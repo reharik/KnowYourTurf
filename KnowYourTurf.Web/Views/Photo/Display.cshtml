@@ -1,0 +1,15 @@
+﻿@model PhotoViewModel
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web
+@using KnowYourTurf.Web.Controllers
+
+@{
+    Layout = "";
+}
+        @MvcHtmlString.Create(Html.HiddenFor(x => x.Photo.EntityId, new { @class = "copyEntityId" }).ToString())
+        @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.Photo.Name).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.Photo.Description).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.Photo.PhotoCategory.Name).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").LabelDisplay(WebLocalizationKeys.PHOTO_CATEGORY).ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.Photo.FileUrl).AddDisplayNameForHref(Model.Photo.Name).LabelDisplay(WebLocalizationKeys.VIEW_FILE).ToString())
+

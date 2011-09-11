@@ -1,0 +1,101 @@
+﻿@using KnowYourTurf.Web
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    
+    @MvcHtmlString.Create(CSS("960.css").ToString())
+    @MvcHtmlString.Create(CSS("yui.reset.2.6.0.css").ToString())
+    @MvcHtmlString.Create(CSS("site.css").ToString())
+    @MvcHtmlString.Create(CSS("kyt.css").ToString())
+    @MvcHtmlString.Create(CSS("jquery-ui-timepicker.css").ToString())
+    @MvcHtmlString.Create(CSS("superfish-1.4.8/superfish.css").ToString())
+    @MvcHtmlString.Create(CSS("superfish-1.4.8/superfish-vertical.css").ToString())
+    @MvcHtmlString.Create(CSS("ui-lightness/jquery-ui-1.8.7.custom.css").ToString())
+    @RenderSection("ExtraCss", false)
+    
+    @MvcHtmlString.Create(Script("jquery-1.4.4.min.js").ToString())
+    @MvcHtmlString.Create(Script("jquery-ui-1.8.7.custom.min.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.validate.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.form.2.63.js").ToString())
+    @MvcHtmlString.Create(Script("superfish.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.utilities.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.crudForm.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.metadata.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.ui.timepicker-0.0.8.js").ToString())
+    @MvcHtmlString.Create(Script("json2.js").ToString())
+    @RenderSection("HeaderScripts", false)
+
+
+     <script type="text/javascript">
+        var kytWebSiteRoot="~";
+        var entityId = @Model.EntityId ;
+        var parentId = @Model.ParentId ;
+        var rootId = @Model.RootId ;
+        $(document).ready(function() {
+            $(".collapsible h4").click(function() {
+                $(this).toggleClass("collapsed");
+                $(this).nextAll(".container").toggle();
+            });
+    
+            $(".startsColllapsed h4").nextAll(".container").hide();
+
+            $(".submitButton").live("click", function(event) {
+                $("#CRUDForm").submit();
+                event.preventDefault();
+            });
+
+            $(".submitButton2").live("click", function(event) {
+                $("#CRUDForm").submit();
+                event.preventDefault();
+            });
+             $("#errorMessages").hide();
+
+            $(".datePicker").live('focusin', function() {
+                var $this = $(this);
+                $this.datepicker();
+            });
+
+            $(".timePicker").live('focusin', function() {
+                var $this = $(this);
+                 $this.timepicker({
+                    showPeriod: true,
+                    showLeadingZero: false
+                });
+            });
+            
+            $(".timePickerNoSuffix").live('focusin', function() {
+                var $this = $(this);
+                $this.timepicker({amPmText:["",""]});
+            });
+        });
+        @RenderSection("HeaderJavascript", false)
+
+        </script>
+    </head>
+
+
+    <body class="kyt_dyn">
+        <div id="background_layer">
+            <div class="KYT_960Main">    
+                <div class="grid_12">
+                    <div class="KYT_site_header">
+                        @Html.Action("KnowYourTurfHeader", "Orthogonal")
+                    </div>
+                </div>
+                <div class = "grid_2">
+                    @Html.Action("SetupKnowYourTurfMenu", "Orthogonal")
+                </div>
+                <div class="grid_10">
+                    @RenderSection("SubHeader", false)
+                    @RenderBody()
+                </div>
+            </div>
+            <div class="grid_12" id="footer">
+                <div class="powered"><span>@{WebLocalizationKeys.POWERED_BY_KEY.ToString();}</span><a>© Copyright 2011 KYTsoftware, LLC.  All Rights Reserved</a></div>
+            </div>
+        </div>
+    </body>
+
+
+</html>

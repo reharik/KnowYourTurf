@@ -1,0 +1,20 @@
+﻿@model KnowYourTurf.Web.Models.TaskViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+
+@{
+    Layout = "";
+}
+     
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Task.EntityId, new { @class = "copyEntityId" }).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Task.TaskType.Name).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Task.ScheduledDate).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Task.Field.Name).LabelDisplay(WebLocalizationKeys.FIELD_NAME).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Product).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.EquipmentNames).LabelDisplay(WebLocalizationKeys.EQUIPMENT).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.EmployeeNames).LabelDisplay(WebLocalizationKeys.EMPLOYEES).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Task.Notes).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+
+

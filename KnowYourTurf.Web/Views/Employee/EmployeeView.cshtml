@@ -1,0 +1,26 @@
+﻿@model KnowYourTurf.Web.Models.Employee.EmployeeViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+
+@{
+    Layout = "";
+}
+        <div class="KYT_section_header" >
+            @MvcHtmlString.Create(WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString())
+        </div>
+        @MvcHtmlString.Create(Html.HiddenFor(x => x.Employee.EntityId, new { @class = "copyEntityId" }).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.EmployeeId).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.FirstName).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.LastName).ToString())
+            
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.Email).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.PhoneMobile).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.Address1).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.Address2).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.City).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.State).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.ZipCode).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.Notes).ToString())
+

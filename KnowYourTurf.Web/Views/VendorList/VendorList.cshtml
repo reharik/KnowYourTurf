@@ -1,0 +1,29 @@
+﻿@model ListViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
+@section HeaderJavascript{
+    var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
+    $(document).ready(function(){
+        $("#gridContainer").AsGrid(gridDef,{multiselect:true});
+        gridContainerMetaData.addRunAfterRender(function() {
+            $("#ChemicalInput").tokenInput(availableChemicals?availableChemicals:{},{prePopulate: selectedChemicals,
+                internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
+            $("#FertilizerInput").tokenInput(availableFertilizers?availableFertilizers:{},{prePopulate: selectedFertilizers,
+                internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
+            $("#MaterialInput").tokenInput(availableMaterials?availableMaterials:{},{prePopulate: selectedMaterials,
+                internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
+            $("#SeedInput").tokenInput(availableSeeds?availableSeeds:{},{prePopulate: selectedSeeds,
+                internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
+        });
+    });
+}
+<div class="KYT_gridbreak">
+@MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_VENDOR).AddClass("KYT_float_left grid_2").ToString())
+@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right grid_1").ToString())
+</div>
+<table id="gridContainer" class="scroll"></table>
+<div id="pager" class="scroll" style="text-align:center;"></div>

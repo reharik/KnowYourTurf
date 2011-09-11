@@ -1,0 +1,42 @@
+﻿@model KnowYourTurf.Web.Models.Equipment.EquipmentViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        if ('@Model.Equipment.ImageUrl') {
+            $("#showImage").show();
+            $("#newImage").hide();
+        } else {
+            $("#showImage").hide();
+            $("#newImage").show();
+        }
+        $("#deleteImage").click(function () {
+            $("#showImage").hide();
+            $("#newImage").show();
+            $("#DeleteImage").val(true);
+        });
+    });
+</script>
+        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
+
+            @MvcHtmlString.Create(FormFor<EquipmentController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Equipment.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Equipment.Name).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Equipment.Description).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Equipment.Vendor).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Equipment.TotalHours).ToString())
+             <div id="showImage" >
+                @MvcHtmlString.Create(Html.ViewFor(x => x.Equipment.ImageUrl).HideLabel().AddClassToInput("KYT_displayImage").ToString())
+                @MvcHtmlString.Create(StyledButtonFor("deleteImage", WebLocalizationKeys.DELETE).ToString())
+            </div>
+            <div id="newImage">
+                <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
+            </div>@MvcHtmlString.Create(EndForm())
+

@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1352FADF-FAFD-4A32-B9F7-907510FD6212}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KnowYourTurf.Core</RootNamespace>
+    <AssemblyName>KnowYourTurf.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Alpinely.TownCrier">
+      <HintPath>..\lib\Town-Crier\Alpinely.TownCrier.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NHibernate3\Required_Bins\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Components.Validator, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CastleValidator\Castle.Components.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NHibernate3\Required_For_LazyLoading\Castle\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=1.2.0.694, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fluentnhibernate-NH3.0-binary-1.2.0.694\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="FubuMVC.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fubu.ui\FubuMVC.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FubuMVC.UI, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fubu.ui\FubuMVC.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlTags, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fubu.ui\HtmlTags.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NHibernate3\Required_Bins\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\lib\Town-Crier\MarkdownSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Common Service Locator\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NHibernate3\Required_Bins\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NHibernate3\Required_For_LazyLoading\Castle\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.41.2, Culture=neutral, PublicKeyToken=cab60358ab4081ea, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NHibernate3\Required_Bins\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\RhinoSecurity\Rhino.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\StructureMap2.6.1\deploy\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xVal">
+      <HintPath>..\lib\xval.1.0\xVal.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BasicExtentions.cs" />
+    <Compile Include="Config\NullSqlServerSessionSourceConfiguration.cs" />
+    <Compile Include="Config\CustomIdentitiy.cs" />
+    <Compile Include="Config\CustomPrincipal.cs" />
+    <Compile Include="Config\SaveUpdateInterceptorWithCompanyFilter.cs" />
+    <Compile Include="CoreViewModels\CalendarViewModel.cs" />
+    <Compile Include="Config\FileBasedSessionFactoryConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Config\FilterDefinition.cs" />
+    <Compile Include="Config\InMemorySessionSourceConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Config\SqlServerSessionSourceConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CoreLocalizationKeys.cs" />
+    <Compile Include="CoreViewModels\GridItemModels.cs" />
+    <Compile Include="Domain\BaseProduct.cs" />
+    <Compile Include="Domain\Calculator.cs" />
+    <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\Continuation.cs" />
+    <Compile Include="Domain\Chemical.cs" />
+    <Compile Include="Domain\Document.cs" />
+    <Compile Include="Domain\DomainEntity.cs" />
+    <Compile Include="Domain\EmailJob.cs" />
+    <Compile Include="Domain\EmailTemplate.cs" />
+    <Compile Include="Domain\Equipment.cs" />
+    <Compile Include="Domain\Event.cs" />
+    <Compile Include="Domain\Fertilizer.cs" />
+    <Compile Include="Domain\Field.cs" />
+    <Compile Include="Domain\ListType.cs" />
+    <Compile Include="Domain\Persistence\ListTypeMap.cs" />
+    <Compile Include="Domain\Persistence\PhotoMap.cs" />
+    <Compile Include="Domain\Persistence\DocumentMap.cs" />
+    <Compile Include="Domain\Persistence\EmailTemplateMap.cs" />
+    <Compile Include="Domain\Persistence\WeatherMap.cs" />
+    <Compile Include="Domain\Photo.cs" />
+    <Compile Include="Domain\Tools\NullNHSetupConfig.cs" />
+    <Compile Include="Domain\Tools\NullNHibernateUnitOfWork.cs" />
+    <Compile Include="Domain\Tools\CustomAttributes\TextAreaAttribute.cs" />
+    <Compile Include="Domain\Tools\NullSession.cs" />
+    <Compile Include="Domain\Tools\NullSessionFactory.cs" />
+    <Compile Include="Domain\Weather.cs" />
+    <Compile Include="Html\FubuUI\Builders\DateTimeDisplayBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\ImageFIleDisplayBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\TextAreaBuilder.cs" />
+    <Compile Include="Html\Grid\ColumnBase.cs" />
+    <Compile Include="Html\Grid\ImageButtonColumn.cs" />
+    <Compile Include="Html\Grid\HiddenColumn.cs" />
+    <Compile Include="Html\Grid\ImageColumn.cs" />
+    <Compile Include="Html\Grid\DisplayColumn.cs" />
+    <Compile Include="Html\Grid\LinkColumn.cs" />
+    <Compile Include="Rules\FieldHasNoOutstandingEvents.cs" />
+    <Compile Include="Rules\FieldHasNoOutstandingTasks.cs" />
+    <Compile Include="Rules\DeleteFieldRules.cs" />
+    <Compile Include="Rules\DeleteEmployeeRules.cs" />
+    <Compile Include="Rules\EmployeeHasNoOutstandingTasks.cs" />
+    <Compile Include="Rules\RulesEngineBase.cs" />
+    <Compile Include="Services\ICrudManager.cs" />
+    <Compile Include="Services\IDynamicExpressionQuery.cs" />
+    <Compile Include="Services\IEmailJob\IEmailJob.cs" />
+    <Compile Include="Services\IEmailTemplateService.cs" />
+    <Compile Include="Services\IGetCompanyIdService.cs" />
+    <Compile Include="Domain\InventoryProduct.cs" />
+    <Compile Include="Domain\Tools\IRepository.cs" />
+    <Compile Include="Domain\Tools\IUnitOfWork.cs" />
+    <Compile Include="Domain\LocalizedEnumeration.cs" />
+    <Compile Include="Domain\LocalizedProperty.cs" />
+    <Compile Include="Domain\LocalizedText.cs" />
+    <Compile Include="Domain\Material.cs" />
+    <Compile Include="Domain\Tools\Repository.cs" />
+    <Compile Include="Domain\Tools\UnitOfWork.cs" />
+    <Compile Include="Domain\Notification.cs" />
+    <Compile Include="Domain\Persistence\BaseProductMap.cs" />
+    <Compile Include="Domain\Persistence\CompanyMap.cs" />
+    <Compile Include="Domain\Persistence\CalculatorMap.cs" />
+    <Compile Include="Domain\Persistence\EmailJobMap.cs" />
+    <Compile Include="Domain\Persistence\EventMap.cs" />
+    <Compile Include="Domain\Persistence\DomainEntityMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\EquipmentMap.cs" />
+    <Compile Include="Domain\Persistence\FieldMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Tools\INHSetupConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\InventoryProductMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\LocalizedPropertyMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\LocalizedTextMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\LocalizedValueObjectMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\PurchaseOrderLineItemMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\PurchaseOrderMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\TaskMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\UserPersistenceMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\VendorContactMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\VendorMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrder.cs" />
+    <Compile Include="Domain\PurchaseOrderLineItem.cs" />
+    <Compile Include="Domain\Seed.cs" />
+    <Compile Include="Domain\Task.cs" />
+    <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\Vendor.cs" />
+    <Compile Include="Domain\VendorContact.cs" />
+    <Compile Include="Enumerations\Enumerations.cs" />
+    <Compile Include="Html\Expressions\BoundExpression.cs" />
+    <Compile Include="Html\Expressions\FormExpression.cs" />
+    <Compile Include="Html\Expressions\HtmlCommonExpressionsBase.cs" />
+    <Compile Include="Html\Expressions\HtmlExpressionExtensions.cs" />
+    <Compile Include="Html\Expressions\ImageExpression.cs" />
+    <Compile Include="Html\Expressions\LinkExpression.cs" />
+    <Compile Include="Html\Expressions\MetaExpression.cs" />
+    <Compile Include="Html\Expressions\ScriptReferenceExpression.cs" />
+    <Compile Include="Html\Expressions\SelectBoxPickerExpression.cs" />
+    <Compile Include="Html\Expressions\StyledButtonExpression.cs" />
+    <Compile Include="Html\Expressions\SubmitButtonExpression.cs" />
+    <Compile Include="Html\FubuUI\Builders\DatePickerBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\ListDisplayBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\GroupedSelectBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\SelectFromIEnumerableBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\EmailDisplayBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\RadioButtonListBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\ValidationModifier.cs" />
+    <Compile Include="Html\FubuUI\FubuUIHtmlExtensions.cs" />
+    <Compile Include="Html\FubuUI\HtmlConventionRegistries\CustomTagActionExpressions.cs" />
+    <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfElementNamingConvention.cs" />
+    <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfHtmlConventions.cs" />
+    <Compile Include="Html\FubuUI\HtmlExpressions\DropdownInputExpression.cs" />
+    <Compile Include="Html\FubuUI\HtmlExpressions\EditorExpression.cs" />
+    <Compile Include="Html\FubuUI\HtmlExpressions\EditorInputExpression.cs" />
+    <Compile Include="Html\FubuUI\HtmlExpressions\EditorLabelExpression.cs" />
+    <Compile Include="Html\FubuUI\HtmlExpressions\ViewDisplayExpression.cs" />
+    <Compile Include="Html\FubuUI\HtmlExpressions\ViewExpression.cs" />
+    <Compile Include="Html\FubuUI\HtmlExpressions\ViewLabelExpression.cs" />
+    <Compile Include="Html\FubuUI\Tags\PasswordTag.cs" />
+    <Compile Include="Html\FubuUI\Tags\RadioButtonListTag.cs" />
+    <Compile Include="Html\FubuUI\Tags\RadioButtonTag.cs" />
+    <Compile Include="Html\Grid\Grid.cs" />
+    <Compile Include="Html\Grid\GridBuilder.cs" />
+    <Compile Include="Html\Grid\Pager.cs" />
+    <Compile Include="Html\Grid\PageSortFilter.cs" />
+    <Compile Include="Html\HtmlExtensions.cs" />
+    <Compile Include="Html\Menu\IMenuBuilder.cs" />
+    <Compile Include="Html\Menu\MenuExpression.cs" />
+    <Compile Include="Html\UrlContext.cs" />
+    <Compile Include="Localization\Enumeration.cs" />
+    <Compile Include="Localization\Header.cs" />
+    <Compile Include="Localization\LocalizationDataProvider.cs" />
+    <Compile Include="Localization\LocalizationManager.cs" />
+    <Compile Include="Localization\LocalizedEnum.cs" />
+    <Compile Include="Localization\LocalizedEnumRegistry.cs" />
+    <Compile Include="Localization\StringToken.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CompleteTaskService.cs" />
+    <Compile Include="Services\ICastleValidationRunner.cs" />
+    <Compile Include="Services\IDynamicExpressionBuilder.cs" />
+    <Compile Include="Services\IGridHandlerService.cs" />
+    <Compile Include="Services\IHttpContextAbstractor.cs" />
+    <Compile Include="Services\IInventoryService.cs" />
+    <Compile Include="Services\ISaveEntityService.cs" />
+    <Compile Include="Services\ISelectBoxPickerService.cs" />
+    <Compile Include="Services\ISelectListItemService.cs" />
+    <Compile Include="Services\ISessionContext.cs" />
+    <Compile Include="Services\DateTimeUtilities.cs" />
+    <Compile Include="Services\IUnitSizeTimesQuantyCalculator.cs" />
+    <Compile Include="Services\ReceivePurchaseOrderService.cs" />
+    <Compile Include="Services\SecurityDataService.cs" />
+    <Compile Include="Services\StructureMapServiceLocator.cs" />
+    <Compile Include="Services\SystemClock.cs" />
+    <Compile Include="CoreViewModels\ViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

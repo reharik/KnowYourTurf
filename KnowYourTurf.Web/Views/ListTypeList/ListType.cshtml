@@ -1,0 +1,42 @@
+﻿
+@model KnowYourTurf.Web.Models.ListTypeListViewModel
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("kyt.listType.js").ToString())
+}
+<script>
+     var ttGridDef = @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionTT));
+     var etGridDef = @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition));
+     var dcGridDef = @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionDC));
+     var pcGridDef = @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionPC));
+    var EventTypeGridMetaData = kyt.popupMetaData.metaData('@Model.AddEditUrlET', "#puErrorMessages", successFunction);
+    var TaskTypeGridMetaData = kyt.popupMetaData.metaData('@Model.AddEditUrlTT', "#puErrorMessages", successFunction);
+    var DocumentCategoryGridMetaData = kyt.popupMetaData.metaData('@Model.AddEditUrlDC', "#puErrorMessages", successFunction);
+    var PhotoCategoryGridMetaData = kyt.popupMetaData.metaData('@Model.AddEditUrlPC', "#puErrorMessages", successFunction);
+    var popupTitleET = "@Model.PopupTitleET" ;
+    var popupTitleTT = "@Model.PopupTitleTT" ;
+    var popupTitlePC = "@Model.PopupTitlePC" ;
+    var popupTitleDC = "@Model.PopupTitleDC" ;
+    
+    $(document).ready(function(){
+        kyt.listType.controller.init();
+    });
+</script>
+@MvcHtmlString.Create(StyledButtonFor("addNewTaskType", WebLocalizationKeys.NEW_TASK_TYPE).ToString())
+<table id="TaskTypeGrid" class="scroll"></table>
+<div id="taskTypePager" class="scroll" style="text-align:center;"></div>
+
+@MvcHtmlString.Create(StyledButtonFor("addNewEventType", WebLocalizationKeys.NEW_EVENT_TYPE).ToString())
+<table id="EventTypeGrid" class="scroll"></table>
+<div id="eventTypePager" class="scroll" style="text-align:center;"></div>
+
+@MvcHtmlString.Create(StyledButtonFor("addNewDocumentCategory", WebLocalizationKeys.NEW_DOCUMENT_CATEGORY).ToString())
+<table id="DocumentCategoryGrid" class="scroll"></table>
+<div id="docCatPager" class="scroll" style="text-align:center;"></div>
+
+@MvcHtmlString.Create(StyledButtonFor("addNewPhotoCategory", WebLocalizationKeys.NEW_PHOTO_CATEGORY).ToString())
+<table id="PhotoCategoryGrid" class="scroll"></table>
+<div id="photoCatPager" class="scroll" style="text-align:center;"></div>

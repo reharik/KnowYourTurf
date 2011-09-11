@@ -1,0 +1,17 @@
+﻿@model KnowYourTurf.Web.Models.CalculatorViewModel
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+
+        <div class="KYT_section_header" >
+            @MvcHtmlString.Create(WebLocalizationKeys.CALCULATOR.ToString())
+        </div>
+        
+        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
+
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Calculator.EntityId).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Calculator.Name).ToString())
+

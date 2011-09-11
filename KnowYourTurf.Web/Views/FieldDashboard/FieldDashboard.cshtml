@@ -1,0 +1,98 @@
+﻿@model KnowYourTurf.Web.Models.FieldDashboardViewModel
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using HtmlTags
+
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+@section ExtraCss {
+    @MvcHtmlString.Create(CSS("ui.jqgrid.css").ToString())
+    @MvcHtmlString.Create(CSS("token-input.css").ToString())
+}    
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("grid.locale-en.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.jqGrid.min.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.kyt.grid.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.tokeninput.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.grid.columnService.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.grid.formatters.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.gridHelpers.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.popupCrud.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.employeeDashboard.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.fieldDashboard.js").ToString())
+}
+
+@section HeaderJavascript{
+     var addUrl=@MvcHtmlString.Create(JsonUtil.ToJson(Model.AddEditUrl));
+     var addPhotoUrl=@MvcHtmlString.Create(JsonUtil.ToJson(Model.AddEditPhotoUrl));
+     var addDocumentUrl=@MvcHtmlString.Create(JsonUtil.ToJson(Model.AddEditDocumentUrl));
+     var successFunction = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SaveJSSuccssCallback));
+     var pendingGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
+     var completeGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CompletedListDefinition))
+     var photoGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.PhotoListDefinition))
+     var documentGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.DocumentListDefinition))
+
+    var pendingGridContainerMetaData = kyt.popupMetaData.metaData(addUrl ,"#puErrorMessages",successFunction);
+    var completeGridContainerMetaData = kyt.popupMetaData.metaData(null ,"#puErrorMessages",successFunction);
+    var photoGridContainerMetaData = kyt.popupMetaData.metaData(addPhotoUrl ,"#puErrorMessages",successFunction);
+    var documentGridContainerMetaData = kyt.popupMetaData.metaData(addDocumentUrl ,"#puErrorMessages",successFunction);
+
+    $(document).ready(function() {
+        kyt.fieldDashboard.controller.init();
+        $("#completeGridContainer").AsGrid(completeGridDef,{multiselect:false,pager:"completedPager"});
+        $("#pendingGridContainer").AsGrid(pendingGridDef,{multiselect:false,pager:"pendingPager"});
+        $("#photoGridContainer").AsGrid(photoGridDef,{multiselect:false,pager:"photoPager"});
+        $("#documentGridContainer").AsGrid(documentGridDef,{multiselect:false,pager:"documentPager"});
+    });
+}
+    <div class="KYT_DashInfo">
+
+        <div class="KYT_section_header" >
+            @MvcHtmlString.Create(WebLocalizationKeys.FIELD_INFORMATION.ToString())
+        </div>
+        <div class=" grid_5">
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Field.Name).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Field.Description).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Field.Size).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+        </div>
+    <div class="grid_5">
+        @{if (!string.IsNullOrEmpty(Model.Field.ImageUrl))
+          {
+             @MvcHtmlString.Create(Html.ViewFor(x => x.Field.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToString());
+          }
+        }
+    </div>
+
+         <div class="grid_10_KYT">
+         </div>
+     <div class="grid_5b">
+        @MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_TASK).ToString())
+        <table id="pendingGridContainer" class="scroll"></table>
+        <div id="pendingPager" class="scroll" style="text-align:center;"></div>
+
+    </div>
+
+    <div class="grid_4 KYT_AddNew_space">
+        <table id="completeGridContainer" class="scroll"></table>
+        <div id="completedPager" class="scroll" style="text-align:center;"></div>
+    </div>
+    <div class="grid_10_KYT">
+         </div>
+    <div class="grid_5b">
+        @MvcHtmlString.Create(StyledButtonFor("addNewPhoto", WebLocalizationKeys.NEW_PHOTO).ToString())
+        <table id="photoGridContainer" class="scroll"></table>
+        <div id="photoPager" class="scroll" style="text-align:center;"></div>
+
+    </div>
+
+    <div class="grid_4 KYT_AddNew_space">
+        @MvcHtmlString.Create(StyledButtonFor("addNewDocument", WebLocalizationKeys.NEW_DOCUMENT).ToString())
+        <table id="documentGridContainer" class="scroll"></table>
+        <div id="documentPager" class="scroll" style="text-align:center;"></div>
+    </div>
+
+
+</div>

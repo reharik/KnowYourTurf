@@ -1,0 +1,360 @@
+ 
+
+body {
+
+    font-size:80%;
+
+    font-family:trebuchet ms, lucida sans, arial, Helvetica, verdana;
+
+    padding:0 0 0em;
+
+    background: url("../images/ui-bgMark_loop_25_000000_21x21.png") repeat scroll 50% 50% #000000;
+
+}
+
+ 
+
+/* HEADINGS  
+
+----------------------------------------------------------*/
+
+h1,
+
+h2,
+
+h3,
+
+h4,
+
+h5,
+
+h6 {
+
+    margin:0em 0 .2em;
+
+    font-weight:bold;
+
+}
+
+h1 {
+
+    font-size:200%;
+
+    background: url(../images/KYTHeaderBack.png);
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    height: 80px;
+    
+    color:#ffffff;
+    
+    width:960px;
+
+}
+
+h2 {
+
+    font-size:100%;
+
+    margin:0em 0 .5em;
+
+    color:White;
+
+    background: #000000 url(../images/ui-bgMarkGreyh2v2.png) repeat-x;
+
+}
+
+h3 {
+
+    font-size:100%;
+
+    margin:0em 0 .5em;
+
+    color:Gray;
+
+    margin-left: .5em;
+
+  
+
+}
+
+h4  {
+
+    font-size:100%;
+
+    margin:0em 0 .5em;
+
+    color:White;
+
+    background: #000000 url(../images/ui-bgMarkButton.png) repeat-x;
+
+}
+
+h5 {
+
+    font-size:100%;
+
+}
+
+h6 {
+
+    font-size:100%;
+
+    color:White;
+
+    background: #000000 url(../images/ui-bgMarkGreyh2v2.png) repeat-x;
+
+ 
+
+}
+
+ 
+
+ 
+
+ 
+
+/* PRIMARY LAYOUT ELEMENTS  
+
+----------------------------------------------------------*/
+
+.page {
+
+    width:95%;
+
+    max-width:95%;
+
+    margin:0 auto;
+
+}
+
+.post.page {
+
+    width:auto;
+
+}
+
+#header {
+
+    height:9em;
+
+}
+
+#header h1 {
+
+    font-size:240%;
+
+    margin:1.55em 0 0;
+
+}
+
+#main {
+
+    margin:0 0 0em;
+
+    padding:1.4em 0;
+
+    border-right:none;
+
+    border-left:none;
+
+    overflow:hidden;
+
+}
+
+#footer {
+
+    overflow:hidden;
+    background: #1a1a1a;
+    margin-bottom:0em;
+    margin-left:0em;
+    margin-right:0em;
+    border-top:2px #384E1D solid;
+    bottom:0;
+    text-align:center;
+    padding:3px;
+    width:954px;
+
+}
+
+#footer .powered {
+
+	text-align:center;
+	color:#b8b8b8;
+    width:960px;
+
+
+}
+
+#footer .credits {
+
+    float:left;
+
+}
+
+#footer .credits a {
+
+    margin:2px 0 0 5px;
+
+    display:block;
+
+    float:left;
+
+}
+
+#footer .credits a#famfamfam {
+
+    background:url(../../images/famfamfam.gif) no-repeat 0 0;
+
+    height:16px;
+
+    width:0;
+
+    padding:0 0 0 0px;
+
+    overflow:hidden;
+
+    outline:none;
+
+}
+
+#footer .credits a:hover#famfamfam {
+
+    background-position:0 -16px;
+
+}
+
+ 
+
+#footer .powered span,
+
+#footer .powered a {
+
+    display:block;
+
+    float:left;
+
+}
+
+#footer .powered span {
+
+    margin: 3px 0 0;
+
+}
+
+#footer .powered a {
+
+    /*background:url(../../images/FubuMVC_Logo_Small_Double.jpg) no-repeat 0 0;*/
+
+    height:60px;
+    margin:0 .1ex 0 .8ex;
+    padding:0 0 0 10px;
+    color:White;
+    outline:none;
+    background: #1A1A1A;
+    bottom:0;
+}
+
+#footer .powered a:hover {
+
+    background-position:0 -20px;
+
+}
+
+ 
+
+/* LOGIN FORM
+
+----------------------------------------------------------*/
+
+form.login divOriginal {
+
+    margin:0 0 1em 5px;
+
+}
+
+form.login div.submit {
+
+    margin-bottom:0;
+
+}
+
+body.dyn form.login label {
+
+    display:block;
+
+}
+
+body.dyn form.login .remember label {
+
+    display:inline;
+
+}
+
+body.dyn form.login input.text {
+
+    width:42ex
+
+}
+
+ 
+
+/* MISC 
+
+----------------------------------------------------------*/
+
+ 
+
+ 
+
+#menucontainer {
+
+    float:right;
+
+    clear:right;
+
+}
+
+ 
+
+#title {
+
+    float:left;
+
+    height:100%
+
+}
+
+ 
+
+/* COLORS
+
+----------------------------------------------------------*/
+
+html {
+
+    background: url("../images/ui-bgMark_loop_25_000000_21x21.png") repeat scroll 50% 50% #000000;
+    color:#373737;
+    background-color:#1a1a1a;
+
+}
+
+ 
+
+
+
+/* selectboxpicker
+
+----------------------------------------------------------*/
+
+.KYT_selectboxPicker{}
+.KYT_selectboxPickerAvailable{float:left;}
+.KYT_selectboxPickerSelected {float:left;}
+.KYT_selectboxPickerBox { width:200px;}
+.KYT_selectboxPickerButtons{float:left;}
+.KYT_selectboxPickerButtonsInner{}
+.KYT_selectboxAddItem{}
+.KYT_selectboxRemoveItem{}
+.KYT_selectboxPicker_error_message{}

@@ -1,0 +1,20 @@
+﻿@model KnowYourTurf.Web.Models.Fertilizer.FertilizerViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+        
+        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
+            @MvcHtmlString.Create(FormFor<FertilizerController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Fertilizer.EntityId).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Fertilizer.Name).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Fertilizer.Description).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Fertilizer.N).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Fertilizer.P).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Fertilizer.K).ToString())
+            @MvcHtmlString.Create(EndForm())
+

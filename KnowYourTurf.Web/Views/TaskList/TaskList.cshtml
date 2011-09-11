@@ -1,0 +1,34 @@
+﻿@model ListViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
+}
+<script>
+     var gridDef = @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition));
+    $(document).ready(function(){
+        gridContainerMetaData.setDisplayButtonBuilder(function(builder){
+                    builder.addEditButton();
+                    builder.addButton("Copy Task", kyt.popupCrud.controller.copyItem);
+                    builder.addCancelButton();
+                    return  builder.getButtons();
+                });
+        gridContainerMetaData.addRunAfterRender(function() {
+            $("#EmployeeInput").tokenInput(availableEmployees?availableEmployees:{},{prePopulate: selectedEmployees,
+              internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
+            $("#EquipmentInput").tokenInput(availableEquipment?availableEquipment:{},{prePopulate: selectedEquipment,
+              internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
+        });
+        
+        $("#gridContainer").AsGrid(gridDef,{multiselect:true});
+    });
+</script>
+<div class="KYT_gridbreak">
+@MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_TASK).AddClass("KYT_float_left grid_2").ToString())
+@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right grid_1").ToString())
+</div>
+<table id="gridContainer" class="scroll"></table>
+<div id="pager" class="scroll" style="text-align:center;"></div>

@@ -1,0 +1,30 @@
+﻿@model KnowYourTurf.Web.Models.EventViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        if ('@Model.Copy' == "True") {
+            $("#Event_EntityId").val(0);
+        }
+    });
+</script>
+      
+        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
+
+            @MvcHtmlString.Create(FormFor<EventController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Event.EntityId).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EventType).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Event.ScheduledDate).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Event.StartTime).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Event.EndTime).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Field).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Event.Notes).ToString())
+            @MvcHtmlString.Create(EndForm())
+

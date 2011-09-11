@@ -1,0 +1,65 @@
+﻿@model KnowYourTurf.Web.Models.POListViewModel
+@using HtmlTags;
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+@section ExtraCss {
+    @MvcHtmlString.Create(CSS("ui.jqgrid.css").ToString())
+}    
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("grid.locale-en.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.jqGrid.min.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.kyt.grid.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.grid.columnService.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.grid.formatters.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.gridHelpers.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.popupCrud.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.purchaseOrder.js").ToString())
+}
+
+@section HeaderJavascript{
+
+ var productGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
+ var poliGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.PoliListDefinition))
+ var successFunction = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SaveJSSuccssCallback));
+ var commitUrl = "@Model.CommitUrl";
+ var returnUrl = "@Model.ReturnUrl";
+
+    var poliGridMetaData = kyt.popupMetaData.metaData(null,"#puErrorMessages",successFunction ) 
+    var productGridMetaData = kyt.popupMetaData.metaData(null,"#puErrorMessages",successFunction ) 
+
+    $(document).ready(function(){
+        kyt.purchaseOrder.controller.init();
+    });
+ 
+}
+<div class="KYT_section_header">
+    @MvcHtmlString.Create(WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString())
+</div>
+
+<div id="errorMessages" class="errorMessages KYT_errorMessages" ><ul></ul></div>
+<input type="hidden" id="vendorId" value="@Model.VendorId"/>
+<input type="hidden" id="poId" value="@Model.PurchaseOrder.EntityId"/>
+
+@MvcHtmlString.Create(Html.HiddenFor(x=>x.PurchaseOrder.EntityId).ToString())
+@MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToString())
+@MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).RootId("viewVendor").ToString())
+@MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrder.Vendor).InputId("vendor").RootId("editVendor").ToString())
+
+<div>
+    <h2>@WebLocalizationKeys.PRODUCTS.ToString()</h2>
+    <table id="productGrid" class="scroll"></table>
+    <div id="productPager" class="scroll" style="text-align:center;"></div>
+</div>
+
+<div id="poliGridDiv">
+    <h2> @WebLocalizationKeys.LINE_ITEMS.ToString() </h2>
+    <table id="poliGrid" class="scroll"></table>
+    <div id="poliPager" class="scroll" style="text-align:center;"></div>
+</div>
+@MvcHtmlString.Create(StyledButtonFor("commit",WebLocalizationKeys.COMMIT).ToString())
+    @MvcHtmlString.Create(StyledButtonFor("return", WebLocalizationKeys.RETURN).ToString())

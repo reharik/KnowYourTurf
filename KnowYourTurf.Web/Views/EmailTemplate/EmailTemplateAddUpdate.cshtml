@@ -1,0 +1,20 @@
+﻿@model EmailTemplateViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+      
+        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
+
+            @MvcHtmlString.Create(FormFor<EmailTemplateController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.EmailTemplate.EntityId).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailTemplate.Name).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailTemplate.Description).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailTemplate.Template).InputId("tinyMce").ToString())
+            @MvcHtmlString.Create(EndForm())
+

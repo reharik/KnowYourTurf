@@ -1,0 +1,40 @@
+﻿@using HtmlTags
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+@section ExtraCss {
+    @MvcHtmlString.Create(CSS("ui.jqgrid.css").ToString())
+    @MvcHtmlString.Create(CSS("token-input.css").ToString())
+    @RenderSection("ExtraCss", false)
+}    
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("grid.locale-en.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.jqGrid.min.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.kyt.grid.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.jqPrint.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.tokeninput.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.grid.columnService.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.grid.formatters.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.gridHelpers.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.popupCrud.js").ToString())
+    @RenderSection("HeaderScripts", false);
+
+}
+
+@section HeaderJavascript{
+     var titlePopup = "@Model.CrudTitle";
+    var addUrl=@MvcHtmlString.Create(JsonUtil.ToJson(Model.AddEditUrl));
+    var successFunction = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SaveJSSuccssCallback));
+    var gridContainerMetaData = kyt.popupMetaData.metaData(addUrl ,"#puErrorMessages",successFunction ) 
+    gridContainerMetaData.addRunAfterSuccess(
+        function(result,metaData){ if($(metaData.getGridName()).length > 0) $(metaData.getGridName()).trigger("reloadGrid")});
+    gridContainerMetaData.setSuccessContainer("#errorMessages");
+
+    $(document).ready(function() {
+        $("#addNew").live("click",function(){kyt.popupCrud.controller.itemCRU(null,gridContainerMetaData)});
+        $("#print").click(function(){
+            $("#gbox_gridContainer").jqprint();
+        });
+    });
+    @RenderSection("HeaderJavascript", false)
+}
+    @RenderBody()

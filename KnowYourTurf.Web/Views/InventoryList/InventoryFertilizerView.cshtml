@@ -1,0 +1,16 @@
+﻿@model KnowYourTurf.Web.Controllers.InventoryFertilizerViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+
+
+@{
+    Layout = "";
+}
+        
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Fertilizer.Name).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Fertilizer.Description).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Fertilizer.N).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Fertilizer.P).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Fertilizer.K).ToString())

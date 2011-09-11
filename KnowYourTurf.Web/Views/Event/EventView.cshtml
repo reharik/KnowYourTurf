@@ -1,0 +1,19 @@
+﻿@model KnowYourTurf.Web.Models.EventViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+
+@{
+    Layout = "";
+}
+        @MvcHtmlString.Create(Html.HiddenFor(x => x.Event.EntityId, new { @class = "copyEntityId" }).ToString())
+            <input type="hidden" name="Event.EntityId" id="EntityId" value="@Model.Event.EntityId"/>
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Event.EventType.Name).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Event.ScheduledDate).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Event.StartTime).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Event.EndTime).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Event.Field.Name).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Event.Notes).ToString())
+
+

@@ -1,0 +1,29 @@
+﻿@model KnowYourTurf.Web.Models.VendorContact.VendorContactViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+
+        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
+
+            @MvcHtmlString.Create(FormFor<VendorContactController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.VendorContact.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.ParentId).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.FirstName).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.LastName).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Email).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Phone).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Fax).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Address1).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Address2).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.City).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.State).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.ZipCode).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Status).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Notes).ToString())
+            @MvcHtmlString.Create(EndForm())
+

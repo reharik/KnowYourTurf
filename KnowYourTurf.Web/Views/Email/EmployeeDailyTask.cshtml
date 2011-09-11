@@ -1,0 +1,21 @@
+﻿@model KnowYourTurf.Web.Models.EmployeeViewModel
+@foreach (var task in Model.Employee.GetTasks().Where(x=>x.ScheduledDate.Value.ToShortDateString() == DateTime.Now.ToShortDateString()))
+{
+    <div>
+        <div class="KYT_view_root"><div class="KYT_view_label"><label for="TaskTaskTypeName">Name:</label></div><div class="KYT_view_display"><span>@task.TaskType.Name</span></div></div>
+        <div class="KYT_view_root"><div class="KYT_view_label"><label for="TaskScheduledDate">Scheduled Date:</label></div><div class="KYT_view_display"><span>@task.ScheduledDate</span></div></div>
+        <div class="KYT_view_root"><div class="KYT_view_label"><label for="TaskScheduledStartTime">Scheduled Start Time:</label></div><div class="KYT_view_display"><span>@task.ScheduledStartTime</span></div></div>
+        <div class="KYT_view_root"><div class="KYT_view_label"><label for="TaskFieldName">Field Name:</label></div><div class="KYT_view_display"><span>@task.Field.Name</span></div></div>
+        <div class="KYT_view_root"><div class="KYT_view_label"><label for="Product">Product:</label></div><div class="KYT_view_display"><span>@task.GetProductName()</span></div></div>
+        <div class="KYT_view_root"><div class="KYT_view_label"><label for="TaskEquipmentName">Name:</label></div><div class="KYT_view_display"><span>@task.Equipment.Name</span></div></div>
+        <div class="KYT_view_root"><div class="KYT_view_label"><label for="EmployeeSelectBoxPickerDTODisplayItems">Employee Names:</label></div>
+        <div class="KYT_view_display">
+            @foreach (var emp in task.GetEmployees())
+            {
+                <div><span>@emp.FullName</span><br></div>
+            }
+        </div>
+    </div>
+}
+
+

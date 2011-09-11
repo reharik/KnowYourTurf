@@ -1,0 +1,20 @@
+﻿@model ListViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@section HeaderJavascript{
+    var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
+    gridContainerMetaData.setDisplayButtonBuilder(function(builder){
+                    builder.addButton("Return",kyt.popupCrud.buttonBuilder.getCancelFunc)
+                    return  builder.getButtons();
+                });
+    $(document).ready(function(){
+        $("#gridContainer").AsGrid(gridDef);
+    });
+}
+
+@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
+<table id="gridContainer" class="scroll"></table>
+<div id="pager" class="scroll" style="text-align:center;"></div>

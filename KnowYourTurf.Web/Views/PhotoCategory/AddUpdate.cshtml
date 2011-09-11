@@ -1,0 +1,17 @@
+﻿@model KnowYourTurf.Web.Models.ListTypeViewModel
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+
+        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
+
+            @MvcHtmlString.Create(FormFor("~/PhotoCategory/SaveListType").Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.ListType.EntityId).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.ListType.Name).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.ListType.Description).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.ListType.Status).ToString())
+            @MvcHtmlString.Create(EndForm())
+

@@ -1,0 +1,23 @@
+﻿@model KnowYourTurf.Web.Models.POListViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+
+@{
+    Layout = "";
+}
+        <div class="KYT_section_header" >
+            @MvcHtmlString.Create(WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString())
+        </div>
+        @MvcHtmlString.Create(Html.HiddenFor(x => x.PurchaseOrder.EntityId, new { @class = "copyEntityId" }).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.DateCreated).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Completed).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.DateReceived).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.SubTotal).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Tax).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Fees).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Total).ToString())
+

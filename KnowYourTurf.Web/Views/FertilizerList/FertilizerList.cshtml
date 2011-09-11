@@ -1,0 +1,17 @@
+﻿@model ListViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+
+<script>
+     var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
+    $(document).ready(function(){
+        $("#gridContainer").AsGrid(gridDef,{multiselect:true});
+    });
+</script>
+@MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_FERTILIZER).ToString())
+@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
+<table id="gridContainer" class="scroll"></table>
+<div id="pager" class="scroll" style="text-align:center;"></div>

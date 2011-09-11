@@ -1,0 +1,58 @@
+﻿@model KnowYourTurf.Web.Models.EmployeeViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        if ('@Model.Employee.ImageUrl') {
+            $("#showImage").show();
+            $("#newImage").hide();
+        } else {
+            $("#showImage").hide();
+            $("#newImage").show();
+        }
+        $("#deleteImage").click(function () {
+            $("#showImage").hide();
+            $("#newImage").show();
+            $("#DeleteImage").val(true);
+        });
+        $("#UserRole").asSelectboxPicker();
+    });
+</script>
+        
+        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
+
+            @MvcHtmlString.Create(FormFor<EmployeeController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Employee.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.EmployeeId).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.FirstName).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.LastName).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.EmployeeType).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.EmergencyContact).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.EmergencyContactPhone).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Password).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Email).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.PhoneMobile).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Address1).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Address2).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.City).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.State).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.ZipCode).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Status).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Notes).ToString())
+             <div id="showImage" >
+                @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.ImageUrl).HideLabel().AddClassToInput("KYT_addEditImageSmall").ToString())
+                @MvcHtmlString.Create(StyledButtonFor("deleteImage", WebLocalizationKeys.DELETE).ToString())
+            </div>
+            <div id="newImage">
+                <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
+            </div>
+            @MvcHtmlString.Create(EndForm())
+

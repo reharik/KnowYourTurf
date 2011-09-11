@@ -1,0 +1,31 @@
+﻿@model KnowYourTurf.Web.Models.PurchaseOrderLineItemViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+
+        <div class="KYT_section_header" >
+            @MvcHtmlString.Create(WebLocalizationKeys.PURCHASE_ORDER_LIST_ITEM_INFORMATION.ToString())
+        </div>
+        
+        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
+
+            @MvcHtmlString.Create(FormFor<PurchaseOrderLineItemController>(x=>x.SaveReceived(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.PurchaseOrderLineItem.EntityId).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.Product.Name).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.Product.Description).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.QuantityOrdered).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.SizeOfUnit).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.UnitType).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.Price).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.SubTotal).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.Tax).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.TotalReceived).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.Completed).ToString())
+
+            @MvcHtmlString.Create(EndForm())
+

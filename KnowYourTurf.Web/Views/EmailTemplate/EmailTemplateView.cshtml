@@ -1,0 +1,14 @@
+﻿@model EmailTemplateViewModel
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+
+@{
+    Layout = "";
+}
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.EmailTemplate.EntityId, new { @class = "copyEntityId" }).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.EmailTemplate.Name).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.EmailTemplate.Description).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.EmailTemplate.Template).ToString())
+

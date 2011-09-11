@@ -1,0 +1,13 @@
+﻿@model KnowYourTurf.Web.Models.Material.MaterialViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+
+@{
+    Layout = "";
+}
+             @MvcHtmlString.Create(Html.HiddenFor(x => x.Material.EntityId, new { @class = "copyEntityId" }).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Material.Name).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Material.Description).ToString())
+

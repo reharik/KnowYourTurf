@@ -1,0 +1,26 @@
+﻿@model PhotoViewModel
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+
+    <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
+
+    @MvcHtmlString.Create(FormFor<PhotoController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+        @MvcHtmlString.Create(Html.HiddenFor(x => x.Photo.EntityId).ToString())
+        @MvcHtmlString.Create(Html.SubmissionFor(x => x.Photo.Name).ToString())
+        @MvcHtmlString.Create(Html.SubmissionFor(x => x.Photo.Description).ToString())
+        @MvcHtmlString.Create(Html.SubmissionFor(x => x.Photo.PhotoCategory).LabelDisplay(WebLocalizationKeys.PHOTO_CATEGORY).ToString())
+        @if (Model.Photo.EntityId > 0)
+        {
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Photo.FileUrl).AddDisplayNameForHref(Model.Photo.Name).LabelDisplay(WebLocalizationKeys.VIEW_FILE).ToString())
+        }
+        else
+        {
+                <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
+        }
+    @MvcHtmlString.Create(EndForm())
+

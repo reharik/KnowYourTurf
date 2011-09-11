@@ -1,0 +1,25 @@
+﻿@model KnowYourTurf.Web.Models.POCommitViewModel
+@using KnowYourTurf.Web
+@using HtmlTags
+@using KnowYourTurf.Core.Html.FubuUI
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("kyt.purchaseOrder.js").ToString())
+}
+@section HeaderJavascript{
+     var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
+     var closePOUrl = '@MvcHtmlString.Create(Model.ClosePOUrl)';
+    $(document).ready(function(){
+        $("#gridContainer").AsGrid(gridDef);
+        $("#savePO").click(function(){kyt.purchaseOrder.controller.closePO($("#PurchaseOrder_EntityId").val())});
+    });
+}
+
+@MvcHtmlString.Create(Html.HiddenFor(x => x.PurchaseOrder.EntityId).ToString())
+@MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToString())
+@MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).RootId("viewVendor").ToString())
+@MvcHtmlString.Create(StyledButtonFor("savePO", WebLocalizationKeys.CLOSE_THIS_PURCHASE_ORDER).ToString())
+<h2>@WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS</h2>
+<table id="gridContainer" class="scroll"></table>
+<div id="pager" class="scroll" style="text-align:center;"></div>
