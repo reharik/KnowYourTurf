@@ -8,7 +8,7 @@ namespace KnowYourTurf.Core.Domain
         [ValidateNonEmpty]
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
-        [TextArea(15, 80)]
+        [TextArea]
         public virtual string Template { get; set; }
     }
 }

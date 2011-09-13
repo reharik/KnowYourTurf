@@ -4,7 +4,8 @@ using KnowYourTurf.Web.Filters;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    [AddUserToViewFilter, CustomAuthorize]
+
+    [AddUserToViewFilter, CustomAuthorize, PermissionValidation]
     public class KYTController : Controller
     {
         protected string RenderViewToString()
@@ -42,7 +43,7 @@ namespace KnowYourTurf.Web.Controllers
     }
 
     [AdminFilter]
-    public class AdminController : KYTController
+    public class AdminControllerBase : KYTController
     {
     }
 

@@ -6,7 +6,6 @@ namespace KnowYourTurf.Core.Domain.Persistence
     {
         public UserPersistenceMap()
         {
-            Map(u => u.EmployeeId);
             Map(u => u.LoginName);
             Map(u => u.Password);
             Map(u => u.Status);
@@ -24,7 +23,6 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(c => c.BirthDate);
             Map(c => c.Notes);
             Map(c => c.UserRoles);
-            Map(c => c.UserType);
             Map(c => c.LanguageDefault);
             Map(x => x.ImageUrl);
             References(x => x.Company);
@@ -36,10 +34,35 @@ namespace KnowYourTurf.Core.Domain.Persistence
         {
             public EmployeeMap()
             {
+                Map(u => u.EmployeeId);
                 Map(x => x.EmployeeType);
                 Map(x => x.EmergencyContact);
                 Map(x => x.EmergencyContactPhone);
                 HasManyToMany(x => x.GetTasks()).Table("EmployeeToTask").Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
+            }
+        }
+
+        public class FacilitiesMap : SubclassMap<Facilities>
+        {
+            public FacilitiesMap()
+            {
+                Map(u => u.FacilitiesId);
+            }
+        }
+
+        public class MultiTenantUserMap : SubclassMap<MultiTenantUser>
+        {
+            public MultiTenantUserMap()
+            {
+                Map(u => u.MultiTenantUserId);
+            }
+        }
+
+        public class KYTAdministratorMap : SubclassMap<KYTAdministrator>
+        {
+            public KYTAdministratorMap()
+            {
+                Map(u => u.KYTAdministratorId);
             }
         }
     }

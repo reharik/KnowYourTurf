@@ -9,12 +9,14 @@
 @section ExtraCss {
     @MvcHtmlString.Create(CSS("ui.jqgrid.css").ToString())
     @MvcHtmlString.Create(CSS("token-input.css").ToString())
+    @MvcHtmlString.Create(CSS("svwp_style.css").ToString())
 }    
 @section HeaderScripts{
     @MvcHtmlString.Create(Script("grid.locale-en.js").ToString())
     @MvcHtmlString.Create(Script("jquery.jqGrid.min.js").ToString())
     @MvcHtmlString.Create(Script("jquery.kyt.grid.js").ToString())
-    @MvcHtmlString.Create(Script("jquery.tokeninput.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.tokeninput.js").ToString()) 
+    @MvcHtmlString.Create(Script("jquery.slideViewerPro.1.5.js").ToString())
     @MvcHtmlString.Create(Script("kyt.grid.columnService.js").ToString())
     @MvcHtmlString.Create(Script("kyt.grid.formatters.js").ToString())
     @MvcHtmlString.Create(Script("kyt.gridHelpers.js").ToString())
@@ -58,12 +60,17 @@
             
             @MvcHtmlString.Create(Html.ViewFor(x => x.Field.Size).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
         </div>
-    <div class="grid_5">
-        @{if (!string.IsNullOrEmpty(Model.Field.ImageUrl))
-          {
-             @MvcHtmlString.Create(Html.ViewFor(x => x.Field.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToString());
-          }
-        }
+    <div class="grid_9">
+       <div id="photoSlide" class="svwp">
+           <ul>
+                @foreach (var photo in Model.Field.GetPhotos())
+                {
+                    <li>
+                        <img  width="710" height="290"  src="@photo.FileUrl" />
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
 
          <div class="grid_10_KYT">

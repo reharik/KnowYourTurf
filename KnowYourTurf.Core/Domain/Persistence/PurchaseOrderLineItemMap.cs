@@ -12,6 +12,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Completed);
             Map(x => x.DateRecieved);
             Map(x => x.UnitType);
+            Map(x => x.Taxable);
+            Map(x => x.SizeOfUnit);
             References(x => x.Product).Not.LazyLoad();
             References(x => x.PurchaseOrder);
         }

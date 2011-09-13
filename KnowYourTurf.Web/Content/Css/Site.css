@@ -437,13 +437,17 @@ a.KYT_AddAddress:hover { cursor:pointer; }
 
 /* END Property Map */
 
-
+.KYT_textArea{
+    width:300px;
+    height:60px;
+}
 .KYT_strikeOut{
     background-color:red;
 }
 
 .KYT_dashboardImage{
-    height: 400px;
+    height: 200px;
+    width:400px;
 }
 
 .KYT_displayImage{

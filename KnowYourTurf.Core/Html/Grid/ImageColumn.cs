@@ -39,7 +39,7 @@ namespace KnowYourTurf.Core.Html.Grid
             divTag.AddClasses(new[]{"imageColumn"});
             var image = BuildImage();
             divTag.Children.Add(image);
-            return divTag.ToPrettyString();
+            return divTag.ToString();
         }
 
         protected HtmlTag BuildImage(bool header = false)

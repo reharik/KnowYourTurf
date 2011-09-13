@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -13,12 +14,17 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
         private readonly IInventoryService _inventoryService;
+        private readonly IPurchaseOrderLineItemService _purchaseOrderLineItemService;
 
-        public PurchaseOrderLineItemController(IRepository repository, ISaveEntityService saveEntityService, IInventoryService inventoryService)
+        public PurchaseOrderLineItemController(IRepository repository,
+            ISaveEntityService saveEntityService,
+            IInventoryService inventoryService,
+            IPurchaseOrderLineItemService purchaseOrderLineItemService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _inventoryService = inventoryService;
+            _purchaseOrderLineItemService = purchaseOrderLineItemService;
         }
 
         public ActionResult AddEdit(ViewModel input)
@@ -27,6 +33,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new PurchaseOrderLineItemViewModel
             {
                 PurchaseOrderLineItem = purchaseOrderLineItem,
+                ParentId = input.ParentId
             };
             return PartialView("PurchaseOrderLineItemAddUpdate", model);
         }
@@ -52,14 +59,17 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(PurchaseOrderLineItemViewModel input)
         {
+            var purchaseOrder = _repository.Find<PurchaseOrder>(input.ParentId);
             var purchaseOrderLineItem = input.PurchaseOrderLineItem.EntityId > 0
-                                            ? _repository.Find<PurchaseOrderLineItem>(input.PurchaseOrderLineItem.EntityId)
+                                            ? purchaseOrder.GetLineItems().FirstOrDefault(x=>x.EntityId == input.PurchaseOrderLineItem.EntityId)
                                             : new PurchaseOrderLineItem();
             purchaseOrderLineItem.Price = input.PurchaseOrderLineItem.Price;
             purchaseOrderLineItem.QuantityOrdered = input.PurchaseOrderLineItem.QuantityOrdered;
             purchaseOrderLineItem.SizeOfUnit = input.PurchaseOrderLineItem.SizeOfUnit;
             purchaseOrderLineItem.UnitType = input.PurchaseOrderLineItem.UnitType;
-            var crudManager = _saveEntityService.ProcessSave(purchaseOrderLineItem);
+            purchaseOrderLineItem.Taxable= input.PurchaseOrderLineItem.Taxable;
+            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder,purchaseOrderLineItem);
+            var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
             var notification = crudManager.Finish();
             return Json(notification, JsonRequestBehavior.AllowGet);
         }

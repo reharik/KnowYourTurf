@@ -53,7 +53,6 @@ namespace KnowYourTurf.Core.Html.Grid
                                 ? ((DateTime) value).ToShortTimeString()
                                 : ((DateTime) value).ToShortDateString();
                 }
-                
             }
             return value == null ? null : value.ToString();
         }

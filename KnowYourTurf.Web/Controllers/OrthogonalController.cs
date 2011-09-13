@@ -9,7 +9,7 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class OrthogonalController : KYTController
+    public class OrthogonalController : Controller
     {
         private readonly IMenuConfig _menuConfig;
         private readonly ISessionContext _sessionContext;
@@ -23,7 +23,7 @@ namespace KnowYourTurf.Web.Controllers
         public PartialViewResult KnowYourTurfHeader()
         {
             User user = new User();
-            if (User.Identity.IsAuthenticated)
+            if (_sessionContext.IsAuthenticated())
             {
                 user = _sessionContext.GetCurrentUser();
             }
@@ -36,8 +36,8 @@ namespace KnowYourTurf.Web.Controllers
             HeaderViewModel model = new HeaderViewModel
             {
                 User = user,
-                LoggedIn = User.Identity.IsAuthenticated,
-                IsAdmin = (user.UserRoles.IsNotEmpty() && user.UserRoles.Contains(UserRole.Admin.ToString())),
+                LoggedIn = _sessionContext.IsAuthenticated(),
+                IsAdmin = _sessionContext.IsInRole(UserRole.Administrator.ToString()),
                 InAdminMode = (bool)inAdminMode
             };
             return PartialView(model);
@@ -47,7 +47,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var currentUser = _sessionContext.GetCurrentUser();
             var inAdminMode = _sessionContext.RetrieveSessionObject(WebLocalizationKeys.INADMINMODE.ToString());
-            if (currentUser.UserRoles.IsNotEmpty() && currentUser.UserRoles.Contains(UserRole.Admin.ToString()) && (bool)inAdminMode)
+            if (_sessionContext.IsInRole(UserRole.Administrator.ToString()) && (bool)inAdminMode)
             {
                 IMenuConfig SetupMenuConfig = ObjectFactory.Container.GetInstance<IMenuConfig>("SetupMenu");
                 return PartialView(new MenuViewModel
@@ -67,9 +67,9 @@ namespace KnowYourTurf.Web.Controllers
             var inAdminMode = _sessionContext.RetrieveSessionItem(WebLocalizationKeys.INADMINMODE.ToString());
             inAdminMode.SessionObject = !(bool) inAdminMode.SessionObject;
             _sessionContext.AddUpdateSessionItem(inAdminMode);
-            return currentUser.UserRoles.IsEmpty() || !currentUser.UserRoles.Contains(UserRole.Admin.ToString())
+            return _sessionContext.IsInRole(UserRole.Administrator.ToString())
                 && (bool)inAdminMode.SessionObject
-                    ? RedirectToAction("Enum", "ListType")
+                    ? RedirectToAction("ListType", "ListTypeList")
                     : RedirectToAction("Home", "Home");
         }
     }

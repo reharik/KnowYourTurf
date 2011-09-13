@@ -42,6 +42,16 @@ kyt.fieldDashboard.controller= (function(){
             $("#addNewPhoto").click(function(){kyt.popupCrud.controller.itemCRU(null,photoGridContainerMetaData)});
             $("#addNewDocument").click(function(){kyt.popupCrud.controller.itemCRU(null,documentGridContainerMetaData)});
 
+            $("#photoSlide").slideViewerPro({
+                thumbs: 4,
+                typo: true,
+                galBorderWidth: 0,
+                thumbsBorderOpacity: 0,
+                buttonsTextColor: "#707070",
+                buttonsWidth: 40,
+                thumbsActiveBorderOpacity: 0.8,
+                thumbsActiveBorderColor: "aqua"
+            });
         }
     }
 }());

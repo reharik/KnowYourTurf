@@ -39,7 +39,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.ImageButtonColumn()
                 .ForAction<TaskController>(x=>x.AddEdit(null))
                 .ToPerformAction(ColumnAction.Edit)
-                .ImageName("page_edit.png")
+                .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x=>x.TaskType.Name)
                 .ForAction<TaskController>(x=>x.Display(null))
@@ -47,7 +47,7 @@ namespace KnowYourTurf.Web.Grids
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x=>x.ScheduledDate);
             GridBuilder.DisplayFor(x=>x.ScheduledStartTime);
-            GridBuilder.DisplayFor(x => x.Status);
+            GridBuilder.DisplayFor(x => x.Complete);
             return this;
         }
     }

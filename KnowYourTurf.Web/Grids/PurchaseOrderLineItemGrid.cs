@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using HtmlTags;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html.Grid;
@@ -35,7 +36,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.ImageButtonColumn()
                 .ForAction<PurchaseOrderLineItemController>(x => x.AddEdit(null))
                 .ToPerformAction(ColumnAction.Edit)
-                .ImageName("page_edit.png")
+                .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Product.Name)
                 .ForAction<PurchaseOrderLineItemController>(x => x.Display(null))
@@ -76,7 +77,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.ImageButtonColumn()
                 .ForAction<PurchaseOrderLineItemController>(x => x.ReceivePurchaseOrderLineItem(null))
                 .ToPerformAction(ColumnAction.Edit)
-                .ImageName("page_edit.png")
+                .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Product.Name)
                 .ForAction<PurchaseOrderLineItemController>(x => x.Display(null))

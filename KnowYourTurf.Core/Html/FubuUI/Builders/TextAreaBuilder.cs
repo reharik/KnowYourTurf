@@ -16,11 +16,9 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-            var textAreaAttribute = request.Accessor.GetAttribute<TextAreaAttribute>();
             var value = request.StringValue().IsNotEmpty() ? request.StringValue() : "";
             return new HtmlTag("textarea")
-                .Attr("rows",textAreaAttribute.Rows)
-                .Attr("cols",textAreaAttribute.Columns)
+            .AddClass("KYT_textArea")
                 .Attr("name", request.ElementId)
                 .Text(value);
         }

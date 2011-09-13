@@ -6,7 +6,7 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class ListTypeListController : AdminController
+    public class ListTypeListController : AdminControllerBase
     {
         private readonly IPhotoCategoryListGrid _photoCategoryListGrid;
         private readonly IDocumentCategoryListGrid _documentCategoryListGrid;

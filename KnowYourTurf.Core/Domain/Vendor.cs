@@ -26,7 +26,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Fax { get; set; }
         public virtual string Website { get; set; }
         public virtual string LogoUrl { get; set; }
-        [TextArea(2, 60)]
+        [TextArea]
         public virtual string Notes { get; set; }
         [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
@@ -80,19 +80,19 @@ namespace KnowYourTurf.Core.Domain
         }
 
 
-        public virtual decimal AmountOfSubTotalForPurchaseOrder(long purchaseOrderId)
+        public virtual double AmountOfSubTotalForPurchaseOrder(long purchaseOrderId)
         {
             var purchaseOrder = GetCompletedPurchaseOrders().FirstOrDefault(x => x.EntityId == purchaseOrderId);
             return purchaseOrder.GetLineItems().Sum(x => x.SubTotal.Value);
         }
 
-        public virtual decimal TotalTaxForPurchaseOrder(long purchaseOrderId)
+        public virtual double TotalTaxForPurchaseOrder(long purchaseOrderId)
         {
             var purchaseOrder = GetCompletedPurchaseOrders().FirstOrDefault(x => x.EntityId == purchaseOrderId);
             return purchaseOrder.GetLineItems().Sum(x => x.Tax.Value);
         }
 
-        public virtual decimal TotalAmountDueForPurchaseOrder(long purchaseOrderId)
+        public virtual double TotalAmountDueForPurchaseOrder(long purchaseOrderId)
         {
             var purchaseOrder = GetCompletedPurchaseOrders().FirstOrDefault(x => x.EntityId == purchaseOrderId);
             return purchaseOrder.GetLineItems().Sum(x => x.SubTotal.Value + x.Tax.Value);

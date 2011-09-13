@@ -44,11 +44,12 @@
 <div id="errorMessages" class="errorMessages KYT_errorMessages" ><ul></ul></div>
 <input type="hidden" id="vendorId" value="@Model.VendorId"/>
 <input type="hidden" id="poId" value="@Model.PurchaseOrder.EntityId"/>
-
-@MvcHtmlString.Create(Html.HiddenFor(x=>x.PurchaseOrder.EntityId).ToString())
-@MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToString())
-@MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).RootId("viewVendor").ToString())
-@MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrder.Vendor).InputId("vendor").RootId("editVendor").ToString())
+<div style="display:inline-block;">
+    @MvcHtmlString.Create(Html.HiddenFor(x=>x.PurchaseOrder.EntityId).ToString())
+    @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToString())
+    @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).RootId("viewVendor").ToString())
+</div>
+    @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrder.Vendor).InputId("vendor").RootId("editVendor").ToString())
 
 <div>
     <h2>@WebLocalizationKeys.PRODUCTS.ToString()</h2>

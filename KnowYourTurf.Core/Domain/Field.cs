@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Enums;
@@ -20,21 +21,21 @@ namespace KnowYourTurf.Core.Domain
         [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
         #region Collections
-        private readonly IList<Task> _pendingTasks = new List<Task>();
-        public virtual IEnumerable<Task> GetPendingTasks() { return _pendingTasks; }
-        public virtual void RemovePendingTask(Task task) { _pendingTasks.Remove(task); }
+        private readonly IList<Task> _tasks = new List<Task>();
+        public virtual IEnumerable<Task> GetTasks() { return _tasks; }
+        public virtual IEnumerable<Task> GetPendingTasks() { return _tasks.Where(x => !x.Complete); }
+        public virtual void RemovePendingTask(Task task) { _tasks.Remove(task); }
         public virtual void AddPendingTask(Task task)
         {
-            if (!task.IsNew() && _pendingTasks.Contains(task)) return;
-            _pendingTasks.Add(task);
+            if (!task.IsNew() && _tasks.Contains(task)) return;
+            _tasks.Add(task);
         }
-        private readonly IList<Task> _completedTasks = new List<Task>();
-        public virtual IEnumerable<Task> GetCompletedTasks() { return _completedTasks; }
-        public virtual void RemoveCompletedTask(Task task) { _completedTasks.Remove(task); }
+        public virtual IEnumerable<Task> GetCompletedTasks() { return _tasks.Where(x => x.Complete); }
+        public virtual void RemoveCompletedTask(Task task) { _tasks.Remove(task); }
         public virtual void AddCompletedTask(Task task)
         {
-            if (!task.IsNew() && _completedTasks.Contains(task)) return;
-            _completedTasks.Add(task);
+            if (!task.IsNew() && _tasks.Contains(task)) return;
+            _tasks.Add(task);
         }
 
         private readonly IList<Event> _events = new List<Event>();

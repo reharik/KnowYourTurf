@@ -13,16 +13,14 @@ namespace KnowYourTurf.Core.Domain
         [ValidateNonEmpty]
         public virtual Vendor Vendor { get; set; }
         [ValidateDecimalAttribute]
-        public virtual decimal SubTotal { get; set; }
+        public virtual double? SubTotal { get; set; }
         [ValidateDecimalAttribute]
-        public virtual decimal Tax { get; set; }
+        public virtual double? Tax { get; set; }
         [ValidateDecimalAttribute]
-        public virtual decimal Fees { get; set; }
+        public virtual double? Fees { get; set; }
         [ValidateDecimalAttribute]
-        public virtual decimal Total { get; set; }
+        public virtual double? Total { get; set; }
         public virtual DateTime? DateReceived { get; set; }
-        [ValueOf(typeof(TemporalStatus))]
-        public virtual string Status { get; set; }
         public virtual bool Completed { get; set; }
 
         private readonly IList<PurchaseOrderLineItem> _lineItems = new List<PurchaseOrderLineItem>();

@@ -27,7 +27,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string FullName { get { return FirstName + " " + LastName; } }
         [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
-        [TextArea(2, 60)]
+        [TextArea]
         public virtual string Notes { get; set; }
         [ValidateNonEmpty]
         public virtual Vendor Vendor { get; set; }

@@ -32,7 +32,6 @@ namespace KnowYourTurf.UnitTests
                            ScheduledDate = DateTime.Parse("01/05/1975"),
                            ScheduledEndTime = DateTime.Parse("01/05/1975 4:00 PM"),
                            ScheduledStartTime = DateTime.Parse("01/05/1975 3:00 PM"),
-                           Status = "Active",
                            Notes = "Some notes",
                            InventoryProduct = ValidInventoryProductChemical("product1"),
                            QuantityNeeded = 4

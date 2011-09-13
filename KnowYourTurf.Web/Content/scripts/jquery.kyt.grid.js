@@ -57,17 +57,17 @@ if (typeof kyt.grid == 'undefined') {
         grid.jqGrid(gridOptions);
         grid.jqGrid('filterToolbar',{stringResult:true});
         $(this)[0].toggleToolbar();
-        grid.jqGrid('navGrid',gridOptions.pager,{edit:false,add:false,del:false,search:false,refresh:false});
-        grid.jqGrid('navButtonAdd',gridOptions.pager,{caption:"Toggle",title:"Toggle Search Toolbar", buttonicon :'ui-icon-pin-s',
-            onClickButton:function(){
-                $(this)[0].toggleToolbar();
-            }
-        });
-        grid.jqGrid('navButtonAdd',gridOptions.pager,{caption:"Clear",title:"Clear Search",buttonicon :'ui-icon-refresh',
-            onClickButton:function(){
-                $(this)[0].clearToolbar();
-            }
-        });
+        //grid.jqGrid('navGrid',gridOptions.pager,{edit:false,add:false,del:false,search:false,refresh:false});
+//        grid.jqGrid('navButtonAdd',gridOptions.pager,{caption:"Toggle",title:"Toggle Search Toolbar", buttonicon :'ui-icon-pin-s',
+//            onClickButton:function(){
+//                $(this)[0].toggleToolbar();
+//            }
+//        });
+//        grid.jqGrid('navButtonAdd',gridOptions.pager,{caption:"Clear",title:"Clear Search",buttonicon :'ui-icon-refresh',
+//            onClickButton:function(){
+//                $(this)[0].clearToolbar();
+//            }
+//        });
 
         return grid;
     }

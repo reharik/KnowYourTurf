@@ -20,13 +20,13 @@
 //    public class GridHandlerService : IGridHandlerService
 //    {
 //        private readonly IRepository _repository;
-//        private readonly IHttpContextAbstractor _httpContextAbstractor;
+//        private readonly ISessionContext _sessionContext;
 //        private readonly IContainer _container;
 
-//        public GridHandlerService(IRepository repository, IHttpContextAbstractor httpContextAbstractor, IContainer container)
+//        public GridHandlerService(IRepository repository, ISessionContext sessionContext, IContainer container)
 //        {
 //            _repository = repository;
-//            _httpContextAbstractor = httpContextAbstractor;
+//            _sessionContext = sessionContext;
 //            _container = container;
 //        }
 
@@ -34,7 +34,7 @@
 //                                                string gridType,
 //                                                StringToken title = null) where ENTITY : DomainEntity
 //        {
-//            var userId = _httpContextAbstractor.GetUserIdFromIdentity();
+//            var userId = _sessionContext.GetUserId();
 //            var user = _repository.Find<User>(userId);
 //            //change this to grab the interface for the grid named.
 //            var grid = gridType.IsEmpty()
@@ -53,7 +53,7 @@
 //                                                            IQueryable<ENTITY> items,
 //                                                            string gridType = null) where ENTITY:DomainEntity
 //        {
-//            var userId = _httpContextAbstractor.GetUserIdFromIdentity();
+//            var userId = _sessionContext.GetUserId();
 //            var user = _repository.Find<User>(userId);
 //            var grid = gridType.IsEmpty()
 //                           ? ObjectFactory.Container.GetInstance<IGrid<ENTITY>>()

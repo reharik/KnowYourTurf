@@ -35,16 +35,16 @@ namespace KnowYourTurf.Core.Html.Grid
 
         public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName)
         {
-            var _item = (ENTITY) item;
+            var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
             if (value.IsEmpty()) return null;
             var divTag = BuildDiv();
-            divTag.AddClasses(new[]{"imageButtonColumn", _action});
-            var anchor = buildAnchor(_item,gridName);
+            divTag.AddClasses(new[] { "imageButtonColumn", _action });
+            var anchor = buildAnchor(_item, gridName);
             var image = BuildImage();
-            anchor.Children.Add(image);
-            divTag.Children.Add(anchor);
-            return divTag.ToPrettyString();
+             divTag.Children.Add(image);
+            anchor.Children.Add(divTag);
+            return anchor.ToString();
         }
 
         private HtmlTag buildAnchor(ENTITY item,string gridName)

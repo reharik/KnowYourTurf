@@ -29,7 +29,7 @@ namespace KnowYourTurf.Core.Services
                                                                              {
                                                                                  Product = purchaseOrderLineItem.Product,
                                                                                  UnitType = purchaseOrderLineItem.UnitType,
-                                                                                 SizeOfUnit = purchaseOrderLineItem.SizeOfUnit
+                                                                                 SizeOfUnit = purchaseOrderLineItem.SizeOfUnit.Value
                                                                              };
 
             inventoryProduct.LastVendor = purchaseOrderLineItem.PurchaseOrder.Vendor;

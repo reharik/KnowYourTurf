@@ -10,7 +10,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Description { get; set; }
         [ValidateNonEmpty]
         public virtual string InstantiatingType { get; set; }
-        [TextArea(3,20)]
+        [TextArea]
         public virtual string Notes { get; set; }
     }
 }

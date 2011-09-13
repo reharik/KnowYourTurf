@@ -12,7 +12,6 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.ScheduledEndTime);
             Map(x => x.ActualTimeSpent);
             Map(x => x.Notes);
-            Map(x => x.Status);
             Map(x => x.Deleted);
             Map(x => x.Complete);
             Map(x => x.QuantityNeeded);

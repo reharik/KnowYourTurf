@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.ImageButtonColumn()
                 .ForAction<DocumentController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.Edit)
-                .ImageName("page_edit.png")
+                .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ForAction<DocumentController>(x => x.Display(null))

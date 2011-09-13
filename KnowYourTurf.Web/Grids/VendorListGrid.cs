@@ -38,7 +38,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.ImageButtonColumn()
                 .ForAction<VendorController>(x => x.AddEdit(null))
                 .ToPerformAction(ColumnAction.Edit)
-                .ImageName("page_edit.png")
+                .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Company)
                 .ForAction<VendorController>(x => x.Display(null))
@@ -53,7 +53,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.ImageButtonColumn()
                 .ForAction<VendorContactListController>(x => x.VendorContactList(null))
                 .ToPerformAction(ColumnAction.Redirect)
-                .ImageName("delete.png");
+                .ImageName("AddContact.png");
             return this;
         }
     }

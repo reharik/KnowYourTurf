@@ -9,6 +9,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Name);
             Map(x => x.Latitude);
             Map(x => x.Longitude);
+            Map(x => x.TaxRate);
         }
     }
 }

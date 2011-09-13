@@ -1,0 +1,60 @@
+﻿@model KnowYourTurf.Web.Models.FacilitiesViewModel
+@using KnowYourTurf.Core;
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using HtmlTags
+
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+@section ExtraCss {
+    @MvcHtmlString.Create(CSS("ui.jqgrid.css").ToString())
+}    
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("grid.locale-en.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.jqGrid.min.js").ToString())
+    @MvcHtmlString.Create(Script("jquery.kyt.grid.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.grid.columnService.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.grid.formatters.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.gridHelpers.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.popupCrud.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
+}
+
+@section HeaderJavascript{
+    crudData = {};
+    $.extend(crudData, {"AddUrl":@MvcHtmlString.Create(JsonUtil.ToJson(Model.AddEditUrl))},{});
+
+    $(document).ready(function() {
+        $("#addNew").live("click",function(){kyt.popupCrud.controller.addEditItem()});
+    });
+}
+    <div class="grid_5">
+        <div class="KYT_section_header" >
+            @MvcHtmlString.Create(WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString())
+        </div>
+
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.FacilitiesId).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.FirstName).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.LastName).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.Email).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.PhoneMobile).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.Address1).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.Address2).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.City).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.State).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.ZipCode).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.Notes).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+         
+    </div>
+    <div class="grid_5">
+        @{if (!string.IsNullOrEmpty(Model.Facilities.ImageUrl))
+          {
+             @MvcHtmlString.Create(Html.ViewFor(x => x.Facilities.ImageUrl).InputId("KYT_dashboardImage").HideLabel().AddClassToInput("KYT_dashboardImage").ToString());
+          }
+        }   </div>
+     
+<div id="dialogHolder"></div>     
+
+

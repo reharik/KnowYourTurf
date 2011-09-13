@@ -8,7 +8,7 @@
 <script>
      var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
     $(document).ready(function(){
-        $("#gridContainer").AsGrid(gridDef,{multiselect:true});
+        $("#gridContainer").AsGrid(gridDef);
     });
 </script>
 <div class="KYT_gridbreak">

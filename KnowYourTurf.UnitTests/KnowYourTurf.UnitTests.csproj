@@ -33,41 +33,44 @@
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\NHibernate3\Required_Bins\Antlr3.Runtime.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate-NH3.0-binary-1.2.0.694\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Components.Validator, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CastleValidator\Castle.Components.Validator.dll</HintPath>
+      <HintPath>..\lib\Castle.Components.Validator.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core">
-      <HintPath>..\lib\NHibernate3\Required_For_LazyLoading\Castle\Castle.Core.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate-NH3.0-binary-1.2.0.694\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\lib\fluentnhibernate-NH3.0-binary-1.2.0.694\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="FubuMVC.Core">
-      <HintPath>..\lib\fubu.ui\FubuMVC.Core.dll</HintPath>
+      <HintPath>..\lib\FubuMVC.Core.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\NHibernate3\Required_Bins\Iesi.Collections.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate-NH3.0-binary-1.2.0.694\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\NHibernate3\Required_Bins\NHibernate.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate-NH3.0-binary-1.2.0.694\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate.ByteCode.Castle">
-      <HintPath>..\lib\NHibernate3\Required_For_LazyLoading\Castle\NHibernate.ByteCode.Castle.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate-NH3.0-binary-1.2.0.694\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\lib\nunit\nunit.framework.dll</HintPath>
+      <HintPath>..\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Remotion.Data.Linq, Version=1.13.41.2, Culture=neutral, PublicKeyToken=cab60358ab4081ea, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\NHibernate3\Required_Bins\Remotion.Data.Linq.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate-NH3.0-binary-1.2.0.694\Remotion.Data.Linq.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks">
-      <HintPath>..\lib\Rhino mocks\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\lib\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Security">
-      <HintPath>..\lib\RhinoSecurity\Rhino.Security.dll</HintPath>
+      <HintPath>..\lib\Rhino.Security.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\lib\StructureMap2.6.1\deploy\StructureMap.dll</HintPath>

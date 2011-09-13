@@ -153,6 +153,10 @@ kyt.popupCrud.popup = (function()  {
 kyt.popupCrud.repository = (function(){
 
     var itemCallback = function(result,metaData){
+        if(result.LoggedOut){
+            window.location.replace(result.RedirectUrl);
+            return;
+        }
         kyt.popupCrud.popup.displayPopup(result, metaData);
         kyt.popupCrud.repository.processPopupMetaData(metaData);
     };

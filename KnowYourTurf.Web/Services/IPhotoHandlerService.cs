@@ -50,7 +50,7 @@ namespace KnowYourTurf.Web.Services
             CrudReport crudReport= new CrudReport();
             if (fileExists)
             {
-                crudReport.AddErrorInfo(new ErrorInfo(null,WebLocalizationKeys.FILE_ALREADY_EXISTS.ToString()));
+                crudReport.AddErrorInfo(new ErrorInfo("Photo",WebLocalizationKeys.FILE_ALREADY_EXISTS.ToString()));
                 crudManager.AddCrudReport(crudReport);
                 return crudManager;
             }

@@ -38,7 +38,7 @@ namespace KnowYourTurf.Core.Domain
             GridBuilder.ImageButtonColumn()
                 .ForAction<PurchaseOrderController>(x => x.AddEdit(null))
                 .ToPerformAction(ColumnAction.Redirect)
-                .ImageName("page_edit.png")
+                .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.DateCreated)
                 .ForAction<PurchaseOrderController>(x => x.Display(null))
@@ -53,7 +53,7 @@ namespace KnowYourTurf.Core.Domain
             GridBuilder.ImageButtonColumn()
                 .ForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null))
                 .ToPerformAction(ColumnAction.Redirect)
-                .ImageName("delete.png");
+                .ImageName("KYTcopy.png");
             return this;
         }
 

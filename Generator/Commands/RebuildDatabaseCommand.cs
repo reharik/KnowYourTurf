@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using KnowYourTurf.Core.Domain;
 using NHibernate;
 using NHibernate.Cfg;
@@ -25,25 +28,16 @@ namespace Generator.Commands
         public void Execute(string[] args)
         {
             
-            
             ObjectFactory.Configure(x=>x.For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactoryAndGenerateSchema()));
             var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
-           // SqlServerHelper.KillAllFKs(sessionFactory);
-    
-                
-            string extraDataLoadKey = null;
 
-            if (args.Length > 1)
-            {
-                _loader.SetFileBasePath(args[1]);
-            }
+            new DataLoader().Load();
 
-            if (args.Length > 2)
-            {
-                extraDataLoadKey = args[2];
-            }
+            SqlServerHelper.AddRhinoSecurity(sessionFactory);
 
-            new DataLoader().Load(extraDataLoadKey);
+            var securitySetup = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
+            securitySetup.Execute(null);
+
 
             //_loader.ClearStrings();
             //_loader.LoadStrings(_repository);

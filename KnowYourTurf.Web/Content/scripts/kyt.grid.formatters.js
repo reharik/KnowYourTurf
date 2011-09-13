@@ -26,6 +26,7 @@ kyt.grid.formatterHelpers = (function () {
                     break;
                 case "Edit":
                     kyt.popupCrud.controller.itemCRU(actionUrl, gridMetaData, gridMetaData ? gridMetaData.getLoadData() : {});
+                    gridMetaData.setIsDisplay(false);
                     break;
                 case "Display":
                     gridMetaData.setIsDisplay(true);

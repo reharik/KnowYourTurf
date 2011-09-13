@@ -13,16 +13,19 @@ namespace KnowYourTurf.Web.Config
             _builder = builder;
         }
 
-        public IList<MenuItem> Build()
+        public IList<MenuItem> Build(bool withoutPermissions = false)
         {
-            return DefaultMenubuilder();
+            return DefaultMenubuilder(withoutPermissions);
         }
 
-        private IList<MenuItem> DefaultMenubuilder()
+        private IList<MenuItem> DefaultMenubuilder(bool withoutPermissions = false)
         {
             return _builder
+                //.CreateNode<AdminListController>(c => c.AdminList(), WebLocalizationKeys.ADMINS)
                 .CreateNode<EmployeeListController>(c => c.EmployeeList(), WebLocalizationKeys.EMPLOYEES)
-                .CreateNode<ListTypeListController>(c => c.ListType(), WebLocalizationKeys.ENUMERATIONS)
+                .CreateNode<FacilitiesListController>(c => c.FacilitiesList(), WebLocalizationKeys.FACILITIES)
+            .CreateNode<ListTypeListController>(c => c.ListType(), WebLocalizationKeys.ENUMERATIONS)
+
                 .CreateNode(WebLocalizationKeys.PRODUCTS)
                     .HasChildren()
                     .CreateNode<MaterialListController>(c => c.MaterialList(), WebLocalizationKeys.MATERIALS)
@@ -34,7 +37,17 @@ namespace KnowYourTurf.Web.Config
                 .CreateNode<PhotoListController>(c => c.PhotoList(null), WebLocalizationKeys.PHOTOS)
                 //.CreateNode<EmailJobListController>(c => c.EmailJobList(), WebLocalizationKeys.EMAIL_JOBS)
                 //.CreateNode<EmailTemplateListController>(c => c.EmailTemplateList(null), WebLocalizationKeys.EMAIL_TEMPLATES)
-                .MenuTree();
+                .CreateNode<VendorListController>(c => c.VendorList(null), WebLocalizationKeys.VENDORS)
+                .CreateNode(WebLocalizationKeys.INVENTORY)
+                    .HasChildren()
+                    .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.MATERIALS, "ProductType=Material")
+                    .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.FERTILIZERS, "ProductType=Fertilizer")
+                    .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.CHEMICALS, "ProductType=Chemical")
+                    .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.SEEDS, "ProductType=Seed")
+                    .EndChildren()
+                .CreateNode<PurchaseOrderListController>(c => c.PurchaseOrderList(), WebLocalizationKeys.PURCHASE_ORDERS)
+
+                .MenuTree(withoutPermissions);
         }
     }
 }

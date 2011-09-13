@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using HtmlTags;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html.Grid;
@@ -37,7 +38,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.ImageButtonColumn()
                .ForAction<EventTypeController>(x => x.AddUpdate(null))
                .ToPerformAction(ColumnAction.Edit)
-               .ImageName("page_edit.png")
+               .ImageName("KYTedit.png")
                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ForAction<EventTypeController>(x => x.Display(null))
@@ -69,7 +70,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.ImageButtonColumn()
                .ForAction<TaskTypeController>(x => x.AddUpdate(null))
                .ToPerformAction(ColumnAction.Edit)
-               .ImageName("page_edit.png")
+               .ImageName("KYTedit.png")
                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ForAction<TaskTypeController>(x => x.Display(null))
@@ -101,7 +102,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.ImageButtonColumn()
                .ForAction<PhotoCategoryController>(x => x.AddUpdate(null))
                .ToPerformAction(ColumnAction.Edit)
-               .ImageName("page_edit.png")
+               .ImageName("KYTedit.png")
                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ForAction<PhotoCategoryController>(x => x.Display(null))
@@ -133,7 +134,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.ImageButtonColumn()
                .ForAction<DocumentCategoryController>(x => x.AddUpdate(null))
                .ToPerformAction(ColumnAction.Edit)
-               .ImageName("page_edit.png")
+               .ImageName("KYTedit.png")
                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ForAction<DocumentCategoryController>(x => x.Display(null))

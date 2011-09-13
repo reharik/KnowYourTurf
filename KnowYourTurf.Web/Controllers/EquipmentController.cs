@@ -14,17 +14,17 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
         private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
-        private readonly IHttpContextAbstractor _httpContextAbstractor;
+        private readonly ISessionContext _sessionContext;
 
         public EquipmentController(IRepository repository,
             ISaveEntityService saveEntityService,
             IUploadedFileHandlerService uploadedFileHandlerService,
-            IHttpContextAbstractor httpContextAbstractor)
+            ISessionContext sessionContext)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _uploadedFileHandlerService = uploadedFileHandlerService;
-            _httpContextAbstractor = httpContextAbstractor;
+            _sessionContext = sessionContext;
         }
 
         public ActionResult AddEdit(ViewModel input)
@@ -67,7 +67,7 @@ namespace KnowYourTurf.Web.Controllers
                 equipment.ImageUrl = string.Empty;
             }
 
-            var serverDirectory = "/CustomerPhotos/" + _httpContextAbstractor.GetCompanyIdFromIdentity() + "/Equipment";
+            var serverDirectory = "/CustomerPhotos/" + _sessionContext.GetCompanyId() + "/Equipment";
             equipment.ImageUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, equipment.Name);
             var crudManager = _saveEntityService.ProcessSave(equipment);
             crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, equipment.Name, crudManager);

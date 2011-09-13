@@ -58,7 +58,7 @@ namespace KnowYourTurf.Core.Domain
                 {
                     x.SetProperty("adonet.batch_size", "100");
                     x.SetProperty("generate_statistics", "true");
-                    Security.Configure<User>(x, SecurityTableStructure.Schema);
+                    Security.Configure<User>(x, SecurityTableStructure.Prefix);
 
                 })
                 .BuildSessionFactory();

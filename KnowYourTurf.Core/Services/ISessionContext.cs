@@ -19,6 +19,10 @@ namespace KnowYourTurf.Core.Services
         SessionItem RetrieveSessionItem(string sessionKey);
         long GetCompanyId();
         long GetUserId();
+        Company GetCurrentCompany();
+        bool IsAuthenticated();
+        bool IsInRole(string role);
+        void ClearSession();
     }
 
     public class SessionContext : ISessionContext
@@ -32,18 +36,22 @@ namespace KnowYourTurf.Core.Services
 
         public User GetCurrentUser()
         {
-            if(HttpContext.Current == null)
-            {
-                return null;
-            }
-            IIdentity identity = HttpContext.Current.User.Identity;
-            if (!identity.IsAuthenticated)
-            {
-                return null;
-            }
-            var customPrincipal = (CustomPrincipal) HttpContext.Current.User;
-            User currentUser = _repository.Find<User>(customPrincipal.UserId);
-            return currentUser;
+            return  _repository.Find<User>(GetUserId());
+        }
+
+        public Company GetCurrentCompany()
+        {
+            return _repository.Find<Company>(GetCompanyId());
+        }
+
+        public bool IsAuthenticated()
+        {
+            return HttpContext.Current.User.Identity.IsAuthenticated;
+        }
+
+        public bool IsInRole(string role)
+        {
+            return HttpContext.Current.User.IsInRole(role);
         }
 
         public object RetrieveSessionObject(Guid sessionKey)
@@ -63,6 +71,10 @@ namespace KnowYourTurf.Core.Services
             return (SessionItem)HttpContext.Current.Session[sessionKey];
         }
 
+        public void ClearSession()
+        {
+            HttpContext.Current.Session.Clear();
+        }
 
         public void AddUpdateSessionItem(SessionItem item)
         {
@@ -174,6 +186,26 @@ namespace KnowYourTurf.Core.Services
         }
 
         public long GetUserId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Company GetCurrentCompany()
+        {
+            return _currentUser.Company;
+        }
+
+        public bool IsAuthenticated()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsInRole(string role)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearSession()
         {
             throw new NotImplementedException();
         }

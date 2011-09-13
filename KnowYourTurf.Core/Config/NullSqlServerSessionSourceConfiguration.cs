@@ -1,9 +1,4 @@
-using System;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
-using KnowYourTurf.Core.Config;
 using NHibernate;
-using NHibernate.Cfg;
 
 namespace KnowYourTurf.Core.Domain
 {

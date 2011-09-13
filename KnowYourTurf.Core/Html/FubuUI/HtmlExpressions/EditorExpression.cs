@@ -5,6 +5,10 @@ using System.Web.Mvc;
 using KnowYourTurf.Core.Localization;
 using FubuMVC.UI.Tags;
 using HtmlTags;
+using KnowYourTurf.Core.Services;
+using Rhino.Security.Interfaces;
+using Rhino.Security.Services;
+using StructureMap;
 
 namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 {
@@ -32,6 +36,9 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         private string _radioButtonGroupName;
         private bool _radioButton;
         private bool _inline;
+        private string _operation;
+        private IAuthorizationService _authorizationService;
+        private ISessionContext _sessionContext;
 
         public EditorExpression(ITagGenerator<VIEWMODEL> generator, Expression<Func<VIEWMODEL, object>> expression)
         {
@@ -41,16 +48,28 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 
         public override string ToString()
         {
-            return ToHtmlTag().ToString();
+            return ToHtmlTag() !=null ? ToHtmlTag().ToString():"";
         }
 
         public HtmlTag ToHtmlTag()
         {
+            if (_operation.IsNotEmpty() && !checkAuthentication())
+            {
+                return null;
+            }
             if(_inlineReverse)
             {
                 return renderInlineReverse();
             }
             return renderStandard();
+        }
+
+        private bool checkAuthentication()
+        {
+            _authorizationService = ObjectFactory.Container.GetInstance<IAuthorizationService>();
+            _sessionContext = ObjectFactory.Container.GetInstance<ISessionContext>();
+            var user = _sessionContext.GetCurrentUser();
+            return _authorizationService.IsAllowed(user, _operation);
         }
 
         private HtmlTag renderStandard()
@@ -240,6 +259,12 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         public EditorExpression<VIEWMODEL> labelId(string id)
         {
             _labelId = id;
+            return this;
+        }
+
+        public EditorExpression<VIEWMODEL> OperationName(string operation)
+        {
+            _operation = operation;
             return this;
         }
 

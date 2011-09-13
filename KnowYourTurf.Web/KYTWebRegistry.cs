@@ -73,10 +73,11 @@ namespace KnowYourTurf.Web
             For<IMenuConfig>().Add<SetupMenuConfig>().Named("SetupMenu");
 
             For<IAuthorizationService>().HybridHttpOrThreadLocalScoped().Use<AuthorizationService>();
-            For<IAuthorizationRepository>().HybridHttpOrThreadLocalScoped().Use<AuthorizationRepository>();
+            For<IAuthorizationRepository>().HybridHttpOrThreadLocalScoped().Use<CustomAuthorizationRepository>();
             For<IPermissionsBuilderService>().HybridHttpOrThreadLocalScoped().Use<PermissionsBuilderService>();
             For<IPermissionsService>().HybridHttpOrThreadLocalScoped().Use<PermissionsService>();
             For(typeof (IGridBuilder<>)).LifecycleIs(new UniquePerRequestLifecycle()).Use(typeof (GridBuilder<>));
+            For<ISecuritySetupService>().Use<DefaultSecuritySetupService>();
         }
     }
 }

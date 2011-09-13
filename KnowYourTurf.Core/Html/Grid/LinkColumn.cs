@@ -78,11 +78,13 @@ namespace KnowYourTurf.Core.Html.Grid
             var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
             if (value.IsEmpty()) return null;
+            var span = new HtmlTag("span").Text(value);
+            addToolTipAndClasses(span);
             var anchor = buildAnchor(_item, gridName);
             anchor.AddClasses(new[] { "linkColumn", _action });
             addToolTipAndClasses(anchor);
-            anchor.Text(value);
-            return anchor.ToPrettyString();
+            anchor.Children.Add(span);
+            return anchor.ToString();
         }
 
         private void addToolTipAndClasses(HtmlTag span)

@@ -14,7 +14,7 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public abstract class ListTypeBaseController<LISTTYPE> : AdminController where LISTTYPE : ListType
+    public abstract class ListTypeBaseController<LISTTYPE> : AdminControllerBase where LISTTYPE : ListType
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
         private readonly IRepository _repository;
@@ -25,7 +25,7 @@ namespace KnowYourTurf.Web.Controllers
         public ListTypeBaseController(IDynamicExpressionQuery dynamicExpressionQuery,
                               IRepository repository,
                               ISaveEntityService saveEntityService,
-                              IListTypeListGrid<LISTTYPE> listTypeListGrid)
+                              IListTypeListGrid<LISTTYPE> listTypeListGrid) 
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _repository = repository;

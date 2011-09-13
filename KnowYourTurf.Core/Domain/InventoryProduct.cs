@@ -9,11 +9,11 @@ namespace KnowYourTurf.Core.Domain
     {
         public virtual DateTime? LastUsed { get; set; }
         [ValidateDouble]
-        public virtual double Quantity { get; set; }
+        public virtual double? Quantity { get; set; }
         public virtual string Description { get; set; }
         public virtual DateTime? DatePurchased { get; set; }
         [ValidateDecimal]
-        public virtual decimal Cost { get; set; }
+        public virtual double? Cost { get; set; }
         [ValidateInteger]
         public virtual int SizeOfUnit { get; set; }
         [ValueOf(typeof(UnitType)), ValidateNonEmpty]

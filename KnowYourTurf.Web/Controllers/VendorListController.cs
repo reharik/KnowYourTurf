@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
+using HtmlTags;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
@@ -42,12 +43,12 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Vendors(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Vendor>();
-            Action<IGridColumn,Vendor> mod = (c,v) =>
+            Action<IGridColumn, Vendor> mod = (c, v) =>
                                           {
-                                              if (c.GetType() == typeof(ImageButtonColumn<Vendor>) && c.ColumnIndex==10)
+                                              if (c.GetType() == typeof(ImageButtonColumn<Vendor>) && c.ColumnIndex == 10)
                                               {
-                                                  var col = (ImageButtonColumn<Vendor>) c;
-                                                  col.AddActionUrlParameters(new Dictionary<string,string>{{ "ParentId", v.EntityId.ToString()}});
+                                                  var col = (ImageButtonColumn<Vendor>)c;
+                                                  col.AddActionUrlParameters(new Dictionary<string, string> { { "ParentId", v.EntityId.ToString() } });
                                               }
                                           };
 

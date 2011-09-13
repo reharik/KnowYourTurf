@@ -15,28 +15,25 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
-        private readonly ISelectBoxPickerService _selectBoxPickerService;
 
         public VendorController(IRepository repository,
-            ISaveEntityService saveEntityService,
-            ISelectBoxPickerService selectBoxPickerService)
+            ISaveEntityService saveEntityService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
-            _selectBoxPickerService = selectBoxPickerService;
         }
 
         public ActionResult AddEdit(ViewModel input)
         {
             var vendor = input.EntityId > 0 ? _repository.Find<Vendor>(input.EntityId) : new Vendor();
-            var availableChemicals = _repository.FindAll<Chemical>().Select(x => new TokenInputDto { id = x.EntityId, name = x.Name });
-            var selectedChemicals = vendor.GetAllProductsOfType("Chemical").Select(x => new TokenInputDto { id = x.EntityId, name = x.Name });
-            var availableFertilizers = _repository.FindAll<Fertilizer>().Select(x => new TokenInputDto { id = x.EntityId, name = x.Name });
-            var selectedFertilizers = vendor.GetAllProductsOfType("Fertilizer").Select(x => new TokenInputDto { id = x.EntityId, name = x.Name });
-            var availableMaterials = _repository.FindAll<Material>().Select(x => new TokenInputDto { id = x.EntityId, name = x.Name });
-            var selectedMaterials = vendor.GetAllProductsOfType("Material").Select(x => new TokenInputDto { id = x.EntityId, name = x.Name });
-            var availableSeeds = _repository.FindAll<Seed>().Select(x => new TokenInputDto { id = x.EntityId, name = x.Name });
-            var selectedSeeds = vendor.GetAllProductsOfType("Seed").Select(x => new TokenInputDto { id = x.EntityId, name = x.Name });
+            var availableChemicals = _repository.FindAll<Chemical>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            var selectedChemicals = vendor.GetAllProductsOfType("Chemical").Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            var availableFertilizers = _repository.FindAll<Fertilizer>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            var selectedFertilizers = vendor.GetAllProductsOfType("Fertilizer").Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            var availableMaterials = _repository.FindAll<Material>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            var selectedMaterials = vendor.GetAllProductsOfType("Material").Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            var availableSeeds = _repository.FindAll<Seed>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            var selectedSeeds = vendor.GetAllProductsOfType("Seed").Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             
             var model = new VendorViewModel
             {

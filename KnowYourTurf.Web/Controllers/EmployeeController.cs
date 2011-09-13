@@ -3,6 +3,7 @@ using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
+using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
@@ -16,31 +17,32 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
         private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
-        private readonly ISelectBoxPickerService _selectBoxPickerService;
-        private readonly IHttpContextAbstractor _httpContextAbstractor;
+        private readonly ISessionContext _sessionContext;
 
         public EmployeeController(IRepository repository,
             ISaveEntityService saveEntityService,
             IUploadedFileHandlerService uploadedFileHandlerService,
-            ISelectBoxPickerService selectBoxPickerService,
-            IHttpContextAbstractor httpContextAbstractor)
+            ISessionContext sessionContext)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _uploadedFileHandlerService = uploadedFileHandlerService;
-            _selectBoxPickerService = selectBoxPickerService;
-            _httpContextAbstractor = httpContextAbstractor;
+            _sessionContext = sessionContext;
         }
 
         public ActionResult AddEdit(ViewModel input)
         {
             var employee = input.EntityId > 0 ? _repository.Find<Employee>(input.EntityId) : new Employee();
-            SelectBoxPickerDto selectorDto = _selectBoxPickerService.GetPickerDto<UserRole>(employee.UserRoles.IsNotEmpty()?employee.UserRoles.Split(','):new string[0]);
+            var availableUserRoles = Enumeration.GetAll<UserRole>(true).Select(x => new TokenInputDto { id = x.Key, name = x.Key});
+            var selectedUserRoles = employee.UserRoles.IsNotEmpty() 
+                ? employee.UserRoles.Split(',').Select(x => new TokenInputDto { id = x, name = x })
+                :null;
             
             var model = new EmployeeViewModel
             {
                 Employee = employee,
-                UserRoleSelectBoxPickerDto = selectorDto
+                AvailableRoles = availableUserRoles,
+                SelectedRoles = selectedUserRoles
             };
             return PartialView("EmployeeAddUpdate", model);
         }
@@ -81,7 +83,7 @@ namespace KnowYourTurf.Web.Controllers
             else
             {
                 employee = new Employee();
-                var companyId = _httpContextAbstractor.GetCompanyIdFromIdentity();
+                var companyId = _sessionContext.GetCompanyId();
                 var company = _repository.Find<Company>(companyId);
                 employee.Company = company;
             }
@@ -93,7 +95,7 @@ namespace KnowYourTurf.Web.Controllers
                 employee.ImageUrl = string.Empty;
             }
 
-            var serverDirectory = "/CustomerPhotos/" + _httpContextAbstractor.GetCompanyIdFromIdentity() + "/Employees";
+            var serverDirectory = "/CustomerPhotos/" + _sessionContext.GetCompanyId() + "/Employees";
             employee.ImageUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, employee.FirstName+"_"+employee.LastName);
             var crudManager = _saveEntityService.ProcessSave(employee);
 
@@ -122,7 +124,7 @@ namespace KnowYourTurf.Web.Controllers
             employee.ZipCode = employeeModel.ZipCode;
             employee.Status= employeeModel.Status;
             employee.Notes = employeeModel.Notes;
-            employee.UserRoles = UserRole.Employee.ToString();//model.UserRoleSelectBoxPickerDto.Selected.Aggregate((i, j) => i + "," + j);
+            employee.UserRoles = model.RolesInput;//model.UserRoleSelectBoxPickerDto.Selected.Aggregate((i, j) => i + "," + j);
             return employee;
         }
     }

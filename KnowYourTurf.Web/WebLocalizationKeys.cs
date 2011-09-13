@@ -25,6 +25,8 @@ namespace KnowYourTurf.Web
         
         public static readonly StringToken HOME = new WebLocalizationKeys("HOME", "Home");
         public static readonly StringToken EMPLOYEES = new WebLocalizationKeys("EMPLOYEES", "Employees");
+        public static readonly StringToken ADMINS = new WebLocalizationKeys("ADMINS", "Admins");
+        public static readonly StringToken FACILITIES = new WebLocalizationKeys("FACILITIES", "Facilities");
         public static readonly StringToken VENDORS = new WebLocalizationKeys("VENDORS", "Vendors");
         public static readonly StringToken PRODUCTS = new WebLocalizationKeys("PRODUCTS", "Products");
         public static readonly StringToken INVENTORY = new WebLocalizationKeys("INVENTORY", "Inventory");
@@ -164,6 +166,12 @@ namespace KnowYourTurf.Web
         public static readonly StringToken PHOTO_INFORMATION = new WebLocalizationKeys("PHOTO_INFORMATION", "Photo Information");
         public static readonly StringToken ADD_ITEM_TO_PO = new WebLocalizationKeys("ADD_ITEM_TO_PO", "Add item to the purchase order");
          public static readonly StringToken VIEW_FILE = new WebLocalizationKeys("VIEW_FILE", "View File");
+         public static readonly StringToken ADMINISTRATOR_INFORMATION = new WebLocalizationKeys("ADMINISTRATOR_INFORMATION", "Administrator Information");
+         public static readonly StringToken ADD_NEW_ADMINISTRATOR = new WebLocalizationKeys("ADD_NEW_ADMINISTRATOR", "Add New Administrator");
+        public static readonly StringToken ADMINISTRATOR_INFORMATION = new WebLocalizationKeys("ADMINISTRATOR_INFORMATION", "Administrator Information");
+         public static readonly StringToken COMMIT = new WebLocalizationKeys("COMMIT", "Commit");
+         public static readonly StringToken RETURN = new WebLocalizationKeys("RETURN", "Return");
+
 
          public static readonly StringToken COMMIT = new WebLocalizationKeys("COMMIT", "Commit");
          public static readonly StringToken RETURN = new WebLocalizationKeys("RETURN", "Return");

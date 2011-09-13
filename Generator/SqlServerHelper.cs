@@ -1,5 +1,9 @@
 using System;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Reflection;
 using FluentNHibernate;
 using KnowYourTurf.Core.Config;
 using NHibernate;
@@ -32,6 +36,45 @@ CLOSE FK_KILLER
 DEALLOCATE FK_KILLER
 ";
 
+                    IDbConnection conn = session.Connection;
+                    var cmd = conn.CreateCommand();
+                    cmd.CommandText = sql;
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+        }
+
+        public static void DeleteReaddDb(ISessionFactory source)
+        {
+            using (ISession session = source.OpenSession(new SaveUpdateInterceptorWithCompanyFilter()))
+            {
+                var sql =
+                    "USE [master] alter database KnowYourTurf set single_user with rollback immediate DROP DATABASE KnowYourTurf CREATE DATABASE KnowYourTurf";
+
+                IDbConnection conn = session.Connection;
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static void AddRhinoSecurity(ISessionFactory source)
+        {
+            var exePath = AppDomain.CurrentDomain.BaseDirectory;
+            var newPath = exePath + @"sqlscripts\new_rhinosecurity.sql";
+            var rhino = new StreamReader(newPath);
+
+            var sql = rhino.ReadToEnd();
+            rhino.Close();
+
+            using (ISession session = source.OpenSession())
+            {
+                try
+                {
                     IDbConnection conn = session.Connection;
                     var cmd = conn.CreateCommand();
                     cmd.CommandText = sql;

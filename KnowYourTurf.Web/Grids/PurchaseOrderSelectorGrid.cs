@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using HtmlTags;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html.Grid;
@@ -30,7 +31,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.ImageButtonColumn()
                 .ForAction<PurchaseOrderController>(x=>x.Save(null))
                 .ToPerformAction(ColumnAction.Other)
-                .ImageName("delete.png")
+                .ImageName("KYTadd.png")
                 .ToolTip(WebLocalizationKeys.ADD_ITEM_TO_PO);
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ForAction(x => x.InstantiatingType, "Display")

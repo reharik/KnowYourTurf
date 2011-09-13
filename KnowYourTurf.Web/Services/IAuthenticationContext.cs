@@ -16,7 +16,9 @@ namespace KnowYourTurf.Web.Controllers
         public string ThisUserHasBeenAuthenticated(User user, bool rememberMe)
         {
             string userData = String.Empty;
-            userData = userData + "UserId=" + user.EntityId + "|CompanyId=" + user.Company.EntityId;
+            userData = userData + "UserId=" + user.EntityId
+                + "|CompanyId=" + user.Company.EntityId
+                + "|UserRoles=" + user.UserRoles;
             var ticket = new FormsAuthenticationTicket(1, user.FullName, DateTime.Now, DateTime.Now.AddMinutes(30), rememberMe, userData);
             string encTicket = FormsAuthentication.Encrypt(ticket);
             var faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);

@@ -16,12 +16,14 @@
 
             @MvcHtmlString.Create(FormFor<PurchaseOrderLineItemController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.PurchaseOrderLineItem.EntityId).ToString())
+            <input type="hidden" id="ParentId" name="ParentId" value="@Model.ParentId"/>
             @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.Product.Name).ToString())
             @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.Product.Description).ToString())
             @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.QuantityOrdered).ToString())
             @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.SizeOfUnit).ToString())
             @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.UnitType).ToString())
             @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.Price).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.Taxable).ToString())
             @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.SubTotal).ToString())
             @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.Tax).ToString())
 

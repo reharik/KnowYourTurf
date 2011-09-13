@@ -274,6 +274,13 @@ namespace KnowYourTurf.Core
             return Regex.Replace(input, ".[A-Z]", m => m.ToString()[0] + " " + m.ToString()[1]);
         }
 
+        public static string RemoveWhiteSpace(this string input)
+        {
+            var item = input.Trim();
+            var removeWhiteSpace = Regex.Replace(item, "[ \t]+", "");
+            return removeWhiteSpace;
+        }
+
         public static string ToFullUrl(this string relativeUrl, params object[] args)
         {
             var formattedUrl = (args == null) ? relativeUrl : relativeUrl.ToFormat(args);

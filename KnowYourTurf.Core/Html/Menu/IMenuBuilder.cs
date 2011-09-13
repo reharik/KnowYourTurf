@@ -4,13 +4,16 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using FubuMVC.Core.Util;
+using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Localization;
+using KnowYourTurf.Core.Services;
+using Rhino.Security.Interfaces;
 
 namespace KnowYourTurf.Core.Html.Menu
 {
     public interface IMenuBuilder
     {
-        IList<MenuItem> MenuTree();
+        IList<MenuItem> MenuTree(bool withoutPermissions = false);
         IMenuBuilder HasChildren();
         IMenuBuilder EndChildren();
         IMenuBuilder CreateNode<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, StringToken text) where CONTROLLER : Controller;
@@ -20,6 +23,17 @@ namespace KnowYourTurf.Core.Html.Menu
 
     public class MenuBuilder : IMenuBuilder
     {
+        private readonly IRepository _repository;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly ISessionContext _sessionContext;
+
+        public MenuBuilder(IRepository repository, IAuthorizationService authorizationService, ISessionContext sessionContext)
+        {
+            _repository = repository;
+            _authorizationService = authorizationService;
+            _sessionContext = sessionContext;
+        }
+
         private IList<MenuItem> _items = new List<MenuItem>();
         private IList<MenuItem> _parentItems = new List<MenuItem>();
         public IMenuBuilder HasChildren()
@@ -81,9 +95,27 @@ namespace KnowYourTurf.Core.Html.Menu
             return this;
         }
 
-        public IList<MenuItem> MenuTree()
+        public IList<MenuItem> MenuTree(bool withoutPermissions = false)
         {
-            return _items;
+            if (withoutPermissions) return _items;
+            IList<MenuItem> permittedItems =  modifyListForPermissions();
+            return permittedItems;
+        }
+
+        private IList<MenuItem> modifyListForPermissions()
+        {
+            var permittedItems = new List<MenuItem>();
+            var userId = _sessionContext.GetUserId();
+            var user = _repository.Find<User>(userId);
+            _items.Each(x =>
+                            {
+                                var operationName = "/MenuItem/"+x.Text.RemoveWhiteSpace();
+                                if (_authorizationService.IsAllowed(user, operationName))
+                                {
+                                    permittedItems.Add(x);
+                                }
+                            });
+            return permittedItems;
         }
     }
 

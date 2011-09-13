@@ -7,6 +7,7 @@ using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
+using KnowYourTurf.Web.Filters;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -45,22 +46,20 @@ namespace KnowYourTurf.Web.Controllers
                     notification.Success = true;
                     notification.Message = string.Empty;
                     notification.Redirect = true;
-                   _sessionContext.AddUpdateSessionItem(
-                    new SessionItem
-                        {
-                            SessionKey = WebLocalizationKeys.USER_ROLES.ToString(),
-                            SessionObject = user.UserRoles
-                        }
-                    );
                 }
-                if (redirectUrl != "/Home/Home")
+
+                if(user is Facilities)
                 {
-                    notification.RedirectUrl = redirectUrl;
+                    notification.RedirectUrl = UrlContext.GetUrlForAction<EventCalendarController>(x => x.EventCalendar());
                 }
-                else if (user.UserType == UserType.Employee.ToString())
-                {
-                    notification.RedirectUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.ViewEmployee(null)) + "/" + user.EntityId;
-                }
+                //if (redirectUrl != "/Home/Home")
+                //{
+                //    notification.RedirectUrl = redirectUrl;
+                //}
+                //else if (user.UserType == UserType.Employee.ToString())
+                //{
+                //    notification.RedirectUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.ViewEmployee(null)) + "/" + user.EntityId;
+                //}
                 else
                 {
                     notification.RedirectUrl = redirectUrl;
@@ -73,6 +72,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            _sessionContext.ClearSession();
             return RedirectToAction("Login");
         }
     }

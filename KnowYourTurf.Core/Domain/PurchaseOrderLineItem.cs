@@ -14,21 +14,21 @@ namespace KnowYourTurf.Core.Domain
         [ValidateNonEmpty,ValidateInteger]
         public virtual int? QuantityOrdered { get; set; }
         [ValidateDecimal]
-        public virtual decimal? Price { get; set; }
+        public virtual double? Price { get; set; }
         [ValidateDecimal]
-        public virtual decimal? SubTotal { get; set; }
+        public virtual double? SubTotal { get; set; }
         [ValidateDecimal]
-        public virtual decimal? Tax { get; set; }
+        public virtual double? Tax { get; set; }
         [ValidateInteger]
         public virtual int? TotalReceived { get; set; }
         public virtual bool Completed { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }
         public virtual DateTime? DateRecieved { get; set; }
         [ValidateInteger]
-        public virtual int SizeOfUnit { get; set; }
+        public virtual int? SizeOfUnit { get; set; }
         [ValidateNonEmpty, ValueOf(typeof(UnitType))]
         public virtual string UnitType { get; set; }
-
+        public virtual bool Taxable { get; set; }
 
         public virtual bool Equals(PurchaseOrderLineItem obj)
         {

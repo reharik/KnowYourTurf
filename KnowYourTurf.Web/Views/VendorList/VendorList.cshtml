@@ -8,7 +8,7 @@
 @section HeaderJavascript{
     var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
     $(document).ready(function(){
-        $("#gridContainer").AsGrid(gridDef,{multiselect:true});
+        $("#gridContainer").AsGrid(gridDef);
         gridContainerMetaData.addRunAfterRender(function() {
             $("#ChemicalInput").tokenInput(availableChemicals?availableChemicals:{},{prePopulate: selectedChemicals,
                 internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});

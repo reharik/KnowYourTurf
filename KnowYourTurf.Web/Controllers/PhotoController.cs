@@ -17,19 +17,19 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISaveEntityService _saveEntityService;
         private readonly ISelectListItemService _selectListItemService;
         private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
-        private readonly IHttpContextAbstractor _httpContextAbstractor;
+        private readonly ISessionContext _sessionContext;
 
         public PhotoController(IRepository repository,
             ISaveEntityService saveEntityService,
             ISelectListItemService selectListItemService,
             IUploadedFileHandlerService uploadedFileHandlerService,
-            IHttpContextAbstractor httpContextAbstractor)
+            ISessionContext sessionContext)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _selectListItemService = selectListItemService;
             _uploadedFileHandlerService = uploadedFileHandlerService;
-            _httpContextAbstractor = httpContextAbstractor;
+            _sessionContext = sessionContext;
         }
 
         public ActionResult AddUpdate(ViewModel input)
@@ -65,7 +65,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(PhotoViewModel input)
         {
-            var coId = _httpContextAbstractor.GetCompanyIdFromIdentity();
+            var coId = _sessionContext.GetCompanyId();
             var photo = input.Photo.EntityId > 0 ? _repository.Find<Photo>(input.Photo.EntityId) : new Photo();
             var newDoc = mapToDomain(input, photo);
             var serverDirectory = "/CustomerPhotos/" + coId;

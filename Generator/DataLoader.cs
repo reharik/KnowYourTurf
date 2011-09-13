@@ -3,6 +3,7 @@ using System.ComponentModel;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Enums;
+using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 using StructureMap;
 
@@ -42,17 +43,21 @@ namespace Generator
         private InventoryProduct _inventorySeed1;
         private InventoryProduct _inventorySeed2;
         private Company _company;
+        private IPurchaseOrderLineItemService _purchaseOrderLineItemService;
+        private User _defaultUser;
+        private Employee _employeeAdmin1;
+        private Employee _employeeAdmin2;
 
-        public void Load(string extraDataKey)
+        public void Load()
         {
             _repository = ObjectFactory.GetInstance<IRepository>();
-           
             _repository.UnitOfWork.Initialize();
-           
-            _repository.UnitOfWork.Commit();
 
             CreateCompany();
             CreateUser();
+            _purchaseOrderLineItemService = new PurchaseOrderLineItemService(new UserSessionFake(_defaultUser));
+            
+            
             CreateEmployee();
             CreateField();
             CreateEquipment();
@@ -140,7 +145,7 @@ namespace Generator
 
         private void CreateCompany()
         {
-            _company = new Company {Name = "KYT"};
+            _company = new Company { Name = "KYT", Latitude = "30.263250", Longitude = "-97.714501", TaxRate = 8.25 };
             _repository.Save(_company);
         }
 
@@ -148,7 +153,7 @@ namespace Generator
         {
             _equip1 = new Equipment
                              {
-                                 Name = "Truk"
+                                 Name = "Truck"
                              };
             _equip2 = new Equipment
                              {
@@ -160,32 +165,38 @@ namespace Generator
 
         private void CreateUser()
         {
-            var defaultUser = new User
+            _defaultUser = new KYTAdministrator()
             {
                 LoginName = "Admin",
                 Password = "pa$$w0rd",
                 FirstName = "Raif",
                 LastName = "Harik",
-                UserRoles = UserRole.Admin.ToString(),
-                UserType = UserType.Admin.ToString(),
+                UserRoles = UserRole.Administrator + "," + UserRole.Employee + "," + UserRole.KYTAdmin,
                 Company = _company
-
-
             };
-            var altUser = new User
+            var altUser = new KYTAdministrator()
             {
                 LoginName = "alt",
                 Password = "alt",
                 FirstName = "Amahl",
                 LastName = "Harik",
-                UserRoles = UserRole.Admin.ToString(),
-                UserType = UserType.Admin.ToString(),
+                UserRoles = UserRole.Administrator + "," + UserRole.Employee + "," + UserRole.KYTAdmin,
                 Company = _company
-
             };
 
-            _repository.Save(defaultUser);
+            var facilities = new Facilities()
+            {
+                LoginName = "facilities",
+                Password = "facilities",
+                FirstName = "Amahl",
+                LastName = "Harik",
+                UserRoles = UserRole.Facilities.ToString(),
+                Company = _company
+            };
+
+            _repository.Save(_defaultUser);
             _repository.Save(altUser);
+            _repository.Save(facilities);
 
         }
 
@@ -208,7 +219,8 @@ namespace Generator
                 PhoneMobile = "123.123.1234",
                 State = "Tx",
                 ZipCode = "12345",
-                Company = _company
+                Company = _company,
+                UserRoles = UserRole.Employee.ToString()
             };
 
             _employee2 = new Employee()
@@ -227,10 +239,54 @@ namespace Generator
                 PhoneMobile = "123.123.1234",
                 State = "Tx",
                 ZipCode = "12345",
-                Company = _company
+                Company = _company,
+                UserRoles = UserRole.Employee.ToString()
             };
+
+            _employeeAdmin1 = new Employee()
+            {
+                EmployeeId = "1234",
+                Address1 = "123 street",
+                Address2 = "apt a",
+                BirthDate = DateTime.Parse("1/5/1972"),
+                City = "Austin",
+                Email = "mark@gmail.com",
+                FirstName = "mark",
+                LastName = "lara",
+                LoginName = "mark@gmail.com",
+                Password = "123",
+                PhoneHome = "123.123.1234",
+                PhoneMobile = "123.123.1234",
+                State = "Tx",
+                ZipCode = "12345",
+                Company = _company,
+                UserRoles = UserRole.Administrator + "," + UserRole.Employee
+            };
+
+            _employeeAdmin2 = new Employee()
+            {
+                EmployeeId = "1234",
+                Address1 = "123 street",
+                Address2 = "apt a",
+                BirthDate = DateTime.Parse("1/5/1972"),
+                City = "Austin",
+                Email = "chris@gmail.com",
+                FirstName = "chris",
+                LastName = "chris",
+                LoginName = "chris@gmail.com",
+                Password = "123",
+                PhoneHome = "123.123.1234",
+                PhoneMobile = "123.123.1234",
+                State = "Tx",
+                ZipCode = "12345",
+                Company = _company,
+                UserRoles = UserRole.Administrator + "," + UserRole.Employee
+            };
+
             _repository.Save(_employee1);
             _repository.Save(_employee2);
+            _repository.Save(_employeeAdmin1);
+            _repository.Save(_employeeAdmin2);
         }
 
         private void CreateField()
@@ -360,21 +416,25 @@ namespace Generator
             _repository.Save(_vendor1);
             _repository.Save(_vendor2);
 
-            var purchaseOrder1 = new PurchaseOrder {Vendor = _vendor1, DateCreated = DateTime.Parse("1/5/2009"), Status = TemporalStatus.Complete.Key};
+            var purchaseOrder1 = new PurchaseOrder {Vendor = _vendor1, DateCreated = DateTime.Parse("1/5/2009")};
             var poli1 = new PurchaseOrderLineItem()
             {
                 Product = _fertilizer1,
                 Price = 10,
                 QuantityOrdered = 5,
-                Tax = 5
+                UnitType = UnitType.Bags.ToString(),
+                SizeOfUnit = 5,
+                Taxable = true
             };
 
             var poli2 = new PurchaseOrderLineItem()
             {
                 Product = _fertilizer1,
                 Price = 10,
+                UnitType = UnitType.Bags.ToString(),
                 QuantityOrdered = 5,
-                Tax = 5
+                SizeOfUnit = 5,
+                Taxable = true
             };
 
             var poli3 = new PurchaseOrderLineItem()
@@ -382,7 +442,9 @@ namespace Generator
                 Product = _materials1,
                 Price = 10,
                 QuantityOrdered = 5,
-                Tax = 5
+                UnitType = UnitType.Bags.ToString(),
+                SizeOfUnit = 5,
+                Taxable = true
             };
 
             var poli4 = new PurchaseOrderLineItem()
@@ -390,7 +452,9 @@ namespace Generator
                 Product = _materials2,
                 Price = 10,
                 QuantityOrdered = 5,
-                Tax = 5
+                UnitType = UnitType.Bags.ToString(),
+                SizeOfUnit = 5,
+                Taxable = true
             };
 
             var poli5 = new PurchaseOrderLineItem()
@@ -398,23 +462,26 @@ namespace Generator
                 Product = _chemical2,
                 Price = 10,
                 QuantityOrdered = 5,
-                Tax = 5
+                UnitType = UnitType.Bags.ToString(),
+                SizeOfUnit = 5,
+                Taxable = true
             };
 
             var poli6 = new PurchaseOrderLineItem()
             {
                 Product = _chemical1,
                 Price = 10,
+                UnitType = UnitType.Bags.ToString(),
                 QuantityOrdered = 5,
-                Tax = 5
+                SizeOfUnit = 5,
+                Taxable = true
             };
-
-            purchaseOrder1.AddLineItem(poli1);
-            purchaseOrder1.AddLineItem(poli2);
-            purchaseOrder1.AddLineItem(poli3);
-            purchaseOrder1.AddLineItem(poli4);
-            purchaseOrder1.AddLineItem(poli5);
-            purchaseOrder1.AddLineItem(poli6);
+            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder1, poli1);
+            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder1, poli2);
+            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder1, poli3);
+            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder1, poli4);
+            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder1, poli5);
+            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder1, poli6);
             _vendor1.AddPurchaseOrder(purchaseOrder1);
             _repository.Save(_vendor1);
 

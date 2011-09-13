@@ -24,12 +24,11 @@ namespace KnowYourTurf.Core.Domain
         public virtual double? QuantityNeeded { get; set; }
         [ValidateDouble]
         public virtual double? QuantityUsed { get; set; }
-        [TextArea(2,60)]
+        [TextArea]
         public virtual string Notes { get; set; }
         [ValueOf(typeof(UnitType))]
         public virtual string UnitType { get; set; }
-        [ValueOf(typeof(Status))]
-        public virtual string Status { get; set; }
+
         public virtual bool Deleted { get; set; }
         public virtual bool Complete { get; set; }
         [ValidateNonEmpty]
@@ -73,7 +72,6 @@ namespace KnowYourTurf.Core.Domain
                 ScheduledDate = ScheduledDate,
                 ScheduledEndTime = ScheduledEndTime,
                 ScheduledStartTime = ScheduledStartTime,
-                Status = Status,
                 InventoryProduct = InventoryProduct
             };
             GetEmployees().Each(newTask.AddEmployee);

@@ -24,12 +24,12 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
         private readonly IPurchaseOrderSelectorGrid _purchaseOrderSelectorGrid;
         private readonly IPurchaseOrderLineItemGrid _purchaseOrderLineItemGrid;
-        private readonly ISessionContext _sessionContext;
+        private readonly IPurchaseOrderLineItemService _purchaseOrderLineItemService;
 
         public PurchaseOrderController(IRepository repository, ISaveEntityService saveEntityService, ISelectListItemService selectListItemService, IDynamicExpressionQuery dynamicExpressionQuery,
             IPurchaseOrderSelectorGrid purchaseOrderSelectorGrid,
             IPurchaseOrderLineItemGrid purchaseOrderLineItemGrid,
-            ISessionContext sessionContext
+            IPurchaseOrderLineItemService purchaseOrderLineItemService
             )
         {
             _repository = repository;
@@ -38,7 +38,7 @@ namespace KnowYourTurf.Web.Controllers
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _purchaseOrderSelectorGrid = purchaseOrderSelectorGrid;
             _purchaseOrderLineItemGrid = purchaseOrderLineItemGrid;
-            _sessionContext = sessionContext;
+            _purchaseOrderLineItemService = purchaseOrderLineItemService;
         }
 
         public ActionResult AddEdit(ViewModel input)
@@ -109,7 +109,6 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult AddItem(ViewModel input)
         {
             var vendor = _repository.Find<Vendor>(input.RootId);
-            var currentUser = _sessionContext.GetCurrentUser();
             
             var purchaseOrder = input.ParentId > 0
                                     ? vendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId)
@@ -131,10 +130,9 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult SaveItem(PurchaseOrderLineItemViewModel input)
         {
             var vendor = _repository.Find<Vendor>(input.RootId);
-            var currentUser = _sessionContext.GetCurrentUser();
             var purchaseOrder = input.ParentId > 0
                                     ? vendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId)
-                                    : new PurchaseOrder{Vendor = vendor,Status = TemporalStatus.Pending.ToString()};
+                                    : new PurchaseOrder{Vendor = vendor};
             var baseProduct = _repository.Find<BaseProduct>(input.PurchaseOrderLineItem.Product.EntityId);
             var newPo = purchaseOrder.EntityId == 0;
             var purchaseOrderLineItem = new PurchaseOrderLineItem
@@ -143,12 +141,10 @@ namespace KnowYourTurf.Web.Controllers
                 PurchaseOrder = purchaseOrder
             };
             mapItem(purchaseOrderLineItem, input.PurchaseOrderLineItem);
-            purchaseOrder.AddLineItem(purchaseOrderLineItem);
-            if(purchaseOrder.EntityId==0)
-            {
-                vendor.AddPurchaseOrder(purchaseOrder);
-            }
-            var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
+            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder, purchaseOrderLineItem);
+            vendor.AddPurchaseOrder(purchaseOrder);
+            
+            var crudManager = _saveEntityService.ProcessSave(vendor);
             var notification = crudManager.Finish();
             notification.Data = new {poId = purchaseOrder.EntityId};
             if(newPo)
@@ -166,6 +162,7 @@ namespace KnowYourTurf.Web.Controllers
             item.SizeOfUnit = input.SizeOfUnit;
             item.UnitType = input.UnitType;
             item.Price = input.Price;
+            item.Taxable = input.Taxable;
         }
     }
 

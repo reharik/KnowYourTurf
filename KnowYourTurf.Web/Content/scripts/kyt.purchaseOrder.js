@@ -49,6 +49,9 @@ kyt.purchaseOrder.controller = (function(){
                 function(result,metaData){ if($(metaData.getGridName()).length > 0) $(metaData.getGridName()).trigger("reloadGrid")});
         poliGridMetaData.setGridName("#poliGrid");
         productGridMetaData.setAltClickFunction(kyt.purchaseOrder.controller.savePO);
+       poliGridMetaData.addLoadData({"RootId":$("#vendorId").val(),"ParentId":$("#poId").val()});
+
+        productGridMetaData.setAltClickFunction(kyt.purchaseOrder.controller.savePO);
         productGridMetaData.addRunAfterSuccess(
             function(result,metaData){
                 $("#poId").val(result.Data.poId);

@@ -15,19 +15,16 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
         private readonly ISelectListItemService _selectListItemService;
-        private readonly ISelectBoxPickerService _selectBoxPickerService;
         private readonly IInventoryService _inventoryService;
 
         public TaskController(IRepository repository,
             ISaveEntityService saveEntityService,
             ISelectListItemService selectListItemService,
-            ISelectBoxPickerService selectBoxPickerService,
             IInventoryService inventoryService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _selectListItemService = selectListItemService;
-            _selectBoxPickerService = selectBoxPickerService;
             _inventoryService = inventoryService;
         }
 
@@ -69,10 +66,10 @@ namespace KnowYourTurf.Web.Controllers
             dictionary.Add(WebLocalizationKeys.MATERIALS.ToString(), materials);
             dictionary.Add(WebLocalizationKeys.FERTILIZERS.ToString(), fertilizer);
             dictionary.Add(WebLocalizationKeys.SEEDS.ToString(), seeds);
-            var availableEmployees = _repository.FindAll<Employee>().Select(x=> new TokenInputDto{id = x.EntityId,name = x.FullName});
-            var selectedEmployees = task.GetEmployees().Select(x => new TokenInputDto { id = x.EntityId, name = x.FullName });
-            var availableEquipment = _repository.FindAll<Equipment>().Select(x => new TokenInputDto { id = x.EntityId, name = x.Name });
-            var selectedEquipment = task.GetEquipment().Select(x => new TokenInputDto { id = x.EntityId, name = x.Name });
+            var availableEmployees = _repository.FindAll<Employee>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
+            var selectedEmployees = task.GetEmployees().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
+            var availableEquipment = _repository.FindAll<Equipment>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            var selectedEquipment = task.GetEquipment().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             
             var model = new TaskViewModel
                             {//strangly I have to itterate this or NH freaks out
@@ -111,7 +108,7 @@ namespace KnowYourTurf.Web.Controllers
                 if (model.Task.EntityId <= 0)
                 {
                     var employee = _repository.Find<Employee>(input.ParentId);
-                    model.SelectedEmployees.Add(new TokenInputDto{id=employee.EntityId,name=employee.FullName});
+                    model.SelectedEmployees.Add(new TokenInputDto { id = employee.EntityId.ToString(), name = employee.FullName });
                 }
             }
             if (input.From == "Calculator")
@@ -178,7 +175,6 @@ namespace KnowYourTurf.Web.Controllers
             item.QuantityNeeded = input.QuantityNeeded;
             item.QuantityUsed = input.QuantityUsed;
             item.Notes = input.Notes;
-            item.Status = input.Status;
             item.Complete = input.Complete;
             
         }

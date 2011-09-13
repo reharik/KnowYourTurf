@@ -18,17 +18,17 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
         private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
-        private readonly IHttpContextAbstractor _httpContextAbstractor;
+        private readonly ISessionContext _sessionContext;
 
         public FieldController(IRepository repository,
             ISaveEntityService saveEntityService,
             IUploadedFileHandlerService uploadedFileHandlerService,
-            IHttpContextAbstractor httpContextAbstractor)
+            ISessionContext sessionContext)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _uploadedFileHandlerService = uploadedFileHandlerService;
-            _httpContextAbstractor = httpContextAbstractor;
+            _sessionContext = sessionContext;
         }
 
         public ActionResult AddEdit(ViewModel input)
@@ -65,18 +65,7 @@ namespace KnowYourTurf.Web.Controllers
             field.Abbreviation= input.Field.Abbreviation;
             field.Size = input.Field.Size;
             field.Status = input.Field.Status;
-
-            if(input.DeleteImage)
-            {
-                _uploadedFileHandlerService.DeleteFile(field.ImageUrl);
-                field.ImageUrl = string.Empty;
-            }
-
-            var serverDirectory = "/CustomerPhotos/" + _httpContextAbstractor.GetCompanyIdFromIdentity() + "/Fields";
-            field.ImageUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, field.Name);
             var crudManager = _saveEntityService.ProcessSave(field);
-
-            crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, field.Name, crudManager);
             var notification = crudManager.Finish();
             return Json(notification,"text/plain");
         }

@@ -17,19 +17,19 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISaveEntityService _saveEntityService;
         private readonly ISelectListItemService _selectListItemService;
         private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
-        private readonly IHttpContextAbstractor _httpContextAbstractor;
+        private readonly ISessionContext _sessionContext;
 
         public DocumentController(IRepository repository,
             ISaveEntityService saveEntityService,
             ISelectListItemService selectListItemService,
             IUploadedFileHandlerService uploadedFileHandlerService,
-            IHttpContextAbstractor httpContextAbstractor)
+            ISessionContext sessionContext)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _selectListItemService = selectListItemService;
             _uploadedFileHandlerService = uploadedFileHandlerService;
-            _httpContextAbstractor = httpContextAbstractor;
+            _sessionContext = sessionContext;
         }
 
         public ActionResult AddUpdate(ViewModel input)
@@ -65,7 +65,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(DocumentViewModel input)
         {
-            var coId = _httpContextAbstractor.GetCompanyIdFromIdentity();
+            var coId = _sessionContext.GetCompanyId();
             var document = input.Document.EntityId > 0 ? _repository.Find<Document>(input.Document.EntityId) : new Document();
             var newDoc = mapToDomain(input, document);
             var serverDirectory = "/CustomerDocuments/" + coId;

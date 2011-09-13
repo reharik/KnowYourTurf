@@ -15,7 +15,7 @@ namespace KnowYourTurf.Core.Domain
         [ValidateNonEmpty]
         public virtual DateTime? StartTime { get; set; }
         public virtual DateTime? EndTime { get; set; }
-        [TextArea(2, 60)]
+        [TextArea]
         public virtual string Notes { get; set; }
     }
 
