@@ -168,12 +168,10 @@ namespace KnowYourTurf.Web
          public static readonly StringToken VIEW_FILE = new WebLocalizationKeys("VIEW_FILE", "View File");
          public static readonly StringToken ADMINISTRATOR_INFORMATION = new WebLocalizationKeys("ADMINISTRATOR_INFORMATION", "Administrator Information");
          public static readonly StringToken ADD_NEW_ADMINISTRATOR = new WebLocalizationKeys("ADD_NEW_ADMINISTRATOR", "Add New Administrator");
-        public static readonly StringToken ADMINISTRATOR_INFORMATION = new WebLocalizationKeys("ADMINISTRATOR_INFORMATION", "Administrator Information");
-         public static readonly StringToken COMMIT = new WebLocalizationKeys("COMMIT", "Commit");
-         public static readonly StringToken RETURN = new WebLocalizationKeys("RETURN", "Return");
 
 
          public static readonly StringToken COMMIT = new WebLocalizationKeys("COMMIT", "Commit");
          public static readonly StringToken RETURN = new WebLocalizationKeys("RETURN", "Return");
+         public static readonly StringToken SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM = new WebLocalizationKeys("SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM", "Select A Color To Associate With This Field");
     }
 }   

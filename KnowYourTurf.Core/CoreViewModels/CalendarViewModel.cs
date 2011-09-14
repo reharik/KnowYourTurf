@@ -36,5 +36,6 @@ namespace KnowYourTurf.Core
         public string end { get; set; }
         public string url { get; set; }
         public string className { get; set; }
+        public string color { get; set; }
     }
 }

@@ -58,7 +58,8 @@ namespace KnowYourTurf.Web.Controllers
                                           EntityId = x.EntityId,
                                           title = x.Field.Abbreviation+": "+ x.EventType.Name,
                                           start = x.StartTime.ToString(),
-                                          end = x.EndTime.ToString()
+                                          end = x.EndTime.ToString(),
+                                          color = x.EventType.EventColor
                                       })
                 );
             return Json(eventsItems, JsonRequestBehavior.AllowGet);

@@ -7,4 +7,9 @@ namespace KnowYourTurf.Web.Models
     {
         public ListType ListType { get; set; }
     }
+
+    public class EventTypeViewModel : ViewModel
+    {
+        public EventType ListType { get; set; }
+    }
 }

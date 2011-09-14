@@ -4,6 +4,7 @@
 @section ExtraCss {
     @MvcHtmlString.Create(CSS("ui.jqgrid.css").ToString())
     @MvcHtmlString.Create(CSS("token-input.css").ToString())
+    @MvcHtmlString.Create(CSS("farbtastic.css").ToString())
     @RenderSection("ExtraCss", false)
 }    
 @section HeaderScripts{
@@ -12,6 +13,7 @@
     @MvcHtmlString.Create(Script("jquery.kyt.grid.js").ToString())
     @MvcHtmlString.Create(Script("jquery.jqPrint.js").ToString())
     @MvcHtmlString.Create(Script("jquery.tokeninput.js").ToString())
+    @MvcHtmlString.Create(Script("farbtastic.js").ToString())
     @MvcHtmlString.Create(Script("kyt.grid.columnService.js").ToString())
     @MvcHtmlString.Create(Script("kyt.grid.formatters.js").ToString())
     @MvcHtmlString.Create(Script("kyt.gridHelpers.js").ToString())

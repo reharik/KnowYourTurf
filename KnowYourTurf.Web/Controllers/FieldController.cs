@@ -65,6 +65,7 @@ namespace KnowYourTurf.Web.Controllers
             field.Abbreviation= input.Field.Abbreviation;
             field.Size = input.Field.Size;
             field.Status = input.Field.Status;
+            field.FieldColor= input.Field.FieldColor;
             var crudManager = _saveEntityService.ProcessSave(field);
             var notification = crudManager.Finish();
             return Json(notification,"text/plain");

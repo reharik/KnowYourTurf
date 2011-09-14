@@ -33,7 +33,7 @@ namespace KnowYourTurf.Web.Controllers
             _listTypeListGrid = listTypeListGrid;
         }
 
-        public ActionResult AddUpdate(ViewModel input)
+        public virtual ActionResult AddUpdate(ViewModel input)
         {
             var listType = input.EntityId > 0
                                ? _repository.Find<LISTTYPE>(input.EntityId)
@@ -62,7 +62,7 @@ namespace KnowYourTurf.Web.Controllers
             return PartialView(model);
         }
 
-        public ActionResult SaveListType(ListTypeViewModel input)
+        public virtual ActionResult SaveListType(ListTypeViewModel input)
         {
             var listType = input.ListType.EntityId > 0
                                ? _repository.Find<LISTTYPE>(input.ListType.EntityId)
@@ -79,13 +79,46 @@ namespace KnowYourTurf.Web.Controllers
 
     public class EventTypeController : ListTypeBaseController<EventType>
     {
+        private readonly IRepository _repository;
+        private readonly ISaveEntityService _saveEntityService;
+
         public EventTypeController(IDynamicExpressionQuery dynamicExpressionQuery,
                               IRepository repository,
                               ISaveEntityService saveEntityService,
                               IEventTypeListGrid listTypeListGrid)
             : base(dynamicExpressionQuery, repository, saveEntityService,(IListTypeListGrid<EventType>)listTypeListGrid)
         {
+            _repository = repository;
+            _saveEntityService = saveEntityService;
         }
+
+        public override ActionResult AddUpdate(ViewModel input)
+        {
+            var listType = input.EntityId > 0
+                               ? _repository.Find<EventType>(input.EntityId)
+                               : Activator.CreateInstance<EventType>();
+            var model = new EventTypeViewModel
+            {
+                ListType = listType,
+            };
+            return PartialView(model);
+        }
+
+        public ActionResult SaveEventType(EventTypeViewModel input)
+        {
+            var listType = input.ListType.EntityId > 0
+                               ? _repository.Find<EventType>(input.ListType.EntityId)
+                               : Activator.CreateInstance<EventType>();
+            listType.Description = input.ListType.Description;
+            listType.Name = input.ListType.Name;
+            listType.Status = input.ListType.Status;
+            listType.EventColor= input.ListType.EventColor;
+            var crudManager = _saveEntityService.ProcessSave(listType);
+            var notification = crudManager.Finish();
+            notification.Variable = typeof(EventType).Name;
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+
     }
     public class TaskTypeController : ListTypeBaseController<TaskType>
     {

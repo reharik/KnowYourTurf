@@ -20,6 +20,8 @@ namespace KnowYourTurf.Core.Domain
         public virtual string ImageUrl { get; set; }
         [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
+        public virtual string FieldColor { get; set; }
+
         #region Collections
         private readonly IList<Task> _tasks = new List<Task>();
         public virtual IEnumerable<Task> GetTasks() { return _tasks; }

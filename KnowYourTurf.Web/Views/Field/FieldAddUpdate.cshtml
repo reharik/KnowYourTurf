@@ -7,7 +7,11 @@
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
-
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#colorPicker').farbtastic('#FieldColor');
+    });
+ </script>
         <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
 
             @MvcHtmlString.Create(FormFor<FieldController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
@@ -17,6 +21,8 @@
             @MvcHtmlString.Create(Html.SubmissionFor(x => x.Field.Abbreviation).ToString())
             @MvcHtmlString.Create(Html.SubmissionFor(x => x.Field.Description).ToString())
             @MvcHtmlString.Create(Html.SubmissionFor(x => x.Field.Size).ToString())
-            
+            @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Field.FieldColor).InputId("FieldColor").ToString())
+            <div id="colorPicker"></div>
             @MvcHtmlString.Create(EndForm())
             

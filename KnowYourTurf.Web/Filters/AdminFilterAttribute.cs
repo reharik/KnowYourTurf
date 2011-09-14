@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Filters
             var sessionContext = ObjectFactory.Container.GetInstance<ISessionContext>();
             var currentUser = sessionContext.GetCurrentUser();
 
-            if(sessionContext.IsInRole(UserRole.Administrator.ToString()))
+            if(!sessionContext.IsInRole(UserRole.Administrator.ToString()))
             {
                 var values = new RouteValueDictionary(new
                 {

@@ -38,6 +38,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
     {
         public EventTypeMap()
         {
+            Map(x => x.EventColor);
         }
     }
 

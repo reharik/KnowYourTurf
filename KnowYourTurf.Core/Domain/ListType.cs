@@ -19,6 +19,7 @@ namespace KnowYourTurf.Web.Controllers
     }
     public class EventType : ListType
     {
+        public virtual string EventColor { get; set; }
     }
     public class PhotoCategory : ListType
     {
