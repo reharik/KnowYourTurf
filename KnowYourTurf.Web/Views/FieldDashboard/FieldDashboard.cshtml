@@ -57,7 +57,7 @@
         <div class=" grid_5">
             @MvcHtmlString.Create(Html.ViewFor(x => x.Field.Name).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
             @MvcHtmlString.Create(Html.ViewFor(x => x.Field.Description).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-            
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Field.Abbreviation).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
             @MvcHtmlString.Create(Html.ViewFor(x => x.Field.Size).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
         </div>
     <div class="grid_9">

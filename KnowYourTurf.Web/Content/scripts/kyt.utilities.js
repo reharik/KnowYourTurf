@@ -35,7 +35,7 @@ kyt.popupMetaData = {
         var _runAfterRender = [];
         var _runAfterSuccess = [];
         var _metaDatas=[];
-        var _isDisplay;
+        var _isDisplay = false;
         var _editButtonBuilder;
         var _displayButtonBuilder;
         var _submitData={};

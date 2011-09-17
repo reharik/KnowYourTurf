@@ -7,7 +7,7 @@ namespace KnowYourTurf.Core.Domain
         [ValidateNonEmpty]
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
-        public virtual string Vendor { get; set; }
+        public virtual Vendor Vendor { get; set; }
         [ValidateNonEmpty]
         [ValidateDecimal]
         public virtual double TotalHours { get; set; }

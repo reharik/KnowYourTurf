@@ -32,7 +32,7 @@ namespace KnowYourTurf.Web.Grids
         {
             GridBuilder.ImageButtonColumn()
                 .ForAction<CalculatorController>(x => x.Calculator(null))
-                .ToPerformAction(ColumnAction.Display)
+                .ToPerformAction(ColumnAction.Edit)
                 .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Name);

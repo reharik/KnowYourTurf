@@ -8,7 +8,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.TotalHours);
             Map(x => x.Description);
             Map(x => x.ImageUrl);
-            Map(x => x.Vendor);
+            References(x => x.Vendor);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using KnowYourTurf.Core;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using KnowYourTurf.Core;
 
 namespace KnowYourTurf.Web.Models.Equipment
 {
@@ -6,5 +8,7 @@ namespace KnowYourTurf.Web.Models.Equipment
     {
         public Core.Domain.Equipment Equipment { get; set; }
         public bool DeleteImage { get; set; }
+
+        public IEnumerable<SelectListItem> VendorList { get; set; }
     }
 }

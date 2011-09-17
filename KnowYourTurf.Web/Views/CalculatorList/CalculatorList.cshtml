@@ -12,7 +12,7 @@
      var createATaskUrl=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CreateATaskUrl));
      var successFunction = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SaveJSSuccssCallback));
      gridContainerMetaData.setSuccessHandler("kyt.calculator.successHandlers.success");
-     gridContainerMetaData.setDisplayButtonBuilder(function(builder){
+     gridContainerMetaData.setEditButtonBuilder(function(builder){
                     builder.addButton("Return",kyt.popupCrud.buttonBuilder().getCancelFunc());
                     builder.addButton("Calculate",kyt.popupCrud.buttonBuilder().getSaveFunc());
                     builder.addButton("Create Task",kyt.calculator.handleAddTask.addTask);
