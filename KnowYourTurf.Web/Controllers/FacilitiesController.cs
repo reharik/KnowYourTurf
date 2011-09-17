@@ -11,7 +11,7 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class FacilitiesController:KYTController
+    public class FacilitiesController : AdminControllerBase
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;

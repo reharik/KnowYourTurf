@@ -56,10 +56,10 @@ namespace KnowYourTurf.Web.Controllers
                 //{
                 //    notification.RedirectUrl = redirectUrl;
                 //}
-                //else if (user.UserType == UserType.Employee.ToString())
-                //{
-                //    notification.RedirectUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.ViewEmployee(null)) + "/" + user.EntityId;
-                //}
+                else if (user is Employee)
+                {
+                    notification.RedirectUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.ViewEmployee(null)) + "/" + user.EntityId;
+                }
                 else
                 {
                     notification.RedirectUrl = redirectUrl;

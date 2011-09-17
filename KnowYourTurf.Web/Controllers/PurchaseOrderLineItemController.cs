@@ -9,7 +9,7 @@ using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class PurchaseOrderLineItemController:KYTController
+    public class PurchaseOrderLineItemController : AdminControllerBase
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;

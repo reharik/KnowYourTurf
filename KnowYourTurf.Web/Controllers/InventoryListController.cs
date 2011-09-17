@@ -12,7 +12,7 @@ using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class InventoryListController:KYTController
+    public class InventoryListController : AdminControllerBase
     {
         private readonly IRepository _repository;
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;

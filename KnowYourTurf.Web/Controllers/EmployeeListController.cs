@@ -9,7 +9,7 @@ using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class EmployeeListController:KYTController
+    public class EmployeeListController : AdminControllerBase
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
         private readonly IEmployeeListGrid _employeeListGrid;

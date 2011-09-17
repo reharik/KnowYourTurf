@@ -12,7 +12,7 @@ using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class PurchaseOrderListController:KYTController
+    public class PurchaseOrderListController : AdminControllerBase
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
         private readonly IPurchaseOrderListGrid _purchaseOrderListGrid;

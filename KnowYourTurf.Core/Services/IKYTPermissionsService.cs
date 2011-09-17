@@ -64,6 +64,8 @@ namespace KnowYourTurf.Core.Services
             _permissionsBuilderService.Allow("/FieldListController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/ForumController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/InventoryListController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/PhotoController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/DocumentController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/PurchaseOrderCommitController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/PurchaseOrderController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/PurchaseOrderLineItemController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();

@@ -10,7 +10,7 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class PurchaseOrderLineItemListController:KYTController
+    public class PurchaseOrderLineItemListController : AdminControllerBase
     {
         private readonly IRepository _repository;
         private readonly IPurchaseOrderLineItemGrid _purchaseOrderLineItemGrid;

@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Config
         private IList<MenuItem> DefaultMenubuilder(bool withoutPermissions = false)
         {
             return _builder
-                .CreateNode<HomeController>(c => c.Home(), WebLocalizationKeys.HOME)
+                .CreateNode<EmployeeDashboardController>(c => c.ViewEmployee(null), WebLocalizationKeys.HOME)
                 
                 .CreateNode<FieldListController>(c => c.FieldList(), WebLocalizationKeys.FIELDS)
                 .CreateNode<EquipmentListController>(c => c.EquipmentList(), WebLocalizationKeys.EQUIPMENT)

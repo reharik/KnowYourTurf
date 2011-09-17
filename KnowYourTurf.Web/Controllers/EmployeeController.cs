@@ -12,7 +12,7 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class EmployeeController:KYTController
+    public class EmployeeController : AdminControllerBase
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;

@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class PurchaseOrderController : KYTController
+    public class PurchaseOrderController : AdminControllerBase
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
