@@ -64,6 +64,7 @@ namespace KnowYourTurf.Web.Controllers
                 {
                     Data = new { LoggedOut = true, RedirectUrl = destinationUrl }
                 };
+                result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
                 result.ExecuteResult(context);
             }
             else
