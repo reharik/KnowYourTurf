@@ -40,11 +40,6 @@ namespace KnowYourTurf.Core.Domain.Persistence
             }
         }
 
-        public class SeedMap : SubclassMap<Seed>
-        {
-            public SeedMap()
-            {
-            }
-        }
+       
     }
 }

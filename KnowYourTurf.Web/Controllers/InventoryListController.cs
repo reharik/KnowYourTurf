@@ -44,10 +44,6 @@ namespace KnowYourTurf.Web.Controllers
                     title = WebLocalizationKeys.FERTILIZERS;
                     crudTitle = WebLocalizationKeys.INVENTORY_FERTILIZER_INFORMATION;
                     break;
-                case "Seed":
-                    title = WebLocalizationKeys.SEEDS;
-                    crudTitle = WebLocalizationKeys.INVENTORY_SEED_INFORMATION;
-                    break;
             }
             var url = UrlContext.GetUrlForAction<InventoryListController>(x => x.Products(null)) + "?ProductType=" + productType;
             ListViewModel model = new ListViewModel()
@@ -84,11 +80,6 @@ namespace KnowYourTurf.Web.Controllers
                 var model = new InventoryMaterialViewModel { InventoryMaterial = inventoryProduct };
                 return PartialView("InventoryMaterialView", model);
             }
-            if (inventoryProduct.Product.InstantiatingType == "Seed")
-            {
-                var model = new InventorySeedViewModel { InventorySeed = inventoryProduct };
-                return PartialView("InventorySeedView", model);
-            }
             return null;
         }
 
@@ -118,10 +109,5 @@ namespace KnowYourTurf.Web.Controllers
     {
         public InventoryProduct InventoryMaterial { get; set; }
         public Material Material { get { return InventoryMaterial.Product as Material; } }
-    }
-    public class InventorySeedViewModel
-    {
-        public InventoryProduct InventorySeed { get; set; }
-        public Seed Seed { get { return InventorySeed.Product as Seed; } }
     }
 }

@@ -31,7 +31,6 @@ namespace KnowYourTurf.Web.Config
                     .CreateNode<MaterialListController>(c => c.MaterialList(), WebLocalizationKeys.MATERIALS)
                     .CreateNode<FertilizerListController>(c => c.FertilizerList(), WebLocalizationKeys.FERTILIZERS)
                     .CreateNode<ChemicalListController>(c => c.ChemicalList(), WebLocalizationKeys.CHEMICALS)
-                    .CreateNode<SeedListController>(c => c.SeedList(), WebLocalizationKeys.SEEDS)
                     .EndChildren()
                 .CreateNode<DocumentListController>(c => c.DocumentList(null), WebLocalizationKeys.DOCUMENTS)
                 .CreateNode<PhotoListController>(c => c.PhotoList(null), WebLocalizationKeys.PHOTOS)
@@ -43,7 +42,6 @@ namespace KnowYourTurf.Web.Config
                     .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.MATERIALS, "ProductType=Material")
                     .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.FERTILIZERS, "ProductType=Fertilizer")
                     .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.CHEMICALS, "ProductType=Chemical")
-                    .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.SEEDS, "ProductType=Seed")
                     .EndChildren()
                 .CreateNode<PurchaseOrderListController>(c => c.PurchaseOrderList(), WebLocalizationKeys.PURCHASE_ORDERS)
 

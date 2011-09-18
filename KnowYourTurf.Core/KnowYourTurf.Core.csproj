@@ -243,7 +243,6 @@
     </Compile>
     <Compile Include="Domain\PurchaseOrder.cs" />
     <Compile Include="Domain\PurchaseOrderLineItem.cs" />
-    <Compile Include="Domain\Seed.cs" />
     <Compile Include="Domain\Task.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\Vendor.cs" />

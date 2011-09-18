@@ -154,8 +154,6 @@
     <Compile Include="Services\EmailHandlers\IEmailTemplateHandler.cs" />
     <Compile Include="Services\Calculators\OverseedRateNeededCalculator.cs" />
     <Compile Include="Services\Calculators\ICalculatorHandler.cs" />
-    <Compile Include="Controllers\SeedController.cs" />
-    <Compile Include="Controllers\SeedListController.cs" />
     <Compile Include="Controllers\EmployeeDashboardController.cs" />
     <Compile Include="Controllers\ListTypeBaseController.cs" />
     <Compile Include="Config\SetupMenuConfig.cs" />
@@ -165,9 +163,7 @@
     <Compile Include="Filters\AddUserToViewFilterAttribute.cs" />
     <Compile Include="Filters\AdminFilterAttribute.cs" />
     <Compile Include="Grids\CalculatorListGrid.cs" />
-    <Compile Include="Grids\SeedListGrid.cs" />
     <Compile Include="Models\Calculator\CalculatorViewModel.cs" />
-    <Compile Include="Models\Seed\SeedViewModel.cs" />
     <Compile Include="Models\Employee\EmployeeDashboardViewModel.cs" />
     <Compile Include="Models\Enum\TaskTypeViewModel.cs" />
     <Compile Include="Models\Enum\ListTypeListViewModel.cs" />
@@ -519,15 +515,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Calculator\FertilizerNeededCalculator.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Seed\SeedAddUpdate.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Seed\SeedView.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\SeedList\SeedList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\InventoryList\InventorySeedList.cshtml" />

@@ -33,7 +33,6 @@ namespace KnowYourTurf.Web
         public static readonly StringToken MATERIALS = new WebLocalizationKeys("MATERIALS", "Materials");
         public static readonly StringToken FERTILIZERS = new WebLocalizationKeys("FERTILIZERS", "Fertilizers");
         public static readonly StringToken CHEMICALS = new WebLocalizationKeys("CHEMICALS", "Chemicals");
-        public static readonly StringToken SEEDS = new WebLocalizationKeys("SEEDS", "Seeds");
         public static readonly StringToken FIELDS = new WebLocalizationKeys("FIELDS", "Fields");
         public static readonly StringToken EQUIPMENT = new WebLocalizationKeys("EQUIPMENT", "Equipment");
         public static readonly StringToken TASKS = new WebLocalizationKeys("TASKS", "Tasks");

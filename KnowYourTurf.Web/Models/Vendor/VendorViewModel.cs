@@ -14,14 +14,11 @@ namespace KnowYourTurf.Web.Models.Vendor
         public string ChemicalInput { get; set; }
         public string FertilizerInput { get; set; }
         public string MaterialInput { get; set; }
-        public string SeedInput { get; set; }
         public IEnumerable<TokenInputDto> AvailableChemicals { get; set; }
         public IEnumerable<TokenInputDto> SelectedChemicals { get; set; }
         public IEnumerable<TokenInputDto> AvailableFertilizers { get; set; }
         public IEnumerable<TokenInputDto> SelectedFertilizers { get; set; }
         public IEnumerable<TokenInputDto> AvailableMaterials { get; set; }
         public IEnumerable<TokenInputDto> SelectedMaterials { get; set; }
-        public IEnumerable<TokenInputDto> AvailableSeeds { get; set; }
-        public IEnumerable<TokenInputDto> SelectedSeeds { get; set; }
     }
 }

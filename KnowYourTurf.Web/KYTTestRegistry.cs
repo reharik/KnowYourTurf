@@ -65,41 +65,6 @@ namespace KnowYourTurf.Web
             For<IPermissionsBuilderService>().HybridHttpOrThreadLocalScoped().Use<PermissionsBuilderService>();
             For<IPermissionsService>().HybridHttpOrThreadLocalScoped().Use<PermissionsService>();
             For(typeof(IGridBuilder<>)).Use(typeof(GridBuilder<>));
-            For(typeof(IGridBuilder<>)).Use(typeof(GridBuilder<>));
-           
-            // RegisterGrids();
         }
-
-        private void RegisterGrids()
-        {
-
-            For<IGrid<Vendor>>().Use<VendorListGrid>();
-            For<IGrid<VendorContact>>().Use<VendorContactListGrid>();
-
-            For<IGrid<Material>>().Use<MaterialListGrid>();
-            For<IGrid<Fertilizer>>().Use<FertilizerListGrid>();
-            For<IGrid<Chemical>>().Use<ChemicalListGrid>();
-            For<IGrid<Seed>>().Use<SeedListGrid>();
-            For<IGrid<InventoryProduct>>().Use<InventoryProductListGrid>();
-            For<IGrid<Material>>().Add<POMaterialListGrid>().Named("POMaterialGrid");
-            For<IGrid<Fertilizer>>().Add<POFertilizerListGrid>().Named("POFertilizerGrid");
-            For<IGrid<Chemical>>().Add<POChemicalListGrid>().Named("POChemicalGrid");
-            For<IGrid<Seed>>().Add<POSeedListGrid>().Named("POSeedGrid");
-
-            For<IGrid<Employee>>().Use<EmployeeListGrid>();
-            For<IGrid<Equipment>>().Use<EquipmentListGrid>();
-            For<IGrid<Task>>().Use<TaskListGrid>();
-            For<IGrid<Task>>().Add<PendingTaskGrid>().Named("PendingTaskGrid");
-            For<IGrid<Task>>().Add<CompletedTaskGrid>().Named("CompletedTaskGrid");
-            For<IGrid<Field>>().Use<FieldListGrid>();
-            For<IGrid<PurchaseOrder>>().Use<PurchaseOrderListGrid>();
-            For<IGrid<PurchaseOrderLineItem>>().Use<PurchaseOrderLineItemGrid>();
-            For<IGrid<PurchaseOrderLineItem>>().Add<ReceivePurchaseOrderLineItemGrid>().Named("RecievePurchaseOrderGrid");
-            For<IGrid<Calculator>>().Use<CalculatorListGrid>();
-            For<IGrid<EmailJob>>().Use<EmailJobListGrid>();
-           
-            For(typeof(IPager<>)).Use(typeof(Pager<>));
-        }
-
     }
 }

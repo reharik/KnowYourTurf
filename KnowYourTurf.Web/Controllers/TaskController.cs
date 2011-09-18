@@ -56,16 +56,10 @@ namespace KnowYourTurf.Web.Controllers
                 "-->", 
                 x => x.EntityId, 
                 false);
-            var seeds = _selectListItemService.CreateListWithConcatinatedText(inventory.Where(i => i.Product.InstantiatingType == "Seed"),
-               x => x.Product.Name,
-               x => x.UnitType,
-               "-->",
-               x => x.EntityId,
-               false);
+            
             dictionary.Add(WebLocalizationKeys.CHEMICALS.ToString(), chemicals);
             dictionary.Add(WebLocalizationKeys.MATERIALS.ToString(), materials);
             dictionary.Add(WebLocalizationKeys.FERTILIZERS.ToString(), fertilizer);
-            dictionary.Add(WebLocalizationKeys.SEEDS.ToString(), seeds);
             var availableEmployees = _repository.FindAll<Employee>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
             var selectedEmployees = task.GetEmployees().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
             var availableEquipment = _repository.FindAll<Equipment>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });

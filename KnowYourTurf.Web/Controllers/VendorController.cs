@@ -32,8 +32,6 @@ namespace KnowYourTurf.Web.Controllers
             var selectedFertilizers = vendor.GetAllProductsOfType("Fertilizer").Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             var availableMaterials = _repository.FindAll<Material>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             var selectedMaterials = vendor.GetAllProductsOfType("Material").Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
-            var availableSeeds = _repository.FindAll<Seed>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
-            var selectedSeeds = vendor.GetAllProductsOfType("Seed").Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             
             var model = new VendorViewModel
             {
@@ -44,8 +42,6 @@ namespace KnowYourTurf.Web.Controllers
                 SelectedFertilizers = selectedFertilizers,
                 AvailableMaterials = availableMaterials,
                 SelectedMaterials = selectedMaterials,
-                AvailableSeeds = availableSeeds,
-                SelectedSeeds = selectedSeeds
             };
             return PartialView("VendorAddUpdate", model);
         }
@@ -103,8 +99,6 @@ namespace KnowYourTurf.Web.Controllers
                 input.FertilizerInput.Split(',').Each(x => vendor.AddProduct(_repository.Find<Fertilizer>(Int32.Parse(x))));
             if (input.MaterialInput.IsNotEmpty())
                 input.MaterialInput.Split(',').Each(x => vendor.AddProduct(_repository.Find<Material>(Int32.Parse(x))));
-            if (input.SeedInput.IsNotEmpty())
-                input.SeedInput.Split(',').Each(x => vendor.AddProduct(_repository.Find<Seed>(Int32.Parse(x))));
             return vendor;
         }
     }

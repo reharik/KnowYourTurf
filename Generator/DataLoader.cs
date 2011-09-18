@@ -34,14 +34,10 @@ namespace Generator
         private Equipment _equip2;
         private Employee _employee1;
         private Employee _employee2;
-        private Seed _seed1;
-        private Seed _seed2;
         private static VendorContact _contact1v1;
         private static VendorContact _contact2v1;
         private static VendorContact _contact1v2;
         private static VendorContact _contact2v2;
-        private InventoryProduct _inventorySeed1;
-        private InventoryProduct _inventorySeed2;
         private Company _company;
         private IPurchaseOrderLineItemService _purchaseOrderLineItemService;
         private User _defaultUser;
@@ -64,7 +60,6 @@ namespace Generator
             CreateChemical();
             CreateMaterials();
             CreateFertilizer();
-            CreateSeed();
             CreateInventory();
             CreateTask();
             CreateEventType();
@@ -408,10 +403,6 @@ namespace Generator
             _vendor2.AddProduct(_materials1);
             _vendor2.AddProduct(_materials2);
 
-            _vendor1.AddProduct(_seed1);
-            _vendor1.AddProduct(_seed2);
-            _vendor2.AddProduct(_seed1);
-            _vendor2.AddProduct(_seed2);
 
             _repository.Save(_vendor1);
             _repository.Save(_vendor2);
@@ -563,16 +554,12 @@ namespace Generator
             _inventoryFertilizer2 = new InventoryProduct() { Product = _fertilizer2, Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
             _invenotyMaterial1 = new InventoryProduct() { Product = _materials1, Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
             _inventoryMaterial2 = new InventoryProduct() { Product = _materials2, Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
-            _inventorySeed1 = new InventoryProduct() { Product = _seed1, Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
-            _inventorySeed2 = new InventoryProduct() { Product = _seed2, Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
             _repository.Save(_inventoryChemical1);
             _repository.Save(_inventoryChemical2);
             _repository.Save(_inventoryFertilizer1);
             _repository.Save(_inventoryFertilizer2);
             _repository.Save(_invenotyMaterial1);
             _repository.Save(_inventoryMaterial2);
-            _repository.Save(_inventorySeed1);
-            _repository.Save(_inventorySeed2);
         }
 
         private void CreateMaterials()
@@ -611,22 +598,6 @@ namespace Generator
 
             _repository.Save(_fertilizer1);
             _repository.Save(_fertilizer2);
-        }
-
-        private void CreateSeed()
-        {
-            _seed1 = new Seed
-            {
-                Name = "Cannabis",
-            };
-
-            _seed2 = new Seed
-            {
-                Name = "Opium",
-            };
-
-            _repository.Save(_seed1);
-            _repository.Save(_seed2);
         }
 
         private void CreateChemical()

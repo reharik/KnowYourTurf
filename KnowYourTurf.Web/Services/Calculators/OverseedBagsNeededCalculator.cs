@@ -22,7 +22,7 @@ namespace KnowYourTurf.Web.Services
 
         public CalculatorViewModel GetViewModel()
         {
-            var products = _repository.Query<InventoryProduct>(x => x.Product.InstantiatingType == "Seed");
+            var products = _repository.Query<InventoryProduct>(x => x.Product.InstantiatingType == "Material");
             var productItems = _selectListItemService.CreateListWithConcatinatedText(products, x => x.Product.Name, x => x.UnitType, " --> ", x => x.EntityId, true);
             var fieldItems = _selectListItemService.CreateList<Field>(x => x.Name, x => x.EntityId, true,true);
             return new OverseedBagsNeededCalcViewModel
