@@ -33,7 +33,9 @@ namespace KnowYourTurf.Core.Services
                                                                              };
 
             inventoryProduct.LastVendor = purchaseOrderLineItem.PurchaseOrder.Vendor;
-            inventoryProduct.Quantity += purchaseOrderLineItem.TotalReceived.Value;
+            if (inventoryProduct.Quantity.HasValue)
+                inventoryProduct.Quantity += purchaseOrderLineItem.TotalReceived.Value;
+            else inventoryProduct.Quantity = purchaseOrderLineItem.TotalReceived.Value;
 
             return _saveEntityService.ProcessSave(inventoryProduct, crudManager);
         }

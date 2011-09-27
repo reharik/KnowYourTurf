@@ -35,7 +35,7 @@
     </Time>
 
     <PropertyGroup>
-      <OutputDirectory>g:\cannibalcoder\BuildFiles\KnowYourTurf\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute)</OutputDirectory>
+      <OutputDirectory>c:\development\BuildFiles\KnowYourTurf\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute)</OutputDirectory>
     </PropertyGroup>
 
     <MakeDir Directories="$(OutputDirectory)"  />

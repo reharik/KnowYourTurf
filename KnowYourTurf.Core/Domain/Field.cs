@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Components.Validator;
@@ -25,7 +26,10 @@ namespace KnowYourTurf.Core.Domain
         #region Collections
         private readonly IList<Task> _tasks = new List<Task>();
         public virtual IEnumerable<Task> GetTasks() { return _tasks; }
-        public virtual IEnumerable<Task> GetPendingTasks() { return _tasks.Where(x => !x.Complete); }
+        public virtual IEnumerable<Task> GetPendingTasks()
+        {
+            return _tasks.Where(x => !x.Complete && x.ScheduledStartTime >= DateTime.Now);
+        }
         public virtual void RemovePendingTask(Task task) { _tasks.Remove(task); }
         public virtual void AddPendingTask(Task task)
         {

@@ -135,6 +135,7 @@ namespace KnowYourTurf.UnitTests
                            Product = ValidChemical(name),
                            PurchaseOrder = ValidPurchaseOrder("raif"),
                            QuantityOrdered = 4,
+                           SizeOfUnit = 3
                        };
         }
 
