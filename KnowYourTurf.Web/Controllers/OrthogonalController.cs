@@ -5,6 +5,7 @@ using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Config;
 using KnowYourTurf.Web.Models;
+using Rhino.Security.Interfaces;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
@@ -13,11 +14,13 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IMenuConfig _menuConfig;
         private readonly ISessionContext _sessionContext;
+        private readonly IAuthorizationService _authorizationService;
 
-        public OrthogonalController(IMenuConfig menuConfig, ISessionContext sessionContext)
+        public OrthogonalController(IMenuConfig menuConfig, ISessionContext sessionContext,IAuthorizationService authorizationService)
         {
             _menuConfig = menuConfig;
             _sessionContext = sessionContext;
+            _authorizationService = authorizationService;
         }
 
         public PartialViewResult KnowYourTurfHeader()
@@ -37,7 +40,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 User = user,
                 LoggedIn = _sessionContext.IsAuthenticated(),
-                IsAdmin = _sessionContext.IsInRole(UserRole.Administrator.ToString()),
+                IsAdmin = _authorizationService.IsAllowed(user, "/AdminOrGreater"),
                 InAdminMode = (bool)inAdminMode
             };
             return PartialView(model);
@@ -47,7 +50,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var currentUser = _sessionContext.GetCurrentUser();
             var inAdminMode = _sessionContext.RetrieveSessionObject(WebLocalizationKeys.INADMINMODE.ToString());
-            if (_sessionContext.IsInRole(UserRole.Administrator.ToString()) && (bool)inAdminMode)
+            if (_authorizationService.IsAllowed(currentUser, "/AdminOrGreater") && (bool)inAdminMode)
             {
                 IMenuConfig SetupMenuConfig = ObjectFactory.Container.GetInstance<IMenuConfig>("SetupMenu");
                 return PartialView(new MenuViewModel
@@ -67,7 +70,7 @@ namespace KnowYourTurf.Web.Controllers
             var inAdminMode = _sessionContext.RetrieveSessionItem(WebLocalizationKeys.INADMINMODE.ToString());
             inAdminMode.SessionObject = !(bool) inAdminMode.SessionObject;
             _sessionContext.AddUpdateSessionItem(inAdminMode);
-            return _sessionContext.IsInRole(UserRole.Administrator.ToString())
+            return _authorizationService.IsAllowed(currentUser, "/AdminOrGreater")
                 && (bool)inAdminMode.SessionObject
                     ? RedirectToAction("ListType", "ListTypeList")
                     : RedirectToAction("Home", "Home");

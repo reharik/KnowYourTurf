@@ -32,7 +32,7 @@ namespace Generator
                 var commands = ObjectFactory.GetAllInstances<IGeneratorCommand>();
                 if (args.Length == 0)
                 {
-                    var commandNoArg = ObjectFactory.Container.GetInstance<IGeneratorCommand>("rebuilddatabase");
+                    var commandNoArg = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
                     commandNoArg.Execute(args);
                     return;
                     //displayHelpAndExit(args, commands);

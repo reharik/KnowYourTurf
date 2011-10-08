@@ -61,6 +61,7 @@ namespace KnowYourTurf.Web.Services
 
         private void CreateKYTAdminOperation()
         {
+            _authorizationRepository.CreateOperation("/AdminOrGreater");
             _authorizationRepository.CreateOperation("/KYTAdmin");
         }
 
@@ -88,6 +89,8 @@ namespace KnowYourTurf.Web.Services
 
         public void CreateOperationsForAllMenuItems()
         {
+
+
             var menuConfig = _container.GetAllInstances<IMenuConfig>();
             menuConfig.Each(x =>
             {
