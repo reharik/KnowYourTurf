@@ -18,7 +18,7 @@ namespace KnowYourTurf.Core.Html.Grid
             set { _actionUrl = value; }
         }
         private string _action;
-        private IDictionary<string,string> _actionUrlParameters;
+        private string _jsonData;
 
         public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression) where CONTROLLER : Controller
         {
@@ -33,47 +33,36 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName)
+        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService)
         {
             var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
             if (value.IsEmpty()) return null;
             var divTag = BuildDiv();
             divTag.AddClasses(new[] { "imageButtonColumn", _action });
-            var anchor = buildAnchor(_item, gridName);
+            var anchor = buildAnchor(_item);
             var image = BuildImage();
              divTag.Children.Add(image);
             anchor.Children.Add(divTag);
             return anchor.ToString();
         }
 
-        private HtmlTag buildAnchor(ENTITY item,string gridName)
+        private HtmlTag buildAnchor(ENTITY item)
         {
             var anchor = new HtmlTag("a");
+            string data = string.Empty;
+            if(_jsonData.IsNotEmpty())
+            {
+                data = ","+_jsonData;
+            }
             anchor.Attr("onclick",
-                        "kyt.grid.formatterHelpers.clickEvent(\"" + _action + "\",\"" + buildUrl(item) + "\",\"" + gridName + "\")");
+                        "$.publish('/grid/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "'"+data+"]);");
             return anchor;
         }
 
-        public void AddActionUrlParameters(IDictionary<string, string> actionUrlParameters)
+        public void AddDataToEvent(string jsonObject)
         {
-            _actionUrlParameters = actionUrlParameters;
-        }
-
-        private string buildUrl(ENTITY item)
-        {
-            var urlBase = _actionUrl + "/" + item.EntityId;
-            if (_actionUrlParameters == null) return urlBase;
-            urlBase += "?";
-            _actionUrlParameters.Each(x =>
-                                          {
-                                              urlBase += x.Key + "=" + x.Value;
-                                              if (!_actionUrlParameters.Last().Equals(x))
-                                              {
-                                                  urlBase += "&";
-                                              }
-                                          });
-            return urlBase;
+            _jsonData = jsonObject;
         }
     }
 }

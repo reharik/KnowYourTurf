@@ -21,7 +21,6 @@ namespace KnowYourTurf.Core.Html.Grid
             set { _actionUrl = value; }
         }
 
-        private IDictionary<string, string> _actionUrlParameters;
         private string _action;
 
         public LinkColumn(Expression<Func<ENTITY, object>> expression)
@@ -73,18 +72,29 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName)
+        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService)
         {
             var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
             if (value.IsEmpty()) return null;
             var span = new HtmlTag("span").Text(value);
             addToolTipAndClasses(span);
-            var anchor = buildAnchor(_item, gridName);
+            var anchor = buildAnchor(_item);
             anchor.AddClasses(new[] { "linkColumn", _action });
-            addToolTipAndClasses(anchor);
-            anchor.Children.Add(span);
+
+            var div = BuildDiv();
+            div.Children.Add(span);
+            anchor.Children.Add(div);
             return anchor.ToString();
+        }
+
+
+        protected DivTag BuildDiv()
+        {
+            var divTag = new DivTag("imageDiv");
+            divTag.Attr("title", _toolTip);
+            divTag.AddClasses(_divCssClasses);
+            return divTag;
         }
 
         private void addToolTipAndClasses(HtmlTag span)
@@ -93,11 +103,10 @@ namespace KnowYourTurf.Core.Html.Grid
             span.AddClasses(_divCssClasses);
         }
 
-        private HtmlTag buildAnchor(ENTITY item, string gridName)
+        private HtmlTag buildAnchor(ENTITY item)
         {
             var anchor = new HtmlTag("a");
-            anchor.Attr("onclick",
-                        "kyt.grid.formatterHelpers.clickEvent(\"" + _action + "\",\"" + buildUrl(item) + "\",\"" + gridName + "\")");
+            anchor.Attr("onclick", "$.publish('/grid/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "']);");
             return anchor;
         }
 
@@ -107,27 +116,6 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        public void AddActionUrlParameter(string name, string value)
-        {
-            if (_actionUrlParameters == null) _actionUrlParameters = new Dictionary<string, string>();
-            if (!_actionUrlParameters.ContainsKey(name))
-                _actionUrlParameters.Add(name, value);
-        }
-
-        private string buildUrl(ENTITY item)
-        {
-            var urlBase = _actionUrl + "/" + item.EntityId;
-            if (_actionUrlParameters == null) return urlBase;
-            urlBase += "?";
-            _actionUrlParameters.Each(x =>
-            {
-                urlBase += x.Key + "=" + x.Value;
-                if (!_actionUrlParameters.Last().Equals(x))
-                {
-                    urlBase += "&";
-                }
-            });
-            return urlBase;
-        }
+        
     }
 }

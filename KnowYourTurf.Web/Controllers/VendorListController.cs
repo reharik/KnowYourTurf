@@ -48,7 +48,7 @@ namespace KnowYourTurf.Web.Controllers
                                               if (c.GetType() == typeof(ImageButtonColumn<Vendor>) && c.ColumnIndex == 10)
                                               {
                                                   var col = (ImageButtonColumn<Vendor>)c;
-                                                  col.AddActionUrlParameters(new Dictionary<string, string> { { "ParentId", v.EntityId.ToString() } });
+                                                  col.AddDataToEvent("{ 'ParentId' : " + v.EntityId + "}");
                                               }
                                           };
 

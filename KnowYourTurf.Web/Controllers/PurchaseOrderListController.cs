@@ -45,7 +45,7 @@ namespace KnowYourTurf.Web.Controllers
                     || c.GetType() == typeof(ImageButtonColumn<PurchaseOrder>) && c.ColumnIndex == 10)
                 {
                     var col = (ImageButtonColumn<PurchaseOrder>)c;
-                    col.AddActionUrlParameters(new Dictionary<string, string> { { "ParentId", v.EntityId.ToString() } });
+                    col.AddDataToEvent("{ 'ParentId' : "+ v.EntityId+ "}" );
                 }
             };
             _purchaseOrderListGrid.AddColumnModifications(mod);

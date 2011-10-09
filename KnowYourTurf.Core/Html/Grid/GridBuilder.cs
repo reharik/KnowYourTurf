@@ -41,7 +41,7 @@ namespace KnowYourTurf.Core.Html.Grid
             foreach (var column in columns)
             {
                 modifications.Each(x => x.Invoke(column, item));
-                string value = column.BuildColumn(item, user, _authorizationService, gridName);
+                string value = column.BuildColumn(item, user, _authorizationService);
                 cellValues.Add(value ?? string.Empty);
             }
             return cellValues.ToArray();

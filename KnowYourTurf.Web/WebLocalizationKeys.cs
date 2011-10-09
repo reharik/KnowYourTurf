@@ -172,5 +172,10 @@ namespace KnowYourTurf.Web
          public static readonly StringToken COMMIT = new WebLocalizationKeys("COMMIT", "Commit");
          public static readonly StringToken RETURN = new WebLocalizationKeys("RETURN", "Return");
          public static readonly StringToken SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM = new WebLocalizationKeys("SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM", "Select A Color To Associate With This Field");
+
+         public static readonly StringToken NEW_FACILITIES = new WebLocalizationKeys("NEW_FACILITIES", "New Facilities");
+    
+    
+    
     }
 }   

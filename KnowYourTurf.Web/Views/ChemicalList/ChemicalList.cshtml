@@ -5,12 +5,11 @@
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 
-<script>
-     var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
+@section HeaderJavascript{
     $(document).ready(function(){
-        $("#gridContainer").AsGrid(gridDef);
+        kyt.crudController(crudOptions).init();
     });
-</script>
+}
 @MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_CHEMICAL).ToString())
 @MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
 <table id="gridContainer" class="scroll"></table>
