@@ -8,9 +8,9 @@
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function () {
+    extraFormOptions.runAfterRenderFunction = function () {
         $('#colorPicker').farbtastic('#FieldColor');
-    });
+    };
  </script>
         <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
 

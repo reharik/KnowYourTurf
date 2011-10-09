@@ -26,6 +26,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new WeatherViewModel
             {
                 Weather = weather,
+                Title = WebLocalizationKeys.WEATHER_INFORMATION.ToString()
             };
             return PartialView("WeatherAddUpdate", model);
         }
@@ -36,7 +37,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new WeatherViewModel
                             {
                                 Weather = weather,
-                                AddEditUrl = UrlContext.GetUrlForAction<WeatherController>(x => x.AddEdit(null)) + "/" + weather.EntityId
+                                AddEditUrl = UrlContext.GetUrlForAction<WeatherController>(x => x.AddEdit(null)) + "/" + weather.EntityId,
+                                Title = WebLocalizationKeys.WEATHER_INFORMATION.ToString()
                             };
             return PartialView("WeatherView", model);
         }

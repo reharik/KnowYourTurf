@@ -38,7 +38,8 @@ namespace KnowYourTurf.Web.Controllers
             {
                 EmailJob = emailJob,
                 UserSelectBoxPickerDto = selectorDto,
-                EmailTemplateList = emailTemplates
+                EmailTemplateList = emailTemplates,
+                Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString()
             };
             return PartialView("EmailJobAddUpdate", model);
         }
@@ -49,7 +50,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmailJobViewModel
             {
                 EmailJob = emailTemplate,
-                AddEditUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)) + "/" + emailTemplate.EntityId
+                AddEditUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)) + "/" + emailTemplate.EntityId,
+                Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString()
             };
             return PartialView("EmailJobView", model);
         }

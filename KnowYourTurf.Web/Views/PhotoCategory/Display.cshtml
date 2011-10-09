@@ -4,7 +4,7 @@
 @using KnowYourTurf.Core.Html.FubuUI
 
 @{
-    Layout = "";
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
         @MvcHtmlString.Create(Html.HiddenFor(x => x.ListType.EntityId, new { @class = "copyEntityId" }).ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())

@@ -7,13 +7,11 @@
 @section HeaderScripts{
     @MvcHtmlString.Create(Script("tiny_mce/jquery.tinymce.js").ToString())
 }
-<script>
-     var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition));
+@section HeaderJavascript{
     $(document).ready(function(){
-        gridContainerMetaData.addRunAfterRender(kyt.utilities.tinyMce);
-        $("#gridContainer").AsGrid(gridDef);
+        kyt.crudController(crudOptions).init();
     });
-</script>
+}
 @MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_EMAIL_TEMPLATE).ToString())
 @MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
 <table id="gridContainer" class="scroll"></table>

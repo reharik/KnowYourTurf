@@ -26,6 +26,7 @@ namespace KnowYourTurf.Web.Controllers
                             {
                                 ParentId = input.ParentId > 0 ? input.ParentId : vendorContact.Vendor.EntityId,
                                 VendorContact = vendorContact,
+                                Title = WebLocalizationKeys.VENDOR_CONTACT_INFORMATION.ToString()
                             };
             return PartialView("VendorContactAddUpdate", model);
         }
@@ -36,7 +37,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new VendorContactViewModel
                             {
                                 VendorContact = vendorContact,
-                                AddEditUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddEdit(null)) + "/" + vendorContact.EntityId
+                                AddEditUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddEdit(null)) + "/" + vendorContact.EntityId,
+                                Title = WebLocalizationKeys.VENDOR_CONTACT_INFORMATION.ToString()
                             };
             return PartialView("VendorContactView", model);
         }

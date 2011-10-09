@@ -35,7 +35,7 @@
 }
 
 @section HeaderJavascript{
-     var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
+    var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
     var addEditUrl=@MvcHtmlString.Create(JsonUtil.ToJson(Model.AddEditUrl));
     var crudOptions = {
         addEditUrl: addEditUrl,

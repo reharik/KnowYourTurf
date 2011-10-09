@@ -38,6 +38,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Field = field,
                 AddEditUrl = UrlContext.GetUrlForAction<FieldController>(x => x.AddEdit(null)) + "/" + field.EntityId,
+                Title = WebLocalizationKeys.FIELD_INFORMATION.ToString()
             };
             return PartialView("FieldAddUpdate", model);
         }

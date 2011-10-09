@@ -29,8 +29,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 AddEditUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddEdit(null)),
-                ListDefinition = _equipmentListGrid.GetGridDefinition(url, WebLocalizationKeys.EQUIPMENT),
-                CrudTitle = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString()
+                ListDefinition = _equipmentListGrid.GetGridDefinition(url, WebLocalizationKeys.EQUIPMENT)
             };
             return View(model);
         }

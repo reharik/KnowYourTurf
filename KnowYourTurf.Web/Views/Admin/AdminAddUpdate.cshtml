@@ -9,21 +9,22 @@
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
 <script>
-    $(document).ready(function () {
-        if ('@Model.Administrator.ImageUrl') {
-            $("#showImage").show();
-            $("#newImage").hide();
+    var imageUrl = '@Model.Administrator.ImageUrl';
+    extraFormOptions.runAfterRenderFunction = function () {
+        if (imageUrl) {
+            $("#showImage", this.el).show();
+            $("#newImage", this.el).hide();
         } else {
-            $("#showImage").hide();
-            $("#newImage").show();
+            $("#showImage", this.el).hide();
+            $("#newImage", this.el).show();
         }
-        $("#deleteImage").click(function () {
-            $("#showImage").hide();
-            $("#newImage").show();
-            $("#DeleteImage").val(true);
+        $("#deleteImage", this.el).click(function () {
+            $("#showImage", this.el).hide();
+            $("#newImage", this.el).show();
+            $("#DeleteImage", this.el).val(true);
         });
-        $("#UserRole").asSelectboxPicker();
-    });
+    }
+  
 </script>
 
         <div class="KYT_section_header" >

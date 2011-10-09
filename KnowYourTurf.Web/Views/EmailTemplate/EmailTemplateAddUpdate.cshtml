@@ -8,7 +8,9 @@
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
-      
+<script>
+    extraFormOptions.runAfterRenderFunction = kyt.utilities.tinyMce
+</Script>
         <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
 
             @MvcHtmlString.Create(FormFor<EmailTemplateController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())

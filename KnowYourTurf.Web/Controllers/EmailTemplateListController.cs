@@ -27,8 +27,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 AddEditUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddEdit(null)),
-                ListDefinition = _emailTemplateListGrid.GetGridDefinition(url, WebLocalizationKeys.WEATHER),
-                CrudTitle = WebLocalizationKeys.EMAIL_TEMPLATE_INFORMATION.ToString()
+                ListDefinition = _emailTemplateListGrid.GetGridDefinition(url, WebLocalizationKeys.WEATHER)
             };
             return View(model);
         }

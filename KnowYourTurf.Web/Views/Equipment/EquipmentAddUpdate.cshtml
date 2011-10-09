@@ -8,20 +8,21 @@
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
 <script>
-    $(document).ready(function () {
-        if ('@Model.Equipment.ImageUrl') {
-            $("#showImage").show();
-            $("#newImage").hide();
+var imageUrl = '@Model.Equipment.ImageUrl';
+    extraFormOptions.runAfterRenderFunction = function () {
+        if (imageUrl) {
+            $("#showImage", this.el).show();
+            $("#newImage", this.el).hide();
         } else {
-            $("#showImage").hide();
-            $("#newImage").show();
+            $("#showImage", this.el).hide();
+            $("#newImage", this.el).show();
         }
-        $("#deleteImage").click(function () {
-            $("#showImage").hide();
-            $("#newImage").show();
-            $("#DeleteImage").val(true);
-        });
-    });
+        $("#deleteImage", this.el).click(function () {
+            $("#showImage", this.el).hide();
+            $("#newImage", this.el).show();
+            $("#DeleteImage", this.el).val(true);
+        });        
+    }
 </script>
         <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
 

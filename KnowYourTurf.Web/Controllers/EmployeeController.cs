@@ -42,7 +42,8 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Employee = employee,
                 AvailableRoles = availableUserRoles,
-                SelectedRoles = selectedUserRoles
+                SelectedRoles = selectedUserRoles,
+                Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
             };
             return PartialView("EmployeeAddUpdate", model);
         }
@@ -53,7 +54,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmployeeViewModel
                             {
                                 Employee = employee,
-                                AddEditUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddEdit(null)) + "/" + employee.EntityId
+                                AddEditUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddEdit(null)) + "/" + employee.EntityId,
+                                Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
                             };
             return PartialView("EmployeeView", model);
         }

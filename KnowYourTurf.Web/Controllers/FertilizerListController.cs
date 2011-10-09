@@ -30,7 +30,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 AddEditUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddEdit(null)),
                 ListDefinition = _fertilizerListGrid.GetGridDefinition(url, WebLocalizationKeys.FERTILIZERS),
-                CrudTitle = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
+                Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
             };
             return View(model);
         }

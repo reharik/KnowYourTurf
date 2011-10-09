@@ -30,7 +30,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 CreateATaskUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null))+"?From=Calculator",
                 ListDefinition = _calculatorListGrid.GetGridDefinition(url, WebLocalizationKeys.CALCULATORS),
-            CrudTitle = WebLocalizationKeys.CALCULATOR.ToString()
+            Title = WebLocalizationKeys.CALCULATOR.ToString()
             };
             return View(model);
         }

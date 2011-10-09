@@ -42,6 +42,7 @@ namespace KnowYourTurf.Web.Controllers
                 SelectedFertilizers = selectedFertilizers,
                 AvailableMaterials = availableMaterials,
                 SelectedMaterials = selectedMaterials,
+                Title = WebLocalizationKeys.VENDOR_INFORMATION.ToString()
             };
             return PartialView("VendorAddUpdate", model);
         }
@@ -55,7 +56,8 @@ namespace KnowYourTurf.Web.Controllers
                             {
                                 Vendor = vendor,
                                 VendorContactNames = contactNames,
-                                AddEditUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddEdit(null)) + "/" + vendor.EntityId
+                                AddEditUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddEdit(null)) + "/" + vendor.EntityId,
+                                Title = WebLocalizationKeys.VENDOR_INFORMATION.ToString()
                             };
             return PartialView("VendorView", model);
         }

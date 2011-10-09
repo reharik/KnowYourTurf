@@ -24,6 +24,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmailTemplateViewModel
             {
                 EmailTemplate = emailTemplate,
+                Title = WebLocalizationKeys.EMAIL_TEMPLATE_INFORMATION.ToString()
             };
             return PartialView("EmailTemplateAddUpdate", model);
         }
@@ -34,7 +35,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmailTemplateViewModel
                             {
                                 EmailTemplate = emailTemplate,
-                                AddEditUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddEdit(null)) + "/" + emailTemplate.EntityId
+                                AddEditUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddEdit(null)) + "/" + emailTemplate.EntityId,
+                                Title = WebLocalizationKeys.EMAIL_TEMPLATE_INFORMATION.ToString()
                             };
             return PartialView("EmailTemplateView", model);
         }

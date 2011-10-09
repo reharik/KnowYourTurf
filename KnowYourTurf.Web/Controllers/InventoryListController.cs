@@ -50,7 +50,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 //TODO put modifiler here "ProductType=" + productType
                 ListDefinition = _inventoryProductListGrid.GetGridDefinition(url, title),
-                CrudTitle = crudTitle.ToString()
+                Title = crudTitle.ToString()
             };
             return View("Inventory" + productType + "List", model);
         }

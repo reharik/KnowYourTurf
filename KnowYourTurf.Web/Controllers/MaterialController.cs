@@ -23,7 +23,8 @@ namespace KnowYourTurf.Web.Controllers
             var material = input.EntityId > 0 ? _repository.Find<Material>(input.EntityId) : new Material();
             var model = new MaterialViewModel
             {
-                Material = material
+                Material = material,
+                Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
             };
             return PartialView("MaterialAddUpdate", model);
         }
@@ -34,7 +35,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new MaterialViewModel
                             {
                                 Material = material,
-                                AddEditUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.AddEdit(null)) + "/" + material.EntityId
+                                AddEditUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.AddEdit(null)) + "/" + material.EntityId,
+                                Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
                             };
             return PartialView("MaterialView", model);
         }

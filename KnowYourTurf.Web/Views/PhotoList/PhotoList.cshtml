@@ -6,9 +6,8 @@
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
 @section HeaderJavascript{
-    var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
     $(document).ready(function(){
-        $("#gridContainer").AsGrid(gridDef);
+        kyt.crudController(crudOptions).init();
     });
 }
 <div class="KYT_gridbreak">

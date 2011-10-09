@@ -23,7 +23,8 @@ namespace KnowYourTurf.Web.Controllers
             var fertilizer = input.EntityId > 0 ? _repository.Find<Fertilizer>(input.EntityId) : new Fertilizer();
             var model = new FertilizerViewModel
             {
-                Fertilizer = fertilizer
+                Fertilizer = fertilizer,
+                Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
             };
             return PartialView("FertilizerAddUpdate", model);
         }
@@ -34,7 +35,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new FertilizerViewModel
             {
                 Fertilizer = fertilizer,
-                AddEditUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddEdit(null)) + "/" + fertilizer.EntityId
+                AddEditUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddEdit(null)) + "/" + fertilizer.EntityId,
+                Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
             };
             return PartialView("FertilizerView", model);
         }

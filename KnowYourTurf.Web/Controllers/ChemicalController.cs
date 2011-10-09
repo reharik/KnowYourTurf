@@ -23,7 +23,8 @@ namespace KnowYourTurf.Web.Controllers
             var chemical = input.EntityId > 0 ? _repository.Find<Chemical>(input.EntityId) : new Chemical();
             var model = new ChemicalViewModel
             {
-                Chemical = chemical
+                Chemical = chemical,
+                Title = WebLocalizationKeys.CHEMICAL_INFORMATION.ToString()
             };
             return PartialView("ChemicalAddUpdate", model);
         }
@@ -34,7 +35,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ChemicalViewModel
             {
                 Chemical = chemical,
-                AddEditUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.AddEdit(null)) + "/" + chemical.EntityId
+                AddEditUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.AddEdit(null)) + "/" + chemical.EntityId,
+                Title = WebLocalizationKeys.CHEMICAL_INFORMATION.ToString()
             };
             return PartialView("ChemicalView", model);
         }

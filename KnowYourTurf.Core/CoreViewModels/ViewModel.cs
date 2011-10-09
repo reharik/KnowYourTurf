@@ -18,7 +18,7 @@ namespace KnowYourTurf.Core
         }
         public string From { get; set; }
         public User User { get; set; }
-        public string CrudTitle { get; set; }
+        public string Title { get; set; }
     }
 
     public class ListViewModel : ViewModel

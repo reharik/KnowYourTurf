@@ -36,6 +36,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new FacilitiesViewModel
             {
                 Facilities = facilities,
+                Title = WebLocalizationKeys.FACILITIES.ToString()
             };
             return PartialView("FacilitiesAddUpdate", model);
         }
@@ -46,7 +47,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new FacilitiesViewModel
                             {
                                 Facilities = facilities,
-                                AddEditUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)) + "/" + facilities.EntityId
+                                AddEditUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)) + "/" + facilities.EntityId,
+                                Title = WebLocalizationKeys.FACILITIES.ToString()
                             };
             return PartialView("FacilitiesView", model);
         }

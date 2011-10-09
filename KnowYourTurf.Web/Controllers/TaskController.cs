@@ -75,6 +75,7 @@ namespace KnowYourTurf.Web.Controllers
                                 ProductList = dictionary,
                                 TaskTypeList = taskTypes,
                                 Task = task,
+                                Title = WebLocalizationKeys.TASK_INFORMATION.ToString()
             };
             if (task.EntityId > 0)
             {

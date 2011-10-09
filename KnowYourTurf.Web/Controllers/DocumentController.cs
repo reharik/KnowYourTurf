@@ -39,7 +39,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new DocumentViewModel
             {
                 Document = document,
-                DocumentCategoryList =categoryItems
+                DocumentCategoryList = categoryItems,
+                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString()
             };
             return View(model);
         }
@@ -50,7 +51,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new DocumentViewModel
                             {
                                 Document = document,
-                                AddEditUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "/" + document.EntityId
+                                AddEditUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "/" + document.EntityId,
+                                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString()
                             };
             return View(model);
         }

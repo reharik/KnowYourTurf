@@ -4,7 +4,7 @@
 @using KnowYourTurf.Core.Html.FubuUI
 
 @{
-    Layout = "";
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
         @MvcHtmlString.Create(Html.HiddenFor(x => x.Event.EntityId, new { @class = "copyEntityId" }).ToString())
             <input type="hidden" name="Event.EntityId" id="EntityId" value="@Model.Event.EntityId"/>

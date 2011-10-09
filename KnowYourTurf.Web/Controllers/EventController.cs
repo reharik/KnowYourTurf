@@ -36,6 +36,7 @@ namespace KnowYourTurf.Web.Controllers
                                 EventTypeList = _eventTypes,
                                 Event = _event,
                                 Copy = input.Copy,
+                                Title = WebLocalizationKeys.EVENT_INFORMATION.ToString()
             };
             if (_event.EntityId > 0)
             {
@@ -51,7 +52,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EventViewModel
                             {
                                 Event = _event,
-                                AddEditUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddEdit(null)) + "/" + _event.EntityId
+                                AddEditUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddEdit(null)) + "/" + _event.EntityId,
+                                Title = WebLocalizationKeys.EVENT_INFORMATION.ToString()
             };
             return PartialView("EventView", model);
         }

@@ -4,7 +4,7 @@
 @using KnowYourTurf.Web.Controllers
 
 @{
-    Layout = "";
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
        
         @MvcHtmlString.Create(Html.HiddenFor(x => x.Weather.EntityId, new { @class = "copyEntityId" }).ToString())

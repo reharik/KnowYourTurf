@@ -39,7 +39,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new PhotoViewModel
             {
                 Photo = photo,
-                PhotoCategoryList =categoryItems
+                PhotoCategoryList = categoryItems,
+                Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString()
             };
             return View(model);
         }
@@ -50,7 +51,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new PhotoViewModel
                             {
                                 Photo = photo,
-                                AddEditUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "/" + photo.EntityId
+                                AddEditUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "/" + photo.EntityId,
+                                Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString()
                             };
             return View(model);
         }

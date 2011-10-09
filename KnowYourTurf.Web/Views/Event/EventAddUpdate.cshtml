@@ -9,11 +9,12 @@
 }
 
 <script>
-    $(document).ready(function () {
-        if ('@Model.Copy' == "True") {
-            $("#Event_EntityId").val(0);
-        }
-    });
+var isCopy = '@Model.Copy';
+extraFormOptions.runAfterRenderFunction = function () {
+    if (isCopy == "True") {
+        $("#Event_EntityId").val(0);
+    }
+};
 </script>
       
         <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
