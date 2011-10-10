@@ -6,6 +6,7 @@
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @section HeaderJavascript{
     $(document).ready(function(){
+        crudOptions.id="field";
         kyt.crudController(crudOptions).init();
     });
 }

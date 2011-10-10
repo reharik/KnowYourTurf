@@ -23,10 +23,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="kyt.crudController.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/kyt.crudController.js">
+      <file leaf-file-name="kyt.fieldDashboard.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/kyt.fieldDashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="45" selection-start="1910" selection-end="1910" vertical-scroll-proportion="0.0">
+            <state line="19" column="46" selection-start="417" selection-end="417" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kyt.employeeDashboard.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/kyt.employeeDashboard.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="76" selection-start="513" selection-end="513" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kyt.popupCrud.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/kyt.popupCrud.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="64" column="112" selection-start="2403" selection-end="2456" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kyt.fieldDashboardController.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/kyt.fieldDashboardController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="48" column="53" selection-start="1867" selection-end="1867" vertical-scroll-proportion="0.8666667">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kyt.GridView.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/kyt.GridView.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="55" selection-start="532" selection-end="539" vertical-scroll-proportion="-13.72">
               <folding />
             </state>
           </provider>
@@ -35,7 +71,7 @@
       <file leaf-file-name="kyt.popupFormModule.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/kyt.popupFormModule.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="32" selection-start="1162" selection-end="1162" vertical-scroll-proportion="0.0">
+            <state line="35" column="35" selection-start="1378" selection-end="1378" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -44,25 +80,16 @@
       <file leaf-file-name="kyt.popupDisplayModule.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/kyt.popupDisplayModule.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="66" selection-start="616" selection-end="629" vertical-scroll-proportion="0.0">
+            <state line="39" column="43" selection-start="1432" selection-end="1432" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kyt.DisplayView.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/kyt.DisplayView.js">
+      <file leaf-file-name="kyt.PopupView.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/kyt.PopupView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="56" selection-start="558" selection-end="558" vertical-scroll-proportion="0.30666667">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jquery.pubsub.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/jquery.pubsub.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="51" selection-start="2047" selection-end="2047" vertical-scroll-proportion="0.0">
+            <state line="49" column="72" selection-start="1420" selection-end="1464" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -71,7 +98,7 @@
       <file leaf-file-name="kyt.FormView.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/kyt.FormView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="29" selection-start="3535" selection-end="3535" vertical-scroll-proportion="0.0">
+            <state line="82" column="54" selection-start="2861" selection-end="2861" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -91,20 +118,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/scripts/kyt.utilities.js" />
-        <option value="$PROJECT_DIR$/scripts/dci.GridView.js" />
         <option value="$PROJECT_DIR$/scripts/dci.TokenView.js" />
         <option value="$PROJECT_DIR$/scripts/dci.FormView.js" />
         <option value="$PROJECT_DIR$/scripts/kyt.popupFormController.js" />
         <option value="$PROJECT_DIR$/scripts/dci.DisplayView.js" />
         <option value="$PROJECT_DIR$/scripts/dci.PopupView.js" />
         <option value="$PROJECT_DIR$/scripts/dci.assetController.js" />
-        <option value="$PROJECT_DIR$/scripts/kyt.FormView.js" />
         <option value="$PROJECT_DIR$/scripts/jquery.pubsub.js" />
-        <option value="$PROJECT_DIR$/scripts/kyt.crudController.js" />
         <option value="$PROJECT_DIR$/scripts/kyt.popupDisplayModule.js" />
         <option value="$PROJECT_DIR$/scripts/kyt.popupFormModule.js" />
         <option value="$PROJECT_DIR$/scripts/kyt.DisplayView.js" />
+        <option value="$PROJECT_DIR$/scripts/kyt.GridView.js" />
+        <option value="$PROJECT_DIR$/scripts/kyt.crudController.js" />
+        <option value="$PROJECT_DIR$/scripts/kyt.FormView.js" />
+        <option value="$PROJECT_DIR$/scripts/kyt.PopupView.js" />
+        <option value="$PROJECT_DIR$/scripts/internalHelpers/kyt.crudForm.js" />
+        <option value="$PROJECT_DIR$/scripts/kyt.fieldDashboardController.js" />
       </list>
     </option>
   </component>
@@ -279,77 +308,112 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/kyt.calculator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="20" selection-start="2547" selection-end="2547" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kyt.utilities.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="32" selection-start="2156" selection-end="2176" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kyt.TokenView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="5" selection-start="1484" selection-end="1484" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kyt.grid.formatters.js">
+    <entry file="file://$PROJECT_DIR$/scripts/internalHelpers/kyt.grid.formatters.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="49" selection-start="995" selection-end="995" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kyt.popupCrud.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="22" selection-start="3882" selection-end="3882" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kyt.PopupView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="106" selection-start="1181" selection-end="1181" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kyt.GridView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="74" selection-start="802" selection-end="802" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/jquery.pubsub.js">
+    <entry file="file://$PROJECT_DIR$/scripts/jqueryPlugins/jquery.pubsub.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="67" column="51" selection-start="2047" selection-end="2047" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kyt.FormView.js">
+    <entry file="file://$PROJECT_DIR$/scripts/kyt.calculator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="29" selection-start="3535" selection-end="3535" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kyt.crudController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="45" selection-start="1910" selection-end="1910" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kyt.popupFormModule.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="32" selection-start="1162" selection-end="1162" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/kyt.popupDisplayModule.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="66" selection-start="616" selection-end="629" vertical-scroll-proportion="0.0">
+        <state line="19" column="62" selection-start="994" selection-end="994" vertical-scroll-proportion="0.48555556">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/kyt.DisplayView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="56" selection-start="558" selection-end="558" vertical-scroll-proportion="0.30666667">
+        <state line="29" column="5" selection-start="718" selection-end="718" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kyt.popupDisplayModule.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="43" selection-start="1432" selection-end="1432" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kyt.crudController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="89" selection-start="1101" selection-end="1501" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/internalHelpers/kyt.utilities.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="21" selection-start="1512" selection-end="1512" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kyt.FormView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="54" selection-start="2861" selection-end="2861" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/internalHelpers/kyt.crudForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="88" selection-start="2202" selection-end="2202" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kyt.fieldDashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="46" selection-start="417" selection-end="417" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kyt.popupFormModule.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="35" selection-start="1378" selection-end="1378" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kyt.popupCrud.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="112" selection-start="2403" selection-end="2456" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kyt.PopupView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="72" selection-start="1420" selection-end="1464" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kyt.employeeDashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="76" selection-start="513" selection-end="513" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kyt.GridView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="55" selection-start="532" selection-end="539" vertical-scroll-proportion="-13.72">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/kyt.fieldDashboardController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="53" selection-start="1867" selection-end="1867" vertical-scroll-proportion="0.8666667">
           <folding />
         </state>
       </provider>

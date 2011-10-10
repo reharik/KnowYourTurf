@@ -19,9 +19,11 @@ namespace KnowYourTurf.Core.Html.Grid
         }
         private string _action;
         private string _jsonData;
+        private string _gridName;
 
-        public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression) where CONTROLLER : Controller
+        public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, string gridName = null) where CONTROLLER : Controller
         {
+            _gridName = gridName.IsNotEmpty()?gridName:string.Empty;
             var actionUrl = UrlContext.GetUrlForAction(expression);
             _actionUrl = actionUrl;
             return this;
@@ -56,7 +58,7 @@ namespace KnowYourTurf.Core.Html.Grid
                 data = ","+_jsonData;
             }
             anchor.Attr("onclick",
-                        "$.publish('/grid/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "'"+data+"]);");
+                        "$.publish('/grid_"+ _gridName +"/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "'"+data+"]);");
             return anchor;
         }
 

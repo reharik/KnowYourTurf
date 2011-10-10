@@ -8,15 +8,15 @@
     @RenderSection("ExtraCss", false)
 }    
 @section HeaderScripts{
-    @MvcHtmlString.Create(Script("grid.locale-en.js").ToString())
-    @MvcHtmlString.Create(Script("jquery.jqGrid.min.js").ToString())
-    @MvcHtmlString.Create(Script("jquery.kyt.grid.js").ToString())
-    @MvcHtmlString.Create(Script("jquery.jqPrint.js").ToString())
-    @MvcHtmlString.Create(Script("jquery.tokeninput.js").ToString())
-    @MvcHtmlString.Create(Script("farbtastic.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.grid.columnService.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.grid.formatters.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.gridHelpers.js").ToString())
+    @MvcHtmlString.Create(Script("jqueryPlugins/grid.locale-en.js").ToString())
+    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.jqGrid.min.js").ToString())
+    @MvcHtmlString.Create(Script("internalHelpers/jquery.kyt.grid.js").ToString())
+    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.jqPrint.js").ToString())
+    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.tokeninput.js").ToString())
+    @MvcHtmlString.Create(Script("externalHelpers/farbtastic.js").ToString())
+    @MvcHtmlString.Create(Script("internalHelpers/kyt.grid.columnService.js").ToString())
+    @MvcHtmlString.Create(Script("internalHelpers/kyt.grid.formatters.js").ToString())
+    @MvcHtmlString.Create(Script("internalHelpers/kyt.gridHelpers.js").ToString())
     @MvcHtmlString.Create(Script("kyt.popupCrud.js").ToString())
 
     

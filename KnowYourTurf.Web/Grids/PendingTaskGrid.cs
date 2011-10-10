@@ -30,16 +30,16 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Task> BuildGrid()
         {
             GridBuilder.ImageButtonColumn()
-               .ForAction<TaskController>(x => x.Delete(null))
+               .ForAction<TaskController>(x => x.Delete(null), "pendingTaskGrid")
                .ToPerformAction(ColumnAction.Delete)
                 .ImageName("delete.png")
                .ToolTip(WebLocalizationKeys.DELETE_ITEM);
             GridBuilder.ImageButtonColumn()
-                .ForAction<TaskController>(x => x.AddEdit(null))
+                .ForAction<TaskController>(x => x.AddEdit(null), "pendingTaskGrid")
                 .ToPerformAction(ColumnAction.Edit)
                 .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
-            GridBuilder.LinkColumnFor(x => x.TaskType.Name)
+            GridBuilder.LinkColumnFor(x => x.TaskType.Name, "pendingTaskGrid")
                 .ForAction<TaskController>(x => x.Display(null))
                 .ToPerformAction(ColumnAction.Display)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);

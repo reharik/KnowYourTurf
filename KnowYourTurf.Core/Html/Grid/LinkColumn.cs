@@ -22,9 +22,11 @@ namespace KnowYourTurf.Core.Html.Grid
         }
 
         private string _action;
+        private string _gridName;
 
-        public LinkColumn(Expression<Func<ENTITY, object>> expression)
+        public LinkColumn(Expression<Func<ENTITY, object>> expression, string gridName = null)
         {
+            _gridName = gridName.IsNotEmpty() ? gridName : string.Empty;
             _divCssClasses = new List<string>();
             propertyAccessor = ReflectionHelper.GetAccessor(expression);
             Properties[GridColumnProperties.name.ToString()] = LocalizationManager.GetLocalString(expression);
@@ -106,7 +108,7 @@ namespace KnowYourTurf.Core.Html.Grid
         private HtmlTag buildAnchor(ENTITY item)
         {
             var anchor = new HtmlTag("a");
-            anchor.Attr("onclick", "$.publish('/grid/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "']);");
+            anchor.Attr("onclick", "$.publish('/grid_"+ _gridName +"/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "']);");
             return anchor;
         }
 
