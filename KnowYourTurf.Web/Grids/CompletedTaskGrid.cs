@@ -30,7 +30,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Task> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.TaskType.Name)
+            GridBuilder.LinkColumnFor(x => x.TaskType.Name, "completeTaskGrid")
                 .ForAction<TaskController>(x => x.Display(null))
                 .ToPerformAction(ColumnAction.Display)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);

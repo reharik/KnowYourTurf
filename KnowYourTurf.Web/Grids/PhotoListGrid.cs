@@ -30,16 +30,16 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Photo> BuildGrid()
         {
             GridBuilder.ImageButtonColumn()
-               .ForAction<PhotoController>(x => x.Delete(null))
+               .ForAction<PhotoController>(x => x.Delete(null),"photoGrid")
                .ToPerformAction(ColumnAction.Delete)
                .ImageName("delete.png")
                .ToolTip(WebLocalizationKeys.DELETE_ITEM);
             GridBuilder.ImageButtonColumn()
-                .ForAction<PhotoController>(x => x.AddUpdate(null))
+                .ForAction<PhotoController>(x => x.AddUpdate(null), "photoGrid")
                 .ToPerformAction(ColumnAction.Edit)
                 .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
-            GridBuilder.LinkColumnFor(x => x.Name)
+            GridBuilder.LinkColumnFor(x => x.Name, "photoGrid")
                 .ForAction<PhotoController>(x => x.Display(null))
                 .ToPerformAction(ColumnAction.Display)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);

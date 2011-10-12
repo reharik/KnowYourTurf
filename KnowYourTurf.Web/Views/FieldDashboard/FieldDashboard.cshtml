@@ -13,7 +13,7 @@
 }    
 @section HeaderScripts{
     @MvcHtmlString.Create(Script("jqueryPlugins/grid.locale-en.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.jqGrid.min.js").ToString())
+    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.jqGrid.src.js").ToString())
     @MvcHtmlString.Create(Script("internalHelpers/jquery.kyt.grid.js").ToString())
     @MvcHtmlString.Create(Script("jqueryPlugins/jquery.tokeninput.js").ToString()) 
     @MvcHtmlString.Create(Script("jqueryPlugins/jquery.slideViewerPro.1.5.js").ToString())
@@ -27,6 +27,7 @@
     @MvcHtmlString.Create(Script("kyt.DisplayView.js").ToString())
     @MvcHtmlString.Create(Script("kyt.FormView.js").ToString())
     @MvcHtmlString.Create(Script("kyt.GridView.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.PopupView.js").ToString())
     @MvcHtmlString.Create(Script("kyt.popupDisplayModule.js").ToString())
     @MvcHtmlString.Create(Script("kyt.popupFormModule.js").ToString())
 
@@ -55,7 +56,7 @@
         kyt.fieldDashboardController(fdcOptions).init();
     });
 }
-    <div class="KYT_DashInfo">
+    <div class="KYT_DashInfo" id="masterArea">
 
         <div class="KYT_section_header" >
             @MvcHtmlString.Create(WebLocalizationKeys.FIELD_INFORMATION.ToString())
@@ -83,27 +84,27 @@
          </div>
      <div id="pendingTaskGridContainer" class="grid_5b">
         @MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_TASK).ToString())
-        <table id="gridContainer" class="scroll"></table>
+        <table id="gridContainer_pt" class="scroll"></table>
         <div id="pager" class="scroll" style="text-align:center;"></div>
 
     </div>
 
     <div id="completeTaskGridContainer" class="grid_4 KYT_AddNew_space">
-        <table id="gridContainer" class="scroll"></table>
+        <table id="gridContainer_ct" class="scroll"></table>
         <div id="pager" class="scroll" style="text-align:center;"></div>
     </div>
     <div class="grid_10_KYT">
          </div>
     <div id="photoGridContainer" class="grid_5b">
         @MvcHtmlString.Create(StyledButtonFor("addNewPhoto", WebLocalizationKeys.NEW_PHOTO).ToString())
-        <table id="gridContainer" class="scroll"></table>
+        <table id="gridContainer_p" class="scroll"></table>
         <div id="pager" class="scroll" style="text-align:center;"></div>
 
     </div>
 
     <div id="documentGridContainer" class="grid_4 KYT_AddNew_space">
         @MvcHtmlString.Create(StyledButtonFor("addNewDocument", WebLocalizationKeys.NEW_DOCUMENT).ToString())
-        <table id="gridContainer" class="scroll"></table>
+        <table id="gridContainer_d" class="scroll"></table>
         <div id="pager" class="scroll" style="text-align:center;"></div>
     </div>
 
