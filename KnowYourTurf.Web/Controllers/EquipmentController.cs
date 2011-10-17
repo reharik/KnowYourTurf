@@ -68,6 +68,7 @@ namespace KnowYourTurf.Web.Controllers
             var equipment = input.Equipment.EntityId > 0 ? _repository.Find<Equipment>(input.Equipment.EntityId) : new Equipment();
             equipment.Name = input.Equipment.Name;
             equipment.TotalHours = input.Equipment.TotalHours;
+            equipment.Description = input.Equipment.Description;
             if (input.DeleteImage)
             {
                 _uploadedFileHandlerService.DeleteFile(equipment.ImageUrl);

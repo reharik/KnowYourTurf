@@ -84,7 +84,7 @@ namespace KnowYourTurf.Web.Controllers
             decorateModel(input,model);
             if (input.Copy)
             {
-                model.Task.EntityId = 0;
+                model.Task = model.Task.CloneTask();
                 model.Task.Complete = false;
             }
                 
@@ -124,7 +124,9 @@ namespace KnowYourTurf.Web.Controllers
                                 Product = productName,
                                 EmployeeNames = task.GetEmployees().Select(x =>  x.FullName ),
                                 EquipmentNames = task.GetEquipment().Select(x => x.Name ),
-                                AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.AddEdit(null))+"/"+task.EntityId
+                                AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.AddEdit(null))+"/"+task.EntityId,
+                                Title = WebLocalizationKeys.TASK_INFORMATION.ToString()
+
             };
             return PartialView("TaskView", model);
         }

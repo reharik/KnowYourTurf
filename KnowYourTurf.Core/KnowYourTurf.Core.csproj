@@ -40,6 +40,9 @@
       <HintPath>..\lib\fluentnhibernate-NH3.0-binary-1.2.0.694\Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\lib\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Components.Validator, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Castle.Components.Validator.dll</HintPath>
