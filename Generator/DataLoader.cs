@@ -163,7 +163,7 @@ namespace Generator
             _defaultUser = new KYTAdministrator()
             {
                 LoginName = "Admin",
-                Password = "pa$$w0rd",
+                Password = "123",
                 FirstName = "Raif",
                 LastName = "Harik",
                 UserRoles = UserRole.Administrator + "," + UserRole.Employee + "," + UserRole.KYTAdmin,

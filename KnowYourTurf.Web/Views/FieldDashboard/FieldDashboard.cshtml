@@ -22,7 +22,7 @@
     @MvcHtmlString.Create(Script("internalHelpers/kyt.gridHelpers.js").ToString())
     @MvcHtmlString.Create(Script("kyt.popupCrud.js").ToString())
     @MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.employeeDashboard.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.baseClasses.js").ToString())
     @MvcHtmlString.Create(Script("kyt.fieldDashboardController.js").ToString())
     @MvcHtmlString.Create(Script("kyt.DisplayView.js").ToString())
     @MvcHtmlString.Create(Script("kyt.FormView.js").ToString())
@@ -53,7 +53,7 @@
             photoGridDef:photoGridDef,
             documentGridDef:documentGridDef
         }
-        kyt.fieldDashboardController(fdcOptions).init();
+        new kyt.FieldDashboardController(fdcOptions);
     });
 }
     <div class="KYT_DashInfo" id="masterArea">

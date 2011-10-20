@@ -4,20 +4,14 @@
 @using HtmlTags
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
-@section HeaderScripts{
-    @MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
-}
-<script>
-     var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
+
+@section HeaderJavascript{
     $(document).ready(function(){
-        $("#gridContainer").AsGrid(gridDef);
-        gridContainerMetaData.addRunAfterRender(function() {
-            $("#RolesInput").tokenInput(availableRoles?availableRoles:{},{prePopulate: selectedRoles,
-              internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
-       });
+        crudOptions.id="employee";
+        kyt.crudController(crudOptions).init();
     });
-</script>
+}
+
 @MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_EMPLOYEE).ToString())
-@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
 <table id="gridContainer" class="scroll"></table>
 <div id="pager" class="scroll" style="text-align:center;"></div>
