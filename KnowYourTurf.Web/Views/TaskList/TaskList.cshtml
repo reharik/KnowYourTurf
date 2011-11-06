@@ -5,27 +5,13 @@
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @section HeaderScripts{
-    @MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.TaskListController.js").ToString())
 }
-<script>
-     var gridDef = @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition));
-    $(document).ready(function(){
-        gridContainerMetaData.setDisplayButtonBuilder(function(builder){
-                    builder.addEditButton();
-                    builder.addButton("Copy Task", kyt.popupCrud.controller.copyItem);
-                    builder.addCancelButton();
-                    return  builder.getButtons();
-                });
-        gridContainerMetaData.addRunAfterRender(function() {
-            $("#EmployeeInput").tokenInput(availableEmployees?availableEmployees:{},{prePopulate: selectedEmployees,
-              internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
-            $("#EquipmentInput").tokenInput(availableEquipment?availableEquipment:{},{prePopulate: selectedEquipment,
-              internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
-        });
-        
-        $("#gridContainer").AsGrid(gridDef);
+@section HeaderJavascript{
+    $(document).ready(function () {
+        new kyt.TaskListController(crudOptions);
     });
-</script>
+}
 <div class="KYT_gridbreak">
 @MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_TASK).AddClass("KYT_float_left grid_2").ToString())
 @MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right grid_1").ToString())

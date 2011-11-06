@@ -4,11 +4,13 @@
 @using HtmlTags
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
-
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("kyt.EmployeeController.js").ToString())
+}
 @section HeaderJavascript{
     $(document).ready(function(){
         crudOptions.id="employee";
-        kyt.crudController(crudOptions).init();
+        new kyt.EmployeeController(crudOptions);
     });
 }
 

@@ -10,12 +10,6 @@ namespace KnowYourTurf.Core
         public long ParentId { get; set; }
         public long RootId { get; set; }
         public string AddEditUrl { get; set; }
-        private string _saveJsSuccssCallback = "kyt.popupCrud.controller.success";
-        public string SaveJSSuccssCallback
-        {
-            get { return _saveJsSuccssCallback; }
-            set { _saveJsSuccssCallback = value; }
-        }
         public string From { get; set; }
         public User User { get; set; }
         public string Title { get; set; }

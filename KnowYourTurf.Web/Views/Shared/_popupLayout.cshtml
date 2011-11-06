@@ -1,5 +1,6 @@
 ﻿@using HtmlTags
 <script>
     extraFormOptions.title = "@Model.Title";
+     @RenderSection("HeaderJavascript", false)
 </script>
     @RenderBody()

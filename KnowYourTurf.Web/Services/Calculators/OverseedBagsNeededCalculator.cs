@@ -32,7 +32,7 @@ namespace KnowYourTurf.Web.Services
                 CalculatorDisplayName = WebLocalizationKeys.OVERSEED_BAGS_NEEEDED_DISPLAY.ToString(),
                 CalculatorName = WebLocalizationKeys.OVERSEED_BAGS_NEEEDED.ToString(),
                 CalculateUrl = UrlContext.GetUrlForAction<CalculatorController>(x => x.Calculate(null)),
-                SaveJSSuccssCallback = "kyt.calculator.controller.overseedBagsNeededSuccess"
+//                SaveJSSuccssCallback = "kyt.calculator.controller.overseedBagsNeededSuccess"
             };
         }
 

@@ -108,7 +108,7 @@ namespace KnowYourTurf.Web.Controllers
             }
             if (input.From == "Calculator")
             {
-                model.Task.Field = _repository.Find<Field>(input.ParentId);
+                model.Task.Field = _repository.Find<Field>(input.Field);
                 model.Product = input.Product;
                 model.Task.QuantityNeeded = input.Quantity;
             }

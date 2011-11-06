@@ -4,14 +4,13 @@
 @using HtmlTags
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("kyt.WeatherController.js").ToString())
+}
 @section HeaderJavascript{
-    var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
-    gridContainerMetaData.setDisplayButtonBuilder(function(builder){
-                    builder.addButton("Return",kyt.popupCrud.buttonBuilder.getCancelFunc)
-                    return  builder.getButtons();
-                });
-    $(document).ready(function(){
-        $("#gridContainer").AsGrid(gridDef);
+    $(document).ready(function () {
+        new kyt.WeatherController(crudOptions);
     });
 }
 

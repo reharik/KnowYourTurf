@@ -41,8 +41,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmployeeViewModel
             {
                 Employee = employee,
-                AvailableRoles = availableUserRoles,
-                SelectedRoles = selectedUserRoles,
+                AvailableItems = availableUserRoles,
+                SelectedItems = selectedUserRoles,
                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
             };
             return PartialView("EmployeeAddUpdate", model);

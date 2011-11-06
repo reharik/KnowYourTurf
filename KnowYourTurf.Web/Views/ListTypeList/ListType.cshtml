@@ -5,24 +5,32 @@
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @section HeaderScripts{
-    @MvcHtmlString.Create(Script("kyt.listType.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.ListTypeController.js").ToString())
 }
 <script>
-     var ttGridDef = @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionTT));
-     var etGridDef = @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition));
-     var dcGridDef = @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionDC));
-     var pcGridDef = @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionPC));
-    var EventTypeGridMetaData = kyt.popupMetaData.metaData('@Model.AddEditUrlET', "#puErrorMessages", successFunction);
-    var TaskTypeGridMetaData = kyt.popupMetaData.metaData('@Model.AddEditUrlTT', "#puErrorMessages", successFunction);
-    var DocumentCategoryGridMetaData = kyt.popupMetaData.metaData('@Model.AddEditUrlDC', "#puErrorMessages", successFunction);
-    var PhotoCategoryGridMetaData = kyt.popupMetaData.metaData('@Model.AddEditUrlPC', "#puErrorMessages", successFunction);
-    var popupTitleET = "@Model.PopupTitleET" ;
-    var popupTitleTT = "@Model.PopupTitleTT" ;
-    var popupTitlePC = "@Model.PopupTitlePC" ;
-    var popupTitleDC = "@Model.PopupTitleDC" ;
+    crudOptions.gridInfo = {
+        addEditUrl: crudOptions.addEditUrl,
+        gridDef: crudOptions.gridDef,
+        title: crudOptions.title
+    };
+    crudOptions.ttGridInfo = {
+        addEditUrl: crudOptions.addEditUrl,
+        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionTT)) ,
+        title: "@Model.PopupTitleTT"
+    };
+    crudOptions.pcGridInfo = {
+        addEditUrl: crudOptions.addEditUrl,
+        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionPC)) ,
+        title: "@Model.PopupTitlePC"
+    };
+    crudOptions.dcGridInfo = {
+        addEditUrl: crudOptions.addEditUrl,
+        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionDC)) ,
+        title: "@Model.PopupTitleDC"
+    }; 
     
     $(document).ready(function(){
-        kyt.listType.controller.init();
+        new kyt.ListTypeController(crudOptions);
     });
 </script>
 @MvcHtmlString.Create(StyledButtonFor("addNewTaskType", WebLocalizationKeys.NEW_TASK_TYPE).ToString())

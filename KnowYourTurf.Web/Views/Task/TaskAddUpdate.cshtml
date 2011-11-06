@@ -14,6 +14,18 @@
     var selectedEmployees = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedEmployees)) ;
     var availableEquipment = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableEquipment)) ;
     var selectedEquipment = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedEquipment)) ;
+    var employeeOptions = {
+        availableItems: availableEmployees,
+        selectedItems: selectedEmployees,
+        inputSelector:"#EmployeeInput"
+    };
+    var equipmentOptions = {
+        availableItems: availableEquipment,
+        selectedItems: selectedEquipment,
+        inputSelector:"#EquipmentInput"
+    };
+    extraFormOptions.employeeOptions = employeeOptions;
+    extraFormOptions.equipmentOptions = equipmentOptions;
 </script>
     
         <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
@@ -34,10 +46,12 @@
             @MvcHtmlString.Create(Model.Task.Complete
                              ? Html.ViewFor(x => x.Task.Complete).ToString()
                              : Html.SubmissionFor(x => x.Task.Complete).ToString())
-            
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmployeeInput).InputId("EmployeeInput").HideInput().LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EquipmentInput).InputId("EquipmentInput").HideInput().LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToString())
-
+            <div id="employeeTokenizer">
+                @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmployeeInput).InputId("EmployeeInput").HideInput().LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToString())
+            </div>
+            <div id="equipmentTokenizer">
+                @MvcHtmlString.Create(Html.SubmissionFor(x => x.EquipmentInput).InputId("EquipmentInput").HideInput().LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToString())
+            </div>
             
             @MvcHtmlString.Create(EndForm())
 

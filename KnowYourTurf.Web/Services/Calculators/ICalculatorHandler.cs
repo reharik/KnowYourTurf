@@ -38,7 +38,7 @@ namespace KnowYourTurf.Web.Services
                 CalculatorDisplayName = WebLocalizationKeys.FERTILIZER_NEEDED_DISPLAY.ToString(),
                 CalculatorName = WebLocalizationKeys.FERTILIZER_NEEDED.ToString(),
                 CalculateUrl =UrlContext.GetUrlForAction<CalculatorController>(x=>x.Calculate(null)),
-                SaveJSSuccssCallback = "kyt.calculator.controller.fertilizerNeededSuccess"
+//                SaveJSSuccssCallback = "kyt.calculator.controller.fertilizerNeededSuccess"
             };
         }
 

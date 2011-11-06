@@ -12,22 +12,26 @@
     @MvcHtmlString.Create(CSS("token-input.css").ToString())
 }    
 @section HeaderScripts{
-    @MvcHtmlString.Create(Script("grid.locale-en.js").ToString())
-    @MvcHtmlString.Create(Script("jquery.jqGrid.min.js").ToString())
-    @MvcHtmlString.Create(Script("jquery.kyt.grid.js").ToString())
-    @MvcHtmlString.Create(Script("jquery.tokeninput.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.grid.columnService.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.grid.formatters.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.gridHelpers.js").ToString())
+    @MvcHtmlString.Create(Script("jqueryPlugins/grid.locale-en.js").ToString())
+    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.jqGrid.src.js").ToString())
+    @MvcHtmlString.Create(Script("internalHelpers/jquery.kyt.grid.js").ToString())
+    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.tokeninput.js").ToString()) 
+    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.slideViewerPro.1.5.js").ToString())
+    @MvcHtmlString.Create(Script("internalHelpers/kyt.grid.columnService.js").ToString())
+    @MvcHtmlString.Create(Script("internalHelpers/kyt.grid.formatters.js").ToString())
+    @MvcHtmlString.Create(Script("internalHelpers/kyt.gridHelpers.js").ToString())
     @MvcHtmlString.Create(Script("kyt.popupCrud.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.employeeDashboard.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.baseClasses.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.employeeDashboardController.js").ToString())
     @MvcHtmlString.Create(Script("kyt.DisplayView.js").ToString())
     @MvcHtmlString.Create(Script("kyt.FormView.js").ToString())
     @MvcHtmlString.Create(Script("kyt.GridView.js").ToString())
     @MvcHtmlString.Create(Script("kyt.PopupView.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.TokenView.js").ToString())
     @MvcHtmlString.Create(Script("kyt.popupDisplayModule.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.popupFormModule.js").ToString())}
-
+    @MvcHtmlString.Create(Script("kyt.popupFormModule.js").ToString())
+}
 @section HeaderJavascript{
     var pendingTaskaddEditUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddEditUrl));
     var pendingGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
@@ -39,11 +43,11 @@
             pendingGridDef:pendingGridDef,
             completeGridDef:completeGridDef,
         }
-        kyt.employeeDashboardController(edcOptions).init();
+        new kyt.EmployeeDashboardController(edcOptions);
     });
 }
 
-    <div class="KYT_DashInfo">
+    <div class="KYT_DashInfo" id="masterArea">
         <div class="KYT_section_header" >
             @MvcHtmlString.Create(WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString())
         </div>
@@ -62,9 +66,9 @@
 
     <div class="grid_5">
         @{if (Model.Employee.ImageUrl.IsNotEmpty())
-            {
+          {
                 @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToString());
-            }
+          }
         }
         @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.Address1).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
         @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.Address2).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())

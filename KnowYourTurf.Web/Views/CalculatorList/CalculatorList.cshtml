@@ -6,24 +6,13 @@
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @section HeaderScripts{
     @MvcHtmlString.Create(Script("kyt.calculator.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.CalculatorController.js").ToString())
 }
 @section HeaderJavascript{
-     var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition));
-     var createATaskUrl=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CreateATaskUrl));
-     var successFunction = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SaveJSSuccssCallback));
-     gridContainerMetaData.setSuccessHandler("kyt.calculator.successHandlers.success");
-     gridContainerMetaData.setEditButtonBuilder(function(builder){
-                    builder.addButton("Return",kyt.popupCrud.buttonBuilder().getCancelFunc());
-                    builder.addButton("Calculate",kyt.popupCrud.buttonBuilder().getSaveFunc());
-                    builder.addButton("Create Task",kyt.calculator.handleAddTask.addTask);
-                    return  builder.getButtons();
-                });
-    gridContainerMetaData.addRunAfterRender(function(){$(":button:contains('Create Task')").attr("disabled","disabled").addClass( 'ui-state-disabled' );});
-    var taskMetaData = kyt.popupMetaData.metaData(addUrl ,"#puErrorMessages",successFunction );
-    gridContainerMetaData.addMetaData(taskMetaData);
-    
+     crudOptions.createATaskUrl=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CreateATaskUrl));
+@*    gridContainerMetaData.addRunAfterRender(function(){$(":button:contains('Create Task')").attr("disabled","disabled").addClass( 'ui-state-disabled' );});*@
     $(document).ready(function(){
-        $("#gridContainer").AsGrid(gridDef);
+        new kyt.CalculatorController(crudOptions);
     });
 }
 @MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())

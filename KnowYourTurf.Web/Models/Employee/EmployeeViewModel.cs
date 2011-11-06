@@ -9,8 +9,8 @@ namespace KnowYourTurf.Web.Models
     {
         public bool DeleteImage { get; set; }
         public Employee Employee { get; set; }
-        public IEnumerable<TokenInputDto> AvailableRoles { get; set; }
-        public IEnumerable<TokenInputDto> SelectedRoles { get; set; }
+        public IEnumerable<TokenInputDto> AvailableItems { get; set; }
+        public IEnumerable<TokenInputDto> SelectedItems { get; set; }
         public string RolesInput { get; set; }
     }
     public class AdminViewModel : ViewModel

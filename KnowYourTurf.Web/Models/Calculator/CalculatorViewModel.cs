@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Castle.Components.Validator;
+using KnowYourTurf.Core;
 
 namespace KnowYourTurf.Web.Models
 {
-    public abstract class CalculatorViewModel
+    public abstract class CalculatorViewModel:ViewModel
     {
-        public long EntityId { get; set; }
-        public long ParentId { get; set; }
-        public long RootId { get; set; }
         public string CalculateUrl { get; set; }
         public string CreateATaskUrl { get; set; }
-        public string SaveJSSuccssCallback { get; set; }
         public string CalculatorDisplayName { get; set; }
         public string CalculatorName { get; set; }
         public bool Success { get { return true; } }

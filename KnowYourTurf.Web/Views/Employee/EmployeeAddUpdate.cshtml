@@ -9,10 +9,16 @@
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
-<script>
-    var availableRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableRoles)) ;
-    var selectedRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedRoles)) ;
-    
+@section HeaderJavascript{
+    var availableRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableItems)) ;
+    var selectedRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedItems)) ;
+    var rolesOptions = {
+        availableItems: availableRoles,
+        selectedItems: selectedRoles,
+        inputSelector:"#RolesInput",
+        name:"Roles"
+    };
+    extraFormOptions.rolesOptions = rolesOptions;
     $(document).ready(function () {
         if ('@Model.Employee.ImageUrl') {
             $("#showImage").show();
@@ -28,7 +34,7 @@
         });
         $("#UserRole").asSelectboxPicker();
     });
-</script>
+}
         
         <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
 
