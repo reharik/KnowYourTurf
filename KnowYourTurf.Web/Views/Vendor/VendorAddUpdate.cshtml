@@ -9,12 +9,26 @@
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
 <script>
-    var availableChemicals = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableChemicals)) ;
-    var selectedChemicals = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedChemicals)) ;
-    var availableFertilizers= @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableFertilizers))
-    var selectedFertilizers = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedFertilizers))
-     var availableMaterials = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableMaterials))
-    var selectedMaterials = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedMaterials))
+    var chemicalOptions = {
+        availableItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableChemicals)),
+        selectedItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedChemicals)) ,
+        inputSelector:"#ChemicalInput"
+    };
+    extraFormOptions.chemicalOptions = chemicalOptions;
+
+    var fertilizerOptions = {
+        availableItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableFertilizers)),
+        selectedItems:  @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedFertilizers)) ,
+        inputSelector:"#FertilizerInput"
+    };
+    extraFormOptions.fertilizerOptions= fertilizerOptions;
+
+    var materialOptions= {
+        availableItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableMaterials)),
+        selectedItems:  @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedMaterials)) ,
+        inputSelector:"#MaterialInput"
+    };
+    extraFormOptions.materialOptions = materialOptions;
 </script>
 
         <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   

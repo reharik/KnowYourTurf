@@ -4,21 +4,10 @@
 @using HtmlTags
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
-@MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
+@MvcHtmlString.Create(Script("kyt.VendorController.js").ToString())
 @section HeaderJavascript{
-    var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
     $(document).ready(function(){
-        $("#gridContainer").AsGrid(gridDef);
-        gridContainerMetaData.addRunAfterRender(function() {
-            $("#ChemicalInput").tokenInput(availableChemicals?availableChemicals:{},{prePopulate: selectedChemicals,
-                internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
-            $("#FertilizerInput").tokenInput(availableFertilizers?availableFertilizers:{},{prePopulate: selectedFertilizers,
-                internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
-            $("#MaterialInput").tokenInput(availableMaterials?availableMaterials:{},{prePopulate: selectedMaterials,
-                internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
-            $("#SeedInput").tokenInput(availableSeeds?availableSeeds:{},{prePopulate: selectedSeeds,
-                internalTokenMarkup:function(item){return "<p><a class='selectedItem'>"+ item.name +"</a></p>";}});
-        });
+        new kyt.VendorController(crudOptions);
     });
 }
 <div class="KYT_gridbreak">

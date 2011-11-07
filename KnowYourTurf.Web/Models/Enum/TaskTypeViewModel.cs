@@ -12,4 +12,9 @@ namespace KnowYourTurf.Web.Models
     {
         public EventType ListType { get; set; }
     }
+
+    public class TaskTypeViewModel : ViewModel
+    {
+        public TaskType ListType { get; set; }
+    }
 }

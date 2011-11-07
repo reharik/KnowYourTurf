@@ -499,12 +499,6 @@
     <Content Include="Views\Shared\_SetupLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\TaskType\Display.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\TaskType\AddUpdate.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\EmployeeDashboard\EmployeeDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -635,6 +629,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AdminDashboard\AdminDashboard.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TaskType\AddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TaskType\Display.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

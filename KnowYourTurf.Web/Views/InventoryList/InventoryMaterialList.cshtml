@@ -5,14 +5,12 @@
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("kyt.InventoryController.js").ToString())
+}
 <script>
-     var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
-    gridContainerMetaData.setDisplayButtonBuilder(function(builder){
-                        builder.addButton("Return", builder.getCancelFunc());
-                        return  builder.getButtons();
-                    });
-    $(document).ready(function(){
-        $("#gridContainer").AsGrid(gridDef,{multiselect:false});
+    $(document).ready(function () {
+        new kyt.InventoryController(crudOptions);
     });
 </script>
 @MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
