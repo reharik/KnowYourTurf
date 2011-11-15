@@ -8,3 +8,4 @@ _ReSharper.*
 *.resharper
 *.vspscc
 *.vssscc
+.idea
