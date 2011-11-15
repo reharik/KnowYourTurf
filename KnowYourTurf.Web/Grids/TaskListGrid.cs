@@ -16,7 +16,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, Task> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Task> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Task> items, string gridName = "");
     }
 
     public class TaskListGrid : Grid<Task>, ITaskListGrid

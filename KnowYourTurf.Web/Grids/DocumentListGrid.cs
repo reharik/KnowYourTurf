@@ -15,7 +15,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn,Document> modification);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Document> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Document> items, string gridName = "");
     }
 
     public class DocumentListGrid : Grid<Document>, IDocumentListGrid
@@ -30,16 +30,16 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Document> BuildGrid()
         {
             GridBuilder.ImageButtonColumn()
-               .ForAction<DocumentController>(x => x.Delete(null),"documentGrid")
+               .ForAction<DocumentController>(x => x.Delete(null))
                .ToPerformAction(ColumnAction.Delete)
                .ImageName("delete.png")
                .ToolTip(WebLocalizationKeys.DELETE_ITEM);
             GridBuilder.ImageButtonColumn()
-                .ForAction<DocumentController>(x => x.AddUpdate(null), "documentGrid")
+                .ForAction<DocumentController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.Edit)
                 .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
-            GridBuilder.LinkColumnFor(x => x.Name, "documentGrid")
+            GridBuilder.LinkColumnFor(x => x.Name)
                 .ForAction<DocumentController>(x => x.Display(null))
                 .ToPerformAction(ColumnAction.Display)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);

@@ -64,7 +64,7 @@ namespace KnowYourTurf.Core.Html.Grid
             };
         }
 
-        public GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items, string gridName = "gridContainer")
+        public GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items, string gridName = "")
         {
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);

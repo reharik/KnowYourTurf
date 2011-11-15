@@ -15,7 +15,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, VendorContact> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<VendorContact> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<VendorContact> items, string gridName = "");
     }
 
     public class VendorContactListGrid : Grid<VendorContact>, IVendorContactListGrid

@@ -30,7 +30,7 @@ namespace KnowYourTurf.Core.Html.Grid
             Properties[GridColumnProperties.width.ToString()] = width;
             return this;
         }
-        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService)
+        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "")
         {
             var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);

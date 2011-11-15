@@ -16,7 +16,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, Chemical> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Chemical> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Chemical> items, string gridName = "");
     }
 
     public class ChemicalListGrid : Grid<Chemical>, IChemicalListGrid

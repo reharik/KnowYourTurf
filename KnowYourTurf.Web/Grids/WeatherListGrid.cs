@@ -16,7 +16,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, Weather> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Weather> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Weather> items, string gridName = "");
     }
 
     public class WeatherListGrid : Grid<Weather>, IWeatherListGrid

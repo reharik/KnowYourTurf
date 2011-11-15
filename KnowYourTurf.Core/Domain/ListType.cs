@@ -16,6 +16,7 @@ namespace KnowYourTurf.Web.Controllers
     }
     public class TaskType : ListType
     {
+        public virtual string TaskColor { get; set; }
     }
     public class EventType : ListType
     {

@@ -15,7 +15,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, Fertilizer> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Fertilizer> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Fertilizer> items, string gridName = "");
     }
 
     public class FertilizerListGrid : Grid<Fertilizer>, IFertilizerListGrid
@@ -55,7 +55,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn,Fertilizer> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Fertilizer> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Fertilizer> items, string gridName = "");
     }
 
     public class POFertilizerListGrid : Grid<Fertilizer>, IPOFertilizerListGrid

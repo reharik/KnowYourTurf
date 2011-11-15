@@ -79,7 +79,7 @@ namespace KnowYourTurf.Web.Controllers
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters,
                                                                    x => x.Field.EntityId == input.ParentId && x.Complete);
             var gridItemsViewModel = _completedTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items,
-                                                                              "completeGridContainer");
+                                                                              "completeTaskGrid");
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 
@@ -89,7 +89,7 @@ namespace KnowYourTurf.Web.Controllers
                                                                    x =>
                                                                    x.Field.EntityId == input.ParentId && !x.Complete);
             var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items,
-                                                                            "pendingGridContainer");
+                                                                            "pendingTaskGrid");
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 

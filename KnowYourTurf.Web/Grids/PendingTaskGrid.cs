@@ -15,7 +15,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, Task> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Task> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Task> items, string gridName = "");
     }
 
     public class PendingTaskGrid : Grid<Task>, IPendingTaskGrid
@@ -30,16 +30,16 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Task> BuildGrid()
         {
             GridBuilder.ImageButtonColumn()
-               .ForAction<TaskController>(x => x.Delete(null), "pendingTaskGrid")
+               .ForAction<TaskController>(x => x.Delete(null))
                .ToPerformAction(ColumnAction.Delete)
                 .ImageName("delete.png")
                .ToolTip(WebLocalizationKeys.DELETE_ITEM);
             GridBuilder.ImageButtonColumn()
-                .ForAction<TaskController>(x => x.AddEdit(null), "pendingTaskGrid")
+                .ForAction<TaskController>(x => x.AddEdit(null))
                 .ToPerformAction(ColumnAction.Edit)
                 .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
-            GridBuilder.LinkColumnFor(x => x.TaskType.Name, "pendingTaskGrid")
+            GridBuilder.LinkColumnFor(x => x.TaskType.Name)
                 .ForAction<TaskController>(x => x.Display(null))
                 .ToPerformAction(ColumnAction.Display)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);

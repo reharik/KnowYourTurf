@@ -24,9 +24,9 @@ namespace KnowYourTurf.Core.Html.Grid
         private string _action;
         private string _gridName;
 
-        public LinkColumn(Expression<Func<ENTITY, object>> expression, string gridName = null)
+        public LinkColumn(Expression<Func<ENTITY, object>> expression, string gridName = "")
         {
-            _gridName = gridName.IsNotEmpty() ? gridName : string.Empty;
+            _gridName = gridName;
             _divCssClasses = new List<string>();
             propertyAccessor = ReflectionHelper.GetAccessor(expression);
             Properties[GridColumnProperties.name.ToString()] = LocalizationManager.GetLocalString(expression);
@@ -74,8 +74,10 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService)
+        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "")
         {
+            // if a name is given in the controller it overrides the name given in the grid declaration
+            if (gridName.IsNotEmpty()) _gridName = gridName;
             var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
             if (value.IsEmpty()) return null;

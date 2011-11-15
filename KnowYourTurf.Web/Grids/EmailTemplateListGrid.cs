@@ -15,7 +15,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, EmailTemplate> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<EmailTemplate> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<EmailTemplate> items, string gridName = "");
     }
 
     public class EmailTemplateListGrid : Grid<EmailTemplate>, IEmailTemplateListGrid

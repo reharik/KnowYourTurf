@@ -15,7 +15,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn,Photo> modification);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Photo> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Photo> items, string gridName = "");
     }
 
     public class PhotoListGrid : Grid<Photo>, IPhotoListGrid
@@ -30,12 +30,12 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Photo> BuildGrid()
         {
             GridBuilder.ImageButtonColumn()
-               .ForAction<PhotoController>(x => x.Delete(null),"photoGrid")
+               .ForAction<PhotoController>(x => x.Delete(null))
                .ToPerformAction(ColumnAction.Delete)
                .ImageName("delete.png")
                .ToolTip(WebLocalizationKeys.DELETE_ITEM);
             GridBuilder.ImageButtonColumn()
-                .ForAction<PhotoController>(x => x.AddUpdate(null), "photoGrid")
+                .ForAction<PhotoController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.Edit)
                 .ImageName("KYTedit.png")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);

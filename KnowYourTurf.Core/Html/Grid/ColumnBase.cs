@@ -14,7 +14,7 @@ namespace KnowYourTurf.Core.Html.Grid
         IDictionary<string, string> Properties { get; set; }
         string Operation { get; set; }
         int ColumnIndex { get; set; }
-        string BuildColumn(object item, User user, IAuthorizationService _authorizationService);
+        string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "");
     }
 
     public class ColumnBase<ENTITY> : IGridColumn, IEquatable<ColumnBase<ENTITY>> where ENTITY : IGridEnabledClass
@@ -32,7 +32,7 @@ namespace KnowYourTurf.Core.Html.Grid
 
         public int ColumnIndex { get; set; }
 
-        public virtual string BuildColumn(object item, User user, IAuthorizationService _authorizationService) 
+        public virtual string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "") 
         {
             return FormatValue((ENTITY)item, user, _authorizationService);
         }

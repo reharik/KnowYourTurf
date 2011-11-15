@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, BaseProduct> modification);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<BaseProduct> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<BaseProduct> items, string gridName = "");
     }
 
     public class PurchaseOrderSelectorGrid : Grid<BaseProduct>, IPurchaseOrderSelectorGrid

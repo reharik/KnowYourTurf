@@ -15,7 +15,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, Task> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Task> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Task> items, string gridName = "");
     }
 
     public class CompletedTaskGrid : Grid<Task>, ICompletedTaskGrid
@@ -30,7 +30,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Task> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.TaskType.Name, "completeTaskGrid")
+            GridBuilder.LinkColumnFor(x => x.TaskType.Name)
                 .ForAction<TaskController>(x => x.Display(null))
                 .ToPerformAction(ColumnAction.Display)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);

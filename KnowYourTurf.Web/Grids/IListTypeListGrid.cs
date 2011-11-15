@@ -14,14 +14,14 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, LISTTYPE> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<LISTTYPE> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<LISTTYPE> items, string gridName = "");
     }
 
     public interface IEventTypeListGrid
     {
         void AddColumnModifications(Action<IGridColumn, EventType> modification);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<EventType> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<EventType> items, string gridName = "");
     }
 
     public class EventTypeListGrid : Grid<EventType>, IListTypeListGrid<EventType>, IEventTypeListGrid
@@ -53,7 +53,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, TaskType> modification);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<TaskType> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<TaskType> items, string gridName = "");
     }
 
     public class TaskTypeListGrid : Grid<TaskType>, IListTypeListGrid<TaskType>, ITaskTypeListGrid
@@ -85,7 +85,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, PhotoCategory> modification);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<PhotoCategory> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<PhotoCategory> items, string gridName = "");
     }
 
     public class PhotoCategoryListGrid : Grid<PhotoCategory>, IListTypeListGrid<PhotoCategory>, IPhotoCategoryListGrid
@@ -117,7 +117,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, DocumentCategory> modification);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<DocumentCategory> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<DocumentCategory> items, string gridName = "");
     }
 
     public class DocumentCategoryListGrid : Grid<DocumentCategory>, IListTypeListGrid<DocumentCategory>, IDocumentCategoryListGrid

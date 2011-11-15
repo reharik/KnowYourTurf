@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn, PurchaseOrderLineItem> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<PurchaseOrderLineItem> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<PurchaseOrderLineItem> items, string gridName = "");
     }
 
     public class PurchaseOrderLineItemGrid : Grid<PurchaseOrderLineItem>, IPurchaseOrderLineItemGrid
@@ -55,7 +55,7 @@ namespace KnowYourTurf.Web.Grids
     {
         void AddColumnModifications(Action<IGridColumn,PurchaseOrderLineItem> modifications);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<PurchaseOrderLineItem> items, string gridName = "gridContainer");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<PurchaseOrderLineItem> items, string gridName = "");
     }
 
     public class ReceivePurchaseOrderLineItemGrid : Grid<PurchaseOrderLineItem>, IReceivePurchaseOrderLineItemGrid 

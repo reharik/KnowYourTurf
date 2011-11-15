@@ -21,9 +21,9 @@ namespace KnowYourTurf.Core.Html.Grid
         private string _jsonData;
         private string _gridName;
 
-        public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, string gridName = null) where CONTROLLER : Controller
+        public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, string gridName = "") where CONTROLLER : Controller
         {
-            _gridName = gridName.IsNotEmpty()?gridName:string.Empty;
+            _gridName = gridName;
             var actionUrl = UrlContext.GetUrlForAction(expression);
             _actionUrl = actionUrl;
             return this;
@@ -35,8 +35,10 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService)
+        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "")
         {
+            // if a name is given in the controller it overrides the name given in the grid declaration
+            if (gridName.IsNotEmpty()) _gridName = gridName;
             var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
             if (value.IsEmpty()) return null;

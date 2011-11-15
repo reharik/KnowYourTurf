@@ -8,11 +8,12 @@
 @section HeaderScripts{
     @MvcHtmlString.Create(Script("kyt.InventoryController.js").ToString())
 }
-<script>
+@section HeaderJavascript{
+
     $(document).ready(function () {
         new kyt.InventoryController(crudOptions);
     });
-</script>
+}
 @MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
 <table id="gridContainer" class="scroll"></table>
 <div id="pager" class="scroll" style="text-align:center;"></div>
