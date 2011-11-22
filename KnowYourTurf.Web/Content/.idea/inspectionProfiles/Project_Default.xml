@@ -1,0 +1,38 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0" is_locked="false">
+    <option name="myName" value="Project Default" />
+    <option name="myLocal" value="false" />
+    <inspection_tool class="CheckDtdRefs" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="CheckTagEmptyBody" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CheckXmlFileWithXercesValidator" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="CucumberMissedExamples" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="CucumberUndefinedStep" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="GemInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RailsI18nInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RailsParamDefResolve" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RubyArgCount" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="RubyArgumentParentheses" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RubyCodeStyle" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RubyConstReAssignment" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="RubyConstant" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RubyDeadCode" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RubyDuckType" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RubyDynamicConstAssignment" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="RubyJumpError" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RubyResolve" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="warnImplicitResults" value="false" />
+    </inspection_tool>
+    <inspection_tool class="RubyScope" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RubyShouldaUnsupportedTestFile" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RubyUnusedLocalVariable" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RubyWrongHash" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+      <option name="processCode" value="true" />
+      <option name="processLiterals" value="true" />
+      <option name="processComments" value="true" />
+    </inspection_tool>
+    <inspection_tool class="XmlDuplicatedId" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="XmlUnboundNsPrefix" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="XmlWrongRootElement" enabled="false" level="ERROR" enabled_by_default="false" />
+  </profile>
+</component>
