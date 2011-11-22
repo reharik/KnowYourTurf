@@ -33,30 +33,33 @@
     });
  
 }
-<div class="KYT_section_header">
-    @MvcHtmlString.Create(WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString())
-</div>
+<div id="masterArea">
 
-<div id="errorMessages" class="errorMessages KYT_errorMessages" ><ul></ul></div>
-<input type="hidden" id="vendorId" value="@Model.VendorId"/>
-<input type="hidden" id="poId" value="@Model.PurchaseOrder.EntityId"/>
-<div style="display:inline-block;">
-    @MvcHtmlString.Create(Html.HiddenFor(x=>x.PurchaseOrder.EntityId).ToString())
-    @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToString())
-    @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).RootId("viewVendor").ToString())
-</div>
-    @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrder.Vendor).InputId("vendor").RootId("editVendor").ToString())
+    <div class="KYT_section_header">
+        @MvcHtmlString.Create(WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString())
+    </div>
 
-<div id="productGridArea">
-    <h2>@WebLocalizationKeys.PRODUCTS.ToString()</h2>
-    <table id="productGrid" class="scroll"></table>
-    <div id="productPager" class="scroll" style="text-align:center;"></div>
-</div>
+    <div id="errorMessages" class="errorMessages KYT_errorMessages" ><ul></ul></div>
+    <input type="hidden" id="vendorId" value="@Model.VendorId"/>
+    <input type="hidden" id="poId" value="@Model.PurchaseOrder.EntityId"/>
+    <div style="display:inline-block;">
+        @MvcHtmlString.Create(Html.HiddenFor(x=>x.PurchaseOrder.EntityId).ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).RootId("viewVendor").ToString())
+    </div>
+        @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrder.Vendor).InputId("vendor").RootId("editVendor").ToString())
 
-<div id="poliGridArea">
-    <h2> @WebLocalizationKeys.LINE_ITEMS.ToString() </h2>
-    <table id="poliGrid" class="scroll"></table>
-    <div id="poliPager" class="scroll" style="text-align:center;"></div>
+    <div id="productGridArea">
+        <h2>@WebLocalizationKeys.PRODUCTS.ToString()</h2>
+        <table id="productGrid" class="scroll"></table>
+        <div id="productPager" class="scroll" style="text-align:center;"></div>
+    </div>
+
+    <div id="poliGridArea">
+        <h2> @WebLocalizationKeys.LINE_ITEMS.ToString() </h2>
+        <table id="poliGrid" class="scroll"></table>
+        <div id="poliPager" class="scroll" style="text-align:center;"></div>
+    </div>
+    @MvcHtmlString.Create(StyledButtonFor("commit",WebLocalizationKeys.COMMIT).ToString())
+    @MvcHtmlString.Create(StyledButtonFor("return", WebLocalizationKeys.RETURN).ToString())
 </div>
-@MvcHtmlString.Create(StyledButtonFor("commit",WebLocalizationKeys.COMMIT).ToString())
-@MvcHtmlString.Create(StyledButtonFor("return", WebLocalizationKeys.RETURN).ToString())
