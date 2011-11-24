@@ -18,7 +18,6 @@ kyt.PopupDisplayModule = kyt.Module.extend({
         $.extend(this,this.defaults());
         this.registerSubscriptions();
         this.views.displayView = new kyt.AjaxDisplayView(this.options);
-        this.views.displayView.render();
     },
 
     registerSubscriptions: function(){
@@ -38,7 +37,7 @@ kyt.PopupDisplayModule = kyt.Module.extend({
             title:formOptions.title
         };
         this.views["popupView"] = new kyt.PopupView(popupOptions);
-    },
+    }
 
 //    //from documentPopup
 //    formCancel:function(){

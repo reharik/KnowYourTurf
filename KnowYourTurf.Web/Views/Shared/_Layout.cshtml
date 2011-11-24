@@ -106,10 +106,12 @@
                     @Html.Action("KnowYourTurfMenu", "Orthogonal")
                 </div>
                 <div class="grid_10">
-                    <div id="errorMessages" class="errorMessages KYT_errorMessages" ><ul></ul></div>   
-                    @RenderSection("SubHeader", false)
-                    @RenderBody()
-                </div>         
+                    <div id="masterArea">
+                        <div id="errorMessages" class="errorMessages KYT_errorMessages" ><ul></ul></div>   
+                        @RenderSection("SubHeader", false)
+                        @RenderBody()
+                    </div>   
+                </div>                      
             <div class="grid_12" id="footer">
                 <div class="powered"><p>© Copyright 2011 KYTsoftware, LLC.  All Rights Reserved</p></div>
             </div>

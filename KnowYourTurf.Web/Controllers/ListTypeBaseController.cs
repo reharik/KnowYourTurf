@@ -23,9 +23,9 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IListTypeListGrid<LISTTYPE> _listTypeListGrid;
 
         public ListTypeBaseController(IDynamicExpressionQuery dynamicExpressionQuery,
-                              IRepository repository,
-                              ISaveEntityService saveEntityService,
-                              IListTypeListGrid<LISTTYPE> listTypeListGrid) 
+                                      IRepository repository,
+                                      ISaveEntityService saveEntityService,
+                                      IListTypeListGrid<LISTTYPE> listTypeListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _repository = repository;
@@ -48,11 +48,12 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult ListTypes(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<LISTTYPE>(input.filters);
-            var gridItemsViewModel = _listTypeListGrid.GetGridItemsViewModel(input.PageSortFilter, items,typeof(LISTTYPE).Name+"Grid");
+            var gridItemsViewModel = _listTypeListGrid.GetGridItemsViewModel(input.PageSortFilter, items,
+                                                                             typeof (LISTTYPE).Name + "Grid");
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Display(ViewModel input)
+        public virtual ActionResult Display(ViewModel input)
         {
             var listType = _repository.Find<LISTTYPE>(input.EntityId);
             var model = new ListTypeViewModel
@@ -72,7 +73,7 @@ namespace KnowYourTurf.Web.Controllers
             listType.Status = input.ListType.Status;
             var crudManager = _saveEntityService.ProcessSave(listType);
             var notification = crudManager.Finish();
-            notification.Variable = typeof(LISTTYPE).Name;
+            notification.Variable = typeof (LISTTYPE).Name;
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
     }
@@ -83,10 +84,11 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISaveEntityService _saveEntityService;
 
         public EventTypeController(IDynamicExpressionQuery dynamicExpressionQuery,
-                              IRepository repository,
-                              ISaveEntityService saveEntityService,
-                              IEventTypeListGrid listTypeListGrid)
-            : base(dynamicExpressionQuery, repository, saveEntityService,(IListTypeListGrid<EventType>)listTypeListGrid)
+                                   IRepository repository,
+                                   ISaveEntityService saveEntityService,
+                                   IEventTypeListGrid listTypeListGrid)
+            : base(
+                dynamicExpressionQuery, repository, saveEntityService, (IListTypeListGrid<EventType>) listTypeListGrid)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
@@ -98,9 +100,22 @@ namespace KnowYourTurf.Web.Controllers
                                ? _repository.Find<EventType>(input.EntityId)
                                : Activator.CreateInstance<EventType>();
             var model = new EventTypeViewModel
-            {
-                ListType = listType,
-            };
+                            {
+                                ListType = listType,
+                            };
+            return PartialView(model);
+        }
+
+        public override ActionResult Display(ViewModel input)
+        {
+            var listType = _repository.Find<EventType>(input.EntityId);
+            var model = new ListTypeViewModel
+                            {
+                                ListType = listType,
+                                AddEditUrl =
+                                    UrlContext.GetUrlForAction<EventTypeController>(x => x.AddUpdate(null)) + "/" +
+                                    input.EntityId
+                            };
             return PartialView(model);
         }
 
@@ -112,42 +127,100 @@ namespace KnowYourTurf.Web.Controllers
             listType.Description = input.ListType.Description;
             listType.Name = input.ListType.Name;
             listType.Status = input.ListType.Status;
-            listType.EventColor= input.ListType.EventColor;
+            listType.EventColor = input.ListType.EventColor;
             var crudManager = _saveEntityService.ProcessSave(listType);
             var notification = crudManager.Finish();
-            notification.Variable = typeof(EventType).Name;
+            notification.Variable = typeof (EventType).Name;
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
     }
+
     public class TaskTypeController : ListTypeBaseController<TaskType>
     {
+        private readonly IRepository _repository;
+
         public TaskTypeController(IDynamicExpressionQuery dynamicExpressionQuery,
-                              IRepository repository,
-                              ISaveEntityService saveEntityService,
-                              ITaskTypeListGrid listTypeListGrid)
-            : base(dynamicExpressionQuery, repository, saveEntityService, (IListTypeListGrid<TaskType>)listTypeListGrid)
+                                  IRepository repository,
+                                  ISaveEntityService saveEntityService,
+                                  ITaskTypeListGrid listTypeListGrid)
+            : base(dynamicExpressionQuery, repository, saveEntityService, (IListTypeListGrid<TaskType>) listTypeListGrid
+                )
         {
+            _repository = repository;
         }
+
+        public override ActionResult Display(ViewModel input)
+        {
+            var listType = _repository.Find<TaskType>(input.EntityId);
+            var model = new ListTypeViewModel
+                            {
+                                ListType = listType,
+                                AddEditUrl =
+                                    UrlContext.GetUrlForAction<TaskTypeController>(x => x.AddUpdate(null)) + "/" +
+                                    input.EntityId
+                            };
+            return PartialView(model);
+        }
+
+
     }
+
     public class DocumentCategoryController : ListTypeBaseController<DocumentCategory>
     {
+        private readonly IRepository _repository;
+
         public DocumentCategoryController(IDynamicExpressionQuery dynamicExpressionQuery,
-                              IRepository repository,
-                              ISaveEntityService saveEntityService,
-                              IDocumentCategoryListGrid listTypeListGrid)
-            : base(dynamicExpressionQuery, repository, saveEntityService, (IListTypeListGrid<DocumentCategory>)listTypeListGrid)
+                                          IRepository repository,
+                                          ISaveEntityService saveEntityService,
+                                          IDocumentCategoryListGrid listTypeListGrid)
+            : base(
+                dynamicExpressionQuery, repository, saveEntityService,
+                (IListTypeListGrid<DocumentCategory>) listTypeListGrid)
         {
+            _repository = repository;
+        }
+
+        public override ActionResult Display(ViewModel input)
+        {
+            var listType = _repository.Find<DocumentCategory>(input.EntityId);
+            var model = new ListTypeViewModel
+                            {
+                                ListType = listType,
+                                AddEditUrl =
+                                    UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.AddUpdate(null)) + "/" +
+                                    input.EntityId
+                            };
+            return PartialView(model);
         }
     }
+
     public class PhotoCategoryController : ListTypeBaseController<PhotoCategory>
     {
+        private readonly IRepository _repository;
+
         public PhotoCategoryController(IDynamicExpressionQuery dynamicExpressionQuery,
-                              IRepository repository,
-                              ISaveEntityService saveEntityService,
-                              IPhotoCategoryListGrid listTypeListGrid)
-            : base(dynamicExpressionQuery, repository, saveEntityService, (IListTypeListGrid<PhotoCategory>)listTypeListGrid)
+                                       IRepository repository,
+                                       ISaveEntityService saveEntityService,
+                                       IPhotoCategoryListGrid listTypeListGrid)
+            : base(
+                dynamicExpressionQuery, repository, saveEntityService,
+                (IListTypeListGrid<PhotoCategory>) listTypeListGrid)
         {
+            _repository = repository;
+        }
+
+        public override ActionResult Display(ViewModel input)
+        {
+            var listType = _repository.Find<PhotoCategory>(input.EntityId);
+            var model = new ListTypeViewModel
+                            {
+                                ListType = listType,
+                                AddEditUrl =
+                                    UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.AddUpdate(null)) + "/" +
+                                    input.EntityId
+                            };
+            return PartialView(model);
         }
     }
 }

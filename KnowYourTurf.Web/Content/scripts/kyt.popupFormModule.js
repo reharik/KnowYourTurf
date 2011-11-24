@@ -41,13 +41,11 @@ kyt.PopupFormModule = kyt.Module.extend({
         $.publish("/popupFormModule_"+this.id+"/popupLoaded",[formOptions]);
     },
 
-    //from documentPopup
     formSave:function(){
         this.views["formView"].saveItem();
     },
     formCancel:function(){
         $.publish("/form_"+ this.id +"/cancel",[this.id]);
         this.views["popupView"].close();
-        this.views["formView"].remove();
     }
 });

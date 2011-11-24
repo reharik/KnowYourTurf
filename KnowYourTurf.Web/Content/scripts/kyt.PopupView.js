@@ -46,10 +46,11 @@ kyt.popupButtonBuilder = (function(){
             $.publish("/popup_"+id+"/save",[id]);
         };
         var editFunc = function(e) {
+                            var url = $("#AddEditUrl",this).val();
                             $(this).dialog("close");
                             $(this).remove();
                             $(".ui-dialog").remove();
-                            $.publish("/popup_"+id+"/edit",[$("#AddEditUrl",this).val(),id]);
+            $.publish("/popup_"+id+"/edit",[url,id]);
         };
         var cancelFunc = function(){
                             $.publish("/popup_"+id+"/cancel",[id]);

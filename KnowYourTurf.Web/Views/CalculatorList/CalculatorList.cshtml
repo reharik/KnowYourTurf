@@ -10,7 +10,6 @@
 }
 @section HeaderJavascript{
      crudOptions.createATaskUrl=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CreateATaskUrl));
-@*    gridContainerMetaData.addRunAfterRender(function(){$(":button:contains('Create Task')").attr("disabled","disabled").addClass( 'ui-state-disabled' );});*@
     $(document).ready(function(){
         new kyt.CalculatorController(crudOptions);
     });

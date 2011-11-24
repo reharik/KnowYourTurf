@@ -5,14 +5,13 @@
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @section HeaderScripts{
-    @MvcHtmlString.Create(Script("kyt.purchaseOrder.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.PurchaseOrderCommitController.js").ToString())
 }
 @section HeaderJavascript{
-     var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition))
-     var closePOUrl = '@MvcHtmlString.Create(Model.ClosePOUrl)';
+     crudOptions.closePOUrl = '@MvcHtmlString.Create(Model.ClosePOUrl)';
+
     $(document).ready(function(){
-        $("#gridContainer").AsGrid(gridDef);
-        $("#savePO").click(function(){kyt.purchaseOrder.controller.closePO($("#PurchaseOrder_EntityId").val())});
+        new kyt.PurchaseOrderCommitController(crudOptions);
     });
 }
 

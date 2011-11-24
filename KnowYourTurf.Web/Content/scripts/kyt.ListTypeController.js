@@ -15,25 +15,25 @@ kyt.ListTypeController = kyt.CrudController.extend({
     }, kyt.CrudController.prototype.events),
     additionalSubscriptions:function(){
         // from etgrid
-        $.subscribe('/grid_eventTypeGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_eventTypeGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_eventTypeGrid/Display',$.proxy(this.displayItem,this), this.cid);
-        $.subscribe('/grid_eventTypeGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
+        $.subscribe('/grid_EventTypeGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/grid_EventTypeGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/grid_EventTypeGrid/Display',$.proxy(this.displayItem,this), this.cid);
+        $.subscribe('/grid_EventTypeGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
         // from ttgrid
-        $.subscribe('/grid_taskTypeGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_taskTypeGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_taskTypeGrid/Display',$.proxy(this.displayItem,this), this.cid);
-        $.subscribe('/grid_taskTypeGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
+        $.subscribe('/grid_TaskTypeGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/grid_TaskTypeGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/grid_TaskTypeGrid/Display',$.proxy(this.displayItem,this), this.cid);
+        $.subscribe('/grid_TaskTypeGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
         // from dcgrid
-        $.subscribe('/grid_documentCategoryGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_documentCategoryGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_documentCategoryGrid/Display',$.proxy(this.displayItem,this), this.cid);
-        $.subscribe('/grid_documentCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
+        $.subscribe('/grid_DocumentCategoryGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/grid_DocumentCategoryGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/grid_DocumentCategoryGrid/Display',$.proxy(this.displayItem,this), this.cid);
+        $.subscribe('/grid_DocumentCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
         // from pcgrid
-        $.subscribe('/grid_photoCategoryGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_photoCategoryGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_photoCategoryGrid/Display',$.proxy(this.displayItem,this), this.cid);
-        $.subscribe('/grid_photoCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
+        $.subscribe('/grid_PhotoCategoryGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/grid_PhotoCategoryGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/grid_PhotoCategoryGrid/Display',$.proxy(this.displayItem,this), this.cid);
+        $.subscribe('/grid_PhotoCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
     },
     initialize:function(){
         this.el = ("#masterArea");

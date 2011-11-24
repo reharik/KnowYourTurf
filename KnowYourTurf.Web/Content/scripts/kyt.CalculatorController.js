@@ -30,7 +30,7 @@ kyt.CalculatorController = kyt.CrudController.extend({
             buttons: builder.getButtons(),
             successHandler:kyt.calculator.successHandler
         };
-        this.modules.calcPopupForm= new kyt.PopupFormModule(moduleOptions);
+        this.modules.popupForm= new kyt.PopupFormModule(moduleOptions);
     },
 
     additionalSubscriptions:function(){
@@ -42,7 +42,7 @@ kyt.CalculatorController = kyt.CrudController.extend({
     addTask:function(){
         var calculatorName = $("#CalculatorName").val();
         var data = this[calculatorName]();
-        this.modules.calcPopupForm.destroy();
+        this.modules.popupForm.destroy();
         $("#masterArea").after("<div id='dialogHolder'/>");
         var moduleOptions = {
             id:"taskModule",
