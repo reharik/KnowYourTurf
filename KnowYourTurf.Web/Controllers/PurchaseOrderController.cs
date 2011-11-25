@@ -22,13 +22,13 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISaveEntityService _saveEntityService;
         private readonly ISelectListItemService _selectListItemService;
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IPurchaseOrderSelectorGrid _purchaseOrderSelectorGrid;
-        private readonly IPurchaseOrderLineItemGrid _purchaseOrderLineItemGrid;
+        private readonly IEntityListGrid<BaseProduct> _purchaseOrderSelectorGrid;
+        private readonly IEntityListGrid<PurchaseOrderLineItem> _purchaseOrderLineItemGrid;
         private readonly IPurchaseOrderLineItemService _purchaseOrderLineItemService;
 
         public PurchaseOrderController(IRepository repository, ISaveEntityService saveEntityService, ISelectListItemService selectListItemService, IDynamicExpressionQuery dynamicExpressionQuery,
-            IPurchaseOrderSelectorGrid purchaseOrderSelectorGrid,
-            IPurchaseOrderLineItemGrid purchaseOrderLineItemGrid,
+            IEntityListGrid<BaseProduct> purchaseOrderSelectorGrid,
+            IEntityListGrid<PurchaseOrderLineItem> purchaseOrderLineItemGrid,
             IPurchaseOrderLineItemService purchaseOrderLineItemService
             )
         {

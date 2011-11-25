@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
@@ -8,17 +6,17 @@ using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Models;
+using KnowYourTurf.Web.Grids;
 
 namespace KnowYourTurf.Web.Controllers
 {
     public class PurchaseOrderListController : AdminControllerBase
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IPurchaseOrderListGrid _purchaseOrderListGrid;
+       private readonly IEntityListGrid<PurchaseOrder> _purchaseOrderListGrid;
 
         public PurchaseOrderListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IPurchaseOrderListGrid purchaseOrderListGrid)
+            IEntityListGrid<PurchaseOrder> purchaseOrderListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _purchaseOrderListGrid = purchaseOrderListGrid;

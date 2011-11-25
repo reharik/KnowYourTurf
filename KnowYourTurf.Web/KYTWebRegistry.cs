@@ -39,8 +39,6 @@ namespace KnowYourTurf.Web
                          x.AddAllTypesOf<ICalculatorHandler>().NameBy(t => t.Name);
                          x.AddAllTypesOf<RulesEngineBase>().NameBy(t => t.Name);
                          x.AddAllTypesOf<IEmailTemplateHandler>().NameBy(t => t.Name);
-                         x.AddAllTypesOf(typeof (IListTypeListGrid<>));
-
                          x.WithDefaultConventions();
                      });
             For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions>();

@@ -19,10 +19,10 @@ namespace KnowYourTurf.Web.Controllers
     public class VendorListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IVendorListGrid _vendorListGrid;
+       private readonly IEntityListGrid<Vendor> _vendorListGrid;
 
         public VendorListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IVendorListGrid vendorListGrid)
+            IEntityListGrid<Vendor> vendorListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _vendorListGrid = vendorListGrid;

@@ -21,6 +21,7 @@ namespace KnowYourTurf.Core.Html.Grid
             set { _actionUrl = value; }
         }
 
+        private IDictionary<string, string> _actionUrlParameters;
         private string _action;
 
         public LinkColumn(Expression<Func<ENTITY, object>> expression)
@@ -67,17 +68,16 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        public override HtmlTag BuildColumn(object item, User user, IAuthorizationService _authorizationService)
+        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName)
         {
             var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
-            if (value==null || value.Text().IsEmpty()) return null;
-            addToolTipAndClasses(value);
-            var anchor = buildAnchor(_item);
-            var div = BuildDiv();
-            div.Children.Add(value);
-            anchor.Children.Add(div);
-            return anchor;
+            if (value.IsEmpty()) return null;
+            var anchor = buildAnchor(_item, gridName);
+            anchor.AddClasses(new[] { "linkColumn", _action });
+            addToolTipAndClasses(anchor);
+            anchor.Text(value);
+            return anchor.ToPrettyString();
         }
 
         protected DivTag BuildDiv()

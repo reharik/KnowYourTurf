@@ -13,8 +13,8 @@ namespace KnowYourTurf.Core.Html.Grid
     public interface IGrid<T> where T : IGridEnabledClass
     {
         void AddColumnModifications(Action<HtmlTag, T> modification);
-        GridDefinition GetGridDefinition(string url);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items);
+        GridDefinition GetGridDefinition(string url, StringToken title = null);
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items, string gridName = null);
     }
 
     public abstract class Grid<T> : IGrid<T> where T : IGridEnabledClass
@@ -59,7 +59,7 @@ namespace KnowYourTurf.Core.Html.Grid
             _modifications.Add(modification);
         }
 
-        public GridDefinition GetGridDefinition(string url)
+        public GridDefinition GetGridDefinition(string url, StringToken title = null)
         {
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);
@@ -70,7 +70,7 @@ namespace KnowYourTurf.Core.Html.Grid
             };
         }
 
-        public GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items)
+        public GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items, string gridName = null)
         {
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);

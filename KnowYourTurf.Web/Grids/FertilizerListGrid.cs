@@ -44,20 +44,13 @@ namespace KnowYourTurf.Web.Grids
         }
     }
 
-    public interface IPOFertilizerListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn,Fertilizer> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Fertilizer> items, string gridName = "");
-    }
-
-    public class POFertilizerListGrid : Grid<Fertilizer>, IPOFertilizerListGrid
+    public class POFertilizerListGrid : Grid<Fertilizer>, IEntityListGrid<Fertilizer>
     {
 
         public POFertilizerListGrid(IGridBuilder<Fertilizer> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

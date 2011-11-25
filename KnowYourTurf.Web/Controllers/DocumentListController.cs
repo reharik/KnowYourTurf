@@ -11,10 +11,10 @@ namespace KnowYourTurf.Web.Controllers
     public class DocumentListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-       private readonly IEntityListGrid<DocumentCategory> _documentListGrid;
+       private readonly IEntityListGrid<Document> _documentListGrid;
 
         public DocumentListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IEntityListGrid<DocumentCategory> documentListGrid)
+            IEntityListGrid<Document> documentListGrid)
         {
             if (documentListGrid == null) throw new ArgumentNullException("documentListGrid");
             _dynamicExpressionQuery = dynamicExpressionQuery;

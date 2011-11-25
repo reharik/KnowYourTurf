@@ -15,7 +15,7 @@ namespace KnowYourTurf.Core.Html.Grid
         IDictionary<string, string> Properties { get; set; }
         string Operation { get; set; }
         int ColumnIndex { get; set; }
-        HtmlTag BuildColumn(object item, User user, IAuthorizationService _authorizationService);
+        HtmlTag BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName);
     }
 
     public class ColumnBase<ENTITY> : IGridColumn, IEquatable<ColumnBase<ENTITY>> where ENTITY : IGridEnabledClass
@@ -34,14 +34,14 @@ namespace KnowYourTurf.Core.Html.Grid
 
         public int ColumnIndex { get; set; }
 
-        public virtual HtmlTag BuildColumn(object item, User user, IAuthorizationService _authorizationService) 
+        public virtual string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName)
         {
             return FormatValue((ENTITY)item, user, _authorizationService);
         }
 
-        protected HtmlTag FormatValue(ENTITY item, User user, IAuthorizationService _authorizationService)
+        protected string FormatValue(ENTITY item, User user, IAuthorizationService _authorizationService)
         {
-            bool isAllowed = Operation.IsEmpty() || _authorizationService.IsAllowed(user, Operation);
+            bool isAllowed = !Operation.IsNotEmpty() || _authorizationService.IsAllowed(user, Operation);
             if (!isAllowed) return null;
             var propertyValue = propertyAccessor.GetValue(item);
             var value = propertyValue;
@@ -49,15 +49,15 @@ namespace KnowYourTurf.Core.Html.Grid
             {
                 var instanceOfEnum = propertyAccessor.GetLocalizedEnum(propertyValue.ToString());
                 value = instanceOfEnum != null ? instanceOfEnum.Key : propertyValue;
-                if (value.GetType() == typeof (DateTime) || value.GetType() == typeof (DateTime?))
+                if (value.GetType() == typeof(DateTime) || value.GetType() == typeof(DateTime?))
                 {
                     value = propertyAccessor.Name.ToLowerInvariant().Contains("time")
-                                ? ((DateTime) value).ToShortTimeString()
-                                : ((DateTime) value).ToShortDateString();
+                                ? ((DateTime)value).ToShortTimeString()
+                                : ((DateTime)value).ToShortDateString();
                 }
-                
+
             }
-            return value == null ? null : new HtmlTag("span").Text(value.ToString());
+            return value == null ? null : value.ToString();
         }
 
         public ColumnBase<ENTITY> HideHeader()

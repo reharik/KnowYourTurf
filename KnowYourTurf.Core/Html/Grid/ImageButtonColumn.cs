@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using HtmlTags;
@@ -16,6 +18,7 @@ namespace KnowYourTurf.Core.Html.Grid
             set { _actionUrl = value; }
         }
         private string _action;
+        private IDictionary<string, string> _actionUrlParameters;
         public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression) where CONTROLLER : Controller
         {
             var actionUrl = UrlContext.GetUrlForAction(expression);
@@ -29,25 +32,42 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        public override HtmlTag BuildColumn(object item, User user, IAuthorizationService _authorizationService)
+        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName)
         {
             var _item = (ENTITY) item;
             var value = FormatValue(_item, user, _authorizationService);
-            if (value.Text().IsEmpty()) return null;
+            if (value.IsEmpty()) return null;
             var divTag = BuildDiv();
-            var anchor = buildAnchor(_item);
+            divTag.AddClasses(new[]{"imageButtonColumn", _action});
+            var anchor = buildAnchor(_item,gridName);
             var image = BuildImage();
-            divTag.Children.Add(image);
-            anchor.Children.Add(divTag);
-            return anchor;
+            anchor.Children.Add(image);
+            divTag.Children.Add(anchor);
+            return divTag.ToPrettyString();
         }
 
-        private HtmlTag buildAnchor(ENTITY item)
+        private HtmlTag buildAnchor(ENTITY item,string gridName)
         {
             var anchor = new HtmlTag("a");
             anchor.Attr("onclick",
-                        "$.publish('/contentLevel/grid/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "']);");
+                        "kyt.grid.formatterHelpers.clickEvent(\"" + _action + "\",\"" + buildUrl(item) + "\",\"" + gridName + "\")");
             return anchor;
+        }
+
+        private string buildUrl(ENTITY item)
+        {
+            var urlBase = _actionUrl + "/" + item.EntityId;
+            if (_actionUrlParameters == null) return urlBase;
+            urlBase += "?";
+            _actionUrlParameters.Each(x =>
+            {
+                urlBase += x.Key + "=" + x.Value;
+                if (!_actionUrlParameters.Last().Equals(x))
+                {
+                    urlBase += "&";
+                }
+            });
+            return urlBase;
         }
     }
 }

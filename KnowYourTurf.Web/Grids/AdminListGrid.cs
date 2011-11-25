@@ -14,8 +14,8 @@ namespace KnowYourTurf.Web.Grids
     public interface IEntityListGrid<ENTITY> where ENTITY : DomainEntity
     {
         void AddColumnModifications(Action<HtmlTag, ENTITY> modification);
-        GridDefinition GetGridDefinition(string url);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<ENTITY> items);
+        GridDefinition GetGridDefinition(string url, StringToken title = null);
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<ENTITY> items, string gridName = null);
     }
     public class AdminListGrid : Grid<Administrator>, IEntityListGrid<Administrator>
     {
