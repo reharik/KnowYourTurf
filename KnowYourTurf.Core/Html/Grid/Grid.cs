@@ -22,7 +22,7 @@ namespace KnowYourTurf.Core.Html.Grid
         protected readonly IGridBuilder<T> GridBuilder;
         private readonly ISessionContext _sessionContext;
         private readonly IRepository _repository;
-        private IList<Action<HtmlTag, T>> _modifications;
+        private IList<Action<IGridColumn, T>> _modifications;
 
         protected Grid(IGridBuilder<T> gridBuilder,
             ISessionContext sessionContext,
@@ -31,7 +31,7 @@ namespace KnowYourTurf.Core.Html.Grid
             GridBuilder = gridBuilder;
             _sessionContext = sessionContext;
             _repository = repository;
-            _modifications = new List<Action<HtmlTag, T>>();
+            _modifications = new List<Action<IGridColumn, T>>();
         }
 
         private IList<IDictionary<string, string>> GetGridColumns(User user)
@@ -43,7 +43,7 @@ namespace KnowYourTurf.Core.Html.Grid
         {
             foreach (T x in rawResults)
             {
-                yield return new GridRow { id = x.EntityId, cell = GridBuilder.ToGridRow(x, user, _modifications), };
+                yield return new GridRow { id = x.EntityId, cell = GridBuilder.ToGridRow(x, user, _modifications) };
             }
         }
 
