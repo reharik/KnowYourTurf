@@ -39,11 +39,11 @@ namespace KnowYourTurf.Core.Html.Grid
             return GridBuilder.ToGridColumns(user);
         }
 
-        private IEnumerable GetGridRows(IEnumerable rawResults, User user)
+        private IEnumerable GetGridRows(IEnumerable rawResults, User user, string gridName)
         {
             foreach (T x in rawResults)
             {
-                yield return new GridRow { id = x.EntityId, cell = GridBuilder.ToGridRow(x, user, _modifications) };
+                yield return new GridRow { id = x.EntityId, cell = GridBuilder.ToGridRow(x, user, _modifications, gridName) };
             }
         }
 
