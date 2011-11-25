@@ -38,7 +38,7 @@ namespace KnowYourTurf.Web.Controllers
                 ? employee.UserRoles.Split(',').Select(x => new TokenInputDto { id = x, name = x })
                 :null;
             
-            var model = new EmployeeViewModel
+            var model = new UserViewModel
             {
                 Employee = employee,
                 AvailableItems = availableUserRoles,
@@ -51,7 +51,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Display(ViewModel input)
         {
             var employee = _repository.Find<Employee>(input.EntityId);
-            var model = new EmployeeViewModel
+            var model = new UserViewModel
                             {
                                 Employee = employee,
                                 AddEditUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddEdit(null)) + "/" + employee.EntityId,
@@ -75,7 +75,7 @@ namespace KnowYourTurf.Web.Controllers
             return null;
         }
 
-        public ActionResult Save(EmployeeViewModel input)
+        public ActionResult Save(UserViewModel input)
         {
             Employee employee;
             if (input.Employee.EntityId > 0)
@@ -106,7 +106,7 @@ namespace KnowYourTurf.Web.Controllers
             return Json(notification,"text/plain");
         }
 
-        private Employee mapToDomain(EmployeeViewModel model, Employee employee)
+        private Employee mapToDomain(UserViewModel model, Employee employee)
         {
             var employeeModel = model.Employee;
             employee.EmployeeId = employeeModel.EmployeeId;

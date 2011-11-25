@@ -1,4 +1,4 @@
-﻿@model KnowYourTurf.Web.Models.EmployeeViewModel
+﻿@model KnowYourTurf.Web.Models.UserViewModel
 @foreach (var task in Model.Employee.GetTasks().Where(x=>x.ScheduledDate.Value.ToShortDateString() == DateTime.Now.ToShortDateString()))
 {
     <div>

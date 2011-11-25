@@ -137,22 +137,17 @@
     </Compile>
     <Compile Include="CoreLocalizationKeys.cs" />
     <Compile Include="CoreViewModels\GridItemModels.cs" />
-    <Compile Include="Domain\Administrator.cs" />
     <Compile Include="Domain\BaseProduct.cs" />
     <Compile Include="Domain\Calculator.cs" />
     <Compile Include="Domain\Company.cs" />
     <Compile Include="Domain\Continuation.cs" />
     <Compile Include="Domain\Chemical.cs" />
-    <Compile Include="Domain\MultiTenantUser.cs" />
-    <Compile Include="Domain\KYTAdministrator.cs" />
     <Compile Include="Domain\Document.cs" />
     <Compile Include="Domain\DomainEntity.cs" />
     <Compile Include="Domain\EmailJob.cs" />
     <Compile Include="Domain\EmailTemplate.cs" />
-    <Compile Include="Domain\Employee.cs" />
     <Compile Include="Domain\Equipment.cs" />
     <Compile Include="Domain\Event.cs" />
-    <Compile Include="Domain\Facilities.cs" />
     <Compile Include="Domain\Fertilizer.cs" />
     <Compile Include="Domain\Field.cs" />
     <Compile Include="Domain\ListType.cs" />

@@ -6,10 +6,6 @@ namespace KnowYourTurf.Core.Domain.Persistence
     {
         public UserPersistenceMap()
         {
-            Map(u => u.LoginName);
-            Map(u => u.Password);
-            Map(u => u.Status);
-
             Map(u => u.FirstName);
             Map(u => u.LastName);
             Map(u => u.Email);
@@ -22,47 +18,25 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(u => u.ZipCode);
             Map(c => c.BirthDate);
             Map(c => c.Notes);
-            Map(c => c.UserRoles);
             Map(c => c.LanguageDefault);
             Map(x => x.ImageUrl);
+            Map(x => x.EmergencyContact);
+            Map(x => x.EmergencyContactPhone);
+            Map(x => x.EmployeeId);
             References(x => x.Company);
+            References(x => x.UserLoginInfo);
             HasManyToMany(x => x.GetEmailTemplates()).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
         }
 
-
-        public class EmployeeMap : SubclassMap<Employee>
+        public class UserLoginInfoMap : DomainEntityMap<UserLoginInfo>
         {
-            public EmployeeMap()
+            public UserLoginInfoMap()
             {
-                Map(u => u.EmployeeId);
-                Map(x => x.EmployeeType);
-                Map(x => x.EmergencyContact);
-                Map(x => x.EmergencyContactPhone);
-                HasManyToMany(x => x.GetTasks()).Table("EmployeeToTask").Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
-            }
-        }
-
-        public class FacilitiesMap : SubclassMap<Facilities>
-        {
-            public FacilitiesMap()
-            {
-                Map(u => u.FacilitiesId);
-            }
-        }
-
-        public class MultiTenantUserMap : SubclassMap<MultiTenantUser>
-        {
-            public MultiTenantUserMap()
-            {
-                Map(u => u.MultiTenantUserId);
-            }
-        }
-
-        public class KYTAdministratorMap : SubclassMap<KYTAdministrator>
-        {
-            public KYTAdministratorMap()
-            {
-                Map(u => u.KYTAdministratorId);
+                Map(x => x.LoginName);
+                Map(x => x.Password);
+                Map(x => x.Status);
+                Map(x => x.UserRoles);
+                Map(x => x.UserType);
             }
         }
     }

@@ -53,29 +53,28 @@
         </div>
         <div class="grid_5">
             @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.EmployeeId).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.FirstName).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.LastName).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.EmployeeType).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.EmergencyContact).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.EmergencyContactPhone).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.Email).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.PhoneMobile).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.User.EmployeeId).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.User.FirstName).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.User.LastName).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.User.EmergencyContact).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.User.EmergencyContactPhone).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.User.Email).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.User.PhoneMobile).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
 
          </div>
 
     <div class="grid_5">
-        @{if (Model.Employee.ImageUrl.IsNotEmpty())
+        @{if (Model.User.ImageUrl.IsNotEmpty())
           {
-                @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToString());
+                @MvcHtmlString.Create(Html.ViewFor(x => x.User.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToString());
           }
         }
-        @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.Address1).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-        @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.Address2).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-        @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.City).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-        @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.State).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-        @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.ZipCode).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
-        @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.Notes).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.User.Address1).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.User.Address2).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.User.City).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.User.State).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.User.ZipCode).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
+        @MvcHtmlString.Create(Html.ViewFor(x => x.User.Notes).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
     </div>
     <div class="grid_10_KYT">
     </div>

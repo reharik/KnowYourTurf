@@ -21,7 +21,7 @@ namespace KnowYourTurf.Core.Services
         {
             var unitOfWork = _repository.UnitOfWork;
             unitOfWork.CurrentSession.DisableFilter("CompanyConditionFilter");
-            var user = _repository.Query<User>(u => u.LoginName.ToLowerInvariant() == username && u.Password == password).FirstOrDefault();
+            var user = _repository.Query<User>(u => u.UserLoginInfo.LoginName.ToLowerInvariant() == username && u.UserLoginInfo.Password == password).FirstOrDefault();
             return user;
         }
     }
