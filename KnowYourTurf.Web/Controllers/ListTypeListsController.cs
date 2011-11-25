@@ -8,16 +8,16 @@ namespace KnowYourTurf.Web.Controllers
 {
     public class ListTypeListController : AdminControllerBase
     {
-        private readonly IPhotoCategoryListGrid _photoCategoryListGrid;
-        private readonly IDocumentCategoryListGrid _documentCategoryListGrid;
-        private readonly IEventTypeListGrid _eventTypeListGrid;
-        private readonly ITaskTypeListGrid _taskTypeListGrid;
+        private readonly IEntityListGrid<EventType> _eventTypeListGrid;
+        private readonly IEntityListGrid<TaskType> _taskTypeListGrid;
+        private readonly IEntityListGrid<DocumentCategory> _photoCategoryListGrid;
+        private readonly IEntityListGrid<PhotoCategory> _documentCategoryListGrid;
 
         public ListTypeListController(
-            IEventTypeListGrid eventTypeListGrid,
-            ITaskTypeListGrid taskTypeListGrid,
-            IPhotoCategoryListGrid photoCategoryListGrid,
-            IDocumentCategoryListGrid documentCategoryListGrid)
+            IEntityListGrid<EventType> eventTypeListGrid,
+            IEntityListGrid<TaskType> taskTypeListGrid,
+            IEntityListGrid<DocumentCategory> photoCategoryListGrid,
+            IEntityListGrid<PhotoCategory> documentCategoryListGrid)
         {
             _eventTypeListGrid = eventTypeListGrid;
             _taskTypeListGrid = taskTypeListGrid;

@@ -172,6 +172,7 @@
     <Compile Include="Html\FubuUI\Builders\ImageFIleDisplayBuilder.cs" />
     <Compile Include="Html\FubuUI\Builders\TextAreaBuilder.cs" />
     <Compile Include="Html\Grid\ColumnBase.cs" />
+    <Compile Include="Html\Grid\GroupingColumn.cs" />
     <Compile Include="Html\Grid\ImageButtonColumn.cs" />
     <Compile Include="Html\Grid\HiddenColumn.cs" />
     <Compile Include="Html\Grid\ImageColumn.cs" />

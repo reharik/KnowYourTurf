@@ -13,9 +13,9 @@ namespace KnowYourTurf.Web.Controllers
     public class PurchaseOrderLineItemListController : AdminControllerBase
     {
         private readonly IRepository _repository;
-        private readonly IPurchaseOrderLineItemGrid _purchaseOrderLineItemGrid;
+        private readonly IEntityListGrid<PurchaseOrderLineItem> _purchaseOrderLineItemGrid;
 
-        public PurchaseOrderLineItemListController(IRepository repository, IPurchaseOrderLineItemGrid purchaseOrderLineItemGrid)
+        public PurchaseOrderLineItemListController(IRepository repository, IEntityListGrid<PurchaseOrderLineItem> purchaseOrderLineItemGrid)
         {
             _repository = repository;
             _purchaseOrderLineItemGrid = purchaseOrderLineItemGrid;

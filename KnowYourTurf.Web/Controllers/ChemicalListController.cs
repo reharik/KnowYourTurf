@@ -14,10 +14,10 @@ namespace KnowYourTurf.Web.Controllers
     public class ChemicalListController:KYTController
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IChemicalListGrid _chemicalListGrid;
+        private readonly IEntityListGrid<Chemical> _chemicalListGrid;
 
         public ChemicalListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IChemicalListGrid chemicalListGrid)
+            IEntityListGrid<Chemical> chemicalListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _chemicalListGrid = chemicalListGrid;

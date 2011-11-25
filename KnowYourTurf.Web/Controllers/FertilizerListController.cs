@@ -14,10 +14,10 @@ namespace KnowYourTurf.Web.Controllers
     public class FertilizerListController:KYTController
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IFertilizerListGrid _fertilizerListGrid;
+        private readonly IEntityListGrid<Fertilizer> _fertilizerListGrid;
 
         public FertilizerListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IFertilizerListGrid fertilizerListGrid)
+            IEntityListGrid<Fertilizer> fertilizerListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _fertilizerListGrid = fertilizerListGrid;

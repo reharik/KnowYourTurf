@@ -10,6 +10,7 @@ using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Grids;
 using KnowYourTurf.Web.Models;
+using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -17,22 +18,20 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IPendingTaskGrid _pendingTaskGrid;
-        private readonly ICompletedTaskGrid _completedTaskGrid;
-        private readonly IPhotoListGrid _photoListGrid;
-        private readonly IDocumentListGrid _documentListGrid;
+        private readonly IEntityListGrid<Task> _pendingTaskGrid;
+        private readonly IEntityListGrid<Task> _completedTaskGrid;
+        private readonly IEntityListGrid<Photo> _photoListGrid;
+        private readonly IEntityListGrid<Document> _documentListGrid;
 
         public FieldDashboardController(IRepository repository,
                                         IDynamicExpressionQuery dynamicExpressionQuery,
-                                        IPendingTaskGrid pendingTaskGrid,
-                                        ICompletedTaskGrid completedTaskGrid,
-                                        IPhotoListGrid photoListGrid,
-                                        IDocumentListGrid documentListGrid)
+                                        IEntityListGrid<Photo> photoListGrid,
+                                        IEntityListGrid<Document> documentListGrid)
         {
             _repository = repository;
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _pendingTaskGrid = pendingTaskGrid;
-            _completedTaskGrid = completedTaskGrid;
+            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("PendingTasks");
+            _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
             _photoListGrid = photoListGrid;
             _documentListGrid = documentListGrid;
         }

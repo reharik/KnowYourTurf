@@ -11,20 +11,13 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IInventoryProductListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, InventoryProduct> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<InventoryProduct> items, string gridName = "");
-    }
-
-    public class InventoryProductListGrid : Grid<InventoryProduct>, IInventoryProductListGrid
+    public class InventoryProductListGrid : Grid<InventoryProduct>, IEntityListGrid<InventoryProduct>
     {
 
         public InventoryProductListGrid(IGridBuilder<InventoryProduct> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 
@@ -43,25 +36,4 @@ namespace KnowYourTurf.Web.Grids
             return this;
         }
     }
-
-    //public class InventoryChemicalListGrid : Grid<InventoryChemical>
-    //{
-
-    //    public InventoryChemicalListGrid(IGridBuilder<InventoryChemical> grid)
-    //        : base(grid)
-    //    {
-    //    }
-
-    //    public override IGrid<InventoryChemical> BuildGrid()
-    //    {
-    //        _grid.DisplayWithInPopup<InventoryListController>(f => f.Chemical.Name, c => c.DisplayChemical(null), "kyt.popupCrud.controller.displayItem")
-    //            .Display(f => f.Quantity)
-    //            .Display(f => f.Chemical.UnitType)
-    //            .Display(f => f.Description)
-    //            .Display(f => f.DatePurchased).Formatter(GridColumnFormatter.Date)
-    //            .Display(f => f.Cost).Formatter(GridColumnFormatter.Currency)
-    //            .Display(f => f.Vendor.Company);
-    //        return this;
-    //    }
-    //}
 }

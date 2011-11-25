@@ -14,10 +14,10 @@ namespace KnowYourTurf.Web.Controllers
     public class EmailJobListController : KYTController
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IEmailJobListGrid _emailJobListGrid;
+        private readonly IEntityListGrid<EmailJob> _emailJobListGrid;
 
         public EmailJobListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IEmailJobListGrid emailJobListGrid)
+            IEntityListGrid<EmailJob> emailJobListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _emailJobListGrid = emailJobListGrid;

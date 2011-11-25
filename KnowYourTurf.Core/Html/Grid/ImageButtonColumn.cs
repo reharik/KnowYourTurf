@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using HtmlTags;
 using KnowYourTurf.Core.Domain;
 using Rhino.Security.Interfaces;
-using System.Linq;
 
 namespace KnowYourTurf.Core.Html.Grid
 {
@@ -17,10 +17,9 @@ namespace KnowYourTurf.Core.Html.Grid
             get { return _actionUrl; }
             set { _actionUrl = value; }
         }
-        private string _action;
+         private string _action;
         private string _jsonData;
         private string _gridName;
-
         public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, string gridName = "") where CONTROLLER : Controller
         {
             _gridName = gridName;
@@ -35,7 +34,7 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "")
+         public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "")
         {
             // if a name is given in the controller it overrides the name given in the grid declaration
             if (gridName.IsNotEmpty()) _gridName = gridName;

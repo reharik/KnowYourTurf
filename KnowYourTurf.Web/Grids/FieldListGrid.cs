@@ -12,20 +12,13 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IFieldListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, Field> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Field> items, string gridName = "");
-    }
-
-    public class FieldListGrid : Grid<Field>, IFieldListGrid
+    public class FieldListGrid : Grid<Field>, IEntityListGrid<Field>
     {
 
         public FieldListGrid(IGridBuilder<Field> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

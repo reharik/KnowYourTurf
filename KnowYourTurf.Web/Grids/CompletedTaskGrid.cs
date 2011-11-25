@@ -11,20 +11,15 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface ICompletedTaskGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, Task> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Task> items, string gridName = "");
-    }
 
-    public class CompletedTaskGrid : Grid<Task>, ICompletedTaskGrid
+
+    public class CompletedTaskGrid : Grid<Task>, IEntityListGrid<Task>
     {
 
         public CompletedTaskGrid(IGridBuilder<Task> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

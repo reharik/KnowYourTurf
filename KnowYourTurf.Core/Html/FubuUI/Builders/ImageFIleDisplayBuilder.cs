@@ -16,7 +16,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
             root.Attr("href", request.RawValue);
             root.Attr("target", "_blank");
             root.Id(request.Accessor.FieldName);
-            root.AddChildren(new HtmlTag("span"));
+            root.Children.Add(new HtmlTag("span"));
             return root;
         }
     } 
