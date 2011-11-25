@@ -79,7 +79,7 @@ namespace KnowYourTurf.Core.Html.Grid
             var pageAndSort = pager.PageAndSort(items, pageSortFilter);
             var model = new GridItemsViewModel
             {
-                items = BuildGrid().GetGridRows(pageAndSort.Items, user),
+                items = BuildGrid().GetGridRows(pageAndSort.Items, user,gridName),
                 page = pageAndSort.Page,
                 records = pageAndSort.TotalRows,
                 total = pageAndSort.TotalPages
