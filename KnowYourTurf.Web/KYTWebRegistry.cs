@@ -34,11 +34,11 @@ namespace KnowYourTurf.Web
             Scan(x =>
                      {
                          x.TheCallingAssembly();
+                         x.ConnectImplementationsToTypesClosing(typeof(IEntityListGrid<>));
                          x.AssemblyContainingType(typeof (CoreLocalizationKeys));
                          x.AddAllTypesOf<ICalculatorHandler>().NameBy(t => t.Name);
                          x.AddAllTypesOf<RulesEngineBase>().NameBy(t => t.Name);
                          x.AddAllTypesOf<IEmailTemplateHandler>().NameBy(t => t.Name);
-                         x.AddAllTypesOf(typeof (IListTypeListGrid<>));
                          x.WithDefaultConventions();
                      });
             For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions>();
@@ -78,6 +78,11 @@ namespace KnowYourTurf.Web
             For<IPermissionsService>().HybridHttpOrThreadLocalScoped().Use<PermissionsService>();
             For(typeof (IGridBuilder<>)).LifecycleIs(new UniquePerRequestLifecycle()).Use(typeof (GridBuilder<>));
             For<ISecuritySetupService>().Use<DefaultSecuritySetupService>();
+
+            For<IEntityListGrid<Task>>().Use<TaskListGrid>();
+            For<IEntityListGrid<Task>>().Add<CompletedTaskGrid>().Named("CompletedTasks");
+            For<IEntityListGrid<Task>>().Add<PendingTaskGrid>().Named("PendingTasks");
+
         }
     }
 }

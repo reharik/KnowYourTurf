@@ -20,12 +20,12 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
         private readonly IContainer _container;
-        private readonly IListTypeListGrid<LISTTYPE> _listTypeListGrid;
+        private readonly IEntityListGrid<LISTTYPE> _listTypeListGrid;
 
         public ListTypeBaseController(IDynamicExpressionQuery dynamicExpressionQuery,
                                       IRepository repository,
                                       ISaveEntityService saveEntityService,
-                                      IListTypeListGrid<LISTTYPE> listTypeListGrid)
+                                      IEntityListGrid<LISTTYPE> listTypeListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _repository = repository;
@@ -86,9 +86,9 @@ namespace KnowYourTurf.Web.Controllers
         public EventTypeController(IDynamicExpressionQuery dynamicExpressionQuery,
                                    IRepository repository,
                                    ISaveEntityService saveEntityService,
-                                   IEventTypeListGrid listTypeListGrid)
+                                   IEntityListGrid<EventType> listTypeListGrid)
             : base(
-                dynamicExpressionQuery, repository, saveEntityService, (IListTypeListGrid<EventType>) listTypeListGrid)
+                dynamicExpressionQuery, repository, saveEntityService, listTypeListGrid)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
@@ -143,8 +143,8 @@ namespace KnowYourTurf.Web.Controllers
         public TaskTypeController(IDynamicExpressionQuery dynamicExpressionQuery,
                                   IRepository repository,
                                   ISaveEntityService saveEntityService,
-                                  ITaskTypeListGrid listTypeListGrid)
-            : base(dynamicExpressionQuery, repository, saveEntityService, (IListTypeListGrid<TaskType>) listTypeListGrid
+                                  IEntityListGrid<TaskType> listTypeListGrid)
+            : base(dynamicExpressionQuery, repository, saveEntityService, listTypeListGrid
                 )
         {
             _repository = repository;
@@ -173,10 +173,10 @@ namespace KnowYourTurf.Web.Controllers
         public DocumentCategoryController(IDynamicExpressionQuery dynamicExpressionQuery,
                                           IRepository repository,
                                           ISaveEntityService saveEntityService,
-                                          IDocumentCategoryListGrid listTypeListGrid)
+                                          IEntityListGrid<DocumentCategory> listTypeListGrid)
             : base(
                 dynamicExpressionQuery, repository, saveEntityService,
-                (IListTypeListGrid<DocumentCategory>) listTypeListGrid)
+                listTypeListGrid)
         {
             _repository = repository;
         }
@@ -202,10 +202,10 @@ namespace KnowYourTurf.Web.Controllers
         public PhotoCategoryController(IDynamicExpressionQuery dynamicExpressionQuery,
                                        IRepository repository,
                                        ISaveEntityService saveEntityService,
-                                       IPhotoCategoryListGrid listTypeListGrid)
+                                       IEntityListGrid<PhotoCategory> listTypeListGrid)
             : base(
                 dynamicExpressionQuery, repository, saveEntityService,
-                (IListTypeListGrid<PhotoCategory>) listTypeListGrid)
+                listTypeListGrid)
         {
             _repository = repository;
         }

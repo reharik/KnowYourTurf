@@ -10,19 +10,12 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IPurchaseOrderSelectorGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, BaseProduct> modification);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<BaseProduct> items, string gridName = "");
-    }
-
-    public class PurchaseOrderSelectorGrid : Grid<BaseProduct>, IPurchaseOrderSelectorGrid
+    public class PurchaseOrderSelectorGrid : Grid<BaseProduct>, IEntityListGrid<BaseProduct>
     {
         public PurchaseOrderSelectorGrid(IGridBuilder<BaseProduct> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

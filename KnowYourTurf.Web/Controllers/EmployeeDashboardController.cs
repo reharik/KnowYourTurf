@@ -18,19 +18,17 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IPendingTaskGrid _pendingTaskGrid;
-        private readonly ICompletedTaskGrid _completedTaskGrid;
+        private readonly IEntityListGrid<Task> _pendingTaskGrid;
+        private readonly IEntityListGrid<Task> _completedTaskGrid;
         private readonly ISessionContext _sessionContext;
 
         public EmployeeDashboardController(IRepository repository, IDynamicExpressionQuery dynamicExpressionQuery,
-            IPendingTaskGrid pendingTaskGrid,
-            ICompletedTaskGrid completedTaskGrid,
             ISessionContext sessionContext)
         {
             _repository = repository;
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _pendingTaskGrid = pendingTaskGrid;
-            _completedTaskGrid = completedTaskGrid;
+            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("PendingTasks");
+            _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks"); ;
             _sessionContext = sessionContext;
         }
 

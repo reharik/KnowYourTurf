@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FubuMVC.Core.Util;
 using HtmlTags;
 using KnowYourTurf.Core.Domain;
@@ -20,6 +21,7 @@ namespace KnowYourTurf.Core.Html.Grid
     public class ColumnBase<ENTITY> : IGridColumn, IEquatable<ColumnBase<ENTITY>> where ENTITY : IGridEnabledClass
     {
         protected string _toolTip;
+
         public ColumnBase()
         {
             Properties = new Dictionary<string, string>();
@@ -32,7 +34,7 @@ namespace KnowYourTurf.Core.Html.Grid
 
         public int ColumnIndex { get; set; }
 
-        public virtual string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "") 
+        public virtual string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName)
         {
             return FormatValue((ENTITY)item, user, _authorizationService);
         }
@@ -47,15 +49,16 @@ namespace KnowYourTurf.Core.Html.Grid
             {
                 var instanceOfEnum = propertyAccessor.GetLocalizedEnum(propertyValue.ToString());
                 value = instanceOfEnum != null ? instanceOfEnum.Key : propertyValue;
-                if (value.GetType() == typeof (DateTime) || value.GetType() == typeof (DateTime?))
+                if (value.GetType() == typeof(DateTime) || value.GetType() == typeof(DateTime?))
                 {
                     value = propertyAccessor.Name.ToLowerInvariant().Contains("time")
-                                ? ((DateTime) value).ToShortTimeString()
-                                : ((DateTime) value).ToShortDateString();
+                                ? ((DateTime)value).ToShortTimeString()
+                                : ((DateTime)value).ToShortDateString();
                 }
             }
             return value == null ? null : value.ToString();
         }
+
 
         public ColumnBase<ENTITY> HideHeader()
         {
@@ -66,6 +69,13 @@ namespace KnowYourTurf.Core.Html.Grid
         public ColumnBase<ENTITY> DisplayHeader(StringToken header)
         {
             Properties[GridColumnProperties.header.ToString()] = header.ToString();
+            return this;
+        }
+
+
+        public ColumnBase<ENTITY> DisplayHeader(string header)
+        {
+            Properties[GridColumnProperties.header.ToString()] = header;
             return this;
         }
 
@@ -98,6 +108,18 @@ namespace KnowYourTurf.Core.Html.Grid
             Operation = operation;
             return this;
         }
+
+        public ColumnBase<ENTITY> DefaultSortColumn()
+        {
+            string fullname=propertyAccessor.Name;
+            if(propertyAccessor is PropertyChain)
+            {
+                fullname = propertyAccessor.Names.Aggregate((current, next) => current + "." + next);
+            }
+            Properties[GridColumnProperties.sortColumn.ToString()] = fullname;
+            return this;
+        }
+
 
         #region IEquatable
 
@@ -138,11 +160,16 @@ namespace KnowYourTurf.Core.Html.Grid
 
     public enum ColumnAction
     {
-        Display,
-        Edit,
+        DisplayItem,
+        AddEditItem,
         Redirect,
+        DeleteItem,
+        Preview,
+        Login,
+        ChargeVoid,
         Delete,
-        Calculator,
+        Edit,
+        Display,
         Other
     }
 }

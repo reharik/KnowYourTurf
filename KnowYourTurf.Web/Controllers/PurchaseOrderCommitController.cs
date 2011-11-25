@@ -19,11 +19,10 @@ namespace KnowYourTurf.Web.Controllers
         private Pager<PurchaseOrderLineItem> _pager;
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
-        private readonly IReceivePurchaseOrderLineItemGrid _receivePurchaseOrderLineItemGrid;
-        private readonly IPurchaseOrderListGrid _purchaseOrderListGrid;
+        private readonly IEntityListGrid<PurchaseOrderLineItem> _receivePurchaseOrderLineItemGrid;
 
         public PurchaseOrderCommitController(IRepository repository, ISaveEntityService saveEntityService,
-            IReceivePurchaseOrderLineItemGrid receivePurchaseOrderLineItemGrid )
+            IEntityListGrid<PurchaseOrderLineItem> receivePurchaseOrderLineItemGrid)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;

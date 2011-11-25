@@ -10,19 +10,12 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IPurchaseOrderLineItemGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, PurchaseOrderLineItem> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<PurchaseOrderLineItem> items, string gridName = "");
-    }
-
-    public class PurchaseOrderLineItemGrid : Grid<PurchaseOrderLineItem>, IPurchaseOrderLineItemGrid
+    public class PurchaseOrderLineItemGrid : Grid<PurchaseOrderLineItem>, IEntityListGrid<PurchaseOrderLineItem>
     {
         public PurchaseOrderLineItemGrid(IGridBuilder<PurchaseOrderLineItem> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 
@@ -51,19 +44,12 @@ namespace KnowYourTurf.Web.Grids
         }
     }
 
-    public interface IReceivePurchaseOrderLineItemGrid
-    {
-        void AddColumnModifications(Action<IGridColumn,PurchaseOrderLineItem> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<PurchaseOrderLineItem> items, string gridName = "");
-    }
-
-    public class ReceivePurchaseOrderLineItemGrid : Grid<PurchaseOrderLineItem>, IReceivePurchaseOrderLineItemGrid 
+    public class ReceivePurchaseOrderLineItemGrid : Grid<PurchaseOrderLineItem>, IEntityListGrid<PurchaseOrderLineItem>
     {
         public ReceivePurchaseOrderLineItemGrid(IGridBuilder<PurchaseOrderLineItem> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

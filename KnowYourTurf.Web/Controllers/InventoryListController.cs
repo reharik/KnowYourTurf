@@ -16,10 +16,10 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IInventoryProductListGrid _inventoryProductListGrid;
+        private readonly IEntityListGrid<InventoryProduct> _inventoryProductListGrid;
 
         public InventoryListController(IRepository repository, IDynamicExpressionQuery dynamicExpressionQuery,
-            IInventoryProductListGrid inventoryProductListGrid )
+            IEntityListGrid<InventoryProduct> inventoryProductListGrid )
         {
             _repository = repository;
             _dynamicExpressionQuery = dynamicExpressionQuery;

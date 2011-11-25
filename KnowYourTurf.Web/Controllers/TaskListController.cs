@@ -11,10 +11,10 @@ namespace KnowYourTurf.Web.Controllers
     public class TaskListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly ITaskListGrid _taskListGrid;
+       private readonly IEntityListGrid<Task> _taskListGrid;
 
         public TaskListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            ITaskListGrid taskListGrid)
+            IEntityListGrid<Task> taskListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _taskListGrid = taskListGrid;

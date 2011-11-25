@@ -11,19 +11,12 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IDocumentListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn,Document> modification);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Document> items, string gridName = "");
-    }
-
-    public class DocumentListGrid : Grid<Document>, IDocumentListGrid
+    public class DocumentListGrid : Grid<Document>, IEntityListGrid<Document>
     {
         public DocumentListGrid(IGridBuilder<Document> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

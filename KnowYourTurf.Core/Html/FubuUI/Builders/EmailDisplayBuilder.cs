@@ -15,7 +15,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         {
             HtmlTag root = new HtmlTag("a");
             root.Attr("href", "mailto:" + request.StringValue());
-            root.Child(new HtmlTag("span").Text(request.StringValue()));
+            root.Children.Add(new HtmlTag("span").Text(request.StringValue()));
             return root;
         }
     }

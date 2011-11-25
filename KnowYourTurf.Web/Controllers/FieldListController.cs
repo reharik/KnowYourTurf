@@ -11,10 +11,10 @@ namespace KnowYourTurf.Web.Controllers
     public class FieldListController : KYTController
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IFieldListGrid _fieldListGrid;
+        private readonly IEntityListGrid<Field> _fieldListGrid;
 
         public FieldListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IFieldListGrid fieldListGrid)
+            IEntityListGrid<Field> fieldListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _fieldListGrid = fieldListGrid;

@@ -12,10 +12,10 @@ namespace KnowYourTurf.Web.Controllers
     public class EmployeeListController : AdminControllerBase
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IEmployeeListGrid _employeeListGrid;
+       private readonly IEntityListGrid<Employee> _employeeListGrid;
 
         public EmployeeListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IEmployeeListGrid employeeListGrid)
+            IEntityListGrid<Employee> employeeListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _employeeListGrid = employeeListGrid;

@@ -12,19 +12,12 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IChemicalListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, Chemical> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Chemical> items, string gridName = "");
-    }
-
-    public class ChemicalListGrid : Grid<Chemical>, IChemicalListGrid
+    public class ChemicalListGrid : Grid<Chemical>, IEntityListGrid<Chemical>
     {
         public ChemicalListGrid(IGridBuilder<Chemical> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 
@@ -52,19 +45,12 @@ namespace KnowYourTurf.Web.Grids
         }
     }
 
-    public interface IPOChemicalListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn,Chemical> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Chemical> items, string gridName = "gridContainer");
-    }
-
-    public class POChemicalListGrid : Grid<Chemical>, IPOChemicalListGrid
+    public class POChemicalListGrid : Grid<Chemical>, IEntityListGrid<Chemical>
     {
         public POChemicalListGrid(IGridBuilder<Chemical> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using FubuMVC.Core.Util;
 using KnowYourTurf.Core.Localization;
@@ -10,7 +11,12 @@ namespace KnowYourTurf.Core.Html.Grid
         public DisplayColumn(Expression<Func<ENTITY, object>> expression)
         {
             propertyAccessor = ReflectionHelper.GetAccessor(expression);
-            Properties[GridColumnProperties.name.ToString()] = LocalizationManager.GetLocalString(expression);
+            var name = LocalizationManager.GetLocalString(expression);
+            if(propertyAccessor is PropertyChain)
+            {
+                name = ((PropertyChain)(propertyAccessor)).Names.Aggregate((current, next) => current + "." + next);
+            }
+            Properties[GridColumnProperties.name.ToString()] = name;
             Properties[GridColumnProperties.header.ToString()] = LocalizationManager.GetHeader(expression).HeaderText;
         }
 

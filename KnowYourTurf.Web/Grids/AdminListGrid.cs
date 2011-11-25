@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using HtmlTags;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
@@ -10,20 +11,19 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IAdminListGrid
+    public interface IEntityListGrid<ENTITY> where ENTITY : DomainEntity
     {
-        void AddColumnModifications(Action<IGridColumn, Administrator> modification);
+        void AddColumnModifications(Action<IGridColumn, ENTITY> modification);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Administrator> items, string gridName = "");
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<ENTITY> items, string gridName = null);
     }
-
-    public class AdminListGrid : Grid<Administrator>, IAdminListGrid
+    public class AdminListGrid : Grid<Administrator>, IEntityListGrid<Administrator>
     {
 
         public AdminListGrid(IGridBuilder<Administrator> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

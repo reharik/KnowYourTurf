@@ -18,7 +18,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
             root.AddClass("KYT_ListDisplayRoot");
             var selectListItems = request.RawValue as IEnumerable<string>;
             if (selectListItems == null) return root;
-            selectListItems.Each(item=> root.Child(new HtmlTag("div").Text(item)));
+            selectListItems.Each(item => root.Children.Add(new HtmlTag("div").Text(item)));
             return root;
         }
     }

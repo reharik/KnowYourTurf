@@ -24,27 +24,30 @@ namespace KnowYourTurf.Core.Html.Grid
         private string _action;
         private string _gridName;
 
-        public LinkColumn(Expression<Func<ENTITY, object>> expression, string gridName = "")
+        public LinkColumn(Expression<Func<ENTITY, object>> expression,string gridName = "")
         {
             _gridName = gridName;
             _divCssClasses = new List<string>();
-            propertyAccessor = ReflectionHelper.GetAccessor(expression);
-            Properties[GridColumnProperties.name.ToString()] = LocalizationManager.GetLocalString(expression);
-            Properties[GridColumnProperties.header.ToString()] = LocalizationManager.GetHeader(expression).HeaderText;
+            propertyAccessor = ReflectionHelper.GetAccessor(expression); 
+            var name = LocalizationManager.GetLocalString(expression);
+            if (propertyAccessor is PropertyChain)
+            {
+                name = ((PropertyChain)(propertyAccessor)).Names.Aggregate((current, next) => current + "." + next);
+            }
+            Properties[GridColumnProperties.name.ToString()] = name;
+            
+            var headerText = LocalizationManager.GetHeader(expression).HeaderText;
+            if(headerText == "Name")
+            {
+                headerText = typeof (ENTITY).Name.ToSeperateWordsFromPascalCase() + " " + headerText;
+            }
+            Properties[GridColumnProperties.header.ToString()] = headerText;
         }
-
         //used for getting controller from a field value like "InstantiatingType"
         public LinkColumn<ENTITY> ForAction(Expression<Func<ENTITY, object>> expression, string actionName)
         {
-            var controllerName = ReflectionHelper.GetAccessor(expression).FieldName+"Controller";
+            var controllerName = ReflectionHelper.GetAccessor(expression).FieldName + "Controller";
             var urlForAction = UrlContext.GetUrlForAction(controllerName, actionName);
-            _actionUrl = urlForAction;
-            return this;
-        }
-
-        public LinkColumn<ENTITY> ForAction(string controllerName, string actionName)
-        {
-            var urlForAction = UrlContext.GetUrlForAction(controllerName,actionName);
             _actionUrl = urlForAction;
             return this;
         }
@@ -52,6 +55,13 @@ namespace KnowYourTurf.Core.Html.Grid
         public LinkColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression) where CONTROLLER : Controller
         {
             var urlForAction = UrlContext.GetUrlForAction(expression);
+            _actionUrl = urlForAction;
+            return this;
+        }
+
+        public LinkColumn<ENTITY> ForAction(string controllerName, string actionName)
+        {
+            var urlForAction = UrlContext.GetUrlForAction(controllerName, actionName);
             _actionUrl = urlForAction;
             return this;
         }
@@ -110,7 +120,7 @@ namespace KnowYourTurf.Core.Html.Grid
         private HtmlTag buildAnchor(ENTITY item)
         {
             var anchor = new HtmlTag("a");
-            anchor.Attr("onclick", "$.publish('/grid_"+ _gridName +"/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "']);");
+            anchor.Attr("onclick", "$.publish('/grid_" + _gridName + "/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "']);");
             return anchor;
         }
 
@@ -120,6 +130,6 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        
+
     }
 }

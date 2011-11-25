@@ -36,7 +36,7 @@ namespace KnowYourTurf.Core.Html.Grid
             var value = FormatValue(_item, user, _authorizationService);
             if (value.IsEmpty()) return null;
             var divTag = BuildDiv();
-            divTag.AddClasses(new[]{"imageColumn"});
+            divTag.AddClasses(new[] { "imageColumn" });
             var image = BuildImage();
             divTag.Children.Add(image);
             return divTag.ToString();
@@ -46,7 +46,7 @@ namespace KnowYourTurf.Core.Html.Grid
         {
             var img = new HtmlTag("img");
             img.Attr("src", "/content/images/" + _imageName);
-            if(header)
+            if (header)
             {
                 img.Style("cursor", "hand");
             }
