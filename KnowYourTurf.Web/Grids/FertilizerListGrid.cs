@@ -11,20 +11,13 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IFertilizerListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, Fertilizer> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Fertilizer> items, string gridName = "");
-    }
-
-    public class FertilizerListGrid : Grid<Fertilizer>, IFertilizerListGrid
+    public class FertilizerListGrid : Grid<Fertilizer>, IEntityListGrid<Fertilizer>
     {
 
         public FertilizerListGrid(IGridBuilder<Fertilizer> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

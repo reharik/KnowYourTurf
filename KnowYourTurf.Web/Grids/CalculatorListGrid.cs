@@ -12,19 +12,12 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface ICalculatorListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, Calculator> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Calculator> items, string gridName = "");
-    }
-
-    public class CalculatorListGrid : Grid<Calculator>, ICalculatorListGrid
+    public class CalculatorListGrid : Grid<Calculator>, IEntityListGrid<Calculator>
     {
         public CalculatorListGrid(IGridBuilder<Calculator> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

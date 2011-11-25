@@ -10,10 +10,10 @@ namespace KnowYourTurf.Web.Controllers
     public class PhotoListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IPhotoListGrid _photoListGrid;
+       private readonly IEntityListGrid<Photo> _photoListGrid;
 
         public PhotoListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IPhotoListGrid photoListGrid)
+            IEntityListGrid<Photo> photoListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _photoListGrid = photoListGrid;

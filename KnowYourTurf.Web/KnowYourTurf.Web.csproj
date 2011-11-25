@@ -60,7 +60,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\HibernatingRhinos.Profiler.Appender.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlTags">
+    <Reference Include="HtmlTags, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\HtmlTags.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections">
@@ -201,8 +202,6 @@
     <Compile Include="Grids\EquipmentListGrid.cs" />
     <Compile Include="Grids\FieldListGrid.cs" />
     <Compile Include="Grids\InventoryProductListGrid.cs" />
-    <Compile Include="Grids\InventoryFertilizerListGrid.cs" />
-    <Compile Include="Grids\InventoryMaterialListGrid.cs" />
     <Compile Include="Models\Chemical\ChemicalViewModel.cs" />
     <Compile Include="Models\PurchaseOrderLineItem\PurchaseOrderLineItemViewModel.cs" />
     <Compile Include="Models\PurchaseOrder\PurchaseOrderViewModel.cs" />

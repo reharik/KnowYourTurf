@@ -1,30 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IWeatherListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, Weather> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Weather> items, string gridName = "");
-    }
-
-    public class WeatherListGrid : Grid<Weather>, IWeatherListGrid
+    public class WeatherListGrid : Grid<Weather>, IEntityListGrid<Weather>
     {
         public WeatherListGrid(IGridBuilder<Weather> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

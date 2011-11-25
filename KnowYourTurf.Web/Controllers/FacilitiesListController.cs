@@ -12,10 +12,10 @@ namespace KnowYourTurf.Web.Controllers
     public class FacilitiesListController : AdminControllerBase
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IFacilitiesListGrid _gridHandlerService;
+       private readonly IEntityListGrid<Facilities> _gridHandlerService;
 
         public FacilitiesListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IFacilitiesListGrid gridHandlerService)
+            IEntityListGrid<Facilities> gridHandlerService)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _gridHandlerService = gridHandlerService;

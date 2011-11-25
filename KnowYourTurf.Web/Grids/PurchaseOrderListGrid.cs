@@ -8,23 +8,17 @@ using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web;
 using KnowYourTurf.Web.Controllers;
+using KnowYourTurf.Web.Grids;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public interface IPurchaseOrderListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, PurchaseOrder> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<PurchaseOrder> items, string gridName = "");
-    }
-
-    public class PurchaseOrderListGrid : Grid<PurchaseOrder>, IPurchaseOrderListGrid
+    public class PurchaseOrderListGrid : Grid<PurchaseOrder>, IEntityListGrid<PurchaseOrder>
     {
 
         public PurchaseOrderListGrid(IGridBuilder<PurchaseOrder> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

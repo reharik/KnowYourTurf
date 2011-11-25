@@ -11,19 +11,12 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IEmailJobListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn,EmailJob> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<EmailJob> items, string gridName = "");
-    }
-
-    public class EmailJobListGrid : Grid<EmailJob>, IEmailJobListGrid 
+  public class EmailJobListGrid : Grid<EmailJob>, IEntityListGrid<EmailJob>
     {
         public EmailJobListGrid(IGridBuilder<EmailJob> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

@@ -12,26 +12,26 @@ namespace KnowYourTurf.Core.Html.Grid
 {
     public interface IGrid<T> where T : IGridEnabledClass
     {
-        void AddColumnModifications(Action<IGridColumn, T> modification);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items, string gridName = "gridContainer");
+        void AddColumnModifications(Action<HtmlTag, T> modification);
+        GridDefinition GetGridDefinition(string url);
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items);
     }
 
     public abstract class Grid<T> : IGrid<T> where T : IGridEnabledClass
     {
         protected readonly IGridBuilder<T> GridBuilder;
-        private readonly IRepository _repository;
         private readonly ISessionContext _sessionContext;
-        private IList<Action<IGridColumn, T>> _modifications;
+        private readonly IRepository _repository;
+        private IList<Action<HtmlTag, T>> _modifications;
 
         protected Grid(IGridBuilder<T> gridBuilder,
-            IRepository repository,
-            ISessionContext sessionContext)
+            ISessionContext sessionContext,
+            IRepository repository)
         {
             GridBuilder = gridBuilder;
-            _repository = repository;
             _sessionContext = sessionContext;
-            _modifications = new List<Action<IGridColumn, T>>();
+            _repository = repository;
+            _modifications = new List<Action<HtmlTag, T>>();
         }
 
         private IList<IDictionary<string, string>> GetGridColumns(User user)
@@ -39,32 +39,38 @@ namespace KnowYourTurf.Core.Html.Grid
             return GridBuilder.ToGridColumns(user);
         }
 
-        private IEnumerable GetGridRows(IEnumerable rawResults, User user, string gridName)
+        private IEnumerable GetGridRows(IEnumerable rawResults, User user)
         {
             foreach (T x in rawResults)
             {
-                yield return new GridRow { id = x.EntityId, cell = GridBuilder.ToGridRow(x, user, _modifications, gridName) };
+                yield return new GridRow { id = x.EntityId, cell = GridBuilder.ToGridRow(x, user, _modifications), };
             }
         }
 
-        public void AddColumnModifications(Action<IGridColumn, T> modification)
+        public string GetDefaultSortColumnName()
+        {
+            var column = GridBuilder.columns.FirstOrDefault(
+                x => x.Properties.Any(y => y.Key == GridColumnProperties.sortColumn.ToString()));
+            return column == null ? string.Empty : column.Properties[GridColumnProperties.header.ToString()];
+        }
+
+        public void AddColumnModifications(Action<HtmlTag, T> modification)
         {
             _modifications.Add(modification);
         }
 
-        public GridDefinition GetGridDefinition(string url, StringToken title = null)
+        public GridDefinition GetGridDefinition(string url)
         {
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);
             return new GridDefinition
             {
                 Url = url,
-                Title = title!= null?title.ToString():"",
                 Columns = BuildGrid().GetGridColumns(user)
             };
         }
 
-        public GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items, string gridName = "")
+        public GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items)
         {
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);
@@ -72,7 +78,7 @@ namespace KnowYourTurf.Core.Html.Grid
             var pageAndSort = pager.PageAndSort(items, pageSortFilter);
             var model = new GridItemsViewModel
             {
-                items = BuildGrid().GetGridRows(pageAndSort.Items, user, gridName),
+                items = BuildGrid().GetGridRows(pageAndSort.Items, user),
                 page = pageAndSort.Page,
                 records = pageAndSort.TotalRows,
                 total = pageAndSort.TotalPages

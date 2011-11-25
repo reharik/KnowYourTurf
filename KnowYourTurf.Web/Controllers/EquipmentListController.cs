@@ -14,10 +14,10 @@ namespace KnowYourTurf.Web.Controllers
     public class EquipmentListController:KYTController
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IEquipmentListGrid _equipmentListGrid;
+        private readonly IEntityListGrid<Equipment> _equipmentListGrid;
 
         public EquipmentListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IEquipmentListGrid equipmentListGrid)
+            IEntityListGrid<Equipment> equipmentListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _equipmentListGrid = equipmentListGrid;

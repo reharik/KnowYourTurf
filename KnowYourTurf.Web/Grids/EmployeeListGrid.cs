@@ -12,20 +12,13 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IEmployeeListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, Employee> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Employee> items, string gridName = "");
-    }
-
-    public class EmployeeListGrid : Grid<Employee>, IEmployeeListGrid
+    public class EmployeeListGrid : Grid<Employee>, IEntityListGrid<Employee>
     {
 
         public EmployeeListGrid(IGridBuilder<Employee> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Html;
@@ -10,11 +11,12 @@ namespace KnowYourTurf.Web.Controllers
     public class DocumentListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IDocumentListGrid _documentListGrid;
+       private readonly IEntityListGrid<DocumentCategory> _documentListGrid;
 
         public DocumentListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IDocumentListGrid documentListGrid)
+            IEntityListGrid<DocumentCategory> documentListGrid)
         {
+            if (documentListGrid == null) throw new ArgumentNullException("documentListGrid");
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _documentListGrid = documentListGrid;
         }

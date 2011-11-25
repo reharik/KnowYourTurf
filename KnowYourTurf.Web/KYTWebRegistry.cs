@@ -34,11 +34,13 @@ namespace KnowYourTurf.Web
             Scan(x =>
                      {
                          x.TheCallingAssembly();
+                         x.ConnectImplementationsToTypesClosing(typeof(IEntityListGrid<>));
                          x.AssemblyContainingType(typeof (CoreLocalizationKeys));
                          x.AddAllTypesOf<ICalculatorHandler>().NameBy(t => t.Name);
                          x.AddAllTypesOf<RulesEngineBase>().NameBy(t => t.Name);
                          x.AddAllTypesOf<IEmailTemplateHandler>().NameBy(t => t.Name);
                          x.AddAllTypesOf(typeof (IListTypeListGrid<>));
+
                          x.WithDefaultConventions();
                      });
             For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions>();

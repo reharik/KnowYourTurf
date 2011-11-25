@@ -17,14 +17,14 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IAdminListGrid _gridHandlerService;
+        private readonly IEntityListGrid<Administrator> _grid;
 
         public AdminDashboardController(IRepository repository, IDynamicExpressionQuery dynamicExpressionQuery,
-            IAdminListGrid gridHandlerService)
+            IEntityListGrid<Administrator> grid  )
         {
             _repository = repository;
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _gridHandlerService = gridHandlerService;
+            _grid = grid;
         }
 
         public ActionResult ViewAdmin(ViewModel input)

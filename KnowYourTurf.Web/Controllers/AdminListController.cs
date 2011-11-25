@@ -12,13 +12,13 @@ namespace KnowYourTurf.Web.Controllers
     public class AdminListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IAdminListGrid _gridHandlerService;
+        private readonly IEntityListGrid<Administrator> _grid;
 
         public AdminListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IAdminListGrid gridHandlerService)
+            IEntityListGrid<Administrator> grid )
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _gridHandlerService = gridHandlerService;
+            _grid = grid;
         }
 
         public ActionResult AdminList()
@@ -27,15 +27,16 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 AddEditUrl = UrlContext.GetUrlForAction<AdminController>(x => x.Admin(null)),
-                ListDefinition = _gridHandlerService.GetGridDefinition(url, WebLocalizationKeys.ADMINS),
+                ListDefinition = _grid.GetGridDefinition(url),
             };
             return View(model);
+        
         }
 
         public JsonResult Admins(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Administrator>(input.filters);
-            var gridItemsViewModel = _gridHandlerService.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _grid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

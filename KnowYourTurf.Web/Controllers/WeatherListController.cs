@@ -12,10 +12,10 @@ namespace KnowYourTurf.Web.Controllers
     public class WeatherListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IWeatherListGrid _weatherListGrid;
+       private readonly IEntityListGrid<Weather> _weatherListGrid;
 
         public WeatherListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IWeatherListGrid weatherListGrid)
+            IEntityListGrid<Weather> weatherListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _weatherListGrid = weatherListGrid;

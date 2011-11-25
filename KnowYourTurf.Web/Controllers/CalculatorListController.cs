@@ -14,10 +14,10 @@ namespace KnowYourTurf.Web.Controllers
     public class CalculatorListController:KYTController
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly ICalculatorListGrid _calculatorListGrid;
+        private readonly IEntityListGrid<Calculator> _calculatorListGrid;
 
         public CalculatorListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            ICalculatorListGrid calculatorListGrid)
+            IEntityListGrid<Calculator> calculatorListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _calculatorListGrid = calculatorListGrid;

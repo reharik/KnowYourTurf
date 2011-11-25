@@ -12,10 +12,10 @@ namespace KnowYourTurf.Web.Controllers
     public class EmailTemplateListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IEmailTemplateListGrid _emailTemplateListGrid;
+       private readonly IEntityListGrid<EmailTemplate> _emailTemplateListGrid;
 
         public EmailTemplateListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IEmailTemplateListGrid emailTemplateListGrid)
+            IEntityListGrid<EmailTemplate> emailTemplateListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _emailTemplateListGrid = emailTemplateListGrid;

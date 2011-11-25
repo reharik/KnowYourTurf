@@ -11,19 +11,12 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IMaterialListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, Material> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Material> items, string gridName = "");
-    }
-
-    public class MaterialListGrid : Grid<Material>, IMaterialListGrid
+    public class MaterialListGrid : Grid<Material>, IEntityListGrid<Material>
     {
         public MaterialListGrid(IGridBuilder<Material> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 
@@ -47,19 +40,12 @@ namespace KnowYourTurf.Web.Grids
         }
     }
 
-    public interface IPOMaterialListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn,Material> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Material> items, string gridName = "");
-    }
-
-    public class POMaterialListGrid : Grid<Material>, IPOMaterialListGrid
+    public class POMaterialListGrid : Grid<Material>, IEntityListGrid<Material>
     {
         public POMaterialListGrid(IGridBuilder<Material> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

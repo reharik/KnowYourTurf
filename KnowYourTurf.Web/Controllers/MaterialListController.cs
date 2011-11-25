@@ -14,10 +14,10 @@ namespace KnowYourTurf.Web.Controllers
     public class MaterialListController:KYTController
     {
          private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IMaterialListGrid _materialListGrid;
+         private readonly IEntityListGrid<Material> _materialListGrid;
 
         public MaterialListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IMaterialListGrid materialListGrid)
+            IEntityListGrid<Material> materialListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _materialListGrid = materialListGrid;

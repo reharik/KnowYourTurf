@@ -11,20 +11,13 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IVendorContactListGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, VendorContact> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<VendorContact> items, string gridName = "");
-    }
-
-    public class VendorContactListGrid : Grid<VendorContact>, IVendorContactListGrid
+    public class VendorContactListGrid : Grid<VendorContact>, IEntityListGrid<VendorContact>
     {
 
      public VendorContactListGrid(IGridBuilder<VendorContact> gridBuilder,
          ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 

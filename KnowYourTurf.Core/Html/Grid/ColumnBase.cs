@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FubuMVC.Core.Util;
 using HtmlTags;
 using KnowYourTurf.Core.Domain;
@@ -14,12 +15,13 @@ namespace KnowYourTurf.Core.Html.Grid
         IDictionary<string, string> Properties { get; set; }
         string Operation { get; set; }
         int ColumnIndex { get; set; }
-        string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "");
+        HtmlTag BuildColumn(object item, User user, IAuthorizationService _authorizationService);
     }
 
     public class ColumnBase<ENTITY> : IGridColumn, IEquatable<ColumnBase<ENTITY>> where ENTITY : IGridEnabledClass
     {
         protected string _toolTip;
+
         public ColumnBase()
         {
             Properties = new Dictionary<string, string>();
@@ -32,14 +34,14 @@ namespace KnowYourTurf.Core.Html.Grid
 
         public int ColumnIndex { get; set; }
 
-        public virtual string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "") 
+        public virtual HtmlTag BuildColumn(object item, User user, IAuthorizationService _authorizationService) 
         {
             return FormatValue((ENTITY)item, user, _authorizationService);
         }
 
-        protected string FormatValue(ENTITY item, User user, IAuthorizationService _authorizationService)
+        protected HtmlTag FormatValue(ENTITY item, User user, IAuthorizationService _authorizationService)
         {
-            bool isAllowed = !Operation.IsNotEmpty() || _authorizationService.IsAllowed(user, Operation);
+            bool isAllowed = Operation.IsEmpty() || _authorizationService.IsAllowed(user, Operation);
             if (!isAllowed) return null;
             var propertyValue = propertyAccessor.GetValue(item);
             var value = propertyValue;
@@ -53,8 +55,9 @@ namespace KnowYourTurf.Core.Html.Grid
                                 ? ((DateTime) value).ToShortTimeString()
                                 : ((DateTime) value).ToShortDateString();
                 }
+                
             }
-            return value == null ? null : value.ToString();
+            return value == null ? null : new HtmlTag("span").Text(value.ToString());
         }
 
         public ColumnBase<ENTITY> HideHeader()
@@ -66,6 +69,13 @@ namespace KnowYourTurf.Core.Html.Grid
         public ColumnBase<ENTITY> DisplayHeader(StringToken header)
         {
             Properties[GridColumnProperties.header.ToString()] = header.ToString();
+            return this;
+        }
+
+
+        public ColumnBase<ENTITY> DisplayHeader(string header)
+        {
+            Properties[GridColumnProperties.header.ToString()] = header;
             return this;
         }
 
@@ -98,6 +108,18 @@ namespace KnowYourTurf.Core.Html.Grid
             Operation = operation;
             return this;
         }
+
+        public ColumnBase<ENTITY> DefaultSortColumn()
+        {
+            string fullname=propertyAccessor.Name;
+            if(propertyAccessor is PropertyChain)
+            {
+                fullname = propertyAccessor.Names.Aggregate((current, next) => current + "." + next);
+            }
+            Properties[GridColumnProperties.sortColumn.ToString()] = fullname;
+            return this;
+        }
+
 
         #region IEquatable
 
@@ -138,11 +160,16 @@ namespace KnowYourTurf.Core.Html.Grid
 
     public enum ColumnAction
     {
-        Display,
-        Edit,
+        DisplayItem,
+        AddEditItem,
         Redirect,
+        DeleteItem,
+        Preview,
+        Login,
+        ChargeVoid,
         Delete,
-        Calculator,
+        Edit,
+        Display,
         Other
     }
 }

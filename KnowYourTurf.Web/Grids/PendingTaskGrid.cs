@@ -11,19 +11,12 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IPendingTaskGrid
-    {
-        void AddColumnModifications(Action<IGridColumn, Task> modifications);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<Task> items, string gridName = "");
-    }
-
-    public class PendingTaskGrid : Grid<Task>, IPendingTaskGrid
+    public class PendingTaskGrid : Grid<Task>, IEntityListGrid<Task>
     {
         public PendingTaskGrid(IGridBuilder<Task> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
-            : base(gridBuilder, repository, sessionContext)
+            : base(gridBuilder, sessionContext, repository)
         {
         }
 
