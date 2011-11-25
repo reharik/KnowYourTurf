@@ -15,7 +15,7 @@ namespace KnowYourTurf.Core.Html.Grid
         IDictionary<string, string> Properties { get; set; }
         string Operation { get; set; }
         int ColumnIndex { get; set; }
-        HtmlTag BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName);
+        string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "");
     }
 
     public class ColumnBase<ENTITY> : IGridColumn, IEquatable<ColumnBase<ENTITY>> where ENTITY : IGridEnabledClass
@@ -55,10 +55,10 @@ namespace KnowYourTurf.Core.Html.Grid
                                 ? ((DateTime)value).ToShortTimeString()
                                 : ((DateTime)value).ToShortDateString();
                 }
-
             }
             return value == null ? null : value.ToString();
         }
+
 
         public ColumnBase<ENTITY> HideHeader()
         {

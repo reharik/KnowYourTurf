@@ -21,11 +21,12 @@ namespace KnowYourTurf.Core.Html.Grid
             set { _actionUrl = value; }
         }
 
-        private IDictionary<string, string> _actionUrlParameters;
         private string _action;
+        private string _gridName;
 
-        public LinkColumn(Expression<Func<ENTITY, object>> expression)
+        public LinkColumn(Expression<Func<ENTITY, object>> expression,string gridName = "")
         {
+            _gridName = gridName;
             _divCssClasses = new List<string>();
             propertyAccessor = ReflectionHelper.GetAccessor(expression); 
             var name = LocalizationManager.GetLocalString(expression);
@@ -42,10 +43,25 @@ namespace KnowYourTurf.Core.Html.Grid
             }
             Properties[GridColumnProperties.header.ToString()] = headerText;
         }
+        //used for getting controller from a field value like "InstantiatingType"
+        public LinkColumn<ENTITY> ForAction(Expression<Func<ENTITY, object>> expression, string actionName)
+        {
+            var controllerName = ReflectionHelper.GetAccessor(expression).FieldName + "Controller";
+            var urlForAction = UrlContext.GetUrlForAction(controllerName, actionName);
+            _actionUrl = urlForAction;
+            return this;
+        }
 
         public LinkColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression) where CONTROLLER : Controller
         {
             var urlForAction = UrlContext.GetUrlForAction(expression);
+            _actionUrl = urlForAction;
+            return this;
+        }
+
+        public LinkColumn<ENTITY> ForAction(string controllerName, string actionName)
+        {
+            var urlForAction = UrlContext.GetUrlForAction(controllerName, actionName);
             _actionUrl = urlForAction;
             return this;
         }
@@ -68,17 +84,24 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName)
+        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "")
         {
+            // if a name is given in the controller it overrides the name given in the grid declaration
+            if (gridName.IsNotEmpty()) _gridName = gridName;
             var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
             if (value.IsEmpty()) return null;
-            var anchor = buildAnchor(_item, gridName);
+            var span = new HtmlTag("span").Text(value);
+            addToolTipAndClasses(span);
+            var anchor = buildAnchor(_item);
             anchor.AddClasses(new[] { "linkColumn", _action });
-            addToolTipAndClasses(anchor);
-            anchor.Text(value);
-            return anchor.ToPrettyString();
+
+            var div = BuildDiv();
+            div.Children.Add(span);
+            anchor.Children.Add(div);
+            return anchor.ToString();
         }
+
 
         protected DivTag BuildDiv()
         {
@@ -97,10 +120,7 @@ namespace KnowYourTurf.Core.Html.Grid
         private HtmlTag buildAnchor(ENTITY item)
         {
             var anchor = new HtmlTag("a");
-            var assetType = string.Empty;
-            anchor.Attr("onclick",
-            "$.publish('/contentLevel/grid/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "'" + assetType + "]);");
-
+            anchor.Attr("onclick", "$.publish('/grid_" + _gridName + "/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "']);");
             return anchor;
         }
 
@@ -109,5 +129,7 @@ namespace KnowYourTurf.Core.Html.Grid
             _divCssClasses.Add(cssClass);
             return this;
         }
+
+
     }
 }

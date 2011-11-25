@@ -17,8 +17,9 @@ namespace KnowYourTurf.Core.Html.Grid
             get { return _actionUrl; }
             set { _actionUrl = value; }
         }
-        private string _action;
-        private IDictionary<string, string> _actionUrlParameters;
+         private string _action;
+        private string _jsonData;
+        private string _gridName;
         public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression) where CONTROLLER : Controller
         {
             var actionUrl = UrlContext.GetUrlForAction(expression);
@@ -32,42 +33,38 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName)
+         public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "")
         {
-            var _item = (ENTITY) item;
+            // if a name is given in the controller it overrides the name given in the grid declaration
+            if (gridName.IsNotEmpty()) _gridName = gridName;
+            var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
             if (value.IsEmpty()) return null;
             var divTag = BuildDiv();
-            divTag.AddClasses(new[]{"imageButtonColumn", _action});
-            var anchor = buildAnchor(_item,gridName);
+            divTag.AddClasses(new[] { "imageButtonColumn", _action });
+            var anchor = buildAnchor(_item);
             var image = BuildImage();
-            anchor.Children.Add(image);
-            divTag.Children.Add(anchor);
-            return divTag.ToPrettyString();
+             divTag.Children.Add(image);
+            anchor.Children.Add(divTag);
+            return anchor.ToString();
         }
 
-        private HtmlTag buildAnchor(ENTITY item,string gridName)
+        private HtmlTag buildAnchor(ENTITY item)
         {
             var anchor = new HtmlTag("a");
+            string data = string.Empty;
+            if(_jsonData.IsNotEmpty())
+            {
+                data = ","+_jsonData;
+            }
             anchor.Attr("onclick",
-                        "kyt.grid.formatterHelpers.clickEvent(\"" + _action + "\",\"" + buildUrl(item) + "\",\"" + gridName + "\")");
+                        "$.publish('/grid_"+ _gridName +"/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "'"+data+"]);");
             return anchor;
         }
 
-        private string buildUrl(ENTITY item)
+        public void AddDataToEvent(string jsonObject)
         {
-            var urlBase = _actionUrl + "/" + item.EntityId;
-            if (_actionUrlParameters == null) return urlBase;
-            urlBase += "?";
-            _actionUrlParameters.Each(x =>
-            {
-                urlBase += x.Key + "=" + x.Value;
-                if (!_actionUrlParameters.Last().Equals(x))
-                {
-                    urlBase += "&";
-                }
-            });
-            return urlBase;
+            _jsonData = jsonObject;
         }
     }
 }
