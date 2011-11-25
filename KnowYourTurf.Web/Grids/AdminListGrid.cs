@@ -13,7 +13,7 @@ namespace KnowYourTurf.Web.Grids
 {
     public interface IEntityListGrid<ENTITY> where ENTITY : DomainEntity
     {
-        void AddColumnModifications(Action<HtmlTag, ENTITY> modification);
+        void AddColumnModifications(Action<IGridColumn, ENTITY> modification);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
         GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<ENTITY> items, string gridName = null);
     }

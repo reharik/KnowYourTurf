@@ -78,6 +78,11 @@ namespace KnowYourTurf.Web
             For<IPermissionsService>().HybridHttpOrThreadLocalScoped().Use<PermissionsService>();
             For(typeof (IGridBuilder<>)).LifecycleIs(new UniquePerRequestLifecycle()).Use(typeof (GridBuilder<>));
             For<ISecuritySetupService>().Use<DefaultSecuritySetupService>();
+
+            For<IEntityListGrid<Task>>().Use<TaskListGrid>();
+            For<IEntityListGrid<Task>>().Add<CompletedTaskGrid>().Named("CompletedTasks");
+            For<IEntityListGrid<Task>>().Add<PendingTaskGrid>().Named("PendingTasks");
+
         }
     }
 }

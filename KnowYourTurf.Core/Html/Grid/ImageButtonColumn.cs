@@ -20,8 +20,9 @@ namespace KnowYourTurf.Core.Html.Grid
          private string _action;
         private string _jsonData;
         private string _gridName;
-        public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression) where CONTROLLER : Controller
+        public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, string gridName = "") where CONTROLLER : Controller
         {
+            _gridName = gridName;
             var actionUrl = UrlContext.GetUrlForAction(expression);
             _actionUrl = actionUrl;
             return this;

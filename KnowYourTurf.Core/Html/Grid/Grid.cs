@@ -12,7 +12,7 @@ namespace KnowYourTurf.Core.Html.Grid
 {
     public interface IGrid<T> where T : IGridEnabledClass
     {
-        void AddColumnModifications(Action<HtmlTag, T> modification);
+        void AddColumnModifications(Action<IGridColumn, T> modification);
         GridDefinition GetGridDefinition(string url, StringToken title = null);
         GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items, string gridName = null);
     }
@@ -54,10 +54,11 @@ namespace KnowYourTurf.Core.Html.Grid
             return column == null ? string.Empty : column.Properties[GridColumnProperties.header.ToString()];
         }
 
-        public void AddColumnModifications(Action<HtmlTag, T> modification)
+        public void AddColumnModifications(Action<IGridColumn, T> modification)
         {
             _modifications.Add(modification);
         }
+
 
         public GridDefinition GetGridDefinition(string url, StringToken title = null)
         {

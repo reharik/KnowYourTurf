@@ -17,7 +17,7 @@ namespace KnowYourTurf.Core.Html.Grid
         HiddenColumn<ENTITY> HideColumnFor(Expression<Func<ENTITY, object>> expression);
         ImageColumn<ENTITY> ImageColumn();
         ImageButtonColumn<ENTITY> ImageButtonColumn();
-        LinkColumn<ENTITY> LinkColumnFor(Expression<Func<ENTITY, object>> expression);
+        LinkColumn<ENTITY> LinkColumnFor(Expression<Func<ENTITY, object>> expression, string gridName = "");
         GroupingColumn<ENTITY> GroupingColumnFor(Expression<Func<ENTITY, object>> expression);
     }
 
@@ -80,9 +80,9 @@ namespace KnowYourTurf.Core.Html.Grid
             return AddColumn(new ImageButtonColumn<ENTITY>());
         }
 
-        public LinkColumn<ENTITY> LinkColumnFor(Expression<Func<ENTITY, object>> expression)
+        public LinkColumn<ENTITY> LinkColumnFor(Expression<Func<ENTITY, object>> expression,string gridName = "")
         {
-            return AddColumn(new LinkColumn<ENTITY>(expression));
+            return AddColumn(new LinkColumn<ENTITY>(expression,gridName));
         }
 
         public GroupingColumn<ENTITY> GroupingColumnFor(Expression<Func<ENTITY, object>> expression)

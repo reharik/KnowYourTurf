@@ -144,7 +144,7 @@ namespace KnowYourTurf.Web.Controllers
                                   IRepository repository,
                                   ISaveEntityService saveEntityService,
                                   IEntityListGrid<TaskType> listTypeListGrid)
-            : base(dynamicExpressionQuery, repository, saveEntityService,- listTypeListGrid
+            : base(dynamicExpressionQuery, repository, saveEntityService, listTypeListGrid
                 )
         {
             _repository = repository;
