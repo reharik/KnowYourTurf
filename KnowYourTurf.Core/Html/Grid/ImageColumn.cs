@@ -30,7 +30,7 @@ namespace KnowYourTurf.Core.Html.Grid
             Properties[GridColumnProperties.width.ToString()] = width;
             return this;
         }
-        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName)
+        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "")
         {
             var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
@@ -39,14 +39,14 @@ namespace KnowYourTurf.Core.Html.Grid
             divTag.AddClasses(new[] { "imageColumn" });
             var image = BuildImage();
             divTag.Children.Add(image);
-            return divTag.ToPrettyString();
+            return divTag.ToString();
         }
 
         protected HtmlTag BuildImage(bool header = false)
         {
             var img = new HtmlTag("img");
             img.Attr("src", "/content/images/" + _imageName);
-            if(header)
+            if (header)
             {
                 img.Style("cursor", "hand");
             }
