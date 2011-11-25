@@ -7,6 +7,7 @@ using System.Web.Script.Serialization;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
+using System.Linq;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -32,17 +33,11 @@ namespace KnowYourTurf.Web.Controllers
 
         private void loadWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company item)
         {
-            var url = "http://www.climate.gov/cwaw/GSODLookup";
-            webClient.QueryString = new NameValueCollection
-                                        {
-                                            {"lat", item.Latitude},
-                                            {"lng", item.Longitude},
-                                            {"date", DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")},
-                                        };
+            var url = "http://api.wunderground.com/api/8c25a57f987344bd/yesterday/q/"+ item.ZipCode+".json";
             var result = webClient.DownloadString(url);
             if (result.IsEmpty()) return;
             var companyWeatherInfoDto = jss.Deserialize<CompanyWeatherInfoDto>(result);
-            if (companyWeatherInfoDto == null || companyWeatherInfoDto.values==null) return;
+            if (companyWeatherInfoDto == null || companyWeatherInfoDto.History==null || companyWeatherInfoDto.History.DailySummary==null) return;
             var weather = new Weather
                               {
                                   CompanyId = item.EntityId,
@@ -53,32 +48,42 @@ namespace KnowYourTurf.Web.Controllers
             var minTemp = 0d;
             var precip = 0d;
             var maxWindGust = 0d;
-            Double.TryParse(companyWeatherInfoDto.values.dewPoint, out dewPoint);
-            Double.TryParse(companyWeatherInfoDto.values.maxTemp, out maxTemp);
-            Double.TryParse(companyWeatherInfoDto.values.minTemp, out minTemp);
-            Double.TryParse(companyWeatherInfoDto.values.precip, out precip);
-            Double.TryParse(companyWeatherInfoDto.values.maxWindGust, out maxWindGust);
+            var humidity = 0d;
+            var dailySummary = companyWeatherInfoDto.History.DailySummary.FirstOrDefault();
+            Double.TryParse(dailySummary.maxdewpti, out dewPoint);
+            Double.TryParse(dailySummary.maxtempi, out maxTemp);
+            Double.TryParse(dailySummary.mintempi, out minTemp);
+            Double.TryParse(dailySummary.rain, out precip);
+            Double.TryParse(dailySummary.maxwspdi, out maxWindGust);
+            Double.TryParse(dailySummary.maxhumidity, out humidity);
             weather.DewPoint = dewPoint;
             weather.HighTemperature = maxTemp;
             weather.LowTemperature = minTemp;
             weather.RainPrecipitation = precip;
             weather.WindSpeed = maxWindGust;
+            weather.Humidity = humidity;
             _repository.Save(weather);
         }
     }
 
     public class CompanyWeatherInfoDto
     {
-        public WeatherInfoDto values { get; set; }
+        public WeatherHistory History { get; set; }
     }
 
-    public class WeatherInfoDto
+    public class WeatherHistory
     {
-        public string maxTemp { get; set; }
-        public string maxWindGust { get; set; }
-        public string precip { get; set; }
-        public string minTemp { get; set; }
-        public string dewPoint { get; set; }
+        public IEnumerable<DailySummary> DailySummary { get; set; }
+    }
+
+    public class DailySummary
+    {
+        public string rain { get; set; }
+        public string maxtempi { get; set; }
+        public string mintempi { get; set; }
+        public string maxhumidity { get; set; }
+        public string maxdewpti { get; set; }
+        public string maxwspdi { get; set; }
     }
 
 }

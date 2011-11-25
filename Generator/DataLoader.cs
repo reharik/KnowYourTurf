@@ -140,7 +140,7 @@ namespace Generator
 
         private void CreateCompany()
         {
-            _company = new Company { Name = "KYT", Latitude = "30.263250", Longitude = "-97.714501", TaxRate = 8.25 };
+            _company = new Company { Name = "KYT", ZipCode = "78702", TaxRate = 8.25 };
             _repository.Save(_company);
         }
 

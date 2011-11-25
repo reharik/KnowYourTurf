@@ -20,27 +20,32 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
         private readonly IPendingTaskGrid _pendingTaskGrid;
         private readonly ICompletedTaskGrid _completedTaskGrid;
+        private readonly ISessionContext _sessionContext;
 
         public EmployeeDashboardController(IRepository repository, IDynamicExpressionQuery dynamicExpressionQuery,
             IPendingTaskGrid pendingTaskGrid,
-            ICompletedTaskGrid completedTaskGrid)
+            ICompletedTaskGrid completedTaskGrid,
+            ISessionContext sessionContext)
         {
             _repository = repository;
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _pendingTaskGrid = pendingTaskGrid;
             _completedTaskGrid = completedTaskGrid;
+            _sessionContext = sessionContext;
         }
 
         public ActionResult ViewEmployee(ViewModel input)
         {
-            var employee = _repository.Find<Employee>(input.EntityId);
-            var url = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasks(null)) + "?ParentId=" + input.EntityId;
-            var completeUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasks(null)) + "?ParentId=" + input.EntityId;
+            var entityId = input.EntityId>0?input.EntityId:_sessionContext.GetUserId();
+
+            var employee = _repository.Find<Employee>(entityId);
+            var url = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasks(null)) + "?ParentId=" + entityId;
+            var completeUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasks(null)) + "?ParentId=" + entityId;
             var model = new EmployeeDashboardViewModel
             {
                 //TODO put modficaztions here "Employee"
                 Employee = employee,
-                AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" + input.EntityId+"&From=Employee",
+                AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" + entityId+"&From=Employee",
                 ListDefinition = _pendingTaskGrid.GetGridDefinition(url, WebLocalizationKeys.PENDING_TASKS),
                 CompletedListDefinition = _completedTaskGrid.GetGridDefinition(completeUrl, WebLocalizationKeys.COMPLETED_TASKS),
                
