@@ -23,9 +23,9 @@ namespace KnowYourTurf.UnitTests.Web.Controllers
         private ISaveEntityService _saveEntityService;
         private IRepository repo;
         private SpecificationExtensions.CapturingConstraint _sesCatcher;
-        private Employee _employee1;
-        private Employee _employee3;
-        private Employee _employee2;
+        private User _employee1;
+        private User _employee3;
+        private User _employee2;
         private InventoryProduct _validInventoryChemical;
         private Equipment _Equip;
         private Equipment _equipment1;
@@ -57,9 +57,9 @@ namespace KnowYourTurf.UnitTests.Web.Controllers
             _employee1 = ObjectMother.ValidEmployee("raif");
             _employee2 = ObjectMother.ValidEmployee("Amahl");
             _employee3 = ObjectMother.ValidEmployee("Ramsay");
-            repo.Stub(x => x.Find<Employee>(1)).Return(_employee1);
-            repo.Stub(x => x.Find<Employee>(2)).Return(_employee2);
-            repo.Stub(x => x.Find<Employee>(3)).Return(_employee3);
+            repo.Stub(x => x.Find<User>(1)).Return(_employee1);
+            repo.Stub(x => x.Find<User>(2)).Return(_employee2);
+            repo.Stub(x => x.Find<User>(3)).Return(_employee3);
             repo.Stub(x => x.Find<Equipment>(6)).Return(_equipment1);
             repo.Stub(x => x.Find<Equipment>(7)).Return(_equipment2);
             repo.Stub(x => x.Find<Equipment>(8)).Return(_equipment3);

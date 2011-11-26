@@ -2,23 +2,24 @@
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Grids;
 using KnowYourTurf.Web.Models;
+using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
     public class AdminListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IEntityListGrid<Administrator> _grid;
+        private readonly IEntityListGrid<User> _grid;
 
-        public AdminListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IEntityListGrid<Administrator> grid )
+        public AdminListController(IDynamicExpressionQuery dynamicExpressionQuery)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _grid = grid;
+            _grid = ObjectFactory.Container.GetInstance<IEntityListGrid<User>>("Admins");
         }
 
         public ActionResult AdminList()
@@ -35,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult Admins(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<Administrator>(input.filters);
+            var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserLoginInfo.UserType==UserRole.Administrator.ToString());
             var gridItemsViewModel = _grid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }

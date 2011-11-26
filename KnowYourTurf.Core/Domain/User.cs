@@ -37,7 +37,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual UserLoginInfo UserLoginInfo { get; set; }
         public virtual string EmergencyContact { get; set; }
         public virtual string EmergencyContactPhone { get; set; }
-        public virtual long EmployeeId { get; set; }
+        public virtual string EmployeeId { get; set; }
         
         public virtual string FullName
         {
@@ -88,6 +88,7 @@ namespace KnowYourTurf.Core.Domain
         [ValidateNonEmpty, ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
         public virtual string UserRoles { get; set; }
+        [ValueOf(typeof(UserRole))]
         public virtual string UserType { get; set; }
     }
 }

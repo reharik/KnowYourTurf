@@ -15,7 +15,7 @@ namespace KnowYourTurf.UnitTests.Rules
     [TestFixture]
     public class when_calling_execute_on_EmployeeHasNoOutstandingTasks_when_there_are_future_tasks
     {
-        private Employee _employee;
+        private User _employee;
         private Task _task1;
         private Task _task2;
         private Task _task3;
@@ -59,7 +59,7 @@ namespace KnowYourTurf.UnitTests.Rules
     [TestFixture]
     public class when_calling_execute_on_EmployeeHasNoOutstandingTasks_when_there_are_NO_future_tasks
     {
-        private Employee _employee;
+        private User _employee;
         private Task _task1;
         private Task _task2;
         private Task _task3;

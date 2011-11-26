@@ -17,17 +17,17 @@ namespace KnowYourTurf.Web.Grids
         GridDefinition GetGridDefinition(string url, StringToken title = null);
         GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<ENTITY> items, string gridName = null);
     }
-    public class AdminListGrid : Grid<Administrator>, IEntityListGrid<Administrator>
+    public class AdminListGrid : Grid<User>, IEntityListGrid<User>
     {
 
-        public AdminListGrid(IGridBuilder<Administrator> gridBuilder,
+        public AdminListGrid(IGridBuilder<User> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
             : base(gridBuilder, sessionContext, repository)
         {
         }
 
-        protected override Grid<Administrator> BuildGrid()
+        protected override Grid<User> BuildGrid()
         {
             GridBuilder.ImageButtonColumn()
               .ForAction<AdminController>(x => x.Delete(null))
@@ -44,7 +44,6 @@ namespace KnowYourTurf.Web.Grids
                 .ToPerformAction(ColumnAction.Redirect)
                 .IsSortable(false)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
-            GridBuilder.DisplayFor(x => x.AdminId);
             GridBuilder.DisplayFor(x => x.PhoneMobile);
             GridBuilder.DisplayFor(x => x.Email);
             return this;

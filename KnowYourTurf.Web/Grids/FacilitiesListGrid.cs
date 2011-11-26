@@ -10,16 +10,16 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public class FacilitiesListGrid : Grid<Facilities>, IEntityListGrid<Facilities>
+    public class FacilitiesListGrid : Grid<User>, IEntityListGrid<User>
     {
-        public FacilitiesListGrid(IGridBuilder<Facilities> gridBuilder,
+        public FacilitiesListGrid(IGridBuilder<User> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
             : base(gridBuilder, sessionContext, repository)
         {
         }
 
-        protected override Grid<Facilities> BuildGrid()
+        protected override Grid<User> BuildGrid()
         {
             GridBuilder.ImageButtonColumn()
                .ForAction<FacilitiesController>(x => x.Delete(null))
@@ -36,7 +36,6 @@ namespace KnowYourTurf.Web.Grids
                 .ToPerformAction(ColumnAction.Redirect)
                 .IsSortable(false)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
-            GridBuilder.DisplayFor(x => x.FacilitiesId);
             GridBuilder.DisplayFor(x => x.PhoneMobile);
             GridBuilder.DisplayFor(x => x.Email);
             return this;

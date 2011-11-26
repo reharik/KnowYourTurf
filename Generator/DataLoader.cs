@@ -32,8 +32,8 @@ namespace Generator
         private InventoryProduct _inventoryMaterial2;
         private Equipment _equip1;
         private Equipment _equip2;
-        private Employee _employee1;
-        private Employee _employee2;
+        private User _employee1;
+        private User _employee2;
         private static VendorContact _contact1v1;
         private static VendorContact _contact2v1;
         private static VendorContact _contact1v2;
@@ -41,8 +41,8 @@ namespace Generator
         private Company _company;
         private IPurchaseOrderLineItemService _purchaseOrderLineItemService;
         private User _defaultUser;
-        private Employee _employeeAdmin1;
-        private Employee _employeeAdmin2;
+        private User _employeeAdmin1;
+        private User _employeeAdmin2;
 
         public void Load()
         {
@@ -52,7 +52,6 @@ namespace Generator
             CreateCompany();
             CreateUser();
             _purchaseOrderLineItemService = new PurchaseOrderLineItemService(new UserSessionFake(_defaultUser));
-            
             
             CreateEmployee();
             CreateField();
@@ -160,33 +159,48 @@ namespace Generator
 
         private void CreateUser()
         {
-            _defaultUser = new KYTAdministrator()
+            _defaultUser = new User()
             {
-                LoginName = "Admin",
-                Password = "123",
+                
                 FirstName = "Raif",
                 LastName = "Harik",
-                UserRoles = UserRole.Administrator + "," + UserRole.Employee + "," + UserRole.KYTAdmin,
                 Company = _company
             };
-            var altUser = new KYTAdministrator()
+            _defaultUser.UserLoginInfo = new UserLoginInfo
+                                             {
+                                                 LoginName = "Admin",
+                                                 UserRoles =
+                                                     UserRole.Administrator + "," + UserRole.Employee + "," +
+                                                     UserRole.KYTAdmin,
+                                                     UserType = UserRole.Employee.ToString(),
+                                                 Password = "123"
+                                             };
+            var altUser = new User()
+            {
+                FirstName = "Amahl",
+                LastName = "Harik",
+                Company = _company
+            };
+            altUser.UserLoginInfo = new UserLoginInfo
             {
                 LoginName = "alt",
                 Password = "alt",
-                FirstName = "Amahl",
-                LastName = "Harik",
+                UserType = UserRole.Employee.ToString(),
                 UserRoles = UserRole.Administrator + "," + UserRole.Employee + "," + UserRole.KYTAdmin,
-                Company = _company
             };
 
-            var facilities = new Facilities()
+            var facilities = new User()
+            {
+                FirstName = "Amahl",
+                LastName = "Harik",
+                Company = _company
+            };
+            facilities.UserLoginInfo = new UserLoginInfo
             {
                 LoginName = "facilities",
                 Password = "facilities",
-                FirstName = "Amahl",
-                LastName = "Harik",
+                UserType = UserRole.Facilities.ToString(),
                 UserRoles = UserRole.Facilities.ToString(),
-                Company = _company
             };
 
             _repository.Save(_defaultUser);
@@ -197,10 +211,9 @@ namespace Generator
 
         private void CreateEmployee()
         {
-            _employee1 = new Employee()
+            _employee1 = new User()
             {
                 EmployeeId = "123",
-                EmployeeType = "Student",
                 Address1 = "123 street",
                 Address2 = "apt a",
                 BirthDate = DateTime.Parse("1/5/1972"),
@@ -208,17 +221,21 @@ namespace Generator
                 Email = "reharik@gmail.com",
                 FirstName = "Raif",
                 LastName = "Harik",
-                LoginName = "reharik@gmail.com",
-                Password = "123",
                 PhoneHome = "123.123.1234",
                 PhoneMobile = "123.123.1234",
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
+                };
+            _employee1.UserLoginInfo = new UserLoginInfo
+            {
+                LoginName = "reharik@gmail.com",
+                Password = "123",
+                UserType = UserRole.Employee.ToString(),
                 UserRoles = UserRole.Employee.ToString()
             };
 
-            _employee2 = new Employee()
+            _employee2 = new User()
             {
                 EmployeeId = "1234",
                 Address1 = "123 street",
@@ -228,17 +245,21 @@ namespace Generator
                 Email = "amahl@gmail.com",
                 FirstName = "Amahl",
                 LastName = "Harik",
-                LoginName = "amahl@gmail.com",
-                Password = "123",
                 PhoneHome = "123.123.1234",
                 PhoneMobile = "123.123.1234",
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
+                };
+            _employee2.UserLoginInfo = new UserLoginInfo
+            {
+                LoginName = "amahl@gmail.com",
+                Password = "123",
+                UserType = UserRole.Employee.ToString(),
                 UserRoles = UserRole.Employee.ToString()
             };
 
-            _employeeAdmin1 = new Employee()
+            _employeeAdmin1 = new User()
             {
                 EmployeeId = "1234",
                 Address1 = "123 street",
@@ -248,17 +269,21 @@ namespace Generator
                 Email = "mark@gmail.com",
                 FirstName = "mark",
                 LastName = "lara",
-                LoginName = "mark@gmail.com",
-                Password = "123",
                 PhoneHome = "123.123.1234",
                 PhoneMobile = "123.123.1234",
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
+            };
+            _employeeAdmin1.UserLoginInfo = new UserLoginInfo
+            {
+                LoginName = "mark@gmail.com",
+                Password = "123",
+                UserType = UserRole.Employee.ToString(),
                 UserRoles = UserRole.Administrator + "," + UserRole.Employee
             };
 
-            _employeeAdmin2 = new Employee()
+            _employeeAdmin2 = new User()
             {
                 EmployeeId = "1234",
                 Address1 = "123 street",
@@ -268,13 +293,17 @@ namespace Generator
                 Email = "chris@gmail.com",
                 FirstName = "chris",
                 LastName = "chris",
-                LoginName = "chris@gmail.com",
-                Password = "123",
                 PhoneHome = "123.123.1234",
                 PhoneMobile = "123.123.1234",
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
+            };
+            _employeeAdmin2.UserLoginInfo = new UserLoginInfo
+            {
+                LoginName = "chris@gmail.com",
+                Password = "123",
+                UserType = UserRole.Employee.ToString(),
                 UserRoles = UserRole.Administrator + "," + UserRole.Employee
             };
 

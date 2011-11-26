@@ -5,7 +5,8 @@ using KnowYourTurf.Web.Filters;
 namespace KnowYourTurf.Web.Controllers
 {
 
-    [AddUserToViewFilter, CustomAuthorize, PermissionValidation]
+//    [AddUserToViewFilter, CustomAuthorize, PermissionValidation]
+    [CustomAuthorize, PermissionValidation]
     public class KYTController : Controller
     {
         protected string RenderViewToString()

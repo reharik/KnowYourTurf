@@ -99,9 +99,9 @@ namespace KnowYourTurf.UnitTests
             };
         }
 
-        public static Employee ValidEmployee(string name)
+        public static User ValidEmployee(string name)
         {
-            return new Employee
+            return new User
                        {
                            Address1 = "1706 Willow St",
                            Address2 = "b",
@@ -112,7 +112,6 @@ namespace KnowYourTurf.UnitTests
                            PhoneMobile = "123.123.1234",
                            State = "TX",
                            ZipCode = "78702",
-                           Status = "Active",
                            BirthDate = DateTime.Parse("1/5/1972"),
                            FirstName = name,
                            LastName = "harik"

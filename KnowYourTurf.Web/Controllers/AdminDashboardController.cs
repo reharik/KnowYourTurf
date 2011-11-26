@@ -17,10 +17,10 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-        private readonly IEntityListGrid<Administrator> _grid;
+        private readonly IEntityListGrid<User> _grid;
 
         public AdminDashboardController(IRepository repository, IDynamicExpressionQuery dynamicExpressionQuery,
-            IEntityListGrid<Administrator> grid  )
+            IEntityListGrid<User> grid  )
         {
             _repository = repository;
             _dynamicExpressionQuery = dynamicExpressionQuery;
@@ -29,14 +29,25 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ViewAdmin(ViewModel input)
         {
-            var admin = _repository.Find<Administrator>(input.EntityId);
-            var model = new AdminViewModel
+            var admin = _repository.Find<User>(input.EntityId);
+            var model = new UserViewModel
             {
-                Administrator = admin,
+                User = admin,
                 AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" + input.EntityId+"&From=Admin",
                
             };
             return View("AdminDashboard", model);
         }
+    }
+
+    public class UserViewModel:ViewModel
+    {
+        public User User { get; set; }
+
+        public bool DeleteImage { get; set; }
+
+        public IEnumerable<TokenInputDto> AvailableItems { get; set; }
+
+        public IEnumerable<TokenInputDto> SelectedItems{ get; set; }
     }
 }

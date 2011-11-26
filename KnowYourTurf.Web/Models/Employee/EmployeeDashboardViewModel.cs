@@ -6,7 +6,7 @@ namespace KnowYourTurf.Web.Models
 {
     public class EmployeeDashboardViewModel : ListViewModel
     {
-        public Employee Employee { get; set; }
+        public User Employee { get; set; }
         public GridDefinition CompletedListDefinition { get; set; }
     }
 }

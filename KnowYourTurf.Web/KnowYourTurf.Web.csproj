@@ -224,7 +224,6 @@
     <Compile Include="Models\Orthogonal\MenuViewModel.cs" />
     <Compile Include="Models\VendorContact\VendorContactViewModel.cs" />
     <Compile Include="Models\Vendor\VendorViewModel.cs" />
-    <Compile Include="Models\Employee\UserViewModel.cs" />
     <Compile Include="Controllers\OrthogonalController.cs" />
     <Compile Include="Grids\EmployeeListGrid.cs" />
     <Compile Include="Models\Orthogonal\HeaderViewModel.cs" />

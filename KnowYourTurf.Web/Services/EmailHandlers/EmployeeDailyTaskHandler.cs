@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
     {
         public EmailTemplateDTO CreateModel(EmailJob emailJob, User subscriber)
         {
-            var employee = subscriber as Employee;
+            var employee = subscriber;
             var tasks = employee.GetTasks().Where(x=>x.ScheduledDate.Value.Date == DateTime.Now.Date);
             var tasksHtml = buildHtmlForTasks(tasks);
             var tokenValues = new Dictionary<string, string>
