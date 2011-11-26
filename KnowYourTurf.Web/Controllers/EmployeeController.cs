@@ -32,15 +32,15 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddEdit(ViewModel input)
         {
-            var employee = input.EntityId > 0 ? _repository.Find<Employee>(input.EntityId) : new Employee();
+            var employee = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
             var availableUserRoles = Enumeration.GetAll<UserRole>(true).Select(x => new TokenInputDto { id = x.Key, name = x.Key});
-            var selectedUserRoles = employee.UserRoles.IsNotEmpty() 
-                ? employee.UserRoles.Split(',').Select(x => new TokenInputDto { id = x, name = x })
+            var selectedUserRoles = employee.UserLoginInfo.UserRoles.IsNotEmpty() 
+                ? employee.UserLoginInfo.UserRoles.Split(',').Select(x => new TokenInputDto { id = x, name = x })
                 :null;
             
-            var model = new EmployeeViewModel
+            var model = new UserViewModel
             {
-                Employee = employee,
+                User = employee,
                 AvailableItems = availableUserRoles,
                 SelectedItems = selectedUserRoles,
                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
@@ -50,10 +50,10 @@ namespace KnowYourTurf.Web.Controllers
       
         public ActionResult Display(ViewModel input)
         {
-            var employee = _repository.Find<Employee>(input.EntityId);
-            var model = new EmployeeViewModel
+            var employee = _repository.Find<User>(input.EntityId);
+            var model = new UserViewModel
                             {
-                                Employee = employee,
+                                User = employee,
                                 AddEditUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddEdit(null)) + "/" + employee.EntityId,
                                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
                             };
@@ -62,7 +62,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Delete(ViewModel input)
         {
-            var employee = _repository.Find<Employee>(input.EntityId);
+            var employee = _repository.Find<User>(input.EntityId);
             var rulesEngineBase = ObjectFactory.Container.GetInstance<RulesEngineBase>("DeleteEmployeeRules");
             var rulesResult = rulesEngineBase.ExecuteRules(employee);
             if(!rulesResult.Success)
@@ -75,16 +75,16 @@ namespace KnowYourTurf.Web.Controllers
             return null;
         }
 
-        public ActionResult Save(EmployeeViewModel input)
+        public ActionResult Save(UserViewModel input)
         {
-            Employee employee;
-            if (input.Employee.EntityId > 0)
+            User employee;
+            if (input.User.EntityId > 0)
             {
-                employee = _repository.Find<Employee>(input.Employee.EntityId);
+                employee = _repository.Find<User>(input.User.EntityId);
             }
             else
             {
-                employee = new Employee();
+                employee = new User();
                 var companyId = _sessionContext.GetCompanyId();
                 var company = _repository.Find<Company>(companyId);
                 employee.Company = company;
@@ -106,28 +106,30 @@ namespace KnowYourTurf.Web.Controllers
             return Json(notification,"text/plain");
         }
 
-        private Employee mapToDomain(EmployeeViewModel model, Employee employee)
+        private User mapToDomain(UserViewModel model, User employee)
         {
-            var employeeModel = model.Employee;
+            var employeeModel = model.User;
             employee.EmployeeId = employeeModel.EmployeeId;
             employee.Address1 = employeeModel.Address1;
             employee.Address2= employeeModel.Address2;
             employee.FirstName= employeeModel.FirstName;
             employee.LastName = employeeModel.LastName;
-            employee.EmployeeType= employeeModel.EmployeeType;
             employee.EmergencyContact = employeeModel.EmergencyContact;
             employee.EmergencyContactPhone= employeeModel.EmergencyContactPhone;
-            employee.Password = employeeModel.Password;
             employee.Email = employeeModel.Email;
-            employee.LoginName = employeeModel.Email;
             employee.PhoneMobile = employeeModel.PhoneMobile;
             employee.City = employeeModel.City;
             employee.State = employeeModel.State;
             employee.ZipCode = employeeModel.ZipCode;
-            employee.Status= employeeModel.Status;
             employee.Notes = employeeModel.Notes;
-            employee.UserRoles = model.RolesInput;//model.UserRoleSelectBoxPickerDto.Selected.Aggregate((i, j) => i + "," + j);
-            return employee;
+            employee.UserLoginInfo = new UserLoginInfo()
+            {
+                Password = employee.UserLoginInfo.Password,
+                LoginName = employee.Email,
+                Status = employee.UserLoginInfo.Status,
+                UserRoles = UserRole.Employee.ToString(),
+                UserType = UserRole.Employee.ToString(),
+            }; return employee;
         }
     }
 }

@@ -60,7 +60,7 @@ namespace KnowYourTurf.Web.Controllers
             dictionary.Add(WebLocalizationKeys.CHEMICALS.ToString(), chemicals);
             dictionary.Add(WebLocalizationKeys.MATERIALS.ToString(), materials);
             dictionary.Add(WebLocalizationKeys.FERTILIZERS.ToString(), fertilizer);
-            var availableEmployees = _repository.FindAll<Employee>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
+            var availableEmployees = _repository.FindAll<User>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
             var selectedEmployees = task.GetEmployees().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
             var availableEquipment = _repository.FindAll<Equipment>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             var selectedEquipment = task.GetEquipment().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
@@ -102,7 +102,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 if (model.Task.EntityId <= 0)
                 {
-                    var employee = _repository.Find<Employee>(input.ParentId);
+                    var employee = _repository.Find<User>(input.ParentId);
                     model.SelectedEmployees.Add(new TokenInputDto { id = employee.EntityId.ToString(), name = employee.FullName });
                 }
             }
@@ -181,7 +181,7 @@ namespace KnowYourTurf.Web.Controllers
             task.ClearEmployees();
             task.ClearEquipment(); 
             if(model.EmployeeInput.IsNotEmpty())
-                model.EmployeeInput.Split(',').Each(x => task.AddEmployee(_repository.Find<Employee>(Int32.Parse(x))));
+                model.EmployeeInput.Split(',').Each(x => task.AddEmployee(_repository.Find<User>(Int32.Parse(x))));
             if(model.EquipmentInput.IsNotEmpty())
                 model.EquipmentInput.Split(',').Each(x => task.AddEquipment(_repository.Find<Equipment>(Int32.Parse(x))));
 

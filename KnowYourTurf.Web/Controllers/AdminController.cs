@@ -31,11 +31,11 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Admin(ViewModel input)
         {
-            var admin = input.EntityId > 0 ? _repository.Find<Administrator>(input.EntityId) : new Administrator();
+            var admin = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
             
-            var model = new AdminViewModel
+            var model = new UserViewModel
             {
-                Administrator = admin,
+                User = admin,
                 Title = WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString()
             };
             return PartialView("AdminAddUpdate", model);
@@ -43,10 +43,10 @@ namespace KnowYourTurf.Web.Controllers
       
         public ActionResult Display(ViewModel input)
         {
-            var admin = _repository.Find<Administrator>(input.EntityId);
-            var model = new AdminViewModel
+            var admin = _repository.Find<User>(input.EntityId);
+            var model = new UserViewModel
                             {
-                                Administrator = admin,
+                                User= admin,
                                 AddEditUrl = UrlContext.GetUrlForAction<AdminController>(x => x.Admin(null)) + "/" + admin.EntityId,
                                 Title = WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString()
                             };
@@ -55,7 +55,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Delete(ViewModel input)
         {
-            var admin = _repository.Find<Administrator>(input.EntityId);
+            var admin = _repository.Find<User>(input.EntityId);
             var rulesEngineBase = ObjectFactory.Container.GetInstance<RulesEngineBase>("DeleteAdminRules");
             var rulesResult = rulesEngineBase.ExecuteRules(admin);
             if(!rulesResult.Success)
@@ -68,16 +68,16 @@ namespace KnowYourTurf.Web.Controllers
             return null;
         }
 
-        public ActionResult Save(AdminViewModel input)
+        public ActionResult Save(UserViewModel input)
         {
-            Administrator administrator;
-            if (input.Administrator.EntityId > 0)
+            User administrator;
+            if (input.User.EntityId > 0)
             {
-                administrator = _repository.Find<Administrator>(input.Administrator.EntityId);
+                administrator = _repository.Find<User>(input.User.EntityId);
             }
             else
             {
-                administrator = new Administrator();
+                administrator = new User();
                 var company = _sessionContext.GetCurrentCompany();
                 administrator.Company = company;
             }
@@ -92,36 +92,34 @@ namespace KnowYourTurf.Web.Controllers
             var serverDirectory = "/CustomerPhotos/" + administrator.CompanyId + "/Admins";
             administrator.ImageUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, administrator.FirstName+"_"+administrator.LastName);
             var crudManager = _saveEntityService.ProcessSave(administrator);
-            if(administrator.IsAnEmployee)
-            {
                 var user = _repository.Find<User>(administrator.EntityId);
-                var employee = user as Employee;
-                _saveEntityService.ProcessSave(employee,crudManager);
-            }
+                _saveEntityService.ProcessSave(user,crudManager);
             crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, administrator.FirstName + "_" + administrator.LastName, crudManager);
             var notification = crudManager.Finish();
             return Json(notification,"text/plain");
         }
 
-        private Administrator mapToDomain(AdminViewModel model, Administrator administrator)
+        private User mapToDomain(UserViewModel model, User administrator)
         {
-            var adminModel = model.Administrator;
-            administrator.AdminId = adminModel.AdminId;
+            var adminModel = model.User;
             administrator.Address1 = adminModel.Address1;
             administrator.Address2= adminModel.Address2;
             administrator.FirstName= adminModel.FirstName;
             administrator.LastName = adminModel.LastName;
-            administrator.Password = adminModel.Password;
             administrator.Email = adminModel.Email;
-            administrator.LoginName = adminModel.Email;
             administrator.PhoneMobile = adminModel.PhoneMobile;
             administrator.City = adminModel.City;
             administrator.State = adminModel.State;
             administrator.ZipCode = adminModel.ZipCode;
-            administrator.Status= adminModel.Status;
             administrator.Notes = adminModel.Notes;
-            administrator.IsAnEmployee = adminModel.IsAnEmployee;
-            administrator.UserRoles = UserRole.Administrator.ToString();
+            administrator.UserLoginInfo = new UserLoginInfo()
+                                              {
+                                                  Password = adminModel.UserLoginInfo.Password,
+                                                  LoginName = adminModel.Email,
+                                                  Status = adminModel.UserLoginInfo.Status,
+                                                  UserRoles = UserRole.Administrator.ToString(),
+                                                  UserType = UserRole.Administrator.ToString(),
+                                              };
             return administrator;
         }
     }

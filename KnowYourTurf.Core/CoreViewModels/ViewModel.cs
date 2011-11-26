@@ -11,7 +11,6 @@ namespace KnowYourTurf.Core
         public long RootId { get; set; }
         public string AddEditUrl { get; set; }
         public string From { get; set; }
-        public User User { get; set; }
         public string Title { get; set; }
     }
 

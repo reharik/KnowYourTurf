@@ -36,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var entityId = input.EntityId>0?input.EntityId:_sessionContext.GetUserId();
 
-            var employee = _repository.Find<Employee>(entityId);
+            var employee = _repository.Find<User>(entityId);
             var url = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasks(null)) + "?ParentId=" + entityId;
             var completeUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasks(null)) + "?ParentId=" + entityId;
             var model = new EmployeeDashboardViewModel

@@ -12,17 +12,17 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public class EmployeeListGrid : Grid<Employee>, IEntityListGrid<Employee>
+    public class EmployeeListGrid : Grid<User>, IEntityListGrid<User>
     {
 
-        public EmployeeListGrid(IGridBuilder<Employee> gridBuilder,
+        public EmployeeListGrid(IGridBuilder<User> gridBuilder,
             ISessionContext sessionContext,
             IRepository repository)
             : base(gridBuilder, sessionContext, repository)
         {
         }
 
-        protected override Grid<Employee> BuildGrid()
+        protected override Grid<User> BuildGrid()
         {
             GridBuilder.ImageButtonColumn()
                .ForAction<EmployeeController>(x => x.Delete(null))

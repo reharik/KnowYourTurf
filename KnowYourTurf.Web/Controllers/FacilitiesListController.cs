@@ -2,23 +2,24 @@
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Grids;
 using KnowYourTurf.Web.Models;
+using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
     public class FacilitiesListController : AdminControllerBase
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-       private readonly IEntityListGrid<Facilities> _gridHandlerService;
+       private readonly IEntityListGrid<User> _gridHandlerService;
 
-        public FacilitiesListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IEntityListGrid<Facilities> gridHandlerService)
+        public FacilitiesListController(IDynamicExpressionQuery dynamicExpressionQuery)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _gridHandlerService = gridHandlerService;
+            _gridHandlerService = ObjectFactory.Container.GetInstance<IEntityListGrid<User>>("Facilities");
         }
 
         public ActionResult FacilitiesList()
@@ -34,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult Facilitiess(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<Facilities>(input.filters);
+            var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserLoginInfo.UserType==UserRole.Facilities.ToString());
             var gridItemsViewModel = _gridHandlerService.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }

@@ -50,11 +50,11 @@ namespace KnowYourTurf.Core.Domain
             _equipment.Add(equipment);
         }
 
-        public virtual void ClearEmployees() { _employees = new List<Employee>(); }
-        private IList<Employee> _employees = new List<Employee>();
-        public virtual IEnumerable<Employee> GetEmployees() { return _employees; }
-        public virtual void RemoveEmployee(Employee employee) { _employees.Remove(employee); }
-        public virtual void AddEmployee(Employee employee)
+        public virtual void ClearEmployees() { _employees = new List<User>(); }
+        private IList<User> _employees = new List<User>();
+        public virtual IEnumerable<User> GetEmployees() { return _employees; }
+        public virtual void RemoveEmployee(User employee) { _employees.Remove(employee); }
+        public virtual void AddEmployee(User employee)
         {
             if (!employee.IsNew() && _employees.Contains(employee)) return;
             _employees.Add(employee);

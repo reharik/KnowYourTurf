@@ -10,13 +10,13 @@ namespace KnowYourTurf.Web.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var firstParameter = filterContext.ActionParameters.Values.FirstOrDefault();
-            var viewModel = firstParameter as ViewModel;
-            if(viewModel!=null)
-            {
-                var sessionContext = ObjectFactory.Container.GetInstance<ISessionContext>();
-                viewModel.User = sessionContext.GetCurrentUser();
-            }
+//            var firstParameter = filterContext.ActionParameters.Values.FirstOrDefault();
+//            var viewModel = firstParameter as ViewModel;
+//            if(viewModel!=null)
+//            {
+//                var sessionContext = ObjectFactory.Container.GetInstance<ISessionContext>();
+//                viewModel.User = sessionContext.GetCurrentUser();
+//            }
             base.OnActionExecuting(filterContext);
         }
     }

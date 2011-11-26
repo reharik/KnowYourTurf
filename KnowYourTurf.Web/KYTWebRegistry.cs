@@ -19,11 +19,9 @@ using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using Rhino.Security.Interfaces;
 using Rhino.Security.Services;
-using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
 using PurchaseOrderLineItemGrid = KnowYourTurf.Web.Grids.PurchaseOrderLineItemGrid;
-using ReceivePurchaseOrderLineItemGrid = KnowYourTurf.Web.Grids.ReceivePurchaseOrderLineItemGrid;
 
 namespace KnowYourTurf.Web
 {
@@ -82,6 +80,13 @@ namespace KnowYourTurf.Web
             For<IEntityListGrid<Task>>().Use<TaskListGrid>();
             For<IEntityListGrid<Task>>().Add<CompletedTaskGrid>().Named("CompletedTasks");
             For<IEntityListGrid<Task>>().Add<PendingTaskGrid>().Named("PendingTasks");
+
+            For<IEntityListGrid<User>>().Use<EmployeeListGrid>();
+            For<IEntityListGrid<User>>().Add<AdminListGrid>().Named("Admins");
+            For<IEntityListGrid<User>>().Add<FacilitiesListGrid>().Named("Facilities");
+
+            For<IEntityListGrid<PurchaseOrderLineItem>>().Use<PurchaseOrderLineItemGrid>();
+
 
         }
     }

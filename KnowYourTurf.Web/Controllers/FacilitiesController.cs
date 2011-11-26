@@ -31,11 +31,11 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Facilities(ViewModel input)
         {
-            var facilities = input.EntityId > 0 ? _repository.Find<Facilities>(input.EntityId) : new Facilities();
+            var facilities = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
             
-            var model = new FacilitiesViewModel
+            var model = new UserViewModel
             {
-                Facilities = facilities,
+                User = facilities,
                 Title = WebLocalizationKeys.FACILITIES.ToString()
             };
             return PartialView("FacilitiesAddUpdate", model);
@@ -43,10 +43,10 @@ namespace KnowYourTurf.Web.Controllers
       
         public ActionResult Display(ViewModel input)
         {
-            var facilities = _repository.Find<Facilities>(input.EntityId);
-            var model = new FacilitiesViewModel
+            var facilities = _repository.Find<User>(input.EntityId);
+            var model = new UserViewModel
                             {
-                                Facilities = facilities,
+                                User = facilities,
                                 AddEditUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)) + "/" + facilities.EntityId,
                                 Title = WebLocalizationKeys.FACILITIES.ToString()
                             };
@@ -55,7 +55,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Delete(ViewModel input)
         {
-            var facilities = _repository.Find<Facilities>(input.EntityId);
+            var facilities = _repository.Find<User>(input.EntityId);
             var rulesEngineBase = ObjectFactory.Container.GetInstance<RulesEngineBase>("DeleteFacilitiesRules");
             var rulesResult = rulesEngineBase.ExecuteRules(facilities);
             if(!rulesResult.Success)
@@ -68,16 +68,16 @@ namespace KnowYourTurf.Web.Controllers
             return null;
         }
 
-        public ActionResult Save(FacilitiesViewModel input)
+        public ActionResult Save(UserViewModel input)
         {
-            Facilities facilities;
-            if (input.Facilities.EntityId > 0)
+            User facilities;
+            if (input.User.EntityId > 0)
             {
-                facilities = _repository.Find<Facilities>(input.Facilities.EntityId);
+                facilities = _repository.Find<User>(input.User.EntityId);
             }
             else
             {
-                facilities = new Facilities();
+                facilities = new User();
                 var companyId = _sessionContext.GetCompanyId();
                 var company = _repository.Find<Company>(companyId);
                 facilities.Company = company;
@@ -99,24 +99,27 @@ namespace KnowYourTurf.Web.Controllers
             return Json(notification,"text/plain");
         }
 
-        private Facilities mapToDomain(FacilitiesViewModel model, Facilities facilities)
+        private User mapToDomain(UserViewModel model, User facilities)
         {
-            var facilitiesModel = model.Facilities;
-            facilities.FacilitiesId = facilitiesModel.FacilitiesId;
+            var facilitiesModel = model.User;
             facilities.Address1 = facilitiesModel.Address1;
             facilities.Address2= facilitiesModel.Address2;
             facilities.FirstName= facilitiesModel.FirstName;
             facilities.LastName = facilitiesModel.LastName;
-            facilities.Password = facilitiesModel.Password;
             facilities.Email = facilitiesModel.Email;
-            facilities.LoginName = facilitiesModel.Email;
             facilities.PhoneMobile = facilitiesModel.PhoneMobile;
             facilities.City = facilitiesModel.City;
             facilities.State = facilitiesModel.State;
             facilities.ZipCode = facilitiesModel.ZipCode;
-            facilities.Status= facilitiesModel.Status;
             facilities.Notes = facilitiesModel.Notes;
-            facilities.UserRoles = UserRole.Facilities.ToString();
+            facilities.UserLoginInfo = new UserLoginInfo()
+            {
+                Password = facilitiesModel.UserLoginInfo.Password,
+                LoginName = facilitiesModel.Email,
+                Status = facilitiesModel.UserLoginInfo.Status,
+                UserRoles = UserRole.Facilities.ToString(),
+                UserType = UserRole.Facilities.ToString(),
+            };
             return facilities;
         }
     }

@@ -19,11 +19,11 @@ namespace KnowYourTurf.UnitTests
     public class when_calling_get_pickerdto
     {
         private ISelectBoxPickerService _selectBoxPickerService;
-        private Employee _validEmployee1;
-        private Employee _validEmployee2;
-        private Employee _validEmployee3;
-        private Employee _validEmployee4;
-        private Employee[] _selectedEmployees;
+        private User _validEmployee1;
+        private User _validEmployee2;
+        private User _validEmployee3;
+        private User _validEmployee4;
+        private User[] _selectedEmployees;
         private SelectBoxPickerDto _result;
         private ISelectListItemService _selectListItemService;
         private SelectListItem[] _selectedSelectListItems;
@@ -52,7 +52,7 @@ namespace KnowYourTurf.UnitTests
                                                new SelectListItem {Text = "emp3", Value = "3"},
                                                new SelectListItem {Text = "emp4", Value = "4"}
                                            };
-            _selectListItemService.Expect(x => x.CreateList<Employee>(null, null, false,true)).IgnoreArguments().Return(_availableSelectListItems);
+            _selectListItemService.Expect(x => x.CreateList<User>(null, null, false,true)).IgnoreArguments().Return(_availableSelectListItems);
             _selectListItemService.Expect(x => x.CreateList(_selectedEmployees, null, null, false)).IgnoreArguments().Return(_selectedSelectListItems);
             _selectBoxPickerService = new SelectBoxPickerService(_selectListItemService, null);
             _result = _selectBoxPickerService.GetPickerDto(_selectedEmployees,x=>x.FullName,x=>x.EntityId);
@@ -94,15 +94,15 @@ namespace KnowYourTurf.UnitTests
     {
 
         private ISelectBoxPickerService _selectBoxPickerService;
-        private Employee _validEmployee1;
-        private Employee _validEmployee2;
-        private Employee[] _selectedEmployees;
+        private User _validEmployee1;
+        private User _validEmployee2;
+        private User[] _selectedEmployees;
         private ISelectListItemService _selectListItemService;
         private SelectListItem _selectListItem1 = new SelectListItem { Text = "emp1", Value = "1" };
         private SelectListItem _selectListItem2 = new SelectListItem { Text = "emp2", Value = "2" };
-        private Employee[] _selectedEntities;
+        private User[] _selectedEntities;
         private SelectBoxPickerDto dto;
-        private IEnumerable<Employee> _result;
+        private IEnumerable<User> _result;
         private IRepository _repo;
 
         [SetUp]
@@ -114,10 +114,10 @@ namespace KnowYourTurf.UnitTests
             _selectedEntities = new[]{_validEmployee1,_validEmployee2};
             dto = new SelectBoxPickerDto{Selected = new[]{"1","2"}};
             _repo = MockRepository.GenerateMock<IRepository>();
-            _repo.Expect(x => x.Find<Employee>(1)).Return(_validEmployee1);
-            _repo.Expect(x => x.Find<Employee>(2)).Return(_validEmployee2);
+            _repo.Expect(x => x.Find<User>(1)).Return(_validEmployee1);
+            _repo.Expect(x => x.Find<User>(2)).Return(_validEmployee2);
             _selectBoxPickerService = new SelectBoxPickerService(_selectListItemService,_repo);
-            _result = _selectBoxPickerService.GetListOfSelectedEntities<Employee>(dto);
+            _result = _selectBoxPickerService.GetListOfSelectedEntities<User>(dto);
         }
 
         [Test]

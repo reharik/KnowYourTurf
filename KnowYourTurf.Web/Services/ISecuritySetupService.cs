@@ -110,16 +110,16 @@ namespace KnowYourTurf.Web.Services
 
         public void AssociateAllUsersWithThierTypeGroup()
         {
-            var admins = _repository.Query<Employee>(x => x.UserRoles.Contains(UserRole.Administrator.ToString()));
+            var admins = _repository.Query<User>(x => x.UserLoginInfo.UserRoles.Contains(UserRole.Administrator.ToString()));
             admins.Each(x => _authorizationRepository.AssociateUserWith(x, UserRole.Administrator.Key));
-            var employees = _repository.FindAll<Employee>();
+            var employees = _repository.FindAll<User>();
             employees.Each(x => _authorizationRepository.AssociateUserWith(x, UserRole.Employee.Key));
-            
-            var facilities = _repository.FindAll<Facilities>();
+
+            var facilities = _repository.Query<User>(x => x.UserLoginInfo.UserRoles.Contains(UserRole.Facilities.ToString()));
             facilities.Each(x => _authorizationRepository.AssociateUserWith(x, UserRole.Facilities.Key));
-            var multiTenantUsers = _repository.FindAll<MultiTenantUser>();
+            var multiTenantUsers = _repository.Query<User>(x => x.UserLoginInfo.UserRoles.Contains(UserRole.MultiTenant.ToString()));
             multiTenantUsers.Each(x => _authorizationRepository.AssociateUserWith(x, UserRole.MultiTenant.Key));
-            var kytAdministrators = _repository.FindAll<KYTAdministrator>();
+            var kytAdministrators = _repository.Query<User>(x => x.UserLoginInfo.UserRoles.Contains(UserRole.KYTAdmin.ToString()));
             kytAdministrators.Each(x =>
                                        {
                                            _authorizationRepository.AssociateUserWith(x, UserRole.KYTAdmin.Key);

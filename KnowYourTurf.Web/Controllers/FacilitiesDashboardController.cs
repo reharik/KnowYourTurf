@@ -25,10 +25,10 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ViewFacilities(ViewModel input)
         {
-            var facilities = _repository.Find<Facilities>(input.EntityId);
-            var model = new FacilitiesViewModel
+            var facilities = _repository.Find<User>(input.EntityId);
+            var model = new UserViewModel
             {
-                Facilities = facilities,
+                User = facilities,
                 AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" + input.EntityId+"&From=Facilities",
                
             };
