@@ -39,7 +39,7 @@ namespace KnowYourTurf.Web.Services
             var folderPath = _sessionContext.MapPath(systemFolder);
             var extension = file.FileName.Substring(file.FileName.LastIndexOf("."));
             var newName = fileNameNoExtension + extension;
-            string filePath = folderPath + "\\" + newName;
+            string filePath = folderPath + "\\" + GetGeneratedFileName(newName);
             var exists = Directory.Exists(folderPath);
             if (!exists)
             {
@@ -75,7 +75,13 @@ namespace KnowYourTurf.Web.Services
                 var extension = file.FileName.Substring(file.FileName.LastIndexOf("."));
                 fileName = fileNameNoExtension + extension;
             }
-            return serverDirectory + "/" + fileName;
+            return serverDirectory + "/" + GetGeneratedFileName(fileName);
+        }
+
+        public string GetGeneratedFileName(string fileName)
+        {
+            var dateTimeForFileName = string.Format("{0:yyyyMMdd-HHmmss}", DateTime.Now);
+            return dateTimeForFileName + fileName;
         }
     }
 }

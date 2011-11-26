@@ -11,7 +11,6 @@
 <script>
     
 </script>
-        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
 
             @MvcHtmlString.Create(FormFor<ChemicalController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.Chemical.EntityId).ToString())

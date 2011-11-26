@@ -107,7 +107,7 @@ namespace KnowYourTurf.Web.Controllers
                items = field.GetPhotos().Where(photoWhereClause.Compile());
            }
             var gridItemsViewModel = _photoListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable(),
-                                                                          "photoGridContainer");
+                                                                          "photoGrid");
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 
@@ -124,7 +124,7 @@ namespace KnowYourTurf.Web.Controllers
                 items = field.GetDocuments().Where(documentWhereClause.Compile());
             }
             var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable(),
-                                                                          "documentGridContainer");
+                                                                          "documentGrid");
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

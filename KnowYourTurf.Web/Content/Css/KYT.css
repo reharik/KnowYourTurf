@@ -9,7 +9,7 @@ body {
     padding:0 0 0em;
 
     background: url("../images/ui-bgMark_loop_25_000000_21x21.png") repeat scroll 50% 50% #000000;
-
+     margin:auto;
 }
 
  
@@ -358,3 +358,4 @@ html {
 .KYT_selectboxAddItem{}
 .KYT_selectboxRemoveItem{}
 .KYT_selectboxPicker_error_message{}
+

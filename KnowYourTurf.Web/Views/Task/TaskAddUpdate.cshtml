@@ -28,7 +28,6 @@
     extraFormOptions.equipmentOptions = equipmentOptions;
 </script>
     
-        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
 
             @MvcHtmlString.Create(FormFor<TaskController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.Task.EntityId).ToString())

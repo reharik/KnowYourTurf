@@ -6,7 +6,6 @@
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
-        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
 
             @MvcHtmlString.Create(FormFor("~/TaskType/SaveEventType").Class("CRUD").ElementId("CRUDForm").ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.ListType.EntityId).ToString())

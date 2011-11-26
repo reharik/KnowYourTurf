@@ -69,12 +69,12 @@
             @MvcHtmlString.Create(Html.ViewFor(x => x.Field.Size).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToString())
         </div>
     <div class="grid_9">
-       <div id="photoSlide" class="svwp">
+       <div id="photoSlide" >
            <ul>
                 @foreach (var photo in Model.Field.GetPhotos())
                 {
                     <li>
-                        <img  width="710" height="290"  src="@photo.FileUrl" />
+                        <img  width="500" height="290"  src="@photo.FileUrl" />
                     </li>
                 }
             </ul>

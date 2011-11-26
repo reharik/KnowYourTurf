@@ -63,19 +63,24 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             addEditUrl:this.options.documentaddEditUrl
         };
         this.views.documentGridView = new kyt.GridView(dgOptions);
+        if($("ul li","#photoSlide").size()>0){
+            this.loadPhotoSlide();
+        }
+    },
 
+    loadPhotoSlide: function(){
         $("#photoSlide").slideViewerPro({
             thumbs: 4,
             typo: true,
             galBorderWidth: 0,
             thumbsBorderOpacity: 0,
             buttonsTextColor: "#707070",
-            buttonsWidth: 40,
+            buttonsWidth: 20,
             thumbsActiveBorderOpacity: 0.8,
             thumbsActiveBorderColor: "aqua"
         });
+        this.options.photoSlideLoaded = true;
     },
-
     registerSubscriptions: function(){
         // from grid
         $.subscribe('/grid_pendingTaskGrid/AddNewItem',$.proxy(function(url,data){this.addEditItem(url,data,"pendingTaskForm")},this), this.cid);
@@ -191,13 +196,25 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
 
     },
     //from form
+    photoFormSuccess:function(result,form,id){
+        // I don't know how to reload this dumb thing for new doc.
+        // will look for better slider then add the new
+        //doc to slider here
+        if(!this.options.PhotoslideLoaded){
+            this.loadPhotoSlide();
+        }
+        this.popupCancel(id);
+        this.views[this.getRootOfName(id) +"GridView"].reloadGrid();
+        if(id=="pendingTaskForm"){
+            this.views["completeTaskGridView"].reloadGrid();
+        }
+    },
     formSuccess:function(result,form,id){
         this.popupCancel(id);
         this.views[this.getRootOfName(id) +"GridView"].reloadGrid();
         if(id=="pendingTaskForm"){
             this.views["completeTaskGridView"].reloadGrid();
         }
-
     },
     popupCancel: function(id){
         this.modules[id].destroy();

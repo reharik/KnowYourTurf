@@ -12,7 +12,6 @@
             @MvcHtmlString.Create(WebLocalizationKeys.PURCHASE_ORDER_LIST_ITEM_INFORMATION.ToString())
         </div>
         
-        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
 
             @MvcHtmlString.Create(FormFor<PurchaseOrderController>(x=>x.SaveItem(null)).Class("CRUD").ElementId("CRUDForm").ToString())
             <input type="hidden" id="ParentId" name="ParentId" value="@Model.PurchaseOrderLineItem.PurchaseOrder.EntityId"/>

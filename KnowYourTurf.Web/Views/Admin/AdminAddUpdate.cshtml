@@ -1,4 +1,4 @@
-﻿@model KnowYourTurf.Web.Models.AdminViewModel
+﻿@model KnowYourTurf.Web.Models.UserViewModel
 @using KnowYourTurf.Core
 @using KnowYourTurf.Web
 @using KnowYourTurf.Core.Html.FubuUI
@@ -29,10 +29,8 @@
 
         <div class="KYT_section_header" >
             @MvcHtmlString.Create(WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString())
-        </div>-
+        </div>
         
-        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
-
             @MvcHtmlString.Create(FormFor<AdminController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.Administrator.EntityId).ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())

@@ -9,8 +9,6 @@
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
 
-        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
-
             @MvcHtmlString.Create(FormFor<MaterialController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.Material.EntityId).ToString())
             @MvcHtmlString.Create(Html.SubmissionFor(x => x.Material.Name).ToString())

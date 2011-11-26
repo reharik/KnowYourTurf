@@ -32,7 +32,6 @@
             @MvcHtmlString.Create(WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString())
         </div>
         
-        <div id="puErrorMessages" class="puErrorMessages KYT_errorMessages" ><ul></ul></div>   
 
             @MvcHtmlString.Create(FormFor<FacilitiesController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.Facilities.EntityId).ToString())
