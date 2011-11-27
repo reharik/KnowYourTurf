@@ -191,7 +191,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
     photoFormSuccess:function(result,form,id){
         if(!this.options.galleriaLoaded){
             $("#galleria").append("<img src='"+result.Variable+"'>");
-            this.opitons.galleriaLoaded = true;
+            this.options.galleriaLoaded = true;
             Galleria.loadTheme('/content/themes/galleria/galleria.classic.min.js');
             $("#galleria").galleria({
                 width: 500,
@@ -200,9 +200,8 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
         }else{
             var gal = Galleria.get(0);
             gal.push({image:result.Variable});
+            gal.show( $("#galleria img").size()-1 );
         }
-        var gal = Galleria.get(0);
-        gal.show( $("#galleria img").size()-1 );
         this.popupCancel(id);
         this.views[this.getRootOfName(id) +"GridView"].reloadGrid();
         if(id=="pendingTaskForm"){
