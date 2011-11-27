@@ -63,24 +63,16 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             addEditUrl:this.options.documentaddEditUrl
         };
         this.views.documentGridView = new kyt.GridView(dgOptions);
-        if($("ul li","#photoSlide").size()>0){
-            this.loadPhotoSlide();
+        if($("#galleria img").size()>0){
+            this.options.galleriaLoaded = true;
+            Galleria.loadTheme('/content/themes/galleria/galleria.classic.min.js');
+            $("#galleria").galleria({
+                width: 500,
+                height: 500
+            });
         }
     },
 
-    loadPhotoSlide: function(){
-        $("#photoSlide").slideViewerPro({
-            thumbs: 4,
-            typo: true,
-            galBorderWidth: 0,
-            thumbsBorderOpacity: 0,
-            buttonsTextColor: "#707070",
-            buttonsWidth: 20,
-            thumbsActiveBorderOpacity: 0.8,
-            thumbsActiveBorderColor: "aqua"
-        });
-        this.options.photoSlideLoaded = true;
-    },
     registerSubscriptions: function(){
         // from grid
         $.subscribe('/grid_pendingTaskGrid/AddNewItem',$.proxy(function(url,data){this.addEditItem(url,data,"pendingTaskForm")},this), this.cid);
@@ -106,7 +98,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
         $.subscribe('/form_pendingTaskForm/success', $.proxy(this.formSuccess,this), this.cid);
         $.subscribe('/form_pendingTaskForm/cancel', $.proxy(this.popupCancel,this), this.cid);
 
-        $.subscribe('/form_photoForm/success', $.proxy(this.formSuccess,this), this.cid);
+        $.subscribe('/form_photoForm/success', $.proxy(this.photoFormSuccess,this), this.cid);
         $.subscribe('/form_photoForm/cancel', $.proxy(this.popupCancel,this), this.cid);
 
         $.subscribe('/form_documentForm/success', $.proxy(this.formSuccess,this), this.cid);
@@ -197,12 +189,20 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
     },
     //from form
     photoFormSuccess:function(result,form,id){
-        // I don't know how to reload this dumb thing for new doc.
-        // will look for better slider then add the new
-        //doc to slider here
-        if(!this.options.PhotoslideLoaded){
-            this.loadPhotoSlide();
+        if(!this.options.galleriaLoaded){
+            $("#galleria").append("<img src='"+result.Variable+"'>");
+            this.opitons.galleriaLoaded = true;
+            Galleria.loadTheme('/content/themes/galleria/galleria.classic.min.js');
+            $("#galleria").galleria({
+                width: 500,
+                height: 500
+            });
+        }else{
+            var gal = Galleria.get(0);
+            gal.push({image:result.Variable});
         }
+        var gal = Galleria.get(0);
+        gal.show( $("#galleria img").size()-1 );
         this.popupCancel(id);
         this.views[this.getRootOfName(id) +"GridView"].reloadGrid();
         if(id=="pendingTaskForm"){

@@ -83,6 +83,7 @@ namespace KnowYourTurf.Web.Controllers
             crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, newDoc.Name, crudManager);
             
             var notification = crudManager.Finish();
+            notification.Variable = photo.FileUrl;
             return Json(notification, "text/plain");
         }
 
