@@ -20,7 +20,7 @@ namespace KnowYourTurf.Core.Domain
         {
             Success = rulesResult.Success;
             if(!Success && rulesResult.RuleResults.Count>1) Errors = new List<ErrorInfo>();
-            rulesResult.RuleResults.Each(x => Errors.Add(new ErrorInfo(CoreLocalizationKeys.DELETE_EMPLOYEE.ToString(), x.Message)));
+            rulesResult.RuleResults.Each(x => Errors.Add(new ErrorInfo(CoreLocalizationKeys.BUISNESS_RULE.ToString(), x.Message)));
         }
 
         public Notification(Continuation continuation)

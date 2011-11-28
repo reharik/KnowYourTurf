@@ -43,11 +43,8 @@ namespace KnowYourTurf.Web.Controllers
     public class UserViewModel:ViewModel
     {
         public User User { get; set; }
-
         public bool DeleteImage { get; set; }
-
         public IEnumerable<TokenInputDto> AvailableItems { get; set; }
-
         public IEnumerable<TokenInputDto> SelectedItems{ get; set; }
     }
 }

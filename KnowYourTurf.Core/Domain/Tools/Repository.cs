@@ -11,7 +11,6 @@ namespace KnowYourTurf.Core.Domain
     public class Repository : IRepository
     {
         private readonly IUnitOfWork _unitOfWork;
-
         public IUnitOfWork UnitOfWork
         {
             get { return _unitOfWork; }
