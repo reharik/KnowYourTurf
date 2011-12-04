@@ -158,13 +158,13 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
         this.modules[name] = new kyt.PopupDisplayModule(moduleOptions);
     },
     deletePendingTask:function(url){
-        kyt.repository.ajaxPost(url)
+        kyt.repository.ajaxPost(url, $.proxy(function(){this.views.pendingTaskGridView.reloadGrid()},this))
     },
     deletePhoto:function(url){
-        kyt.repository.ajaxPost(url)
+        kyt.repository.ajaxPost(url, $.proxy(function(){this.views.photoGridView.reloadGrid()},this))
     },
     deleteDocument:function(url){
-        kyt.repository.ajaxPost(url)
+        kyt.repository.ajaxPost(url, $.proxy(function(){this.views.documentGridView.reloadGrid()},this))
     },
     //from popupformmodule
     loadTokenizers:function(formOptions){
