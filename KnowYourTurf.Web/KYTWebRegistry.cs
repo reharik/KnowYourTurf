@@ -87,6 +87,9 @@ namespace KnowYourTurf.Web
 
             For<IEntityListGrid<PurchaseOrderLineItem>>().Use<PurchaseOrderLineItemGrid>();
 
+            For<IEntityListGrid<Material>>().Use<MaterialListGrid>();
+            For<IEntityListGrid<Chemical>>().Use<ChemicalListGrid>();
+            For<IEntityListGrid<Fertilizer>>().Use<FertilizerListGrid>();
 
         }
     }

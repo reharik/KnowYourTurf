@@ -44,6 +44,7 @@ namespace KnowYourTurf.Web.Controllers
     {
         public User User { get; set; }
         public bool DeleteImage { get; set; }
+        public string RolesInput { get; set; }
         public IEnumerable<TokenInputDto> AvailableItems { get; set; }
         public IEnumerable<TokenInputDto> SelectedItems{ get; set; }
     }

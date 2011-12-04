@@ -1,3 +1,5 @@
+using KnowYourTurf.Core.Config;
+
 namespace KnowYourTurf.Core.Html.Expressions
 {
     public class ImageExpression : HtmlCommonExpressionBase
@@ -8,7 +10,7 @@ namespace KnowYourTurf.Core.Html.Expressions
         public ImageExpression(string imageSrcUrl)
         {
             _imageSrcUrl = imageSrcUrl;
-            _baseUrl = "~/content/images/";
+            _baseUrl = SiteConfig.Settings().ImagesPath;
         }
 
         public override string ToString()

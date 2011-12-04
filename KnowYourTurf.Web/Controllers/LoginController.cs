@@ -48,7 +48,7 @@ namespace KnowYourTurf.Web.Controllers
                     notification.Redirect = true;
                 }
 
-                if(user.UserLoginInfo.UserType==UserRole.Facilities.ToString())
+                if (user != null && user.UserLoginInfo.UserType == UserRole.Facilities.ToString())
                 {
                     notification.RedirectUrl = UrlContext.GetUrlForAction<EventCalendarController>(x => x.EventCalendar());
                 }
@@ -56,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
                 //{
                 //    notification.RedirectUrl = redirectUrl;
                 //}
-                else if (user.UserLoginInfo.UserType == UserRole.Employee.ToString())
+                else if (user != null && user.UserLoginInfo.UserType == UserRole.Employee.ToString())
                 {
                     notification.RedirectUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.ViewEmployee(null)) + "/" + user.EntityId;
                 }

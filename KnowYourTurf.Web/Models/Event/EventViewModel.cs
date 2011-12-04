@@ -22,7 +22,6 @@ namespace KnowYourTurf.Web.Models
     {
         public DateTime? StartTime { get; set; }
         public bool Copy { get; set; }
-
         public DateTime? ScheduledDate { get; set; }
     }
 }

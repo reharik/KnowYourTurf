@@ -1,24 +1,21 @@
 /**
  * Created by JetBrains RubyMine.
  * User: Owner
- * Date: 11/5/11
- * Time: 2:47 PM
+ * Date: 12/4/11
+ * Time: 5:25 AM
  * To change this template use File | Settings | File Templates.
  */
 
-if (typeof kyt == "undefined") {
-    var kyt = {};
-}
-
-kyt.TaskListController = kyt.CrudController.extend({
+kyt.TaskCalendarController = kyt.CalendarController.extend({
     events:_.extend({
-    }, kyt.CrudController.prototype.events),
+    }, kyt.CalendarController.prototype.events),
+
     additionalSubscriptions:function(){
-        $.subscribe('/popupFormModule_/popupLoaded',$.proxy(this.loadTokenizers,this), this.cid);
+        $.subscribe('/popupFormModule_editModule/popupLoaded',$.proxy(this.loadTokenizers,this), this.cid);
     },
     loadTokenizers:function(formOptions){
         var employeeTokenOptions = {
-            id:"employee",
+            id:this.id+"employee",
             el:"#employeeTokenizer",
             availableItems:formOptions.employeeOptions.availableItems,
             selectedItems:formOptions.employeeOptions.selectedItems,
@@ -26,7 +23,7 @@ kyt.TaskListController = kyt.CrudController.extend({
         };
 
         var equipmentTokenOptions = {
-            id:"equipment",
+            id:this.id+"equipment",
             el:"#equipmentTokenizer",
             availableItems:formOptions.equipmentOptions.availableItems,
             selectedItems:formOptions.equipmentOptions.selectedItems,
@@ -37,4 +34,3 @@ kyt.TaskListController = kyt.CrudController.extend({
 
     }
 });
-

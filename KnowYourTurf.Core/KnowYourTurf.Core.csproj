@@ -130,6 +130,7 @@
     <Compile Include="Config\CustomPrincipal.cs" />
     <Compile Include="Config\NullSqlServerSessionSourceConfiguration.cs" />
     <Compile Include="Config\SaveUpdateInterceptorWithCompanyFilter.cs" />
+    <Compile Include="Config\SiteConfiguration.cs" />
     <Compile Include="CoreViewModels\CalendarViewModel.cs" />
     <Compile Include="Config\FilterDefinition.cs" />
     <Compile Include="Config\SqlServerSessionSourceConfiguration.cs">

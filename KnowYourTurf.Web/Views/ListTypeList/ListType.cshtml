@@ -9,23 +9,23 @@
 }
 <script>
     crudOptions.gridInfo = {
-        addEditUrl: crudOptions.addEditUrl,
+        addEditUrl:  "@Model.AddEditUrlET",
         gridDef: crudOptions.gridDef,
         title: crudOptions.title
     };
     crudOptions.ttGridInfo = {
-        addEditUrl: crudOptions.addEditUrl,
+        addEditUrl: "@Model.AddEditUrlTT",
         gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionTT)) ,
         title: "@Model.PopupTitleTT"
     };
-    crudOptions.pcGridInfo = {
-        addEditUrl: crudOptions.addEditUrl,
-        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionPC)) ,
+    crudOptions.dcGridInfo = {
+        addEditUrl: "@Model.AddEditUrlDC",
+        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionDC)) ,
         title: "@Model.PopupTitlePC"
     };
-    crudOptions.dcGridInfo = {
-        addEditUrl: crudOptions.addEditUrl,
-        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionDC)) ,
+    crudOptions.pcGridInfo = {
+        addEditUrl: "@Model.AddEditUrlPC",
+        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionPC)) ,
         title: "@Model.PopupTitleDC"
     }; 
     

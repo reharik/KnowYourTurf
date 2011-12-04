@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using FubuMVC.Core.Util;
 using HtmlTags;
+using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
 using Rhino.Security.Interfaces;
 
@@ -45,7 +46,7 @@ namespace KnowYourTurf.Core.Html.Grid
         protected HtmlTag BuildImage(bool header = false)
         {
             var img = new HtmlTag("img");
-            img.Attr("src", "/content/images/" + _imageName);
+            img.Attr("src", SiteConfig.Settings().ImagesPath + _imageName);
             if (header)
             {
                 img.Style("cursor", "hand");

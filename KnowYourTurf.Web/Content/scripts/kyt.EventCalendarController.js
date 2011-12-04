@@ -30,7 +30,9 @@ kyt.CalendarController = kyt.Controller.extend({
         // from display
         $.subscribe('/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
         $.subscribe('/popup_displayModule/edit', $.proxy(this.displayEdit,this), this.cid);
+        this.additionalSubscriptions();
     },
+    additionalSubscriptions:function(){},
     dayClick:function(date, allDay, jsEvent, view) {
         var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"), "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")};
         this.editEvent(this.options.AddEditUrl,data);

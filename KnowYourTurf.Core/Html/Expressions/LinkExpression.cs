@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Web;
+using KnowYourTurf.Core.Config;
 
 namespace KnowYourTurf.Core.Html.Expressions
 {
@@ -72,7 +73,7 @@ namespace KnowYourTurf.Core.Html.Expressions
 
         public LinkExpression AsStyleSheet()
         {
-            BasedAt("~/content/Css/");
+            BasedAt(SiteConfig.Settings().CssPath);
             Rel("stylesheet");
             Type("text/css");
             return this;

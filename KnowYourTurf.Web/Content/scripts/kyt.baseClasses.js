@@ -13,7 +13,7 @@ Backbone.View.prototype.renderCallback = function(){};
 Backbone.View.prototype.viewLoaded = function(){};
 
 
-kyt.Controller = Backbone.View.extend({
+    kyt.Controller = Backbone.View.extend({
     defaults:function(){
         return {
             views:{},

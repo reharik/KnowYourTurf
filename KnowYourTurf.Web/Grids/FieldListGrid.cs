@@ -40,7 +40,7 @@ namespace KnowYourTurf.Web.Grids
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.Description);
             GridBuilder.DisplayFor(x => x.Size);
-            GridBuilder.DisplayFor(x => x.Description);
+            GridBuilder.DisplayFor(x => x.Abbreviation);
             return this;
         }
     }

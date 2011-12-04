@@ -9,18 +9,21 @@
     @MvcHtmlString.Create(CSS("token-input.css").ToString())
 }
 @section HeaderScripts{
+   @MvcHtmlString.Create(Script("jqueryPlugins/jquery.tokeninput.js").ToString())
    @MvcHtmlString.Create(Script("internalHelpers/jquery.kyt.calendar.js").ToString())
     @MvcHtmlString.Create(Script("kyt.calendar.js").ToString())
     @MvcHtmlString.Create(Script("externalHelpers/fullcalendar.js").ToString())
     @MvcHtmlString.Create(Script("kyt.CalendarView.js").ToString())
     @MvcHtmlString.Create(Script("kyt.EventCalendarController.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.TaskCalendarController.js").ToString())
+
 }
 @section HeaderJavascript{
     var calendarDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CalendarDefinition));
     calendarDef.calendarContainer="#calendar";
     
     $(document).ready(function(){
-        new kyt.CalendarController(calendarDef);
+        new kyt.TaskCalendarController(calendarDef);
         });
 }
 <div id='calendar'></div>

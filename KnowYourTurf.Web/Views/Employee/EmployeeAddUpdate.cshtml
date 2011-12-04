@@ -1,4 +1,4 @@
-﻿@model KnowYourTurf.Web.Models.UserViewModel
+﻿@model UserViewModel
 @using HtmlTags
 @using KnowYourTurf.Core
 @using KnowYourTurf.Web
@@ -20,7 +20,7 @@
     };
     extraFormOptions.rolesOptions = rolesOptions;
     $(document).ready(function () {
-        if ('@Model.Employee.ImageUrl') {
+        if ('@Model.User.ImageUrl') {
             $("#showImage").show();
             $("#newImage").hide();
         } else {
@@ -38,24 +38,23 @@
         
 
             @MvcHtmlString.Create(FormFor<EmployeeController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Employee.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.User.EntityId).ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.EmployeeId).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.FirstName).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.LastName).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.EmployeeType).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.EmergencyContact).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.EmergencyContactPhone).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Password).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Email).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.PhoneMobile).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Address1).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Address2).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.City).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.State).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.ZipCode).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Status).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Employee.Notes).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.EmployeeId).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.FirstName).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.LastName).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.EmergencyContact).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.EmergencyContactPhone).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.UserLoginInfo.Password).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.Email).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.PhoneMobile).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.Address1).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.Address2).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.City).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.State).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.ZipCode).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.UserLoginInfo.Status).ToString())
+            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.Notes).ToString())
             @MvcHtmlString.Create(Html.SubmissionFor(x => x.RolesInput)
                                                             .InputId("RolesInput")
                                                             .HideInput()
@@ -64,7 +63,7 @@
                                                             .ToString())
              
              <div id="showImage" >
-                @MvcHtmlString.Create(Html.ViewFor(x => x.Employee.ImageUrl).HideLabel().AddClassToInput("KYT_addEditImageSmall").ToString())
+                @MvcHtmlString.Create(Html.ViewFor(x => x.User.ImageUrl).HideLabel().AddClassToInput("KYT_addEditImageSmall").ToString())
                 @MvcHtmlString.Create(StyledButtonFor("deleteImage", WebLocalizationKeys.DELETE).ToString())
             </div>
             <div id="newImage">

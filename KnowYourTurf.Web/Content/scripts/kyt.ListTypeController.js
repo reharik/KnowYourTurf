@@ -11,8 +11,6 @@ if (typeof kyt == "undefined") {
 }
 
 kyt.ListTypeController = kyt.CrudController.extend({
-    events:_.extend({
-    }, kyt.CrudController.prototype.events),
     additionalSubscriptions:function(){
         // from etgrid
         $.subscribe('/grid_EventTypeGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
@@ -34,6 +32,14 @@ kyt.ListTypeController = kyt.CrudController.extend({
         $.subscribe('/grid_PhotoCategoryGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
         $.subscribe('/grid_PhotoCategoryGrid/Display',$.proxy(this.displayItem,this), this.cid);
         $.subscribe('/grid_PhotoCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
+
+        // from form
+        $.subscribe('/form_editModule/success', $.proxy(this.formSuccess,this), this.cid);
+        $.subscribe('/form_editModule/cancel', $.proxy(this.formCancel,this), this.cid);
+        // from display
+        $.subscribe('/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
+        $.subscribe('/popup_displayModule/edit', $.proxy(this.displayEdit,this), this.cid);
+
     },
     initialize:function(){
         this.el = ("#masterArea");
@@ -70,8 +76,14 @@ kyt.ListTypeController = kyt.CrudController.extend({
             gridContainer:"#PhotoCategoryGrid"
         };
         this.views.pcGridView = new kyt.GridView(pcOptions);
+        this.delegateLocalEvents();
     },
-
+    delegateLocalEvents:function(){
+        $(this.el).delegate("#addNewTaskType","click",$.proxy(function(){this.addEditItem(this.options.ttGridInfo.addEditUrl)},this));
+        $(this.el).delegate("#addNewEventType","click",$.proxy(function(){this.addEditItem(this.options.gridInfo.addEditUrl)},this));
+        $(this.el).delegate("#addNewDocumentCategory","click",$.proxy(function(){this.addEditItem(this.options.dcGridInfo.addEditUrl)},this));
+        $(this.el).delegate("#addNewPhotoCategory","click",$.proxy(function(){this.addEditItem(this.options.pcGridInfo.addEditUrl)},this));
+    },
     addEditItem: function(url, data){
         var _url = url?url:this.options.addEditUrl;
         $("#masterArea").after("<div id='dialogHolder'/>");
@@ -85,5 +97,26 @@ kyt.ListTypeController = kyt.CrudController.extend({
             $('#EventColor',this.el).miniColors();
         };
         this.modules.popupForm = new kyt.PopupFormModule(moduleOptions);
+    },
+     //from form
+    formSuccess:function(){
+        this.formCancel();
+        this.views.etGridView.reloadGrid();
+        this.views.ttGridView.reloadGrid();
+        this.views.dcGridView.reloadGrid();
+        this.views.pcGridView.reloadGrid();
+    },
+    formCancel: function(){
+        this.modules.popupForm.destroy();
+    },
+
+    //from display
+    displayCancel:function(){
+        this.modules.popupDisplay.destroy();
+    },
+
+    displayEdit:function(data){
+        this.modules.popupDisplay.destroy();
+        this.addEditItem(data);
     }
 });

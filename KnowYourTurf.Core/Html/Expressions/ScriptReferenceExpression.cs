@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using KnowYourTurf.Core.Config;
 
 namespace KnowYourTurf.Core.Html.Expressions
 {
@@ -14,7 +15,7 @@ namespace KnowYourTurf.Core.Html.Expressions
 
         public ScriptReferenceExpression()
         {
-            _baseUrl = "~/content/scripts/";
+            _baseUrl = SiteConfig.Settings().ScriptsPath;
             _indentation = "";
         }
 
