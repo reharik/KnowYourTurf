@@ -146,7 +146,12 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
         this.editItem(data);
     },
 
-    deleteItem:function(){},
+    deleteItem:function(url){
+        if (confirm("Are you sure you would like to delete this Item?")) {
+        kyt.repository.ajaxGet(url,{}, $.proxy(function(){
+            this.views.poliGridView.reloadGrid();},this));
+        }
+    },
     editItem:function(url, data){
         var poId = $("#poId").val();
          var _url = url?url:this.options.addEditUrl;

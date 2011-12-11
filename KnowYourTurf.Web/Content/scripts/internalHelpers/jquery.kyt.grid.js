@@ -40,7 +40,7 @@ if (typeof kyt.grid == 'undefined') {
             caption:gridDefinition.Title?gridDefinition.Title:"Items",
             sortorder: "asc",
             viewrecords: true,
-            pager: '#pager',
+            pager: gridDefinition.pager ?gridDefinition.pager :'#pager',
             jsonReader: {
                 repeatitems: true,
                 root: "items",

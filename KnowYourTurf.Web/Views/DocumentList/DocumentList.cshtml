@@ -7,7 +7,6 @@
 @MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
 @section HeaderJavascript{
     $(document).ready(function(){
-        crudOptions.gridName = "documentGrid";
         new kyt.CrudController(crudOptions);
     });
 }

@@ -21,12 +21,11 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISaveEntityService _saveEntityService;
         private readonly IEntityListGrid<PurchaseOrderLineItem> _receivePurchaseOrderLineItemGrid;
 
-        public PurchaseOrderCommitController(IRepository repository, ISaveEntityService saveEntityService,
-            IEntityListGrid<PurchaseOrderLineItem> receivePurchaseOrderLineItemGrid)
+        public PurchaseOrderCommitController(IRepository repository, ISaveEntityService saveEntityService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
-            _receivePurchaseOrderLineItemGrid = receivePurchaseOrderLineItemGrid;
+            _receivePurchaseOrderLineItemGrid = ObjectFactory.Container.GetInstance < IEntityListGrid<PurchaseOrderLineItem>>("Recieve");
         }
 
         public ActionResult PurchaseOrderCommit(ViewModel input)

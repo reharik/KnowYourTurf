@@ -63,7 +63,10 @@ kyt.PurchaseOrderController = kyt.Controller.extend({
     },
 
     deleteItem:function(url,data){
-
+        if (confirm("Are you sure you would like to delete this Item?")) {
+        kyt.repository.ajaxGet(url,{}, $.proxy(function(){
+            this.views.gridView.reloadGrid();},this));
+        }
     },
         //from display
     displayCancel:function(){

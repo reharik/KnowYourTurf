@@ -34,12 +34,6 @@ kyt.ListTypeController = kyt.CrudController.extend({
         $.subscribe('/grid_PhotoCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
 
         // from form
-        $.subscribe('/form_editModule/success', $.proxy(this.formSuccess,this), this.cid);
-        $.subscribe('/form_editModule/cancel', $.proxy(this.formCancel,this), this.cid);
-        // from display
-        $.subscribe('/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
-        $.subscribe('/popup_displayModule/edit', $.proxy(this.displayEdit,this), this.cid);
-
     },
     initialize:function(){
         this.el = ("#masterArea");
@@ -49,6 +43,7 @@ kyt.ListTypeController = kyt.CrudController.extend({
             id:"eventTypeGrid",
             gridDef:this.options.gridInfo.gridDef,
             addEditUrl:this.options.gridInfo.addEditUrl,
+            gridOptions:{pager: "#eventTypePager"},
             gridContainer:"#EventTypeGrid"
         };
         this.views.etGridView = new kyt.GridView(etOptions);
@@ -57,6 +52,7 @@ kyt.ListTypeController = kyt.CrudController.extend({
             id:"taskTypeGrid",
             gridDef:this.options.ttGridInfo.gridDef,
             addEditUrl:this.options.ttGridInfo.addEditUrl,
+            gridOptions:{pager: "#taskTypePager"},
             gridContainer:"#TaskTypeGrid"
         };
         this.views.ttGridView = new kyt.GridView(ttOptions);
@@ -65,6 +61,7 @@ kyt.ListTypeController = kyt.CrudController.extend({
             id:"documentCategoryGrid",
             gridDef:this.options.dcGridInfo.gridDef,
             addEditUrl:this.options.dcGridInfo.addEditUrl,
+            gridOptions:{pager: "#docCatPager"},
             gridContainer:"#DocumentCategoryGrid"
         };
         this.views.dcGridView = new kyt.GridView(dcOptions);
@@ -73,6 +70,7 @@ kyt.ListTypeController = kyt.CrudController.extend({
             id:"photoCategoryGrid",
             gridDef:this.options.pcGridInfo.gridDef,
             addEditUrl:this.options.pcGridInfo.addEditUrl,
+            gridOptions:{pager: "#photoCatPager"},
             gridContainer:"#PhotoCategoryGrid"
         };
         this.views.pcGridView = new kyt.GridView(pcOptions);
@@ -105,18 +103,5 @@ kyt.ListTypeController = kyt.CrudController.extend({
         this.views.ttGridView.reloadGrid();
         this.views.dcGridView.reloadGrid();
         this.views.pcGridView.reloadGrid();
-    },
-    formCancel: function(){
-        this.modules.popupForm.destroy();
-    },
-
-    //from display
-    displayCancel:function(){
-        this.modules.popupDisplay.destroy();
-    },
-
-    displayEdit:function(data){
-        this.modules.popupDisplay.destroy();
-        this.addEditItem(data);
     }
 });
