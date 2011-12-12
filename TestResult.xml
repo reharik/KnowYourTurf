@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Development\KnowYourTurf\KnowYourTurf.UnitTests\bin\Debug\KnowYourTurf.UnitTests.dll" total="39" failures="0" not-run="8" date="2011-12-04" time="10:51:18">
+<test-results name="C:\Development\KnowYourTurf\KnowYourTurf.UnitTests\bin\Debug\KnowYourTurf.UnitTests.dll" total="39" failures="0" not-run="8" date="2011-12-10" time="18:17:36">
   <environment nunit-version="2.4.7.0" clr-version="4.0.30319.239" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Development\KnowYourTurf" machine-name="RHARIK" user="Owner" user-domain="RHARIK" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite name="C:\Development\KnowYourTurf\KnowYourTurf.UnitTests\bin\Debug\KnowYourTurf.UnitTests.dll" success="True" time="1.798" asserts="0">
+  <test-suite name="C:\Development\KnowYourTurf\KnowYourTurf.UnitTests\bin\Debug\KnowYourTurf.UnitTests.dll" success="True" time="1.889" asserts="0">
     <results>
-      <test-suite name="KnowYourTurf" success="True" time="1.794" asserts="0">
+      <test-suite name="KnowYourTurf" success="True" time="1.886" asserts="0">
         <results>
-          <test-suite name="UnitTests" success="True" time="1.793" asserts="0">
+          <test-suite name="UnitTests" success="True" time="1.885" asserts="0">
             <results>
-              <test-suite name="Rules" success="True" time="1.388" asserts="0">
+              <test-suite name="Rules" success="True" time="1.485" asserts="0">
                 <results>
-                  <test-suite name="when_calling_execute_on_EmployeeHasNoOutstandingTasks_when_there_are_future_tasks" success="True" time="1.294" asserts="0">
+                  <test-suite name="when_calling_execute_on_EmployeeHasNoOutstandingTasks_when_there_are_future_tasks" success="True" time="1.393" asserts="0">
                     <results>
-                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_EmployeeHasNoOutstandingTasks_when_there_are_future_tasks.should_check_employeetasks_for_tasks_in_the_future_and_set_success_accordingly" executed="True" success="True" time="1.273" asserts="1" />
-                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_EmployeeHasNoOutstandingTasks_when_there_are_future_tasks.should_return_proper_error_message_if_there_are_future_tasks" executed="True" success="True" time="0.010" asserts="1" />
+                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_EmployeeHasNoOutstandingTasks_when_there_are_future_tasks.should_check_employeetasks_for_tasks_in_the_future_and_set_success_accordingly" executed="True" success="True" time="1.373" asserts="1" />
+                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_EmployeeHasNoOutstandingTasks_when_there_are_future_tasks.should_return_proper_error_message_if_there_are_future_tasks" executed="True" success="True" time="0.009" asserts="1" />
                     </results>
                   </test-suite>
                   <test-suite name="when_calling_execute_on_EmployeeHasNoOutstandingTasks_when_there_are_NO_future_tasks" success="True" time="0.012" asserts="0">
@@ -23,33 +23,33 @@
                       <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_EmployeeHasNoOutstandingTasks_when_there_are_NO_future_tasks.should_return_proper_error_message_if_there_are_future_tasks" executed="True" success="True" time="0.005" asserts="1" />
                     </results>
                   </test-suite>
-                  <test-suite name="when_calling_execute_on_FieldHasNoOutstandingEvents_when_there_are_future_events" success="True" time="0.014" asserts="0">
+                  <test-suite name="when_calling_execute_on_FieldHasNoOutstandingEvents_when_there_are_future_events" success="True" time="0.013" asserts="0">
                     <results>
-                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingEvents_when_there_are_future_events.should_check_fieldevents_for_events_in_the_future_and_set_success_accordingly" executed="True" success="True" time="0.009" asserts="1" />
+                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingEvents_when_there_are_future_events.should_check_fieldevents_for_events_in_the_future_and_set_success_accordingly" executed="True" success="True" time="0.008" asserts="1" />
                       <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingEvents_when_there_are_future_events.should_return_proper_error_message_if_there_are_future_events" executed="True" success="True" time="0.005" asserts="1" />
                     </results>
                   </test-suite>
-                  <test-suite name="when_calling_execute_on_FieldHasNoOutstandingEvents_when_there_are_NO_future_events" success="True" time="0.015" asserts="0">
+                  <test-suite name="when_calling_execute_on_FieldHasNoOutstandingEvents_when_there_are_NO_future_events" success="True" time="0.014" asserts="0">
                     <results>
                       <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingEvents_when_there_are_NO_future_events.should_check_fieldevents_for_events_in_the_future_and_set_success_accordingly" executed="True" success="True" time="0.006" asserts="1" />
-                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingEvents_when_there_are_NO_future_events.should_return_proper_error_message_if_there_are_future_events" executed="True" success="True" time="0.009" asserts="1" />
+                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingEvents_when_there_are_NO_future_events.should_return_proper_error_message_if_there_are_future_events" executed="True" success="True" time="0.007" asserts="1" />
                     </results>
                   </test-suite>
-                  <test-suite name="when_calling_execute_on_FieldHasNoOutstandingTasks_when_there_are_future_tasks" success="True" time="0.016" asserts="0">
+                  <test-suite name="when_calling_execute_on_FieldHasNoOutstandingTasks_when_there_are_future_tasks" success="True" time="0.015" asserts="0">
                     <results>
-                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingTasks_when_there_are_future_tasks.should_check_fieldtasks_for_tasks_in_the_future_and_set_success_accordingly" executed="True" success="True" time="0.011" asserts="1" />
+                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingTasks_when_there_are_future_tasks.should_check_fieldtasks_for_tasks_in_the_future_and_set_success_accordingly" executed="True" success="True" time="0.010" asserts="1" />
                       <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingTasks_when_there_are_future_tasks.should_return_proper_error_message_if_there_are_future_tasks" executed="True" success="True" time="0.005" asserts="1" />
                     </results>
                   </test-suite>
                   <test-suite name="when_calling_execute_on_FieldHasNoOutstandingTasks_when_there_are_NO_future_tasks" success="True" time="0.016" asserts="0">
                     <results>
-                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingTasks_when_there_are_NO_future_tasks.should_check_fieldtasks_for_tasks_in_the_future_and_set_success_accordingly" executed="True" success="True" time="0.006" asserts="1" />
-                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingTasks_when_there_are_NO_future_tasks.should_return_proper_error_message_if_there_are_future_tasks" executed="True" success="True" time="0.010" asserts="1" />
+                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingTasks_when_there_are_NO_future_tasks.should_check_fieldtasks_for_tasks_in_the_future_and_set_success_accordingly" executed="True" success="True" time="0.005" asserts="1" />
+                      <test-case name="KnowYourTurf.UnitTests.Rules.when_calling_execute_on_FieldHasNoOutstandingTasks_when_there_are_NO_future_tasks.should_return_proper_error_message_if_there_are_future_tasks" executed="True" success="True" time="0.011" asserts="1" />
                     </results>
                   </test-suite>
                 </results>
               </test-suite>
-              <test-suite name="Services" success="True" time="0.360" asserts="0">
+              <test-suite name="Services" success="True" time="0.355" asserts="0">
                 <results>
                   <test-suite name="when_calling_calculate" success="True" time="0.000" asserts="0">
                     <results>
@@ -60,38 +60,38 @@
                       </test-case>
                     </results>
                   </test-suite>
-                  <test-suite name="when_calling_calculate_for_sand" success="True" time="0.019" asserts="0">
+                  <test-suite name="when_calling_calculate_for_sand" success="True" time="0.018" asserts="0">
                     <results>
-                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_for_sand.should_return_proper_amount_of_material" executed="True" success="True" time="0.019" asserts="1" />
+                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_for_sand.should_return_proper_amount_of_material" executed="True" success="True" time="0.018" asserts="1" />
                     </results>
                   </test-suite>
-                  <test-suite name="when_calling_calculate_on_calc" success="True" time="0.179" asserts="0">
+                  <test-suite name="when_calling_calculate_on_calc" success="True" time="0.177" asserts="0">
                     <results>
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_calc.should_calculate_proper_value_for_bagsneeded" executed="False">
                         <reason>
                           <message><![CDATA[]]></message>
                         </reason>
                       </test-case>
-                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_calc.should_calculate_proper_value_for_K" executed="True" success="True" time="0.172" asserts="1" />
+                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_calc.should_calculate_proper_value_for_K" executed="True" success="True" time="0.171" asserts="1" />
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_calc.should_calculate_proper_value_for_N" executed="True" success="True" time="0.001" asserts="1" />
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_calc.should_calculate_proper_value_for_P" executed="True" success="True" time="0.001" asserts="1" />
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_calc.should_call_repo_for_field_and_product" executed="True" success="True" time="0.003" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="when_calling_calculate_on_the_overseed_bags_calc" success="True" time="0.005" asserts="0">
+                  <test-suite name="when_calling_calculate_on_the_overseed_bags_calc" success="True" time="0.004" asserts="0">
                     <results>
-                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_the_overseed_bags_calc.should_calculate_proper_value_for_bagsneeded" executed="True" success="True" time="0.004" asserts="1" />
+                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_the_overseed_bags_calc.should_calculate_proper_value_for_bagsneeded" executed="True" success="True" time="0.003" asserts="1" />
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_the_overseed_bags_calc.should_call_repo_for_field_and_product" executed="True" success="True" time="0.001" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="when_calling_calculate_on_the_overseed_rate_calc" success="True" time="0.004" asserts="0">
+                  <test-suite name="when_calling_calculate_on_the_overseed_rate_calc" success="True" time="0.003" asserts="0">
                     <results>
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_the_overseed_rate_calc.should_calculate_proper_value_for_bagsneeded" executed="False">
                         <reason>
                           <message><![CDATA[slightly off need verification of result]]></message>
                         </reason>
                       </test-case>
-                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_the_overseed_rate_calc.should_call_repo_for_field_and_product" executed="True" success="True" time="0.004" asserts="0" />
+                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_calculate_on_the_overseed_rate_calc.should_call_repo_for_field_and_product" executed="True" success="True" time="0.003" asserts="0" />
                     </results>
                   </test-suite>
                   <test-suite name="when_calling_DecrementTaskProduct" success="True" time="0.064" asserts="0">
@@ -99,14 +99,14 @@
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_DecrementTaskProduct.should_reduce_the_amount_of_the_product_by_the_quantity_used" executed="True" success="True" time="0.064" asserts="1" />
                     </results>
                   </test-suite>
-                  <test-suite name="when_calling_delete_image" success="True" time="0.001" asserts="0">
+                  <test-suite name="when_calling_delete_image" success="True" time="0.000" asserts="0">
                     <results>
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_delete_image.should_" executed="True" success="True" time="0.000" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="when_calling_receive_lineItem_for_product_already_in_inventory" success="True" time="0.060" asserts="0">
+                  <test-suite name="when_calling_receive_lineItem_for_product_already_in_inventory" success="True" time="0.059" asserts="0">
                     <results>
-                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_receive_lineItem_for_product_already_in_inventory.should_call_repo_to_get__corrisonding_inventory_product" executed="True" success="True" time="0.056" asserts="0" />
+                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_receive_lineItem_for_product_already_in_inventory.should_call_repo_to_get__corrisonding_inventory_product" executed="True" success="True" time="0.055" asserts="0" />
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_receive_lineItem_for_product_already_in_inventory.should_set_the_lastvendor_to_the_vendor_from_the_purchaseorder" executed="True" success="True" time="0.002" asserts="1" />
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_receive_lineItem_for_product_already_in_inventory.should_update_quantity_of_base_product_and_save" executed="True" success="True" time="0.002" asserts="1" />
                     </results>
@@ -127,7 +127,7 @@
                   </test-suite>
                   <test-suite name="when_calling_service_for_lbs" success="True" time="0.002" asserts="0">
                     <results>
-                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_service_for_lbs.shoudl_return_proper_amount_for_oz" executed="True" success="True" time="0.001" asserts="1" />
+                      <test-case name="KnowYourTurf.UnitTests.Services.when_calling_service_for_lbs.shoudl_return_proper_amount_for_oz" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_service_for_lbs.shoudl_return_proper_amount_for_tons" executed="True" success="True" time="0.001" asserts="1" />
                       <test-case name="KnowYourTurf.UnitTests.Services.when_calling_service_for_lbs.should_return_unitsize_for_pounds" executed="True" success="True" time="0.000" asserts="1" />
                     </results>
@@ -136,9 +136,9 @@
               </test-suite>
               <test-suite name="Web" success="True" time="0.006" asserts="0">
                 <results>
-                  <test-suite name="Controllers" success="True" time="0.004" asserts="0">
+                  <test-suite name="Controllers" success="True" time="0.005" asserts="0">
                     <results>
-                      <test-suite name="when_calling_save_on_controller" success="True" time="0.002" asserts="0">
+                      <test-suite name="when_calling_save_on_controller" success="True" time="0.003" asserts="0">
                         <results>
                           <test-case name="KnowYourTurf.UnitTests.Web.Controllers.when_calling_save_on_controller.should_call_save_on_service" executed="False">
                             <reason>
@@ -173,12 +173,12 @@
               </test-suite>
               <test-suite name="when_calling_get_list_of_selected_entities" success="True" time="0.005" asserts="0">
                 <results>
-                  <test-case name="KnowYourTurf.UnitTests.when_calling_get_list_of_selected_entities.should_return_list_of_entities_corrisponding_to_list_of_ids" executed="True" success="True" time="0.005" asserts="2" />
+                  <test-case name="KnowYourTurf.UnitTests.when_calling_get_list_of_selected_entities.should_return_list_of_entities_corrisponding_to_list_of_ids" executed="True" success="True" time="0.004" asserts="2" />
                 </results>
               </test-suite>
-              <test-suite name="when_calling_get_pickerdto" success="True" time="0.032" asserts="0">
+              <test-suite name="when_calling_get_pickerdto" success="True" time="0.030" asserts="0">
                 <results>
-                  <test-case name="KnowYourTurf.UnitTests.when_calling_get_pickerdto.should_call_selecteditemservice_twice" executed="True" success="True" time="0.026" asserts="0" />
+                  <test-case name="KnowYourTurf.UnitTests.when_calling_get_pickerdto.should_call_selecteditemservice_twice" executed="True" success="True" time="0.025" asserts="0" />
                   <test-case name="KnowYourTurf.UnitTests.when_calling_get_pickerdto.should_return_model_with_proper_available_list_items" executed="True" success="True" time="0.002" asserts="1" />
                   <test-case name="KnowYourTurf.UnitTests.when_calling_get_pickerdto.should_return_model_with_proper_selectListitems_for_selected" executed="True" success="True" time="0.000" asserts="1" />
                   <test-case name="KnowYourTurf.UnitTests.when_calling_get_pickerdto.should_return_selectboxpickerdto" executed="True" success="True" time="0.003" asserts="2" />

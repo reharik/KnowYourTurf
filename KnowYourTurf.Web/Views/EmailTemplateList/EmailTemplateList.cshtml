@@ -9,7 +9,7 @@
 }
 @section HeaderJavascript{
     $(document).ready(function(){
-        kyt.crudController(crudOptions).init();
+       new kyt.CrudController(crudOptions);
     });
 }
 @MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_EMAIL_TEMPLATE).ToString())

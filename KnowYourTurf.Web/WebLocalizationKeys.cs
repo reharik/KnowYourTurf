@@ -100,7 +100,7 @@ namespace KnowYourTurf.Web
 
         public static readonly StringToken EMAIL_TEMPLATE_INFORMATION = new WebLocalizationKeys("EMAIL_TEMPLATE_INFORMATION", "Email Template Information");
         public static readonly StringToken NEW_EMAIL_TEMPLATE = new WebLocalizationKeys("NEW_EMAIL_TEMPLATE", "Add New Email Template");
-        public static readonly StringToken EMAIL_JOB_INFORMATION = new WebLocalizationKeys("EMAIL_JOB_INFORMATION", "Email JOb Information");
+        public static readonly StringToken EMAIL_JOB_INFORMATION = new WebLocalizationKeys("EMAIL_JOB_INFORMATION", "Email Job Information");
         public static readonly StringToken NEW_EMAIL_JOB = new WebLocalizationKeys("NEW_EMAIL_JOB", "Add New Email Job");
 
         public static readonly StringToken FERTILIZER_NEEDED_DISPLAY = new WebLocalizationKeys("FERTILIZER_NEEDED_DISPLAY", "Fertilizer Needed");

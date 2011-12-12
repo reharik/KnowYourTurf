@@ -8,15 +8,20 @@ using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
 using System.Linq;
+using KnowYourTurf.Core.Services;
+using KnowYourTurf.Web.Services.EmailHandlers;
+using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
     public class TaskRunnerController : Controller
     {
+        private readonly IEmailTemplateService _emailService;
         private readonly IRepository _repository;
 
-        public TaskRunnerController()
+        public TaskRunnerController( IEmailTemplateService emailService)
         {
+            _emailService = emailService;
             _repository = new Repository();
         }
 
@@ -63,6 +68,27 @@ namespace KnowYourTurf.Web.Controllers
             weather.WindSpeed = maxWindGust;
             weather.Humidity = humidity;
             _repository.Save(weather);
+        }
+
+        public ActionResult ProcessEmail(ViewModel input)
+        {
+            var notification = new Notification { Success = true };
+            var emailJob = _repository.Find<EmailJob>(input.EntityId);
+            var emailTemplateHandler = ObjectFactory.Container.GetInstance<IEmailTemplateHandler>(emailJob.Name + "Handler");
+            try
+            {
+                emailJob.GetSubscribers().Each(x =>
+                {
+                    var model = emailTemplateHandler.CreateModel(emailJob, x);
+                    _emailService.SendSingleEmail(model);
+                });
+            }
+            catch (Exception ex)
+            {
+                notification.Success = false;
+                notification.Message = ex.Message;
+            }
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
     }
 

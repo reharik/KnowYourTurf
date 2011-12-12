@@ -27,13 +27,13 @@
     @MvcHtmlString.Create(Script("jqueryPlugins/jquery.metadata.js").ToString())
     
     <script type="text/javascript">
-        $(document).ready(function() {
-            $(".submitButton").live("click", function(event) {
+        $(document).ready(function () {
+            $(".submitButton").live("click", function (event) {
                 $("#CRUDForm").submit();
                 event.preventDefault();
             });
-
-             $("#errorMessages").hide();
+            $("[name=UserName]").focus();
+            $("#errorMessages").hide();
         });
         </script>
     </head>
