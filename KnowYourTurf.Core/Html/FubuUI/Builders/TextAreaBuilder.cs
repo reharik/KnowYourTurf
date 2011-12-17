@@ -1,8 +1,7 @@
-    using System;
-    using FubuMVC.Core.Util;
+using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
+using FubuMVC.Core.Util;
     using FubuMVC.UI.Configuration;
     using HtmlTags;
-    using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 
 namespace KnowYourTurf.Core.Html.FubuUI.Builders
 {
@@ -18,7 +17,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         {
             var value = request.StringValue().IsNotEmpty() ? request.StringValue() : "";
             return new HtmlTag("textarea")
-            .AddClass("KYT_textArea")
+            .AddClasses("textArea")
                 .Attr("name", request.ElementId)
                 .Text(value);
         }

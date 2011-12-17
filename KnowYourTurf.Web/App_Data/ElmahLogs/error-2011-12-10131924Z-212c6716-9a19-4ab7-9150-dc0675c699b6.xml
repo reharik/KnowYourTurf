@@ -1,0 +1,179 @@
+﻿<error errorId="212c6716-9a19-4ab7-9150-dc0675c699b6" host="RHARIK" type="System.ArgumentOutOfRangeException" message="Length cannot be less than zero.&#xD;&#xA;Parameter name: length" source="mscorlib" detail="System.ArgumentOutOfRangeException: Length cannot be less than zero.&#xD;&#xA;Parameter name: length&#xD;&#xA;   at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)&#xD;&#xA;   at System.String.Substring(Int32 startIndex, Int32 length)&#xD;&#xA;   at Rhino.Security.Impl.Util.Strings.GetParentOperationName(String operationName) in C:\ExternalCode\rhino-security\Rhino.Security\Impl\Util\Strings.cs:line 23&#xD;&#xA;   at Rhino.Security.Impl.Util.Strings.GetHierarchicalOperationNames(String operationName) in C:\ExternalCode\rhino-security\Rhino.Security\Impl\Util\Strings.cs:line 39&#xD;&#xA;   at Rhino.Security.Services.PermissionsService.GetGlobalPermissionsFor(IUser user, String operationName) in C:\ExternalCode\rhino-security\Rhino.Security\Services\PermissionsService.cs:line 59&#xD;&#xA;   at Rhino.Security.Services.AuthorizationService.IsAllowed(IUser user, String operation) in C:\ExternalCode\rhino-security\Rhino.Security\Services\AuthorizationService.cs:line 115&#xD;&#xA;   at MethodFitness.Web.Areas.Schedule.Controllers.AppointmentCalendarController.Events(GetEventsViewModel input) in C:\Development\MethodFitness\Development\src\MethodFitness.Web\Areas\Schedule\Controllers\AppointmentCalendarController.cs:line 70&#xD;&#xA;   at lambda_method(Closure , ControllerBase , Object[] )&#xD;&#xA;   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)&#xD;&#xA;   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;InvokeActionMethodWithFilters&gt;b__12()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)&#xD;&#xA;   at System.Web.Mvc.Controller.ExecuteCore()&#xD;&#xA;   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClass6.&lt;&gt;c__DisplayClassb.&lt;BeginProcessRequest&gt;b__5()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClasse.&lt;EndProcessRequest&gt;b__d()&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.&lt;GetCallInAppTrustThunk&gt;b__0(Action f)&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="Harik, Raif" time="2011-12-10T13:19:24.1520549Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:application/json, text/javascript, */*; q=0.01&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-us,en;q=0.5&#xD;&#xA;HTTP_COOKIE:MF=BFC62DA707BB5F8396776948F9D6C93B2BB2B634E684011E768A98D0317D5B1412AB1C14EC1465AC20F8ED7B6CF2B34CC827375C69E87660C835D0AB70B7C8F62417AF697D5F3DCB78E9ADA8CD51B44D3A325D449CB12E477D1EB3B78FC3985249BC5D018B45580CAD565E97E535A2DD576CD636A4CE38F4749006484E62068A13737F39605303F6A1EDD8FB34726ACFD9CBBDF175C613EB1CE78FB32BD4B5E64C9CA76EB86759E2ECEC51495DCD5E1D918BB1777A13F14E1E6DB0158A4C63D0&#xD;&#xA;HTTP_HOST:localhost:888&#xD;&#xA;HTTP_REFERER:http://localhost:888/MethodFitness/Home&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: application/json, text/javascript, */*; q=0.01&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-us,en;q=0.5&#xD;&#xA;Cookie: MF=BFC62DA707BB5F8396776948F9D6C93B2BB2B634E684011E768A98D0317D5B1412AB1C14EC1465AC20F8ED7B6CF2B34CC827375C69E87660C835D0AB70B7C8F62417AF697D5F3DCB78E9ADA8CD51B44D3A325D449CB12E477D1EB3B78FC3985249BC5D018B45580CAD565E97E535A2DD576CD636A4CE38F4749006484E62068A13737F39605303F6A1EDD8FB34726ACFD9CBBDF175C613EB1CE78FB32BD4B5E64C9CA76EB86759E2ECEC51495DCD5E1D918BB1777A13F14E1E6DB0158A4C63D0&#xD;&#xA;Host: localhost:888&#xD;&#xA;Referer: http://localhost:888/MethodFitness/Home&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Development\MethodFitness\Development\src\MethodFitness.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms Authentication" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="RHARIK\Owner" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Schedule/AppointmentCalendar/Events" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Development\MethodFitness\Development\src\MethodFitness.Web\Schedule\AppointmentCalendar\Events" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="start=1323064800&amp;end=1323669600&amp;_=1323523164119" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Schedule/AppointmentCalendar/Events" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="888" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/Schedule/AppointmentCalendar/Events" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="application/json, text/javascript, */*; q=0.01" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-us,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="MF=BFC62DA707BB5F8396776948F9D6C93B2BB2B634E684011E768A98D0317D5B1412AB1C14EC1465AC20F8ED7B6CF2B34CC827375C69E87660C835D0AB70B7C8F62417AF697D5F3DCB78E9ADA8CD51B44D3A325D449CB12E477D1EB3B78FC3985249BC5D018B45580CAD565E97E535A2DD576CD636A4CE38F4749006484E62068A13737F39605303F6A1EDD8FB34726ACFD9CBBDF175C613EB1CE78FB32BD4B5E64C9CA76EB86759E2ECEC51495DCD5E1D918BB1777A13F14E1E6DB0158A4C63D0" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:888" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:888/MethodFitness/Home" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="start">
+      <value string="1323064800" />
+    </item>
+    <item name="end">
+      <value string="1323669600" />
+    </item>
+    <item name="_">
+      <value string="1323523164119" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name="MF">
+      <value string="BFC62DA707BB5F8396776948F9D6C93B2BB2B634E684011E768A98D0317D5B1412AB1C14EC1465AC20F8ED7B6CF2B34CC827375C69E87660C835D0AB70B7C8F62417AF697D5F3DCB78E9ADA8CD51B44D3A325D449CB12E477D1EB3B78FC3985249BC5D018B45580CAD565E97E535A2DD576CD636A4CE38F4749006484E62068A13737F39605303F6A1EDD8FB34726ACFD9CBBDF175C613EB1CE78FB32BD4B5E64C9CA76EB86759E2ECEC51495DCD5E1D918BB1777A13F14E1E6DB0158A4C63D0" />
+    </item>
+  </cookies>
+</error>

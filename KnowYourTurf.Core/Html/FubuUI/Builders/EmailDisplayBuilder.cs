@@ -1,4 +1,5 @@
-using System;
+using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
+using FubuMVC.Core.Util;
 using FubuMVC.UI.Configuration;
 using HtmlTags;
 
@@ -15,8 +16,10 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         {
             HtmlTag root = new HtmlTag("a");
             root.Attr("href", "mailto:" + request.StringValue());
-            root.Children.Add(new HtmlTag("span").Text(request.StringValue()));
+            root.Attr("name", request.Accessor.FieldName + "Link");
+            root.Append(new HtmlTag("span").Text(request.StringValue()));
             return root;
         }
     }
+
 }

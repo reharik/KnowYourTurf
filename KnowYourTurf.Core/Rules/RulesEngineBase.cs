@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Localization;
 
-namespace KnowYourTurf.Core
+namespace KnowYourTurf.Core.Rules
 {
     public abstract class RulesEngineBase
     {

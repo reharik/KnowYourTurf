@@ -1,0 +1,52 @@
+﻿@using HtmlTags
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web
+@using KnowYourTurf.Web.Controllers
+@model ClientViewModel
+
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+
+@section HeaderJavascript{
+}
+
+  @MvcHtmlString.Create(FormFor<ClientController>(x => x.Save(null)).AddClass("CRUD").ElementId("CRUDForm").ToString())
+        <input type="hidden" id="EntityId" name="EntityId" value="@Model.Item.EntityId">
+        <div class="col left">
+            <div class="fieldRow">
+                <h4>@WebLocalizationKeys.CLIENT_INFORMATION</h4>
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.FirstName).AddClassToRoot("two-five first").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.MiddleInitial).LabelDisplay(WebLocalizationKeys.INITIAL).AddClassToRoot("one-five mid").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.LastName).AddClassToRoot("two-five last").ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.BirthDate).AddClassToRoot("half first").ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.Address1).AddClassToRoot("half first").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.Address2).AddClassToRoot("half").ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.City).AddClassToRoot("half first").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.State).AddClassToRoot("one-quarter").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.ZipCode).AddClassToRoot("one-quarter").ToHtmlTag()
+            </div>
+            
+        </div>
+        <div class="col right">
+             <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.Email).ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.SecondaryPhone).AddClassToRoot("half first").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.MobilePhone).AddClassToRoot("half").ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.Source).AddClassToRoot("half first").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.StartDate).AddClassToRoot("half").ToHtmlTag()
+            </div>
+        </div>
+    @EndForm()

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
+using KnowYourTurf.Core.Domain;
 using FubuMVC.Core.Util;
 using HtmlTags;
-using KnowYourTurf.Core.Config;
-using KnowYourTurf.Core.Domain;
 using Rhino.Security.Interfaces;
 
 namespace KnowYourTurf.Core.Html.Grid
@@ -31,23 +30,23 @@ namespace KnowYourTurf.Core.Html.Grid
             Properties[GridColumnProperties.width.ToString()] = width;
             return this;
         }
-        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "")
+        public override HtmlTag BuildColumn(object item, User user, IAuthorizationService _authorizationService)
         {
             var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
-            if (value.IsEmpty()) return null;
+            if (value.Text().IsEmpty()) return null;
             var divTag = BuildDiv();
-            divTag.AddClasses(new[] { "imageColumn" });
             var image = BuildImage();
             divTag.Children.Add(image);
-            return divTag.ToString();
+            return divTag;
         }
 
-        protected HtmlTag BuildImage(bool header = false)
+        protected HtmlTag 
+            BuildImage(bool header = false)
         {
             var img = new HtmlTag("img");
-            img.Attr("src", SiteConfig.Settings().ImagesPath + _imageName);
-            if (header)
+            img.Attr("src", "/content/images/" + _imageName);
+            if(header)
             {
                 img.Style("cursor", "hand");
             }

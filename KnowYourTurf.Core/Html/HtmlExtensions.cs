@@ -4,8 +4,6 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using KnowYourTurf.Core.Html.Expressions;
 using FubuMVC.Core.Util;
-using KnowYourTurf.Core.Html.Menu;
-using Microsoft.Practices.ServiceLocation;
 
 namespace KnowYourTurf.Core.Html
 {
@@ -21,7 +19,7 @@ namespace KnowYourTurf.Core.Html
             return new LinkExpression();
         }
 
-        public static LinkExpression CSS(this WebViewPage viewPage, string url)
+        public static LinkExpression CSS(this ViewPage viewPage, string url)
         {
             return new LinkExpression().Href(url).AsStyleSheet();
         }
@@ -33,20 +31,14 @@ namespace KnowYourTurf.Core.Html
 
         public static ScriptReferenceExpression Script(this ViewPage viewPage, string url)
         {
-            return new ScriptReferenceExpression().Add(url);
+            return new ScriptReferenceExpression(url);
         }
 
         public static ScriptReferenceExpression SiteScript(this ViewMasterPage viewMasterPage, string url)
         {
-            return new ScriptReferenceExpression().Add(url);
+            return new ScriptReferenceExpression(url);
         }
-
-        public static ScriptReferenceExpression Script(this ViewPage viewPage, IEnumerable<string> scriptLinks)
-        {
-            var expr = new ScriptReferenceExpression();
-            scriptLinks.Each(l => expr.Add(l));
-            return expr;
-        }
+        
 
         public static string ActionUrl<CONTROLLER>(this ViewPage viewPage, Expression<Func<CONTROLLER, object>> actionExpression)
             where CONTROLLER : class
@@ -106,9 +98,9 @@ namespace KnowYourTurf.Core.Html
             return new SubmitButtonExpression(value, name);
         }
 
-        public static string EndForm(this ViewPage view)
+        public static MvcHtmlString EndForm(this ViewPage view)
         {
-            return "</form>";
+            return MvcHtmlString.Create("</form>");
         }
 
         

@@ -13,6 +13,8 @@ using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using NHibernate;
 using StructureMap;
+using DomainEntity = KnowYourTurf.Core.Domain.DomainEntity;
+using IRepository = KnowYourTurf.Core.Domain.IRepository;
 
 namespace Generator
 {
@@ -249,7 +251,7 @@ namespace Generator
 
         public void EnterStrings(IRepository repo, TextReader inReader, TextWriter outWriter)
         {
-            repo.UnitOfWork.Initialize();
+            repo.Initialize();
             outWriter.WriteLine("--------------------");
             outWriter.WriteLine("Localized entries in the database which have no default text will be displayed.");
             outWriter.WriteLine("Please type in text for each entry and press RETURN to proceed to the next.");

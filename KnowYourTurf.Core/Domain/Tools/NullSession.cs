@@ -3,7 +3,6 @@ using System.Data;
 using System.Linq.Expressions;
 using NHibernate;
 using NHibernate.Engine;
-using NHibernate.Impl;
 using NHibernate.Stat;
 using NHibernate.Type;
 
@@ -47,6 +46,16 @@ namespace KnowYourTurf.Core.Domain.Tools
         }
 
         public bool IsDirty()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsReadOnly(object entityOrProxy)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetReadOnly(object entityOrProxy, bool readOnly)
         {
             throw new NotImplementedException();
         }
@@ -416,6 +425,12 @@ namespace KnowYourTurf.Core.Domain.Tools
         public bool IsConnected
         {
             get { throw new NotImplementedException(); }
+        }
+
+        public bool DefaultReadOnly
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         public ITransaction Transaction

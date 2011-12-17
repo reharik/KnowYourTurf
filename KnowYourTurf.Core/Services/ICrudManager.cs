@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Domain.Tools;
 using xVal.ServerSide;
 
 namespace KnowYourTurf.Core.Services
@@ -10,8 +11,8 @@ namespace KnowYourTurf.Core.Services
         IEnumerable<CrudReport> GetCrudReports();
         void RemoveCrudReport(CrudReport crudReport);
         void AddCrudReport(CrudReport crudReport);
-        bool HasFailingReport();
-        Notification Finish();
+        Notification Finish(string successMessage = "");
+        bool HasFailed();
     }
 
     public class CrudManager : ICrudManager
@@ -36,13 +37,18 @@ namespace KnowYourTurf.Core.Services
         }
         #endregion
 
-        public bool HasFailingReport()
+        public bool HasFailed()
         {
-            return _crudReports.Any(x => !x.Success);
+            if (_crudReports.Any(crudReport => !crudReport.Success))
+            {
+                return true;
+            }
+            return false;
         }
-        
-        public Notification Finish()
+
+        public Notification Finish(string successMessage ="")
         {
+            if (successMessage.IsEmpty()) successMessage = CoreLocalizationKeys.SUCCESSFUL_SAVE.ToString();
             var notification = new Notification { Success = true };
             GetCrudReports().Each(x =>
             {
@@ -58,7 +64,7 @@ namespace KnowYourTurf.Core.Services
             if (notification.Success)
             {
                 _repository.Commit();
-                notification.Message = CoreLocalizationKeys.SUCCESSFUL_SAVE.ToString();
+                notification.Message = successMessage;
             }
             else
                 _repository.Rollback();

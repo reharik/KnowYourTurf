@@ -12,41 +12,51 @@ if (typeof kyt == "undefined") {
 
 kyt.GridView = Backbone.View.extend({
     events:{
-        'click #addNew': 'addNew'
+        'click .new' : 'addNew',
+        'click .delete' : 'deleteItems'
     },
     initialize: function(){
         this.options = $.extend({},kyt.gridDefaults,this.options);
-        this.id = this.options.id;
+        this.id=this.options.id;
         this.render();
     },
     render: function(){
-        $(this.options.gridContainer,this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
+        $("#gridContainer",this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
+        $(window).bind('resize', function() { cc.gridHelper.adjustSize("#gridContainer"); }).trigger('resize');
+        $(this.el).gridSearch({onClear:$.proxy(this.removeSearch,this),onSubmit:$.proxy(this.search,this)});
         return this;
     },
     addNew:function(){
-        $.publish('/grid_'+this.id+'/AddNewItem', [this.options.addEditUrl]);
+        $.publish('/contentLevel/grid/AddUpdateItem', [this.options.addEditUrl]);
     },
-    deleteItem:function(){
+    deleteItems:function(){
         if (confirm("Are you sure you would like to delete this Item?")) {
-            $.get(this.options.deleteMultipleUrl,
+            var ids = cc.gridMultiSelect.getCheckedBoxes();
+            kyt.repository.ajaxGet(this.options.deleteMultipleUrl,
                 $.param({"EntityIds":ids},true),
-                $.proxy(this.reloadGrid,this));
+                $.proxy(function(){this.reloadGrid()},this));
         }
     },
+
+    search:function(v){
+        var searchItem = {"field": this.options.searchField ,"data": v };
+        var filter = {"group":"AND",rules:[searchItem]};
+        var obj = {"filters":""  + JSON.stringify(filter) + ""};
+        $("#gridContainer").jqGrid('setGridParam',{postData:obj});
+        this.reloadGrid();
+    },
+    removeSearch:function(){
+        delete $("#gridContainer").jqGrid('getGridParam' ,'postData')["filters"];
+        this.reloadGrid();
+        return false;
+    },
     reloadGrid:function(){
-        $(this.options.gridContainer,this.el).trigger("reloadGrid");
-    },
-    getUrl:function(){
-        return $(this.options.gridContainer,this.el).getGridParam("url");
-    },
-    setUrl:function(url){
-        $(this.options.gridContainer,this.el).setGridParam({"url":url});
+        $("#gridContainer").trigger("reloadGrid");
     }
 });
 
+
 kyt.gridDefaults = {
-    id:"",
     searchField:"Name",
-    showSearch:true,
-    gridContainer:"#gridContainer"
+    showSearch:true
 };

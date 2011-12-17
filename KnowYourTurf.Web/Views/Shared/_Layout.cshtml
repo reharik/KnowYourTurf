@@ -1,122 +1,79 @@
-﻿@using KnowYourTurf.Web
-<!DOCTYPE html>
+﻿@using HtmlTags
+<!--[if IE]>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- [Else]>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- [endif]-->
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    
-    @MvcHtmlString.Create(CSS("960.css").ToString())
-    @MvcHtmlString.Create(CSS("yui.reset.2.6.0.css").ToString())
-    @MvcHtmlString.Create(CSS("site.css").ToString())
-    @MvcHtmlString.Create(CSS("kyt.css").ToString())
-    @MvcHtmlString.Create(CSS("jquery-ui-timepicker.css").ToString())
-    @MvcHtmlString.Create(CSS("superfish-1.4.8/superfish.css").ToString())
-    @MvcHtmlString.Create(CSS("superfish-1.4.8/superfish-vertical.css").ToString())
-    @MvcHtmlString.Create(CSS("ui-lightness/jquery-ui-1.8.7.custom.css").ToString())
+    @CSS("jquery-ui-1.8.16.custom.css").ToHtmlTag()
+    @CSS("ui.multiselect.css").ToHtmlTag()
+    @CSS("fileinput.css").ToHtmlTag()
+    @CSS("ui.jqgrid.css").ToHtmlTag()
+    <!--[if gt IE 7]>
+    @CSS("ie.css").ToHtmlTag()
+     <![endif]-->
+    @CSS("main.css").ToHtmlTag()
+    @CSS("token-input.css").ToHtmlTag()
+    @CSS("fg.menu.css").ToHtmlTag()
+    @CSS("jquery.cleditor.css").ToHtmlTag()
+
+    @CSS("kyt.css").ToHtmlTag()
+
     @RenderSection("ExtraCss", false)
-    
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery-1.4.4.min.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery-ui-1.8.7.custom.min.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.validate.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.form.2.83.js").ToString())
-    @MvcHtmlString.Create(Script("externalHelpers/superfish.js").ToString())
-    @MvcHtmlString.Create(Script("internalHelpers/kyt.utilities.js").ToString())
-    @MvcHtmlString.Create(Script("internalHelpers/kyt.crudForm.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.metadata.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.ae.image.resize.min.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.ui.timepicker-0.0.8.js").ToString())
-    @MvcHtmlString.Create(Script("externalHelpers/json2.js").ToString())
-    @MvcHtmlString.Create(Script("externalHelpers/underscore.js").ToString())
-    @MvcHtmlString.Create(Script("externalHelpers/backbone.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.pubsub.js").ToString())
-     @MvcHtmlString.Create(Script("kyt.baseClasses.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.crudController.js").ToString())
 
-    @MvcHtmlString.Create(Script("kyt.popupDisplayModule.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.popupFormModule.js").ToString())
-    
-    @MvcHtmlString.Create(Script("kyt.GridView.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.DisplayView.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.FormView.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.PopupView.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.TokenView.js").ToString())
-    @MvcHtmlString.Create(Script("internalHelpers/kyt.repository.js").ToString())
+    @Script("jqueryPlugins/jquery-1.6.2.min.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery-ui-1.8.16.custom.min.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.validate.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.form.2.83.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.tokeninput.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.pubsub.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.cleditor.min.js").ToHtmlTag()
 
-        @RenderSection("HeaderScripts", false)
+    @Script("jqueryPlugins/jquery.metadata.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.address-1.4.js").ToHtmlTag()
+    @Script("externalHelpers/underscore.js").ToHtmlTag()
+    @Script("externalHelpers/backbone.js").ToHtmlTag()
+    
+    
+    @Script("externalHelpers/superfish.js").ToHtmlTag()
+    @Script("internalHelpers/cc.ccMenu.js").ToHtmlTag()
+
+    @Script("internalHelpers/cc.utilities.js").ToHtmlTag()
+    @Script("internalHelpers/cc.crudForm.js").ToHtmlTag()
+    @Script("externalHelpers/json2.js").ToHtmlTag()
+    @Script("kyt.baseClass.js").ToHtmlTag()
+    @Script("kyt.home.js").ToHtmlTag()
+    
+
+    @RenderSection("HeaderScripts", false)
 
 
      <script type="text/javascript">
-        var kytWebSiteRoot="~";
         var entityId = @Model.EntityId ;
         var parentId = @Model.ParentId ;
         var rootId = @Model.RootId ;
+        var kytCurrentLocaton;
+        var extraFormOptions = {};
+        extraFormOptions.crudFormOptions = { };
+        
         $(document).ready(function() {
-            $(".collapsible h4").click(function() {
-                $(this).toggleClass("collapsed");
-                $(this).nextAll(".container").toggle();
-            });
-    
-            $(".startsColllapsed h4").nextAll(".container").hide();
-
-            $(".submitButton").live("click", function(event) {
-                $("#CRUDForm").submit();
-                event.preventDefault();
-            });
-
-            $(".submitButton2").live("click", function(event) {
-                $("#CRUDForm").submit();
-                event.preventDefault();
-            });
-             $("#errorMessages").hide();
-
-            $(".datePicker").live('focusin', function() {
-                var $this = $(this);
-                $this.datepicker();
-            });
-
-            $(".timePicker").live('focusin', function() {
-                var $this = $(this);
-                 $this.timepicker({
-                    showPeriod: true,
-                    showLeadingZero: false
-                });
-            });
-            
-            $(".timePickerNoSuffix").live('focusin', function() {
-                var $this = $(this);
-                $this.timepicker({amPmText:["",""]});
-            });
-            $(".profileImage").aeImageResize({ height: 48, width: 48 });
-            extraFormOptions = {};
+            var options = { el: ".kyt_dyn"};
+            new kyt.HomeController(options);
         });
         @RenderSection("HeaderJavascript", false)
 
         </script>
     </head>
 
-    <body class="kyt_dyn">
-        <div id="background_layer">
-            <div class="container_12">   
-              <div class="KYT_960Main">
-                <div class="grid_12">
-                    <div class="KYT_site_header">
-                        @Html.Action("KnowYourTurfHeader", "Orthogonal")
-                    </div>
-                </div>
-                <div class = "grid_2">
-                    @Html.Action("KnowYourTurfMenu", "Orthogonal")
-                </div>
-                <div class="grid_10">
-                    <div id="masterArea">
-                        <div id="errorMessages" class="errorMessages KYT_errorMessages" ><ul></ul></div>   
-                        @RenderSection("SubHeader", false)
-                        @RenderBody()
-                    </div>   
-                </div>                      
-            <div class="grid_12" id="footer">
-                <div class="powered"><p>© Copyright 2011 KYTsoftware, LLC.  All Rights Reserved</p></div>
-            </div>
-            <div style="clear:both;"></div>
-        </div></div>
+    <body id="portfolios" class="kyt_dyn">
+    <div id="ajaxLoading" style="z-index: 1000">&nbsp;</div>
+        @Html.Action("KnowYourTurfHeader", "Orthogonal")
+        <div id="top-separator"></div>
+        <div id="main-body">
+            @RenderBody()
+        </div>
     </body>
 
 </html>

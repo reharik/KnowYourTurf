@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using FubuMVC.Core.Util;
 using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
 using HtmlTags;
@@ -19,6 +20,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         private string _inputClass;
         private bool _hide;
         private string _elementId;
+        private string _labelDisplay;
 
         public DropdownInputExpression(ITagGenerator<VIEWMODEL> generator, Expression<Func<VIEWMODEL, object>> expression, IEnumerable<SelectListItem> items)
         {
@@ -29,7 +31,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 
         public HtmlTag ToHtmlTag()
         {
-            _htmlRoot = new HtmlTag("div").AddClass("KYT_editor_input");
+            _htmlRoot = new HtmlTag("div").AddClass("editor_input");
             if (_hide) _htmlRoot.Hide();
             ElementRequest request = _generator.GetRequest(_expression);
 
@@ -64,12 +66,17 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             tag.Attr("name", name);
             addInternalCssClasses(_htmlRoot, tag);
             if (_elementId.IsNotEmpty()) tag.Id(_elementId);
-            _htmlRoot.Child(tag);
+            _htmlRoot.Append(tag);
             return _htmlRoot;
         }
 
         private void addInternalCssClasses(HtmlTag root, HtmlTag input)
         {
+            if (input.GetValidationHelpers().Any())
+            {
+                var origional = ReflectionHelper.GetProperty(_expression).Name;
+                input.GetValidationHelpers().Each(x => x.ErrorMessage = x.ErrorMessage.Replace(origional, _labelDisplay));
+            }
             if (_inputRootClass.IsNotEmpty()) root.AddClass(_inputRootClass);
             if (_inputClass.IsNotEmpty()) input.AddClass(_inputClass);
         }
@@ -95,6 +102,12 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         public IEditorInputExpression<VIEWMODEL> ElementId(string id)
         {
             _elementId = id;
+            return this;
+        }
+
+        public IEditorInputExpression<VIEWMODEL> CustomLabel(string labelDisplay)
+        {
+            _labelDisplay = labelDisplay;
             return this;
         }
     }

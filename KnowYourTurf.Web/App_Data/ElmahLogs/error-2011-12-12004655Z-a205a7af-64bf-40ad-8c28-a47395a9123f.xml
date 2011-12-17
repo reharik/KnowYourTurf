@@ -1,0 +1,185 @@
+﻿<error errorId="a205a7af-64bf-40ad-8c28-a47395a9123f" host="RHARIK" type="NHibernate.HibernateException" message="identifier of an instance of MethodFitness.Web.Areas.Schedule.Controllers.Appointment was altered from 1 to 0" source="NHibernate" detail="NHibernate.HibernateException: identifier of an instance of MethodFitness.Web.Areas.Schedule.Controllers.Appointment was altered from 1 to 0&#xD;&#xA;   at NHibernate.Event.Default.DefaultFlushEntityEventListener.CheckId(Object obj, IEntityPersister persister, Object id, EntityMode entityMode) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\DefaultFlushEntityEventListener.cs:line 117&#xD;&#xA;   at NHibernate.Event.Default.DefaultFlushEntityEventListener.GetValues(Object entity, EntityEntry entry, EntityMode entityMode, Boolean mightBeDirty, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\DefaultFlushEntityEventListener.cs:line 77&#xD;&#xA;   at NHibernate.Event.Default.DefaultFlushEntityEventListener.OnFlushEntity(FlushEntityEvent event) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\DefaultFlushEntityEventListener.cs:line 36&#xD;&#xA;   at NHibernate.Event.Default.AbstractFlushingEventListener.FlushEntities(FlushEvent event) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\AbstractFlushingEventListener.cs:line 161&#xD;&#xA;   at NHibernate.Event.Default.AbstractFlushingEventListener.FlushEverythingToExecutions(FlushEvent event) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\AbstractFlushingEventListener.cs:line 60&#xD;&#xA;   at NHibernate.Event.Default.DefaultAutoFlushEventListener.OnAutoFlush(AutoFlushEvent event) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\DefaultAutoFlushEventListener.cs:line 30&#xD;&#xA;   at NHibernate.Impl.SessionImpl.AutoFlushIfRequired(ISet`1 querySpaces) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Impl\SessionImpl.cs:line 1145&#xD;&#xA;   at NHibernate.Impl.SessionImpl.List(CriteriaImpl criteria, IList results) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Impl\SessionImpl.cs:line 1903&#xD;&#xA;   at NHibernate.Impl.CriteriaImpl.List(IList results) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Impl\CriteriaImpl.cs:line 265&#xD;&#xA;   at NHibernate.Impl.CriteriaImpl.List[T]() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Impl\CriteriaImpl.cs:line 276&#xD;&#xA;   at Rhino.Security.Services.PermissionsService.FindResults(DetachedCriteria criteria) in C:\ExternalCode\rhino-security\Rhino.Security\Services\PermissionsService.cs:line 161&#xD;&#xA;   at Rhino.Security.Services.PermissionsService.GetGlobalPermissionsFor(IUser user, String operationName) in C:\ExternalCode\rhino-security\Rhino.Security\Services\PermissionsService.cs:line 69&#xD;&#xA;   at Rhino.Security.Services.AuthorizationService.IsAllowed(IUser user, String operation) in C:\ExternalCode\rhino-security\Rhino.Security\Services\AuthorizationService.cs:line 115&#xD;&#xA;   at MethodFitness.Core.Services.UserPermissionService.IsAllowed(String operationName) in C:\Development\MethodFitness\Development\src\MethodFitness.Core\Services\IPermissionService.cs:line 29&#xD;&#xA;   at MethodFitness.Web.Areas.Schedule.Controllers.AppointmentController.handleTrainer(AppointmentViewModel model) in C:\Development\MethodFitness\Development\src\MethodFitness.Web\Areas\Schedule\Controllers\AppointmentController.cs:line 70&#xD;&#xA;   at MethodFitness.Web.Areas.Schedule.Controllers.AppointmentController.AddUpdate(AddEditAppointmentViewModel input) in C:\Development\MethodFitness\Development\src\MethodFitness.Web\Areas\Schedule\Controllers\AppointmentController.cs:line 51&#xD;&#xA;   at lambda_method(Closure , ControllerBase , Object[] )&#xD;&#xA;   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)&#xD;&#xA;   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;InvokeActionMethodWithFilters&gt;b__12()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)&#xD;&#xA;   at System.Web.Mvc.Controller.ExecuteCore()&#xD;&#xA;   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClass6.&lt;&gt;c__DisplayClassb.&lt;BeginProcessRequest&gt;b__5()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClasse.&lt;EndProcessRequest&gt;b__d()&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.&lt;GetCallInAppTrustThunk&gt;b__0(Action f)&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="Harik, amahl" time="2011-12-12T00:46:55.3778711Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:*/*&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-us,en;q=0.5&#xD;&#xA;HTTP_COOKIE:.ASPXAUTH=6F8F88C3A34C5A693B9FD704A2B6F9895B47009AFB6DDA02BF7A50ADF5AF8DB13A00B9CE7DDC64B54B8D87AB5101EAC4D8CCD07E874A04B196E246ADF457026487D9CD2341D7A4A40143EFE994270964B263287EF292F8F6D00F403650CCB31697FF4DD4122A065C2DAB5DE1B7570717F58E88EE03AE0FD637F2C36CC617E071562536C793F862A6C7DA71682947416CFB2C827F6A672EAD361A27BA182C4675692DE8B77307723026C9107773F35E1BEB78DF759EAB9FDA5BFF1DBB2551657F7B65024E12529D734E4634DA6C4C42B0FD2A4168775502AEA4D53DE27879C14971A693B803DC6828F0BF2F2279115C1DB9BBE83CE187197DF5BBEF4CBEF1A46EE46C05A2454E4AE0EC56D7746BDA3167; ASP.NET_SessionId=ksb1nyrju5vqmtxzjodeci0f; MF=1CFC8483FABCF87D6183DE92535A775C0C7369C255976ED80D18C4C52CF4E393CA03BC40968F2D39867BCC2E427D07757E8E03DDA5DCDE4996CD04E7C0CA857A9618F7FF8F3A823776422ED25A664AA04E8B6502864F2A1E750BBD61A03E7F65E7DD8ECD8229B858DA4B2440249BBD77D3790528A4DD6BB64D407A9A8216915E0E7F3D029D3277BB4E1C6B214FF49C035E1F97B3A13DA3C8E9976C8F1B4DE27465E071E47EAA9F689F174BCBF6DA7B78C7469DDA50C80DFEF4146024C0959480&#xD;&#xA;HTTP_HOST:localhost:888&#xD;&#xA;HTTP_REFERER:http://localhost:888/MethodFitness/Home&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: */*&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-us,en;q=0.5&#xD;&#xA;Cookie: .ASPXAUTH=6F8F88C3A34C5A693B9FD704A2B6F9895B47009AFB6DDA02BF7A50ADF5AF8DB13A00B9CE7DDC64B54B8D87AB5101EAC4D8CCD07E874A04B196E246ADF457026487D9CD2341D7A4A40143EFE994270964B263287EF292F8F6D00F403650CCB31697FF4DD4122A065C2DAB5DE1B7570717F58E88EE03AE0FD637F2C36CC617E071562536C793F862A6C7DA71682947416CFB2C827F6A672EAD361A27BA182C4675692DE8B77307723026C9107773F35E1BEB78DF759EAB9FDA5BFF1DBB2551657F7B65024E12529D734E4634DA6C4C42B0FD2A4168775502AEA4D53DE27879C14971A693B803DC6828F0BF2F2279115C1DB9BBE83CE187197DF5BBEF4CBEF1A46EE46C05A2454E4AE0EC56D7746BDA3167; ASP.NET_SessionId=ksb1nyrju5vqmtxzjodeci0f; MF=1CFC8483FABCF87D6183DE92535A775C0C7369C255976ED80D18C4C52CF4E393CA03BC40968F2D39867BCC2E427D07757E8E03DDA5DCDE4996CD04E7C0CA857A9618F7FF8F3A823776422ED25A664AA04E8B6502864F2A1E750BBD61A03E7F65E7DD8ECD8229B858DA4B2440249BBD77D3790528A4DD6BB64D407A9A8216915E0E7F3D029D3277BB4E1C6B214FF49C035E1F97B3A13DA3C8E9976C8F1B4DE27465E071E47EAA9F689F174BCBF6DA7B78C7469DDA50C80DFEF4146024C0959480&#xD;&#xA;Host: localhost:888&#xD;&#xA;Referer: http://localhost:888/MethodFitness/Home&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Development\MethodFitness\Development\src\MethodFitness.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms Authentication" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="Harik, amahl" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="RHARIK\Owner" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="Harik, amahl" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Schedule/Appointment/AddUpdate" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Development\MethodFitness\Development\src\MethodFitness.Web\Schedule\Appointment\AddUpdate" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="EntityId=1&amp;Copy=true&amp;_=1323650780195" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Schedule/Appointment/AddUpdate" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="888" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/Schedule/Appointment/AddUpdate" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="*/*" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-us,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string=".ASPXAUTH=6F8F88C3A34C5A693B9FD704A2B6F9895B47009AFB6DDA02BF7A50ADF5AF8DB13A00B9CE7DDC64B54B8D87AB5101EAC4D8CCD07E874A04B196E246ADF457026487D9CD2341D7A4A40143EFE994270964B263287EF292F8F6D00F403650CCB31697FF4DD4122A065C2DAB5DE1B7570717F58E88EE03AE0FD637F2C36CC617E071562536C793F862A6C7DA71682947416CFB2C827F6A672EAD361A27BA182C4675692DE8B77307723026C9107773F35E1BEB78DF759EAB9FDA5BFF1DBB2551657F7B65024E12529D734E4634DA6C4C42B0FD2A4168775502AEA4D53DE27879C14971A693B803DC6828F0BF2F2279115C1DB9BBE83CE187197DF5BBEF4CBEF1A46EE46C05A2454E4AE0EC56D7746BDA3167; ASP.NET_SessionId=ksb1nyrju5vqmtxzjodeci0f; MF=1CFC8483FABCF87D6183DE92535A775C0C7369C255976ED80D18C4C52CF4E393CA03BC40968F2D39867BCC2E427D07757E8E03DDA5DCDE4996CD04E7C0CA857A9618F7FF8F3A823776422ED25A664AA04E8B6502864F2A1E750BBD61A03E7F65E7DD8ECD8229B858DA4B2440249BBD77D3790528A4DD6BB64D407A9A8216915E0E7F3D029D3277BB4E1C6B214FF49C035E1F97B3A13DA3C8E9976C8F1B4DE27465E071E47EAA9F689F174BCBF6DA7B78C7469DDA50C80DFEF4146024C0959480" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:888" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:888/MethodFitness/Home" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="EntityId">
+      <value string="1" />
+    </item>
+    <item name="Copy">
+      <value string="true" />
+    </item>
+    <item name="_">
+      <value string="1323650780195" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name=".ASPXAUTH">
+      <value string="6F8F88C3A34C5A693B9FD704A2B6F9895B47009AFB6DDA02BF7A50ADF5AF8DB13A00B9CE7DDC64B54B8D87AB5101EAC4D8CCD07E874A04B196E246ADF457026487D9CD2341D7A4A40143EFE994270964B263287EF292F8F6D00F403650CCB31697FF4DD4122A065C2DAB5DE1B7570717F58E88EE03AE0FD637F2C36CC617E071562536C793F862A6C7DA71682947416CFB2C827F6A672EAD361A27BA182C4675692DE8B77307723026C9107773F35E1BEB78DF759EAB9FDA5BFF1DBB2551657F7B65024E12529D734E4634DA6C4C42B0FD2A4168775502AEA4D53DE27879C14971A693B803DC6828F0BF2F2279115C1DB9BBE83CE187197DF5BBEF4CBEF1A46EE46C05A2454E4AE0EC56D7746BDA3167" />
+    </item>
+    <item name="ASP.NET_SessionId">
+      <value string="ksb1nyrju5vqmtxzjodeci0f" />
+    </item>
+    <item name="MF">
+      <value string="1CFC8483FABCF87D6183DE92535A775C0C7369C255976ED80D18C4C52CF4E393CA03BC40968F2D39867BCC2E427D07757E8E03DDA5DCDE4996CD04E7C0CA857A9618F7FF8F3A823776422ED25A664AA04E8B6502864F2A1E750BBD61A03E7F65E7DD8ECD8229B858DA4B2440249BBD77D3790528A4DD6BB64D407A9A8216915E0E7F3D029D3277BB4E1C6B214FF49C035E1F97B3A13DA3C8E9976C8F1B4DE27465E071E47EAA9F689F174BCBF6DA7B78C7469DDA50C80DFEF4146024C0959480" />
+    </item>
+  </cookies>
+</error>

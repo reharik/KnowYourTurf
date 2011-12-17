@@ -1,0 +1,197 @@
+﻿<error errorId="2e2712e4-6d22-401e-bbb1-65c200a91e93" host="RHARIK" type="System.Data.SqlClient.SqlException" message="Invalid object name 'UserLoginInfo'." source=".Net SqlClient Data Provider" detail="NHibernate.Exceptions.GenericADOException: could not execute query&#xD;&#xA;[ select user0_.EntityId as EntityId5_, user0_.CreateDate as CreateDate5_, user0_.ChangeDate as ChangeDate5_, user0_.ChangedBy as ChangedBy5_, user0_.Archived as Archived5_, user0_.CompanyId as CompanyId5_, user0_.UserId as UserId5_, user0_.FirstName as FirstName5_, user0_.MiddleInitial as MiddleIn9_5_, user0_.LastName as LastName5_, user0_.BirthDate as BirthDate5_, user0_.Email as Email5_, user0_.PhoneMobile as PhoneMo13_5_, user0_.PhoneHome as PhoneHome5_, user0_.Address1 as Address15_5_, user0_.Address2 as Address16_5_, user0_.City as City5_, user0_.State as State5_, user0_.ZipCode as ZipCode5_, user0_.Notes as Notes5_, user0_.ImageUrl as ImageUrl5_, user0_.Color as Color5_, user0_.UserLoginInfoId as UserLog23_5_ from [User] user0_, [UserLoginInfo] userlogini1_ where user0_.Archived= @p0 and user0_.UserLoginInfoId=userlogini1_.EntityId and userlogini1_.Archived= @p1 and lower(userlogini1_.LoginName)=@p2 ]&#xD;&#xA;  Name:p1 - Value:admin&#xD;&#xA;[SQL: select user0_.EntityId as EntityId5_, user0_.CreateDate as CreateDate5_, user0_.ChangeDate as ChangeDate5_, user0_.ChangedBy as ChangedBy5_, user0_.Archived as Archived5_, user0_.CompanyId as CompanyId5_, user0_.UserId as UserId5_, user0_.FirstName as FirstName5_, user0_.MiddleInitial as MiddleIn9_5_, user0_.LastName as LastName5_, user0_.BirthDate as BirthDate5_, user0_.Email as Email5_, user0_.PhoneMobile as PhoneMo13_5_, user0_.PhoneHome as PhoneHome5_, user0_.Address1 as Address15_5_, user0_.Address2 as Address16_5_, user0_.City as City5_, user0_.State as State5_, user0_.ZipCode as ZipCode5_, user0_.Notes as Notes5_, user0_.ImageUrl as ImageUrl5_, user0_.Color as Color5_, user0_.UserLoginInfoId as UserLog23_5_ from [User] user0_, [UserLoginInfo] userlogini1_ where user0_.Archived= @p0 and user0_.UserLoginInfoId=userlogini1_.EntityId and userlogini1_.Archived= @p1 and lower(userlogini1_.LoginName)=@p2] ---&gt; System.Data.SqlClient.SqlException: Invalid object name 'UserLoginInfo'.&#xD;&#xA;   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)&#xD;&#xA;   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)&#xD;&#xA;   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()&#xD;&#xA;   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)&#xD;&#xA;   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()&#xD;&#xA;   at System.Data.SqlClient.SqlDataReader.get_MetaData()&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)&#xD;&#xA;   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()&#xD;&#xA;   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 247&#xD;&#xA;   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, Boolean autoDiscoverTypes, Boolean callable, RowSelection selection, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Loader\Loader.cs:line 1349&#xD;&#xA;   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Loader\Loader.cs:line 411&#xD;&#xA;   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Loader\Loader.cs:line 243&#xD;&#xA;   at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Loader\Loader.cs:line 1694&#xD;&#xA;   --- End of inner exception stack trace ---&#xD;&#xA;   at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Loader\Loader.cs:line 1703&#xD;&#xA;   at NHibernate.Loader.Loader.ListIgnoreQueryCache(ISessionImplementor session, QueryParameters queryParameters) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Loader\Loader.cs:line 1601&#xD;&#xA;   at NHibernate.Loader.Loader.List(ISessionImplementor session, QueryParameters queryParameters, ISet`1 querySpaces, IType[] resultTypes) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Loader\Loader.cs:line 1591&#xD;&#xA;   at NHibernate.Hql.Ast.ANTLR.Loader.QueryLoader.List(ISessionImplementor session, QueryParameters queryParameters) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Hql\Ast\ANTLR\Loader\QueryLoader.cs:line 300&#xD;&#xA;   at NHibernate.Hql.Ast.ANTLR.QueryTranslatorImpl.List(ISessionImplementor session, QueryParameters queryParameters) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Hql\Ast\ANTLR\QueryTranslatorImpl.cs:line 108&#xD;&#xA;   at NHibernate.Engine.Query.HQLQueryPlan.PerformList(QueryParameters queryParameters, ISessionImplementor session, IList results) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\Query\HQLQueryPlan.cs:line 78&#xD;&#xA;   at NHibernate.Impl.SessionImpl.List(IQueryExpression queryExpression, QueryParameters queryParameters, IList results) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Impl\SessionImpl.cs:line 645&#xD;&#xA;   at NHibernate.Impl.AbstractSessionImpl.List(IQueryExpression queryExpression, QueryParameters parameters) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Impl\AbstractSessionImpl.cs:line 92&#xD;&#xA;   at NHibernate.Impl.ExpressionQueryImpl.List() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Impl\ExpressionQueryImpl.cs:line 60&#xD;&#xA;   at NHibernate.Linq.NhQueryProvider.ExecuteQuery(NhLinqExpression nhLinqExpression, IQuery query, NhLinqExpression nhQuery) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Linq\NhQueryProvider.cs:line 79&#xD;&#xA;   at NHibernate.Linq.NhQueryProvider.Execute[TResult](Expression expression) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Linq\NhQueryProvider.cs:line 103&#xD;&#xA;   at Remotion.Data.Linq.QueryableBase`1.GetEnumerator() in :line 0&#xD;&#xA;   at MethodFitness.Core.BasicExtentions.Each[T](IEnumerable`1 values, Action`1 eachAction) in C:\Development\MethodFitness\Development\src\MethodFitness.Core\BasicExtentions.cs:line 83&#xD;&#xA;   at MethodFitness.Core.Services.SecurityDataService.AuthenticateForUserId(String username, String password) in C:\Development\MethodFitness\Development\src\MethodFitness.Core\Services\ISecurityDataService.cs:line 34&#xD;&#xA;   at MethodFitness.Web.Controllers.LoginController.Login(LoginViewModel input) in C:\Development\MethodFitness\Development\src\MethodFitness.Web\Controllers\LoginController.cs:line 60" time="2011-12-16T01:09:00.7928659Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CACHE_CONTROL:no-cache&#xD;&#xA;HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_PRAGMA:no-cache&#xD;&#xA;HTTP_CONTENT_LENGTH:50&#xD;&#xA;HTTP_CONTENT_TYPE:application/x-www-form-urlencoded; charset=UTF-8&#xD;&#xA;HTTP_ACCEPT:application/json, text/javascript, */*; q=0.01&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-us,en;q=0.5&#xD;&#xA;HTTP_COOKIE:.ASPXAUTH=6F8F88C3A34C5A693B9FD704A2B6F9895B47009AFB6DDA02BF7A50ADF5AF8DB13A00B9CE7DDC64B54B8D87AB5101EAC4D8CCD07E874A04B196E246ADF457026487D9CD2341D7A4A40143EFE994270964B263287EF292F8F6D00F403650CCB31697FF4DD4122A065C2DAB5DE1B7570717F58E88EE03AE0FD637F2C36CC617E071562536C793F862A6C7DA71682947416CFB2C827F6A672EAD361A27BA182C4675692DE8B77307723026C9107773F35E1BEB78DF759EAB9FDA5BFF1DBB2551657F7B65024E12529D734E4634DA6C4C42B0FD2A4168775502AEA4D53DE27879C14971A693B803DC6828F0BF2F2279115C1DB9BBE83CE187197DF5BBEF4CBEF1A46EE46C05A2454E4AE0EC56D7746BDA3167; ASP.NET_SessionId=ksb1nyrju5vqmtxzjodeci0f; MF=A806F7C4CEB2B79408E109F0D55321E88AFA6DDA7ED0D8B065E8036D1DDEB310BF86D635F1E291F68D1E3320B117BBEDD7C640DCCD18168BB18D30ED023A84551BA2EC6A32ACC448D62FB62ED3E3390BEB71F9AA4AED40B5D705C4DD769BF027BE04B7CBF7980DE62D8E25A7A88267919564240B8FFF634A3390086CA0CC9B6C6CDEB64E8749261A15F8430D9283B8068468DD2A095933E5AD34551A1F0460893F87258CC5FB8EB0B18A965974F3997CBA8EA2CF9D97A38B9C7D91E044478ACA&#xD;&#xA;HTTP_HOST:localhost:888&#xD;&#xA;HTTP_REFERER:http://localhost:888/&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Cache-Control: no-cache&#xD;&#xA;Connection: keep-alive&#xD;&#xA;Pragma: no-cache&#xD;&#xA;Content-Length: 50&#xD;&#xA;Content-Type: application/x-www-form-urlencoded; charset=UTF-8&#xD;&#xA;Accept: application/json, text/javascript, */*; q=0.01&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-us,en;q=0.5&#xD;&#xA;Cookie: .ASPXAUTH=6F8F88C3A34C5A693B9FD704A2B6F9895B47009AFB6DDA02BF7A50ADF5AF8DB13A00B9CE7DDC64B54B8D87AB5101EAC4D8CCD07E874A04B196E246ADF457026487D9CD2341D7A4A40143EFE994270964B263287EF292F8F6D00F403650CCB31697FF4DD4122A065C2DAB5DE1B7570717F58E88EE03AE0FD637F2C36CC617E071562536C793F862A6C7DA71682947416CFB2C827F6A672EAD361A27BA182C4675692DE8B77307723026C9107773F35E1BEB78DF759EAB9FDA5BFF1DBB2551657F7B65024E12529D734E4634DA6C4C42B0FD2A4168775502AEA4D53DE27879C14971A693B803DC6828F0BF2F2279115C1DB9BBE83CE187197DF5BBEF4CBEF1A46EE46C05A2454E4AE0EC56D7746BDA3167; ASP.NET_SessionId=ksb1nyrju5vqmtxzjodeci0f; MF=A806F7C4CEB2B79408E109F0D55321E88AFA6DDA7ED0D8B065E8036D1DDEB310BF86D635F1E291F68D1E3320B117BBEDD7C640DCCD18168BB18D30ED023A84551BA2EC6A32ACC448D62FB62ED3E3390BEB71F9AA4AED40B5D705C4DD769BF027BE04B7CBF7980DE62D8E25A7A88267919564240B8FFF634A3390086CA0CC9B6C6CDEB64E8749261A15F8430D9283B8068468DD2A095933E5AD34551A1F0460893F87258CC5FB8EB0B18A965974F3997CBA8EA2CF9D97A38B9C7D91E044478ACA&#xD;&#xA;Host: localhost:888&#xD;&#xA;Referer: http://localhost:888/&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Development\MethodFitness\Development\src\MethodFitness.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="RHARIK\Owner" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="50" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded; charset=UTF-8" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Login/Login" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Development\MethodFitness\Development\src\MethodFitness.Web\Login\Login" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="POST" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Login/Login" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="888" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/Login/Login" />
+    </item>
+    <item name="HTTP_CACHE_CONTROL">
+      <value string="no-cache" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_PRAGMA">
+      <value string="no-cache" />
+    </item>
+    <item name="HTTP_CONTENT_LENGTH">
+      <value string="50" />
+    </item>
+    <item name="HTTP_CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded; charset=UTF-8" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="application/json, text/javascript, */*; q=0.01" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-us,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string=".ASPXAUTH=6F8F88C3A34C5A693B9FD704A2B6F9895B47009AFB6DDA02BF7A50ADF5AF8DB13A00B9CE7DDC64B54B8D87AB5101EAC4D8CCD07E874A04B196E246ADF457026487D9CD2341D7A4A40143EFE994270964B263287EF292F8F6D00F403650CCB31697FF4DD4122A065C2DAB5DE1B7570717F58E88EE03AE0FD637F2C36CC617E071562536C793F862A6C7DA71682947416CFB2C827F6A672EAD361A27BA182C4675692DE8B77307723026C9107773F35E1BEB78DF759EAB9FDA5BFF1DBB2551657F7B65024E12529D734E4634DA6C4C42B0FD2A4168775502AEA4D53DE27879C14971A693B803DC6828F0BF2F2279115C1DB9BBE83CE187197DF5BBEF4CBEF1A46EE46C05A2454E4AE0EC56D7746BDA3167; ASP.NET_SessionId=ksb1nyrju5vqmtxzjodeci0f; MF=A806F7C4CEB2B79408E109F0D55321E88AFA6DDA7ED0D8B065E8036D1DDEB310BF86D635F1E291F68D1E3320B117BBEDD7C640DCCD18168BB18D30ED023A84551BA2EC6A32ACC448D62FB62ED3E3390BEB71F9AA4AED40B5D705C4DD769BF027BE04B7CBF7980DE62D8E25A7A88267919564240B8FFF634A3390086CA0CC9B6C6CDEB64E8749261A15F8430D9283B8068468DD2A095933E5AD34551A1F0460893F87258CC5FB8EB0B18A965974F3997CBA8EA2CF9D97A38B9C7D91E044478ACA" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:888" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:888/" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+  </serverVariables>
+  <form>
+    <item name="UserName">
+      <value string="admin" />
+    </item>
+    <item name="Password">
+      <value string="123" />
+    </item>
+    <item name="RememberMe">
+      <value string="false" />
+    </item>
+    <item name="save">
+      <value string="" />
+    </item>
+  </form>
+  <cookies>
+    <item name=".ASPXAUTH">
+      <value string="6F8F88C3A34C5A693B9FD704A2B6F9895B47009AFB6DDA02BF7A50ADF5AF8DB13A00B9CE7DDC64B54B8D87AB5101EAC4D8CCD07E874A04B196E246ADF457026487D9CD2341D7A4A40143EFE994270964B263287EF292F8F6D00F403650CCB31697FF4DD4122A065C2DAB5DE1B7570717F58E88EE03AE0FD637F2C36CC617E071562536C793F862A6C7DA71682947416CFB2C827F6A672EAD361A27BA182C4675692DE8B77307723026C9107773F35E1BEB78DF759EAB9FDA5BFF1DBB2551657F7B65024E12529D734E4634DA6C4C42B0FD2A4168775502AEA4D53DE27879C14971A693B803DC6828F0BF2F2279115C1DB9BBE83CE187197DF5BBEF4CBEF1A46EE46C05A2454E4AE0EC56D7746BDA3167" />
+    </item>
+    <item name="ASP.NET_SessionId">
+      <value string="ksb1nyrju5vqmtxzjodeci0f" />
+    </item>
+  </cookies>
+</error>

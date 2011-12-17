@@ -1,8 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using HtmlTags;
 using KnowYourTurf.Core.Domain;
+using HtmlTags;
 using Rhino.Security.Interfaces;
 
 namespace KnowYourTurf.Core.Html.Grid
@@ -11,13 +12,13 @@ namespace KnowYourTurf.Core.Html.Grid
     {
         List<IGridColumn> columns { get; }
         IList<IDictionary<string, string>> ToGridColumns(User user);
-        string[] ToGridRow(ENTITY item, User user, IEnumerable<Action<IGridColumn, ENTITY>> modifications, string gridName = "");
+        string[] ToGridRow(ENTITY item, User user, IEnumerable<Action<HtmlTag, ENTITY>> modifications);
 
         DisplayColumn<ENTITY> DisplayFor(Expression<Func<ENTITY, object>> expression);
         HiddenColumn<ENTITY> HideColumnFor(Expression<Func<ENTITY, object>> expression);
         ImageColumn<ENTITY> ImageColumn();
         ImageButtonColumn<ENTITY> ImageButtonColumn();
-        LinkColumn<ENTITY> LinkColumnFor(Expression<Func<ENTITY, object>> expression, string gridName = "");
+        LinkColumn<ENTITY> LinkColumnFor(Expression<Func<ENTITY, object>> expression);
         GroupingColumn<ENTITY> GroupingColumnFor(Expression<Func<ENTITY, object>> expression);
     }
 
@@ -36,14 +37,14 @@ namespace KnowYourTurf.Core.Html.Grid
             get { return _columns; }
         }
 
-        public string[] ToGridRow(ENTITY item, User user, IEnumerable<Action<IGridColumn, ENTITY>> modifications, string gridName = "")
+        public string[] ToGridRow(ENTITY item, User user, IEnumerable<Action<HtmlTag, ENTITY>> modifications)
         {
             var cellValues = new List<string>();
             foreach (var column in columns)
             {
-                modifications.Each(x => x.Invoke(column, item));
-                string value = column.BuildColumn(item, user, _authorizationService, gridName);
-                cellValues.Add(value ?? string.Empty);
+                var value = column.BuildColumn(item, user, _authorizationService);
+                modifications.Each(x => x.Invoke(value, item));
+                cellValues.Add(value == null ? string.Empty: value.ToPrettyString());
             }
             return cellValues.ToArray();
         }
@@ -80,9 +81,9 @@ namespace KnowYourTurf.Core.Html.Grid
             return AddColumn(new ImageButtonColumn<ENTITY>());
         }
 
-        public LinkColumn<ENTITY> LinkColumnFor(Expression<Func<ENTITY, object>> expression,string gridName = "")
+        public LinkColumn<ENTITY> LinkColumnFor(Expression<Func<ENTITY, object>> expression)
         {
-            return AddColumn(new LinkColumn<ENTITY>(expression,gridName));
+            return AddColumn(new LinkColumn<ENTITY>(expression));
         }
 
         public GroupingColumn<ENTITY> GroupingColumnFor(Expression<Func<ENTITY, object>> expression)

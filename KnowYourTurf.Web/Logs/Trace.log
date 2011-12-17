@@ -1,0 +1,59 @@
+2011-12-17 09:22:21,371 [11] ERROR - Could not execute query: select user0_.EntityId as EntityId5_, user0_.CreateDate as CreateDate5_, user0_.ChangeDate as ChangeDate5_, user0_.ChangedBy as ChangedBy5_, user0_.Archived as Archived5_, user0_.CompanyId as CompanyId5_, user0_.UserId as UserId5_, user0_.FirstName as FirstName5_, user0_.MiddleInitial as MiddleIn9_5_, user0_.LastName as LastName5_, user0_.BirthDate as BirthDate5_, user0_.Email as Email5_, user0_.PhoneMobile as PhoneMo13_5_, user0_.PhoneHome as PhoneHome5_, user0_.Address1 as Address15_5_, user0_.Address2 as Address16_5_, user0_.City as City5_, user0_.State as State5_, user0_.ZipCode as ZipCode5_, user0_.Notes as Notes5_, user0_.ImageUrl as ImageUrl5_, user0_.Color as Color5_, user0_.UserLoginInfoId as UserLog23_5_ from [User] user0_, [UserLoginInfo] userlogini1_ where user0_.Archived= @p0 and user0_.UserLoginInfoId=userlogini1_.EntityId and userlogini1_.Archived= @p1 and lower(userlogini1_.LoginName)=@p2
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'Archived'.
+Invalid column name 'UserLoginInfoId'.
+Invalid column name 'Archived'.
+Invalid column name 'CreateDate'.
+Invalid column name 'ChangeDate'.
+Invalid column name 'ChangedBy'.
+Invalid column name 'Archived'.
+Invalid column name 'UserId'.
+Invalid column name 'MiddleInitial'.
+Invalid column name 'Color'.
+Invalid column name 'UserLoginInfoId'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2011-12-17 09:22:21,379 [11] ERROR - Invalid column name 'Archived'.
+Invalid column name 'UserLoginInfoId'.
+Invalid column name 'Archived'.
+Invalid column name 'CreateDate'.
+Invalid column name 'ChangeDate'.
+Invalid column name 'ChangedBy'.
+Invalid column name 'Archived'.
+Invalid column name 'UserId'.
+Invalid column name 'MiddleInitial'.
+Invalid column name 'Color'.
+Invalid column name 'UserLoginInfoId'.
+2011-12-17 09:22:21,383 [11] ERROR - Invalid column name 'Archived'.
+Invalid column name 'UserLoginInfoId'.
+Invalid column name 'Archived'.
+Invalid column name 'CreateDate'.
+Invalid column name 'ChangeDate'.
+Invalid column name 'ChangedBy'.
+Invalid column name 'Archived'.
+Invalid column name 'UserId'.
+Invalid column name 'MiddleInitial'.
+Invalid column name 'Color'.
+Invalid column name 'UserLoginInfoId'.
+2011-12-17 09:22:21,384 [11] ERROR - Invalid column name 'Archived'.
+Invalid column name 'UserLoginInfoId'.
+Invalid column name 'Archived'.
+Invalid column name 'CreateDate'.
+Invalid column name 'ChangeDate'.
+Invalid column name 'ChangedBy'.
+Invalid column name 'Archived'.
+Invalid column name 'UserId'.
+Invalid column name 'MiddleInitial'.
+Invalid column name 'Color'.
+Invalid column name 'UserLoginInfoId'.

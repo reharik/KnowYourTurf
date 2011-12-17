@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using KnowYourTurf.Core.Localization;
 using FubuMVC.UI.Tags;
@@ -11,7 +13,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         private readonly ITagGenerator<VIEWMODEL> _generator;
         private readonly Expression<Func<VIEWMODEL, object>> _expression;
         private HtmlTag _htmlRoot;
-        private string _rootClass;
+        private List<string> _rootClasses; 
         private string _labelRootClass;
         private string _labelClass;
         private string _inputRootClass;
@@ -24,7 +26,9 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         private string _rootId;
         private bool _noClear;
         private string _labelDisplay;
-        private string _displayName;
+        private string _url;
+        private bool _hideIfEmpty;
+        private string _dateFormat;
 
         public ViewExpression(ITagGenerator<VIEWMODEL> generator, Expression<Func<VIEWMODEL, object>> expression)
         {
@@ -40,29 +44,43 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         public HtmlTag ToHtmlTag()
         {
             _htmlRoot = new HtmlTag("div");
-            _htmlRoot.AddClass(_noClear ? "KYT_view_root_no_clear" : "KYT_view_root");
+            _htmlRoot.AddClass(_noClear ? "view_root_no_clear" : "view_root");
 
-            _htmlRoot = new HtmlTag("div").AddClass("KYT_view_root");
+            _htmlRoot = new HtmlTag("div").AddClass("view_root");
             if (_rootId.IsNotEmpty()) _htmlRoot.Id(_rootId);
-            if (_rootClass.IsNotEmpty()) _htmlRoot.AddClass(_rootClass);
+            if (_rootClasses!=null && _rootClasses.Any()) _htmlRoot.AddClasses(_rootClasses);
             ViewLabelExpression<VIEWMODEL> labelBuilder = new ViewLabelExpression<VIEWMODEL>(_generator, _expression);
             ViewDisplayExpression<VIEWMODEL> displayBuilder = new ViewDisplayExpression<VIEWMODEL>(_generator, _expression);
-            if (_displayName.IsNotEmpty()) displayBuilder.AddDisplayNameForHref(_displayName);
             addInternalCssClasses(labelBuilder, displayBuilder);
             hideElements(_htmlRoot, labelBuilder, displayBuilder);
             addIds(labelBuilder, displayBuilder);
             addCustomLabel(labelBuilder);
+            addCustomAttr(displayBuilder);
+            handleSpecialFormats(displayBuilder);
             HtmlTag label = labelBuilder.ToHtmlTag();
             HtmlTag input = displayBuilder.ToHtmlTag();
-
-            _htmlRoot.Child(label);
-            _htmlRoot.Child(input);
+            if (input.Text().IsEmpty() && _hideIfEmpty) return null;
+            _htmlRoot.Append(label);
+            _htmlRoot.Append(input);
             return _htmlRoot;
+        }
+
+        private void handleSpecialFormats(ViewDisplayExpression<VIEWMODEL> displayBuilder)
+        {
+            if(_dateFormat.IsNotEmpty())
+            {
+                displayBuilder.DateFormat(_dateFormat);
+            }
         }
 
         private void addCustomLabel(ViewLabelExpression<VIEWMODEL> label)
         {
             if (_labelDisplay.IsNotEmpty()) label.CustomLabel(_labelDisplay);
+        }
+
+        private void addCustomAttr(ViewDisplayExpression<VIEWMODEL> display)
+        {
+            if (_url.IsNotEmpty()) display.AddUrlToAnchor(_url);
         }
 
         private void addIds(ViewLabelExpression<VIEWMODEL> label, ViewDisplayExpression<VIEWMODEL> input)
@@ -94,6 +112,12 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             return this;
         }
 
+        public ViewExpression<VIEWMODEL> AddUrlToDisplayAnchor(string url)
+        {
+            _url = url;
+            return this;
+        }
+
         public ViewExpression<VIEWMODEL> LabelDisplay(string display)
         {
             _labelDisplay = display;
@@ -108,7 +132,18 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 
         public ViewExpression<VIEWMODEL> AddClassToRoot(string cssClass)
         {
-            _rootClass = cssClass;
+            if (_rootClasses == null)
+            {
+                _rootClasses = new List<string>();
+            }
+            if (cssClass.Contains(" "))
+            {
+                cssClass.Split(' ').Each(_rootClasses.Add);
+            }
+            else
+            {
+                _rootClasses.Add(cssClass);
+            }
             return this;
         }
 
@@ -172,14 +207,22 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             return this;
         }
 
-        public ViewExpression<VIEWMODEL> AddDisplayNameForHref(string displayName)
+        public ViewExpression<VIEWMODEL> HideIfEmpty()
         {
-            _displayName = displayName;
+            _hideIfEmpty = true;
             return this;
         }
 
-        #endregion
+        public ViewExpression<VIEWMODEL> DateFormat(string format)
+        {
+            _dateFormat = format;
+            return this;
+        }
 
+
+
+
+        #endregion
 
     }
 }

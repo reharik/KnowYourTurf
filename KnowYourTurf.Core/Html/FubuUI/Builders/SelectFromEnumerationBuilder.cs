@@ -25,16 +25,16 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
                 IEnumerable<Enumeration> enumerations = Enumeration.GetAllActive(enumeration);
                 if (enumerations == null) return;
-                enumerations = enumerations.OrderBy(item => item.Key);
+
                 foreach (Enumeration option in enumerations)
                 {
                     x.Option(option.Key,
-                             option.Value ?? option.Key);
+                             option.Value.IsEmpty() ? option.Key : option.Value);
                 }
                 if (value != null && value.ToString().IsNotEmpty())
                 {
                     x.SelectByValue(value);
-                } 
+                }
                 else
                 {
                     Enumeration defaultOption = enumerations.FirstOrDefault(o => o.IsDefault);
@@ -43,6 +43,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
                         x.SelectByValue(defaultOption.Value.IsEmpty() ? defaultOption.Key : defaultOption.Value);
                     }
                 }
+                x.AddClass("kyt_fixedWidthDropdown");
+                x.AddClass("fixedWidthDropdown");
             };
             return new SelectTag(action);
         }

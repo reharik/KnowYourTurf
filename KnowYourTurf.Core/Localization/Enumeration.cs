@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -66,7 +65,7 @@ namespace KnowYourTurf.Core.Localization
             }
         }
 
-        public static IEnumerable<T> GetAll<T>(bool justActive = false) where T : Enumeration, new()
+        public static IEnumerable<T> GetAll<T>() where T : Enumeration, new()
         {
             var type = typeof(T);
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
@@ -75,15 +74,31 @@ namespace KnowYourTurf.Core.Localization
             {
                 var instance = new T();
                 var locatedValue = info.GetValue(instance) as T;
-                if (justActive &&  locatedValue != null && locatedValue.IsActive) yield return locatedValue;
-                else if (!justActive && locatedValue != null)yield return locatedValue;
-                
+
+                if (locatedValue != null)
+                {
+                    yield return locatedValue;
+                }
             }
         }
-        public static IEnumerable<Enumeration> GetAllActive<ENUM>() where ENUM : Enumeration,new()
+
+        public static IEnumerable<T> GetAllActive<T>() where T : Enumeration, new()
         {
-            return GetAll<ENUM>(true);
+            var type = typeof(T);
+            var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
+
+            foreach (var info in fields)
+            {
+                var instance = new T();
+                var locatedValue = info.GetValue(instance) as T;
+
+                if (locatedValue != null && locatedValue.IsActive)
+                {
+                    yield return locatedValue;
+                }
+            }
         }
+
         public static IEnumerable<Enumeration> GetAllActive(Enumeration e)
         {
             var type = e.GetType();

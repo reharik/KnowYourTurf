@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using KnowYourTurf.Core;
 using KnowYourTurf.Web;
-using KnowYourTurf.Web.Config;
 using StructureMap;
 
 namespace Generator
@@ -20,7 +19,7 @@ namespace Generator
                 //{
                 //    ObjectFactory.Profile = "productionProfile";
                 //}
-                //ObjectFactory.Profile = "productionProfile";et
+                //ObjectFactory.Profile = "productionProfile";
                 //ObjectFactory.Profile = "devProfile";
 
                 Initialize();
@@ -29,19 +28,12 @@ namespace Generator
                 //                var command = new EnterStringsCommand(ObjectFactory.GetInstance<ILocalizedStringLoader>(), ObjectFactory.GetInstance<IRepository>());
                 //var command = new RebuildDatabaseCommand(ObjectFactory.GetInstance<ISessionSource>(), ObjectFactory.GetInstance<IRepository>(), ObjectFactory.GetInstance<ILocalizedStringLoader>(),ObjectFactory.GetInstance<PersistenceModel>());
 
-                var commands = ObjectFactory.GetAllInstances<IGeneratorCommand>();
-                if (args.Length == 0)
-                {
-                    var commandNoArg = ObjectFactory.Container.GetInstance<IGeneratorCommand>("rebuilddatabase");
-//                    var commandNoArg = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
-                    commandNoArg.Execute(args);
-                    return;
-                    //displayHelpAndExit(args, commands);
-                }
-                    var command = commands.FirstOrDefault(c => c.toCanonicalCommandName() == args[0].toCanonicalCommandName());
-                    if (command == null) displayHelpAndExit(args, commands);
-                    //var command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
-                    command.Execute(args);
+                //var commands = ObjectFactory.GetAllInstances<IGeneratorCommand>();
+                //if (args.Length == 0) displayHelpAndExit(args, commands);
+                //var command = commands.FirstOrDefault(c => c.toCanonicalCommandName() == args[0].toCanonicalCommandName());
+                //if (command == null) displayHelpAndExit(args, commands);
+                var command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("rebuilddatabase");
+                command.Execute(args);
             }
             catch (Exception ex)
             {
@@ -73,13 +65,13 @@ namespace Generator
         private static void Initialize()
         {
            // Bootstrapper.Restart();
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+
             ObjectFactory.Initialize(x =>
                                          {
                                              x.AddRegistry(new KYTWebRegistry());
                                              x.AddRegistry(new CommandRegistry());
                                          });
-            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
-
             //ObjectFactory.AssertConfigurationIsValid();
 
 

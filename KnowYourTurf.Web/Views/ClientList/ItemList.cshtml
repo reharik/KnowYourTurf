@@ -1,0 +1,15 @@
+﻿@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@model ListViewModel
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@section HeaderScripts{
+}
+@section HeaderJavascript{
+    $(document).ready(function(){
+        gridControllerOptions.id="trainer";
+        new kyt.CrudController(gridControllerOptions);
+    });
+}
+<table id="gridContainer" class="scroll"></table>
+<div id="pager" class="scroll" style="text-align:center;"></div>

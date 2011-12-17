@@ -15,7 +15,6 @@ namespace KnowYourTurf.Web.Config
             ObjectFactory.AssertConfigurationIsValid();
         }
 
-
         public static void Restart()
         {
             if (_hasStarted)
@@ -42,9 +41,9 @@ namespace KnowYourTurf.Web.Config
         public virtual void BootstrapStructureMap()
         {
             ObjectFactory.Initialize(x =>
-                                         {
-                                             x.AddRegistry(new KYTTestRegistry());
-                                         });
+            {
+                x.AddRegistry(new KYTTestRegistry());
+            });
             ObjectFactory.AssertConfigurationIsValid();
         }
 

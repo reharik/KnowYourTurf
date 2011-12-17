@@ -1,8 +1,5 @@
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Services;
+﻿using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Services;
-using StructureMap;
 
 namespace Generator.Commands
 {
@@ -11,7 +8,7 @@ namespace Generator.Commands
         private readonly IRepository _repository;
         private readonly ISecuritySetupService _securitySetupService;
 
-        public DefaultSecuritySetupCommand(IRepository repository,ISecuritySetupService securitySetupService)
+        public DefaultSecuritySetupCommand(IRepository repository, ISecuritySetupService securitySetupService)
         {
             _repository = repository;
             _securitySetupService = securitySetupService;
@@ -22,7 +19,6 @@ namespace Generator.Commands
         public void Execute(string[] args)
         {
             _securitySetupService.ExecuteAll();
-            _repository.UnitOfWork.Commit();;
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
-using FubuMVC.Core.Util;
 using KnowYourTurf.Core.Localization;
+using FubuMVC.Core.Util;
 
 namespace KnowYourTurf.Core.Html.Grid
 {

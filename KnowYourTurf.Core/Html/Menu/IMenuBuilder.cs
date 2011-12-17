@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Web.Caching;
 using System.Web.Mvc;
-using FubuMVC.Core.Util;
+using System.Web.Script.Serialization;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Enumerations;
 using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using Rhino.Security.Interfaces;
@@ -16,9 +19,11 @@ namespace KnowYourTurf.Core.Html.Menu
         IList<MenuItem> MenuTree(bool withoutPermissions = false);
         IMenuBuilder HasChildren();
         IMenuBuilder EndChildren();
-        IMenuBuilder CreateNode<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, StringToken text) where CONTROLLER : Controller;
-        IMenuBuilder CreateNode<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, StringToken text, string urlParam) where CONTROLLER : Controller;
-        IMenuBuilder CreateNode(StringToken text);
+        IMenuBuilder CreateNode<CONTROLLER>(string urlPreface, Expression<Func<CONTROLLER, object>> action, StringToken text, AreaName areaName = null, string cssClass = null) where CONTROLLER : Controller;
+        IMenuBuilder CreateNode<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, StringToken text, AreaName areaName = null, string cssClass = null) where CONTROLLER : Controller;
+        IMenuBuilder CreateNode<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, StringToken text, string urlParam, AreaName areaName = null, string cssClass=null) where CONTROLLER : Controller;
+        IMenuBuilder CreateNode(StringToken text, string cssClass=null);
+        string OutputFlatJson();
     }
 
     public class MenuBuilder : IMenuBuilder
@@ -41,7 +46,7 @@ namespace KnowYourTurf.Core.Html.Menu
             var _itemList = getList();
             var lastItem = _itemList.LastOrDefault();
             lastItem.Children = new List<MenuItem>();
-            _parentItems.Add(lastItem);            
+            _parentItems.Add(lastItem);
             return this;
         }
 
@@ -52,13 +57,28 @@ namespace KnowYourTurf.Core.Html.Menu
             return this;
         }
 
-        public IMenuBuilder CreateNode(StringToken text)
+        public IMenuBuilder CreateNode<CONTROLLER>(string urlPreface, Expression<Func<CONTROLLER, object>> action, StringToken text, AreaName areaName = null, string cssClass = null) where CONTROLLER : Controller
+        {
+            
+            var _itemList = getList();
+            _itemList.Add(new MenuItem
+            {
+                Text = text.DefaultValue,
+                Url = urlPreface + UrlContext.GetUrlForAction(action, areaName),
+                CssClass = cssClass
+            });
+            return this;
+        }
+
+        public IMenuBuilder CreateNode(StringToken text, string cssClass=null)
         {
             var _itemList = getList();
             _itemList.Add(new MenuItem
             {
                 Text = text.DefaultValue,
-                Url="#"
+                Url = "#",
+                CssClass = cssClass,
+                
             });
             return this;
         }
@@ -69,12 +89,12 @@ namespace KnowYourTurf.Core.Html.Menu
             return lastParentItem != null ? lastParentItem.Children : _items;
         }
 
-        public IMenuBuilder CreateNode<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, StringToken text) where CONTROLLER : Controller
+        public IMenuBuilder CreateNode<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, StringToken text, AreaName areaName = null, string cssClass=null) where CONTROLLER : Controller
         {
-            return CreateNode(action, text, "");
+            return CreateNode(action, text, "",areaName,cssClass);
         }
 
-        public IMenuBuilder CreateNode<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, StringToken text, string urlParam) where CONTROLLER : Controller
+        public IMenuBuilder CreateNode<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, StringToken text, string urlParam, AreaName areaName = null, string cssClass = null) where CONTROLLER : Controller
         {
             string param;
             if (urlParam.Contains("="))
@@ -88,34 +108,61 @@ namespace KnowYourTurf.Core.Html.Menu
 
             var _itemList = getList();
             _itemList.Add(new MenuItem
-                           {
-                               Text = text.DefaultValue,
-                               Url = UrlContext.GetUrlForAction(action) + param
-                           });
+            {
+                Text = text.DefaultValue,
+                Url = UrlContext.GetUrlForAction(action,areaName) + param,
+                CssClass=cssClass
+            });
             return this;
         }
-
         public IList<MenuItem> MenuTree(bool withoutPermissions = false)
         {
             if (withoutPermissions) return _items;
-            IList<MenuItem> permittedItems =  modifyListForPermissions();
+            IList<MenuItem> permittedItems = modifyListForPermissions();
             return permittedItems;
         }
 
         private IList<MenuItem> modifyListForPermissions()
         {
             var permittedItems = new List<MenuItem>();
-            var userId = _sessionContext.GetUserId();
+            var userId = _sessionContext.GetUserEntityId();
             var user = _repository.Find<User>(userId);
             _items.Each(x =>
-                            {
-                                var operationName = "/MenuItem/"+x.Text.RemoveWhiteSpace();
-                                if (_authorizationService.IsAllowed(user, operationName))
-                                {
-                                    permittedItems.Add(x);
-                                }
-                            });
+            {
+                var operationName = "/MenuItem/" + x.Text.RemoveWhiteSpace();
+                if (_authorizationService.IsAllowed(user, operationName))
+                {
+                    permittedItems.Add(x);
+                }
+            });
             return permittedItems;
+        }
+
+        private void getLinksOnly(IEnumerable<MenuItem> items, IList<MenuItem> result)
+        {
+            foreach (var x in items)
+            {
+                if(x.Text.IsEmpty())
+                {
+                    continue;
+                }
+                if(x.Children==null)
+                {
+                    result.Add(x);
+                    continue;
+                }
+                getLinksOnly(x.Children, result);
+            }
+        }
+
+        public string OutputFlatJson()
+        {
+            var result = new List<MenuItem>();
+            getLinksOnly(_items,result);
+            result.Each(x=>Debug.WriteLine(x.Text + "--" +x.Url));
+            var jss = new JavaScriptSerializer();
+            var json = jss.Serialize(result);
+            return json;
         }
     }
 
@@ -123,6 +170,7 @@ namespace KnowYourTurf.Core.Html.Menu
     {
         public string Text { get; set; }
         public string Url { get; set; }
+        public string CssClass { get; set; }
         public IList<MenuItem> Children { get; set; }
     }
 }

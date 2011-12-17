@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using KnowYourTurf.Core.Html.FubuUI.Tags;
 using FubuMVC.UI.Configuration;
 using HtmlTags;
 
@@ -28,7 +29,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
                 x.Option(CoreLocalizationKeys.SELECT_ITEM.ToString(),"");
                 dictionary.Keys.Each(key =>
                 {
-                    x.OptGroup(key);
+                    x.OptionGroup(key);
                     dictionary[key].Each(l => x.Option(l.Text, l.Value+"_"+key));
                 });
                 if (value != null && value.ToString().IsNotEmpty())
@@ -38,5 +39,26 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
             };
             return new SelectTag(action);
         }
+    }
+
+    public static class SelectTagExtensions
+    {
+        public static HtmlTag MakeOptionGroup(this SelectTag tag, string display)
+        {
+            return new HtmlTag("optgroup").Attr("label", display).Attr("value", "");
+        }
+
+        public static HtmlTag OptionGroup(this SelectTag tag, string display)
+        {
+            HtmlTag option = tag.MakeOptionGroup(display);
+            tag.Append(option);
+            return option;
+
+        }
+
+       
+
+
+
     }
 }

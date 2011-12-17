@@ -1,13 +1,15 @@
 using KnowYourTurf.Core.Config;
+using KnowYourTurf.Core.Domain;
+using HtmlTags;
 
 namespace KnowYourTurf.Core.Html.Expressions
 {
-    public class ImageExpression : HtmlCommonExpressionBase
+    public class ImageExpression : HtmlTagExpressionBase
     {
         private readonly string _imageSrcUrl;
         private string _baseUrl;
 
-        public ImageExpression(string imageSrcUrl)
+        public ImageExpression(string imageSrcUrl):base("img")
         {
             _imageSrcUrl = imageSrcUrl;
             _baseUrl = SiteConfig.Settings().ImagesPath;
@@ -15,9 +17,14 @@ namespace KnowYourTurf.Core.Html.Expressions
 
         public override string ToString()
         {
+            return ToHtmlTag().ToString();
+        }
+
+        private HtmlTag ToHtmlTag()
+        {
             var fullUrl = UrlContext.Combine(_baseUrl, _imageSrcUrl).ToFullUrl();
-            var html = @"<img src=""{0}""{1}/>".ToFormat(fullUrl, GetHtmlAttributesString());
-            return html;
+            AddAttr("src", fullUrl);
+            return ToHtmlTagBase();
         }
 
         public ImageExpression BasedAt(string baseUrl)
@@ -28,7 +35,7 @@ namespace KnowYourTurf.Core.Html.Expressions
 
         public ImageExpression Alt(string altText)
         {
-            this.Attr("alt", altText);
+            AddAttr("alt", altText);
             return this;
         }
     }

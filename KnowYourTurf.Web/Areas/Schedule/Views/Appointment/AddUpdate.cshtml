@@ -1,0 +1,77 @@
+﻿@using HtmlTags
+@using KnowYourTurf.Core.Enumerations
+@using KnowYourTurf.Core.Html.Expressions
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Core.Services
+@using KnowYourTurf.Web
+@using KnowYourTurf.Web.Areas.Schedule.Controllers
+@using KnowYourTurf.Web.Controllers
+@model AppointmentViewModel
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+
+<script>
+    var isCopy = '@Model.Copy';
+     extraFormOptions.availableItems= @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableItems));
+        extraFormOptions.selectedItems= @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedItems));
+    extraFormOptions.runAfterRenderFunction = function () {
+        if (isCopy == "True") {
+            $("#Appointment_EntityId").val(0);
+        }
+    };
+</script>
+
+<div id="errorMessagesForm" class="dci_ErrorMessages errorMessages"><ul></ul></div>
+@MvcHtmlString.Create(FormFor<AppointmentController>(x => x.Save(null), AreaName.Schedule).AddClass("CRUD").ElementId("CRUDForm").ToString())
+    @Html.SubmissionFor(x => x.Appointment.EntityId).HideRoot().ToHtmlTag()
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Appointment.Location).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @if (@UserPermissionService.Allow("/Calendar/SetAppointmentForOthers"))
+            {
+                @Html.SubmissionFor(x => x.Appointment.Trainer).ToHtmlTag()
+            }
+            else
+            {
+                @Html.ViewFor(x => x.TrainerName).ToHtmlTag()
+                @Html.SubmissionFor(x => x.Appointment.Trainer.EntityId).HideRoot().ToHtmlTag()
+            }
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Appointment.Notes).ToHtmlTag()
+        </div>
+    </div>
+    <div class="col right">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Appointment.ScheduledDate).ToHtmlTag()
+        </div>
+        <h5>@WebLocalizationKeys.STARTTIME</h5>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.sHour).AddClassToRoot("first one-five").LabelDisplay(WebLocalizationKeys.HOUR).ToHtmlTag()
+            @Html.SubmissionFor(x => x.sMinutes).AddClassToRoot("one-five").LabelDisplay(WebLocalizationKeys.MINUTES).ToHtmlTag()
+            @Html.SubmissionFor(x => x.sAMPM).AddClassToRoot("one-five").LabelDisplay(WebLocalizationKeys.AMPM).ToHtmlTag()
+        </div>
+        <h5>
+            @WebLocalizationKeys.ENDTIME
+        </h5>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.eHour).AddClassToRoot("first one-five").LabelDisplay(WebLocalizationKeys.HOUR).ToHtmlTag()
+            @Html.SubmissionFor(x => x.eMinutes).AddClassToRoot("one-five").LabelDisplay(WebLocalizationKeys.MINUTES).ToHtmlTag()
+            @Html.SubmissionFor(x => x.eAMPM).AddClassToRoot("one-five").LabelDisplay(WebLocalizationKeys.AMPM).ToHtmlTag()
+        </div>
+    </div>
+    <div class="col full clear">
+        <div class="fieldRow artifact-field">
+            <div id="clients">
+                <label class="section">@WebLocalizationKeys.CLIENTS</label>
+                <div id="clients" class="dci_assetSection">
+                    <div class="instruction" id="hasAssets">@WebLocalizationKeys.SELECT_ONE_OR_MORE_OR.ToString()</div>
+                    <input type="text" name="ClientInput" id="Input" class="artifact nolabels"/>
+                </div>
+            </div>
+        </div>
+    </div>
+

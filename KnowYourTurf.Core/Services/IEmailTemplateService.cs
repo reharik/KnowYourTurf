@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Mail;
 using Alpinely.TownCrier;
 using StructureMap;
@@ -7,8 +8,8 @@ namespace KnowYourTurf.Core.Services
 {
     public interface IEmailTemplateService
     {
-        void SendSingleEmail(EmailTemplateDTO input);
-        void SendMultipleEmails(EmailTemplateDTO input, IEnumerable<MailAddress> addresses);
+        string SendEmail(EmailTemplateDTO input);
+        string SendEmail(EmailTemplateDTO input, IEnumerable<MailAddress> addresses);
     }
 
     public class EmailTemplateService : IEmailTemplateService
@@ -20,50 +21,32 @@ namespace KnowYourTurf.Core.Services
             _container = container;
         }
 
-        public void SendSingleEmail(EmailTemplateDTO input)
+        public string SendEmail(EmailTemplateDTO input)
         {
-            var mergedEmailFactory = _container.GetInstance<IMergedEmailFactory>();
-            MailMessage message = mergedEmailFactory
-                .WithTokenValues(input.TokenValues)
-                .WithSubject(input.Subject)
-                .WithHtmlBody(input.Body)
-                .Create();
-
-            message.From = input.From;
-            message.To.Add(input.To);
-            
-            var smtpClient = getSmtpClient();
-            smtpClient.Send(message);
+           return SendEmail(input, input.Addresses ?? new[] { input.To });
         }
-      
-        public void SendMultipleEmails(EmailTemplateDTO input, IEnumerable<MailAddress> addresses)
+        public string SendEmail(EmailTemplateDTO input, IEnumerable<MailAddress> addresses )
         {
-            var mergedEmailFactory = _container.GetInstance<IMergedEmailFactory>();
-            MailMessage message = mergedEmailFactory
-                .WithTokenValues(input.TokenValues)
-                .WithSubject(input.Subject)
-                .WithHtmlBody(input.Body)
-                .Create();
+            try
+            {
+                var mergedEmailFactory = _container.GetInstance<IMergedEmailFactory>();
+                MailMessage message = mergedEmailFactory
+                    .WithTokenValues(input.TokenValues)
+                    .WithSubject(input.Subject)
+                    .WithHtmlBody(input.Body)
+                    .Create();
 
-            message.From = input.From;
-            message.To.AddRange(addresses);
+                message.From = input.From;
+                message.To.AddRange(addresses);
 
-            var smtpClient = getSmtpClient();
-            smtpClient.Send(message);
-        }
-    
-        private SmtpClient getSmtpClient()
-        {
-            var smtpClient = new SmtpClient("smtp.gmail.com",587);
-            smtpClient.Credentials = new System.Net.NetworkCredential("reharik@gmail.com", "mishm124");
-            smtpClient.EnableSsl = true;
-
-            //TODO get this from site settins
-
-            //var smtpClient = new SmtpClient("mail.knowyourturf.com");
-            //smtpClient.Credentials = new System.Net.NetworkCredential("postmaster@knowyourturf.com", "KYTadmin6")
-
-            return smtpClient;
+                var smtpClient = new SmtpClient("mail.methodfitness.com", 25);
+                smtpClient.Send(message);
+            }
+            catch(Exception ex)
+            {
+                return ex.Message;
+            }
+            return string.Empty;
         }
     }
 
@@ -74,5 +57,6 @@ namespace KnowYourTurf.Core.Services
         public string Body { get; set; }
         public MailAddress From { get; set; }
         public MailAddress To { get; set; }
+        public IEnumerable<MailAddress> Addresses { get; set; }
     }
 }

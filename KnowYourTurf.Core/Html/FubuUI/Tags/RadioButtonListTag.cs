@@ -36,7 +36,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Tags
         public HtmlTag AddRadioButton(string display, object value, string name)
         {
             var button = MakeRadioButton(display, value, name);
-            AddChildren(button);
+            Append(button);
             return button;
         }
 
@@ -53,8 +53,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.Tags
             DivTag divTag = new DivTag(display);
             HtmlTag radioButton = new RadioButtonTag(false).Attr("value", value).Attr("name",name);
             HtmlTag label = new HtmlTag("label").Text(display);
-            label.AddChildren(radioButton);
-            divTag.AddChildren(label);
+            label.Append(radioButton);
+            divTag.Append(label);
             return divTag;
         }
 

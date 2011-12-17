@@ -1,361 +1,348 @@
- 
-
-body {
-
-    font-size:80%;
-
-    font-family:trebuchet ms, lucida sans, arial, Helvetica, verdana;
-
-    padding:0 0 0em;
-
-    background: url("../images/ui-bgMark_loop_25_000000_21x21.png") repeat scroll 50% 50% #000000;
-     margin:auto;
-}
-
- 
-
-/* HEADINGS  
-
-----------------------------------------------------------*/
-
-h1,
-
-h2,
-
-h3,
-
-h4,
-
-h5,
-
-h6 {
-
-    margin:0em 0 .2em;
-
-    font-weight:bold;
-
-}
-
-h1 {
-
-    font-size:200%;
-
-    background: url(../images/KYTHeaderBack.png);
-
-    background-position:center;
-
-    background-repeat:no-repeat;
-
-    height: 80px;
-    
-    color:#ffffff;
-    
-    width:960px;
-
-}
-
-h2 {
-
-    font-size:100%;
-
-    margin:0em 0 .5em;
-
-    color:White;
-
-    background: #000000 url(../images/ui-bgMarkGreyh2v2.png) repeat-x;
-
-}
-
-h3 {
-
-    font-size:100%;
-
-    margin:0em 0 .5em;
-
-    color:Gray;
-
-    margin-left: .5em;
-
-  
-
-}
-
-h4  {
-
-    font-size:100%;
-
-    margin:0em 0 .5em;
-
-    color:White;
-
-    background: #000000 url(../images/ui-bgMarkButton.png) repeat-x;
-
-}
-
-h5 {
-
-    font-size:100%;
-
-}
-
-h6 {
-
-    font-size:100%;
-
-    color:White;
-
-    background: #000000 url(../images/ui-bgMarkGreyh2v2.png) repeat-x;
-
- 
-
-}
-
- 
-
- 
-
- 
-
-/* PRIMARY LAYOUT ELEMENTS  
-
-----------------------------------------------------------*/
-
-.page {
-
-    width:95%;
-
-    max-width:95%;
-
-    margin:0 auto;
-
-}
-
-.post.page {
-
-    width:auto;
-
-}
-
-#header {
-
-    height:9em;
-
-}
-
-#header h1 {
-
-    font-size:240%;
-
-    margin:1.55em 0 0;
-
-}
-
-#main {
-
-    margin:0 0 0em;
-
-    padding:1.4em 0;
-
-    border-right:none;
-
-    border-left:none;
-
-    overflow:hidden;
-
-}
-
-#footer {
-
-    overflow:hidden;
-    background: #1a1a1a;
-    margin-bottom:0em;
-    margin-left:0em;
-    margin-right:0em;
-    border-top:2px #384E1D solid;
-    bottom:0;
-    text-align:center;
-    padding:3px;
-    width:954px;
-
-}
-
-#footer .powered {
-
-	text-align:center;
-	color:#b8b8b8;
-    width:960px;
-
-
-}
-
-#footer .credits {
-
-    float:left;
-
-}
-
-#footer .credits a {
-
-    margin:2px 0 0 5px;
-
+﻿.raif{ width:300px; height:300px;}
+
+div.fieldRow textarea
+	{ height: 45px;
+	overflow: auto; }
+ div.fieldRow textarea.medium
+	{ height: 90px	;
+	  overflow: auto; }
+ div.fieldRow textarea.large
+		{ height: 180px	;
+	  overflow: auto; }
+
+.unit a.close {
+    background: url(../images/close-x.png) no-repeat top left;
+    width: 14px;
+    height: 16px;
     display:block;
+    text-indent: -999em;
+    margin-right: 15px;
+    float: right;
+}
+ .repeaterItems {
+     background-color: #C0D4DE;
+     padding: 8px;
+ }
 
-    float:left;
+ .unit{
+     width: 100%;
+     border: 1px black solid;
+ }
 
+.unit .move-up {
+    background: url("../images/move-up-icon.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 8px;
+    margin-top: 1px;
+    width: 11px;
+    cursor: pointer;
 }
 
-#footer .credits a#famfamfam {
-
-    background:url(../../images/famfamfam.gif) no-repeat 0 0;
-
-    height:16px;
-
-    width:0;
-
-    padding:0 0 0 0px;
-
-    overflow:hidden;
-
-    outline:none;
-
+.unit .move-down {
+    background: url("../images/move-down-icon.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 8px;
+    margin-top: 2px;
+    width: 11px;
+    cursor: pointer;
 }
 
-#footer .credits a:hover#famfamfam {
-
-    background-position:0 -16px;
-
+/******  FORMS  *******/
+ div.-scroll-wrapper {
+    padding-top: 12px;
 }
 
- 
-
-#footer .powered span,
-
-#footer .powered a {
-
-    display:block;
-
-    float:left;
-
+ div.-scroll-inner {
+    height: 480px;
+    overflow-y: auto;
 }
 
-#footer .powered span {
-
-    margin: 3px 0 0;
-
+ div.col {
+    width: 335px;
+    padding: 10px 20px;
+    display: block;
 }
 
-#footer .powered a {
-
-    /*background:url(../../images/FubuMVC_Logo_Small_Double.jpg) no-repeat 0 0;*/
-
-    height:60px;
-    margin:0 .1ex 0 .8ex;
-    padding:0 0 0 10px;
-    color:White;
-    outline:none;
-    background: #1A1A1A;
-    bottom:0;
+ div.top {
+    padding-top: 0;
+    display: block;
 }
 
-#footer .powered a:hover {
-
-    background-position:0 -20px;
-
+ div.footer {
+    display: block;
+    clear: both;
+    padding: 10px 0 10px 30px;
 }
 
- 
-
-/* LOGIN FORM
-
-----------------------------------------------------------*/
-
-form.login divOriginal {
-
-    margin:0 0 1em 5px;
-
+ div.left {
+    float: left;
 }
 
-form.login div.submit {
-
-    margin-bottom:0;
-
+ div.right {
+    float: left;
 }
 
-body.dyn form.login label {
-
-    display:block;
-
+ div.full {
+    width: 710px;
+    padding: 10px 0 10px 20px;
 }
 
-body.dyn form.login .remember label {
-
-    display:inline;
-
+ div.fieldRow {
+    font-size: 13px;
+    color: #666666;
+    display: block;
+    margin: 8px 10px;
+    overflow: hidden;
 }
 
-body.dyn form.login input.text {
-
-    width:42ex
-
+ div.fieldRow label {
+    width: 100%;
+    margin-bottom: 4px;
+    display: block;
 }
 
- 
-
-/* MISC 
-
-----------------------------------------------------------*/
-
- 
-
- 
-
-#menucontainer {
-
-    float:right;
-
-    clear:right;
-
+ div.fieldRow label.small {
+    font-size: 0.7em;
 }
 
- 
-
-#title {
-
-    float:left;
-
-    height:100%
-
+ div.fieldRow a {
+    color: #666666;
+    text-decoration: underline;
 }
 
- 
-
-/* COLORS
-
-----------------------------------------------------------*/
-
-html {
-
-    background: url("../images/ui-bgMark_loop_25_000000_21x21.png") repeat scroll 50% 50% #000000;
-    color:#373737;
-    background-color:#1a1a1a;
-
+ div.fieldRow .checkbox .editor_label label {
+    float: left;
+    line-height: 25px;
+    margin: 16px 7px 0 7px;
+    width: auto;
 }
 
- 
+ div.fieldRow div.one-quarter {
+    margin-left: 2%;
+    width: 23%;
+    float: left;
+}
+
+ div.fieldRow div.one-third {
+    margin-left: 2%;
+    width: 31%;
+    float: left;
+}
+
+ div.fieldRow div.half {
+    margin-left: 2%;
+    width: 48%;
+    float: left;
+}
+
+ div.fieldRow div.two-thirds {
+    margin-left: 2%;
+    width: 64%;
+    float: left;
+}
+
+ div.fieldRow div.three-quarters {
+    margin-left: 2%;
+    width: 73%;
+    float: left;
+}
+
+ div.fieldRow div.first {
+    margin-left: 0;
+    margin-right: 2%;
+}
+
+ div.fieldRow input, div.fieldRow select {
+    width: 100%;
+    height: 25px;
+    color: #838383;
+    padding: 2px;
+}
+
+ div.fieldRow  textarea {
+    width: 100%;
+    color: #838383;
+    font-size: 100%;
+    padding: 2px;
+}
+
+ div.fieldRow .checkbox .editor_input input {
+    float: left;
+    width: 12px;
+    margin-top: 16px;
+}
+
+ div.fieldRow input.num, div.fieldRow input.money {
+    width: 40%;
+}
+
+ div.fieldRow input.password {
+    font-size: 11px;
+}
+
+ label.section {
+    color: #457596;
+    background: url('../images/button-v.png') no-repeat;
+    padding-left: 25px;
+    height: 21px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+ .section-divider {
+    width: 710px;
+    display: block;
+    clear: both;
+    padding: 0 0 0 20px;
+}
+
+ .section-divider label.section {
+    margin-left: 10px;
+}
+
+ .footer button {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+ .footer button.save {
+    background: url("../images/button-save-bg.png") repeat-x scroll 0 0 #CCCCCC;
+    border: 1px solid #B7D6DE;
+    height: 27px;
+    width: 80px;
+    color: #437182;
+}
+
+ .footer button.cancel {
+    background: url("../images/button-cancel-bg.png") repeat-x scroll 0 0 #CCCCCC;
+    border: 1px solid #dfdfdf;
+    height: 27px;
+    width: 80px;
+    color: #8F8F8F;
+}
+
+ .footer button.save:hover {
+    background: url("../images/button-save-bg-hover.png") repeat-x scroll 0 0 #CCCCCC;
+}
+
+ .footer button.cancel:hover {
+    background: url("../images/button-cancel-bg-hover.png") repeat-x scroll 0 0 #CCCCCC;
+}
+
+ .footer button.save:active {
+    background: url("../images/button-save-bg-active.png") repeat-x scroll 0 0 #CCCCCC;
+    -webkit-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+    -moz-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+    box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+}
+
+ .footer button.cancel:active {
+    background: url("../images/button-cancel-bg-active.png") repeat-x scroll 0 0 #CCCCCC;
+}
+
+  .artifact-field .editor_root,   .artifact-field .editor_label,   .artifact-field .editor_input {
+    width:100%;
+}
 
 
+ div.fieldRow div.one-five {
+    width: 20%;
+    float: left;
+    margin-left: 2%;
+}
 
-/* selectboxpicker
+ div.fieldRow div.two-five {
+    width: 38%;
+    float: left;
+}
 
-----------------------------------------------------------*/
+div.fieldRow div.three-five {
+    width: 54%;
+    float: left;
+}
 
-.KYT_selectboxPicker{}
-.KYT_selectboxPickerAvailable{float:left;}
-.KYT_selectboxPickerSelected {float:left;}
-.KYT_selectboxPickerBox { width:200px;}
-.KYT_selectboxPickerButtons{float:left;}
-.KYT_selectboxPickerButtonsInner{}
-.KYT_selectboxAddItem{}
-.KYT_selectboxRemoveItem{}
-.KYT_selectboxPicker_error_message{}
+ div.fieldRow div.mid {
+    margin: 0;
+}
 
+ div.fieldRow div.last {
+    margin: 0 0 0 2%;
+}
+
+div.footer div.col {
+    padding: 10px 20px 10px 0;
+}
+
+#portfolios #main-header ul#main-tabs li.selected {
+    background: white;
+    border-top: medium none;
+    height: 33px;
+}
+
+#portfolios #main-header ul#main-tabs li.selected a {
+    color: #333333;
+    text-shadow: -1px -1px 1px #DDDDDD;
+}
+
+.headShotImage img{
+    width: 80px;
+}
+
+#ajaxLoading {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    left: 50%;
+    top: 50%;
+    background: url(../images/ajax-loader.gif);
+}
+
+.ui-jqgrid .loading {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    left: 50%;
+    top: 50%;
+    background: url(../images/ajax-loader.gif);
+}
+
+
+/*********** Overrides to make menu wider ********************/
+
+#left-navigation {
+    width: 222px;
+}
+
+#main-content {
+    margin: 10px 16px 0 222px;
+}
+
+.ui-icon {
+	 width: 17px; 
+	 height: 17px;
+}
+
+/************************/
+.acceptLegal{
+
+    text-align: left;
+    width: 800px;
+    height: 400px;
+    overflow: auto;
+    background-color:           #CCCCCC;
+    font-size:                  10pt;
+    font-family:                Arial, Helvetica, sans-serif;
+    scrollbar-base-color:       #EEEEFF;
+    scrollbar-face-color:       #EEEEFF;
+    scrollbar-track-color:      #F9F9FF;
+    scrollbar-arrow-color:      #000000;
+    scrollbar-shadow-color:     #CCCCCC;
+    scrollbar-highlight-color:  #CCCCCC;
+    scrollbar-3dlight-color:    #CCCCCC;
+    scrollbar-darkshadow-Color: #CCCCCC;
+
+}

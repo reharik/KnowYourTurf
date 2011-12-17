@@ -1,0 +1,10 @@
+﻿@using KnowYourTurf.Core.Domain
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web
+@model Email
+
+        @Html.HiddenFor(x => x.EntityId)
+        <div class="fieldRow">
+        @Html.SubmissionFor(x => x.EmailAddress).AddClassToRoot("three-quarters").ToHtmlTag()
+        @Html.SubmissionFor(x => x.IsDefault).AddClassToRoot("checkbox one-quarter").ToHtmlTag()
+        </div>

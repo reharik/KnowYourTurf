@@ -1,8 +1,7 @@
-using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 
-namespace KnowYourTurf.UnitTests.Rules
+namespace KnowYourTurf.Core.Rules
 {
     public class FieldHasNoOutstandingEvents:IRule
     {
@@ -16,14 +15,14 @@ namespace KnowYourTurf.UnitTests.Rules
         public RuleResult Execute<ENTITY>(ENTITY field) where ENTITY : DomainEntity
         {
             var result = new RuleResult {Success = true};
-            var count = 0;
-            var _field = field as Field;
-            _field.GetEvents().Each(x => { if (x .StartTime > _systemClock.Now) count++; });
-            if(count>0)
-            {
-                result.Success = false;
-                result.Message = CoreLocalizationKeys.FIELD_HAS_EVENTS_IN_FUTURE.ToFormat(count);
-            }
+//            var count = 0;
+//            var _field = field as Field;
+//            _field.GetEvents().Each(x => { if (x .StartTime > _systemClock.Now) count++; });
+//            if(count>0)
+//            {
+//                result.Success = false;
+//                result.Message = CoreLocalizationKeys.FIELD_HAS_EVENTS_IN_FUTURE.ToFormat(count);
+//            }
             return result;
         }
     }

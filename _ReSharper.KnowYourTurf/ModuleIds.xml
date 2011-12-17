@@ -1,0 +1,5 @@
+<Modules>
+  <Module PersistentId="3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7" ModuleId="MethodFitness.Core" />
+  <Module PersistentId="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2" ModuleId="MethodFitness.Web" />
+  <Module PersistentId="E40B313E-1001-41D6-825F-F87B3CB68E2F" ModuleId="Generator" />
+</Modules>

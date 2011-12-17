@@ -1,0 +1,8 @@
+﻿@model MenuViewModel
+@using KnowYourTurf.Web.Areas.Portfolio.Controllers
+<script>
+    $(document).ready(function () {
+        $(".ccMenu").ccMenu({ backLink: false, width : 220 });
+    });
+</script>
+@MenuItems(Model.MenuItems).filGroup().ToHtmlTag()

@@ -4,15 +4,14 @@ ul.token-input-list {
     height: auto !important; 
     height: 1%;
     width: 400px;
-    border: 1px solid #999;
+    border: 1px solid #C6DADE;
     cursor: text;
     font-size: 12px;
     font-family: Verdana;
     z-index: 999;
-    margin: 0;
+    margin: 8px 0 0;
     padding: 0;
     background-color: #fff;
-    color:Black;
     list-style-type: none;
     clear: left;
 }
@@ -35,10 +34,12 @@ li.token-input-token {
     height: 1%;
     margin: 3px;
     padding: 3px 5px;
-    background-color: #000;
+    background-color: #bfd9e5;
+    color: #000;
     font-weight: bold;
     cursor: default;
     display: block;
+	width: 96%;
 }
 
 li.token-input-token p {
@@ -48,14 +49,20 @@ li.token-input-token p {
 }
 
 li.token-input-token span {
-    float: right;
-    color: #777;
+    background: url("../images/blank-blue.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
     cursor: pointer;
+    float: right;
+    font-weight: bold;
+    padding-left: 2px;
+    width: 16px;
+    height: 16px;
+    line-height: 14px;
 }
 
 li.token-input-selected-token {
-    background-color: #334b17;
-    color: #000 !important;
+    background-color: #bdb76b;
+    color: #fff !important;
 }
 
 li.token-input-selected-token span {
@@ -65,7 +72,6 @@ li.token-input-selected-token span {
 div.token-input-dropdown {
     width: 400px;
     background-color: #fff;
-    color:Black;
     overflow: hidden;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
@@ -74,6 +80,7 @@ div.token-input-dropdown {
     font-size: 12px;
     font-family: Verdana;
     z-index: 1005;
+	clear: left;
 }
 
 div.token-input-dropdown p {
@@ -86,6 +93,7 @@ div.token-input-dropdown p {
 div.token-input-dropdown ul {
     margin: 0;
     padding: 0;
+	width: 100% !important;
 }
 
 div.token-input-dropdown ul li {
@@ -108,11 +116,16 @@ div.token-input-dropdown ul li em {
 }
 
 div.token-input-dropdown ul li.token-input-selected-dropdown-item {
-    background-color: #fdaf2f;
-    color: #281301 !important;
+    background-color: #D7E6ED;
+    color: #666666 !important;
 }
 
 .token-input-input-token{
-    background: url(../images/dropdown_icon.gif) no-repeat right ;
+    background: none no-repeat scroll right center transparent !important;
     margin: 2px 4px;
+}
+
+form .fieldRow .token-input-token p a {
+    font-weight: normal;
+    text-decoration: none;
 }

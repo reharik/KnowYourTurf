@@ -1,0 +1,23 @@
+﻿@model CalendarViewModel
+@using KnowYourTurf.Core.CoreViewModelAndDTOs
+@using HtmlTags
+<script>
+    var calendarDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CalendarDefinition));
+    calendarDef.calendarContainer="#calendar";
+    $(document).ready(function(){
+        new kyt.AppointmentCalendarController(calendarDef,{height:"800px"});
+        });
+
+</script>
+
+<div class="content-header">
+    <span class="title-name">@Model.Title</span>
+</div>
+<div id="contentArea" class="content-inner">
+    <div id="errorMessagesCalendar" class="dci_ErrorMessages errorMessages"><ul></ul></div>
+        <div id='calendar'></div>
+        <div class="footer">
+    </div>
+</div>
+
+

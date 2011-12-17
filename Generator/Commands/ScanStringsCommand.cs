@@ -21,9 +21,9 @@ namespace Generator.Commands
         public void Execute(string[] args)
         {
             _repository = ObjectFactory.GetInstance<IRepository>();
-            _repository.UnitOfWork.Initialize();
+            _repository.Initialize();
             new LocalizationScanner(_repository).Execute();
-            _repository.UnitOfWork.Commit();
+            _repository.Commit();
         }
     }
 

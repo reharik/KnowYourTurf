@@ -9,26 +9,42 @@ namespace KnowYourTurf.Core.Domain
     {
         private ITransaction _transaction;
         private bool _isDisposed;
-        private ISession _session;
-        private readonly IGetCompanyIdService _getCompanyIdService;
+        private readonly ISession _session;
+        private readonly ISessionContext _sessionContext;
         private bool _isInitialized;
 
-        public UnitOfWork(ISession session,IGetCompanyIdService getCompanyIdService)
+        public UnitOfWork(ISession session, ISessionContext sessionContext)
         {
             _session = session;
-            var enableCoFilter = _session.EnableFilter("CompanyConditionFilter");
-            var enableDeletdFilter = _session.EnableFilter("IsDeletedConditionFilter");
-            if(enableCoFilter!=null)
-                enableCoFilter.SetParameter("CompanyId", ObjectFactory.Container.GetInstance<IGetCompanyIdService>().Execute());
-            if (enableDeletdFilter!= null)
-                enableDeletdFilter.SetParameter("IsDeleted", false);
-        }
+            _sessionContext = sessionContext;
+            var enableCompanyFilter = _session.EnableFilter("CompanyConditionFilter");
+            var enableDeleteFilter = _session.EnableFilter("DeletedConditionFilter");
+            if (enableCompanyFilter == null) return;
 
+            enableCompanyFilter.SetParameter("CompanyId", _sessionContext.GetCompanyId());
+            enableDeleteFilter.SetParameter("Archived", false);
+        }
+        //No filters
         public UnitOfWork()
         {
-            _session = ObjectFactory.GetNamedInstance<ISession>("NoCompanyFilter");
+            _session = ObjectFactory.Container.GetInstance<ISession>();
         }
-        
+        //No filters or interceptor
+        public UnitOfWork(bool noFiltersOrInterceptor)
+        {
+            _session = ObjectFactory.Container.GetInstance<ISession>("NoFiltersOrInterceptor");
+        }
+
+        public void DisableFilter(string FilterName)
+        {
+            _session.DisableFilter(FilterName);
+        }
+
+        public void EnableFilter(string FilterName, string field, object value)
+        {
+            var enableFilter = _session.EnableFilter(FilterName);
+            enableFilter.SetParameter(field, value);
+        }
         public void Initialize()
         {
             should_not_currently_be_disposed();
@@ -46,6 +62,7 @@ namespace KnowYourTurf.Core.Domain
         {
             should_not_currently_be_disposed();
             should_be_initialized_first();
+
             _transaction.Commit();
 
             begin_new_transaction();

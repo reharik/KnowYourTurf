@@ -1,0 +1,57 @@
+2011-12-12 07:30:43,418 [13] ERROR - Could not execute query: select user0_.EntityId as EntityId3_, user0_.CreateDate as CreateDate3_, user0_.ChangeDate as ChangeDate3_, user0_.ChangedBy as ChangedBy3_, user0_.Archived as Archived3_, user0_.CompanyId as CompanyId3_, user0_.UserId as UserId3_, user0_.FirstName as FirstName3_, user0_.MiddleInitial as MiddleIn9_3_, user0_.LastName as LastName3_, user0_.BirthDate as BirthDate3_, user0_.Email as Email3_, user0_.PhoneMobile as PhoneMo13_3_, user0_.PhoneHome as PhoneHome3_, user0_.Address1 as Address15_3_, user0_.Address2 as Address16_3_, user0_.City as City3_, user0_.State as State3_, user0_.ZipCode as ZipCode3_, user0_.Notes as Notes3_, user0_.ImageUrl as ImageUrl3_, user0_.Color as Color3_, user0_.UserLoginInfoId as UserLog23_3_ from [User] user0_, [UserLoginInfo] userlogini1_ where user0_.Archived= @p0 and user0_.UserLoginInfoId=userlogini1_.EntityId and userlogini1_.Archived= @p1 and lower(userlogini1_.LoginName)=@p2
+System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'UserLoginInfo'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2011-12-12 07:30:43,444 [13] ERROR - Invalid object name 'UserLoginInfo'.
+2011-12-12 07:30:43,462 [13] ERROR - Invalid object name 'UserLoginInfo'.
+2011-12-12 07:30:43,464 [13] ERROR - Invalid object name 'UserLoginInfo'.
+2011-12-12 07:31:24,450 [91] ERROR - Could not execute query: select user0_.EntityId as EntityId3_, user0_.CreateDate as CreateDate3_, user0_.ChangeDate as ChangeDate3_, user0_.ChangedBy as ChangedBy3_, user0_.Archived as Archived3_, user0_.CompanyId as CompanyId3_, user0_.UserId as UserId3_, user0_.FirstName as FirstName3_, user0_.MiddleInitial as MiddleIn9_3_, user0_.LastName as LastName3_, user0_.BirthDate as BirthDate3_, user0_.Email as Email3_, user0_.PhoneMobile as PhoneMo13_3_, user0_.PhoneHome as PhoneHome3_, user0_.Address1 as Address15_3_, user0_.Address2 as Address16_3_, user0_.City as City3_, user0_.State as State3_, user0_.ZipCode as ZipCode3_, user0_.Notes as Notes3_, user0_.ImageUrl as ImageUrl3_, user0_.Color as Color3_, user0_.UserLoginInfoId as UserLog23_3_ from [User] user0_, [UserLoginInfo] userlogini1_ where user0_.Archived= @p0 and user0_.UserLoginInfoId=userlogini1_.EntityId and userlogini1_.Archived= @p1 and lower(userlogini1_.LoginName)=@p2
+System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'UserLoginInfo'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2011-12-12 07:31:24,467 [91] ERROR - Invalid object name 'UserLoginInfo'.
+2011-12-12 07:31:24,483 [91] ERROR - Invalid object name 'UserLoginInfo'.
+2011-12-12 07:31:24,483 [91] ERROR - Invalid object name 'UserLoginInfo'.
+2011-12-12 07:32:16,152 [69] ERROR - Could not execute query: select user0_.EntityId as EntityId3_, user0_.CreateDate as CreateDate3_, user0_.ChangeDate as ChangeDate3_, user0_.ChangedBy as ChangedBy3_, user0_.Archived as Archived3_, user0_.CompanyId as CompanyId3_, user0_.UserId as UserId3_, user0_.FirstName as FirstName3_, user0_.MiddleInitial as MiddleIn9_3_, user0_.LastName as LastName3_, user0_.BirthDate as BirthDate3_, user0_.Email as Email3_, user0_.PhoneMobile as PhoneMo13_3_, user0_.PhoneHome as PhoneHome3_, user0_.Address1 as Address15_3_, user0_.Address2 as Address16_3_, user0_.City as City3_, user0_.State as State3_, user0_.ZipCode as ZipCode3_, user0_.Notes as Notes3_, user0_.ImageUrl as ImageUrl3_, user0_.Color as Color3_, user0_.UserLoginInfoId as UserLog23_3_ from [User] user0_, [UserLoginInfo] userlogini1_ where user0_.Archived= @p0 and user0_.UserLoginInfoId=userlogini1_.EntityId and userlogini1_.Archived= @p1 and lower(userlogini1_.LoginName)=@p2
+System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'UserLoginInfo'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2011-12-12 07:32:16,154 [69] ERROR - Invalid object name 'UserLoginInfo'.
+2011-12-12 07:32:16,155 [69] ERROR - Invalid object name 'UserLoginInfo'.
+2011-12-12 07:32:16,156 [69] ERROR - Invalid object name 'UserLoginInfo'.

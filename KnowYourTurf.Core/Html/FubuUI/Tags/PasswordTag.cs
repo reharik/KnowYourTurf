@@ -1,4 +1,3 @@
-using System;
 using HtmlTags;
 
 namespace KnowYourTurf.Core.Html.FubuUI.Tags

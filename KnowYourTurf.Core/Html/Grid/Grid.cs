@@ -2,19 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
+using KnowYourTurf.Core.CoreViewModelAndDTOs;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
+using HtmlTags;
 
 namespace KnowYourTurf.Core.Html.Grid
 {
     public interface IGrid<T> where T : IGridEnabledClass
     {
-        void AddColumnModifications(Action<IGridColumn, T> modification);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items, string gridName = null);
+        void AddColumnModifications(Action<HtmlTag, T> modification);
+        GridDefinition GetGridDefinition(string url);
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items);
     }
 
     public abstract class Grid<T> : IGrid<T> where T : IGridEnabledClass
@@ -22,7 +21,7 @@ namespace KnowYourTurf.Core.Html.Grid
         protected readonly IGridBuilder<T> GridBuilder;
         private readonly ISessionContext _sessionContext;
         private readonly IRepository _repository;
-        private IList<Action<IGridColumn, T>> _modifications;
+        private IList<Action<HtmlTag, T>> _modifications;
 
         protected Grid(IGridBuilder<T> gridBuilder,
             ISessionContext sessionContext,
@@ -31,7 +30,7 @@ namespace KnowYourTurf.Core.Html.Grid
             GridBuilder = gridBuilder;
             _sessionContext = sessionContext;
             _repository = repository;
-            _modifications = new List<Action<IGridColumn, T>>();
+            _modifications = new List<Action<HtmlTag, T>>();
         }
 
         private IList<IDictionary<string, string>> GetGridColumns(User user)
@@ -39,30 +38,29 @@ namespace KnowYourTurf.Core.Html.Grid
             return GridBuilder.ToGridColumns(user);
         }
 
-        private IEnumerable GetGridRows(IEnumerable rawResults, User user, string gridName)
+        private IEnumerable GetGridRows(IEnumerable rawResults, User user)
         {
             foreach (T x in rawResults)
             {
-                yield return new GridRow { id = x.EntityId, cell = GridBuilder.ToGridRow(x, user, _modifications, gridName) };
+                yield return new GridRow { id = x.EntityId, cell = GridBuilder.ToGridRow(x, user, _modifications) };
             }
         }
 
         public string GetDefaultSortColumnName()
         {
             var column = GridBuilder.columns.FirstOrDefault(
-                x => x.Properties.Any(y => y.Key == GridColumnProperties.sortColumn.ToString()));
-            return column == null ? string.Empty : column.Properties[GridColumnProperties.header.ToString()];
+                x => x.Properties.Any(y=>y.Key == GridColumnProperties.sortColumn.ToString()));
+            return column==null?string.Empty:column.Properties[GridColumnProperties.header.ToString()];
         }
 
-        public void AddColumnModifications(Action<IGridColumn, T> modification)
+        public void AddColumnModifications(Action<HtmlTag, T> modification)
         {
             _modifications.Add(modification);
         }
 
-
-        public GridDefinition GetGridDefinition(string url, StringToken title = null)
+        public GridDefinition GetGridDefinition(string url)
         {
-            var userId = _sessionContext.GetUserId();
+            var userId = _sessionContext.GetUserEntityId();
             var user = _repository.Find<User>(userId);
             return new GridDefinition
             {
@@ -71,15 +69,15 @@ namespace KnowYourTurf.Core.Html.Grid
             };
         }
 
-        public GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items, string gridName = null)
+        public GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items)
         {
-            var userId = _sessionContext.GetUserId();
+            var userId = _sessionContext.GetUserEntityId();
             var user = _repository.Find<User>(userId);
             var pager = new Pager<T>();
             var pageAndSort = pager.PageAndSort(items, pageSortFilter);
             var model = new GridItemsViewModel
             {
-                items = BuildGrid().GetGridRows(pageAndSort.Items, user,gridName),
+                items = BuildGrid().GetGridRows(pageAndSort.Items, user),
                 page = pageAndSort.Page,
                 records = pageAndSort.TotalRows,
                 total = pageAndSort.TotalPages
@@ -88,14 +86,14 @@ namespace KnowYourTurf.Core.Html.Grid
         }
 
         protected virtual Grid<T> BuildGrid()
-        {
+        { 
             return this;
         }
     }
 
     public interface IGridEnabledClass
     {
-        long EntityId { get; set; }
+        int EntityId { get; set; }
     }
 
     public class GridRow

@@ -1,22 +1,32 @@
-using FluentNHibernate.Mapping;
 using KnowYourTurf.Core.Config;
+using FluentNHibernate.Mapping;
 
 namespace KnowYourTurf.Core.Domain.Persistence
 {
-    public class DomainEntityMap<ENTITY> : ClassMap<ENTITY>
-        where ENTITY : DomainEntity
-    {   
+    public class DomainEntityMap<DOMAINENTITY> : EntityMap<DOMAINENTITY> where DOMAINENTITY : DomainEntity
+    {
         public DomainEntityMap()
         {
-            Id(x => x.EntityId);
-            Map(x => x.LastModified);
-            Map(x => x.DateCreated);
             Map(x => x.CompanyId);
-            Map(x => x.IsDeleted);
-            References(x => x.CreatedBy);
-            References(x => x.ModifiedBy);
-            ApplyFilter<CompanyConditionFilter>("CompanyId= :CompanyId");
+            ApplyFilter<CompanyConditionFilter>("(CompanyId= :CompanyId)");
         }
+    }
 
+
+
+    public class EntityMap<ENTITY> : ClassMap<ENTITY> where ENTITY : Entity
+    {
+        public EntityMap()
+        {
+            Id(x => x.EntityId);
+            Map(x => x.CreateDate)
+                .Default("(getdate())");
+            Map(x => x.ChangeDate)
+                //.Not.Nullable()
+                .Default("(getdate())");
+            Map(x => x.ChangedBy);
+            Map(x => x.Archived);
+            ApplyFilter<DeletedConditionFilter>("Archived= :Archived");
+        }
     }
 }

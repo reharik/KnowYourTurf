@@ -3,7 +3,7 @@ using System.Web;
 using System.Web.Security;
 using KnowYourTurf.Core.Domain;
 
-namespace KnowYourTurf.Web.Controllers
+namespace KnowYourTurf.Web.Services
 {
     public interface IAuthenticationContext
     {
@@ -13,18 +13,16 @@ namespace KnowYourTurf.Web.Controllers
 
     public class WebAuthenticationContext : IAuthenticationContext
     {
-        public string ThisUserHasBeenAuthenticated(User user, bool rememberMe)
+        public string ThisUserHasBeenAuthenticated(User user,  bool rememberMe)
         {
             string userData = String.Empty;
-            userData = userData + "UserId=" + user.EntityId
-                + "|CompanyId=" + user.Company.EntityId
-                + "|UserRoles=" + user.UserLoginInfo.UserRoles;
-            var ticket = new FormsAuthenticationTicket(1, user.FullName, DateTime.Now, DateTime.Now.AddMinutes(30), rememberMe, userData);
+            userData = userData + "UserId=" + user.EntityId + "|CompanyId=" + user.CompanyId;
+            var ticket = new FormsAuthenticationTicket(1, user.FullNameLNF, DateTime.Now, DateTime.Now.AddMinutes(30),
+                                                       rememberMe, userData);
             string encTicket = FormsAuthentication.Encrypt(ticket);
             var faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
             HttpContext.Current.Response.Cookies.Add(faCookie);
-            return FormsAuthentication.GetRedirectUrl(user.FullName, false);
-
+            return FormsAuthentication.GetRedirectUrl(user.FullNameLNF, false);
         }
 
         public void SignOut()

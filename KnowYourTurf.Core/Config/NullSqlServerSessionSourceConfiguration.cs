@@ -1,6 +1,7 @@
+﻿using KnowYourTurf.Core.Domain;
 using NHibernate;
 
-namespace KnowYourTurf.Core.Domain
+namespace KnowYourTurf.Core.Config
 {
     public class NullSqlServerSessionSourceConfiguration : ISessionFactoryConfiguration
     {
@@ -22,5 +23,5 @@ namespace KnowYourTurf.Core.Domain
             return null;
         }
 
-    }
+    } 
 }

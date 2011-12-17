@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Config;
+using KnowYourTurf.Core;
+using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Enumerations;
 using KnowYourTurf.Web.Controllers;
 using Rhino.Security.Interfaces;
 using StructureMap;
@@ -22,7 +22,7 @@ namespace KnowYourTurf.Web.Services
         void CreateAdminPermissions();
     }
 
-    public class DefaultSecuritySetupService:ISecuritySetupService
+    public class DefaultSecuritySetupService : ISecuritySetupService
     {
         private static readonly List<string> Operations = new List<string>();
         private readonly IContainer _container;
@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Services
             IKYTPermissionsService permissionsService)
         {
             _container = container;
-            _repository = new Repository();
+            _repository = ObjectFactory.Container.GetInstance<IRepository>("NoFilters");
             _authorizationRepository = authorizationRepository;
             _permissionsBuilderService = permissionsBuilderService;
             _permissionsService = permissionsService;
@@ -50,11 +50,10 @@ namespace KnowYourTurf.Web.Services
             CreateKYTAdminOperation();
             CreateOperationsForAllControllers();
             CreateOperationsForAllMenuItems();
+            CreateMiscellaneousOperations();
             CreateAdminPermissions();
-            _permissionsService.GrantDefaultAdminPermissions(UserRole.Administrator.Key);
-            _permissionsService.GrantDefaultFacilitiesPermissions();
-            _permissionsService.GrantDefaultEmployeePermissions();
-            _permissionsService.GrantDefaultKYTAdminPermissions();
+            _permissionsService.GrantDefaultAdminPermissions("Administrator");
+            _permissionsService.GrantDefaultTrainersPermissions();
             CreateFacilitiesPermissions();
             _repository.UnitOfWork.Commit();
         }
@@ -67,22 +66,22 @@ namespace KnowYourTurf.Web.Services
 
         private void CreateOperationsForAllControllers()
         {
-            foreach (Type controllerType in typeof (KYTController)
+            foreach (Type controllerType in typeof(KYTController)
                 .Assembly
                 .GetTypes()
-                .Where(x => (typeof (Controller).IsAssignableFrom(x)) && !x.IsAbstract))
+                .Where(x => (typeof(Controller).IsAssignableFrom(x)) && !x.IsAbstract))
             {
                 //foreach ( var method in controllerType
                 //    .GetMethods()
                 //    .Where(x => (typeof (ActionResult).IsAssignableFrom(x.ReturnType)) && !x.IsDefined(typeof (NonActionAttribute), true)))
                 //{
-                    var operation = string.Format("/{0}", controllerType.Name);
-                    if (!Operations.Contains(operation))
-                    {
-                        Operations.Add(operation);
-                        if (_authorizationRepository.GetOperationByName(operation) == null)
-                            _authorizationRepository.CreateOperation(operation);
-                    }
+                var operation = string.Format("/{0}", controllerType.Name);
+                if (!Operations.Contains(operation))
+                {
+                    Operations.Add(operation);
+                    if (_authorizationRepository.GetOperationByName(operation) == null)
+                        _authorizationRepository.CreateOperation(operation);
+                }
                 //}
             }
         }
@@ -101,64 +100,50 @@ namespace KnowYourTurf.Web.Services
                     if (!Operations.Contains(operation))
                     {
                         Operations.Add(operation);
-                        if (_authorizationRepository    .GetOperationByName(operation) == null)
+                        if (_authorizationRepository.GetOperationByName(operation) == null)
                             _authorizationRepository.CreateOperation(operation);
                     }
                 });
             });
         }
 
+        public void CreateMiscellaneousOperations()
+        {
+            _authorizationRepository.CreateOperation("/Calendar/CanSeeOthersAppointments");
+            _authorizationRepository.CreateOperation("/Calendar/CanEditOtherAppointments");
+            _authorizationRepository.CreateOperation("/Calendar/CanEnterRetroactiveAppointments");
+            _authorizationRepository.CreateOperation("/Calendar/CanEditPastAppointments");
+            _authorizationRepository.CreateOperation("/Calendar/SetAppointmentForOthers");
+        }
+
         public void AssociateAllUsersWithThierTypeGroup()
         {
-            var admins = _repository.Query<User>(x => x.UserLoginInfo.UserRoles.Contains(UserRole.Administrator.ToString()));
-            admins.Each(x => _authorizationRepository.AssociateUserWith(x, UserRole.Administrator.Key));
+            var admins = _repository.Query<User>(x => x.UserRoles.Any(y=>y.Name == SecurityUserGroups.Administrator.ToString()));
+            admins.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Administrator.ToString()));
             var employees = _repository.FindAll<User>();
-            employees.Each(x => _authorizationRepository.AssociateUserWith(x, UserRole.Employee.Key));
-
-            var facilities = _repository.Query<User>(x => x.UserLoginInfo.UserRoles.Contains(UserRole.Facilities.ToString()));
-            facilities.Each(x => _authorizationRepository.AssociateUserWith(x, UserRole.Facilities.Key));
-            var multiTenantUsers = _repository.Query<User>(x => x.UserLoginInfo.UserRoles.Contains(UserRole.MultiTenant.ToString()));
-            multiTenantUsers.Each(x => _authorizationRepository.AssociateUserWith(x, UserRole.MultiTenant.Key));
-            var kytAdministrators = _repository.Query<User>(x => x.UserLoginInfo.UserRoles.Contains(UserRole.KYTAdmin.ToString()));
-            kytAdministrators.Each(x =>
-                                       {
-                                           _authorizationRepository.AssociateUserWith(x, UserRole.KYTAdmin.Key);
-                                           _authorizationRepository.AssociateUserWith(x, UserRole.Administrator.Key);
-                                       });
+            employees.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Trainer.ToString()));
         }
 
         public void CreateUserGroups()
         {
-            if (_authorizationRepository.GetUsersGroupByName(UserRole.Administrator.Key) == null)
+            if (_authorizationRepository.GetUsersGroupByName(SecurityUserGroups.Administrator.ToString()) == null)
             {
-                _authorizationRepository.CreateUsersGroup(UserRole.Administrator.Key);
+                _authorizationRepository.CreateUsersGroup(SecurityUserGroups.Administrator.ToString());
             }
-            if (_authorizationRepository.GetUsersGroupByName(UserRole.Employee.Key) == null)
+            if (_authorizationRepository.GetUsersGroupByName(SecurityUserGroups.Trainer.ToString()) == null)
             {
-                _authorizationRepository.CreateUsersGroup(UserRole.Employee.Key);
-            }
-            if (_authorizationRepository.GetUsersGroupByName(UserRole.Facilities.Key) == null)
-            {
-                _authorizationRepository.CreateUsersGroup(UserRole.Facilities.Key);
-            }
-            if (_authorizationRepository.GetUsersGroupByName(UserRole.MultiTenant.Key) == null)
-            {
-                _authorizationRepository.CreateUsersGroup(UserRole.MultiTenant.Key);
-            }
-            if (_authorizationRepository.GetUsersGroupByName(UserRole.KYTAdmin.Key) == null)
-            {
-                _authorizationRepository.CreateUsersGroup(UserRole.KYTAdmin.Key);
+                _authorizationRepository.CreateUsersGroup(SecurityUserGroups.Trainer.ToString());
             }
         }
 
         public void CreateAdminPermissions()
         {
-           
+
         }
 
         public void CreateFacilitiesPermissions()
         {
-            
+
 
         }
     }

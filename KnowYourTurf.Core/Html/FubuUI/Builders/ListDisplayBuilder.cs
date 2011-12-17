@@ -15,10 +15,13 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         public override HtmlTag Build(ElementRequest request)
         {
             HtmlTag root = new HtmlTag("div");
-            root.AddClass("KYT_ListDisplayRoot");
             var selectListItems = request.RawValue as IEnumerable<string>;
             if (selectListItems == null) return root;
-            selectListItems.Each(item => root.Children.Add(new HtmlTag("div").Text(item)));
+            selectListItems.Each(item=>
+                                     {
+                                         root.Append(new HtmlTag("span").Text(item));
+                                         root.Append(new HtmlTag("br"));
+                                     });
             return root;
         }
     }

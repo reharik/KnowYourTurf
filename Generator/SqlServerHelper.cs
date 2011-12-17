@@ -1,10 +1,6 @@
 using System;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.IO;
-using System.Reflection;
-using FluentNHibernate;
 using KnowYourTurf.Core.Config;
 using NHibernate;
 
@@ -14,7 +10,7 @@ namespace Generator
     {
         public static void KillAllFKs(ISessionFactory source)
         {
-            using (ISession session = source.OpenSession(new SaveUpdateInterceptorWithCompanyFilter()))
+            using (ISession session = source.OpenSession(new SaveUpdateInterceptor()))
             {
                 try
                 {
@@ -50,10 +46,10 @@ DEALLOCATE FK_KILLER
 
         public static void DeleteReaddDb(ISessionFactory source)
         {
-            using (ISession session = source.OpenSession(new SaveUpdateInterceptorWithCompanyFilter()))
+            using (ISession session = source.OpenSession(new SaveUpdateInterceptor()))
             {
                 var sql =
-                    "USE [master] alter database KnowYourTurf set single_user with rollback immediate DROP DATABASE KnowYourTurf CREATE DATABASE KnowYourTurf";
+                    "USE [master] alter database KnowYourTurf_DEV set single_user with rollback immediate DROP DATABASE KnowYourTurf_DEV CREATE DATABASE KnowYourTurf_DEV";
 
                 IDbConnection conn = session.Connection;
                 var cmd = conn.CreateCommand();

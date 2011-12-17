@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using KnowYourTurf.Core.Localization;
 using FubuMVC.UI.Tags;
 using HtmlTags;
-using KnowYourTurf.Core.Services;
-using Rhino.Security.Interfaces;
-using Rhino.Security.Services;
-using StructureMap;
 
 namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 {
@@ -19,7 +16,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         private HtmlTag _htmlRoot;
         private bool _inlineReverse;
         private IEnumerable<SelectListItem> _dropdownWithItems;
-        private string _rootClass;
+        private List<string> _rootClasses; 
         private string _labelRootClass;
         private string _labelClass;
         private string _inputRootClass;
@@ -27,18 +24,14 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         private bool _hideRoot;
         private bool _hideInput;
         private bool _hideLabel;
+        private bool _colonAfterLabel;
         private string _labelId;
         private string _inputId;
         private string _rootId;
         private bool _dropdown;
         private bool _noClear;
         private string _labelDisplay;
-        private string _radioButtonGroupName;
-        private bool _radioButton;
         private bool _inline;
-        private string _operation;
-        private IAuthorizationService _authorizationService;
-        private ISessionContext _sessionContext;
 
         public EditorExpression(ITagGenerator<VIEWMODEL> generator, Expression<Func<VIEWMODEL, object>> expression)
         {
@@ -48,15 +41,11 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 
         public override string ToString()
         {
-            return ToHtmlTag() !=null ? ToHtmlTag().ToString():"";
-        }
+            return ToHtmlTag().ToString();
+        } 
 
         public HtmlTag ToHtmlTag()
         {
-            if (_operation.IsNotEmpty() && !checkAuthentication())
-            {
-                return null;
-            }
             if(_inlineReverse)
             {
                 return renderInlineReverse();
@@ -64,20 +53,12 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             return renderStandard();
         }
 
-        private bool checkAuthentication()
-        {
-            _authorizationService = ObjectFactory.Container.GetInstance<IAuthorizationService>();
-            _sessionContext = ObjectFactory.Container.GetInstance<ISessionContext>();
-            var user = _sessionContext.GetCurrentUser();
-            return _authorizationService.IsAllowed(user, _operation);
-        }
-
         private HtmlTag renderStandard()
         {
             _htmlRoot = new HtmlTag("div");
-            _htmlRoot.AddClass(_noClear ? "KYT_editor_root_no_clear" : "KYT_editor_root");
+            _htmlRoot.AddClass("editor_root");
             if (_rootId.IsNotEmpty()) _htmlRoot.Id(_rootId);
-            if(_rootClass.IsNotEmpty()) _htmlRoot.AddClass(_rootClass);
+            if (_rootClasses!=null && _rootClasses.Any()) _htmlRoot.AddClasses(_rootClasses);
             EditorLabelExpression<VIEWMODEL> labelBuilder = new EditorLabelExpression<VIEWMODEL>(_generator, _expression);
             IEditorInputExpression<VIEWMODEL> inputBuilder;
             if (_dropdown)
@@ -91,17 +72,23 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             addInternalCssClasses(labelBuilder, inputBuilder);
             hideElements(_htmlRoot, labelBuilder, inputBuilder);
             addIds(labelBuilder, inputBuilder);
-            addCustomLabel(labelBuilder);
+            addCustomLabel(labelBuilder, inputBuilder);
+            labelBuilder.InLine(_inline);
             HtmlTag input = inputBuilder.ToHtmlTag();
             HtmlTag label = labelBuilder.ToHtmlTag();
-            _htmlRoot.Child(label);
-            _htmlRoot.Child(input);
+            _htmlRoot.Append(label);
+            _htmlRoot.Append(input);
             return _htmlRoot;
         }
         
-        private void addCustomLabel(EditorLabelExpression<VIEWMODEL> label)
+        private void addCustomLabel(EditorLabelExpression<VIEWMODEL> label, IEditorInputExpression<VIEWMODEL> input)
         {
-            if (_labelDisplay.IsNotEmpty()) label.CustomLabel(_labelDisplay);
+            if (_labelDisplay.IsNotEmpty())
+            {
+                input.CustomLabel(_labelDisplay);
+                label.CustomLabel(_labelDisplay);
+            }
+            if (_colonAfterLabel) label.ShowColonAfterLabel();
         }
 
         private void addIds(EditorLabelExpression<VIEWMODEL> label, IEditorInputExpression<VIEWMODEL> input)
@@ -112,19 +99,19 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 
         private HtmlTag renderInlineReverse()
         {
-            _htmlRoot = new HtmlTag("div").AddClass("KYT_editor_root");
+            _htmlRoot = new HtmlTag("div").AddClass("editor_root");
             if (_rootId.IsNotEmpty()) _htmlRoot.Id(_rootId);
-            if (_rootClass.IsNotEmpty()) _htmlRoot.AddClass(_rootClass);
+            if (_rootClasses!=null && _rootClasses.Any()) _htmlRoot.AddClasses(_rootClasses);
             EditorLabelExpression<VIEWMODEL> labelBuilder = new EditorLabelExpression<VIEWMODEL>(_generator, _expression);
             EditorInputExpression<VIEWMODEL> inputBuilder = new EditorInputExpression<VIEWMODEL>(_generator, _expression);
             addInternalCssClasses(labelBuilder, inputBuilder);
             hideElements(_htmlRoot, labelBuilder, inputBuilder);
             addIds(labelBuilder, inputBuilder);
-            addCustomLabel(labelBuilder);
+            addCustomLabel(labelBuilder, inputBuilder);
             HtmlTag label = labelBuilder.LeadingColon().ToHtmlTag();
             HtmlTag input = inputBuilder.ToHtmlTag();
-            _htmlRoot.Child(input);
-            _htmlRoot.Child(label);
+            _htmlRoot.Append(input);
+            _htmlRoot.Append(label);
             return _htmlRoot;
         }
 
@@ -148,14 +135,11 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         public EditorExpression<VIEWMODEL> RadioButton()
         {
             _inlineReverse = true;
-            _radioButton = true;
             return this;
         }
         public EditorExpression<VIEWMODEL> RadioButton(string groupName)
         {
             _inlineReverse = true;
-            _radioButtonGroupName = groupName;
-            _radioButton = true;
             return this;
         }
 
@@ -189,6 +173,13 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             return this;
         }
 
+        public EditorExpression<VIEWMODEL> ShowColonAfterLabel()
+        {
+            _colonAfterLabel= true;
+            return this;
+        }
+
+
         public EditorExpression<VIEWMODEL> FillWith(IEnumerable<SelectListItem> enumerable)
         {
             _dropdown = true;
@@ -198,7 +189,18 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 
         public EditorExpression<VIEWMODEL> AddClassToRoot(string cssClass)
         {
-            _rootClass = cssClass;
+            if(_rootClasses==null)
+            {
+                _rootClasses = new List<string>();
+            }
+            if (cssClass.Contains(" "))
+            {
+                cssClass.Split(' ').Each(_rootClasses.Add);
+            }
+            else
+            {
+                _rootClasses.Add(cssClass);
+            }
             return this;
         }
 
@@ -259,12 +261,6 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         public EditorExpression<VIEWMODEL> labelId(string id)
         {
             _labelId = id;
-            return this;
-        }
-
-        public EditorExpression<VIEWMODEL> OperationName(string operation)
-        {
-            _operation = operation;
             return this;
         }
 

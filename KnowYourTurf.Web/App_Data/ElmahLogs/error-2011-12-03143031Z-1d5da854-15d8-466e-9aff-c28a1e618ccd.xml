@@ -1,0 +1,236 @@
+﻿<error errorId="1d5da854-15d8-466e-9aff-c28a1e618ccd" host="RHARIK" type="System.NullReferenceException" message="Object reference not set to an instance of an object." source="MethodFitness.Web" detail="System.NullReferenceException: Object reference not set to an instance of an object.&#xD;&#xA;   at MethodFitness.Web.Controllers.TrainerController.Save(UserViewModel input) in C:\Development\MethodFitness\Development\src\MethodFitness.Web\Controllers\TrainerController.cs:line 90&#xD;&#xA;   at lambda_method(Closure , ControllerBase , Object[] )&#xD;&#xA;   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)&#xD;&#xA;   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;InvokeActionMethodWithFilters&gt;b__12()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)&#xD;&#xA;   at System.Web.Mvc.Controller.ExecuteCore()&#xD;&#xA;   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClass6.&lt;&gt;c__DisplayClassb.&lt;BeginProcessRequest&gt;b__5()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClasse.&lt;EndProcessRequest&gt;b__d()&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.&lt;GetCallInAppTrustThunk&gt;b__0(Action f)&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="Harik, Raif" time="2011-12-03T14:30:31.4550094Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CACHE_CONTROL:no-cache&#xD;&#xA;HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_PRAGMA:no-cache&#xD;&#xA;HTTP_CONTENT_LENGTH:248&#xD;&#xA;HTTP_CONTENT_TYPE:application/x-www-form-urlencoded; charset=UTF-8&#xD;&#xA;HTTP_ACCEPT:application/json, text/javascript, */*; q=0.01&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-us,en;q=0.5&#xD;&#xA;HTTP_COOKIE:.ASPXAUTH=7E1DB742B90D66B62365A65D80EDF3F1BB2603FFD77D4107AB62A5FFCA2FA557E50E45952064AA8CC7F8F3AD437231D3E851B3D15C95DB73D157741EC541C442CE2DC4B6EAC4D053AC35F699EB71E95D9DBB1A373313BE74277FF80BD23CE6C0FAF4CD5A4DFE089D33A7AFF247E6CF1CCCDB07840E83C7D2FD7665EE9415A0F5EDBA024C14954340A2627641537F7215563593D2E8324C2F794F62D19AA19A7972AEBEBC03668A2213F9201DC6DB0B9EDA84BD88A7FD2E211A3B0DA070878EC7BC2F99DF8DA9131057E2FD6E58DE48530AD5CA17B31F02EE7B0D73D92AC2B36EC9B920809BB03A8FBBB675560BF28C0FC0E523F0D890E79BB6AAD713793D75112C711A5DD905112A7E02439073193702; ASP.NET_SessionId=z3gwyksr1uvmxqkrtye3qfee; MF=6B6ACC6A820210F19036EB26E6549EAD2A3545FEE5F9DDD23E23563E0DCF14462301F3A228157D294CF324EB9C4D1A95ED6D486E9F259E42487372852E793AFE5464A9FFFBAE4A00CAD78CCD6F3307E15B09D194C8A074DA0199B2CF1ACD54BE9C053B5C3809CE38410A980BDBFA2A045210C6D60852FAE536F0BE165CAB398A74E2F9E3C296EA6656EB1FA2D55814D42F9C5A5CEB9C9C8AF363408B11890B951A56EF7C4E0490C71189FD8E10D1B9514B0C3345D551FF5B895E354C60A38B33&#xD;&#xA;HTTP_HOST:localhost:888&#xD;&#xA;HTTP_REFERER:http://localhost:888/MethodFitness/Home&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Cache-Control: no-cache&#xD;&#xA;Connection: keep-alive&#xD;&#xA;Pragma: no-cache&#xD;&#xA;Content-Length: 248&#xD;&#xA;Content-Type: application/x-www-form-urlencoded; charset=UTF-8&#xD;&#xA;Accept: application/json, text/javascript, */*; q=0.01&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-us,en;q=0.5&#xD;&#xA;Cookie: .ASPXAUTH=7E1DB742B90D66B62365A65D80EDF3F1BB2603FFD77D4107AB62A5FFCA2FA557E50E45952064AA8CC7F8F3AD437231D3E851B3D15C95DB73D157741EC541C442CE2DC4B6EAC4D053AC35F699EB71E95D9DBB1A373313BE74277FF80BD23CE6C0FAF4CD5A4DFE089D33A7AFF247E6CF1CCCDB07840E83C7D2FD7665EE9415A0F5EDBA024C14954340A2627641537F7215563593D2E8324C2F794F62D19AA19A7972AEBEBC03668A2213F9201DC6DB0B9EDA84BD88A7FD2E211A3B0DA070878EC7BC2F99DF8DA9131057E2FD6E58DE48530AD5CA17B31F02EE7B0D73D92AC2B36EC9B920809BB03A8FBBB675560BF28C0FC0E523F0D890E79BB6AAD713793D75112C711A5DD905112A7E02439073193702; ASP.NET_SessionId=z3gwyksr1uvmxqkrtye3qfee; MF=6B6ACC6A820210F19036EB26E6549EAD2A3545FEE5F9DDD23E23563E0DCF14462301F3A228157D294CF324EB9C4D1A95ED6D486E9F259E42487372852E793AFE5464A9FFFBAE4A00CAD78CCD6F3307E15B09D194C8A074DA0199B2CF1ACD54BE9C053B5C3809CE38410A980BDBFA2A045210C6D60852FAE536F0BE165CAB398A74E2F9E3C296EA6656EB1FA2D55814D42F9C5A5CEB9C9C8AF363408B11890B951A56EF7C4E0490C71189FD8E10D1B9514B0C3345D551FF5B895E354C60A38B33&#xD;&#xA;Host: localhost:888&#xD;&#xA;Referer: http://localhost:888/MethodFitness/Home&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Development\MethodFitness\Development\src\MethodFitness.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms Authentication" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="RHARIK\Owner" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="248" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded; charset=UTF-8" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Trainer/Save" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Development\MethodFitness\Development\src\MethodFitness.Web\Trainer\Save" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="POST" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Trainer/Save" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="888" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/Trainer/Save" />
+    </item>
+    <item name="HTTP_CACHE_CONTROL">
+      <value string="no-cache" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_PRAGMA">
+      <value string="no-cache" />
+    </item>
+    <item name="HTTP_CONTENT_LENGTH">
+      <value string="248" />
+    </item>
+    <item name="HTTP_CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded; charset=UTF-8" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="application/json, text/javascript, */*; q=0.01" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-us,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string=".ASPXAUTH=7E1DB742B90D66B62365A65D80EDF3F1BB2603FFD77D4107AB62A5FFCA2FA557E50E45952064AA8CC7F8F3AD437231D3E851B3D15C95DB73D157741EC541C442CE2DC4B6EAC4D053AC35F699EB71E95D9DBB1A373313BE74277FF80BD23CE6C0FAF4CD5A4DFE089D33A7AFF247E6CF1CCCDB07840E83C7D2FD7665EE9415A0F5EDBA024C14954340A2627641537F7215563593D2E8324C2F794F62D19AA19A7972AEBEBC03668A2213F9201DC6DB0B9EDA84BD88A7FD2E211A3B0DA070878EC7BC2F99DF8DA9131057E2FD6E58DE48530AD5CA17B31F02EE7B0D73D92AC2B36EC9B920809BB03A8FBBB675560BF28C0FC0E523F0D890E79BB6AAD713793D75112C711A5DD905112A7E02439073193702; ASP.NET_SessionId=z3gwyksr1uvmxqkrtye3qfee; MF=6B6ACC6A820210F19036EB26E6549EAD2A3545FEE5F9DDD23E23563E0DCF14462301F3A228157D294CF324EB9C4D1A95ED6D486E9F259E42487372852E793AFE5464A9FFFBAE4A00CAD78CCD6F3307E15B09D194C8A074DA0199B2CF1ACD54BE9C053B5C3809CE38410A980BDBFA2A045210C6D60852FAE536F0BE165CAB398A74E2F9E3C296EA6656EB1FA2D55814D42F9C5A5CEB9C9C8AF363408B11890B951A56EF7C4E0490C71189FD8E10D1B9514B0C3345D551FF5B895E354C60A38B33" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:888" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:888/MethodFitness/Home" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+  </serverVariables>
+  <form>
+    <item name="EntityId">
+      <value string="1" />
+    </item>
+    <item name="User.FirstName">
+      <value string="Raif" />
+    </item>
+    <item name="User.MiddleInitial">
+      <value string="" />
+    </item>
+    <item name="User.LastName">
+      <value string="Harik" />
+    </item>
+    <item name="User.BirthDate">
+      <value string="" />
+    </item>
+    <item name="User.Address1">
+      <value string="" />
+    </item>
+    <item name="User.Address2">
+      <value string="" />
+    </item>
+    <item name="User.City">
+      <value string="" />
+    </item>
+    <item name="User.State">
+      <value string="AL" />
+    </item>
+    <item name="User.ZipCode">
+      <value string="" />
+    </item>
+    <item name="Password">
+      <value string="" />
+    </item>
+    <item name="PasswordConfirmation">
+      <value string="" />
+    </item>
+    <item name="User.Email">
+      <value string="admin" />
+    </item>
+    <item name="User.PhoneHome">
+      <value string="" />
+    </item>
+    <item name="User.PhoneMobile">
+      <value string="123" />
+    </item>
+    <item name="Input">
+      <value string="" />
+    </item>
+  </form>
+  <cookies>
+    <item name=".ASPXAUTH">
+      <value string="7E1DB742B90D66B62365A65D80EDF3F1BB2603FFD77D4107AB62A5FFCA2FA557E50E45952064AA8CC7F8F3AD437231D3E851B3D15C95DB73D157741EC541C442CE2DC4B6EAC4D053AC35F699EB71E95D9DBB1A373313BE74277FF80BD23CE6C0FAF4CD5A4DFE089D33A7AFF247E6CF1CCCDB07840E83C7D2FD7665EE9415A0F5EDBA024C14954340A2627641537F7215563593D2E8324C2F794F62D19AA19A7972AEBEBC03668A2213F9201DC6DB0B9EDA84BD88A7FD2E211A3B0DA070878EC7BC2F99DF8DA9131057E2FD6E58DE48530AD5CA17B31F02EE7B0D73D92AC2B36EC9B920809BB03A8FBBB675560BF28C0FC0E523F0D890E79BB6AAD713793D75112C711A5DD905112A7E02439073193702" />
+    </item>
+    <item name="ASP.NET_SessionId">
+      <value string="z3gwyksr1uvmxqkrtye3qfee" />
+    </item>
+    <item name="MF">
+      <value string="6B6ACC6A820210F19036EB26E6549EAD2A3545FEE5F9DDD23E23563E0DCF14462301F3A228157D294CF324EB9C4D1A95ED6D486E9F259E42487372852E793AFE5464A9FFFBAE4A00CAD78CCD6F3307E15B09D194C8A074DA0199B2CF1ACD54BE9C053B5C3809CE38410A980BDBFA2A045210C6D60852FAE536F0BE165CAB398A74E2F9E3C296EA6656EB1FA2D55814D42F9C5A5CEB9C9C8AF363408B11890B951A56EF7C4E0490C71189FD8E10D1B9514B0C3345D551FF5B895E354C60A38B33" />
+    </item>
+  </cookies>
+</error>

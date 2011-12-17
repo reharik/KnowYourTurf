@@ -1,8 +1,7 @@
-using System;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using FubuMVC.Core.Util;
-using KnowYourTurf.Core;
 
 namespace KnowYourTurf.Core.Localization
 {
@@ -11,14 +10,14 @@ namespace KnowYourTurf.Core.Localization
         CultureInfo Culture { get; set; }
         string GetTextForKey(StringToken key);
         string GetText(Enumeration localizedEnum);
-        Header GetHeader(PropertyInfo property);
+        Header GetHeader(Accessor property);
     }
 
     public class LocalizationDataProvider : ILocalizationDataProvider
     {
         private readonly Cache<StringToken, string> _textValues = new Cache<StringToken, string>();
         private readonly Cache<Enumeration, string> _enumerations = new Cache<Enumeration, string>();
-        private readonly Cache<PropertyInfo, Header> _headers = new Cache<PropertyInfo, Header>();
+        private readonly Cache<Accessor, Header> _headers = new Cache<Accessor, Header>();
 
         public LocalizationDataProvider()
         {
@@ -30,7 +29,7 @@ namespace KnowYourTurf.Core.Localization
 
         public CultureInfo Culture { get; set; }
 
-        private Header findMissingProperty(PropertyInfo property)
+        private Header findMissingProperty(Accessor accessor)
         {
             //var localized =
             //    _repository.FindBy<LocalizedProperty>(
@@ -49,8 +48,25 @@ namespace KnowYourTurf.Core.Localization
 
             //    _repository.Save(localized);
             //}
+            string value = string.Empty;
+            if (accessor is PropertyChain)
+            {
+                var names = ((PropertyChain) (accessor)).Names;
+                if (names.Last() != "Name")
+                {
+                    value = names.Last();
+                }
+                else
+                {
+                    var className = names.ToArray()[names.Count() - 2];
+                    value = className + " " + names.Last();
+                }
+            }else
+            {
+                value = accessor.Name;
+            }
 
-            return new Header() { HeaderText = property.Name.ToSeperateWordsFromPascalCase(), Tooltip = "Tooltip for " + property.Name.ToSeperateWordsFromPascalCase() };
+            return new Header() { HeaderText = value.ToSeperateWordsFromPascalCase(), Tooltip = "Tooltip for " + value.ToSeperateWordsFromPascalCase() };
         }
 
         private string findMissingLocalizedText(StringToken token)
@@ -114,9 +130,9 @@ namespace KnowYourTurf.Core.Localization
             return _enumerations.Retrieve(localizedEnum);
         }
 
-        public Header GetHeader(PropertyInfo property)
+        public Header GetHeader(Accessor accessor)
         {
-            return _headers.Retrieve(property);
+            return _headers.Retrieve(accessor);
         }
     }
 }
