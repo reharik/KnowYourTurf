@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Localization;
+using FubuMVC.Core.Util;
 using FubuMVC.UI.Configuration;
 using HtmlTags;
 
@@ -20,8 +23,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         {
             Action<SelectTag> action = x =>
                                            {
-                                               var value = request.RawValue is Entity ? ((Entity)request.RawValue).EntityId : request.RawValue;
-                                               
+                                               var value = request.RawValue is DomainEntity ? ((DomainEntity)request.RawValue).EntityId : request.RawValue;
+
                                                 var propertyName = request.ToAccessorDef().Accessor.FieldName;
                                                 var listPropertyInfo = request.ToAccessorDef().ModelType.GetProperty(propertyName+"List");
                                                var selectListItems = listPropertyInfo.GetValue(request.Model, null) as IEnumerable<SelectListItem>;
@@ -29,12 +32,10 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
                                                
                                                selectListItems.Each(option=> x.Option(option.Text, option.Value.IsNotEmpty() ? option.Value: ""));
 
-                                               if ( value != null && value.ToString().IsNotEmpty())
+                                               if (value != null && value.ToString().IsNotEmpty())
                                                {
                                                    x.SelectByValue(value.ToString());
                                                }
-                                               x.AddClass("kyt_fixedWidthDropdown");
-                                               x.AddClass("fixedWidthDropdown");
                                            };
             return new SelectTag(action);
         }

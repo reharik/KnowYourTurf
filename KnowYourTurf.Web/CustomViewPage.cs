@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
-using KnowYourTurf.Core.Enumerations;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html.Expressions;
 using KnowYourTurf.Core.Html.Menu;
 using KnowYourTurf.Core.Localization;
-using KnowYourTurf.Core.Services;
 using FubuMVC.Core.Util;
+using MethodFitness.Core.Html.Expressions;
+using MethodFitness.Core.Html.Menu;
 
 namespace KnowYourTurf.Web
 {
@@ -50,16 +51,16 @@ namespace KnowYourTurf.Web
             return ("~/" + areaName + controller + "/" + action).ToFullUrl();
         }
 
-        public static FormExpression FormFor<CONTROLLER>(Expression<Func<CONTROLLER, object>> actionExpression, AreaName area = null, string id = null)
+        public static FormExpression FormFor<CONTROLLER>(Expression<Func<CONTROLLER, object>> actionExpression, AreaName area = null)
             where CONTROLLER : class
         {
             var actionUrl = ActionUrl(actionExpression, area);
-            return new FormExpression(actionUrl,id);
+            return new FormExpression(actionUrl);
         }
 
-        public static FormExpression FormFor(string actionUrl, string id = null)
+        public static FormExpression FormFor(string actionUrl)
         {
-            return new FormExpression(actionUrl, id);
+            return new FormExpression(actionUrl);
         }
 
         public static StandardButtonExpression StandardButtonFor(string name, string value)
@@ -70,18 +71,6 @@ namespace KnowYourTurf.Web
         public static StandardButtonExpression StandardButtonFor(string name, StringToken text)
         {
             return new StandardButtonExpression(name).LocalizedText(text);
-        }
-
-        public static AlphaNumericPickerExpression GetAlphaNumericPicker()
-        {
-            return new AlphaNumericPickerExpression();
-        }
-
-        /// <param name="collectionName">Collection name on model which contains selectable items</param>
-        /// <param name="templateName">Template name for partial code</param>
-        public static ValueObjectSelector ValueObjectSelector(string collectionName, string templateName) 
-        {
-            return new ValueObjectSelector(collectionName,templateName);
         }
 
         public MvcHtmlString EndForm()

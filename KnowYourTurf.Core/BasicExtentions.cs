@@ -6,9 +6,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using FubuMVC.Core.Util;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
-using FubuMVC.Core.Util;
+using xVal.ServerSide;
 
 namespace KnowYourTurf.Core
 {
@@ -164,33 +165,14 @@ namespace KnowYourTurf.Core
 
         public static IQueryable OrderBy(this IQueryable source, string propertyName)
         {
-            return sort(source, propertyName, "OrderBy");
-        }
+            ParameterExpression x = Expression.Parameter(source.ElementType, "x");
 
-        private static IQueryable sort(IQueryable source, string propertyName, string direction)
-        {
-            string[] props = propertyName.Split('.');
-            Type type = source.ElementType;
-            ParameterExpression arg = Expression.Parameter(type, "x");
-            Expression expr = arg;
-            foreach (string prop in props)
-            {
-                // use reflection (not ComponentModel) to mirror LINQ
-                PropertyInfo pi = type.GetProperty(prop);
-                expr = Expression.Property(expr, pi);
-                type = pi.PropertyType;
-            }
-            Type delegateType = typeof (Func<,>).MakeGenericType(source.ElementType, type);
-            LambdaExpression lambda = Expression.Lambda(delegateType, expr, arg);
+            LambdaExpression selector = Expression.Lambda(Expression.PropertyOrField(x, propertyName), x);
 
-            object result = typeof (Queryable).GetMethods().Single(
-                method => method.Name == direction
-                          && method.IsGenericMethodDefinition
-                          && method.GetGenericArguments().Length == 2
-                          && method.GetParameters().Length == 2)
-                .MakeGenericMethod(source.ElementType, type)
-                .Invoke(null, new object[] {source, lambda});
-            return (IQueryable) result;
+            return source.Provider.CreateQuery(
+                Expression.Call(typeof(Queryable), "OrderBy", new[] { source.ElementType, selector.Body.Type },
+                    source.Expression, selector
+                    ));
         }
 
         public static IQueryable<T> OrderByDescending<T>(this IQueryable<T> source, string propertyName)
@@ -200,7 +182,14 @@ namespace KnowYourTurf.Core
 
         public static IQueryable OrderByDescending(this IQueryable source, string propertyName)
         {
-            return sort(source, propertyName, "OrderByDescending");
+            ParameterExpression x = Expression.Parameter(source.ElementType, "x");
+
+            LambdaExpression selector = Expression.Lambda(Expression.PropertyOrField(x, propertyName), x);
+
+            return source.Provider.CreateQuery(
+                Expression.Call(typeof(Queryable), "OrderByDescending", new[] { source.ElementType, selector.Body.Type },
+                    source.Expression, selector
+                    ));
         }
 
         public static void SetValue(this PropertyInfo propertyInfo, object destination, object value)

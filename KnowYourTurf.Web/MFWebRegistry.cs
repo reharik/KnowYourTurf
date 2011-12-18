@@ -1,28 +1,28 @@
 using Alpinely.TownCrier;
 using AuthorizeNet;
+using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Domain.Tools;
 using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
 using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Localization;
-using KnowYourTurf.Web.Areas.Schedule.Grids;
 using KnowYourTurf.Web.Config;
 using KnowYourTurf.Web.Menus;
 using KnowYourTurf.Web.Services;
 using FubuMVC.UI;
 using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
-using KnowYourTurf.Web.Config;
+using MethodFitness.Core;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using Rhino.Security.Interfaces;
 using Rhino.Security.Services;
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
-using Log4NetLogger = KnowYourTurf.Core.Log4NetLogger;
+using Log4NetLogger = MethodFitness.Core.Log4NetLogger;
+using StructureMapServiceLocator = KnowYourTurf.Core.Services.StructureMapServiceLocator;
 
 namespace KnowYourTurf.Web
 {
@@ -57,14 +57,11 @@ namespace KnowYourTurf.Web
             For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory());
 
             For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor()));
-            For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession()).Named("NoFiltersOrInterceptor");
-
+            For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor())).Named("NoCompanyFilter");
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork()).Named("NoFilters");
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(true)).Named("NoFiltersOrInterceptor");
 
             For<IRepository>().Use<Repository>();
-            For<IRepository>().Add(x => new Repository(true)).Named("NoFiltersOrInterceptor");
             For<IRepository>().Add(x => new Repository()).Named("NoFilters");
 
 

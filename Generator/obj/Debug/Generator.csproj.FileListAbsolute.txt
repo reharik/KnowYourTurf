@@ -65,7 +65,6 @@ C:\Development\KnowYourTurf\Generator\obj\Debug\Generator.pdb
 C:\Development\KnowYourTurf\Generator\obj\Debug\ResolveAssemblyReference.cache
 C:\Development\KnowYourTurf\Generator\bin\Debug\Generator.exe
 C:\Development\KnowYourTurf\Generator\bin\Debug\Generator.pdb
-C:\Development\KnowYourTurf\Generator\bin\Debug\MethodFitness.Core.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\MethodFitness.Web.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\System.Configuration.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\System.Data.DataSetExtensions.dll
@@ -79,13 +78,10 @@ C:\Development\KnowYourTurf\Generator\bin\Debug\HtmlTags.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\Castle.Components.Validator.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\xVal.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\log4net.dll
-C:\Development\KnowYourTurf\Generator\bin\Debug\ImageResizer.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\Alpinely.TownCrier.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\Elmah.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\AuthorizeNet.dll
-C:\Development\KnowYourTurf\Generator\bin\Debug\PDFVision.dll
-C:\Development\KnowYourTurf\Generator\bin\Debug\MethodFitness.Core.pdb
 C:\Development\KnowYourTurf\Generator\bin\Debug\MethodFitness.Web.pdb
 C:\Development\KnowYourTurf\Generator\bin\Debug\Castle.Core.xml
 C:\Development\KnowYourTurf\Generator\bin\Debug\FluentNHibernate.pdb
@@ -103,7 +99,8 @@ C:\Development\KnowYourTurf\Generator\bin\Debug\FubuMVC.UI.pdb
 C:\Development\KnowYourTurf\Generator\bin\Debug\HtmlTags.pdb
 C:\Development\KnowYourTurf\Generator\bin\Debug\HtmlTags.xml
 C:\Development\KnowYourTurf\Generator\bin\Debug\log4net.xml
-C:\Development\KnowYourTurf\Generator\bin\Debug\ImageResizer.xml
 C:\Development\KnowYourTurf\Generator\bin\Debug\Alpinely.TownCrier.pdb
 C:\Development\KnowYourTurf\Generator\bin\Debug\AuthorizeNet.pdb
 C:\Development\KnowYourTurf\Generator\bin\Debug\AuthorizeNet.xml
+C:\Development\KnowYourTurf\Generator\bin\Debug\KnowYourTurf.Core.dll
+C:\Development\KnowYourTurf\Generator\bin\Debug\KnowYourTurf.Core.pdb

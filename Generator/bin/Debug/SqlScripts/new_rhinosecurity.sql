@@ -128,7 +128,7 @@ alter table security_UsersGroupsHierarchy  drop constraint FK69A3B61FA87BAE50
        Level INT not null,
        EntityTypeName NVARCHAR(255) null,
        Operation UNIQUEIDENTIFIER not null,
-       [User] int null,
+       [User] bigint null,
        UsersGroup UNIQUEIDENTIFIER null,
        EntitiesGroup UNIQUEIDENTIFIER null,
        primary key (Id)
@@ -149,7 +149,7 @@ alter table security_UsersGroupsHierarchy  drop constraint FK69A3B61FA87BAE50
 
     create table security_UsersToUsersGroups (
         GroupId UNIQUEIDENTIFIER not null,
-       UserId int not null,
+       UserId bigint not null,
        primary key (GroupId, UserId)
     )
 

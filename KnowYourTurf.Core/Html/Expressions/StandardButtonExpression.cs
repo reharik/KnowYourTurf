@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using KnowYourTurf.Core;
 using KnowYourTurf.Core.Localization;
-using FubuMVC.Core.Util;
 using HtmlTags;
 
-namespace KnowYourTurf.Core.Html.Expressions
+namespace MethodFitness.Core.Html.Expressions
 {
-    public class StandardButtonExpression 
+    public class StandardButtonExpression
     {
         private string _name;
         private string _text;
@@ -17,7 +15,7 @@ namespace KnowYourTurf.Core.Html.Expressions
 
         public StandardButtonExpression(string name)
         {
-            CssClasses = new List<string> {};
+            CssClasses = new List<string> { };
             _name = name;
 
             HtmlAttributes = new Dictionary<string, string> { { "name", name }, { "id", _id ?? _name } };
@@ -25,7 +23,7 @@ namespace KnowYourTurf.Core.Html.Expressions
 
         protected void addMainTagAttributes()
         {
-                HtmlAttributes.Add("onclick", "return false");
+            HtmlAttributes.Add("onclick", "return false");
         }
 
         public HtmlTag ToHtmlTag()

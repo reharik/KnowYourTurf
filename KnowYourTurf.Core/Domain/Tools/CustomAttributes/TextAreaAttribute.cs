@@ -5,7 +5,6 @@ namespace KnowYourTurf.Core.Domain.Tools.CustomAttributes
     {
         public TextAreaAttribute()
         {
-            // used just as a flag for ui gen        
         }
     }
 }

@@ -131,17 +131,25 @@
             <param name="key">The name of the stored value</param>
             <returns>The calling tag.</returns>
         </member>
-        <member name="M:HtmlTags.HtmlTag.GetValidationHelpers">
-            <summary>
-            Gets Validation Helpers
-            </summary>
-            <returns></returns>
-        </member>
         <member name="P:HtmlTags.HtmlTag.Next">
             <summary>
             The sibling tag that immediately follows the current tag. 
             Setting this value will remove any existing value. Use <see cref="M:HtmlTags.HtmlTag.After(HtmlTags.HtmlTag)"/> if you wish to insert a new sibling before any existing sibling.
             </summary>
+        </member>
+        <member name="T:HtmlTags.LiteralTag">
+            <summary>
+            HtmlTag that *only outputs the literal html put into it in the 
+            constructor function
+            </summary>
+        </member>
+        <member name="M:HtmlTags.LiteralTagExtensions.AppendHtml(HtmlTags.HtmlTag,System.String)">
+            <summary>
+            Adds a LiteralTag to the Children collection
+            </summary>
+            <param name="tag"></param>
+            <param name="html"></param>
+            <returns></returns>
         </member>
         <member name="M:HtmlTags.JsonUtil.ToUnsafeJson(System.Object)">
             <summary>

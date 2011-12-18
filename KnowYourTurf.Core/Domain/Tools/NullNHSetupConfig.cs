@@ -1,9 +1,11 @@
 using System;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using KnowYourTurf.Core.Config;
 using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 
-namespace KnowYourTurf.Core.Domain.Tools
+namespace KnowYourTurf.Core.Domain.Persistence
 {
     public class NullNHSetupConfig : INHSetupConfig
     {

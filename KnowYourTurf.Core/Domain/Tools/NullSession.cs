@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq.Expressions;
 using NHibernate;
 using NHibernate.Engine;
+using NHibernate.Impl;
 using NHibernate.Stat;
 using NHibernate.Type;
 

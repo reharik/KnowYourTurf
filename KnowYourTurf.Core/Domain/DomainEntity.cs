@@ -1,84 +1,26 @@
 using System;
-using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 using KnowYourTurf.Core.Html.Grid;
-
+using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class DomainEntity : Entity
+    public abstract class DomainEntity : IEquatable<DomainEntity>, IGridEnabledClass
     {
-        public virtual int CompanyId { get; set; }
-    }
-
-    public class Entity :  IGridEnabledClass, IEquatable<Entity>
-    {
-        
-        public virtual int EntityId { get; set; }
-        
-        
-        [ValidateSqlDateTime]
-        public virtual DateTime? CreateDate { get; set; }
-
-        [ValidateSqlDateTime]
-        public virtual DateTime? ChangeDate { get; set; }
-
-        
-        //private DateTime? _createDate;
-        //[ValidateSqlDateTime]
-        //public virtual DateTime? CreateDate
-        //{
-        //    get
-        //    {   if (_createDate == null)
-        //            { return System.DateTime.Now; }
-        //        else
-        //            { return _createDate; }
-        //    }
-        //    set { _createDate = value; }
-        //}
-
-
-
-        ////private DateTime _changeDate = System.DateTime.Now;
-        ////pzt
-        //private DateTime? _changeDate;
-        //[ValidateSqlDateTime]
-        //public virtual DateTime? ChangeDate
-        //{
-        //    get
-        //    {
-        //        if (_changeDate == null)
-        //        { return System.DateTime.Now; }
-        //        else
-        //        { return _changeDate; }
-        //    }
-        //    set { _changeDate = value; }
-        //}
-
-
-
-        public virtual int ChangedBy { get; set; }
-
-        [System.ComponentModel.DefaultValue(0)] //pzt
-        public virtual bool Archived { get; set; }
-
-        public Entity()
-        {
-            
-        }
-
+        public virtual long EntityId { get; set; }
+        public virtual DateTime? DateCreated { get; set; }
+        public virtual DateTime? LastModified { get; set; }
+        public virtual User CreatedBy { get; set; }
+        public virtual User ModifiedBy { get; set; }
+        public virtual long CompanyId { get; set; }
+        public virtual bool IsDeleted { get; set; }
         public virtual bool IsNew()
         {
             return EntityId == 0;
         }
 
-        public virtual void UpdateSelf(Entity entity)
-        {
-            throw new NotImplementedException();
-        }
 
         #region IEquatable
-
-        public virtual bool Equals(Entity obj)
+        public virtual bool Equals(DomainEntity obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
@@ -91,7 +33,7 @@ namespace KnowYourTurf.Core.Domain
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (GetType() != obj.GetType()) return false;
-            return Equals((Entity) obj);
+            return Equals((DomainEntity)obj);
         }
 
         public override int GetHashCode()
@@ -99,24 +41,35 @@ namespace KnowYourTurf.Core.Domain
             return EntityId.GetHashCode();
         }
 
-        public static bool operator ==(Entity left, Entity right)
+        public static bool operator ==(DomainEntity left, DomainEntity right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(Entity left, Entity right)
+        public static bool operator !=(DomainEntity left, DomainEntity right)
         {
             return !Equals(left, right);
-        }
-
+        } 
         #endregion
-        
-
     }
 
-    public interface ILookupType
+    public static class DomainEntityExtensions
     {
-        int EntityId { get; set; }
-        string Name { get; set; }
+        public static void MarkModified(this object entity, ISystemClock clock, IGetCompanyIdService getCompanyIdService)
+        {
+            var domainEntity = entity as DomainEntity;
+            if (domainEntity == null) return;
+            domainEntity.LastModified = clock.Now;
+
+            if (!domainEntity.DateCreated.HasValue)
+            {
+                domainEntity.DateCreated = clock.Now;
+            }
+
+            if(domainEntity.CompanyId<=0)
+            {
+                domainEntity.CompanyId = getCompanyIdService.Execute();
+            }
+        }
     }
 }

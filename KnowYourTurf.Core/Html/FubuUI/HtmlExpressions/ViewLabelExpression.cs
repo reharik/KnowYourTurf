@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
+using Castle.Components.Validator;
 using FubuMVC.UI.Tags;
 using HtmlTags;
 
@@ -14,8 +13,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         private HtmlTag _htmlRoot;
         private bool _noColon;
         private bool _LeadingColon;
-        private List<string> _labelRootClasses;
-        private List<string> _labelClasses;
+        private string _labelRootClass;
+        private string _labelClass;
         private bool _hide;
         private string _elementId;
         private string _customDisplay;
@@ -28,11 +27,11 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 
         public HtmlTag ToHtmlTag()
         {
-            _htmlRoot = new HtmlTag("div").AddClass("view_label");
-            if (_labelRootClasses != null && _labelRootClasses.Any()) _htmlRoot.AddClasses(_labelRootClasses);
+            _htmlRoot = new HtmlTag("div").AddClass("KYT_view_label");
+            if (_labelRootClass.IsNotEmpty()) _htmlRoot.AddClass(_labelRootClass);
             if (_hide) _htmlRoot.Hide();
             HtmlTag label = _generator.LabelFor(_expression);
-            if (_labelClasses != null && _labelClasses.Any()) label.AddClasses(_labelClasses);
+            if (_labelClass.IsNotEmpty()) label.AddClass(_labelClass);
             if (_elementId.IsNotEmpty()) label.Id(_elementId);
             if (_customDisplay.IsNotEmpty()) label.Text(_customDisplay);
             if (!_noColon && !_LeadingColon)
@@ -43,7 +42,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             {
                 label.Text(":" + label.Text());
             }
-            _htmlRoot.Append(label);
+            _htmlRoot.Children.Add(label);
             return _htmlRoot;
         }
 
@@ -61,35 +60,13 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 
         public ViewLabelExpression<VIEWMODEL> AddClassToLabelRoot(string cssClass)
         {
-            if (_labelRootClasses == null)
-            {
-                _labelRootClasses = new List<string>();
-            }
-            if (cssClass.Contains(" "))
-            {
-                cssClass.Split(' ').Each(_labelRootClasses.Add);
-            }
-            else
-            {
-                _labelRootClasses.Add(cssClass);
-            }
+            _labelRootClass = cssClass;
             return this;
         }
 
         public ViewLabelExpression<VIEWMODEL> AddClassToLabel(string cssClass)
         {
-            if (_labelClasses == null)
-            {
-                _labelClasses = new List<string>();
-            }
-            if (cssClass.Contains(" "))
-            {
-                cssClass.Split(' ').Each(_labelClasses.Add);
-            }
-            else
-            {
-                _labelClasses.Add(cssClass);
-            }
+            _labelClass = cssClass;
             return this;
         }
 

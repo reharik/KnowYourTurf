@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
+using KnowYourTurf.UnitTests.Rules;
 
 namespace KnowYourTurf.Core.Rules
 {

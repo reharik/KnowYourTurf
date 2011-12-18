@@ -1,7 +1,6 @@
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Tests.dll.config
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Tests.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Tests.pdb
-C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Core.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Web.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\Microsoft.CSharp.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\System.Data.DataSetExtensions.dll
@@ -11,11 +10,8 @@ C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\System.Web.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\System.Xml.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\System.Xml.Linq.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\log4net.dll
-C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\ImageResizer.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\Elmah.dll
-C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\PDFVision.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\HibernatingRhinos.Profiler.Appender.dll
-C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Core.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Web.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\Alpinely.TownCrier.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\AuthorizeNet.pdb
@@ -37,7 +33,8 @@ C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\Rhino.Mocks.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\Rhino.Security.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\Rhino.Security.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\log4net.xml
-C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\ImageResizer.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\obj\Debug\ResolveAssemblyReference.cache
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\obj\Debug\MethodFitness.Tests.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\obj\Debug\MethodFitness.Tests.pdb
+C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Core.dll
+C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Core.pdb

@@ -1,6 +1,5 @@
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\MethodFitness.Web.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\MethodFitness.Web.pdb
-C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\MethodFitness.Core.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\Microsoft.CSharp.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\System.ComponentModel.DataAnnotations.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\System.Configuration.dll
@@ -20,7 +19,6 @@ C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\System.Web.Routing.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\System.Web.Services.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\System.Xml.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\System.Xml.Linq.dll
-C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\MethodFitness.Core.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\Alpinely.TownCrier.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\AuthorizeNet.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\AuthorizeNet.xml
@@ -46,3 +44,6 @@ C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\System.Web.Helpers.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\ResolveAssemblyReference.cache
 C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\MethodFitness.Web.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\MethodFitness.Web.pdb
+C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\KnowYourTurf.Core.dll
+C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\KnowYourTurf.Core.pdb
+C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\StructureMap.xml

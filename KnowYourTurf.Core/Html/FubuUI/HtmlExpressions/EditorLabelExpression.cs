@@ -1,6 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using Castle.Components.Validator;
 using FubuMVC.Core.Util;
@@ -15,14 +14,12 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         private readonly Expression<Func<VIEWMODEL, object>> _expression;
         private HtmlTag _htmlRoot;
         private bool _noColon;
-        private bool _colonAfterLabel;
         private bool _LeadingColon;
-        private List<string> _labelRootClasses;
-        private List<string> _labelClasses;
+        private string _labelRootClass;
+        private string _labelClass;
         private bool _hide;
         private string _elementId;
         private string _customDisplay;
-        private bool _inLine;
 
         public EditorLabelExpression(ITagGenerator<VIEWMODEL> generator, Expression<Func<VIEWMODEL, object>> expression)
         {
@@ -32,20 +29,19 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 
         public HtmlTag ToHtmlTag()
         {
-            _htmlRoot = new HtmlTag("div");
-            _htmlRoot.AddClass(_inLine ? "editor_label_inline" : "editor_label");
-            if (_labelRootClasses!=null && _labelRootClasses.Any()) _htmlRoot.AddClasses(_labelRootClasses);
+            _htmlRoot = new HtmlTag("div").AddClass("KYT_editor_label");
+            if (_labelRootClass.IsNotEmpty()) _htmlRoot.AddClass(_labelRootClass);
             if (_hide) _htmlRoot.Hide();
             HtmlTag label = _generator.LabelFor(_expression);
-            if (_labelClasses!=null && _labelClasses.Any()) label.AddClasses(_labelClasses);
+            if (_labelClass.IsNotEmpty()) label.AddClass(_labelClass);
             if (_elementId.IsNotEmpty()) label.Id(_elementId);
             if (_customDisplay.IsNotEmpty()) label.Text(_customDisplay);
             
-            if(_colonAfterLabel && !_LeadingColon)
+            if(!_noColon && !_LeadingColon)
             {
                 label.Text(label.Text() + ":");
             }
-            if (_colonAfterLabel && _LeadingColon)
+            if (!_noColon && _LeadingColon)
             {
                 label.Text(":" + label.Text());
             }
@@ -53,19 +49,13 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             {
                 label.Text(label.Text()+"*");
             }
-            _htmlRoot.Append(label);
+            _htmlRoot.Children.Add(label);
             return _htmlRoot;
         }
 
         public EditorLabelExpression<VIEWMODEL> NoColon()
         {
             _noColon = true;
-            return this;
-        }
-
-        public EditorLabelExpression<VIEWMODEL> ShowColonAfterLabel()
-        {
-            _colonAfterLabel = true;
             return this;
         }
 
@@ -77,41 +67,13 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 
         public EditorLabelExpression<VIEWMODEL> AddClassToLabelRoot(string cssClass)
         {
-            if (_labelRootClasses == null)
-            {
-                _labelRootClasses = new List<string>();
-            }
-            if (cssClass.Contains(" "))
-            {
-                cssClass.Split(' ').Each(_labelRootClasses.Add);
-            }
-            else
-            {
-                _labelRootClasses.Add(cssClass);
-            }
+            _labelRootClass = cssClass;
             return this;
         }
 
         public EditorLabelExpression<VIEWMODEL> AddClassToLabel(string cssClass)
         {
-            if (_labelClasses == null)
-            {
-                _labelClasses = new List<string>();
-            }
-            if (cssClass.Contains(" "))
-            {
-                cssClass.Split(' ').Each(_labelClasses.Add);
-            }
-            else
-            {
-                _labelClasses.Add(cssClass);
-            }
-            return this;
-        }
-
-        public EditorLabelExpression<VIEWMODEL> InLine(bool val = true)
-        {
-            _inLine = val;
+            _labelClass = cssClass;
             return this;
         }
 

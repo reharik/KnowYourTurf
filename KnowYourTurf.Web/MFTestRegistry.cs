@@ -3,6 +3,7 @@ using AuthorizeNet;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Domain.Tools;
 using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
 using KnowYourTurf.Core.Html.Grid;
@@ -15,6 +16,7 @@ using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Config;
+using MethodFitness.Core;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using Rhino.Security.Interfaces;
@@ -45,8 +47,6 @@ namespace KnowYourTurf.Web.Config
             For<IElementNamingConvention>().Use<KnowYourTurfElementNamingConvention>();
             For(typeof (ITagGenerator<>)).Use(typeof (TagGenerator<>));
             For<TagProfileLibrary>().Singleton();
-            For<ICastleValidationRunner>().Use<DummyCastleValidationRunnerSuccess>();
-            For<ISaveEntityServiceWithoutPrincipal>().Use<NullSaveEntityServiceWithoutPrincipal>();
             For<INHSetupConfig>().Use<NullNHSetupConfig>();
 
             For<ISessionFactoryConfiguration>().Singleton().Use<NullSqlServerSessionSourceConfiguration>();
@@ -63,7 +63,6 @@ namespace KnowYourTurf.Web.Config
 
             For<IRepository>().Use<Repository>();
             For<IRepository>().Add(x => new Repository()).Named("NoFiltersOrInterceptor");
-            For<IRepository>().Add(x => new Repository(true)).Named("NoFilters");
 
             For<ILocalizationDataProvider>().Use<LocalizationDataProvider>();
             For<IAuthenticationContext>().Use<WebAuthenticationContext>();

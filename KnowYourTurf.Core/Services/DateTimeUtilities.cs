@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+
 namespace KnowYourTurf.Core.Services
 {
     public class DateTimeUtilities
@@ -16,7 +17,7 @@ namespace KnowYourTurf.Core.Services
         public static int StandardToMilitary(string standard)
         {
             var hour = standard.Substring(0, standard.Length - 6);
-            var minutes = standard.Substring(standard.Length - 5, 2);
+            var minutes = standard.Substring(standard.Length - 5,2);
             var AmPm = standard.Substring(standard.Length - 2);
             var hourAsInt = Int32.Parse(hour) * 100;
             var military = AmPm == "PM" ? hourAsInt + 1200 : hourAsInt;

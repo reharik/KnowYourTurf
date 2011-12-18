@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Web;
+using KnowYourTurf.Core;
 using KnowYourTurf.Core.Config;
-using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Html;
 using HtmlTags;
 
-namespace KnowYourTurf.Core.Html.Expressions
+namespace MethodFitness.Core.Html.Expressions
 {
-    public class LinkExpression 
+    public class LinkExpression
     {
         private string _href;
         private string _baseUrl;
@@ -86,7 +84,7 @@ namespace KnowYourTurf.Core.Html.Expressions
         {
             if (_baseUrl.IsNotEmpty())
                 _href = UrlContext.Combine(_baseUrl, _href).ToFullUrl();
-            HtmlAttributes.Add("href",_href);
+            HtmlAttributes.Add("href", _href);
             var root = new HtmlTag("link");
             addClassesAndAttributesToRoot(root);
             return root;

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Config;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Enumerations;
 using KnowYourTurf.Web.Controllers;
 using Rhino.Security.Interfaces;
 using StructureMap;
@@ -34,17 +34,21 @@ namespace KnowYourTurf.Web.Services
         public DefaultSecuritySetupService(IContainer container,
             IAuthorizationRepository authorizationRepository,
             IPermissionsBuilderService permissionsBuilderService,
-            IKYTPermissionsService permissionsService)
+            IKYTPermissionsService permissionsService,
+            IRepository repository)
         {
             _container = container;
-            _repository = ObjectFactory.Container.GetInstance<IRepository>("NoFilters");
+            //_repository = ObjectFactory.Container.GetInstance<IRepository>("NoFilters");
+
             _authorizationRepository = authorizationRepository;
             _permissionsBuilderService = permissionsBuilderService;
             _permissionsService = permissionsService;
+            _repository = repository;
         }
 
         public void ExecuteAll()
         {
+
             CreateUserGroups();
             AssociateAllUsersWithThierTypeGroup();
             CreateKYTAdminOperation();
@@ -53,7 +57,6 @@ namespace KnowYourTurf.Web.Services
             CreateMiscellaneousOperations();
             CreateAdminPermissions();
             _permissionsService.GrantDefaultAdminPermissions("Administrator");
-            _permissionsService.GrantDefaultTrainersPermissions();
             CreateFacilitiesPermissions();
             _repository.UnitOfWork.Commit();
         }

@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Expressions;
 using KnowYourTurf.Core.Html.FubuUI.HtmlExpressions;
 using FubuMVC.UI.Tags;
 using HtmlTags;
@@ -15,6 +13,7 @@ namespace KnowYourTurf.Core.Html.FubuUI
     {
         private static ITagGenerator<T> GetGenerator<T>(HtmlHelper<T> helper, Expression<Func<T, object>> expression) where T : class
         {
+            
             TagGenerator<T> generator = DependencyResolver.Current.GetService<ITagGenerator<T>>() as TagGenerator<T>;
             generator.Model = helper.ViewData.Model;
             if (helper.ViewData.TemplateInfo.HtmlFieldPrefix.IsNotEmpty())
@@ -75,40 +74,6 @@ namespace KnowYourTurf.Core.Html.FubuUI
             return new ViewExpression<T>(generator, expression);
         }
 
-        public static ViewDisplayExpression<T> ViewDisplayFor<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression) where T : class
-        {
-            ITagGenerator<T> generator = GetGenerator(helper, expression);
-            return new ViewDisplayExpression<T>(generator, expression);
-        }
-
-        public static ViewDisplayDataRangeExpression<T> ViewDisplayDateRangeFor<T>(this HtmlHelper<T> helper, 
-                                                                            Expression<Func<T, object>> expressionFrom,
-                                                                            Expression<Func<T, object>> expressionTo,
-                                                                            Expression<Func<T, object>> expressionToPresent = null) where T : class
-        {
-            ITagGenerator<T> generator = GetGenerator(helper, expressionFrom);
-            return new ViewDisplayDataRangeExpression<T>(generator, expressionFrom, expressionTo, expressionToPresent);
-        }
-
-
-        public static ViewDisplayCityStateExpression<T> ViewDisplayCityStateFor<T>(this HtmlHelper<T> helper,
-                                                                           Expression<Func<T, object>> expressionCity,
-                                                                           Expression<Func<T, object>> expressionState,
-                                                                           Expression<Func<T, object>> expressionZip) where T : class
-        {
-            ITagGenerator<T> generator = GetGenerator(helper, expressionCity);
-            return new ViewDisplayCityStateExpression<T>(generator, expressionCity, expressionState, expressionZip);
-        }
-
-        public static ViewDisplayAddressExpression<T> ViewDisplayAddressFor<T>(this HtmlHelper<T> helper,
-              Expression<Func<T, object>> address) where T : class
-        {
-            ITagGenerator<T> generator = GetGenerator(helper, address);
-            return new ViewDisplayAddressExpression<T>(generator, address);
-        }
-
-
-
         //public static string ElementNameFor<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression) where T : class
         //{
         //    var convention = ObjectFactory.Container.GetInstance<IElementNamingConvention>();
@@ -116,6 +81,4 @@ namespace KnowYourTurf.Core.Html.FubuUI
         //}
 
     }
-
-    
 }

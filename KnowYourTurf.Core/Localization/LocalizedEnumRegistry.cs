@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using KnowYourTurf.Core.Enumerations;
+using KnowYourTurf.Core;
 using FubuMVC.Core.Util;
+using KnowYourTurf.Core.Enums;
 
 namespace KnowYourTurf.Core.Localization
 {

@@ -2,27 +2,26 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using StructureMap;
-using FubuMVC.Core.Util;
 
 namespace KnowYourTurf.Core.Localization
 {
     public static class LocalizationManager
     {
-        public static string ToHeader(this Accessor property)
+        public static string ToHeader(this PropertyInfo property)
         {
             return GetHeader(property).HeaderText;
         }
 
-        public static Header GetHeader(Accessor accessor)
+        public static Header GetHeader(PropertyInfo property)
         {
             ILocalizationDataProvider provider = ObjectFactory.Container.GetInstance<ILocalizationDataProvider>();
-            return provider.GetHeader(accessor);
+            return provider.GetHeader(property);
         }
 
         public static Header GetHeader<T>(Expression<Func<T, object>> expression)
         {
-           
-            return GetHeader(expression.ToAccessor());
+            PropertyInfo propertyInfo = FubuMVC.Core.Util.ReflectionHelper.GetProperty(expression);
+            return GetHeader(propertyInfo);
         }
 
         public static string GetTextForKey(StringToken token)

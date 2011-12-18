@@ -2,8 +2,6 @@
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Enumerations;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Html.Menu;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
@@ -35,7 +33,7 @@ namespace KnowYourTurf.Web.Areas.Portfolio.Controllers
             User user=null;
             if (User.Identity.IsAuthenticated)
             {
-                user = _repository.Find<User>(_sessionContext.GetUserEntityId());
+                user = _repository.Find<User>(_sessionContext.GetUserId());
             }
             HeaderViewModel model = new HeaderViewModel
                                         {

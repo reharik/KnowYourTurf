@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using System.Text;
+using KnowYourTurf.Core;
 using KnowYourTurf.Core.Html.Expressions;
+using KnowYourTurf.Core.Html.Menu;
+using MethodFitness.Core.Html.Expressions;
 using HtmlTags;
 
-namespace KnowYourTurf.Core.Html.Menu
+namespace MethodFitness.Core.Html.Menu
 {
     public class MenuExpression : HtmlTagExpressionBase
     {
@@ -12,7 +15,8 @@ namespace KnowYourTurf.Core.Html.Menu
         private bool _filGroup;
         private bool _vertical;
 
-        public MenuExpression(IList<MenuItem> items):base (new DivTag(""))
+        public MenuExpression(IList<MenuItem> items)
+            : base(new DivTag(""))
         {
             _items = items;
         }
@@ -30,7 +34,8 @@ namespace KnowYourTurf.Core.Html.Menu
             if (_filGroup)
             {
                 ul.AddClasses(new[] { "ccMenu" });
-            }else
+            }
+            else
             {
                 ul.AddClasses(new[] { "main-tabs" });
                 ul.Id("main-tabs");
@@ -50,14 +55,14 @@ namespace KnowYourTurf.Core.Html.Menu
         {
             if (item == null) return null;
             var li = new HtmlTag("li");
-            if(item.CssClass.IsNotEmpty())
+            if (item.CssClass.IsNotEmpty())
                 li.AddClass(item.CssClass);
             var anchor = new HtmlTag("a");
             anchor.Attr("href", "#");
             anchor.Attr("rel", item.Url);
             anchor.Text(item.Text);
             li.Children.Add(anchor);
-            if(item.Children!=null)
+            if (item.Children != null)
             {
                 var ul = new HtmlTag("ul");
                 renderListItems(ul, item.Children);
@@ -66,7 +71,7 @@ namespace KnowYourTurf.Core.Html.Menu
             return li;
         }
 
-        public MenuExpression SuperFish(bool vertical=false)
+        public MenuExpression SuperFish(bool vertical = false)
         {
             _superFish = true;
             _filGroup = false;

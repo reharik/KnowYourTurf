@@ -1,9 +1,10 @@
 ﻿using System.Web.Mvc;
-using DecisionCritical.Core;
+using KnowYourTurf.Core;
+using KnowYourTurf.Web.Controllers;
 
 namespace DecisionCritical.Web.Controllers
 {
-    public class DashboardController:DCIController
+    public class DashboardController:KYTController
     {
          public ActionResult Dashboard(ViewModel input)
          {

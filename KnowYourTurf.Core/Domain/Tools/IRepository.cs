@@ -2,46 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using NHibernate;
 using NHibernate.Criterion;
 
 namespace KnowYourTurf.Core.Domain
 {
     public interface IRepository
     {
-        ISession CurrentSession();
-
         void Save<ENTITY>(ENTITY entity)
-            where ENTITY : Entity;
+            where ENTITY : DomainEntity;
 
-        ENTITY Load<ENTITY>(int id)
-            where ENTITY : Entity;
+        ENTITY Load<ENTITY>(long id)
+            where ENTITY : DomainEntity;
 
         IQueryable<ENTITY> Query<ENTITY>()
-            where ENTITY : Entity;
+            where ENTITY : DomainEntity;
 
         IQueryable<T> Query<T>(Expression<Func<T, bool>> where);
 
         T FindBy<T>(Expression<Func<T, bool>> where);
 
-        T Find<T>(int id) where T : Entity;
+        T Find<T>(long id) where T : DomainEntity;
 
-        IEnumerable<T> FindAll<T>() where T : Entity;
-
-        void Delete<ENTITY>(ENTITY entity) where ENTITY : Entity;
+        IEnumerable<T> FindAll<T>() where T : DomainEntity;
 
         void HardDelete(object target);
 
-        IQueryOver<ENTITY> QueryOver<ENTITY>() where ENTITY : Entity;
-
+        IUnitOfWork UnitOfWork { get; }
+        void SoftDelete<ENTITY>(ENTITY entity) where ENTITY : DomainEntity;
         void Commit();
         void Rollback();
         void Initialize();
-        IList<ENTITY> ExecuteCriteria<ENTITY>(DetachedCriteria criteria) where ENTITY : Entity;
-
-        IList<T> GetNamedQuery<T>(string sprocName);
-        void DisableFilter(string FilterName);
-        void EnableFilter(string FilterName, string field, object value);
-        IUnitOfWork UnitOfWork { get; set; }
+        IList<ENTITY> ExecuteCriteria<ENTITY>(DetachedCriteria criteria) where ENTITY : DomainEntity;
+    
     }
 }

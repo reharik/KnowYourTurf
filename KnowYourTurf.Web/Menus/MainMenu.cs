@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using KnowYourTurf.Core.Enumerations;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html.Menu;
-using KnowYourTurf.Web.Areas.Portfolio.Controllers;
 using KnowYourTurf.Web.Config;
-using KnowYourTurf.Web.Areas.Schedule.Controllers;
 using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Menus
@@ -25,12 +23,9 @@ namespace KnowYourTurf.Web.Menus
         private IList<MenuItem> DefaultMenubuilder(bool withoutPermissions = false)
         {
             return _builder
-                .CreateNode<EmployeeDashboardController>(c => c.Display(null), WebLocalizationKeys.EMPLOYEE_DASHBOARD)
-                .CreateNode<AppointmentCalendarController>(c => c.AppointmentCalendar(), WebLocalizationKeys.CALENDAR, AreaName.Schedule)
+                .CreateNode<EmployeeListController>(c => c.EmployeeList(), WebLocalizationKeys.EMPLOYEES)
                 .CreateNode(WebLocalizationKeys.ADMIN_TOOLS, "tools")
                     .HasChildren()
-                        .CreateNode<TrainerListController>(c => c.ItemList(null), WebLocalizationKeys.TRAINERS)
-                        .CreateNode<ClientListController>(c => c.ItemList(null), WebLocalizationKeys.CLIENTS)
                     .EndChildren()
                 //                .CreateNode<PortfolioListController>(c => c.ItemList(null), WebLocalizationKeys.PORTFOLIOS,
 //                                                     AreaName.Portfolio, "portfolios")

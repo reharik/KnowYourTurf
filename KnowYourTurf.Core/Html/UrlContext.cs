@@ -2,7 +2,6 @@ using System;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
-using KnowYourTurf.Core.Enumerations;
 using FubuMVC.Core.Util;
 
 namespace KnowYourTurf.Core.Html
@@ -61,7 +60,7 @@ namespace KnowYourTurf.Core.Html
 
         public static string GetUrl(string url)
         {
-            return ToAbsolute(url.StartsWith("~")?url: Combine("~/", url));
+            return ToAbsolute(Combine("~/", url));
         }
 
         public static string GetFullUrl(string path)
@@ -69,25 +68,22 @@ namespace KnowYourTurf.Core.Html
             return ToFull(path);
         }
 
-        public static string GetUrlForAction<CONTROLLER>(string action, AreaName areaName = null) where CONTROLLER : Controller
+        public static string GetUrlForAction<CONTROLLER>(string action) where CONTROLLER:Controller
         {
             string controllerName = typeof (CONTROLLER).Name.Replace("Controller", "");
-            string _area = areaName != null ? areaName.Key + "/" : "/";
-            return ToAbsolute(Combine("~/", _area + controllerName + "/" + action));
+            return ToAbsolute(Combine("~/", controllerName + "/" + action));
         }
 
-        public static string GetUrlForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, AreaName areaName = null)
+        public static string GetUrlForAction(string controller, string action) 
+        {
+            return ToAbsolute(Combine("~/", controller + "/" + action));
+        }
+
+        public static string GetUrlForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression)
         {
             string controllerName = typeof(CONTROLLER).Name.Replace("Controller", "");
             string action = ReflectionHelper.GetMethod(expression).Name;
-            string _area = areaName!=null? areaName.Key + "/" : "/";
-            return ToAbsolute(Combine("~/", _area + controllerName + "/" + action));
-        }
-
-        public static string GetUrlForAction(string controllerName, string action, AreaName areaName = null)
-        {
-            var area = areaName != null ? areaName.Key + "/" : "/";
-            return ToAbsolute(Combine("~/", area + controllerName + "/" + action));
+            return ToAbsolute(Combine("~/", controllerName + "/" + action));
         }
     }
 }

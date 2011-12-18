@@ -1,7 +1,7 @@
 using System;
-using KnowYourTurf.Core.Config;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using KnowYourTurf.Core.Config;
 using NHibernate;
 using NHibernate.Cfg;
 using Rhino.Security;
@@ -36,15 +36,15 @@ namespace KnowYourTurf.Core.Domain
         {
             return Fluently.Configure()
                 .Database(_config.DBConfiguration(_connectionStr))
-              //  .Mappings(m => m.FluentMappings.Add(typeof(CompanyConditionFilter)))
-               // .Mappings(m => m.FluentMappings.Add(typeof(OrgConditionFilter)))
+               // .Mappings(m => m.FluentMappings.Add(typeof(CompanyConditionFilter)))
                 .Mappings(_config.MappingConfiguration())
                 .ExposeConfiguration(x=>
                 {
                     _config.GenerateSchema(x);
                     x.SetProperty("adonet.batch_size", "100");
                     x.SetProperty("generate_statistics", "true");
-                    Security.Configure<User>(x, SecurityTableStructure.Prefix);
+                    //Security.Configure<User>(x, SecurityTableStructure.Schema);
+
                 })
                 .BuildSessionFactory();
         }
@@ -53,15 +53,13 @@ namespace KnowYourTurf.Core.Domain
         {
             return Fluently.Configure()
                 .Database(_config.DBConfiguration(_connectionStr))
-               // .Mappings(m => m.FluentMappings.Add(typeof(CompanyConditionFilter)))
-              //  .Mappings(m => m.FluentMappings.Add(typeof(OrgConditionFilter)))
-              //  .Mappings(m => m.FluentMappings.Add(typeof(DeletedConditionFilter)))
                 .Mappings(_config.MappingConfiguration())
                 .ExposeConfiguration(x =>
                 {
                     x.SetProperty("adonet.batch_size", "100");
                     x.SetProperty("generate_statistics", "true");
                     Security.Configure<User>(x, SecurityTableStructure.Prefix);
+
                 })
                 .BuildSessionFactory();
         }

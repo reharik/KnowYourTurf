@@ -7,7 +7,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
         public CompanyMap()
         {
             Map(x => x.Name);
-            Map(x => x.Description);
-        } 
+            Map(x => x.ZipCode);
+            Map(x => x.TaxRate);
+        }
     }
 }

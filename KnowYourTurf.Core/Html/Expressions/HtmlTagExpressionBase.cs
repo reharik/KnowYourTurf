@@ -23,7 +23,7 @@ namespace KnowYourTurf.Core.Html.Expressions
 
         public HtmlTag ToHtmlTagBase()
         {
-            _rootTag.Attr("id",_id);
+            _rootTag.Attr("id", _id);
             if (cssClasses != null)
             {
                 _rootTag.AddClasses(cssClasses);
@@ -42,8 +42,8 @@ namespace KnowYourTurf.Core.Html.Expressions
 
         public HtmlTagExpressionBase AddClass(string className)
         {
-            if(cssClasses==null)cssClasses=new List<string>();
-            if(className.Contains(" "))throw new Exception("cssClasses may not contain spaces");
+            if (cssClasses == null) cssClasses = new List<string>();
+            if (className.Contains(" ")) throw new Exception("cssClasses may not contain spaces");
             cssClasses.Add(className);
             return this;
         }
@@ -57,8 +57,8 @@ namespace KnowYourTurf.Core.Html.Expressions
 
         public HtmlTagExpressionBase AddAttr(string attr, string value)
         {
-            if (attributes== null) attributes= new Dictionary<string, string>();
-            attributes.Add(attr,value);
+            if (attributes == null) attributes = new Dictionary<string, string>();
+            attributes.Add(attr, value);
             return this;
         }
 

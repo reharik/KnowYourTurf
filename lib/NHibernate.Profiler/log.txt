@@ -1,0 +1,125 @@
+2011-06-22 21:25:30,841 [1] WARN  Rhino.Licensing.LicenseValidator [(null)] - Could not find license file: C:\Users\Harik\AppData\Local\NHibernate Profiler\license.xml
+2011-06-22 21:27:47,687 [1] ERROR Rhino.Licensing.LicenseValidator [(null)] - Could not validate license
+System.Security.Cryptography.CryptographicException: Unknown transform has been encountered.
+   at System.Security.Cryptography.Xml.Reference.LoadXml(XmlElement value)
+   at System.Security.Cryptography.Xml.SignedInfo.LoadXml(XmlElement value)
+   at System.Security.Cryptography.Xml.Signature.LoadXml(XmlElement value)
+   at System.Security.Cryptography.Xml.SignedXml.LoadXml(XmlElement value)
+   at Rhino.Licensing.AbstractLicenseValidator.TryGetValidDocument(String licensePublicKey, XmlDocument doc)
+   at Rhino.Licensing.AbstractLicenseValidator.TryLoadingLicenseValuesFromValidatedXml()
+2011-06-22 21:27:47,766 [1] WARN  Rhino.Licensing.LicenseValidator [(null)] - Failed validating license:
+<?xml version="1.0" encoding="utf-8"?>
+<license id="fe899eb7-baf9-4124-bc85-9ee00119f2a7" expiration="9999-12-
+31T23:59:59.9999999" type="Standard" prof="NHProf">
+  <name>Daniel Foster</name>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-
+c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" 
+/>
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-
+signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <DigestValue>t7/j0/H/z76MmIWzuw1/BTeJdOA=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    
+<SignatureValue>F0+uVf6pno+iGAZGQfrimKMSpMoIrnOLDJjslHLMfGEwV1p/R/Ygc8QJ7jB8Xk
+66L3Y8HtBqYkz6HNx5OnozqsRHSB4xUD7+vPmNWAmuHo9PvfjaS23M8z2lEc/gVny/aYoA6rJbVpWP
+fz28gxOQ7i06qJ6HqbrYJG8xVKisJbI=</SignatureValue>
+  </Signature>
+</license>
+
+2011-06-22 21:27:47,769 [1] WARN  Rhino.Licensing.LicenseValidator [(null)] - Could not validate existing license
+<?xml version="1.0" encoding="utf-8"?>
+<license id="fe899eb7-baf9-4124-bc85-9ee00119f2a7" expiration="9999-12-
+31T23:59:59.9999999" type="Standard" prof="NHProf">
+  <name>Daniel Foster</name>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-
+c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" 
+/>
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-
+signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <DigestValue>t7/j0/H/z76MmIWzuw1/BTeJdOA=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    
+<SignatureValue>F0+uVf6pno+iGAZGQfrimKMSpMoIrnOLDJjslHLMfGEwV1p/R/Ygc8QJ7jB8Xk
+66L3Y8HtBqYkz6HNx5OnozqsRHSB4xUD7+vPmNWAmuHo9PvfjaS23M8z2lEc/gVny/aYoA6rJbVpWP
+fz28gxOQ7i06qJ6HqbrYJG8xVKisJbI=</SignatureValue>
+  </Signature>
+</license>
+
+2011-06-22 21:27:52,705 [1] ERROR Rhino.Licensing.LicenseValidator [(null)] - Could not validate license
+System.Security.Cryptography.CryptographicException: Unknown transform has been encountered.
+   at System.Security.Cryptography.Xml.Reference.LoadXml(XmlElement value)
+   at System.Security.Cryptography.Xml.SignedInfo.LoadXml(XmlElement value)
+   at System.Security.Cryptography.Xml.Signature.LoadXml(XmlElement value)
+   at System.Security.Cryptography.Xml.SignedXml.LoadXml(XmlElement value)
+   at Rhino.Licensing.AbstractLicenseValidator.TryGetValidDocument(String licensePublicKey, XmlDocument doc)
+   at Rhino.Licensing.AbstractLicenseValidator.TryLoadingLicenseValuesFromValidatedXml()
+2011-06-22 21:27:52,706 [1] WARN  Rhino.Licensing.LicenseValidator [(null)] - Failed validating license:
+<?xml version="1.0" encoding="utf-8"?>
+<license id="fe899eb7-baf9-4124-bc85-9ee00119f2a7" expiration="9999-12-
+31T23:59:59.9999999" type="Standard" prof="NHProf">
+  <name>Daniel Foster</name>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-
+c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" 
+/>
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-
+signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <DigestValue>t7/j0/H/z76MmIWzuw1/BTeJdOA=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    
+<SignatureValue>F0+uVf6pno+iGAZGQfrimKMSpMoIrnOLDJjslHLMfGEwV1p/R/Ygc8QJ7jB8Xk
+66L3Y8HtBqYkz6HNx5OnozqsRHSB4xUD7+vPmNWAmuHo9PvfjaS23M8z2lEc/gVny/aYoA6rJbVpWP
+fz28gxOQ7i06qJ6HqbrYJG8xVKisJbI=</SignatureValue>
+  </Signature>
+</license>
+
+2011-06-22 21:27:52,706 [1] WARN  Rhino.Licensing.LicenseValidator [(null)] - Could not validate existing license
+<?xml version="1.0" encoding="utf-8"?>
+<license id="fe899eb7-baf9-4124-bc85-9ee00119f2a7" expiration="9999-12-
+31T23:59:59.9999999" type="Standard" prof="NHProf">
+  <name>Daniel Foster</name>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-
+c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" 
+/>
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-
+signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <DigestValue>t7/j0/H/z76MmIWzuw1/BTeJdOA=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    
+<SignatureValue>F0+uVf6pno+iGAZGQfrimKMSpMoIrnOLDJjslHLMfGEwV1p/R/Ygc8QJ7jB8Xk
+66L3Y8HtBqYkz6HNx5OnozqsRHSB4xUD7+vPmNWAmuHo9PvfjaS23M8z2lEc/gVny/aYoA6rJbVpWP
+fz28gxOQ7i06qJ6HqbrYJG8xVKisJbI=</SignatureValue>
+  </Signature>
+</license>
+

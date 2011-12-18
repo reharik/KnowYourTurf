@@ -14,109 +14,174 @@ namespace KnowYourTurf.Web
         {
         }
 
-        public static readonly StringToken EMPLOYEE_DASHBOARD = new WebLocalizationKeys("EMPLOYEE_DASHBOARD", "Employee Dashboard");
-        public static readonly StringToken CALENDAR = new WebLocalizationKeys("CALENDAR", "Calendar");
-        public static readonly StringToken TRAINERS = new WebLocalizationKeys("TRAINERS", "Trainers");
-        public static readonly StringToken TRAINER = new WebLocalizationKeys("TRAINER", "Trainer");
-        public static readonly StringToken CLIENTS = new WebLocalizationKeys("CLIENTS", "Clients");
-        public static readonly StringToken CLIENT = new WebLocalizationKeys("CLIENT", "Client");
-        public static readonly StringToken NEW_TRAINER = new WebLocalizationKeys("NEW_TRAINER", "New Trainer");
-        public static readonly StringToken NEW_CLIENT = new WebLocalizationKeys("NEW_CLIENT", "New Client");
-        public static readonly StringToken CLIENT_INFORMATION = new WebLocalizationKeys("CLIENT_INFORMATION", "Client Information");
-        public static readonly StringToken TRAINER_INFORMATION = new WebLocalizationKeys("TRAINER_INFORMATION", "Trainer Information");
-
-
-
-
-
-
-        public static readonly StringToken ADMIN_TOOLS = new WebLocalizationKeys("ADMIN_TOOLS", "Admin Tools");
-        public static readonly StringToken REQUIRED = new WebLocalizationKeys("REQUIRED", "Required");
-        public static readonly StringToken SIGN_IN = new WebLocalizationKeys("SIGN_IN", "Sign In");
+        public static readonly StringToken DASHBOARD = new WebLocalizationKeys("DASHBOARD", "Dashboard");
+        public static readonly StringToken LOGIN_KEY = new WebLocalizationKeys("LOG_IN", "Log In");
         public static readonly StringToken LOG_OUT = new WebLocalizationKeys("LOG_OUT", "Logout");
+        public static readonly StringToken SIGN_IN = new WebLocalizationKeys("SIGN_IN", "Sign In");
         public static readonly StringToken WELCOME = new WebLocalizationKeys("WELCOME", "Welcome ,");
+        public static readonly StringToken INADMINMODE = new WebLocalizationKeys("INADMINMODE", "INADMINMODE");
         public static readonly StringToken USER_ROLES = new WebLocalizationKeys("USER_ROLES", "UserRoles");
+        public static readonly StringToken SAVE = new WebLocalizationKeys("SAVE", "Save");
         public static readonly StringToken ACCOUNT_LOGIN = new WebLocalizationKeys("ACCOUNT_LOGIN", "Account LogIn");
         public static readonly StringToken INVALID_USERNAME_OR_PASSWORD = new WebLocalizationKeys("INVALID_USERNAME_OR_PASSWORD", "Invalid Username or Password");
         public static readonly StringToken PLEASE_ENTER_YOUR_USERNAME_AND_PASSWORD_BELOW_KEY = new WebLocalizationKeys("PLEASE_ENTER_YOUR_USERNAME_AND_PASSWORD_BELOW_KEY", "Please enter your Username and Password below");
-        public static readonly StringToken ENTER_YOUR_EMAIL_ADDRESS_AND_WE_WILL_SEND_YOU_YOUR_INFORMATION = new WebLocalizationKeys("ENTER_YOUR_EMAIL_ADDRESS_AND_WE_WILL_SEND_YOU_YOUR_INFORMATION", "Enter your email address and we will send you your information");
-        public static readonly StringToken UNABLE_TO_FIND_EMAIL_ADDRESS = new WebLocalizationKeys("UNABLE_TO_FIND_EMAIL_ADDRESS", "Unable to find the email address you entered");
-        public static readonly StringToken YOUR_PASSWORD_ADDRESS_HAS_BEEN_SENT_TO_YOU = new WebLocalizationKeys("YOUR_PASSWORD_ADDRESS_HAS_BEEN_SENT_TO_YOU", "Your password has been emailed to you.");
         public static readonly StringToken FORGOT_YOUR_PASSWORD = new WebLocalizationKeys("FORGOT_YOUR_PASSWORD", "Forgot your password?");
-        public static readonly StringToken FORGOT_YOUR_PASSWORD_POPUP_TITLE = new WebLocalizationKeys("FORGOT_YOUR_PASSWORD_POPUP_TITLE", "Forgotten Password");
-        public static readonly StringToken MY_ACCOUNT= new WebLocalizationKeys("USER_PROFILE", "My Account");
-        public static readonly StringToken PROFILE = new WebLocalizationKeys("PROFILE", "Profile");
-        public static readonly StringToken HELP = new WebLocalizationKeys("HELP", "Help");
 
-        public static readonly StringToken DASHBOARD = new WebLocalizationKeys("DASHBOARD", "Dashboard");
+        public static readonly StringToken HOME = new WebLocalizationKeys("HOME", "Home");
+        public static readonly StringToken EMPLOYEES = new WebLocalizationKeys("EMPLOYEES", "Employees");
+        public static readonly StringToken ADMINS = new WebLocalizationKeys("ADMINS", "Admins");
+        public static readonly StringToken FACILITIES = new WebLocalizationKeys("FACILITIES", "Facilities");
+        public static readonly StringToken VENDORS = new WebLocalizationKeys("VENDORS", "Vendors");
+        public static readonly StringToken PRODUCTS = new WebLocalizationKeys("PRODUCTS", "Products");
+        public static readonly StringToken INVENTORY = new WebLocalizationKeys("INVENTORY", "Inventory");
+        public static readonly StringToken MATERIALS = new WebLocalizationKeys("MATERIALS", "Materials");
+        public static readonly StringToken FERTILIZERS = new WebLocalizationKeys("FERTILIZERS", "Fertilizers");
+        public static readonly StringToken CHEMICALS = new WebLocalizationKeys("CHEMICALS", "Chemicals");
+        public static readonly StringToken FIELDS = new WebLocalizationKeys("FIELDS", "Fields");
+        public static readonly StringToken EQUIPMENT = new WebLocalizationKeys("EQUIPMENT", "Equipment");
+        public static readonly StringToken TASKS = new WebLocalizationKeys("TASKS", "Tasks");
+        public static readonly StringToken TASK_LIST = new WebLocalizationKeys("TASK_LIST", "Task List");
+        public static readonly StringToken TASK_CALENDAR = new WebLocalizationKeys("TASK_CALENDAR", "Task Calendar");
+        public static readonly StringToken EVENTS = new WebLocalizationKeys("EVENTS", "Events");
+        public static readonly StringToken PURCHASE_ORDERS = new WebLocalizationKeys("PURCHASE_ORDERS", "Purchase Orders");
+        public static readonly StringToken ADMIN = new WebLocalizationKeys("ADMIN", "Admin");
+        public static readonly StringToken CALCULATORS = new WebLocalizationKeys("CALCULATORS", "Calculators");
+        public static readonly StringToken EMAIL_TEMPLATES = new WebLocalizationKeys("EMAIL_TEMPLATES", "Email Templates");
+        public static readonly StringToken EMAIL_JOBS = new WebLocalizationKeys("EMAIL_JOBS", "Email Jobs");
 
-        public static readonly StringToken FIELD_REQUIRED = new WebLocalizationKeys("FIELD_REQUIRED", "{0} Field is Required");
-        public static readonly StringToken USER_COMPLIANCE_ITEM_NOT_IN_USER_COMPLIANCE_SET = new WebLocalizationKeys("USER_COMPLIANCE_ITEM_NOT_IN_USER_COMPLIANCE_SET", "User Assistant Item is not in the User Assistant Set");
+
+        public static readonly StringToken EMPLOYEE_INFORMATION = new WebLocalizationKeys("EMPLOYEE_INFORMATION", "Employee Information");
+        public static readonly StringToken NEW_EMPLOYEE = new WebLocalizationKeys("NEW_EMPLOYEE", "Add New Employee");
+
+        public static readonly StringToken VENDOR_INFORMATION = new WebLocalizationKeys("VENDOR_INFORMATION", "Vendor Information");
+        public static readonly StringToken NEW_VENDOR = new WebLocalizationKeys("NEW_VENDOR", "Add New Vendor");
+
+        public static readonly StringToken VENDOR_CONTACT_INFORMATION = new WebLocalizationKeys("VENDOR_CONTACT_INFORMATION", "Vendor Contact Information");
+        public static readonly StringToken NEW_VENDOR_CONTACT = new WebLocalizationKeys("NEW_VENDOR_CONTACT", "Add New Vendor Contact");
+
+        public static readonly StringToken MATERIAL_INFORMATION = new WebLocalizationKeys("MATERIAL_INFORMATION", "Material Information");
+        public static readonly StringToken NEW_MATERIAL = new WebLocalizationKeys("NEW_MATERIAL", "Add New Material");
+
+        public static readonly StringToken FERTILIZER_INFORMATION = new WebLocalizationKeys("FERILIZER_INFORMATION", "Fertilizer Information");
+        public static readonly StringToken NEW_FERTILIZER = new WebLocalizationKeys("NEW_FERTILIZER", "Add New Fertilizer");
+
+        public static readonly StringToken CHEMICAL_INFORMATION = new WebLocalizationKeys("CHEMICAL_INFORMATION", "Chemical Information");
+        public static readonly StringToken NEW_CHEMICAL = new WebLocalizationKeys("NEW_CHEMICAL", "Add New Chemical");
+
+        public static readonly StringToken SEED_INFORMATION = new WebLocalizationKeys("SEED_INFORMATION", "Seed Information");
+        public static readonly StringToken NEW_SEED = new WebLocalizationKeys("NEW_SEED", "Add New Seed");
+
+        public static readonly StringToken FIELD_INFORMATION = new WebLocalizationKeys("FIELD_INFORMATION", "Field Information");
+        public static readonly StringToken NEW_FIELD = new WebLocalizationKeys("NEW_FIELD", "Add New Field");
+
+        public static readonly StringToken EQUIPMENT_INFORMATION = new WebLocalizationKeys("EQUIPMENT_INFORMATION", "Equipment Information");
+        public static readonly StringToken NEW_EQUIPMENT = new WebLocalizationKeys("NEW_EQUIPMENT", "Add New Equipment");
+
+        public static readonly StringToken TASK_INFORMATION = new WebLocalizationKeys("TASK_INFORMATION", "Task Information");
+        public static readonly StringToken NEW_TASK = new WebLocalizationKeys("NEW_TASK", "Add New Task");
+        public static readonly StringToken PENDING_TASKS = new WebLocalizationKeys("PENDING_TASKS", "Pending Tasks");
+        public static readonly StringToken COMPLETED_TASKS = new WebLocalizationKeys("COMPLETED_TASKS", "Completed Tasks");
+
+        public static readonly StringToken TASK_TYPE_INFORMATION = new WebLocalizationKeys("TASK_TYPE_INFORMATION", "Task Type Information");
+        public static readonly StringToken NEW_TASK_TYPE = new WebLocalizationKeys("NEW_TASK_TYPE", "Add New Task Type");
+        public static readonly StringToken TASK_TYPES = new WebLocalizationKeys("TASK_TYPES", "Task Types");
+
+        public static readonly StringToken EVENT_TYPE_INFORMATION = new WebLocalizationKeys("EVENT_TYPE_INFORMATION", "Event Type Information");
+        public static readonly StringToken NEW_EVENT_TYPE = new WebLocalizationKeys("NEW_EVENT_TYPE", "Add New Event Type");
+        public static readonly StringToken EVENT_TYPES = new WebLocalizationKeys("EVENT_TYPES", "Event Types");
+
+        public static readonly StringToken EVENT_INFORMATION = new WebLocalizationKeys("EVENT_INFORMATION", "Event Information");
+
+        public static readonly StringToken PURCHASE_ORDER_INFORMATION = new WebLocalizationKeys("PURCHASE_ORDER_INFORMATION", "Purchase Order Information");
+        public static readonly StringToken NEW_PURCHASE_ORDER = new WebLocalizationKeys("NEW_PURCHASE_ORDER", "Add New Purchase Order");
+
+        public static readonly StringToken INVENTORY_CHEMICAL_INFORMATION = new WebLocalizationKeys("INVENTORY_CHEMICAL_INFORMATION", "Inventory Chemical Information");
+        public static readonly StringToken INVENTORY_MATERIAL_INFORMATION = new WebLocalizationKeys("INVENTORY_MATERIAL_INFORMATION", "Inventory Material Information");
+        public static readonly StringToken INVENTORY_FERTILIZER_INFORMATION = new WebLocalizationKeys("INVENTORY_FERTILIZER_INFORMATION", "Inventory Fertilizer Information");
+        public static readonly StringToken INVENTORY_SEED_INFORMATION = new WebLocalizationKeys("INVENTORY_SEED_INFORMATION", "Inventory Seed Information");
+
+        public static readonly StringToken PURCHASE_ORDER_LIST_ITEM_INFORMATION = new WebLocalizationKeys("PURCHASE_ORDER_LIST_ITEM_INFORMATION", "Purchase Order List Item");
+
+        public static readonly StringToken EMAIL_TEMPLATE_INFORMATION = new WebLocalizationKeys("EMAIL_TEMPLATE_INFORMATION", "Email Template Information");
+        public static readonly StringToken NEW_EMAIL_TEMPLATE = new WebLocalizationKeys("NEW_EMAIL_TEMPLATE", "Add New Email Template");
+        public static readonly StringToken EMAIL_JOB_INFORMATION = new WebLocalizationKeys("EMAIL_JOB_INFORMATION", "Email Job Information");
+        public static readonly StringToken NEW_EMAIL_JOB = new WebLocalizationKeys("NEW_EMAIL_JOB", "Add New Email Job");
+
+        public static readonly StringToken FERTILIZER_NEEDED_DISPLAY = new WebLocalizationKeys("FERTILIZER_NEEDED_DISPLAY", "Fertilizer Needed");
+        public static readonly StringToken FERTILIZER_NEEDED = new WebLocalizationKeys("FERTILIZER_NEEDED", "FertilizerNeeded");
+        public static readonly StringToken SAND = new WebLocalizationKeys("SAND", "Sand");
+        public static readonly StringToken OVERSEED_BAGS_NEEEDED_DISPLAY = new WebLocalizationKeys("OVERSEED_BAGS_NEEEDED_DISPLAY", "Overseed Bags Needed");
+        public static readonly StringToken OVERSEED_BAGS_NEEEDED = new WebLocalizationKeys("OVERSEED_BAGS_NEEEDED", "OverseedBagsNeeded");
+        public static readonly StringToken OVERSEED_RATE_NEEEDED_DISPLAY = new WebLocalizationKeys("OVERSEED_RATE_NEEEDED_DISPLAY", "Overseed Rate Needed");
+        public static readonly StringToken OVERSEED_RATE_NEEEDED = new WebLocalizationKeys("OVERSEED_RATE_NEEEDED", "OverseedRateNeeded");
+
+
+
+        public static readonly StringToken FIELD_REQUIRED = new WebLocalizationKeys("FIELD_REQUIRED", "'the {0} field is required.'");
+        public static readonly StringToken DIGITS_REQUIRED = new WebLocalizationKeys("DIGITS_REQUIRED", "the {0} field requires a digit.");
+        public static readonly StringToken VALID_RANGE_REQUIRED = new WebLocalizationKeys("VALID_RANGE_REQUIRED", "the {0} field must be between {1} and {2}.");
+        public static readonly StringToken POWERED_BY_KEY = new WebLocalizationKeys("POWERED_BY_KEY", "Powered by ");
+
+        public static readonly StringToken FIELD_NAME = new WebLocalizationKeys("FIELD_NAME", "Field Name");
+        public static readonly StringToken EMPLOYEE_NAMES = new WebLocalizationKeys("EMPLOYEE_NAMES", "Employee Names");
+        public static readonly StringToken PO_NUMBER = new WebLocalizationKeys("PO_NUMBER", "PO Number");
+        public static readonly StringToken VENDOR_PRODUCTS = new WebLocalizationKeys("VENDOR_PRODUCTS", "Vendor Products");
+        public static readonly StringToken PURCHASE_ORDER_LINE_ITEMS = new WebLocalizationKeys("PURCHASE_ORDER_LINE_ITEMS", "Purchase Order Line Items");
+        public static readonly StringToken LINE_ITEMS = new WebLocalizationKeys("LINE_ITEMS", "Line Items");
+        public static readonly StringToken COPY_TASK = new WebLocalizationKeys("COPY_TASK", "Duplicate Task");
+        public static readonly StringToken EDIT_TASK = new WebLocalizationKeys("EDIT_TASK", "Edit Task");
+        public static readonly StringToken COPY_EVENT = new WebLocalizationKeys("COPY_EVENT", "Copy Event");
+        public static readonly StringToken EDIT_EVENT = new WebLocalizationKeys("EDIT_EVENT", "Edit Event");
+        public static readonly StringToken CLOSE_THIS_PURCHASE_ORDER = new WebLocalizationKeys("CLOSE_THIS_PURCHASE_ORDER", "Close This Purchase Order");
+        public static readonly StringToken ENUMERATIONS = new WebLocalizationKeys("ENUMERATIONS", "Enumerations");
+        public static readonly StringToken UPLOAD_PICTURE = new WebLocalizationKeys("UPLOAD_PICTURE", "Upload Picture");
+        public static readonly StringToken FILE_ALREADY_EXISTS = new WebLocalizationKeys("FILE_ALREADY_EXISTS", "File Already Exists");
+        public static readonly StringToken DELETE = new WebLocalizationKeys("DELETE", "Delete");
+        public static readonly StringToken CALCULATOR = new WebLocalizationKeys("CALCULATOR", "Calculator");
+        public static readonly StringToken PRINT = new WebLocalizationKeys("PRINT", "Print");
         public static readonly StringToken DELETE_ITEM = new WebLocalizationKeys("DELETE_ITEM", "Delete this item!");
         public static readonly StringToken EDIT_ITEM = new WebLocalizationKeys("EDIT_ITEM", "Edit this item!");
         public static readonly StringToken DISPLAY_ITEM = new WebLocalizationKeys("DISPLAY_ITEM", "Display this item!");
-        public static readonly StringToken USER_HAS_DATA = new WebLocalizationKeys("USER_HAS_DATA", "User Has Data");
-        public static readonly StringToken TASK_NAME = new WebLocalizationKeys("TASK_NAME", "Task Name");
-        public static readonly StringToken NAME = new WebLocalizationKeys("NAME", "Name");
-        public static readonly StringToken ADD_NEW_ITEM = new WebLocalizationKeys("ADD_NEW_ITEM", "Add New Item");
-        public static readonly StringToken UPLOAD_NEW_DOCUMENT = new WebLocalizationKeys("UPLOAD_NEW_DOCUMENT", "Upload New Document");
-        public static readonly StringToken SELECT_UPLOAD_FILE = new WebLocalizationKeys("SELECT_UPLOAD_FILE", "Select File to Upload");
-        public static readonly StringToken DELETE_PHOTO = new WebLocalizationKeys("DELETE_PHOTO", "Delete Photo");
+        public static readonly StringToken ID = new WebLocalizationKeys("ID", "ID");
+        public static readonly StringToken ADDRESS = new WebLocalizationKeys("ADDRESS", "Address");
+        public static readonly StringToken FORUM = new WebLocalizationKeys("FORUM", "Forum");
 
-        public static readonly StringToken REMOVE_DOCUMENT = new WebLocalizationKeys("REMOVE_DOCUMENT", "(X) Remove Document");
+        public static readonly StringToken WEATHER = new WebLocalizationKeys("WEATHER", "Weather");
+        public static readonly StringToken WEATHER_INFORMATION = new WebLocalizationKeys("WEATHER_INFORMATION", "Weather Information");
+
+        public static readonly StringToken VENDOR_CONTACTS = new WebLocalizationKeys("VENDOR_CONTACTS", "Vendor Contacts");
+        public static readonly StringToken PREVIOUS_VENDOR = new WebLocalizationKeys("PREVIOUS_VENDOR", "Previous Vendor");
+
+        public static readonly StringToken NEW_DOCUMENT_CATEGORY = new WebLocalizationKeys("NEW_DOCUMENT_CATEGORY", "Add New Document Category");
+        public static readonly StringToken DOCUMENT_CATEGORY_INFORMATION = new WebLocalizationKeys("DOCUMENT_CATEGORY_INFORMATION", "Document Category Information");
+        public static readonly StringToken DOCUMENT_CATEGORY = new WebLocalizationKeys("DOCUMENT_CATEGORY", "Document Category");
+        public static readonly StringToken DOCUMENT_CATEGORIES = new WebLocalizationKeys("DOCUMENT_CATEGORIES", "Document Categories");
         public static readonly StringToken DOCUMENTS = new WebLocalizationKeys("DOCUMENTS", "Documents");
-        public static readonly StringToken FILES = new WebLocalizationKeys("FILES", "Files");
-        public static readonly StringToken FILE = new WebLocalizationKeys("FILE", "File");
-        public static readonly StringToken FILE_CATEGORY = new WebLocalizationKeys("FILE_CATEGORY", "File Category");
-        public static readonly StringToken DOCUMENT = new WebLocalizationKeys("DOCUMENT", "Document");
-        public static readonly StringToken PHOTO = new WebLocalizationKeys("PHOTO", "Photo");
+        public static readonly StringToken NEW_DOCUMENT = new WebLocalizationKeys("NEW_DOCUMENT", "Add New Document");
+        public static readonly StringToken DOCUMENT_INFORMATION = new WebLocalizationKeys("DOCUMENT_INFORMATION", "Document Information");
+
+        public static readonly StringToken NEW_PHOTO_CATEGORY = new WebLocalizationKeys("NEW_PHOTO_CATEGORY", "Add New Photo Category");
+        public static readonly StringToken PHOTO_CATEGORY_INFORMATION = new WebLocalizationKeys("PHOTO_CATEGORY_INFORMATION", "Photo Category Information");
+        public static readonly StringToken PHOTO_CATEGORY = new WebLocalizationKeys("PHOTO_CATEGORY", "Photo Category");
+        public static readonly StringToken PHOTO_CATEGORIES = new WebLocalizationKeys("PHOTO_CATEGORIES", "Photo Categories");
         public static readonly StringToken PHOTOS = new WebLocalizationKeys("PHOTOS", "Photos");
-        public static readonly StringToken SELECT_EXISTING_DOCUMENT = new WebLocalizationKeys("SELECT_EXISTING_DOCUMENT", "Select Existing Document");
-        public static readonly StringToken UPLOAD_AND_SELECT = new WebLocalizationKeys("UPLOAD_AND_SELECT", "Upload and Select");
-        public static readonly StringToken SELECT_ITEMS = new WebLocalizationKeys("SELECT_ITEMS", "Select checked items");
-        public static readonly StringToken REMOVE_ITEMS = new WebLocalizationKeys("REMOVE_ITEMS", "Remove checked items");
-        public static readonly StringToken REMOVE_ITEM = new WebLocalizationKeys("REMOVE_ITEM", "(X)Remove");
-        public static readonly StringToken CATEGORY = new WebLocalizationKeys("CATEGORY", "Category");
-        public static readonly StringToken FILETYPE = new WebLocalizationKeys("FILETYPE", "File Type");
-        public static readonly StringToken SEARCH = new WebLocalizationKeys("SEARCH", "Search");
-        public static readonly StringToken CLEAR = new WebLocalizationKeys("CLEAR", "Clear");
-        public static readonly StringToken STATE = new WebLocalizationKeys("STATE", "State");
-        public static readonly StringToken CANCEL = new WebLocalizationKeys("CANCEL", "Cancel");
+        public static readonly StringToken NEW_PHOTO = new WebLocalizationKeys("NEW_PHOTO", "Add New Photo");
+        public static readonly StringToken PHOTO_INFORMATION = new WebLocalizationKeys("PHOTO_INFORMATION", "Photo Information");
+        public static readonly StringToken ADD_ITEM_TO_PO = new WebLocalizationKeys("ADD_ITEM_TO_PO", "Add item to the purchase order");
+        public static readonly StringToken VIEW_FILE = new WebLocalizationKeys("VIEW_FILE", "View File");
+        public static readonly StringToken ADMINISTRATOR_INFORMATION = new WebLocalizationKeys("ADMINISTRATOR_INFORMATION", "Administrator Information");
+        public static readonly StringToken ADD_NEW_ADMINISTRATOR = new WebLocalizationKeys("ADD_NEW_ADMINISTRATOR", "Add New Administrator");
+
+
+        public static readonly StringToken COMMIT = new WebLocalizationKeys("COMMIT", "Commit");
         public static readonly StringToken RETURN = new WebLocalizationKeys("RETURN", "Return");
-        public static readonly StringToken ADD = new WebLocalizationKeys("ADD", "Add");
+        public static readonly StringToken SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM = new WebLocalizationKeys("SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM", "Select A Color To Associate With This Field");
 
-        public static readonly StringToken LAST_NAME = new WebLocalizationKeys("LAST_NAME", "Last Name");
-        public static readonly StringToken FIRST_NAME = new WebLocalizationKeys("FIRST_NAME", "First Name");
-        public static readonly StringToken REQUIRED_BY_SYSTEM = new WebLocalizationKeys("REQUIRED_BY_SYSTEM", "Is Required By the System");
+        public static readonly StringToken NEW_FACILITIES = new WebLocalizationKeys("NEW_FACILITIES", "New Facilities");
+        public static readonly StringToken ERROR_UNEXPECTED = new WebLocalizationKeys("ERROR_UNEXPECTED", "An Unexpected Error Has Occured.");
+        public static readonly StringToken ADMIN_TOOLS = new WebLocalizationKeys("ADMIN_TOOLS", "Admin Tools");
 
-        public static readonly StringToken YOU_HAVE_NOT_ADDED_ANY = new WebLocalizationKeys("YOU_HAVE_NOT_ADDED_ANY", "You have not added any {0} ");
-        public static readonly StringToken SELECT_ONE_OR_MORE_OR = new WebLocalizationKeys("SELECT_ONE_OR_MORE", "Select one or more or ...");
-        public static readonly StringToken ADD_A_NEW = new WebLocalizationKeys("ADD_A_NEW", "Add a new {0}");
-        public static readonly StringToken ADD_A_NEW_ONE = new WebLocalizationKeys("ADD_A_NEW_ONE", "add a new one");
-
-        public static readonly StringToken RESET_PASSWORD = new WebLocalizationKeys("RESET_PASSWORD", "Reset Password");
-        public static readonly StringToken NEW_PASSWORD = new WebLocalizationKeys("NEW_PASSWORD", "New Password");
-        public static readonly StringToken CONFIRM_NEW_PASSWORD = new WebLocalizationKeys("CONFIRM_NEW_PASSWORD", "Confirm New Password");
-        public static readonly StringToken LOGIN_NAME = new WebLocalizationKeys("LOGIN_NAME", "Login Name");
-        public static readonly StringToken PLEASE_SELECT_A_PASSWORD = new WebLocalizationKeys("PLEASE_SELECT_A_PASSWORD", "Hello {0}, please select a new password");
-
-        public static readonly StringToken SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_PERSON = new WebLocalizationKeys("SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_PERSON", "Select a color to Associate with this Person");
-        public static readonly StringToken ERROR_UNEXPECTED = new WebLocalizationKeys("ERROR_UNEXPECTED", "Unexpected Error");
-        public static readonly StringToken APPOINTMENT_INFORMATION = new WebLocalizationKeys("APPOINTMENT_INFORMATION", "Appointment Information");
-        public static readonly StringToken REMOVE = new WebLocalizationKeys("REMOVE", "Remove");
-        public static readonly StringToken NEW = new WebLocalizationKeys("NEW", "New");
-        public static readonly StringToken PERSONAL_INFORMATION = new WebLocalizationKeys("PERSONAL_INFORMATION", "Personal Information");
-        public static readonly StringToken INITIAL = new WebLocalizationKeys("INITIAL", "Initial");
-        public static readonly StringToken PASSWORD = new WebLocalizationKeys("PASSWORD", "Password");
-        public static readonly StringToken SAVE = new WebLocalizationKeys("SAVE", "Save");
-
-        public static readonly StringToken HOUR = new WebLocalizationKeys("HOUR", "Hour");
-        public static readonly StringToken MINUTES = new WebLocalizationKeys("MINUTES", "Minutes");
-        public static readonly StringToken AMPM = new WebLocalizationKeys("AMPM", "AM/PM");
-
-        public static readonly StringToken STARTTIME= new WebLocalizationKeys("STARTTIME", "Start Time");
-        public static readonly StringToken ENDTIME = new WebLocalizationKeys("ENDTIME", "End Time");
-
+    
 
     }
 }

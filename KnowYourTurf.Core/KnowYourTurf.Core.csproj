@@ -8,8 +8,8 @@
     <ProjectGuid>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MethodFitness.Core</RootNamespace>
-    <AssemblyName>MethodFitness.Core</AssemblyName>
+    <RootNamespace>KnowYourTurf.Core</RootNamespace>
+    <AssemblyName>KnowYourTurf.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,216 +32,242 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Alpinely.TownCrier">
-      <HintPath>..\..\lib\Alpinely.TownCrier.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\lib\Alpinely.TownCrier.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="AuthorizeNet">
-      <HintPath>..\..\lib\AuthorizeNet.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper">
-      <HintPath>..\..\lib\AutoMapper.dll</HintPath>
+      <HintPath>..\lib\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Components.Validator">
-      <HintPath>..\..\lib\Castle.Components.Validator.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Castle.Components.Validator, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Castle.Components.Validator.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="FubuMVC.Core">
-      <HintPath>..\..\lib\FubuMVC.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="FubuMVC.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\FubuMVC.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FubuMVC.UI">
-      <HintPath>..\..\lib\FubuMVC.UI.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\lib\FubuMVC.UI.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlTags">
-      <HintPath>..\..\lib\HtmlTags.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HtmlTags, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\HtmlTags.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\Iesi.Collections.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="ImageResizer">
-      <HintPath>..\..\lib\ImageResizer.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\..\lib\log4net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\NHibernate.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate.ByteCode.Castle, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\NHibernate.ByteCode.Castle.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core">
-      <HintPath>..\..\lib\nunit.core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\lib\fluentnhibernate\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
     <Reference Include="Remotion.Data.Linq, Version=1.13.41.2, Culture=neutral, PublicKeyToken=cab60358ab4081ea, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\Remotion.Data.Linq.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\Remotion.Data.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.Security">
-      <HintPath>..\..\lib\Rhino.Security.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+    <Reference Include="Rhino.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\StructureMap.dll</HintPath>
+      <HintPath>..\lib\Rhino.Security.dll</HintPath>
     </Reference>
-    <Reference Include="System">
-      <Private>True</Private>
+    <Reference Include="StructureMap">
+      <HintPath>..\lib\StructureMap.dll</HintPath>
     </Reference>
-    <Reference Include="System.Core">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.Remoting">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Extensions">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Windows.Forms">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CSharp">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="xVal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f8fbed92c68c4006, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\xVal.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xVal">
+      <HintPath>..\lib\xVal.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicExtentions.cs" />
-    <Compile Include="Config\FilterDefinitions.cs" />
-    <Compile Include="Config\ManyToManyTableNameConvention.cs" />
-    <Compile Include="Config\ForeignKeyConstraintNameConvention.cs" />
-    <Compile Include="Config\StructuremapGridConvention.cs" />
-    <Compile Include="Config\TextAreaConvention.cs" />
-    <Compile Include="CoreViewModelAndDTOs\CalendarViewModel.cs" />
-    <Compile Include="CoreViewModelAndDTOs\OrderDetailsDto.cs" />
-    <Compile Include="CoreViewModelAndDTOs\TokenInputDto.cs" />
     <Compile Include="Config\CustomIdentitiy.cs" />
     <Compile Include="Config\CustomPrincipal.cs" />
-    <Compile Include="Config\SaveUpdateInterceptor.cs" />
-    <Compile Include="Config\SqlServerSessionSourceConfiguration.cs" />
+    <Compile Include="Config\NullSqlServerSessionSourceConfiguration.cs" />
+    <Compile Include="Config\SaveUpdateInterceptorWithCompanyFilter.cs" />
+    <Compile Include="Config\SiteConfiguration.cs" />
+    <Compile Include="CoreViewModels\CalendarViewModel.cs" />
+    <Compile Include="Config\FilterDefinition.cs" />
+    <Compile Include="Config\SqlServerSessionSourceConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CoreLocalizationKeys.cs" />
-    <Compile Include="CoreViewModelAndDTOs\DocumentDto.cs" />
-    <Compile Include="CoreViewModelAndDTOs\GridItemViewModel.cs" />
-    <Compile Include="CoreViewModelAndDTOs\MembershipDto.cs" />
-    <Compile Include="CoreViewModelAndDTOs\ViewModel.cs" />
-    <Compile Include="Domain\Appointment.cs" />
+    <Compile Include="CoreViewModels\GridItemModels.cs" />
+    <Compile Include="Domain\BaseProduct.cs" />
+    <Compile Include="Domain\Calculator.cs" />
     <Compile Include="Domain\Company.cs" />
-    <Compile Include="Domain\Client.cs" />
+    <Compile Include="Domain\Continuation.cs" />
+    <Compile Include="Domain\Chemical.cs" />
+    <Compile Include="Domain\Document.cs" />
     <Compile Include="Domain\DomainEntity.cs" />
+    <Compile Include="Domain\EmailJob.cs" />
+    <Compile Include="Domain\EmailTemplate.cs" />
+    <Compile Include="Domain\Equipment.cs" />
+    <Compile Include="Domain\Event.cs" />
+    <Compile Include="Domain\Fertilizer.cs" />
+    <Compile Include="Domain\Field.cs" />
+    <Compile Include="Domain\ListType.cs" />
+    <Compile Include="Domain\Persistence\ListTypeMap.cs" />
+    <Compile Include="Domain\Persistence\PhotoMap.cs" />
+    <Compile Include="Domain\Persistence\DocumentMap.cs" />
+    <Compile Include="Domain\Persistence\EmailTemplateMap.cs" />
+    <Compile Include="Domain\Persistence\UserRoleMap.cs" />
+    <Compile Include="Domain\Persistence\WeatherMap.cs" />
+    <Compile Include="Domain\Photo.cs" />
+    <Compile Include="Domain\Tools\NullNHSetupConfig.cs" />
+    <Compile Include="Domain\Tools\NullNHibernateUnitOfWork.cs" />
+    <Compile Include="Domain\Tools\CustomAttributes\TextAreaAttribute.cs" />
+    <Compile Include="Domain\Tools\NullSession.cs" />
+    <Compile Include="Domain\Tools\NullSessionFactory.cs" />
+    <Compile Include="Domain\UserRole.cs" />
+    <Compile Include="Domain\Weather.cs" />
+    <Compile Include="Html\Expressions\HtmlTagExpressionBase.cs" />
+    <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
+    <Compile Include="Html\FubuUI\Builders\DateTimeDisplayBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\ImageFIleDisplayBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\TextAreaBuilder.cs" />
+    <Compile Include="Html\Grid\ColumnBase.cs" />
+    <Compile Include="Html\Grid\GroupingColumn.cs" />
+    <Compile Include="Html\Grid\ImageButtonColumn.cs" />
+    <Compile Include="Html\Grid\HiddenColumn.cs" />
+    <Compile Include="Html\Grid\ImageColumn.cs" />
+    <Compile Include="Html\Grid\DisplayColumn.cs" />
+    <Compile Include="Html\Grid\LinkColumn.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="Rules\FieldHasNoOutstandingEvents.cs" />
+    <Compile Include="Rules\FieldHasNoOutstandingTasks.cs" />
+    <Compile Include="Rules\DeleteFieldRules.cs" />
+    <Compile Include="Rules\DeleteEmployeeRules.cs" />
+    <Compile Include="Rules\EmployeeHasNoOutstandingTasks.cs" />
+    <Compile Include="Rules\RulesEngineBase.cs" />
+    <Compile Include="Services\ICustomAuthorizationRepository.cs" />
+    <Compile Include="Services\ICrudManager.cs" />
+    <Compile Include="Services\IDynamicExpressionQuery.cs" />
+    <Compile Include="Services\IEmailJob\IEmailJob.cs" />
+    <Compile Include="Services\IEmailTemplateService.cs" />
+    <Compile Include="Services\IEntityListGrid.cs" />
+    <Compile Include="Services\IGetCompanyIdService.cs" />
+    <Compile Include="Domain\InventoryProduct.cs" />
+    <Compile Include="Domain\Tools\IRepository.cs" />
+    <Compile Include="Domain\Tools\IUnitOfWork.cs" />
     <Compile Include="Domain\LocalizedEnumeration.cs" />
     <Compile Include="Domain\LocalizedProperty.cs" />
     <Compile Include="Domain\LocalizedText.cs" />
-    <Compile Include="Domain\Location.cs" />
-    <Compile Include="Domain\Persistence\CompanyMap.cs" />
-    <Compile Include="Domain\Persistence\AppointmentMap.cs" />
-    <Compile Include="Domain\Persistence\ClientMap.cs" />
-    <Compile Include="Domain\Persistence\LocationMap.cs" />
-    <Compile Include="Domain\Persistence\UserRoleMap.cs" />
-    <Compile Include="Domain\Persistence\UserMap.cs" />
-    <Compile Include="Domain\Persistence\DomainEntityMap.cs" />
-    <Compile Include="Domain\SiteConfiguration.cs" />
-    <Compile Include="Domain\Tools\Continuation.cs" />
-    <Compile Include="Domain\Tools\CustomAttributes\LinkDisplayAttribute.cs" />
-    <Compile Include="Domain\Tools\CustomAttributes\LogAttribute.cs" />
-    <Compile Include="Domain\Tools\CustomAttributes\TextAreaAttribute.cs" />
-    <Compile Include="Domain\Tools\CustomAttributes\ValidateDateComesAfterAttribute.cs" />
-    <Compile Include="Domain\Tools\CustomAttributes\ValidateDCIRangeAttribute.cs" />
-    <Compile Include="Domain\Tools\CustomAttributes\ValidateSqlDateTimeAttribute.cs" />
-    <Compile Include="Domain\Tools\CustomAttributes\ValidateUrlAttribute.cs" />
-    <Compile Include="Domain\Tools\INHSetupConfig.cs" />
-    <Compile Include="Domain\Tools\IRepository.cs" />
-    <Compile Include="Domain\Tools\IUnitOfWork.cs" />
-    <Compile Include="Domain\Tools\NullNHibernateUnitOfWork.cs" />
-    <Compile Include="Domain\Tools\NullNHSetupConfig.cs" />
-    <Compile Include="Domain\Tools\NullSession.cs" />
-    <Compile Include="Domain\Tools\NullSessionFactory.cs" />
+    <Compile Include="Domain\Material.cs" />
     <Compile Include="Domain\Tools\Repository.cs" />
     <Compile Include="Domain\Tools\UnitOfWork.cs" />
-    <Compile Include="Domain\Tools\Notification.cs" />
-    <Compile Include="Domain\Tools\SqlStatementInterceptor.cs" />
+    <Compile Include="Domain\Notification.cs" />
+    <Compile Include="Domain\Persistence\BaseProductMap.cs" />
+    <Compile Include="Domain\Persistence\CompanyMap.cs" />
+    <Compile Include="Domain\Persistence\CalculatorMap.cs" />
+    <Compile Include="Domain\Persistence\EmailJobMap.cs" />
+    <Compile Include="Domain\Persistence\EventMap.cs" />
+    <Compile Include="Domain\Persistence\DomainEntityMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\EquipmentMap.cs" />
+    <Compile Include="Domain\Persistence\FieldMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Tools\INHSetupConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\InventoryProductMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\LocalizedPropertyMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\LocalizedTextMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\LocalizedValueObjectMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\PurchaseOrderLineItemMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\PurchaseOrderMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\TaskMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\UserPersistenceMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\VendorContactMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Persistence\VendorMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrder.cs" />
+    <Compile Include="Domain\PurchaseOrderLineItem.cs" />
+    <Compile Include="Domain\Task.cs" />
     <Compile Include="Domain\User.cs" />
-    <Compile Include="Domain\UserRole.cs" />
+    <Compile Include="Domain\Vendor.cs" />
+    <Compile Include="Domain\VendorContact.cs" />
     <Compile Include="Enumerations\Enumerations.cs" />
-    <Compile Include="Html\Expressions\AlphaNumericPickerExpression.cs" />
     <Compile Include="Html\Expressions\BoundExpression.cs" />
-    <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
     <Compile Include="Html\Expressions\FormExpression.cs" />
     <Compile Include="Html\Expressions\HtmlCommonExpressionsBase.cs" />
     <Compile Include="Html\Expressions\HtmlExpressionExtensions.cs" />
-    <Compile Include="Html\Expressions\HtmlTagExpressionBase.cs" />
     <Compile Include="Html\Expressions\ImageExpression.cs" />
     <Compile Include="Html\Expressions\LinkExpression.cs" />
     <Compile Include="Html\Expressions\MetaExpression.cs" />
     <Compile Include="Html\Expressions\ScriptReferenceExpression.cs" />
+    <Compile Include="Html\Expressions\SelectBoxPickerExpression.cs" />
     <Compile Include="Html\Expressions\StyledButtonExpression.cs" />
     <Compile Include="Html\Expressions\SubmitButtonExpression.cs" />
-    <Compile Include="Html\Expressions\ValueObjectSelector.cs" />
-    <Compile Include="Html\FubuUI\Builders\ImageFileDisplayBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\SelectFromLookupTypeBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\LinkDisplayBuilder.cs" />
     <Compile Include="Html\FubuUI\Builders\DatePickerBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\EmailDisplayBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\GroupedSelectBuilder.cs" />
     <Compile Include="Html\FubuUI\Builders\ListDisplayBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\RadioButtonListBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\GroupedSelectBuilder.cs" />
     <Compile Include="Html\FubuUI\Builders\SelectFromIEnumerableBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\TextAreaBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\EmailDisplayBuilder.cs" />
+    <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder.cs" />
     <Compile Include="Html\FubuUI\Builders\ValidationModifier.cs" />
     <Compile Include="Html\FubuUI\FubuUIHtmlExtensions.cs" />
     <Compile Include="Html\FubuUI\HtmlConventionRegistries\CustomTagActionExpressions.cs" />
-    <Compile Include="Html\FubuUI\HtmlConventionRegistries\DecisionCriticalElementNamingConvention.cs" />
-    <Compile Include="Html\FubuUI\HtmlConventionRegistries\DecisionCriticalHtmlConventions.cs" />
-    <Compile Include="Html\FubuUI\HtmlExpressions\ViewDisplayAddressExpression.cs" />
-    <Compile Include="Html\FubuUI\HtmlExpressions\ViewDisplayCityStateExpression.cs" />
-    <Compile Include="Html\FubuUI\HtmlExpressions\ViewDisplayDateRangeExpression.cs" />
+    <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfElementNamingConvention.cs" />
+    <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfHtmlConventions.cs" />
     <Compile Include="Html\FubuUI\HtmlExpressions\DropdownInputExpression.cs" />
     <Compile Include="Html\FubuUI\HtmlExpressions\EditorExpression.cs" />
     <Compile Include="Html\FubuUI\HtmlExpressions\EditorInputExpression.cs" />
@@ -250,25 +276,15 @@
     <Compile Include="Html\FubuUI\HtmlExpressions\ViewExpression.cs" />
     <Compile Include="Html\FubuUI\HtmlExpressions\ViewLabelExpression.cs" />
     <Compile Include="Html\FubuUI\Tags\PasswordTag.cs" />
-    <Compile Include="Html\FubuUI\Tags\PropertyValidationHelper.cs" />
-    <Compile Include="Html\FubuUI\Tags\RadioButtonListTag.cs" />
     <Compile Include="Html\FubuUI\Tags\RadioButtonTag.cs" />
-    <Compile Include="Html\Grid\ColumnBase.cs" />
-    <Compile Include="Html\Grid\GroupingColumn.cs" />
-    <Compile Include="Html\Grid\DisplayColumn.cs" />
     <Compile Include="Html\Grid\Grid.cs" />
     <Compile Include="Html\Grid\GridBuilder.cs" />
-    <Compile Include="Html\Grid\HiddenColumn.cs" />
-    <Compile Include="Html\Grid\ImageButtonColumn.cs" />
-    <Compile Include="Html\Grid\ImageColumn.cs" />
-    <Compile Include="Html\Grid\LinkColumn.cs" />
     <Compile Include="Html\Grid\Pager.cs" />
     <Compile Include="Html\Grid\PageSortFilter.cs" />
     <Compile Include="Html\HtmlExtensions.cs" />
     <Compile Include="Html\Menu\IMenuBuilder.cs" />
     <Compile Include="Html\Menu\MenuExpression.cs" />
     <Compile Include="Html\UrlContext.cs" />
-    <Compile Include="ILogger.cs" />
     <Compile Include="Localization\Enumeration.cs" />
     <Compile Include="Localization\Header.cs" />
     <Compile Include="Localization\LocalizationDataProvider.cs" />
@@ -276,34 +292,27 @@
     <Compile Include="Localization\LocalizedEnum.cs" />
     <Compile Include="Localization\LocalizedEnumRegistry.cs" />
     <Compile Include="Localization\StringToken.cs" />
-    <Compile Include="Config\NullSqlServerSessionSourceConfiguration.cs" />
-    <Compile Include="Rules\DeleteEmployeeRules.cs" />
-    <Compile Include="Rules\DeleteFieldRules.cs" />
-    <Compile Include="Rules\EmployeeHasNoOutstandingTasks.cs" />
-    <Compile Include="Rules\FieldHasNoOutstandingEvents.cs" />
-    <Compile Include="Rules\FieldHasNoOutstandingTasks.cs" />
-    <Compile Include="Rules\RulesEngineBase.cs" />
-    <Compile Include="Services\CustomAuthorizationRepository.cs" />
-    <Compile Include="Services\DateTimeUtilities.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CompleteTaskService.cs" />
     <Compile Include="Services\ICastleValidationRunner.cs" />
-    <Compile Include="Services\ICrudManager.cs" />
     <Compile Include="Services\IDynamicExpressionBuilder.cs" />
-    <Compile Include="Services\IDynamicExpressionQuery.cs" />
-    <Compile Include="Services\IEmailTemplateService.cs" />
-    <Compile Include="Services\IFileHandlerService.cs" />
-    <Compile Include="Services\IMFPermissionsService.cs" />
-    <Compile Include="Services\IPermissionService.cs" />
-    <Compile Include="Services\ISessionContext.cs" />
+    <Compile Include="Services\IGridHandlerService.cs" />
+    <Compile Include="Services\IInventoryService.cs" />
+    <Compile Include="Services\IKYTPermissionsService.cs" />
+    <Compile Include="Services\IPurchaseOrderLineItemService.cs" />
     <Compile Include="Services\ISaveEntityService.cs" />
-    <Compile Include="Services\ISecurityDataService.cs" />
+    <Compile Include="Services\ISelectBoxPickerService.cs" />
     <Compile Include="Services\ISelectListItemService.cs" />
-    <Compile Include="Services\IUpdateCollectionService.cs" />
+    <Compile Include="Services\ISessionContext.cs" />
+    <Compile Include="Services\DateTimeUtilities.cs" />
+    <Compile Include="Services\IUnitSizeTimesQuantyCalculator.cs" />
+    <Compile Include="Services\ReceivePurchaseOrderService.cs" />
+    <Compile Include="Services\SecurityDataService.cs" />
+    <Compile Include="Services\StructureMapServiceLocator.cs" />
     <Compile Include="Services\SystemClock.cs" />
+    <Compile Include="CoreViewModels\ViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-    <Folder Include="SubscriptionEngine\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

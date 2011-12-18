@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using KnowYourTurf.Core.Enumerations;
 using KnowYourTurf.Core.Html.Menu;
-using KnowYourTurf.Web;
-using KnowYourTurf.Web.Areas.Portfolio.Controllers;
 using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Config

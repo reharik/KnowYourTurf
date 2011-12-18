@@ -1,7 +1,8 @@
 ﻿using System;
+using KnowYourTurf.Core;
 using log4net;
 
-namespace KnowYourTurf.Core
+namespace MethodFitness.Core
 {
     public interface ILogger
     {

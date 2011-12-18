@@ -1,35 +1,57 @@
-﻿using System;
+using System;
+using System.Security.Principal;
 using System.Web;
 using KnowYourTurf.Core.Config;
+using KnowYourTurf.Core.Domain;
 
 namespace KnowYourTurf.Core.Services
 {
     public interface ISessionContext
     {
-        int GetCompanyId();
-        int GetUserEntityId();
+        User GetCurrentUser();
         object RetrieveSessionObject(Guid sessionKey);
         object RetrieveSessionObject(string sessionKey);
-        SessionItem RetrieveSessionItem(string sessionKey);
         void AddUpdateSessionItem(SessionItem item);
         void RemoveSessionItem(Guid sessionKey);
         void RemoveSessionItem(string sessionKey);
+        string MapPath(string url);
+        HttpPostedFile RetrieveUploadedFile();
+        SessionItem RetrieveSessionItem(string sessionKey);
+        long GetCompanyId();
+        long GetUserId();
+        Company GetCurrentCompany();
+        bool IsAuthenticated();
+        bool IsInRole(string role);
+        void ClearSession();
     }
-
 
     public class SessionContext : ISessionContext
     {
-        public int GetCompanyId()
+        private readonly IRepository _repository;
+
+        public SessionContext(IRepository repository)
         {
-            var httpContext = HttpContext.Current;
-            var customPrincipal = httpContext != null ? httpContext.User as CustomPrincipal : null;
-            return customPrincipal != null ? customPrincipal.CompanyId : 0;
+            _repository = repository;
         }
-        public int GetUserEntityId()
+
+        public User GetCurrentUser()
         {
-            var httpContext = HttpContext.Current;
-            var customPrincipal = httpContext != null ? httpContext.User as CustomPrincipal : null;
-            return customPrincipal != null ? customPrincipal.UserId : 0;
+            return  _repository.Find<User>(GetUserId());
+        }
+
+        public Company GetCurrentCompany()
+        {
+            return _repository.Find<Company>(GetCompanyId());
+        }
+
+        public bool IsAuthenticated()
+        {
+            return HttpContext.Current.User.Identity.IsAuthenticated;
+        }
+
+        public bool IsInRole(string role)
+        {
+            return HttpContext.Current.User.IsInRole(role);
         }
 
         public object RetrieveSessionObject(Guid sessionKey)
@@ -41,12 +63,17 @@ namespace KnowYourTurf.Core.Services
         public object RetrieveSessionObject(string sessionKey)
         {
             SessionItem item = (SessionItem)HttpContext.Current.Session[sessionKey];
-            return item != null ? item.SessionObject : null;
+            return item != null ?item.SessionObject:null;
         }
 
         public SessionItem RetrieveSessionItem(string sessionKey)
         {
             return (SessionItem)HttpContext.Current.Session[sessionKey];
+        }
+
+        public void ClearSession()
+        {
+            HttpContext.Current.Session.Clear();
         }
 
         public void AddUpdateSessionItem(SessionItem item)
@@ -64,6 +91,28 @@ namespace KnowYourTurf.Core.Services
             HttpContext.Current.Session.Remove(sessionKey);
         }
 
+        public string MapPath(string url)
+        {
+            return HttpContext.Current.Server.MapPath(url);
+        }
+
+        public HttpPostedFile RetrieveUploadedFile()
+        {
+            return HttpContext.Current.Request.Files.AllKeys.Length > 0 ? HttpContext.Current.Request.Files[0] : null;
+        }
+
+        public long GetCompanyId()
+        {
+            var httpContext = HttpContext.Current;
+            var customPrincipal = httpContext != null ? httpContext.User as CustomPrincipal : null;
+            return customPrincipal != null ? customPrincipal.CompanyId : 0;
+        }
+        public long GetUserId()
+        {
+            var httpContext = HttpContext.Current;
+            var customPrincipal = httpContext != null ? httpContext.User as CustomPrincipal : null;
+            return customPrincipal != null ? customPrincipal.UserId : 0;
+        }
     }
 
     public class SessionItem
@@ -71,5 +120,94 @@ namespace KnowYourTurf.Core.Services
         public DateTime TimeStamp { get; set; }
         public string SessionKey { get; set; }
         public object SessionObject { get; set; }
+    }
+
+    public class UserSessionFake : ISessionContext
+    {
+        private User _currentUser;
+        public UserSessionFake(User currentUser)
+        {
+            _currentUser = currentUser;
+        }
+
+        public virtual User GetCurrentUser()
+        {
+            return _currentUser;
+        }
+
+        public bool CheckIfSessionItemIsStale<ENTITY>(Guid sessionKey) where ENTITY : DomainEntity
+        {
+            throw new NotImplementedException();
+        }
+
+        public object RetrieveSessionObject(Guid sessionKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object RetrieveSessionObject(string sessionKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddUpdateSessionItem(SessionItem item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveSessionItem(Guid sessionKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveSessionItem(string sessionKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string MapPath(string url)
+        {
+            throw new NotImplementedException();
+        }
+
+        public HttpPostedFile RetrieveUploadedFile()
+        {
+            throw new NotImplementedException();
+        }
+
+        public SessionItem RetrieveSessionItem(string sessionKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetCompanyId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetUserId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Company GetCurrentCompany()
+        {
+            return _currentUser.Company;
+        }
+
+        public bool IsAuthenticated()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsInRole(string role)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearSession()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

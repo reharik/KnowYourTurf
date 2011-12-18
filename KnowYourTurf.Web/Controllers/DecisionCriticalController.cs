@@ -10,7 +10,7 @@ namespace KnowYourTurf.Web.Controllers
          {
              var knowYourTurfViewModel = new KnowYourTurfViewModel
                                                  {
-                                                     UserProfileUrl = UrlContext.GetUrlForAction<TrainerController>(x => x.AddUpdate(null))
+//                                                     UserProfileUrl = UrlContext.GetUrlForAction<TrainerController>(x => x.AddUpdate(null))
                                                  };
              return View(knowYourTurfViewModel);
          }
