@@ -22,20 +22,11 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Task> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-               .ForAction<TaskController>(x => x.Delete(null))
-               .ToPerformAction(ColumnAction.Delete)
-                .ImageName("delete.png")
-               .ToolTip(WebLocalizationKeys.DELETE_ITEM);
-            GridBuilder.ImageButtonColumn()
-                .ForAction<TaskController>(x => x.AddEdit(null))
-                .ToPerformAction(ColumnAction.Edit)
-                .ImageName("KYTedit.png")
-                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
+            
             GridBuilder.LinkColumnFor(x => x.TaskType.Name)
-                .ForAction<TaskController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ForAction<TaskController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.ScheduledDate);
             GridBuilder.DisplayFor(x => x.ScheduledStartTime);
             return this;

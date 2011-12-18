@@ -1,0 +1,41 @@
+﻿@model KnowYourTurf.Web.Models.EmailJobViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+    });
+</script>
+
+
+@MvcHtmlString.Create(FormFor<EmailJobController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+    @MvcHtmlString.Create(Html.HiddenFor(x => x.EmailJob.EntityId).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.Subject).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.Frequency).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.Status).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.EmailTemplate).ToHtmlTag()
+        </div>
+    </div>
+    @EndForm())
+

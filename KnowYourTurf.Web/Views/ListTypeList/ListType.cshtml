@@ -8,43 +8,39 @@
     @MvcHtmlString.Create(Script("kyt.ListTypeController.js").ToString())
 }
 <script>
-    crudOptions.gridInfo = {
-        addEditUrl:  "@Model.AddUpdateUrlET",
+    gridControllerOptions.gridInfo = {
+        addUpdateUrl:  "@Model.AddUpdateUrlET",
         gridDef: crudOptions.gridDef,
         title: crudOptions.title
     };
-    crudOptions.ttGridInfo = {
-        addEditUrl: "@Model.AddUpdateUrlTT",
+    gridControllerOptions.ttGridInfo = {
+        addUpdateUrl: "@Model.AddUpdateUrlTT",
         gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionTT)) ,
         title: "@Model.PopupTitleTT"
     };
-    crudOptions.dcGridInfo = {
-        addEditUrl: "@Model.AddUpdateUrlDC",
+    gridControllerOptions.dcGridInfo = {
+        addUpdateUrl: "@Model.AddUpdateUrlDC",
         gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionDC)) ,
         title: "@Model.PopupTitlePC"
     };
-    crudOptions.pcGridInfo = {
-        addEditUrl: "@Model.AddUpdateUrlPC",
+    gridControllerOptions.pcGridInfo = {
+        addUpdateUrl: "@Model.AddUpdateUrlPC",
         gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionPC)) ,
         title: "@Model.PopupTitleDC"
     }; 
     
     $(document).ready(function(){
-        new kyt.ListTypeController(crudOptions);
+        new kyt.ListTypeController(gridControllerOptions);
     });
 </script>
-@MvcHtmlString.Create(StyledButtonFor("addNewTaskType", WebLocalizationKeys.NEW_TASK_TYPE).ToString())
 <table id="TaskTypeGrid" class="scroll"></table>
 <div id="taskTypePager" class="scroll" style="text-align:center;"></div>
 
-@MvcHtmlString.Create(StyledButtonFor("addNewEventType", WebLocalizationKeys.NEW_EVENT_TYPE).ToString())
 <table id="EventTypeGrid" class="scroll"></table>
 <div id="eventTypePager" class="scroll" style="text-align:center;"></div>
 
-@MvcHtmlString.Create(StyledButtonFor("addNewDocumentCategory", WebLocalizationKeys.NEW_DOCUMENT_CATEGORY).ToString())
 <table id="DocumentCategoryGrid" class="scroll"></table>
 <div id="docCatPager" class="scroll" style="text-align:center;"></div>
 
-@MvcHtmlString.Create(StyledButtonFor("addNewPhotoCategory", WebLocalizationKeys.NEW_PHOTO_CATEGORY).ToString())
 <table id="PhotoCategoryGrid" class="scroll"></table>
 <div id="photoCatPager" class="scroll" style="text-align:center;"></div>

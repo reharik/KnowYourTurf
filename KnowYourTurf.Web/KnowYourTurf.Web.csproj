@@ -384,29 +384,6 @@
     <Content Include="Content\css\ui-lightness\jquery-ui-1.8.7.custom.css" />
     <Content Include="Content\css\ui.jqgrid.css" />
     <Content Include="Content\css\ui.multiselect.css" />
-    <Content Include="Content\scripts\dci.ajaxPopupDisplayModule.js" />
-    <Content Include="Content\scripts\dci.ajaxPopupFormModule.js" />
-    <Content Include="Content\scripts\dci.assetController.js" />
-    <Content Include="Content\scripts\dci.assetFormModule.js" />
-    <Content Include="Content\scripts\dci.AssetWithToPresentLogicController.js" />
-    <Content Include="Content\scripts\dci.baseClass.js" />
-    <Content Include="Content\scripts\dci.complianceNotificationController.js" />
-    <Content Include="Content\scripts\dci.complianceNotificationModule.js" />
-    <Content Include="Content\scripts\dci.CreditCardController.js" />
-    <Content Include="Content\scripts\dci.creditcardView.js" />
-    <Content Include="Content\scripts\dci.crudController.js" />
-    <Content Include="Content\scripts\dci.DisplayView.js" />
-    <Content Include="Content\scripts\dci.forgottenPasswordController.js" />
-    <Content Include="Content\scripts\dci.FormModule.js" />
-    <Content Include="Content\scripts\dci.FormView.js" />
-    <Content Include="Content\scripts\dci.GridView.js" />
-    <Content Include="Content\scripts\dci.home.js" />
-    <Content Include="Content\scripts\dci.PopupView.js" />
-    <Content Include="Content\scripts\dci.portfolioBuilderController.js" />
-    <Content Include="Content\scripts\dci.portfolioDashboardController.js" />
-    <Content Include="Content\scripts\dci.tokenizerModule.js" />
-    <Content Include="Content\scripts\dci.TokenView.js" />
-    <Content Include="Content\scripts\dci.userProfileController.js" />
     <Content Include="Content\scripts\externalHelpers\backbone.js" />
     <Content Include="Content\scripts\externalHelpers\dark-blue.js" />
     <Content Include="Content\scripts\externalHelpers\highcharts.js" />
@@ -424,13 +401,14 @@
     <Content Include="Content\scripts\internalHelpers\cc.grid.columnService.js" />
     <Content Include="Content\scripts\internalHelpers\cc.gridHelpers.js" />
     <Content Include="Content\scripts\internalHelpers\cc.utilities.js" />
-    <Content Include="Content\scripts\internalHelpers\dci.gridSearch.js" />
-    <Content Include="Content\scripts\internalHelpers\dci.mediaHandler.js" />
-    <Content Include="Content\scripts\internalHelpers\dci.multiItemRepeater.js" />
-    <Content Include="Content\scripts\internalHelpers\dci.popupCrud.js" />
-    <Content Include="Content\scripts\internalHelpers\dci.repeatableInputSection.js" />
-    <Content Include="Content\scripts\internalHelpers\dci.repository.js" />
     <Content Include="Content\scripts\internalHelpers\jquery.cc.grid.js" />
+    <Content Include="Content\scripts\internalHelpers\jquery.kyt.calendar.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.gridSearch.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.mediaHandler.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.multiItemRepeater.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.popupCrud.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.repeatableInputSection.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.repository.js" />
     <Content Include="Content\scripts\internalHelpers\multiRowRepeater.js" />
     <Content Include="Content\scripts\jqueryPlugins\grid.locale-en.js" />
     <Content Include="Content\scripts\jqueryPlugins\jquery-1.6.2.min.js" />
@@ -465,6 +443,32 @@
     <Content Include="Content\scripts\jqueryPlugins\jquery.validate.min-vsdoc.js" />
     <Content Include="Content\scripts\jqueryPlugins\jquery.validate.min.js" />
     <Content Include="Content\scripts\jqueryPlugins\jquery.validate.pack.js" />
+    <Content Include="Content\scripts\kyt.ajaxPopupDisplayModule.js" />
+    <Content Include="Content\scripts\kyt.ajaxPopupFormModule.js" />
+    <Content Include="Content\scripts\kyt.AppointmentCalendarController.js" />
+    <Content Include="Content\scripts\kyt.assetController.js" />
+    <Content Include="Content\scripts\kyt.assetFormModule.js" />
+    <Content Include="Content\scripts\kyt.AssetWithToPresentLogicController.js" />
+    <Content Include="Content\scripts\kyt.baseClass.js" />
+    <Content Include="Content\scripts\kyt.CalendarView.js" />
+    <Content Include="Content\scripts\kyt.complianceNotificationController.js" />
+    <Content Include="Content\scripts\kyt.complianceNotificationModule.js" />
+    <Content Include="Content\scripts\kyt.CreditCardController.js" />
+    <Content Include="Content\scripts\kyt.creditcardView.js" />
+    <Content Include="Content\scripts\kyt.crudController.js" />
+    <Content Include="Content\scripts\kyt.DisplayView.js" />
+    <Content Include="Content\scripts\kyt.forgottenPasswordController.js" />
+    <Content Include="Content\scripts\kyt.formModule.js" />
+    <Content Include="Content\scripts\kyt.FormView.js" />
+    <Content Include="Content\scripts\kyt.GridView.js" />
+    <Content Include="Content\scripts\kyt.home.js" />
+    <Content Include="Content\scripts\kyt.PopupView.js" />
+    <Content Include="Content\scripts\kyt.portfolioBuilderController.js" />
+    <Content Include="Content\scripts\kyt.portfolioDashboardController.js" />
+    <Content Include="Content\scripts\kyt.tokenizerModule.js" />
+    <Content Include="Content\scripts\kyt.TokenView.js" />
+    <Content Include="Content\scripts\kyt.TrainerController.js" />
+    <Content Include="Content\scripts\kyt.userProfileController.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\themes\base\jquery-ui.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -513,9 +517,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Login\Login.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\MethodFitness\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Orthogonal\MainMenu.cshtml" />
@@ -568,21 +569,6 @@
     <Content Include="Views\Shared\_ListLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Trainer\TrainerView.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\TrainerList\ItemList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Trainer\TrainerAddUpdate.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Client\AddUpdate.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ClientList\ItemList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Orthogonal\KnowYourTurfHeader.cshtml" />
     <Content Include="Views\Orthogonal\KnowYourTurfMenu.cshtml" />
   </ItemGroup>
@@ -606,8 +592,6 @@
     <Content Include="Views\InventoryList\InventoryFertilizerView.cshtml" />
     <Content Include="Views\InventoryList\InventoryMaterialList.cshtml" />
     <Content Include="Views\InventoryList\InventoryMaterialView.cshtml" />
-    <Content Include="Views\InventoryList\InventorySeedList.cshtml" />
-    <Content Include="Views\InventoryList\InventorySeedView.cshtml" />
     <Content Include="Views\KnowYourTurf\Home.cshtml" />
     <Content Include="Views\ListTypeList\ListType.cshtml" />
     <Content Include="Views\MaterialList\MaterialList.cshtml" />
@@ -617,6 +601,33 @@
     <Content Include="Views\VendorContactList\VendorContactList.cshtml" />
     <Content Include="Views\VendorList\VendorList.cshtml" />
     <Content Include="Views\WeatherList\WeatherList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Calculator\CalculatorAddUpdate.cshtml" />
+    <Content Include="Views\Calculator\FertilizerNeededCalculator.cshtml" />
+    <Content Include="Views\Calculator\MaterialsCalculator.cshtml" />
+    <Content Include="Views\Calculator\OverseedBagsNeededCalculator.cshtml" />
+    <Content Include="Views\Calculator\OverseedRateNeededCalculator.cshtml" />
+    <Content Include="Views\Calculator\SandCalculator.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Chemical\ChemicalAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Document\AddUpdate.cshtml" />
+    <Content Include="Views\Document\Display.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EmailJob\EmailJobAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EmailTemplate\EmailTemplateAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EmployeeDashboard\EmployeeDashboard.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Employee\EmployeeAddUpdate.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

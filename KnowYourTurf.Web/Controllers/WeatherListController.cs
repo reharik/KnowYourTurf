@@ -24,7 +24,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<WeatherListController>(x => x.Weathers(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<WeatherController>(x => x.AddEdit(null)),
+                AddUpdateUrl = UrlContext.GetUrlForAction<WeatherController>(x => x.AddUpdate(null)),
                 GridDefinition = _weatherListGrid.GetGridDefinition(url)
             };
             return View(model);

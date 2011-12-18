@@ -21,13 +21,13 @@ kyt.GridView = Backbone.View.extend({
         this.render();
     },
     render: function(){
-        $("#gridContainer",this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
+        $(this.options.gridContainer).AsGrid(this.options.gridDef, this.options.gridOptions);
         $(window).bind('resize', function() { cc.gridHelper.adjustSize("#gridContainer"); }).trigger('resize');
         $(this.el).gridSearch({onClear:$.proxy(this.removeSearch,this),onSubmit:$.proxy(this.search,this)});
         return this;
     },
     addNew:function(){
-        $.publish('/contentLevel/grid/AddUpdateItem', [this.options.addEditUrl]);
+        $.publish('/contentLevel/grid_'+this.options.gridName+'/AddUpdateItem', [this.options.addUpdateUrl]);
     },
     deleteItems:function(){
         if (confirm("Are you sure you would like to delete this Item?")) {
@@ -42,21 +42,23 @@ kyt.GridView = Backbone.View.extend({
         var searchItem = {"field": this.options.searchField ,"data": v };
         var filter = {"group":"AND",rules:[searchItem]};
         var obj = {"filters":""  + JSON.stringify(filter) + ""};
-        $("#gridContainer").jqGrid('setGridParam',{postData:obj});
+        $(this.options.gridContainer).jqGrid('setGridParam',{postData:obj});
         this.reloadGrid();
     },
     removeSearch:function(){
-        delete $("#gridContainer").jqGrid('getGridParam' ,'postData')["filters"];
+        delete $(this.options.gridContainer).jqGrid('getGridParam' ,'postData')["filters"];
         this.reloadGrid();
         return false;
     },
     reloadGrid:function(){
-        $("#gridContainer").trigger("reloadGrid");
+        $(this.options.gridContainer).trigger("reloadGrid");
     }
 });
 
 
 kyt.gridDefaults = {
     searchField:"Name",
-    showSearch:true
+    showSearch:true,
+    gridContainer:"#gridContainer",
+    gridName:""
 };

@@ -43,7 +43,7 @@ kyt.AppointmentCalendarController = kyt.Controller.extend({
             return;
         }
         var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"), "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")};
-        this.editEvent(this.options.AddEditUrl,data);
+        this.editEvent(this.options.AddUpdateUrl,data);
     },
 
     editEvent:function(url, data){
@@ -66,7 +66,7 @@ kyt.AppointmentCalendarController = kyt.Controller.extend({
         var data = {"EntityId": calEvent.EntityId};
         var builder = kyt.popupButtonBuilder.builder("displayModule");
         builder.addButton("Delete", $.proxy(this.deleteItem,this));
-        builder.addEditButton();
+        builder.addUpdateButton();
         builder.addButton("Copy Event",$.proxy(this.copyItem,this));
         builder.addCancelButton();
        $("#masterArea").after("<div id='dialogHolder'/>");
@@ -83,7 +83,7 @@ kyt.AppointmentCalendarController = kyt.Controller.extend({
     copyItem:function(){
         var entityId = $("[name$='EntityId']").val();
         var data = {"EntityId":entityId,"Copy":true};
-        this.editEvent(this.options.AddEditUrl,data);
+        this.editEvent(this.options.AddUpdateUrl,data);
     },
 
     deleteItem: function(){

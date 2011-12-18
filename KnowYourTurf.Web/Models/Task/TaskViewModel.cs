@@ -30,7 +30,7 @@ namespace KnowYourTurf.Web.Models
         public IEnumerable<string> EquipmentNames { get; set; }
     }
 
-    public class AddEditTaskViewModel:ViewModel
+    public class AddUpdateTaskViewModel:ViewModel
     {
         public string From { get; set; }
         public long Field { get; set; }

@@ -23,7 +23,7 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var vendor = input.EntityId > 0 ? _repository.Find<Vendor>(input.EntityId) : new Vendor();
             var availableChemicals = _repository.FindAll<Chemical>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
@@ -56,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
                             {
                                 Vendor = vendor,
                                 VendorContactNames = contactNames,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddEdit(null)) + "/" + vendor.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddUpdate(null)) + "/" + vendor.EntityId,
                                 Title = WebLocalizationKeys.VENDOR_INFORMATION.ToString()
                             };
             return PartialView("VendorView", model);

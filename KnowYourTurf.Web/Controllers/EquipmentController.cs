@@ -30,7 +30,7 @@ namespace KnowYourTurf.Web.Controllers
             _selectListItemService = selectListItemService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var equipment = input.EntityId > 0 ? _repository.Find<Equipment>(input.EntityId) : new Equipment();
             var vendors = _selectListItemService.CreateList<Vendor>(x => x.Company, x => x.EntityId, true);
@@ -49,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EquipmentViewModel
             {
                 Equipment = equipment,
-                AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddEdit(null)) + "/" + equipment.EntityId,
+                AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddUpdate(null)) + "/" + equipment.EntityId,
                 Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString()
             };
             return PartialView("EquipmentView", model);

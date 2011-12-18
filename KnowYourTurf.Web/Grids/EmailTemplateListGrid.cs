@@ -23,20 +23,11 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<EmailTemplate> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-               .ForAction<EmailTemplateController>(x => x.Delete(null))
-               .ToPerformAction(ColumnAction.Delete)
-                .ImageName("delete.png")
-               .ToolTip(WebLocalizationKeys.DELETE_ITEM);
-            GridBuilder.ImageButtonColumn()
-                .ForAction<EmailTemplateController>(x => x.AddEdit(null))
-                .ToPerformAction(ColumnAction.Edit)
-                .ImageName("KYTedit.png")
-                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
+            
             GridBuilder.LinkColumnFor(x => x.Name)
-                .ForAction<EmailTemplateController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ForAction<EmailTemplateController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.DateCreated);
             return this;
         }

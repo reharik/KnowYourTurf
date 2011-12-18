@@ -18,7 +18,7 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var fertilizer = input.EntityId > 0 ? _repository.Find<Fertilizer>(input.EntityId) : new Fertilizer();
             var model = new FertilizerViewModel
@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new FertilizerViewModel
             {
                 Fertilizer = fertilizer,
-                AddUpdateUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddEdit(null)) + "/" + fertilizer.EntityId,
+                AddUpdateUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddUpdate(null)) + "/" + fertilizer.EntityId,
                 Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
             };
             return PartialView("FertilizerView", model);

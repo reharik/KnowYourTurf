@@ -48,11 +48,11 @@ kyt.UserProfileController = kyt.Controller.extend({
     },
 
     formCancel:function(){
-        $.publish("/form_userProfile/cancel",[]);
+        $.publish("/contentLevel/form_userProfile/cancel",[]);
     },
 
     formSuccess:function(){
-        $.publish("/form_userProfile/success",[]);
+        $.publish("/contentLevel/form_userProfile/success",[]);
     },
     emailConfromation: function(url, data){
         kyt.repository.ajaxGet(url,data, $.proxy(this.confirmEmailCallback,this));

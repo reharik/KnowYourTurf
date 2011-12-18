@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrders(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddEdit(null)),
+                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)),
                 GridDefinition = _purchaseOrderListGrid.GetGridDefinition(url),
             };
             return View(model);

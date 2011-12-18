@@ -18,7 +18,7 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var material = input.EntityId > 0 ? _repository.Find<Material>(input.EntityId) : new Material();
             var model = new MaterialViewModel
@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new MaterialViewModel
                             {
                                 Material = material,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.AddEdit(null)) + "/" + material.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.AddUpdate(null)) + "/" + material.EntityId,
                                 Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
                             };
             return PartialView("MaterialView", model);

@@ -21,20 +21,11 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<PurchaseOrderLineItem> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-               .ForAction<PurchaseOrderLineItemController>(x => x.Delete(null))
-               .ToPerformAction(ColumnAction.Delete)
-               .ImageName("delete.png")
-               .ToolTip(WebLocalizationKeys.DELETE_ITEM);
-            GridBuilder.ImageButtonColumn()
-                .ForAction<PurchaseOrderLineItemController>(x => x.AddEdit(null))
-                .ToPerformAction(ColumnAction.Edit)
-                .ImageName("KYTedit.png")
-                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
+            
             GridBuilder.LinkColumnFor(x => x.Product.Name)
-                .ForAction<PurchaseOrderLineItemController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ForAction<PurchaseOrderLineItemController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.QuantityOrdered);
             GridBuilder.DisplayFor(x => x.Price).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.SubTotal).FormatValue(GridColumnFormatter.Currency);

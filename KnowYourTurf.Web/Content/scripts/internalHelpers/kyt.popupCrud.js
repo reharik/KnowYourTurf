@@ -39,13 +39,13 @@ kyt.popupCrud.controller = (function(){
         editFromDisplay:function(event){
             var metaData = $(".ui-dialog").data().metaData;
             metaData.setIsDisplay(false);
-            var addEditUrl = $("#AddEditUrl").val();
+            var addUpdateUrl = $("#AddUpdateUrl").val();
             // I dont like it sam I am
             var sibling = $(event.target).parent().parent().siblings()[1];
             var entityId = $(sibling).find("#EntityId").val();
             var dialogName = $(sibling).attr("id");
             $("#"+dialogName+".ui-dialog-content").dialog("close");
-            kyt.popupCrud.controller.itemCRU(addEditUrl,metaData,{"EntityId":entityId});
+            kyt.popupCrud.controller.itemCRU(addUpdateUrl,metaData,{"EntityId":entityId});
         }
     }
 }());
@@ -62,7 +62,7 @@ kyt.popupCrud.buttonBuilder = function(){
         getSaveFunc:function(){return saveFunc;},
         getCancelFunc:function(){return cancelFunc;},
         addSaveButton:function(){_addButton("Save",saveFunc);},
-        addEditButton:function(){_addButton("Edit",editFunc);},
+        addUpdateButton:function(){_addButton("Edit",editFunc);},
         addCancelButton:function(){_addButton("Cancel",cancelFunc);},
         addButton:function(name,func){_addButton(name,func);},
         clearButtons:function(){buttons = {};}
@@ -76,7 +76,7 @@ kyt.popupCrud.popup = (function()  {
         return builder.getButtons();
     };
     var standardDisplayButtons = function(builder){
-         builder.addEditButton();
+         builder.addUpdateButton();
          builder.addCancelButton();
         return builder.getButtons();
     };

@@ -34,23 +34,23 @@ kyt.TokenView = Backbone.View.extend({
                 return "<p><a " + cssClass + ">" + item.name + "</a></p>";
             },
             afterTokenSelectedFunction:function() {
-                $(".kyt_tokenTooltip").cluetip({showTitle: false,
-                    cluetipClass: 'rounded',
-                    arrows: true,
-                    hoverIntent: {
-                        sensitivity:  3,
-                        interval:     50,
-                        timeout:      500
-                    },
-                    mouseOutClose:true
-                    //delayedClose:5000
-                });
+//                $(".kyt_tokenTooltip").cluetip({showTitle: false,
+//                    cluetipClass: 'rounded',
+//                    arrows: true,
+//                    hoverIntent: {
+//                        sensitivity:  3,
+//                        interval:     50,
+//                        timeout:      500
+//                    },
+//                    mouseOutClose:true
+//                    //delayedClose:5000
+//                });
             }
         });
         this.options.instantiated = true;
     },
     addNew:function(){
-        $.publish("/contentLevel/token_"+this.id+"/addEdit",[this.id]);
+        $.publish("/contentLevel/token_"+this.id+"/addUpdate",[this.id]);
         return false;
     },
     successHandler: function(result){

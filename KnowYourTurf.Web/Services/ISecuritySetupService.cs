@@ -123,8 +123,10 @@ namespace KnowYourTurf.Web.Services
         {
             var admins = _repository.Query<User>(x => x.UserRoles.Any(y=>y.Name == SecurityUserGroups.Administrator.ToString()));
             admins.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Administrator.ToString()));
+            var facilities = _repository.Query<User>(x => x.UserRoles.Any(y => y.Name == SecurityUserGroups.Facilities.ToString()));
+            facilities.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Facilities.ToString()));
             var employees = _repository.FindAll<User>();
-            employees.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Trainer.ToString()));
+            employees.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Employee.ToString()));
         }
 
         public void CreateUserGroups()
@@ -133,9 +135,21 @@ namespace KnowYourTurf.Web.Services
             {
                 _authorizationRepository.CreateUsersGroup(SecurityUserGroups.Administrator.ToString());
             }
-            if (_authorizationRepository.GetUsersGroupByName(SecurityUserGroups.Trainer.ToString()) == null)
+            if (_authorizationRepository.GetUsersGroupByName(SecurityUserGroups.Employee.ToString()) == null)
             {
-                _authorizationRepository.CreateUsersGroup(SecurityUserGroups.Trainer.ToString());
+                _authorizationRepository.CreateUsersGroup(SecurityUserGroups.Employee.ToString());
+            }
+            if (_authorizationRepository.GetUsersGroupByName(SecurityUserGroups.Facilities.ToString()) == null)
+            {
+                _authorizationRepository.CreateUsersGroup(SecurityUserGroups.Facilities.ToString());
+            }
+            if (_authorizationRepository.GetUsersGroupByName(SecurityUserGroups.KYTAdmin.ToString()) == null)
+            {
+                _authorizationRepository.CreateUsersGroup(SecurityUserGroups.KYTAdmin.ToString());
+            }
+            if (_authorizationRepository.GetUsersGroupByName(SecurityUserGroups.MultiTenant.ToString()) == null)
+            {
+                _authorizationRepository.CreateUsersGroup(SecurityUserGroups.MultiTenant.ToString());
             }
         }
 

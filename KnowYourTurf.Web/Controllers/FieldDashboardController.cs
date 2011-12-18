@@ -51,12 +51,12 @@ namespace KnowYourTurf.Web.Controllers
                                 EntityId = input.EntityId,
                                 Field = field,
                                 AddUpdateUrl =
-                                    UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" +
+                                    UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" +
                                     input.EntityId + "&From=Field",
-                                AddEditPhotoUrl =
+                                AddUpdatePhotoUrl =
                                     UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "?ParentId=" +
                                     input.EntityId + "&From=Field",
-                                AddEditDocumentUrl =
+                                AddUpdateDocumentUrl =
                                     UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "?ParentId=" +
                                     input.EntityId + "&From=Field",
                                 GridDefinition =

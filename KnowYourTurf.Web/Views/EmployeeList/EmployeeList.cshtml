@@ -5,12 +5,11 @@
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @section HeaderScripts{
-    @MvcHtmlString.Create(Script("kyt.EmployeeController.js").ToString())
 }
 @section HeaderJavascript{
     $(document).ready(function(){
-        crudOptions.id="employee";
-        new kyt.EmployeeController(crudOptions);
+        gridControllerOptions.id="employee";
+        new kyt.EmployeeController(gridControllerOptions);
     });
 }
 

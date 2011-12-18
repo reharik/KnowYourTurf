@@ -13,8 +13,8 @@ namespace KnowYourTurf.Web.Models
 
         public GridDefinition PhotoListDefinition { get; set; }
 
-        public string AddEditPhotoUrl { get; set; }
+        public string AddUpdatePhotoUrl { get; set; }
 
-        public string AddEditDocumentUrl { get; set; }
+        public string AddUpdateDocumentUrl { get; set; }
     }
 }

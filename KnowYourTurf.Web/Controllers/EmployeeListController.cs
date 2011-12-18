@@ -25,7 +25,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<EmployeeListController>(x => x.Employees(null));
             var model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddEdit(null)),
+                AddUpdateUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddUpdate(null)),
                 GridDefinition = _employeeListGrid.GetGridDefinition(url)
             };
             return View(model);

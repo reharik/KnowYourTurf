@@ -120,7 +120,7 @@ namespace KnowYourTurf.Core.Html.Grid
         private HtmlTag buildAnchor(ENTITY item)
         {
             var anchor = new HtmlTag("a");
-            anchor.Attr("onclick", "$.publish('/grid_" + _gridName + "/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "']);");
+            anchor.Attr("onclick", "$.publish('/contentLevel/grid_" + _gridName + "/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "']);");
             return anchor;
         }
 

@@ -18,7 +18,7 @@ namespace KnowYourTurf.Web.Models
         public bool Copy { get; set; }
     }
     
-    public class AddEditEventViewModel : ViewModel
+    public class AddUpdateEventViewModel : ViewModel
     {
         public DateTime? StartTime { get; set; }
         public bool Copy { get; set; }

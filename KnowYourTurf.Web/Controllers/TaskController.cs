@@ -28,7 +28,7 @@ namespace KnowYourTurf.Web.Controllers
             _inventoryService = inventoryService;
         }
 
-        public ActionResult AddEdit(AddEditTaskViewModel input)
+        public ActionResult AddUpdate(AddUpdateTaskViewModel input)
         {
             var task = input.EntityId > 0 ? _repository.Find<Task>(input.EntityId) : new Task();
             task.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : task.ScheduledDate;
@@ -91,7 +91,7 @@ namespace KnowYourTurf.Web.Controllers
             return PartialView("TaskAddUpdate", model);
         }
 
-        private void decorateModel(AddEditTaskViewModel input, TaskViewModel model)
+        private void decorateModel(AddUpdateTaskViewModel input, TaskViewModel model)
         { 
             if (input.From == "Field")
             {
@@ -124,7 +124,7 @@ namespace KnowYourTurf.Web.Controllers
                                 Product = productName,
                                 EmployeeNames = task.Employees.Select(x =>  x.FullName ),
                                 EquipmentNames = task.Equipment.Select(x => x.Name ),
-                                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.AddEdit(null))+"/"+task.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.AddUpdate(null))+"/"+task.EntityId,
                                 Title = WebLocalizationKeys.TASK_INFORMATION.ToString()
 
             };

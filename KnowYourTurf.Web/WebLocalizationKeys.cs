@@ -22,6 +22,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken INADMINMODE = new WebLocalizationKeys("INADMINMODE", "INADMINMODE");
         public static readonly StringToken USER_ROLES = new WebLocalizationKeys("USER_ROLES", "UserRoles");
         public static readonly StringToken SAVE = new WebLocalizationKeys("SAVE", "Save");
+        public static readonly StringToken CANCEL = new WebLocalizationKeys("CANCEL", "Cancel");
         public static readonly StringToken ACCOUNT_LOGIN = new WebLocalizationKeys("ACCOUNT_LOGIN", "Account LogIn");
         public static readonly StringToken INVALID_USERNAME_OR_PASSWORD = new WebLocalizationKeys("INVALID_USERNAME_OR_PASSWORD", "Invalid Username or Password");
         public static readonly StringToken PLEASE_ENTER_YOUR_USERNAME_AND_PASSWORD_BELOW_KEY = new WebLocalizationKeys("PLEASE_ENTER_YOUR_USERNAME_AND_PASSWORD_BELOW_KEY", "Please enter your Username and Password below");
@@ -183,7 +184,10 @@ namespace KnowYourTurf.Web
 
         public static readonly StringToken REMOVE = new WebLocalizationKeys("REMOVE", "Remove");
         public static readonly StringToken NEW = new WebLocalizationKeys("NEW", "New");
-
+        public static readonly StringToken YOU_HAVE_NOT_ADDED_ANY = new WebLocalizationKeys("YOU_HAVE_NOT_ADDED_ANY", "You have not added any {0} ");
+        public static readonly StringToken SELECT_ONE_OR_MORE_OR = new WebLocalizationKeys("SELECT_ONE_OR_MORE", "Select one or more or ...");
+        public static readonly StringToken ADD_A_NEW = new WebLocalizationKeys("ADD_A_NEW", "Add a new {0}");
+        
 
     
 

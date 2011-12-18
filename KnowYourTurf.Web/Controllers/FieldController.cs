@@ -31,13 +31,13 @@ namespace KnowYourTurf.Web.Controllers
             _sessionContext = sessionContext;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var field = input.EntityId > 0 ? _repository.Find<Field>(input.EntityId) : new Field();
             var model = new FieldViewModel
             {
                 Field = field,
-                AddUpdateUrl = UrlContext.GetUrlForAction<FieldController>(x => x.AddEdit(null)) + "/" + field.EntityId,
+                AddUpdateUrl = UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)) + "/" + field.EntityId,
                 Title = WebLocalizationKeys.FIELD_INFORMATION.ToString()
             };
             return PartialView("FieldAddUpdate", model);

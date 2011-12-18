@@ -159,7 +159,10 @@ namespace KnowYourTurf.Core.Enums
     {
         public static readonly SecurityUserGroups Empty = new SecurityUserGroups { IsActive = false, Key = "" };
         public static readonly SecurityUserGroups Administrator = new SecurityUserGroups { IsActive = true, Key = "Administrator" };
-        public static readonly SecurityUserGroups Trainer = new SecurityUserGroups { IsActive = true, Key = "Trainer" };
+        public static readonly SecurityUserGroups Employee = new SecurityUserGroups { IsActive = true, Key = "Employee" };
+        public static readonly SecurityUserGroups Facilities = new SecurityUserGroups { IsActive = true, Key = "Facilities" };
+        public static readonly SecurityUserGroups KYTAdmin = new SecurityUserGroups { IsActive = true, Key = "KYTAdmin" };
+        public static readonly SecurityUserGroups MultiTenant = new SecurityUserGroups { IsActive = true, Key = "MultiTenant" };
     }
 
 }

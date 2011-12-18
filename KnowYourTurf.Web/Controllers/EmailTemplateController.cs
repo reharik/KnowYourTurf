@@ -18,7 +18,7 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var emailTemplate = input.EntityId > 0 ? _repository.Find<EmailTemplate>(input.EntityId) : new EmailTemplate();
             var model = new EmailTemplateViewModel
@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmailTemplateViewModel
                             {
                                 EmailTemplate = emailTemplate,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddEdit(null)) + "/" + emailTemplate.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddUpdate(null)) + "/" + emailTemplate.EntityId,
                                 Title = WebLocalizationKeys.EMAIL_TEMPLATE_INFORMATION.ToString()
                             };
             return PartialView("EmailTemplateView", model);

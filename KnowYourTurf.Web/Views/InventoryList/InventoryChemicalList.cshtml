@@ -10,9 +10,8 @@
 @section HeaderJavascript{
 
     $(document).ready(function () {
-        new kyt.InventoryController(crudOptions);
+        new kyt.InventoryController(gridControllerOptions);
     });
 }
-@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
 <table id="gridContainer" class="scroll"></table>
 <div id="pager" class="scroll" style="text-align:center;"></div>

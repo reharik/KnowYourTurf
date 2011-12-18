@@ -59,7 +59,7 @@ namespace KnowYourTurf.Core.Html.Grid
                 data = ","+_jsonData;
             }
             anchor.Attr("onclick",
-                        "$.publish('/grid_"+ _gridName +"/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "'"+data+"]);");
+                        "$.publish('/contentLevel/grid_" + _gridName + "/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "'" + data + "]);");
             return anchor;
         }
 

@@ -1,0 +1,224 @@
+﻿<error errorId="1e760744-b5bf-4bdd-8469-f23e5ff33912" host="RHARIK" type="System.InvalidOperationException" message="There is no users group named: Employee" source="Rhino.Security" detail="System.InvalidOperationException: There is no users group named: Employee&#xD;&#xA;   at Rhino.Security.Impl.Guard.Against(Boolean assertion, String message) in C:\ExternalCode\rhino-security\Rhino.Security\Impl\Guard.cs:line 29&#xD;&#xA;   at Rhino.Security.Services.AuthorizationRepository.DetachUserFromGroup(IUser user, String usersGroupName) in C:\ExternalCode\rhino-security\Rhino.Security\Services\AuthorizationRepository.cs:line 484&#xD;&#xA;   at KnowYourTurf.Web.Controllers.EmployeeController.mapRolesToGroups(User employee) in C:\Development\KnowYourTurf\KnowYourTurf.Web\Controllers\EmployeeController.cs:line 121&#xD;&#xA;   at KnowYourTurf.Web.Controllers.EmployeeController.Save(UserViewModel input) in C:\Development\KnowYourTurf\KnowYourTurf.Web\Controllers\EmployeeController.cs:line 102&#xD;&#xA;   at lambda_method(Closure , ControllerBase , Object[] )&#xD;&#xA;   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)&#xD;&#xA;   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;InvokeActionMethodWithFilters&gt;b__12()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)&#xD;&#xA;   at System.Web.Mvc.Controller.ExecuteCore()&#xD;&#xA;   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClass6.&lt;&gt;c__DisplayClassb.&lt;BeginProcessRequest&gt;b__5()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClasse.&lt;EndProcessRequest&gt;b__d()&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.&lt;GetCallInAppTrustThunk&gt;b__0(Action f)&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="Harik, Raif" time="2011-12-18T16:09:26.2363275Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_CONTENT_LENGTH:2034&#xD;&#xA;HTTP_CONTENT_TYPE:multipart/form-data; boundary=---------------------------265001916915724&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-us,en;q=0.5&#xD;&#xA;HTTP_COOKIE:KYT=EF5B156AC3635ECBEA6D62932AFFF3D818F59369C4F8EC861533E769FCD486ED278C42D7993CF10EEB72DC0E47EA10B9DC88AE630CD82A5FA1F83D42D4DBDBFA9B29F802858BDD1A5DEA7AB809A4D7E167DB6B8E0957CECBEB102FE17C1B5763C8CCDF66FB829924404BA9085A23F103033897342EFDC5382ECBDCA64323477BED3D22DAA08A3583DBBDFDFC3AA8501203E60D218956D8DEADE0B0A79FC8A9E9C4A9B4FD8CE927178A61A8D4AE8C3F4FE12048EFDF7415C564A1A3E8C8CA37B6&#xD;&#xA;HTTP_HOST:localhost:888&#xD;&#xA;HTTP_REFERER:http://localhost:888/KnowYourTurf/Home&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Content-Length: 2034&#xD;&#xA;Content-Type: multipart/form-data; boundary=---------------------------265001916915724&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-us,en;q=0.5&#xD;&#xA;Cookie: KYT=EF5B156AC3635ECBEA6D62932AFFF3D818F59369C4F8EC861533E769FCD486ED278C42D7993CF10EEB72DC0E47EA10B9DC88AE630CD82A5FA1F83D42D4DBDBFA9B29F802858BDD1A5DEA7AB809A4D7E167DB6B8E0957CECBEB102FE17C1B5763C8CCDF66FB829924404BA9085A23F103033897342EFDC5382ECBDCA64323477BED3D22DAA08A3583DBBDFDFC3AA8501203E60D218956D8DEADE0B0A79FC8A9E9C4A9B4FD8CE927178A61A8D4AE8C3F4FE12048EFDF7415C564A1A3E8C8CA37B6&#xD;&#xA;Host: localhost:888&#xD;&#xA;Referer: http://localhost:888/KnowYourTurf/Home&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms Authentication" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="RHARIK\Owner" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="2034" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="multipart/form-data; boundary=---------------------------265001916915724" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Employee/Save" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\Employee\Save" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="POST" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Employee/Save" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="888" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/Employee/Save" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_CONTENT_LENGTH">
+      <value string="2034" />
+    </item>
+    <item name="HTTP_CONTENT_TYPE">
+      <value string="multipart/form-data; boundary=---------------------------265001916915724" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-us,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="KYT=EF5B156AC3635ECBEA6D62932AFFF3D818F59369C4F8EC861533E769FCD486ED278C42D7993CF10EEB72DC0E47EA10B9DC88AE630CD82A5FA1F83D42D4DBDBFA9B29F802858BDD1A5DEA7AB809A4D7E167DB6B8E0957CECBEB102FE17C1B5763C8CCDF66FB829924404BA9085A23F103033897342EFDC5382ECBDCA64323477BED3D22DAA08A3583DBBDFDFC3AA8501203E60D218956D8DEADE0B0A79FC8A9E9C4A9B4FD8CE927178A61A8D4AE8C3F4FE12048EFDF7415C564A1A3E8C8CA37B6" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:888" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:888/KnowYourTurf/Home" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0" />
+    </item>
+  </serverVariables>
+  <form>
+    <item name="User.EntityId">
+      <value string="0" />
+    </item>
+    <item name="DeleteImage">
+      <value string="False" />
+    </item>
+    <item name="User.EmployeeId">
+      <value string="d" />
+    </item>
+    <item name="User.FirstName">
+      <value string="s" />
+    </item>
+    <item name="User.LastName">
+      <value string="x" />
+    </item>
+    <item name="User.EmergencyContact">
+      <value string="x" />
+    </item>
+    <item name="User.EmergencyContactPhone">
+      <value string="x" />
+    </item>
+    <item name="User.UserLoginInfo.Password">
+      <value string="x" />
+    </item>
+    <item name="User.Email">
+      <value string="x" />
+    </item>
+    <item name="User.PhoneMobile">
+      <value string="x" />
+    </item>
+    <item name="User.Address1">
+      <value string="x" />
+    </item>
+    <item name="User.Address2">
+      <value string="x" />
+    </item>
+    <item name="User.City">
+      <value string="x" />
+    </item>
+    <item name="User.State">
+      <value string="AK" />
+    </item>
+    <item name="User.ZipCode">
+      <value string="x" />
+    </item>
+    <item name="User.UserLoginInfo.Status">
+      <value string="Active" />
+    </item>
+    <item name="User.Notes">
+      <value string="x" />
+    </item>
+  </form>
+  <cookies>
+    <item name="KYT">
+      <value string="EF5B156AC3635ECBEA6D62932AFFF3D818F59369C4F8EC861533E769FCD486ED278C42D7993CF10EEB72DC0E47EA10B9DC88AE630CD82A5FA1F83D42D4DBDBFA9B29F802858BDD1A5DEA7AB809A4D7E167DB6B8E0957CECBEB102FE17C1B5763C8CCDF66FB829924404BA9085A23F103033897342EFDC5382ECBDCA64323477BED3D22DAA08A3583DBBDFDFC3AA8501203E60D218956D8DEADE0B0A79FC8A9E9C4A9B4FD8CE927178A61A8D4AE8C3F4FE12048EFDF7415C564A1A3E8C8CA37B6" />
+    </item>
+  </cookies>
+</error>

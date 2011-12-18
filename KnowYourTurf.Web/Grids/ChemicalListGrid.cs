@@ -23,20 +23,11 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Chemical> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-                .ForAction<ChemicalController>(x => x.Delete(null))
-                .ToPerformAction(ColumnAction.Delete)
-               .ImageName("delete.png")
-                .ToolTip(WebLocalizationKeys.DELETE_ITEM);
-            GridBuilder.ImageButtonColumn()
-                .ForAction<ChemicalController>(x => x.AddEdit(null))
-                .ToPerformAction(ColumnAction.Edit)
-                .ImageName("KYTedit.png")
-                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
+           
             GridBuilder.LinkColumnFor(x => x.Name)
-                .ForAction<ChemicalController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ForAction<ChemicalController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.ActiveIngredient);
             GridBuilder.DisplayFor(x => x.ActiveIngredientPercent);
             GridBuilder.DisplayFor(x => x.EPAEstNumber);
@@ -58,8 +49,8 @@ namespace KnowYourTurf.Web.Grids
         {
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ForAction<ChemicalController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Manufacturer);
             GridBuilder.DisplayFor(x => x.ActiveIngredient);
             GridBuilder.DisplayFor(x => x.ActiveIngredientPercent);

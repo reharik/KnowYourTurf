@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Controllers
             _purchaseOrderLineItemService = purchaseOrderLineItemService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var purchaseOrderLineItem = input.EntityId > 0 ? _repository.Find<PurchaseOrderLineItem>(input.EntityId) : new PurchaseOrderLineItem();
             var model = new PurchaseOrderLineItemViewModel
@@ -44,7 +44,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new PurchaseOrderLineItemViewModel
             {
                 PurchaseOrderLineItem = purchaseOrderLineItem,
-                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.AddEdit(null)) + "/" + purchaseOrderLineItem.EntityId
+                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.AddUpdate(null)) + "/" + purchaseOrderLineItem.EntityId
             };
             return PartialView("PurchaseOrderLineItemView", model);
         }

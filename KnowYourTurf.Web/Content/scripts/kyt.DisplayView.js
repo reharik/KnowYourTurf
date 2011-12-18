@@ -19,7 +19,7 @@ kyt.PortfolioLandingPageView = Backbone.View.extend({
     },
 
     buildNewPortfolio: function(){
-        $.publish("/contentLevel/grid/AddUpdateItem",[this.options.addEditUrl]);
+        $.publish("/contentLevel/grid/AddUpdateItem",[this.options.addUpdateUrl]);
     }
 
 });

@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
+using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using StructureMap;
@@ -31,17 +34,27 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult ViewEmployee(ViewModel input)
         {
             var entityId = input.EntityId>0?input.EntityId:_sessionContext.GetUserId();
-
             var employee = _repository.Find<User>(entityId);
+            
+            var availableUserRoles = Enumeration.GetAll<UserType>(true).Select(x => new TokenInputDto { id = x.Key, name = x.Key });
+            IEnumerable<TokenInputDto> selectedUserRoles;
+            if (input.EntityId > 0 && employee.UserRoles != null)
+                selectedUserRoles =
+                    employee.UserRoles.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            else selectedUserRoles = null;
+
             var url = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasks(null)) + "?ParentId=" + entityId;
             var completeUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasks(null)) + "?ParentId=" + entityId;
             var model = new EmployeeDashboardViewModel
             {
                 //TODO put modficaztions here "Employee"
-                Employee = employee,
-                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" + entityId+"&From=Employee",
+                User = employee,
+                AvailableItems = availableUserRoles,
+                SelectedItems = selectedUserRoles,
+                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + entityId+"&From=Employee",
                 GridDefinition = _pendingTaskGrid.GetGridDefinition(url),
                 CompletedListDefinition = _completedTaskGrid.GetGridDefinition(completeUrl),
+                EmployeeListUrl = UrlContext.GetUrlForAction<EmployeeListController>(x=>x.EmployeeList())
                
             };
             return View("EmployeeDashboard", model);

@@ -23,21 +23,11 @@ namespace KnowYourTurf.Web.Grids
 
      protected override Grid<VendorContact> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-               .ForAction<VendorContactController>(x => x.Delete(null))
-               .ToPerformAction(ColumnAction.Delete)
-               .ImageName("delete.png")
-               .ToolTip(WebLocalizationKeys.DELETE_ITEM);
-            GridBuilder.ImageButtonColumn()
-                .ForAction<VendorContactController>(x => x.AddEdit(null))
-                .ToPerformAction(ColumnAction.Edit)
-                .ImageName("KYTedit.png")
-                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.FullName)
-                .ForAction<VendorContactController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
+                .ForAction<VendorContactController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
                 .IsSortable(false)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Email).FormatValue(GridColumnFormatter.EMail);
             GridBuilder.DisplayFor(x => x.Phone);
             GridBuilder.DisplayFor(x => x.Address1).DisplayHeader(WebLocalizationKeys.ADDRESS);

@@ -27,7 +27,7 @@ kyt.CrudController  = kyt.Controller.extend({
     },
 
     registerSubscriptions: function(){
-        $.subscribe('/contentLevel/grid/AddUpdateItem',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
         //
         $.subscribe("/contentLevel/form_mainForm/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
         //
@@ -38,14 +38,14 @@ kyt.CrudController  = kyt.Controller.extend({
     registerAdditionalSubscriptions:function(){},
 
     //from grid
-    addEditItem: function(url){
+    addUpdateItem: function(url){
         var formOptions = {
             el: "#detailArea",
             id: "mainForm",
             url: url
         };
         $("#masterArea","#contentInner").after("<div id='detailArea'/>");
-        this.modules.formModule = new kyt.FormModule(formOptions);
+        this.modules.formModule = new kyt.AjaxFormModule(formOptions);
     },
     formLoaded:function(){
          $("#masterArea").hide();

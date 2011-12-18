@@ -22,7 +22,7 @@ kyt.TokenizerModule  = kyt.Module.extend({
     },
 
     registerSubscriptions: function(){
-        $.subscribe("/contentLevel/token_"+this.id+"/addEdit", $.proxy(this.addEditItem,this),this.cid);
+        $.subscribe("/contentLevel/token_"+this.id+"/addUpdate", $.proxy(this.addUpdateItem,this),this.cid);
         //
         $.subscribe("/contentLevel/ajaxPopupFormModule_" + this.id + "/formSuccess", $.proxy(this.formSuccess,this),this.cid);
         $.subscribe("/contentLevel/ajaxPopupFormModule_" + this.id + "/formCancel", $.proxy(this.formCancel,this),this.cid);
@@ -30,7 +30,7 @@ kyt.TokenizerModule  = kyt.Module.extend({
     },
 
     //from tolkneizer
-    addEditItem:function(){
+    addUpdateItem:function(){
         var formOptions = {
             id:this.id,
             el: "#popupContentDiv",

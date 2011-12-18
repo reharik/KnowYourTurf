@@ -19,7 +19,7 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var vendorContact = input.EntityId > 0 ? _repository.Find<VendorContact>(input.EntityId) : new VendorContact();
             var model = new VendorContactViewModel
@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new VendorContactViewModel
                             {
                                 VendorContact = vendorContact,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddEdit(null)) + "/" + vendorContact.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddUpdate(null)) + "/" + vendorContact.EntityId,
                                 Title = WebLocalizationKeys.VENDOR_CONTACT_INFORMATION.ToString()
                             };
             return PartialView("VendorContactView", model);

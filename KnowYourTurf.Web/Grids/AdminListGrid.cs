@@ -23,16 +23,6 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<User> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-              .ForAction<AdminController>(x => x.Delete(null))
-              .ToPerformAction(ColumnAction.Delete)
-               .ImageName("delete.png")
-              .ToolTip(WebLocalizationKeys.DELETE_ITEM);
-            GridBuilder.ImageButtonColumn()
-                .ForAction<AdminController>(x => x.Admin(null))
-                .ToPerformAction(ColumnAction.Edit)
-                .ImageName("KYTedit.png")
-                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.FullName)
                 .ForAction<AdminDashboardController>(x => x.ViewAdmin(null))
                 .ToPerformAction(ColumnAction.Redirect)

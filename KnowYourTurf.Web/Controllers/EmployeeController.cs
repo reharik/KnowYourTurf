@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Controllers
             _authorizationRepository = authorizationRepository;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var employee = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
             var availableUserRoles = Enumeration.GetAll<UserType>(true).Select(x => new TokenInputDto { id = x.Key, name = x.Key});
@@ -63,7 +63,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new UserViewModel
                             {
                                 User = employee,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddEdit(null)) + "/" + employee.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddUpdate(null)) + "/" + employee.EntityId,
                                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
                             };
             return PartialView("EmployeeView", model);
@@ -164,14 +164,16 @@ namespace KnowYourTurf.Web.Controllers
             employee.State = employeeModel.State;
             employee.ZipCode = employeeModel.ZipCode;
             employee.Notes = employeeModel.Notes;
-            employee.UserLoginInfo = new UserLoginInfo()
+            if(employee.UserLoginInfo == null)
             {
-                Password = employeeModel.UserLoginInfo.Password,
-                LoginName = employeeModel.Email,
-                Status = employeeModel.UserLoginInfo.Status,
-                UserType = UserType.Employee.ToString(),
-            }; 
-            employee.AddUserRole(new UserRole{Name=UserType.Employee.ToString()});
+                employee.UserLoginInfo = new UserLoginInfo();
+            }
+            employee.UserLoginInfo.Password = employeeModel.UserLoginInfo.Password;
+            employee.UserLoginInfo.LoginName = employeeModel.Email;
+            employee.UserLoginInfo.Status = employeeModel.UserLoginInfo.Status;
+            employee.UserLoginInfo.UserType = UserType.Employee.ToString();
+            var userRole = _repository.Query<UserRole>(x=>x.Name==UserType.Employee.ToString()).FirstOrDefault();
+            employee.AddUserRole(userRole);
             return employee;
         }
     }

@@ -33,7 +33,7 @@
 		});
 	};
 
-	d.subscribe = function(/* String */topic, /* Function */callback, /*hook name */ handle){
+	d.subscribe = function(/* String */topic, /* Function */callback, /*hook name */ handle, name){
 		// summary:
 		//		Register a callback on a named topic.
 		// topic: String
@@ -52,7 +52,7 @@
 		if(!cache[topic]){
 			cache[topic] = [];
 		}
-		cache[topic].push({"handle":handle, "func":callback});
+		cache[topic].push({"handle":handle, "func":callback,"name":name});
         return [topic, callback]; // Array
 	};
 

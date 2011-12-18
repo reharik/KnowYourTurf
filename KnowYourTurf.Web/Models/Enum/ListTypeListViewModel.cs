@@ -5,10 +5,10 @@ namespace KnowYourTurf.Web.Models
 {
     public class ListTypeListViewModel : ListViewModel
     {
-        public string AddEditUrlET { get; set; }
-        public string AddEditUrlTT { get; set; }
-        public string AddEditUrlDC { get; set; }
-        public string AddEditUrlPC { get; set; }
+        public string AddUpdateUrlET { get; set; }
+        public string AddUpdateUrlTT { get; set; }
+        public string AddUpdateUrlDC { get; set; }
+        public string AddUpdateUrlPC { get; set; }
         public GridDefinition ListDefinitionTT { get; set; }
         public GridDefinition ListDefinitionDC { get; set; }
         public GridDefinition ListDefinitionPC { get; set; }

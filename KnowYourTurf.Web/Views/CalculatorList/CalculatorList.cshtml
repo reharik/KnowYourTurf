@@ -5,15 +5,12 @@
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @section HeaderScripts{
-    @MvcHtmlString.Create(Script("kyt.calculator.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.CalculatorController.js").ToString())
 }
 @section HeaderJavascript{
-     crudOptions.createATaskUrl=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CreateATaskUrl));
+     gridControllerOptions.createATaskUrl=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CreateATaskUrl));
     $(document).ready(function(){
-        new kyt.CalculatorController(crudOptions);
+        new kyt.CalculatorController(gridControllerOptions);
     });
 }
-@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
 <table id="gridContainer" class="scroll"></table>
 <div id="pager" class="scroll" style="text-align:center;"></div>

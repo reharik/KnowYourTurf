@@ -23,20 +23,11 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Fertilizer> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-               .ForAction<FertilizerController>(x => x.Delete(null))
-               .ToPerformAction(ColumnAction.Delete)
-               .ImageName("delete.png")
-               .ToolTip(WebLocalizationKeys.DELETE_ITEM);
-            GridBuilder.ImageButtonColumn()
-                .ForAction<FertilizerController>(x => x.AddEdit(null))
-                .ToPerformAction(ColumnAction.Edit)
-               .ImageName("KYTedit.png")
-                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
+            
             GridBuilder.LinkColumnFor(x => x.Name)
-                .ForAction<FertilizerController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ForAction<FertilizerController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.N);
             GridBuilder.DisplayFor(x => x.P);
             GridBuilder.DisplayFor(x => x.K);

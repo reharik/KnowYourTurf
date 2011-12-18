@@ -22,18 +22,8 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<EmailJob> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-               .ForAction<EmailJobController>(x => x.Delete(null))
-               .ToPerformAction(ColumnAction.Delete)
-                .ImageName("delete.png")
-               .ToolTip(WebLocalizationKeys.DELETE_ITEM);
-            GridBuilder.ImageButtonColumn()
-                .ForAction<EmailJobController>(x => x.EmailJob(null))
-                .ToPerformAction(ColumnAction.Edit)
-                .ImageName("KYTedit.png")
-                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Name)
-                .ForAction<EmailJobController>(x => x.Display(null))
+                .ForAction<EmailJobController>(x => x.EmailJob(null))
                 .ToPerformAction(ColumnAction.Display)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.Subject);

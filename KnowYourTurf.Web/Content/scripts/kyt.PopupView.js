@@ -58,7 +58,7 @@ kyt.popupButtonBuilder = (function(){
             getSaveFunc:function(){return saveFunc;},
             getCancelFunc:function(){return cancelFunc;},
             addSaveButton:function(){_addButton("Save",saveFunc); return this},
-            addEditButton:function(){_addButton("Edit",editFunc);return this},
+            addUpdateButton:function(){_addButton("Edit",editFunc);return this},
             addCancelButton:function(){_addButton("Cancel",cancelFunc);return this},
             addButton:function(name,func){_addButton(name,func);return this},
             clearButtons:function(){buttons = {};return this},

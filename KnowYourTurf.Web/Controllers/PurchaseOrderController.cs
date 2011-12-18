@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             _purchaseOrderLineItemService = purchaseOrderLineItemService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var purchaseOrder = input.ParentId > 0 ? _repository.Find<PurchaseOrder>(input.ParentId) : new PurchaseOrder();
             var vendors = _selectListItemService.CreateList<Vendor>(x=>x.Company,x=>x.EntityId,true);
@@ -70,7 +70,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new POListViewModel()
             {
                 PurchaseOrder = purchaseOrder,
-                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddEdit(null)) + "/" + purchaseOrder.EntityId
+                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" + purchaseOrder.EntityId
             };
             return PartialView("PurchaseOrderView", model);
         }
@@ -144,7 +144,7 @@ namespace KnowYourTurf.Web.Controllers
             if(newPo)
             {
                 notification.Redirect = true;
-                notification.RedirectUrl=UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddEdit(null)) + "/" +
+                notification.RedirectUrl=UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" +
                         vendor.EntityId+"?ParentId="+ purchaseOrder.EntityId;
             }
             return Json(notification, JsonRequestBehavior.AllowGet);

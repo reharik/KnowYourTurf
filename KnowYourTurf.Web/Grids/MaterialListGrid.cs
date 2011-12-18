@@ -22,20 +22,10 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Material> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-               .ForAction<MaterialController>(x => x.Delete(null))
-               .ToPerformAction(ColumnAction.Delete)
-               .ImageName("delete.png")
-               .ToolTip(WebLocalizationKeys.DELETE_ITEM);
-            GridBuilder.ImageButtonColumn()
-                .ForAction<MaterialController>(x => x.AddEdit(null))
-                .ToPerformAction(ColumnAction.Edit)
-                .ImageName("KYTedit.png")
-                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Name)
-                .ForAction<MaterialController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ForAction<MaterialController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             return this;
         }
     }
