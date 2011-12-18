@@ -9,6 +9,7 @@ using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
 using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Web.Config;
+using KnowYourTurf.Web.Grids;
 using KnowYourTurf.Web.Menus;
 using KnowYourTurf.Web.Services;
 using FubuMVC.UI;
@@ -79,10 +80,23 @@ namespace KnowYourTurf.Web
             For<IPermissionsBuilderService>().HybridHttpOrThreadLocalScoped().Use<PermissionsBuilderService>();
             For<IPermissionsService>().HybridHttpOrThreadLocalScoped().Use<PermissionsService>();
             For<ISecuritySetupService>().Use<DefaultSecuritySetupService>();
+            For<ILogger>().Use(() => new Log4NetLogger(typeof(string)));
 
             For(typeof(IGridBuilder<>)).Use(typeof(GridBuilder<>));
-            
-            For<ILogger>().Use(() => new Log4NetLogger(typeof(string)));
+
+            For<IEntityListGrid<Task>>().Use<TaskListGrid>();
+            For<IEntityListGrid<Task>>().Add<CompletedTaskGrid>().Named("CompletedTasks");
+            For<IEntityListGrid<Task>>().Add<PendingTaskGrid>().Named("PendingTasks");
+
+            For<IEntityListGrid<User>>().Use<EmployeeListGrid>();
+            For<IEntityListGrid<User>>().Add<AdminListGrid>().Named("Admins");
+            For<IEntityListGrid<User>>().Add<FacilitiesListGrid>().Named("Facilities");
+
+            For<IEntityListGrid<PurchaseOrderLineItem>>().Use<PurchaseOrderLineItemGrid>();
+            For<IEntityListGrid<PurchaseOrderLineItem>>().Add<ReceivePurchaseOrderLineItemGrid>().Named("Recieve");
+            For<IEntityListGrid<Material>>().Use<MaterialListGrid>();
+            For<IEntityListGrid<Chemical>>().Use<ChemicalListGrid>();
+            For<IEntityListGrid<Fertilizer>>().Use<FertilizerListGrid>();
 
         }
     }

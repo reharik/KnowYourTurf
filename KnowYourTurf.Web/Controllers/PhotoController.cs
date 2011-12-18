@@ -51,7 +51,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new PhotoViewModel
                             {
                                 Photo = photo,
-                                AddEditUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "/" + photo.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "/" + photo.EntityId,
                                 Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString()
                             };
             return View(model);

@@ -200,6 +200,7 @@
     <Compile Include="Config\Bootstrapper.cs" />
     <Compile Include="Config\CustomAuthorizationAttribute.cs" />
     <Content Include="Content\images\ajax-loader.gif" />
+    <Compile Include="Config\KnowYourTurfMenu.cs" />
     <Compile Include="Config\ModelBinders.cs" />
     <Compile Include="Config\ModelBindingBootstaper.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -264,6 +265,30 @@
     <Compile Include="Filters\AdminFilterAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filters\PermissionValidationAttribute.cs" />
+    <Compile Include="Grids\AdminListGrid.cs" />
+    <Compile Include="Grids\CalculatorListGrid.cs" />
+    <Compile Include="Grids\ChemicalListGrid.cs" />
+    <Compile Include="Grids\CompletedTaskGrid.cs" />
+    <Compile Include="Grids\DocumentListGrid.cs" />
+    <Compile Include="Grids\EmailJobListGrid.cs" />
+    <Compile Include="Grids\EmailTemplateListGrid.cs" />
+    <Compile Include="Grids\EmployeeListGrid.cs" />
+    <Compile Include="Grids\EquipmentListGrid.cs" />
+    <Compile Include="Grids\FacilitiesListGrid.cs" />
+    <Compile Include="Grids\FertilizerListGrid.cs" />
+    <Compile Include="Grids\FieldListGrid.cs" />
+    <Compile Include="Grids\IListTypeListGrid.cs" />
+    <Compile Include="Grids\InventoryProductListGrid.cs" />
+    <Compile Include="Grids\MaterialListGrid.cs" />
+    <Compile Include="Grids\PendingTaskGrid.cs" />
+    <Compile Include="Grids\PhotoListGrid.cs" />
+    <Compile Include="Grids\PurchaseOrderLineItemGrid.cs" />
+    <Compile Include="Grids\PurchaseOrderListGrid.cs" />
+    <Compile Include="Grids\PurchaseOrderSelectorGrid.cs" />
+    <Compile Include="Grids\TaskListGrid.cs" />
+    <Compile Include="Grids\VendorContactListGrid.cs" />
+    <Compile Include="Grids\VendorListGrid.cs" />
+    <Compile Include="Grids\WeatherListGrid.cs" />
     <Compile Include="MFTestRegistry.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\IMenuConfig.cs" />
@@ -473,7 +498,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
-    <Folder Include="Grids\" />
     <Folder Include="Logs\" />
     <Folder Include="Models\Email\" />
     <Folder Include="Properties\" />
@@ -561,6 +585,38 @@
   <ItemGroup>
     <Content Include="Views\Orthogonal\KnowYourTurfHeader.cshtml" />
     <Content Include="Views\Orthogonal\KnowYourTurfMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdminList\AdminList.cshtml" />
+    <Content Include="Views\CalculatorList\CalculatorList.cshtml" />
+    <Content Include="Views\ChemicalList\ChemicalList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DocumentList\DocumentList.cshtml" />
+    <Content Include="Views\EmailJobList\EmailJobList.cshtml" />
+    <Content Include="Views\EmailTemplateList\EmailTemplateList.cshtml" />
+    <Content Include="Views\EmployeeList\EmployeeList.cshtml" />
+    <Content Include="Views\EquipmentList\EquipmentList.cshtml" />
+    <Content Include="Views\FacilitiesList\FacilitiesList.cshtml" />
+    <Content Include="Views\FertilizerList\FertilizerList.cshtml" />
+    <Content Include="Views\FieldList\FieldList.cshtml" />
+    <Content Include="Views\InventoryList\InventoryChemicalList.cshtml" />
+    <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
+    <Content Include="Views\InventoryList\InventoryFertilizerList.cshtml" />
+    <Content Include="Views\InventoryList\InventoryFertilizerView.cshtml" />
+    <Content Include="Views\InventoryList\InventoryMaterialList.cshtml" />
+    <Content Include="Views\InventoryList\InventoryMaterialView.cshtml" />
+    <Content Include="Views\InventoryList\InventorySeedList.cshtml" />
+    <Content Include="Views\InventoryList\InventorySeedView.cshtml" />
+    <Content Include="Views\KnowYourTurf\Home.cshtml" />
+    <Content Include="Views\ListTypeList\ListType.cshtml" />
+    <Content Include="Views\MaterialList\MaterialList.cshtml" />
+    <Content Include="Views\PhotoList\PhotoList.cshtml" />
+    <Content Include="Views\PurchaseOrderList\PurchaseOrderList.cshtml" />
+    <Content Include="Views\TaskList\TaskList.cshtml" />
+    <Content Include="Views\VendorContactList\VendorContactList.cshtml" />
+    <Content Include="Views\VendorList\VendorList.cshtml" />
+    <Content Include="Views\WeatherList\WeatherList.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

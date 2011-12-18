@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmailTemplateViewModel
                             {
                                 EmailTemplate = emailTemplate,
-                                AddEditUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddEdit(null)) + "/" + emailTemplate.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddEdit(null)) + "/" + emailTemplate.EntityId,
                                 Title = WebLocalizationKeys.EMAIL_TEMPLATE_INFORMATION.ToString()
                             };
             return PartialView("EmailTemplateView", model);

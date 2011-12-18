@@ -50,7 +50,7 @@ namespace KnowYourTurf.Web.Controllers
                             {
                                 EntityId = input.EntityId,
                                 Field = field,
-                                AddEditUrl =
+                                AddUpdateUrl =
                                     UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" +
                                     input.EntityId + "&From=Field",
                                 AddEditPhotoUrl =
@@ -59,7 +59,7 @@ namespace KnowYourTurf.Web.Controllers
                                 AddEditDocumentUrl =
                                     UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "?ParentId=" +
                                     input.EntityId + "&From=Field",
-                                ListDefinition =
+                                GridDefinition =
                                     _pendingTaskGrid.GetGridDefinition(url),
                                 CompletedListDefinition =
                                     _completedTaskGrid.GetGridDefinition(completeUrl),

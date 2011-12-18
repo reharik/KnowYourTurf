@@ -47,7 +47,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new UserViewModel
                             {
                                 User = facilities,
-                                AddEditUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)) + "/" + facilities.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)) + "/" + facilities.EntityId,
                                 Title = WebLocalizationKeys.FACILITIES.ToString()
                             };
             return PartialView("FacilitiesView", model);

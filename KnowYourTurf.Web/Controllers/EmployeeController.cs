@@ -63,7 +63,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new UserViewModel
                             {
                                 User = employee,
-                                AddEditUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddEdit(null)) + "/" + employee.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddEdit(null)) + "/" + employee.EntityId,
                                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
                             };
             return PartialView("EmployeeView", model);

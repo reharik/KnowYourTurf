@@ -181,6 +181,10 @@ namespace KnowYourTurf.Web
         public static readonly StringToken ERROR_UNEXPECTED = new WebLocalizationKeys("ERROR_UNEXPECTED", "An Unexpected Error Has Occured.");
         public static readonly StringToken ADMIN_TOOLS = new WebLocalizationKeys("ADMIN_TOOLS", "Admin Tools");
 
+        public static readonly StringToken REMOVE = new WebLocalizationKeys("REMOVE", "Remove");
+        public static readonly StringToken NEW = new WebLocalizationKeys("NEW", "New");
+
+
     
 
     }

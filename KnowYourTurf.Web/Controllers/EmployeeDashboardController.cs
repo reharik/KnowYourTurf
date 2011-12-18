@@ -39,8 +39,8 @@ namespace KnowYourTurf.Web.Controllers
             {
                 //TODO put modficaztions here "Employee"
                 Employee = employee,
-                AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" + entityId+"&From=Employee",
-                ListDefinition = _pendingTaskGrid.GetGridDefinition(url),
+                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" + entityId+"&From=Employee",
+                GridDefinition = _pendingTaskGrid.GetGridDefinition(url),
                 CompletedListDefinition = _completedTaskGrid.GetGridDefinition(completeUrl),
                
             };

@@ -49,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
                 ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrderList()),
                 CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)),
 
-                ListDefinition = _purchaseOrderSelectorGrid.GetGridDefinition(url),
+                GridDefinition = _purchaseOrderSelectorGrid.GetGridDefinition(url),
                 PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl)
 
             };
@@ -70,7 +70,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new POListViewModel()
             {
                 PurchaseOrder = purchaseOrder,
-                AddEditUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddEdit(null)) + "/" + purchaseOrder.EntityId
+                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddEdit(null)) + "/" + purchaseOrder.EntityId
             };
             return PartialView("PurchaseOrderView", model);
         }

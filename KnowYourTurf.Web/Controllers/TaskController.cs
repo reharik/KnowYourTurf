@@ -124,7 +124,7 @@ namespace KnowYourTurf.Web.Controllers
                                 Product = productName,
                                 EmployeeNames = task.Employees.Select(x =>  x.FullName ),
                                 EquipmentNames = task.Equipment.Select(x => x.Name ),
-                                AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.AddEdit(null))+"/"+task.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.AddEdit(null))+"/"+task.EntityId,
                                 Title = WebLocalizationKeys.TASK_INFORMATION.ToString()
 
             };

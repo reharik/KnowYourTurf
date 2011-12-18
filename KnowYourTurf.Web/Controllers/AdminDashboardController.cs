@@ -29,7 +29,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new UserViewModel
             {
                 User = admin,
-                AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" + input.EntityId+"&From=Admin",
+                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" + input.EntityId+"&From=Admin",
                
             };
             return View("AdminDashboard", model);

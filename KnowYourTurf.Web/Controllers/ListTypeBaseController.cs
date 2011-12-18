@@ -108,7 +108,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ListTypeViewModel
                             {
                                 ListType = listType,
-                                AddEditUrl =
+                                AddUpdateUrl =
                                     UrlContext.GetUrlForAction<EventTypeController>(x => x.AddUpdate(null)) + "/" +
                                     input.EntityId
                             };
@@ -152,7 +152,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ListTypeViewModel
                             {
                                 ListType = listType,
-                                AddEditUrl =
+                                AddUpdateUrl =
                                     UrlContext.GetUrlForAction<TaskTypeController>(x => x.AddUpdate(null)) + "/" +
                                     input.EntityId
                             };
@@ -183,7 +183,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ListTypeViewModel
                             {
                                 ListType = listType,
-                                AddEditUrl =
+                                AddUpdateUrl =
                                     UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.AddUpdate(null)) + "/" +
                                     input.EntityId
                             };
@@ -212,7 +212,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ListTypeViewModel
                             {
                                 ListType = listType,
-                                AddEditUrl =
+                                AddUpdateUrl =
                                     UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.AddUpdate(null)) + "/" +
                                     input.EntityId
                             };

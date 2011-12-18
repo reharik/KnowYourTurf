@@ -34,7 +34,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ChemicalViewModel
             {
                 Chemical = chemical,
-                AddEditUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.AddEdit(null)) + "/" + chemical.EntityId,
+                AddUpdateUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.AddEdit(null)) + "/" + chemical.EntityId,
                 Title = WebLocalizationKeys.CHEMICAL_INFORMATION.ToString()
             };
             return PartialView("ChemicalView", model);

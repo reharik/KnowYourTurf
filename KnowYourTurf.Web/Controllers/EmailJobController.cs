@@ -50,7 +50,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmailJobViewModel
             {
                 EmailJob = emailTemplate,
-                AddEditUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)) + "/" + emailTemplate.EntityId,
+                AddUpdateUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)) + "/" + emailTemplate.EntityId,
                 Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString()
             };
             return PartialView("EmailJobView", model);

@@ -56,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
                             {
                                 Vendor = vendor,
                                 VendorContactNames = contactNames,
-                                AddEditUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddEdit(null)) + "/" + vendor.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddEdit(null)) + "/" + vendor.EntityId,
                                 Title = WebLocalizationKeys.VENDOR_INFORMATION.ToString()
                             };
             return PartialView("VendorView", model);

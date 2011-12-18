@@ -23,8 +23,8 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<PhotoListController>(x => x.Photos(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)),
-                ListDefinition = _photoListGrid.GetGridDefinition(url)
+                AddUpdateUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)),
+                GridDefinition = _photoListGrid.GetGridDefinition(url)
             };
             return View(model);
         }

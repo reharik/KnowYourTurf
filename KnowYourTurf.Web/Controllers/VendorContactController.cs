@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new VendorContactViewModel
                             {
                                 VendorContact = vendorContact,
-                                AddEditUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddEdit(null)) + "/" + vendorContact.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddEdit(null)) + "/" + vendorContact.EntityId,
                                 Title = WebLocalizationKeys.VENDOR_CONTACT_INFORMATION.ToString()
                             };
             return PartialView("VendorContactView", model);

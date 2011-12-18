@@ -52,7 +52,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EventViewModel
                             {
                                 Event = _event,
-                                AddEditUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddEdit(null)) + "/" + _event.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddEdit(null)) + "/" + _event.EntityId,
                                 Title = WebLocalizationKeys.EVENT_INFORMATION.ToString()
             };
             return PartialView("EventView", model);

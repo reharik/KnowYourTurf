@@ -24,8 +24,8 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<TaskListController>(x => x.Tasks(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)),
-                ListDefinition = _taskListGrid.GetGridDefinition(url)
+                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)),
+                GridDefinition = _taskListGrid.GetGridDefinition(url)
             };
             return View(model);
         }

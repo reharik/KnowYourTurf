@@ -34,7 +34,7 @@ namespace KnowYourTurf.Web.Controllers
             {   
                 ClosePOUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x=>x.ClosePurchaseOrder(null)),
                 PurchaseOrder = purchaseOrder,
-                ListDefinition = _receivePurchaseOrderLineItemGrid.GetGridDefinition(url)
+                GridDefinition = _receivePurchaseOrderLineItemGrid.GetGridDefinition(url)
             };
             return View("PurchaseOrderCommit",model);
         }

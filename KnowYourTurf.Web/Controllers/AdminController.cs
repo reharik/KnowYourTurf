@@ -45,7 +45,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new UserViewModel
                             {
                                 User= admin,
-                                AddEditUrl = UrlContext.GetUrlForAction<AdminController>(x => x.Admin(null)) + "/" + admin.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<AdminController>(x => x.Admin(null)) + "/" + admin.EntityId,
                                 Title = WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString()
                             };
             return PartialView("AdminView", model);
