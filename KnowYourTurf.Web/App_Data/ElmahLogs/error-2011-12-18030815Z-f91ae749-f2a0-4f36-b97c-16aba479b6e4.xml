@@ -1,0 +1,165 @@
+﻿<error errorId="f91ae749-f2a0-4f36-b97c-16aba479b6e4" host="RHARIK" type="System.InvalidOperationException" message="Storage scopes cannot be created when _AppStart is executing." source="System.Web.WebPages" detail="System.InvalidOperationException: Storage scopes cannot be created when _AppStart is executing.&#xD;&#xA;   at System.Web.WebPages.Scope.AspNetRequestScopeStorageProvider.set_CurrentScope(IDictionary`2 value)&#xD;&#xA;   at System.Web.WebPages.Scope.ScopeStorage.CreateTransientScope(IDictionary`2 context)&#xD;&#xA;   at System.Web.WebPages.Scope.ScopeStorage.CreateTransientScope()&#xD;&#xA;   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClass6.&lt;&gt;c__DisplayClassb.&lt;BeginProcessRequest&gt;b__5()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClasse.&lt;EndProcessRequest&gt;b__d()&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.&lt;GetCallInAppTrustThunk&gt;b__0(Action f)&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="Harik, Raif" time="2011-12-18T03:08:15.4841889Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CACHE_CONTROL:max-age=0&#xD;&#xA;HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-us,en;q=0.5&#xD;&#xA;HTTP_COOKIE:KYT=AF97A39BF17C1628E8454289B2B105F070D4B695F0F3B972F6B298C404409606386193BE8A53FB338511C1284A69C327EAF3A1D6091567C5C6AFCE7BC1DE479A538708F353A63CE262D89C11E7D9780B12E5FEB91B293F49C733C40B92FC026C259FDD75DE7B80A9A9C149B6FFC76992171CD23BEEBAB193E44FEAE54D8BE315411D615B19D8EE4CC95BC3C1D5E2A4932D90C0C5233FD70ECB95D01DEA222935B9CC665BC6FF8B8AAE4F1BEECF18B93D2405C588272A676008FC8F77826C8F9F&#xD;&#xA;HTTP_HOST:localhost:888&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Cache-Control: max-age=0&#xD;&#xA;Connection: keep-alive&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-us,en;q=0.5&#xD;&#xA;Cookie: KYT=AF97A39BF17C1628E8454289B2B105F070D4B695F0F3B972F6B298C404409606386193BE8A53FB338511C1284A69C327EAF3A1D6091567C5C6AFCE7BC1DE479A538708F353A63CE262D89C11E7D9780B12E5FEB91B293F49C733C40B92FC026C259FDD75DE7B80A9A9C149B6FFC76992171CD23BEEBAB193E44FEAE54D8BE315411D615B19D8EE4CC95BC3C1D5E2A4932D90C0C5233FD70ECB95D01DEA222935B9CC665BC6FF8B8AAE4F1BEECF18B93D2405C588272A676008FC8F77826C8F9F&#xD;&#xA;Host: localhost:888&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms Authentication" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="RHARIK\Owner" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/KnowYourTurf/Home" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\KnowYourTurf\Home" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/KnowYourTurf/Home" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="888" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/KnowYourTurf/Home" />
+    </item>
+    <item name="HTTP_CACHE_CONTROL">
+      <value string="max-age=0" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-us,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="KYT=AF97A39BF17C1628E8454289B2B105F070D4B695F0F3B972F6B298C404409606386193BE8A53FB338511C1284A69C327EAF3A1D6091567C5C6AFCE7BC1DE479A538708F353A63CE262D89C11E7D9780B12E5FEB91B293F49C733C40B92FC026C259FDD75DE7B80A9A9C149B6FFC76992171CD23BEEBAB193E44FEAE54D8BE315411D615B19D8EE4CC95BC3C1D5E2A4932D90C0C5233FD70ECB95D01DEA222935B9CC665BC6FF8B8AAE4F1BEECF18B93D2405C588272A676008FC8F77826C8F9F" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:888" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0" />
+    </item>
+  </serverVariables>
+  <cookies>
+    <item name="KYT">
+      <value string="AF97A39BF17C1628E8454289B2B105F070D4B695F0F3B972F6B298C404409606386193BE8A53FB338511C1284A69C327EAF3A1D6091567C5C6AFCE7BC1DE479A538708F353A63CE262D89C11E7D9780B12E5FEB91B293F49C733C40B92FC026C259FDD75DE7B80A9A9C149B6FFC76992171CD23BEEBAB193E44FEAE54D8BE315411D615B19D8EE4CC95BC3C1D5E2A4932D90C0C5233FD70ECB95D01DEA222935B9CC665BC6FF8B8AAE4F1BEECF18B93D2405C588272A676008FC8F77826C8F9F" />
+    </item>
+  </cookies>
+</error>

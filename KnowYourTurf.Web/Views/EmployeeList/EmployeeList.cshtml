@@ -1,0 +1,18 @@
+﻿@model ListViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("kyt.EmployeeController.js").ToString())
+}
+@section HeaderJavascript{
+    $(document).ready(function(){
+        crudOptions.id="employee";
+        new kyt.EmployeeController(crudOptions);
+    });
+}
+
+<table id="gridContainer" class="scroll"></table>
+<div id="pager" class="scroll" style="text-align:center;"></div>

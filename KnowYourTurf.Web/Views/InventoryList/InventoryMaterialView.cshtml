@@ -1,0 +1,15 @@
+﻿@model KnowYourTurf.Web.Controllers.InventoryMaterialViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+
+@{
+    Layout = "";
+}
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Material.Name).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Material.Description).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.InventoryMaterial.Quantity).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.InventoryMaterial.SizeOfUnit).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.InventoryMaterial.UnitType).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.InventoryMaterial.LastVendor.Company).LabelDisplay(WebLocalizationKeys.PREVIOUS_VENDOR).ToString())
+

@@ -1,0 +1,19 @@
+﻿@model ListViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
+@section HeaderJavascript{
+    $(document).ready(function(){
+        crudOptions.gridName = "photoGrid";
+        new kyt.CrudController(crudOptions);
+    });
+}
+<div class="KYT_gridbreak">
+@MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_PHOTO).AddClass("KYT_float_left grid_2").ToString())
+@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right grid_1").ToString())
+</div>
+<table id="gridContainer" class="scroll"></table>
+<div id="pager" class="scroll" style="text-align:center;"></div>

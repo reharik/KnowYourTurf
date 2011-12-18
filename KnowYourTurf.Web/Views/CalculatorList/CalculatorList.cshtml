@@ -1,0 +1,19 @@
+﻿@model CalculatorListViewModel
+@using KnowYourTurf.Web
+@using HtmlTags
+@using KnowYourTurf.Web.Controllers
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@section HeaderScripts{
+    @MvcHtmlString.Create(Script("kyt.calculator.js").ToString())
+    @MvcHtmlString.Create(Script("kyt.CalculatorController.js").ToString())
+}
+@section HeaderJavascript{
+     crudOptions.createATaskUrl=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CreateATaskUrl));
+    $(document).ready(function(){
+        new kyt.CalculatorController(crudOptions);
+    });
+}
+@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
+<table id="gridContainer" class="scroll"></table>
+<div id="pager" class="scroll" style="text-align:center;"></div>

@@ -1,0 +1,10 @@
+﻿@model KnowYourTurf.Web.Controllers.InventorySeedViewModel
+@using KnowYourTurf.Core.Html.FubuUI
+
+@{
+    Layout = "";
+}
+        
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Seed.Name).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Seed.Description).ToString())
+

@@ -1,0 +1,16 @@
+﻿@model ListViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+
+@section HeaderJavascript{
+    $(document).ready(function(){
+        new kyt.CrudController(crudOptions);
+    });
+}
+@MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_CHEMICAL).ToString())
+@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
+<table id="gridContainer" class="scroll"></table>
+<div id="pager" class="scroll" style="text-align:center;"></div>
