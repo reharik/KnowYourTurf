@@ -629,6 +629,45 @@
   <ItemGroup>
     <Content Include="Views\Employee\EmployeeAddUpdate.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Equipment\EquipmentAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Event\EventAddUpdate.cshtml" />
+    <Content Include="Views\Event\EventView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EventCalendar\EventCalendar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_DisplayLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EventType\AddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Fertilizer\FertilizerAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forum\Forum.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Material\MaterialAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Photo\AddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PhotoCategory\AddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PurchaseOrderCommit\PurchaseOrderCommit.cshtml" />
+    <Content Include="Views\PurchaseOrderLineItem\PurchaseOrderLineItemAddUpdate.cshtml" />
+    <Content Include="Views\PurchaseOrderLineItem\PurchaseOrderLineItemView.cshtml" />
+    <Content Include="Views\PurchaseOrderLineItem\ReceivePurchaseOrderLineItem.cshtml" />
+    <Content Include="Views\PurchaseOrder\AddItem.cshtml" />
+    <Content Include="Views\PurchaseOrder\PurchaseOrderBuilder.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -646,7 +685,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
-          <DevelopmentServerPort>888</DevelopmentServerPort>
+          <DevelopmentServerPort>666</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

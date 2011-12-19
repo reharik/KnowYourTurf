@@ -12,7 +12,6 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
 
     initialize:function(){
         $.extend(this,this.defaults());
-        this.options = $.extend({},kyt.crudControllerDefaults, this.options);
         $.clearPubSub();
         this.registerSubscriptions();
         var viewOptions={
@@ -57,7 +56,7 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
         $.subscribe("/contentLevel/grid_productGrid/Other", $.proxy(this.addToOrder,this));
         $.subscribe("/contentLevel/grid_productGrid/Display", $.proxy(this.displayProduct,this));
         $.subscribe("/contentLevel/grid_poliGrid/Delete", $.proxy(this.deleteItem,this));
-        $.subscribe("/contentLevel/grid_poliGrid/Edit", $.proxy(this.editItem,this));
+        $.subscribe("/contentLevel/grid_poliGrid/AddUpdateItem", $.proxy(this.editItem,this));
         $.subscribe("/contentLevel/grid_poliGrid/Display", $.proxy(this.displayItem,this));
         $.subscribe('/contentLevel/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
         $.subscribe('/contentLevel/popup_displayModule/edit', $.proxy(this.displayEdit,this), this.cid);
@@ -122,7 +121,7 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
             url: _url,
             buttons: button
         };
-        this.modules.popupDisplay= new kyt.PopupDisplayModule(moduleOptions);
+        this.modules.popupDisplay= new kyt.AjaxPopupDisplayModule(moduleOptions);
     },
 
     displayItem:function(url, data){
@@ -163,7 +162,7 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
             url: _url,
             data:data
         };
-        this.modules.popupForm = new kyt.PopupFormModule(moduleOptions);
+        this.modules.popupForm = new kyt.AjaxPopupFormModule(moduleOptions);
     },
     itemSuccess:function(){
        this.itemCancel();

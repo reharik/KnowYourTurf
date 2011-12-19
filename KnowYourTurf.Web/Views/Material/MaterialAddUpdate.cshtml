@@ -1,0 +1,23 @@
+﻿@model KnowYourTurf.Web.Models.Material.MaterialViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+
+            @MvcHtmlString.Create(FormFor<MaterialController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Material.EntityId).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Material.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Material.Description).ToHtmlTag()
+        </div>
+    </div>
+@EndForm()
+

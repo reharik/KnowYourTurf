@@ -4,11 +4,10 @@
 @using HtmlTags
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
-@MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
 @section HeaderJavascript{
     $(document).ready(function(){
-        crudOptions.gridName = "photoGrid";
-        new kyt.CrudController(gridControllerOptions);
+        gridControllerOptions.gridName = "photoGrid";
+        new kyt.PhotoListController(gridControllerOptions);
     });
 }
 <table id="gridContainer" class="scroll"></table>

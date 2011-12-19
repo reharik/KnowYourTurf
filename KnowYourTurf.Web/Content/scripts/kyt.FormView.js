@@ -33,6 +33,9 @@ kyt.BaseFormView = Backbone.View.extend({
                 $(this.options.crudFormSelector,this.el).data('crudForm').setBeforeSubmitFuncs(item);
             },this));
         }
+        if(typeof this.options.runAfterRenderFunction == 'function'){
+            this.options.runAfterRenderFunction.apply(this,[this.el]);
+        }
         $(".rte").cleditor();
     },
     saveItem:function(){
@@ -75,50 +78,12 @@ kyt.AjaxFormView = kyt.BaseFormView.extend({
         this.config();
         //callback for render
         this.viewLoaded();
+
         //general notification of pageloaded
         $.publish("/contentLevel/form_"+this.id+"/pageLoaded",[this.options]);
     }
 });
 
-kyt.ComplianceItemsFormView = kyt.FormView.extend({
-    events:
-        _.extend({
-        'change [name="ComplianceNotificationSchedule.DaysBeforeExpiration"]':'daysBefore',
-        'change [name="ComplianceNotificationSchedule.RepeatDaysUntilExpiration"]':'daysUntil',
-        'change [name="ComplianceNotificationSchedule.RepeatDaysAfterExpiration"]':'daysAfter',
-        'change [name="ComplianceNotificationSchedule.EndDaysAfterExpiration"]':'endDay'
-    }, kyt.FormView.prototype.events),
-    render:function(){
-        $.publish("/contentLevel/form_"+this.id+"/pageLoaded",[this.options]);
-        this.attachPlugins();
-        this.prePopulate();
-    },
-    attachPlugins:function(){
-        $("#daysBefore", this.el).slider({min:0,max:60,slide:function(event,ui){$("[name='ComplianceNotificationSchedule.DaysBeforeExpiration']").val(ui.value);}});
-        $("#repeatDaysUntil", this.el).slider({min:0,max:60,slide:function(event,ui){$("[name='ComplianceNotificationSchedule.RepeatDaysUntilExpiration']").val(ui.value);}});
-        $("#repeatDaysAfter", this.el).slider({min:0,max:60,slide:function(event,ui){$("[name='ComplianceNotificationSchedule.RepeatDaysAfterExpiration']").val(ui.value);}});
-        $("#endPeriod", this.el).slider({min:0,max:60,slide:function(event,ui){$("[name='ComplianceNotificationSchedule.EndDaysAfterExpiration']").val(ui.value);}});
-
-    },
-    prePopulate: function(){
-        $("#daysBefore", this.el ).slider( "option", "value", $("[name='ComplianceNotificationSchedule.DaysBeforeExpiration']").val());
-        $( "#repeatDaysUntil", this.el ).slider( "option", "value", $("[name='ComplianceNotificationSchedule.RepeatDaysUntilExpiration']").val());
-        $( "#repeatDaysAfter", this.el ).slider( "option", "value", $("[name='ComplianceNotificationSchedule.RepeatDaysAfterExpiration']").val());
-        $( "#endPeriod", this.el ).slider( "option", "value", $("[name='ComplianceNotificationSchedule.EndDaysAfterExpiration']").val());
-    },
-    daysBefore:function(){
-        $("#daysBefore", this.el).slider( "option", "value", $(this).val() );
-    },
-    daysUntil:function(){
-        $("#repeatDaysUntil", this.el).slider( "option", "value", $(this).val() );
-    },
-    daysAfter:function(){
-         $("#repeatDaysAfter", this.el).slider( "option", "value", $(this).val() );
-    },
-    endDay:function(){
-        $("#endPeriod", this.el).slider( "option", "value", $(this).val() );
-    }
-});
 
 kyt.AssetFormView = kyt.AjaxFormView.extend({
     events:_.extend({
@@ -137,118 +102,6 @@ kyt.AssetFormView = kyt.AjaxFormView.extend({
         $(this.el).jqprint();
     }
 });
-
-kyt.PortfolioFormView = kyt.AjaxFormView.extend({
-    events:_.extend({
-        'click .delete':'deleteItem',
-        'click .print':'print',
-        'click .preview':'previewItem',
-        'click .addToPortfolio':'addAllItems',
-        'click .rmvpage':'removeAllItems',
-        'click .download':'downloadItem',
-        'click .mail':'emailForm',
-        'click #changePictureButton':'changePictureClick',
-        'change [name="Item.HeadShot.EntityId"]':'headshotChange',
-        'click #addHeadShot':'setupNewHeadshot'
-
-    }, kyt.AjaxFormView.prototype.events),
-
-    viewLoaded:function(){
-        if(!$("#headShotSelector").val()){
-            $("#changePictureButton").hide();
-            $("#headShotSelector").show();
-        }else{
-            $("#changePictureButton").show();
-            $("#headShotSelector").hide();
-        }
-    },
-    setupNewHeadshot: function(){
-        $.publish("/contentLevel/form_"+this.id+"/setupNewHeadshot",[]);
-        return false;
-    },
-    changePictureClick:function(){
-        $("#changePictureButton").hide();
-        $("#headShotSelector").show();
-    },
-
-    headshotChange:function(e){
-        var id = $(e.target).val();
-        $.each(this.options.headShotDtos,function(i,item){
-            if(item.EntityId == id){
-                $("a#FileUrl img").attr("src",item.Url);
-            }
-        });
-        $("#changePictureButton").show();
-        $("#headShotSelector").hide();
-    },
-
-    deleteItem:function(){
-        if (confirm("Are you sure you would like to delete this Item?")) {
-            var entityId = $(this.el).find("#EntityId").val();
-            kyt.repository.ajaxGet(this.options.deleteUrl,{"EntityId":entityId}, $.proxy(function(result){
-                $.publish("/contentLevel/form_"+this.id+"/success",[result])
-            },this));
-         }
-    },
-    print:function(){
-        var id = $("#EntityId",this.el).val();
-        if(id<=0){
-            this.saveFirstAlert();
-            return false;
-        }
-        $.publish("/contentLevel/form_"+this.id+"/print",[]);
-    },
-    emailForm:function(){
-        var id = $("#EntityId",this.el).val();
-        if(id<=0){
-            this.saveFirstAlert();
-            return false;
-        }
-        $.publish("/contentLevel/form_"+this.id+"/emailPortfolio",[]);
-    },
-    previewItem:function(){
-        var id = $("#EntityId",this.el).val();
-        if(id<=0){
-            this.saveFirstAlert();
-            return false;
-        }
-        $.publish("/contentLevel/form_"+this.id+"/preview",[]);
-    },
-    downloadItem:function(){
-        var id = $("#EntityId",this.el).val();
-        if(id<=0){
-            this.saveFirstAlert();
-            return false;
-        }
-        window.open(this.options.downloadUrl+"/"+id);
-    },
-    addAllItems:function(){
-        var id = $("#EntityId",this.el).val();
-        if(id<=0){
-            this.saveFirstAlert();
-            return false;
-        }
-        kyt.repository.ajaxGet(this.options.addAllItemsUrl,{"EntityId":id},$.proxy(function(){
-           $.publish("/contentLevel/form_"+this.id+"/addAllItems",[]);
-        },this));
-    },
-    removeAllItems: function(){
-        var id = $("#EntityId",this.el).val();
-        if(id<=0){
-            this.saveFirstAlert();
-            return false;
-        }
-        kyt.repository.ajaxGet(this.options.removeAllItemsUrl,{"EntityId":id},$.proxy(function(){
-            $.publish("/contentLevel/form_"+this.id+"/removeAllItems",[]);
-        },this))
-    },
-    saveFirstAlert:function(){
-        alert("You must save your portfolio before perfoming this function!");
-    }
-
-
-});
-
 
 kyt.userProfileViewModel =  {
     AddressItem: function(data) {

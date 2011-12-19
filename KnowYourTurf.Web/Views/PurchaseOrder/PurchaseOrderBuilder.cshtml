@@ -1,0 +1,58 @@
+﻿@model KnowYourTurf.Web.Models.POListViewModel
+@using HtmlTags;
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+
+
+@{ Layout = "~/Views/Shared/_DisplayLayout.cshtml"; }
+
+@section HeaderJavascript{
+    var crudOptions = {
+        addEditUrl: "@Model.AddUpdateUrl",
+        productGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition)),
+        poliGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.PoliListDefinition)),
+        commitUrl: "@Model.CommitUrl",
+        returnUrl: "@Model.ReturnUrl"
+    }
+    $(document).ready(function(){
+        new kyt.PurchaseOrderBuilderController(crudOptions);
+    });
+ 
+}
+    <div id="errorMessages" class="errorMessages KYT_errorMessages" ><ul></ul></div>
+    <input type="hidden" id="vendorId" value="@Model.VendorId"/>
+    <input type="hidden" id="poId" value="@Model.PurchaseOrder.EntityId"/>
+        @MvcHtmlString.Create(Html.HiddenFor(x=>x.PurchaseOrder.EntityId).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+        @Html.ViewFor(x => x.PurchaseOrder.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+        @Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).RootId("viewVendor").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+        @Html.SubmissionFor(x => x.PurchaseOrder.Vendor).InputId("vendor").RootId("editVendor").ToHtmlTag()
+        </div>
+    </div>
+
+    <div class="col full clear">
+        <div class="fieldRow">
+            <div id="productGridArea">
+                <h2>@WebLocalizationKeys.PRODUCTS.ToString()</h2>
+                <table id="productGrid" class="scroll"></table>
+                <div id="productPager" class="scroll" style="text-align:center;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col full clear">
+        <div class="fieldRow">
+            <div id="poliGridArea">
+                <h2> @WebLocalizationKeys.LINE_ITEMS.ToString() </h2>
+                <table id="poliGrid" class="scroll"></table>
+                <div id="poliPager" class="scroll" style="text-align:center;"></div>
+            </div>
+        </div>
+    </div>
+    @StandardButtonFor("commit",WebLocalizationKeys.COMMIT).ToHtmlTag()
+    @StandardButtonFor("return", WebLocalizationKeys.RETURN).ToHtmlTag()

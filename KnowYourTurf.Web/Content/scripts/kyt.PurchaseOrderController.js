@@ -13,7 +13,6 @@ kyt.PurchaseOrderController = kyt.Controller.extend({
 
     initialize:function(){
         $.extend(this,this.defaults());
-        this.options = $.extend({},kyt.crudControllerDefaults, this.options);
         $.clearPubSub();
         this.registerSubscriptions();
         var displayOptions={
@@ -25,19 +24,18 @@ kyt.PurchaseOrderController = kyt.Controller.extend({
     },
     registerSubscriptions: function(){
     // from grid
-        $.subscribe('/contentLevel/grid_'+this.options.gridName+'/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/contentLevel/grid_'+this.options.gridName+'/Edit',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/contentLevel/grid_'+this.options.gridName+'/Display',$.proxy(this.displayItem,this), this.cid);
-        $.subscribe('/contentLevel/grid_'+this.options.gridName+'/Delete',$.proxy(this.deleteItem,this), this.cid);
-        $.subscribe('/contentLevel/grid_'+this.options.gridName+'/Redirect',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_/Display',$.proxy(this.displayItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_/Delete',$.proxy(this.deleteItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_/Redirect',$.proxy(this.addEditItem,this), this.cid);
         // from form
         // from display
         $.subscribe('/contentLevel/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
         $.subscribe('/contentLevel/popup_displayModule/edit', $.proxy(this.displayEdit,this), this.cid);
     },
-    addEditItem: function(url, data){
+    addUpdateItem: function(url, data){
         var parentId = data ? data.ParentId : 0;
-        window.location.href = url + "?ParentId=" + parentId;
+        $.address.value(url + "?ParentId=" + parentId);
     },
     displayItem: function(url, data){
         var builder = kyt.popupButtonBuilder.builder("displayModule");

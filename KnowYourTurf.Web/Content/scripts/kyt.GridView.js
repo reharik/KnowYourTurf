@@ -52,6 +52,12 @@ kyt.GridView = Backbone.View.extend({
     },
     reloadGrid:function(){
         $(this.options.gridContainer).trigger("reloadGrid");
+    },
+    getUrl:function(){
+        return $(this.options.gridContainer).getGridParam("url");
+    },
+    setUrl:function(url){
+        $(this.options.gridContainer).setGridParam({url:url});
     }
 });
 

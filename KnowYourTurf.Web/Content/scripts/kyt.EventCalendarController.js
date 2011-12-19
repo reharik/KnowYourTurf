@@ -35,7 +35,7 @@ kyt.CalendarController = kyt.Controller.extend({
     additionalSubscriptions:function(){},
     dayClick:function(date, allDay, jsEvent, view) {
         var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"), "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")};
-        this.editEvent(this.options.AddEditUrl,data);
+        this.editEvent(this.options.AddUpdateUrl,data);
     },
 
     editEvent:function(url, data){
@@ -47,14 +47,14 @@ kyt.CalendarController = kyt.Controller.extend({
             data:data,
             buttons: kyt.popupButtonBuilder.builder("editModule").standardEditButons()
         };
-        this.modules.popupForm = new kyt.PopupFormModule(moduleOptions);
+        this.modules.popupForm = new kyt.AjaxPopupFormModule(moduleOptions);
     },
 
     eventClick:function(calEvent, jsEvent, view) {
         var data = {"EntityId": calEvent.EntityId};
         var builder = kyt.popupButtonBuilder.builder("displayModule");
         builder.addButton("Delete", $.proxy(this.deleteItem,this));
-        builder.addEditButton();
+        builder.addUpdateButton();
         builder.addButton("Copy Event",$.proxy(this.copyItem,this));
         builder.addCancelButton();
        $("#masterArea").after("<div id='dialogHolder'/>");
@@ -65,13 +65,13 @@ kyt.CalendarController = kyt.Controller.extend({
             data:data,
             buttons:builder.getButtons()
         };
-        this.modules.popupDisplay = new kyt.PopupDisplayModule(moduleOptions);
+        this.modules.popupDisplay = new kyt.AjaxPopupDisplayModule(moduleOptions);
     },
 
     copyItem:function(){
         var entityId = $("[name$='EntityId']").val();
         var data = {"EntityId":entityId,"Copy":true};
-        this.editEvent(this.options.AddEditUrl,data);
+        this.editEvent(this.options.AddUpdateUrl,data);
     },
 
     deleteItem: function(){
@@ -99,8 +99,10 @@ kyt.CalendarController = kyt.Controller.extend({
     },
 
     displayEdit:function(url){
+        var id = $("#EntityId").val();
+        var _url = this.options.AddUpdateUrl+"/"+id;
         this.modules.popupDisplay.destroy();
-        this.editEvent(url);
+        this.editEvent(_url);
     }
 
 });
