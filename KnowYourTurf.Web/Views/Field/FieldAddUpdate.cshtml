@@ -1,0 +1,39 @@
+﻿@model KnowYourTurf.Web.Models.FieldViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+<script type="text/javascript" charset="utf-8">
+    extraFormOptions.runAfterRenderFunction = function () {
+        $('#FieldColor').miniColors();
+    };
+ </script>
+
+            @MvcHtmlString.Create(FormFor<FieldController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Field.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Field.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Field.Abbreviation).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Field.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Field.Size).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
+            @Html.SubmissionFor(x => x.Field.FieldColor).InputId("FieldColor").ToHtmlTag()
+            <div id="colorPicker"></div>
+        </div>
+    </div>
+            @EndForm()
+            

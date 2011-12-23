@@ -1,0 +1,54 @@
+﻿@model KnowYourTurf.Web.Models.VendorContact.VendorContactViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+
+
+            @MvcHtmlString.Create(FormFor<VendorContactController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.VendorContact.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.ParentId).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.VendorContact.FirstName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.VendorContact.LastName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.VendorContact.Email).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.VendorContact.Phone).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.VendorContact.Fax).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.VendorContact.Address1).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.VendorContact.Address2).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.VendorContact.City).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+           @Html.SubmissionFor(x => x.VendorContact.State).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.VendorContact.ZipCode).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.VendorContact.Status).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.VendorContact.Notes).ToHtmlTag()
+        </div>
+    </div>
+            @EndForm()
+

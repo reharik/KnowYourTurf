@@ -40,19 +40,21 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Document = document,
                 DocumentCategoryList = categoryItems,
-                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString()
+                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
+                Popup = input.Popup
             };
             return View(model);
         }
       
-        public ActionResult Display(ViewModel input)
+        public ActionResult Display(DocumentViewModel input)
         {
             var document = _repository.Find<Document>(input.EntityId);
             var model = new DocumentViewModel
                             {
                                 Document = document,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "/" + document.EntityId,
-                                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString()
+                                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
+                                Popup = input.Popup
                             };
             return View(model);
         }
@@ -103,9 +105,7 @@ namespace KnowYourTurf.Web.Controllers
     public class DocumentViewModel:ViewModel
     {
         public Document Document { get; set; }
-
         public IEnumerable<SelectListItem> DocumentCategoryList { get; set; }
-
         public long DocumentCategory { get; set; }
     }
 }

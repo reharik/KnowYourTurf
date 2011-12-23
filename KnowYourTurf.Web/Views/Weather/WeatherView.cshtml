@@ -1,0 +1,33 @@
+﻿@model WeatherViewModel
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+       
+        @MvcHtmlString.Create(Html.HiddenFor(x => x.Weather.EntityId, new { @class = "copyEntityId" }).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Weather.Date).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Weather.DewPoint).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Weather.HighTemperature).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Weather.LowTemperature).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Weather.RainPrecipitation).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Weather.WindSpeed).ToHtmlTag()
+        </div>
+    </div>
+
+

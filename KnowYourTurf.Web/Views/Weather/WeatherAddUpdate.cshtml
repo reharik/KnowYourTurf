@@ -1,0 +1,38 @@
+﻿@model WeatherViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+       
+
+            @MvcHtmlString.Create(FormFor<WeatherController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Weather.EntityId).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.DewPoint).ToHtmlTag()        
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.EvaporationRate).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.HighTemperature).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.LowTemperature).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.Humidity).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.RainPrecipitation).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.WindSpeed).ToHtmlTag()
+        </div>
+    </div>
+            @EndForm()
+

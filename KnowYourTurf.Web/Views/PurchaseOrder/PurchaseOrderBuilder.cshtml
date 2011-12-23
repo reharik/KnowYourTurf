@@ -8,7 +8,7 @@
 
 @section HeaderJavascript{
     var crudOptions = {
-        addEditUrl: "@Model.AddUpdateUrl",
+        addUpdateUrl: "@Model.AddUpdateUrl",
         productGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition)),
         poliGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.PoliListDefinition)),
         commitUrl: "@Model.CommitUrl",

@@ -153,7 +153,7 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
     },
     editItem:function(url, data){
         var poId = $("#poId").val();
-         var _url = url?url:this.options.addEditUrl;
+         var _url = url?url:this.options.addUpdateUrl;
         _url = _url+"?ParentId="+poId;
         $("#masterArea").after("<div id='dialogHolder'/>");
         var moduleOptions = {

@@ -37,3 +37,6 @@ C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\Rhino.Security.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\System.Web.Helpers.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\MethodFitness.Web.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\MethodFitness.Web.pdb
+C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\NHibernate.xml
+C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\Rhino.Security.xml
+C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\StructureMap.xml

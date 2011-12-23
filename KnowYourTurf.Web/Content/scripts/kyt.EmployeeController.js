@@ -12,15 +12,12 @@ kyt.EmployeeController = kyt.CrudController.extend({
     }, kyt.Controller.prototype.events),
 
     registerAdditionalSubscriptions:function(){
-        $.subscribe('/contentLevel/grid_/Redirect',$.proxy(this.redirectItem,this), this.cid);
         $.subscribe('/contentLevel/form_editModule/pageLoaded', $.proxy(this.loadTokenizers,this), this.cid);
     },
 
     loadTokenizers: function(formOptions){
         var options = $.extend({},formOptions.rolesOptions,{el:"#rolesInputRoot"});
         this.views.roles = new kyt.TokenView(options);
-    },
-    redirectItem:function(url){
-        $.address.value(url);
     }
+
 });

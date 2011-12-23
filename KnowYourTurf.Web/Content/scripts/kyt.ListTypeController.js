@@ -42,7 +42,7 @@ kyt.ListTypeController = kyt.CrudController.extend({
             el:"#etGrid",
             id:"eventTypeGrid",
             gridDef:this.options.gridInfo.gridDef,
-            addEditUrl:this.options.gridInfo.addEditUrl,
+            addUpdateUrl:this.options.gridInfo.addUpdateUrl,
             gridOptions:{pager: "#eventTypePager"},
             gridContainer:"#EventTypeGrid"
         };
@@ -51,7 +51,7 @@ kyt.ListTypeController = kyt.CrudController.extend({
             el:"#ttGrid",
             id:"taskTypeGrid",
             gridDef:this.options.ttGridInfo.gridDef,
-            addEditUrl:this.options.ttGridInfo.addEditUrl,
+            addUpdateUrl:this.options.ttGridInfo.addUpdateUrl,
             gridOptions:{pager: "#taskTypePager"},
             gridContainer:"#TaskTypeGrid"
         };
@@ -60,7 +60,7 @@ kyt.ListTypeController = kyt.CrudController.extend({
             el:"#dcGrid",
             id:"documentCategoryGrid",
             gridDef:this.options.dcGridInfo.gridDef,
-            addEditUrl:this.options.dcGridInfo.addEditUrl,
+            addUpdateUrl:this.options.dcGridInfo.addUpdateUrl,
             gridOptions:{pager: "#docCatPager"},
             gridContainer:"#DocumentCategoryGrid"
         };
@@ -69,7 +69,7 @@ kyt.ListTypeController = kyt.CrudController.extend({
             el:"#pcGrid",
             id:"photoCategoryGrid",
             gridDef:this.options.pcGridInfo.gridDef,
-            addEditUrl:this.options.pcGridInfo.addEditUrl,
+            addUpdateUrl:this.options.pcGridInfo.addUpdateUrl,
             gridOptions:{pager: "#photoCatPager"},
             gridContainer:"#PhotoCategoryGrid"
         };
@@ -77,13 +77,13 @@ kyt.ListTypeController = kyt.CrudController.extend({
         this.delegateLocalEvents();
     },
     delegateLocalEvents:function(){
-        $(this.el).delegate("#addNewTaskType","click",$.proxy(function(){this.addEditItem(this.options.ttGridInfo.addEditUrl)},this));
-        $(this.el).delegate("#addNewEventType","click",$.proxy(function(){this.addEditItem(this.options.gridInfo.addEditUrl)},this));
-        $(this.el).delegate("#addNewDocumentCategory","click",$.proxy(function(){this.addEditItem(this.options.dcGridInfo.addEditUrl)},this));
-        $(this.el).delegate("#addNewPhotoCategory","click",$.proxy(function(){this.addEditItem(this.options.pcGridInfo.addEditUrl)},this));
+        $(this.el).delegate("#addNewTaskType","click",$.proxy(function(){this.addEditItem(this.options.ttGridInfo.addUpdateUrl)},this));
+        $(this.el).delegate("#addNewEventType","click",$.proxy(function(){this.addEditItem(this.options.gridInfo.addUpdateUrl)},this));
+        $(this.el).delegate("#addNewDocumentCategory","click",$.proxy(function(){this.addEditItem(this.options.dcGridInfo.addUpdateUrl)},this));
+        $(this.el).delegate("#addNewPhotoCategory","click",$.proxy(function(){this.addEditItem(this.options.pcGridInfo.addUpdateUrl)},this));
     },
     addEditItem: function(url, data){
-        var _url = url?url:this.options.addEditUrl;
+        var _url = url?url:this.options.addUpdateUrl;
         $("#masterArea").after("<div id='dialogHolder'/>");
         var moduleOptions = {
             id:"editModule",

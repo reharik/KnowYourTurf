@@ -1,0 +1,176 @@
+﻿<error errorId="24b6a4e8-30f2-42d3-baf5-3fe4d394b53b" host="RAIFHARIK-MAC" type="System.InvalidOperationException" message="The partial view 'TaskView' was not found or no view engine supports the searched locations. The following locations were searched:&#xD;&#xA;~/Views/Task/TaskView.aspx&#xD;&#xA;~/Views/Task/TaskView.ascx&#xD;&#xA;~/Views/Shared/TaskView.aspx&#xD;&#xA;~/Views/Shared/TaskView.ascx&#xD;&#xA;~/Views/Task/TaskView.cshtml&#xD;&#xA;~/Views/Task/TaskView.vbhtml&#xD;&#xA;~/Views/Shared/TaskView.cshtml&#xD;&#xA;~/Views/Shared/TaskView.vbhtml" source="System.Web.Mvc" detail="System.InvalidOperationException: The partial view 'TaskView' was not found or no view engine supports the searched locations. The following locations were searched:&#xD;&#xA;~/Views/Task/TaskView.aspx&#xD;&#xA;~/Views/Task/TaskView.ascx&#xD;&#xA;~/Views/Shared/TaskView.aspx&#xD;&#xA;~/Views/Shared/TaskView.ascx&#xD;&#xA;~/Views/Task/TaskView.cshtml&#xD;&#xA;~/Views/Task/TaskView.vbhtml&#xD;&#xA;~/Views/Shared/TaskView.cshtml&#xD;&#xA;~/Views/Shared/TaskView.vbhtml&#xD;&#xA;   at System.Web.Mvc.PartialViewResult.FindView(ControllerContext context)&#xD;&#xA;   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass1c.&lt;InvokeActionResultWithFilters&gt;b__19()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass1c.&lt;&gt;c__DisplayClass1e.&lt;InvokeActionResultWithFilters&gt;b__1b()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass1c.&lt;&gt;c__DisplayClass1e.&lt;InvokeActionResultWithFilters&gt;b__1b()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)&#xD;&#xA;   at System.Web.Mvc.Controller.ExecuteCore()&#xD;&#xA;   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClass6.&lt;&gt;c__DisplayClassb.&lt;BeginProcessRequest&gt;b__5()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClasse.&lt;EndProcessRequest&gt;b__d()&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.&lt;GetCallInAppTrustThunk&gt;b__0(Action f)&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="Harik, Raif" time="2011-12-23T04:11:41.3799752Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:*/*&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-us,en;q=0.5&#xD;&#xA;HTTP_COOKIE:KYT=51D7B9CFB61F073F41D876FCBB7709E290485CD70D60DEC23E248883AC0137B163AEDF6B46AEC6064478A4E7B10FAF547BCA18DA582D9BB9D5F43D5D940A1AFC7A3AFE84030EAEB50FC1B898763D5808BF62EF6F9E1ED0043D926577913256D10A96FF7CF46F73A31C35399F9D274EF5308996CD13280243FD8DC4B0FB2940F8C193C1C79E5091027151ECD844ACD957155C669053C23D8F48CAAAFEE25D6783121749200B5BCAECE5D7141866551B669C1F6207038B8518CEA5E5B6A2245972; MF=941306D86432B5D680344EA68A7AB4D84502178F0868A62A34BAA529D4B8C716BC7DA32482C4166151A81B8CB598C6588CD59A15AED86F6741E9BF17D9CA85B9304B9F7E1FF1873F557FC96C826F9BDC9C58C69970D36BE518201A426B9499E002AE74CD2E647AFD1B907EC2FE071316D88BD8AE01D5D9A16A93D47C82901E9E71E31EE2873D714A637F207957ECD357B78ADD004B7A50FE3A7304879608CE555DCB41F9132B1B1259679C370B949899D04AF47F853173EABBADB2BFA4369F35&#xD;&#xA;HTTP_HOST:localhost:666&#xD;&#xA;HTTP_REFERER:http://localhost:666/KnowYourTurf/Home&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: */*&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-us,en;q=0.5&#xD;&#xA;Cookie: KYT=51D7B9CFB61F073F41D876FCBB7709E290485CD70D60DEC23E248883AC0137B163AEDF6B46AEC6064478A4E7B10FAF547BCA18DA582D9BB9D5F43D5D940A1AFC7A3AFE84030EAEB50FC1B898763D5808BF62EF6F9E1ED0043D926577913256D10A96FF7CF46F73A31C35399F9D274EF5308996CD13280243FD8DC4B0FB2940F8C193C1C79E5091027151ECD844ACD957155C669053C23D8F48CAAAFEE25D6783121749200B5BCAECE5D7141866551B669C1F6207038B8518CEA5E5B6A2245972; MF=941306D86432B5D680344EA68A7AB4D84502178F0868A62A34BAA529D4B8C716BC7DA32482C4166151A81B8CB598C6588CD59A15AED86F6741E9BF17D9CA85B9304B9F7E1FF1873F557FC96C826F9BDC9C58C69970D36BE518201A426B9499E002AE74CD2E647AFD1B907EC2FE071316D88BD8AE01D5D9A16A93D47C82901E9E71E31EE2873D714A637F207957ECD357B78ADD004B7A50FE3A7304879608CE555DCB41F9132B1B1259679C370B949899D04AF47F853173EABBADB2BFA4369F35&#xD;&#xA;Host: localhost:666&#xD;&#xA;Referer: http://localhost:666/KnowYourTurf/Home&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms Authentication" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="RaifHarik-Mac\Raif Harik" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Task/Display/1" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\Task\Display\1" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="_=1324613501229" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Task/Display/1" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="666" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/Task/Display/1" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="*/*" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-us,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="KYT=51D7B9CFB61F073F41D876FCBB7709E290485CD70D60DEC23E248883AC0137B163AEDF6B46AEC6064478A4E7B10FAF547BCA18DA582D9BB9D5F43D5D940A1AFC7A3AFE84030EAEB50FC1B898763D5808BF62EF6F9E1ED0043D926577913256D10A96FF7CF46F73A31C35399F9D274EF5308996CD13280243FD8DC4B0FB2940F8C193C1C79E5091027151ECD844ACD957155C669053C23D8F48CAAAFEE25D6783121749200B5BCAECE5D7141866551B669C1F6207038B8518CEA5E5B6A2245972; MF=941306D86432B5D680344EA68A7AB4D84502178F0868A62A34BAA529D4B8C716BC7DA32482C4166151A81B8CB598C6588CD59A15AED86F6741E9BF17D9CA85B9304B9F7E1FF1873F557FC96C826F9BDC9C58C69970D36BE518201A426B9499E002AE74CD2E647AFD1B907EC2FE071316D88BD8AE01D5D9A16A93D47C82901E9E71E31EE2873D714A637F207957ECD357B78ADD004B7A50FE3A7304879608CE555DCB41F9132B1B1259679C370B949899D04AF47F853173EABBADB2BFA4369F35" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:666" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:666/KnowYourTurf/Home" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="_">
+      <value string="1324613501229" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name="KYT">
+      <value string="51D7B9CFB61F073F41D876FCBB7709E290485CD70D60DEC23E248883AC0137B163AEDF6B46AEC6064478A4E7B10FAF547BCA18DA582D9BB9D5F43D5D940A1AFC7A3AFE84030EAEB50FC1B898763D5808BF62EF6F9E1ED0043D926577913256D10A96FF7CF46F73A31C35399F9D274EF5308996CD13280243FD8DC4B0FB2940F8C193C1C79E5091027151ECD844ACD957155C669053C23D8F48CAAAFEE25D6783121749200B5BCAECE5D7141866551B669C1F6207038B8518CEA5E5B6A2245972" />
+    </item>
+    <item name="MF">
+      <value string="941306D86432B5D680344EA68A7AB4D84502178F0868A62A34BAA529D4B8C716BC7DA32482C4166151A81B8CB598C6588CD59A15AED86F6741E9BF17D9CA85B9304B9F7E1FF1873F557FC96C826F9BDC9C58C69970D36BE518201A426B9499E002AE74CD2E647AFD1B907EC2FE071316D88BD8AE01D5D9A16A93D47C82901E9E71E31EE2873D714A637F207957ECD357B78ADD004B7A50FE3A7304879608CE555DCB41F9132B1B1259679C370B949899D04AF47F853173EABBADB2BFA4369F35" />
+    </item>
+  </cookies>
+</error>

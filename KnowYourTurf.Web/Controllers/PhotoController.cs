@@ -40,7 +40,8 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Photo = photo,
                 PhotoCategoryList = categoryItems,
-                Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString()
+                Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString(),
+                Popup = input.Popup
             };
             return View(model);
         }
@@ -106,9 +107,7 @@ namespace KnowYourTurf.Web.Controllers
     public class PhotoViewModel:ViewModel
     {
         public Photo Photo { get; set; }
-
         public IEnumerable<SelectListItem> PhotoCategoryList { get; set; }
-
         public long PhotoCategory { get; set; }
     }
 }

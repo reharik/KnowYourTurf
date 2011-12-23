@@ -1,0 +1,139 @@
+﻿@model KnowYourTurf.Web.Models.FieldDashboardViewModel
+@using KnowYourTurf.Core.Html.Expressions
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using HtmlTags
+
+
+@{ Layout = "~/Views/Shared/_FormLayout.cshtml"; }
+
+
+@section HeaderJavascript{
+     var pendingTaskaddUpdateUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdateUrl));
+     var photoaddUpdateUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdatePhotoUrl));
+     var documentaddUpdateUrl =@MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdateDocumentUrl));
+     var pendingGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition))
+     var completeGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CompletedListDefinition))
+     var photoGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.PhotoListDefinition))
+     var documentGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.DocumentListDefinition))
+ 
+    $(document).ready(function() {
+        fdcOptions = {
+            pendingTaskaddUpdateUrl:pendingTaskaddUpdateUrl,
+            photoaddUpdateUrl:photoaddUpdateUrl,
+            documentaddUpdateUrl:documentaddUpdateUrl,
+            pendingGridDef:pendingGridDef,
+            completeGridDef:completeGridDef,
+            photoGridDef:photoGridDef,
+            documentGridDef:documentGridDef
+        }
+        new kyt.FieldDashboardController(fdcOptions);
+    });
+}
+    <div class="KYT_DashInfo" id="masterArea">
+
+                  @MvcHtmlString.Create(FormFor<FieldController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Field.EntityId).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Field.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Field.Abbreviation).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Field.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Field.Size).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
+            @Html.SubmissionFor(x => x.Field.FieldColor).InputId("FieldColor").ToHtmlTag()
+            <div id="colorPicker"></div>
+        </div>
+    </div>
+            @EndForm()
+            
+        <div id="galleria" >
+            
+                        @foreach (var photo in Model.Field.Photos)
+                        {
+                                <img src="@photo.FileUrl" />
+                        }
+        </div>
+    <div class="col full clear"></div>
+
+    <div class="col left clear">
+        <div class="fieldRow">
+            <div id="pendingTaskGridContainer" class="grid_5b">
+                <div class="content-header">
+                    <input class="search" /> 
+                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+                    <span class="title-name">@Model.Title</span>
+                </div>
+                <div id="contentArea" class="content-inner">
+                    <div id="validation-container-wrapper">
+                        <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
+                    </div>
+                        <table id="gridContainer_pt" class="scroll"></table>
+                        <div id="pager" class="scroll" style="text-align:center;"></div>
+            </div>
+        </div>
+        <div class="fieldRow">
+            <div id="photoGridContainer" class="grid_5b">
+                <div class="content-header">
+                    <input class="search" /> 
+                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+                    <span class="title-name">@Model.Title</span>
+                </div>
+                <div id="contentArea" class="content-inner">
+                    <div id="validation-container-wrapper">
+                        <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
+                    </div>
+                        <table id="gridContainer_p" class="scroll"></table>
+                        <div id="pager" class="scroll" style="text-align:center;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="col right">
+        <div class="fieldRow">
+            <div id="completeTaskGridContainer" class="grid_4 KYT_AddNew_space">
+                <div class="content-header">
+                    <input class="search" /> 
+                    <span class="title-name">@Model.Title</span>
+                </div>
+                <div id="contentArea" class="content-inner">
+                    <div id="validation-container-wrapper">
+                        <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
+                    </div>
+                            <table id="gridContainer_ct" class="scroll"></table>
+                            <div id="pager" class="scroll" style="text-align:center;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="fieldRow">
+            <div id="documentGridContainer" class="grid_5b">
+                <div class="content-header">
+                    <input class="search" /> 
+                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+                    <span class="title-name">@Model.Title</span>
+                </div>
+                <div id="contentArea" class="content-inner">
+                    <div id="validation-container-wrapper">
+                        <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
+                    </div>
+                        <table id="gridContainer_d" class="scroll"></table>
+                        <div id="pager" class="scroll" style="text-align:center;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

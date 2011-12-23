@@ -18,6 +18,7 @@ kyt.AjaxPopupFormModule  = kyt.Module.extend({
     initialize:function(){
         $.extend(this,this.defaults());
         this.registerSubscriptions();
+        this.options.crudFormOptions.errorContainer = "#errorMessagesPU";
         this.views[this.id + "Form"] = new kyt.AjaxFormView(this.options);
         this.views[this.id + "Form"].render();
     },

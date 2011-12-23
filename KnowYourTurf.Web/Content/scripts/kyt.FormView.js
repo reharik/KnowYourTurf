@@ -49,7 +49,7 @@ kyt.BaseFormView = Backbone.View.extend({
         var message = cc.utilities.messageHandling.mhMessage("success",result.Message,"");
         emh.addMessage(message);
         emh.showAllMessages(notification.getSuccessContainer());
-        $.publish("/contentLevel/form_"+this.id+"/success",[result,form]);
+        $.publish("/contentLevel/form_"+this.id+"/success",[result,form,this.id]);
     }
 });
 

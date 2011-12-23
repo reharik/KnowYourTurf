@@ -10,7 +10,7 @@
             @MvcHtmlString.Create(WebLocalizationKeys.PURCHASE_ORDER_LIST_ITEM_INFORMATION.ToString())
         </div>
         @MvcHtmlString.Create(Html.HiddenFor(x => x.PurchaseOrderLineItem.EntityId, new { @class = "copyEntityId" }).ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())
             @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.Product.Name).ToString())
             @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.Product.Description).ToString())
             @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.QuantityOrdered).ToString())

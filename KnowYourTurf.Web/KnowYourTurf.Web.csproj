@@ -668,6 +668,35 @@
     <Content Include="Views\PurchaseOrder\AddItem.cshtml" />
     <Content Include="Views\PurchaseOrder\PurchaseOrderBuilder.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Task\TaskAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TaskRunner\GetWeather.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TaskType\AddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\VendorAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\VendorContact\VendorContactAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Weather\WeatherAddUpdate.cshtml" />
+    <Content Include="Views\Weather\WeatherView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FieldDashboard\FieldDashboard.cshtml" />
+    <Content Include="Views\Field\FieldAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Task\Display.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

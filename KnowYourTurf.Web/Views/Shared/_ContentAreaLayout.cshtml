@@ -8,6 +8,7 @@
      @CSS("fullcalendar.css").ToHtmlTag()
     @CSS("token-input.css").ToHtmlTag()
     @CSS("fullcalendar.css").ToHtmlTag()
+    @CSS("svwp_style.css").ToHtmlTag()
     @RenderSection("ExtraCss", false)
 }
 
@@ -18,6 +19,7 @@
     @Script("jqueryPlugins/jquery-tmpl.js").ToHtmlTag()
     @Script("jqueryPlugins/jquery.miniColors.js").ToHtmlTag()
     @Script("jqueryPlugins/jquery.ui.timepicker-0.0.8.js").ToHtmlTag()
+    @Script("jqueryPlugins/galleria-1.2.5.js").ToHtmlTag()
 
     @Script("externalHelpers/knockout-1.2.1.debug.js").ToHtmlTag()
     @Script("externalHelpers/knockout.mapping.js").ToHtmlTag()
@@ -57,15 +59,16 @@
     @Script("kyt.WeatherController.js").ToHtmlTag()
     @Script("kyt.CalculatorController.js").ToHtmlTag()
     @Script("internalHelpers/jquery.kyt.calendar.js").ToHtmlTag()
-    @Script("kyt.calendar.js").ToHtmlTag()
     @Script("externalHelpers/fullcalendar.js").ToHtmlTag()
     @Script("kyt.CalendarView.js").ToHtmlTag()
     @Script("kyt.EventCalendarController.js").ToHtmlTag()
     @Script("kyt.PhotoListController.js").ToHtmlTag()
     @Script("kyt.PurchaseOrderController.js").ToHtmlTag()
     @Script("kyt.PurchaseOrderBuilderController.js").ToHtmlTag()
-
-
+    @Script("kyt.TaskCalendarController.js").ToHtmlTag()
+    @Script("kyt.VendorController.js").ToHtmlTag()
+    @Script("kyt.FieldDashboardController.js").ToHtmlTag()
+    @Script("kyt.TaskListController.js").ToHtmlTag()
 
     @RenderSection("HeaderScripts", false)
 }

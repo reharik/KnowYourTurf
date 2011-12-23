@@ -75,7 +75,9 @@ namespace KnowYourTurf.Web.Controllers
                                 ProductList = dictionary,
                                 TaskTypeList = taskTypes,
                                 Task = task,
-                                Title = WebLocalizationKeys.TASK_INFORMATION.ToString()
+                                Title = WebLocalizationKeys.TASK_INFORMATION.ToString(),
+                                Popup = input.Popup
+
             };
             if (task.EntityId > 0)
             {
@@ -128,7 +130,7 @@ namespace KnowYourTurf.Web.Controllers
                                 Title = WebLocalizationKeys.TASK_INFORMATION.ToString()
 
             };
-            return PartialView("TaskView", model);
+            return PartialView( model);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -187,7 +189,7 @@ namespace KnowYourTurf.Web.Controllers
 
             task.TaskType = _repository.Find<TaskType>(model.Task.TaskType.EntityId);
             task.Field = _repository.Find<Field>(model.Task.Field.EntityId);
-            if (model.Product.IsNotEmpty())
+            if (model.Product.Contains("_"))
             {
                 var product = model.Product.Split('_');
                 task.InventoryProduct= _repository.Find<InventoryProduct>(Int64.Parse(product[0]));

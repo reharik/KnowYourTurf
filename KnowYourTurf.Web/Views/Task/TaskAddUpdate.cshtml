@@ -1,0 +1,89 @@
+﻿@model KnowYourTurf.Web.Models.TaskViewModel
+@using HtmlTags
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
+}
+
+<script>
+    var availableEmployees = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableEmployees)) ;
+    var selectedEmployees = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedEmployees)) ;
+    var availableEquipment = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableEquipment)) ;
+    var selectedEquipment = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedEquipment)) ;
+    var employeeOptions = {
+        availableItems: availableEmployees,
+        selectedItems: selectedEmployees,
+        inputSelector:"#EmployeeInput"
+    };
+    var equipmentOptions = {
+        availableItems: availableEquipment,
+        selectedItems: selectedEquipment,
+        inputSelector:"#EquipmentInput"
+    };
+    extraFormOptions.employeeOptions = employeeOptions;
+    extraFormOptions.equipmentOptions = equipmentOptions;
+</script>
+        
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
+
+@MvcHtmlString.Create(FormFor<TaskController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+@MvcHtmlString.Create(Html.HiddenFor(x => x.Task.EntityId).ToString())
+<div class="col left">
+<div class="fieldRow">
+    @Html.SubmissionFor(x => x.Task.TaskType).ToHtmlTag()
+</div>
+<div class="fieldRow">
+    @Html.SubmissionFor(x => x.Task.ScheduledDate).ToHtmlTag()
+</div>
+<div class="fieldRow">
+    @Html.SubmissionFor(x => x.Task.ScheduledStartTime).ToHtmlTag()
+</div>
+<div class="fieldRow">
+    @Html.SubmissionFor(x => x.Task.ScheduledEndTime).ToHtmlTag()
+</div>
+<div class="fieldRow">
+    @Html.SubmissionFor(x => x.Task.ActualTimeSpent).AddClassToInput("timePickerNoSuffix").ToHtmlTag()
+</div>
+<div class="fieldRow">
+    @Html.SubmissionFor(x => x.Task.Field).ToHtmlTag()
+</div>
+<div class="fieldRow">
+    @Html.SubmissionFor(x => x.Product).ToHtmlTag()
+</div>
+<div class="fieldRow">
+    @Html.SubmissionFor(x => x.Task.QuantityNeeded).ToHtmlTag()
+</div>
+<div class="fieldRow">
+    @Html.SubmissionFor(x => x.Task.QuantityUsed).ToHtmlTag()
+</div>
+<div class="fieldRow">
+            
+    @Html.SubmissionFor(x => x.Task.Notes).AddClassToInput("KYT_editor_label_left").ToHtmlTag()
+</div>
+<div class="fieldRow">
+@if (Model.Task.Complete){
+                @Html.ViewFor(x => x.Task.Complete).ToHtmlTag()
+}else{
+                              @Html.SubmissionFor(x => x.Task.Complete).ToHtmlTag()}
+        </div>
+    </div>
+    <div class="col full clear">
+        <div class="fieldRow">
+                    <div id="employeeTokenizer">
+                @Html.SubmissionFor(x => x.EmployeeInput).InputId("EmployeeInput").HideInput().LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
+            </div>
+        </div>
+        <div class="fieldRow">
+            <div id="equipmentTokenizer">
+                @Html.SubmissionFor(x => x.EquipmentInput).InputId("EquipmentInput").HideInput().LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
+            </div>
+        </div>
+    </div>
+            
+            @EndForm()
+
+

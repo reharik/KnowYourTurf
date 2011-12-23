@@ -32,7 +32,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
             gridName:"pendingTaskGrid",
             gridContainer:"#gridContainer_pt",
             gridDef:this.options.pendingGridDef,
-            addUpdateUrl:this.options.pendingTaskaddEditUrl
+            addUpdateUrl:this.options.pendingTaskaddUpdateUrl
         };
         this.views.pendingTaskGridView = new kyt.GridView(ptgOptions);
         var ctgOptions = {
@@ -42,7 +42,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
             gridContainer:"#gridContainer_ct",
             gridDef:this.options.completeGridDef,
             // this is not used except for copy task which is why it's for the pendingGrid
-            addUpdateUrl:this.options.pendingTaskaddEditUrl
+            addUpdateUrl:this.options.pendingTaskaddUpdateUrl
         };
         this.views.completeTaskGridView = new kyt.GridView(ctgOptions);
     },
@@ -60,7 +60,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
 
         $.subscribe('/contentLevel/grid_completeTaskGrid/Display',$.proxy(function(url,data){this.displayItem(url,data,"completeTaskDisplay")},this), this.cid, "empDash");
 
-        $.subscribe('/contentLevel/popupFormModule_pendingTaskForm/popupLoaded',$.proxy(this.loadTokenizers,this), this.cid, "empDash");
+        $.subscribe('/contentLevel/form_pendingTaskForm/pageLoaded',$.proxy(this.loadTokenizers,this), this.cid, "empDash");
         // from form
         $.subscribe('/contentLevel/form_pendingTaskForm/success', $.proxy(this.formSuccess,this), this.cid, "empDash");
         $.subscribe('/contentLevel/form_pendingTaskForm/cancel', $.proxy(this.popupCancel,this), this.cid, "empDash");
@@ -78,7 +78,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
         if(result.success) return;
         $.address.value(this.options.employeeListUrl);
     },
-    
+
     loadRolesTokenizers: function(formOptions){
         var options = $.extend({},formOptions.rolesOptions,{el:"#rolesInputRoot"});
         this.views.roles = new kyt.TokenView(options);
@@ -86,7 +86,9 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
     addUpdateItem: function(url, data,name){
         var crudFormOptions={};
         crudFormOptions.additionalSubmitData =  {"From":"Employee","ParentId":entityId};
-        var _url = url?url:this.options[name+"addEditUrl"];
+        var _url = url?url:this.options[name+"addUpdateUrl"];
+        if(!data)data={};
+        data.Popup=true;
         $("#masterArea").after("<div id='dialogHolder'/>");
         var moduleOptions = {
             id:name,

@@ -20,11 +20,12 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
         this.registerSubscriptions();
         this.id = "fieldDashboardController";
         var displayOptions={
-            el:"#masterArea"
+            el:"#masterArea",
+            id:"mainForm"
         };
         var _options = $.extend({},this.options,displayOptions);
 
-        this.views.displayView = new kyt.DisplayView(_options);
+        this.modules.mainForm = new kyt.FormModule(_options);
 
         var ptgOptions = {
             el:"#pendingTaskGridContainer",
@@ -32,7 +33,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             gridName:"pendingTaskGrid",
             gridContainer:"#gridContainer_pt",
             gridDef:this.options.pendingGridDef,
-            addEditUrl:this.options.pendingTaskaddEditUrl
+            addUpdateUrl:this.options.pendingTaskaddUpdateUrl
         };
         this.views.pendingTaskGridView = new kyt.GridView(ptgOptions);
         var ctgOptions = {
@@ -42,7 +43,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             gridContainer:"#gridContainer_ct",
             gridDef:this.options.completeGridDef,
             // this is not used except for copy task which is why it's for the pendingGrid
-            addEditUrl:this.options.pendingTaskaddEditUrl
+            addUpdateUrl:this.options.pendingTaskaddUpdateUrl
         };
         this.views.completeTaskGridView = new kyt.GridView(ctgOptions);
         var pgOptions = {
@@ -51,7 +52,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             gridName:"photoGrid",
             gridContainer:"#gridContainer_p",
             gridDef:this.options.photoGridDef,
-            addEditUrl:this.options.photoaddEditUrl
+            addUpdateUrl:this.options.photoaddUpdateUrl
         };
         this.views.photoGridView = new kyt.GridView(pgOptions);
         var dgOptions = {
@@ -60,7 +61,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             gridName:"documentGrid",
             gridContainer:"#gridContainer_d",
             gridDef:this.options.documentGridDef,
-            addEditUrl:this.options.documentaddEditUrl
+            addUpdateUrl:this.options.documentaddUpdateUrl
         };
         this.views.documentGridView = new kyt.GridView(dgOptions);
         if($("#galleria img").size()>0){
@@ -74,29 +75,32 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
     },
 
     registerSubscriptions: function(){
+
+        $.subscribe('/contentLevel/form_mainForm/pageLoaded',$.proxy(this.loadPlugins,this), this.cid, "empDash");
         // from grid
-        $.subscribe('/contentLevel/grid_pendingTaskGrid/AddNewItem',$.proxy(function(url,data){this.addEditItem(url,data,"pendingTaskForm")},this), this.cid);
+        $.subscribe('/contentLevel/grid_pendingTaskGrid/AddUpdateItem',$.proxy(function(url,data){this.addEditItem(url,data,"pendingTaskForm")},this), this.cid);
         $.subscribe('/contentLevel/grid_pendingTaskGrid/Edit',$.proxy(function(url,data){this.addEditItem(url,data,"pendingTaskForm")},this), this.cid);
         $.subscribe('/contentLevel/grid_pendingTaskGrid/Display',$.proxy(function(url,data){this.displayItem(url,data,"pendingTaskDisplay")},this), this.cid);
         $.subscribe('/contentLevel/grid_pendingTaskGrid/Delete',$.proxy(this.deletePendingTask,this), this.cid);
+        $.subscribe('/contentLevel/form_pendingTaskForm/pageLoaded',$.proxy(this.loadTokenizers,this), this.cid, "empDash");
 
         $.subscribe('/contentLevel/grid_completeTaskGrid/Display',$.proxy(function(url,data){this.displayItem(url,data,"completeTaskDisplay")},this), this.cid);
 
-        $.subscribe('/contentLevel/grid_photoGrid/AddNewItem',$.proxy(function(url,data){this.addEditItem(url,data,"photoForm")},this), this.cid);
+        $.subscribe('/contentLevel/grid_photoGrid/AddUpdateItem',$.proxy(function(url,data){this.addEditItem(url,data,"photoForm")},this), this.cid);
         $.subscribe('/contentLevel/grid_photoGrid/Edit',$.proxy(function(url,data){this.addEditItem(url,data,"photoForm")},this), this.cid);
         $.subscribe('/contentLevel/grid_photoGrid/Display',$.proxy(function(url,data){this.displayItem(url,data,"photoDisplay")},this), this.cid);
         $.subscribe('/contentLevel/grid_photoGrid/Delete',$.proxy(this.deletePhoto,this), this.cid);
 
-        $.subscribe('/contentLevel/grid_documentGrid/AddNewItem',$.proxy(function(url,data){this.addEditItem(url,data,"documentForm")},this), this.cid);
+        $.subscribe('/contentLevel/grid_documentGrid/AddUpdateItem',$.proxy(function(url,data){this.addEditItem(url,data,"documentForm")},this), this.cid);
         $.subscribe('/contentLevel/grid_documentGrid/Edit',$.proxy(function(url,data){this.addEditItem(url,data,"documentForm")},this), this.cid);
         $.subscribe('/contentLevel/grid_documentGrid/Display',$.proxy(function(url,data){this.displayItem(url,data,"documentDisplay")},this), this.cid);
         $.subscribe('/contentLevel/grid_documentGrid/Delete',$.proxy(this.deleteDocument,this), this.cid);
 
-        $.subscribe('/contentLevel/popupFormModule_pendingTaskForm/popupLoaded',$.proxy(this.loadTokenizers,this), this.cid);
+//        $.subscribe('/contentLevel/popupFormModule_pendingTaskForm/popupLoaded',$.proxy(this.loadTokenizers,this), this.cid);
 
         // from form
         $.subscribe('/contentLevel/form_pendingTaskForm/success', $.proxy(this.formSuccess,this), this.cid);
-        $.subscribe('/contentLevel/form_pendingTaskForm/cancel', $.proxy(this.popupCancel,this), this.cid);
+        $.subscribe('/contentLevel/popup_pendingTaskForm/cancel', $.proxy(this.popupCancel,this), this.cid);
 
         $.subscribe('/contentLevel/form_photoForm/success', $.proxy(this.photoFormSuccess,this), this.cid);
         $.subscribe('/contentLevel/form_photoForm/cancel', $.proxy(this.popupCancel,this), this.cid);
@@ -122,7 +126,9 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
     addEditItem: function(url, data,name){
         var crudFormOptions={};
         crudFormOptions.additionalSubmitData =  {"From":"Field","ParentId":entityId};
-        var _url = url?url:this.options[name+"addEditUrl"];
+        var _url = url?url:this.options[name+"addUpdateUrl"];
+        if(!data)data={};
+        data.Popup=true;
         $("#masterArea").after("<div id='dialogHolder'/>");
         var moduleOptions = {
             id:name,
@@ -132,7 +138,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             crudFormOptions:crudFormOptions,
             buttons: kyt.popupButtonBuilder.builder(name).standardEditButons()
         };
-        this.modules[name] = new kyt.PopupFormModule(moduleOptions);
+        this.modules[name] = new kyt.AjaxPopupFormModule(moduleOptions);
     },
 
     displayItem: function(url, data,name){
@@ -141,7 +147,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
         var buttons = builder.standardDisplayButtons();
         if(name == "pendingTaskDisplay" || name== "completeTaskDisplay"){
             builder.clearButtons();
-            builder.addButton("Copy Task", function(){$.publish("/contentLevel/popup_"+name+"/copyTask",[$("#AddEditUrl",this).val(),name])});
+            builder.addButton("Copy Task", function(){$.publish("/contentLevel/popup_"+name+"/copyTask",[$("#AddUpdateUrl",this).val(),name])});
             builder.addCancelButton();
             if(name == "pendingTaskDisplay" ){
                 builder.addEditButton();
@@ -155,7 +161,10 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             url: _url,
             buttons: buttons
         };
-        this.modules[name] = new kyt.PopupDisplayModule(moduleOptions);
+        this.modules[name] = new kyt.AjaxPopupDisplayModule(moduleOptions);
+    },
+    loadPlugins:function(){
+        $('#FieldColor',"#masterArea").miniColors();
     },
     deletePendingTask:function(url){
         kyt.repository.ajaxPost(url, $.proxy(function(){this.views.pendingTaskGridView.reloadGrid()},this))
@@ -182,7 +191,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             availableItems:formOptions.equipmentOptions.availableItems,
             selectedItems:formOptions.equipmentOptions.selectedItems,
             inputSelector:formOptions.equipmentOptions.inputSelector
-        };
+            };
         this.views.employeeToken= new kyt.TokenView(employeeTokenOptions);
         this.views.equipmentToken = new kyt.TokenView(equipmentTokenOptions);
 

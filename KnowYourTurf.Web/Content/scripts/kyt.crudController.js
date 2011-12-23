@@ -27,6 +27,7 @@ kyt.CrudController  = kyt.Controller.extend({
     },
 
     registerSubscriptions: function(){
+        $.subscribe('/contentLevel/grid_/Redirect',$.proxy(this.redirectItem,this), this.cid);
         $.subscribe('/contentLevel/grid_/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
         //
         $.subscribe("/contentLevel/form_mainForm/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
@@ -46,6 +47,9 @@ kyt.CrudController  = kyt.Controller.extend({
         };
         $("#masterArea","#contentInner").after("<div id='detailArea'/>");
         this.modules.formModule = new kyt.AjaxFormModule(formOptions);
+    },
+    redirectItem:function(url){
+        $.address.value(url);
     },
     formLoaded:function(){
          $("#masterArea").hide();

@@ -1,0 +1,18 @@
+﻿@model CalendarViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_DisplayLayout.cshtml"; }
+
+<script>
+  var calendarDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CalendarDefinition));
+  calendarDef.calendarContainer="#calendar";
+  calendarDef.deleteUrl = "@MvcHtmlString.Create(Model.DeleteUrl)";
+
+    $(document).ready(function(){
+        new kyt.TaskCalendarController(calendarDef);
+    });
+</script>
+
+<div id='calendar'></div>

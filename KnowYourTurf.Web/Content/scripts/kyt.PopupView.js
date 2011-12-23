@@ -33,7 +33,7 @@ kyt.PopupView = Backbone.View.extend({
             buttons:this.options.buttons,
             title: this.options.title,
             close:function(){
-                $.publish("/contentLevel/popup_"+that.id+"/cancel",[]);
+                $.publish("/contentLevel/popup_"+that.id+"/cancel",[that.id]);
                 $(".ui-dialog").remove();
             }
         });

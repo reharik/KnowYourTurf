@@ -1,58 +1,45 @@
 <Configuration>
   <RecentFiles>
     <RecentFiles>
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_DetailLayout.cshtml" caret="0" fromTop="0" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_EmptyLayout.cshtml" caret="29" fromTop="1" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_DisplayLayout.cshtml" caret="559" fromTop="20" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Equipment/f:EquipmentAddUpdate.cshtml" caret="1354" fromTop="21" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:EventCalendar/f:EventCalendar.cshtml" caret="499" fromTop="14" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Event/f:EventView.cshtml" caret="1410" fromTop="31" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:EquipmentListController.cs" caret="592" fromTop="15" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:EquipmentList/f:EquipmentList.cshtml" caret="394" fromTop="14" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Employee/f:EmployeeAddUpdate.cshtml" caret="254" fromTop="9" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:EventCalendarController.cs" caret="260" fromTop="10" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:EventType/f:AddUpdate.cshtml" caret="639" fromTop="17" />
-      <File id="3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7/d:Services/f:IPurchaseOrderLineItemService.cs" caret="1158" fromTop="20" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderList/f:PurchaseOrderList.cshtml" caret="170" fromTop="7" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:AddItem.cshtml" caret="1384" fromTop="22" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PhotoCategory/f:AddUpdate.cshtml" caret="614" fromTop="15" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_ContentAreaLayout.cshtml" caret="3429" fromTop="41" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PhotoList/f:PhotoList.cshtml" caret="333" fromTop="11" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Photo/f:AddUpdate.cshtml" caret="598" fromTop="17" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_FormLayout.cshtml" caret="0" fromTop="0" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Material/f:MaterialAddUpdate.cshtml" caret="681" fromTop="18" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Forum/f:Forum.cshtml" caret="85" fromTop="3" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Fertilizer/f:FertilizerAddUpdate.cshtml" caret="695" fromTop="16" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Event/f:EventAddUpdate.cshtml" caret="840" fromTop="27" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="1212" fromTop="12" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderCommit/f:PurchaseOrderCommit.cshtml" caret="293" fromTop="7" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:PurchaseOrderLineItemView.cshtml" caret="326" fromTop="10" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:PurchaseOrderLineItemAddUpdate.cshtml" caret="815" fromTop="17" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:ReceivePurchaseOrderLineItem.cshtml" caret="1284" fromTop="23" />
-      <File id="3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7/d:Rules/f:DeleteEmployeeRules.cs" caret="230" fromTop="8" />
-      <File id="3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7/d:Rules/f:DeleteFieldRules.cs" caret="572" fromTop="16" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Weather/f:WeatherAddUpdate.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:VendorContact/f:VendorContactAddUpdate.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Vendor/f:VendorAddUpdate.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:TaskType/f:AddUpdate.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:TaskRunner/f:GetWeather.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:EventCalendar/f:EventCalendar.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:TaskCalendar/f:TaskCalendar.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Photo/f:AddUpdate.cshtml" caret="0" fromTop="0" />
+      <File id="3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7/d:Rules/f:DeleteFieldRules.cs" caret="0" fromTop="0" />
+      <File id="3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7/d:Rules/f:DeleteEmployeeRules.cs" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:ReceivePurchaseOrderLineItem.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:PurchaseOrderLineItemView.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderCommit/f:PurchaseOrderCommit.cshtml" caret="0" fromTop="0" />
+      <File id="3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7/d:Services/f:IPurchaseOrderLineItemService.cs" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:PurchaseOrderLineItemAddUpdate.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderList/f:PurchaseOrderList.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:AddItem.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PhotoCategory/f:AddUpdate.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Material/f:MaterialAddUpdate.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Forum/f:Forum.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Fertilizer/f:FertilizerAddUpdate.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Event/f:EventAddUpdate.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:EmployeeDashboard/f:EmployeeDashboard.cshtml" caret="6087" fromTop="59" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FieldDashboard/f:FieldDashboard.cshtml" caret="6972" fromTop="28" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_DisplayLayout.cshtml" caret="408" fromTop="17" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_FormLayout.cshtml" caret="55" fromTop="4" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Field/f:FieldAddUpdate.cshtml" caret="256" fromTop="4" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Task/f:TaskAddUpdate.cshtml" caret="1242" fromTop="31" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_popupLayout.cshtml" caret="0" fromTop="0" />
     </RecentFiles>
     <RecentEdits>
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Photo/f:AddUpdate.cshtml" caret="1254" fromTop="30" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Photo/f:AddUpdate.cshtml" caret="211" fromTop="6" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PhotoList/f:PhotoList.cshtml" caret="287" fromTop="9" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PhotoCategory/f:AddUpdate.cshtml" caret="855" fromTop="13" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PhotoCategory/f:AddUpdate.cshtml" caret="825" fromTop="20" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:AddItem.cshtml" caret="2069" fromTop="28" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:AddItem.cshtml" caret="2069" fromTop="28" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:AddItem.cshtml" caret="2078" fromTop="28" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:AddItem.cshtml" caret="2048" fromTop="39" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PhotoCategory/f:AddUpdate.cshtml" caret="206" fromTop="5" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:AddItem.cshtml" caret="270" fromTop="2" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderList/f:PurchaseOrderList.cshtml" caret="170" fromTop="7" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="359" fromTop="25" />
       <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="190" fromTop="8" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="1460" fromTop="29" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="1462" fromTop="29" />
       <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_ContentAreaLayout.cshtml" caret="2939" fromTop="32" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="1558" fromTop="33" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="1522" fromTop="31" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="1935" fromTop="40" />
-      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="2239" fromTop="38" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="1560" fromTop="33" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="1524" fromTop="31" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="1937" fromTop="40" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrder/f:PurchaseOrderBuilder.cshtml" caret="2241" fromTop="38" />
       <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:PurchaseOrderLineItemAddUpdate.cshtml" caret="1756" fromTop="26" />
       <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:PurchaseOrderLineItemAddUpdate.cshtml" caret="1859" fromTop="28" />
       <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:PurchaseOrderLineItemAddUpdate.cshtml" caret="1836" fromTop="40" />
@@ -63,6 +50,19 @@
       <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:ReceivePurchaseOrderLineItem.cshtml" caret="1976" fromTop="26" />
       <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:ReceivePurchaseOrderLineItem.cshtml" caret="2091" fromTop="28" />
       <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:ReceivePurchaseOrderLineItem.cshtml" caret="2068" fromTop="39" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FieldDashboard/f:FieldDashboard.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:EmployeeDashboard/f:EmployeeDashboard.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:EmployeeDashboard/f:EmployeeDashboard.cshtml" caret="248" fromTop="8" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FieldDashboard/f:FieldDashboard.cshtml" caret="2089" fromTop="11" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FieldDashboard/f:FieldDashboard.cshtml" caret="1747" fromTop="2" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FieldDashboard/f:FieldDashboard.cshtml" caret="2492" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FieldDashboard/f:FieldDashboard.cshtml" caret="2426" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FieldDashboard/f:FieldDashboard.cshtml" caret="2490" fromTop="2" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FieldDashboard/f:FieldDashboard.cshtml" caret="4932" fromTop="32" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FieldDashboard/f:FieldDashboard.cshtml" caret="6979" fromTop="29" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_FormLayout.cshtml" caret="55" fromTop="4" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_popupLayout.cshtml" caret="0" fromTop="0" />
+      <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Task/f:TaskAddUpdate.cshtml" caret="1242" fromTop="28" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>

@@ -12,6 +12,7 @@ namespace KnowYourTurf.Core
         public string AddUpdateUrl { get; set; }
         public string From { get; set; }
         public string Title { get; set; }
+        public bool Popup { get; set; }
     }
 
     public class ListViewModel : ViewModel

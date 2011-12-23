@@ -11,7 +11,7 @@
 
 
 @section HeaderJavascript{
-    var pendingTaskaddEditUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdateUrl));
+    var pendingTaskaddUpdateUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdateUrl));
     var pendingGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition))
     var completeGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CompletedListDefinition))
      var availableRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableItems)) ;
@@ -25,7 +25,7 @@
     extraFormOptions.rolesOptions = rolesOptions;
     $(document).ready(function() {
         edcOptions = {
-            pendingTaskaddEditUrl:pendingTaskaddEditUrl,
+            pendingTaskaddUpdateUrl:pendingTaskaddUpdateUrl,
             pendingGridDef:pendingGridDef,
             completeGridDef:completeGridDef,
             rolesOptions:rolesOptions,

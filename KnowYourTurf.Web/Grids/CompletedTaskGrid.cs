@@ -26,8 +26,8 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Task> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.TaskType.Name)
-                .ForAction<TaskController>(x => x.AddUpdate(null))
-                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ForAction<TaskController>(x => x.Display(null))
+                .ToPerformAction(ColumnAction.Display)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.ScheduledDate);
             GridBuilder.DisplayFor(x => x.ScheduledStartTime);

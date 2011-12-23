@@ -4,7 +4,6 @@
 @using HtmlTags
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
-@MvcHtmlString.Create(Script("kyt.VendorController.js").ToString())
 @section HeaderJavascript{
     $(document).ready(function(){
         new kyt.VendorController(gridControllerOptions);
