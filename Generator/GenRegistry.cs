@@ -1,54 +1,39 @@
-using Alpinely.TownCrier;
-using AuthorizeNet;
-using KnowYourTurf.Core.Domain.Persistence;
+﻿using KnowYourTurf.Core.Domain.Persistence;
+using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Web.Config;
 using KnowYourTurf.Web.Grids;
 using KnowYourTurf.Web.Menus;
 using KnowYourTurf.Web.Services;
-using FubuMVC.UI;
-using FubuMVC.UI.Configuration;
-using FubuMVC.UI.Tags;
+using KnowYourTurf.Web.Services.EmailHandlers;
 using MethodFitness.Core;
-using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using Rhino.Security.Interfaces;
 using Rhino.Security.Services;
 using StructureMap.Configuration.DSL;
-using StructureMap.Pipeline;
 using Log4NetLogger = MethodFitness.Core.Log4NetLogger;
-using StructureMapServiceLocator = KnowYourTurf.Core.Services.StructureMapServiceLocator;
 
 namespace KnowYourTurf.Web
 {
-    public class KYTWebRegistry : Registry
+    public class GenRegistry : Registry
     {
-        public KYTWebRegistry()
+        public GenRegistry()
         {
             Scan(x =>
             {
                 x.TheCallingAssembly();
                 x.ConnectImplementationsToTypesClosing(typeof(IEntityListGrid<>));
                 x.AssemblyContainingType(typeof(CoreLocalizationKeys));
-                x.AssemblyContainingType(typeof(MergedEmailFactory));
-                x.AssemblyContainingType(typeof(Gateway));
+                x.AddAllTypesOf<ICalculatorHandler>().NameBy(t => t.Name);
+                x.AddAllTypesOf<RulesEngineBase>().NameBy(t => t.Name);
+                x.AddAllTypesOf<IEmailTemplateHandler>().NameBy(t => t.Name);
                 x.WithDefaultConventions();
             });
-            For<IGateway>().Use<Gateway>().Ctor<string>("apiLogin").EqualToAppSetting("Authorize.Net_apiLogin")
-                .Ctor<string>("transactionKey").EqualToAppSetting("Authorize.Net_TransactionKey")
-                .Ctor<bool>("testMode").EqualToAppSetting("Authorize.Net_testMode");
 
-            For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions>();
-            For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
-            For<IElementNamingConvention>().Use<KnowYourTurfElementNamingConvention>();
-            For(typeof(ITagGenerator<>)).Use(typeof(TagGenerator<>));
-            For<TagProfileLibrary>().Singleton();
             For<INHSetupConfig>().Use<KYTNHSetupConfig>();
 
             For<ISessionFactoryConfiguration>().Singleton()
@@ -66,14 +51,11 @@ namespace KnowYourTurf.Web
             For<IRepository>().Add(x => new Repository()).Named("NoFilters");
 
 
-            For<IMergedEmailFactory>().Use<MergedEmailFactory>();
-            For<ITemplateParser>().Use<TemplateParser>();
 
             For<ILocalizationDataProvider>().Use<LocalizationDataProvider>();
             For<IAuthenticationContext>().Use<WebAuthenticationContext>();
 
             For<IMenuConfig>().Use<MainMenu>();
-            For<IMergedEmailFactory>().LifecycleIs(new UniquePerRequestLifecycle()).Use<MergedEmailFactory>();
 
             For<IAuthorizationService>().HybridHttpOrThreadLocalScoped().Use<AuthorizationService>();
             For<IAuthorizationRepository>().HybridHttpOrThreadLocalScoped().Use<CustomAuthorizationRepository>();
@@ -82,22 +64,7 @@ namespace KnowYourTurf.Web
             For<ISecuritySetupService>().Use<DefaultSecuritySetupService>();
             For<ILogger>().Use(() => new Log4NetLogger(typeof(string)));
 
-            For(typeof(IGridBuilder<>)).Use(typeof(GridBuilder<>));
-
-            For<IEntityListGrid<Task>>().Use<TaskListGrid>();
-            For<IEntityListGrid<Task>>().Add<CompletedTaskGrid>().Named("CompletedTasks");
-            For<IEntityListGrid<Task>>().Add<PendingTaskGrid>().Named("PendingTasks");
-
-            For<IEntityListGrid<User>>().Use<EmployeeListGrid>();
-            For<IEntityListGrid<User>>().Add<AdminListGrid>().Named("Admins");
-            For<IEntityListGrid<User>>().Add<FacilitiesListGrid>().Named("Facilities");
-
-            For<IEntityListGrid<PurchaseOrderLineItem>>().Use<PurchaseOrderLineItemGrid>();
-            For<IEntityListGrid<PurchaseOrderLineItem>>().Add<ReceivePurchaseOrderLineItemGrid>().Named("Recieve");
-            For<IEntityListGrid<Material>>().Use<MaterialListGrid>();
-            For<IEntityListGrid<Chemical>>().Use<ChemicalListGrid>();
-            For<IEntityListGrid<Fertilizer>>().Use<FertilizerListGrid>();
-
+            For<IGetCompanyIdService>().Use<DataLoaderGetCompanyIdService>();
         }
     }
 }

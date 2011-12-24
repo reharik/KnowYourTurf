@@ -1,4 +1,4 @@
-﻿`@model KnowYourTurf.Web.Models.CalculatorViewModel
+﻿@model KnowYourTurf.Web.Models.CalculatorViewModel
 @using KnowYourTurf.Web
 @using KnowYourTurf.Core.Html.FubuUI
 
@@ -11,5 +11,5 @@
         </div>
         
             @MvcHtmlString.Create(Html.HiddenFor(x => x.Calculator.EntityId).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Calculator.Name).ToString())
+            @Html.SubmissionFor(x => x.Calculator.Name).ToHtmlTag()
 

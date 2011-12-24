@@ -14,7 +14,7 @@ if (typeof kyt == "undefined") {
 kyt.CalculatorController = kyt.CrudController.extend({
     events:_.extend({
     }, kyt.CrudController.prototype.events),
-    addEditItem: function(url, data){
+    addUpdateItem: function(url, data){
         var _url = url?url:this.options.addUpdateUrl;
         $("#masterArea").after("<div id='dialogHolder'/>");
         var builder = kyt.popupButtonBuilder.builder("editModule");
@@ -28,13 +28,14 @@ kyt.CalculatorController = kyt.CrudController.extend({
             url: _url,
             data:data,
             buttons: builder.getButtons(),
-            successHandler:kyt.calculator.successHandler
         };
-        this.modules.popupForm= new kyt.PopupFormModule(moduleOptions);
+        this.modules.popupForm= new kyt.AjaxPopupFormModule(moduleOptions);
     },
 
-    additionalSubscriptions:function(){
-        $.subscribe('/contentLevel/popupFormModule_taskModule/popupLoaded',$.proxy(this.loadTokenizers,this), this.cid);
+    registerAdditionalSubscriptions:function(){
+
+        $.subscribe('/contentLevel/form_editModule/success',kyt.calculator.successHandlers.success, this.cid);
+        $.subscribe('/contentLevel/form_taskModule/pageLoaded',$.proxy(this.loadTokenizers,this), this.cid);
         $.subscribe('/contentLevel/form_taskModule/success', $.proxy(this.taskSuccess,this), this.cid);
         $.subscribe('/contentLevel/form_taskModule/cancel', $.proxy(this.taskCancel,this), this.cid);
     },
@@ -42,6 +43,7 @@ kyt.CalculatorController = kyt.CrudController.extend({
     addTask:function(){
         var calculatorName = $("#CalculatorName").val();
         var data = this[calculatorName]();
+        data.Popup=true;
         this.modules.popupForm.destroy();
         $("#masterArea").after("<div id='dialogHolder'/>");
         var moduleOptions = {
@@ -50,7 +52,7 @@ kyt.CalculatorController = kyt.CrudController.extend({
             url: this.options.createATaskUrl,
             data:data
         };
-        this.modules.taskForm = new kyt.PopupFormModule(moduleOptions);
+        this.modules.taskForm = new kyt.AjaxPopupFormModule(moduleOptions);
     },
     formSuccess:function(result){
         kyt.calculator.successHandlers.success(result)

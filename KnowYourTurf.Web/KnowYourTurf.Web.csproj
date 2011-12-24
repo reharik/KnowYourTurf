@@ -289,7 +289,7 @@
     <Compile Include="Grids\VendorContactListGrid.cs" />
     <Compile Include="Grids\VendorListGrid.cs" />
     <Compile Include="Grids\WeatherListGrid.cs" />
-    <Compile Include="MFTestRegistry.cs" />
+    <Compile Include="KYTTestRegistry.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\IMenuConfig.cs" />
     <Compile Include="Config\SecurityBootstrapper.cs" />
@@ -335,7 +335,7 @@
     <Compile Include="Services\ISecuritySetupService.cs" />
     <Compile Include="Services\IUploadedFileHandlerService.cs" />
     <Compile Include="WebLocalizationKeys.cs" />
-    <Compile Include="MFWebRegistry.cs" />
+    <Compile Include="KYTWebRegistry.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

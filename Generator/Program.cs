@@ -69,7 +69,7 @@ namespace Generator
 
             ObjectFactory.Initialize(x =>
                                          {
-                                             x.AddRegistry(new KYTWebRegistry());
+                                             x.AddRegistry(new GenRegistry());
                                              x.AddRegistry(new CommandRegistry());
                                          });
             //ObjectFactory.AssertConfigurationIsValid();

@@ -147,6 +147,7 @@
     <Compile Include="Commands\RebuildDatabaseCommand.cs" />
     <Compile Include="Commands\ScanStringsCommand.cs" />
     <Compile Include="DataLoader.cs" />
+    <Compile Include="GenRegistry.cs" />
     <Compile Include="IGeneratorCommand.cs" />
     <Compile Include="ILocalizedStringLoader.cs" />
     <Compile Include="Program.cs" />
