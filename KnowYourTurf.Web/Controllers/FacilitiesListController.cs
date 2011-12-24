@@ -27,6 +27,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)),
                 GridDefinition = _gridHandlerService.GetGridDefinition(url),
+                Title = WebLocalizationKeys.FACILITIES.ToString()
             };
             return View(model);
         }

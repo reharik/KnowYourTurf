@@ -1,97 +1,22 @@
-﻿@using HtmlTags
-<!--[if IE]>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<!-- [Else]>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<!-- [endif]-->
-<html>
-<head>
-    <title>@ViewBag.Title</title>
-    @CSS("jquery-ui-1.8.16.custom.css").ToHtmlTag()
-    @CSS("ui.multiselect.css").ToHtmlTag()
-    @CSS("fileinput.css").ToHtmlTag()
-    @CSS("ui.jqgrid.css").ToHtmlTag()
-    <!--[if gt IE 7]>
-    @CSS("ie.css").ToHtmlTag()
-     <![endif]-->
-    @CSS("main.css").ToHtmlTag()
-    @CSS("token-input.css").ToHtmlTag()
-    @CSS("fg.menu.css").ToHtmlTag()
-    @CSS("jquery.cleditor.css").ToHtmlTag()
+﻿@using KnowYourTurf.Web;
+@using HtmlTags
 
-    @CSS("kyt.css").ToHtmlTag()
-
+<script>
     @RenderSection("ExtraCss", false)
-
-    @Script("jqueryPlugins/jquery-1.6.2.min.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.transform-0.9.3.min.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery-ui-1.8.16.custom.min.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.tokeninput.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.validate.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.form.2.83.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.tokeninput.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.ie-select-style.pack.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.pubsub.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.cleditor.min.js").ToHtmlTag()
-    @Script("externalHelpers/modernizr-2.0.min.js").ToHtmlTag()
-    @Script("externalHelpers/respond.min.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.metadata.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.address-1.4.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.Jcrop.js").ToHtmlTag()
-    @Script("externalHelpers/underscore.js").ToHtmlTag()
-    @Script("externalHelpers/backbone.js").ToHtmlTag()
-    @Script("kyt.BaseClass.js").ToHtmlTag()
-    @Script("kyt.TokenView.js").ToHtmlTag()
-    @Script("kyt.PopupView.js").ToHtmlTag()
-    @Script("kyt.GridView.js").ToHtmlTag()
-    @Script("kyt.FormView.js").ToHtmlTag()
-    @Script("kyt.DisplayView.js").ToHtmlTag()
-    @Script("kyt.ajaxPopupDisplayModule.js").ToHtmlTag()
-    @Script("kyt.ajaxPopupFormModule.js").ToHtmlTag()
-    @Script("kyt.tokenizerModule.js").ToHtmlTag()
-    @Script("kyt.FormModule.js").ToHtmlTag()
-    @Script("kyt.CrudController.js").ToHtmlTag()
-
-    @Script("internalHelpers/cc.utilities.js").ToHtmlTag()
-    @Script("internalHelpers/cc.crudForm.js").ToHtmlTag()
-    @Script("externalHelpers/json2.js").ToHtmlTag()
-    @Script("kyt.baseClass.js").ToHtmlTag()
-    
 
     @RenderSection("HeaderScripts", false)
 
-
-     <script type="text/javascript">
-        var entityId = @Model.EntityId ;
-        var parentId = @Model.ParentId ;
-        var rootId = @Model.RootId ;
-        var kytCurrentLocaton;
-        var extraFormOptions = {};
-        extraFormOptions.crudFormOptions = { };
-        
-        $(document).ready(function() {
-        });
+    var contentArea;
+    var extraFormOptions ={}
         @RenderSection("HeaderJavascript", false)
+</script>
 
-        </script>
-    </head>
-
-    <body id="portfolios" class="kyt_dyn">
-@*        <div id="ajaxLoading" style="z-index: 1000">&nbsp;</div>*@
-        
-        <div id="main-header">
-        </div>
-        <div id="top-separator"></div>
-        <div id="main-body">
-            <div id="main-content">
-                <div class="content-outer" >
-                    <div id="contentInner">
-                        @RenderBody()
-                    </div>
-                    <div class="content-footer"><span>&nbsp;</span></div>
-                </div>
-            </div>
-        </div>
-    </body>
-
-</html>
+   <div class="content-header">
+        <span class="title-name">@Model.Title</span>
+    </div>
+    <div id="contentArea" class="content-inner">
+    <div id="errorMessagesForm" class="mf_ErrorMessages errorMessages"><ul></ul></div>
+        @RenderBody()
+         <div class="footer">
+         </div>
+    </div>

@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate(ViewModel input)
         {
-            var purchaseOrder = input.ParentId > 0 ? _repository.Find<PurchaseOrder>(input.ParentId) : new PurchaseOrder();
+            var purchaseOrder = input.EntityId > 0 ? _repository.Find<PurchaseOrder>(input.EntityId) : new PurchaseOrder();
             var vendors = _selectListItemService.CreateList<Vendor>(x=>x.Company,x=>x.EntityId,true);
             var url = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null))+"?Vendor=0";
             var PoliUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.PurchaseOrderLineItems(null)) + "?EntityId=" + purchaseOrder.EntityId;

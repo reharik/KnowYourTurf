@@ -21,11 +21,12 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult VendorContactList(ListViewModel input)
         {
-            var url = UrlContext.GetUrlForAction<VendorContactListController>(x => x.VendorContacts(null)) + "?ParentId=" + input.ParentId;
+            var url = UrlContext.GetUrlForAction<VendorContactListController>(x => x.VendorContacts(null)) + "?ParentId=" + input.EntityId;
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddUpdate(null)) + "?ParentId=" + input.ParentId,
-                GridDefinition = _vendorContactListGrid.GetGridDefinition(url)
+                AddUpdateUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId,
+                GridDefinition = _vendorContactListGrid.GetGridDefinition(url),
+                Title = WebLocalizationKeys.VENDOR_CONTACTS.ToString()
             };
             return View(model);
         }

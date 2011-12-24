@@ -6,6 +6,8 @@
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
+<input type="hidden" id="EntityId" value="@Model.Task.EntityId"/>
      
             @MvcHtmlString.Create(Html.HiddenFor(x => x.Task.EntityId, new { @class = "copyEntityId" }).ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())

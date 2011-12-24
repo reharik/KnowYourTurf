@@ -3,9 +3,10 @@
 @using KnowYourTurf.Web
 @using HtmlTags
 
-@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@{
+    Layout = "~/Views/Shared/_listLayout.cshtml";
+ }
 @section HeaderScripts{
-    @MvcHtmlString.Create(Script("kyt.InventoryController.js").ToString())
 }
 @section HeaderJavascript{
 

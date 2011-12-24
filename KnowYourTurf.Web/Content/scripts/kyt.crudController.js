@@ -29,11 +29,14 @@ kyt.CrudController  = kyt.Controller.extend({
     registerSubscriptions: function(){
         $.subscribe('/contentLevel/grid_/Redirect',$.proxy(this.redirectItem,this), this.cid);
         $.subscribe('/contentLevel/grid_/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_/Display',$.proxy(this.display,this), this.cid);
         //
         $.subscribe("/contentLevel/form_mainForm/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
+        $.subscribe("/contentLevel/display_mainDisplay/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
         //
         $.subscribe('/contentLevel/formModule_mainForm/moduleSuccess',$.proxy(this.moduleSuccess,this),this.cid);
         $.subscribe('/contentLevel/formModule_mainForm/moduleCancel',$.proxy(this.moduleCancel,this), this.cid);
+        $.subscribe('/contentLevel/display_mainDisplay/cancel',$.proxy(this.displayCancel,this), this.cid);
         this.registerAdditionalSubscriptions();
     },
     registerAdditionalSubscriptions:function(){},
@@ -48,6 +51,18 @@ kyt.CrudController  = kyt.Controller.extend({
         $("#masterArea","#contentInner").after("<div id='detailArea'/>");
         this.modules.formModule = new kyt.AjaxFormModule(formOptions);
     },
+
+    display: function(url){
+        var formOptions = {
+            el: "#detailArea",
+            id: "mainDisplay",
+            url: url
+        };
+        $("#masterArea","#contentInner").after("<div id='detailArea'/>");
+        this.modules.displayView = new kyt.AjaxDisplayView(formOptions);
+        this.modules.displayView.render();
+    },
+
     redirectItem:function(url){
         $.address.value(url);
     },
@@ -60,6 +75,10 @@ kyt.CrudController  = kyt.Controller.extend({
     },
     moduleCancel: function(){
         this.modules.formModule.destroy();
+        $("#masterArea").show();
+    },
+        displayCancel: function(){
+        this.modules.displayView.remove();
         $("#masterArea").show();
     }
 });

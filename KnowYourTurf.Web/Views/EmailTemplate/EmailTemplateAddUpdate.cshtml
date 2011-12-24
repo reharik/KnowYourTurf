@@ -11,6 +11,7 @@
 <script>
     extraFormOptions.runAfterRenderFunction = kyt.utilities.tinyMce
 </Script>
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
 @MvcHtmlString.Create(FormFor<EmailTemplateController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
 @MvcHtmlString.Create(Html.HiddenFor(x => x.EmailTemplate.EntityId).ToString())

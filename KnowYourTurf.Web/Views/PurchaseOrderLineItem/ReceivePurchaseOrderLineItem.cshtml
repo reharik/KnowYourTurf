@@ -5,12 +5,8 @@
 @using KnowYourTurf.Web.Controllers
 @using KnowYourTurf.Core.Html.Expressions
 @{
-    Layout = "~/Views/Shared/_popupLayout.cshtml";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-
-        <div class="KYT_section_header" >
-            @MvcHtmlString.Create(WebLocalizationKeys.PURCHASE_ORDER_LIST_ITEM_INFORMATION.ToString())
-        </div>
         
 
             @MvcHtmlString.Create(FormFor<PurchaseOrderLineItemController>(x=>x.SaveReceived(null)).Class("CRUD").ElementId("CRUDForm").ToString())

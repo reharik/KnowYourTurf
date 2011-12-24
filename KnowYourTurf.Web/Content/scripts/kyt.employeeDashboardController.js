@@ -63,7 +63,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
         $.subscribe('/contentLevel/form_pendingTaskForm/pageLoaded',$.proxy(this.loadTokenizers,this), this.cid, "empDash");
         // from form
         $.subscribe('/contentLevel/form_pendingTaskForm/success', $.proxy(this.formSuccess,this), this.cid, "empDash");
-        $.subscribe('/contentLevel/form_pendingTaskForm/cancel', $.proxy(this.popupCancel,this), this.cid, "empDash");
+        $.subscribe('/contentLevel/popup_pendingTaskForm/cancel', $.proxy(this.popupCancel,this), this.cid, "empDash");
 
         // from display
         $.subscribe('/contentLevel/popup_pendingTaskDisplay/cancel', $.proxy(this.popupCancel,this), this.cid, "empDash");
@@ -107,7 +107,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
         var buttons = builder.standardDisplayButtons();
         if(name == "pendingTaskDisplay" || name== "completeTaskDisplay"){
             builder.clearButtons();
-            builder.addButton("Copy Task", function(){$.publish("/contentLevel/popup_"+name+"/copyTask",[$("#AddEditUrl",this).val(),name])});
+            builder.addButton("Copy Task", function(){$.publish("/contentLevel/popup_"+name+"/copyTask",[$("#AddUpdateUrl",this).val(),name])});
             builder.addCancelButton();
             if(name == "pendingTaskDisplay" ){
                 builder.addEditButton();
@@ -121,7 +121,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
             url: _url,
             buttons: buttons
         };
-        this.modules[name] = new kyt.PopupDisplayModule(moduleOptions);
+        this.modules[name] = new kyt.AjaxPopupDisplayModule(moduleOptions);
     },
     //from popupformmodule
     loadTokenizers:function(formOptions){

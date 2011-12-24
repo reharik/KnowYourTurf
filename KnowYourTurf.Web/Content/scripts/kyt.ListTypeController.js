@@ -11,36 +11,46 @@ if (typeof kyt == "undefined") {
 }
 
 kyt.ListTypeController = kyt.CrudController.extend({
-    additionalSubscriptions:function(){
+    registerAdditionalSubscriptions:function(){
         // from etgrid
-        $.subscribe('/contentLevel/grid_EventTypeGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/contentLevel/grid_EventTypeGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_EventTypeGrid/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
         $.subscribe('/contentLevel/grid_EventTypeGrid/Display',$.proxy(this.displayItem,this), this.cid);
         $.subscribe('/contentLevel/grid_EventTypeGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
         // from ttgrid
-        $.subscribe('/contentLevel/grid_TaskTypeGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/contentLevel/grid_TaskTypeGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_TaskTypeGrid/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
         $.subscribe('/contentLevel/grid_TaskTypeGrid/Display',$.proxy(this.displayItem,this), this.cid);
         $.subscribe('/contentLevel/grid_TaskTypeGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
         // from dcgrid
-        $.subscribe('/contentLevel/grid_DocumentCategoryGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/contentLevel/grid_DocumentCategoryGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_DocumentCategoryGrid/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
         $.subscribe('/contentLevel/grid_DocumentCategoryGrid/Display',$.proxy(this.displayItem,this), this.cid);
         $.subscribe('/contentLevel/grid_DocumentCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
         // from pcgrid
-        $.subscribe('/contentLevel/grid_PhotoCategoryGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_PhotoCategoryGrid/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
         $.subscribe('/contentLevel/grid_PhotoCategoryGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
         $.subscribe('/contentLevel/grid_PhotoCategoryGrid/Display',$.proxy(this.displayItem,this), this.cid);
         $.subscribe('/contentLevel/grid_PhotoCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
 
         // from form
+        $.subscribe("/contentLevel/form_eventTypeGrid/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
+        $.subscribe("/contentLevel/form_taskTypeGrid/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
+        $.subscribe("/contentLevel/form_documentCategoryGrid/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
+        $.subscribe("/contentLevel/form_editModule/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
+        
     },
-    initialize:function(){
+    initialize:function(options){
+        $.extend(this,this.defaults());
+        kyt.contentLevelControllers["ListTypeController"]=this;
+        $.unsubscribeByPrefix("/contentLevel");
+        this.id="ListTypeController";
+        this.registerSubscriptions();
+
+        $.extend(this.options, options);
+
         this.el = ("#masterArea");
-        this.initializeBase();
         var etOptions={
             el:"#etGrid",
             id:"eventTypeGrid",
+            gridName:"EventTypeGrid",
             gridDef:this.options.gridInfo.gridDef,
             addUpdateUrl:this.options.gridInfo.addUpdateUrl,
             gridOptions:{pager: "#eventTypePager"},
@@ -50,6 +60,7 @@ kyt.ListTypeController = kyt.CrudController.extend({
         var ttOptions={
             el:"#ttGrid",
             id:"taskTypeGrid",
+            gridName:"TaskTypeGrid",
             gridDef:this.options.ttGridInfo.gridDef,
             addUpdateUrl:this.options.ttGridInfo.addUpdateUrl,
             gridOptions:{pager: "#taskTypePager"},
@@ -59,6 +70,7 @@ kyt.ListTypeController = kyt.CrudController.extend({
         var dcOptions={
             el:"#dcGrid",
             id:"documentCategoryGrid",
+            gridName:"DocumentCategoryGrid",
             gridDef:this.options.dcGridInfo.gridDef,
             addUpdateUrl:this.options.dcGridInfo.addUpdateUrl,
             gridOptions:{pager: "#docCatPager"},
@@ -68,40 +80,39 @@ kyt.ListTypeController = kyt.CrudController.extend({
         var pcOptions={
             el:"#pcGrid",
             id:"photoCategoryGrid",
+            gridName:"PhotoCategoryGrid",
             gridDef:this.options.pcGridInfo.gridDef,
             addUpdateUrl:this.options.pcGridInfo.addUpdateUrl,
             gridOptions:{pager: "#photoCatPager"},
             gridContainer:"#PhotoCategoryGrid"
         };
         this.views.pcGridView = new kyt.GridView(pcOptions);
-        this.delegateLocalEvents();
     },
-    delegateLocalEvents:function(){
-        $(this.el).delegate("#addNewTaskType","click",$.proxy(function(){this.addEditItem(this.options.ttGridInfo.addUpdateUrl)},this));
-        $(this.el).delegate("#addNewEventType","click",$.proxy(function(){this.addEditItem(this.options.gridInfo.addUpdateUrl)},this));
-        $(this.el).delegate("#addNewDocumentCategory","click",$.proxy(function(){this.addEditItem(this.options.dcGridInfo.addUpdateUrl)},this));
-        $(this.el).delegate("#addNewPhotoCategory","click",$.proxy(function(){this.addEditItem(this.options.pcGridInfo.addUpdateUrl)},this));
-    },
-    addEditItem: function(url, data){
+    addUpdateItem: function(url, data){
         var _url = url?url:this.options.addUpdateUrl;
-        $("#masterArea").after("<div id='dialogHolder'/>");
+        $("#masterArea","#contentInner").after("<div id='detailArea'/>");
         var moduleOptions = {
-            id:"editModule",
-            el:"#dialogHolder",
+            id:"mainForm",
+            el:"#detailArea",
             url: _url,
             data:data
         };
         moduleOptions.runAfterRenderFunction = function () {
             $('#EventColor',this.el).miniColors();
         };
-        this.modules.popupForm = new kyt.PopupFormModule(moduleOptions);
+        this.modules.formModule = new kyt.AjaxFormModule(moduleOptions);
     },
      //from form
-    formSuccess:function(){
-        this.formCancel();
-        this.views.etGridView.reloadGrid();
+    moduleSuccess:function(){
+        this.moduleCancel();
+         this.views.etGridView.reloadGrid();
         this.views.ttGridView.reloadGrid();
         this.views.dcGridView.reloadGrid();
         this.views.pcGridView.reloadGrid();
+    },
+    moduleCancel: function(){
+        this.modules.formModule.destroy();
+        $("#masterArea").show();
     }
+
 });

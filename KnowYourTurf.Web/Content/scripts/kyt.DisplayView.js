@@ -6,24 +6,6 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
-kyt.PortfolioLandingPageView = Backbone.View.extend({
-    events:{
-        'click #buildNewPortfolio': "buildNewPortfolio"
-    },
-    initialize:function(){
-        this.render();
-    },
-    render:function(){
-        $(this.el).show();
-    },
-
-    buildNewPortfolio: function(){
-        $.publish("/contentLevel/grid/AddUpdateItem",[this.options.addUpdateUrl]);
-    }
-
-});
-
 kyt.AjaxDisplayView = Backbone.View.extend({
     events:{
         'click .cancel' : 'cancel'
@@ -53,18 +35,6 @@ kyt.AjaxDisplayView = Backbone.View.extend({
         $.publish("/contentLevel/display_"+this.id+"/cancel",[this.id]);
     }
 });
-
-kyt.AddToPortfolioView = kyt.AjaxDisplayView.extend({
-    events:_.extend({
-        'click .portfolioClick' : 'portfolioClick'
-    }, kyt.AjaxDisplayView.prototype.events),
-
-    portfolioClick:function(e){
-        $.publish("/contentLevel/display_"+this.id+"/portfolioChosen",[$(e.currentTarget).attr("id")]);
-    }
-
-});
-
 
 kyt.displayDefaults = {
     id:"",

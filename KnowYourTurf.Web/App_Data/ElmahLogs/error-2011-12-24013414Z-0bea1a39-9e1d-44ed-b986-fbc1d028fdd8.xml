@@ -1,0 +1,173 @@
+﻿<error errorId="0bea1a39-9e1d-44ed-b986-fbc1d028fdd8" host="RAIFHARIK-MAC" type="System.InvalidOperationException" message="The partial view 'AddUpdate' was not found or no view engine supports the searched locations. The following locations were searched:&#xD;&#xA;~/Views/DocumentCategory/AddUpdate.aspx&#xD;&#xA;~/Views/DocumentCategory/AddUpdate.ascx&#xD;&#xA;~/Views/Shared/AddUpdate.aspx&#xD;&#xA;~/Views/Shared/AddUpdate.ascx&#xD;&#xA;~/Views/DocumentCategory/AddUpdate.cshtml&#xD;&#xA;~/Views/DocumentCategory/AddUpdate.vbhtml&#xD;&#xA;~/Views/Shared/AddUpdate.cshtml&#xD;&#xA;~/Views/Shared/AddUpdate.vbhtml" source="System.Web.Mvc" detail="System.InvalidOperationException: The partial view 'AddUpdate' was not found or no view engine supports the searched locations. The following locations were searched:&#xD;&#xA;~/Views/DocumentCategory/AddUpdate.aspx&#xD;&#xA;~/Views/DocumentCategory/AddUpdate.ascx&#xD;&#xA;~/Views/Shared/AddUpdate.aspx&#xD;&#xA;~/Views/Shared/AddUpdate.ascx&#xD;&#xA;~/Views/DocumentCategory/AddUpdate.cshtml&#xD;&#xA;~/Views/DocumentCategory/AddUpdate.vbhtml&#xD;&#xA;~/Views/Shared/AddUpdate.cshtml&#xD;&#xA;~/Views/Shared/AddUpdate.vbhtml&#xD;&#xA;   at System.Web.Mvc.PartialViewResult.FindView(ControllerContext context)&#xD;&#xA;   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass1c.&lt;InvokeActionResultWithFilters&gt;b__19()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass1c.&lt;&gt;c__DisplayClass1e.&lt;InvokeActionResultWithFilters&gt;b__1b()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass1c.&lt;&gt;c__DisplayClass1e.&lt;InvokeActionResultWithFilters&gt;b__1b()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass1c.&lt;&gt;c__DisplayClass1e.&lt;InvokeActionResultWithFilters&gt;b__1b()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)&#xD;&#xA;   at System.Web.Mvc.Controller.ExecuteCore()&#xD;&#xA;   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClass6.&lt;&gt;c__DisplayClassb.&lt;BeginProcessRequest&gt;b__5()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClasse.&lt;EndProcessRequest&gt;b__d()&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.&lt;GetCallInAppTrustThunk&gt;b__0(Action f)&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="Harik, Raif" time="2011-12-24T01:34:14.0617137Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:*/*&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-us,en;q=0.5&#xD;&#xA;HTTP_COOKIE:KYT=749B4A36D45CABD7E6FBC6BA9A8B250D728D263344C25B039A1E2180CE1F15D9E69AE5E0BAB675015947B470F3F80AFA816D14DA092BE67DF8B6268A9C5E8983FA49B24F4C048A710EC0CA8B8817E38A56BAE9A4A4147A66C17EF9E383CFA6ECE592B03C96928E2E1AC4C55C606EAE499EB69C5114F215FC5E2D3F650AF9822B8026F5F030D0737BDAB6772FCE500E92B7C5DD3823DF522331B997507C4F2FE4C34C81AF97D7B0B9273322AC3E43AA0504CC4C80AA80526037C3F1144155F936&#xD;&#xA;HTTP_HOST:localhost:666&#xD;&#xA;HTTP_REFERER:http://localhost:666/KnowYourTurf/Home&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: */*&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-us,en;q=0.5&#xD;&#xA;Cookie: KYT=749B4A36D45CABD7E6FBC6BA9A8B250D728D263344C25B039A1E2180CE1F15D9E69AE5E0BAB675015947B470F3F80AFA816D14DA092BE67DF8B6268A9C5E8983FA49B24F4C048A710EC0CA8B8817E38A56BAE9A4A4147A66C17EF9E383CFA6ECE592B03C96928E2E1AC4C55C606EAE499EB69C5114F215FC5E2D3F650AF9822B8026F5F030D0737BDAB6772FCE500E92B7C5DD3823DF522331B997507C4F2FE4C34C81AF97D7B0B9273322AC3E43AA0504CC4C80AA80526037C3F1144155F936&#xD;&#xA;Host: localhost:666&#xD;&#xA;Referer: http://localhost:666/KnowYourTurf/Home&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms Authentication" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="RaifHarik-Mac\Raif Harik" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/DocumentCategory/AddUpdate/1" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\DocumentCategory\AddUpdate\1" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="_=1324690453980" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/DocumentCategory/AddUpdate/1" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="666" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/DocumentCategory/AddUpdate/1" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="*/*" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-us,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="KYT=749B4A36D45CABD7E6FBC6BA9A8B250D728D263344C25B039A1E2180CE1F15D9E69AE5E0BAB675015947B470F3F80AFA816D14DA092BE67DF8B6268A9C5E8983FA49B24F4C048A710EC0CA8B8817E38A56BAE9A4A4147A66C17EF9E383CFA6ECE592B03C96928E2E1AC4C55C606EAE499EB69C5114F215FC5E2D3F650AF9822B8026F5F030D0737BDAB6772FCE500E92B7C5DD3823DF522331B997507C4F2FE4C34C81AF97D7B0B9273322AC3E43AA0504CC4C80AA80526037C3F1144155F936" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:666" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:666/KnowYourTurf/Home" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="_">
+      <value string="1324690453980" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name="KYT">
+      <value string="749B4A36D45CABD7E6FBC6BA9A8B250D728D263344C25B039A1E2180CE1F15D9E69AE5E0BAB675015947B470F3F80AFA816D14DA092BE67DF8B6268A9C5E8983FA49B24F4C048A710EC0CA8B8817E38A56BAE9A4A4147A66C17EF9E383CFA6ECE592B03C96928E2E1AC4C55C606EAE499EB69C5114F215FC5E2D3F650AF9822B8026F5F030D0737BDAB6772FCE500E92B7C5DD3823DF522331B997507C4F2FE4C34C81AF97D7B0B9273322AC3E43AA0504CC4C80AA80526037C3F1144155F936" />
+    </item>
+  </cookies>
+</error>

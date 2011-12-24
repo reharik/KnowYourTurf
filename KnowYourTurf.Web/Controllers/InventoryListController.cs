@@ -88,17 +88,17 @@ namespace KnowYourTurf.Web.Controllers
         public string ProductType { get; set; }
     }
 
-    public class InventoryFertilizerViewModel
+    public class InventoryFertilizerViewModel : ViewModel
     {
         public InventoryProduct InventoryFertilizer { get; set; }
         public Fertilizer Fertilizer { get { return InventoryFertilizer.Product as Fertilizer; } }
     }
-    public class InventoryChemicalViewModel
+    public class InventoryChemicalViewModel :ViewModel
     {
         public InventoryProduct InventoryChemical { get; set; }
         public Chemical Chemical { get { return InventoryChemical.Product as Chemical; } }
     }
-    public class InventoryMaterialViewModel
+    public class InventoryMaterialViewModel : ViewModel
     {
         public InventoryProduct InventoryMaterial { get; set; }
         public Material Material { get { return InventoryMaterial.Product as Material; } }

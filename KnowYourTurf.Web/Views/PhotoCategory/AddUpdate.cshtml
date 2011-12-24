@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
 
-            @MvcHtmlString.Create(FormFor("~/PhotoCategory/SaveListType").Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(FormFor("/PhotoCategory/SaveListType").Class("CRUD").ElementId("CRUDForm").ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.ListType.EntityId).ToString())
     <div class="col left">
         <div class="fieldRow">

@@ -28,8 +28,8 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult PurchaseOrderCommit(ViewModel input)
         {
-            var purchaseOrder = _repository.Find<PurchaseOrder>(input.ParentId);
-            var url = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderLineItems(null))+"?EntityId="+input.ParentId;
+            var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
+            var url = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderLineItems(null))+"?EntityId="+input.EntityId;
             POCommitViewModel model = new POCommitViewModel()
             {   
                 ClosePOUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x=>x.ClosePurchaseOrder(null)),

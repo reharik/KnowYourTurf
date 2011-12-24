@@ -12,8 +12,8 @@ if (typeof kyt == "undefined") {
 kyt.VendorController = kyt.CrudController.extend({
     events:_.extend({
     }, kyt.CrudController.prototype.events),
-    additionalSubscriptions:function(){
-        $.subscribe("/contentLevel/popupFormModule_editModule/popupLoaded",$.proxy(this.loadTokenizers,this));
+    registerAdditionalSubscriptions:function(){
+        $.subscribe("/contentLevel/form_mainForm/pageLoaded",$.proxy(this.loadTokenizers,this));
     },
     loadTokenizers:function(formOptions){
         var chemicalTokenOptions = {
@@ -42,11 +42,6 @@ kyt.VendorController = kyt.CrudController.extend({
         this.views.fertilizerToken= new kyt.TokenView(fertilizerTokenOptions);
         this.views.materialToken = new kyt.TokenView(materialTokenOptions);
 
-    },
-    redirectItem:function(url,data){
-        var _url = url ? url : this.options.redirectUrl;
-        _url = _url + "?ParentId=" + data.ParentId;
-        window.location.href = _url;
     }
 
 });

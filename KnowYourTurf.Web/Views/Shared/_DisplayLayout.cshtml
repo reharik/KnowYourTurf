@@ -7,7 +7,7 @@
     @RenderSection("HeaderScripts", false)
 
     var contentArea;
-    var extraFormOptions ={}
+    var extraFormOptions = { };
         @RenderSection("HeaderJavascript", false)
 </script>
 
@@ -18,5 +18,6 @@
     <div id="errorMessagesForm" class="mf_ErrorMessages errorMessages"><ul></ul></div>
         @RenderBody()
          <div class="footer">
+            @StandardButtonFor("cancel", WebLocalizationKeys.RETURN).AddClass("cancel").ToHtmlTag()
          </div>
     </div>

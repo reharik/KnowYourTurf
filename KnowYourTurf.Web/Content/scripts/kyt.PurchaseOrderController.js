@@ -27,7 +27,7 @@ kyt.PurchaseOrderController = kyt.Controller.extend({
         $.subscribe('/contentLevel/grid_/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
         $.subscribe('/contentLevel/grid_/Display',$.proxy(this.displayItem,this), this.cid);
         $.subscribe('/contentLevel/grid_/Delete',$.proxy(this.deleteItem,this), this.cid);
-        $.subscribe('/contentLevel/grid_/Redirect',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_/Redirect',$.proxy(this.redirectItem,this), this.cid);
         // from form
         // from display
         $.subscribe('/contentLevel/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
@@ -59,7 +59,9 @@ kyt.PurchaseOrderController = kyt.Controller.extend({
         };
         this.modules.popupDisplay= new kyt.PopupDisplayModule(moduleOptions);
     },
-
+    redirectItem:function(url){
+        $.address.value(url);
+    },
     deleteItem:function(url,data){
         if (confirm("Are you sure you would like to delete this Item?")) {
         kyt.repository.ajaxGet(url,{}, $.proxy(function(){

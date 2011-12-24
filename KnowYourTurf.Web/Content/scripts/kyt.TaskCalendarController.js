@@ -11,7 +11,7 @@ kyt.TaskCalendarController = kyt.CalendarController.extend({
     }, kyt.CalendarController.prototype.events),
 
     additionalSubscriptions:function(){
-        $.subscribe('/contentLevel/popupFormModule_editModule/popupLoaded',$.proxy(this.loadTokenizers,this), this.cid);
+        $.subscribe('/contentLevel/form_editModule/pageLoaded',$.proxy(this.loadTokenizers,this), this.cid);
     },
     loadTokenizers:function(formOptions){
         var employeeTokenOptions = {

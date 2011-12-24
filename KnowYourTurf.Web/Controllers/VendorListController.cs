@@ -27,7 +27,8 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddUpdate(null)),
-                GridDefinition = _vendorListGrid.GetGridDefinition(url)
+                GridDefinition = _vendorListGrid.GetGridDefinition(url),
+                Title = WebLocalizationKeys.VENDORS.ToString()
             };
             return View(model);
         }

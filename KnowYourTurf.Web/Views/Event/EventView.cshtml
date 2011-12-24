@@ -6,6 +6,7 @@
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
         @MvcHtmlString.Create(Html.HiddenFor(x => x.Event.EntityId, new { @class = "copyEntityId" }).ToString())
             <input type="hidden" name="Event.EntityId" id="EntityId" value="@Model.Event.EntityId"/>
    <div class="col left">

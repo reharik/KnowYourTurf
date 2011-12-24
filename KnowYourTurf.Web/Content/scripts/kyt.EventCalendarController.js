@@ -11,7 +11,7 @@ kyt.CalendarController = kyt.Controller.extend({
     }, kyt.Controller.prototype.events),
     initialize:function(){
         $.extend(this,this.defaults());
-        this.options = $.extend({},kyt.crudControllerDefaults, this.options);
+        this.options = $.extend({},kyt.ControllerDefaults, this.options);
         $.clearPubSub();
         this.registerSubscriptions();
         var displayOptions={
@@ -26,7 +26,7 @@ kyt.CalendarController = kyt.Controller.extend({
         $.subscribe('/contentLevel/calendar_event/eventClick', $.proxy(this.eventClick,this), this.cid);
         // from form
         $.subscribe('/contentLevel/form_editModule/success', $.proxy(this.formSuccess,this), this.cid);
-        $.subscribe('/contentLevel/form_editModule/cancel', $.proxy(this.formCancel,this), this.cid);
+        $.subscribe('/contentLevel/popup_editModule/cancel', $.proxy(this.formCancel,this), this.cid);
         // from display
         $.subscribe('/contentLevel/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
         $.subscribe('/contentLevel/popup_displayModule/edit', $.proxy(this.displayEdit,this), this.cid);
@@ -40,6 +40,8 @@ kyt.CalendarController = kyt.Controller.extend({
 
     editEvent:function(url, data){
         $("#masterArea").after("<div id='dialogHolder'/>");
+        if(!data)data={};
+        data.Popup=true;
         var moduleOptions = {
             id:"editModule",
             el:"#dialogHolder",
@@ -51,7 +53,7 @@ kyt.CalendarController = kyt.Controller.extend({
     },
 
     eventClick:function(calEvent, jsEvent, view) {
-        var data = {"EntityId": calEvent.EntityId};
+        var data = {"EntityId": calEvent.EntityId, popup:true};
         var builder = kyt.popupButtonBuilder.builder("displayModule");
         builder.addButton("Delete", $.proxy(this.deleteItem,this));
         builder.addUpdateButton();

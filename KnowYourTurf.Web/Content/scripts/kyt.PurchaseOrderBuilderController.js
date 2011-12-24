@@ -61,7 +61,7 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
         $.subscribe('/contentLevel/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
         $.subscribe('/contentLevel/popup_displayModule/edit', $.proxy(this.displayEdit,this), this.cid);
 
-        $.subscribe('/form_editModule/success', $.proxy(this.itemSuccess,this), this.cid);
+        $.subscribe('/contentLevel/form_editModule/success', $.proxy(this.itemSuccess,this), this.cid);
 
     },
     pageLoaded:function(){
@@ -95,15 +95,20 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
         },this));
 
         $("#commit").click($.proxy(this.commitPO, this));
-        $("#return").click($.proxy(function(){window.location.href = this.options.returnUrl;},this));
+        $("#return").click($.proxy(function(){$.address.value(this.options.returnUrl)},this));
     },
     addToOrder:function(url){
-        var poId = $("#poId").val();
+        var poId = $("#PurchaseOrder_EntityId").val();
         var vendorId = $("#vendorId").val();
         kyt.repository.ajaxGet(url,{"PurchaseOrderId":poId,"VendorId":vendorId}, $.proxy(this.addToOrderCallback,this))
     },
     addToOrderCallback:function(result){
-        $("#poId").val(result.EntityId);
+        if($("#PurchaseOrder_EntityId").val()==0){
+            var vendorName = $("#vendor :selected").text();
+            $("#viewVendor").find("span", ".KYT_view_display").text(vendorName);
+        }
+        $("#PurchaseOrder_EntityId").val(result.EntityId);
+        this.showPOData();
         var url = this.views.poliGridView.getUrl();
         url = url.substr(0,url.indexOf("?EntityId"));
         url = url+"?EntityId="+result.EntityId;
@@ -152,7 +157,7 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
         }
     },
     editItem:function(url, data){
-        var poId = $("#poId").val();
+        var poId = $("#PurchaseOrder_EntityId").val();
          var _url = url?url:this.options.addUpdateUrl;
         _url = _url+"?ParentId="+poId;
         $("#masterArea").after("<div id='dialogHolder'/>");
@@ -164,6 +169,7 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
         };
         this.modules.popupForm = new kyt.AjaxPopupFormModule(moduleOptions);
     },
+
     itemSuccess:function(){
        this.itemCancel();
        this.views.poliGridView.reloadGrid();
@@ -173,6 +179,6 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
     },
     commitPO:function(){
         var purchaseOrderId = $("#PurchaseOrder_EntityId").val();
-        window.location.href = this.options.commitUrl+"?ParentId="+purchaseOrderId;
+        $.address.value(this.options.commitUrl+"?EntityId="+purchaseOrderId);
     }
 });

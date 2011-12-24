@@ -17,6 +17,7 @@ extraFormOptions.runAfterRenderFunction = function () {
 };
 </script>
       
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
 @MvcHtmlString.Create(FormFor<EventController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.Event.EntityId).ToString())

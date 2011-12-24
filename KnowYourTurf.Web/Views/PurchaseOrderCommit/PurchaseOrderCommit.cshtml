@@ -5,13 +5,12 @@
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @section HeaderScripts{
-    @MvcHtmlString.Create(Script("kyt.PurchaseOrderCommitController.js").ToString())
 }
 @section HeaderJavascript{
-     crudOptions.closePOUrl = '@MvcHtmlString.Create(Model.ClosePOUrl)';
+     gridControllerOptions.closePOUrl = '@MvcHtmlString.Create(Model.ClosePOUrl)';
 
     $(document).ready(function(){
-        new kyt.PurchaseOrderCommitController(crudOptions);
+        new kyt.PurchaseOrderCommitController(gridControllerOptions);
     });
 }
 
@@ -24,7 +23,20 @@
             @Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).RootId("viewVendor").ToHtmlTag()
         </div>
     </div>
+    <div class="col full clear">
+        <div class="fieldRow">
             @StandardButtonFor("savePO", WebLocalizationKeys.CLOSE_THIS_PURCHASE_ORDER).ToHtmlTag()
-            <h2>@WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS</h2>
-            <table id="gridContainer" class="scroll"></table>
-            <div id="pager" class="scroll" style="text-align:center;"></div>
+           <div class="content-header">
+                <input class="search" /> 
+                <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+                <span class="title-name">@Model.Title</span>
+            </div>
+            <div id="contentArea" class="content-inner">
+            <div id="validation-container-wrapper">
+                <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
+            </div>
+                     <table id="gridContainer" class="scroll"></table>
+        @*            <div id="pager" class="scroll" style="text-align:center;"></div>*@
+            </div>
+        </div>
+    </div>

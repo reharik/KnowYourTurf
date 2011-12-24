@@ -27,13 +27,14 @@ kyt.CalculatorController = kyt.CrudController.extend({
             el:"#dialogHolder",
             url: _url,
             data:data,
-            buttons: builder.getButtons(),
+            buttons: builder.getButtons()
         };
         this.modules.popupForm= new kyt.AjaxPopupFormModule(moduleOptions);
     },
 
     registerAdditionalSubscriptions:function(){
 
+        $.subscribe('/contentLevel/popup_editModule/cancel',$.proxy(this.calcCancel,this), this.cid);
         $.subscribe('/contentLevel/form_editModule/success',kyt.calculator.successHandlers.success, this.cid);
         $.subscribe('/contentLevel/form_taskModule/pageLoaded',$.proxy(this.loadTokenizers,this), this.cid);
         $.subscribe('/contentLevel/form_taskModule/success', $.proxy(this.taskSuccess,this), this.cid);
@@ -110,6 +111,9 @@ kyt.CalculatorController = kyt.CrudController.extend({
     },
     taskCancel: function(){
         this.modules.taskForm.destroy();
+    },
+    calcCancel: function(){
+        this.modules.popupForm.destroy();
     }
 
 

@@ -327,22 +327,8 @@ div.footer div.col {
 }
 
 /************************/
-.acceptLegal{
-
-    text-align: left;
-    width: 800px;
-    height: 400px;
-    overflow: auto;
-    background-color:           #CCCCCC;
-    font-size:                  10pt;
-    font-family:                Arial, Helvetica, sans-serif;
-    scrollbar-base-color:       #EEEEFF;
-    scrollbar-face-color:       #EEEEFF;
-    scrollbar-track-color:      #F9F9FF;
-    scrollbar-arrow-color:      #000000;
-    scrollbar-shadow-color:     #CCCCCC;
-    scrollbar-highlight-color:  #CCCCCC;
-    scrollbar-3dlight-color:    #CCCCCC;
-    scrollbar-darkshadow-Color: #CCCCCC;
-
+.KYT_view_label{
+    float: left;
+    font-weight: bold;
+    padding-right: 8px;
 }

@@ -29,6 +29,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)),
                 GridDefinition = _purchaseOrderListGrid.GetGridDefinition(url),
+                Title = WebLocalizationKeys.PURCHASE_ORDERS.ToString()
             };
             return View(model);
         }

@@ -7,6 +7,7 @@
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
             @MvcHtmlString.Create(FormFor<PurchaseOrderLineItemController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.PurchaseOrderLineItem.EntityId).ToString())
