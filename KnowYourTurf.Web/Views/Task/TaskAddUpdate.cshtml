@@ -31,44 +31,44 @@
     <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
 @MvcHtmlString.Create(FormFor<TaskController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-@MvcHtmlString.Create(Html.HiddenFor(x => x.Task.EntityId).ToString())
+@MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
 <div class="col left">
 <div class="fieldRow">
-    @Html.SubmissionFor(x => x.Task.TaskType).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.TaskType).ToHtmlTag()
 </div>
 <div class="fieldRow">
-    @Html.SubmissionFor(x => x.Task.ScheduledDate).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.ScheduledDate).ToHtmlTag()
 </div>
 <div class="fieldRow">
-    @Html.SubmissionFor(x => x.Task.ScheduledStartTime).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.ScheduledStartTime).ToHtmlTag()
 </div>
 <div class="fieldRow">
-    @Html.SubmissionFor(x => x.Task.ScheduledEndTime).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.ScheduledEndTime).ToHtmlTag()
 </div>
 <div class="fieldRow">
-    @Html.SubmissionFor(x => x.Task.ActualTimeSpent).AddClassToInput("timePickerNoSuffix").ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.ActualTimeSpent).AddClassToInput("timePickerNoSuffix").ToHtmlTag()
 </div>
 <div class="fieldRow">
-    @Html.SubmissionFor(x => x.Task.Field).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.Field).ToHtmlTag()
 </div>
 <div class="fieldRow">
     @Html.SubmissionFor(x => x.Product).ToHtmlTag()
 </div>
 <div class="fieldRow">
-    @Html.SubmissionFor(x => x.Task.QuantityNeeded).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.QuantityNeeded).ToHtmlTag()
 </div>
 <div class="fieldRow">
-    @Html.SubmissionFor(x => x.Task.QuantityUsed).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.QuantityUsed).ToHtmlTag()
 </div>
 <div class="fieldRow">
             
-    @Html.SubmissionFor(x => x.Task.Notes).AddClassToInput("KYT_editor_label_left").ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.Notes).AddClassToInput("KYT_editor_label_left").ToHtmlTag()
 </div>
 <div class="fieldRow">
-@if (Model.Task.Complete){
-                @Html.ViewFor(x => x.Task.Complete).ToHtmlTag()
+@if (Model.Item.Complete){
+                @Html.ViewFor(x => x.Item.Complete).ToHtmlTag()
 }else{
-                              @Html.SubmissionFor(x => x.Task.Complete).ToHtmlTag()}
+                              @Html.SubmissionFor(x => x.Item.Complete).ToHtmlTag()}
         </div>
     </div>
     <div class="col full clear">

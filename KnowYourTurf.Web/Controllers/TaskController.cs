@@ -74,7 +74,7 @@ namespace KnowYourTurf.Web.Controllers
                                 FieldList = fields,
                                 ProductList = dictionary,
                                 TaskTypeList = taskTypes,
-                                Task = task,
+                                Item = task,
                                 Title = WebLocalizationKeys.TASK_INFORMATION.ToString(),
                                 Popup = input.Popup
 
@@ -86,8 +86,8 @@ namespace KnowYourTurf.Web.Controllers
             decorateModel(input,model);
             if (input.Copy)
             {
-                model.Task = model.Task.CloneTask();
-                model.Task.Complete = false;
+                model.Item = model.Item.CloneTask();
+                model.Item.Complete = false;
             }
                 
             return PartialView("TaskAddUpdate", model);
@@ -97,12 +97,12 @@ namespace KnowYourTurf.Web.Controllers
         { 
             if (input.From == "Field")
             {
-                if (model.Task.EntityId <= 0)
-                    model.Task.Field = _repository.Find<Field>(input.ParentId);
+                if (model.Item.EntityId <= 0)
+                    model.Item.Field = _repository.Find<Field>(input.ParentId);
             }
             if (input.From == "Employee")
             {
-                if (model.Task.EntityId <= 0)
+                if (model.Item.EntityId <= 0)
                 {
                     var employee = _repository.Find<User>(input.ParentId);
                     model.SelectedEmployees.Add(new TokenInputDto { id = employee.EntityId.ToString(), name = employee.FullName });
@@ -110,9 +110,9 @@ namespace KnowYourTurf.Web.Controllers
             }
             if (input.From == "Calculator")
             {
-                model.Task.Field = _repository.Find<Field>(input.Field);
+                model.Item.Field = _repository.Find<Field>(input.Field);
                 model.Product = input.Product;
-                model.Task.QuantityNeeded = input.Quantity;
+                model.Item.QuantityNeeded = input.Quantity;
             }
         }
 
@@ -122,7 +122,7 @@ namespace KnowYourTurf.Web.Controllers
             var productName = task.GetProductName();
             var model = new TaskViewModel
                             {
-                                Task = task,
+                                Item = task,
                                 Product = productName,
                                 EmployeeNames = task.Employees.Select(x =>  x.FullName ),
                                 EquipmentNames = task.Equipment.Select(x => x.Name ),
@@ -154,8 +154,8 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(TaskViewModel input)
         {
-            var task = input.Task.EntityId > 0? _repository.Find<Task>(input.Task.EntityId):new Task();
-            mapItem(task, input.Task);
+            var task = input.Item.EntityId > 0? _repository.Find<Task>(input.Item.EntityId):new Task();
+            mapItem(task, input.Item);
             mapChildren(task, input);
             ICrudManager crudManager = null;
             if (task.Complete && !task.InventoryDecremented)
@@ -198,8 +198,8 @@ namespace KnowYourTurf.Web.Controllers
             if(model.EquipmentInput.IsNotEmpty())
                 model.EquipmentInput.Split(',').Each(x => task.AddEquipment(_repository.Find<Equipment>(Int32.Parse(x))));
 
-            task.TaskType = _repository.Find<TaskType>(model.Task.TaskType.EntityId);
-            task.Field = _repository.Find<Field>(model.Task.Field.EntityId);
+            task.TaskType = _repository.Find<TaskType>(model.Item.TaskType.EntityId);
+            task.Field = _repository.Find<Field>(model.Item.Field.EntityId);
             if (model.Product.Contains("_"))
             {
                 var product = model.Product.Split('_');

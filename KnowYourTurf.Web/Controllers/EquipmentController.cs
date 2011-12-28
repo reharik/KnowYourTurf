@@ -87,7 +87,7 @@ namespace KnowYourTurf.Web.Controllers
                 if(notification.Message.IsEmpty())
                 {
                     notification.Success = false;
-                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_TASK.ToString();
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_FOR_TASK.ToString();
                 }
                 return false;
             }

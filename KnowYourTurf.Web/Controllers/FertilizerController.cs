@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -48,16 +49,34 @@ namespace KnowYourTurf.Web.Controllers
             _repository.UnitOfWork.Commit();
             return null;
         }
-        
+
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
+            var notification = new Notification { Success = true };
             input.EntityIds.Each(x =>
             {
                 var item = _repository.Find<Fertilizer>(x);
-                _repository.HardDelete(item);
+                if (checkDependencies(item, notification))
+                {
+                    _repository.HardDelete(item);
+                }
             });
             _repository.Commit();
-            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+        private bool checkDependencies(Fertilizer item, Notification notification)
+        {
+            var dependantItems = _repository.Query<Vendor>(x => x.Products.Any(i => i == item));
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_FOR_VENDOR.ToString();
+                }
+                return false;
+            }
+            return true;
         }
 
         public ActionResult Save(FertilizerViewModel input)

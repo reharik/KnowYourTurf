@@ -15,7 +15,7 @@ namespace KnowYourTurf.Web.Models
         public IEnumerable<SelectListItem> TaskTypeList { get; set; }
         public string Product { get; set; }
         public IDictionary<string,IEnumerable<SelectListItem>> ProductList { get; set; }
-        public Task Task { get; set; }
+        public Task Item { get; set; }
         public bool Copy { get; set; }
 
         public IEnumerable<TokenInputDto> AvailableEmployees { get; set; }

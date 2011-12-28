@@ -12,7 +12,13 @@
 </script>
 
    <div class="content-header">
+        @RenderSection("ExtraContentHeaderButtons", false)
         <span class="title-name">@Model.Title</span>
+        <button class="close cancel" title="@WebLocalizationKeys.CLOSE"></button>
+        @if (Model.Item.EntityId > 0)
+        {
+            <span class="title-added">@WebLocalizationKeys.DATE_ADDED.ToFormat(Model.Item.DateCreated.ToLongDateString())</span>
+        }
     </div>
     <div id="contentArea" class="content-inner">
     <div id="errorMessagesForm" class="mf_ErrorMessages errorMessages"><ul></ul></div>

@@ -7,19 +7,19 @@
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
     <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
-<input type="hidden" id="EntityId" value="@Model.Task.EntityId"/>
+<input type="hidden" id="EntityId" value="@Model.Item.EntityId"/>
      
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Task.EntityId, new { @class = "copyEntityId" }).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId, new { @class = "copyEntityId" }).ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())
 <div class="col left">
     <div class="fieldRow">
-           @Html.ViewFor(x => x.Task.TaskType.Name).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToHtmlTag()
+           @Html.ViewFor(x => x.Item.TaskType.Name).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToHtmlTag()
     </div>
     <div class="fieldRow">
-                @Html.ViewFor(x => x.Task.ScheduledDate).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToHtmlTag()
+                @Html.ViewFor(x => x.Item.ScheduledDate).AddClassToLabel("KYT_Label").AddClassToInput("KYT_Input").ToHtmlTag()
     </div>
     <div class="fieldRow">
-                @Html.ViewFor(x => x.Task.Field.Name).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
+                @Html.ViewFor(x => x.Item.Field.Name).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
     </div>
     <div class="fieldRow">
                 @Html.ViewFor(x => x.Product).AddClassToLabel("KYT_Label").ToHtmlTag()
@@ -31,7 +31,7 @@
                 @Html.ViewFor(x => x.EmployeeNames).LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
     </div>
     <div class="fieldRow">
-                @Html.ViewFor(x => x.Task.Notes).AddClassToLabel("KYT_Label").ToHtmlTag()
+                @Html.ViewFor(x => x.Item.Notes).AddClassToLabel("KYT_Label").ToHtmlTag()
     </div>
 </div>
 

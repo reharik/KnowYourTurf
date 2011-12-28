@@ -72,15 +72,32 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
+            var notification = new Notification { Success = true };
             input.EntityIds.Each(x =>
             {
-                var item = _repository.Find<Vendor>(x)  ;
-                _repository.HardDelete(item);
+                var item = _repository.Find<Vendor>(x);
+                if (checkDependencies(item, notification))
+                {
+                    _repository.HardDelete(item);
+                }
             });
             _repository.Commit();
-            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
-
+        private bool checkDependencies(Vendor item, Notification notification)
+        {
+            var dependantItems = _repository.Query<PurchaseOrder>(x => x.Vendor == item);
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_FOR_PURCHASEORDER.ToString();
+                }
+                return false;
+            }
+            return true;
+        }
         public ActionResult Save(VendorViewModel input)
         {
             var vendor = input.Vendor.EntityId > 0 ? _repository.Find<Vendor>(input.Vendor.EntityId) : new Vendor();

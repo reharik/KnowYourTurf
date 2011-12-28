@@ -183,12 +183,16 @@ namespace KnowYourTurf.Web
         public static readonly StringToken ADMIN_TOOLS = new WebLocalizationKeys("ADMIN_TOOLS", "Admin Tools");
 
         public static readonly StringToken REMOVE = new WebLocalizationKeys("REMOVE", "Remove");
+        public static readonly StringToken CLOSE = new WebLocalizationKeys("CLOSE", "Close");
         public static readonly StringToken NEW = new WebLocalizationKeys("NEW", "New");
         public static readonly StringToken YOU_HAVE_NOT_ADDED_ANY = new WebLocalizationKeys("YOU_HAVE_NOT_ADDED_ANY", "You have not added any {0} ");
         public static readonly StringToken SELECT_ONE_OR_MORE_OR = new WebLocalizationKeys("SELECT_ONE_OR_MORE", "Select one or more or ...");
         public static readonly StringToken ADD_A_NEW = new WebLocalizationKeys("ADD_A_NEW", "Add a new {0}");
+        public static readonly StringToken DATE_ADDED = new WebLocalizationKeys("DATE_ADDED", "Date Added {0}");
 
-        public static readonly StringToken COULD_NOT_DELETE_TASK = new WebLocalizationKeys("COULD_NOT_DELETE_TASK", "Could not delete one or more item because it is being used in one or more Task");
+        public static readonly StringToken COULD_NOT_DELETE_FOR_TASK = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_TASK", "Could not delete one or more item because it is being used in one or more Task");
+        public static readonly StringToken COULD_NOT_DELETE_FOR_VENDOR = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_VENDOR", "Could not delete one or more item because it is being used by one or more Vendor");
+        public static readonly StringToken COULD_NOT_DELETE_FOR_PURCHASEORDER = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_PURCHASEORDER", "Could not delete one or more item because it is being used in one or more Purchase Order");
         public static readonly StringToken COULD_NOT_DELETE_EVENTTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EVENTTYPE", "Could not delete one or more item because it is being used in one or more Event");
         public static readonly StringToken COULD_NOT_DELETE_PHOTOCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_PHOTOCATEGORY", "Could not delete one or more item because it is being used in one or more Photo");
         public static readonly StringToken COULD_NOT_DELETE_DOCUMENTCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_DOCUMENTCATEGORY", "Could not delete one or more item because it is being used in one or more Document");
