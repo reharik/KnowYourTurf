@@ -32,7 +32,8 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
             gridName:"pendingTaskGrid",
             gridContainer:"#gridContainer_pt",
             gridDef:this.options.pendingGridDef,
-            addUpdateUrl:this.options.pendingTaskaddUpdateUrl
+            addUpdateUrl:this.options.pendingTaskaddUpdateUrl,
+            deleteMultipleUrl:this.options.deleteMultipleUrl
         };
         this.views.pendingTaskGridView = new kyt.GridView(ptgOptions);
         var ctgOptions = {
@@ -84,6 +85,8 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
         this.views.roles = new kyt.TokenView(options);
     },
     addUpdateItem: function(url, data,name){
+        if(this.options.popupIsActive){return;}
+        this.options.popupIsActive = true;
         var crudFormOptions={};
         crudFormOptions.additionalSubmitData =  {"From":"Employee","ParentId":entityId};
         var _url = url?url:this.options[name+"addUpdateUrl"];
@@ -154,6 +157,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
 
     },
     popupCancel: function(id){
+        this.options.popupIsActive=false;
         this.modules[id].destroy();
     },
 

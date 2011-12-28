@@ -27,6 +27,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddUpdate(null)),
+                DeleteMultipleUrl = UrlContext.GetUrlForAction<VendorController>(x => x.DeleteMultiple(null)),
                 GridDefinition = _vendorListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.VENDORS.ToString()
             };

@@ -33,7 +33,8 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             gridName:"pendingTaskGrid",
             gridContainer:"#gridContainer_pt",
             gridDef:this.options.pendingGridDef,
-            addUpdateUrl:this.options.pendingTaskaddUpdateUrl
+            addUpdateUrl:this.options.pendingTaskaddUpdateUrl,
+            deleteMultipleUrl:this.options.deleteMultipleUrl
         };
         this.views.pendingTaskGridView = new kyt.GridView(ptgOptions);
         var ctgOptions = {
@@ -52,7 +53,8 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             gridName:"photoGrid",
             gridContainer:"#gridContainer_p",
             gridDef:this.options.photoGridDef,
-            addUpdateUrl:this.options.photoaddUpdateUrl
+            addUpdateUrl:this.options.photoaddUpdateUrl,
+            deleteMultipleUrl:this.options.deleteMultiplePhotosUrl
         };
         this.views.photoGridView = new kyt.GridView(pgOptions);
         var dgOptions = {
@@ -61,7 +63,8 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             gridName:"documentGrid",
             gridContainer:"#gridContainer_d",
             gridDef:this.options.documentGridDef,
-            addUpdateUrl:this.options.documentaddUpdateUrl
+            addUpdateUrl:this.options.documentaddUpdateUrl,
+            deleteMultipleUrl:this.options.deleteMultipleDocumentsUrl
         };
         this.views.documentGridView = new kyt.GridView(dgOptions);
         if($("#galleria img").size()>0){
@@ -124,6 +127,8 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
     },
 
     addEditItem: function(url, data,name){
+        if(this.options.popupIsActive){return;}
+        this.options.popupIsActive = true;
         var crudFormOptions={};
         crudFormOptions.additionalSubmitData =  {"From":"Field","ParentId":entityId};
         var _url = url?url:this.options[name+"addUpdateUrl"];
@@ -225,6 +230,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
         }
     },
     popupCancel: function(id){
+        this.options.popupIsActive=false;
         this.modules[id].destroy();
     },
 

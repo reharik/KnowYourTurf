@@ -47,7 +47,16 @@ namespace KnowYourTurf.Web.Controllers
             _repository.UnitOfWork.Commit();
             return null;
         }
-
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<Chemical>(x);
+                _repository.HardDelete(item);
+            });
+            _repository.Commit();
+            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Save(ChemicalViewModel input)
         {
             Chemical chemical = input.Chemical.EntityId>0 ? _repository.Find<Chemical>(input.Chemical.EntityId) : new Chemical();

@@ -25,6 +25,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddUpdate(null)),
+                DeleteMultipleUrl= UrlContext.GetUrlForAction<FertilizerController>(x => x.DeleteMultiple(null)),
                 GridDefinition = _fertilizerListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.FERTILIZERS.ToString()
             };

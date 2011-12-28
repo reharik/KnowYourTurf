@@ -66,8 +66,9 @@ cc.gridHelper= (function(){
 cc.gridMultiSelect = (function(){
     return {
         getCheckedBoxes: function(gridContainerName) {
+            var name = gridContainerName?gridContainerName: "#gridContainer";
             var ids = [];
-            $($("#gridContainer").jqGrid('getGridParam', 'selarrrow')).each(function(idx, item) { ids.push(item) });
+            $($(name).jqGrid('getGridParam', 'selarrrow')).each(function(idx, item) { ids.push(item) });
             return ids;
         }
     }

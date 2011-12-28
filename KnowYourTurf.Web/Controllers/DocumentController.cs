@@ -66,6 +66,18 @@ namespace KnowYourTurf.Web.Controllers
             _repository.UnitOfWork.Commit();
             return null;
         }
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<Document>(x);
+                _uploadedFileHandlerService.DeleteFile(item.FileUrl);
+                _repository.HardDelete(item);
+            });
+            _repository.Commit();
+            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult Save(DocumentViewModel input)
         {

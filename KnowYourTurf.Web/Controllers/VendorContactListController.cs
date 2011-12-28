@@ -26,6 +26,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId,
                 GridDefinition = _vendorContactListGrid.GetGridDefinition(url),
+                DeleteMultipleUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.DeleteMultiple(null)) + "?ParentId=" + input.EntityId,
                 Title = WebLocalizationKeys.VENDOR_CONTACTS.ToString()
             };
             return View(model);

@@ -39,6 +39,7 @@ kyt.CalendarController = kyt.Controller.extend({
     },
 
     editEvent:function(url, data){
+        $("#dialogHolder").remove();
         $("#masterArea").after("<div id='dialogHolder'/>");
         if(!data)data={};
         data.Popup=true;

@@ -70,6 +70,17 @@ namespace KnowYourTurf.Web.Controllers
             return null;
         }
 
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<Vendor>(x)  ;
+                _repository.HardDelete(item);
+            });
+            _repository.Commit();
+            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Save(VendorViewModel input)
         {
             var vendor = input.Vendor.EntityId > 0 ? _repository.Find<Vendor>(input.Vendor.EntityId) : new Vendor();

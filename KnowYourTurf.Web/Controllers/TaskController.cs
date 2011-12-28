@@ -141,6 +141,17 @@ namespace KnowYourTurf.Web.Controllers
             return null;
         }
 
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<Task>(x);
+                _repository.HardDelete(item);
+            });
+            _repository.Commit();
+            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Save(TaskViewModel input)
         {
             var task = input.Task.EntityId > 0? _repository.Find<Task>(input.Task.EntityId):new Task();

@@ -24,6 +24,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)),
+                DeleteMultipleUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.DeleteMultiple(null)),
                 GridDefinition = _photoListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.PHOTOS.ToString()
             };

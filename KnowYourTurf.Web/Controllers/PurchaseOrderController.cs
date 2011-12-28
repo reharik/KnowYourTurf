@@ -41,6 +41,7 @@ namespace KnowYourTurf.Web.Controllers
             var vendors = _selectListItemService.CreateList<Vendor>(x=>x.Company,x=>x.EntityId,true);
             var url = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null))+"?Vendor=0";
             var PoliUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.PurchaseOrderLineItems(null)) + "?EntityId=" + purchaseOrder.EntityId;
+            var deleteMany = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + purchaseOrder.EntityId;
             POListViewModel model = new POListViewModel()
             {
                 PurchaseOrder = purchaseOrder,
@@ -48,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
                 VendorId = purchaseOrder.EntityId > 0 ? purchaseOrder.Vendor.EntityId : 0,
                 ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrderList()),
                 CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)),
-
+                DeleteMultipleUrl = deleteMany,
                 GridDefinition = _purchaseOrderSelectorGrid.GetGridDefinition(url),
                 PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl)
 
@@ -81,6 +82,17 @@ namespace KnowYourTurf.Web.Controllers
             _repository.HardDelete(purchaseOrder);
             _repository.UnitOfWork.Commit();
             return null;
+        }
+
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<PurchaseOrder>(x);
+                _repository.HardDelete(item);
+            });
+            _repository.Commit();
+            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Save(POSaveViewModel input)

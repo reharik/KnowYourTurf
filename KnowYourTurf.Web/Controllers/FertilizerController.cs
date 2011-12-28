@@ -48,6 +48,17 @@ namespace KnowYourTurf.Web.Controllers
             _repository.UnitOfWork.Commit();
             return null;
         }
+        
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<Fertilizer>(x);
+                _repository.HardDelete(item);
+            });
+            _repository.Commit();
+            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Save(FertilizerViewModel input)
         {

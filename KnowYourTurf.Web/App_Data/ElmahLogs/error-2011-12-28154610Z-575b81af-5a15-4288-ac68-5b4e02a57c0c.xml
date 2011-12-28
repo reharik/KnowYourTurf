@@ -1,0 +1,176 @@
+﻿<error errorId="575b81af-5a15-4288-ac68-5b4e02a57c0c" host="RAIFHARIK-MAC" type="System.Data.SqlClient.SqlException" message="The DELETE statement conflicted with the REFERENCE constraint &quot;FK5B0F8632DD09CEF5&quot;. The conflict occurred in database &quot;KnowYourTurf&quot;, table &quot;dbo.EquipmentToTask&quot;, column 'Equipment_id'.&#xD;&#xA;The statement has been terminated." source=".Net SqlClient Data Provider" detail="NHibernate.Exceptions.GenericADOException: could not execute batch command.[SQL: SQL not available] ---&gt; System.Data.SqlClient.SqlException: The DELETE statement conflicted with the REFERENCE constraint &quot;FK5B0F8632DD09CEF5&quot;. The conflict occurred in database &quot;KnowYourTurf&quot;, table &quot;dbo.EquipmentToTask&quot;, column 'Equipment_id'.&#xD;&#xA;The statement has been terminated.&#xD;&#xA;   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)&#xD;&#xA;   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)&#xD;&#xA;   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()&#xD;&#xA;   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()&#xD;&#xA;   at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()&#xD;&#xA;   at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()&#xD;&#xA;   at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\SqlClientSqlCommandSet.cs:line 117&#xD;&#xA;   at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\SqlClientBatchingBatcher.cs:line 79&#xD;&#xA;   --- End of inner exception stack trace ---&#xD;&#xA;   at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\SqlClientBatchingBatcher.cs:line 95&#xD;&#xA;   at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 431&#xD;&#xA;   at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 416&#xD;&#xA;   at NHibernate.Engine.ActionQueue.ExecuteActions(IList list) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 129&#xD;&#xA;   at NHibernate.Engine.ActionQueue.ExecuteActions() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 174&#xD;&#xA;   at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\AbstractFlushingEventListener.cs:line 249&#xD;&#xA;   at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\DefaultFlushEventListener.cs:line 19&#xD;&#xA;   at NHibernate.Impl.SessionImpl.Flush() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Impl\SessionImpl.cs:line 1472&#xD;&#xA;   at NHibernate.Transaction.AdoTransaction.Commit() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Transaction\AdoTransaction.cs:line 187&#xD;&#xA;   at KnowYourTurf.Core.Domain.UnitOfWork.Commit() in C:\Development\KnowYourTurf\KnowYourTurf.Core\Domain\Tools\UnitOfWork.cs:line 49&#xD;&#xA;   at KnowYourTurf.Core.Domain.Repository.Commit() in C:\Development\KnowYourTurf\KnowYourTurf.Core\Domain\Tools\Repository.cs:line 60&#xD;&#xA;   at KnowYourTurf.Web.Controllers.EquipmentController.DeleteMultiple(BulkActionViewModel input) in C:\Development\KnowYourTurf\KnowYourTurf.Web\Controllers\EquipmentController.cs:line 78&#xD;&#xA;   at lambda_method(Closure , ControllerBase , Object[] )&#xD;&#xA;   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)&#xD;&#xA;   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;InvokeActionMethodWithFilters&gt;b__12()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)&#xD;&#xA;   at System.Web.Mvc.Controller.ExecuteCore()&#xD;&#xA;   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClass6.&lt;&gt;c__DisplayClassb.&lt;BeginProcessRequest&gt;b__5()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClasse.&lt;EndProcessRequest&gt;b__d()&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.&lt;GetCallInAppTrustThunk&gt;b__0(Action f)&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="Harik, Raif" time="2011-12-28T15:46:10.4686343Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:*/*&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-us,en;q=0.5&#xD;&#xA;HTTP_COOKIE:KYT=6307B29AB795406F5F33690CD6AA4856D9CA7E553B60662FD3EB7F105806BC6C558104CACE088B0DCEB91802901C35337FB382755245F341A5955E39952111EB12DC8455695DBC9771DDBB97F4836803C33EA5F541EA3A61B8F0085621155FF3D6C4FC17EE4883034F0BDC06DA68A263806E1DCFC3C11F01E1666438038D4206ACD82E841E767D4EB8C667AE21F11464998CB76BBF0A68F644645C3580549EA0A5C812CFA5B35156B542F9535BDCE895A7DA04B6802CB3062FBD899D6D00B3F1&#xD;&#xA;HTTP_HOST:localhost:666&#xD;&#xA;HTTP_REFERER:http://localhost:666/KnowYourTurf/Home&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: */*&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-us,en;q=0.5&#xD;&#xA;Cookie: KYT=6307B29AB795406F5F33690CD6AA4856D9CA7E553B60662FD3EB7F105806BC6C558104CACE088B0DCEB91802901C35337FB382755245F341A5955E39952111EB12DC8455695DBC9771DDBB97F4836803C33EA5F541EA3A61B8F0085621155FF3D6C4FC17EE4883034F0BDC06DA68A263806E1DCFC3C11F01E1666438038D4206ACD82E841E767D4EB8C667AE21F11464998CB76BBF0A68F644645C3580549EA0A5C812CFA5B35156B542F9535BDCE895A7DA04B6802CB3062FBD899D6D00B3F1&#xD;&#xA;Host: localhost:666&#xD;&#xA;Referer: http://localhost:666/KnowYourTurf/Home&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms Authentication" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="RaifHarik-Mac\Raif Harik" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Equipment/DeleteMultiple" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\Equipment\DeleteMultiple" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="EntityIds=4&amp;_=1325087159429" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Equipment/DeleteMultiple" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="666" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/Equipment/DeleteMultiple" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="*/*" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-us,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="KYT=6307B29AB795406F5F33690CD6AA4856D9CA7E553B60662FD3EB7F105806BC6C558104CACE088B0DCEB91802901C35337FB382755245F341A5955E39952111EB12DC8455695DBC9771DDBB97F4836803C33EA5F541EA3A61B8F0085621155FF3D6C4FC17EE4883034F0BDC06DA68A263806E1DCFC3C11F01E1666438038D4206ACD82E841E767D4EB8C667AE21F11464998CB76BBF0A68F644645C3580549EA0A5C812CFA5B35156B542F9535BDCE895A7DA04B6802CB3062FBD899D6D00B3F1" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:666" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:666/KnowYourTurf/Home" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="EntityIds">
+      <value string="4" />
+    </item>
+    <item name="_">
+      <value string="1325087159429" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name="KYT">
+      <value string="6307B29AB795406F5F33690CD6AA4856D9CA7E553B60662FD3EB7F105806BC6C558104CACE088B0DCEB91802901C35337FB382755245F341A5955E39952111EB12DC8455695DBC9771DDBB97F4836803C33EA5F541EA3A61B8F0085621155FF3D6C4FC17EE4883034F0BDC06DA68A263806E1DCFC3C11F01E1666438038D4206ACD82E841E767D4EB8C667AE21F11464998CB76BBF0A68F644645C3580549EA0A5C812CFA5B35156B542F9535BDCE895A7DA04B6802CB3062FBD899D6D00B3F1" />
+    </item>
+  </cookies>
+</error>

@@ -29,7 +29,9 @@
 		//
 		//	|		$.publish("/some/topic", ["a","b","c"]);
 		cache[topic] && d.each(cache[topic], function(){
-			this.func.apply(d, args || []);
+            if(this.func){
+			    this.func.apply(d, args || []);
+            }
 		});
 	};
 

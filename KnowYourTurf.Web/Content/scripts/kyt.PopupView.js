@@ -16,6 +16,7 @@ kyt.PopupView = Backbone.View.extend({
         this.id=this.options.id;
 
         $(".ui-dialog").remove();
+
         // since dialog probably has a form in it.  much swich from form em to pu em
         // look at doing this in the form setup
         var errorMessages = $("div[id*='errorMessages']", this.el);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
@@ -59,6 +60,7 @@ namespace KnowYourTurf.Web.Controllers
             return PartialView(model);
         }
 
+
         public virtual ActionResult SaveListType(ListTypeViewModel input)
         {
             var listType = input.ListType.EntityId > 0
@@ -114,6 +116,35 @@ namespace KnowYourTurf.Web.Controllers
                             };
             return PartialView(model);
         }
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            var notification = new Notification { Success = true };
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<EventType>(x);
+                if (checkDependencies(item, notification))
+                {
+                    _repository.HardDelete(item);
+                }
+            });
+            _repository.Commit();
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+        private bool checkDependencies(EventType item, Notification notification)
+        {
+            var dependantItems = _repository.Query<Event>(x => x.EventType== item);
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_EVENTTYPE.ToString();
+                }
+                return false;
+            }
+            return true;
+        }
+
 
         public ActionResult SaveEventType(EventTypeViewModel input)
         {
@@ -158,8 +189,34 @@ namespace KnowYourTurf.Web.Controllers
                             };
             return PartialView(model);
         }
-
-
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            var notification = new Notification { Success = true };
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<TaskType>(x);
+                if (checkDependencies(item, notification))
+                {
+                    _repository.HardDelete(item);
+                }
+            });
+            _repository.Commit();
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+        private bool checkDependencies(TaskType item, Notification notification)
+        {
+            var dependantItems = _repository.Query<Task>(x => x.TaskType == item);
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_TASK.ToString();
+                }
+                return false;
+            }
+            return true;
+        }
     }
 
     public class DocumentCategoryController : ListTypeBaseController<DocumentCategory>
@@ -189,6 +246,35 @@ namespace KnowYourTurf.Web.Controllers
                             };
             return PartialView(model);
         }
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            var notification = new Notification { Success = true };
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<DocumentCategory>(x);
+                if (checkDependencies(item, notification))
+                {
+                    _repository.HardDelete(item);
+                }
+            });
+            _repository.Commit();
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+        private bool checkDependencies(DocumentCategory item, Notification notification)
+        {
+            var dependantItems = _repository.Query<Document>(x => x.DocumentCategory== item);
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_DOCUMENTCATEGORY.ToString();
+                }
+                return false;
+            }
+            return true;
+        }
+
     }
 
     public class PhotoCategoryController : ListTypeBaseController<PhotoCategory>
@@ -217,6 +303,37 @@ namespace KnowYourTurf.Web.Controllers
                                     input.EntityId
                             };
             return PartialView(model);
+        }
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            var notification = new Notification { Success = true };
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<PhotoCategory>(x);
+                if (checkDependencies(item, notification))
+                {
+                    _repository.HardDelete(item);
+                }
+            });
+            _repository.Commit();
+            return Json(notification, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+        private bool checkDependencies(PhotoCategory item, Notification notification)
+        {
+            var dependantItems = _repository.Query<Photo>(x=>x.PhotoCategory==item);
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_PHOTOCATEGORY.ToString();
+                }
+                return false;
+            }
+            return true;
         }
     }
 }

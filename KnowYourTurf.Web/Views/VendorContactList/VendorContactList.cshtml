@@ -10,6 +10,12 @@
         new kyt.CrudController(gridControllerOptions);
     });
 }
+
+@section ExtraContentHeaderButtons{
+    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+        <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+}
+
 <table id="gridContainer" class="scroll"></table>
 <div id="pager" class="scroll" style="text-align:center;"></div>
 <div id="filter" style="margin-left:30%;display:none">Search Invoices</div>

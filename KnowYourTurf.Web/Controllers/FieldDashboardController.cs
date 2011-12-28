@@ -50,23 +50,18 @@ namespace KnowYourTurf.Web.Controllers
                             {
                                 EntityId = input.EntityId,
                                 Field = field,
-                                AddUpdateUrl =
-                                    UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" +
+                                DeleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x => x.DeleteMultiple(null)) ,
+                                DeleteMultiplePhotosUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.DeleteMultiple(null)),
+                                DeleteMultipleDocumentsUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.DeleteMultiple(null)),
+                                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId + "&From=Field",
+                                AddUpdatePhotoUrl =UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "?ParentId=" +
                                     input.EntityId + "&From=Field",
-                                AddUpdatePhotoUrl =
-                                    UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "?ParentId=" +
+                                AddUpdateDocumentUrl =UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "?ParentId=" +
                                     input.EntityId + "&From=Field",
-                                AddUpdateDocumentUrl =
-                                    UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "?ParentId=" +
-                                    input.EntityId + "&From=Field",
-                                GridDefinition =
-                                    _pendingTaskGrid.GetGridDefinition(url),
-                                CompletedListDefinition =
-                                    _completedTaskGrid.GetGridDefinition(completeUrl),
-                                DocumentListDefinition =
-                                    _documentListGrid.GetGridDefinition(docuemntUrl),
-                                PhotoListDefinition =
-                                    _photoListGrid.GetGridDefinition(photoUrl),
+                                GridDefinition =_pendingTaskGrid.GetGridDefinition(url),
+                                CompletedListDefinition =_completedTaskGrid.GetGridDefinition(completeUrl),
+                                DocumentListDefinition =_documentListGrid.GetGridDefinition(docuemntUrl),
+                                PhotoListDefinition =_photoListGrid.GetGridDefinition(photoUrl),
                             };
             return View("FieldDashboard", model);
         }

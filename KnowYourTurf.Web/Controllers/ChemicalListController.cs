@@ -25,6 +25,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.AddUpdate(null)),
+                DeleteMultipleUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.DeleteMultiple(null)),
                 GridDefinition = _chemicalListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.CHEMICALS.ToString()
             };

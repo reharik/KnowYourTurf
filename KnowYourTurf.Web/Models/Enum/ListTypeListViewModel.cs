@@ -20,5 +20,13 @@ namespace KnowYourTurf.Web.Models
         public string PopupTitlePC { get; set; }
 
         public string PopupTitleDC { get; set; }
+
+        public string DeleteMultipleET { get; set; }
+
+        public string DeleteMultipleTT { get; set; }
+
+        public string DeleteMultipleDC { get; set; }
+
+        public string DeleteMultiplePC { get; set; }
     }
 }

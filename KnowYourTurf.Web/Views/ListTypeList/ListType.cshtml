@@ -11,22 +11,26 @@
     gridControllerOptions.gridInfo = {
         addUpdateUrl:  "@Model.AddUpdateUrlET",
         gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition)) ,
-        title: "@Model.Title"
+        title: "@Model.Title",
+        deleteMultiple:"@Model.DeleteMultipleET"
     };
     gridControllerOptions.ttGridInfo = {
         addUpdateUrl: "@Model.AddUpdateUrlTT",
         gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionTT)) ,
-        title: "@Model.PopupTitleTT"
+        title: "@Model.PopupTitleTT",
+        deleteMultiple:"@Model.DeleteMultipleTT"
     };
     gridControllerOptions.dcGridInfo = {
         addUpdateUrl: "@Model.AddUpdateUrlDC",
         gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionDC)) ,
-        title: "@Model.PopupTitlePC"
+        title: "@Model.PopupTitleDC",
+        deleteMultiple:"@Model.DeleteMultipleDC"
     };
     gridControllerOptions.pcGridInfo = {
         addUpdateUrl: "@Model.AddUpdateUrlPC",
         gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionPC)) ,
-        title: "@Model.PopupTitleDC"
+        title: "@Model.PopupTitlePC",
+        deleteMultiple:"@Model.DeleteMultiplePC"
     }; 
     
     $(document).ready(function(){

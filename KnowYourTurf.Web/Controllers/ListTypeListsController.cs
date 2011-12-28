@@ -30,6 +30,10 @@ namespace KnowYourTurf.Web.Controllers
             var gridUrlTT = UrlContext.GetUrlForAction<TaskTypeController>(x => x.ListTypes(null));
             var gridUrlDC = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.ListTypes(null));
             var gridUrlPC = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.ListTypes(null));
+            var dmET = UrlContext.GetUrlForAction<EventTypeController>(x => x.DeleteMultiple(null));
+            var dmTT = UrlContext.GetUrlForAction<TaskTypeController>(x => x.DeleteMultiple(null));
+            var dmDC = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.DeleteMultiple(null));
+            var dmPC = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.DeleteMultiple(null));
             ListTypeListViewModel model = new ListTypeListViewModel()
                                               {
                                                   AddUpdateUrlET = UrlContext.GetUrlForAction<EventTypeController>(x => x.AddUpdate(null)),
@@ -43,7 +47,11 @@ namespace KnowYourTurf.Web.Controllers
                                                   PopupTitleET = WebLocalizationKeys.EVENT_INFORMATION.ToString(),
                                                   PopupTitleTT = WebLocalizationKeys.TASK_INFORMATION.ToString(),
                                                   PopupTitlePC = WebLocalizationKeys.PHOTO_CATEGORY_INFORMATION.ToString(),
-                                                  PopupTitleDC = WebLocalizationKeys.DOCUMENT_CATEGORY_INFORMATION.ToString()
+                                                  PopupTitleDC = WebLocalizationKeys.DOCUMENT_CATEGORY_INFORMATION.ToString(),
+                                                  DeleteMultipleET = dmET,
+                                                  DeleteMultipleTT = dmTT,
+                                                  DeleteMultipleDC = dmDC,
+                                                  DeleteMultiplePC = dmPC,
                                               };
             return View(model);
         }

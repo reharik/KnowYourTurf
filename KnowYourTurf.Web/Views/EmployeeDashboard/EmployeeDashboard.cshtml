@@ -29,13 +29,14 @@
             pendingGridDef:pendingGridDef,
             completeGridDef:completeGridDef,
             rolesOptions:rolesOptions,
-            employeeListUrl:'@MvcHtmlString.Create(Model.EmployeeListUrl)'
+            employeeListUrl:'@Model.EmployeeListUrl',
+            deleteMultipleUrl:'@Model.DeleteMultipleUrl'
         }
         new kyt.EmployeeDashboardController(edcOptions);
     });
 }
 
-@MvcHtmlString.Create(FormFor<EmployeeController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+@MvcHtmlString.Create(FormFor<EmployeeController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
     @MvcHtmlString.Create(Html.HiddenFor(x => x.User.EntityId).ToString())
     @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())
     <div class="col left">
@@ -66,11 +67,11 @@
     </div>
     <div class="col left">
      @{if (Model.User.ImageUrl.IsNotEmpty())
-          {
+       {
             <div class="fieldRow">
                 @Html.ViewFor(x => x.User.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
             </div>
-          }
+       }
         }
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.User.Address1).ToHtmlTag()

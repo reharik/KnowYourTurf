@@ -301,6 +301,7 @@
     <Compile Include="Controllers\PermissionsController.cs" />
     <Compile Include="CustomViewPage.cs" />
     <Compile Include="Menus\HeaderMenu.cs" />
+    <Compile Include="Models\BulkAction\BulkActionViewModel.cs" />
     <Compile Include="Models\Calculator\CalculatorViewModel.cs" />
     <Compile Include="Models\Chemical\ChemicalViewModel.cs" />
     <Compile Include="Models\EmailJob\EmailJobViewModel.cs" />

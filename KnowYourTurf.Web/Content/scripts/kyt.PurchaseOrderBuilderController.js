@@ -46,7 +46,8 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
             id:"poliGrid",
             gridContainer:"#poliGrid",
             gridDef:this.options.poliGridDef,
-            gridOptions: poliExtraOptions
+//            gridOptions: poliExtraOptions,
+            deleteMultipleUrl:this.options.deleteMultipleUrl
         };
         this.views.poliGridView = new kyt.GridView(poliGridOptions);
         $("#productGrid").jqGrid('setGridState', $("#vendorId").val()<=0?'hidden':'visible');

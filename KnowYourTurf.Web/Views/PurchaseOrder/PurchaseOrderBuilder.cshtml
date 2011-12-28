@@ -12,7 +12,8 @@
         productGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition)),
         poliGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.PoliListDefinition)),
         commitUrl: "@Model.CommitUrl",
-        returnUrl: "@Model.ReturnUrl"
+        returnUrl: "@Model.ReturnUrl",
+        deleteMultipleUrl: "@Model.DeleteMultipleUrl"
     }
     $(document).ready(function(){
         new kyt.PurchaseOrderBuilderController(crudOptions);
@@ -37,22 +38,36 @@
 
     <div class="col full clear">
         <div class="fieldRow">
+            <h2>@WebLocalizationKeys.PRODUCTS.ToString()</h2>
             <div id="productGridArea">
-                <h2>@WebLocalizationKeys.PRODUCTS.ToString()</h2>
+              <div class="content-header">
+                <input class="search" /> 
+                <span class="title-name">@Model.Title</span>
+            </div>
+            <div id="contentArea" class="content-inner">
                 <table id="productGrid" class="scroll"></table>
-@*                <div id="productPager" class="scroll" style="text-align:center;"></div>*@
             </div>
         </div>
+    </div>
     </div>
 
     <div class="col full clear">
         <div class="fieldRow">
+            <h2> @WebLocalizationKeys.LINE_ITEMS.ToString() </h2>
             <div id="poliGridArea">
-                <h2> @WebLocalizationKeys.LINE_ITEMS.ToString() </h2>
+              <div class="content-header">
+                <input class="search" /> 
+                <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+                <span class="title-name">@Model.Title</span>
+            </div>
+            <div id="contentArea" class="content-inner">
                 <table id="poliGrid" class="scroll"></table>
-@*                <div id="poliPager" class="scroll" style="text-align:center;"></div>*@
             </div>
         </div>
     </div>
-    @StandardButtonFor("commit",WebLocalizationKeys.COMMIT).ToHtmlTag()
-    @StandardButtonFor("return", WebLocalizationKeys.RETURN).ToHtmlTag()
+    </div>
+         <div class="footer">
+
+    @StandardButtonFor("commit", WebLocalizationKeys.COMMIT).AddClass("save").ToHtmlTag()
+    @StandardButtonFor("return", WebLocalizationKeys.RETURN).AddClass("cancel").ToHtmlTag()
+    </div>

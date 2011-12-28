@@ -16,5 +16,9 @@ namespace KnowYourTurf.Web.Models
         public string AddUpdatePhotoUrl { get; set; }
 
         public string AddUpdateDocumentUrl { get; set; }
+
+        public string DeleteMultiplePhotosUrl { get; set; }
+
+        public string DeleteMultipleDocumentsUrl { get; set; }
     }
 }

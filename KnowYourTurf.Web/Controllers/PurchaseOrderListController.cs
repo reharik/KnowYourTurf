@@ -28,6 +28,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)),
+                DeleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.DeleteMultiple(null)),
                 GridDefinition = _purchaseOrderListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.PURCHASE_ORDERS.ToString()
             };
@@ -51,5 +52,7 @@ namespace KnowYourTurf.Web.Controllers
             var gridItemsViewModel = _purchaseOrderListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
+
+
     }
 }

@@ -7,7 +7,7 @@
 @section HeaderScripts{
 }
 @section HeaderJavascript{
-     gridControllerOptions.createATaskUrl=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CreateATaskUrl));
+     gridControllerOptions.createATaskUrl=  '@Model.CreateATaskUrl';
     $(document).ready(function(){
         new kyt.CalculatorController(gridControllerOptions);
     });

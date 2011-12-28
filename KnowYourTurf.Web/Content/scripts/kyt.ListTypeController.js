@@ -54,7 +54,8 @@ kyt.ListTypeController = kyt.CrudController.extend({
             gridDef:this.options.gridInfo.gridDef,
             addUpdateUrl:this.options.gridInfo.addUpdateUrl,
             gridOptions:{pager: "#eventTypePager"},
-            gridContainer:"#EventTypeGrid"
+            gridContainer:"#EventTypeGrid",
+            deleteMultipleUrl:this.options.gridInfo.deleteMultiple
         };
         this.views.etGridView = new kyt.GridView(etOptions);
         var ttOptions={
@@ -64,7 +65,8 @@ kyt.ListTypeController = kyt.CrudController.extend({
             gridDef:this.options.ttGridInfo.gridDef,
             addUpdateUrl:this.options.ttGridInfo.addUpdateUrl,
             gridOptions:{pager: "#taskTypePager"},
-            gridContainer:"#TaskTypeGrid"
+            gridContainer:"#TaskTypeGrid",
+            deleteMultipleUrl:this.options.ttGridInfo.deleteMultiple
         };
         this.views.ttGridView = new kyt.GridView(ttOptions);
         var dcOptions={
@@ -74,7 +76,8 @@ kyt.ListTypeController = kyt.CrudController.extend({
             gridDef:this.options.dcGridInfo.gridDef,
             addUpdateUrl:this.options.dcGridInfo.addUpdateUrl,
             gridOptions:{pager: "#docCatPager"},
-            gridContainer:"#DocumentCategoryGrid"
+            gridContainer:"#DocumentCategoryGrid",
+            deleteMultipleUrl:this.options.dcGridInfo.deleteMultiple
         };
         this.views.dcGridView = new kyt.GridView(dcOptions);
         var pcOptions={
@@ -84,7 +87,8 @@ kyt.ListTypeController = kyt.CrudController.extend({
             gridDef:this.options.pcGridInfo.gridDef,
             addUpdateUrl:this.options.pcGridInfo.addUpdateUrl,
             gridOptions:{pager: "#photoCatPager"},
-            gridContainer:"#PhotoCategoryGrid"
+            gridContainer:"#PhotoCategoryGrid",
+            deleteMultipleUrl:this.options.pcGridInfo.deleteMultiple
         };
         this.views.pcGridView = new kyt.GridView(pcOptions);
     },
