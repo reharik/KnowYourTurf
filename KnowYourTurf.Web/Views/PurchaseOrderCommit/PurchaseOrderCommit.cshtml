@@ -3,11 +3,20 @@
 @using HtmlTags
 @using KnowYourTurf.Core.Html.FubuUI
 
-@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@{ Layout = "~/Views/Shared/_emptyLayout.cshtml"; }
 @section HeaderScripts{
 }
 @section HeaderJavascript{
-     gridControllerOptions.closePOUrl = '@MvcHtmlString.Create(Model.ClosePOUrl)';
+    var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition));
+    var addUpdateUrl = "@MvcHtmlString.Create(Model.AddUpdateUrl)";
+    var deleteMultipleUrl = "@MvcHtmlString.Create(Model.DeleteMultipleUrl)";
+    var contentArea;
+    var gridControllerOptions = { gridDef: gridDef,
+        addUpdateUrl: addUpdateUrl,
+        deleteMultipleUrl: deleteMultipleUrl,
+        el:"#masterArea"
+    };
+    gridControllerOptions.closePOUrl = '@MvcHtmlString.Create(Model.ClosePOUrl)';
      gridControllerOptions.searchField = 'PurchaseOrderLineItem.Product.Name';
     $(document).ready(function(){
         new kyt.PurchaseOrderCommitController(gridControllerOptions);
@@ -25,7 +34,7 @@
     </div>
     <div class="col full clear">
         <div class="fieldRow">
-            @StandardButtonFor("savePO", WebLocalizationKeys.CLOSE_THIS_PURCHASE_ORDER).AddClass("save").ToHtmlTag()
+            @StandardButtonFor("savePO", WebLocalizationKeys.CLOSE_THIS_PURCHASE_ORDER).AddClass("saveNotFixed").ToHtmlTag()
            <div class="content-header">
                 <input class="search" /> 
                 <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>

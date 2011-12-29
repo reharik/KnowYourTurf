@@ -10,43 +10,6 @@ div.fieldRow textarea
 		{ height: 180px	;
 	  overflow: auto; }
 
-.unit a.close {
-    background: url(../images/close-x.png) no-repeat top left;
-    width: 14px;
-    height: 16px;
-    display:block;
-    text-indent: -999em;
-    margin-right: 15px;
-    float: right;
-}
- .repeaterItems {
-     background-color: #C0D4DE;
-     padding: 8px;
- }
-
- .unit{
-     width: 100%;
-     border: 1px black solid;
- }
-
-.unit .move-up {
-    background: url("../images/move-up-icon.png") no-repeat scroll 0 0 transparent;
-    display: block;
-    height: 8px;
-    margin-top: 1px;
-    width: 11px;
-    cursor: pointer;
-}
-
-.unit .move-down {
-    background: url("../images/move-down-icon.png") no-repeat scroll 0 0 transparent;
-    display: block;
-    height: 8px;
-    margin-top: 2px;
-    width: 11px;
-    cursor: pointer;
-}
-
 /******  FORMS  *******/
  div.-scroll-wrapper {
     padding-top: 12px;
@@ -209,15 +172,21 @@ div.fieldRow textarea
     padding-bottom: 5px;
 }
 
- .footer button.save {
+ button.save {
     background: url("../images/button-save-bg.png") repeat-x scroll 0 0 #CCCCCC;
     border: 1px solid #B7D6DE;
     height: 27px;
     width: 80px;
     color: #437182;
 }
+button.saveNotFixed {
+    background: url("../images/button-save-bg.png") repeat-x scroll 0 0 #CCCCCC;
+    border: 1px solid #B7D6DE;
+    height: 27px;
+    color: #437182;
+}
 
- .footer button.cancel {
+ button.cancel {
     background: url("../images/button-cancel-bg.png") repeat-x scroll 0 0 #CCCCCC;
     border: 1px solid #dfdfdf;
     height: 27px;
@@ -225,22 +194,31 @@ div.fieldRow textarea
     color: #8F8F8F;
 }
 
- .footer button.save:hover {
+ button.save:hover {
+    background: url("../images/button-save-bg-hover.png") repeat-x scroll 0 0 #CCCCCC;
+}
+button.saveNotFixed:hover {
     background: url("../images/button-save-bg-hover.png") repeat-x scroll 0 0 #CCCCCC;
 }
 
- .footer button.cancel:hover {
+ button.cancel:hover {
     background: url("../images/button-cancel-bg-hover.png") repeat-x scroll 0 0 #CCCCCC;
 }
 
- .footer button.save:active {
-    background: url("../images/button-save-bg-active.png") repeat-x scroll 0 0 #CCCCCC;
-    -webkit-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
-    -moz-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
-    box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
-}
+button.save:active {
+   background: url("../images/button-save-bg-active.png") repeat-x scroll 0 0 #CCCCCC;
+   -webkit-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+   -moz-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+   box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+   }
+button.saveNotFixed:active {
+   background: url("../images/button-save-bg-active.png") repeat-x scroll 0 0 #CCCCCC;
+   -webkit-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+   -moz-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+   box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+   }
 
- .footer button.cancel:active {
+ button.cancel:active {
     background: url("../images/button-cancel-bg-active.png") repeat-x scroll 0 0 #CCCCCC;
 }
 

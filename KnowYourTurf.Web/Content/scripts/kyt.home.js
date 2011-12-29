@@ -101,7 +101,7 @@ kyt.HomeController = kyt.Controller.extend({
                 $("#contentArea").show().empty();
             }else{
                 kyt.repository.ajaxGet(value,{},function(result){
-                    $.each(kyt.contentLevelControllers,function(name,value){
+                        $.each(kyt.contentLevelControllers,function(name,value){
                         if(value)
                         value.destroy();
                     });

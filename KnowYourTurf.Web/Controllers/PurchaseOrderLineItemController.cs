@@ -79,7 +79,8 @@ namespace KnowYourTurf.Web.Controllers
             var purchaseOrderLineItem = _repository.Find<PurchaseOrderLineItem>(input.EntityId);
             var model = new PurchaseOrderLineItemViewModel
             {
-                Item = purchaseOrderLineItem
+                Item = purchaseOrderLineItem,
+                Title = WebLocalizationKeys.RECEIVE_PURCHASE_ORDER_ITEM.ToString()
             };
             return PartialView("ReceivePurchaseOrderLineItem", model);
         }

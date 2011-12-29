@@ -59,8 +59,8 @@ kyt.CrudController  = kyt.Controller.extend({
             url: url
         };
         $("#masterArea","#contentInner").after("<div id='detailArea'/>");
-        this.modules.displayView = new kyt.AjaxDisplayView(formOptions);
-        this.modules.displayView.render();
+        this.views.displayView = new kyt.AjaxDisplayView(formOptions);
+        this.views.displayView.render();
     },
 
     redirectItem:function(url){
@@ -78,7 +78,7 @@ kyt.CrudController  = kyt.Controller.extend({
         $("#masterArea").show();
     },
         displayCancel: function(){
-        this.modules.displayView.remove();
+        this.views.displayView.remove();
         $("#masterArea").show();
     }
 });
