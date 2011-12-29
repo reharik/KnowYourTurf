@@ -33,7 +33,7 @@ namespace KnowYourTurf.Web.Controllers
         
         public JsonResult Photos(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<Photo>();
+            var items = _dynamicExpressionQuery.PerformQuery<Photo>(input.filters);
             var gridItemsViewModel = _photoListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }

@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
         
         public JsonResult Documents(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<Document>();
+            var items = _dynamicExpressionQuery.PerformQuery<Document>(input.filters);
             var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }

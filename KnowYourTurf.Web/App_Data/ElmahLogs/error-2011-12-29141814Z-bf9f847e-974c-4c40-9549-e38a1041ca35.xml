@@ -1,0 +1,197 @@
+﻿<error errorId="bf9f847e-974c-4c40-9549-e38a1041ca35" host="RAIFHARIK-MAC" type="System.ArgumentException" message="Instance property 'Name' is not defined for type 'KnowYourTurf.Core.Domain.PurchaseOrderLineItem'" source="System.Core" detail="System.ArgumentException: Instance property 'Name' is not defined for type 'KnowYourTurf.Core.Domain.PurchaseOrderLineItem'&#xD;&#xA;   at System.Linq.Expressions.Expression.Property(Expression expression, String propertyName)&#xD;&#xA;   at KnowYourTurf.Core.Services.DynamicExpressionBuilder.createMemberExpressionForProperty(ParameterExpression parameterExpression, String fullName) in C:\Development\KnowYourTurf\KnowYourTurf.Core\Services\IDynamicExpressionBuilder.cs:line 52&#xD;&#xA;   at KnowYourTurf.Core.Services.DynamicExpressionBuilder.&lt;&gt;c__DisplayClass2.&lt;createBinaryExpressionsForRules&gt;b__1(FilterItem item) in C:\Development\KnowYourTurf\KnowYourTurf.Core\Services\IDynamicExpressionBuilder.cs:line 67&#xD;&#xA;   at KnowYourTurf.Core.BasicExtentions.Each[T](IEnumerable`1 values, Action`1 eachAction) in C:\Development\KnowYourTurf\KnowYourTurf.Core\BasicExtentions.cs:line 86&#xD;&#xA;   at KnowYourTurf.Core.Services.DynamicExpressionBuilder.createBinaryExpressionsForRules(IEnumerable`1 filterItems, ParameterExpression pe, Expression pb, Boolean isNullCheck) in C:\Development\KnowYourTurf\KnowYourTurf.Core\Services\IDynamicExpressionBuilder.cs:line 63&#xD;&#xA;   at KnowYourTurf.Core.Services.DynamicExpressionBuilder.Build[ENTITY](JqGridFilter filter, Boolean isNullCheck) in C:\Development\KnowYourTurf\KnowYourTurf.Core\Services\IDynamicExpressionBuilder.cs:line 39&#xD;&#xA;   at KnowYourTurf.Core.Services.DynamicExpressionQuery.PrepareExpression[ENTITY](String json, Expression`1 extraFilters) in C:\Development\KnowYourTurf\KnowYourTurf.Core\Services\IDynamicExpressionQuery.cs:line 55&#xD;&#xA;   at KnowYourTurf.Core.Services.DynamicExpressionQuery.PerformQuery[ENTITY](String json, Expression`1 extraFilters, Boolean isNullCheck) in C:\Development\KnowYourTurf\KnowYourTurf.Core\Services\IDynamicExpressionQuery.cs:line 38&#xD;&#xA;   at KnowYourTurf.Web.Controllers.PurchaseOrderCommitController.PurchaseOrderLineItems(GridItemsRequestModel input) in C:\Development\KnowYourTurf\KnowYourTurf.Web\Controllers\PurchaseOrderCommitController.cs:line 59&#xD;&#xA;   at lambda_method(Closure , ControllerBase , Object[] )&#xD;&#xA;   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)&#xD;&#xA;   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;InvokeActionMethodWithFilters&gt;b__12()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)&#xD;&#xA;   at System.Web.Mvc.Controller.ExecuteCore()&#xD;&#xA;   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClass6.&lt;&gt;c__DisplayClassb.&lt;BeginProcessRequest&gt;b__5()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClasse.&lt;EndProcessRequest&gt;b__d()&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.&lt;GetCallInAppTrustThunk&gt;b__0(Action f)&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="Harik, Raif" time="2011-12-29T14:18:14.9076314Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:application/json, text/javascript, */*; q=0.01&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-us,en;q=0.5&#xD;&#xA;HTTP_COOKIE:KYT=8E5083344C5247814966A51257C78F37E95425DB53B5EEFFF3D0A559A561F48D4E77D1E9AAB8291E125D9D1D6A1BF243127542FAAA87DDFE6EF8D422A47BC4DAC52285EF64F73611FAA9AF2A084AD904EAA595651B42C476D59F1ED87C97D6BC8C6E3DE1114F787F64B10E485C81B285674E7528DA6F5E243DE3347FC099B0B0A76654323BD2CB93FB06BB205392D7D83E5560B4D1A7A44EAE8038BB1452B34A9ECF33E1A3613DE722B23C8ADF695169A5FF6991CCF4C92A0960E81E95B19CDA&#xD;&#xA;HTTP_HOST:localhost:666&#xD;&#xA;HTTP_REFERER:http://localhost:666/KnowYourTurf/Home&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: application/json, text/javascript, */*; q=0.01&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-us,en;q=0.5&#xD;&#xA;Cookie: KYT=8E5083344C5247814966A51257C78F37E95425DB53B5EEFFF3D0A559A561F48D4E77D1E9AAB8291E125D9D1D6A1BF243127542FAAA87DDFE6EF8D422A47BC4DAC52285EF64F73611FAA9AF2A084AD904EAA595651B42C476D59F1ED87C97D6BC8C6E3DE1114F787F64B10E485C81B285674E7528DA6F5E243DE3347FC099B0B0A76654323BD2CB93FB06BB205392D7D83E5560B4D1A7A44EAE8038BB1452B34A9ECF33E1A3613DE722B23C8ADF695169A5FF6991CCF4C92A0960E81E95B19CDA&#xD;&#xA;Host: localhost:666&#xD;&#xA;Referer: http://localhost:666/KnowYourTurf/Home&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms Authentication" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="RaifHarik-Mac\Raif Harik" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/PurchaseOrderCommit/PurchaseOrderLineItems" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\PurchaseOrderCommit\PurchaseOrderLineItems" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="EntityId=1&amp;_search=false&amp;nd=1325168294783&amp;rows=100&amp;page=1&amp;sidx=&amp;sord=asc&amp;filters=%7B%22group%22%3A%22AND%22%2C%22rules%22%3A%5B%7B%22field%22%3A%22PurchaseOrderLineItem.Name%22%2C%22data%22%3A%22k%22%7D%5D%7D&amp;_=1325168294784" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/PurchaseOrderCommit/PurchaseOrderLineItems" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="666" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/PurchaseOrderCommit/PurchaseOrderLineItems" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="application/json, text/javascript, */*; q=0.01" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-us,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="KYT=8E5083344C5247814966A51257C78F37E95425DB53B5EEFFF3D0A559A561F48D4E77D1E9AAB8291E125D9D1D6A1BF243127542FAAA87DDFE6EF8D422A47BC4DAC52285EF64F73611FAA9AF2A084AD904EAA595651B42C476D59F1ED87C97D6BC8C6E3DE1114F787F64B10E485C81B285674E7528DA6F5E243DE3347FC099B0B0A76654323BD2CB93FB06BB205392D7D83E5560B4D1A7A44EAE8038BB1452B34A9ECF33E1A3613DE722B23C8ADF695169A5FF6991CCF4C92A0960E81E95B19CDA" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:666" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:666/KnowYourTurf/Home" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0.1) Gecko/20100101 Firefox/8.0.1" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="EntityId">
+      <value string="1" />
+    </item>
+    <item name="_search">
+      <value string="false" />
+    </item>
+    <item name="nd">
+      <value string="1325168294783" />
+    </item>
+    <item name="rows">
+      <value string="100" />
+    </item>
+    <item name="page">
+      <value string="1" />
+    </item>
+    <item name="sidx">
+      <value string="" />
+    </item>
+    <item name="sord">
+      <value string="asc" />
+    </item>
+    <item name="filters">
+      <value string="{&quot;group&quot;:&quot;AND&quot;,&quot;rules&quot;:[{&quot;field&quot;:&quot;PurchaseOrderLineItem.Name&quot;,&quot;data&quot;:&quot;k&quot;}]}" />
+    </item>
+    <item name="_">
+      <value string="1325168294784" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name="KYT">
+      <value string="8E5083344C5247814966A51257C78F37E95425DB53B5EEFFF3D0A559A561F48D4E77D1E9AAB8291E125D9D1D6A1BF243127542FAAA87DDFE6EF8D422A47BC4DAC52285EF64F73611FAA9AF2A084AD904EAA595651B42C476D59F1ED87C97D6BC8C6E3DE1114F787F64B10E485C81B285674E7528DA6F5E243DE3347FC099B0B0A76654323BD2CB93FB06BB205392D7D83E5560B4D1A7A44EAE8038BB1452B34A9ECF33E1A3613DE722B23C8ADF695169A5FF6991CCF4C92A0960E81E95B19CDA" />
+    </item>
+  </cookies>
+</error>

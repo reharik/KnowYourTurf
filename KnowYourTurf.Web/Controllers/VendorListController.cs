@@ -36,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
         
         public JsonResult Vendors(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<Vendor>();
+            var items = _dynamicExpressionQuery.PerformQuery<Vendor>(input.filters);
             Action<IGridColumn, Vendor> mod = (c, v) =>
                                           {
                                               if (c.GetType() == typeof(ImageButtonColumn<Vendor>) && c.ColumnIndex == 10)

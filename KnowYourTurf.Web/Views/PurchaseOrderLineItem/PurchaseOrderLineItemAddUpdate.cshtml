@@ -10,35 +10,35 @@
     <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
             @MvcHtmlString.Create(FormFor<PurchaseOrderLineItemController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.PurchaseOrderLineItem.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
             <input type="hidden" id="ParentId" name="ParentId" value="@Model.ParentId"/>
     <div class="col left">
         <div class="fieldRow">
-            @Html.ViewFor(x => x.PurchaseOrderLineItem.Product.Name).ToHtmlTag()
+            @Html.ViewFor(x => x.Item.Product.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.PurchaseOrderLineItem.Product.Description).ToHtmlTag()
+            @Html.ViewFor(x => x.Item.Product.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.PurchaseOrderLineItem.QuantityOrdered).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.QuantityOrdered).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.PurchaseOrderLineItem.SizeOfUnit).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.SizeOfUnit).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.PurchaseOrderLineItem.UnitType).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.UnitType).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.PurchaseOrderLineItem.Price).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Price).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.PurchaseOrderLineItem.Taxable).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Taxable).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.PurchaseOrderLineItem.SubTotal).ToHtmlTag()
+            @Html.ViewFor(x => x.Item.SubTotal).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.PurchaseOrderLineItem.Tax).ToHtmlTag()
+            @Html.ViewFor(x => x.Item.Tax).ToHtmlTag()
         </div>
     </div>
 

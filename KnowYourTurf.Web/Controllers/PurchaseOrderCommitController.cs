@@ -17,12 +17,16 @@ namespace KnowYourTurf.Web.Controllers
         private Pager<PurchaseOrderLineItem> _pager;
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
+        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
         private readonly IEntityListGrid<PurchaseOrderLineItem> _receivePurchaseOrderLineItemGrid;
 
-        public PurchaseOrderCommitController(IRepository repository, ISaveEntityService saveEntityService)
+        public PurchaseOrderCommitController(IRepository repository,
+            ISaveEntityService saveEntityService,
+            IDynamicExpressionQuery dynamicExpressionQuery)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
+            _dynamicExpressionQuery = dynamicExpressionQuery;
             _receivePurchaseOrderLineItemGrid = ObjectFactory.Container.GetInstance < IEntityListGrid<PurchaseOrderLineItem>>("Recieve");
         }
 
@@ -52,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult PurchaseOrderLineItems(GridItemsRequestModel input)
         {
-            var items = _repository.Query<PurchaseOrderLineItem>(x=>x.PurchaseOrder.EntityId == input.EntityId && !x.Completed);
+            var items = _dynamicExpressionQuery.PerformQuery<PurchaseOrderLineItem>(input.filters, x => x.PurchaseOrder.EntityId == input.EntityId && !x.Completed);
             var model = _receivePurchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(model, JsonRequestBehavior.AllowGet);
         }

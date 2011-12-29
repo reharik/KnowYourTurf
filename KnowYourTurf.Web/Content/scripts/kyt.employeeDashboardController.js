@@ -31,6 +31,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
             id:"pendingTaskGrid",
             gridName:"pendingTaskGrid",
             gridContainer:"#gridContainer_pt",
+            searchField:"TaskType.Name",
             gridDef:this.options.pendingGridDef,
             addUpdateUrl:this.options.pendingTaskaddUpdateUrl,
             deleteMultipleUrl:this.options.deleteMultipleUrl
@@ -41,6 +42,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
             id:"completeTaskGrid",
             gridName:"completeTaskGrid",
             gridContainer:"#gridContainer_ct",
+            searchField:"TaskType.Name",
             gridDef:this.options.completeGridDef,
             // this is not used except for copy task which is why it's for the pendingGrid
             addUpdateUrl:this.options.pendingTaskaddUpdateUrl

@@ -43,6 +43,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             id:"completeTaskGrid",
             gridName:"completeTaskGrid",
             gridContainer:"#gridContainer_ct",
+            searchField:"TaskType.Name",
             gridDef:this.options.completeGridDef,
             // this is not used except for copy task which is why it's for the pendingGrid
             addUpdateUrl:this.options.pendingTaskaddUpdateUrl

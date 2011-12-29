@@ -123,6 +123,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken VALID_RANGE_REQUIRED = new WebLocalizationKeys("VALID_RANGE_REQUIRED", "the {0} field must be between {1} and {2}.");
         public static readonly StringToken POWERED_BY_KEY = new WebLocalizationKeys("POWERED_BY_KEY", "Powered by ");
 
+        public static readonly StringToken DATE = new WebLocalizationKeys("DATE", "Date ");
         public static readonly StringToken FIELD_NAME = new WebLocalizationKeys("FIELD_NAME", "Field Name");
         public static readonly StringToken EMPLOYEE_NAMES = new WebLocalizationKeys("EMPLOYEE_NAMES", "Employee Names");
         public static readonly StringToken PO_NUMBER = new WebLocalizationKeys("PO_NUMBER", "PO Number");
@@ -189,6 +190,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken SELECT_ONE_OR_MORE_OR = new WebLocalizationKeys("SELECT_ONE_OR_MORE", "Select one or more or ...");
         public static readonly StringToken ADD_A_NEW = new WebLocalizationKeys("ADD_A_NEW", "Add a new {0}");
         public static readonly StringToken DATE_ADDED = new WebLocalizationKeys("DATE_ADDED", "Date Added {0}");
+        public static readonly StringToken PO_Number = new WebLocalizationKeys("PO_Number", "PO Number");
 
         public static readonly StringToken COULD_NOT_DELETE_FOR_TASK = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_TASK", "Could not delete one or more item because it is being used in one or more Task");
         public static readonly StringToken COULD_NOT_DELETE_FOR_VENDOR = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_VENDOR", "Could not delete one or more item because it is being used by one or more Vendor");

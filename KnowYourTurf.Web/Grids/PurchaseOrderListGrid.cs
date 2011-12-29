@@ -28,6 +28,7 @@ namespace KnowYourTurf.Core.Domain
                 .ForAction<PurchaseOrderController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
+            GridBuilder.DisplayFor(x => x.EntityId).DisplayHeader(WebLocalizationKeys.PO_Number);
             GridBuilder.DisplayFor(x => x.Completed);
             GridBuilder.DisplayFor(x => x.Vendor.Company);
             GridBuilder.DisplayFor(x => x.SubTotal).FormatValue(GridColumnFormatter.Currency);

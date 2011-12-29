@@ -32,7 +32,7 @@ namespace KnowYourTurf.Web.Controllers
             var purchaseOrderLineItem = input.EntityId > 0 ? _repository.Find<PurchaseOrderLineItem>(input.EntityId) : new PurchaseOrderLineItem();
             var model = new PurchaseOrderLineItemViewModel
             {
-                PurchaseOrderLineItem = purchaseOrderLineItem,
+                Item = purchaseOrderLineItem,
                 ParentId = input.ParentId
             };
             return PartialView("PurchaseOrderLineItemAddUpdate", model);
@@ -43,7 +43,7 @@ namespace KnowYourTurf.Web.Controllers
             var purchaseOrderLineItem = _repository.Find<PurchaseOrderLineItem>(input.EntityId);
             var model = new PurchaseOrderLineItemViewModel
             {
-                PurchaseOrderLineItem = purchaseOrderLineItem,
+                Item = purchaseOrderLineItem,
                 AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.AddUpdate(null)) + "/" + purchaseOrderLineItem.EntityId
             };
             return PartialView("PurchaseOrderLineItemView", model);
@@ -60,14 +60,14 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Save(PurchaseOrderLineItemViewModel input)
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.ParentId);
-            var purchaseOrderLineItem = input.PurchaseOrderLineItem.EntityId > 0
-                                            ? purchaseOrder.LineItems.FirstOrDefault(x=>x.EntityId == input.PurchaseOrderLineItem.EntityId)
+            var purchaseOrderLineItem = input.Item.EntityId > 0
+                                            ? purchaseOrder.LineItems.FirstOrDefault(x=>x.EntityId == input.Item.EntityId)
                                             : new PurchaseOrderLineItem();
-            purchaseOrderLineItem.Price = input.PurchaseOrderLineItem.Price;
-            purchaseOrderLineItem.QuantityOrdered = input.PurchaseOrderLineItem.QuantityOrdered;
-            purchaseOrderLineItem.SizeOfUnit = input.PurchaseOrderLineItem.SizeOfUnit;
-            purchaseOrderLineItem.UnitType = input.PurchaseOrderLineItem.UnitType;
-            purchaseOrderLineItem.Taxable= input.PurchaseOrderLineItem.Taxable;
+            purchaseOrderLineItem.Price = input.Item.Price;
+            purchaseOrderLineItem.QuantityOrdered = input.Item.QuantityOrdered;
+            purchaseOrderLineItem.SizeOfUnit = input.Item.SizeOfUnit;
+            purchaseOrderLineItem.UnitType = input.Item.UnitType;
+            purchaseOrderLineItem.Taxable= input.Item.Taxable;
             _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder,purchaseOrderLineItem);
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
             var notification = crudManager.Finish();
@@ -79,20 +79,20 @@ namespace KnowYourTurf.Web.Controllers
             var purchaseOrderLineItem = _repository.Find<PurchaseOrderLineItem>(input.EntityId);
             var model = new PurchaseOrderLineItemViewModel
             {
-                PurchaseOrderLineItem = purchaseOrderLineItem
+                Item = purchaseOrderLineItem
             };
             return PartialView("ReceivePurchaseOrderLineItem", model);
         }
 
         public ActionResult SaveReceived(PurchaseOrderLineItemViewModel input)
         {
-            var origionalPurchaseOrderLineItem = _repository.Find<PurchaseOrderLineItem>(input.PurchaseOrderLineItem.EntityId);
-            origionalPurchaseOrderLineItem.QuantityOrdered = input.PurchaseOrderLineItem.QuantityOrdered;
-            origionalPurchaseOrderLineItem.Price = input.PurchaseOrderLineItem.Price;
-            origionalPurchaseOrderLineItem.TotalReceived = input.PurchaseOrderLineItem.TotalReceived;
-            origionalPurchaseOrderLineItem.Completed = input.PurchaseOrderLineItem.Completed;
-            origionalPurchaseOrderLineItem.UnitType = input.PurchaseOrderLineItem.UnitType;
-            origionalPurchaseOrderLineItem.SizeOfUnit = input.PurchaseOrderLineItem.SizeOfUnit;
+            var origionalPurchaseOrderLineItem = _repository.Find<PurchaseOrderLineItem>(input.Item.EntityId);
+            origionalPurchaseOrderLineItem.QuantityOrdered = input.Item.QuantityOrdered;
+            origionalPurchaseOrderLineItem.Price = input.Item.Price;
+            origionalPurchaseOrderLineItem.TotalReceived = input.Item.TotalReceived;
+            origionalPurchaseOrderLineItem.Completed = input.Item.Completed;
+            origionalPurchaseOrderLineItem.UnitType = input.Item.UnitType;
+            origionalPurchaseOrderLineItem.SizeOfUnit = input.Item.SizeOfUnit;
             var crudManager = _saveEntityService.ProcessSave(origionalPurchaseOrderLineItem);
             crudManager = _inventoryService.ReceivePurchaseOrderLineItem(origionalPurchaseOrderLineItem,crudManager);
             var notification = crudManager.Finish();

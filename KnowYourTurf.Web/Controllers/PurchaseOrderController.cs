@@ -62,7 +62,9 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Products(PoSelectorGridItemsRequestModel input)
         {
             var vendor = _repository.Find<Vendor>(input.Vendor);
-            var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, vendor.Products.AsQueryable(), "productGrid");
+            var items = _dynamicExpressionQuery.PerformQuery(vendor.Products, input.filters);
+
+            var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items, "productGrid");
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
@@ -129,7 +131,7 @@ namespace KnowYourTurf.Web.Controllers
 
             var model = new PurchaseOrderLineItemViewModel
                                                      {
-                                                         PurchaseOrderLineItem = purchaseOrderLineItem
+                                                         Item = purchaseOrderLineItem
                                                      };
             return View(model);
         }
@@ -140,14 +142,14 @@ namespace KnowYourTurf.Web.Controllers
             var purchaseOrder = input.ParentId > 0
                                     ? vendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId)
                                     : new PurchaseOrder{Vendor = vendor};
-            var baseProduct = _repository.Find<BaseProduct>(input.PurchaseOrderLineItem.Product.EntityId);
+            var baseProduct = _repository.Find<BaseProduct>(input.Item.Product.EntityId);
             var newPo = purchaseOrder.EntityId == 0;
             var purchaseOrderLineItem = new PurchaseOrderLineItem
             {
                 Product = baseProduct,
                 PurchaseOrder = purchaseOrder
             };
-            mapItem(purchaseOrderLineItem, input.PurchaseOrderLineItem);
+            mapItem(purchaseOrderLineItem, input.Item);
             _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder, purchaseOrderLineItem);
             vendor.AddPurchaseOrder(purchaseOrder);
             

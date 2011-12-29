@@ -12,21 +12,25 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IRepository _repository;
         private readonly IEntityListGrid<PurchaseOrderLineItem> _purchaseOrderLineItemGrid;
         private readonly ISaveEntityService _saveEntityService;
+        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
 
         public PurchaseOrderLineItemListController(IRepository repository,
             IEntityListGrid<PurchaseOrderLineItem> purchaseOrderLineItemGrid,
-            ISaveEntityService saveEntityService)
+            ISaveEntityService saveEntityService, 
+            IDynamicExpressionQuery dynamicExpressionQuery)
         {
             _repository = repository;
             _purchaseOrderLineItemGrid = purchaseOrderLineItemGrid;
             _saveEntityService = saveEntityService;
+            _dynamicExpressionQuery = dynamicExpressionQuery;
         }
 
         public JsonResult PurchaseOrderLineItems(GridItemsRequestModel input)
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
             if (purchaseOrder == null) return null;
-            IQueryable<PurchaseOrderLineItem> items = purchaseOrder.LineItems.AsQueryable();
+            var items = _dynamicExpressionQuery.PerformQuery(purchaseOrder.LineItems, input.filters);
+
             if (input.PageSortFilter.SortColumn.IsEmpty()) items = items.OrderBy(x => x.Product.Name);
             var model = _purchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items, "poliGrid");
             return Json(model, JsonRequestBehavior.AllowGet);

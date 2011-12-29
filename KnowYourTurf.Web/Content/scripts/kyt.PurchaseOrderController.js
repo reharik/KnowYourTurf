@@ -17,7 +17,8 @@ kyt.PurchaseOrderController = kyt.Controller.extend({
         this.registerSubscriptions();
         var displayOptions={
             el:"#masterArea",
-            id:this.options.gridName
+            id:this.options.gridName,
+            searchField: "EntityId"
         };
         var options = $.extend({}, this.options,displayOptions);
         this.views.gridView = new kyt.GridView(options);

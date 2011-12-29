@@ -45,11 +45,10 @@
 
     <div class="col full clear">
         <div class="fieldRow">
-            <h2>@WebLocalizationKeys.PRODUCTS.ToString()</h2>
             <div id="productGridArea">
               <div class="content-header">
                 <input class="search" /> 
-                <span class="title-name">@Model.Title</span>
+                <span class="title-name">@WebLocalizationKeys.PRODUCTS.ToString()</span>
             </div>
             <div id="contentArea" class="content-inner">
                 <table id="productGrid" class="scroll"></table>
@@ -60,12 +59,11 @@
 
     <div class="col full clear">
         <div class="fieldRow">
-            <h2> @WebLocalizationKeys.LINE_ITEMS.ToString() </h2>
             <div id="poliGridArea">
               <div class="content-header">
                 <input class="search" /> 
                 <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
-                <span class="title-name">@Model.Title</span>
+                <span class="title-name">@WebLocalizationKeys.LINE_ITEMS.ToString()</span>
             </div>
             <div id="contentArea" class="content-inner">
                 <table id="poliGrid" class="scroll"></table>
