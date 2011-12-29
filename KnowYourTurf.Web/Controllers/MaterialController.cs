@@ -24,7 +24,7 @@ namespace KnowYourTurf.Web.Controllers
             var material = input.EntityId > 0 ? _repository.Find<Material>(input.EntityId) : new Material();
             var model = new MaterialViewModel
             {
-                Material = material,
+                Item = material,
                 Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
             };
             return PartialView("MaterialAddUpdate", model);
@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             var material = _repository.Find<Material>(input.EntityId);
             var model = new MaterialViewModel
                             {
-                                Material = material,
+                                Item = material,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.AddUpdate(null)) + "/" + material.EntityId,
                                 Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
                             };
@@ -81,7 +81,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(MaterialViewModel input)
         {
-            var material = input.Material.EntityId > 0 ? _repository.Find<Material>(input.Material.EntityId) : new Material();
+            var material = input.Item.EntityId > 0 ? _repository.Find<Material>(input.Item.EntityId) : new Material();
             mapItem(material, input);
             var crudManager = _saveEntityService.ProcessSave(material);
             var notification = crudManager.Finish();
@@ -90,9 +90,9 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(Material material, MaterialViewModel input)
         {
-            material.Description = input.Material.Description;
-            material.Name = input.Material.Name;
-            material.Notes = input.Material.Name;
+            material.Description = input.Item.Description;
+            material.Name = input.Item.Name;
+            material.Notes = input.Item.Name;
         }
     }
 }

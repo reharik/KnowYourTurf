@@ -37,62 +37,62 @@
 }
 
 @MvcHtmlString.Create(FormFor<EmployeeController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-    @MvcHtmlString.Create(Html.HiddenFor(x => x.User.EntityId).ToString())
+    @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
     @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.EmployeeId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.EmployeeId).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.FirstName).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.FirstName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.LastName).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.LastName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.EmergencyContact).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.EmergencyContact).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.EmergencyContactPhone).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.EmergencyContactPhone).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.UserLoginInfo.Password).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Password).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.Email).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Email).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.PhoneMobile).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.PhoneMobile).ToHtmlTag()
         </div>
     </div>
     <div class="col left">
-     @{if (Model.User.ImageUrl.IsNotEmpty())
+     @{if (Model.Item.ImageUrl.IsNotEmpty())
        {
             <div class="fieldRow">
-                @Html.ViewFor(x => x.User.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
+                @Html.ViewFor(x => x.Item.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
             </div>
        }
         }
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.Address1).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.Address2).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Address2).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.City).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.City).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.State).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.State).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.ZipCode).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.ZipCode).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.UserLoginInfo.Status).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Status).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.Notes).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().RootId("rolesInputRoot").LabelDisplay(WebLocalizationKeys.USER_ROLES).ToHtmlTag()
@@ -110,12 +110,12 @@
 
     <div class="col left clear">
         <div class="fieldRow">
+        <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
             <div id="pendingTaskGridContainer" class="grid_5b">
                 <div class="content-header">
                     <input class="search" /> 
                     <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
                     <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
-                    <span class="title-name">@Model.Title</span>
                 </div>
                 <div id="contentArea" class="content-inner">
                     <div id="validation-container-wrapper">
@@ -130,10 +130,10 @@
 
     <div class="col right ">
         <div class="fieldRow">
-            <div id="completeTaskGridContainer" class="grid_4 KYT_AddNew_space">
+            <div class="gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
+                   <div id="completeTaskGridContainer" class="grid_4 KYT_AddNew_space">
                 <div class="content-header">
                     <input class="search" /> 
-                    <span class="title-name">@Model.Title</span>
                 </div>
                 <div id="contentArea" class="content-inner">
                     <div id="validation-container-wrapper">

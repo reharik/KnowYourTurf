@@ -32,8 +32,7 @@
             documentGridDef:documentGridDef,
             deleteMultipleUrl: deleteMultipleUrl,
             deleteMultipleDocumentsUrl: deleteMultipleDocumentsUrl,
-            deleteMultiplePhotosUrl: deleteMultiplePhotosUrl
-        }
+            deleteMultiplePhotosUrl: deleteMultiplePhotosUrl }
         new kyt.FieldDashboardController(fdcOptions);
     });
 }
@@ -43,23 +42,23 @@
         </div>
 
                   @MvcHtmlString.Create(FormFor<FieldController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Field.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Field.Name).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Field.Abbreviation).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Abbreviation).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Field.Description).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Field.Size).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Size).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
-            @Html.SubmissionFor(x => x.Field.FieldColor).InputId("FieldColor").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.FieldColor).InputId("FieldColor").ToHtmlTag()
             <div id="colorPicker"></div>
         </div>
     </div>
@@ -67,7 +66,7 @@
             
         <div id="galleria" >
             
-                        @foreach (var photo in Model.Field.Photos)
+                        @foreach (var photo in Model.Item.Photos)
                         {
                                 <img src="@photo.FileUrl" />
                         }
@@ -76,12 +75,13 @@
 
     <div class="col left clear">
         <div class="fieldRow">
+        <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
             <div id="pendingTaskGridContainer" class="grid_5b">
                 <div class="content-header">
                     <input class="search" /> 
                     <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
                     <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
-                    <span class="title-name">@Model.Title</span>
+@*                    <span class="title-name">@Model.Title</span>*@
                 </div>
                 <div id="contentArea" class="content-inner">
                         <table id="gridContainer_pt" class="scroll"></table>
@@ -89,12 +89,13 @@
             </div>
         </div>
         <div class="fieldRow">
+        <div class="gridHeader">@WebLocalizationKeys.PHOTOS</div>
             <div id="photoGridContainer" class="grid_5b">
                 <div class="content-header">
                     <input class="search" /> 
                     <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
                     <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
-                    <span class="title-name">@Model.Title</span>
+@*                    <span class="title-name">@Model.Title</span>*@
                 </div>
                 <div id="contentArea" class="content-inner">
                         <table id="gridContainer_p" class="scroll"></table>
@@ -107,10 +108,11 @@
 
     <div class="col right">
         <div class="fieldRow">
+        <div class="gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
             <div id="completeTaskGridContainer" class="grid_4 KYT_AddNew_space">
                 <div class="content-header">
                     <input class="search" /> 
-                    <span class="title-name">@Model.Title</span>
+@*                    <span class="title-name">@Model.Title</span>*@
                 </div>
                 <div id="contentArea" class="content-inner">
                             <table id="gridContainer_ct" class="scroll"></table>
@@ -119,12 +121,13 @@
             </div>
         </div>
         <div class="fieldRow">
+        <div class="gridHeader">@WebLocalizationKeys.DOCUMENTS</div>
             <div id="documentGridContainer" class="grid_5b">
                 <div class="content-header">
                     <input class="search" /> 
                     <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
                     <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
-                    <span class="title-name">@Model.Title</span>
+@*                    <span class="title-name">@Model.Title</span>*@
                 </div>
                 <div id="contentArea" class="content-inner">
                         <table id="gridContainer_d" class="scroll"></table>

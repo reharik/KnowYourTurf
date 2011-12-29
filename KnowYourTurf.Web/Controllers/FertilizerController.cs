@@ -24,7 +24,7 @@ namespace KnowYourTurf.Web.Controllers
             var fertilizer = input.EntityId > 0 ? _repository.Find<Fertilizer>(input.EntityId) : new Fertilizer();
             var model = new FertilizerViewModel
             {
-                Fertilizer = fertilizer,
+                Item = fertilizer,
                 Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
             };
             return PartialView("FertilizerAddUpdate", model);
@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             var fertilizer = _repository.Find<Fertilizer>(input.EntityId);
             var model = new FertilizerViewModel
             {
-                Fertilizer = fertilizer,
+                Item = fertilizer,
                 AddUpdateUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddUpdate(null)) + "/" + fertilizer.EntityId,
                 Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
             };
@@ -81,7 +81,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(FertilizerViewModel input)
         {
-            Fertilizer fertilizer = input.Fertilizer.EntityId > 0 ? _repository.Find<Fertilizer>(input.Fertilizer.EntityId) : new Fertilizer();
+            Fertilizer fertilizer = input.Item.EntityId > 0 ? _repository.Find<Fertilizer>(input.Item.EntityId) : new Fertilizer();
             mapItem(fertilizer, input);
             var crudManager = _saveEntityService.ProcessSave(fertilizer);
             var notification = crudManager.Finish();
@@ -90,12 +90,12 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(Fertilizer fertilizer, FertilizerViewModel input)
         {
-            fertilizer.Description = input.Fertilizer.Description;
-            fertilizer.K = input.Fertilizer.K;
-            fertilizer.N = input.Fertilizer.N;
-            fertilizer.Name = input.Fertilizer.Name;
-            fertilizer.Notes = input.Fertilizer.Notes;
-            fertilizer.P = input.Fertilizer.P;
+            fertilizer.Description = input.Item.Description;
+            fertilizer.K = input.Item.K;
+            fertilizer.N = input.Item.N;
+            fertilizer.Name = input.Item.Name;
+            fertilizer.Notes = input.Item.Notes;
+            fertilizer.P = input.Item.P;
         }
     }
 }

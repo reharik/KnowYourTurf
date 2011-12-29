@@ -10,31 +10,31 @@
 }
 
 @MvcHtmlString.Create(FormFor<ChemicalController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-    @MvcHtmlString.Create(Html.HiddenFor(x => x.Chemical.EntityId).ToString())
+    @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Chemical.Name).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Chemical.Description).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Chemical.Manufacturer).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Manufacturer).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Chemical.ActiveIngredient).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.ActiveIngredient).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Chemical.ActiveIngredientPercent).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.ActiveIngredientPercent).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Chemical.EPAEstNumber).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.EPAEstNumber).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Chemical.EPARegNumber).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.EPARegNumber).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Chemical.Notes).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
         </div>
     </div>
 @EndForm()

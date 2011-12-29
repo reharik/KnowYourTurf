@@ -38,7 +38,7 @@ namespace KnowYourTurf.Web.Controllers
             var categoryItems = _selectListItemService.CreateList<DocumentCategory>(x=>x.Name,x=>x.EntityId,true);
             var model = new DocumentViewModel
             {
-                Document = document,
+                Item = document,
                 DocumentCategoryList = categoryItems,
                 Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
                 Popup = input.Popup
@@ -51,7 +51,7 @@ namespace KnowYourTurf.Web.Controllers
             var document = _repository.Find<Document>(input.EntityId);
             var model = new DocumentViewModel
                             {
-                                Document = document,
+                                Item = document,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "/" + document.EntityId,
                                 Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
                                 Popup = input.Popup
@@ -82,7 +82,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Save(DocumentViewModel input)
         {
             var coId = _sessionContext.GetCompanyId();
-            var document = input.Document.EntityId > 0 ? _repository.Find<Document>(input.Document.EntityId) : new Document();
+            var document = input.Item.EntityId > 0 ? _repository.Find<Document>(input.Item.EntityId) : new Document();
             var newDoc = mapToDomain(input, document);
             var serverDirectory = "/CustomerDocuments/" + coId;
             document.FileUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, document.Name);
@@ -101,14 +101,14 @@ namespace KnowYourTurf.Web.Controllers
 
         private Document mapToDomain(DocumentViewModel input, Document document)
         {
-            var documentModel = input.Document;
+            var documentModel = input.Item;
             document.FileType = documentModel.FileType;
             
             document.Name = documentModel.Name;
             document.Description = documentModel.Description;
-            if (document.DocumentCategory == null || document.DocumentCategory.EntityId != input.Document.DocumentCategory.EntityId)
+            if (document.DocumentCategory == null || document.DocumentCategory.EntityId != input.Item.DocumentCategory.EntityId)
             {
-                document.DocumentCategory = _repository.Find<DocumentCategory>(input.Document.DocumentCategory.EntityId);
+                document.DocumentCategory = _repository.Find<DocumentCategory>(input.Item.DocumentCategory.EntityId);
             }
             return document;
         }
@@ -116,7 +116,7 @@ namespace KnowYourTurf.Web.Controllers
 
     public class DocumentViewModel:ViewModel
     {
-        public Document Document { get; set; }
+        public Document Item { get; set; }
         public IEnumerable<SelectListItem> DocumentCategoryList { get; set; }
         public long DocumentCategory { get; set; }
     }

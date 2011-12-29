@@ -32,6 +32,7 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             id:"pendingTaskGrid",
             gridName:"pendingTaskGrid",
             gridContainer:"#gridContainer_pt",
+            searchField:"TaskType.Name",
             gridDef:this.options.pendingGridDef,
             addUpdateUrl:this.options.pendingTaskaddUpdateUrl,
             deleteMultipleUrl:this.options.deleteMultipleUrl
@@ -106,10 +107,10 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
         $.subscribe('/contentLevel/popup_pendingTaskForm/cancel', $.proxy(this.popupCancel,this), this.cid);
 
         $.subscribe('/contentLevel/form_photoForm/success', $.proxy(this.photoFormSuccess,this), this.cid);
-        $.subscribe('/contentLevel/form_photoForm/cancel', $.proxy(this.popupCancel,this), this.cid);
+        $.subscribe('/contentLevel/popup_photoForm/cancel', $.proxy(this.popupCancel,this), this.cid);
 
         $.subscribe('/contentLevel/form_documentForm/success', $.proxy(this.formSuccess,this), this.cid);
-        $.subscribe('/contentLevel/form_documentForm/cancel', $.proxy(this.popupCancel,this), this.cid);
+        $.subscribe('/contentLevel/popup_documentForm/cancel', $.proxy(this.popupCancel,this), this.cid);
 
         // from display
         $.subscribe('/contentLevel/popup_pendingTaskDisplay/cancel', $.proxy(this.popupCancel,this), this.cid);
@@ -145,7 +146,6 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
         };
         this.modules[name] = new kyt.AjaxPopupFormModule(moduleOptions);
     },
-
     displayItem: function(url, data,name){
         var _url = url?url:this.options.displayUrl;
         var builder = kyt.popupButtonBuilder.builder(name);

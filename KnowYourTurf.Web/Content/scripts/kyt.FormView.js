@@ -24,6 +24,7 @@ kyt.BaseFormView = Backbone.View.extend({
         if(extraFormOptions){
             $.extend(true, this.options, extraFormOptions);
         }
+        extraFormOptions = {};
 
         this.options.crudFormOptions.successHandler = $.proxy(this.successHandler,this);
         $(this.options.crudFormSelector,this.el).crudForm(this.options.crudFormOptions);

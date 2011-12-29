@@ -4,6 +4,6 @@ namespace KnowYourTurf.Web.Models.Fertilizer
 {
     public class FertilizerViewModel:ViewModel
     {
-        public Core.Domain.Fertilizer Fertilizer { get; set; }
+        public Core.Domain.Fertilizer Item { get; set; }
     }
 }

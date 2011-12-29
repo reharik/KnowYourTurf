@@ -9,7 +9,7 @@ namespace KnowYourTurf.Web.Models.Vendor
     public class VendorViewModel : ViewModel
     {
         public IEnumerable<string> VendorContactNames{ get; set; }
-        public Core.Domain.Vendor Vendor { get; set; }
+        public Core.Domain.Vendor Item { get; set; }
 
         public string ChemicalInput { get; set; }
         public string FertilizerInput { get; set; }

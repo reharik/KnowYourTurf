@@ -7,7 +7,7 @@ namespace KnowYourTurf.Web.Models
 {
     public class EmployeeDashboardViewModel : ListViewModel
     {
-        public User User { get; set; }
+        public User Item { get; set; }
         public bool DeleteImage { get; set; }
         public string RolesInput { get; set; }
         public IEnumerable<TokenInputDto> AvailableItems { get; set; }

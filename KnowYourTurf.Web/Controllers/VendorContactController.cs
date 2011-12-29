@@ -25,7 +25,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new VendorContactViewModel
                             {
                                 ParentId = input.ParentId > 0 ? input.ParentId : vendorContact.Vendor.EntityId,
-                                VendorContact = vendorContact,
+                                Item = vendorContact,
                                 Title = WebLocalizationKeys.VENDOR_CONTACT_INFORMATION.ToString()
                             };
             return PartialView("VendorContactAddUpdate", model);
@@ -36,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
             var vendorContact = _repository.Find<VendorContact>(input.EntityId);
             var model = new VendorContactViewModel
                             {
-                                VendorContact = vendorContact,
+                                Item = vendorContact,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddUpdate(null)) + "/" + vendorContact.EntityId,
                                 Title = WebLocalizationKeys.VENDOR_CONTACT_INFORMATION.ToString()
                             };
@@ -65,9 +65,9 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Save(VendorContactViewModel input)
         {
             VendorContact vendorContact;
-            if (input.VendorContact.EntityId > 0)
+            if (input.Item.EntityId > 0)
             {
-                vendorContact = _repository.Find<VendorContact>(input.VendorContact.EntityId);
+                vendorContact = _repository.Find<VendorContact>(input.Item.EntityId);
             }
             else
             {
@@ -83,19 +83,19 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(VendorContact vendorContact, VendorContactViewModel input)
         {
-            vendorContact.Address1 = input.VendorContact.Address1;
-            vendorContact.Address2 = input.VendorContact.Address2;
-            vendorContact.City = input.VendorContact.City;
-            vendorContact.Country = input.VendorContact.Country;
-            vendorContact.Email = input.VendorContact.Email;
-            vendorContact.Fax = input.VendorContact.Fax;
-            vendorContact.FirstName = input.VendorContact.FirstName;
-            vendorContact.LastName = input.VendorContact.LastName;
-            vendorContact.Notes = input.VendorContact.Notes;
-            vendorContact.Phone = input.VendorContact.Phone;
-            vendorContact.State = input.VendorContact.State;
-            vendorContact.Status = input.VendorContact.State;
-            vendorContact.ZipCode = input.VendorContact.ZipCode;
+            vendorContact.Address1 = input.Item.Address1;
+            vendorContact.Address2 = input.Item.Address2;
+            vendorContact.City = input.Item.City;
+            vendorContact.Country = input.Item.Country;
+            vendorContact.Email = input.Item.Email;
+            vendorContact.Fax = input.Item.Fax;
+            vendorContact.FirstName = input.Item.FirstName;
+            vendorContact.LastName = input.Item.LastName;
+            vendorContact.Notes = input.Item.Notes;
+            vendorContact.Phone = input.Item.Phone;
+            vendorContact.State = input.Item.State;
+            vendorContact.Status = input.Item.State;
+            vendorContact.ZipCode = input.Item.ZipCode;
         }
     }
 }

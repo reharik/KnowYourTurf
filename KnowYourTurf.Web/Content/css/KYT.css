@@ -332,3 +332,10 @@ div.footer div.col {
     font-weight: bold;
     padding-right: 8px;
 }
+
+.gridHeader{
+    color: #666666;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

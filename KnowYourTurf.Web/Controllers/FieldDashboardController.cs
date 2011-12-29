@@ -49,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new FieldDashboardViewModel
                             {
                                 EntityId = input.EntityId,
-                                Field = field,
+                                Item = field,
                                 DeleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x => x.DeleteMultiple(null)) ,
                                 DeleteMultiplePhotosUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.DeleteMultiple(null)),
                                 DeleteMultipleDocumentsUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.DeleteMultiple(null)),
@@ -62,6 +62,7 @@ namespace KnowYourTurf.Web.Controllers
                                 CompletedListDefinition =_completedTaskGrid.GetGridDefinition(completeUrl),
                                 DocumentListDefinition =_documentListGrid.GetGridDefinition(docuemntUrl),
                                 PhotoListDefinition =_photoListGrid.GetGridDefinition(photoUrl),
+                                Title = WebLocalizationKeys.FIELD_INFORMATION.ToString()
                             };
             return View("FieldDashboard", model);
         }

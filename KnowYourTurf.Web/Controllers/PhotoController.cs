@@ -38,7 +38,7 @@ namespace KnowYourTurf.Web.Controllers
             var categoryItems = _selectListItemService.CreateList<PhotoCategory>(x=>x.Name,x=>x.EntityId,true);
             var model = new PhotoViewModel
             {
-                Photo = photo,
+                Item = photo,
                 PhotoCategoryList = categoryItems,
                 Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString(),
                 Popup = input.Popup
@@ -51,7 +51,7 @@ namespace KnowYourTurf.Web.Controllers
             var photo = _repository.Find<Photo>(input.EntityId);
             var model = new PhotoViewModel
                             {
-                                Photo = photo,
+                                Item = photo,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "/" + photo.EntityId,
                                 Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString()
                             };
@@ -81,7 +81,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Save(PhotoViewModel input)
         {
             var coId = _sessionContext.GetCompanyId();
-            var photo = input.Photo.EntityId > 0 ? _repository.Find<Photo>(input.Photo.EntityId) : new Photo();
+            var photo = input.Item.EntityId > 0 ? _repository.Find<Photo>(input.Item.EntityId) : new Photo();
             var newDoc = mapToDomain(input, photo);
             var serverDirectory = "/CustomerPhotos/" + coId;
             photo.FileUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, photo.Name); 
@@ -102,14 +102,14 @@ namespace KnowYourTurf.Web.Controllers
 
         private Photo mapToDomain(PhotoViewModel input, Photo photo)
         {
-            var photoModel = input.Photo;
+            var photoModel = input.Item;
             photo.FileType = photoModel.FileType;
             
             photo.Name = photoModel.Name;
             photo.Description = photoModel.Description;
             if (photo.PhotoCategory == null || photo.PhotoCategory.EntityId != input.PhotoCategory)
             {
-                photo.PhotoCategory = _repository.Find<PhotoCategory>(input.Photo.PhotoCategory.EntityId);
+                photo.PhotoCategory = _repository.Find<PhotoCategory>(input.Item.PhotoCategory.EntityId);
             }
             return photo;
         }
@@ -118,7 +118,7 @@ namespace KnowYourTurf.Web.Controllers
 
     public class PhotoViewModel:ViewModel
     {
-        public Photo Photo { get; set; }
+        public Photo Item { get; set; }
         public IEnumerable<SelectListItem> PhotoCategoryList { get; set; }
         public long PhotoCategory { get; set; }
     }

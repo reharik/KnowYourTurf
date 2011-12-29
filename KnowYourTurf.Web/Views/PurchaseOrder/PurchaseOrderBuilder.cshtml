@@ -20,19 +20,26 @@
     });
  
 }
+
+@section ExtraContentHeaderButtons{
+@if (Model.Item.EntityId > 0)
+        {
+            <span class="title-added">@WebLocalizationKeys.DATE_ADDED.ToFormat(Model.Item.DateCreated.Value.ToLongDateString())</span>
+        }
+}
     <div id="errorMessages" class="errorMessages KYT_errorMessages" ><ul></ul></div>
     <input type="hidden" id="vendorId" value="@Model.VendorId"/>
-    <input type="hidden" id="poId" value="@Model.PurchaseOrder.EntityId"/>
-        @MvcHtmlString.Create(Html.HiddenFor(x=>x.PurchaseOrder.EntityId).ToString())
+    <input type="hidden" id="poId" value="@Model.Item.EntityId"/>
+        @MvcHtmlString.Create(Html.HiddenFor(x=>x.Item.EntityId).ToString())
     <div class="col left">
         <div class="fieldRow">
-        @Html.ViewFor(x => x.PurchaseOrder.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToHtmlTag()
+        @Html.ViewFor(x => x.Item.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToHtmlTag()
         </div>
         <div class="fieldRow">
-        @Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).RootId("viewVendor").ToHtmlTag()
+        @Html.ViewFor(x => x.Item.Vendor.Company).RootId("viewVendor").ToHtmlTag()
         </div>
         <div class="fieldRow">
-        @Html.SubmissionFor(x => x.PurchaseOrder.Vendor).InputId("vendor").RootId("editVendor").ToHtmlTag()
+        @Html.SubmissionFor(x => x.Item.Vendor).InputId("vendor").RootId("editVendor").ToHtmlTag()
         </div>
     </div>
 

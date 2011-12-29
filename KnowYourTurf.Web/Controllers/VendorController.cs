@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             
             var model = new VendorViewModel
             {
-                Vendor = vendor,
+                Item = vendor,
                 AvailableChemicals = availableChemicals,
                 SelectedChemicals = selectedChemicals,
                 AvailableFertilizers = availableFertilizers,
@@ -54,7 +54,7 @@ namespace KnowYourTurf.Web.Controllers
             vendor.Contacts.Each(x => contactNames.Add(x.FullName)); 
             var model = new VendorViewModel
                             {
-                                Vendor = vendor,
+                                Item = vendor,
                                 VendorContactNames = contactNames,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddUpdate(null)) + "/" + vendor.EntityId,
                                 Title = WebLocalizationKeys.VENDOR_INFORMATION.ToString()
@@ -100,7 +100,7 @@ namespace KnowYourTurf.Web.Controllers
         }
         public ActionResult Save(VendorViewModel input)
         {
-            var vendor = input.Vendor.EntityId > 0 ? _repository.Find<Vendor>(input.Vendor.EntityId) : new Vendor();
+            var vendor = input.Item.EntityId > 0 ? _repository.Find<Vendor>(input.Item.EntityId) : new Vendor();
             var newTask = mapToDomain(input, vendor);
 
             var crudManager = _saveEntityService.ProcessSave(newTask);
@@ -110,7 +110,7 @@ namespace KnowYourTurf.Web.Controllers
 
         private Vendor mapToDomain(VendorViewModel input, Vendor vendor)
         {
-            var vendorModel = input.Vendor;
+            var vendorModel = input.Item;
             vendor.Company = vendorModel.Company;
             vendor.Fax = vendorModel.Fax;
             vendor.Phone = vendorModel.Phone;

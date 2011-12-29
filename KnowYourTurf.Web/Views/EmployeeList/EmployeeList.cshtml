@@ -9,6 +9,7 @@
 @section HeaderJavascript{
     $(document).ready(function(){
         gridControllerOptions.id="employee";
+        gridControllerOptions.searchField="LastName";
         new kyt.EmployeeController(gridControllerOptions);
     });
 }

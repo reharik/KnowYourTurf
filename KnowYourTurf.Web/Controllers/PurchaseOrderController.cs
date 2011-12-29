@@ -44,14 +44,15 @@ namespace KnowYourTurf.Web.Controllers
             var deleteMany = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + purchaseOrder.EntityId;
             POListViewModel model = new POListViewModel()
             {
-                PurchaseOrder = purchaseOrder,
+                Item = purchaseOrder,
                 VendorList = vendors,
                 VendorId = purchaseOrder.EntityId > 0 ? purchaseOrder.Vendor.EntityId : 0,
                 ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrderList()),
                 CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)),
                 DeleteMultipleUrl = deleteMany,
                 GridDefinition = _purchaseOrderSelectorGrid.GetGridDefinition(url),
-                PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl)
+                PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl),
+                Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString()
 
             };
             return PartialView("PurchaseOrderBuilder", model);
@@ -70,7 +71,7 @@ namespace KnowYourTurf.Web.Controllers
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
             var model = new POListViewModel()
             {
-                PurchaseOrder = purchaseOrder,
+                Item = purchaseOrder,
                 AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" + purchaseOrder.EntityId
             };
             return PartialView("PurchaseOrderView", model);

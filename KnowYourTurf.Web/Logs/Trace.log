@@ -73,3 +73,41 @@ The statement has been terminated.
    at NHibernate.Engine.ActionQueue.ExecuteActions(IList list) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 129
    at NHibernate.Engine.ActionQueue.ExecuteActions() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 174
    at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\AbstractFlushingEventListener.cs:line 241
+2011-12-28 17:18:41,461 [90] ERROR - Could not execute query: select TOP (@p0) user0_.EntityId as EntityId26_, user0_.LastModified as LastModi2_26_, user0_.DateCreated as DateCrea3_26_, user0_.CompanyId as CompanyId26_, user0_.IsDeleted as IsDeleted26_, user0_.FirstName as FirstName26_, user0_.LastName as LastName26_, user0_.Email as Email26_, user0_.PhoneMobile as PhoneMob9_26_, user0_.PhoneHome as PhoneHome26_, user0_.Address1 as Address11_26_, user0_.Address2 as Address12_26_, user0_.City as City26_, user0_.State as State26_, user0_.ZipCode as ZipCode26_, user0_.BirthDate as BirthDate26_, user0_.Notes as Notes26_, user0_.LanguageDefault as Languag18_26_, user0_.ImageUrl as ImageUrl26_, user0_.EmergencyContact as Emergen20_26_, user0_.EmergencyContactPhone as Emergen21_26_, user0_.EmployeeId as EmployeeId26_, user0_.CreatedBy_id as CreatedBy23_26_, user0_.ModifiedBy_id as ModifiedBy24_26_, user0_.Company_id as Company25_26_, user0_.UserLoginInfo_id as UserLog26_26_ from [User] user0_, [UserLoginInfo] userlogini1_ where user0_.UserLoginInfo_id=userlogini1_.EntityId and lower(userlogini1_.LoginName)=@p1 and userlogini1_.Password=@p2
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'PhoneHome'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2011-12-28 17:18:41,497 [90] ERROR - Invalid column name 'PhoneHome'.
+2011-12-28 17:18:41,502 [90] ERROR - Invalid column name 'PhoneHome'.
+2011-12-28 17:18:41,504 [90] ERROR - Invalid column name 'PhoneHome'.
+2011-12-28 17:19:25,779 [91] ERROR - Could not execute query: select TOP (@p0) user0_.EntityId as EntityId26_, user0_.LastModified as LastModi2_26_, user0_.DateCreated as DateCrea3_26_, user0_.CompanyId as CompanyId26_, user0_.IsDeleted as IsDeleted26_, user0_.FirstName as FirstName26_, user0_.LastName as LastName26_, user0_.Email as Email26_, user0_.PhoneMobile as PhoneMob9_26_, user0_.PhoneHome as PhoneHome26_, user0_.Address1 as Address11_26_, user0_.Address2 as Address12_26_, user0_.City as City26_, user0_.State as State26_, user0_.ZipCode as ZipCode26_, user0_.BirthDate as BirthDate26_, user0_.Notes as Notes26_, user0_.LanguageDefault as Languag18_26_, user0_.ImageUrl as ImageUrl26_, user0_.EmergencyContact as Emergen20_26_, user0_.EmergencyContactPhone as Emergen21_26_, user0_.EmployeeId as EmployeeId26_, user0_.CreatedBy_id as CreatedBy23_26_, user0_.ModifiedBy_id as ModifiedBy24_26_, user0_.Company_id as Company25_26_, user0_.UserLoginInfo_id as UserLog26_26_ from [User] user0_, [UserLoginInfo] userlogini1_ where user0_.UserLoginInfo_id=userlogini1_.EntityId and lower(userlogini1_.LoginName)=@p1 and userlogini1_.Password=@p2
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'PhoneHome'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2011-12-28 17:19:25,797 [91] ERROR - Invalid column name 'PhoneHome'.
+2011-12-28 17:19:25,815 [91] ERROR - Invalid column name 'PhoneHome'.
+2011-12-28 17:19:25,816 [91] ERROR - Invalid column name 'PhoneHome'.

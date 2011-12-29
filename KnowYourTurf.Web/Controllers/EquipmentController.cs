@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Controllers
             var vendors = _selectListItemService.CreateList<Vendor>(x => x.Company, x => x.EntityId, true);
             var model = new EquipmentViewModel
             {
-                Equipment = equipment,
+                Item = equipment,
                 VendorList = vendors,
                 Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString()
             };
@@ -49,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
             var equipment = _repository.Find<Equipment>(input.EntityId);
             var model = new EquipmentViewModel
             {
-                Equipment = equipment,
+                Item = equipment,
                 AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddUpdate(null)) + "/" + equipment.EntityId,
                 Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString()
             };
@@ -96,18 +96,18 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(EquipmentViewModel input)
         {
-            var equipment = input.Equipment.EntityId > 0 ? _repository.Find<Equipment>(input.Equipment.EntityId) : new Equipment();
-            equipment.Name = input.Equipment.Name;
-            equipment.TotalHours = input.Equipment.TotalHours;
-            equipment.Description = input.Equipment.Description;
+            var equipment = input.Item.EntityId > 0 ? _repository.Find<Equipment>(input.Item.EntityId) : new Equipment();
+            equipment.Name = input.Item.Name;
+            equipment.TotalHours = input.Item.TotalHours;
+            equipment.Description = input.Item.Description;
             if (input.DeleteImage)
             {
                 _uploadedFileHandlerService.DeleteFile(equipment.ImageUrl);
                 equipment.ImageUrl = string.Empty;
             }
-            if (equipment.Vendor == null || equipment.Vendor.EntityId != input.Equipment.Vendor.EntityId)
+            if (equipment.Vendor == null || equipment.Vendor.EntityId != input.Item.Vendor.EntityId)
             {
-                equipment.Vendor = _repository.Find<Vendor>(input.Equipment.Vendor.EntityId);
+                equipment.Vendor = _repository.Find<Vendor>(input.Item.Vendor.EntityId);
             }
             var serverDirectory = "/CustomerPhotos/" + _sessionContext.GetCompanyId() + "/Equipment";
             equipment.ImageUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, equipment.Name);

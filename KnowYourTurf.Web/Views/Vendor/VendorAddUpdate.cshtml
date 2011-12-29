@@ -32,40 +32,40 @@
 </script>
 
             @MvcHtmlString.Create(FormFor<VendorController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Vendor.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Vendor.Company).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Company).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Vendor.Phone).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Phone).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Vendor.Fax).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Fax).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Vendor.Address1).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Vendor.Address2).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Address2).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Vendor.City).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.City).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Vendor.State).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.State).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Vendor.ZipCode).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.ZipCode).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Vendor.Website).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Website).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Vendor.Status).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Status).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Vendor.Notes).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
 

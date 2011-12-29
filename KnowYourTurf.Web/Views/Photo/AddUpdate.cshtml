@@ -6,27 +6,29 @@
 @{
     Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
 }
-
+<script>
+    extraFormOptions.title = '@Model.Title';
+</script>
 
     @MvcHtmlString.Create(FormFor<PhotoController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-        @MvcHtmlString.Create(Html.HiddenFor(x => x.Photo.EntityId).ToString())
+        @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
         @MvcHtmlString.Create(Html.HiddenFor(x => x.From).ToString())
         @MvcHtmlString.Create(Html.HiddenFor(x => x.ParentId).ToString())
         
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Photo.Name).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Photo.Description).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Photo.PhotoCategory).LabelDisplay(WebLocalizationKeys.PHOTO_CATEGORY).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.PhotoCategory).LabelDisplay(WebLocalizationKeys.PHOTO_CATEGORY).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @if (Model.Photo.EntityId > 0)
+            @if (Model.Item.EntityId > 0)
             {
-                @Html.ViewFor(x => x.Photo.FileUrl).AddDisplayNameForHref(Model.Photo.Name).LabelDisplay(WebLocalizationKeys.VIEW_FILE).ToHtmlTag()
+                @Html.ViewFor(x => x.Item.FileUrl).AddDisplayNameForHref(Model.Item.Name).LabelDisplay(WebLocalizationKeys.VIEW_FILE).ToHtmlTag()
             }
             else
             {

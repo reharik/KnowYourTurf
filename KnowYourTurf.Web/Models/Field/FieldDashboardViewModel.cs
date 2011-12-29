@@ -6,7 +6,7 @@ namespace KnowYourTurf.Web.Models
 {
     public class FieldDashboardViewModel : ListViewModel
     {
-        public Field Field { get; set; }
+        public Field Item { get; set; }
         public GridDefinition CompletedListDefinition { get; set; }
 
         public GridDefinition DocumentListDefinition { get; set; }
@@ -20,5 +20,6 @@ namespace KnowYourTurf.Web.Models
         public string DeleteMultiplePhotosUrl { get; set; }
 
         public string DeleteMultipleDocumentsUrl { get; set; }
+
     }
 }

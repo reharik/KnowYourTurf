@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
 <script>
-var imageUrl = '@Model.Equipment.ImageUrl';
+var imageUrl = '@Model.Item.ImageUrl';
     extraFormOptions.runAfterRenderFunction = function () {
         if (imageUrl) {
             $("#showImage", this.el).show();
@@ -26,24 +26,24 @@ var imageUrl = '@Model.Equipment.ImageUrl';
 </script>
 
             @MvcHtmlString.Create(FormFor<EquipmentController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Equipment.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
    <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Equipment.Name).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Equipment.Description).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Equipment.Vendor).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Vendor).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Equipment.TotalHours).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.TotalHours).ToHtmlTag()
         </div>
         <div class="fieldRow">
              <div id="showImage" >
-                @Html.ViewFor(x => x.Equipment.ImageUrl).HideLabel().AddClassToInput("KYT_displayImage").ToHtmlTag()
+                @Html.ViewFor(x => x.Item.ImageUrl).HideLabel().AddClassToInput("KYT_displayImage").ToHtmlTag()
                 @StandardButtonFor("deleteImage", WebLocalizationKeys.DELETE).ToHtmlTag()
             </div>
             <div id="newImage">

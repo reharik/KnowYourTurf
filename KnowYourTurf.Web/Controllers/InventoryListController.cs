@@ -60,17 +60,17 @@ namespace KnowYourTurf.Web.Controllers
             var inventoryProduct = _repository.Find<InventoryProduct>(input.EntityId);
             if (inventoryProduct.Product.InstantiatingType == "Chemical")
             {
-                var model = new InventoryChemicalViewModel {InventoryChemical = inventoryProduct};
+                var model = new InventoryChemicalViewModel {Item = inventoryProduct,Title=WebLocalizationKeys.INVENTORY_CHEMICAL_INFORMATION.ToString()};
                 return PartialView("InventoryChemicalView", model);
             }
             if (inventoryProduct.Product.InstantiatingType == "Fertilizer")
             {
-                var model = new InventoryFertilizerViewModel { InventoryFertilizer = inventoryProduct };
+                var model = new InventoryFertilizerViewModel { Item = inventoryProduct,Title=WebLocalizationKeys.INVENTORY_FERTILIZER_INFORMATION.ToString() };
                 return PartialView("InventoryFertilizerView", model);
             }
             if (inventoryProduct.Product.InstantiatingType == "Material")
             {
-                var model = new InventoryMaterialViewModel { InventoryMaterial = inventoryProduct };
+                var model = new InventoryMaterialViewModel { Item = inventoryProduct, Title = WebLocalizationKeys.INVENTORY_MATERIAL_INFORMATION.ToString()};
                 return PartialView("InventoryMaterialView", model);
             }
             return null;
@@ -90,17 +90,17 @@ namespace KnowYourTurf.Web.Controllers
 
     public class InventoryFertilizerViewModel : ViewModel
     {
-        public InventoryProduct InventoryFertilizer { get; set; }
-        public Fertilizer Fertilizer { get { return InventoryFertilizer.Product as Fertilizer; } }
+        public InventoryProduct Item { get; set; }
+        public Fertilizer Fertilizer { get { return Item.Product as Fertilizer; } }
     }
     public class InventoryChemicalViewModel :ViewModel
     {
-        public InventoryProduct InventoryChemical { get; set; }
-        public Chemical Chemical { get { return InventoryChemical.Product as Chemical; } }
+        public InventoryProduct Item { get; set; }
+        public Chemical Chemical { get { return Item.Product as Chemical; } }
     }
     public class InventoryMaterialViewModel : ViewModel
     {
-        public InventoryProduct InventoryMaterial { get; set; }
-        public Material Material { get { return InventoryMaterial.Product as Material; } }
+        public InventoryProduct Item { get; set; }
+        public Material Material { get { return Item.Product as Material; } }
     }
 }

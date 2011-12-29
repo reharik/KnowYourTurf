@@ -48,14 +48,15 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmployeeDashboardViewModel
             {
                 //TODO put modficaztions here "Employee"
-                User = employee,
+                Item = employee,
                 AvailableItems = availableUserRoles,
                 SelectedItems = selectedUserRoles,
                 AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + entityId+"&From=Employee",
                 GridDefinition = _pendingTaskGrid.GetGridDefinition(url),
                 CompletedListDefinition = _completedTaskGrid.GetGridDefinition(completeUrl),
                 EmployeeListUrl = UrlContext.GetUrlForAction<EmployeeListController>(x=>x.EmployeeList()),
-                DeleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.DeleteMultiple(null))
+                DeleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.DeleteMultiple(null)),
+                Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
                
             };
             return View("EmployeeDashboard", model);

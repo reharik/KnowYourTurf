@@ -14,16 +14,16 @@
             @Html.ViewFor(x => x.Material.Description).ToHtmlTag()
          </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.InventoryMaterial.Quantity).ToHtmlTag()
+            @Html.ViewFor(x => x.Item.Quantity).ToHtmlTag()
          </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.InventoryMaterial.SizeOfUnit).ToHtmlTag()
+            @Html.ViewFor(x => x.Item.SizeOfUnit).ToHtmlTag()
          </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.InventoryMaterial.UnitType).ToHtmlTag()
+            @Html.ViewFor(x => x.Item.UnitType).ToHtmlTag()
          </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.InventoryMaterial.LastVendor.Company).LabelDisplay(WebLocalizationKeys.PREVIOUS_VENDOR).ToHtmlTag()
+            @Html.ViewFor(x => x.Item.LastVendor.Company).LabelDisplay(WebLocalizationKeys.PREVIOUS_VENDOR).ToHtmlTag()
          </div>
     </div>
 

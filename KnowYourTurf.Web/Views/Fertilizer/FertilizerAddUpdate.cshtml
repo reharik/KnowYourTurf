@@ -9,22 +9,22 @@
 }
         
             @MvcHtmlString.Create(FormFor<FertilizerController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Fertilizer.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Fertilizer.Name).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Fertilizer.Description).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Fertilizer.N).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.N).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Fertilizer.P).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.P).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Fertilizer.K).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.K).ToHtmlTag()
         </div>
     </div>
             @EndForm()

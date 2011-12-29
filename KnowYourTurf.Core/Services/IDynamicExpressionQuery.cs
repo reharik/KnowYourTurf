@@ -41,7 +41,10 @@ namespace KnowYourTurf.Core.Services
             if (jqGridFilter.rules.Any(x => x.op == "ListContains" && x.listOfIds.Count() <= 0)) return extraFilters;
             
             var expression = _dynamicExpressionBuilder.Build<ENTITY>(jqGridFilter);
-            
+            if(extraFilters == null)
+            {
+                return expression;
+            }
             BinaryExpression binaryExpression = Expression.AndAlso(expression.Body, extraFilters.Body);
             Expression<Func<ENTITY, bool>> finalExpression = Expression.Lambda<Func<ENTITY, bool>>(binaryExpression, expression.Parameters);
             return finalExpression;
