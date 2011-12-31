@@ -1,0 +1,66 @@
+﻿<RecentFiles>
+  <RecentFiles>
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_DisplayLayout.cshtml" caret="0" fromTop="0" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:InventoryListController.cs" caret="0" fromTop="0" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:ListTypeList/f:ListType.cshtml" caret="0" fromTop="0" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:DocumentCategory/f:AddUpdate.cshtml" caret="0" fromTop="0" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Document/f:AddUpdate.cshtml" caret="0" fromTop="0" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_popupLayout.cshtml" caret="0" fromTop="0" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FertilizerList/f:FertilizerList.cshtml" caret="0" fromTop="0" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:EquipmentList/f:EquipmentList.cshtml" caret="0" fromTop="0" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_DetailLayout.cshtml" caret="0" fromTop="0" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/f:Web.config" caret="1103" fromTop="15" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:PurchaseOrderController.cs" caret="2393" fromTop="22" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:PurchaseOrderCommitController.cs" caret="2502" fromTop="13" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:PurchaseOrderLineItemController.cs" caret="3885" fromTop="19" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/f:WebLocalizationKeys.cs" caret="20113" fromTop="32" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_ListLayout.cshtml" caret="634" fromTop="17" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:Shared/f:_EmptyLayout.cshtml" caret="243" fromTop="10" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderLineItem/f:ReceivePurchaseOrderLineItem.cshtml" caret="0" fromTop="0" />
+    <File id="3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7/d:Config/f:SaveUpdateInterceptorWithCompanyFilter.cs" caret="2594" fromTop="67" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:EmployeeListController.cs" caret="1723" fromTop="29" />
+    <File id="E40B313E-1001-41D6-825F-F87B3CB68E2F/f:GenRegistry.cs" caret="2286" fromTop="21" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Services/f:ISecuritySetupService.cs" caret="1805" fromTop="23" />
+    <File id="3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7/d:Domain/d:Tools/f:UnitOfWork.cs" caret="489" fromTop="15" />
+    <File id="E40B313E-1001-41D6-825F-F87B3CB68E2F/f:App.config" caret="1816" fromTop="27" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderCommit/f:PurchaseOrderCommit.cshtml" caret="942" fromTop="23" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/f:Web.config" caret="181" fromTop="4" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/f:connectionStrings.config" caret="479" fromTop="9" />
+    <File id="E40B313E-1001-41D6-825F-F87B3CB68E2F/d:Commands/f:DefaultSecuritySetupCommand.cs" caret="373" fromTop="10" />
+    <File id="E40B313E-1001-41D6-825F-F87B3CB68E2F/f:Program.cs" caret="889" fromTop="18" />
+    <File id="08AC9A07-0B36-4E53-833F-8A0C58FF1A39/f:build.proj" caret="962" fromTop="14" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FieldDashboard/f:FieldDashboard.cshtml" caret="0" fromTop="0" />
+  </RecentFiles>
+  <RecentEdits>
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:ListTypeList/f:ListType.cshtml" caret="4202" fromTop="26" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:ListTypeList/f:ListType.cshtml" caret="1367" fromTop="18" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:ListTypeListsController.cs" caret="434" fromTop="11" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:ListTypeListsController.cs" caret="817" fromTop="18" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:DocumentCategory/f:AddUpdate.cshtml" caret="206" fromTop="5" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:PurchaseOrderCommitController.cs" caret="1412" fromTop="22" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:FieldDashboard/f:FieldDashboard.cshtml" caret="1859" fromTop="25" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/f:Web.config" caret="1268" fromTop="20" />
+    <File id="3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7/d:Config/f:SqlServerSessionSourceConfiguration.cs" caret="2198" fromTop="22" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/f:Web.config" caret="1103" fromTop="15" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderCommit/f:PurchaseOrderCommit.cshtml" caret="1577" fromTop="27" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:PurchaseOrderCommitController.cs" caret="1892" fromTop="24" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:PurchaseOrderLineItemController.cs" caret="3895" fromTop="19" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/f:WebLocalizationKeys.cs" caret="18782" fromTop="22" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderCommit/f:PurchaseOrderCommit.cshtml" caret="166" fromTop="5" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderCommit/f:PurchaseOrderCommit.cshtml" caret="249" fromTop="9" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Views/d:PurchaseOrderCommit/f:PurchaseOrderCommit.cshtml" caret="671" fromTop="18" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/f:connectionStrings.config" caret="230" fromTop="4" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/f:Web.config" caret="181" fromTop="4" />
+    <File id="E40B313E-1001-41D6-825F-F87B3CB68E2F/f:App.config" caret="134" fromTop="3" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Services/f:ISecuritySetupService.cs" caret="4989" fromTop="13" />
+    <File id="E40B313E-1001-41D6-825F-F87B3CB68E2F/f:Program.cs" caret="1586" fromTop="23" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Services/f:ISecuritySetupService.cs" caret="406" fromTop="0" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Services/f:ISecuritySetupService.cs" caret="1384" fromTop="18" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Services/f:ISecuritySetupService.cs" caret="1564" fromTop="17" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Services/f:ISecuritySetupService.cs" caret="1765" fromTop="21" />
+    <File id="3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7/d:Domain/d:Tools/f:UnitOfWork.cs" caret="987" fromTop="23" />
+    <File id="67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2/d:Controllers/f:EmployeeListController.cs" caret="1517" fromTop="24" />
+    <File id="08AC9A07-0B36-4E53-833F-8A0C58FF1A39/f:build.proj" caret="2179" fromTop="29" />
+    <File id="08AC9A07-0B36-4E53-833F-8A0C58FF1A39/f:build.proj" caret="1089" fromTop="17" />
+  </RecentEdits>
+</RecentFiles>

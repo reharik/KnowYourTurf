@@ -21,7 +21,8 @@ if (typeof cc.grid == 'undefined') {
             multiselect: true,
             scrollOffset:0,
             altRows:true,
-            height:"1000",
+            height:"100%",
+            autowidth:true,
             // here we move the value of the entityId to ParentId since it's the Id of the containing element
             // and set EntityId to RowId as RowId is for the Particular entity we want to change
             beforeSubmitCell: function(rowid, celname, value, iRow, iCol) { return { RootId: rootId, ParentId: entityId, EntityId: rowid, rowId: rowid, cellName: celname, cellValue: value} },

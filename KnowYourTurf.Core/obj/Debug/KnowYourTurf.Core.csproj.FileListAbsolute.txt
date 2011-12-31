@@ -1,4 +1,3 @@
-C:\Development\KnowYourTurf\KnowYourTurf.Core\obj\Debug\ResolveAssemblyReference.cache
 C:\Development\KnowYourTurf\KnowYourTurf.Core\bin\Debug\KnowYourTurf.Core.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Core\bin\Debug\KnowYourTurf.Core.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Core\bin\Debug\Antlr3.Runtime.dll
@@ -30,5 +29,6 @@ C:\Development\KnowYourTurf\KnowYourTurf.Core\bin\Debug\NHibernate.ByteCode.Cast
 C:\Development\KnowYourTurf\KnowYourTurf.Core\bin\Debug\Rhino.Security.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Core\bin\Debug\Rhino.Security.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Core\bin\Debug\StructureMap.xml
+C:\Development\KnowYourTurf\KnowYourTurf.Core\obj\Debug\ResolveAssemblyReference.cache
 C:\Development\KnowYourTurf\KnowYourTurf.Core\obj\Debug\KnowYourTurf.Core.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Core\obj\Debug\KnowYourTurf.Core.pdb

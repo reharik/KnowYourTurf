@@ -34,7 +34,8 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
             searchField:"TaskType.Name",
             gridDef:this.options.pendingGridDef,
             addUpdateUrl:this.options.pendingTaskaddUpdateUrl,
-            deleteMultipleUrl:this.options.deleteMultipleUrl
+            deleteMultipleUrl:this.options.deleteMultipleUrl,
+            gridOptions:{height:"400px"}
         };
         this.views.pendingTaskGridView = new kyt.GridView(ptgOptions);
         var ctgOptions = {
@@ -45,7 +46,8 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
             searchField:"TaskType.Name",
             gridDef:this.options.completeGridDef,
             // this is not used except for copy task which is why it's for the pendingGrid
-            addUpdateUrl:this.options.pendingTaskaddUpdateUrl
+            addUpdateUrl:this.options.pendingTaskaddUpdateUrl,
+            gridOptions:{height:"400px"}
         };
         this.views.completeTaskGridView = new kyt.GridView(ctgOptions);
     },

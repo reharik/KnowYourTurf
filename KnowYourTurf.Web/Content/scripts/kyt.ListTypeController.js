@@ -53,9 +53,9 @@ kyt.ListTypeController = kyt.CrudController.extend({
             gridName:"EventTypeGrid",
             gridDef:this.options.gridInfo.gridDef,
             addUpdateUrl:this.options.gridInfo.addUpdateUrl,
-            gridOptions:{pager: "#eventTypePager"},
             gridContainer:"#EventTypeGrid",
-            deleteMultipleUrl:this.options.gridInfo.deleteMultiple
+            deleteMultipleUrl:this.options.gridInfo.deleteMultiple,
+            gridOptions:{height:"400px"}
         };
         this.views.etGridView = new kyt.GridView(etOptions);
         var ttOptions={
@@ -64,9 +64,9 @@ kyt.ListTypeController = kyt.CrudController.extend({
             gridName:"TaskTypeGrid",
             gridDef:this.options.ttGridInfo.gridDef,
             addUpdateUrl:this.options.ttGridInfo.addUpdateUrl,
-            gridOptions:{pager: "#taskTypePager"},
             gridContainer:"#TaskTypeGrid",
-            deleteMultipleUrl:this.options.ttGridInfo.deleteMultiple
+            deleteMultipleUrl:this.options.ttGridInfo.deleteMultiple,
+            gridOptions:{height:"400px"}
         };
         this.views.ttGridView = new kyt.GridView(ttOptions);
         var dcOptions={
@@ -75,9 +75,9 @@ kyt.ListTypeController = kyt.CrudController.extend({
             gridName:"DocumentCategoryGrid",
             gridDef:this.options.dcGridInfo.gridDef,
             addUpdateUrl:this.options.dcGridInfo.addUpdateUrl,
-            gridOptions:{pager: "#docCatPager"},
             gridContainer:"#DocumentCategoryGrid",
-            deleteMultipleUrl:this.options.dcGridInfo.deleteMultiple
+            deleteMultipleUrl:this.options.dcGridInfo.deleteMultiple,
+            gridOptions:{height:"400px"}
         };
         this.views.dcGridView = new kyt.GridView(dcOptions);
         var pcOptions={
@@ -86,9 +86,9 @@ kyt.ListTypeController = kyt.CrudController.extend({
             gridName:"PhotoCategoryGrid",
             gridDef:this.options.pcGridInfo.gridDef,
             addUpdateUrl:this.options.pcGridInfo.addUpdateUrl,
-            gridOptions:{pager: "#photoCatPager"},
             gridContainer:"#PhotoCategoryGrid",
-            deleteMultipleUrl:this.options.pcGridInfo.deleteMultiple
+            deleteMultipleUrl:this.options.pcGridInfo.deleteMultiple,
+            gridOptions:{height:"400px"}
         };
         this.views.pcGridView = new kyt.GridView(pcOptions);
     },

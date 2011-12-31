@@ -1,4 +1,3 @@
-C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\ResolveAssemblyReference.cache
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\MethodFitness.Web.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\MethodFitness.Web.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\KnowYourTurf.Core.dll
@@ -31,12 +30,12 @@ C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\HtmlTags.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\Iesi.Collections.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\Iesi.Collections.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\NHibernate.pdb
+C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\NHibernate.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\NHibernate.ByteCode.Castle.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\NHibernate.ByteCode.Castle.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\Rhino.Security.pdb
+C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\StructureMap.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\System.Web.Helpers.xml
+C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\ResolveAssemblyReference.cache
 C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\MethodFitness.Web.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\MethodFitness.Web.pdb
-C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\NHibernate.xml
-C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\Rhino.Security.xml
-C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\StructureMap.xml

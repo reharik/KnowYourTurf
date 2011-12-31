@@ -1,7 +1,6 @@
-C:\Development\KnowYourTurf\KnowYourTurf.Tests\obj\Debug\ResolveAssemblyReference.cache
-C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Tests.dll.config
-C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Tests.dll
-C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Tests.pdb
+C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll.config
+C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll
+C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Core.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Web.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\Microsoft.CSharp.dll
@@ -16,5 +15,6 @@ C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\Elmah.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\HibernatingRhinos.Profiler.Appender.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Core.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\MethodFitness.Web.pdb
-C:\Development\KnowYourTurf\KnowYourTurf.Tests\obj\Debug\MethodFitness.Tests.dll
-C:\Development\KnowYourTurf\KnowYourTurf.Tests\obj\Debug\MethodFitness.Tests.pdb
+C:\Development\KnowYourTurf\KnowYourTurf.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Development\KnowYourTurf\KnowYourTurf.Tests\obj\Debug\KnowYourTurf.Tests.dll
+C:\Development\KnowYourTurf\KnowYourTurf.Tests\obj\Debug\KnowYourTurf.Tests.pdb

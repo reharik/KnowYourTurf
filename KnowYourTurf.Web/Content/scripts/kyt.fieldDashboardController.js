@@ -35,7 +35,8 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             searchField:"TaskType.Name",
             gridDef:this.options.pendingGridDef,
             addUpdateUrl:this.options.pendingTaskaddUpdateUrl,
-            deleteMultipleUrl:this.options.deleteMultipleUrl
+            deleteMultipleUrl:this.options.deleteMultipleUrl,
+            gridOptions:{height:"400px"}
         };
         this.views.pendingTaskGridView = new kyt.GridView(ptgOptions);
         var ctgOptions = {
@@ -46,7 +47,8 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             searchField:"TaskType.Name",
             gridDef:this.options.completeGridDef,
             // this is not used except for copy task which is why it's for the pendingGrid
-            addUpdateUrl:this.options.pendingTaskaddUpdateUrl
+            addUpdateUrl:this.options.pendingTaskaddUpdateUrl,
+            gridOptions:{height:"400px"}
         };
         this.views.completeTaskGridView = new kyt.GridView(ctgOptions);
         var pgOptions = {
@@ -56,7 +58,8 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             gridContainer:"#gridContainer_p",
             gridDef:this.options.photoGridDef,
             addUpdateUrl:this.options.photoaddUpdateUrl,
-            deleteMultipleUrl:this.options.deleteMultiplePhotosUrl
+            deleteMultipleUrl:this.options.deleteMultiplePhotosUrl,
+            gridOptions:{height:"400px"}
         };
         this.views.photoGridView = new kyt.GridView(pgOptions);
         var dgOptions = {
@@ -66,7 +69,8 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
             gridContainer:"#gridContainer_d",
             gridDef:this.options.documentGridDef,
             addUpdateUrl:this.options.documentaddUpdateUrl,
-            deleteMultipleUrl:this.options.deleteMultipleDocumentsUrl
+            deleteMultipleUrl:this.options.deleteMultipleDocumentsUrl,
+            gridOptions:{height:"400px"}
         };
         this.views.documentGridView = new kyt.GridView(dgOptions);
         if($("#galleria img").size()>0){
