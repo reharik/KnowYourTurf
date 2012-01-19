@@ -50,7 +50,8 @@ namespace KnowYourTurf.Core.Services
 
         public void GrantDefaultEmployeePermissions()
         {
-            _permissionsBuilderService.Allow("/HomeController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/KnowYourTurfController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/OrthogonalController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/CalculatorController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/CalculatorListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/EmployeeDashboardController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
@@ -81,12 +82,9 @@ namespace KnowYourTurf.Core.Services
             _permissionsBuilderService.Allow("/WeatherListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
 
             _permissionsBuilderService.Allow("/MenuItem/Home").For(UserType.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/Vendors").For(UserType.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/Inventory").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/MenuItem/Fields").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/MenuItem/Equipment").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/MenuItem/Tasks").For(UserType.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/PurchaseOrders").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/MenuItem/Events").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/MenuItem/Calculators").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/MenuItem/Weather").For(UserType.Employee.Key).OnEverything().Level(1).Save();
@@ -107,7 +105,8 @@ namespace KnowYourTurf.Core.Services
                 .OnEverything()
                 .Level(1)
                 .Save();
-            _permissionsBuilderService.Allow("/MenuItem/Events").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/MenuItem/Events").For(UserType.Facilities.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/KnowYourTurfController").For(UserType.Facilities.Key).OnEverything().Level(1).Save();
 
         }
     }

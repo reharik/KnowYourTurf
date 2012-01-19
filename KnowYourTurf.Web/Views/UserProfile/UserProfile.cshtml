@@ -9,9 +9,9 @@
 
 @section HeaderJavascript{
     var repeaters = {
-        addressItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.User.Addresses)),
-        emailItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.User.Emails)),
-        phoneItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.User.Phones))
+        addressItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.Item.Addresses)),
+        emailItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.Item.Emails)),
+        phoneItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.Item.Phones))
     }
     extraFormOptions.repeaters = repeaters;
 }
@@ -20,22 +20,22 @@
 </div>
 <div id="userProfile">
     @MvcHtmlString.Create(FormFor<UserProfileController>(x => x.Save(null)).AddClass("kyt_CRUD").ElementId("CRUDForm").ToString())
-        <input type="hidden" id="EntityId" name="EntityId" value="@Model.User.EntityId">
+        <input type="hidden" id="EntityId" name="EntityId" value="@Model.Item.EntityId">
         <div class="col left">
             <div class="fieldRow">
                 <h4>@WebLocalizationKeys.PERSONAL_INFORMATION</h4>
             </div>
             <div class="fieldRow">
-                @Html.SubmissionFor(x => x.User.FirstName).AddClassToRoot("two-five first").ToHtmlTag()
-                @Html.SubmissionFor(x => x.User.MiddleInitial).LabelDisplay(WebLocalizationKeys.INITIAL).AddClassToRoot("one-five mid").ToHtmlTag()
-                @Html.SubmissionFor(x => x.User.LastName).AddClassToRoot("two-five last").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.FirstName).AddClassToRoot("two-five first").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.MiddleInitial).LabelDisplay(WebLocalizationKeys.INITIAL).AddClassToRoot("one-five mid").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.LastName).AddClassToRoot("two-five last").ToHtmlTag()
             </div>
             <div class="fieldRow">
-                @Html.SubmissionFor(x => x.User.Title).ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.Title).ToHtmlTag()
             </div>
             <div class="fieldRow">
-                @Html.ViewFor(x => x.User.UserLoginInfo.LoginName).AddClassToRoot("half").ToHtmlTag()
-                @Html.SubmissionFor(x => x.User.BirthDate).AddClassToRoot("half").ToHtmlTag()
+                @Html.ViewFor(x => x.Item.UserLoginInfo.LoginName).AddClassToRoot("half").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.BirthDate).AddClassToRoot("half").ToHtmlTag()
             </div>
         </div>
         <div class="col right">

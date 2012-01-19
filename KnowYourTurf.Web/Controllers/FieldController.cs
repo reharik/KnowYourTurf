@@ -32,7 +32,7 @@ namespace KnowYourTurf.Web.Controllers
             var field = input.EntityId > 0 ? _repository.Find<Field>(input.EntityId) : new Field();
             var model = new FieldViewModel
             {
-                Field = field,
+                Item = field,
                 AddUpdateUrl = UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)) + "/" + field.EntityId,
                 Title = WebLocalizationKeys.FIELD_INFORMATION.ToString()
             };
@@ -56,13 +56,13 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(FieldViewModel input)
         {
-            var field = input.Field.EntityId>0? _repository.Find<Field>(input.Field.EntityId):new Field();
-            field.Description = input.Field.Description;
-            field.Name = input.Field.Name;
-            field.Abbreviation= input.Field.Abbreviation;
-            field.Size = input.Field.Size;
-            field.Status = input.Field.Status;
-            field.FieldColor= input.Field.FieldColor;
+            var field = input.Item.EntityId>0? _repository.Find<Field>(input.Item.EntityId):new Field();
+            field.Description = input.Item.Description;
+            field.Name = input.Item.Name;
+            field.Abbreviation= input.Item.Abbreviation;
+            field.Size = input.Item.Size;
+            field.Status = input.Item.Status;
+            field.FieldColor= input.Item.FieldColor;
             var crudManager = _saveEntityService.ProcessSave(field);
             var notification = crudManager.Finish();
             return Json(notification,"text/plain");

@@ -1,5 +1,7 @@
 ﻿using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Services;
+using NHibernate;
+using StructureMap;
 
 namespace Generator.Commands
 {
@@ -18,6 +20,9 @@ namespace Generator.Commands
 
         public void Execute(string[] args)
         {
+            ObjectFactory.Configure(x => x.For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory()));
+            var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
+            SqlServerHelper.killRhinoSecurity(sessionFactory);
             _securitySetupService.ExecuteAll();
         }
     }

@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             
             var model = new UserViewModel
             {
-                User = facilities,
+                Item = facilities,
                 Title = WebLocalizationKeys.FACILITIES.ToString()
             };
             return PartialView("FacilitiesAddUpdate", model);
@@ -46,7 +46,7 @@ namespace KnowYourTurf.Web.Controllers
             var facilities = _repository.Find<User>(input.EntityId);
             var model = new UserViewModel
                             {
-                                User = facilities,
+                                Item = facilities,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)) + "/" + facilities.EntityId,
                                 Title = WebLocalizationKeys.FACILITIES.ToString()
                             };
@@ -71,9 +71,9 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Save(UserViewModel input)
         {
             User facilities;
-            if (input.User.EntityId > 0)
+            if (input.Item.EntityId > 0)
             {
-                facilities = _repository.Find<User>(input.User.EntityId);
+                facilities = _repository.Find<User>(input.Item.EntityId);
             }
             else
             {
@@ -101,7 +101,7 @@ namespace KnowYourTurf.Web.Controllers
 
         private User mapToDomain(UserViewModel model, User facilities)
         {
-            var facilitiesModel = model.User;
+            var facilitiesModel = model.Item;
             facilities.Address1 = facilitiesModel.Address1;
             facilities.Address2= facilitiesModel.Address2;
             facilities.FirstName= facilitiesModel.FirstName;

@@ -23,18 +23,21 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
         private readonly ISessionContext _sessionContext;
         private readonly IAuthorizationRepository _authorizationRepository;
+        private readonly IUpdateCollectionService _updateCollectionService;
 
         public EmployeeController(IRepository repository,
             ISaveEntityService saveEntityService,
             IUploadedFileHandlerService uploadedFileHandlerService,
             ISessionContext sessionContext,
-            IAuthorizationRepository authorizationRepository)
+            IAuthorizationRepository authorizationRepository,
+            IUpdateCollectionService updateCollectionService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _uploadedFileHandlerService = uploadedFileHandlerService;
             _sessionContext = sessionContext;
             _authorizationRepository = authorizationRepository;
+            _updateCollectionService = updateCollectionService;
         }
 
         public ActionResult AddUpdate(ViewModel input)
@@ -49,7 +52,7 @@ namespace KnowYourTurf.Web.Controllers
 
             var model = new UserViewModel
             {
-                User = employee,
+                Item = employee,
                 AvailableItems = availableUserRoles,
                 SelectedItems = selectedUserRoles,
                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
@@ -62,7 +65,7 @@ namespace KnowYourTurf.Web.Controllers
             var employee = _repository.Find<User>(input.EntityId);
             var model = new UserViewModel
                             {
-                                User = employee,
+                                Item = employee,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddUpdate(null)) + "/" + employee.EntityId,
                                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
                             };
@@ -87,9 +90,9 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Save(UserViewModel input)
         {
             User employee;
-            if (input.User.EntityId > 0)
+            if (input.Item.EntityId > 0)
             {
-                employee = _repository.Find<User>(input.User.EntityId);
+                employee = _repository.Find<User>(input.Item.EntityId);
             }
             else
             {
@@ -150,7 +153,7 @@ namespace KnowYourTurf.Web.Controllers
 
         private User mapToDomain(UserViewModel model, User employee)
         {
-            var employeeModel = model.User;
+            var employeeModel = model.Item;
             employee.EmployeeId = employeeModel.EmployeeId;
             employee.Address1 = employeeModel.Address1;
             employee.Address2= employeeModel.Address2;
@@ -172,8 +175,7 @@ namespace KnowYourTurf.Web.Controllers
             employee.UserLoginInfo.LoginName = employeeModel.Email;
             employee.UserLoginInfo.Status = employeeModel.UserLoginInfo.Status;
             employee.UserLoginInfo.UserType = UserType.Employee.ToString();
-            var userRole = _repository.Query<UserRole>(x=>x.Name==UserType.Employee.ToString()).FirstOrDefault();
-            employee.AddUserRole(userRole);
+            _updateCollectionService.UpdateFromCSV(employee.UserRoles,model.RolesInput,employee.AddUserRole,employee.RemoveUserRole);
             return employee;
         }
     }

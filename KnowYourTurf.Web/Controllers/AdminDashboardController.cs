@@ -28,7 +28,7 @@ namespace KnowYourTurf.Web.Controllers
             var admin = _repository.Find<User>(input.EntityId);
             var model = new UserViewModel
             {
-                User = admin,
+                Item = admin,
                 AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId+"&From=Admin",
                
             };
@@ -38,7 +38,7 @@ namespace KnowYourTurf.Web.Controllers
 
     public class UserViewModel:ViewModel
     {
-        public User User { get; set; }
+        public User Item { get; set; }
         public bool DeleteImage { get; set; }
         public string RolesInput { get; set; }
         public IEnumerable<TokenInputDto> AvailableItems { get; set; }

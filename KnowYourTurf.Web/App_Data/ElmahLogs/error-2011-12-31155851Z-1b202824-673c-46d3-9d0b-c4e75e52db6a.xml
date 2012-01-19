@@ -1,0 +1,166 @@
+﻿<error errorId="1b202824-673c-46d3-9d0b-c4e75e52db6a" host="RHARIK" type="System.IO.FileNotFoundException" message="Could not find file 'C:\Development\KnowYourTurf\KnowYourTurf.Web\Areas\Employee.xml'." source="mscorlib" detail="System.Web.HttpUnhandledException (0x80004005): Exception of type 'System.Web.HttpUnhandledException' was thrown. ---&gt; System.IO.FileNotFoundException: Could not find file 'C:\Development\KnowYourTurf\KnowYourTurf.Web\Areas\Employee.xml'.&#xD;&#xA;File name: 'C:\Development\KnowYourTurf\KnowYourTurf.Web\Areas\Employee.xml'&#xD;&#xA;   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)&#xD;&#xA;   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)&#xD;&#xA;   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)&#xD;&#xA;   at System.Xml.XmlDownloadManager.GetStream(Uri uri, ICredentials credentials, IWebProxy proxy, RequestCachePolicy cachePolicy)&#xD;&#xA;   at System.Xml.XmlUrlResolver.GetEntity(Uri absoluteUri, String role, Type ofObjectToReturn)&#xD;&#xA;   at System.Xml.XmlTextReaderImpl.OpenUrlDelegate(Object xmlResolver)&#xD;&#xA;   at System.Threading.CompressedStack.runTryCode(Object userData)&#xD;&#xA;   at System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(TryCode code, CleanupCode backoutCode, Object userData)&#xD;&#xA;   at System.Threading.CompressedStack.Run(CompressedStack compressedStack, ContextCallback callback, Object state)&#xD;&#xA;   at System.Xml.XmlTextReaderImpl.OpenUrl()&#xD;&#xA;   at System.Xml.XmlTextReaderImpl.Read()&#xD;&#xA;   at System.Xml.XmlTextReader.Read()&#xD;&#xA;   at System.Xml.XmlReader.MoveToContent()&#xD;&#xA;   at System.Data.DataSet.ReadXml(XmlReader reader, Boolean denyResolving)&#xD;&#xA;   at System.Data.DataSet.ReadXml(String fileName)&#xD;&#xA;   at KnowYourTurf.Web.Areas.WebForm1.Page_Load(Object sender, EventArgs e) in C:\Development\KnowYourTurf\KnowYourTurf.Web\Areas\WebForm1.aspx.cs:line 18&#xD;&#xA;   at System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)&#xD;&#xA;   at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)&#xD;&#xA;   at System.Web.UI.Control.OnLoad(EventArgs e)&#xD;&#xA;   at System.Web.UI.Control.LoadRecursive()&#xD;&#xA;   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)&#xD;&#xA;   at System.Web.UI.Page.HandleError(Exception e)&#xD;&#xA;   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)&#xD;&#xA;   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)&#xD;&#xA;   at System.Web.UI.Page.ProcessRequest()&#xD;&#xA;   at System.Web.UI.Page.ProcessRequestWithNoAssert(HttpContext context)&#xD;&#xA;   at System.Web.UI.Page.ProcessRequest(HttpContext context)&#xD;&#xA;   at ASP.areas_webform1_aspx.ProcessRequest(HttpContext context) in c:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\root\09d88ede\b5cf8bed\App_Web_cytdpdv5.0.cs:line 0&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="Harik, Raif" time="2011-12-31T15:58:51.8756632Z" statusCode="500" webHostHtmlMessage="&lt;html&gt;&#xD;&#xA;    &lt;head&gt;&#xD;&#xA;        &lt;title&gt;Could not find file 'C:\Development\KnowYourTurf\KnowYourTurf.Web\Areas\Employee.xml'.&lt;/title&gt;&#xD;&#xA;        &lt;style&gt;&#xD;&#xA;         body {font-family:&quot;Verdana&quot;;font-weight:normal;font-size: .7em;color:black;} &#xD;&#xA;         p {font-family:&quot;Verdana&quot;;font-weight:normal;color:black;margin-top: -5px}&#xD;&#xA;         b {font-family:&quot;Verdana&quot;;font-weight:bold;color:black;margin-top: -5px}&#xD;&#xA;         H1 { font-family:&quot;Verdana&quot;;font-weight:normal;font-size:18pt;color:red }&#xD;&#xA;         H2 { font-family:&quot;Verdana&quot;;font-weight:normal;font-size:14pt;color:maroon }&#xD;&#xA;         pre {font-family:&quot;Lucida Console&quot;;font-size: .9em}&#xD;&#xA;         .marker {font-weight: bold; color: black;text-decoration: none;}&#xD;&#xA;         .version {color: gray;}&#xD;&#xA;         .error {margin-bottom: 10px;}&#xD;&#xA;         .expandable { text-decoration:underline; font-weight:bold; color:navy; cursor:hand; }&#xD;&#xA;        &lt;/style&gt;&#xD;&#xA;    &lt;/head&gt;&#xD;&#xA;&#xD;&#xA;    &lt;body bgcolor=&quot;white&quot;&gt;&#xD;&#xA;&#xD;&#xA;            &lt;span&gt;&lt;H1&gt;Server Error in '/' Application.&lt;hr width=100% size=1 color=silver&gt;&lt;/H1&gt;&#xD;&#xA;&#xD;&#xA;            &lt;h2&gt; &lt;i&gt;Could not find file 'C:\Development\KnowYourTurf\KnowYourTurf.Web\Areas\Employee.xml'.&lt;/i&gt; &lt;/h2&gt;&lt;/span&gt;&#xD;&#xA;&#xD;&#xA;            &lt;font face=&quot;Arial, Helvetica, Geneva, SunSans-Regular, sans-serif &quot;&gt;&#xD;&#xA;&#xD;&#xA;            &lt;b&gt; Description: &lt;/b&gt;An unhandled exception occurred during the execution of the current web request. Please review the stack trace for more information about the error and where it originated in the code.&#xD;&#xA;&#xD;&#xA;            &lt;br&gt;&lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;b&gt; Exception Details: &lt;/b&gt;System.IO.FileNotFoundException: Could not find file 'C:\Development\KnowYourTurf\KnowYourTurf.Web\Areas\Employee.xml'.&lt;br&gt;&lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;b&gt;Source Error:&lt;/b&gt; &lt;br&gt;&lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;table width=100% bgcolor=&quot;#ffffcc&quot;&gt;&#xD;&#xA;               &lt;tr&gt;&#xD;&#xA;                  &lt;td&gt;&#xD;&#xA;                      &lt;code&gt;&lt;pre&gt;&#xD;&#xA;&#xD;&#xA;Line 16: &#xD;&#xA;Line 17:                 DataSet dataSet = new DataSet();&#xD;&#xA;&lt;font color=red&gt;Line 18:                 dataSet.ReadXml(MapPath(&amp;quot;Employee.xml&amp;quot;));&#xD;&#xA;&lt;/font&gt;Line 19: &#xD;&#xA;Line 20:                 ReportDataSource dataSource = new ReportDataSource(&amp;quot;EmployeeDataSet_Employee&amp;quot;, dataSet.Tables[0]);&lt;/pre&gt;&lt;/code&gt;&#xD;&#xA;&#xD;&#xA;                  &lt;/td&gt;&#xD;&#xA;               &lt;/tr&gt;&#xD;&#xA;            &lt;/table&gt;&#xD;&#xA;&#xD;&#xA;            &lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;b&gt; Source File: &lt;/b&gt; C:\Development\KnowYourTurf\KnowYourTurf.Web\Areas\WebForm1.aspx.cs&lt;b&gt; &amp;nbsp;&amp;nbsp; Line: &lt;/b&gt; 18&#xD;&#xA;            &lt;br&gt;&lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;b&gt;Stack Trace:&lt;/b&gt; &lt;br&gt;&lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;table width=100% bgcolor=&quot;#ffffcc&quot;&gt;&#xD;&#xA;               &lt;tr&gt;&#xD;&#xA;                  &lt;td&gt;&#xD;&#xA;                      &lt;code&gt;&lt;pre&gt;&#xD;&#xA;&#xD;&#xA;[FileNotFoundException: Could not find file &amp;#39;C:\Development\KnowYourTurf\KnowYourTurf.Web\Areas\Employee.xml&amp;#39;.]&#xD;&#xA;   System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath) +9718543&#xD;&#xA;   System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath) +1142&#xD;&#xA;   System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize) +81&#xD;&#xA;   System.Xml.XmlDownloadManager.GetStream(Uri uri, ICredentials credentials, IWebProxy proxy, RequestCachePolicy cachePolicy) +77&#xD;&#xA;   System.Xml.XmlUrlResolver.GetEntity(Uri absoluteUri, String role, Type ofObjectToReturn) +69&#xD;&#xA;   System.Xml.XmlTextReaderImpl.OpenUrlDelegate(Object xmlResolver) +75&#xD;&#xA;   System.Threading.CompressedStack.runTryCode(Object userData) +70&#xD;&#xA;   System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(TryCode code, CleanupCode backoutCode, Object userData) +0&#xD;&#xA;   System.Threading.CompressedStack.Run(CompressedStack compressedStack, ContextCallback callback, Object state) +92&#xD;&#xA;   System.Xml.XmlTextReaderImpl.OpenUrl() +191&#xD;&#xA;   System.Xml.XmlTextReaderImpl.Read() +207&#xD;&#xA;   System.Xml.XmlTextReader.Read() +15&#xD;&#xA;   System.Xml.XmlReader.MoveToContent() +70&#xD;&#xA;   System.Data.DataSet.ReadXml(XmlReader reader, Boolean denyResolving) +374&#xD;&#xA;   System.Data.DataSet.ReadXml(String fileName) +70&#xD;&#xA;   KnowYourTurf.Web.Areas.WebForm1.Page_Load(Object sender, EventArgs e) in C:\Development\KnowYourTurf\KnowYourTurf.Web\Areas\WebForm1.aspx.cs:18&#xD;&#xA;   System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e) +14&#xD;&#xA;   System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e) +35&#xD;&#xA;   System.Web.UI.Control.OnLoad(EventArgs e) +91&#xD;&#xA;   System.Web.UI.Control.LoadRecursive() +74&#xD;&#xA;   System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint) +2207&#xD;&#xA;&lt;/pre&gt;&lt;/code&gt;&#xD;&#xA;&#xD;&#xA;                  &lt;/td&gt;&#xD;&#xA;               &lt;/tr&gt;&#xD;&#xA;            &lt;/table&gt;&#xD;&#xA;&#xD;&#xA;            &lt;br&gt;&#xD;&#xA;&#xD;&#xA;    &lt;/body&gt;&#xD;&#xA;&lt;/html&gt;&#xD;&#xA;">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-us,en;q=0.5&#xD;&#xA;HTTP_COOKIE:KYT=504383F6B4C123BE9C5EFE3BD99E702691721DCF7B34C579B37EFB99CF6CC29F0F0A4E07D9662C6AC675C703F21869888B5CBF46A0E533D44F81AB40CE9354719CE61663F74EF818444274D99933D6FFC1D2CDC3ADD4E3321FA8FA72B560FE576FC503377AC214177BC16CBBCA58945FE0F54AF539B47C4A63EFA5E3E7CCC3E7A0C56ED5C3FA107140D8F9E7C895B8D349AE1998E49886E377A66982FE3DD995F19C81E06D9AE249764324968C51F751ABBE53EBE532DAB38F76EFFE9F203DB2; ASP.NET_SessionId=wghc5liobfnk2uyslj4ido5i&#xD;&#xA;HTTP_HOST:localhost:666&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-us,en;q=0.5&#xD;&#xA;Cookie: KYT=504383F6B4C123BE9C5EFE3BD99E702691721DCF7B34C579B37EFB99CF6CC29F0F0A4E07D9662C6AC675C703F21869888B5CBF46A0E533D44F81AB40CE9354719CE61663F74EF818444274D99933D6FFC1D2CDC3ADD4E3321FA8FA72B560FE576FC503377AC214177BC16CBBCA58945FE0F54AF539B47C4A63EFA5E3E7CCC3E7A0C56ED5C3FA107140D8F9E7C895B8D349AE1998E49886E377A66982FE3DD995F19C81E06D9AE249764324968C51F751ABBE53EBE532DAB38F76EFFE9F203DB2; ASP.NET_SessionId=wghc5liobfnk2uyslj4ido5i&#xD;&#xA;Host: localhost:666&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms Authentication" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="RHARIK\Owner" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="Harik, Raif" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Areas/WebForm1.aspx" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Development\KnowYourTurf\KnowYourTurf.Web\Areas\WebForm1.aspx" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Areas/WebForm1.aspx" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="666" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/Areas/WebForm1.aspx" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-us,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="KYT=504383F6B4C123BE9C5EFE3BD99E702691721DCF7B34C579B37EFB99CF6CC29F0F0A4E07D9662C6AC675C703F21869888B5CBF46A0E533D44F81AB40CE9354719CE61663F74EF818444274D99933D6FFC1D2CDC3ADD4E3321FA8FA72B560FE576FC503377AC214177BC16CBBCA58945FE0F54AF539B47C4A63EFA5E3E7CCC3E7A0C56ED5C3FA107140D8F9E7C895B8D349AE1998E49886E377A66982FE3DD995F19C81E06D9AE249764324968C51F751ABBE53EBE532DAB38F76EFFE9F203DB2; ASP.NET_SessionId=wghc5liobfnk2uyslj4ido5i" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:666" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0" />
+    </item>
+  </serverVariables>
+  <cookies>
+    <item name="KYT">
+      <value string="504383F6B4C123BE9C5EFE3BD99E702691721DCF7B34C579B37EFB99CF6CC29F0F0A4E07D9662C6AC675C703F21869888B5CBF46A0E533D44F81AB40CE9354719CE61663F74EF818444274D99933D6FFC1D2CDC3ADD4E3321FA8FA72B560FE576FC503377AC214177BC16CBBCA58945FE0F54AF539B47C4A63EFA5E3E7CCC3E7A0C56ED5C3FA107140D8F9E7C895B8D349AE1998E49886E377A66982FE3DD995F19C81E06D9AE249764324968C51F751ABBE53EBE532DAB38F76EFFE9F203DB2" />
+      <value string="5991BBE8B6DD3163416D3C00508E5EB94B81CD78B96F0B9C40E327BFB33BEE3CAF82AB668953A54C80C275E0BE31DAB83AE7F9D1AB67A1BF390DF64773BDBFDA90D9B0D0D27C5487FF4B97F291D2145D9B02F5ABAC7F70B649EE348BC1388505C96C1E5AFAE0851666CB38A0874F3ADB946DE75573E677193E3E607BEB2C8F8DB189ED14857B40E3A3297C9B2FAE6CFB902055ED2F237E339E1826C69590E0A76DBD13C82EB5B856BBDE9CFFD5AF356E316E6C323AC80ADC6E2F13E416091C6B" />
+    </item>
+    <item name="ASP.NET_SessionId">
+      <value string="wghc5liobfnk2uyslj4ido5i" />
+    </item>
+  </cookies>
+</error>

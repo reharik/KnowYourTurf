@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using KnowYourTurf.Core.Domain;
@@ -18,7 +18,7 @@ namespace KnowYourTurf.Core.Services
                                                    Action<ENTITY> removeEntity) where ENTITY : Entity;
     }
 
-    public class UpdateCollectionService : IUpdateCollectionService 
+    public class UpdateCollectionService : IUpdateCollectionService
     {
         private readonly IRepository _repository;
 
@@ -63,7 +63,9 @@ namespace KnowYourTurf.Core.Services
             var newItems = new List<ENTITY>();
             if (newItemsCSV.IsEmpty())
             {
-                origional.Each(removeEntity);
+                var remove = new List<ENTITY>();
+                origional.Each(remove.Add);
+                remove.Each(removeEntity);
                 return;
             }
             newItemsCSV.Split(',').Each(x => newItems.Add(_repository.Find<ENTITY>(Int32.Parse(x))));

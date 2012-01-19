@@ -1,6 +1,6 @@
 ﻿namespace KnowYourTurf.Core.Domain.Persistence
 {
-    public class UserRoleMap : DomainEntityMap<UserRole>
+    public class UserRoleMap : EntityMap<UserRole>
     {
         public UserRoleMap()
         {

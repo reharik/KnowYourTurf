@@ -36,12 +36,16 @@ namespace KnowYourTurf.Web.Controllers
             var entityId = input.EntityId>0?input.EntityId:_sessionContext.GetUserId();
             var employee = _repository.Find<User>(entityId);
             
-            var availableUserRoles = Enumeration.GetAll<UserType>(true).Select(x => new TokenInputDto { id = x.Key, name = x.Key });
+            var availableUserRoles = _repository.FindAll<UserRole>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name});
             IEnumerable<TokenInputDto> selectedUserRoles;
             if (input.EntityId > 0 && employee.UserRoles != null)
-                selectedUserRoles =
-                    employee.UserRoles.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
-            else selectedUserRoles = null;
+            {
+                selectedUserRoles = employee.UserRoles.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            }
+            else
+            {
+                selectedUserRoles = null;
+            }
 
             var url = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasks(null)) + "?ParentId=" + entityId;
             var completeUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasks(null)) + "?ParentId=" + entityId;

@@ -18,7 +18,8 @@ namespace KnowYourTurf.Core.Html.Menu
         IMenuBuilder EndChildren();
         IMenuBuilder CreateNode<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, StringToken text) where CONTROLLER : Controller;
         IMenuBuilder CreateNode<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, StringToken text, string urlParam) where CONTROLLER : Controller;
-        IMenuBuilder CreateNode(StringToken text, string cssClass=null);
+        IMenuBuilder CreateNode(StringToken text, string url, string cssClass = null);
+        IMenuBuilder CreateNode(StringToken text, string cssClass = null);
 
     }
 
@@ -97,6 +98,18 @@ namespace KnowYourTurf.Core.Html.Menu
                            });
             return this;
         }
+
+        public IMenuBuilder CreateNode(StringToken text, string url, string cssClass = null)
+        {
+            var _itemList = getList();
+            _itemList.Add(new MenuItem
+            {
+                Text = text.DefaultValue,
+                Url = url
+            });
+            return this;
+        }
+
 
         public IList<MenuItem> MenuTree(bool withoutPermissions = false)
         {

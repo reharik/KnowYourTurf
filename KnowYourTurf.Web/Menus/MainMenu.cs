@@ -24,6 +24,7 @@ namespace KnowYourTurf.Web.Menus
         {
             return _builder
                 .CreateNode<EmployeeDashboardController>(c => c.ViewEmployee(null), WebLocalizationKeys.HOME)
+                .CreateNode(WebLocalizationKeys.ADDRESS, "/Areas/Reports/WebForm1.aspx","someclass")
 
                 .CreateNode<FieldListController>(c => c.FieldList(), WebLocalizationKeys.FIELDS)
                 .CreateNode<EquipmentListController>(c => c.EquipmentList(), WebLocalizationKeys.EQUIPMENT)

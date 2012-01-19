@@ -63,7 +63,6 @@ C:\Development\KnowYourTurf\Generator\bin\Debug\Generator.exe.config
 C:\Development\KnowYourTurf\Generator\bin\Debug\Generator.exe
 C:\Development\KnowYourTurf\Generator\bin\Debug\Generator.pdb
 C:\Development\KnowYourTurf\Generator\bin\Debug\KnowYourTurf.Core.dll
-C:\Development\KnowYourTurf\Generator\bin\Debug\MethodFitness.Web.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\System.Configuration.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\System.Data.DataSetExtensions.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\System.Data.dll
@@ -81,7 +80,6 @@ C:\Development\KnowYourTurf\Generator\bin\Debug\Alpinely.TownCrier.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\Elmah.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\AuthorizeNet.dll
 C:\Development\KnowYourTurf\Generator\bin\Debug\KnowYourTurf.Core.pdb
-C:\Development\KnowYourTurf\Generator\bin\Debug\MethodFitness.Web.pdb
 C:\Development\KnowYourTurf\Generator\bin\Debug\HtmlTags.pdb
 C:\Development\KnowYourTurf\Generator\bin\Debug\HtmlTags.xml
 C:\Development\KnowYourTurf\Generator\bin\Debug\FubuMVC.UI.pdb
@@ -89,3 +87,5 @@ C:\Development\KnowYourTurf\Generator\bin\Debug\Alpinely.TownCrier.pdb
 C:\Development\KnowYourTurf\Generator\obj\Debug\ResolveAssemblyReference.cache
 C:\Development\KnowYourTurf\Generator\obj\Debug\Generator.exe
 C:\Development\KnowYourTurf\Generator\obj\Debug\Generator.pdb
+C:\Development\KnowYourTurf\Generator\bin\Debug\KnowYourTurf.Web.dll
+C:\Development\KnowYourTurf\Generator\bin\Debug\KnowYourTurf.Web.pdb

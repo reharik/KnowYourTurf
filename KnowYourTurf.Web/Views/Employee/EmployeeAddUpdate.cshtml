@@ -26,55 +26,55 @@
         
 
 @MvcHtmlString.Create(FormFor<EmployeeController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-@MvcHtmlString.Create(Html.HiddenFor(x => x.User.EntityId).ToString())
+@MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
 @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.EmployeeId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.EmployeeId).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.FirstName).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.FirstName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.LastName).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.LastName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.EmergencyContact).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.EmergencyContact).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.EmergencyContactPhone).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.EmergencyContactPhone).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.UserLoginInfo.Password).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Password).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.Email).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Email).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.PhoneMobile).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.PhoneMobile).ToHtmlTag()
         </div>
     </div>
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.Address1).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.Address2).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Address2).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.City).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.City).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.State).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.State).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.ZipCode).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.ZipCode).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.UserLoginInfo.Status).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Status).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.User.Notes).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().LabelDisplay(WebLocalizationKeys.USER_ROLES).OperationName("/KYTAdmin").ToHtmlTag()

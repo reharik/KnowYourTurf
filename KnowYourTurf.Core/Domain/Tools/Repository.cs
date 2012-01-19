@@ -29,12 +29,12 @@ namespace KnowYourTurf.Core.Domain
             _unitOfWork.Initialize();
         }
 
-        public void Save<ENTITY>(ENTITY entity) where ENTITY : DomainEntity
+        public void Save<ENTITY>(ENTITY entity) where ENTITY : Entity
         {
             _unitOfWork.CurrentSession.SaveOrUpdate(entity);
         }
 
-        public IEnumerable<T> FindAll<T>() where T : DomainEntity
+        public IEnumerable<T> FindAll<T>() where T : Entity
         {
             return _unitOfWork.CurrentSession.Query<T>();
         }
@@ -44,7 +44,7 @@ namespace KnowYourTurf.Core.Domain
             _unitOfWork.CurrentSession.Delete(target);
         }
 
-        public void SoftDelete<ENTITY>(ENTITY entity) where ENTITY : DomainEntity
+        public void SoftDelete<ENTITY>(ENTITY entity) where ENTITY : Entity
         {
             entity.IsDeleted = true;
             _unitOfWork.CurrentSession.SaveOrUpdate(entity);
@@ -65,18 +65,18 @@ namespace KnowYourTurf.Core.Domain
             _unitOfWork.Rollback();
         }
 
-        public IList<ENTITY> ExecuteCriteria<ENTITY>(DetachedCriteria criteria) where ENTITY : DomainEntity
+        public IList<ENTITY> ExecuteCriteria<ENTITY>(DetachedCriteria criteria) where ENTITY : Entity
         {
             ICriteria executableCriteria = criteria.GetExecutableCriteria(_unitOfWork.CurrentSession);
             return executableCriteria.List<ENTITY>();
         }
 
-        public ENTITY Load<ENTITY>(long id) where ENTITY : DomainEntity
+        public ENTITY Load<ENTITY>(long id) where ENTITY : Entity
         {
             return _unitOfWork.CurrentSession.Load<ENTITY>(id);
         }
 
-        public IQueryable<ENTITY> Query<ENTITY>() where ENTITY : DomainEntity
+        public IQueryable<ENTITY> Query<ENTITY>() where ENTITY : Entity
         {
             return _unitOfWork.CurrentSession.Query<ENTITY>();
         }
@@ -91,7 +91,7 @@ namespace KnowYourTurf.Core.Domain
             return _unitOfWork.CurrentSession.Query<T>().FirstOrDefault(where);
         }
 
-        public T Find<T>(long id) where T : DomainEntity
+        public T Find<T>(long id) where T : Entity
         {
             return _unitOfWork.CurrentSession.Get<T>(id);
         }

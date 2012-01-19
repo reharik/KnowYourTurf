@@ -33,7 +33,7 @@ namespace KnowYourTurf.Web.Controllers
             
             var model = new UserViewModel
             {
-                User = admin,
+                Item = admin,
                 Title = WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString()
             };
             return PartialView("AdminAddUpdate", model);
@@ -44,7 +44,7 @@ namespace KnowYourTurf.Web.Controllers
             var admin = _repository.Find<User>(input.EntityId);
             var model = new UserViewModel
                             {
-                                User= admin,
+                                Item= admin,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<AdminController>(x => x.Admin(null)) + "/" + admin.EntityId,
                                 Title = WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString()
                             };
@@ -69,9 +69,9 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Save(UserViewModel input)
         {
             User administrator;
-            if (input.User.EntityId > 0)
+            if (input.Item.EntityId > 0)
             {
-                administrator = _repository.Find<User>(input.User.EntityId);
+                administrator = _repository.Find<User>(input.Item.EntityId);
             }
             else
             {
@@ -99,7 +99,7 @@ namespace KnowYourTurf.Web.Controllers
 
         private User mapToDomain(UserViewModel model, User administrator)
         {
-            var adminModel = model.User;
+            var adminModel = model.Item;
             administrator.Address1 = adminModel.Address1;
             administrator.Address2= adminModel.Address2;
             administrator.FirstName= adminModel.FirstName;

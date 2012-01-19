@@ -1,5 +1,3 @@
-C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\MethodFitness.Web.dll
-C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\MethodFitness.Web.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\KnowYourTurf.Core.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\Microsoft.CSharp.dll
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\System.ComponentModel.DataAnnotations.dll
@@ -37,5 +35,10 @@ C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\Rhino.Security.pdb
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\StructureMap.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\System.Web.Helpers.xml
 C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\ResolveAssemblyReference.cache
-C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\MethodFitness.Web.dll
-C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\MethodFitness.Web.pdb
+C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\Rhino.Security.xml
+C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\RdlCompile.cache
+C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\RdlCompile.compiled
+C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\KnowYourTurf.Web.dll
+C:\Development\KnowYourTurf\KnowYourTurf.Web\bin\KnowYourTurf.Web.pdb
+C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\KnowYourTurf.Web.dll
+C:\Development\KnowYourTurf\KnowYourTurf.Web\obj\Debug\KnowYourTurf.Web.pdb

@@ -14,24 +14,24 @@
  </script>
 
             @MvcHtmlString.Create(FormFor<FieldController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Field.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Field.Name).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Field.Abbreviation).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Abbreviation).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Field.Description).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Field.Size).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Size).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
-            @Html.SubmissionFor(x => x.Field.FieldColor).InputId("FieldColor").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.FieldColor).InputId("FieldColor").ToHtmlTag()
             <div id="colorPicker"></div>
         </div>
     </div>

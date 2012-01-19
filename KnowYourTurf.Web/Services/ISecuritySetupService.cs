@@ -8,6 +8,7 @@ using KnowYourTurf.Web.Config;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Controllers;
+using NHibernate;
 using Rhino.Security.Interfaces;
 using StructureMap;
 
@@ -48,6 +49,7 @@ namespace KnowYourTurf.Web.Services
 
         public void ExecuteAll()
         {
+            
 
             CreateUserGroups();
             AssociateAllUsersWithThierTypeGroup();
@@ -57,6 +59,8 @@ namespace KnowYourTurf.Web.Services
             CreateMiscellaneousOperations();
             CreateAdminPermissions();
             _permissionsService.GrantDefaultAdminPermissions("Administrator");
+            _permissionsService.GrantDefaultEmployeePermissions();
+            _permissionsService.GrantDefaultFacilitiesPermissions();
             CreateFacilitiesPermissions();
             _repository.UnitOfWork.Commit();
         }

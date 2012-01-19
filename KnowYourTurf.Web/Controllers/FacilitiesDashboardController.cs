@@ -28,7 +28,7 @@ namespace KnowYourTurf.Web.Controllers
             var facilities = _repository.Find<User>(input.EntityId);
             var model = new UserViewModel
             {
-                User = facilities,
+                Item = facilities,
                 AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId+"&From=Facilities",
                
             };
