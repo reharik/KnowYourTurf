@@ -10,3 +10,5 @@ _ReSharper.*
 *.vssscc
 .idea
 App_Data
+CustomerPhotos
+CustomerDocuments
