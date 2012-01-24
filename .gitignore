@@ -3,9 +3,10 @@
 *.user
 *.suo
 *.[Cc]ache
-*.log 
+
 _ReSharper.*
 *.resharper
 *.vspscc
 *.vssscc
 .idea
+App_Data
