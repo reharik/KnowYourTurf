@@ -1,0 +1,11 @@
+[Oo]bj
+[Bb]in
+*.user
+*.suo
+*.[Cc]ache
+*.log 
+_ReSharper.*
+*.resharper
+*.vspscc
+*.vssscc
+.idea
