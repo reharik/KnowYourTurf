@@ -67,9 +67,9 @@
     <Reference Include="HibernatingRhinos.Profiler.Appender.NHibernateLog4Net">
       <HintPath>..\lib\HibernatingRhinos.Profiler.Appender.NHibernateLog4Net.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlTags">
-      <HintPath>..\..\lib\HtmlTags.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HtmlTags, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\HtmlTags.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -742,7 +742,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
-          <DevelopmentServerPort>666</DevelopmentServerPort>
+          <DevelopmentServerPort>6666</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
