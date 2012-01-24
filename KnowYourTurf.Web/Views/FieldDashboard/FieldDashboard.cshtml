@@ -6,7 +6,7 @@
 @using HtmlTags
 
 
-@{ Layout = "~/Views/Shared/_FormLayout.cshtml"; }
+@{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
 
 
 @section HeaderJavascript{
@@ -72,6 +72,11 @@
                         }
         </div>
     <div class="col full clear"></div>
+<div class="col left">
+    @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
+    @StandardButtonFor("cancel", WebLocalizationKeys.CANCEL).AddClass("cancel").ToHtmlTag()
+</div>
+<div class="col full clear"><hr/></div>
 
     <div class="col left clear">
         <div class="fieldRow">

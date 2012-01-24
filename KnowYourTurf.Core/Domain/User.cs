@@ -32,6 +32,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Notes { get; set; }
         public virtual DateTime? BirthDate { get; set; }
         public virtual string ImageUrl { get; set; }
+        public virtual string ImageFriendlyName { get; set; }
         public virtual Company Company { get; set; }
         public virtual CultureInfo LanguageDefault { get; set; }
         public virtual UserLoginInfo UserLoginInfo { get; set; }
@@ -95,6 +96,7 @@ namespace KnowYourTurf.Core.Domain
         {
             get { return new SecurityInfo(FullName, EntityId); }
         }
+
     }
 
     public class UserLoginInfo : DomainEntity

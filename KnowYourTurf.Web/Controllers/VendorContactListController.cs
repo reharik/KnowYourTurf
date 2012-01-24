@@ -11,23 +11,27 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
         private readonly IEntityListGrid<VendorContact>_vendorContactListGrid;
+        private readonly IRepository _repository;
 
         public VendorContactListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IEntityListGrid<VendorContact> vendorContactListGrid)
+            IEntityListGrid<VendorContact> vendorContactListGrid,
+            IRepository repository)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _vendorContactListGrid = vendorContactListGrid;
+            _repository = repository;
         }
 
         public ActionResult VendorContactList(ListViewModel input)
         {
+            var vendor = _repository.Find<Vendor>(input.EntityId);
             var url = UrlContext.GetUrlForAction<VendorContactListController>(x => x.VendorContacts(null)) + "?ParentId=" + input.EntityId;
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId,
                 GridDefinition = _vendorContactListGrid.GetGridDefinition(url),
                 DeleteMultipleUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.DeleteMultiple(null)) + "?ParentId=" + input.EntityId,
-                Title = WebLocalizationKeys.VENDOR_CONTACTS.ToString()
+                Title = "("+vendor.Company+") "+ WebLocalizationKeys.VENDOR_CONTACTS
             };
             return View(model);
         }

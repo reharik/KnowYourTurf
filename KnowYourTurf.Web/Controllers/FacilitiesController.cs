@@ -15,17 +15,17 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
-        private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
+        private readonly IFileHandlerService _fileHandlerService;
         private readonly ISessionContext _sessionContext;
 
         public FacilitiesController(IRepository repository,
             ISaveEntityService saveEntityService,
-            IUploadedFileHandlerService uploadedFileHandlerService,
+            IFileHandlerService fileHandlerService,
             ISessionContext sessionContext)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
-            _uploadedFileHandlerService = uploadedFileHandlerService;
+            _fileHandlerService = fileHandlerService;
             _sessionContext = sessionContext;
         }
 
@@ -86,15 +86,14 @@ namespace KnowYourTurf.Web.Controllers
 
             if (input.DeleteImage)
             {
-                _uploadedFileHandlerService.DeleteFile(facilities.ImageUrl);
+                _fileHandlerService.DeleteFile(facilities.ImageUrl);
                 facilities.ImageUrl = string.Empty;
             }
 
-            var serverDirectory = "/CustomerPhotos/" + facilities.CompanyId + "/Facilitiess";
-            facilities.ImageUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, facilities.FirstName+"_"+facilities.LastName);
+            facilities.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Facilitiess");
+            facilities.ImageFriendlyName = facilities.FirstName + "_" + facilities.LastName;
             var crudManager = _saveEntityService.ProcessSave(facilities);
 
-            crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, facilities.FirstName + "_" + facilities.LastName, crudManager);
             var notification = crudManager.Finish();
             return Json(notification,"text/plain");
         }

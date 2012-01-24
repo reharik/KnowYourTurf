@@ -20,22 +20,22 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
-        private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
         private readonly ISessionContext _sessionContext;
+        private readonly IFileHandlerService _fileHandlerService;
         private readonly IAuthorizationRepository _authorizationRepository;
         private readonly IUpdateCollectionService _updateCollectionService;
 
         public EmployeeController(IRepository repository,
             ISaveEntityService saveEntityService,
-            IUploadedFileHandlerService uploadedFileHandlerService,
             ISessionContext sessionContext,
+            IFileHandlerService fileHandlerService,
             IAuthorizationRepository authorizationRepository,
             IUpdateCollectionService updateCollectionService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
-            _uploadedFileHandlerService = uploadedFileHandlerService;
             _sessionContext = sessionContext;
+            _fileHandlerService = fileHandlerService;
             _authorizationRepository = authorizationRepository;
             _updateCollectionService = updateCollectionService;
         }
@@ -105,15 +105,14 @@ namespace KnowYourTurf.Web.Controllers
             mapRolesToGroups(employee);
             if (input.DeleteImage)
             {
-                _uploadedFileHandlerService.DeleteFile(employee.ImageUrl);
+                _fileHandlerService.DeleteFile(employee.ImageUrl);
                 employee.ImageUrl = string.Empty;
             }
 
-            var serverDirectory = "/CustomerPhotos/" + _sessionContext.GetCompanyId() + "/Employees";
-            employee.ImageUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, employee.FirstName+"_"+employee.LastName);
+            employee.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Employees");
+            employee.ImageFriendlyName = employee.FirstName + "_" + employee.LastName;
             var crudManager = _saveEntityService.ProcessSave(employee);
 
-            crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, employee.FirstName + "_" + employee.LastName, crudManager);
             var notification = crudManager.Finish();
             return Json(notification,"text/plain");
         }

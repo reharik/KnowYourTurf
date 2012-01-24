@@ -15,18 +15,18 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
-        private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
+        private readonly IFileHandlerService _fileHandlerService;
         private readonly ISessionContext _sessionContext;
         private readonly ISelectListItemService _selectListItemService;
 
         public EquipmentController(IRepository repository,
             ISaveEntityService saveEntityService,
-            IUploadedFileHandlerService uploadedFileHandlerService,
+            IFileHandlerService fileHandlerService,
             ISessionContext sessionContext, ISelectListItemService selectListItemService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
-            _uploadedFileHandlerService = uploadedFileHandlerService;
+            _fileHandlerService = fileHandlerService;
             _sessionContext = sessionContext;
             _selectListItemService = selectListItemService;
         }
@@ -102,17 +102,15 @@ namespace KnowYourTurf.Web.Controllers
             equipment.Description = input.Item.Description;
             if (input.DeleteImage)
             {
-                _uploadedFileHandlerService.DeleteFile(equipment.ImageUrl);
+                _fileHandlerService.DeleteFile(equipment.ImageUrl);
                 equipment.ImageUrl = string.Empty;
             }
             if (equipment.Vendor == null || equipment.Vendor.EntityId != input.Item.Vendor.EntityId)
             {
                 equipment.Vendor = _repository.Find<Vendor>(input.Item.Vendor.EntityId);
             }
-            var serverDirectory = "/CustomerPhotos/" + _sessionContext.GetCompanyId() + "/Equipment";
-            equipment.ImageUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, equipment.Name);
+            equipment.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
             var crudManager = _saveEntityService.ProcessSave(equipment);
-            crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, equipment.Name, crudManager);
             var notification = crudManager.Finish();
             return Json(notification, "text/plain");
         }
