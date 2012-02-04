@@ -74,17 +74,13 @@ DEALLOCATE FK_KILLER
 
         public static void AddRhinoSecurity(ISessionFactory source)
         {
-            var exePath = AppDomain.CurrentDomain.BaseDirectory;
-            var newPath = exePath + @"sqlscripts\new_rhinosecurity.sql";
-            var rhino = new StreamReader(newPath);
-
-            var sql = rhino.ReadToEnd();
-            rhino.Close();
-
             using (ISession session = source.OpenSession())
             {
                 try
                 {
+                    var rhinoSecurityScript = new System.IO.StreamReader("src\\new_rhinosecurity.sql");
+                    string sql = rhinoSecurityScript.ReadToEnd();
+                    rhinoSecurityScript.Close();
                     IDbConnection conn = session.Connection;
                     var cmd = conn.CreateCommand();
                     cmd.CommandText = sql;

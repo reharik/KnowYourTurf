@@ -13,18 +13,12 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
-        private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
-        private readonly ISessionContext _sessionContext;
 
         public FieldController(IRepository repository,
-            ISaveEntityService saveEntityService,
-            IUploadedFileHandlerService uploadedFileHandlerService,
-            ISessionContext sessionContext)
+            ISaveEntityService saveEntityService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
-            _uploadedFileHandlerService = uploadedFileHandlerService;
-            _sessionContext = sessionContext;
         }
 
         public ActionResult AddUpdate(ViewModel input)

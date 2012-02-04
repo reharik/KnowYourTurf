@@ -7,7 +7,7 @@
 @using KnowYourTurf.Web.Controllers
 
 
-@{ Layout = "~/Views/Shared/_FormLayout.cshtml"; }
+@{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
 
 
 @section HeaderJavascript{
@@ -107,8 +107,14 @@
 
 
 @EndForm()
+<div class="col full clear"></div>
+<div class="col left">
+    @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
+    @StandardButtonFor("cancel", WebLocalizationKeys.CANCEL).AddClass("cancel").ToHtmlTag()
+</div>
+<div class="col full clear"><hr/></div>
 
-    <div class="col left clear">
+<div class="col left clear">
         <div class="fieldRow">
         <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
             <div id="pendingTaskGridContainer" class="grid_5b">

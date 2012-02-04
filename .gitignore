@@ -1,0 +1,14 @@
+[Oo]bj
+[Bb]in
+*.user
+*.suo
+*.[Cc]ache
+
+_ReSharper.*
+*.resharper
+*.vspscc
+*.vssscc
+.idea
+App_Data
+CustomerPhotos
+CustomerDocuments

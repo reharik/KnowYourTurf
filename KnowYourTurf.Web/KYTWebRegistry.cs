@@ -1,5 +1,4 @@
 using Alpinely.TownCrier;
-using AuthorizeNet;
 using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Core;

@@ -16,19 +16,19 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
         private readonly ISelectListItemService _selectListItemService;
-        private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
+        private readonly IFileHandlerService _fileHandlerService;
         private readonly ISessionContext _sessionContext;
 
         public PhotoController(IRepository repository,
             ISaveEntityService saveEntityService,
             ISelectListItemService selectListItemService,
-            IUploadedFileHandlerService uploadedFileHandlerService,
+            IFileHandlerService fileHandlerService,
             ISessionContext sessionContext)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _selectListItemService = selectListItemService;
-            _uploadedFileHandlerService = uploadedFileHandlerService;
+            _fileHandlerService = fileHandlerService;
             _sessionContext = sessionContext;
         }
 
@@ -71,7 +71,7 @@ namespace KnowYourTurf.Web.Controllers
             input.EntityIds.Each(x =>
             {
                 var item = _repository.Find<Photo>(x);
-                _uploadedFileHandlerService.DeleteFile(item.FileUrl);
+                _fileHandlerService.DeleteFile(item.FileUrl);
                 _repository.HardDelete(item);
             });
             _repository.Commit();
@@ -80,12 +80,9 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(PhotoViewModel input)
         {
-            var coId = _sessionContext.GetCompanyId();
             var photo = input.Item.EntityId > 0 ? _repository.Find<Photo>(input.Item.EntityId) : new Photo();
             var newDoc = mapToDomain(input, photo);
-            var serverDirectory = "/CustomerPhotos/" + coId;
-            photo.FileUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, photo.Name); 
-            
+            photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos");
             var crudManager = _saveEntityService.ProcessSave(newDoc);
             if (input.From == "Field")
             {
@@ -93,8 +90,6 @@ namespace KnowYourTurf.Web.Controllers
                 field.AddPhoto(photo);
                 crudManager = _saveEntityService.ProcessSave(field, crudManager);
             } 
-            crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, newDoc.Name, crudManager);
-            
             var notification = crudManager.Finish();
             notification.Variable = photo.FileUrl;
             return Json(notification, "text/plain");
@@ -103,7 +98,6 @@ namespace KnowYourTurf.Web.Controllers
         private Photo mapToDomain(PhotoViewModel input, Photo photo)
         {
             var photoModel = input.Item;
-            photo.FileType = photoModel.FileType;
             
             photo.Name = photoModel.Name;
             photo.Description = photoModel.Description;

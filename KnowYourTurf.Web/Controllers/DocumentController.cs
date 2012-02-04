@@ -15,20 +15,20 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
+        private readonly IFileHandlerService _fileHandlerService;
         private readonly ISelectListItemService _selectListItemService;
-        private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
         private readonly ISessionContext _sessionContext;
 
         public DocumentController(IRepository repository,
             ISaveEntityService saveEntityService,
+            IFileHandlerService fileHandlerService,
             ISelectListItemService selectListItemService,
-            IUploadedFileHandlerService uploadedFileHandlerService,
             ISessionContext sessionContext)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
+            _fileHandlerService = fileHandlerService;
             _selectListItemService = selectListItemService;
-            _uploadedFileHandlerService = uploadedFileHandlerService;
             _sessionContext = sessionContext;
         }
 
@@ -71,7 +71,7 @@ namespace KnowYourTurf.Web.Controllers
             input.EntityIds.Each(x =>
             {
                 var item = _repository.Find<Document>(x);
-                _uploadedFileHandlerService.DeleteFile(item.FileUrl);
+                _fileHandlerService.DeleteFile(item.FileUrl);
                 _repository.HardDelete(item);
             });
             _repository.Commit();
@@ -84,8 +84,7 @@ namespace KnowYourTurf.Web.Controllers
             var coId = _sessionContext.GetCompanyId();
             var document = input.Item.EntityId > 0 ? _repository.Find<Document>(input.Item.EntityId) : new Document();
             var newDoc = mapToDomain(input, document);
-            var serverDirectory = "/CustomerDocuments/" + coId;
-            document.FileUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, document.Name);
+            document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments");
             var crudManager = _saveEntityService.ProcessSave(newDoc);
             if (input.From == "Field")
             {
@@ -93,7 +92,6 @@ namespace KnowYourTurf.Web.Controllers
                 field.AddDocument(document);
                 crudManager = _saveEntityService.ProcessSave(field, crudManager);
             }
-            crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, newDoc.Name, crudManager);
             
             var notification = crudManager.Finish();
             return Json(notification, "text/plain");

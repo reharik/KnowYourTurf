@@ -1,85 +1,109 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using System.Web;
+using ImageResizer;
 using KnowYourTurf.Core.Services;
-using FubuMVC.Core;
-using xVal.ServerSide;
 
 namespace KnowYourTurf.Web.Services
 {
-    public interface IUploadedFileHandlerService
+    public interface IFileHandlerService
     {
+        string SaveAndReturnUrlForFile(string root);
+        bool DoesImageExist(string url);
         void DeleteFile(string url);
-        ICrudManager SaveUploadedFile(string systemFolder, string fileNameNoExtension, ICrudManager crudManager);
-        string GetUploadedFileUrl(string serverDirectory);
-        string GetUploadedFileUrl(string serverDirectory, string fileNameNoExtension);
     }
 
-    public class UploadedFileHandlerService : IUploadedFileHandlerService
+    public class FileHandlerService : IFileHandlerService
     {
         private readonly ISessionContext _sessionContext;
 
-        public UploadedFileHandlerService(ISessionContext sessionContext)
+        public FileHandlerService(ISessionContext sessionContext)
         {
             _sessionContext = sessionContext;
         }
 
+        public bool DoesImageExist(string url)
+        {
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            request.Method = "HEAD";
+
+            bool exists;
+            try
+            {
+                request.GetResponse();
+                exists = true;
+            }
+            catch
+            {
+                exists = false;
+            }
+            return exists;
+
+        }
+
+        public string SaveAndReturnUrlForFile(string root)
+        {
+            var file = HttpContext.Current.Request.Files.AllKeys.Length > 0 &&
+                   HttpContext.Current.Request.Files[0].ContentLength > 0
+                       ? HttpContext.Current.Request.Files[0]
+                       : null;
+            if (file == null || file.ContentLength <= 0) return null;
+
+            var pathForFile = GetPhysicalPathForFile(root);
+            var exists = Directory.Exists(pathForFile);
+            if (!exists)
+            {
+                Directory.CreateDirectory(pathForFile);
+            }
+
+            var fileExtension = new FileInfo(file.FileName).Extension.ToLower();
+            var generatedFileName = Guid.NewGuid() + fileExtension;
+            if (fileExtension == ".gif" || fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png")
+            {
+                GenerateVersions(file, pathForFile, generatedFileName);
+                generatedFileName = generatedFileName.Substring(0, generatedFileName.LastIndexOf(".")) + ".jpg";
+            }
+            else
+            {
+                file.SaveAs(pathForFile + generatedFileName);
+            }
+            return GetUrlForFile(generatedFileName, root);
+        }
         public void DeleteFile(string url)
         {
             var mapPath = _sessionContext.MapPath(url);
             File.Delete(mapPath);
         }
-
-        public ICrudManager SaveUploadedFile(string systemFolder, string fileNameNoExtension, ICrudManager crudManager)
+        public void GenerateVersions(HttpPostedFile file, string pathForFile, string origFileName)
         {
-            var file = _sessionContext.RetrieveUploadedFile();
-            if (file == null || file.ContentLength <= 0 || crudManager.HasFailingReport()) return crudManager;
-
-            var folderPath = _sessionContext.MapPath(systemFolder);
-            var extension = file.FileName.Substring(file.FileName.LastIndexOf("."));
-            var newName = fileNameNoExtension + extension;
-            string filePath = folderPath + "\\" + GetGeneratedFileName(newName);
-            var exists = Directory.Exists(folderPath);
-            if (!exists)
+            var versions = new Dictionary<string, string>
+                                                      {
+                                                          {"_thumb", "width=100&height=100&crop=auto&format=jpg"},
+                                                          {"", "maxwidth=200&maxheight=200&crop=autoformat=jpg"},
+                                                          {"_large", "maxwidth=400&maxheight=400format=jpg"}
+                                                      };
+            var fileNameNoExtension = origFileName.Substring(0, origFileName.LastIndexOf("."));
+            foreach (var suffix in versions.Keys)
             {
-                Directory.CreateDirectory(folderPath);
+                var appndFileName = fileNameNoExtension + suffix;
+                var fullFilePath = Path.Combine(pathForFile, appndFileName);
+                ImageBuilder.Current.Build(file, fullFilePath, new ResizeSettings(versions[suffix]), false, true);
             }
-            //TODO insert rules engine here
-            var fileExists = File.Exists(filePath);
-            CrudReport crudReport = new CrudReport();
-            if (fileExists)
-            {
-                crudReport.AddErrorInfo(new ErrorInfo("Photo", WebLocalizationKeys.FILE_ALREADY_EXISTS.ToString()));
-                crudManager.AddCrudReport(crudReport);
-                return crudManager;
-            }
-            file.SaveAs(filePath);
-            crudReport.Success = true;
-            crudManager.AddCrudReport(crudReport);
-            return crudManager;
         }
 
-        public string GetUploadedFileUrl(string serverDirectory)
+        private string GetUrlForFile(string fileName, string root)
         {
-            return GetUploadedFileUrl(serverDirectory, "");
+            var companyId = _sessionContext.GetCompanyId();
+            return @"/" + root + @"/" + companyId + @"/" + fileName;
         }
 
-        public string GetUploadedFileUrl(string serverDirectory, string fileNameNoExtension)
+        private string GetPhysicalPathForFile(string root)
         {
-            var file = _sessionContext.RetrieveUploadedFile();
-            if (file == null || file.ContentLength <= 0) return string.Empty;
-            var fileName = file.FileName;
-            if (fileNameNoExtension.IsNotEmpty())
-            {
-                var extension = file.FileName.Substring(file.FileName.LastIndexOf("."));
-                fileName = fileNameNoExtension + extension;
-            }
-            return serverDirectory + "/" + GetGeneratedFileName(fileName);
+            var companyId = _sessionContext.GetCompanyId();
+            return ImageResizer.Util.PathUtils.AppPhysicalPath + root + @"\" + companyId + @"\";
         }
 
-        public string GetGeneratedFileName(string fileName)
-        {
-            var dateTimeForFileName = string.Format("{0:yyyyMMdd-HHmmss}", DateTime.Now);
-            return dateTimeForFileName + fileName;
-        }
     }
 }

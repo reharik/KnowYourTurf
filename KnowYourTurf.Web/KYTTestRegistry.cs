@@ -1,21 +1,16 @@
 using Alpinely.TownCrier;
-using AuthorizeNet;
 using KnowYourTurf.Core;
-using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Domain.Tools;
 using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
 using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Localization;
-using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Menus;
 using KnowYourTurf.Web.Services;
 using FubuMVC.UI;
 using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
-using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Web.Config;
 using MethodFitness.Core;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
@@ -35,13 +30,8 @@ namespace KnowYourTurf.Web.Config
                          x.TheCallingAssembly();
                          x.AssemblyContainingType(typeof (CoreLocalizationKeys));
                          x.AssemblyContainingType(typeof (MergedEmailFactory));
-                         x.AssemblyContainingType(typeof(Gateway));
                          x.WithDefaultConventions();
                      });
-            For<IGateway>().Use<Gateway>().Ctor<string>("apiLogin").EqualToAppSetting("Authorize.Net_apiLogin")
-                .Ctor<string>("transactionKey").EqualToAppSetting("Authorize.Net_TransactionKey")
-                .Ctor<bool>("testMode").EqualToAppSetting("Authorize.Net_testMode");
-
             For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions>();
             For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
             For<IElementNamingConvention>().Use<KnowYourTurfElementNamingConvention>();
