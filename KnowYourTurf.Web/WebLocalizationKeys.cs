@@ -45,6 +45,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken TASK_CALENDAR = new WebLocalizationKeys("TASK_CALENDAR", "Task Calendar");
         public static readonly StringToken EVENTS = new WebLocalizationKeys("EVENTS", "Events");
         public static readonly StringToken PURCHASE_ORDERS = new WebLocalizationKeys("PURCHASE_ORDERS", "Purchase Orders");
+        public static readonly StringToken COMPLETED_PURCHASE_ORDERS = new WebLocalizationKeys("COMPLETED_PURCHASE_ORDERS", "Completed Purchase Orders");
         public static readonly StringToken ADMIN = new WebLocalizationKeys("ADMIN", "Admin");
         public static readonly StringToken CALCULATORS = new WebLocalizationKeys("CALCULATORS", "Calculators");
         public static readonly StringToken EMAIL_TEMPLATES = new WebLocalizationKeys("EMAIL_TEMPLATES", "Email Templates");
@@ -200,6 +201,9 @@ namespace KnowYourTurf.Web
         public static readonly StringToken COULD_NOT_DELETE_EVENTTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EVENTTYPE", "Could not delete one or more item because it is being used in one or more Event");
         public static readonly StringToken COULD_NOT_DELETE_PHOTOCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_PHOTOCATEGORY", "Could not delete one or more item because it is being used in one or more Photo");
         public static readonly StringToken COULD_NOT_DELETE_DOCUMENTCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_DOCUMENTCATEGORY", "Could not delete one or more item because it is being used in one or more Document");
+
+        public static readonly StringToken CURRENT = new WebLocalizationKeys("CURRENT", "Current");
+        public static readonly StringToken COMPLETED = new WebLocalizationKeys("COMPLETED", "Completed");
 
     
 

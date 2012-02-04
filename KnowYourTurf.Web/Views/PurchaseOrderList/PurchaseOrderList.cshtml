@@ -1,4 +1,4 @@
-﻿@model ListViewModel
+﻿@model KnowYourTurf.Web.Controllers.PurchaseOrderListViewModel
 @using KnowYourTurf.Core
 @using KnowYourTurf.Web
 @using HtmlTags
@@ -13,8 +13,11 @@
     });
 }
 @section ExtraContentHeaderButtons{
-    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+    @if(!Model.Completed)
+    {
+        <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
         <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+    }
 }
 <table id="gridContainer" class="scroll"></table>
 <div id="pager" class="scroll" style="text-align:center;"></div>

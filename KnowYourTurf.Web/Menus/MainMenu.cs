@@ -58,7 +58,11 @@ namespace KnowYourTurf.Web.Menus
                             .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.FERTILIZERS, "ProductType=Fertilizer")
                             .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.CHEMICALS, "ProductType=Chemical")
                         .EndChildren()
-                        .CreateNode<PurchaseOrderListController>(c => c.PurchaseOrderList(), WebLocalizationKeys.PURCHASE_ORDERS)
+                        .CreateNode(WebLocalizationKeys.PURCHASE_ORDERS)
+                        .HasChildren()
+                            .CreateNode<PurchaseOrderListController>(c => c.PurchaseOrderList(null), WebLocalizationKeys.CURRENT)
+                            .CreateNode<PurchaseOrderListController>(c => c.PurchaseOrderList(null), WebLocalizationKeys.COMPLETED).addUrlParameter("Completed", "true")
+                        .EndChildren()
                     .EndChildren()
                 .MenuTree(withoutPermissions);
         }

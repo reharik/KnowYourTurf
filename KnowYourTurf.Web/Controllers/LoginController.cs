@@ -60,11 +60,13 @@ namespace KnowYourTurf.Web.Controllers
                     var user = _securityDataService.AuthenticateForUserId(input.UserName, input.Password);
                     if (user != null)
                     {
-                        redirectUrl = _authenticationContext.ThisUserHasBeenAuthenticated(user, input.RememberMe);
+                        _authenticationContext.ThisUserHasBeenAuthenticated(user, input.RememberMe);
                         notification.Success = true;
                         notification.Message = string.Empty;
                         notification.Redirect = true;
-                        notification.RedirectUrl = redirectUrl;
+                        notification.RedirectUrl = user.UserRoles.Any(x=>x.Name=="Facilities")
+                            ?"/KnowYourTurf/Home#/EventCalendar/EventCalendar"
+                            : "KnowYourTurf/Home#/EmployeeDashboard/ViewEmployee/"+user.EntityId;
                     }
                 }
             }

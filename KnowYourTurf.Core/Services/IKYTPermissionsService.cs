@@ -107,6 +107,7 @@ namespace KnowYourTurf.Core.Services
                 .Save();
             _permissionsBuilderService.Allow("/MenuItem/Events").For(UserType.Facilities.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/KnowYourTurfController").For(UserType.Facilities.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/OrthogonalController").For(UserType.Facilities.Key).OnEverything().Level(1).Save();
 
         }
     }

@@ -47,7 +47,7 @@ namespace KnowYourTurf.Web.Controllers
                 Item = purchaseOrder,
                 VendorList = vendors,
                 VendorId = purchaseOrder.EntityId > 0 ? purchaseOrder.Vendor.EntityId : 0,
-                ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrderList()),
+                ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrderList(null)),
                 CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)),
                 DeleteMultipleUrl = deleteMany,
                 GridDefinition = _purchaseOrderSelectorGrid.GetGridDefinition(url),

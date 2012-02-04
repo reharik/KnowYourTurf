@@ -724,6 +724,7 @@
     <None Include="knowyourturf_testDataSet.xss">
       <DependentUpon>knowyourturf_testDataSet.xsd</DependentUpon>
     </None>
+    <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -1,0 +1,60 @@
+﻿@model UserViewModel
+@using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+
+
+@MvcHtmlString.Create(FormFor<FacilitiesController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+@MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
+@MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.FirstName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.LastName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Password).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Email).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.PhoneMobile).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Status).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            <div id="newImage">
+                <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
+            </div>
+        </div>
+    </div>
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Address2).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.City).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.State).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.ZipCode).ToHtmlTag()
+        </div>
+        
+    </div>
+@EndForm()
+

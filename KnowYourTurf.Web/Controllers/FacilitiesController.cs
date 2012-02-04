@@ -7,6 +7,7 @@ using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
 using System.Linq;
+using Rhino.Security.Interfaces;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
@@ -17,16 +18,18 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISaveEntityService _saveEntityService;
         private readonly IFileHandlerService _fileHandlerService;
         private readonly ISessionContext _sessionContext;
+        private readonly IAuthorizationRepository _authorizationRepository;
 
         public FacilitiesController(IRepository repository,
             ISaveEntityService saveEntityService,
             IFileHandlerService fileHandlerService,
-            ISessionContext sessionContext)
+            ISessionContext sessionContext, IAuthorizationRepository authorizationRepository)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _fileHandlerService = fileHandlerService;
             _sessionContext = sessionContext;
+            _authorizationRepository = authorizationRepository;
         }
 
         public ActionResult Facilities(ViewModel input)
@@ -83,7 +86,7 @@ namespace KnowYourTurf.Web.Controllers
                 facilities.Company = company;
             }
             facilities = mapToDomain(input, facilities);
-
+            mapRolesToGroups(facilities);
             if (input.DeleteImage)
             {
                 _fileHandlerService.DeleteFile(facilities.ImageUrl);
@@ -118,8 +121,20 @@ namespace KnowYourTurf.Web.Controllers
                 Status = facilitiesModel.UserLoginInfo.Status,
                 UserType = UserType.Facilities.ToString(),
             };
-            facilities.AddUserRole(new UserRole{Name = UserType.Facilities.ToString()});
+            var role = _repository.Query<UserRole>(x => x.Name == UserType.Facilities.ToString()).FirstOrDefault();
+            facilities.AddUserRole(role);
             return facilities;
+        }
+
+        private void mapRolesToGroups(User facilities)
+        {
+            _authorizationRepository.DetachUserFromGroup(facilities, UserType.Administrator.Key);
+            _authorizationRepository.DetachUserFromGroup(facilities, UserType.Employee.Key);
+            _authorizationRepository.DetachUserFromGroup(facilities, UserType.Facilities.Key);
+            _authorizationRepository.DetachUserFromGroup(facilities, UserType.KYTAdmin.Key);
+            _authorizationRepository.DetachUserFromGroup(facilities, UserType.MultiTenant.Key);
+
+            _authorizationRepository.AssociateUserWith(facilities, UserType.Facilities.Key);
         }
     }
 }

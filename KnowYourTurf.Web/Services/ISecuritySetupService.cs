@@ -129,7 +129,7 @@ namespace KnowYourTurf.Web.Services
             admins.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Administrator.ToString()));
             var facilities = _repository.Query<User>(x => x.UserRoles.Any(y => y.Name == SecurityUserGroups.Facilities.ToString()));
             facilities.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Facilities.ToString()));
-            var employees = _repository.FindAll<User>();
+            var employees = _repository.Query<User>(x => !x.UserRoles.Any(y => y.Name == SecurityUserGroups.Facilities.ToString()));
             employees.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Employee.ToString()));
         }
 

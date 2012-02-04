@@ -146,3 +146,42 @@ System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'User'.
 2012-02-04 13:09:41,358 [21] ERROR - Invalid object name 'User'.
 2012-02-04 13:09:41,373 [21] ERROR - Invalid object name 'User'.
 2012-02-04 13:09:41,373 [21] ERROR - Invalid object name 'User'.
+2012-02-04 15:13:38,267 [10] ERROR - Could not synchronize database state with session
+NHibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing. Type: KnowYourTurf.Core.Domain.UserRole, Entity: KnowYourTurf.Core.Domain.UserRole
+   at NHibernate.Engine.ForeignKeys.GetEntityIdentifierIfNotUnsaved(String entityName, Object entity, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ForeignKeys.cs:line 264
+   at NHibernate.Type.EntityType.GetIdentifier(Object value, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Type\EntityType.cs:line 166
+   at NHibernate.Type.ManyToOneType.NullSafeSet(IDbCommand st, Object value, Int32 index, Boolean[] settable, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Type\ManyToOneType.cs:line 48
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.WriteElement(IDbCommand st, Object elt, Int32 i, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Persister\Collection\AbstractCollectionPersister.cs:line 747
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.PerformInsert(Object ownerId, IPersistentCollection collection, IExpectation expectation, Object entry, Int32 index, Boolean useBatch, Boolean callable, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Persister\Collection\AbstractCollectionPersister.cs:line 1981
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Persister\Collection\AbstractCollectionPersister.cs:line 1096
+   at NHibernate.Action.CollectionRecreateAction.Execute() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Action\CollectionRecreateAction.cs:line 33
+   at NHibernate.Engine.ActionQueue.Execute(IExecutable executable) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 136
+   at NHibernate.Engine.ActionQueue.ExecuteActions(IList list) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 126
+   at NHibernate.Engine.ActionQueue.ExecuteActions() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 173
+   at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\AbstractFlushingEventListener.cs:line 241
+2012-02-04 15:15:16,222 [23] ERROR - Could not synchronize database state with session
+NHibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing. Type: KnowYourTurf.Core.Domain.UserRole, Entity: KnowYourTurf.Core.Domain.UserRole
+   at NHibernate.Engine.ForeignKeys.GetEntityIdentifierIfNotUnsaved(String entityName, Object entity, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ForeignKeys.cs:line 264
+   at NHibernate.Type.EntityType.GetIdentifier(Object value, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Type\EntityType.cs:line 159
+   at NHibernate.Type.ManyToOneType.NullSafeSet(IDbCommand st, Object value, Int32 index, Boolean[] settable, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Type\ManyToOneType.cs:line 48
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.WriteElement(IDbCommand st, Object elt, Int32 i, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Persister\Collection\AbstractCollectionPersister.cs:line 747
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.PerformInsert(Object ownerId, IPersistentCollection collection, IExpectation expectation, Object entry, Int32 index, Boolean useBatch, Boolean callable, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Persister\Collection\AbstractCollectionPersister.cs:line 1981
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Persister\Collection\AbstractCollectionPersister.cs:line 1096
+   at NHibernate.Action.CollectionRecreateAction.Execute() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Action\CollectionRecreateAction.cs:line 31
+   at NHibernate.Engine.ActionQueue.Execute(IExecutable executable) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 136
+   at NHibernate.Engine.ActionQueue.ExecuteActions(IList list) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 126
+   at NHibernate.Engine.ActionQueue.ExecuteActions() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 173
+   at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\AbstractFlushingEventListener.cs:line 241
+2012-02-04 15:15:44,996 [17] ERROR - Could not synchronize database state with session
+NHibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing. Type: KnowYourTurf.Core.Domain.UserRole, Entity: KnowYourTurf.Core.Domain.UserRole
+   at NHibernate.Engine.ForeignKeys.GetEntityIdentifierIfNotUnsaved(String entityName, Object entity, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ForeignKeys.cs:line 264
+   at NHibernate.Type.EntityType.GetIdentifier(Object value, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Type\EntityType.cs:line 159
+   at NHibernate.Type.ManyToOneType.NullSafeSet(IDbCommand st, Object value, Int32 index, Boolean[] settable, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Type\ManyToOneType.cs:line 48
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.WriteElement(IDbCommand st, Object elt, Int32 i, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Persister\Collection\AbstractCollectionPersister.cs:line 747
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.PerformInsert(Object ownerId, IPersistentCollection collection, IExpectation expectation, Object entry, Int32 index, Boolean useBatch, Boolean callable, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Persister\Collection\AbstractCollectionPersister.cs:line 1981
+   at NHibernate.Persister.Collection.AbstractCollectionPersister.Recreate(IPersistentCollection collection, Object id, ISessionImplementor session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Persister\Collection\AbstractCollectionPersister.cs:line 1096
+   at NHibernate.Action.CollectionRecreateAction.Execute() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Action\CollectionRecreateAction.cs:line 31
+   at NHibernate.Engine.ActionQueue.Execute(IExecutable executable) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 136
+   at NHibernate.Engine.ActionQueue.ExecuteActions(IList list) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 126
+   at NHibernate.Engine.ActionQueue.ExecuteActions() in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Engine\ActionQueue.cs:line 173
+   at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\Event\Default\AbstractFlushingEventListener.cs:line 241

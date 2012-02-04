@@ -21,6 +21,7 @@ namespace KnowYourTurf.Core.Html.Menu
         IMenuBuilder CreateNode(StringToken text, string url, string cssClass = null);
         IMenuBuilder CreateNode(StringToken text, string cssClass = null);
 
+        IMenuBuilder addUrlParameter(string name, string value);
     }
 
     public class MenuBuilder : IMenuBuilder
@@ -51,6 +52,14 @@ namespace KnowYourTurf.Core.Html.Menu
         {
             var lastItem = _parentItems.LastOrDefault();
             _parentItems.Remove(lastItem);
+            return this;
+        }
+
+        public IMenuBuilder addUrlParameter(string name, string value)
+        {
+            var _itemList = getList();
+            var lastItem = _itemList.LastOrDefault();
+            lastItem.Url = lastItem.Url + "?" + name + "=" + value;
             return this;
         }
 

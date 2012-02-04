@@ -22,10 +22,10 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<User> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.FullName)
-                .ForAction<FacilitiesDashboardController>(x => x.ViewFacilities(null))
-                .ToPerformAction(ColumnAction.Redirect)
+                .ForAction<FacilitiesController>(x => x.Facilities(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
                 .IsSortable(false)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.PhoneMobile);
             GridBuilder.DisplayFor(x => x.Email);
             return this;
