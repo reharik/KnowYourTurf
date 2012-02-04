@@ -32,5 +32,24 @@ kyt.TaskCalendarController = kyt.CalendarController.extend({
         this.views.employeeToken= new kyt.TokenView(employeeTokenOptions);
         this.views.equipmentToken = new kyt.TokenView(equipmentTokenOptions);
 
+    },
+    eventClick:function(calEvent, jsEvent, view) {
+        $("#dialogHolder").remove();
+        var data = {"EntityId": calEvent.EntityId, popup:true};
+        var builder = kyt.popupButtonBuilder.builder("displayModule");
+        builder.addButton("Delete", $.proxy(this.deleteItem,this));
+        builder.addUpdateButton();
+        builder.addButton("Copy Task",$.proxy(this.copyItem,this));
+        builder.addCancelButton();
+
+       $("#masterArea").after("<div id='dialogHolder'/>");
+        var moduleOptions = {
+            id:"displayModule",
+            el:"#dialogHolder",
+            url: this.options.DisplayUrl,
+            data:data,
+            buttons:builder.getButtons()
+        };
+        this.modules.popupDisplay = new kyt.AjaxPopupDisplayModule(moduleOptions);
     }
 });

@@ -136,8 +136,11 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Delete(ViewModel input)
         {
             var task = _repository.Find<Task>(input.EntityId);
-            _repository.HardDelete(task);
-            _repository.UnitOfWork.Commit();
+            if (task.ScheduledStartTime > DateTime.Now)
+            {
+                _repository.HardDelete(task);
+                _repository.UnitOfWork.Commit();
+            }
             return null;
         }
 

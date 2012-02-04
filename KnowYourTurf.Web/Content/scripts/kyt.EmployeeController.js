@@ -12,7 +12,7 @@ kyt.EmployeeController = kyt.CrudController.extend({
     }, kyt.Controller.prototype.events),
 
     registerAdditionalSubscriptions:function(){
-        $.subscribe('/contentLevel/form_editModule/pageLoaded', $.proxy(this.loadTokenizers,this), this.cid);
+        $.subscribe('/contentLevel/form_mainForm/pageLoaded', $.proxy(this.loadTokenizers,this), this.cid);
     },
 
     loadTokenizers: function(formOptions){

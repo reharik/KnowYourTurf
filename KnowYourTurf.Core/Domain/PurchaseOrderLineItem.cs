@@ -24,7 +24,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual bool Completed { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }
         public virtual DateTime? DateRecieved { get; set; }
-        [ValidateNonEmpty,ValidateInteger]
+        [ValidateInteger]
         public virtual int? SizeOfUnit { get; set; }
         [ValidateNonEmpty, ValueOf(typeof(UnitType))]
         public virtual string UnitType { get; set; }

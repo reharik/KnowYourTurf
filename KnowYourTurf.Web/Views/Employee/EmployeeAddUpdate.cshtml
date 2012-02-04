@@ -77,7 +77,8 @@
             @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().LabelDisplay(WebLocalizationKeys.USER_ROLES).OperationName("/KYTAdmin").ToHtmlTag()
+            @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().RootId("rolesInputRoot").LabelDisplay(WebLocalizationKeys.USER_ROLES).ToHtmlTag()
+            @*            OperationName("/KYTAdmin").ToHtmlTag()*@
         </div>
         <div class="fieldRow">
             <div id="newImage">

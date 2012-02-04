@@ -13,6 +13,7 @@ kyt.AjaxDisplayView = Backbone.View.extend({
     initialize: function(){
         this.options = $.extend({},kyt.displayDefaults,this.options);
         this.id=this.options.id;
+        this.el=this.options.el;
     },
     render:function(){
         kyt.repository.ajaxGet(this.options.url, this.options.data, $.proxy(this.renderCallback,this));

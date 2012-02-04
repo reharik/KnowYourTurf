@@ -26,6 +26,7 @@ namespace KnowYourTurf.Core
 
         public string DisplayUrl { get; set; }
 
+        public string DeleteUrl { get; set; }
     }
 
     public class CalendarEvent

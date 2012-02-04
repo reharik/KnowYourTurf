@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using FluentNHibernate.Utils;
-using FubuMVC.Core;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
@@ -175,7 +174,15 @@ namespace KnowYourTurf.Web.Controllers
             employee.UserLoginInfo.LoginName = employeeModel.Email;
             employee.UserLoginInfo.Status = employeeModel.UserLoginInfo.Status;
             employee.UserLoginInfo.UserType = UserType.Employee.ToString();
-            _updateCollectionService.UpdateFromCSV(employee.UserRoles,model.RolesInput,employee.AddUserRole,employee.RemoveUserRole);
+            if (model.RolesInput.IsEmpty())
+            {
+                var emp = _repository.Query<UserRole>(x => x.Name == UserType.Employee.ToString()).FirstOrDefault();
+                employee.AddUserRole(emp);
+            }
+            else
+            {
+                _updateCollectionService.UpdateFromCSV(employee.UserRoles, model.RolesInput, employee.AddUserRole,employee.RemoveUserRole);
+            }
             return employee;
         }
     }

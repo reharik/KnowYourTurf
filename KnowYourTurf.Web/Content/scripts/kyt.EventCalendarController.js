@@ -54,6 +54,7 @@ kyt.CalendarController = kyt.Controller.extend({
     },
 
     eventClick:function(calEvent, jsEvent, view) {
+        $("#dialogHolder").remove();
         var data = {"EntityId": calEvent.EntityId, popup:true};
         var builder = kyt.popupButtonBuilder.builder("displayModule");
         builder.addButton("Delete", $.proxy(this.deleteItem,this));
@@ -74,6 +75,7 @@ kyt.CalendarController = kyt.Controller.extend({
     copyItem:function(){
         var entityId = $("[name$='EntityId']").val();
         var data = {"EntityId":entityId,"Copy":true};
+        this.displayCancel();
         this.editEvent(this.options.AddUpdateUrl,data);
     },
 
@@ -81,7 +83,7 @@ kyt.CalendarController = kyt.Controller.extend({
         if (confirm("Are you sure you would like to delete this Item?")) {
             ///// do delete here!
         var entityId = $("#EntityId").val();
-        kyt.repository.ajaxGet(this.options.deleteUrl,{"EntityId":entityId}, $.proxy(function(){
+        kyt.repository.ajaxGet(this.options.DeleteUrl,{"EntityId":entityId}, $.proxy(function(){
             this.modules.popupDisplay.destroy();
             this.views.calendarView.reload();},this));
         }
