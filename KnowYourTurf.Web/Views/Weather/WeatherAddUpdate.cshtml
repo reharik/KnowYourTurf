@@ -5,18 +5,34 @@
 @using KnowYourTurf.Web.Controllers
 @using KnowYourTurf.Core.Html.Expressions
 @{
-    Layout = "~/Views/Shared/_popupLayout.cshtml";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
        
 
             @MvcHtmlString.Create(FormFor<WeatherController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.Weather.EntityId).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Weather.DewPoint).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Weather.EvaporationRate).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Weather.HighTemperature).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Weather.LowTemperature).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Weather.Humidity).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Weather.RainPrecipitation).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Weather.WindSpeed).ToString())
-            @MvcHtmlString.Create(EndForm())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.DewPoint).ToHtmlTag()        
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.EvaporationRate).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.HighTemperature).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.LowTemperature).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.Humidity).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.RainPrecipitation).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Weather.WindSpeed).ToHtmlTag()
+        </div>
+    </div>
+            @EndForm()
 

@@ -4,7 +4,6 @@ using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -25,8 +24,9 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl =  UrlContext.GetUrlForAction<FieldController>(x => x.AddEdit(null)),
-                ListDefinition = _fieldListGrid.GetGridDefinition(url, WebLocalizationKeys.FIELDS)
+                AddUpdateUrl =  UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)),
+                GridDefinition = _fieldListGrid.GetGridDefinition(url),
+                Title = WebLocalizationKeys.FIELDS.ToString()
             };
             return View(model);
         }

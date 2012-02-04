@@ -64,7 +64,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             tag.Attr("name", name);
             addInternalCssClasses(_htmlRoot, tag);
             if (_elementId.IsNotEmpty()) tag.Id(_elementId);
-            _htmlRoot.Child(tag);
+            _htmlRoot.Children.Add(tag);
             return _htmlRoot;
         }
 

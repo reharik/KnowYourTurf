@@ -4,12 +4,26 @@
 @using KnowYourTurf.Core.Html.FubuUI
 
 @{
-    Layout = "";
+    Layout = "~/Views/Shared/_DisplayLayout.cshtml";
 }
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Material.Name).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Material.Description).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.InventoryMaterial.Quantity).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.InventoryMaterial.SizeOfUnit).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.InventoryMaterial.UnitType).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.InventoryMaterial.LastVendor.Company).LabelDisplay(WebLocalizationKeys.PREVIOUS_VENDOR).ToString())
+  <div class="col left">
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Material.Name).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Material.Description).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Item.Quantity).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Item.SizeOfUnit).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Item.UnitType).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Item.LastVendor.Company).LabelDisplay(WebLocalizationKeys.PREVIOUS_VENDOR).ToHtmlTag()
+         </div>
+    </div>
 

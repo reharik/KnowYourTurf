@@ -1,0 +1,17 @@
+﻿@using KnowYourTurf.Web.Controllers
+@using HtmlTags
+@model KnowYourTurfViewModel
+
+@{
+    Layout = "~/Views/Shared/_ContentAreaLayout.cshtml";
+}
+@section HeaderScripts{
+}
+
+@section HeaderJavascript{
+    var firstTimeUrl=@MvcHtmlString.Create(JsonUtil.ToJson(Model.FirstTimeUrl));
+    var welcome =@MvcHtmlString.Create(JsonUtil.ToJson(Model.mode))=="new";
+    var reset =@MvcHtmlString.Create(JsonUtil.ToJson(Model.mode))=="reset";
+    var helper=@MvcHtmlString.Create(JsonUtil.ToJson(Model.c));
+    var un=@MvcHtmlString.Create(JsonUtil.ToJson(Model.u));
+}

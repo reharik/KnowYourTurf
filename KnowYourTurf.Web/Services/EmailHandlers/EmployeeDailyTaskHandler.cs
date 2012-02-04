@@ -15,7 +15,7 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
         public EmailTemplateDTO CreateModel(EmailJob emailJob, User subscriber)
         {
             var employee = subscriber;
-            var tasks = employee.GetTasks().Where(x=>x.ScheduledDate.Value.Date == DateTime.Now.Date);
+            var tasks = employee.Tasks.Where(x=>x.ScheduledDate.Value.Date == DateTime.Now.Date);
             var tasksHtml = buildHtmlForTasks(tasks);
             var tokenValues = new Dictionary<string, string>
                       {
@@ -46,10 +46,10 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
                                task += x.ScheduledEndTime.HasValue? " To " + x.ScheduledEndTime.Value.ToShortTimeString():"";
                                task += ": " + x.TaskType.Name + " at " + x.Field.Name;
                                liDiv.Text(task);
-                               li.AddChildren(liDiv);
-                               ul.AddChildren(li);
+                               li.Children.Add(liDiv);
+                               ul.Children.Add(li);
                            });
-            rootTag.AddChildren(ul);
+            rootTag.Children.Add(ul);
             return rootTag;
         }
     }

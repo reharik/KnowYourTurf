@@ -1,3 +1,4 @@
+using System;
 using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Web
@@ -13,16 +14,20 @@ namespace KnowYourTurf.Web
         {
         }
 
+        public static readonly StringToken DASHBOARD = new WebLocalizationKeys("DASHBOARD", "Dashboard");
         public static readonly StringToken LOGIN_KEY = new WebLocalizationKeys("LOG_IN", "Log In");
         public static readonly StringToken LOG_OUT = new WebLocalizationKeys("LOG_OUT", "Logout");
+        public static readonly StringToken SIGN_IN = new WebLocalizationKeys("SIGN_IN", "Sign In");
         public static readonly StringToken WELCOME = new WebLocalizationKeys("WELCOME", "Welcome ,");
         public static readonly StringToken INADMINMODE = new WebLocalizationKeys("INADMINMODE", "INADMINMODE");
         public static readonly StringToken USER_ROLES = new WebLocalizationKeys("USER_ROLES", "UserRoles");
         public static readonly StringToken SAVE = new WebLocalizationKeys("SAVE", "Save");
+        public static readonly StringToken CANCEL = new WebLocalizationKeys("CANCEL", "Cancel");
         public static readonly StringToken ACCOUNT_LOGIN = new WebLocalizationKeys("ACCOUNT_LOGIN", "Account LogIn");
         public static readonly StringToken INVALID_USERNAME_OR_PASSWORD = new WebLocalizationKeys("INVALID_USERNAME_OR_PASSWORD", "Invalid Username or Password");
         public static readonly StringToken PLEASE_ENTER_YOUR_USERNAME_AND_PASSWORD_BELOW_KEY = new WebLocalizationKeys("PLEASE_ENTER_YOUR_USERNAME_AND_PASSWORD_BELOW_KEY", "Please enter your Username and Password below");
-        
+        public static readonly StringToken FORGOT_YOUR_PASSWORD = new WebLocalizationKeys("FORGOT_YOUR_PASSWORD", "Forgot your password?");
+
         public static readonly StringToken HOME = new WebLocalizationKeys("HOME", "Home");
         public static readonly StringToken EMPLOYEES = new WebLocalizationKeys("EMPLOYEES", "Employees");
         public static readonly StringToken ADMINS = new WebLocalizationKeys("ADMINS", "Admins");
@@ -51,7 +56,7 @@ namespace KnowYourTurf.Web
 
         public static readonly StringToken VENDOR_INFORMATION = new WebLocalizationKeys("VENDOR_INFORMATION", "Vendor Information");
         public static readonly StringToken NEW_VENDOR = new WebLocalizationKeys("NEW_VENDOR", "Add New Vendor");
-        
+
         public static readonly StringToken VENDOR_CONTACT_INFORMATION = new WebLocalizationKeys("VENDOR_CONTACT_INFORMATION", "Vendor Contact Information");
         public static readonly StringToken NEW_VENDOR_CONTACT = new WebLocalizationKeys("NEW_VENDOR_CONTACT", "Add New Vendor Contact");
 
@@ -118,6 +123,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken VALID_RANGE_REQUIRED = new WebLocalizationKeys("VALID_RANGE_REQUIRED", "the {0} field must be between {1} and {2}.");
         public static readonly StringToken POWERED_BY_KEY = new WebLocalizationKeys("POWERED_BY_KEY", "Powered by ");
 
+        public static readonly StringToken DATE = new WebLocalizationKeys("DATE", "Date ");
         public static readonly StringToken FIELD_NAME = new WebLocalizationKeys("FIELD_NAME", "Field Name");
         public static readonly StringToken EMPLOYEE_NAMES = new WebLocalizationKeys("EMPLOYEE_NAMES", "Employee Names");
         public static readonly StringToken PO_NUMBER = new WebLocalizationKeys("PO_NUMBER", "PO Number");
@@ -164,18 +170,38 @@ namespace KnowYourTurf.Web
         public static readonly StringToken NEW_PHOTO = new WebLocalizationKeys("NEW_PHOTO", "Add New Photo");
         public static readonly StringToken PHOTO_INFORMATION = new WebLocalizationKeys("PHOTO_INFORMATION", "Photo Information");
         public static readonly StringToken ADD_ITEM_TO_PO = new WebLocalizationKeys("ADD_ITEM_TO_PO", "Add item to the purchase order");
-         public static readonly StringToken VIEW_FILE = new WebLocalizationKeys("VIEW_FILE", "View File");
-         public static readonly StringToken ADMINISTRATOR_INFORMATION = new WebLocalizationKeys("ADMINISTRATOR_INFORMATION", "Administrator Information");
-         public static readonly StringToken ADD_NEW_ADMINISTRATOR = new WebLocalizationKeys("ADD_NEW_ADMINISTRATOR", "Add New Administrator");
+        public static readonly StringToken VIEW_FILE = new WebLocalizationKeys("VIEW_FILE", "View File");
+        public static readonly StringToken ADMINISTRATOR_INFORMATION = new WebLocalizationKeys("ADMINISTRATOR_INFORMATION", "Administrator Information");
+        public static readonly StringToken ADD_NEW_ADMINISTRATOR = new WebLocalizationKeys("ADD_NEW_ADMINISTRATOR", "Add New Administrator");
 
 
-         public static readonly StringToken COMMIT = new WebLocalizationKeys("COMMIT", "Commit");
-         public static readonly StringToken RETURN = new WebLocalizationKeys("RETURN", "Return");
-         public static readonly StringToken SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM = new WebLocalizationKeys("SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM", "Select A Color To Associate With This Field");
+        public static readonly StringToken COMMIT = new WebLocalizationKeys("COMMIT", "Commit");
+        public static readonly StringToken RETURN = new WebLocalizationKeys("RETURN", "Return");
+        public static readonly StringToken SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM = new WebLocalizationKeys("SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM", "Select A Color To Associate With This Field");
 
-         public static readonly StringToken NEW_FACILITIES = new WebLocalizationKeys("NEW_FACILITIES", "New Facilities");
+        public static readonly StringToken NEW_FACILITIES = new WebLocalizationKeys("NEW_FACILITIES", "New Facilities");
+        public static readonly StringToken ERROR_UNEXPECTED = new WebLocalizationKeys("ERROR_UNEXPECTED", "An Unexpected Error Has Occured.");
+        public static readonly StringToken ADMIN_TOOLS = new WebLocalizationKeys("ADMIN_TOOLS", "Admin Tools");
+
+        public static readonly StringToken REMOVE = new WebLocalizationKeys("REMOVE", "Remove");
+        public static readonly StringToken CLOSE = new WebLocalizationKeys("CLOSE", "Close");
+        public static readonly StringToken NEW = new WebLocalizationKeys("NEW", "New");
+        public static readonly StringToken YOU_HAVE_NOT_ADDED_ANY = new WebLocalizationKeys("YOU_HAVE_NOT_ADDED_ANY", "You have not added any {0} ");
+        public static readonly StringToken SELECT_ONE_OR_MORE_OR = new WebLocalizationKeys("SELECT_ONE_OR_MORE", "Select one or more or ...");
+        public static readonly StringToken ADD_A_NEW = new WebLocalizationKeys("ADD_A_NEW", "Add a new {0}");
+        public static readonly StringToken DATE_ADDED = new WebLocalizationKeys("DATE_ADDED", "Date Added {0}");
+        public static readonly StringToken PO_Number = new WebLocalizationKeys("PO_Number", "PO Number");
+        public static readonly StringToken COMMIT_PURCHASE_ORDER = new WebLocalizationKeys("COMMIT_PURCHASE_ORDER", "Commit Purchase Order");
+        public static readonly StringToken RECEIVE_PURCHASE_ORDER_ITEM = new WebLocalizationKeys("RECEIVE_PURCHASE_ORDER_ITEM", "Recieve Purchase Order Item");
+
+        public static readonly StringToken COULD_NOT_DELETE_FOR_TASK = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_TASK", "Could not delete one or more item because it is being used in one or more Task");
+        public static readonly StringToken COULD_NOT_DELETE_FOR_VENDOR = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_VENDOR", "Could not delete one or more item because it is being used by one or more Vendor");
+        public static readonly StringToken COULD_NOT_DELETE_FOR_PURCHASEORDER = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_PURCHASEORDER", "Could not delete one or more item because it is being used in one or more Purchase Order");
+        public static readonly StringToken COULD_NOT_DELETE_EVENTTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EVENTTYPE", "Could not delete one or more item because it is being used in one or more Event");
+        public static readonly StringToken COULD_NOT_DELETE_PHOTOCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_PHOTOCATEGORY", "Could not delete one or more item because it is being used in one or more Photo");
+        public static readonly StringToken COULD_NOT_DELETE_DOCUMENTCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_DOCUMENTCATEGORY", "Could not delete one or more item because it is being used in one or more Document");
+
     
-    
-    
+
     }
-}   
+}

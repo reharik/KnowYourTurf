@@ -107,14 +107,14 @@ namespace KnowYourTurf.Core.Enums
     }
 
     [Serializable]
-    public class UserRole : Enumeration
+    public class UserType : Enumeration
     {
-        public static readonly UserRole Empty = new UserRole { IsActive = false, Key = "" };
-        public static readonly UserRole Employee = new UserRole { IsActive = true, Key = "Employee" };
-        public static readonly UserRole Administrator = new UserRole { IsActive = true, Key = "Administrator" };
-        public static readonly UserRole Facilities = new UserRole { IsActive = true, Key = "Facilities" };
-        public static readonly UserRole MultiTenant = new UserRole { IsActive = true, Key = "MultiTenant" };
-        public static readonly UserRole KYTAdmin = new UserRole { IsActive = true, Key = "KYTAdmin" };
+        public static readonly UserType Empty = new UserType { IsActive = false, Key = "" };
+        public static readonly UserType Employee = new UserType { IsActive = true, Key = "Employee" };
+        public static readonly UserType Administrator = new UserType { IsActive = true, Key = "Administrator" };
+        public static readonly UserType Facilities = new UserType { IsActive = true, Key = "Facilities" };
+        public static readonly UserType MultiTenant = new UserType { IsActive = true, Key = "MultiTenant" };
+        public static readonly UserType KYTAdmin = new UserType { IsActive = true, Key = "KYTAdmin" };
     }
 
     [Serializable]
@@ -147,4 +147,22 @@ namespace KnowYourTurf.Core.Enums
         public static readonly DocumentFileType vsd = new DocumentFileType { IsActive = true, Key = "vsd", Value = "Microsoft Visio" };
         public static readonly DocumentFileType txt = new DocumentFileType { IsActive = true, Key = "txt", Value = "Text File" };
     }
+
+    [Serializable]
+    public class AreaName : Enumeration
+    {
+        public static readonly AreaName Empty = new AreaName { IsActive = false, Key = "" };
+    }
+
+    [Serializable]
+    public class SecurityUserGroups : Enumeration
+    {
+        public static readonly SecurityUserGroups Empty = new SecurityUserGroups { IsActive = false, Key = "" };
+        public static readonly SecurityUserGroups Administrator = new SecurityUserGroups { IsActive = true, Key = "Administrator" };
+        public static readonly SecurityUserGroups Employee = new SecurityUserGroups { IsActive = true, Key = "Employee" };
+        public static readonly SecurityUserGroups Facilities = new SecurityUserGroups { IsActive = true, Key = "Facilities" };
+        public static readonly SecurityUserGroups KYTAdmin = new SecurityUserGroups { IsActive = true, Key = "KYTAdmin" };
+        public static readonly SecurityUserGroups MultiTenant = new SecurityUserGroups { IsActive = true, Key = "MultiTenant" };
+    }
+
 }

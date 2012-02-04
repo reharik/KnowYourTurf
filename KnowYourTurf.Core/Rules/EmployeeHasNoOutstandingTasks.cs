@@ -18,7 +18,7 @@ namespace KnowYourTurf.UnitTests.Rules
             var result = new RuleResult {Success = true};
             var count = 0;
             var _employee = employee as User;
-            _employee.GetTasks().Each(x => { if (x.ScheduledStartTime > _systemClock.Now) count++; });
+            _employee.Tasks.Each(x => { if (x.ScheduledStartTime > _systemClock.Now) count++; });
             if(count>0)
             {
                 result.Success = false;

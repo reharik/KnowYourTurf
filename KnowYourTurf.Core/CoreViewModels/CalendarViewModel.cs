@@ -20,12 +20,13 @@ namespace KnowYourTurf.Core
         public string Url { get; set; }
         public string Title { get; set; }
 
-        public string AddEditUrl { get; set; }
+        public string AddUpdateUrl { get; set; }
 
         public string EventChangedUrl { get; set; }
 
         public string DisplayUrl { get; set; }
 
+        public string DeleteUrl { get; set; }
     }
 
     public class CalendarEvent

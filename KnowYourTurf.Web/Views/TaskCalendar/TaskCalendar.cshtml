@@ -3,27 +3,15 @@
 @using KnowYourTurf.Web
 @using HtmlTags
 
-@{ Layout = "~/Views/Shared/_layout.cshtml"; }
-@section ExtraCss{
-    @MvcHtmlString.Create(CSS("fullcalendar.css").ToString())
-    @MvcHtmlString.Create(CSS("token-input.css").ToString())
-}
-@section HeaderScripts{
-   @MvcHtmlString.Create(Script("jqueryPlugins/jquery.tokeninput.js").ToString())
-   @MvcHtmlString.Create(Script("internalHelpers/jquery.kyt.calendar.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.calendar.js").ToString())
-    @MvcHtmlString.Create(Script("externalHelpers/fullcalendar.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.CalendarView.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.EventCalendarController.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.TaskCalendarController.js").ToString())
+@{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
 
-}
-@section HeaderJavascript{
-    var calendarDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CalendarDefinition));
-    calendarDef.calendarContainer="#calendar";
-    
+<script>
+  var calendarDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CalendarDefinition));
+  calendarDef.calendarContainer="#calendar";
+
     $(document).ready(function(){
         new kyt.TaskCalendarController(calendarDef);
-        });
-}
+    });
+</script>
+
 <div id='calendar'></div>

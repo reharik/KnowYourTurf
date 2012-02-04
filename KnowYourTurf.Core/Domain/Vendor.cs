@@ -33,7 +33,7 @@ namespace KnowYourTurf.Core.Domain
 
         #region Collections
         private readonly IList<VendorContact> _contacts = new List<VendorContact>();
-        public virtual IEnumerable<VendorContact> GetContacts() { return _contacts; }
+        public virtual IEnumerable<VendorContact> Contacts { get { return _contacts; } }
         public virtual void RemoveContact(VendorContact contact) { _contacts.Remove(contact); }
         public virtual void AddContact(VendorContact contact)
         {
@@ -44,7 +44,7 @@ namespace KnowYourTurf.Core.Domain
 
         public virtual void ClearProducts() { _products = new List<BaseProduct>(); }
         private IList<BaseProduct> _products = new List<BaseProduct>();
-        public virtual IEnumerable<BaseProduct> GetProducts() { return _products; }
+        public virtual IEnumerable<BaseProduct> Products { get { return _products; } }
         public virtual void RemoveProduct(BaseProduct product) { _products.Remove(product); }
         public virtual void AddProduct(BaseProduct product)
         {
@@ -58,7 +58,7 @@ namespace KnowYourTurf.Core.Domain
         }
 
         private readonly IList<PurchaseOrder> _purchaseOrders = new List<PurchaseOrder>();
-        public virtual IEnumerable<PurchaseOrder> GetPurchaseOrders() { return _purchaseOrders; } 
+        public virtual IEnumerable<PurchaseOrder> PurchaseOrders { get { return _purchaseOrders; } } 
         public virtual IEnumerable<PurchaseOrder> GetCompletedPurchaseOrders() { return _purchaseOrders.Where(x => x.Completed); }
         public virtual void AddPurchaseOrder(PurchaseOrder purchaseOrder)
         {
@@ -74,7 +74,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual bool PurchaseOrderHasBeenCompleted(long purchaseOrderId)
         {
             var purchaseOrder = GetCompletedPurchaseOrders().FirstOrDefault(x => x.EntityId == purchaseOrderId);
-            foreach (var li in purchaseOrder.GetLineItems())
+            foreach (var li in purchaseOrder.LineItems)
                 if (li.QuantityOrdered > li.TotalReceived) return false;
             return true;
         }
@@ -83,19 +83,19 @@ namespace KnowYourTurf.Core.Domain
         public virtual double AmountOfSubTotalForPurchaseOrder(long purchaseOrderId)
         {
             var purchaseOrder = GetCompletedPurchaseOrders().FirstOrDefault(x => x.EntityId == purchaseOrderId);
-            return purchaseOrder.GetLineItems().Sum(x => x.SubTotal.Value);
+            return purchaseOrder.LineItems.Sum(x => x.SubTotal.Value);
         }
 
         public virtual double TotalTaxForPurchaseOrder(long purchaseOrderId)
         {
             var purchaseOrder = GetCompletedPurchaseOrders().FirstOrDefault(x => x.EntityId == purchaseOrderId);
-            return purchaseOrder.GetLineItems().Sum(x => x.Tax.Value);
+            return purchaseOrder.LineItems.Sum(x => x.Tax.Value);
         }
 
         public virtual double TotalAmountDueForPurchaseOrder(long purchaseOrderId)
         {
             var purchaseOrder = GetCompletedPurchaseOrders().FirstOrDefault(x => x.EntityId == purchaseOrderId);
-            return purchaseOrder.GetLineItems().Sum(x => x.SubTotal.Value + x.Tax.Value);
+            return purchaseOrder.LineItems.Sum(x => x.SubTotal.Value + x.Tax.Value);
         }
     }
 

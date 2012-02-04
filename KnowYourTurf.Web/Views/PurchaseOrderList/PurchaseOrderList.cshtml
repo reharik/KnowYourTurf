@@ -5,18 +5,16 @@
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @section HeaderScripts{
-    @MvcHtmlString.Create(Script("kyt.PurchaseOrderController.js").ToString())
 }
 @section HeaderJavascript{
 
     $(document).ready(function () {
-        new kyt.PurchaseOrderController(crudOptions);
+        new kyt.PurchaseOrderController(gridControllerOptions);
     });
 }
-
-<div class="KYT_gridbreak">
-@MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_PURCHASE_ORDER).AddClass("KYT_float_left grid_3").ToString())
-@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right grid_1").ToString())
-</div>
+@section ExtraContentHeaderButtons{
+    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+        <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+}
 <table id="gridContainer" class="scroll"></table>
 <div id="pager" class="scroll" style="text-align:center;"></div>

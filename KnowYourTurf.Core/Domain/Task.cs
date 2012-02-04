@@ -42,7 +42,7 @@ namespace KnowYourTurf.Core.Domain
         #region Collections
         public virtual void ClearEquipment() { _equipment = new List<Equipment>(); }
         private IList<Equipment> _equipment = new List<Equipment>();
-        public virtual IEnumerable<Equipment> GetEquipment() { return _equipment; }
+        public virtual IEnumerable<Equipment> Equipment { get { return _equipment; } }
         public virtual void RemoveEquipment(Equipment equipment) { _equipment.Remove(equipment); }
         public virtual void AddEquipment(Equipment equipment)
         {
@@ -52,7 +52,7 @@ namespace KnowYourTurf.Core.Domain
 
         public virtual void ClearEmployees() { _employees = new List<User>(); }
         private IList<User> _employees = new List<User>();
-        public virtual IEnumerable<User> GetEmployees() { return _employees; }
+        public virtual IEnumerable<User> Employees { get { return _employees; } }
         public virtual void RemoveEmployee(User employee) { _employees.Remove(employee); }
         public virtual void AddEmployee(User employee)
         {
@@ -74,7 +74,7 @@ namespace KnowYourTurf.Core.Domain
                 ScheduledStartTime = ScheduledStartTime,
                 InventoryProduct = InventoryProduct
             };
-            GetEmployees().Each(newTask.AddEmployee);
+            Employees.Each(newTask.AddEmployee);
             return newTask;
         }
 
@@ -90,7 +90,7 @@ namespace KnowYourTurf.Core.Domain
 
         public virtual bool IsAssignedToEmployee(long employeeId)
         {
-            var employee = GetEmployees().FirstOrDefault(x=>x.EntityId == employeeId);
+            var employee = Employees.FirstOrDefault(x=>x.EntityId == employeeId);
             return employee != null;
         }
     }

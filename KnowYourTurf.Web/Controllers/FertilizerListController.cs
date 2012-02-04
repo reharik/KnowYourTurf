@@ -1,13 +1,9 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
-using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -28,9 +24,10 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<FertilizerListController>(x => x.Fertilizers(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddEdit(null)),
-                ListDefinition = _fertilizerListGrid.GetGridDefinition(url, WebLocalizationKeys.FERTILIZERS),
-                Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
+                AddUpdateUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddUpdate(null)),
+                DeleteMultipleUrl= UrlContext.GetUrlForAction<FertilizerController>(x => x.DeleteMultiple(null)),
+                GridDefinition = _fertilizerListGrid.GetGridDefinition(url),
+                Title = WebLocalizationKeys.FERTILIZERS.ToString()
             };
             return View(model);
         }

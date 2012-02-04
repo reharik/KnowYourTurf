@@ -20,7 +20,7 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var weather = input.EntityId > 0 ? _repository.Find<Weather>(input.EntityId) : new Weather();
             var model = new WeatherViewModel
@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new WeatherViewModel
                             {
                                 Weather = weather,
-                                AddEditUrl = UrlContext.GetUrlForAction<WeatherController>(x => x.AddEdit(null)) + "/" + weather.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<WeatherController>(x => x.AddUpdate(null)) + "/" + weather.EntityId,
                                 Title = WebLocalizationKeys.WEATHER_INFORMATION.ToString()
                             };
             return PartialView("WeatherView", model);

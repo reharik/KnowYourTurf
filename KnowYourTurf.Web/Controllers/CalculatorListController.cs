@@ -1,13 +1,9 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
-using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -28,9 +24,9 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<CalculatorListController>(x => x.Calculators(null));
             CalculatorListViewModel model = new CalculatorListViewModel()
             {
-                CreateATaskUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null))+"?From=Calculator",
-                ListDefinition = _calculatorListGrid.GetGridDefinition(url, WebLocalizationKeys.CALCULATORS),
-            Title = WebLocalizationKeys.CALCULATOR.ToString()
+                CreateATaskUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null))+"?From=Calculator",
+                GridDefinition = _calculatorListGrid.GetGridDefinition(url),
+            Title = WebLocalizationKeys.CALCULATORS.ToString()
             };
             return View(model);
         }

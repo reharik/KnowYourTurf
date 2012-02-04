@@ -37,8 +37,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             addInternalCssClasses(_htmlRoot, input);
             if (_hide) input.Style("display","none");
             if (_elementId.IsNotEmpty()) input.Id(_elementId);
-            
-            _htmlRoot.Child(input);
+
+            _htmlRoot.Children.Add(input);
             return _htmlRoot;
         }
 

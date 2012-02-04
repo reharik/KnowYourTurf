@@ -20,13 +20,11 @@ namespace KnowYourTurf.Core.Config
             _userId = userIdProp.Replace("UserId=","");
             var companyIdProp = data.FirstOrDefault(x => x.Contains("CompanyId="));
             _companyId = companyIdProp.Replace("CompanyId=", "");
-            var userRoles = data.FirstOrDefault(x => x.Contains("UserRoles="));
-            _userRoles = userRoles.Replace("UserRoles=", "");
         }
 
         public bool IsInRole(string role)
         {
-           return _userRoles.Split(',').Any(x => x == role);
+            return false;
         }
 
         public IIdentity Identity{ get { return _identity; } }

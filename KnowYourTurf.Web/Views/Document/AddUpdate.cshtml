@@ -4,22 +4,37 @@
 @using KnowYourTurf.Web.Controllers
 @using KnowYourTurf.Core.Html.Expressions
 @{
-    Layout = "~/Views/Shared/_popupLayout.cshtml";
+    Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
 }
+<script>
+    extraFormOptions.title = '@Model.Title';
+</script>
 
 
-    @MvcHtmlString.Create(FormFor<DocumentController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-        @MvcHtmlString.Create(Html.HiddenFor(x => x.Document.EntityId).ToString())
-        @MvcHtmlString.Create(Html.SubmissionFor(x => x.Document.Name).ToString())
-        @MvcHtmlString.Create(Html.SubmissionFor(x => x.Document.Description).ToString())
-        @MvcHtmlString.Create(Html.SubmissionFor(x => x.Document.DocumentCategory).LabelDisplay(WebLocalizationKeys.DOCUMENT_CATEGORY).ToString())
-        @if (Model.Document.EntityId > 0)
-        {
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Document.FileUrl).AddDisplayNameForHref(Model.Document.Name).LabelDisplay(WebLocalizationKeys.VIEW_FILE).ToString())
-        }
-        else
-        {
-                <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
-        }
-    @MvcHtmlString.Create(EndForm())
+@MvcHtmlString.Create(FormFor<DocumentController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+    @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.From).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.ParentId).ToString())
+        <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.DocumentCategory).LabelDisplay(WebLocalizationKeys.DOCUMENT_CATEGORY).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @if (Model.Item.EntityId > 0)
+            {
+                @Html.ViewFor(x => x.Item.FileUrl).AddDisplayNameForHref(Model.Item.Name).LabelDisplay(WebLocalizationKeys.VIEW_FILE).ToHtmlTag()
+            }
+            else
+            {
+                    <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
+            }
+        </div>
+    </div>
+@EndForm()
 

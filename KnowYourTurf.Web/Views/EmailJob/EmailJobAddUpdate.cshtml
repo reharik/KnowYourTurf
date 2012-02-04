@@ -11,19 +11,32 @@
 
 <script>
     $(document).ready(function () {
-        $("#User").asSelectboxPicker();
     });
 </script>
 
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
-            @MvcHtmlString.Create(FormFor<EmailJobController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.EmailJob.EntityId).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailJob.Name).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailJob.Description).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailJob.Subject).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailJob.Frequency).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailJob.Status).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailJob.EmailTemplate).ToString())
-            @MvcHtmlString.Create(SelectBoxPicker(Model.UserSelectBoxPickerDto).ToString())
-            @MvcHtmlString.Create(EndForm())
+@MvcHtmlString.Create(FormFor<EmailJobController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+    @MvcHtmlString.Create(Html.HiddenFor(x => x.EmailJob.EntityId).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.Subject).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.Frequency).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.Status).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailJob.EmailTemplate).ToHtmlTag()
+        </div>
+    </div>
+    @EndForm())
 

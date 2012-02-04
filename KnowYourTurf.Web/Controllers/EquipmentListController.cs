@@ -1,13 +1,9 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
-using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -28,8 +24,10 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<EquipmentListController>(x => x.Equipments(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddEdit(null)),
-                ListDefinition = _equipmentListGrid.GetGridDefinition(url, WebLocalizationKeys.EQUIPMENT)
+                AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddUpdate(null)),
+                DeleteMultipleUrl= UrlContext.GetUrlForAction<EquipmentController>(x => x.DeleteMultiple(null)),
+                GridDefinition = _equipmentListGrid.GetGridDefinition(url),
+                Title = WebLocalizationKeys.EQUIPMENT.ToString()
             };
             return View(model);
         }

@@ -6,40 +6,19 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
-kyt.DisplayView = Backbone.View.extend({
+kyt.AjaxDisplayView = Backbone.View.extend({
     events:{
         'click .cancel' : 'cancel'
     },
     initialize: function(){
-        this.options = $.extend({},kyt.formDefaults,this.options);
+        this.options = $.extend({},kyt.displayDefaults,this.options);
         this.id=this.options.id;
-
-        if(extraFormOptions){
-            $.extend(true, this.options, extraFormOptions);
-        }
-        this.render();
-
+        this.el=this.options.el;
     },
-    render: function(){
-        $.publish("/form_"+this.id+"/pageLoaded",[this.options]);
-        return this;
+    render:function(){
+        kyt.repository.ajaxGet(this.options.url, this.options.data, $.proxy(this.renderCallback,this));
     },
-    cancel:function(){
-        $.publish("/form_"+this.id+"/cancel",[this.id]);
-    }
-});
-
-
-
-kyt.AjaxDisplayView = Backbone.View.extend({
-    initialize: function(){
-        this.options = $.extend({},kyt.formDefaults,this.options);
-        this.id=this.options.id;
-        kyt.repository.ajaxGet(this.options.url, this.options.data, $.proxy(this.initializeCallback,this));
-    },
-
-    initializeCallback:function(result){
+    renderCallback:function(result){
         if(result.LoggedOut){
             window.location.replace(result.RedirectUrl);
             return;
@@ -51,12 +30,15 @@ kyt.AjaxDisplayView = Backbone.View.extend({
         if(typeof this.options.runAfterRenderFunction == 'function'){
             this.options.runAfterRenderFunction.apply(this,[this.el]);
         }
-        
-        this.render();
+        $.publish("/contentLevel/display_"+this.id+"/pageLoaded",[this.options]);
     },
-
-    render: function(){
-        $.publish("/display_"+this.id+"/pageLoaded",[this.options]);
-        return this;
+    cancel:function(){
+        $.publish("/contentLevel/display_"+this.id+"/cancel",[this.id]);
     }
 });
+
+kyt.displayDefaults = {
+    id:"",
+    data:{},
+    runAfterRenderFunction: null
+};

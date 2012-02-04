@@ -19,9 +19,9 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Phone);
             Map(x => x.Status);
             Map(x => x.Website);
-            HasMany(x => x.GetContacts()).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
-            HasManyToMany(x => x.GetProducts()).Access.CamelCaseField(Prefix.Underscore).LazyLoad();
-            HasMany(x => x.GetPurchaseOrders()).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
+            HasMany(x => x.Contacts).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
+            HasManyToMany(x => x.Products).Access.CamelCaseField(Prefix.Underscore).LazyLoad();
+            HasMany(x => x.PurchaseOrders).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
         }
     }
 }

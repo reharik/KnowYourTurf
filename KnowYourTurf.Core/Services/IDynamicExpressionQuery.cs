@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Script.Serialization;
@@ -13,6 +14,10 @@ namespace KnowYourTurf.Core.Services
                                                 bool isNullCheck = false) where ENTITY : DomainEntity;
 
         Expression<Func<ENTITY, bool>> PrepareExpression<ENTITY>(string json, Expression<Func<ENTITY, bool>> extraFilters= null)where ENTITY : DomainEntity;
+
+        IQueryable<ENTITY> PerformQuery<ENTITY>(IEnumerable<ENTITY> items, string json = null,
+                                                                Expression<Func<ENTITY, bool>> extraFilters = null,
+                                                                bool isNullCheck = false) where ENTITY : DomainEntity;
     }
 
     public class DynamicExpressionQuery : IDynamicExpressionQuery
@@ -26,12 +31,19 @@ namespace KnowYourTurf.Core.Services
             _dynamicExpressionBuilder = dynamicExpressionBuilder;
         }
 
-        public IQueryable<ENTITY> PerformQuery<ENTITY>(string json = null, 
-                                                        Expression<Func<ENTITY, bool>> extraFilters = null, 
+        public IQueryable<ENTITY> PerformQuery<ENTITY>(string json = null,
+                                                        Expression<Func<ENTITY, bool>> extraFilters = null,
                                                         bool isNullCheck = false) where ENTITY : DomainEntity
         {
             var expression = PrepareExpression(json, extraFilters);
             return expression == null ? _repository.Query<ENTITY>() : _repository.Query(expression);
+        }
+        public IQueryable<ENTITY> PerformQuery<ENTITY>(IEnumerable<ENTITY> items, string json = null,
+                                                        Expression<Func<ENTITY, bool>> extraFilters = null,
+                                                        bool isNullCheck = false) where ENTITY : DomainEntity
+        {
+            var expression = PrepareExpression(json, extraFilters);
+            return expression == null ? items.AsQueryable() : items.Where(expression.Compile()).AsQueryable();
         }
 
         public Expression<Func<ENTITY, bool>> PrepareExpression<ENTITY>(string json, Expression<Func<ENTITY, bool>> extraFilters= null)where ENTITY : DomainEntity
@@ -41,7 +53,10 @@ namespace KnowYourTurf.Core.Services
             if (jqGridFilter.rules.Any(x => x.op == "ListContains" && x.listOfIds.Count() <= 0)) return extraFilters;
             
             var expression = _dynamicExpressionBuilder.Build<ENTITY>(jqGridFilter);
-            
+            if(extraFilters == null)
+            {
+                return expression;
+            }
             BinaryExpression binaryExpression = Expression.AndAlso(expression.Body, extraFilters.Body);
             Expression<Func<ENTITY, bool>> finalExpression = Expression.Lambda<Func<ENTITY, bool>>(binaryExpression, expression.Parameters);
             return finalExpression;

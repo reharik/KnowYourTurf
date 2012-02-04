@@ -6,7 +6,6 @@ using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -28,8 +27,10 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrders(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddEdit(null)),
-                ListDefinition = _purchaseOrderListGrid.GetGridDefinition(url, WebLocalizationKeys.PURCHASE_ORDERS),
+                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)),
+                DeleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.DeleteMultiple(null)),
+                GridDefinition = _purchaseOrderListGrid.GetGridDefinition(url),
+                Title = WebLocalizationKeys.PURCHASE_ORDERS.ToString()
             };
             return View(model);
         }
@@ -51,5 +52,7 @@ namespace KnowYourTurf.Web.Controllers
             var gridItemsViewModel = _purchaseOrderListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
+
+
     }
 }

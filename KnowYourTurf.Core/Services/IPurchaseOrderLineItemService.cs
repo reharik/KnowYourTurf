@@ -32,7 +32,7 @@ namespace KnowYourTurf.Web.Controllers
             purchaseOrder.AddLineItem(purchaseOrderLineItem);
             var sub = 0d;
             var tax = 0d;
-            purchaseOrder.GetLineItems().Each(x =>
+            purchaseOrder.LineItems.Each(x =>
                                                   {
                                                       if (x.QuantityOrdered.HasValue && x.Price.HasValue)
                                                       {

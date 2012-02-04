@@ -4,62 +4,75 @@
 @using KnowYourTurf.Core.Html.FubuUI
 
 
-@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
-
-@section ExtraCss {
-    @MvcHtmlString.Create(CSS("ui.jqgrid.css").ToString())
-}    
-@section HeaderScripts{
-    @MvcHtmlString.Create(Script("jqueryPlugins/grid.locale-en.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.jqGrid.min.js").ToString())
-    @MvcHtmlString.Create(Script("internalHelpers/jquery.kyt.grid.js").ToString())
-    @MvcHtmlString.Create(Script("internalHelpers/kyt.grid.columnService.js").ToString())
-    @MvcHtmlString.Create(Script("internalHelpers/kyt.grid.formatters.js").ToString())
-    @MvcHtmlString.Create(Script("internalHelpers/kyt.gridHelpers.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.PurchaseOrderBuilderController.js").ToString())
-    @MvcHtmlString.Create(Script("kyt.crudController.js").ToString())
-}
+@{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
 
 @section HeaderJavascript{
     var crudOptions = {
-        addEditUrl: "@Model.AddEditUrl",
-        productGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinition)),
+        addUpdateUrl: "@Model.AddUpdateUrl",
+        productGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition)),
         poliGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.PoliListDefinition)),
         commitUrl: "@Model.CommitUrl",
-        returnUrl: "@Model.ReturnUrl"
+        returnUrl: "@Model.ReturnUrl",
+        deleteMultipleUrl: "@Model.DeleteMultipleUrl"
     }
     $(document).ready(function(){
         new kyt.PurchaseOrderBuilderController(crudOptions);
     });
  
 }
-<div id="masterArea">
 
-    <div class="KYT_section_header">
-        @MvcHtmlString.Create(WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString())
-    </div>
-
+@section ExtraContentHeaderButtons{
+@if (Model.Item.EntityId > 0)
+        {
+            <span class="title-added">@WebLocalizationKeys.DATE_ADDED.ToFormat(Model.Item.DateCreated.Value.ToLongDateString())</span>
+        }
+}
     <div id="errorMessages" class="errorMessages KYT_errorMessages" ><ul></ul></div>
     <input type="hidden" id="vendorId" value="@Model.VendorId"/>
-    <input type="hidden" id="poId" value="@Model.PurchaseOrder.EntityId"/>
-    <div style="display:inline-block;">
-        @MvcHtmlString.Create(Html.HiddenFor(x=>x.PurchaseOrder.EntityId).ToString())
-        @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToString())
-        @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).RootId("viewVendor").ToString())
+    <input type="hidden" id="poId" value="@Model.Item.EntityId"/>
+        @MvcHtmlString.Create(Html.HiddenFor(x=>x.Item.EntityId).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+        @Html.ViewFor(x => x.Item.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+        @Html.ViewFor(x => x.Item.Vendor.Company).RootId("viewVendor").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+        @Html.SubmissionFor(x => x.Item.Vendor).InputId("vendor").RootId("editVendor").ToHtmlTag()
+        </div>
     </div>
-        @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrder.Vendor).InputId("vendor").RootId("editVendor").ToString())
 
-    <div id="productGridArea">
-        <h2>@WebLocalizationKeys.PRODUCTS.ToString()</h2>
-        <table id="productGrid" class="scroll"></table>
-        <div id="productPager" class="scroll" style="text-align:center;"></div>
+    <div class="col full clear">
+        <div class="fieldRow">
+            <div id="productGridArea">
+              <div class="content-header">
+                <input class="search" /> 
+                <span class="title-name">@WebLocalizationKeys.PRODUCTS.ToString()</span>
+            </div>
+            <div id="contentArea" class="content-inner">
+                <table id="productGrid" class="scroll"></table>
+            </div>
+        </div>
+    </div>
     </div>
 
-    <div id="poliGridArea">
-        <h2> @WebLocalizationKeys.LINE_ITEMS.ToString() </h2>
-        <table id="poliGrid" class="scroll"></table>
-        <div id="poliPager" class="scroll" style="text-align:center;"></div>
+    <div class="col full clear">
+        <div class="fieldRow">
+            <div id="poliGridArea">
+              <div class="content-header">
+                <input class="search" /> 
+                <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+                <span class="title-name">@WebLocalizationKeys.LINE_ITEMS.ToString()</span>
+            </div>
+            <div id="contentArea" class="content-inner">
+                <table id="poliGrid" class="scroll"></table>
+            </div>
+        </div>
     </div>
-    @MvcHtmlString.Create(StyledButtonFor("commit",WebLocalizationKeys.COMMIT).ToString())
-    @MvcHtmlString.Create(StyledButtonFor("return", WebLocalizationKeys.RETURN).ToString())
-</div>
+    </div>
+         <div class="footer">
+
+    @StandardButtonFor("commit", WebLocalizationKeys.COMMIT).AddClass("save").ToHtmlTag()
+    @StandardButtonFor("return", WebLocalizationKeys.RETURN).AddClass("cancel").ToHtmlTag()
+    </div>

@@ -15,17 +15,17 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
-        private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
+        private readonly IFileHandlerService _fileHandlerService;
         private readonly ISessionContext _sessionContext;
 
         public FacilitiesController(IRepository repository,
             ISaveEntityService saveEntityService,
-            IUploadedFileHandlerService uploadedFileHandlerService,
+            IFileHandlerService fileHandlerService,
             ISessionContext sessionContext)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
-            _uploadedFileHandlerService = uploadedFileHandlerService;
+            _fileHandlerService = fileHandlerService;
             _sessionContext = sessionContext;
         }
 
@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             
             var model = new UserViewModel
             {
-                User = facilities,
+                Item = facilities,
                 Title = WebLocalizationKeys.FACILITIES.ToString()
             };
             return PartialView("FacilitiesAddUpdate", model);
@@ -46,8 +46,8 @@ namespace KnowYourTurf.Web.Controllers
             var facilities = _repository.Find<User>(input.EntityId);
             var model = new UserViewModel
                             {
-                                User = facilities,
-                                AddEditUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)) + "/" + facilities.EntityId,
+                                Item = facilities,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)) + "/" + facilities.EntityId,
                                 Title = WebLocalizationKeys.FACILITIES.ToString()
                             };
             return PartialView("FacilitiesView", model);
@@ -71,9 +71,9 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Save(UserViewModel input)
         {
             User facilities;
-            if (input.User.EntityId > 0)
+            if (input.Item.EntityId > 0)
             {
-                facilities = _repository.Find<User>(input.User.EntityId);
+                facilities = _repository.Find<User>(input.Item.EntityId);
             }
             else
             {
@@ -86,22 +86,21 @@ namespace KnowYourTurf.Web.Controllers
 
             if (input.DeleteImage)
             {
-                _uploadedFileHandlerService.DeleteFile(facilities.ImageUrl);
+                _fileHandlerService.DeleteFile(facilities.ImageUrl);
                 facilities.ImageUrl = string.Empty;
             }
 
-            var serverDirectory = "/CustomerPhotos/" + facilities.CompanyId + "/Facilitiess";
-            facilities.ImageUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, facilities.FirstName+"_"+facilities.LastName);
+            facilities.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Facilitiess");
+            facilities.ImageFriendlyName = facilities.FirstName + "_" + facilities.LastName;
             var crudManager = _saveEntityService.ProcessSave(facilities);
 
-            crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, facilities.FirstName + "_" + facilities.LastName, crudManager);
             var notification = crudManager.Finish();
             return Json(notification,"text/plain");
         }
 
         private User mapToDomain(UserViewModel model, User facilities)
         {
-            var facilitiesModel = model.User;
+            var facilitiesModel = model.Item;
             facilities.Address1 = facilitiesModel.Address1;
             facilities.Address2= facilitiesModel.Address2;
             facilities.FirstName= facilitiesModel.FirstName;
@@ -117,9 +116,9 @@ namespace KnowYourTurf.Web.Controllers
                 Password = facilitiesModel.UserLoginInfo.Password,
                 LoginName = facilitiesModel.Email,
                 Status = facilitiesModel.UserLoginInfo.Status,
-                UserRoles = UserRole.Facilities.ToString(),
-                UserType = UserRole.Facilities.ToString(),
+                UserType = UserType.Facilities.ToString(),
             };
+            facilities.AddUserRole(new UserRole{Name = UserType.Facilities.ToString()});
             return facilities;
         }
     }

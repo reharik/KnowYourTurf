@@ -28,8 +28,8 @@ namespace KnowYourTurf.Web.Controllers
             var facilities = _repository.Find<User>(input.EntityId);
             var model = new UserViewModel
             {
-                User = facilities,
-                AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" + input.EntityId+"&From=Facilities",
+                Item = facilities,
+                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId+"&From=Facilities",
                
             };
             return View("FacilitiesDashboard", model);

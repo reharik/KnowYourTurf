@@ -13,8 +13,8 @@ if (typeof kyt == "undefined") {
 kyt.TaskListController = kyt.CrudController.extend({
     events:_.extend({
     }, kyt.CrudController.prototype.events),
-    additionalSubscriptions:function(){
-        $.subscribe('/popupFormModule_/popupLoaded',$.proxy(this.loadTokenizers,this), this.cid);
+    registerAdditionalSubscriptions:function(){
+        $.subscribe('/contentLevel/form_mainForm/pageLoaded',$.proxy(this.loadTokenizers,this), this.cid);
     },
     loadTokenizers:function(formOptions){
         var employeeTokenOptions = {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
@@ -18,36 +19,39 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
-        private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
         private readonly ISessionContext _sessionContext;
+        private readonly IFileHandlerService _fileHandlerService;
         private readonly IAuthorizationRepository _authorizationRepository;
+        private readonly IUpdateCollectionService _updateCollectionService;
 
         public EmployeeController(IRepository repository,
             ISaveEntityService saveEntityService,
-            IUploadedFileHandlerService uploadedFileHandlerService,
             ISessionContext sessionContext,
-            IAuthorizationRepository authorizationRepository)
+            IFileHandlerService fileHandlerService,
+            IAuthorizationRepository authorizationRepository,
+            IUpdateCollectionService updateCollectionService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
-            _uploadedFileHandlerService = uploadedFileHandlerService;
             _sessionContext = sessionContext;
+            _fileHandlerService = fileHandlerService;
             _authorizationRepository = authorizationRepository;
+            _updateCollectionService = updateCollectionService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var employee = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
-            var availableUserRoles = Enumeration.GetAll<UserRole>(true).Select(x => new TokenInputDto { id = x.Key, name = x.Key});
+            var availableUserRoles = Enumeration.GetAll<UserType>(true).Select(x => new TokenInputDto { id = x.Key, name = x.Key});
             IEnumerable<TokenInputDto> selectedUserRoles;
-            if (input.EntityId > 0 && employee.UserLoginInfo.UserRoles.IsNotEmpty())
+            if (input.EntityId > 0 && employee.UserRoles != null)
                 selectedUserRoles =
-                    employee.UserLoginInfo.UserRoles.Split(',').Select(x => new TokenInputDto {id = x, name = x});
+                    employee.UserRoles.Select(x => new TokenInputDto {id = x.EntityId.ToString(), name = x.Name});
             else selectedUserRoles = null;
 
             var model = new UserViewModel
             {
-                User = employee,
+                Item = employee,
                 AvailableItems = availableUserRoles,
                 SelectedItems = selectedUserRoles,
                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
@@ -60,8 +64,8 @@ namespace KnowYourTurf.Web.Controllers
             var employee = _repository.Find<User>(input.EntityId);
             var model = new UserViewModel
                             {
-                                User = employee,
-                                AddEditUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddEdit(null)) + "/" + employee.EntityId,
+                                Item = employee,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddUpdate(null)) + "/" + employee.EntityId,
                                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
                             };
             return PartialView("EmployeeView", model);
@@ -85,9 +89,9 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Save(UserViewModel input)
         {
             User employee;
-            if (input.User.EntityId > 0)
+            if (input.Item.EntityId > 0)
             {
-                employee = _repository.Find<User>(input.User.EntityId);
+                employee = _repository.Find<User>(input.Item.EntityId);
             }
             else
             {
@@ -100,55 +104,54 @@ namespace KnowYourTurf.Web.Controllers
             mapRolesToGroups(employee);
             if (input.DeleteImage)
             {
-                _uploadedFileHandlerService.DeleteFile(employee.ImageUrl);
+                _fileHandlerService.DeleteFile(employee.ImageUrl);
                 employee.ImageUrl = string.Empty;
             }
 
-            var serverDirectory = "/CustomerPhotos/" + _sessionContext.GetCompanyId() + "/Employees";
-            employee.ImageUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, employee.FirstName+"_"+employee.LastName);
+            employee.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Employees");
+            employee.ImageFriendlyName = employee.FirstName + "_" + employee.LastName;
             var crudManager = _saveEntityService.ProcessSave(employee);
 
-            crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, employee.FirstName + "_" + employee.LastName, crudManager);
             var notification = crudManager.Finish();
             return Json(notification,"text/plain");
         }
 
         private void mapRolesToGroups(User employee)
         {
-            _authorizationRepository.DetachUserFromGroup(employee, UserRole.Administrator.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserRole.Employee.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserRole.Facilities.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserRole.KYTAdmin.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserRole.MultiTenant.Key);
+            _authorizationRepository.DetachUserFromGroup(employee, UserType.Administrator.Key);
+            _authorizationRepository.DetachUserFromGroup(employee, UserType.Employee.Key);
+            _authorizationRepository.DetachUserFromGroup(employee, UserType.Facilities.Key);
+            _authorizationRepository.DetachUserFromGroup(employee, UserType.KYTAdmin.Key);
+            _authorizationRepository.DetachUserFromGroup(employee, UserType.MultiTenant.Key);
 
-            employee.UserLoginInfo.UserRoles.Split(',').Each(x =>
+            foreach (var x in employee.UserRoles)
             {
-                if (x == UserRole.Administrator.Key)
+                if (x.Name == UserType.Administrator.Key)
                 {
-                    _authorizationRepository.AssociateUserWith(employee, UserRole.Administrator.Key);
+                    _authorizationRepository.AssociateUserWith(employee, UserType.Administrator.Key);
                 }
-                if (x == UserRole.Employee.Key)
+                if (x.Name== UserType.Employee.Key)
                 {
-                    _authorizationRepository.AssociateUserWith(employee, UserRole.Employee.Key);
+                    _authorizationRepository.AssociateUserWith(employee, UserType.Employee.Key);
                 }
-                if (x == UserRole.Facilities.Key)
+                if (x.Name == UserType.Facilities.Key)
                 {
-                    _authorizationRepository.AssociateUserWith(employee, UserRole.Facilities.Key);
+                    _authorizationRepository.AssociateUserWith(employee, UserType.Facilities.Key);
                 }
-                if (x == UserRole.KYTAdmin.Key)
+                if (x.Name == UserType.KYTAdmin.Key)
                 {
-                    _authorizationRepository.AssociateUserWith(employee, UserRole.KYTAdmin.Key);
+                    _authorizationRepository.AssociateUserWith(employee, UserType.KYTAdmin.Key);
                 }
-                if (x == UserRole.MultiTenant.Key)
+                if (x.Name == UserType.MultiTenant.Key)
                 {
-                    _authorizationRepository.AssociateUserWith(employee, UserRole.MultiTenant.Key);
+                    _authorizationRepository.AssociateUserWith(employee, UserType.MultiTenant.Key);
                 }
-            });
+            }
         }
 
         private User mapToDomain(UserViewModel model, User employee)
         {
-            var employeeModel = model.User;
+            var employeeModel = model.Item;
             employee.EmployeeId = employeeModel.EmployeeId;
             employee.Address1 = employeeModel.Address1;
             employee.Address2= employeeModel.Address2;
@@ -162,14 +165,24 @@ namespace KnowYourTurf.Web.Controllers
             employee.State = employeeModel.State;
             employee.ZipCode = employeeModel.ZipCode;
             employee.Notes = employeeModel.Notes;
-            employee.UserLoginInfo = new UserLoginInfo()
+            if(employee.UserLoginInfo == null)
             {
-                Password = employeeModel.UserLoginInfo.Password,
-                LoginName = employeeModel.Email,
-                Status = employeeModel.UserLoginInfo.Status,
-                UserRoles = model.RolesInput.IsNotEmpty() ? model.RolesInput : UserRole.Employee.ToString(),
-                UserType = UserRole.Employee.ToString(),
-            }; return employee;
+                employee.UserLoginInfo = new UserLoginInfo();
+            }
+            employee.UserLoginInfo.Password = employeeModel.UserLoginInfo.Password;
+            employee.UserLoginInfo.LoginName = employeeModel.Email;
+            employee.UserLoginInfo.Status = employeeModel.UserLoginInfo.Status;
+            employee.UserLoginInfo.UserType = UserType.Employee.ToString();
+            if (model.RolesInput.IsEmpty())
+            {
+                var emp = _repository.Query<UserRole>(x => x.Name == UserType.Employee.ToString()).FirstOrDefault();
+                employee.AddUserRole(emp);
+            }
+            else
+            {
+                _updateCollectionService.UpdateFromCSV(employee.UserRoles, model.RolesInput, employee.AddUserRole,employee.RemoveUserRole);
+            }
+            return employee;
         }
     }
 }

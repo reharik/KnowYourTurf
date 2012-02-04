@@ -4,6 +4,6 @@ namespace KnowYourTurf.Web.Models
 {
     public class ChemicalViewModel:ViewModel
     {
-        public Core.Domain.Chemical Chemical { get; set; }
+        public Core.Domain.Chemical Item { get; set; }
     }
 }

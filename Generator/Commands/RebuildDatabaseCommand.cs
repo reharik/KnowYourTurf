@@ -1,14 +1,7 @@
-using System;
-using System.IO;
-using System.Reflection;
 using KnowYourTurf.Core.Domain;
 using NHibernate;
-using NHibernate.Cfg;
 using StructureMap;
-using StructureMap.Pipeline;
-using ISessionFactoryConfiguration = KnowYourTurf.Core.Domain.ISessionFactoryConfiguration;
 
-//using ISessionFactoryConfiguration = KnowYourTurf.Core.Domain.ISessionFactoryConfiguration;
 
 namespace Generator.Commands
 {
@@ -27,12 +20,11 @@ namespace Generator.Commands
 
         public void Execute(string[] args)
         {
-            
-            ObjectFactory.Configure(x=>x.For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactoryAndGenerateSchema()));
+
+            ObjectFactory.Configure(x => x.For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactoryAndGenerateSchema()));
             var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
 
             new DataLoader().Load();
-
             SqlServerHelper.AddRhinoSecurity(sessionFactory);
 
             var securitySetup = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");

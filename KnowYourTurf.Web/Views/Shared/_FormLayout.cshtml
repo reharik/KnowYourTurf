@@ -1,0 +1,30 @@
+﻿@using KnowYourTurf.Web;
+@using HtmlTags
+
+<script>
+    @RenderSection("ExtraCss", false)
+
+    @RenderSection("HeaderScripts", false)
+
+    var contentArea;
+    var extraFormOptions ={}
+        @RenderSection("HeaderJavascript", false)
+</script>
+
+   <div class="content-header">
+        @RenderSection("ExtraContentHeaderButtons", false)
+        <span class="title-name">@Model.Title</span>
+        <button class="close cancel" title="@WebLocalizationKeys.CLOSE"></button>
+        @if (Model.Item.EntityId > 0)
+        {
+            <span class="title-added">@WebLocalizationKeys.DATE_ADDED.ToFormat(Model.Item.DateCreated.ToLongDateString())</span>
+        }
+    </div>
+    <div id="contentArea" class="content-inner">
+    <div id="errorMessagesForm" class="mf_ErrorMessages errorMessages"><ul></ul></div>
+        @RenderBody()
+        <div class="footer">
+            @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
+            @StandardButtonFor("cancel", WebLocalizationKeys.CANCEL).AddClass("cancel").ToHtmlTag()
+        </div>
+    </div>

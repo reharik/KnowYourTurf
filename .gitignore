@@ -3,9 +3,14 @@
 *.user
 *.suo
 *.[Cc]ache
-*.log 
+
 _ReSharper.*
 *.resharper
 *.vspscc
 *.vssscc
-.idea.*
+.idea
+App_Data
+CustomerPhotos
+CustomerDocuments
+[Ll]ogs
+[Ll]og

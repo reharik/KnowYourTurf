@@ -11,11 +11,20 @@
 <script>
     extraFormOptions.runAfterRenderFunction = kyt.utilities.tinyMce
 </Script>
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
-            @MvcHtmlString.Create(FormFor<EmailTemplateController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.EmailTemplate.EntityId).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailTemplate.Name).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailTemplate.Description).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.EmailTemplate.Template).InputId("tinyMce").ToString())
-            @MvcHtmlString.Create(EndForm())
+@MvcHtmlString.Create(FormFor<EmailTemplateController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+@MvcHtmlString.Create(Html.HiddenFor(x => x.EmailTemplate.EntityId).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailTemplate.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailTemplate.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmailTemplate.Template).InputId("tinyMce").ToHtmlTag()
+        </div>
+    </div>
+@EndForm()
 

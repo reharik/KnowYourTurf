@@ -7,7 +7,7 @@
 @using KnowYourTurf.Core.Html.Expressions
 
 @{
-    Layout = "~/Views/Shared/_popupLayout.cshtml";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
 @section HeaderJavascript{
     var availableRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableItems)) ;
@@ -20,54 +20,71 @@
     };
     extraFormOptions.rolesOptions = rolesOptions;
     $(document).ready(function () {
-        if ('@Model.User.ImageUrl') {
-            $("#showImage").show();
-            $("#newImage").hide();
-        } else {
-            $("#showImage").hide();
-            $("#newImage").show();
-        }
-        $("#deleteImage").click(function () {
-            $("#showImage").hide();
-            $("#newImage").show();
-            $("#DeleteImage").val(true);
-        });
-        $("#UserRole").asSelectboxPicker();
+       
     });
 }
         
 
-            @MvcHtmlString.Create(FormFor<EmployeeController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.User.EntityId).ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.EmployeeId).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.FirstName).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.LastName).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.EmergencyContact).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.EmergencyContactPhone).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.UserLoginInfo.Password).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.Email).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.PhoneMobile).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.Address1).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.Address2).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.City).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.State).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.ZipCode).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.UserLoginInfo.Status).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.User.Notes).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.RolesInput)
-                                                            .InputId("RolesInput")
-                                                            .HideInput()
-                                                            .LabelDisplay(WebLocalizationKeys.USER_ROLES)
-                                                                     .OperationName("/KYTAdmin")
-                                                            .ToString())
-             
-             <div id="showImage" >
-                @MvcHtmlString.Create(Html.ViewFor(x => x.User.ImageUrl).HideLabel().AddClassToInput("KYT_addEditImageSmall").ToString())
-                @MvcHtmlString.Create(StyledButtonFor("deleteImage", WebLocalizationKeys.DELETE).ToString())
-            </div>
+@MvcHtmlString.Create(FormFor<EmployeeController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+@MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
+@MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.EmployeeId).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.FirstName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.LastName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.EmergencyContact).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.EmergencyContactPhone).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Password).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Email).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.PhoneMobile).ToHtmlTag()
+        </div>
+    </div>
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Address2).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.City).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.State).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.ZipCode).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Status).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().RootId("rolesInputRoot").LabelDisplay(WebLocalizationKeys.USER_ROLES).ToHtmlTag()
+            @*            OperationName("/KYTAdmin").ToHtmlTag()*@
+        </div>
+        <div class="fieldRow">
             <div id="newImage">
                 <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
             </div>
-            @MvcHtmlString.Create(EndForm())
+        </div>
+    </div>
+@EndForm()
 

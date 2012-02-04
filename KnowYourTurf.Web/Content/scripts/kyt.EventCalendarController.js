@@ -11,7 +11,7 @@ kyt.CalendarController = kyt.Controller.extend({
     }, kyt.Controller.prototype.events),
     initialize:function(){
         $.extend(this,this.defaults());
-        this.options = $.extend({},kyt.crudControllerDefaults, this.options);
+        this.options = $.extend({},kyt.ControllerDefaults, this.options);
         $.clearPubSub();
         this.registerSubscriptions();
         var displayOptions={
@@ -22,24 +22,27 @@ kyt.CalendarController = kyt.Controller.extend({
         this.views.calendarView = new kyt.CalendarView(options);
     },
     registerSubscriptions:function(){
-        $.subscribe('/calendar_event/dayClick', $.proxy(this.dayClick,this), this.cid);
-        $.subscribe('/calendar_event/eventClick', $.proxy(this.eventClick,this), this.cid);
+        $.subscribe('/contentLevel/calendar_event/dayClick', $.proxy(this.dayClick,this), this.cid);
+        $.subscribe('/contentLevel/calendar_event/eventClick', $.proxy(this.eventClick,this), this.cid);
         // from form
-        $.subscribe('/form_editModule/success', $.proxy(this.formSuccess,this), this.cid);
-        $.subscribe('/form_editModule/cancel', $.proxy(this.formCancel,this), this.cid);
+        $.subscribe('/contentLevel/form_editModule/success', $.proxy(this.formSuccess,this), this.cid);
+        $.subscribe('/contentLevel/popup_editModule/cancel', $.proxy(this.formCancel,this), this.cid);
         // from display
-        $.subscribe('/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
-        $.subscribe('/popup_displayModule/edit', $.proxy(this.displayEdit,this), this.cid);
+        $.subscribe('/contentLevel/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
+        $.subscribe('/contentLevel/popup_displayModule/edit', $.proxy(this.displayEdit,this), this.cid);
         this.additionalSubscriptions();
     },
     additionalSubscriptions:function(){},
     dayClick:function(date, allDay, jsEvent, view) {
         var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"), "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")};
-        this.editEvent(this.options.AddEditUrl,data);
+        this.editEvent(this.options.AddUpdateUrl,data);
     },
 
     editEvent:function(url, data){
+        $("#dialogHolder").remove();
         $("#masterArea").after("<div id='dialogHolder'/>");
+        if(!data)data={};
+        data.Popup=true;
         var moduleOptions = {
             id:"editModule",
             el:"#dialogHolder",
@@ -47,14 +50,15 @@ kyt.CalendarController = kyt.Controller.extend({
             data:data,
             buttons: kyt.popupButtonBuilder.builder("editModule").standardEditButons()
         };
-        this.modules.popupForm = new kyt.PopupFormModule(moduleOptions);
+        this.modules.popupForm = new kyt.AjaxPopupFormModule(moduleOptions);
     },
 
     eventClick:function(calEvent, jsEvent, view) {
-        var data = {"EntityId": calEvent.EntityId};
+        $("#dialogHolder").remove();
+        var data = {"EntityId": calEvent.EntityId, popup:true};
         var builder = kyt.popupButtonBuilder.builder("displayModule");
         builder.addButton("Delete", $.proxy(this.deleteItem,this));
-        builder.addEditButton();
+        builder.addUpdateButton();
         builder.addButton("Copy Event",$.proxy(this.copyItem,this));
         builder.addCancelButton();
        $("#masterArea").after("<div id='dialogHolder'/>");
@@ -65,20 +69,21 @@ kyt.CalendarController = kyt.Controller.extend({
             data:data,
             buttons:builder.getButtons()
         };
-        this.modules.popupDisplay = new kyt.PopupDisplayModule(moduleOptions);
+        this.modules.popupDisplay = new kyt.AjaxPopupDisplayModule(moduleOptions);
     },
 
     copyItem:function(){
         var entityId = $("[name$='EntityId']").val();
         var data = {"EntityId":entityId,"Copy":true};
-        this.editEvent(this.options.AddEditUrl,data);
+        this.displayCancel();
+        this.editEvent(this.options.AddUpdateUrl,data);
     },
 
     deleteItem: function(){
         if (confirm("Are you sure you would like to delete this Item?")) {
             ///// do delete here!
         var entityId = $("#EntityId").val();
-        kyt.repository.ajaxGet(this.options.deleteUrl,{"EntityId":entityId}, $.proxy(function(){
+        kyt.repository.ajaxGet(this.options.DeleteUrl,{"EntityId":entityId}, $.proxy(function(){
             this.modules.popupDisplay.destroy();
             this.views.calendarView.reload();},this));
         }
@@ -99,8 +104,10 @@ kyt.CalendarController = kyt.Controller.extend({
     },
 
     displayEdit:function(url){
+        var id = $("#EntityId").val();
+        var _url = this.options.AddUpdateUrl+"/"+id;
         this.modules.popupDisplay.destroy();
-        this.editEvent(url);
+        this.editEvent(_url);
     }
 
 });

@@ -7,17 +7,36 @@
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
         
             @MvcHtmlString.Create(FormFor<CalculatorController>(x=>x.Calculate(null)).Class("CRUD").ElementId("CRUDForm").ToString())
 
             @MvcHtmlString.Create(Html.HiddenFor(x => x.EntityId).ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.CalculatorName).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.CalculatorDisplayName).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Field).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Product).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.SeedRate).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.OverSeedPercent).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.FieldArea).InputId("FieldArea").ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.BagSize).InputId("BagSize").ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.BagsNeeded).InputId("BagsNeeded").ToString())
-            @MvcHtmlString.Create(EndForm())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.CalculatorDisplayName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Field).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Product).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.SeedRate).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.OverSeedPercent).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.FieldArea).InputId("FieldArea").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.BagSize).InputId("BagSize").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.BagsNeeded).InputId("BagsNeeded").ToHtmlTag()
+        </div>
+    </div>
+            @EndForm()

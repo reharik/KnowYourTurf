@@ -4,9 +4,7 @@ using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
-using System.Linq;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
@@ -15,17 +13,17 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
-        private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
+        private readonly IFileHandlerService _fileHandlerService;
         private readonly ISessionContext _sessionContext;
 
         public AdminController(IRepository repository,
             ISaveEntityService saveEntityService,
-            IUploadedFileHandlerService uploadedFileHandlerService,
+            IFileHandlerService fileHandlerService,
             ISessionContext sessionContext)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
-            _uploadedFileHandlerService = uploadedFileHandlerService;
+            _fileHandlerService = fileHandlerService;
             _sessionContext = sessionContext;
         }
 
@@ -35,7 +33,7 @@ namespace KnowYourTurf.Web.Controllers
             
             var model = new UserViewModel
             {
-                User = admin,
+                Item = admin,
                 Title = WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString()
             };
             return PartialView("AdminAddUpdate", model);
@@ -46,8 +44,8 @@ namespace KnowYourTurf.Web.Controllers
             var admin = _repository.Find<User>(input.EntityId);
             var model = new UserViewModel
                             {
-                                User= admin,
-                                AddEditUrl = UrlContext.GetUrlForAction<AdminController>(x => x.Admin(null)) + "/" + admin.EntityId,
+                                Item= admin,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<AdminController>(x => x.Admin(null)) + "/" + admin.EntityId,
                                 Title = WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString()
                             };
             return PartialView("AdminView", model);
@@ -71,9 +69,9 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Save(UserViewModel input)
         {
             User administrator;
-            if (input.User.EntityId > 0)
+            if (input.Item.EntityId > 0)
             {
-                administrator = _repository.Find<User>(input.User.EntityId);
+                administrator = _repository.Find<User>(input.Item.EntityId);
             }
             else
             {
@@ -85,23 +83,22 @@ namespace KnowYourTurf.Web.Controllers
 
             if (input.DeleteImage)
             {
-                _uploadedFileHandlerService.DeleteFile(administrator.ImageUrl);
+                _fileHandlerService.DeleteFile(administrator.ImageUrl);
                 administrator.ImageUrl = string.Empty;
             }
 
-            var serverDirectory = "/CustomerPhotos/" + administrator.CompanyId + "/Admins";
-            administrator.ImageUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, administrator.FirstName+"_"+administrator.LastName);
+            administrator.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Admins");
+            administrator.ImageFriendlyName = administrator.FirstName + "_" + administrator.LastName;
             var crudManager = _saveEntityService.ProcessSave(administrator);
                 var user = _repository.Find<User>(administrator.EntityId);
                 _saveEntityService.ProcessSave(user,crudManager);
-            crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, administrator.FirstName + "_" + administrator.LastName, crudManager);
             var notification = crudManager.Finish();
             return Json(notification,"text/plain");
         }
 
         private User mapToDomain(UserViewModel model, User administrator)
         {
-            var adminModel = model.User;
+            var adminModel = model.Item;
             administrator.Address1 = adminModel.Address1;
             administrator.Address2= adminModel.Address2;
             administrator.FirstName= adminModel.FirstName;
@@ -117,9 +114,10 @@ namespace KnowYourTurf.Web.Controllers
                                                   Password = adminModel.UserLoginInfo.Password,
                                                   LoginName = adminModel.Email,
                                                   Status = adminModel.UserLoginInfo.Status,
-                                                  UserRoles = UserRole.Administrator.ToString(),
-                                                  UserType = UserRole.Administrator.ToString(),
+                                                  UserType = UserType.Administrator.ToString(),
                                               };
+            administrator.AddUserRole(new UserRole { Name = UserType.Administrator.ToString() });
+            administrator.AddUserRole(new UserRole { Name = UserType.Employee.ToString() });
             return administrator;
         }
     }

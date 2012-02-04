@@ -55,8 +55,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             HtmlTag label = labelBuilder.ToHtmlTag();
             HtmlTag input = displayBuilder.ToHtmlTag();
 
-            _htmlRoot.Child(label);
-            _htmlRoot.Child(input);
+            _htmlRoot.Children.Add(label);
+            _htmlRoot.Children.Add(input);
             return _htmlRoot;
         }
 

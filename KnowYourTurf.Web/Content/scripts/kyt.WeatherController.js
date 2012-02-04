@@ -15,7 +15,7 @@ kyt.WeatherController = kyt.CrudController.extend({
     events:_.extend({
     }, kyt.CrudController.prototype.events),
     addEditItem: function(url, data){
-        var _url = url?url:this.options.addEditUrl;
+        var _url = url?url:this.options.addUpdateUrl;
         var builder = kyt.popupButtonBuilder.builder("editModule");
         builder.addButton("Return",kyt.popupCrud.buttonBuilder.getCancelFunc);
                     

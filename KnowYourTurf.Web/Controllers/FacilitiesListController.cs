@@ -5,8 +5,6 @@ using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
-using KnowYourTurf.Web.Models;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
@@ -27,15 +25,16 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<FacilitiesListController>(x => x.Facilitiess(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)),
-                ListDefinition = _gridHandlerService.GetGridDefinition(url, WebLocalizationKeys.EMPLOYEES),
+                AddUpdateUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)),
+                GridDefinition = _gridHandlerService.GetGridDefinition(url),
+                Title = WebLocalizationKeys.FACILITIES.ToString()
             };
             return View(model);
         }
 
         public JsonResult Facilitiess(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserLoginInfo.UserType==UserRole.Facilities.ToString());
+            var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserLoginInfo.UserType==UserType.Facilities.ToString());
             var gridItemsViewModel = _gridHandlerService.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }

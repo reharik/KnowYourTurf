@@ -1,10 +1,11 @@
 /**
  * Created by JetBrains RubyMine.
- * User: Owner
- * Date: 11/5/11
- * Time: 2:27 PM
+ * User: RHarik
+ * Date: 10/13/11
+ * Time: 10:52 AM
  * To change this template use File | Settings | File Templates.
  */
+
 kyt.repository= (function(){
     var repositoryCallback = function(result,callback){
         clearTimeout(showLoader);

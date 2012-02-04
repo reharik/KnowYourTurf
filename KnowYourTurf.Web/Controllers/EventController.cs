@@ -23,7 +23,7 @@ namespace KnowYourTurf.Web.Controllers
             _selectListItemService = selectListItemService;
         }
 
-        public ActionResult AddEdit(AddEditEventViewModel input)
+        public ActionResult AddUpdate(AddUpdateEventViewModel input)
         {
             var _event = input.EntityId > 0 ? _repository.Find<Event>(input.EntityId) : new Event();
             _event.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : _event.ScheduledDate;
@@ -52,7 +52,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EventViewModel
                             {
                                 Event = _event,
-                                AddEditUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddEdit(null)) + "/" + _event.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate(null)) + "/" + _event.EntityId,
                                 Title = WebLocalizationKeys.EVENT_INFORMATION.ToString()
             };
             return PartialView("EventView", model);

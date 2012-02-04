@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
 using KnowYourTurf.Web.Models;
-using StructureMap;
 using System.Linq;
 
 namespace KnowYourTurf.Web.Controllers
@@ -41,22 +35,24 @@ namespace KnowYourTurf.Web.Controllers
             _purchaseOrderLineItemService = purchaseOrderLineItemService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
-            var purchaseOrder = input.ParentId > 0 ? _repository.Find<PurchaseOrder>(input.ParentId) : new PurchaseOrder();
+            var purchaseOrder = input.EntityId > 0 ? _repository.Find<PurchaseOrder>(input.EntityId) : new PurchaseOrder();
             var vendors = _selectListItemService.CreateList<Vendor>(x=>x.Company,x=>x.EntityId,true);
             var url = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null))+"?Vendor=0";
             var PoliUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.PurchaseOrderLineItems(null)) + "?EntityId=" + purchaseOrder.EntityId;
+            var deleteMany = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + purchaseOrder.EntityId;
             POListViewModel model = new POListViewModel()
             {
-                PurchaseOrder = purchaseOrder,
+                Item = purchaseOrder,
                 VendorList = vendors,
                 VendorId = purchaseOrder.EntityId > 0 ? purchaseOrder.Vendor.EntityId : 0,
                 ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrderList()),
                 CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)),
-
-                ListDefinition = _purchaseOrderSelectorGrid.GetGridDefinition(url, WebLocalizationKeys.PRODUCTS),
-                PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl, WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS)
+                DeleteMultipleUrl = deleteMany,
+                GridDefinition = _purchaseOrderSelectorGrid.GetGridDefinition(url),
+                PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl),
+                Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString()
 
             };
             return PartialView("PurchaseOrderBuilder", model);
@@ -66,7 +62,9 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Products(PoSelectorGridItemsRequestModel input)
         {
             var vendor = _repository.Find<Vendor>(input.Vendor);
-            var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, vendor.GetProducts().AsQueryable(), "productGrid");
+            var items = _dynamicExpressionQuery.PerformQuery(vendor.Products, input.filters);
+
+            var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items, "productGrid");
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
@@ -75,8 +73,8 @@ namespace KnowYourTurf.Web.Controllers
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
             var model = new POListViewModel()
             {
-                PurchaseOrder = purchaseOrder,
-                AddEditUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddEdit(null)) + "/" + purchaseOrder.EntityId
+                Item = purchaseOrder,
+                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" + purchaseOrder.EntityId
             };
             return PartialView("PurchaseOrderView", model);
         }
@@ -87,6 +85,17 @@ namespace KnowYourTurf.Web.Controllers
             _repository.HardDelete(purchaseOrder);
             _repository.UnitOfWork.Commit();
             return null;
+        }
+
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<PurchaseOrder>(x);
+                _repository.HardDelete(item);
+            });
+            _repository.Commit();
+            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Save(POSaveViewModel input)
@@ -122,7 +131,7 @@ namespace KnowYourTurf.Web.Controllers
 
             var model = new PurchaseOrderLineItemViewModel
                                                      {
-                                                         PurchaseOrderLineItem = purchaseOrderLineItem
+                                                         Item = purchaseOrderLineItem
                                                      };
             return View(model);
         }
@@ -133,14 +142,14 @@ namespace KnowYourTurf.Web.Controllers
             var purchaseOrder = input.ParentId > 0
                                     ? vendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId)
                                     : new PurchaseOrder{Vendor = vendor};
-            var baseProduct = _repository.Find<BaseProduct>(input.PurchaseOrderLineItem.Product.EntityId);
+            var baseProduct = _repository.Find<BaseProduct>(input.Item.Product.EntityId);
             var newPo = purchaseOrder.EntityId == 0;
             var purchaseOrderLineItem = new PurchaseOrderLineItem
             {
                 Product = baseProduct,
                 PurchaseOrder = purchaseOrder
             };
-            mapItem(purchaseOrderLineItem, input.PurchaseOrderLineItem);
+            mapItem(purchaseOrderLineItem, input.Item);
             _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder, purchaseOrderLineItem);
             vendor.AddPurchaseOrder(purchaseOrder);
             
@@ -150,7 +159,7 @@ namespace KnowYourTurf.Web.Controllers
             if(newPo)
             {
                 notification.Redirect = true;
-                notification.RedirectUrl=UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddEdit(null)) + "/" +
+                notification.RedirectUrl=UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" +
                         vendor.EntityId+"?ParentId="+ purchaseOrder.EntityId;
             }
             return Json(notification, JsonRequestBehavior.AllowGet);

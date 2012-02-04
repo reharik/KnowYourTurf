@@ -24,7 +24,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual bool Completed { get; set; }
 
         private readonly IList<PurchaseOrderLineItem> _lineItems = new List<PurchaseOrderLineItem>();
-        public virtual IEnumerable<PurchaseOrderLineItem> GetLineItems() { return _lineItems.AsEnumerable(); }
+        public virtual IEnumerable<PurchaseOrderLineItem> LineItems { get { return _lineItems.AsEnumerable(); } }
         public virtual void RemoveLineItem(PurchaseOrderLineItem purchaseOrderLineItem) { _lineItems.Remove(purchaseOrderLineItem); purchaseOrderLineItem.PurchaseOrder = null; }
         public virtual void AddLineItem(PurchaseOrderLineItem purchaseOrderLineItem)
         {

@@ -10,10 +10,9 @@ kyt.PurchaseOrderCommitController = kyt.CrudController.extend({
     }, kyt.CrudController.prototype.events),
     closePO:function(){
         var purchaseOrderId = $("#PurchaseOrder_EntityId").val();
-        kyt.repository.ajaxGet(this.options.closePOUrl,{"EntityId":purchaseOrderId},function(result){window.location = result.RedirectUrl;});
+        kyt.repository.ajaxGet(this.options.closePOUrl,{"EntityId":purchaseOrderId},function(result){$.address.value( result.RedirectUrl);});
     },
-    //fucking hack you fucking hack
-    additionalSubscriptions:function(){
+    registerAdditionalSubscriptions:function(){
         $("#savePO").click($.proxy(this.closePO,this));
     }
 

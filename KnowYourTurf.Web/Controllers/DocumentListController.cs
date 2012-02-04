@@ -4,7 +4,6 @@ using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -26,15 +25,17 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<DocumentListController>(x => x.Documents(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)),
-                ListDefinition = _documentListGrid.GetGridDefinition(url, WebLocalizationKeys.DOCUMENTS)
+                AddUpdateUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)),
+                DeleteMultipleUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.DeleteMultiple(null)),
+                GridDefinition = _documentListGrid.GetGridDefinition(url),
+                Title = WebLocalizationKeys.DOCUMENTS.ToString()
             };
             return View(model);
         }
         
         public JsonResult Documents(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<Document>();
+            var items = _dynamicExpressionQuery.PerformQuery<Document>(input.filters);
             var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }

@@ -11,12 +11,6 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public interface IEntityListGrid<ENTITY> where ENTITY : DomainEntity
-    {
-        void AddColumnModifications(Action<IGridColumn, ENTITY> modification);
-        GridDefinition GetGridDefinition(string url, StringToken title = null);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<ENTITY> items, string gridName = null);
-    }
     public class AdminListGrid : Grid<User>, IEntityListGrid<User>
     {
 
@@ -29,16 +23,6 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<User> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-              .ForAction<AdminController>(x => x.Delete(null))
-              .ToPerformAction(ColumnAction.Delete)
-               .ImageName("delete.png")
-              .ToolTip(WebLocalizationKeys.DELETE_ITEM);
-            GridBuilder.ImageButtonColumn()
-                .ForAction<AdminController>(x => x.Admin(null))
-                .ToPerformAction(ColumnAction.Edit)
-                .ImageName("KYTedit.png")
-                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.FullName)
                 .ForAction<AdminDashboardController>(x => x.ViewAdmin(null))
                 .ToPerformAction(ColumnAction.Redirect)
@@ -48,6 +32,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x => x.Email);
             return this;
         }
+
     }
 
 }

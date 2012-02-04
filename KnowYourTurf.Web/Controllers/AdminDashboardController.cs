@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
 using KnowYourTurf.Web.Models;
-using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -32,8 +28,8 @@ namespace KnowYourTurf.Web.Controllers
             var admin = _repository.Find<User>(input.EntityId);
             var model = new UserViewModel
             {
-                User = admin,
-                AddEditUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" + input.EntityId+"&From=Admin",
+                Item = admin,
+                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId+"&From=Admin",
                
             };
             return View("AdminDashboard", model);
@@ -42,7 +38,7 @@ namespace KnowYourTurf.Web.Controllers
 
     public class UserViewModel:ViewModel
     {
-        public User User { get; set; }
+        public User Item { get; set; }
         public bool DeleteImage { get; set; }
         public string RolesInput { get; set; }
         public IEnumerable<TokenInputDto> AvailableItems { get; set; }

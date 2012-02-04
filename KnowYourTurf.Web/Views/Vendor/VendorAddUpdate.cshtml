@@ -6,7 +6,7 @@
 @using KnowYourTurf.Web.Controllers
 @using KnowYourTurf.Core.Html.Expressions
 @{
-    Layout = "~/Views/Shared/_popupLayout.cshtml";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
 <script>
     var chemicalOptions = {
@@ -32,22 +32,53 @@
 </script>
 
             @MvcHtmlString.Create(FormFor<VendorController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Vendor.EntityId).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Vendor.Company).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Vendor.Phone).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Vendor.Fax).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Vendor.Address1).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Vendor.Address2).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Vendor.City).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Vendor.State).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Vendor.ZipCode).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Vendor.Website).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Vendor.Status).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Vendor.Notes).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Company).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Phone).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Fax).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Address2).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.City).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.State).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.ZipCode).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Website).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Status).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
 
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.ChemicalInput).InputId("ChemicalInput").HideInput().LabelDisplay(WebLocalizationKeys.CHEMICALS).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.FertilizerInput).InputId("FertilizerInput").HideInput().LabelDisplay(WebLocalizationKeys.FERTILIZERS).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.MaterialInput).InputId("MaterialInput").HideInput().LabelDisplay(WebLocalizationKeys.MATERIALS).ToString())
+            @Html.SubmissionFor(x => x.ChemicalInput).InputId("ChemicalInput").HideInput().LabelDisplay(WebLocalizationKeys.CHEMICALS).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.FertilizerInput).InputId("FertilizerInput").HideInput().LabelDisplay(WebLocalizationKeys.FERTILIZERS).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.MaterialInput).InputId("MaterialInput").HideInput().LabelDisplay(WebLocalizationKeys.MATERIALS).ToHtmlTag()
+        </div>
+    </div>
             
-            @MvcHtmlString.Create(EndForm())
+            
+            @EndForm()
 

@@ -161,7 +161,7 @@ namespace KnowYourTurf.Core.Html.Grid
     public enum ColumnAction
     {
         DisplayItem,
-        AddEditItem,
+        AddUpdateItem,
         Redirect,
         DeleteItem,
         Preview,

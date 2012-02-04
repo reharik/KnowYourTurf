@@ -25,7 +25,7 @@ namespace KnowYourTurf.Core.Domain
 
         #region Collections
         private readonly IList<Task> _tasks = new List<Task>();
-        public virtual IEnumerable<Task> GetTasks() { return _tasks; }
+        public virtual IEnumerable<Task> Tasks { get { return _tasks; } }
         public virtual IEnumerable<Task> GetPendingTasks()
         {
             return _tasks.Where(x => !x.Complete && x.ScheduledStartTime >= DateTime.Now);
@@ -45,7 +45,7 @@ namespace KnowYourTurf.Core.Domain
         }
 
         private readonly IList<Event> _events = new List<Event>();
-        public virtual IEnumerable<Event> GetEvents() { return _events; }
+        public virtual IEnumerable<Event> Events { get { return _events; } }
         public virtual void RemoveEvent(Event fieldEvent) { _events.Remove(fieldEvent); }
         public virtual void AddEvent(Event fieldEvent)
         {
@@ -54,7 +54,7 @@ namespace KnowYourTurf.Core.Domain
         }
         
         private readonly IList<Document> _documents = new List<Document>();
-        public virtual IEnumerable<Document> GetDocuments() { return _documents; }
+        public virtual IEnumerable<Document> Documents { get { return _documents; } }
         public virtual void RemoveDocument(Document fieldDocument) { _documents.Remove(fieldDocument); }
         public virtual void AddDocument(Document fieldDocument)
         {
@@ -63,7 +63,7 @@ namespace KnowYourTurf.Core.Domain
         }
 
         private readonly IList<Photo> _photos = new List<Photo>();
-        public virtual IEnumerable<Photo> GetPhotos() { return _photos; }
+        public virtual IEnumerable<Photo> Photos { get { return _photos; } }
         public virtual void RemovePhoto(Photo fieldPhoto) { _photos.Remove(fieldPhoto); }
         public virtual void AddPhoto(Photo fieldPhoto)
         {

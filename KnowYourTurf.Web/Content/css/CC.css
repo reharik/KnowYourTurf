@@ -1,0 +1,135 @@
+﻿body
+{
+}
+
+.rbroundbox { background: url(nt.gif) repeat; }
+.rbtop div { background: url(tl.gif) no-repeat top left; }
+.rbtop { background: url(tr.gif) no-repeat top right; }
+.rbbot div { background: url(bl.gif) no-repeat bottom left; }
+.rbbot { background: url(br.gif) no-repeat bottom right; }
+
+/* height and width stuff, width not really nessisary. */
+.rbtop div, .rbtop, .rbbot div, .rbbot {
+width: 100%;
+height: 7px;
+font-size: 1px;
+}
+.rbcontent { margin: 0 7px; }
+.rbroundbox { width: 50%; margin: 1em auto; }
+
+
+table.BillInfo
+{
+    margin: 10px 10px 10px 40px;
+    text-align: center;
+    font-family: Verdana;
+    font-weight: normal;
+    font-size: 11px;
+    color: #404040;
+    width: 360px;
+    background-color: #CCCCCC;
+    border: 1px #0c3466 solid;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+td.sumalert
+{
+    border-bottom: 1px #6699CC dotted;
+    text-align: left;
+    background-color: #FFFFFF;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 94px;
+    padding-right: 0px;
+    vertical-align: middle;
+}
+
+
+td.contact
+{
+    border-bottom: 1px #6699CC dotted;
+    text-align: left;
+    font-family: Verdana, sans-serif, Arial;
+    font-weight: normal;
+    font-size: .9em;
+    color: #000000;
+    background-color: #E1E1E1;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 0px;
+}
+
+td.header
+{
+    text-align: left;
+    font-family: 'Trebuchet MS';
+    font-weight: bold;
+    font-size: 24px;
+    color: #FFFFFF;
+    background-color: #000066;
+   /* padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 8px;
+    padding-right: 0px;*/
+    background-image: url('images/bill-head.gif');
+    vertical-align: middle;
+}
+
+
+
+
+
+
+label.error
+{
+    display: block;
+    color: red;
+
+}
+
+input.error {
+	border: 2px solid red;
+}
+
+
+
+div.error
+{
+    color: red;
+    font-family: Verdana;
+    font-size: 11px;
+}
+
+/*alert type box for displaying bill info*/
+table.alerts
+{
+    text-align: center;
+    font-family: Verdana;
+    font-weight: normal;
+    font-size: 11px;
+    color: #404040;
+    width: 160px;
+    background-color: #fafafa;
+    border: 1px solid #808080;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+
+.alertHd
+{
+    border-bottom: 2px solid #808080;
+    background-color: #666666;
+    text-align: center;
+    font-family: Verdana;
+    font-weight: bold;
+    font-size: 11px;
+    color: #FFFFFF;
+}
+
+td.contact li{
+    list-style:none;
+
+}

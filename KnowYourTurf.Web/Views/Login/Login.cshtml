@@ -1,85 +1,109 @@
 ﻿@model LoginViewModel
-@using KnowYourTurf.Core
-@using KnowYourTurf.Web.Controllers
 @using KnowYourTurf.Core.Html.Expressions
-@using KnowYourTurf.Web
 @using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web
+@using KnowYourTurf.Web.Controllers
+@using HtmlTags
 
 @{
     Layout = "";
 }
-<!DOCTYPE html>
+<!--[if IE]>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- [Else]>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- [endif]-->
 <html>
     <head>
     <title>Login</title>
-    
-    @MvcHtmlString.Create(CSS("yui.reset.2.6.0.css").ToString())
-    @MvcHtmlString.Create(CSS("site.css").ToString())
-    @MvcHtmlString.Create(CSS("kyt.css").ToString())
-    @MvcHtmlString.Create(CSS("ui-lightness/jquery-ui-1.8.7.custom.css").ToString())
 
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery-1.4.4.min.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery-ui-1.8.7.custom.min.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.validate.min.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.form.js").ToString())
-    @MvcHtmlString.Create(Script("internalHelpers/kyt.utilities.js").ToString())
-    @MvcHtmlString.Create(Script("internalHelpers/kyt.crudForm.js").ToString())
-    @MvcHtmlString.Create(Script("jqueryPlugins/jquery.metadata.js").ToString())
+    @CSS("jquery-ui-1.8.16.custom.css").ToHtmlTag()
+    @CSS("main.css").ToHtmlTag()
+    <!--[if gt IE 7]>
+    @CSS("ie.css").ToHtmlTag()
+     <![endif]-->
+     @CSS("kyt.css").ToHtmlTag()
+    @Script("jqueryPlugins/jquery-1.6.2.min.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery-ui-1.8.16.custom.min.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.validate.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.form.js").ToHtmlTag()
+    @Script("internalHelpers/cc.utilities.js").ToHtmlTag()
+    @Script("internalHelpers/cc.crudForm.js").ToHtmlTag()
+    @Script("externalHelpers/underscore.js").ToHtmlTag()
+    @Script("externalHelpers/backbone.js").ToHtmlTag()
+
+    @Script("kyt.baseClass.js").ToHtmlTag()
+    @Script("kyt.PopupView.js").ToHtmlTag()
+    @Script("kyt.FormView.js").ToHtmlTag()
+    @Script("kyt.ajaxPopupFormModule.js").ToHtmlTag()
+    @Script("kyt.forgottenPasswordController.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.pubsub.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.metadata.js").ToHtmlTag()
+    @Script("externalHelpers/json2.js").ToHtmlTag()
     
     <script type="text/javascript">
+        
+        var forgotPasswordUrl =@MvcHtmlString.Create(JsonUtil.ToJson(Model.ForgotPasswordUrl));
+        var popupTitle = "@Model.ForgotPasswordTitle";
+		
+		kyt.contentLevelControllers = {};
+		var extraFormOptions = {};
+
         $(document).ready(function () {
-            $(".submitButton").live("click", function (event) {
+            
+            $('.kyt_CRUD').crudForm({});
+            $("#save").click(function (event) {
                 $("#CRUDForm").submit();
                 event.preventDefault();
             });
-            $("[name=UserName]").focus();
-            $("#errorMessages").hide();
+
+            $("#forgotPasswordArea").hide();
+
+            $("#forgotPassword").click(function () {
+                new kyt.ForgottenPasswordController({el: "#forgotPassword",
+                        id: "forgotPasswordController",
+                        forgottenPasswordUrl: forgotPasswordUrl,
+                        title: popupTitle });
+            });
+
+            $("input[name='UserName']").focus();
+
         });
         </script>
     </head>
-    <body class="kyt_dyn">
-        <div id="background_layer">
-            <div class="container_12">    
-                <div class="KYT_960Main">
-                <div class="grid_3"></div>
-                <div class="grid_5"></div>
-                <div class="grid_4">
-                    <div class="KYT_userinfo">
+    <body id="signin">
+        <div id="outer-wrapper">
+            <div class="content-outer">
+                <div class="content-header"></div>
+                <div class="content-inner norequired">
+                    @MvcHtmlString.Create(FormFor<LoginController>(l => l.Login(null)).Class("kyt_CRUD").ElementId("CRUDForm").ToString())
                         
-                         
-                    </div>             
+                        <div class="signin">
+                            <div class="col">
+                                <label class="big">@WebLocalizationKeys.SIGN_IN</label>
+                                <div id="validation-container-wrapper">
+                                    <div id="errorMessagesForm" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
+                                </div>
+                                <div class="fieldRow">
+                                    @Html.SubmissionFor(x => x.UserName).ToHtmlTag()
+                                </div>
+                                <div class="fieldRow">
+                                    @Html.SubmissionFor(x => x.Password).ToHtmlTag()
+                                </div>
+                                <div class="fieldRow">
+                                    @Html.SubmissionFor(x => x.RememberMe).AddClassToRoot("checkbox").InlineReverse().ToHtmlTag()
+                                </div>
+                            </div>
+                            <div class="footer some-top-padding">
+                                @StandardButtonFor("save", WebLocalizationKeys.SIGN_IN).AddClass("save").AddClass("kyt_submitButton").ToHtmlTag()
+                                <a href="#" id="forgotPassword">@WebLocalizationKeys.FORGOT_YOUR_PASSWORD</a>
+                            </div>
+                        </div>
+                    @EndForm()
                 </div>
-
-                <h1></h1>
-                <div class="grid_12">
-
-                    @MvcHtmlString.Create(FormFor<LoginController>(l => l.Login(null)).Class("CRUD").ElementId("CRUDForm").ToString());
-    
-                        <h2 class="title">Login</h2>
-                        <div class="KYT_login_label">@WebLocalizationKeys.PLEASE_ENTER_YOUR_USERNAME_AND_PASSWORD_BELOW_KEY</div>     
-    
-                        <div id="errorMessages" class="errorMessages KYT_errorMessages" ><ul></ul></div>   
-    
-                        <div class="username">
-                            @MvcHtmlString.Create(Html.SubmissionFor(x => x.UserName).AddClassToInput(".KYT_width100").ToString())
-                        </div>
-                        <div class="password">
-                            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Password).AddClassToInput(".KYT_width100").ToString())
-                        </div>
-                        <div class="remember">
-                            @MvcHtmlString.Create(Html.SubmissionFor(x => x.RememberMe).InLine().AddClassToInput(".KYT_width100").ToString())
-                        </div>
-                        <div class="submit KYT_float_right">
-                            @MvcHtmlString.Create(StyledButtonFor("Login",WebLocalizationKeys.LOGIN_KEY).AsSubmit().ToString())
-                        </div>
-                    </form>
-
-                </div>
-            <div class="grid_12" id="footer">
-                <div class="powered"><p>© Copyright 2011 KYTsoftware, LLC.  All Rights Reserved</p></div>
-                </div>
-            </div>
+                <div class="content-footer"><span></span></div>
             </div>
         </div>
+        <div id="forgotPasswordArea"></div>
     </body>
 </html>

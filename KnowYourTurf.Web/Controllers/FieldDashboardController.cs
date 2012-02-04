@@ -8,7 +8,6 @@ using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
 using KnowYourTurf.Web.Models;
 using StructureMap;
 
@@ -50,25 +49,20 @@ namespace KnowYourTurf.Web.Controllers
             var model = new FieldDashboardViewModel
                             {
                                 EntityId = input.EntityId,
-                                Field = field,
-                                AddEditUrl =
-                                    UrlContext.GetUrlForAction<TaskController>(x => x.AddEdit(null)) + "?ParentId=" +
+                                Item = field,
+                                DeleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x => x.DeleteMultiple(null)) ,
+                                DeleteMultiplePhotosUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.DeleteMultiple(null)),
+                                DeleteMultipleDocumentsUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.DeleteMultiple(null)),
+                                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId + "&From=Field",
+                                AddUpdatePhotoUrl =UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "?ParentId=" +
                                     input.EntityId + "&From=Field",
-                                AddEditPhotoUrl =
-                                    UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "?ParentId=" +
+                                AddUpdateDocumentUrl =UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "?ParentId=" +
                                     input.EntityId + "&From=Field",
-                                AddEditDocumentUrl =
-                                    UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "?ParentId=" +
-                                    input.EntityId + "&From=Field",
-                                ListDefinition =
-                                    _pendingTaskGrid.GetGridDefinition(url, WebLocalizationKeys.PENDING_TASKS),
-                                CompletedListDefinition =
-                                    _completedTaskGrid.GetGridDefinition(completeUrl,
-                                                                         WebLocalizationKeys.COMPLETED_TASKS),
-                                DocumentListDefinition =
-                                    _documentListGrid.GetGridDefinition(docuemntUrl, WebLocalizationKeys.DOCUMENTS),
-                                PhotoListDefinition =
-                                    _photoListGrid.GetGridDefinition(photoUrl, WebLocalizationKeys.PHOTOS),
+                                GridDefinition =_pendingTaskGrid.GetGridDefinition(url),
+                                CompletedListDefinition =_completedTaskGrid.GetGridDefinition(completeUrl),
+                                DocumentListDefinition =_documentListGrid.GetGridDefinition(docuemntUrl),
+                                PhotoListDefinition =_photoListGrid.GetGridDefinition(photoUrl),
+                                Title = WebLocalizationKeys.FIELD_INFORMATION.ToString()
                             };
             return View("FieldDashboard", model);
         }
@@ -100,11 +94,11 @@ namespace KnowYourTurf.Web.Controllers
             IEnumerable<Photo> items;
             if(photoWhereClause==null)
            {
-               items = field.GetPhotos();
+               items = field.Photos;
            }
            else
            {
-               items = field.GetPhotos().Where(photoWhereClause.Compile());
+               items = field.Photos.Where(photoWhereClause.Compile());
            }
             var gridItemsViewModel = _photoListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable(),
                                                                           "photoGrid");
@@ -118,10 +112,10 @@ namespace KnowYourTurf.Web.Controllers
             IEnumerable<Document> items;
             if (documentWhereClause == null)
             {
-                items = field.GetDocuments();
+                items = field.Documents;
             }else
             {
-                items = field.GetDocuments().Where(documentWhereClause.Compile());
+                items = field.Documents.Where(documentWhereClause.Compile());
             }
             var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable(),
                                                                           "documentGrid");

@@ -31,8 +31,8 @@ var DEFAULT_SETTINGS = {
     onAdd: null,
     onDelete: null,
     idPrefix: "token-input-",
-    internalTokenMarkup:function(item){return "<p>"+ item.name +"</p>";}
-
+    internalTokenMarkup:function(item){return "<p>"+ item.name +"</p>";},
+    afterTokenSelectedFunction:function(){}
 };
 
 // Default classes to use when theming
@@ -461,7 +461,7 @@ $.TokenList = function (input, url_or_data, settings) {
         $(hidden_input).val(token_ids.join(settings.tokenDelimiter));
 
         token_count += 1;
-
+        settings.afterTokenSelectedFunction();
         return this_token;
     }
 
@@ -600,11 +600,12 @@ $.TokenList = function (input, url_or_data, settings) {
     }
 
     function show_dropdown() {
+        //added delay for hiding dropdown RH
         function autoHideDropdown(){
             var t = setTimeout(function() {
                     dropdown.hide().empty();
                     selected_dropdown_item = null;
-                },1500);
+                },11500);
             dropdown.mouseenter(function(){clearTimeout(t)});
 
         }

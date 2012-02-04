@@ -7,24 +7,40 @@
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
-
-        <div class="KYT_section_header" >
-            @MvcHtmlString.Create(WebLocalizationKeys.PURCHASE_ORDER_LIST_ITEM_INFORMATION.ToString())
-        </div>
-        
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
             @MvcHtmlString.Create(FormFor<PurchaseOrderLineItemController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.PurchaseOrderLineItem.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
             <input type="hidden" id="ParentId" name="ParentId" value="@Model.ParentId"/>
-            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.Product.Name).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.Product.Description).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.QuantityOrdered).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.SizeOfUnit).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.UnitType).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.Price).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.PurchaseOrderLineItem.Taxable).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.SubTotal).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.PurchaseOrderLineItem.Tax).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Item.Product.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Item.Product.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.QuantityOrdered).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.SizeOfUnit).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.UnitType).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Price).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Taxable).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Item.SubTotal).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Item.Tax).ToHtmlTag()
+        </div>
+    </div>
 
-            @MvcHtmlString.Create(EndForm())
+            @EndForm()
 

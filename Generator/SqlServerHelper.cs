@@ -1,10 +1,6 @@
 using System;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.IO;
-using System.Reflection;
-using FluentNHibernate;
 using KnowYourTurf.Core.Config;
 using NHibernate;
 
@@ -14,7 +10,7 @@ namespace Generator
     {
         public static void KillAllFKs(ISessionFactory source)
         {
-            using (ISession session = source.OpenSession(new SaveUpdateInterceptorWithCompanyFilter()))
+            using (ISession session = source.OpenSession(new SaveUpdateInterceptor()))
             {
                 try
                 {
@@ -50,7 +46,7 @@ DEALLOCATE FK_KILLER
 
         public static void DeleteReaddDb(ISessionFactory source)
         {
-            using (ISession session = source.OpenSession(new SaveUpdateInterceptorWithCompanyFilter()))
+            using (ISession session = source.OpenSession(new SaveUpdateInterceptor()))
             {
                 var sql =
                     "USE [master] alter database KnowYourTurf set single_user with rollback immediate DROP DATABASE KnowYourTurf CREATE DATABASE KnowYourTurf";
@@ -62,19 +58,29 @@ DEALLOCATE FK_KILLER
             }
         }
 
+        public static void killRhinoSecurity(ISessionFactory source)
+        {
+            using (ISession session = source.OpenSession(new SaveUpdateInterceptor()))
+            {
+                var sql =
+                    "delete security_UsersToUsersGroups;delete security_UsersGroupsHierarchy;delete security_Permissions;delete security_UsersGroups;delete security_Operations;delete security_EntityReferencesToEntitiesGroups;delete security_EntityReferences;delete security_EntityTypes;delete security_EntityGroupsHierarchy;delete security_EntitiesGroups;";
+
+                IDbConnection conn = session.Connection;
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public static void AddRhinoSecurity(ISessionFactory source)
         {
-            var exePath = AppDomain.CurrentDomain.BaseDirectory;
-            var newPath = exePath + @"sqlscripts\new_rhinosecurity.sql";
-            var rhino = new StreamReader(newPath);
-
-            var sql = rhino.ReadToEnd();
-            rhino.Close();
-
             using (ISession session = source.OpenSession())
             {
                 try
                 {
+                    var rhinoSecurityScript = new System.IO.StreamReader("src\\new_rhinosecurity.sql");
+                    string sql = rhinoSecurityScript.ReadToEnd();
+                    rhinoSecurityScript.Close();
                     IDbConnection conn = session.Connection;
                     var cmd = conn.CreateCommand();
                     cmd.CommandText = sql;

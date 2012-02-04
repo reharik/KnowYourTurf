@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using System.Web.Mvc;
-using HtmlTags;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
-using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -33,15 +26,17 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<VendorListController>(x => x.Vendors(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddEdit(null)),
-                ListDefinition = _vendorListGrid.GetGridDefinition(url, WebLocalizationKeys.VENDORS)
+                AddUpdateUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddUpdate(null)),
+                DeleteMultipleUrl = UrlContext.GetUrlForAction<VendorController>(x => x.DeleteMultiple(null)),
+                GridDefinition = _vendorListGrid.GetGridDefinition(url),
+                Title = WebLocalizationKeys.VENDORS.ToString()
             };
             return View(model);
         }
         
         public JsonResult Vendors(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<Vendor>();
+            var items = _dynamicExpressionQuery.PerformQuery<Vendor>(input.filters);
             Action<IGridColumn, Vendor> mod = (c, v) =>
                                           {
                                               if (c.GetType() == typeof(ImageButtonColumn<Vendor>) && c.ColumnIndex == 10)

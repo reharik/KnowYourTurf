@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using KnowYourTurf.Core.Html.Expressions;
 using FubuMVC.Core.Util;
 using KnowYourTurf.Core.Html.Menu;
+using MethodFitness.Core.Html.Expressions;
 using Microsoft.Practices.ServiceLocation;
 
 namespace KnowYourTurf.Core.Html
@@ -33,19 +34,12 @@ namespace KnowYourTurf.Core.Html
 
         public static ScriptReferenceExpression Script(this ViewPage viewPage, string url)
         {
-            return new ScriptReferenceExpression().Add(url);
+            return new ScriptReferenceExpression(url);
         }
 
         public static ScriptReferenceExpression SiteScript(this ViewMasterPage viewMasterPage, string url)
         {
-            return new ScriptReferenceExpression().Add(url);
-        }
-
-        public static ScriptReferenceExpression Script(this ViewPage viewPage, IEnumerable<string> scriptLinks)
-        {
-            var expr = new ScriptReferenceExpression();
-            scriptLinks.Each(l => expr.Add(l));
-            return expr;
+            return new ScriptReferenceExpression(url);
         }
 
         public static string ActionUrl<CONTROLLER>(this ViewPage viewPage, Expression<Func<CONTROLLER, object>> actionExpression)

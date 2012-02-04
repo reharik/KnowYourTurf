@@ -24,7 +24,7 @@ namespace Generator.Commands
 
             }
             _loader.EnterStrings(_repository, Console.In, Console.Out);
-            _repository.UnitOfWork.Commit();
+            _repository.Commit();
 
         }
     }

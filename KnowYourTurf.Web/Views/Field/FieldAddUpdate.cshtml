@@ -5,7 +5,7 @@
 @using KnowYourTurf.Web.Controllers
 @using KnowYourTurf.Core.Html.Expressions
 @{
-    Layout = "~/Views/Shared/_popupLayout.cshtml";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
 <script type="text/javascript" charset="utf-8">
     extraFormOptions.runAfterRenderFunction = function () {
@@ -14,14 +14,26 @@
  </script>
 
             @MvcHtmlString.Create(FormFor<FieldController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Field.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Field.Name).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Field.Abbreviation).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Field.Description).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Field.Size).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Abbreviation).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Size).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
             @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.Field.FieldColor).InputId("FieldColor").ToString())
+            @Html.SubmissionFor(x => x.Item.FieldColor).InputId("FieldColor").ToHtmlTag()
             <div id="colorPicker"></div>
-            @MvcHtmlString.Create(EndForm())
+        </div>
+    </div>
+            @EndForm()
             

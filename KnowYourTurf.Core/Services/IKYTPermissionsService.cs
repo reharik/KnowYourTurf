@@ -26,11 +26,11 @@ namespace KnowYourTurf.Core.Services
         {
             _permissionsBuilderService
                     .Allow("/KYTAdmin")
-                    .For(UserRole.KYTAdmin.Key)
+                    .For(UserType.KYTAdmin.Key)
                     .OnEverything()
                     .Level(10)
                     .Save();
-            GrantDefaultAdminPermissions(UserRole.KYTAdmin.Key);
+            GrantDefaultAdminPermissions(UserType.KYTAdmin.Key);
         }
 
         public void GrantDefaultAdminPermissions(string type)
@@ -50,64 +50,63 @@ namespace KnowYourTurf.Core.Services
 
         public void GrantDefaultEmployeePermissions()
         {
-            _permissionsBuilderService.Allow("/HomeController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/CalculatorController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/CalculatorListController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/EmployeeDashboardController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/EmployeeController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/EquipmentController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/EquipmentListController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/EventController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/EventCalendarController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/FieldController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/FieldDashboardController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/FieldListController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/ForumController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/InventoryListController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/PhotoController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/DocumentController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/PurchaseOrderCommitController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/PurchaseOrderController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/PurchaseOrderLineItemController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/PurchaseOrderListController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/TaskController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/TaskCalendarController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/TaskListController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/VendorContactController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/VendorContactListController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/VendorController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/VendorListController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/WeatherController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/WeatherListController").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/KnowYourTurfController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/OrthogonalController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/CalculatorController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/CalculatorListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/EmployeeDashboardController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/EmployeeController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/EquipmentController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/EquipmentListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/EventController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/EventCalendarController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/FieldController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/FieldDashboardController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/FieldListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/ForumController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/InventoryListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/PhotoController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/DocumentController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/PurchaseOrderCommitController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/PurchaseOrderController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/PurchaseOrderLineItemController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/PurchaseOrderListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/TaskController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/TaskCalendarController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/TaskListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/VendorContactController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/VendorContactListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/VendorController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/VendorListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/WeatherController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/WeatherListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
 
-            _permissionsBuilderService.Allow("/MenuItem/Home").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/Vendors").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/Inventory").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/Fields").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/Equipment").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/Tasks").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/PurchaseOrders").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/Events").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/Calculators").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/Weather").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/MenuItem/Forum").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/MenuItem/Home").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/MenuItem/Fields").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/MenuItem/Equipment").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/MenuItem/Tasks").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/MenuItem/Events").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/MenuItem/Calculators").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/MenuItem/Weather").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/MenuItem/Forum").For(UserType.Employee.Key).OnEverything().Level(1).Save();
         }
 
         public void GrantDefaultFacilitiesPermissions()
         {
             _permissionsBuilderService
                 .Allow("/EventController")
-                .For(UserRole.Facilities.Key)
+                .For(UserType.Facilities.Key)
                 .OnEverything()
                 .Level(1)
                 .Save();
             _permissionsBuilderService
                 .Allow("/EventCalendarController")
-                .For(UserRole.Facilities.Key)
+                .For(UserType.Facilities.Key)
                 .OnEverything()
                 .Level(1)
                 .Save();
-            _permissionsBuilderService.Allow("/MenuItem/Events").For(UserRole.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/MenuItem/Events").For(UserType.Facilities.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/KnowYourTurfController").For(UserType.Facilities.Key).OnEverything().Level(1).Save();
 
         }
     }

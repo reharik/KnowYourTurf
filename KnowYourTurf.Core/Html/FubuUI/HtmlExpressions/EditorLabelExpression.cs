@@ -49,7 +49,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             {
                 label.Text(label.Text()+"*");
             }
-            _htmlRoot.Child(label);
+            _htmlRoot.Children.Add(label);
             return _htmlRoot;
         }
 

@@ -22,8 +22,8 @@ kyt.CalendarView = Backbone.View.extend({
     },
     registerSubscriptions:function(){
 
-        $.subscribe('/calendar_'+this.id+'/eventDrop', $.proxy(this.eventDrop,this), this.cid);
-        $.subscribe('/calendar_'+this.id+'/eventResize', $.proxy(this.eventResize,this), this.cid);
+        $.subscribe('/contentLevel/calendar_'+this.id+'/eventDrop', $.proxy(this.eventDrop,this), this.cid);
+        $.subscribe('/contentLevel/calendar_'+this.id+'/eventResize', $.proxy(this.eventResize,this), this.cid);
     },
     eventDrop:function(event, dayDelta,minuteDelta,allDay,revertFunc) {
         var data = {"EntityId":event.EntityId,

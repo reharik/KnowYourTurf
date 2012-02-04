@@ -1,10 +1,16 @@
+﻿using System;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.Services;
 using FubuMVC.UI;
 using FubuMVC.UI.Tags;
-using KnowYourTurf.Core.Services;
 using Microsoft.Practices.ServiceLocation;
+using NHibernate.Mapping;
 using StructureMap;
+using StructureMap.Configuration;
+using log4net.Config;
 
 namespace KnowYourTurf.Web.Config
 {
@@ -12,7 +18,7 @@ namespace KnowYourTurf.Web.Config
     {
         private static bool _hasStarted;
 
-        public static void Restart(bool testing = false)
+        public static void Restart()
         {
             if (_hasStarted)
             {
@@ -29,7 +35,6 @@ namespace KnowYourTurf.Web.Config
         {
             new Bootstrapper().Start();
         }
-
         public static void BootstrapTest()
         {
             new Bootstrapper().Start(true);
@@ -37,18 +42,43 @@ namespace KnowYourTurf.Web.Config
 
         private void Start(bool testing = false)
         {
-            if(testing)
+            if (testing)
+            {
                 StructureMapBootstrapperTesting.Bootstrap();
+            }
             else
+            {
                 StructureMapBootstrapper.Bootstrap();
+                ModelBindingBootstaper.Bootstrap();
+            }
+            // sets SM as CSL
             ServiceLocator.SetLocatorProvider(() => new StructureMapServiceLocator());
-            //ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory(ObjectFactory.Container));
-            DependencyResolver.SetResolver(new StructureMapDependencyResolver(ObjectFactory.Container));
+            // sets MVCDependencyResolver to use the CSL
+            DependencyResolver.SetResolver(new StructureMapServiceLocator());
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+
+            XmlConfigurator.ConfigureAndWatch(new FileInfo(locateFileAsAbsolutePath("log4net.config")));
 
             var library = ObjectFactory.Container.GetInstance<TagProfileLibrary>();
             var conventions = ObjectFactory.Container.GetAllInstances<HtmlConventionRegistry>();
             conventions.Each(library.ImportRegistry);
+
+            //SecurityBootstrapper.Bootstrap();
+        }
+
+        private static string locateFileAsAbsolutePath(string filename)
+        {
+            if (Path.IsPathRooted(filename))
+                return filename;
+            string applicationBase = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            string path = Path.Combine(applicationBase, filename);
+            if (!File.Exists(path))
+            {
+                path = Path.Combine(Path.Combine(applicationBase, "bin"), filename);
+                if (!File.Exists(path))
+                    path = Path.Combine(Path.Combine(applicationBase, ".."), filename);
+            }
+            return path;
         }
     }
 }

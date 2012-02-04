@@ -21,15 +21,10 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<EventType> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-               .ForAction<EventTypeController>(x => x.AddUpdate(null),"eventTypeGrid")
-               .ToPerformAction(ColumnAction.Edit)
-               .ImageName("KYTedit.png")
-               .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Name, "eventTypeGrid")
-                .ForAction<EventTypeController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ForAction<EventTypeController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
         }
@@ -46,15 +41,10 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<TaskType> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-               .ForAction<TaskTypeController>(x => x.AddUpdate(null),"taskTypeGrid")
-               .ToPerformAction(ColumnAction.Edit)
-               .ImageName("KYTedit.png")
-               .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Name, "taskTypeGrid")
-                .ForAction<TaskTypeController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ForAction<TaskTypeController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
         }
@@ -71,15 +61,10 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<PhotoCategory> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-                .ForAction<PhotoCategoryController>(x => x.AddUpdate(null),"photoCategoryGrid")
-               .ToPerformAction(ColumnAction.Edit)
-               .ImageName("KYTedit.png")
-               .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Name, "photoCategoryGrid")
-                .ForAction<PhotoCategoryController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ForAction<PhotoCategoryController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
         }
@@ -96,15 +81,10 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<DocumentCategory> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-               .ForAction<DocumentCategoryController>(x => x.AddUpdate(null),"documentCategoryGrid")
-               .ToPerformAction(ColumnAction.Edit)
-               .ImageName("KYTedit.png")
-               .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.Name, "documentCategoryGrid")
-                .ForAction<DocumentCategoryController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ForAction<DocumentCategoryController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
         }

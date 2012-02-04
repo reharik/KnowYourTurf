@@ -5,14 +5,33 @@
 @using KnowYourTurf.Web.Controllers
 
 @{
-    Layout = "";
+    Layout = "~/Views/Shared/_DisplayLayout.cshtml";
+
 }
         
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Chemical.Name).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Chemical.Description).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Chemical.Manufacturer).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Chemical.ActiveIngredient).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Chemical.ActiveIngredientPercent).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Chemical.EPAEstNumber).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Chemical.EPARegNumber).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Chemical.Notes).ToString())
+   <div class="col left">
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Chemical.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Chemical.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Chemical.Manufacturer).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Chemical.ActiveIngredient).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Chemical.ActiveIngredientPercent).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Chemical.EPAEstNumber).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Chemical.EPARegNumber).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Chemical.Notes).ToHtmlTag()
+        </div>
+    </div>

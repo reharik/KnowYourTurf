@@ -12,7 +12,6 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
 
     initialize:function(){
         $.extend(this,this.defaults());
-        this.options = $.extend({},kyt.crudControllerDefaults, this.options);
         $.clearPubSub();
         this.registerSubscriptions();
         var viewOptions={
@@ -47,22 +46,24 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
             id:"poliGrid",
             gridContainer:"#poliGrid",
             gridDef:this.options.poliGridDef,
-            gridOptions: poliExtraOptions
+            searchField:"Product.Name",
+//            gridOptions: poliExtraOptions,
+            deleteMultipleUrl:this.options.deleteMultipleUrl
         };
         this.views.poliGridView = new kyt.GridView(poliGridOptions);
         $("#productGrid").jqGrid('setGridState', $("#vendorId").val()<=0?'hidden':'visible');
     },
     registerSubscriptions:function(){
-        $.subscribe("/form_POBuilder/pageLoaded", $.proxy(this.pageLoaded,this));
-        $.subscribe("/grid_productGrid/Other", $.proxy(this.addToOrder,this));
-        $.subscribe("/grid_productGrid/Display", $.proxy(this.displayProduct,this));
-        $.subscribe("/grid_poliGrid/Delete", $.proxy(this.deleteItem,this));
-        $.subscribe("/grid_poliGrid/Edit", $.proxy(this.editItem,this));
-        $.subscribe("/grid_poliGrid/Display", $.proxy(this.displayItem,this));
-        $.subscribe('/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
-        $.subscribe('/popup_displayModule/edit', $.proxy(this.displayEdit,this), this.cid);
+        $.subscribe("/contentLevel/form_POBuilder/pageLoaded", $.proxy(this.pageLoaded,this));
+        $.subscribe("/contentLevel/grid_productGrid/Other", $.proxy(this.addToOrder,this));
+        $.subscribe("/contentLevel/grid_productGrid/Display", $.proxy(this.displayProduct,this));
+        $.subscribe("/contentLevel/grid_poliGrid/Delete", $.proxy(this.deleteItem,this));
+        $.subscribe("/contentLevel/grid_poliGrid/AddUpdateItem", $.proxy(this.editItem,this));
+        $.subscribe("/contentLevel/grid_poliGrid/Display", $.proxy(this.displayItem,this));
+        $.subscribe('/contentLevel/popup_displayModule/cancel', $.proxy(this.displayCancel,this), this.cid);
+        $.subscribe('/contentLevel/popup_displayModule/edit', $.proxy(this.displayEdit,this), this.cid);
 
-        $.subscribe('/form_editModule/success', $.proxy(this.itemSuccess,this), this.cid);
+        $.subscribe('/contentLevel/form_editModule/success', $.proxy(this.itemSuccess,this), this.cid);
 
     },
     pageLoaded:function(){
@@ -70,12 +71,12 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
         this.setupEvents()
     },
     showPOData: function() {
-        var poId = $("#PurchaseOrder_EntityId").val();
+        var poId = $("#Item_EntityId").val();
         if (poId > 0) {
             $("#viewPOID").show();
             $("#viewVendor").show();
             $("#editVendor").hide();
-            $("#PurchaseOrder_EntityId").val(poId);
+            $("#Item_EntityId").val(poId);
             $("#POID").val(poId);
             $("#viewPOID").find("span").text(poId);
         } else {
@@ -96,15 +97,20 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
         },this));
 
         $("#commit").click($.proxy(this.commitPO, this));
-        $("#return").click($.proxy(function(){window.location.href = this.options.returnUrl;},this));
+        $("#return").click($.proxy(function(){$.address.value(this.options.returnUrl)},this));
     },
     addToOrder:function(url){
-        var poId = $("#poId").val();
+        var poId = $("#Item_EntityId").val();
         var vendorId = $("#vendorId").val();
         kyt.repository.ajaxGet(url,{"PurchaseOrderId":poId,"VendorId":vendorId}, $.proxy(this.addToOrderCallback,this))
     },
     addToOrderCallback:function(result){
-        $("#poId").val(result.EntityId);
+        if($("#Item_EntityId").val()==0){
+            var vendorName = $("#vendor :selected").text();
+            $("#viewVendor").find("span", ".KYT_view_display").text(vendorName);
+        }
+        $("#Item_EntityId").val(result.EntityId);
+        this.showPOData();
         var url = this.views.poliGridView.getUrl();
         url = url.substr(0,url.indexOf("?EntityId"));
         url = url+"?EntityId="+result.EntityId;
@@ -122,7 +128,7 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
             url: _url,
             buttons: button
         };
-        this.modules.popupDisplay= new kyt.PopupDisplayModule(moduleOptions);
+        this.modules.popupDisplay= new kyt.AjaxPopupDisplayModule(moduleOptions);
     },
 
     displayItem:function(url, data){
@@ -153,8 +159,8 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
         }
     },
     editItem:function(url, data){
-        var poId = $("#poId").val();
-         var _url = url?url:this.options.addEditUrl;
+        var poId = $("#Item_EntityId").val();
+         var _url = url?url:this.options.addUpdateUrl;
         _url = _url+"?ParentId="+poId;
         $("#masterArea").after("<div id='dialogHolder'/>");
         var moduleOptions = {
@@ -163,8 +169,9 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
             url: _url,
             data:data
         };
-        this.modules.popupForm = new kyt.PopupFormModule(moduleOptions);
+        this.modules.popupForm = new kyt.AjaxPopupFormModule(moduleOptions);
     },
+
     itemSuccess:function(){
        this.itemCancel();
        this.views.poliGridView.reloadGrid();
@@ -173,7 +180,7 @@ kyt.PurchaseOrderBuilderController = kyt.Controller.extend({
        this.modules.popupForm.destroy();
     },
     commitPO:function(){
-        var purchaseOrderId = $("#PurchaseOrder_EntityId").val();
-        window.location.href = this.options.commitUrl+"?ParentId="+purchaseOrderId;
+        var purchaseOrderId = $("#Item_EntityId").val();
+        $.address.value(this.options.commitUrl+"?EntityId="+purchaseOrderId);
     }
 });

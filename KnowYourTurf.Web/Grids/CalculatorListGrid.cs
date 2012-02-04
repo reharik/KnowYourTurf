@@ -23,12 +23,10 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Calculator> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
+            GridBuilder.LinkColumnFor(x=>x.Name)
                 .ForAction<CalculatorController>(x => x.Calculator(null))
-                .ToPerformAction(ColumnAction.Edit)
-                .ImageName("KYTedit.png")
+                .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
-            GridBuilder.DisplayFor(x => x.Name);
             GridBuilder.DisplayFor(x => x.DateCreated);
             return this;
         }

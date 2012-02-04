@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -18,12 +19,12 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var fertilizer = input.EntityId > 0 ? _repository.Find<Fertilizer>(input.EntityId) : new Fertilizer();
             var model = new FertilizerViewModel
             {
-                Fertilizer = fertilizer,
+                Item = fertilizer,
                 Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
             };
             return PartialView("FertilizerAddUpdate", model);
@@ -34,8 +35,8 @@ namespace KnowYourTurf.Web.Controllers
             var fertilizer = _repository.Find<Fertilizer>(input.EntityId);
             var model = new FertilizerViewModel
             {
-                Fertilizer = fertilizer,
-                AddEditUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddEdit(null)) + "/" + fertilizer.EntityId,
+                Item = fertilizer,
+                AddUpdateUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddUpdate(null)) + "/" + fertilizer.EntityId,
                 Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
             };
             return PartialView("FertilizerView", model);
@@ -49,9 +50,38 @@ namespace KnowYourTurf.Web.Controllers
             return null;
         }
 
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            var notification = new Notification { Success = true };
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<Fertilizer>(x);
+                if (checkDependencies(item, notification))
+                {
+                    _repository.HardDelete(item);
+                }
+            });
+            _repository.Commit();
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+        private bool checkDependencies(Fertilizer item, Notification notification)
+        {
+            var dependantItems = _repository.Query<Vendor>(x => x.Products.Any(i => i == item));
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_FOR_VENDOR.ToString();
+                }
+                return false;
+            }
+            return true;
+        }
+
         public ActionResult Save(FertilizerViewModel input)
         {
-            Fertilizer fertilizer = input.Fertilizer.EntityId > 0 ? _repository.Find<Fertilizer>(input.Fertilizer.EntityId) : new Fertilizer();
+            Fertilizer fertilizer = input.Item.EntityId > 0 ? _repository.Find<Fertilizer>(input.Item.EntityId) : new Fertilizer();
             mapItem(fertilizer, input);
             var crudManager = _saveEntityService.ProcessSave(fertilizer);
             var notification = crudManager.Finish();
@@ -60,12 +90,12 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(Fertilizer fertilizer, FertilizerViewModel input)
         {
-            fertilizer.Description = input.Fertilizer.Description;
-            fertilizer.K = input.Fertilizer.K;
-            fertilizer.N = input.Fertilizer.N;
-            fertilizer.Name = input.Fertilizer.Name;
-            fertilizer.Notes = input.Fertilizer.Notes;
-            fertilizer.P = input.Fertilizer.P;
+            fertilizer.Description = input.Item.Description;
+            fertilizer.K = input.Item.K;
+            fertilizer.N = input.Item.N;
+            fertilizer.Name = input.Item.Name;
+            fertilizer.Notes = input.Item.Notes;
+            fertilizer.P = input.Item.P;
         }
     }
 }

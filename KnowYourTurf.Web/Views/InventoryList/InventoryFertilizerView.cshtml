@@ -6,11 +6,23 @@
 
 
 @{
-    Layout = "";
+    Layout = "~/Views/Shared/_DisplayLayout.cshtml";
 }
         
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Fertilizer.Name).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Fertilizer.Description).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Fertilizer.N).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Fertilizer.P).ToString())
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Fertilizer.K).ToString())
+  <div class="col left">
+        <div class="fieldRow">
+             @Html.ViewFor(x => x.Fertilizer.Name).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+           @Html.ViewFor(x => x.Fertilizer.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Fertilizer.N).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Fertilizer.P).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Fertilizer.K).ToHtmlTag()
+        </div>
+    </div>

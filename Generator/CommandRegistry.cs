@@ -17,7 +17,6 @@ namespace Generator
            
             For<IConventionFinder>().Use<DefaultConventionFinder>();
             For<ILocalizedStringLoader>().Use<LocalizedStringLoader>();
-            For<IGetCompanyIdService>().Use<DataLoaderGetCompanyIdService>();
 
         }
     }

@@ -24,6 +24,7 @@
              KnowYourTurf.Web\**\*.cs;
              KnowYourTurf.Web\**\.idea\**;
              KnowYourTurf.Web\**\.svn\**;
+             KnowYourTurf.Web\**\*.xml;
              KnowYourTurf.Web\**\*.pdb;" />
     </ItemGroup>
     <Time>
@@ -51,7 +52,7 @@
   </Target>
 
   <ItemGroup>
-    <UnitTestAssemblies Include="$(SourcePath)\KnowYourTurf.UnitTests\bin\Debug\KnowYourTurf.UnitTests.dll;" />
+    <UnitTestAssemblies Include="$(SourcePath)\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll;" />
   </ItemGroup>
   <Target Name="_unitTests">
     <NUnit Assemblies="@(UnitTestAssemblies)" ToolPath="$(NUnit)" />

@@ -24,20 +24,11 @@ namespace KnowYourTurf.Core.Domain
 
         protected override Grid<PurchaseOrder> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
-               .ForAction<PurchaseOrderController>(x => x.Delete(null))
-               .ToPerformAction(ColumnAction.Delete)
-               .ImageName("delete.png")
-               .ToolTip(WebLocalizationKeys.DELETE_ITEM);
-            GridBuilder.ImageButtonColumn()
-                .ForAction<PurchaseOrderController>(x => x.AddEdit(null))
-                .ToPerformAction(ColumnAction.Redirect)
-                .ImageName("KYTedit.png")
-                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.LinkColumnFor(x => x.DateCreated)
-                .ForAction<PurchaseOrderController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ForAction<PurchaseOrderController>(x => x.AddUpdate(null))
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
+            GridBuilder.DisplayFor(x => x.EntityId).DisplayHeader(WebLocalizationKeys.PO_Number);
             GridBuilder.DisplayFor(x => x.Completed);
             GridBuilder.DisplayFor(x => x.Vendor.Company);
             GridBuilder.DisplayFor(x => x.SubTotal).FormatValue(GridColumnFormatter.Currency);

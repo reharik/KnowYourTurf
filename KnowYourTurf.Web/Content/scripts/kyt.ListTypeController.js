@@ -11,97 +11,112 @@ if (typeof kyt == "undefined") {
 }
 
 kyt.ListTypeController = kyt.CrudController.extend({
-    additionalSubscriptions:function(){
+    registerAdditionalSubscriptions:function(){
         // from etgrid
-        $.subscribe('/grid_EventTypeGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_EventTypeGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_EventTypeGrid/Display',$.proxy(this.displayItem,this), this.cid);
-        $.subscribe('/grid_EventTypeGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_EventTypeGrid/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_EventTypeGrid/Display',$.proxy(this.displayItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_EventTypeGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
         // from ttgrid
-        $.subscribe('/grid_TaskTypeGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_TaskTypeGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_TaskTypeGrid/Display',$.proxy(this.displayItem,this), this.cid);
-        $.subscribe('/grid_TaskTypeGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_TaskTypeGrid/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_TaskTypeGrid/Display',$.proxy(this.displayItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_TaskTypeGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
         // from dcgrid
-        $.subscribe('/grid_DocumentCategoryGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_DocumentCategoryGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_DocumentCategoryGrid/Display',$.proxy(this.displayItem,this), this.cid);
-        $.subscribe('/grid_DocumentCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_DocumentCategoryGrid/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_DocumentCategoryGrid/Display',$.proxy(this.displayItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_DocumentCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
         // from pcgrid
-        $.subscribe('/grid_PhotoCategoryGrid/AddNewItem',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_PhotoCategoryGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
-        $.subscribe('/grid_PhotoCategoryGrid/Display',$.proxy(this.displayItem,this), this.cid);
-        $.subscribe('/grid_PhotoCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_PhotoCategoryGrid/AddUpdateItem',$.proxy(this.addUpdateItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_PhotoCategoryGrid/Edit',$.proxy(this.addEditItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_PhotoCategoryGrid/Display',$.proxy(this.displayItem,this), this.cid);
+        $.subscribe('/contentLevel/grid_PhotoCategoryGrid/Delete',$.proxy(this.deleteItem,this), this.cid);
 
         // from form
+        $.subscribe("/contentLevel/form_eventTypeGrid/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
+        $.subscribe("/contentLevel/form_taskTypeGrid/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
+        $.subscribe("/contentLevel/form_documentCategoryGrid/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
+        $.subscribe("/contentLevel/form_editModule/pageLoaded", $.proxy(this.formLoaded,this),this.cid);
+        
     },
-    initialize:function(){
+    initialize:function(options){
+        $.extend(this,this.defaults());
+        kyt.contentLevelControllers["ListTypeController"]=this;
+        $.unsubscribeByPrefix("/contentLevel");
+        this.id="ListTypeController";
+        this.registerSubscriptions();
+
+        $.extend(this.options, options);
+
         this.el = ("#masterArea");
-        this.initializeBase();
         var etOptions={
             el:"#etGrid",
             id:"eventTypeGrid",
+            gridName:"EventTypeGrid",
             gridDef:this.options.gridInfo.gridDef,
-            addEditUrl:this.options.gridInfo.addEditUrl,
-            gridOptions:{pager: "#eventTypePager"},
-            gridContainer:"#EventTypeGrid"
+            addUpdateUrl:this.options.gridInfo.addUpdateUrl,
+            gridContainer:"#EventTypeGrid",
+            deleteMultipleUrl:this.options.gridInfo.deleteMultiple,
+            gridOptions:{height:"400px"}
         };
         this.views.etGridView = new kyt.GridView(etOptions);
         var ttOptions={
             el:"#ttGrid",
             id:"taskTypeGrid",
+            gridName:"TaskTypeGrid",
             gridDef:this.options.ttGridInfo.gridDef,
-            addEditUrl:this.options.ttGridInfo.addEditUrl,
-            gridOptions:{pager: "#taskTypePager"},
-            gridContainer:"#TaskTypeGrid"
+            addUpdateUrl:this.options.ttGridInfo.addUpdateUrl,
+            gridContainer:"#TaskTypeGrid",
+            deleteMultipleUrl:this.options.ttGridInfo.deleteMultiple,
+            gridOptions:{height:"400px"}
         };
         this.views.ttGridView = new kyt.GridView(ttOptions);
         var dcOptions={
             el:"#dcGrid",
             id:"documentCategoryGrid",
+            gridName:"DocumentCategoryGrid",
             gridDef:this.options.dcGridInfo.gridDef,
-            addEditUrl:this.options.dcGridInfo.addEditUrl,
-            gridOptions:{pager: "#docCatPager"},
-            gridContainer:"#DocumentCategoryGrid"
+            addUpdateUrl:this.options.dcGridInfo.addUpdateUrl,
+            gridContainer:"#DocumentCategoryGrid",
+            deleteMultipleUrl:this.options.dcGridInfo.deleteMultiple,
+            gridOptions:{height:"400px"}
         };
         this.views.dcGridView = new kyt.GridView(dcOptions);
         var pcOptions={
             el:"#pcGrid",
             id:"photoCategoryGrid",
+            gridName:"PhotoCategoryGrid",
             gridDef:this.options.pcGridInfo.gridDef,
-            addEditUrl:this.options.pcGridInfo.addEditUrl,
-            gridOptions:{pager: "#photoCatPager"},
-            gridContainer:"#PhotoCategoryGrid"
+            addUpdateUrl:this.options.pcGridInfo.addUpdateUrl,
+            gridContainer:"#PhotoCategoryGrid",
+            deleteMultipleUrl:this.options.pcGridInfo.deleteMultiple,
+            gridOptions:{height:"400px"}
         };
         this.views.pcGridView = new kyt.GridView(pcOptions);
-        this.delegateLocalEvents();
     },
-    delegateLocalEvents:function(){
-        $(this.el).delegate("#addNewTaskType","click",$.proxy(function(){this.addEditItem(this.options.ttGridInfo.addEditUrl)},this));
-        $(this.el).delegate("#addNewEventType","click",$.proxy(function(){this.addEditItem(this.options.gridInfo.addEditUrl)},this));
-        $(this.el).delegate("#addNewDocumentCategory","click",$.proxy(function(){this.addEditItem(this.options.dcGridInfo.addEditUrl)},this));
-        $(this.el).delegate("#addNewPhotoCategory","click",$.proxy(function(){this.addEditItem(this.options.pcGridInfo.addEditUrl)},this));
-    },
-    addEditItem: function(url, data){
-        var _url = url?url:this.options.addEditUrl;
-        $("#masterArea").after("<div id='dialogHolder'/>");
+    addUpdateItem: function(url, data){
+        var _url = url?url:this.options.addUpdateUrl;
+        $("#masterArea","#contentInner").after("<div id='detailArea'/>");
         var moduleOptions = {
-            id:"editModule",
-            el:"#dialogHolder",
+            id:"mainForm",
+            el:"#detailArea",
             url: _url,
             data:data
         };
         moduleOptions.runAfterRenderFunction = function () {
             $('#EventColor',this.el).miniColors();
         };
-        this.modules.popupForm = new kyt.PopupFormModule(moduleOptions);
+        this.modules.formModule = new kyt.AjaxFormModule(moduleOptions);
     },
      //from form
-    formSuccess:function(){
-        this.formCancel();
-        this.views.etGridView.reloadGrid();
+    moduleSuccess:function(){
+        this.moduleCancel();
+         this.views.etGridView.reloadGrid();
         this.views.ttGridView.reloadGrid();
         this.views.dcGridView.reloadGrid();
         this.views.pcGridView.reloadGrid();
+    },
+    moduleCancel: function(){
+        this.modules.formModule.destroy();
+        $("#masterArea").show();
     }
+
 });

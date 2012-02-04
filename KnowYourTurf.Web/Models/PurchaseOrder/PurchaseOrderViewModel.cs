@@ -11,7 +11,7 @@ namespace KnowYourTurf.Web.Models
         public GridDefinition PoliListDefinition { get; set; }
         public long VendorId { get; set; }
         public IEnumerable<SelectListItem> VendorList { get; set; }
-        public Core.Domain.PurchaseOrder PurchaseOrder { get; set; }
+        public Core.Domain.PurchaseOrder Item { get; set; }
 
         public string ChemUrl { get; set; }
         public string MatUrl { get; set; }

@@ -1,13 +1,9 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
-using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -28,8 +24,10 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<ChemicalListController>(x => x.Chemicals(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.AddEdit(null)),
-                ListDefinition = _chemicalListGrid.GetGridDefinition(url, WebLocalizationKeys.CHEMICALS)
+                AddUpdateUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.AddUpdate(null)),
+                DeleteMultipleUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.DeleteMultiple(null)),
+                GridDefinition = _chemicalListGrid.GetGridDefinition(url),
+                Title = WebLocalizationKeys.CHEMICALS.ToString()
             };
             return View(model);
         }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
 using StructureMap;

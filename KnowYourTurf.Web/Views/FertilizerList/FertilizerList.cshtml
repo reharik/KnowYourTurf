@@ -7,10 +7,10 @@
 
 @section HeaderJavascript{
     $(document).ready(function(){
-        new kyt.CrudController(crudOptions);
+        gridControllerOptions.deleteMultipleUrl=  '@Model.DeleteMultipleUrl';
+        new kyt.CrudController(gridControllerOptions);
     });
 }
-@MvcHtmlString.Create(StyledButtonFor("addNew", WebLocalizationKeys.NEW_FERTILIZER).ToString())
-@MvcHtmlString.Create(StyledButtonFor("print", WebLocalizationKeys.PRINT).AddClass("KYT_float_right").ToString())
+
 <table id="gridContainer" class="scroll"></table>
 <div id="pager" class="scroll" style="text-align:center;"></div>

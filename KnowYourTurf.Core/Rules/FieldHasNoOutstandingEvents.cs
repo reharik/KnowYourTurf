@@ -18,7 +18,7 @@ namespace KnowYourTurf.UnitTests.Rules
             var result = new RuleResult {Success = true};
             var count = 0;
             var _field = field as Field;
-            _field.GetEvents().Each(x => { if (x .StartTime > _systemClock.Now) count++; });
+            _field.Events.Each(x => { if (x .StartTime > _systemClock.Now) count++; });
             if(count>0)
             {
                 result.Success = false;

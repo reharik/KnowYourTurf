@@ -5,24 +5,50 @@
 @using KnowYourTurf.Web.Controllers
 @using KnowYourTurf.Core.Html.Expressions
 @{
-    Layout = "~/Views/Shared/_popupLayout.cshtml";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
 
 
             @MvcHtmlString.Create(FormFor<VendorContactController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.VendorContact.EntityId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.ParentId).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.FirstName).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.LastName).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Email).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Phone).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Fax).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Address1).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Address2).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.City).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.State).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.ZipCode).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Status).ToString())
-            @MvcHtmlString.Create(Html.SubmissionFor(x => x.VendorContact.Notes).ToString())
-            @MvcHtmlString.Create(EndForm())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.FirstName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.LastName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Email).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Phone).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Fax).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Address2).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.City).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+           @Html.SubmissionFor(x => x.Item.State).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.ZipCode).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Status).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
+        </div>
+    </div>
+            @EndForm()
 

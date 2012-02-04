@@ -43,6 +43,9 @@ namespace Generator
         private User _defaultUser;
         private User _employeeAdmin1;
         private User _employeeAdmin2;
+        private UserRole _userRoleAdmin;
+        private UserRole _userRoleEmployee;
+        private UserRole _userRoleFac;
 
         public void Load()
         {
@@ -50,6 +53,7 @@ namespace Generator
             _repository.UnitOfWork.Initialize();
 
             CreateCompany();
+            CreateUserRoles();
             CreateUser();
             _purchaseOrderLineItemService = new PurchaseOrderLineItemService(new UserSessionFake(_defaultUser));
             
@@ -72,6 +76,25 @@ namespace Generator
 
             _repository.UnitOfWork.Commit();
 
+        }
+
+        private void CreateUserRoles()
+        {
+            _userRoleAdmin = new UserRole
+            {
+                Name = UserType.Administrator.ToString()
+            };
+            _userRoleEmployee = new UserRole
+            {
+                Name = UserType.Employee.ToString()
+            };
+            _userRoleFac = new UserRole
+            {
+                Name = UserType.Facilities.ToString()
+            };
+            _repository.Save(_userRoleAdmin);
+            _repository.Save(_userRoleEmployee);
+            _repository.Save(_userRoleFac);
         }
 
         private void CreateEmailTemplate()
@@ -169,12 +192,11 @@ namespace Generator
             _defaultUser.UserLoginInfo = new UserLoginInfo
                                              {
                                                  LoginName = "Admin",
-                                                 UserRoles =
-                                                     UserRole.Administrator + "," + UserRole.Employee + "," +
-                                                     UserRole.KYTAdmin,
-                                                     UserType = UserRole.Employee.ToString(),
-                                                 Password = "123"
+                                                 Password = "123",
+                                                 UserType = UserType.Administrator.ToString()
                                              };
+            _defaultUser.AddUserRole(_userRoleAdmin);
+            _defaultUser.AddUserRole(_userRoleEmployee);
             var altUser = new User()
             {
                 FirstName = "Amahl",
@@ -185,9 +207,10 @@ namespace Generator
             {
                 LoginName = "alt",
                 Password = "alt",
-                UserType = UserRole.Employee.ToString(),
-                UserRoles = UserRole.Administrator + "," + UserRole.Employee + "," + UserRole.KYTAdmin,
+                UserType = UserType.Employee.ToString(),
             };
+            altUser.AddUserRole(_userRoleAdmin);
+            altUser.AddUserRole(_userRoleEmployee);
 
             var facilities = new User()
             {
@@ -199,9 +222,10 @@ namespace Generator
             {
                 LoginName = "facilities",
                 Password = "facilities",
-                UserType = UserRole.Facilities.ToString(),
-                UserRoles = UserRole.Facilities.ToString(),
+                UserType = UserType.Facilities.ToString(),
             };
+            facilities.AddUserRole(_userRoleFac);
+
 
             _repository.Save(_defaultUser);
             _repository.Save(altUser);
@@ -231,8 +255,7 @@ namespace Generator
             {
                 LoginName = "reharik@gmail.com",
                 Password = "123",
-                UserType = UserRole.Employee.ToString(),
-                UserRoles = UserRole.Employee.ToString()
+                UserType = UserType.Employee.ToString()
             };
 
             _employee2 = new User()
@@ -255,8 +278,7 @@ namespace Generator
             {
                 LoginName = "amahl@gmail.com",
                 Password = "123",
-                UserType = UserRole.Employee.ToString(),
-                UserRoles = UserRole.Employee.ToString()
+                UserType = UserType.Employee.ToString()
             };
 
             _employeeAdmin1 = new User()
@@ -279,8 +301,7 @@ namespace Generator
             {
                 LoginName = "mark@gmail.com",
                 Password = "123",
-                UserType = UserRole.Employee.ToString(),
-                UserRoles = UserRole.Administrator + "," + UserRole.Employee
+                UserType = UserType.Employee.ToString()
             };
 
             _employeeAdmin2 = new User()
@@ -303,8 +324,7 @@ namespace Generator
             {
                 LoginName = "chris@gmail.com",
                 Password = "123",
-                UserType = UserRole.Employee.ToString(),
-                UserRoles = UserRole.Administrator + "," + UserRole.Employee
+                UserType = UserType.Employee.ToString()
             };
 
             _repository.Save(_employee1);

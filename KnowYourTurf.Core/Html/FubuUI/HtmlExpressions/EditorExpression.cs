@@ -94,8 +94,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             addCustomLabel(labelBuilder);
             HtmlTag input = inputBuilder.ToHtmlTag();
             HtmlTag label = labelBuilder.ToHtmlTag();
-            _htmlRoot.Child(label);
-            _htmlRoot.Child(input);
+            _htmlRoot.Children.Add(label);
+            _htmlRoot.Children.Add(input);
             return _htmlRoot;
         }
         
@@ -123,8 +123,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             addCustomLabel(labelBuilder);
             HtmlTag label = labelBuilder.LeadingColon().ToHtmlTag();
             HtmlTag input = inputBuilder.ToHtmlTag();
-            _htmlRoot.Child(input);
-            _htmlRoot.Child(label);
+            _htmlRoot.Children.Add(input);
+            _htmlRoot.Children.Add(label);
             return _htmlRoot;
         }
 

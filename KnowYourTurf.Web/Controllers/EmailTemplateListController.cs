@@ -4,8 +4,6 @@ using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
-using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -26,8 +24,8 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<EmailTemplateListController>(x => x.EmailTemplates(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddEdit(null)),
-                ListDefinition = _emailTemplateListGrid.GetGridDefinition(url, WebLocalizationKeys.WEATHER)
+                AddUpdateUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddUpdate(null)),
+                GridDefinition = _emailTemplateListGrid.GetGridDefinition(url)
             };
             return View(model);
         }

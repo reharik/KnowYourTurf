@@ -1,13 +1,9 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Grids;
-using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -28,8 +24,8 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<EmailJobListController>(x => x.EmailJobs(null));
             ListViewModel model = new ListViewModel()
             {
-                AddEditUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)),
-                ListDefinition = _emailJobListGrid.GetGridDefinition(url, WebLocalizationKeys.EMAIL_TEMPLATES)
+                AddUpdateUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)),
+                GridDefinition = _emailJobListGrid.GetGridDefinition(url)
             };
             return View(model);
         }

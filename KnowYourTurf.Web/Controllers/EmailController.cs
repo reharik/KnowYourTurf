@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
             var emailJob = _repository.Find<EmailJob>(input.EntityId);
             var emailTemplateHandler = ObjectFactory.Container.GetInstance<IEmailTemplateHandler>(emailJob.Name+"Handler");
             try{ 
-                emailJob.GetSubscribers().Each(x=>
+                emailJob.Subscribers.Each(x=>
                                                     {
                                                         var model = emailTemplateHandler.CreateModel(emailJob, x);
                                                         _emailService.SendSingleEmail(model);

@@ -29,11 +29,13 @@
 		//
 		//	|		$.publish("/some/topic", ["a","b","c"]);
 		cache[topic] && d.each(cache[topic], function(){
-			this.func.apply(d, args || []);
+            if(this.func){
+			    this.func.apply(d, args || []);
+            }
 		});
 	};
 
-	d.subscribe = function(/* String */topic, /* Function */callback, /*hook name */ handle){
+	d.subscribe = function(/* String */topic, /* Function */callback, /*hook name */ handle, name){
 		// summary:
 		//		Register a callback on a named topic.
 		// topic: String
@@ -52,7 +54,8 @@
 		if(!cache[topic]){
 			cache[topic] = [];
 		}
-		cache[topic].push({"handle":handle, "func":callback});
+		cache[topic].push({"handle":handle, "func":callback,"name":name});
+        return [topic, callback]; // Array
 	};
 
 	d.unsubscribe = function( /* String */topic,/* Array */handle){
@@ -81,12 +84,22 @@
     };
 
     d.unsubscribeByHandle = function(handle){
+        var _handle = handle;
         $.each(cache,function(i,item){
-            $.each(item, function(idx,obj){
-                if(obj.handle == handle){
-                    item.splice(idx, 1);
+            var _item = item;
+            var removeFuncIndexs =[];
+            $.each(_item, function(idx,obj){
+                if(obj && obj.handle == _handle){
+                    removeFuncIndexs.push(idx);
                 }
             });
+            $.each(removeFuncIndexs,function(idx,index){
+                if(_item.length<=1){
+                    _item.pop();
+                }else{
+                    _item.splice(index, 1);
+                }
+            })
         });
     };
 

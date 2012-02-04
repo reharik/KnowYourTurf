@@ -33,7 +33,7 @@ namespace KnowYourTurf.Web.Controllers
             var emailJob = input.EntityId > 0 ? _repository.Find<EmailJob>(input.EntityId) : new EmailJob();
             emailJob.Status = input.EntityId > 0 ? emailJob.Status : Status.InActive.ToString();
             var emailTemplates = _selectListItemService.CreateList<EmailTemplate>(x => x.Name, x => x.EntityId, true);
-            var selectorDto = _selectBoxPickerService.GetPickerDto(emailJob.GetSubscribers().OrderBy(x=>x.FullName), x => x.FullName, x => x.EntityId);
+            var selectorDto = _selectBoxPickerService.GetPickerDto(emailJob.Subscribers.OrderBy(x=>x.FullName), x => x.FullName, x => x.EntityId);
             var model = new EmailJobViewModel
             {
                 EmailJob = emailJob,
@@ -50,7 +50,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmailJobViewModel
             {
                 EmailJob = emailTemplate,
-                AddEditUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)) + "/" + emailTemplate.EntityId,
+                AddUpdateUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)) + "/" + emailTemplate.EntityId,
                 Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString()
             };
             return PartialView("EmailJobView", model);

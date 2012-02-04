@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -18,12 +18,12 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var chemical = input.EntityId > 0 ? _repository.Find<Chemical>(input.EntityId) : new Chemical();
             var model = new ChemicalViewModel
             {
-                Chemical = chemical,
+                Item = chemical,
                 Title = WebLocalizationKeys.CHEMICAL_INFORMATION.ToString()
             };
             return PartialView("ChemicalAddUpdate", model);
@@ -34,8 +34,8 @@ namespace KnowYourTurf.Web.Controllers
             var chemical = _repository.Find<Chemical>(input.EntityId);
             var model = new ChemicalViewModel
             {
-                Chemical = chemical,
-                AddEditUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.AddEdit(null)) + "/" + chemical.EntityId,
+                Item = chemical,
+                AddUpdateUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.AddUpdate(null)) + "/" + chemical.EntityId,
                 Title = WebLocalizationKeys.CHEMICAL_INFORMATION.ToString()
             };
             return PartialView("ChemicalView", model);
@@ -48,10 +48,38 @@ namespace KnowYourTurf.Web.Controllers
             _repository.UnitOfWork.Commit();
             return null;
         }
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            var notification = new Notification { Success = true };
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<Chemical>(x);
+                if (checkDependencies(item, notification))
+                {
+                    _repository.HardDelete(item);
+                }
+            });
+            _repository.Commit();
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+        private bool checkDependencies(Chemical item, Notification notification)
+        {
+            var dependantItems = _repository.Query<Vendor>(x => x.Products.Any(i=>i == item));
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_FOR_VENDOR.ToString();
+                }
+                return false;
+            }
+            return true;
+        }
 
         public ActionResult Save(ChemicalViewModel input)
         {
-            Chemical chemical = input.Chemical.EntityId>0 ? _repository.Find<Chemical>(input.Chemical.EntityId) : new Chemical();
+            Chemical chemical = input.Item.EntityId>0 ? _repository.Find<Chemical>(input.Item.EntityId) : new Chemical();
             mapItem(chemical, input);
             var crudManager = _saveEntityService.ProcessSave(chemical);
             var notification = crudManager.Finish();
@@ -60,14 +88,14 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(Chemical chemical, ChemicalViewModel input)
         {
-            chemical.ActiveIngredient = input.Chemical.ActiveIngredient;
-            chemical.ActiveIngredientPercent = input.Chemical.ActiveIngredientPercent;
-            chemical.Description = input.Chemical.Description;
-            chemical.EPAEstNumber = input.Chemical.EPAEstNumber;
-            chemical.EPARegNumber = input.Chemical.EPARegNumber;
-            chemical.Manufacturer = input.Chemical.Manufacturer;
-            chemical.Name = input.Chemical.Name;
-            chemical.Notes = input.Chemical.Notes;
+            chemical.ActiveIngredient = input.Item.ActiveIngredient;
+            chemical.ActiveIngredientPercent = input.Item.ActiveIngredientPercent;
+            chemical.Description = input.Item.Description;
+            chemical.EPAEstNumber = input.Item.EPAEstNumber;
+            chemical.EPARegNumber = input.Item.EPARegNumber;
+            chemical.Manufacturer = input.Item.Manufacturer;
+            chemical.Name = input.Item.Name;
+            chemical.Notes = input.Item.Notes;
         }
     }
 }

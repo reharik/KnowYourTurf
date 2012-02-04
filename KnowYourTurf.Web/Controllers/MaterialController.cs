@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -18,12 +19,12 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
-        public ActionResult AddEdit(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var material = input.EntityId > 0 ? _repository.Find<Material>(input.EntityId) : new Material();
             var model = new MaterialViewModel
             {
-                Material = material,
+                Item = material,
                 Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
             };
             return PartialView("MaterialAddUpdate", model);
@@ -34,8 +35,8 @@ namespace KnowYourTurf.Web.Controllers
             var material = _repository.Find<Material>(input.EntityId);
             var model = new MaterialViewModel
                             {
-                                Material = material,
-                                AddEditUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.AddEdit(null)) + "/" + material.EntityId,
+                                Item = material,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.AddUpdate(null)) + "/" + material.EntityId,
                                 Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
                             };
             return PartialView("MaterialView", model);
@@ -49,9 +50,38 @@ namespace KnowYourTurf.Web.Controllers
             return null;
         }
 
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            var notification = new Notification { Success = true };
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<Material>(x);
+                if (checkDependencies(item, notification))
+                {
+                    _repository.HardDelete(item);
+                }
+            });
+            _repository.Commit();
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+        private bool checkDependencies(Material item, Notification notification)
+        {
+            var dependantItems = _repository.Query<Vendor>(x => x.Products.Any(i => i == item));
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_FOR_VENDOR.ToString();
+                }
+                return false;
+            }
+            return true;
+        }
+
         public ActionResult Save(MaterialViewModel input)
         {
-            var material = input.Material.EntityId > 0 ? _repository.Find<Material>(input.Material.EntityId) : new Material();
+            var material = input.Item.EntityId > 0 ? _repository.Find<Material>(input.Item.EntityId) : new Material();
             mapItem(material, input);
             var crudManager = _saveEntityService.ProcessSave(material);
             var notification = crudManager.Finish();
@@ -60,9 +90,9 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(Material material, MaterialViewModel input)
         {
-            material.Description = input.Material.Description;
-            material.Name = input.Material.Name;
-            material.Notes = input.Material.Name;
+            material.Description = input.Item.Description;
+            material.Name = input.Item.Name;
+            material.Notes = input.Item.Name;
         }
     }
 }

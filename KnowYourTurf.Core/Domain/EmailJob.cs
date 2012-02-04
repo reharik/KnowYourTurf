@@ -24,7 +24,7 @@ namespace KnowYourTurf.Core.Domain
 
         #region Collections
         private readonly IList<User> _subscribers = new List<User>();
-        public virtual IEnumerable<User> GetSubscribers() { return _subscribers; }
+        public virtual IEnumerable<User> Subscribers { get { return _subscribers; } }
         public virtual void RemoveSubscriber(User subscriber) { _subscribers.Remove(subscriber); }
         public virtual void AddSubscriber(User subscriber)
         {

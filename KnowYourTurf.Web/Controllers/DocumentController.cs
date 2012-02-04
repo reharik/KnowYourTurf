@@ -15,20 +15,20 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
+        private readonly IFileHandlerService _fileHandlerService;
         private readonly ISelectListItemService _selectListItemService;
-        private readonly IUploadedFileHandlerService _uploadedFileHandlerService;
         private readonly ISessionContext _sessionContext;
 
         public DocumentController(IRepository repository,
             ISaveEntityService saveEntityService,
+            IFileHandlerService fileHandlerService,
             ISelectListItemService selectListItemService,
-            IUploadedFileHandlerService uploadedFileHandlerService,
             ISessionContext sessionContext)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
+            _fileHandlerService = fileHandlerService;
             _selectListItemService = selectListItemService;
-            _uploadedFileHandlerService = uploadedFileHandlerService;
             _sessionContext = sessionContext;
         }
 
@@ -38,21 +38,23 @@ namespace KnowYourTurf.Web.Controllers
             var categoryItems = _selectListItemService.CreateList<DocumentCategory>(x=>x.Name,x=>x.EntityId,true);
             var model = new DocumentViewModel
             {
-                Document = document,
+                Item = document,
                 DocumentCategoryList = categoryItems,
-                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString()
+                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
+                Popup = input.Popup
             };
             return View(model);
         }
       
-        public ActionResult Display(ViewModel input)
+        public ActionResult Display(DocumentViewModel input)
         {
             var document = _repository.Find<Document>(input.EntityId);
             var model = new DocumentViewModel
                             {
-                                Document = document,
-                                AddEditUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "/" + document.EntityId,
-                                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString()
+                                Item = document,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "/" + document.EntityId,
+                                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
+                                Popup = input.Popup
                             };
             return View(model);
         }
@@ -64,14 +66,25 @@ namespace KnowYourTurf.Web.Controllers
             _repository.UnitOfWork.Commit();
             return null;
         }
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            input.EntityIds.Each(x =>
+            {
+                var item = _repository.Find<Document>(x);
+                _fileHandlerService.DeleteFile(item.FileUrl);
+                _repository.HardDelete(item);
+            });
+            _repository.Commit();
+            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult Save(DocumentViewModel input)
         {
             var coId = _sessionContext.GetCompanyId();
-            var document = input.Document.EntityId > 0 ? _repository.Find<Document>(input.Document.EntityId) : new Document();
+            var document = input.Item.EntityId > 0 ? _repository.Find<Document>(input.Item.EntityId) : new Document();
             var newDoc = mapToDomain(input, document);
-            var serverDirectory = "/CustomerDocuments/" + coId;
-            document.FileUrl = _uploadedFileHandlerService.GetUploadedFileUrl(serverDirectory, document.Name);
+            document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments");
             var crudManager = _saveEntityService.ProcessSave(newDoc);
             if (input.From == "Field")
             {
@@ -79,7 +92,6 @@ namespace KnowYourTurf.Web.Controllers
                 field.AddDocument(document);
                 crudManager = _saveEntityService.ProcessSave(field, crudManager);
             }
-            crudManager = _uploadedFileHandlerService.SaveUploadedFile(serverDirectory, newDoc.Name, crudManager);
             
             var notification = crudManager.Finish();
             return Json(notification, "text/plain");
@@ -87,14 +99,14 @@ namespace KnowYourTurf.Web.Controllers
 
         private Document mapToDomain(DocumentViewModel input, Document document)
         {
-            var documentModel = input.Document;
+            var documentModel = input.Item;
             document.FileType = documentModel.FileType;
             
             document.Name = documentModel.Name;
             document.Description = documentModel.Description;
-            if (document.DocumentCategory == null || document.DocumentCategory.EntityId != input.Document.DocumentCategory.EntityId)
+            if (document.DocumentCategory == null || document.DocumentCategory.EntityId != input.Item.DocumentCategory.EntityId)
             {
-                document.DocumentCategory = _repository.Find<DocumentCategory>(input.Document.DocumentCategory.EntityId);
+                document.DocumentCategory = _repository.Find<DocumentCategory>(input.Item.DocumentCategory.EntityId);
             }
             return document;
         }
@@ -102,10 +114,8 @@ namespace KnowYourTurf.Web.Controllers
 
     public class DocumentViewModel:ViewModel
     {
-        public Document Document { get; set; }
-
+        public Document Item { get; set; }
         public IEnumerable<SelectListItem> DocumentCategoryList { get; set; }
-
         public long DocumentCategory { get; set; }
     }
 }

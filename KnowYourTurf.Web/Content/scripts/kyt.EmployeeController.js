@@ -11,12 +11,13 @@ kyt.EmployeeController = kyt.CrudController.extend({
     events:_.extend({
     }, kyt.Controller.prototype.events),
 
-    additionalSubscriptions:function(){
-        $.subscribe('/form_editModule/pageLoaded', $.proxy(this.loadTokenizers,this), this.cid);
+    registerAdditionalSubscriptions:function(){
+        $.subscribe('/contentLevel/form_mainForm/pageLoaded', $.proxy(this.loadTokenizers,this), this.cid);
     },
 
     loadTokenizers: function(formOptions){
-        var options = $.extend({},formOptions,{el:"#dialogHolder"});
-        this.views.roles = new kyt.TokenView(formOptions.rolesOptions);
+        var options = $.extend({},formOptions.rolesOptions,{el:"#rolesInputRoot"});
+        this.views.roles = new kyt.TokenView(options);
     }
+
 });

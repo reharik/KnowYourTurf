@@ -1,0 +1,44 @@
+﻿@model KnowYourTurf.Web.Models.TaskViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using KnowYourTurf.Core.Html.FubuUI
+
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+
+<script>
+        extraFormOptions.title = '@Model.Title';
+</script>
+
+
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
+    <input type="hidden" id="EntityId" value="@Model.Item.EntityId"/>
+<div id="taskDisplay"> 
+    @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId, new { @class = "copyEntityId" }).ToString())
+    @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())
+    <div class="col left">
+    <div class="fieldRow">
+           @Html.ViewFor(x => x.Item.TaskType.Name).ToHtmlTag()
+    </div>
+    <div class="fieldRow">
+                @Html.ViewFor(x => x.Item.ScheduledDate).LabelDisplay(WebLocalizationKeys.DATE).ToHtmlTag()
+    </div>
+    <div class="fieldRow">
+                @Html.ViewFor(x => x.Item.Field.Name).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
+    </div>
+    <div class="fieldRow">
+                @Html.ViewFor(x => x.Product).ToHtmlTag()
+    </div>
+    <div class="fieldRow">
+                @Html.ViewFor(x => x.EquipmentNames).LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
+    </div>
+    <div class="fieldRow">
+                @Html.ViewFor(x => x.EmployeeNames).LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
+    </div>
+    <div class="fieldRow">
+                @Html.ViewFor(x => x.Item.Notes).ToHtmlTag()
+    </div>
+</div>
+</div>
+

@@ -23,7 +23,7 @@ namespace KnowYourTurf.Core.Domain
             if (enableDeletdFilter!= null)
                 enableDeletdFilter.SetParameter("IsDeleted", false);
         }
-
+        
         public UnitOfWork()
         {
             _session = ObjectFactory.GetNamedInstance<ISession>("NoCompanyFilter");

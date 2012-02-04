@@ -1,0 +1,23 @@
+﻿@using KnowYourTurf.Web;
+@using HtmlTags
+
+<script>
+    @RenderSection("ExtraCss", false)
+
+    @RenderSection("HeaderScripts", false)
+
+    var contentArea;
+    var extraFormOptions ={}
+        @RenderSection("HeaderJavascript", false)
+</script>
+
+   <div class="content-header">
+        @RenderSection("ExtraContentHeaderButtons", false)
+        <span class="title-name">@Model.Title</span>
+    </div>
+    <div id="contentArea" class="content-inner">
+    <div id="errorMessagesForm" class="mf_ErrorMessages errorMessages"><ul></ul></div>
+        @RenderBody()
+         <div class="footer">
+         </div>
+    </div>

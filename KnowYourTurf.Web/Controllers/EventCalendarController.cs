@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Controllers
                            CalendarDefinition = new CalendarDefinition
                                                    {
                                                        Url = UrlContext.GetUrlForAction<EventCalendarController>(x => x.Events(null)),
-                                                       AddEditUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddEdit(null)),
+                                                       AddUpdateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate(null)),
                                                        DisplayUrl = UrlContext.GetUrlForAction<EventController>(x => x.Display(null)),
                                                        EventChangedUrl = UrlContext.GetUrlForAction<EventCalendarController>(x => x.EventChanged(null))
                                                    }

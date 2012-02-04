@@ -30,7 +30,7 @@ namespace KnowYourTurf.Core.Services.IEmailJob
             employees.Each(x =>
                                {
                                    var sb = new StringBuilder();
-                                   x.GetTasks().Where(t=>t.ScheduledDate >= DateTime.Now && t.ScheduledDate <= DateTime.Now.AddDays(1)).Each(task =>
+                                   x.Tasks.Where(t=>t.ScheduledDate >= DateTime.Now && t.ScheduledDate <= DateTime.Now.AddDays(1)).Each(task =>
                                                          {
                                                              sb.Append("Task Type: ");
                                                              sb.Append(task.TaskType.Name);

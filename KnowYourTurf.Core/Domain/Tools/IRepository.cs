@@ -9,30 +9,30 @@ namespace KnowYourTurf.Core.Domain
     public interface IRepository
     {
         void Save<ENTITY>(ENTITY entity)
-            where ENTITY : DomainEntity;
+            where ENTITY : Entity;
 
         ENTITY Load<ENTITY>(long id)
-            where ENTITY : DomainEntity;
+            where ENTITY : Entity;
 
         IQueryable<ENTITY> Query<ENTITY>()
-            where ENTITY : DomainEntity;
+            where ENTITY : Entity;
 
         IQueryable<T> Query<T>(Expression<Func<T, bool>> where);
 
         T FindBy<T>(Expression<Func<T, bool>> where);
 
-        T Find<T>(long id) where T : DomainEntity;
+        T Find<T>(long id) where T : Entity;
 
-        IEnumerable<T> FindAll<T>() where T : DomainEntity;
+        IEnumerable<T> FindAll<T>() where T : Entity;
 
         void HardDelete(object target);
 
         IUnitOfWork UnitOfWork { get; }
-        void SoftDelete<ENTITY>(ENTITY entity) where ENTITY : DomainEntity;
+        void SoftDelete<ENTITY>(ENTITY entity) where ENTITY : Entity;
         void Commit();
         void Rollback();
         void Initialize();
-        IList<ENTITY> ExecuteCriteria<ENTITY>(DetachedCriteria criteria) where ENTITY : DomainEntity;
+        IList<ENTITY> ExecuteCriteria<ENTITY>(DetachedCriteria criteria) where ENTITY : Entity;
     
     }
 }
