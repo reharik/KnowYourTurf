@@ -12,3 +12,5 @@ _ReSharper.*
 App_Data
 CustomerPhotos
 CustomerDocuments
+[Ll]ogs
+[Ll]og
