@@ -55,3 +55,94 @@ System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'Chemical'.
 2012-02-03 21:17:40,111 [15] ERROR - Invalid object name 'Chemical'.
 2012-02-03 21:17:40,112 [15] ERROR - Invalid object name 'Chemical'.
 2012-02-03 21:17:40,112 [15] ERROR - Invalid object name 'Chemical'.
+2012-02-04 13:07:35,406 [32] ERROR - Could not execute query: SELECT products0_.Vendor_id as Vendor1_1_, products0_.BaseProduct_id as BaseProd2_1_, baseproduc1_.EntityId as EntityId0_0_, baseproduc1_.LastModified as LastModi2_0_0_, baseproduc1_.DateCreated as DateCrea3_0_0_, baseproduc1_.IsDeleted as IsDeleted0_0_, baseproduc1_.CompanyId as CompanyId0_0_, baseproduc1_.Name as Name0_0_, baseproduc1_.Description as Descript7_0_0_, baseproduc1_.InstantiatingType as Instanti8_0_0_, baseproduc1_.Notes as Notes0_0_, baseproduc1_.CreatedBy_id as CreatedBy10_0_0_, baseproduc1_.ModifiedBy_id as ModifiedBy11_0_0_, baseproduc1_1_.ActiveIngredient as ActiveIn2_1_0_, baseproduc1_1_.ActiveIngredientPercent as ActiveIn3_1_0_, baseproduc1_1_.EPAEstNumber as EPAEstNu4_1_0_, baseproduc1_1_.EPARegNumber as EPARegNu5_1_0_, baseproduc1_2_.N as N2_0_, baseproduc1_2_.P as P2_0_, baseproduc1_2_.K as K2_0_, case when baseproduc1_1_.BaseProduct_id is not null then 1 when baseproduc1_2_.BaseProduct_id is not null then 2 when baseproduc1_3_.BaseProduct_id is not null then 3 when baseproduc1_.EntityId is not null then 0 end as clazz_0_ FROM BaseProductToVendor products0_ left outer join [BaseProduct] baseproduc1_ on products0_.BaseProduct_id=baseproduc1_.EntityId left outer join [Chemical] baseproduc1_1_ on baseproduc1_.EntityId=baseproduc1_1_.BaseProduct_id left outer join [Fertilizer] baseproduc1_2_ on baseproduc1_.EntityId=baseproduc1_2_.BaseProduct_id left outer join [Material] baseproduc1_3_ on baseproduc1_.EntityId=baseproduc1_3_.BaseProduct_id WHERE (baseproduc1_.CompanyId= @p1) AND products0_.Vendor_id=@p0
+System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'BaseProduct'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2012-02-04 13:07:35,483 [21] ERROR - Could not execute query: SELECT baseproduc0_.EntityId as EntityId0_0_, baseproduc0_.LastModified as LastModi2_0_0_, baseproduc0_.DateCreated as DateCrea3_0_0_, baseproduc0_.IsDeleted as IsDeleted0_0_, baseproduc0_.CompanyId as CompanyId0_0_, baseproduc0_.Name as Name0_0_, baseproduc0_.Description as Descript7_0_0_, baseproduc0_.InstantiatingType as Instanti8_0_0_, baseproduc0_.Notes as Notes0_0_, baseproduc0_.CreatedBy_id as CreatedBy10_0_0_, baseproduc0_.ModifiedBy_id as ModifiedBy11_0_0_, baseproduc0_1_.ActiveIngredient as ActiveIn2_1_0_, baseproduc0_1_.ActiveIngredientPercent as ActiveIn3_1_0_, baseproduc0_1_.EPAEstNumber as EPAEstNu4_1_0_, baseproduc0_1_.EPARegNumber as EPARegNu5_1_0_, baseproduc0_2_.N as N2_0_, baseproduc0_2_.P as P2_0_, baseproduc0_2_.K as K2_0_, case when baseproduc0_1_.BaseProduct_id is not null then 1 when baseproduc0_2_.BaseProduct_id is not null then 2 when baseproduc0_3_.BaseProduct_id is not null then 3 when baseproduc0_.EntityId is not null then 0 end as clazz_0_ FROM [BaseProduct] baseproduc0_ left outer join [Chemical] baseproduc0_1_ on baseproduc0_.EntityId=baseproduc0_1_.BaseProduct_id left outer join [Fertilizer] baseproduc0_2_ on baseproduc0_.EntityId=baseproduc0_2_.BaseProduct_id left outer join [Material] baseproduc0_3_ on baseproduc0_.EntityId=baseproduc0_3_.BaseProduct_id WHERE baseproduc0_.EntityId=@p0
+System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'BaseProduct'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2012-02-04 13:07:35,521 [32] ERROR - Invalid object name 'BaseProduct'.
+2012-02-04 13:07:35,522 [21] ERROR - Invalid object name 'BaseProduct'.
+2012-02-04 13:07:35,559 [32] ERROR - Invalid object name 'BaseProduct'.
+2012-02-04 13:07:35,559 [21] ERROR - Invalid object name 'BaseProduct'.
+2012-02-04 13:08:08,573 [27] ERROR - Could not execute query: SELECT products0_.Vendor_id as Vendor1_1_, products0_.BaseProduct_id as BaseProd2_1_, baseproduc1_.EntityId as EntityId0_0_, baseproduc1_.LastModified as LastModi2_0_0_, baseproduc1_.DateCreated as DateCrea3_0_0_, baseproduc1_.IsDeleted as IsDeleted0_0_, baseproduc1_.CompanyId as CompanyId0_0_, baseproduc1_.Name as Name0_0_, baseproduc1_.Description as Descript7_0_0_, baseproduc1_.InstantiatingType as Instanti8_0_0_, baseproduc1_.Notes as Notes0_0_, baseproduc1_.CreatedBy_id as CreatedBy10_0_0_, baseproduc1_.ModifiedBy_id as ModifiedBy11_0_0_, baseproduc1_1_.ActiveIngredient as ActiveIn2_1_0_, baseproduc1_1_.ActiveIngredientPercent as ActiveIn3_1_0_, baseproduc1_1_.EPAEstNumber as EPAEstNu4_1_0_, baseproduc1_1_.EPARegNumber as EPARegNu5_1_0_, baseproduc1_2_.N as N2_0_, baseproduc1_2_.P as P2_0_, baseproduc1_2_.K as K2_0_, case when baseproduc1_1_.BaseProduct_id is not null then 1 when baseproduc1_2_.BaseProduct_id is not null then 2 when baseproduc1_3_.BaseProduct_id is not null then 3 when baseproduc1_.EntityId is not null then 0 end as clazz_0_ FROM BaseProductToVendor products0_ left outer join [BaseProduct] baseproduc1_ on products0_.BaseProduct_id=baseproduc1_.EntityId left outer join [Chemical] baseproduc1_1_ on baseproduc1_.EntityId=baseproduc1_1_.BaseProduct_id left outer join [Fertilizer] baseproduc1_2_ on baseproduc1_.EntityId=baseproduc1_2_.BaseProduct_id left outer join [Material] baseproduc1_3_ on baseproduc1_.EntityId=baseproduc1_3_.BaseProduct_id WHERE (baseproduc1_.CompanyId= @p1) AND products0_.Vendor_id=@p0
+System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'BaseProduct'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2012-02-04 13:08:08,605 [27] ERROR - Invalid object name 'BaseProduct'.
+2012-02-04 13:08:08,620 [27] ERROR - Invalid object name 'BaseProduct'.
+2012-02-04 13:09:22,891 [25] ERROR - Could not execute query: SELECT user0_.EntityId as EntityId26_0_, user0_.LastModified as LastModi2_26_0_, user0_.DateCreated as DateCrea3_26_0_, user0_.IsDeleted as IsDeleted26_0_, user0_.CompanyId as CompanyId26_0_, user0_.FirstName as FirstName26_0_, user0_.LastName as LastName26_0_, user0_.Email as Email26_0_, user0_.PhoneMobile as PhoneMob9_26_0_, user0_.PhoneHome as PhoneHome26_0_, user0_.Address1 as Address11_26_0_, user0_.Address2 as Address12_26_0_, user0_.City as City26_0_, user0_.State as State26_0_, user0_.ZipCode as ZipCode26_0_, user0_.BirthDate as BirthDate26_0_, user0_.Notes as Notes26_0_, user0_.LanguageDefault as Languag18_26_0_, user0_.ImageUrl as ImageUrl26_0_, user0_.EmergencyContact as Emergen20_26_0_, user0_.EmergencyContactPhone as Emergen21_26_0_, user0_.EmployeeId as EmployeeId26_0_, user0_.CreatedBy_id as CreatedBy23_26_0_, user0_.ModifiedBy_id as ModifiedBy24_26_0_, user0_.Company_id as Company25_26_0_, user0_.UserLoginInfo_id as UserLog26_26_0_ FROM [User] user0_ WHERE user0_.EntityId=@p0
+System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'User'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2012-02-04 13:09:22,906 [25] ERROR - Invalid object name 'User'.
+2012-02-04 13:09:22,937 [25] ERROR - Invalid object name 'User'.
+2012-02-04 13:09:41,342 [21] ERROR - Could not execute query: select TOP (@p0) user0_.EntityId as EntityId26_, user0_.LastModified as LastModi2_26_, user0_.DateCreated as DateCrea3_26_, user0_.IsDeleted as IsDeleted26_, user0_.CompanyId as CompanyId26_, user0_.FirstName as FirstName26_, user0_.LastName as LastName26_, user0_.Email as Email26_, user0_.PhoneMobile as PhoneMob9_26_, user0_.PhoneHome as PhoneHome26_, user0_.Address1 as Address11_26_, user0_.Address2 as Address12_26_, user0_.City as City26_, user0_.State as State26_, user0_.ZipCode as ZipCode26_, user0_.BirthDate as BirthDate26_, user0_.Notes as Notes26_, user0_.LanguageDefault as Languag18_26_, user0_.ImageUrl as ImageUrl26_, user0_.EmergencyContact as Emergen20_26_, user0_.EmergencyContactPhone as Emergen21_26_, user0_.EmployeeId as EmployeeId26_, user0_.CreatedBy_id as CreatedBy23_26_, user0_.ModifiedBy_id as ModifiedBy24_26_, user0_.Company_id as Company25_26_, user0_.UserLoginInfo_id as UserLog26_26_ from [User] user0_, [UserLoginInfo] userlogini1_ where user0_.UserLoginInfo_id=userlogini1_.EntityId and lower(userlogini1_.LoginName)=@p1 and userlogini1_.Password=@p2
+System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'User'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2012-02-04 13:09:41,358 [21] ERROR - Invalid object name 'User'.
+2012-02-04 13:09:41,373 [21] ERROR - Invalid object name 'User'.
+2012-02-04 13:09:41,373 [21] ERROR - Invalid object name 'User'.

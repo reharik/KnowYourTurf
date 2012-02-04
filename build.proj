@@ -4,9 +4,9 @@
   <PropertyGroup>
     <ToolsPath>$(MSBuildProjectDirectory)\lib</ToolsPath>
     <SourcePath>$(MSBuildProjectDirectory)</SourcePath>
-    <MSBuildCommunityTasksPath>$(ToolsPath)\MSBuildCommunityTasks</MSBuildCommunityTasksPath>
-    <NUnit>$(ToolsPath)\nunit</NUnit>
-    <Trunk>$(MSBuildProjectDirectory)..\..\</Trunk>
+    <MSBuildCommunityTasksPath>$(ToolsPath)</MSBuildCommunityTasksPath>
+    <NUnit>$(ToolsPath)</NUnit>
+    <Trunk>$(MSBuildProjectDirectory)..\..</Trunk>
   </PropertyGroup>
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
 

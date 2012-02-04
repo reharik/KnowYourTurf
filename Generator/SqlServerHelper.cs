@@ -78,7 +78,7 @@ DEALLOCATE FK_KILLER
             {
                 try
                 {
-                    var rhinoSecurityScript = new System.IO.StreamReader("src\\new_rhinosecurity.sql");
+                    var rhinoSecurityScript = new System.IO.StreamReader("new_rhinosecurity.sql");
                     string sql = rhinoSecurityScript.ReadToEnd();
                     rhinoSecurityScript.Close();
                     IDbConnection conn = session.Connection;

@@ -7,7 +7,7 @@
 				center: calendarDefinition.Title,
 				right: 'month,agendaWeek,agendaDay'
 			},
-            defaultView: 'agendaWeek',
+            defaultView: 'month',
             editable:true,
             theme:true,
             firstDay:1,

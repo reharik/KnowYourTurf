@@ -136,7 +136,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Delete(ViewModel input)
         {
             var task = _repository.Find<Task>(input.EntityId);
-            if (task.ScheduledStartTime > DateTime.Now)
+            if (!task.Complete)
             {
                 _repository.HardDelete(task);
                 _repository.UnitOfWork.Commit();
@@ -149,7 +149,7 @@ namespace KnowYourTurf.Web.Controllers
             input.EntityIds.Each(x =>
             {
                 var item = _repository.Find<Task>(x);
-                _repository.HardDelete(item);
+                if(!item.Complete) _repository.HardDelete(item);
             });
             _repository.Commit();
             return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);

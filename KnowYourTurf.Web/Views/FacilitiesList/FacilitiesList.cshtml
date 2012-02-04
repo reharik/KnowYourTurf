@@ -1,12 +1,9 @@
 ﻿@model ListViewModel
 @using KnowYourTurf.Core
 @using KnowYourTurf.Web
-@using HtmlTags
 
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
-@section HeaderScripts{
-    @MvcHtmlString.Create(Script("kyt.selectBoxPicker.js").ToString())
-}
+
 @section HeaderJavascript{
     $(document).ready(function(){
         new kyt.CrudController(gridControllerOptions);
