@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
@@ -60,7 +61,7 @@ namespace KnowYourTurf.Web.Controllers
             dictionary.Add(WebLocalizationKeys.CHEMICALS.ToString(), chemicals);
             dictionary.Add(WebLocalizationKeys.MATERIALS.ToString(), materials);
             dictionary.Add(WebLocalizationKeys.FERTILIZERS.ToString(), fertilizer);
-            var availableEmployees = _repository.FindAll<User>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
+            var availableEmployees = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString()).Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).ToList();
             var selectedEmployees = task.Employees.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
             var availableEquipment = _repository.FindAll<Equipment>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             var selectedEquipment = task.Equipment.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
@@ -203,7 +204,7 @@ namespace KnowYourTurf.Web.Controllers
 
             task.TaskType = _repository.Find<TaskType>(model.Item.TaskType.EntityId);
             task.Field = _repository.Find<Field>(model.Item.Field.EntityId);
-            if (model.Product.Contains("_"))
+            if (model.Product!=null && model.Product.Contains("_"))
             {
                 var product = model.Product.Split('_');
                 task.InventoryProduct= _repository.Find<InventoryProduct>(Int64.Parse(product[0]));

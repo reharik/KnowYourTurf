@@ -1,3 +1,4 @@
+using KnowYourTurf.Core.Config;
 using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Core.Domain.Persistence
@@ -10,6 +11,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Name);
             Map(x => x.Description);
             Map(x => x.Status);
+            ApplyFilter<StatusConditionFilter>("(Status = :condition)");
+
         }
     }
 

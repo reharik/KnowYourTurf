@@ -26,10 +26,7 @@ namespace KnowYourTurf.Web.Grids
                 .ToPerformAction(ColumnAction.Other)
                 .ImageName("KYTadd.png")
                 .ToolTip(WebLocalizationKeys.ADD_ITEM_TO_PO);
-            GridBuilder.LinkColumnFor(x => x.Name)
-                .ForAction(x => x.InstantiatingType, "Display")
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+            GridBuilder.DisplayFor(x => x.Name);
             GridBuilder.DisplayFor(x => x.Description);
             GridBuilder.DisplayFor(x => x.InstantiatingType);
             return this;

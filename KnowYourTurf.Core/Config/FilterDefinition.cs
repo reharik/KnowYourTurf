@@ -20,5 +20,13 @@ namespace KnowYourTurf.Core.Config
                 .AddParameter("IsDeleted", NHibernate.NHibernateUtil.Boolean);
         }
     }
+    public class StatusConditionFilter : FilterDefinition
+    {
+        public StatusConditionFilter()
+        {
+            WithName("StatusConditionFilter")
+                .AddParameter("condition", NHibernate.NHibernateUtil.String);
+        }
+    }
 }
 

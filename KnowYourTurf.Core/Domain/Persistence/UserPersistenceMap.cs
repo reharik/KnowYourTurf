@@ -1,4 +1,5 @@
 using FluentNHibernate.Mapping;
+using KnowYourTurf.Core.Config;
 
 namespace KnowYourTurf.Core.Domain.Persistence
 {
@@ -27,7 +28,6 @@ namespace KnowYourTurf.Core.Domain.Persistence
             References(x => x.UserLoginInfo).Cascade.All();
             HasManyToMany(x => x.EmailTemplates).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
             HasManyToMany(x => x.UserRoles).Access.CamelCaseField(Prefix.Underscore);
-
         }
 
         public class UserLoginInfoMap : DomainEntityMap<UserLoginInfo>
@@ -39,6 +39,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
                 Map(x => x.Status);
                 Map(x => x.UserType);
                 Map(x => x.ByPassToken);
+                ApplyFilter<StatusConditionFilter>("(status = :condition)");
             }
         }
     }

@@ -18,10 +18,13 @@ namespace KnowYourTurf.Core.Domain
             _session = session;
             var enableCoFilter = _session.EnableFilter("CompanyConditionFilter");
             var enableDeletdFilter = _session.EnableFilter("IsDeletedConditionFilter");
+            var enableStatusFilter = _session.EnableFilter("StatusConditionFilter");
             if(enableCoFilter!=null)
                 enableCoFilter.SetParameter("CompanyId", ObjectFactory.Container.GetInstance<IGetCompanyIdService>().Execute());
             if (enableDeletdFilter!= null)
                 enableDeletdFilter.SetParameter("IsDeleted", false);
+            if (enableStatusFilter!= null)
+                enableStatusFilter.SetParameter("condition", "Active");
         }
         
         public UnitOfWork()

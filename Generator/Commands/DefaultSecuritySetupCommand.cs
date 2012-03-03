@@ -7,12 +7,10 @@ namespace Generator.Commands
 {
     public class DefaultSecuritySetupCommand : IGeneratorCommand
     {
-        private readonly IRepository _repository;
         private readonly ISecuritySetupService _securitySetupService;
 
-        public DefaultSecuritySetupCommand(IRepository repository, ISecuritySetupService securitySetupService)
+        public DefaultSecuritySetupCommand( ISecuritySetupService securitySetupService)
         {
-            _repository = repository;
             _securitySetupService = securitySetupService;
         }
 

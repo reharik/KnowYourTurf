@@ -18,8 +18,12 @@ hr {
 }
 
 #main-header {
-    background: url(../images/header-title.png) no-repeat scroll top left
-        #333333;
+    background: url(../images/header-title_transparent.png)
+				no-repeat 
+				scroll 
+				top 
+				left
+				#333333;
     height: 71px;
     min-width: 870px;
     display: block;
@@ -51,7 +55,7 @@ hr {
     float: left;
     list-style: none outside none;
     margin: 0 0 0 3px;
-    padding: 0 20px;
+    padding: 0 100px;
     height: 32px;
     -webkit-border-top-left-radius: 3px;
     -webkit-border-top-right-radius: 3px;
@@ -76,8 +80,6 @@ hr {
     color: #666666;
     text-shadow:-0px 0px 1px #999999;
 }
-
-
 
 
 #portfolios #main-header ul#main-tabs li#portfolios-tab {
@@ -668,21 +670,30 @@ body#signin {
     padding: 0;
 }
 
-#preview .section ul li {
-    list-style: none;
+#preview .section ul li
+{
+	list-style: none;
+	padding: 0px 0px 10px 0px;
 }
 
 #preview .section ul li div.view_display {
 }
 
+#preview .section ul li div.right
+{
+	padding-bottom: 10px;
+}
+
+
 #preview .section ul li a {
 
 }
 
-#preview .section ul li span {
-    display: block;
-    text-align: left;
-/*
+#preview .section ul li span
+{
+	
+	display: block;
+	text-align: left; /*
 	float: right;
     width: 128px;
 */
@@ -922,11 +933,6 @@ div.ui-dialog {
     font-weight: bold;
 }
 
-.ui-widget-content {
-   /* border: 1px solid #d9d9d9; */
-	border: 0 none;
-}
-
 .ui-jqgrid .ui-jqgrid-htable th div span.camera-grid-header {
     width:29px;
     height: 20px;
@@ -1001,7 +1007,7 @@ div.ui-dialog {
     border: 1px dotted #a8a8a8;
     width: 100%;
     margin: 20px 10px;
-    padding: 10px;;
+    padding: 10px;
     float: left;
     height: 350px;
 }
@@ -1035,10 +1041,13 @@ div.ui-dialog {
     float: left;
 }
 
+/* Jason remove 1-16
 .no-left-nav div.col{
     width: 435px;
     padding-top: 0;
 }
+*/
+
 div.no-left-nav {
     margin-left: 10px !important;
 }
@@ -1188,7 +1197,7 @@ span#login-links a.active {
 
 .bottom_add {
     float: left;
-    margin: 10px 0 0 30px;
+    clear: both;
 }
 
 .multirow-input-tbl tr.current td {
@@ -1322,42 +1331,62 @@ ul.plain-list li a {
 }
 
 #validation-container-wrapper .errorMessages {
-    display: none;
-    border: 2px solid #BBB;
-    background:#EEE;	
+    display: none;	
 }
-
 label.invalid_field {
-	background: url(../images/validation_error_small.png) no-repeat 5px 4px #FFCCCC;
-	margin: 6px;
-	padding: 4px;
-	text-indent: 22px;
-	-webkit-border--radius: 2px;
+	background: url(../images/validation_error.png) 10px 3px no-repeat;
+	background-color: #FF9999;
+    -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-	border-radius: 2px;
+    margin: 5px;
+    padding: 3px 3px 3px 40px;
+    line-height: 25px;
 }
 
 #validation-container-wrapper ul {
 	max-width: 850px;
 }
 
-#validation-container-wrapper .errorMessages, #validation-container-wrapper .success {
+, #validation-container-wrapper .success {
     font-size:13px;
     font-weight:bold;
     width:auto;
     height:auto;
+    line-height: 25px;
     margin:0 30px 10px 30px;
-    padding:10px 15px 10px 40px;
     -moz-border-radius: 3px 3px 3px 3px;
     border-radius: 3px 3px 3px 3px;
     margin-top: 15px;
 }
-#validation-container-wrapper .success {
+#validation-container-wrapper .errorMessages .valid_field{
+	background: url(../images/check.png) 10px 3px no-repeat;
+	background-color: #339900;
+	margin: 5px;
+	clear: both;
+	padding: 3px 3px 3px 35px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	line-height: 25px;
+	color: #fff;
+}
+/*#validation-container-wrapper .errorMessages .invalid_field{
+	background: url(../images/validation_error.png) 10px 5px no-repeat;
+	background-color: #FF9999;
+	margin: 5px;
+	clear: both;
+	padding: 8px 8px 8px 40px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #000;
+}
+*/
+
+/*#validation-container-wrapper .success {
     display:none;
     border: 2px solid #90d390;
     color:#006600;
     background:url(../images/validation_success.png) no-repeat 10px 9px #d5edc5;	
-}
+}*/
 #validation-container-wrapper .success button.close {
     background: url(../images/close-x-green.png) no-repeat scroll 0 0 transparent;
     width: 14px;
@@ -1469,17 +1498,17 @@ button.rounded {
 }
 
 button.plus-rounded {
-    -moz-border-radius: 12px 12px 12px 12px;
-    border-radius: 12px 12px 12px 12px;
-    background: url("../images/plus_button.png") no-repeat scroll 3% 50%
-        white;
+    background: url("../images/plus_button.png") no-repeat scroll 2px 3px white;
     border: 1px solid #E0E0E0;
+    border-radius: 12px 12px 12px 12px;
+    clear: both;
     color: #888888;
     cursor: pointer;
     font-family: tahoma;
     font-size: 11px;
     font-weight: bold;
     padding: 2px 8px 2px 27px;
+    text-align: left;
 }
 
 button.change-my-picture {
@@ -1652,6 +1681,8 @@ select.picture {
 .artifact-field * {
     float: left;
     color: #666666;
+    clear: both;
+    margin: 5px 0;
 }
 
 .artifact-field div {
@@ -1714,7 +1745,6 @@ span.artifact_item {
 
 
 ul.token-input-list li{
-    background: #d7e6ed;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -1740,6 +1770,7 @@ div.token-input-dropdown li {
 ul li.token-input-input-token {
     padding:0;
 	margin:0;
+	width: 100%;
 }
 
 .empty ul.token-input-list {
@@ -1892,4 +1923,9 @@ div.ui-datepicker {
 	margin: 0 !important;
 }
 
-
+.page-instructions
+{
+	padding: 20px;
+	margin: 20px;
+	font-size: 12px;
+}

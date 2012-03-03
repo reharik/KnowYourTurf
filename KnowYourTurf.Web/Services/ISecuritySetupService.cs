@@ -49,8 +49,6 @@ namespace KnowYourTurf.Web.Services
 
         public void ExecuteAll()
         {
-            
-
             CreateUserGroups();
             AssociateAllUsersWithThierTypeGroup();
             CreateKYTAdminOperation();

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using KnowYourTurf.Core;
 using KnowYourTurf.Web;
 using StructureMap;
+using log4net.Config;
 
 namespace Generator
 {
@@ -28,14 +30,14 @@ namespace Generator
                 //                var command = new EnterStringsCommand(ObjectFactory.GetInstance<ILocalizedStringLoader>(), ObjectFactory.GetInstance<IRepository>());
                 //var command = new RebuildDatabaseCommand(ObjectFactory.GetInstance<ISessionSource>(), ObjectFactory.GetInstance<IRepository>(), ObjectFactory.GetInstance<ILocalizedStringLoader>(),ObjectFactory.GetInstance<PersistenceModel>());
 
-                var commands = ObjectFactory.GetAllInstances<IGeneratorCommand>();
-                if (args.Length == 0) displayHelpAndExit(args, commands);
-                var command = commands.FirstOrDefault(c => c.toCanonicalCommandName() == args[0].toCanonicalCommandName());
-                if (command == null) //displayHelpAndExit(args, commands);
-                {
-                    command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
+//                var commands = ObjectFactory.GetAllInstances<IGeneratorCommand>();
+//                if (args.Length == 0) displayHelpAndExit(args, commands);
+//                var command = commands.FirstOrDefault(c => c.toCanonicalCommandName() == args[0].toCanonicalCommandName());
+//                if (command == null) //displayHelpAndExit(args, commands);
+//                {
+            var        command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
 //                    command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("rebuilddatabase");
-                }
+//                }
                 command.Execute(args);
             }
             catch (Exception ex)
@@ -75,6 +77,7 @@ namespace Generator
                                              x.AddRegistry(new GenRegistry());
                                              x.AddRegistry(new CommandRegistry());
                                          });
+            XmlConfigurator.ConfigureAndWatch(new FileInfo(locateFileAsAbsolutePath("log4net.config")));
             //ObjectFactory.AssertConfigurationIsValid();
 
 
@@ -98,6 +101,20 @@ namespace Generator
             return commandType.Name.toCanonicalCommandName().Replace("command", "");
         }
 
+        private static string locateFileAsAbsolutePath(string filename)
+        {
+            if (Path.IsPathRooted(filename))
+                return filename;
+            string applicationBase = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            string path = Path.Combine(applicationBase, filename);
+            if (!File.Exists(path))
+            {
+                path = Path.Combine(Path.Combine(applicationBase, "bin"), filename);
+                if (!File.Exists(path))
+                    path = Path.Combine(Path.Combine(applicationBase, ".."), filename);
+            }
+            return path;
+        }
 
     }
 }

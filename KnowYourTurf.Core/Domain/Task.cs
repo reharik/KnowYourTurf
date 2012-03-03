@@ -10,7 +10,7 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class Task : DomainEntity
+    public class  Task : DomainEntity
     {
         [ValidateNonEmpty]
         public virtual TaskType TaskType { get; set; }

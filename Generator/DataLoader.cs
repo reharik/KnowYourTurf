@@ -193,7 +193,8 @@ namespace Generator
                                              {
                                                  LoginName = "Admin",
                                                  Password = "123",
-                                                 UserType = UserType.Administrator.ToString()
+                                                 UserType = UserType.Administrator.ToString(),
+                                                 Status = "Active"
                                              };
             _defaultUser.AddUserRole(_userRoleAdmin);
             _defaultUser.AddUserRole(_userRoleEmployee);
@@ -223,6 +224,7 @@ namespace Generator
                 LoginName = "facilities",
                 Password = "facilities",
                 UserType = UserType.Facilities.ToString(),
+                Status = "Active"
             };
             facilities.AddUserRole(_userRoleFac);
 
@@ -255,7 +257,8 @@ namespace Generator
             {
                 LoginName = "reharik@gmail.com",
                 Password = "123",
-                UserType = UserType.Employee.ToString()
+                UserType = UserType.Employee.ToString(),
+                Status = "Active"
             };
 
             _employee2 = new User()
@@ -278,7 +281,8 @@ namespace Generator
             {
                 LoginName = "amahl@gmail.com",
                 Password = "123",
-                UserType = UserType.Employee.ToString()
+                UserType = UserType.Employee.ToString(),
+                Status = "Active"
             };
 
             _employeeAdmin1 = new User()
@@ -301,7 +305,8 @@ namespace Generator
             {
                 LoginName = "mark@gmail.com",
                 Password = "123",
-                UserType = UserType.Employee.ToString()
+                UserType = UserType.Employee.ToString(),
+                Status = "Active"
             };
 
             _employeeAdmin2 = new User()
@@ -324,7 +329,8 @@ namespace Generator
             {
                 LoginName = "chris@gmail.com",
                 Password = "123",
-                UserType = UserType.Employee.ToString()
+                UserType = UserType.Employee.ToString(),
+                Status = "Active"
             };
 
             _repository.Save(_employee1);

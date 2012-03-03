@@ -14,8 +14,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             return MsSqlConfiguration
                 .MsSql2008
                 .ConnectionString(x => x.Is(connectionString))
-                .UseOuterJoin();
-//                .ShowSql();
+                .UseOuterJoin();//.ShowSql();
         }
 
         public Action<MappingConfiguration> MappingConfiguration()
