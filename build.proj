@@ -22,10 +22,14 @@
       <WebFiles Include="KnowYourTurf.Web\**\*.*;"
                 Exclude="KnowYourTurf.Web\obj\**;
              KnowYourTurf.Web\**\*.cs;
-             KnowYourTurf.Web\**\.idea\**;
-             KnowYourTurf.Web\**\.svn\**;
-             KnowYourTurf.Web\**\*.xml;
-             KnowYourTurf.Web\**\*.pdb;" />
+						 KnowYourTurf.Web\**\.idea\**;
+						 KnowYourTurf.Web\**\.svn\**;
+						 KnowYourTurf.Web\**\*.pdb;
+						 KnowYourTurf.Web\*.csproj.*;
+						 KnowYourTurf.Web\*.sln;
+						 KnowYourTurf.Web\Tenant\**;
+						 KnowYourTurf.Web\App_Data\**;
+						 KnowYourTurf.Web\Logs\**; 		 " />
     </ItemGroup>
     <Time>
       <Output TaskParameter="Month" PropertyName="Month" />
