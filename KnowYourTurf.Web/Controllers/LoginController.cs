@@ -66,7 +66,7 @@ namespace KnowYourTurf.Web.Controllers
                         notification.Redirect = true;
                         notification.RedirectUrl = user.UserRoles.Any(x=>x.Name=="Facilities")
                             ?"/KnowYourTurf/Home#/EventCalendar/EventCalendar"
-                            : "KnowYourTurf/Home#/EmployeeDashboard/ViewEmployee/"+user.EntityId;
+                            : "/KnowYourTurf/Home#/EmployeeDashboard/ViewEmployee/"+user.EntityId;
                     }
                 }
             }
