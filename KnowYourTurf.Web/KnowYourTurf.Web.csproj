@@ -587,7 +587,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\DocumentList\DocumentList.cshtml" />
-    <Content Include="Views\EmailJobList\EmailJobList.cshtml" />
+    <Content Include="Views\EmailJobList\ItemList.cshtml" />
     <Content Include="Views\EmailTemplateList\EmailTemplateList.cshtml" />
     <Content Include="Views\EmployeeList\EmployeeList.cshtml" />
     <Content Include="Views\EquipmentList\EquipmentList.cshtml" />

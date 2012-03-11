@@ -24,8 +24,8 @@ namespace KnowYourTurf.Web.Grids
         {
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ForAction<EmailJobController>(x => x.EmailJob(null))
-                .ToPerformAction(ColumnAction.Display)
-                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Subject);
             GridBuilder.DisplayFor(x => x.Frequency);
             return this;

@@ -1,4 +1,5 @@
 ﻿@model KnowYourTurf.Web.Models.EmailJobViewModel
+@using HtmlTags
 @using KnowYourTurf.Core
 @using KnowYourTurf.Web
 @using KnowYourTurf.Core.Html.FubuUI
@@ -6,37 +7,51 @@
 @using KnowYourTurf.Core.Html.Expressions
 
 @{
-    Layout = "~/Views/Shared/_popupLayout.cshtml";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
 
 <script>
-    $(document).ready(function () {
-    });
+    var availableEmployees = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableEmployees)) ;
+    var selectedEmployees = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedEmployees)) ;
+    var employeeOptions = {
+        availableItems: availableEmployees,
+        selectedItems: selectedEmployees,
+        inputSelector:"#EmployeeInput"
+    };
+    extraFormOptions.employeeOptions = employeeOptions;
+    extraFormOptions.title = '@Model.Title';
 </script>
 
     <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
 @MvcHtmlString.Create(FormFor<EmailJobController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-    @MvcHtmlString.Create(Html.HiddenFor(x => x.EmailJob.EntityId).ToString())
+    @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmailJob.Name).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmailJob.Description).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmailJob.Subject).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Subject).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmailJob.Frequency).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Frequency).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmailJob.Status).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.Status).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmailJob.EmailTemplate).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.EmailTemplate).ToHtmlTag()
         </div>
     </div>
-    @EndForm())
+     <div class="col full clear">
+         <div class="fieldRow">
+             <div id="employeeTokenizer">
+                 @Html.SubmissionFor(x => x.EmployeeInput).InputId("EmployeeInput").HideInput().LabelDisplay(WebLocalizationKeys.SUBSCRIBERS).ToHtmlTag()
+             </div>
+         </div>
+    </div>
+@EndForm()
 

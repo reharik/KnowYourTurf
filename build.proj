@@ -27,7 +27,7 @@
 						 KnowYourTurf.Web\**\*.pdb;
 						 KnowYourTurf.Web\*.csproj.*;
 						 KnowYourTurf.Web\*.sln;
-						 KnowYourTurf.Web\Tenant\**;
+						 KnowYourTurf.Web\CustomerPhotos\**;
 						 KnowYourTurf.Web\App_Data\**;
 						 KnowYourTurf.Web\Logs\**; 		 " />
     </ItemGroup>

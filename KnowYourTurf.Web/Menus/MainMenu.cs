@@ -49,7 +49,7 @@ namespace KnowYourTurf.Web.Menus
                         .EndChildren()
                         .CreateNode<DocumentListController>(c => c.DocumentList(null), WebLocalizationKeys.DOCUMENTS)
                         .CreateNode<PhotoListController>(c => c.PhotoList(null), WebLocalizationKeys.PHOTOS)
-                //.CreateNode<EmailJobListController>(c => c.EmailJobList(), WebLocalizationKeys.EMAIL_JOBS)
+                //.CreateNode<EmailJobListController>(c => c.ItemList(), WebLocalizationKeys.EMAIL_JOBS)
                 //.CreateNode<EmailTemplateListController>(c => c.EmailTemplateList(null), WebLocalizationKeys.EMAIL_TEMPLATES)
                         .CreateNode<VendorListController>(c => c.VendorList(null), WebLocalizationKeys.VENDORS)
                         .CreateNode(WebLocalizationKeys.INVENTORY)

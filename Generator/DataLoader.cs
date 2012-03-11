@@ -49,7 +49,7 @@ namespace Generator
 
         public void Load()
         {
-            _repository = ObjectFactory.GetInstance<IRepository>();
+            _repository = ObjectFactory.Container.GetInstance<IRepository>("NoFiltersOrInterceptor");
             _repository.UnitOfWork.Initialize();
 
             CreateCompany();
@@ -332,6 +332,12 @@ namespace Generator
                 UserType = UserType.Employee.ToString(),
                 Status = "Active"
             };
+            _employee1.AddUserRole(_userRoleEmployee);
+            _employee2.AddUserRole(_userRoleEmployee);
+            _employeeAdmin1.AddUserRole(_userRoleEmployee);
+            _employeeAdmin2.AddUserRole(_userRoleEmployee);
+            _employeeAdmin1.AddUserRole(_userRoleAdmin);
+            _employeeAdmin2.AddUserRole(_userRoleAdmin);
 
             _repository.Save(_employee1);
             _repository.Save(_employee2);

@@ -23,8 +23,9 @@ namespace KnowYourTurf.Core.Domain
         public virtual EmailTemplate EmailTemplate { get; set; }
 
         #region Collections
-        private readonly IList<User> _subscribers = new List<User>();
+        private IList<User> _subscribers = new List<User>();
         public virtual IEnumerable<User> Subscribers { get { return _subscribers; } }
+        public virtual void ClearSubscriber() { _subscribers = new List<User>(); }
         public virtual void RemoveSubscriber(User subscriber) { _subscribers.Remove(subscriber); }
         public virtual void AddSubscriber(User subscriber)
         {

@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using NHibernate;
 using NHibernate.Criterion;
 
 namespace KnowYourTurf.Core.Domain
 {
     public interface IRepository
     {
+        ISession CurrentSession();
         void Save<ENTITY>(ENTITY entity)
             where ENTITY : Entity;
 
@@ -27,12 +29,15 @@ namespace KnowYourTurf.Core.Domain
 
         void HardDelete(object target);
 
-        IUnitOfWork UnitOfWork { get; }
         void SoftDelete<ENTITY>(ENTITY entity) where ENTITY : Entity;
         void Commit();
         void Rollback();
         void Initialize();
         IList<ENTITY> ExecuteCriteria<ENTITY>(DetachedCriteria criteria) where ENTITY : Entity;
+
+        void DisableFilter(string FilterName);
+        void EnableFilter(string FilterName, string field, object value);
+        IUnitOfWork UnitOfWork { get; set; }
     
     }
 }

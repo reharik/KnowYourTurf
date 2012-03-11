@@ -204,6 +204,7 @@ namespace KnowYourTurf.Web
 
         public static readonly StringToken CURRENT = new WebLocalizationKeys("CURRENT", "Current");
         public static readonly StringToken COMPLETED = new WebLocalizationKeys("COMPLETED", "Completed");
+        public static readonly StringToken SUBSCRIBERS = new WebLocalizationKeys("SUBSCRIBERS", "Subscribers");
 
     
 

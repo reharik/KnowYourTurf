@@ -54,15 +54,14 @@ namespace KnowYourTurf.Core.Services
     
         private SmtpClient getSmtpClient()
         {
-            var smtpClient = new SmtpClient("smtp.gmail.com",587);
-            smtpClient.Credentials = new System.Net.NetworkCredential("reharik@gmail.com", "mishm124");
-            smtpClient.EnableSsl = true;
+//            var smtpClient = new SmtpClient("smtp.gmail.com",587);
+//            smtpClient.Credentials = new System.Net.NetworkCredential("reharik@gmail.com", "mishm124");
+//            smtpClient.EnableSsl = true;
 
             //TODO get this from site settins
 
-            //var smtpClient = new SmtpClient("mail.knowyourturf.com");
-            //smtpClient.Credentials = new System.Net.NetworkCredential("postmaster@knowyourturf.com", "KYTadmin6")
-
+            var smtpClient = new SmtpClient("knowyourturf.com");
+            smtpClient.Credentials = new System.Net.NetworkCredential("mail@knowyourturf.com", "KYTadmin6x");
             return smtpClient;
         }
     }

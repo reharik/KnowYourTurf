@@ -371,8 +371,8 @@ namespace KnowYourTurf.Web {
                 if ((ds.Tables["DocumentCategory"] != null)) {
                     base.Tables.Add(new DocumentCategoryDataTable(ds.Tables["DocumentCategory"]));
                 }
-                if ((ds.Tables["EmailJob"] != null)) {
-                    base.Tables.Add(new EmailJobDataTable(ds.Tables["EmailJob"]));
+                if ((ds.Tables["Item"] != null)) {
+                    base.Tables.Add(new EmailJobDataTable(ds.Tables["Item"]));
                 }
                 if ((ds.Tables["EmailJobToUser"] != null)) {
                     base.Tables.Add(new EmailJobToUserDataTable(ds.Tables["EmailJobToUser"]));
@@ -1067,8 +1067,8 @@ namespace KnowYourTurf.Web {
                 if ((ds.Tables["DocumentCategory"] != null)) {
                     base.Tables.Add(new DocumentCategoryDataTable(ds.Tables["DocumentCategory"]));
                 }
-                if ((ds.Tables["EmailJob"] != null)) {
-                    base.Tables.Add(new EmailJobDataTable(ds.Tables["EmailJob"]));
+                if ((ds.Tables["Item"] != null)) {
+                    base.Tables.Add(new EmailJobDataTable(ds.Tables["Item"]));
                 }
                 if ((ds.Tables["EmailJobToUser"] != null)) {
                     base.Tables.Add(new EmailJobToUserDataTable(ds.Tables["EmailJobToUser"]));
@@ -1262,7 +1262,7 @@ namespace KnowYourTurf.Web {
                     this.tableDocumentCategory.InitVars();
                 }
             }
-            this.tableEmailJob = ((EmailJobDataTable)(base.Tables["EmailJob"]));
+            this.tableEmailJob = ((EmailJobDataTable)(base.Tables["Item"]));
             if ((initTable == true)) {
                 if ((this.tableEmailJob != null)) {
                     this.tableEmailJob.InitVars();
@@ -5224,7 +5224,7 @@ namespace KnowYourTurf.Web {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public EmailJobDataTable() {
-                this.TableName = "EmailJob";
+                this.TableName = "Item";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -22842,7 +22842,7 @@ namespace KnowYourTurf.Web {
                         return ((global::System.DateTime)(this[this.tableEmailJob.LastModifiedColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'LastModified\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'LastModified\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -22858,7 +22858,7 @@ namespace KnowYourTurf.Web {
                         return ((global::System.DateTime)(this[this.tableEmailJob.DateCreatedColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DateCreated\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'DateCreated\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -22874,7 +22874,7 @@ namespace KnowYourTurf.Web {
                         return ((long)(this[this.tableEmailJob.CompanyIdColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CompanyId\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompanyId\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -22890,7 +22890,7 @@ namespace KnowYourTurf.Web {
                         return ((bool)(this[this.tableEmailJob.IsDeletedColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'IsDeleted\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'IsDeleted\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -22906,7 +22906,7 @@ namespace KnowYourTurf.Web {
                         return ((string)(this[this.tableEmailJob.NameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Name\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Name\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -22922,7 +22922,7 @@ namespace KnowYourTurf.Web {
                         return ((string)(this[this.tableEmailJob.SubjectColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Subject\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subject\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -22938,7 +22938,7 @@ namespace KnowYourTurf.Web {
                         return ((string)(this[this.tableEmailJob.SenderColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Sender\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Sender\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -22954,7 +22954,7 @@ namespace KnowYourTurf.Web {
                         return ((string)(this[this.tableEmailJob.DescriptionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -22970,7 +22970,7 @@ namespace KnowYourTurf.Web {
                         return ((string)(this[this.tableEmailJob.FrequencyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Frequency\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Frequency\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -22986,7 +22986,7 @@ namespace KnowYourTurf.Web {
                         return ((long)(this[this.tableEmailJob.EmailTemplate_idColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EmailTemplate_id\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'EmailTemplate_id\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -23002,7 +23002,7 @@ namespace KnowYourTurf.Web {
                         return ((long)(this[this.tableEmailJob.CreatedBy_idColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CreatedBy_id\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CreatedBy_id\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -23018,7 +23018,7 @@ namespace KnowYourTurf.Web {
                         return ((long)(this[this.tableEmailJob.ModifiedBy_idColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ModifiedBy_id\' in table \'EmailJob\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ModifiedBy_id\' in table \'Item\' is DBNull.", e);
                     }
                 }
                 set {
@@ -39671,7 +39671,7 @@ namespace KnowYourTurf.Web.knowyourturf_testDataSetTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "EmailJob";
+            tableMapping.DataSetTable = "Item";
             tableMapping.ColumnMappings.Add("EntityId", "EntityId");
             tableMapping.ColumnMappings.Add("LastModified", "LastModified");
             tableMapping.ColumnMappings.Add("DateCreated", "DateCreated");
@@ -39688,12 +39688,12 @@ namespace KnowYourTurf.Web.knowyourturf_testDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[EmailJob] WHERE (([EntityId] = @Original_EntityId))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Item] WHERE (([EntityId] = @Original_EntityId))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EntityId", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EntityId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[EmailJob] ([LastModified], [DateCreated], [CompanyId], [IsDeleted], [Name], [Subject], [Sender], [Description], [Frequency], [EmailTemplate_id], [CreatedBy_id], [ModifiedBy_id]) VALUES (@LastModified, @DateCreated, @CompanyId, @IsDeleted, @Name, @Subject, @Sender, @Description, @Frequency, @EmailTemplate_id, @CreatedBy_id, @ModifiedBy_id)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Item] ([LastModified], [DateCreated], [CompanyId], [IsDeleted], [Name], [Subject], [Sender], [Description], [Frequency], [EmailTemplate_id], [CreatedBy_id], [ModifiedBy_id]) VALUES (@LastModified, @DateCreated, @CompanyId, @IsDeleted, @Name, @Subject, @Sender, @Description, @Frequency, @EmailTemplate_id, @CreatedBy_id, @ModifiedBy_id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastModified", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastModified", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DateCreated", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DateCreated", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -39709,7 +39709,7 @@ namespace KnowYourTurf.Web.knowyourturf_testDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ModifiedBy_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ModifiedBy_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[EmailJob] SET [LastModified] = @LastModified, [DateCreated] = @DateCreated, [CompanyId] = @CompanyId, [IsDeleted] = @IsDeleted, [Name] = @Name, [Subject] = @Subject, [Sender] = @Sender, [Description] = @Description, [Frequency] = @Frequency, [EmailTemplate_id] = @EmailTemplate_id, [CreatedBy_id] = @CreatedBy_id, [ModifiedBy_id] = @ModifiedBy_id WHERE (([EntityId] = @Original_EntityId))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Item] SET [LastModified] = @LastModified, [DateCreated] = @DateCreated, [CompanyId] = @CompanyId, [IsDeleted] = @IsDeleted, [Name] = @Name, [Subject] = @Subject, [Sender] = @Sender, [Description] = @Description, [Frequency] = @Frequency, [EmailTemplate_id] = @EmailTemplate_id, [CreatedBy_id] = @CreatedBy_id, [ModifiedBy_id] = @ModifiedBy_id WHERE (([EntityId] = @Original_EntityId))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastModified", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastModified", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DateCreated", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DateCreated", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -39741,7 +39741,7 @@ namespace KnowYourTurf.Web.knowyourturf_testDataSetTableAdapters {
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT EntityId, LastModified, DateCreated, CompanyId, IsDeleted, Name, Subject, " +
                 "Sender, Description, Frequency, EmailTemplate_id, CreatedBy_id, ModifiedBy_id FR" +
-                "OM dbo.EmailJob";
+                "OM dbo.Item";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -39780,7 +39780,7 @@ namespace KnowYourTurf.Web.knowyourturf_testDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(knowyourturf_testDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "EmailJob");
+            return this.Adapter.Update(dataSet, "Item");
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

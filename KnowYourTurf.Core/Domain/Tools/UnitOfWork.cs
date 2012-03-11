@@ -26,17 +26,33 @@ namespace KnowYourTurf.Core.Domain
             if (enableStatusFilter!= null)
                 enableStatusFilter.SetParameter("condition", "Active");
         }
-        
+
+        //No filters
         public UnitOfWork()
         {
-            _session = ObjectFactory.GetNamedInstance<ISession>("NoCompanyFilter");
+            _session = ObjectFactory.Container.GetInstance<ISession>();
         }
-        
+        //No filters or interceptor
+        public UnitOfWork(bool noFiltersOrInterceptor)
+        {
+            _session = ObjectFactory.Container.GetInstance<ISession>("NoFiltersOrInterceptor");
+        }
+
+        public void DisableFilter(string FilterName)
+        {
+            _session.DisableFilter(FilterName);
+        }
+
+        public void EnableFilter(string FilterName, string field, object value)
+        {
+            var enableFilter = _session.EnableFilter(FilterName);
+            enableFilter.SetParameter(field, value);
+        }
         public void Initialize()
         {
             should_not_currently_be_disposed();
             if (_isInitialized) return;
-          
+
             CurrentSession = _session;
             begin_new_transaction();
 
