@@ -49,7 +49,8 @@ namespace Generator
 
         public void Load()
         {
-            _repository = ObjectFactory.Container.GetInstance<IRepository>("NoFiltersOrInterceptor");
+            //genregistry has no companyfilter and special getcompanyidservice
+            _repository = ObjectFactory.Container.GetInstance<IRepository>();
             _repository.UnitOfWork.Initialize();
 
             CreateCompany();
@@ -73,7 +74,7 @@ namespace Generator
             CreateDocumentCategory();
             CreatePhotoCategory();
             CreateEmailTemplate();
-
+            CreateEmailJobType();
             _repository.UnitOfWork.Commit();
 
         }
@@ -114,12 +115,14 @@ namespace Generator
             var category = new DocumentCategory
             {
                 Name = "Field",
-                Description = "pictures of fields"
+                Description = "pictures of fields",
+                Status = Status.Active.ToString()
             };
             var category2 = new DocumentCategory
             {
                 Name = "People",
-                Description = "pictures of people"
+                Description = "pictures of people",
+                Status = Status.Active.ToString()
             };
             _repository.Save(category);
             _repository.Save(category2);
@@ -131,12 +134,14 @@ namespace Generator
             var category = new PhotoCategory
             {
                 Name = "Field",
-                Description = "pictures of fields"
+                Description = "pictures of fields",
+                Status = Status.Active.ToString()
             };
             var category2 = new PhotoCategory
             {
                 Name = "People",
-                Description = "pictures of people"
+                Description = "pictures of people",
+                Status = Status.Active.ToString()
             };
             _repository.Save(category);
             _repository.Save(category2);
@@ -187,7 +192,8 @@ namespace Generator
                 
                 FirstName = "Raif",
                 LastName = "Harik",
-                Company = _company
+                Company = _company,
+                CompanyId = _company.EntityId
             };
             _defaultUser.UserLoginInfo = new UserLoginInfo
                                              {
@@ -202,7 +208,8 @@ namespace Generator
             {
                 FirstName = "Amahl",
                 LastName = "Harik",
-                Company = _company
+                Company = _company,
+                CompanyId = _company.EntityId
             };
             altUser.UserLoginInfo = new UserLoginInfo
             {
@@ -252,6 +259,7 @@ namespace Generator
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
+                CompanyId = _company.EntityId
                 };
             _employee1.UserLoginInfo = new UserLoginInfo
             {
@@ -276,6 +284,7 @@ namespace Generator
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
+                CompanyId = _company.EntityId
                 };
             _employee2.UserLoginInfo = new UserLoginInfo
             {
@@ -300,6 +309,7 @@ namespace Generator
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
+                CompanyId = _company.EntityId
             };
             _employeeAdmin1.UserLoginInfo = new UserLoginInfo
             {
@@ -324,6 +334,7 @@ namespace Generator
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
+                CompanyId = _company.EntityId
             };
             _employeeAdmin2.UserLoginInfo = new UserLoginInfo
             {
@@ -369,21 +380,41 @@ namespace Generator
 
         private void CreateEventType()
         {
-            var eventType1 = new EventType { Name = "some event" };
-            var eventType2 = new EventType { Name = "some other event" };
+            var eventType1 = new EventType
+            {
+                Name = "some event",
+                Status = Status.Active.ToString()
+            };
+            var eventType2 = new EventType
+            {
+                Name = "some other event",
+                Status = Status.Active.ToString()
+            };
             _repository.Save(eventType1);
             _repository.Save(eventType2);
+        }
+
+        private void CreateEmailJobType()
+        {
+            var ejt = new EmailJobType()
+            {
+                Name = "Daily Tasks",
+                Status = Status.Active.ToString()
+            };
+            _repository.Save(ejt);
         }
 
         private void CreateTask()
         {
             var taskType1 = new TaskType
             {
-                Name = "Mow"
+                Name = "Mow",
+                Status = Status.Active.ToString()
             };
             var taskType2 = new TaskType
             {
-                Name = "Water"
+                Name = "Water",
+                Status = Status.Active.ToString()
             };
             _repository.Save(taskType1);
             _repository.Save(taskType2);

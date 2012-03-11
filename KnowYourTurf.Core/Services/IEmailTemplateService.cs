@@ -60,8 +60,8 @@ namespace KnowYourTurf.Core.Services
 
             //TODO get this from site settins
 
-            var smtpClient = new SmtpClient("knowyourturf.com");
-            smtpClient.Credentials = new System.Net.NetworkCredential("mail@knowyourturf.com", "KYTadmin6x");
+            var smtpClient = new SmtpClient("knowyourturf-qa.com");
+            smtpClient.Credentials = new System.Net.NetworkCredential("mail@knowyourturf.com", "KYTadmin6");
             return smtpClient;
         }
     }

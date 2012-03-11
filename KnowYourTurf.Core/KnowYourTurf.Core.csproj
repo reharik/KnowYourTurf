@@ -139,12 +139,14 @@
     <Compile Include="Domain\Document.cs" />
     <Compile Include="Domain\DomainEntity.cs" />
     <Compile Include="Domain\EmailJob.cs" />
+    <Compile Include="Domain\EmailJobType.cs" />
     <Compile Include="Domain\EmailTemplate.cs" />
     <Compile Include="Domain\Equipment.cs" />
     <Compile Include="Domain\Event.cs" />
     <Compile Include="Domain\Fertilizer.cs" />
     <Compile Include="Domain\Field.cs" />
     <Compile Include="Domain\ListType.cs" />
+    <Compile Include="Domain\Persistence\EmailJobTypeMap.cs" />
     <Compile Include="Domain\Persistence\ListTypeMap.cs" />
     <Compile Include="Domain\Persistence\PhotoMap.cs" />
     <Compile Include="Domain\Persistence\DocumentMap.cs" />

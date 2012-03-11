@@ -1,4 +1,5 @@
 using System;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using NHibernate;
 using StructureMap;
@@ -28,16 +29,21 @@ namespace KnowYourTurf.Core.Domain
         }
 
         //No filters
-        public UnitOfWork()
+        public UnitOfWork(RepoConfig config)
         {
-            _session = ObjectFactory.Container.GetInstance<ISession>();
+            switch (config.Key)
+            {
+                case "NoFilters":
+                    _session = ObjectFactory.Container.GetInstance<ISession>();
+                    break;
+                case "NoFiltersOrInterceptor":
+                    _session = ObjectFactory.Container.GetInstance<ISession>("NoFiltersOrInterceptor");
+                    break;
+                case "NoFiltersSpecialInterceptor":
+                    _session = ObjectFactory.Container.GetInstance<ISession>("NoFiltersSpecialInterceptor");
+                    break;
+            }
         }
-        //No filters or interceptor
-        public UnitOfWork(bool noFiltersOrInterceptor)
-        {
-            _session = ObjectFactory.Container.GetInstance<ISession>("NoFiltersOrInterceptor");
-        }
-
         public void DisableFilter(string FilterName)
         {
             _session.DisableFilter(FilterName);

@@ -14,5 +14,7 @@ namespace KnowYourTurf.Web.Models
         public IEnumerable<TokenInputDto> AvailableEmployees { get; set; }
         public IEnumerable<TokenInputDto> SelectedEmployees { get; set; }
         public IEnumerable<SelectListItem> EmailTemplateList { get; set; }
+
+        public IEnumerable<SelectListItem> EmailJobTypeList { get; set; }
     }
 }

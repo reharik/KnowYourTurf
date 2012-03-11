@@ -28,6 +28,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             References(x => x.UserLoginInfo).Cascade.All();
             HasManyToMany(x => x.EmailTemplates).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
             HasManyToMany(x => x.UserRoles).Access.CamelCaseField(Prefix.Underscore);
+            HasManyToMany(x => x.Tasks).Table("EmployeeToTask").Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
         }
 
         public class UserLoginInfoMap : DomainEntityMap<UserLoginInfo>

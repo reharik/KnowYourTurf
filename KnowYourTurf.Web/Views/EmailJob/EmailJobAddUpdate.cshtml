@@ -43,6 +43,9 @@
             @Html.SubmissionFor(x => x.Item.Status).ToHtmlTag()
         </div>
         <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.EmailJobType).ToHtmlTag()
+        </div>
+         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Item.EmailTemplate).ToHtmlTag()
         </div>
     </div>

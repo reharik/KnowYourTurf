@@ -165,4 +165,14 @@ namespace KnowYourTurf.Core.Enums
         public static readonly SecurityUserGroups MultiTenant = new SecurityUserGroups { IsActive = true, Key = "MultiTenant" };
     }
 
+    [Serializable]
+    public class RepoConfig : Enumeration
+    {
+        public static readonly RepoConfig Empty = new RepoConfig { IsActive = false, Key = "" };
+        public static readonly RepoConfig NoFilters = new RepoConfig { IsActive = true, Key = "NoFilters" };
+        public static readonly RepoConfig NoFiltersOrInterceptor = new RepoConfig { IsActive = true, Key = "NoFiltersOrInterceptor" };
+        public static readonly RepoConfig NoFiltersSpecialInterceptor = new RepoConfig { IsActive = true, Key = "NoFiltersSpecialInterceptor" };
+
+    }
+
 }

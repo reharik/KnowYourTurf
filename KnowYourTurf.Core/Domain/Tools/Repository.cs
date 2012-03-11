@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using NHibernate;
 using NHibernate.Criterion;
@@ -22,16 +23,20 @@ namespace KnowYourTurf.Core.Domain
         }
 
         //No Filters
-        public Repository()
+        public Repository(RepoConfig config)
         {
-            _unitOfWork = ObjectFactory.Container.GetInstance<IUnitOfWork>("NoFilters");
-            _unitOfWork.Initialize();
-        }
-
-        //No Filters or Interceptor
-        public Repository(bool noFiltersOrInterceptor)
-        {
-            _unitOfWork = ObjectFactory.Container.GetInstance<IUnitOfWork>("NoFiltersOrInterceptor");
+            switch(config.Key)
+            {
+                case "NoFilters":
+                    _unitOfWork = ObjectFactory.Container.GetInstance<IUnitOfWork>("NoFilters");
+                    break;
+                case "NoFiltersOrInterceptor":
+                    _unitOfWork = ObjectFactory.Container.GetInstance<IUnitOfWork>("NoFiltersOrInterceptor");
+                    break;
+                case "NoFiltersSpecialInterceptor":
+                    _unitOfWork = ObjectFactory.Container.GetInstance<IUnitOfWork>("NoFiltersSpecialInterceptor");
+                    break;
+            }
             _unitOfWork.Initialize();
         }
 

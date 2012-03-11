@@ -21,6 +21,8 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Status { get; set; }
         [ValidateNonEmpty]
         public virtual EmailTemplate EmailTemplate { get; set; }
+        [ValidateNonEmpty]
+        public virtual EmailJobType EmailJobType { get; set; }
 
         #region Collections
         private IList<User> _subscribers = new List<User>();

@@ -33,6 +33,7 @@ namespace KnowYourTurf.Web.Controllers
             var emailJob = input.EntityId > 0 ? _repository.Find<EmailJob>(input.EntityId) : new EmailJob();
             emailJob.Status = input.EntityId > 0 ? emailJob.Status : Status.InActive.ToString();
             var emailTemplates = _selectListItemService.CreateList<EmailTemplate>(x => x.Name, x => x.EntityId, true);
+            var emailTypes = _selectListItemService.CreateList<EmailJobType>(x => x.Name, x => x.EntityId, true);
             var availableEmployees = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString()).Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).ToList();
             var selectedEmployees = emailJob.Subscribers.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
             
@@ -41,6 +42,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Item = emailJob,
                 EmailTemplateList = emailTemplates,
+                EmailJobTypeList = emailTypes,
                 Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString(),
                 AvailableEmployees = availableEmployees.ToList(),
                 SelectedEmployees = selectedEmployees.ToList()
@@ -85,7 +87,8 @@ namespace KnowYourTurf.Web.Controllers
             job.Sender = input.Item.Sender;
             job.Status = input.Item.Status;
             job.Subject = input.Item.Subject;
-            job.EmailTemplate= _repository.Find<EmailTemplate>(input.Item.EmailTemplate.EntityId);
+            job.EmailTemplate = _repository.Find<EmailTemplate>(input.Item.EmailTemplate.EntityId);
+            job.EmailJobType = _repository.Find<EmailJobType>(input.Item.EmailJobType.EntityId);
 
             job.ClearSubscriber();
             if (input.EmployeeInput.IsNotEmpty())

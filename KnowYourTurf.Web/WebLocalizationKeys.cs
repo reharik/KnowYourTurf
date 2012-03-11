@@ -149,7 +149,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken ADDRESS = new WebLocalizationKeys("ADDRESS", "Address");
         public static readonly StringToken FORUM = new WebLocalizationKeys("FORUM", "Forum");
 
-        public static readonly StringToken WEATHER = new WebLocalizationKeys("WEATHER", "Weather");
+        public static readonly StringToken WEATHER = new WebLocalizationKeys("WEATHER", "Item");
         public static readonly StringToken WEATHER_INFORMATION = new WebLocalizationKeys("WEATHER_INFORMATION", "Weather Information");
 
         public static readonly StringToken VENDOR_CONTACTS = new WebLocalizationKeys("VENDOR_CONTACTS", "Vendor Contacts");
