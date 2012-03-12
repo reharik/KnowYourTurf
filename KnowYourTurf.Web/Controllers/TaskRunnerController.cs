@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
 using System.Linq;
 using KnowYourTurf.Core.Services;
@@ -22,7 +23,7 @@ namespace KnowYourTurf.Web.Controllers
         public TaskRunnerController( IEmailTemplateService emailService)
         {
             _emailService = emailService;
-            _repository = new Repository();
+            _repository = new Repository(RepoConfig.NoFiltersSpecialInterceptor);
         }
 
         public ActionResult GetWeather(ViewModel input)
@@ -33,6 +34,7 @@ namespace KnowYourTurf.Web.Controllers
 
             companies.Each(x => loadWeatherObject(jss, webClient, x));
             _repository.UnitOfWork.Commit();
+
             return null;
         }
 
@@ -70,24 +72,37 @@ namespace KnowYourTurf.Web.Controllers
             _repository.Save(weather);
         }
 
+        // this is obviously shite. plese rewrite the whole thing if people start using it.
         public ActionResult ProcessEmail(ViewModel input)
         {
             var notification = new Notification { Success = true };
-            var emailJob = _repository.Find<EmailJob>(input.EntityId);
-            var emailTemplateHandler = ObjectFactory.Container.GetInstance<IEmailTemplateHandler>(emailJob.Name + "Handler");
-            try
-            {
-                emailJob.Subscribers.Each(x =>
-                {
-                    var model = emailTemplateHandler.CreateModel(emailJob, x);
-                    _emailService.SendSingleEmail(model);
-                });
-            }
-            catch (Exception ex)
-            {
-                notification.Success = false;
-                notification.Message = ex.Message;
-            }
+            var emailJobs = _repository.FindAll<EmailJob>();
+            emailJobs.Each(x =>
+                               {
+                                   if (x.Status == Status.Active.ToString() && (
+                                       x.Frequency == EmailFrequency.Daily.ToString()
+                                       || x.Frequency == EmailFrequency.Once.ToString()
+                                       || (x.Frequency == EmailFrequency.Weekly.ToString() && DateTime.Now.Day == 1)))
+                                   {
+                                       var emailTemplateHandler =
+                                           ObjectFactory.Container.GetInstance<IEmailTemplateHandler>(
+                                               x.EmailJobType.Name + "Handler");
+                                       try
+                                       {
+                                           x.Subscribers.Each(s =>
+                                                                  {
+                                                                      var model = emailTemplateHandler.CreateModel(x, s);
+                                                                      _emailService.SendSingleEmail(model);
+                                                                  });
+                                       }
+                                       catch (Exception ex)
+                                       {
+                                           notification.Success = false;
+                                           notification.Message = ex.Message;
+                                       }
+                                   }
+                               });
+
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
     }

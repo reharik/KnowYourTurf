@@ -49,7 +49,7 @@ DEALLOCATE FK_KILLER
             using (ISession session = source.OpenSession(new SaveUpdateInterceptor()))
             {
                 var sql =
-                    "USE [master] alter database KnowYourTurf set single_user with rollback immediate DROP DATABASE KnowYourTurf CREATE DATABASE KnowYourTurf";
+                    "USE [master] alter database KnowYourTurf_DEV set single_user with rollback immediate DROP DATABASE KnowYourTurf_DEV CREATE DATABASE KnowYourTurf_DEV";
 
                 IDbConnection conn = session.Connection;
                 var cmd = conn.CreateCommand();

@@ -9,8 +9,12 @@ namespace KnowYourTurf.Web.Models
 {
     public class EmailJobViewModel:ViewModel
     {
-        public EmailJob EmailJob { get; set; }
-        public SelectBoxPickerDto UserSelectBoxPickerDto { get; set; }
+        public EmailJob Item { get; set; }
+        public string EmployeeInput { get; set; }
+        public IEnumerable<TokenInputDto> AvailableEmployees { get; set; }
+        public IEnumerable<TokenInputDto> SelectedEmployees { get; set; }
         public IEnumerable<SelectListItem> EmailTemplateList { get; set; }
+
+        public IEnumerable<SelectListItem> EmailJobTypeList { get; set; }
     }
 }

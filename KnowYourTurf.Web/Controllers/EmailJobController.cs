@@ -33,13 +33,19 @@ namespace KnowYourTurf.Web.Controllers
             var emailJob = input.EntityId > 0 ? _repository.Find<EmailJob>(input.EntityId) : new EmailJob();
             emailJob.Status = input.EntityId > 0 ? emailJob.Status : Status.InActive.ToString();
             var emailTemplates = _selectListItemService.CreateList<EmailTemplate>(x => x.Name, x => x.EntityId, true);
-            var selectorDto = _selectBoxPickerService.GetPickerDto(emailJob.Subscribers.OrderBy(x=>x.FullName), x => x.FullName, x => x.EntityId);
+            var emailTypes = _selectListItemService.CreateList<EmailJobType>(x => x.Name, x => x.EntityId, true);
+            var availableEmployees = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString()).Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).ToList();
+            var selectedEmployees = emailJob.Subscribers.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
+            
+            
             var model = new EmailJobViewModel
             {
-                EmailJob = emailJob,
-                UserSelectBoxPickerDto = selectorDto,
+                Item = emailJob,
                 EmailTemplateList = emailTemplates,
-                Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString()
+                EmailJobTypeList = emailTypes,
+                Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString(),
+                AvailableEmployees = availableEmployees.ToList(),
+                SelectedEmployees = selectedEmployees.ToList()
             };
             return PartialView("EmailJobAddUpdate", model);
         }
@@ -49,7 +55,7 @@ namespace KnowYourTurf.Web.Controllers
             var emailTemplate = _repository.Find<EmailJob>(input.EntityId);
             var model = new EmailJobViewModel
             {
-                EmailJob = emailTemplate,
+                Item = emailTemplate,
                 AddUpdateUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)) + "/" + emailTemplate.EntityId,
                 Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString()
             };
@@ -66,7 +72,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(EmailJobViewModel input)
         {
-            var job = input.EmailJob.EntityId > 0 ? _repository.Find<EmailJob>(input.EmailJob.EntityId) : new EmailJob();
+            var job = input.Item.EntityId > 0 ? _repository.Find<EmailJob>(input.Item.EntityId) : new EmailJob();
             mapItem(job,input);
             var crudManager = _saveEntityService.ProcessSave(job);
             var notification = crudManager.Finish();
@@ -75,16 +81,18 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(EmailJob job, EmailJobViewModel input)
         {
-            job.Description = input.EmailJob.Description;
-            job.Frequency = input.EmailJob.Frequency;
-            job.Name = input.EmailJob.Name;
-            job.Sender = input.EmailJob.Sender;
-            job.Status = input.EmailJob.Status;
-            job.Subject = input.EmailJob.Subject;
-            job.EmailTemplate= _repository.Find<EmailTemplate>(input.EmailJob.EmailTemplate.EntityId);
+            job.Description = input.Item.Description;
+            job.Frequency = input.Item.Frequency;
+            job.Name = input.Item.Name;
+            job.Sender = input.Item.Sender;
+            job.Status = input.Item.Status;
+            job.Subject = input.Item.Subject;
+            job.EmailTemplate = _repository.Find<EmailTemplate>(input.Item.EmailTemplate.EntityId);
+            job.EmailJobType = _repository.Find<EmailJobType>(input.Item.EmailJobType.EntityId);
 
-            var listOfSelectedEntities = _selectBoxPickerService.GetListOfSelectedEntities<User>(input.UserSelectBoxPickerDto);
-            listOfSelectedEntities.Each(job.AddSubscriber);
+            job.ClearSubscriber();
+            if (input.EmployeeInput.IsNotEmpty())
+                input.EmployeeInput.Split(',').Each(x => job.AddSubscriber(_repository.Find<User>(Int32.Parse(x))));
         }
     }
 }

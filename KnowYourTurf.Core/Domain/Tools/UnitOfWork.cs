@@ -1,4 +1,5 @@
 using System;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using NHibernate;
 using StructureMap;
@@ -26,17 +27,38 @@ namespace KnowYourTurf.Core.Domain
             if (enableStatusFilter!= null)
                 enableStatusFilter.SetParameter("condition", "Active");
         }
-        
-        public UnitOfWork()
+
+        //No filters
+        public UnitOfWork(RepoConfig config)
         {
-            _session = ObjectFactory.GetNamedInstance<ISession>("NoCompanyFilter");
+            switch (config.Key)
+            {
+                case "NoFilters":
+                    _session = ObjectFactory.Container.GetInstance<ISession>();
+                    break;
+                case "NoFiltersOrInterceptor":
+                    _session = ObjectFactory.Container.GetInstance<ISession>("NoFiltersOrInterceptor");
+                    break;
+                case "NoFiltersSpecialInterceptor":
+                    _session = ObjectFactory.Container.GetInstance<ISession>("NoFiltersSpecialInterceptor");
+                    break;
+            }
         }
-        
+        public void DisableFilter(string FilterName)
+        {
+            _session.DisableFilter(FilterName);
+        }
+
+        public void EnableFilter(string FilterName, string field, object value)
+        {
+            var enableFilter = _session.EnableFilter(FilterName);
+            enableFilter.SetParameter(field, value);
+        }
         public void Initialize()
         {
             should_not_currently_be_disposed();
             if (_isInitialized) return;
-          
+
             CurrentSession = _session;
             begin_new_transaction();
 

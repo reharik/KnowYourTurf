@@ -25,7 +25,7 @@ namespace KnowYourTurf.Web.Controllers
             var weather = input.EntityId > 0 ? _repository.Find<Weather>(input.EntityId) : new Weather();
             var model = new WeatherViewModel
             {
-                Weather = weather,
+                Item = weather,
                 Title = WebLocalizationKeys.WEATHER_INFORMATION.ToString()
             };
             return PartialView("WeatherAddUpdate", model);
@@ -36,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
             var weather = _repository.Find<Weather>(input.EntityId);
             var model = new WeatherViewModel
                             {
-                                Weather = weather,
+                                Item = weather,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<WeatherController>(x => x.AddUpdate(null)) + "/" + weather.EntityId,
                                 Title = WebLocalizationKeys.WEATHER_INFORMATION.ToString()
                             };
@@ -53,7 +53,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(WeatherViewModel input)
         {
-            var weather = input.Weather.EntityId > 0 ? _repository.Find<Weather>(input.Weather.EntityId) : new Weather();
+            var weather = input.Item.EntityId > 0 ? _repository.Find<Weather>(input.Item.EntityId) : new Weather();
             var newTask = mapToDomain(input, weather);
 
             var crudManager = _saveEntityService.ProcessSave(newTask);
@@ -63,12 +63,12 @@ namespace KnowYourTurf.Web.Controllers
 
         private Weather mapToDomain(WeatherViewModel input, Weather weather)
         {
-            var weatherModel = input.Weather;
+            var weatherModel = input.Item;
             weather.DewPoint = weatherModel.DewPoint;
             weather.EvaporationRate = weatherModel.EvaporationRate;
             weather.HighTemperature = weatherModel.HighTemperature;
             weather.Humidity = weatherModel.Humidity;
-            weather.LowTemperature = weatherModel.LowTemperature;
+            weather.LowTemperature = weatherModel.LowTemperature; 
             weather.RainPrecipitation = weatherModel.RainPrecipitation;
             weather.WindSpeed = weatherModel.WindSpeed;
             return weather;
@@ -77,6 +77,6 @@ namespace KnowYourTurf.Web.Controllers
 
     public class WeatherViewModel:ViewModel
     {
-        public Weather Weather { get; set; }
+        public Weather Item { get; set; }
     }
 }

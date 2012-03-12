@@ -3,6 +3,7 @@ using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Domain.Tools;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
 using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Localization;
@@ -43,16 +44,20 @@ namespace KnowYourTurf.Web.Config
             For<ISessionFactory>().Use<NullSessionFactory>();
 
             For<ISession>().Use<NullSession>();
+            For<ISession>().Use<NullSession>().Named("NoFilters");
             For<ISession>().Use<NullSession>().Named("NoFiltersOrInterceptor");
+            For<ISession>().Use<NullSession>().Named("NoFiltersSpecialInterceptor");
 
 
-            For<IUnitOfWork>().Use<NullNHibernateUnitOfWork>();
-            For<IUnitOfWork>().Add<NullNHibernateUnitOfWork>().Named("NoFiltersOrInterceptor");
-            For<IUnitOfWork>().Add<NullNHibernateUnitOfWork>().Named("NoFilters");
-            //For<IGetCompanyIdService>().Use<DataLoaderGetCompanyIdService>();
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFilters)).Named("NoFilters");
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFiltersOrInterceptor)).Named("NoFiltersOrInterceptor");
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFiltersSpecialInterceptor)).Named("NoFiltersSpecialInterceptor");
 
             For<IRepository>().Use<Repository>();
-            For<IRepository>().Add(x => new Repository()).Named("NoFiltersOrInterceptor");
+            For<IRepository>().Add(x => new Repository(RepoConfig.NoFilters)).Named("NoFilters");
+            For<IRepository>().Add(x => new Repository(RepoConfig.NoFiltersOrInterceptor)).Named("NoFiltersOrInterceptor");
+            For<IRepository>().Add(x => new Repository(RepoConfig.NoFiltersSpecialInterceptor)).Named("NoFiltersSpecialInterceptor");
 
             For<ILocalizationDataProvider>().Use<LocalizationDataProvider>();
             For<IAuthenticationContext>().Use<WebAuthenticationContext>();

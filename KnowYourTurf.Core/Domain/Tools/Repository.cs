@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using KnowYourTurf.Core.Enums;
+using KnowYourTurf.Core.Services;
 using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Linq;
@@ -11,22 +13,52 @@ namespace KnowYourTurf.Core.Domain
 {
     public class Repository : IRepository
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private  IUnitOfWork _unitOfWork;
+        private ISystemClock _clock;
+
         public IUnitOfWork UnitOfWork
         {
             get { return _unitOfWork; }
+            set { _unitOfWork = value; }
         }
 
-        public Repository()
+        //No Filters
+        public Repository(RepoConfig config)
         {
-            _unitOfWork = new UnitOfWork();
+            switch(config.Key)
+            {
+                case "NoFilters":
+                    _unitOfWork = ObjectFactory.Container.GetInstance<IUnitOfWork>("NoFilters");
+                    break;
+                case "NoFiltersOrInterceptor":
+                    _unitOfWork = ObjectFactory.Container.GetInstance<IUnitOfWork>("NoFiltersOrInterceptor");
+                    break;
+                case "NoFiltersSpecialInterceptor":
+                    _unitOfWork = ObjectFactory.Container.GetInstance<IUnitOfWork>("NoFiltersSpecialInterceptor");
+                    break;
+            }
             _unitOfWork.Initialize();
         }
 
-        public Repository(IUnitOfWork unitOfWork)
+        public Repository(IUnitOfWork unitOfWork, ISystemClock clock)
         {
             _unitOfWork = unitOfWork;
             _unitOfWork.Initialize();
+            _clock = clock;
+        }
+
+        public void DisableFilter(string FilterName)
+        {
+            _unitOfWork.DisableFilter(FilterName);
+        }
+
+        public void EnableFilter(string FilterName, string field, object value)
+        {
+            _unitOfWork.EnableFilter(FilterName, field, value);
+        }
+        public ISession CurrentSession()
+        {
+            return _unitOfWork.CurrentSession;
         }
 
         public void Save<ENTITY>(ENTITY entity) where ENTITY : Entity

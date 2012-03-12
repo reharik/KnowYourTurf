@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll" total="0" failures="0" not-run="0" date="2012-03-03" time="13:04:43">
-  <environment nunit-version="2.4.7.0" clr-version="4.0.30319.239" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Development\KnowYourTurf" machine-name="RHARIK" user="Owner" user-domain="RHARIK" />
+<test-results name="c:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll" total="0" failures="0" not-run="0" date="2012-03-11" time="15:19:39">
+  <environment nunit-version="2.4.7.0" clr-version="4.0.30319.239" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="c:\Development\KnowYourTurf" machine-name="RHARIK" user="Owner" user-domain="RHARIK" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite name="C:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll" success="True" time="0.001" asserts="0">
+  <test-suite name="c:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll" success="True" time="0.001" asserts="0">
     <results />
   </test-suite>
 </test-results>

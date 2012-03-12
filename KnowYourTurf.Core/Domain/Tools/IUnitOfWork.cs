@@ -9,5 +9,8 @@ namespace KnowYourTurf.Core.Domain
         void Initialize();
         void Commit();
         void Rollback();
+
+        void DisableFilter(string FilterName);
+        void EnableFilter(string FilterName, string field, object value);
     }
 }

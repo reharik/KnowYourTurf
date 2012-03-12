@@ -30,6 +30,16 @@ namespace KnowYourTurf.Core.Domain
             return;
         }
 
+        public void DisableFilter(string FilterName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void EnableFilter(string FilterName, string field, object value)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Dispose()
         {
             return;
