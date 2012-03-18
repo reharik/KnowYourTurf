@@ -1,188 +1,36 @@
-2012-03-11 13:06:37,686 [4] DEBUG - IDbTransaction disposed.
-2012-03-11 13:06:37,706 [4] DEBUG - transaction completion
-2012-03-11 13:06:37,707 [4] DEBUG - aggressively releasing database connection
-2012-03-11 13:06:37,707 [4] DEBUG - Closing connection
-2012-03-11 13:06:37,709 [4] DEBUG - [session-id=0b016188-837f-430b-a269-c75130319127] running ISession.Dispose()
-2012-03-11 13:06:37,709 [4] DEBUG - [session-id=0b016188-837f-430b-a269-c75130319127] executing real Dispose(True)
-2012-03-11 13:06:37,710 [4] DEBUG - closing session
-2012-03-11 13:06:37,710 [4] DEBUG - running BatcherImpl.Dispose(true)
-2012-03-11 13:06:37,777 [5] DEBUG - [session-id=5606e72c-7d8a-4ab8-a364-7dbee31b6db6] opened session at timestamp: 634670679977, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,777 [4] DEBUG - [session-id=dc3fbb77-1c8e-4727-ae73-170dacd74ffd] opened session at timestamp: 634670679977, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,780 [5] DEBUG - [session-id=80fbc576-1540-4093-aba0-6bbc35e05969] opened session at timestamp: 634670679977, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,813 [5] DEBUG - [session-id=63dc5f4e-d64e-47df-8fa4-731071d49ca6] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,815 [4] DEBUG - [session-id=e036321e-ce16-4a04-8a5a-561a53db9271] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,817 [11] DEBUG - [session-id=b374e262-99ad-4efe-a14a-636310b57320] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,817 [14] DEBUG - [session-id=7f043601-0429-4b82-929c-16d854f0b474] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,817 [13] DEBUG - [session-id=ff3d118c-c05b-4bdf-b000-2d86a92bda54] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,817 [10] DEBUG - [session-id=90ca6fc1-dafd-434a-bac8-120266695a76] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,819 [5] DEBUG - [session-id=0a945873-162e-4711-8ce6-dc01a0ed833a] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,819 [10] DEBUG - [session-id=162ff912-085c-41da-9fd8-a5049d0db2e9] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,819 [13] DEBUG - [session-id=14e94061-2b4f-4e22-aa97-2a8cb5428bb8] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,820 [14] DEBUG - [session-id=cab2bb67-0d30-4f54-8be0-5fec44a4f350] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,821 [10] DEBUG - [session-id=b3bcbf6e-c6cb-4f88-8cfd-e9b43550adde] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,821 [11] DEBUG - [session-id=30fd14fa-ef1f-4f58-a036-e69be55c2c46] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,821 [5] DEBUG - [session-id=037e12b2-9453-4416-ad95-62088991bcfe] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:37,823 [13] DEBUG - [session-id=7746c0e8-5a3c-4881-8caa-6ca419afa9f0] opened session at timestamp: 634670679978, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:38,116 [4] DEBUG - [session-id=478d9617-443a-4c71-b430-58cdb24c47cf] opened session at timestamp: 634670679981, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:38,116 [10] DEBUG - [session-id=f30d0b6d-c57c-4e63-a960-6d2c7779f16f] opened session at timestamp: 634670679981, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:38,116 [14] DEBUG - [session-id=98d10d5a-068f-441b-ac75-5e017fa15e23] opened session at timestamp: 634670679981, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:40,565 [13] DEBUG - [session-id=c2917cad-9cf0-4bc6-89b1-18d490d93c5e] opened session at timestamp: 634670680005, for session factory: [/f97242471e9149619ec12d0dff9f94fc]
-2012-03-11 13:06:40,565 [13] DEBUG - Begin (Unspecified)
-2012-03-11 13:06:40,570 [13] DEBUG - Obtaining IDbConnection from Driver
-2012-03-11 13:06:40,611 [13] DEBUG - loading entity: [KnowYourTurf.Core.Domain.EmailJob#1]
-2012-03-11 13:06:40,612 [13] DEBUG - attempting to resolve: [KnowYourTurf.Core.Domain.EmailJob#1]
-2012-03-11 13:06:40,614 [13] DEBUG - object not resolved in any cache: [KnowYourTurf.Core.Domain.EmailJob#1]
-2012-03-11 13:06:40,614 [13] DEBUG - Fetching entity: [KnowYourTurf.Core.Domain.EmailJob#1]
-2012-03-11 13:06:40,616 [13] DEBUG - loading entity: [KnowYourTurf.Core.Domain.EmailJob#1]
-2012-03-11 13:06:40,628 [13] DEBUG - Opened new IDbCommand, open IDbCommands: 1
-2012-03-11 13:06:40,628 [13] DEBUG - Building an IDbCommand object for the SqlString: SELECT emailjob0_.EntityId as EntityId8_0_, emailjob0_.LastModified as LastModi2_8_0_, emailjob0_.DateCreated as DateCrea3_8_0_, emailjob0_.IsDeleted as IsDeleted8_0_, emailjob0_.CompanyId as CompanyId8_0_, emailjob0_.Name as Name8_0_, emailjob0_.Subject as Subject8_0_, emailjob0_.Sender as Sender8_0_, emailjob0_.Description as Descript9_8_0_, emailjob0_.Frequency as Frequency8_0_, emailjob0_.CreatedBy_id as CreatedBy11_8_0_, emailjob0_.ModifiedBy_id as ModifiedBy12_8_0_, emailjob0_.EmailTemplate_id as EmailTe13_8_0_ FROM [EmailJob] emailjob0_ WHERE emailjob0_.EntityId=?
-2012-03-11 13:06:40,629 [13] DEBUG - BindParameters(Positional0:NHibernate.Type.Int64Type) 1 -> [0]
-2012-03-11 13:06:40,631 [13] INFO  - SELECT emailjob0_.EntityId as EntityId8_0_, emailjob0_.LastModified as LastModi2_8_0_, emailjob0_.DateCreated as DateCrea3_8_0_, emailjob0_.IsDeleted as IsDeleted8_0_, emailjob0_.CompanyId as CompanyId8_0_, emailjob0_.Name as Name8_0_, emailjob0_.Subject as Subject8_0_, emailjob0_.Sender as Sender8_0_, emailjob0_.Description as Descript9_8_0_, emailjob0_.Frequency as Frequency8_0_, emailjob0_.CreatedBy_id as CreatedBy11_8_0_, emailjob0_.ModifiedBy_id as ModifiedBy12_8_0_, emailjob0_.EmailTemplate_id as EmailTe13_8_0_ FROM [EmailJob] emailjob0_ WHERE emailjob0_.EntityId=@p0
-2012-03-11 13:06:40,635 [13] DEBUG - SELECT emailjob0_.EntityId as EntityId8_0_, emailjob0_.LastModified as LastModi2_8_0_, emailjob0_.DateCreated as DateCrea3_8_0_, emailjob0_.IsDeleted as IsDeleted8_0_, emailjob0_.CompanyId as CompanyId8_0_, emailjob0_.Name as Name8_0_, emailjob0_.Subject as Subject8_0_, emailjob0_.Sender as Sender8_0_, emailjob0_.Description as Descript9_8_0_, emailjob0_.Frequency as Frequency8_0_, emailjob0_.CreatedBy_id as CreatedBy11_8_0_, emailjob0_.ModifiedBy_id as ModifiedBy12_8_0_, emailjob0_.EmailTemplate_id as EmailTe13_8_0_ FROM [EmailJob] emailjob0_ WHERE emailjob0_.EntityId=@p0;@p0 = 1 [Type: Int64 (0)]
-2012-03-11 13:06:40,638 [13] DEBUG - Enlist Command
-2012-03-11 13:06:40,639 [13] DEBUG - ExecuteReader took 0 ms
-2012-03-11 13:06:40,640 [13] DEBUG - Opened IDataReader, open IDataReaders: 1
-2012-03-11 13:06:40,641 [13] DEBUG - processing result set
-2012-03-11 13:06:40,641 [13] DEBUG - result set row: 0
-2012-03-11 13:06:40,642 [13] DEBUG - result row: EntityKey[KnowYourTurf.Core.Domain.EmailJob#1]
-2012-03-11 13:06:40,645 [13] DEBUG - Initializing object from DataReader: [KnowYourTurf.Core.Domain.EmailJob#1]
-2012-03-11 13:06:40,648 [13] DEBUG - Hydrating entity: [KnowYourTurf.Core.Domain.EmailJob#1]
-2012-03-11 13:06:40,651 [13] DEBUG - done processing result set (1 rows)
-2012-03-11 13:06:40,652 [13] DEBUG - running NHybridDataReader.Dispose()
-2012-03-11 13:06:40,652 [13] DEBUG - Closed IDataReader, open IDataReaders :0
-2012-03-11 13:06:40,652 [13] DEBUG - DataReader was closed after 13 ms
-2012-03-11 13:06:40,653 [13] DEBUG - Closed IDbCommand, open IDbCommands: 0
-2012-03-11 13:06:40,654 [13] DEBUG - total objects hydrated: 1
-2012-03-11 13:06:40,655 [13] DEBUG - resolving associations for [KnowYourTurf.Core.Domain.EmailJob#1]
-2012-03-11 13:06:40,657 [13] DEBUG - creating collection wrapper:[KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]
-2012-03-11 13:06:40,660 [13] DEBUG - loading entity: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:40,661 [13] DEBUG - creating new proxy for entity
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=b374e262-99ad-4efe-a14a-636310b57320] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=14e94061-2b4f-4e22-aa97-2a8cb5428bb8] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=0a945873-162e-4711-8ce6-dc01a0ed833a] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=162ff912-085c-41da-9fd8-a5049d0db2e9] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=b3bcbf6e-c6cb-4f88-8cfd-e9b43550adde] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=037e12b2-9453-4416-ad95-62088991bcfe] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=7746c0e8-5a3c-4881-8caa-6ca419afa9f0] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=5606e72c-7d8a-4ab8-a364-7dbee31b6db6] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=dc3fbb77-1c8e-4727-ae73-170dacd74ffd] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=ff3d118c-c05b-4bdf-b000-2d86a92bda54] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=7f043601-0429-4b82-929c-16d854f0b474] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=80fbc576-1540-4093-aba0-6bbc35e05969] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=90ca6fc1-dafd-434a-bac8-120266695a76] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=30fd14fa-ef1f-4f58-a036-e69be55c2c46] executing real Dispose(False)
-2012-03-11 13:06:40,777 [2] DEBUG - [session-id=98d10d5a-068f-441b-ac75-5e017fa15e23] executing real Dispose(False)
-2012-03-11 13:06:40,833 [13] DEBUG - loading entity: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:40,833 [13] DEBUG - entity proxy found in session cache
-2012-03-11 13:06:40,834 [13] DEBUG - loading entity: [KnowYourTurf.Core.Domain.EmailTemplate#1]
-2012-03-11 13:06:40,834 [13] DEBUG - creating new proxy for entity
-2012-03-11 13:06:40,867 [13] DEBUG - done materializing entity [KnowYourTurf.Core.Domain.EmailJob#1]
-2012-03-11 13:06:40,867 [13] DEBUG - initializing non-lazy collections
-2012-03-11 13:06:40,868 [13] DEBUG - done entity load
-2012-03-11 13:06:55,110 [13] DEBUG - loading entity: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:55,110 [13] DEBUG - entity proxy found in session cache
-2012-03-11 13:06:55,110 [13] DEBUG - attempting to resolve: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:55,110 [13] DEBUG - object not resolved in any cache: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:55,110 [13] DEBUG - Fetching entity: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:55,110 [13] DEBUG - loading entity: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:55,110 [13] DEBUG - Opened new IDbCommand, open IDbCommands: 1
-2012-03-11 13:06:55,111 [13] DEBUG - Building an IDbCommand object for the SqlString: SELECT user0_.EntityId as EntityId27_0_, user0_.LastModified as LastModi2_27_0_, user0_.DateCreated as DateCrea3_27_0_, user0_.IsDeleted as IsDeleted27_0_, user0_.CompanyId as CompanyId27_0_, user0_.FirstName as FirstName27_0_, user0_.LastName as LastName27_0_, user0_.Email as Email27_0_, user0_.PhoneMobile as PhoneMob9_27_0_, user0_.PhoneHome as PhoneHome27_0_, user0_.Address1 as Address11_27_0_, user0_.Address2 as Address12_27_0_, user0_.City as City27_0_, user0_.State as State27_0_, user0_.ZipCode as ZipCode27_0_, user0_.BirthDate as BirthDate27_0_, user0_.Notes as Notes27_0_, user0_.LanguageDefault as Languag18_27_0_, user0_.ImageUrl as ImageUrl27_0_, user0_.EmergencyContact as Emergen20_27_0_, user0_.EmergencyContactPhone as Emergen21_27_0_, user0_.EmployeeId as EmployeeId27_0_, user0_.CreatedBy_id as CreatedBy23_27_0_, user0_.ModifiedBy_id as ModifiedBy24_27_0_, user0_.Company_id as Company25_27_0_, user0_.UserLoginInfo_id as UserLog26_27_0_ FROM [User] user0_ WHERE user0_.EntityId=?
-2012-03-11 13:06:55,111 [13] DEBUG - BindParameters(Positional0:NHibernate.Type.Int64Type) 1 -> [0]
-2012-03-11 13:06:55,111 [13] INFO  - SELECT user0_.EntityId as EntityId27_0_, user0_.LastModified as LastModi2_27_0_, user0_.DateCreated as DateCrea3_27_0_, user0_.IsDeleted as IsDeleted27_0_, user0_.CompanyId as CompanyId27_0_, user0_.FirstName as FirstName27_0_, user0_.LastName as LastName27_0_, user0_.Email as Email27_0_, user0_.PhoneMobile as PhoneMob9_27_0_, user0_.PhoneHome as PhoneHome27_0_, user0_.Address1 as Address11_27_0_, user0_.Address2 as Address12_27_0_, user0_.City as City27_0_, user0_.State as State27_0_, user0_.ZipCode as ZipCode27_0_, user0_.BirthDate as BirthDate27_0_, user0_.Notes as Notes27_0_, user0_.LanguageDefault as Languag18_27_0_, user0_.ImageUrl as ImageUrl27_0_, user0_.EmergencyContact as Emergen20_27_0_, user0_.EmergencyContactPhone as Emergen21_27_0_, user0_.EmployeeId as EmployeeId27_0_, user0_.CreatedBy_id as CreatedBy23_27_0_, user0_.ModifiedBy_id as ModifiedBy24_27_0_, user0_.Company_id as Company25_27_0_, user0_.UserLoginInfo_id as UserLog26_27_0_ FROM [User] user0_ WHERE user0_.EntityId=@p0
-2012-03-11 13:06:55,111 [13] DEBUG - SELECT user0_.EntityId as EntityId27_0_, user0_.LastModified as LastModi2_27_0_, user0_.DateCreated as DateCrea3_27_0_, user0_.IsDeleted as IsDeleted27_0_, user0_.CompanyId as CompanyId27_0_, user0_.FirstName as FirstName27_0_, user0_.LastName as LastName27_0_, user0_.Email as Email27_0_, user0_.PhoneMobile as PhoneMob9_27_0_, user0_.PhoneHome as PhoneHome27_0_, user0_.Address1 as Address11_27_0_, user0_.Address2 as Address12_27_0_, user0_.City as City27_0_, user0_.State as State27_0_, user0_.ZipCode as ZipCode27_0_, user0_.BirthDate as BirthDate27_0_, user0_.Notes as Notes27_0_, user0_.LanguageDefault as Languag18_27_0_, user0_.ImageUrl as ImageUrl27_0_, user0_.EmergencyContact as Emergen20_27_0_, user0_.EmergencyContactPhone as Emergen21_27_0_, user0_.EmployeeId as EmployeeId27_0_, user0_.CreatedBy_id as CreatedBy23_27_0_, user0_.ModifiedBy_id as ModifiedBy24_27_0_, user0_.Company_id as Company25_27_0_, user0_.UserLoginInfo_id as UserLog26_27_0_ FROM [User] user0_ WHERE user0_.EntityId=@p0;@p0 = 1 [Type: Int64 (0)]
-2012-03-11 13:06:55,112 [13] DEBUG - Enlist Command
-2012-03-11 13:06:55,113 [13] DEBUG - ExecuteReader took 0 ms
-2012-03-11 13:06:55,113 [13] DEBUG - Opened IDataReader, open IDataReaders: 1
-2012-03-11 13:06:55,113 [13] DEBUG - processing result set
-2012-03-11 13:06:55,114 [13] DEBUG - result set row: 0
-2012-03-11 13:06:55,114 [13] DEBUG - result row: EntityKey[KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:55,114 [13] DEBUG - Initializing object from DataReader: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:55,114 [13] DEBUG - Hydrating entity: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:55,114 [13] DEBUG - done processing result set (1 rows)
-2012-03-11 13:06:55,114 [13] DEBUG - running NHybridDataReader.Dispose()
-2012-03-11 13:06:55,114 [13] DEBUG - Closed IDataReader, open IDataReaders :0
-2012-03-11 13:06:55,114 [13] DEBUG - DataReader was closed after 1 ms
-2012-03-11 13:06:55,114 [13] DEBUG - Closed IDbCommand, open IDbCommands: 0
-2012-03-11 13:06:55,115 [13] DEBUG - total objects hydrated: 1
-2012-03-11 13:06:55,115 [13] DEBUG - resolving associations for [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:55,115 [13] DEBUG - creating collection wrapper:[KnowYourTurf.Core.Domain.User.EmailTemplates#1]
-2012-03-11 13:06:55,115 [13] DEBUG - creating collection wrapper:[KnowYourTurf.Core.Domain.User.UserRoles#1]
-2012-03-11 13:06:55,115 [13] DEBUG - loading entity: [KnowYourTurf.Core.Domain.Company#1]
-2012-03-11 13:06:55,115 [13] DEBUG - creating new proxy for entity
-2012-03-11 13:06:55,155 [13] DEBUG - loading entity: [KnowYourTurf.Core.Domain.UserLoginInfo#1]
-2012-03-11 13:06:55,155 [13] DEBUG - creating new proxy for entity
-2012-03-11 13:06:55,190 [13] DEBUG - done materializing entity [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:06:55,190 [13] DEBUG - initializing non-lazy collections
-2012-03-11 13:06:55,190 [13] DEBUG - done entity load
-2012-03-11 13:09:33,725 [13] DEBUG - initializing collection [KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]
-2012-03-11 13:09:33,725 [13] DEBUG - checking second-level cache
-2012-03-11 13:09:33,726 [13] DEBUG - collection not cached
-2012-03-11 13:09:33,727 [13] DEBUG - loading collection: [KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]
-2012-03-11 13:09:33,727 [13] DEBUG - Opened new IDbCommand, open IDbCommands: 1
-2012-03-11 13:09:33,727 [13] DEBUG - Building an IDbCommand object for the SqlString: SELECT subscriber0_.EmailJob_id as EmailJob1_1_, subscriber0_.User_id as User2_1_, user1_.EntityId as EntityId27_0_, user1_.LastModified as LastModi2_27_0_, user1_.DateCreated as DateCrea3_27_0_, user1_.IsDeleted as IsDeleted27_0_, user1_.CompanyId as CompanyId27_0_, user1_.FirstName as FirstName27_0_, user1_.LastName as LastName27_0_, user1_.Email as Email27_0_, user1_.PhoneMobile as PhoneMob9_27_0_, user1_.PhoneHome as PhoneHome27_0_, user1_.Address1 as Address11_27_0_, user1_.Address2 as Address12_27_0_, user1_.City as City27_0_, user1_.State as State27_0_, user1_.ZipCode as ZipCode27_0_, user1_.BirthDate as BirthDate27_0_, user1_.Notes as Notes27_0_, user1_.LanguageDefault as Languag18_27_0_, user1_.ImageUrl as ImageUrl27_0_, user1_.EmergencyContact as Emergen20_27_0_, user1_.EmergencyContactPhone as Emergen21_27_0_, user1_.EmployeeId as EmployeeId27_0_, user1_.CreatedBy_id as CreatedBy23_27_0_, user1_.ModifiedBy_id as ModifiedBy24_27_0_, user1_.Company_id as Company25_27_0_, user1_.UserLoginInfo_id as UserLog26_27_0_ FROM EmailTemplatesToSubscribers subscriber0_ left outer join [User] user1_ on subscriber0_.User_id=user1_.EntityId WHERE subscriber0_.EmailJob_id=?
-2012-03-11 13:09:33,727 [13] DEBUG - BindParameters(Positional0:NHibernate.Type.Int64Type) 1 -> [0]
-2012-03-11 13:09:33,727 [13] INFO  - SELECT subscriber0_.EmailJob_id as EmailJob1_1_, subscriber0_.User_id as User2_1_, user1_.EntityId as EntityId27_0_, user1_.LastModified as LastModi2_27_0_, user1_.DateCreated as DateCrea3_27_0_, user1_.IsDeleted as IsDeleted27_0_, user1_.CompanyId as CompanyId27_0_, user1_.FirstName as FirstName27_0_, user1_.LastName as LastName27_0_, user1_.Email as Email27_0_, user1_.PhoneMobile as PhoneMob9_27_0_, user1_.PhoneHome as PhoneHome27_0_, user1_.Address1 as Address11_27_0_, user1_.Address2 as Address12_27_0_, user1_.City as City27_0_, user1_.State as State27_0_, user1_.ZipCode as ZipCode27_0_, user1_.BirthDate as BirthDate27_0_, user1_.Notes as Notes27_0_, user1_.LanguageDefault as Languag18_27_0_, user1_.ImageUrl as ImageUrl27_0_, user1_.EmergencyContact as Emergen20_27_0_, user1_.EmergencyContactPhone as Emergen21_27_0_, user1_.EmployeeId as EmployeeId27_0_, user1_.CreatedBy_id as CreatedBy23_27_0_, user1_.ModifiedBy_id as ModifiedBy24_27_0_, user1_.Company_id as Company25_27_0_, user1_.UserLoginInfo_id as UserLog26_27_0_ FROM EmailTemplatesToSubscribers subscriber0_ left outer join [User] user1_ on subscriber0_.User_id=user1_.EntityId WHERE subscriber0_.EmailJob_id=@p0
-2012-03-11 13:09:33,727 [13] DEBUG - SELECT subscriber0_.EmailJob_id as EmailJob1_1_, subscriber0_.User_id as User2_1_, user1_.EntityId as EntityId27_0_, user1_.LastModified as LastModi2_27_0_, user1_.DateCreated as DateCrea3_27_0_, user1_.IsDeleted as IsDeleted27_0_, user1_.CompanyId as CompanyId27_0_, user1_.FirstName as FirstName27_0_, user1_.LastName as LastName27_0_, user1_.Email as Email27_0_, user1_.PhoneMobile as PhoneMob9_27_0_, user1_.PhoneHome as PhoneHome27_0_, user1_.Address1 as Address11_27_0_, user1_.Address2 as Address12_27_0_, user1_.City as City27_0_, user1_.State as State27_0_, user1_.ZipCode as ZipCode27_0_, user1_.BirthDate as BirthDate27_0_, user1_.Notes as Notes27_0_, user1_.LanguageDefault as Languag18_27_0_, user1_.ImageUrl as ImageUrl27_0_, user1_.EmergencyContact as Emergen20_27_0_, user1_.EmergencyContactPhone as Emergen21_27_0_, user1_.EmployeeId as EmployeeId27_0_, user1_.CreatedBy_id as CreatedBy23_27_0_, user1_.ModifiedBy_id as ModifiedBy24_27_0_, user1_.Company_id as Company25_27_0_, user1_.UserLoginInfo_id as UserLog26_27_0_ FROM EmailTemplatesToSubscribers subscriber0_ left outer join [User] user1_ on subscriber0_.User_id=user1_.EntityId WHERE subscriber0_.EmailJob_id=@p0;@p0 = 1 [Type: Int64 (0)]
-2012-03-11 13:09:33,729 [13] DEBUG - Enlist Command
-2012-03-11 13:09:33,730 [13] DEBUG - ExecuteReader took 0 ms
-2012-03-11 13:09:33,730 [13] DEBUG - Opened IDataReader, open IDataReaders: 1
-2012-03-11 13:09:33,730 [13] DEBUG - result set contains (possibly empty) collection: [KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]
-2012-03-11 13:09:33,730 [13] DEBUG - constructing collection load context for result set [NHibernate.Driver.NHybridDataReader]
-2012-03-11 13:09:33,731 [13] DEBUG - starting attempt to find loading collection [[KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]]
-2012-03-11 13:09:33,731 [13] DEBUG - collection not yet initialized; initializing
-2012-03-11 13:09:33,733 [13] DEBUG - processing result set
-2012-03-11 13:09:33,733 [13] DEBUG - result set row: 0
-2012-03-11 13:09:33,733 [13] DEBUG - result row: EntityKey[KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:09:33,734 [13] DEBUG - found row of collection: [KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]
-2012-03-11 13:09:33,734 [13] DEBUG - starting attempt to find loading collection [[KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]]
-2012-03-11 13:09:33,734 [13] DEBUG - attempting to locate loading collection entry [CollectionKey[KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]] in any result-set context
-2012-03-11 13:09:33,734 [13] DEBUG - collection [CollectionKey[KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]] not located in load context
-2012-03-11 13:09:33,734 [13] DEBUG - found loading collection bound to current result set processing; reading row
-2012-03-11 13:09:33,734 [13] DEBUG - loading entity: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:09:33,734 [13] DEBUG - entity proxy found in session cache
-2012-03-11 13:09:33,734 [13] DEBUG - attempting to resolve: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:09:33,735 [13] DEBUG - resolved object in session cache: [KnowYourTurf.Core.Domain.User#1]
-2012-03-11 13:09:33,735 [13] DEBUG - done processing result set (1 rows)
-2012-03-11 13:09:33,735 [13] DEBUG - running NHybridDataReader.Dispose()
-2012-03-11 13:09:33,735 [13] DEBUG - Closed IDataReader, open IDataReaders :0
-2012-03-11 13:09:33,735 [13] DEBUG - DataReader was closed after 5 ms
-2012-03-11 13:09:33,735 [13] DEBUG - Closed IDbCommand, open IDbCommands: 0
-2012-03-11 13:09:33,735 [13] DEBUG - total objects hydrated: 0
-2012-03-11 13:09:33,736 [13] DEBUG - attempting to locate loading collection entry [CollectionKey[KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]] in any result-set context
-2012-03-11 13:09:33,736 [13] DEBUG - collection [CollectionKey[KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]] not located in load context
-2012-03-11 13:09:33,737 [13] DEBUG - removing collection load entry [NHibernate.Engine.Loading.LoadingCollectionEntry<rs=NHibernate.Driver.NHybridDataReader, coll=[KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]>@8a920e]
-2012-03-11 13:09:33,737 [13] DEBUG - 1 collections were found in result set for role: KnowYourTurf.Core.Domain.EmailJob.Subscribers
-2012-03-11 13:09:33,738 [13] DEBUG - ending loading collection [NHibernate.Engine.Loading.LoadingCollectionEntry<rs=NHibernate.Driver.NHybridDataReader, coll=[KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]>@8a920e]
-2012-03-11 13:09:33,739 [13] DEBUG - collection fully initialized: [KnowYourTurf.Core.Domain.EmailJob.Subscribers#1]
-2012-03-11 13:09:33,739 [13] DEBUG - 1 collections initialized for role: KnowYourTurf.Core.Domain.EmailJob.Subscribers
-2012-03-11 13:09:33,740 [13] DEBUG - initializing non-lazy collections
-2012-03-11 13:09:33,740 [13] DEBUG - done loading collection
-2012-03-11 13:09:33,740 [13] DEBUG - collection initialized
-2012-03-11 13:09:33,750 [13] DEBUG - initializing proxy: [KnowYourTurf.Core.Domain.EmailTemplate#1]
-2012-03-11 13:09:33,750 [13] DEBUG - attempting to resolve: [KnowYourTurf.Core.Domain.EmailTemplate#1]
-2012-03-11 13:09:33,750 [13] DEBUG - object not resolved in any cache: [KnowYourTurf.Core.Domain.EmailTemplate#1]
-2012-03-11 13:09:33,750 [13] DEBUG - Fetching entity: [KnowYourTurf.Core.Domain.EmailTemplate#1]
-2012-03-11 13:09:33,750 [13] DEBUG - loading entity: [KnowYourTurf.Core.Domain.EmailTemplate#1]
-2012-03-11 13:09:33,750 [13] DEBUG - Opened new IDbCommand, open IDbCommands: 1
-2012-03-11 13:09:33,750 [13] DEBUG - Building an IDbCommand object for the SqlString: SELECT emailtempl0_.EntityId as EntityId10_0_, emailtempl0_.LastModified as LastModi2_10_0_, emailtempl0_.DateCreated as DateCrea3_10_0_, emailtempl0_.IsDeleted as IsDeleted10_0_, emailtempl0_.CompanyId as CompanyId10_0_, emailtempl0_.Name as Name10_0_, emailtempl0_.Description as Descript7_10_0_, emailtempl0_.Template as Template10_0_, emailtempl0_.CreatedBy_id as CreatedBy9_10_0_, emailtempl0_.ModifiedBy_id as ModifiedBy10_10_0_ FROM [EmailTemplate] emailtempl0_ WHERE emailtempl0_.EntityId=?
-2012-03-11 13:09:33,750 [13] DEBUG - BindParameters(Positional0:NHibernate.Type.Int64Type) 1 -> [0]
-2012-03-11 13:09:33,750 [13] INFO  - SELECT emailtempl0_.EntityId as EntityId10_0_, emailtempl0_.LastModified as LastModi2_10_0_, emailtempl0_.DateCreated as DateCrea3_10_0_, emailtempl0_.IsDeleted as IsDeleted10_0_, emailtempl0_.CompanyId as CompanyId10_0_, emailtempl0_.Name as Name10_0_, emailtempl0_.Description as Descript7_10_0_, emailtempl0_.Template as Template10_0_, emailtempl0_.CreatedBy_id as CreatedBy9_10_0_, emailtempl0_.ModifiedBy_id as ModifiedBy10_10_0_ FROM [EmailTemplate] emailtempl0_ WHERE emailtempl0_.EntityId=@p0
-2012-03-11 13:09:33,750 [13] DEBUG - SELECT emailtempl0_.EntityId as EntityId10_0_, emailtempl0_.LastModified as LastModi2_10_0_, emailtempl0_.DateCreated as DateCrea3_10_0_, emailtempl0_.IsDeleted as IsDeleted10_0_, emailtempl0_.CompanyId as CompanyId10_0_, emailtempl0_.Name as Name10_0_, emailtempl0_.Description as Descript7_10_0_, emailtempl0_.Template as Template10_0_, emailtempl0_.CreatedBy_id as CreatedBy9_10_0_, emailtempl0_.ModifiedBy_id as ModifiedBy10_10_0_ FROM [EmailTemplate] emailtempl0_ WHERE emailtempl0_.EntityId=@p0;@p0 = 1 [Type: Int64 (0)]
-2012-03-11 13:09:33,752 [13] DEBUG - Enlist Command
-2012-03-11 13:09:33,752 [13] DEBUG - ExecuteReader took 0 ms
-2012-03-11 13:09:33,752 [13] DEBUG - Opened IDataReader, open IDataReaders: 1
-2012-03-11 13:09:33,752 [13] DEBUG - processing result set
-2012-03-11 13:09:33,752 [13] DEBUG - result set row: 0
-2012-03-11 13:09:33,752 [13] DEBUG - result row: EntityKey[KnowYourTurf.Core.Domain.EmailTemplate#1]
-2012-03-11 13:09:33,753 [13] DEBUG - Initializing object from DataReader: [KnowYourTurf.Core.Domain.EmailTemplate#1]
-2012-03-11 13:09:33,753 [13] DEBUG - Hydrating entity: [KnowYourTurf.Core.Domain.EmailTemplate#1]
-2012-03-11 13:09:33,753 [13] DEBUG - done processing result set (1 rows)
-2012-03-11 13:09:33,753 [13] DEBUG - running NHybridDataReader.Dispose()
-2012-03-11 13:09:33,753 [13] DEBUG - Closed IDataReader, open IDataReaders :0
-2012-03-11 13:09:33,753 [13] DEBUG - DataReader was closed after 0 ms
-2012-03-11 13:09:33,753 [13] DEBUG - Closed IDbCommand, open IDbCommands: 0
-2012-03-11 13:09:33,753 [13] DEBUG - total objects hydrated: 1
-2012-03-11 13:09:33,753 [13] DEBUG - resolving associations for [KnowYourTurf.Core.Domain.EmailTemplate#1]
-2012-03-11 13:09:33,753 [13] DEBUG - done materializing entity [KnowYourTurf.Core.Domain.EmailTemplate#1]
-2012-03-11 13:09:33,753 [13] DEBUG - initializing non-lazy collections
-2012-03-11 13:09:33,753 [13] DEBUG - done entity load
+2012-03-18 11:34:15,421 [15] ERROR - Could not execute query: SELECT emailtempl0_.User_id as User2_1_, emailtempl0_.EmailJob_id as EmailJob1_1_, emailjob1_.EntityId as EntityId8_0_, emailjob1_.LastModified as LastModi2_8_0_, emailjob1_.DateCreated as DateCrea3_8_0_, emailjob1_.IsDeleted as IsDeleted8_0_, emailjob1_.CompanyId as CompanyId8_0_, emailjob1_.Name as Name8_0_, emailjob1_.Subject as Subject8_0_, emailjob1_.Sender as Sender8_0_, emailjob1_.Description as Descript9_8_0_, emailjob1_.Frequency as Frequency8_0_, emailjob1_.CreatedBy_id as CreatedBy11_8_0_, emailjob1_.ModifiedBy_id as ModifiedBy12_8_0_, emailjob1_.EmailTemplate_id as EmailTe13_8_0_, emailjob1_.EmailJobType_id as EmailJo14_8_0_ FROM EmailTemplatesToSubscribers emailtempl0_ left outer join [EmailJob] emailjob1_ on emailtempl0_.EmailJob_id=emailjob1_.EntityId WHERE emailtempl0_.User_id=@p0
+System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'EmailTemplatesToSubscribers'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2012-03-18 11:34:15,439 [15] ERROR - Invalid object name 'EmailTemplatesToSubscribers'.
+2012-03-18 11:34:15,449 [15] ERROR - Invalid object name 'EmailTemplatesToSubscribers'.
+2012-03-18 11:34:15,795 [15] ERROR - Could not execute query: SELECT emailtempl0_.User_id as User2_1_, emailtempl0_.EmailJob_id as EmailJob1_1_, emailjob1_.EntityId as EntityId8_0_, emailjob1_.LastModified as LastModi2_8_0_, emailjob1_.DateCreated as DateCrea3_8_0_, emailjob1_.IsDeleted as IsDeleted8_0_, emailjob1_.CompanyId as CompanyId8_0_, emailjob1_.Name as Name8_0_, emailjob1_.Subject as Subject8_0_, emailjob1_.Sender as Sender8_0_, emailjob1_.Description as Descript9_8_0_, emailjob1_.Frequency as Frequency8_0_, emailjob1_.CreatedBy_id as CreatedBy11_8_0_, emailjob1_.ModifiedBy_id as ModifiedBy12_8_0_, emailjob1_.EmailTemplate_id as EmailTe13_8_0_, emailjob1_.EmailJobType_id as EmailJo14_8_0_ FROM EmailTemplatesToSubscribers emailtempl0_ left outer join [EmailJob] emailjob1_ on emailtempl0_.EmailJob_id=emailjob1_.EntityId WHERE emailtempl0_.User_id=@p0
+System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'EmailTemplatesToSubscribers'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd) in d:\CSharp\NH\NH\nhibernate\src\NHibernate\AdoNet\AbstractBatcher.cs:line 241
+2012-03-18 11:34:15,804 [15] ERROR - Invalid object name 'EmailTemplatesToSubscribers'.
+2012-03-18 11:34:15,813 [15] ERROR - Invalid object name 'EmailTemplatesToSubscribers'.
