@@ -17,11 +17,12 @@ namespace KnowYourTurf.Core.Domain
         public UnitOfWork(ISession session,IGetCompanyIdService getCompanyIdService)
         {
             _session = session;
+            _getCompanyIdService = getCompanyIdService;
             var enableCoFilter = _session.EnableFilter("CompanyConditionFilter");
             var enableDeletdFilter = _session.EnableFilter("IsDeletedConditionFilter");
             var enableStatusFilter = _session.EnableFilter("StatusConditionFilter");
             if(enableCoFilter!=null)
-                enableCoFilter.SetParameter("CompanyId", ObjectFactory.Container.GetInstance<IGetCompanyIdService>().Execute());
+                enableCoFilter.SetParameter("CompanyId", _getCompanyIdService.Execute());
             if (enableDeletdFilter!= null)
                 enableDeletdFilter.SetParameter("IsDeleted", false);
             if (enableStatusFilter!= null)

@@ -149,7 +149,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken ADDRESS = new WebLocalizationKeys("ADDRESS", "Address");
         public static readonly StringToken FORUM = new WebLocalizationKeys("FORUM", "Forum");
 
-        public static readonly StringToken WEATHER = new WebLocalizationKeys("WEATHER", "Item");
+        public static readonly StringToken WEATHER = new WebLocalizationKeys("WEATHER", "Weather");
         public static readonly StringToken WEATHER_INFORMATION = new WebLocalizationKeys("WEATHER_INFORMATION", "Weather Information");
 
         public static readonly StringToken VENDOR_CONTACTS = new WebLocalizationKeys("VENDOR_CONTACTS", "Vendor Contacts");
@@ -178,7 +178,7 @@ namespace KnowYourTurf.Web
 
         public static readonly StringToken COMMIT = new WebLocalizationKeys("COMMIT", "Commit");
         public static readonly StringToken RETURN = new WebLocalizationKeys("RETURN", "Return");
-        public static readonly StringToken SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM = new WebLocalizationKeys("SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM", "Select A Color To Associate With This Field");
+        public static readonly StringToken SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM = new WebLocalizationKeys("SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM", "Select A Color To Associate With This Item");
 
         public static readonly StringToken NEW_FACILITIES = new WebLocalizationKeys("NEW_FACILITIES", "New Facilities");
         public static readonly StringToken ERROR_UNEXPECTED = new WebLocalizationKeys("ERROR_UNEXPECTED", "An Unexpected Error Has Occured.");
