@@ -119,33 +119,44 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapRolesToGroups(User employee)
         {
-            _authorizationRepository.DetachUserFromGroup(employee, UserType.Administrator.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserType.Employee.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserType.Facilities.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserType.KYTAdmin.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserType.MultiTenant.Key);
-
             foreach (var x in employee.UserRoles)
             {
                 if (x.Name == UserType.Administrator.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.Administrator.Key);
+                }else
+                {
+                    _authorizationRepository.DetachUserFromGroup(employee, UserType.Administrator.Key);
                 }
                 if (x.Name== UserType.Employee.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.Employee.Key);
+                }else
+                {
+                    _authorizationRepository.DetachUserFromGroup(employee, UserType.Employee.Key);
                 }
                 if (x.Name == UserType.Facilities.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.Facilities.Key);
                 }
+                else
+                {
+                    _authorizationRepository.DetachUserFromGroup(employee, UserType.Facilities.Key);
+                }
                 if (x.Name == UserType.KYTAdmin.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.KYTAdmin.Key);
                 }
+                else
+                {
+                    _authorizationRepository.DetachUserFromGroup(employee, UserType.KYTAdmin.Key);
+                }
                 if (x.Name == UserType.MultiTenant.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.MultiTenant.Key);
+                }else
+                {
+                    _authorizationRepository.DetachUserFromGroup(employee, UserType.MultiTenant.Key);
                 }
             }
         }
@@ -173,7 +184,6 @@ namespace KnowYourTurf.Web.Controllers
             employee.UserLoginInfo.Password = employeeModel.UserLoginInfo.Password;
             employee.UserLoginInfo.LoginName = employeeModel.Email;
             employee.UserLoginInfo.Status = employeeModel.UserLoginInfo.Status;
-            employee.UserLoginInfo.UserType = UserType.Employee.ToString();
             if (model.RolesInput.IsEmpty())
             {
                 employee.EmptyUserRoles();

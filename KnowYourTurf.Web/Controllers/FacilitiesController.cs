@@ -119,7 +119,6 @@ namespace KnowYourTurf.Web.Controllers
                 Password = facilitiesModel.UserLoginInfo.Password,
                 LoginName = facilitiesModel.Email,
                 Status = facilitiesModel.UserLoginInfo.Status,
-                UserType = UserType.Facilities.ToString(),
             };
             var role = _repository.Query<UserRole>(x => x.Name == UserType.Facilities.ToString()).FirstOrDefault();
             facilities.AddUserRole(role);

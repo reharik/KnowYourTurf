@@ -199,7 +199,6 @@ namespace Generator
                                              {
                                                  LoginName = "Admin",
                                                  Password = "123",
-                                                 UserType = UserType.Administrator.ToString(),
                                                  Status = "Active"
                                              };
             _defaultUser.AddUserRole(_userRoleAdmin);
@@ -215,7 +214,6 @@ namespace Generator
             {
                 LoginName = "alt",
                 Password = "alt",
-                UserType = UserType.Employee.ToString(),
             };
             altUser.AddUserRole(_userRoleAdmin);
             altUser.AddUserRole(_userRoleEmployee);
@@ -230,7 +228,6 @@ namespace Generator
             {
                 LoginName = "facilities",
                 Password = "facilities",
-                UserType = UserType.Facilities.ToString(),
                 Status = "Active"
             };
             facilities.AddUserRole(_userRoleFac);
@@ -265,7 +262,6 @@ namespace Generator
             {
                 LoginName = "reharik@gmail.com",
                 Password = "123",
-                UserType = UserType.Employee.ToString(),
                 Status = "Active"
             };
 
@@ -290,7 +286,6 @@ namespace Generator
             {
                 LoginName = "amahl@gmail.com",
                 Password = "123",
-                UserType = UserType.Employee.ToString(),
                 Status = "Active"
             };
 
@@ -315,7 +310,6 @@ namespace Generator
             {
                 LoginName = "mark@gmail.com",
                 Password = "123",
-                UserType = UserType.Employee.ToString(),
                 Status = "Active"
             };
 
@@ -340,7 +334,6 @@ namespace Generator
             {
                 LoginName = "chris@gmail.com",
                 Password = "123",
-                UserType = UserType.Employee.ToString(),
                 Status = "Active"
             };
             _employee1.AddUserRole(_userRoleEmployee);
