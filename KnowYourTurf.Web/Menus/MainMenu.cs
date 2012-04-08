@@ -24,14 +24,16 @@ namespace KnowYourTurf.Web.Menus
         {
             return _builder
                 .CreateNode<EmployeeDashboardController>(c => c.ViewEmployee(null), WebLocalizationKeys.HOME)
+                .CategoryGroupForItteration()
                 .CreateNode<FieldListController>(c => c.FieldList(), WebLocalizationKeys.FIELDS)
-                .CreateNode<EquipmentListController>(c => c.EquipmentList(), WebLocalizationKeys.EQUIPMENT)
                 .CreateNode(WebLocalizationKeys.TASKS)
                     .HasChildren()
                     .CreateNode<TaskListController>(c => c.TaskList(), WebLocalizationKeys.TASK_LIST)
                     .CreateNode<TaskCalendarController>(c => c.TaskCalendar(), WebLocalizationKeys.TASK_CALENDAR)
                     .EndChildren()
                 .CreateNode<EventCalendarController>(c => c.EventCalendar(), WebLocalizationKeys.EVENTS)
+                .EndCategoryGroup()
+                .CreateNode<EquipmentListController>(c => c.EquipmentList(), WebLocalizationKeys.EQUIPMENT)
                 .CreateNode<CalculatorListController>(c => c.CalculatorList(), WebLocalizationKeys.CALCULATORS)
                 .CreateNode<WeatherListController>(c => c.WeatherList(null), WebLocalizationKeys.WEATHER)
                 .CreateNode<ForumController>(c => c.Forum(), WebLocalizationKeys.FORUM)

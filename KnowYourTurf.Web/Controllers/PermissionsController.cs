@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using FubuMVC.Core;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using NHibernate.Collection.Generic;

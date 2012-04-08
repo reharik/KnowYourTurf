@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
@@ -175,12 +176,15 @@ namespace KnowYourTurf.Web.Controllers
             employee.UserLoginInfo.UserType = UserType.Employee.ToString();
             if (model.RolesInput.IsEmpty())
             {
+                employee.EmptyUserRoles();
                 var emp = _repository.Query<UserRole>(x => x.Name == UserType.Employee.ToString()).FirstOrDefault();
                 employee.AddUserRole(emp);
             }
             else
             {
-                _updateCollectionService.UpdateFromCSV(employee.UserRoles, model.RolesInput, employee.AddUserRole,employee.RemoveUserRole);
+                var newItems = new List<UserRole>();
+                model.RolesInput.Split(',').Each(x => newItems.Add(_repository.Query<UserRole>(y=>y.Name==x).FirstOrDefault()));
+                _updateCollectionService.Update(employee.UserRoles, newItems, employee.AddUserRole, employee.RemoveUserRole);
             }
             return employee;
         }

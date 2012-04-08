@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using FubuMVC.Core;
 using KnowYourTurf.Core;
 using KnowYourTurf.Web;
 using StructureMap;

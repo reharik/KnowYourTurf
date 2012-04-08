@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.UI;
+using FubuMVC.Core;
 using FubuMVC.Core.Util;
 using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using Alpinely.TownCrier;
+using FubuMVC.Core;
 using KnowYourTurf.Core.Domain;
 
 namespace KnowYourTurf.Core.Services.IEmailJob

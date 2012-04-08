@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using FubuMVC.Core;
 using FubuMVC.Core.Util;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
@@ -77,28 +78,28 @@ namespace KnowYourTurf.Core
         {
             return values.Count(evaluator) > 0;
         }
-
-        [DebuggerStepThrough]
-        public static IEnumerable<T> Each<T>(this IEnumerable<T> values, Action<T> eachAction)
-        {
-            foreach (var item in values)
-            {
-                eachAction(item);
-            }
-
-            return values;
-        }
-
-        [DebuggerStepThrough]
-        public static IEnumerable Each(this IEnumerable values, Action<object> eachAction)
-        {
-            foreach (var item in values)
-            {
-                eachAction(item);
-            }
-
-            return values;
-        }
+//
+//        [DebuggerStepThrough]
+//        public static IEnumerable<T> Each<T>(this IEnumerable<T> values, Action<T> eachAction)
+//        {
+//            foreach (var item in values)
+//            {
+//                eachAction(item);
+//            }
+//
+//            return values;
+//        }
+//
+//        [DebuggerStepThrough]
+//        public static IEnumerable Each(this IEnumerable values, Action<object> eachAction)
+//        {
+//            foreach (var item in values)
+//            {
+//                eachAction(item);
+//            }
+//
+//            return values;
+//        }
 
         [DebuggerStepThrough]
         public static int IterateFromZero(this int maxCount, Action<int> eachAction)

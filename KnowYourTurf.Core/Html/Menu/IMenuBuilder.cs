@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using FubuMVC.Core;
 using FubuMVC.Core.Util;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Localization;
@@ -22,6 +23,8 @@ namespace KnowYourTurf.Core.Html.Menu
         IMenuBuilder CreateNode(StringToken text, string cssClass = null);
 
         IMenuBuilder addUrlParameter(string name, string value);
+        IMenuBuilder CategoryGroupForItteration();
+        IMenuBuilder EndCategoryGroup();
     }
 
     public class MenuBuilder : IMenuBuilder
@@ -39,6 +42,11 @@ namespace KnowYourTurf.Core.Html.Menu
 
         private IList<MenuItem> _items = new List<MenuItem>();
         private IList<MenuItem> _parentItems = new List<MenuItem>();
+        private IList<MenuItem> _categoryItems = new List<MenuItem>();
+        private int index = 0;
+        private int count = 0;
+        private IList<Category> _categories;
+
         public IMenuBuilder HasChildren()
         {
             var _itemList = getList();
@@ -46,6 +54,43 @@ namespace KnowYourTurf.Core.Html.Menu
             lastItem.Children = new List<MenuItem>();
             _parentItems.Add(lastItem);            
             return this;
+        }
+        public IMenuBuilder CategoryGroupForItteration()
+        {
+            var userId = _sessionContext.GetUserId();
+            var user = _repository.Find<User>(userId);
+            _categories = user.Company.Categories.ToList();
+            count = _categories.Count;
+            return this;
+        }
+
+        public IMenuBuilder EndCategoryGroup()
+        {
+            _categories.Each(x =>
+                                 {
+                                     IList<MenuItem> parent = _items;
+                                     if (count > 1)
+                                     {
+                                         CreateNode(x.Name);
+                                         parent = _items.LastOrDefault().Children;
+
+                                     }
+                                     itterateOverCategoryItems(x.EntityId, _categoryItems, parent);
+                                 });
+
+            return this;
+        }
+        private void itterateOverCategoryItems(long entityId, IList<MenuItem> items, IList<MenuItem> parent = null )
+        {
+            items.Each(c =>
+            {
+                if (c.Url.IsEmpty() && c.Children.Any())
+                {
+                    itterateOverCategoryItems(entityId, c.Children);
+                }
+                c.Url = c.Url + "?ParentId=" + entityId;
+                if(parent!=null)parent.Add(c);
+            });
         }
 
         public IMenuBuilder EndChildren()
@@ -62,13 +107,17 @@ namespace KnowYourTurf.Core.Html.Menu
             lastItem.Url = lastItem.Url + "?" + name + "=" + value;
             return this;
         }
-
         public IMenuBuilder CreateNode(StringToken text, string cssClass = null)
+        {
+            return CreateNode(text.DefaultValue, cssClass);
+        }
+
+        public IMenuBuilder CreateNode(string text, string cssClass = null)
         {
             var _itemList = getList();
             _itemList.Add(new MenuItem
             {
-                Text = text.DefaultValue,
+                Text = text,
                 Url = "#",
                 CssClass = cssClass,
 
@@ -78,6 +127,7 @@ namespace KnowYourTurf.Core.Html.Menu
 
         private IList<MenuItem> getList()
         {
+            if (_categories != null && count > 1) { return _categoryItems; }
             var lastParentItem = _parentItems.LastOrDefault();
             return lastParentItem != null ? lastParentItem.Children : _items;
         }
