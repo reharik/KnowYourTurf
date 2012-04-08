@@ -114,7 +114,6 @@ namespace KnowYourTurf.Web.Controllers
                                                   Password = adminModel.UserLoginInfo.Password,
                                                   LoginName = adminModel.Email,
                                                   Status = adminModel.UserLoginInfo.Status,
-                                                  UserType = UserType.Administrator.ToString(),
                                               };
             administrator.AddUserRole(new UserRole { Name = UserType.Administrator.ToString() });
             administrator.AddUserRole(new UserRole { Name = UserType.Employee.ToString() });

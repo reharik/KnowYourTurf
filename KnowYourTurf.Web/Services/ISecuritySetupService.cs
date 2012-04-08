@@ -119,6 +119,7 @@ namespace KnowYourTurf.Web.Services
             _authorizationRepository.CreateOperation("/Calendar/CanEnterRetroactiveAppointments");
             _authorizationRepository.CreateOperation("/Calendar/CanEditPastAppointments");
             _authorizationRepository.CreateOperation("/Calendar/SetAppointmentForOthers");
+            _authorizationRepository.CreateOperation("/UserRoles");
         }
 
         public void AssociateAllUsersWithThierTypeGroup()

@@ -106,8 +106,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Password { get; set; }
         [ValidateNonEmpty, ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
-        [ValueOf(typeof(UserRole))]
-        public virtual string UserType { get; set; }
+        
         public virtual Guid ByPassToken { get; set; }
 
     }
