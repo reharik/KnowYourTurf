@@ -151,7 +151,7 @@ namespace KnowYourTurf.Core.Html.Menu
 
         private IList<MenuItem> getList()
         {
-            if (_categories != null && count > 1)
+            if (_categories != null && count > 0)
             {
                 var lastCatParentItem = _parentItems.LastOrDefault();
                 return lastCatParentItem != null ? lastCatParentItem.Children : _categoryItems;

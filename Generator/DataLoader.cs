@@ -173,9 +173,9 @@ namespace Generator
         {
             _company = new Company { Name = "KYT", ZipCode = "78702", TaxRate = 8.25,NumberOfCategories = 2};
             _category1 = new Category { Name = "Field 1" };
-            _category2 = new Category { Name = "Field 2" };
+//            _category2 = new Category { Name = "Field 2" };
             _company.AddCategory(_category1);
-            _company.AddCategory(_category2);
+//            _company.AddCategory(_category2);
 
             _repository.Save(_company);
         }
@@ -394,10 +394,10 @@ namespace Generator
 
             _category1.AddField(_field1);
             _category1.AddField(_field2);
-            _category2.AddField(_field3);
-            _category2.AddField(_field4);
+//            _category2.AddField(_field3);
+//            _category2.AddField(_field4);
             _repository.Save(_category1);
-            _repository.Save(_category2);
+//            _repository.Save(_category2);
         }
 
         private void CreateEventType()
@@ -511,11 +511,11 @@ namespace Generator
 
             _category1.AddTask(_task1);
             _category1.AddTask(_task2);
-            _category2.AddTask(_task3);
-            _category2.AddTask(_task4);
+//            _category2.AddTask(_task3);
+//            _category2.AddTask(_task4);
 
             _repository.Save(_category1);
-            _repository.Save(_category2);
+//            _repository.Save(_category2);
 
         }
 
