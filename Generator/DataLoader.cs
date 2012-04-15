@@ -1,7 +1,5 @@
 using System;
-using System.ComponentModel;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
@@ -46,6 +44,12 @@ namespace Generator
         private UserRole _userRoleAdmin;
         private UserRole _userRoleEmployee;
         private UserRole _userRoleFac;
+        private Category _category1;
+        private Category _category2;
+        private Field _field3;
+        private Field _field4;
+        private Task _task3;
+        private Task _task4;
 
         public void Load()
         {
@@ -167,7 +171,12 @@ namespace Generator
 
         private void CreateCompany()
         {
-            _company = new Company { Name = "KYT", ZipCode = "78702", TaxRate = 8.25 };
+            _company = new Company { Name = "KYT", ZipCode = "78702", TaxRate = 8.25,NumberOfCategories = 2};
+            _category1 = new Category { Name = "Field 1" };
+            _category2 = new Category { Name = "Field 2" };
+            _company.AddCategory(_category1);
+            _company.AddCategory(_category2);
+
             _repository.Save(_company);
         }
 
@@ -366,9 +375,29 @@ namespace Generator
                 Size = 120000,
                 Abbreviation = "SOFF"
             };
+            _field3 = new Field
+            {
+                Name = "field3",
+                Description = "SomeField1",
+                Size = 22000,
+                Abbreviation = "SFF"
+            };
 
-            _repository.Save(_field1);
-            _repository.Save(_field2);
+            _field4 = new Field
+            {
+                Name = "field3",
+                Description = "SomeField2",
+                Size = 120000,
+                Abbreviation = "SOFF"
+            };
+
+
+            _category1.AddField(_field1);
+            _category1.AddField(_field2);
+            _category2.AddField(_field3);
+            _category2.AddField(_field4);
+            _repository.Save(_category1);
+            _repository.Save(_category2);
         }
 
         private void CreateEventType()
@@ -444,10 +473,49 @@ namespace Generator
             _task2.AddEmployee(_employee2);
             _task2.AddEquipment(_equip1);
             _task2.AddEquipment(_equip2);
-            
-            
-            _repository.Save(_task1);
-            _repository.Save(_task2);
+
+
+            _task3 = new Task
+            {
+                TaskType = taskType1,
+                Field = _field3,
+                ScheduledDate = DateTime.Parse("3/3/2011"),
+                ScheduledStartTime = DateTime.Parse("3/3/2011 5:30 AM"),
+                ScheduledEndTime = DateTime.Parse("3/3/2011 6:30 AM"),
+                Notes = "Notes1",
+                InventoryProduct = _invenotyMaterial1,
+                QuantityNeeded = 4,
+                UnitType = UnitType.Tons.ToString()
+            };
+
+            _task4 = new Task
+            {
+                TaskType = taskType2,
+                Field = _field4,
+                ScheduledDate = DateTime.Parse("3/3/2011"),
+                ScheduledStartTime = DateTime.Parse("3/3/2011 6:30 AM"),
+                ScheduledEndTime = DateTime.Parse("3/3/2011 7:30 AM"),
+                Notes = "Notes2",
+                InventoryProduct = _inventoryChemical2,
+                QuantityNeeded = 4,
+                UnitType = UnitType.Tons.ToString()
+            };
+            _task3.AddEmployee(_employee1);
+            _task3.AddEmployee(_employee2);
+            _task3.AddEquipment(_equip1);
+            _task3.AddEquipment(_equip2);
+            _task4.AddEmployee(_employee1);
+            _task4.AddEmployee(_employee2);
+            _task4.AddEquipment(_equip1);
+            _task4.AddEquipment(_equip2);
+
+            _category1.AddTask(_task1);
+            _category1.AddTask(_task2);
+            _category2.AddTask(_task3);
+            _category2.AddTask(_task4);
+
+            _repository.Save(_category1);
+            _repository.Save(_category2);
 
         }
 

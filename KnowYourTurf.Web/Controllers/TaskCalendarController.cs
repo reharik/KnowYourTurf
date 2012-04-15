@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using FubuMVC.Core;
 using KnowYourTurf.Core;
@@ -20,19 +21,20 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
-        public ActionResult TaskCalendar()
+        public ActionResult TaskCalendar(ViewModel input)
         {
             var model = new CalendarViewModel
                        {
                            CalendarDefinition = new CalendarDefinition
                                                    {
-                                                       Url = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.Events(null)),
+                                                       Url = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.Events(null))+"?ParentId="+input.ParentId,
                                                        AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)),
                                                        DisplayUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Display(null)),
                                                        EventChangedUrl = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.EventChanged(null)),
-                                                       DeleteUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Delete(null)),
-                                                       
-                                                   }
+                                                       DeleteUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Delete(null)) ,
+
+                                                   },
+                           RootId = input.ParentId
                        };
             return View(model);
         }
@@ -53,7 +55,8 @@ namespace KnowYourTurf.Web.Controllers
             var events = new List<CalendarEvent>();
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
-            var tasks = _repository.Query<Task>(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
+            var category = _repository.Find<Category>(input.ParentId);
+            var tasks = category.Tasks.Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
             tasks.Each(x =>
                        events.Add(new CalendarEvent
                                       {
@@ -73,8 +76,5 @@ namespace KnowYourTurf.Web.Controllers
         public DateTime? ScheduledDate { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
-        
-            
-            
     }
 }

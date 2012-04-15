@@ -41,7 +41,6 @@ namespace KnowYourTurf.Web.Controllers
                 companies.Each(x => loadLastWeeksWeatherObject(jss, webClient, x, DateTime.Now.Date.AddDays(-d)));
                 d--;
                 _repository.UnitOfWork.Commit();
-                Thread.Sleep(70000);
             }
             return null;
         }
@@ -75,9 +74,10 @@ namespace KnowYourTurf.Web.Controllers
         private void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company item, DateTime date)
         {
             var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" + item.ZipCode + ".json";
-            var weather = _repository.Query<Weather>(x => x.Date == date).FirstOrDefault() ??
+            var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId== item.EntityId).FirstOrDefault() ??
                           new Weather { CompanyId = item.EntityId, Date = date };
             loadWeather(jss, webClient, weather, url);
+            Thread.Sleep(10000);
         }
 //        private void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company item)
 //        {

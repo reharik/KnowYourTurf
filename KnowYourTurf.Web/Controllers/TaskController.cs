@@ -32,10 +32,11 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate(AddUpdateTaskViewModel input)
         {
-            var task = input.EntityId > 0 ? _repository.Find<Task>(input.EntityId) : new Task();
+            var category = _repository.Find<Category>(input.RootId);
+            var task = input.EntityId > 0 ? category.Tasks.FirstOrDefault(x => x.EntityId == input.EntityId) : new Task();
             task.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : task.ScheduledDate;
             task.ScheduledStartTime= input.ScheduledStartTime.HasValue ? input.ScheduledStartTime.Value: task.ScheduledStartTime;
-            var fields = _selectListItemService.CreateList<Field>(x => x.Name, x => x.EntityId, true,true);
+            var fields = _selectListItemService.CreateList(category.Fields, x => x.Name, x => x.EntityId, true);
             var taskTypes = _selectListItemService.CreateList<TaskType>(x => x.Name, x => x.EntityId, true);
 
             var dictionary = new Dictionary<string, IEnumerable<SelectListItem>>();
@@ -79,7 +80,8 @@ namespace KnowYourTurf.Web.Controllers
                                 TaskTypeList = taskTypes,
                                 Item = task,
                                 Title = WebLocalizationKeys.TASK_INFORMATION.ToString(),
-                                Popup = input.Popup
+                                Popup = input.Popup,
+                                RootId = input.RootId,
 
             };
             if (task.EntityId > 0)
@@ -160,7 +162,15 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(TaskViewModel input)
         {
-            var task = input.Item.EntityId > 0? _repository.Find<Task>(input.Item.EntityId):new Task();
+            var category = _repository.Find<Category>(input.RootId);
+            Task task;
+            if (input.Item.EntityId > 0) { task = category.Tasks.FirstOrDefault(x => x.EntityId == input.Item.EntityId); }
+            else
+            {
+                task = new Task();
+                category.AddTask(task);
+            }
+
             mapItem(task, input.Item);
             mapChildren(task, input);
             ICrudManager crudManager = null;
@@ -169,7 +179,7 @@ namespace KnowYourTurf.Web.Controllers
                 crudManager = _inventoryService.DecrementTaskProduct(task);
                 task.InventoryDecremented = true;
             }
-            crudManager = _saveEntityService.ProcessSave(task, crudManager);
+            crudManager = _saveEntityService.ProcessSave(category, crudManager);
             var notification = crudManager.Finish();
             return Json(notification);
         }

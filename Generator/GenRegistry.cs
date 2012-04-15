@@ -1,6 +1,7 @@
 ﻿using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html.Grid;
+using KnowYourTurf.Core.Html.Menu;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Config;
@@ -62,6 +63,7 @@ namespace KnowYourTurf.Web
             For<ILocalizationDataProvider>().Use<LocalizationDataProvider>();
             For<IAuthenticationContext>().Use<WebAuthenticationContext>();
 
+            For<IMenuBuilder>().Use<GenMenuBuilder>();
             For<IMenuConfig>().Use<MainMenu>();
 
             For<IAuthorizationService>().HybridHttpOrThreadLocalScoped().Use<AuthorizationService>();

@@ -136,16 +136,18 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
         if(this.options.popupIsActive){return;}
         this.options.popupIsActive = true;
         var crudFormOptions={};
-        crudFormOptions.additionalSubmitData =  {"From":"Field","ParentId":entityId};
+        crudFormOptions.additionalSubmitData =  {"From":"Field"};
         var _url = url?url:this.options[name+"addUpdateUrl"];
-        if(!data)data={};
-        data.Popup=true;
+        var _data = $.extend({"From":"Field",
+            "ParentId":$("#ParentId").val(),
+            "RootId":$("#RootId").val(),
+            "Popup":true},data,{});
         $("#masterArea").after("<div id='dialogHolder'/>");
         var moduleOptions = {
             id:name,
             el:"#dialogHolder",
             url: _url,
-            data:data,
+            data:_data,
             crudFormOptions:crudFormOptions,
             buttons: kyt.popupButtonBuilder.builder(name).standardEditButons()
         };

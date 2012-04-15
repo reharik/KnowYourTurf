@@ -27,6 +27,7 @@ namespace KnowYourTurf.Core.Services.IEmailJob
         public void Execute()
         {
             var factory = new MergedEmailFactory(new TemplateParser());
+            var employees = _repository.Query<User>(x => x.UserRoles.Any(r=>r.Name == UserType.Employee.ToString()));
             var emailTemplate = _repository.Query<EmailTemplate>(x => x.Name == "Daily Tasks List").FirstOrDefault();
             employees.Each(x =>
                                {

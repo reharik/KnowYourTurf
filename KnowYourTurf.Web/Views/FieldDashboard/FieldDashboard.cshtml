@@ -41,8 +41,10 @@
             <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
         </div>
 
-                  @MvcHtmlString.Create(FormFor<FieldController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
+    @MvcHtmlString.Create(FormFor<FieldController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+        @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
+        <input type="hidden" id="ParentId" name="ParentId" value="@Model.ParentId"/>
+        <input type="hidden" id="RootId" value="@Model.ParentId"/>
     <div class="col left">
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
@@ -86,13 +88,13 @@
                     <input class="search" /> 
                     <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
                     <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
-@*                    <span class="title-name">@Model.Title</span>*@
+                    @*                    <span class="title-name">@Model.Title</span>*@
                 </div>
                 <div id="contentArea" class="content-inner">
-                        <table id="gridContainer_pt" class="scroll"></table>
-                        <div id="pager" class="scroll" style="text-align:center;"></div>
+                    <table id="gridContainer_pt" class="scroll"></table>
+                    <div id="pager" class="scroll" style="text-align:center;"></div>
+                </div>
             </div>
-        </div>
         <div class="fieldRow">
         <div class="gridHeader">@WebLocalizationKeys.PHOTOS</div>
             <div id="photoGridContainer" class="grid_5b">

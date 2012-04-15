@@ -94,8 +94,6 @@ namespace KnowYourTurf.Web.Services
 
         public void CreateOperationsForAllMenuItems()
         {
-
-
             var menuConfig = _container.GetAllInstances<IMenuConfig>();
             menuConfig.Each(x =>
             {
