@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
+using KnowYourTurf.Security.Model;
+using KnowYourTurf.Security.Services;
 using NHibernate;
-using NHibernate.Criterion;
-using Rhino.Security.Model;
-using Rhino.Security.Services;
 
 namespace KnowYourTurf.Core.Services
 {

@@ -1,8 +1,7 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using KnowYourTurf.Security.Interfaces;
 using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
-using Rhino.Security.Interfaces;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Filters

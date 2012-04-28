@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using KnowYourTurf.Security.Interfaces;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -11,7 +12,6 @@ using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
 using System.Linq;
-using Rhino.Security.Interfaces;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
@@ -193,7 +193,7 @@ namespace KnowYourTurf.Web.Controllers
             else
             {
                 var newItems = new List<UserRole>();
-                model.RolesInput.Split(',').Each(x => newItems.Add(_repository.Query<UserRole>(y=>y.Name==x).FirstOrDefault()));
+                model.RolesInput.Split(',').Each(x => newItems.Add(_repository.Query<UserRole>(y=>y.EntityId==Int32.Parse(x)).FirstOrDefault()));
                 _updateCollectionService.Update(employee.UserRoles, newItems, employee.AddUserRole, employee.RemoveUserRole);
             }
             return employee;

@@ -63,7 +63,7 @@ DEALLOCATE FK_KILLER
             using (ISession session = source.OpenSession(new SaveUpdateInterceptor()))
             {
                 var sql =
-                    "delete security_UsersToUsersGroups;delete security_UsersGroupsHierarchy;delete security_Permissions;delete security_UsersGroups;delete security_Operations;delete security_EntityReferencesToEntitiesGroups;delete security_EntityReferences;delete security_EntityTypes;delete security_EntityGroupsHierarchy;delete security_EntitiesGroups;";
+                    "delete security_UsersToUsersGroups;delete security_UsersGroupsHierarchy;delete security_Permissions;delete security_UsersGroups;delete security_Operations;";
 
                 IDbConnection conn = session.Connection;
                 var cmd = conn.CreateCommand();

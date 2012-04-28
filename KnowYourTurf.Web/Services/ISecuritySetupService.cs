@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using KnowYourTurf.Security.Interfaces;
 using FubuMVC.Core;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
@@ -9,8 +10,6 @@ using KnowYourTurf.Web.Config;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Controllers;
-using NHibernate;
-using Rhino.Security.Interfaces;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Services
