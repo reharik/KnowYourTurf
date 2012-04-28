@@ -4,7 +4,7 @@
         var calendarDefaultOptions = {
             header: {
 				left: 'prev,next today',
-				center: calendarDefinition.Title,
+				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
             defaultView: 'month',

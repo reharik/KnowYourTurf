@@ -1,5 +1,5 @@
-﻿using KnowYourTurf.Core.Enums;
-using Rhino.Security.Interfaces;
+﻿using KnowYourTurf.Security.Interfaces;
+using KnowYourTurf.Core.Enums;
 
 namespace KnowYourTurf.Core.Services
 {

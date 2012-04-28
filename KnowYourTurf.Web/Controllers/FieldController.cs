@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
@@ -27,6 +28,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new FieldViewModel
             {
                 Item = field,
+                ParentId = input.ParentId,
                 AddUpdateUrl = UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)) + "/" + field.EntityId,
                 Title = WebLocalizationKeys.FIELD_INFORMATION.ToString()
             };
@@ -50,14 +52,22 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(FieldViewModel input)
         {
-            var field = input.Item.EntityId>0? _repository.Find<Field>(input.Item.EntityId):new Field();
+            var category = _repository.Find<Category>(input.ParentId);
+            Field field;
+            if (input.Item.EntityId > 0) { field = category.Fields.FirstOrDefault(x => x.EntityId == input.Item.EntityId); }
+            else
+            {
+                field = new Field();
+                category.AddField(field);
+            }
             field.Description = input.Item.Description;
             field.Name = input.Item.Name;
             field.Abbreviation= input.Item.Abbreviation;
             field.Size = input.Item.Size;
             field.Status = input.Item.Status;
             field.FieldColor= input.Item.FieldColor;
-            var crudManager = _saveEntityService.ProcessSave(field);
+            
+            var crudManager = _saveEntityService.ProcessSave(category);
             var notification = crudManager.Finish();
             return Json(notification,"text/plain");
         }

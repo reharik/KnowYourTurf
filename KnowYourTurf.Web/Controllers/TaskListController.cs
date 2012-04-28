@@ -11,30 +11,35 @@ namespace KnowYourTurf.Web.Controllers
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
        private readonly IEntityListGrid<Task> _taskListGrid;
+        private readonly IRepository _repository;
 
         public TaskListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IEntityListGrid<Task> taskListGrid)
+            IEntityListGrid<Task> taskListGrid,
+            IRepository repository)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _taskListGrid = taskListGrid;
+            _repository = repository;
         }
 
-        public ActionResult TaskList()
+        public ActionResult TaskList(ViewModel input)
         {
-            var url = UrlContext.GetUrlForAction<TaskListController>(x => x.Tasks(null));
+            var url = UrlContext.GetUrlForAction<TaskListController>(x => x.Tasks(null))+"?ParentId="+input.ParentId;
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)),
                 DeleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x => x.DeleteMultiple(null)),
                 GridDefinition = _taskListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.TASKS.ToString()
+                Title = WebLocalizationKeys.TASKS.ToString(),
+                ParentId = input.ParentId
             };
             return View(model);
         }
 
         public JsonResult Tasks(GridItemsRequestModel input)
         {
-               var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters);
+            var category = _repository.Find<Category>(input.ParentId);
+            var items = _dynamicExpressionQuery.PerformQuery(category.Tasks,input.filters);
             var gridItemsViewModel = _taskListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }

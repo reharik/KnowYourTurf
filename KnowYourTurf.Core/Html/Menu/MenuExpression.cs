@@ -1,10 +1,11 @@
+
+
 using System.Collections.Generic;
-using System.Text;
+using FluentNHibernate.Utils;
+using HtmlTags;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Html.Expressions;
 using KnowYourTurf.Core.Html.Menu;
-using MethodFitness.Core.Html.Expressions;
-using HtmlTags;
 
 namespace MethodFitness.Core.Html.Menu
 {
@@ -49,7 +50,6 @@ namespace MethodFitness.Core.Html.Menu
         {
             if (_items == null) return;
             items.Each(x => ul.Children.Add(getLiItem(x)));
-            return;
         }
         private HtmlTag getLiItem(MenuItem item)
         {

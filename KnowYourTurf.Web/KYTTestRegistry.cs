@@ -1,3 +1,5 @@
+using KnowYourTurf.Security.Interfaces;
+using KnowYourTurf.Security.Services;
 using Alpinely.TownCrier;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -15,8 +17,6 @@ using FubuMVC.UI.Tags;
 using MethodFitness.Core;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
-using Rhino.Security.Interfaces;
-using Rhino.Security.Services;
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
 

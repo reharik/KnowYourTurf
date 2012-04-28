@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Html;

@@ -11,29 +11,34 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
         private readonly IEntityListGrid<Field> _fieldListGrid;
+        private readonly IRepository _repository;
 
         public FieldListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IEntityListGrid<Field> fieldListGrid)
+            IEntityListGrid<Field> fieldListGrid,
+            IRepository repository)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _fieldListGrid = fieldListGrid;
+            _repository = repository;
         }
 
-        public ActionResult FieldList()
+        public ActionResult FieldList(ViewModel input)
         {
-            var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null));
+            var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null))+"?ParentId="+input.ParentId;
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl =  UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)),
                 GridDefinition = _fieldListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.FIELDS.ToString()
+                Title = WebLocalizationKeys.FIELDS.ToString(),
+                ParentId = input.ParentId
             };
             return View(model);
         }
 
         public JsonResult Fields(GridItemsRequestModel input)
         {
-              var items = _dynamicExpressionQuery.PerformQuery<Field>(input.filters);
+            var category = _repository.Find<Category>(input.ParentId);
+            var items = _dynamicExpressionQuery.PerformQuery(category.Fields, input.filters);
             var gridItemsViewModel = _fieldListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }

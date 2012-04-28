@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Script.Serialization;
+using FubuMVC.Core;
 using FubuMVC.Core.Util;
 using KnowYourTurf.Core.Domain;
 

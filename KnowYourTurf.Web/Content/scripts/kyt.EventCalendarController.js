@@ -34,20 +34,22 @@ kyt.CalendarController = kyt.Controller.extend({
     },
     additionalSubscriptions:function(){},
     dayClick:function(date, allDay, jsEvent, view) {
-        var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"), "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")};
+         var rootId = $("#RootId").val();
+        var data = {"RootId":rootId,"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"), "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")};
         this.editEvent(this.options.AddUpdateUrl,data);
     },
 
     editEvent:function(url, data){
         $("#dialogHolder").remove();
         $("#masterArea").after("<div id='dialogHolder'/>");
-        if(!data)data={};
-        data.Popup=true;
+        var rootId = $("#RootId").val();
+        var _data = $.extend({"RootId":rootId},data,{});
+        _data.Popup=true;
         var moduleOptions = {
             id:"editModule",
             el:"#dialogHolder",
             url: url,
-            data:data,
+            data:_data,
             buttons: kyt.popupButtonBuilder.builder("editModule").standardEditButons()
         };
         this.modules.popupForm = new kyt.AjaxPopupFormModule(moduleOptions);

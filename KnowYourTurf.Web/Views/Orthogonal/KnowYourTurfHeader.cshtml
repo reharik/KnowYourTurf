@@ -23,8 +23,8 @@
     <span id="login-links">
         @if (Model.LoggedIn)
         {
-            <a href="" class="first" id="userSettings">@Model.User.FullName </a>
-            <a href="">Help</a>
+            <a href="" class="first" id="userSettings">@Model.User.FullName (@Model.User.Company.Name) </a>
+            <a href="" onclick="window.open('/Orthogonal/Help'); return false;">Help</a>
             @Html.ActionLink(WebLocalizationKeys.LOG_OUT.ToString(), "Logout", "Login")
         }
         else

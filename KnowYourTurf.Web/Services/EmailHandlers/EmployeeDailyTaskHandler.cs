@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using FubuMVC.Core;
 using HtmlTags;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;

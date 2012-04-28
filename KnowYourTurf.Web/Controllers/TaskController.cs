@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
@@ -31,10 +32,11 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate(AddUpdateTaskViewModel input)
         {
-            var task = input.EntityId > 0 ? _repository.Find<Task>(input.EntityId) : new Task();
+            var category = _repository.Find<Category>(input.RootId);
+            var task = input.EntityId > 0 ? category.Tasks.FirstOrDefault(x => x.EntityId == input.EntityId) : new Task();
             task.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : task.ScheduledDate;
             task.ScheduledStartTime= input.ScheduledStartTime.HasValue ? input.ScheduledStartTime.Value: task.ScheduledStartTime;
-            var fields = _selectListItemService.CreateList<Field>(x => x.Name, x => x.EntityId, true,true);
+            var fields = _selectListItemService.CreateList(category.Fields, x => x.Name, x => x.EntityId, true);
             var taskTypes = _selectListItemService.CreateList<TaskType>(x => x.Name, x => x.EntityId, true);
 
             var dictionary = new Dictionary<string, IEnumerable<SelectListItem>>();
@@ -61,10 +63,11 @@ namespace KnowYourTurf.Web.Controllers
             dictionary.Add(WebLocalizationKeys.CHEMICALS.ToString(), chemicals);
             dictionary.Add(WebLocalizationKeys.MATERIALS.ToString(), materials);
             dictionary.Add(WebLocalizationKeys.FERTILIZERS.ToString(), fertilizer);
-            var availableEmployees = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString()).Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).ToList();
-            var selectedEmployees = task.Employees.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
-            var availableEquipment = _repository.FindAll<Equipment>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
-            var selectedEquipment = task.Equipment.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            var availableEmployees = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString() && x.UserRoles.Any(y=>y.Name==UserType.Employee.ToString()))
+                .Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).OrderBy(x=>x.name).ToList();
+            var selectedEmployees = task.Employees.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName }).OrderBy(x => x.name);
+            var availableEquipment = _repository.FindAll<Equipment>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name }).OrderBy(x => x.name);
+            var selectedEquipment = task.Equipment.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name }).OrderBy(x => x.name);
             
             var model = new TaskViewModel
                             {//strangly I have to itterate this or NH freaks out
@@ -77,7 +80,8 @@ namespace KnowYourTurf.Web.Controllers
                                 TaskTypeList = taskTypes,
                                 Item = task,
                                 Title = WebLocalizationKeys.TASK_INFORMATION.ToString(),
-                                Popup = input.Popup
+                                Popup = input.Popup,
+                                RootId = input.RootId,
 
             };
             if (task.EntityId > 0)
@@ -158,7 +162,15 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(TaskViewModel input)
         {
-            var task = input.Item.EntityId > 0? _repository.Find<Task>(input.Item.EntityId):new Task();
+            var category = _repository.Find<Category>(input.RootId);
+            Task task;
+            if (input.Item.EntityId > 0) { task = category.Tasks.FirstOrDefault(x => x.EntityId == input.Item.EntityId); }
+            else
+            {
+                task = new Task();
+                category.AddTask(task);
+            }
+
             mapItem(task, input.Item);
             mapChildren(task, input);
             ICrudManager crudManager = null;
@@ -167,7 +179,7 @@ namespace KnowYourTurf.Web.Controllers
                 crudManager = _inventoryService.DecrementTaskProduct(task);
                 task.InventoryDecremented = true;
             }
-            crudManager = _saveEntityService.ProcessSave(task, crudManager);
+            crudManager = _saveEntityService.ProcessSave(category, crudManager);
             var notification = crudManager.Finish();
             return Json(notification);
         }

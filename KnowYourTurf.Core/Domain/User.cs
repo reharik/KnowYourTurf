@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using KnowYourTurf.Security;
 using Castle.Components.Validator;
-using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
-using Rhino.Security;
 
 namespace KnowYourTurf.Core.Domain
 {
@@ -28,7 +27,7 @@ namespace KnowYourTurf.Core.Domain
         [ValueOf(typeof(State))]
         public virtual string State { get; set; }
         public virtual string ZipCode { get; set; }
-        [TextArea]
+        [Tools.CustomAttributes.TextArea]
         public virtual string Notes { get; set; }
         public virtual DateTime? BirthDate { get; set; }
         public virtual string ImageUrl { get; set; }
@@ -106,8 +105,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Password { get; set; }
         [ValidateNonEmpty, ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
-        [ValueOf(typeof(UserRole))]
-        public virtual string UserType { get; set; }
+        
         public virtual Guid ByPassToken { get; set; }
 
     }

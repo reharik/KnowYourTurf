@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using KnowYourTurf.Security.Interfaces;
+using FubuMVC.Core;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Config;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Controllers;
-using NHibernate;
-using Rhino.Security.Interfaces;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Services
@@ -93,8 +93,6 @@ namespace KnowYourTurf.Web.Services
 
         public void CreateOperationsForAllMenuItems()
         {
-
-
             var menuConfig = _container.GetAllInstances<IMenuConfig>();
             menuConfig.Each(x =>
             {
@@ -119,6 +117,7 @@ namespace KnowYourTurf.Web.Services
             _authorizationRepository.CreateOperation("/Calendar/CanEnterRetroactiveAppointments");
             _authorizationRepository.CreateOperation("/Calendar/CanEditPastAppointments");
             _authorizationRepository.CreateOperation("/Calendar/SetAppointmentForOthers");
+            _authorizationRepository.CreateOperation("/UserRoles");
         }
 
         public void AssociateAllUsersWithThierTypeGroup()

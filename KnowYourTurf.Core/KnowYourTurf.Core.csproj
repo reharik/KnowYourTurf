@@ -90,10 +90,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Remotion.Data.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Rhino.Security.dll</HintPath>
-    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\lib\StructureMap.dll</HintPath>
     </Reference>
@@ -316,7 +312,12 @@
     <Compile Include="Services\SystemClock.cs" />
     <Compile Include="CoreViewModels\ViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\KnowYourTuf.Security\KnowYourTurf.Security.csproj">
+      <Project>{DBA372FE-3D52-45B3-AF82-B37696328764}</Project>
+      <Name>KnowYourTurf.Security</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

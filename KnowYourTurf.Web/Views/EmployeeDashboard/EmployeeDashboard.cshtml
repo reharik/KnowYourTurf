@@ -66,13 +66,14 @@
         </div>
     </div>
     <div class="col left">
-     @{if (Model.Item.ImageUrl.IsNotEmpty())
-       {
-            <div class="fieldRow">
-                @Html.ViewFor(x => x.Item.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
-            </div>
-       }
-        }
+     @{
+         if (Model.Item.ImageUrl.IsNotEmpty())
+         {
+             <div class="fieldRow">
+                 @Html.ViewFor(x => x.Item.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
+             </div>
+         }
+     }
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
         </div>
@@ -95,7 +96,7 @@
             @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().RootId("rolesInputRoot").LabelDisplay(WebLocalizationKeys.USER_ROLES).OperationName("/KYTAdmin").ToHtmlTag()
+            @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().RootId("rolesInputRoot").LabelDisplay(WebLocalizationKeys.USER_ROLES).OperationName("/UserRoles").ToHtmlTag()
         </div>
         <div class="fieldRow">
             <div id="newImage">

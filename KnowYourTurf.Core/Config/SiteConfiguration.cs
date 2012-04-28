@@ -13,6 +13,7 @@ namespace KnowYourTurf.Core.Config
         public virtual string CssPath { get; set; }
         public virtual string ImagesPath { get; set; }
         public virtual string WebSiteRoot { get; set; }
+        public virtual string NumberOfFieldsPerCategory { get; set; }
     }
 
     public static class SiteConfig

@@ -1,0 +1,156 @@
+﻿@{
+    Layout = null;
+}
+ 
+ 
+ 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+body,td,th {
+                font-family: Verdana, Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                color: 838383;
+}
+body {
+                background-color: #FFFFFF;
+}
+a:link {
+                color: 838383;
+}
+a:visited {
+                color: 334B17;
+}
+.style2 {
+                font-weight: bold;
+                font-size: 14px;
+}
+.style3 {font-size: 10px}
+-->
+</style></head>
+ 
+<body>
+<p>FAQ's</p>
+<p>General Application Questions::</p>
+<ul>
+  <li><a href="#AddTask">How do I add a Task?</a></li>
+  <li><a href="#FacilitiesUser">What is a Facilities user?</a></li>
+  <li><a href="#WeatherUpdates">How often is the weather updated?</a></li>
+</ul>
+<p>Admin Questions::</p>
+<ul>
+  <li><a href="#AddProduct">How do I add a Product?</a></li>
+  <li><a href="#CreatePO">How do I create a PO?</a></li>
+  <li><a href="#AddInventory">How do I add Inventory?</a></li>
+</ul>
+<p>&nbsp;</p>
+<p class="style2">General Application Questions::</p>
+<ul>
+  <li>How do I add a Task?<a name="AddTask" id="AddTask"></a>
+    <span class="style3">download instructions</span>
+    <ul>
+      <li>From the Task Calendar
+        <ul>
+          <li>Click on a day in the Task Calendar (select the day you would like to have that date auto fill in the form)</li>
+          <li>Enter the required information
+            <ul>
+              <li>Select the Task Type </li>
+              <li>Confirm the correct date</li>
+              <li>Enter the Scheduled Start Time (click in the field and a calendar selector will appear)</li>
+              <li>Select the Field</li>
+            </ul>
+          </li>
+          <li>Enter any additional information about the Task
+            <ul>
+              <li>To enter an Employee, click in the Employee field and you will see the appropriate list (this is a multi-select field)</li>
+              <li>To enter Equipment to be used, click in the Employee field and you will see the appropriate list  (this is a multi-select field)</li>
+              <li>Select a Product. This list will only be populated with Products that are currently in your Inventory. If you do not see it in the list, please verify the correct Inventory has been added.</li>
+            </ul>
+          </li>
+        </ul>
+        <p>**Additional Information: Once you check the Completed option and save the Task, you will not be able to edit the Task again. If the task was tied to an Inventory item, the Quantity Used will then be subtracted from the Product's Inventory total.</p>
+      </li>
+    </ul>
+  </li>
+  <li>What is a Facilities User?<a name="FacilitiesUser" id="FacilitiesUser"></a> </li>
+</ul>
+<ul>
+  <ul>
+    <li>A Facilities User has restricted access to the system and can only update and view the Events Calendar. If a Facilities User also needs access to the full system, you will need to add the role of Employee on the Employee list page.</li>
+  </ul>
+  <p>&nbsp;</p>
+  <li>How often is the weather updated?<a name="WeatherUpdates" id="WeatherUpdates"></a> </li>
+</ul>
+<ul>
+  <ul>
+    <li>The weather is updated daily for the previous day's data. The information is being pulled based on the zip code of the organization. If you would like to use a different zip code for this information, please get with your Account Manager.</li>
+  </ul>
+</ul>
+<p>&nbsp;</p>
+<p class="style2">Admin Questions::</p>
+<ul>
+  <li>How do I add a Product?<a name="AddProduct" id="AddProduct"></a>
+    <span class="style3">download instructions</span>
+    <ul>
+      <li>From  the main navigation, select Admin Tools</li>
+      <li>Select Products</li>
+      <li>Select the proper category: Materials, Fertilizers,  or Chemicals</li>
+      <li>Select the &quot;+&quot; icon on the top left of the grid</li>
+      <li>Enter the Name</li>
+      <li>Enter the Description (optional)</li>
+      <li>Click Save</li>
+    </ul>
+  </li>
+  <blockquote>
+    <p>**Additional Information: Adding a Product will make it available for selection while creating a Purchase Order, it will not be an option when creating a Task until you add it to Inventory.</p>
+  </blockquote>
+  <li>How do I create a PO?<a name="CreatePO" id="CreatePO"></a>
+      <span class="style3">download instructions</span>
+      <ul>
+          <li>From  the main navigation, select Admin Tools</li>
+          <li>Select Purchase Orders</li>
+         <li>Select Current </li>
+          <li>Select the &quot;+&quot; icon on the top left of the grid</li>
+          <li>From the Vendor drop down, select the Vendor</li>
+          <li>Click on the &quot;+&quot; icon next to the Product(s) you wish to order</li>
+          <li>When you have selected all the Products for this order, go to the List Items grid at the bottom of the page. The Products you selected will be listed here.</li>
+          <li>Click on each Product to enter:
+            <ul>
+              <li>Quantity Ordered</li>
+              <li>Unit Type - if the Unit Type you need is not an option, an Admin will need to enter it on the Enumerations page found under Admin Tools.</li>
+              <li>Size of Unit and Price are optional.</li>
+            </ul>
+          </li>
+          <li>Click  Save</li>
+          <li>Once you have entered this information for all Products, click Commit on the bottom left of the page.</li>
+          <li>Your PO has been Committed and will now appear in the Current Purchase Orders list.
+              <p>**Additional Information: You must have Admin rights to see the Admin Tools option in the main navigation</p>
+          </li>
+    </ul>
+  </li>
+  <li>How do I add Inventory?<a name="AddInventory" id="AddInventory"></a>  <span class="style3">download instructions</span></li>
+  <ul>
+    <li>      From  the main navigation, select Admin Tools</li>
+    <li>Select Purchase Orders</li>
+    <li>Select Current </li>
+    <li>Click on the Commit icon (&quot;C&quot;) of the Purchase Order you would like to receive
+      <ul>
+        <li>The Commit icon is located on the right of the grid</li>
+      </ul>
+    </li>
+    <li>Click on each Product you would like to receive</li>
+    <li>Enter the Quantity Received    </li>
+    <li>Click the Completed box</li>
+    <li>Click Save    </li>
+    <li>When you have completed this process for each Product, you will no longer see any Products listed on the Purchase Order.  Click on the &quot;Close This Purchase Order&quot; button.    </li>
+    <li>Select
+        Admin Tools, then Inventory to verify the Quantity Received has been added to your Inventory
+      <p>**Additional Information: You must have Admin rights to see the Admin Tools option in the main navigation.</p>
+    </li>
+  </ul>
+</ul>
+</body>
+</html>

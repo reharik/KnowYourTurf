@@ -2,6 +2,7 @@
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using FubuMVC.Core;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Services;
 using FubuMVC.UI;
