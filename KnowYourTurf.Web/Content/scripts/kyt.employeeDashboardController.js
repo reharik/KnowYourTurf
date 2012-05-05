@@ -80,8 +80,10 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
     },
 
     mainFormSuccess:function(result){
-        if(result.success) return;
-        $.address.value(this.options.employeeListUrl);
+        if(!result.Success) return;
+        if($("#returnToList").val()=="True"){
+            $.address.value(this.options.employeeListUrl);
+        }
     },
 
     loadRolesTokenizers: function(formOptions){

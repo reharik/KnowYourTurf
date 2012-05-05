@@ -39,6 +39,7 @@
 @MvcHtmlString.Create(FormFor<EmployeeController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
     @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
     @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())
+    <input type="hidden" id="returnToList" name="ReturnToList" value="@Model.ReturnToList"/>
     <div class="col left">
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Item.EmployeeId).ToHtmlTag()
