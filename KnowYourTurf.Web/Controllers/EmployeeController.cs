@@ -124,14 +124,15 @@ namespace KnowYourTurf.Web.Controllers
                 if (x.Name == UserType.Administrator.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.Administrator.Key);
-                }else
+                }else if(!employee.UserRoles.Any(r=>r.Name==x.Name))
                 {
                     _authorizationRepository.DetachUserFromGroup(employee, UserType.Administrator.Key);
                 }
                 if (x.Name== UserType.Employee.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.Employee.Key);
-                }else
+                }
+                else if (!employee.UserRoles.Any(r => r.Name == x.Name))
                 {
                     _authorizationRepository.DetachUserFromGroup(employee, UserType.Employee.Key);
                 }
@@ -139,7 +140,7 @@ namespace KnowYourTurf.Web.Controllers
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.Facilities.Key);
                 }
-                else
+                else if (!employee.UserRoles.Any(r => r.Name == x.Name))
                 {
                     _authorizationRepository.DetachUserFromGroup(employee, UserType.Facilities.Key);
                 }
@@ -147,14 +148,15 @@ namespace KnowYourTurf.Web.Controllers
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.KYTAdmin.Key);
                 }
-                else
+                else if(!employee.UserRoles.Any(r=>r.Name==x.Name))
                 {
                     _authorizationRepository.DetachUserFromGroup(employee, UserType.KYTAdmin.Key);
                 }
                 if (x.Name == UserType.MultiTenant.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.MultiTenant.Key);
-                }else
+                }
+                else if (!employee.UserRoles.Any(r => r.Name == x.Name))
                 {
                     _authorizationRepository.DetachUserFromGroup(employee, UserType.MultiTenant.Key);
                 }

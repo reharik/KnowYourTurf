@@ -49,7 +49,7 @@
     @Html.SubmissionFor(x => x.Item.ScheduledEndTime).ToHtmlTag()
 </div>
 <div class="fieldRow">
-    @Html.SubmissionFor(x => x.Item.ActualTimeSpent).AddClassToInput("timePicker").ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
 </div>
 <div class="fieldRow">
     @Html.SubmissionFor(x => x.Item.Field).ToHtmlTag()

@@ -14,5 +14,6 @@ namespace KnowYourTurf.Web.Models
         public IEnumerable<TokenInputDto> SelectedItems { get; set; }
         public GridDefinition CompletedListDefinition { get; set; }
         public string EmployeeListUrl { get; set; }
+        public bool ReturnToList { get; set; }
     }
 }
