@@ -36,7 +36,7 @@ KYT.Controller = (function(KYT, Backbone){
        };
 
        KYT.addInitializer(function(){
-           KYT.ScheduleApp.Menu.show();
+           KYT.FieldsApp.Menu.show();
        });
 
        return Controller;

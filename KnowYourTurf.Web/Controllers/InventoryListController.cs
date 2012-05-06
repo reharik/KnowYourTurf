@@ -22,11 +22,11 @@ namespace KnowYourTurf.Web.Controllers
             _inventoryProductListGrid = inventoryProductListGrid;
         }
 
-        public ActionResult InventoryProductList(string productType)
+        public ActionResult ItemList(InventoryProductListViewModel input)
         {
             StringToken title = null;
             StringToken crudTitle = null;
-            switch(productType)
+            switch (input.ProductType)
             {
                 case "Chemical":
                     crudTitle = WebLocalizationKeys.INVENTORY_CHEMICAL_INFORMATION;
@@ -38,14 +38,14 @@ namespace KnowYourTurf.Web.Controllers
                     crudTitle = WebLocalizationKeys.INVENTORY_FERTILIZER_INFORMATION;
                     break;
             }
-            var url = UrlContext.GetUrlForAction<InventoryListController>(x => x.Products(null)) + "?ProductType=" + productType;
+            var url = UrlContext.GetUrlForAction<InventoryListController>(x => x.Products(null)) + "?ProductType=" + input.ProductType;
             ListViewModel model = new ListViewModel()
             {
                 //TODO put modifiler here "ProductType=" + productType
                 GridDefinition = _inventoryProductListGrid.GetGridDefinition(url),
                 Title = crudTitle.ToString()
             };
-            return View("Inventory" + productType + "List", model);
+            return View("Inventory" + input.ProductType + "List", model);
         }
 
         public JsonResult Products(InventoryProductGridItemsRequestModel input)

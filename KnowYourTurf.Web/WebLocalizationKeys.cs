@@ -206,7 +206,8 @@ namespace KnowYourTurf.Web
         public static readonly StringToken COMPLETED = new WebLocalizationKeys("COMPLETED", "Completed");
         public static readonly StringToken SUBSCRIBERS = new WebLocalizationKeys("SUBSCRIBERS", "Subscribers");
 
-    
+        public static readonly StringToken DELETE_ITEMS = new WebLocalizationKeys("DELETE_ITEMS", "Delete these items");
+        
 
     }
 }

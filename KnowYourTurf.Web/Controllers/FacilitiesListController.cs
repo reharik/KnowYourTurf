@@ -21,7 +21,7 @@ namespace KnowYourTurf.Web.Controllers
             _gridHandlerService = ObjectFactory.Container.GetInstance<IEntityListGrid<User>>("AddUpdate");
         }
 
-        public ActionResult ItemList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<FacilitiesListController>(x => x.Facilitiess(null));
             ListViewModel model = new ListViewModel()

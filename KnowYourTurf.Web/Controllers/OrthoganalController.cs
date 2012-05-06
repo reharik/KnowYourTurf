@@ -52,7 +52,7 @@ namespace KnowYourTurf.Web.Areas.Portfolio.Controllers
         }
 
         //remove true param when permissions are implemented
-        public PartialViewResult MainMenu()
+        public PartialViewResult MainMenu(ViewModel input)
         {
             return PartialView(new MenuViewModel
             {

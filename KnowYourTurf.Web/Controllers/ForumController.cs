@@ -5,7 +5,7 @@ namespace KnowYourTurf.Web.Controllers
 {
     public class ForumController:KYTController
     {
-         public ActionResult Forum()
+        public ActionResult Forum(ViewModel input)
          {
              return View(new ViewModel());
          }

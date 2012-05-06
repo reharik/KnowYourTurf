@@ -40,16 +40,11 @@ KYT.addInitializer(function(){
     });
 });
 
-KYT.bind("initialize:before", function(){
-    KYT.ScheduleApp.router = new KYT.Routing.ScheduleApp.Router({
-            controller: KYT.Controller
-        });
-});
-
 KYT.bind("initialize:after", function(){
-  if (Backbone.history){
-    Backbone.history.start();
-  }
+    KYT.State.set({"application":"fields"});
+    if (Backbone.history){
+        Backbone.history.start();
+    }
 });
 
 // calling start will run all of the initializers

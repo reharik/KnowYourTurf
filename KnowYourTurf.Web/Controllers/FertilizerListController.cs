@@ -19,7 +19,7 @@ namespace KnowYourTurf.Web.Controllers
             _fertilizerListGrid = fertilizerListGrid;
         }
 
-        public ActionResult FertilizerList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<FertilizerListController>(x => x.Fertilizers(null));
             ListViewModel model = new ListViewModel()

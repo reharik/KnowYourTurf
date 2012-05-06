@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using KnowYourTurf.Core;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
@@ -24,7 +25,7 @@ namespace KnowYourTurf.Web.Controllers
             _documentCategoryListGrid = documentCategoryListGrid;
         }
 
-        public ActionResult ItemList()
+        public ActionResult ItemList(ViewModel input)
         {
             var gridUrlET = UrlContext.GetUrlForAction<EventTypeController>(x => x.ListTypes(null));
             var gridUrlTT = UrlContext.GetUrlForAction<TaskTypeController>(x => x.ListTypes(null));

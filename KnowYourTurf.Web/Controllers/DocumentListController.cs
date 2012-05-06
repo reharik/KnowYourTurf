@@ -20,7 +20,7 @@ namespace KnowYourTurf.Web.Controllers
             _documentListGrid = documentListGrid;
         }
 
-        public ActionResult DocumentList(ListViewModel input)
+        public ActionResult ItemList(ListViewModel input)
         {
             var url = UrlContext.GetUrlForAction<DocumentListController>(x => x.Documents(null));
             ListViewModel model = new ListViewModel()

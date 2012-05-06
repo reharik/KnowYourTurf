@@ -22,7 +22,7 @@ namespace KnowYourTurf.Web.Controllers
         }
 
 
-        public ActionResult PurchaseOrderList(PurchaseOrderListViewModel input)
+        public ActionResult ItemList(PurchaseOrderListViewModel input)
         {
             var url = input.Completed
                           ? UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrdersCompleted(null))

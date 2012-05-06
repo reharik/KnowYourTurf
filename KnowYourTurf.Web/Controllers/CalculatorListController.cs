@@ -19,7 +19,7 @@ namespace KnowYourTurf.Web.Controllers
             _calculatorListGrid = calculatorListGrid;
         }
 
-        public ActionResult ItemList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<CalculatorListController>(x => x.Calculators(null));
             CalculatorListViewModel model = new CalculatorListViewModel()

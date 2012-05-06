@@ -19,6 +19,7 @@ using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
 using KnowYourTurf.Web.Services.EmailHandlers;
 using KnowYourTurf.Core;
+using KnowYourTurf.Web.Services.ViewOptions;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using StructureMap.Configuration.DSL;
@@ -103,6 +104,7 @@ namespace KnowYourTurf.Web
             For<IEntityListGrid<Material>>().Use<MaterialListGrid>();
             For<IEntityListGrid<Chemical>>().Use<ChemicalListGrid>();
             For<IEntityListGrid<Fertilizer>>().Use<FertilizerListGrid>();
+            For<IViewOptionConfig>().Add<FieldsViewOptionList>();
 
             For<IEmailTemplateHandler>().Use<EmployeeDailyTaskHandler>().Named("Daily TasksHandler");
 

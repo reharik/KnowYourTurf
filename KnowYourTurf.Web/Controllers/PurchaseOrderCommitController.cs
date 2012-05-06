@@ -53,7 +53,7 @@ namespace KnowYourTurf.Web.Controllers
             purchaseOrder.LineItems.Where(x => !x.Completed).Each(x => x.Completed = true);
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
             var notification = crudManager.Finish();
-            notification.RedirectUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrderList(null));
+            notification.RedirectUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
 

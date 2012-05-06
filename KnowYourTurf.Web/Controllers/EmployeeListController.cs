@@ -21,7 +21,7 @@ namespace KnowYourTurf.Web.Controllers
             _employeeListGrid = employeeListGrid;
         }
 
-        public ActionResult ItemList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<EmployeeListController>(x => x.Employees(null));
             var model = new ListViewModel()

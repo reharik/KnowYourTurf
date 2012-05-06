@@ -19,7 +19,7 @@ namespace KnowYourTurf.Web.Controllers
             _materialListGrid = materialListGrid;
         }
 
-        public ActionResult MaterialList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url =UrlContext.GetUrlForAction<MaterialListController>(x => x.Materials(null));
             ListViewModel model = new ListViewModel()

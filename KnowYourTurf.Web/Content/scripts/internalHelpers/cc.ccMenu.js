@@ -59,12 +59,12 @@ function CCMenu(_caller, _options){
 		nextMenuLink: 'ui-icon-triangle-1-e', // class to style the link (specifically, a span within the link) used in the multi-level menu to show the next level
 		topLinkText: 'Home',
 		nextCrumbLink: 'ui-icon-carat-1-e',
-        containingElement :".kyt_menuContainer"
+        containingElement :".mf_menuContainer"
 	}, _options);
 	this.showLoading = function(){
 		caller.addClass(options.loadingState);
 	};
-    var container = $('<div class="kyt_menuContainer ui-widget ui-widget-content ui-corner-all">'+options.content+'</div>');
+    var container = $('<div class="mf_menuContainer ui-widget ui-widget-content ui-corner-all">'+options.content+'</div>');
     $(caller).hide();
 
     this.getLocationString = function(){
@@ -128,10 +128,10 @@ function CCMenu(_caller, _options){
     this.showMenu = function(){
 		if (!menu.menuExists) {
             menu.create();
-            var urlToken = $.address.value();
-            if(urlToken){
-                menu.setMenuByUrl(urlToken);
-            }
+//            var urlToken = $.address.value();
+//            if(urlToken){
+//                menu.setMenuByUrl(urlToken);
+//            }
         }
 		menu.menuOpen = true;
 		// assign key events
@@ -266,12 +266,7 @@ function CCMenu(_caller, _options){
         $('.fg-menu li a',container).removeClass(options.callerOnState);
         $(item).addClass(options.callerOnState);
 
-        if($.address.value() == $(item).attr('rel')){
-            // function added by RH 11.4.11. not in origional source
-            $.address.trigger();
-        }else{
-            $.address.value($(item).attr('rel'));
-        }
+        MF.vent.trigger("menuItem", $(item).attr('rel'));
         return false;
 	};
 }

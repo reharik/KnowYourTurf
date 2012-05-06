@@ -19,7 +19,7 @@ namespace KnowYourTurf.Web.Controllers
             _chemicalListGrid = chemicalListGrid;
         }
 
-        public ActionResult ChemicalList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<ChemicalListController>(x => x.Chemicals(null));
             ListViewModel model = new ListViewModel()

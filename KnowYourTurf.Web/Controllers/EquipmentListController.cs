@@ -19,7 +19,7 @@ namespace KnowYourTurf.Web.Controllers
             _equipmentListGrid = equipmentListGrid;
         }
 
-        public ActionResult ItemList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<EquipmentListController>(x => x.Equipments(null));
             ListViewModel model = new ListViewModel()

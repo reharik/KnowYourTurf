@@ -18,7 +18,7 @@ namespace KnowYourTurf.Web.Controllers
             _photoListGrid = photoListGrid;
         }
 
-        public ActionResult PhotoList(ListViewModel input)
+        public ActionResult ItemList(ListViewModel input)
         {
             var url = UrlContext.GetUrlForAction<PhotoListController>(x => x.Photos(null));
             ListViewModel model = new ListViewModel()
