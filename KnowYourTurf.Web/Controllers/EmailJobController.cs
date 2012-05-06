@@ -29,7 +29,7 @@ namespace KnowYourTurf.Web.Controllers
             _selectListItemService = selectListItemService;
         }
 
-        public ActionResult EmailJob(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var emailJob = input.EntityId > 0 ? _repository.Find<EmailJob>(input.EntityId) : new EmailJob();
             emailJob.Status = input.EntityId > 0 ? emailJob.Status : Status.InActive.ToString();
@@ -57,7 +57,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmailJobViewModel
             {
                 Item = emailTemplate,
-                AddUpdateUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)) + "/" + emailTemplate.EntityId,
+                AddUpdateUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.AddUpdate(null)) + "/" + emailTemplate.EntityId,
                 Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString()
             };
             return PartialView("EmailJobView", model);

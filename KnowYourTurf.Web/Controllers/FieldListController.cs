@@ -22,7 +22,7 @@ namespace KnowYourTurf.Web.Controllers
             _repository = repository;
         }
 
-        public ActionResult FieldList(ViewModel input)
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null))+"?ParentId="+input.ParentId;
             ListViewModel model = new ListViewModel()

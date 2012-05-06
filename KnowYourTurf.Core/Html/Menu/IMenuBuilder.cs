@@ -24,6 +24,9 @@ namespace KnowYourTurf.Core.Html.Menu
         IMenuBuilder addUrlParameter(string name, string value);
         IMenuBuilder CategoryGroupForItteration();
         IMenuBuilder EndCategoryGroup();
+
+        IMenuBuilder CreateTagNode<CONTROLLER>(StringToken text) where CONTROLLER : Controller;
+        IMenuBuilder Route(string route);
     }
 
     public class MenuBuilder : IMenuBuilder
@@ -195,7 +198,14 @@ namespace KnowYourTurf.Core.Html.Menu
             });
             return this;
         }
+        public IMenuBuilder Route(string route)
+        {
+            var _itemList = getList();
+            var lastItem = _itemList.LastOrDefault();
+            lastItem.Url = route;
+            return this;
 
+        } 
 
         public IList<MenuItem> MenuTree(bool withoutPermissions = false)
         {
@@ -218,6 +228,19 @@ namespace KnowYourTurf.Core.Html.Menu
                                 }
                             });
             return permittedItems;
+        }
+
+        public IMenuBuilder CreateTagNode<CONTROLLER>(StringToken text) where CONTROLLER : Controller
+        {
+            var _itemList = getList();
+            var type = typeof(CONTROLLER).Name.ToLowerInvariant();
+            type = type.Replace("controller", "");
+            _itemList.Add(new MenuItem
+            {
+                Text = text.DefaultValue,
+                Url = type
+            });
+            return this;
         }
     }
 
@@ -360,7 +383,13 @@ namespace KnowYourTurf.Core.Html.Menu
             });
             return this;
         }
-
+        public IMenuBuilder Route(string route)
+        {
+            var _itemList = getList();
+            var lastItem = _itemList.LastOrDefault();
+            lastItem.Url = route;
+            return this;
+        } 
 
         public IList<MenuItem> MenuTree(bool withoutPermissions = false)
         {
@@ -384,6 +413,19 @@ namespace KnowYourTurf.Core.Html.Menu
             });
             return permittedItems;
         }
+
+        public IMenuBuilder CreateTagNode<CONTROLLER>(StringToken text) where CONTROLLER : Controller
+        {
+            var _itemList = getList();
+            var type = typeof(CONTROLLER).Name.ToLowerInvariant();
+            type = type.Replace("controller", "");
+            _itemList.Add(new MenuItem
+            {
+                Text = text.DefaultValue,
+                Url = type
+            });
+            return this;
+        } 
     }
 
     public class MenuItem

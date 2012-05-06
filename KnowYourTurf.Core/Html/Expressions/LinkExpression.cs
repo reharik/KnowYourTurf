@@ -5,7 +5,7 @@ using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Html;
 using HtmlTags;
 
-namespace MethodFitness.Core.Html.Expressions
+namespace KnowYourTurf.Core.Html.Expressions
 {
     public class LinkExpression
     {

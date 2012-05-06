@@ -19,7 +19,7 @@ namespace KnowYourTurf.Web.Controllers
             _weatherListGrid = weatherListGrid;
         }
 
-        public ActionResult WeatherList(ListViewModel input)
+        public ActionResult ItemList(ListViewModel input)
         {
             var url = UrlContext.GetUrlForAction<WeatherListController>(x => x.Weathers(null));
             ListViewModel model = new ListViewModel()

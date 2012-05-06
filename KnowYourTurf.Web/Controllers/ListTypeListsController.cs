@@ -24,7 +24,7 @@ namespace KnowYourTurf.Web.Controllers
             _documentCategoryListGrid = documentCategoryListGrid;
         }
 
-        public ActionResult ListType()
+        public ActionResult ItemList()
         {
             var gridUrlET = UrlContext.GetUrlForAction<EventTypeController>(x => x.ListTypes(null));
             var gridUrlTT = UrlContext.GetUrlForAction<TaskTypeController>(x => x.ListTypes(null));

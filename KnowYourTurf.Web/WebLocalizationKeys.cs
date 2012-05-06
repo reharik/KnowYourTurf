@@ -31,7 +31,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken HOME = new WebLocalizationKeys("HOME", "Home");
         public static readonly StringToken EMPLOYEES = new WebLocalizationKeys("EMPLOYEES", "Employees");
         public static readonly StringToken ADMINS = new WebLocalizationKeys("ADMINS", "Admins");
-        public static readonly StringToken FACILITIES = new WebLocalizationKeys("FACILITIES", "Facilities");
+        public static readonly StringToken FACILITIES = new WebLocalizationKeys("FACILITIES", "AddUpdate");
         public static readonly StringToken VENDORS = new WebLocalizationKeys("VENDORS", "Vendors");
         public static readonly StringToken PRODUCTS = new WebLocalizationKeys("PRODUCTS", "Products");
         public static readonly StringToken INVENTORY = new WebLocalizationKeys("INVENTORY", "Inventory");
@@ -180,7 +180,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken RETURN = new WebLocalizationKeys("RETURN", "Return");
         public static readonly StringToken SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM = new WebLocalizationKeys("SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM", "Select A Color To Associate With This Item");
 
-        public static readonly StringToken NEW_FACILITIES = new WebLocalizationKeys("NEW_FACILITIES", "New Facilities");
+        public static readonly StringToken NEW_FACILITIES = new WebLocalizationKeys("NEW_FACILITIES", "New AddUpdate");
         public static readonly StringToken ERROR_UNEXPECTED = new WebLocalizationKeys("ERROR_UNEXPECTED", "An Unexpected Error Has Occured.");
         public static readonly StringToken ADMIN_TOOLS = new WebLocalizationKeys("ADMIN_TOOLS", "Admin Tools");
 

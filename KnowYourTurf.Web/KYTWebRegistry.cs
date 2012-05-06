@@ -18,12 +18,12 @@ using FubuMVC.UI;
 using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
 using KnowYourTurf.Web.Services.EmailHandlers;
-using MethodFitness.Core;
+using KnowYourTurf.Core;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
-using Log4NetLogger = MethodFitness.Core.Log4NetLogger;
+using Log4NetLogger = KnowYourTurf.Core.Log4NetLogger;
 using StructureMapServiceLocator = KnowYourTurf.Core.Services.StructureMapServiceLocator;
 
 namespace KnowYourTurf.Web
@@ -96,7 +96,7 @@ namespace KnowYourTurf.Web
 
             For<IEntityListGrid<User>>().Use<EmployeeListGrid>();
             For<IEntityListGrid<User>>().Add<AdminListGrid>().Named("Admins");
-            For<IEntityListGrid<User>>().Add<FacilitiesListGrid>().Named("Facilities");
+            For<IEntityListGrid<User>>().Add<FacilitiesListGrid>().Named("AddUpdate");
 
             For<IEntityListGrid<PurchaseOrderLineItem>>().Use<PurchaseOrderLineItemGrid>();
             For<IEntityListGrid<PurchaseOrderLineItem>>().Add<ReceivePurchaseOrderLineItemGrid>().Named("Recieve");

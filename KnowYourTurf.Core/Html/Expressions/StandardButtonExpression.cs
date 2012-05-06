@@ -4,7 +4,7 @@ using KnowYourTurf.Core;
 using KnowYourTurf.Core.Localization;
 using HtmlTags;
 
-namespace MethodFitness.Core.Html.Expressions
+namespace KnowYourTurf.Core.Html.Expressions
 {
     public class StandardButtonExpression
     {

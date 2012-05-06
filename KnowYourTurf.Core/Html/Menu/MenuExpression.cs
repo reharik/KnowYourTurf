@@ -7,7 +7,7 @@ using KnowYourTurf.Core;
 using KnowYourTurf.Core.Html.Expressions;
 using KnowYourTurf.Core.Html.Menu;
 
-namespace MethodFitness.Core.Html.Menu
+namespace KnowYourTurf.Core.Html.Menu
 {
     public class MenuExpression : HtmlTagExpressionBase
     {

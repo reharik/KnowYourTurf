@@ -59,7 +59,7 @@ namespace KnowYourTurf.Web.Controllers
                 AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + entityId+"&From=Employee",
                 GridDefinition = _pendingTaskGrid.GetGridDefinition(url),
                 CompletedListDefinition = _completedTaskGrid.GetGridDefinition(completeUrl),
-                EmployeeListUrl = UrlContext.GetUrlForAction<EmployeeListController>(x=>x.EmployeeList()),
+                EmployeeListUrl = UrlContext.GetUrlForAction<EmployeeListController>(x=>x.ItemList()),
                 DeleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.DeleteMultiple(null)),
                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString(),
                 ReturnToList = input.EntityId>0
