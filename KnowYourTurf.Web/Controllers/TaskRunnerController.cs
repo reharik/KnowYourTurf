@@ -137,6 +137,12 @@ namespace KnowYourTurf.Web.Controllers
                                                                       var model = emailTemplateHandler.CreateModel(x, s);
                                                                       _emailService.SendSingleEmail(model);
                                                                   });
+                                            if(x.Frequency == EmailFrequency.Once.ToString())
+                                            {
+                                                x.Status = Status.InActive.ToString();
+                                                _repository.Save(x);
+                                                _repository.Commit();
+                                            }
                                        }
                                        catch (Exception ex)
                                        {
