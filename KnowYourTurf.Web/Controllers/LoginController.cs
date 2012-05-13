@@ -64,9 +64,9 @@ namespace KnowYourTurf.Web.Controllers
                         notification.Success = true;
                         notification.Message = string.Empty;
                         notification.Redirect = true;
-                        notification.RedirectUrl = user.UserRoles.Any(x=>x.Name=="AddUpdate")
-                            ?"/KnowYourTurf/Home#/EventCalendar/EventCalendar"
-                            : "/KnowYourTurf/Home#/EmployeeDashboard/ViewEmployee/"+user.EntityId;
+                        notification.RedirectUrl = user.UserRoles.Any(x=>x.Name=="Facilities")
+                            ?"/KnowYourTurf/Home#/eventcalendar"
+                            : "/KnowYourTurf/Home#/employeedashboard/"+user.EntityId;
                     }
                 }
             }

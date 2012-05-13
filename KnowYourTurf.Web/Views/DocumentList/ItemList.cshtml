@@ -6,7 +6,7 @@
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @section HeaderJavascript{
     $(document).ready(function(){
-        gridControllerOptions.deleteMultipleUrl = '@Model.DeleteMultipleUrl';
+        gridControllerOptions.deleteMultipleUrl = '@Model.deleteMultipleUrl';
     
         new kyt.CrudController(gridControllerOptions);
     });

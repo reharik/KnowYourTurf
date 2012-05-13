@@ -80,11 +80,7 @@
         var extraFormOptions = {};
         extraFormOptions.crudFormOptions = { };
         KYT.routeTokens = @MvcHtmlString.Create(JsonUtil.ToJson(@Model.SerializedRoutes));
-        
-//        $(document).ready(function() {
-//            var options = { el: ".kyt_dyn"};
-//            new kyt.HomeController(options);
-//        });
+
         @RenderSection("HeaderJavascript", false)
 
         </script>

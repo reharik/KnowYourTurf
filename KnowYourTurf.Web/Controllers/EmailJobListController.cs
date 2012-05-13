@@ -25,7 +25,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.AddUpdate(null)),
-                GridDefinition = _emailJobListGrid.GetGridDefinition(url)
+                gridDef = _emailJobListGrid.GetGridDefinition(url)
             };
             return View(model);
         }

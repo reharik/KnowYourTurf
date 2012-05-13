@@ -42,7 +42,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 //TODO put modifiler here "ProductType=" + productType
-                GridDefinition = _inventoryProductListGrid.GetGridDefinition(url),
+                gridDef = _inventoryProductListGrid.GetGridDefinition(url),
                 Title = crudTitle.ToString()
             };
             return View("Inventory" + input.ProductType + "List", model);

@@ -120,10 +120,11 @@ namespace KnowYourTurf.Core.Html.Grid
         private HtmlTag buildAnchor(ENTITY item)
         {
             var anchor = new HtmlTag("a");
-            anchor.Attr("onclick", "$.publish('/contentLevel/grid_" + _gridName + "/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "']);");
+            anchor.Attr("onclick", "KYT.vent.trigger('" + _action + "'," + item.EntityId + ")");
+
             return anchor;
         }
-
+     
         public ColumnBase<ENTITY> AddClassToSpan(string cssClass)
         {
             _divCssClasses.Add(cssClass);

@@ -13,16 +13,15 @@
      var pendingTaskaddUpdateUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdateUrl));
      var photoaddUpdateUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdatePhotoUrl));
      var documentaddUpdateUrl =@MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdateDocumentUrl));
-     var pendingGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition))
+     var pendingGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.gridDef))
      var completeGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CompletedListDefinition))
      var photoGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.PhotoListDefinition))
      var documentGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.DocumentListDefinition))
-     var deleteMultipleUrl = '@Model.DeleteMultipleUrl';
+     var deleteMultipleUrl = '@Model.deleteMultipleUrl';
      var deleteMultipleDocumentsUrl = '@Model.DeleteMultipleDocumentsUrl';
      var deleteMultiplePhotosUrl = '@Model.DeleteMultiplePhotosUrl';
  
-    $(document).ready(function() {
-        fdcOptions = {
+        extraFormOptions = {
             pendingTaskaddUpdateUrl:pendingTaskaddUpdateUrl,
             photoaddUpdateUrl:photoaddUpdateUrl,
             documentaddUpdateUrl:documentaddUpdateUrl,
@@ -33,8 +32,6 @@
             deleteMultipleUrl: deleteMultipleUrl,
             deleteMultipleDocumentsUrl: deleteMultipleDocumentsUrl,
             deleteMultiplePhotosUrl: deleteMultiplePhotosUrl }
-        new kyt.FieldDashboardController(fdcOptions);
-    });
 }
     <div class="KYT_DashInfo" id="masterArea">
         <div id="validation-container-wrapper">

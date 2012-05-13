@@ -10,7 +10,7 @@
     var gridControllerOptions = { };
     gridControllerOptions.gridInfo = {
         addUpdateUrl:  "@Model.AddUpdateUrlET",
-        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition)) ,
+        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.gridDef)) ,
         title: "@Model.Title",
         deleteMultiple:"@Model.DeleteMultipleET"
     };

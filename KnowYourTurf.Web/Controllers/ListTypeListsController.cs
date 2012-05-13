@@ -41,7 +41,7 @@ namespace KnowYourTurf.Web.Controllers
                                                   AddUpdateUrlTT = UrlContext.GetUrlForAction<TaskTypeController>(x => x.AddUpdate(null)),
                                                   AddUpdateUrlDC = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.AddUpdate(null)),
                                                   AddUpdateUrlPC = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.AddUpdate(null)),
-                                                  GridDefinition = _eventTypeListGrid.GetGridDefinition(gridUrlET),
+                                                  gridDef = _eventTypeListGrid.GetGridDefinition(gridUrlET),
                                                   ListDefinitionTT = _taskTypeListGrid.GetGridDefinition(gridUrlTT),
                                                   ListDefinitionDC = _documentCategoryListGrid.GetGridDefinition(gridUrlDC),
                                                   ListDefinitionPC = _photoCategoryListGrid.GetGridDefinition(gridUrlPC),

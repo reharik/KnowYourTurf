@@ -7,9 +7,9 @@
 @section HeaderScripts{
 }
 @section HeaderJavascript{
-    var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition));
+    var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.gridDef));
     var addUpdateUrl = "@MvcHtmlString.Create(Model.AddUpdateUrl)";
-    var deleteMultipleUrl = "@MvcHtmlString.Create(Model.DeleteMultipleUrl)";
+    var deleteMultipleUrl = "@MvcHtmlString.Create(Model.deleteMultipleUrl)";
     var contentArea;
     var gridControllerOptions = { gridDef: gridDef,
         addUpdateUrl: addUpdateUrl,

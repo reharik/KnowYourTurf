@@ -21,11 +21,12 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         public IList<ViewOption> Build(bool withoutPermissions = false)
         {
             _builder.WithoutPermissions(withoutPermissions);
-            _builder.Url<OrthogonalController>(x => x.MainMenu(null)).ViewId("scheduleMenu").End();
+            _builder.Url<OrthogonalController>(x => x.MainMenu(null)).ViewId("fieldsMenu").End();
             _builder.UrlForForm<EmployeeDashboardController>(x => x.ViewEmployee(null)).IsChild(false).End();
 
-            _builder.UrlForList<FieldListController>(x => x.ItemList(null)).End();
+            _builder.UrlForList<FieldListController>(x => x.ItemList(null)).ViewName("FieldListView").End();
             _builder.UrlForForm<FieldController>(x => x.AddUpdate(null)).End();
+            _builder.UrlForForm<FieldDashboardController>(x => x.ViewField(null)).End();
 
             _builder.UrlForList<TaskListController>(x => x.ItemList(null)).End();
             _builder.UrlForForm<TaskCalendarController>(x => x.TaskCalendar(null)).End();

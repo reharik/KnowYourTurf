@@ -50,8 +50,8 @@ namespace KnowYourTurf.Web.Controllers
                 VendorId = purchaseOrder.EntityId > 0 ? purchaseOrder.Vendor.EntityId : 0,
                 ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null)),
                 CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)),
-                DeleteMultipleUrl = deleteMany,
-                GridDefinition = _purchaseOrderSelectorGrid.GetGridDefinition(url),
+                deleteMultipleUrl = deleteMany,
+                gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url),
                 PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl),
                 Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString()
 

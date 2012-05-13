@@ -45,6 +45,9 @@ KYT.Views.View = Backbone.View.extend({
           childView.close();
         });
       }
+    },
+
+    viewLoaded:function(){
     }
   });
 

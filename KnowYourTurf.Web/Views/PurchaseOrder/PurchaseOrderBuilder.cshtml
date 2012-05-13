@@ -9,11 +9,11 @@
 @section HeaderJavascript{
     var crudOptions = {
         addUpdateUrl: "@Model.AddUpdateUrl",
-        productGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition)),
+        productGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.gridDef)),
         poliGridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.PoliListDefinition)),
         commitUrl: "@Model.CommitUrl",
         returnUrl: "@Model.ReturnUrl",
-        deleteMultipleUrl: "@Model.DeleteMultipleUrl"
+        deleteMultipleUrl: "@Model.deleteMultipleUrl"
     }
     $(document).ready(function(){
         new kyt.PurchaseOrderBuilderController(crudOptions);

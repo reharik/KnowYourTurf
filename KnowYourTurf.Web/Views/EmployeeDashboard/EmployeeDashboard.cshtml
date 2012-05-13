@@ -11,29 +11,29 @@
 
 
 @section HeaderJavascript{
-    var pendingTaskaddUpdateUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdateUrl));
-    var pendingGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition))
-    var completeGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CompletedListDefinition))
-     var availableRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableItems)) ;
-    var selectedRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedItems)) ;
-    var rolesOptions = {
-        availableItems: availableRoles,
-        selectedItems: selectedRoles,
-        inputSelector:"#RolesInput",
-        name:"Roles"
-    };
-    extraFormOptions.rolesOptions = rolesOptions;
-    $(document).ready(function() {
-        edcOptions = {
-            pendingTaskaddUpdateUrl:pendingTaskaddUpdateUrl,
-            pendingGridDef:pendingGridDef,
-            completeGridDef:completeGridDef,
-            rolesOptions:rolesOptions,
-            employeeListUrl:'@Model.EmployeeListUrl',
-            deleteMultipleUrl:'@Model.DeleteMultipleUrl'
-        }
-        new kyt.EmployeeDashboardController(edcOptions);
-    });
+@*    var pendingTaskaddUpdateUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdateUrl));*@
+@*    var pendingGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.gridDef))*@
+@*    var completeGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CompletedListDefinition))*@
+@*     var availableRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableItems)) ;*@
+@*    var selectedRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedItems)) ;*@
+@*    var rolesOptions = {*@
+@*        availableItems: availableRoles,*@
+@*        selectedItems: selectedRoles,*@
+@*        inputSelector:"#RolesInput",*@
+@*        name:"Roles"*@
+@*    };*@
+@*    extraFormOptions.rolesOptions = rolesOptions;*@
+@*    $(document).ready(function() {*@
+@*        edcOptions = {*@
+@*            pendingTaskaddUpdateUrl:pendingTaskaddUpdateUrl,*@
+@*            pendingGridDef:pendingGridDef,*@
+@*            completeGridDef:completeGridDef,*@
+@*            rolesOptions:rolesOptions,*@
+@*            employeeListUrl:'@Model.EmployeeListUrl',*@
+@*            deleteMultipleUrl:'@Model.deleteMultipleUrl'*@
+@*        }*@
+@*        new kyt.EmployeeDashboardController(edcOptions);*@
+@*    });*@
 }
 
 @MvcHtmlString.Create(FormFor<EmployeeController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())

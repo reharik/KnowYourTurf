@@ -28,11 +28,11 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl =  UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)),
-                GridDefinition = _fieldListGrid.GetGridDefinition(url),
+                gridDef = _fieldListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.FIELDS.ToString(),
                 ParentId = input.ParentId
             };
-            return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Fields(GridItemsRequestModel input)

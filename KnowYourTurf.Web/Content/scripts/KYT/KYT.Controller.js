@@ -36,7 +36,6 @@ KYT.Controller = (function(KYT, Backbone){
        };
 
        KYT.addInitializer(function(){
-           KYT.FieldsApp.Menu.show();
        });
 
        return Controller;

@@ -454,20 +454,11 @@ KYT.Views.TrainerEditableTokenView = KYT.Views.EditableTokenView.extend({
 
 });
 
-KYT.Views.TrainerGridView = KYT.Views.GridView.extend({
+KYT.Views.FieldListView = KYT.Views.GridView.extend({
     viewLoaded:function(){
-        KYT.vent.bind("Redirect",this.showPayGrid,this);
+        KYT.vent.bind("Redirect",this.showDashboard,this);
     },
-    showPayGrid:function(id){
-        KYT.vent.trigger("route","paytrainerlist/"+id,true);
-    }
-});
-
-KYT.Views.ClientGridView = KYT.Views.GridView.extend({
-    viewLoaded:function(){
-        KYT.vent.bind("Redirect",this.showPayGrid,this);
-    },
-    showPayGrid:function(id){
-        KYT.vent.trigger("route","paymentlist/"+id,true);
+    showDashboard:function(id){
+        KYT.vent.trigger("route","fielddashboard/"+id,true);
     }
 });
