@@ -11,7 +11,7 @@ KYT.FieldsApp.Menu = (function(KYT, Backbone, $){
 
     Menu.show = function(){
         var routeToken = _.find(KYT.routeTokens,function(item){
-            return item.id == "scheduleMenu";
+            return item.id == "fieldsMenu";
         });
         var view = new MenuView(routeToken);
         KYT.menu.show(view);
