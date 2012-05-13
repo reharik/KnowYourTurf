@@ -26,7 +26,8 @@ namespace KnowYourTurf.Web.Controllers
         {
             _repository = repository;
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("PendingTasks");
+            //completed used for pending so that you can't edit on employee page
+            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
             _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
             _sessionContext = sessionContext;
         }
