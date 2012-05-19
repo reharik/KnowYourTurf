@@ -22,11 +22,10 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IEmailTemplateService _emailService;
         private readonly IRepository _repository;
 
-        public TaskRunnerController(IRepository repository, IEmailTemplateService emailService)
+        public TaskRunnerController(IEmailTemplateService emailService)
         {
             _emailService = emailService;
-            _repository = repository;
-            _repository.DisableFilter("CompanyConditionFilter");
+            _repository = ObjectFactory.Container.GetInstance<IRepository>("NoFiltersSpecialInterceptor");
         }
 
         public ActionResult GetWeather(ViewModel input)
@@ -59,7 +58,7 @@ namespace KnowYourTurf.Web.Controllers
             var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId== company.EntityId).FirstOrDefault() ??
                           new Weather { CompanyId = company.EntityId, Date = date };
             loadWeather(jss, webClient, weather, url);
-            Thread.Sleep(1000);
+            Thread.Sleep(10000);
         }
 
         private void loadWeather(JavaScriptSerializer jss, WebClient webClient, Weather weather, string url)
