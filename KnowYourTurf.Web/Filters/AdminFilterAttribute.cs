@@ -1,9 +1,7 @@
 using System.Web.Mvc;
 using System.Web.Routing;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Enums;
+using KnowYourTurf.Security.Interfaces;
 using KnowYourTurf.Core.Services;
-using Rhino.Security.Interfaces;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Filters

@@ -1,13 +1,12 @@
 ﻿using System.Web.Mvc;
+using KnowYourTurf.Security.Interfaces;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
 using System.Linq;
-using Rhino.Security.Interfaces;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
@@ -119,7 +118,6 @@ namespace KnowYourTurf.Web.Controllers
                 Password = facilitiesModel.UserLoginInfo.Password,
                 LoginName = facilitiesModel.Email,
                 Status = facilitiesModel.UserLoginInfo.Status,
-                UserType = UserType.Facilities.ToString(),
             };
             var role = _repository.Query<UserRole>(x => x.Name == UserType.Facilities.ToString()).FirstOrDefault();
             facilities.AddUserRole(role);

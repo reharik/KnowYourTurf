@@ -65,7 +65,6 @@ namespace KnowYourTurf.Web.Controllers
         {
             var weatherModel = input.Item;
             weather.DewPoint = weatherModel.DewPoint;
-            weather.EvaporationRate = weatherModel.EvaporationRate;
             weather.HighTemperature = weatherModel.HighTemperature;
             weather.Humidity = weatherModel.Humidity;
             weather.LowTemperature = weatherModel.LowTemperature; 

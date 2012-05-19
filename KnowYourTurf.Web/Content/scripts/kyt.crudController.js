@@ -43,10 +43,14 @@ kyt.CrudController  = kyt.Controller.extend({
 
     //from grid
     addUpdateItem: function(url){
+        var parentId = $("#masterArea").find("#ParentId").val();
+        var rootId = $("#masterArea").find("#RootId").val();
+        var data = {"ParentId":parentId,"RootId":rootId};
         var formOptions = {
             el: "#detailArea",
             id: "mainForm",
-            url: url
+            url: url,
+            data:data
         };
         $("#masterArea","#contentInner").after("<div id='detailArea'/>");
         this.modules.formModule = new kyt.AjaxFormModule(formOptions);
@@ -64,6 +68,10 @@ kyt.CrudController  = kyt.Controller.extend({
     },
 
     redirectItem:function(url){
+        var parentId = $("#masterArea").find("#ParentId").val();
+        if(parentId && parentId > 0 ){
+            url = url +"?ParentId="+parentId;
+        }
         $.address.value(url);
     },
     formLoaded:function(){

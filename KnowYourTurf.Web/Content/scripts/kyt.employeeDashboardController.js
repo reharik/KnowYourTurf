@@ -35,7 +35,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
             gridDef:this.options.pendingGridDef,
             addUpdateUrl:this.options.pendingTaskaddUpdateUrl,
             deleteMultipleUrl:this.options.deleteMultipleUrl,
-            gridOptions:{height:"400px"}
+            gridOptions:{multiselect: false,height:"400px"}
         };
         this.views.pendingTaskGridView = new kyt.GridView(ptgOptions);
         var ctgOptions = {
@@ -47,7 +47,7 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
             gridDef:this.options.completeGridDef,
             // this is not used except for copy task which is why it's for the pendingGrid
             addUpdateUrl:this.options.pendingTaskaddUpdateUrl,
-            gridOptions:{height:"400px"}
+            gridOptions:{multiselect: false,height:"400px"}
         };
         this.views.completeTaskGridView = new kyt.GridView(ctgOptions);
     },
@@ -80,33 +80,36 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
     },
 
     mainFormSuccess:function(result){
-        if(result.success) return;
-        $.address.value(this.options.employeeListUrl);
+        if(!result.Success) return;
+        if($("#returnToList").val()=="True"){
+            $.address.value(this.options.employeeListUrl);
+        }
     },
 
     loadRolesTokenizers: function(formOptions){
         var options = $.extend({},formOptions.rolesOptions,{el:"#rolesInputRoot"});
         this.views.roles = new kyt.TokenView(options);
     },
-    addUpdateItem: function(url, data,name){
-        if(this.options.popupIsActive){return;}
-        this.options.popupIsActive = true;
-        var crudFormOptions={};
-        crudFormOptions.additionalSubmitData =  {"From":"Employee","ParentId":entityId};
-        var _url = url?url:this.options[name+"addUpdateUrl"];
-        if(!data)data={};
-        data.Popup=true;
-        $("#masterArea").after("<div id='dialogHolder'/>");
-        var moduleOptions = {
-            id:name,
-            el:"#dialogHolder",
-            url: _url,
-            data:data,
-            crudFormOptions:crudFormOptions,
-            buttons: kyt.popupButtonBuilder.builder(name).standardEditButons()
-        };
-        this.modules[name] = new kyt.AjaxPopupFormModule(moduleOptions);
-    },
+    // can't use this anymore since we have categories
+//    addUpdateItem: function(url, data,name){
+//        if(this.options.popupIsActive){return;}
+//        this.options.popupIsActive = true;
+//        var crudFormOptions={};
+//        crudFormOptions.additionalSubmitData =  {"From":"Employee","ParentId":entityId};
+//        var _url = url?url:this.options[name+"addUpdateUrl"];
+//        if(!data)data={};
+//        data.Popup=true;
+//        $("#masterArea").after("<div id='dialogHolder'/>");
+//        var moduleOptions = {
+//            id:name,
+//            el:"#dialogHolder",
+//            url: _url,
+//            data:data,
+//            crudFormOptions:crudFormOptions,
+//            buttons: kyt.popupButtonBuilder.builder(name).standardEditButons()
+//        };
+//        this.modules[name] = new kyt.AjaxPopupFormModule(moduleOptions);
+//    },
 
     displayItem: function(url, data,name){
         var _url = url?url:this.options.displayUrl;
@@ -114,11 +117,11 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
         var buttons = builder.standardDisplayButtons();
         if(name == "pendingTaskDisplay" || name== "completeTaskDisplay"){
             builder.clearButtons();
-            builder.addButton("Copy Task", function(){$.publish("/contentLevel/popup_"+name+"/copyTask",[$("#AddUpdateUrl",this).val(),name])});
+           // builder.addButton("Copy Task", function(){$.publish("/contentLevel/popup_"+name+"/copyTask",[$("#AddUpdateUrl",this).val(),name])});
             builder.addCancelButton();
-            if(name == "pendingTaskDisplay" ){
-                builder.addEditButton();
-            }
+//            if(name == "pendingTaskDisplay" ){
+//                builder.addEditButton();
+//            }
         buttons = builder.getButtons();
         }
         $("#masterArea").after("<div id='dialogHolder'/>");
@@ -163,24 +166,24 @@ kyt.EmployeeDashboardController  = kyt.Controller.extend({
     popupCancel: function(id){
         this.options.popupIsActive=false;
         this.modules[id].destroy();
-    },
+    }//,
 
     //from display
-    displayEdit:function(url, name){
-        this.modules[name].destroy();
-        this.addUpdateItem(url, null,this.getRootOfName(name)+"Form");
-    },
+//    displayEdit:function(url, name){
+//        this.modules[name].destroy();
+//        this.addUpdateItem(url, null,this.getRootOfName(name)+"Form");
+//    },
 
-    copyTask:function(url, name){
-        this.modules[name].destroy();
-        this.addUpdateItem(url, {"Copy":"true"}, "pendingTaskForm");
-    },
+//    copyTask:function(url, name){
+//        this.modules[name].destroy();
+//        this.addUpdateItem(url, {"Copy":"true"}, "pendingTaskForm");
+//    },
 
-    getRootOfName:function(name){
-        if(name.indexOf("Display")>0){
-            return name.substring(0,name.indexOf("Display"));
-        }else if(name.indexOf("Form")>0){
-            return name.substring(0,name.indexOf("Form"));
-        }
-    }
+//    getRootOfName:function(name){
+//        if(name.indexOf("Display")>0){
+//            return name.substring(0,name.indexOf("Display"));
+//        }else if(name.indexOf("Form")>0){
+//            return name.substring(0,name.indexOf("Form"));
+//        }
+//    }
 });

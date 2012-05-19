@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using FubuMVC.Core;
 using HtmlTags;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -42,15 +43,23 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
                            {
                                var li = new HtmlTag("li");
                                var liDiv = new DivTag("liDiv");
-                               var task = x.ScheduledDate.Value.ToLongDateString()+" "+x.ScheduledStartTime.Value.ToShortTimeString();
-                               task += x.ScheduledEndTime.HasValue? " To " + x.ScheduledEndTime.Value.ToShortTimeString():"";
-                               task += ": " + x.TaskType.Name + " at " + x.Field.Name;
-                               liDiv.Text(task);
+                               var task = new HtmlTag("span");
+                               var taskText = x.ScheduledDate.Value.ToLongDateString()+" "+x.ScheduledStartTime.Value.ToShortTimeString();
+                               taskText += x.ScheduledEndTime.HasValue ? " To " + x.ScheduledEndTime.Value.ToShortTimeString() : "";
+                               taskText += ": " + x.TaskType.Name + " at " + x.Field.Name;
+                               task.Text(taskText);
+                               var br = new HtmlTag("br");
+                               var notesSpan = new HtmlTag("span");
+                               notesSpan.Text(x.Notes);
+                               liDiv.Children.Add(task);
+                               liDiv.Children.Add(br);
+                               liDiv.Children.Add(notesSpan);
+
                                li.Children.Add(liDiv);
                                ul.Children.Add(li);
                            });
             rootTag.Children.Add(ul);
             return rootTag;
-        }
+        }   
     }
 }

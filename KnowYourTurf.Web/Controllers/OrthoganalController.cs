@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Html.Menu;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
@@ -39,9 +40,15 @@ namespace KnowYourTurf.Web.Areas.Portfolio.Controllers
                                         {
                                             User = user,
                                             LoggedIn = User.Identity.IsAuthenticated,
-                                            NotificationSuccessFunction = "kyt.popupCrud.controller.success"
+                                            NotificationSuccessFunction = "kyt.popupCrud.controller.success",
+                                            HelpUrl = UrlContext.GetUrlForAction<OrthogonalController>(x=>x.Help())
                                         };
             return PartialView(model);
+        }
+
+        public ActionResult Help()
+        {
+            return View();
         }
 
         //remove true param when permissions are implemented
@@ -69,5 +76,7 @@ namespace KnowYourTurf.Web.Areas.Portfolio.Controllers
         public string UserProfileUrl { get; set; }
         public string NotificationSettingsUrl { get; set; }
         public string NotificationSuccessFunction { get; set; }
+
+        public string HelpUrl { get; set; }
     }
 }

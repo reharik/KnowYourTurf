@@ -15,6 +15,7 @@ kyt.TaskListController = kyt.CrudController.extend({
     }, kyt.CrudController.prototype.events),
     registerAdditionalSubscriptions:function(){
         $.subscribe('/contentLevel/form_mainForm/pageLoaded',$.proxy(this.loadTokenizers,this), this.cid);
+        $.subscribe('/contentLevel/form_mainForm/pageLoaded',$.proxy(this.changeTimeSelector,this), this.cid);
     },
     loadTokenizers:function(formOptions){
         var employeeTokenOptions = {
@@ -35,6 +36,11 @@ kyt.TaskListController = kyt.CrudController.extend({
         this.views.employeeToken= new kyt.TokenView(employeeTokenOptions);
         this.views.equipmentToken = new kyt.TokenView(equipmentTokenOptions);
 
+    },
+    changeTimeSelector:function(){
+        $('#timeSpent').timepicker({
+            showPeriodLabels: false
+        });
     }
 });
 

@@ -26,19 +26,21 @@ namespace KnowYourTurf.Web.Controllers
         {
             _repository = repository;
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("PendingTasks");
-            _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks"); ;
+            //completed used for pending so that you can't edit on employee page
+            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
+            _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
             _sessionContext = sessionContext;
         }
 
         public ActionResult ViewEmployee(ViewModel input)
         {
-            var entityId = input.EntityId>0?input.EntityId:_sessionContext.GetUserId();
+            long entityId;
+            entityId = input.EntityId > 0 ? input.EntityId : _sessionContext.GetUserId();
             var employee = _repository.Find<User>(entityId);
             
             var availableUserRoles = _repository.FindAll<UserRole>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name});
             IEnumerable<TokenInputDto> selectedUserRoles;
-            if (input.EntityId > 0 && employee.UserRoles != null)
+            if (employee.UserRoles != null)
             {
                 selectedUserRoles = employee.UserRoles.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             }
@@ -60,8 +62,8 @@ namespace KnowYourTurf.Web.Controllers
                 CompletedListDefinition = _completedTaskGrid.GetGridDefinition(completeUrl),
                 EmployeeListUrl = UrlContext.GetUrlForAction<EmployeeListController>(x=>x.EmployeeList()),
                 DeleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.DeleteMultiple(null)),
-                Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
-               
+                Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString(),
+                ReturnToList = input.EntityId>0
             };
             return View("EmployeeDashboard", model);
         }

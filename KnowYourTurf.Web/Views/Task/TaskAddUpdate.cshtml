@@ -33,6 +33,8 @@
 
 @MvcHtmlString.Create(FormFor<TaskController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
 @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
+<input type="hidden" id="RootId" name="RootId" value="@Model.RootId"/>
+
 <div class="col left">
 <div class="fieldRow">
     @Html.SubmissionFor(x => x.Item.TaskType).ToHtmlTag()
@@ -47,7 +49,7 @@
     @Html.SubmissionFor(x => x.Item.ScheduledEndTime).ToHtmlTag()
 </div>
 <div class="fieldRow">
-    @Html.SubmissionFor(x => x.Item.ActualTimeSpent).AddClassToInput("timePicker").ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
 </div>
 <div class="fieldRow">
     @Html.SubmissionFor(x => x.Item.Field).ToHtmlTag()
@@ -66,10 +68,13 @@
     @Html.SubmissionFor(x => x.Item.Notes).AddClassToInput("KYT_editor_label_left").ToHtmlTag()
 </div>
 <div class="fieldRow">
-@if (Model.Item.Complete){
-                @Html.ViewFor(x => x.Item.Complete).ToHtmlTag()
-}else{
-                              @Html.SubmissionFor(x => x.Item.Complete).ToHtmlTag()}
+@if (Model.Item.Complete)
+{
+    @Html.ViewFor(x => x.Item.Complete).ToHtmlTag()
+}
+else
+{
+    @Html.SubmissionFor(x => x.Item.Complete).ToHtmlTag()}
         </div>
     </div>
     <div class="col full clear">

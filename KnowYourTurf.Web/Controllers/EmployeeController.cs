@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
+using KnowYourTurf.Security.Interfaces;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -10,7 +12,6 @@ using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
 using System.Linq;
-using Rhino.Security.Interfaces;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
@@ -42,7 +43,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult AddUpdate(ViewModel input)
         {
             var employee = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
-            var availableUserRoles = Enumeration.GetAll<UserType>(true).Select(x => new TokenInputDto { id = x.Key, name = x.Key});
+            var availableUserRoles = Enumeration.GetAll<UserType>(true).Select(x => new TokenInputDto { id = x.Value, name = x.Key});
             IEnumerable<TokenInputDto> selectedUserRoles;
             if (input.EntityId > 0 && employee.UserRoles != null)
                 selectedUserRoles =
@@ -118,33 +119,46 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapRolesToGroups(User employee)
         {
-            _authorizationRepository.DetachUserFromGroup(employee, UserType.Administrator.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserType.Employee.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserType.Facilities.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserType.KYTAdmin.Key);
-            _authorizationRepository.DetachUserFromGroup(employee, UserType.MultiTenant.Key);
-
             foreach (var x in employee.UserRoles)
             {
                 if (x.Name == UserType.Administrator.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.Administrator.Key);
+                }else if(!employee.UserRoles.Any(r=>r.Name==x.Name))
+                {
+                    _authorizationRepository.DetachUserFromGroup(employee, UserType.Administrator.Key);
                 }
                 if (x.Name== UserType.Employee.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.Employee.Key);
                 }
+                else if (!employee.UserRoles.Any(r => r.Name == x.Name))
+                {
+                    _authorizationRepository.DetachUserFromGroup(employee, UserType.Employee.Key);
+                }
                 if (x.Name == UserType.Facilities.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.Facilities.Key);
+                }
+                else if (!employee.UserRoles.Any(r => r.Name == x.Name))
+                {
+                    _authorizationRepository.DetachUserFromGroup(employee, UserType.Facilities.Key);
                 }
                 if (x.Name == UserType.KYTAdmin.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.KYTAdmin.Key);
                 }
+                else if(!employee.UserRoles.Any(r=>r.Name==x.Name))
+                {
+                    _authorizationRepository.DetachUserFromGroup(employee, UserType.KYTAdmin.Key);
+                }
                 if (x.Name == UserType.MultiTenant.Key)
                 {
                     _authorizationRepository.AssociateUserWith(employee, UserType.MultiTenant.Key);
+                }
+                else if (!employee.UserRoles.Any(r => r.Name == x.Name))
+                {
+                    _authorizationRepository.DetachUserFromGroup(employee, UserType.MultiTenant.Key);
                 }
             }
         }
@@ -172,15 +186,17 @@ namespace KnowYourTurf.Web.Controllers
             employee.UserLoginInfo.Password = employeeModel.UserLoginInfo.Password;
             employee.UserLoginInfo.LoginName = employeeModel.Email;
             employee.UserLoginInfo.Status = employeeModel.UserLoginInfo.Status;
-            employee.UserLoginInfo.UserType = UserType.Employee.ToString();
             if (model.RolesInput.IsEmpty())
             {
+                employee.EmptyUserRoles();
                 var emp = _repository.Query<UserRole>(x => x.Name == UserType.Employee.ToString()).FirstOrDefault();
                 employee.AddUserRole(emp);
             }
             else
             {
-                _updateCollectionService.UpdateFromCSV(employee.UserRoles, model.RolesInput, employee.AddUserRole,employee.RemoveUserRole);
+                var newItems = new List<UserRole>();
+                model.RolesInput.Split(',').Each(x => newItems.Add(_repository.Query<UserRole>(y=>y.EntityId==Int32.Parse(x)).FirstOrDefault()));
+                _updateCollectionService.Update(employee.UserRoles, newItems, employee.AddUserRole, employee.RemoveUserRole);
             }
             return employee;
         }

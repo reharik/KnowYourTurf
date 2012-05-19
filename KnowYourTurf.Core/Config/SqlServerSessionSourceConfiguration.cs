@@ -1,10 +1,9 @@
 using System;
+using KnowYourTurf.Security;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using KnowYourTurf.Core.Config;
 using NHibernate;
 using NHibernate.Cfg;
-using Rhino.Security;
 
 namespace KnowYourTurf.Core.Domain
 {
@@ -43,7 +42,7 @@ namespace KnowYourTurf.Core.Domain
                     _config.GenerateSchema(x);
                     x.SetProperty("adonet.batch_size", "100");
                     x.SetProperty("generate_statistics", "true");
-                    //Security.Configure<User>(x, SecurityTableStructure.Schema);
+                    KnowYourTurf.Security.Security.Configure<User>(x, SecurityTableStructure.Schema);
 
                 })
                 .BuildSessionFactory();
@@ -58,7 +57,7 @@ namespace KnowYourTurf.Core.Domain
                 {
                     x.SetProperty("adonet.batch_size", "100");
                     x.SetProperty("generate_statistics", "true");
-                    Security.Configure<User>(x, SecurityTableStructure.Prefix);
+                    KnowYourTurf.Security.Security.Configure<User>(x, SecurityTableStructure.Prefix);
 
                 })
                 .BuildSessionFactory();

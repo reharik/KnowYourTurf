@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -25,13 +26,15 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate(AddUpdateEventViewModel input)
         {
-            var _event = input.EntityId > 0 ? _repository.Find<Event>(input.EntityId) : new Event();
+            var category = _repository.Find<Category>(input.RootId);
+            var _event = input.EntityId > 0 ? category.Events.FirstOrDefault(x=>x.EntityId == input.EntityId) : new Event();
             _event.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : _event.ScheduledDate;
             _event.StartTime = input.StartTime.HasValue ? input.StartTime.Value : _event.StartTime;
-            var fields = _selectListItemService.CreateList<Field>(x => x.Name, x => x.EntityId, true,true);
+            var fields = _selectListItemService.CreateList(category.Fields,x => x.Name, x => x.EntityId, true);
             var _eventTypes = _selectListItemService.CreateList<EventType>(x => x.Name, x => x.EntityId, true);
             var model = new EventViewModel
                             {
+                                RootId = input.RootId,
                                 FieldList = fields,
                                 EventTypeList = _eventTypes,
                                 Event = _event,
@@ -69,9 +72,17 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(EventViewModel input)
         {
-            var _event = input.Event.EntityId > 0? _repository.Find<Event>(input.Event.EntityId):new Event();
+            var category = _repository.Find<Category>(input.RootId);
+            Event _event;
+            if (input.Event.EntityId > 0) { _event = category.Events.FirstOrDefault(x => x.EntityId == input.Event.EntityId); }
+            else
+            {
+                _event = new Event();
+                category.AddEvent(_event);
+            }
+
             mapToDomain(input, _event);
-            var crudManager = _saveEntityService.ProcessSave(_event);
+            var crudManager = _saveEntityService.ProcessSave(category);
             var notification = crudManager.Finish();
             return Json(notification, JsonRequestBehavior.AllowGet);
         }

@@ -53,7 +53,7 @@ namespace KnowYourTurf.Web.Controllers
                                 DeleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x => x.DeleteMultiple(null)) ,
                                 DeleteMultiplePhotosUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.DeleteMultiple(null)),
                                 DeleteMultipleDocumentsUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.DeleteMultiple(null)),
-                                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId + "&From=Field",
+                                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId + "&From=Field&RootId="+input.ParentId,
                                 AddUpdatePhotoUrl =UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "?ParentId=" +
                                     input.EntityId + "&From=Field",
                                 AddUpdateDocumentUrl =UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "?ParentId=" +
@@ -62,7 +62,8 @@ namespace KnowYourTurf.Web.Controllers
                                 CompletedListDefinition =_completedTaskGrid.GetGridDefinition(completeUrl),
                                 DocumentListDefinition =_documentListGrid.GetGridDefinition(docuemntUrl),
                                 PhotoListDefinition =_photoListGrid.GetGridDefinition(photoUrl),
-                                Title = WebLocalizationKeys.FIELD_INFORMATION.ToString()
+                                Title = WebLocalizationKeys.FIELD_INFORMATION.ToString(),
+                                ParentId = input.ParentId
                             };
             return View("FieldDashboard", model);
         }

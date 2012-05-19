@@ -12,6 +12,7 @@ kyt.TaskCalendarController = kyt.CalendarController.extend({
 
     additionalSubscriptions:function(){
         $.subscribe('/contentLevel/form_editModule/pageLoaded',$.proxy(this.loadTokenizers,this), this.cid);
+        $.subscribe('/contentLevel/form_editModule/pageLoaded',$.proxy(this.changeTimeSelector,this), this.cid);
     },
     loadTokenizers:function(formOptions){
         var employeeTokenOptions = {
@@ -51,5 +52,10 @@ kyt.TaskCalendarController = kyt.CalendarController.extend({
             buttons:builder.getButtons()
         };
         this.modules.popupDisplay = new kyt.AjaxPopupDisplayModule(moduleOptions);
+    },
+    changeTimeSelector:function(){
+        $('#timeSpent').timepicker({
+            showPeriodLabels: false
+        });
     }
 });

@@ -39,6 +39,7 @@
 @MvcHtmlString.Create(FormFor<EmployeeController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
     @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
     @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())
+    <input type="hidden" id="returnToList" name="ReturnToList" value="@Model.ReturnToList"/>
     <div class="col left">
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Item.EmployeeId).ToHtmlTag()
@@ -66,13 +67,14 @@
         </div>
     </div>
     <div class="col left">
-     @{if (Model.Item.ImageUrl.IsNotEmpty())
-       {
-            <div class="fieldRow">
-                @Html.ViewFor(x => x.Item.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
-            </div>
-       }
-        }
+     @{
+         if (Model.Item.ImageUrl.IsNotEmpty())
+         {
+             <div class="fieldRow">
+                 @Html.ViewFor(x => x.Item.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
+             </div>
+         }
+     }
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
         </div>
@@ -95,7 +97,7 @@
             @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().RootId("rolesInputRoot").LabelDisplay(WebLocalizationKeys.USER_ROLES).OperationName("/KYTAdmin").ToHtmlTag()
+            @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().RootId("rolesInputRoot").LabelDisplay(WebLocalizationKeys.USER_ROLES).OperationName("/UserRoles").ToHtmlTag()
         </div>
         <div class="fieldRow">
             <div id="newImage">
@@ -119,8 +121,6 @@
             <div id="pendingTaskGridContainer" class="grid_5b">
                 <div class="content-header">
                     <input class="search" /> 
-                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
-                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
                 </div>
                 <div id="contentArea" class="content-inner">
                     <div id="validation-container-wrapper">

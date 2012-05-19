@@ -28,6 +28,7 @@
 @MvcHtmlString.Create(FormFor<EmployeeController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
 @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
 @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
+
     <div class="col left">
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Item.EmployeeId).ToHtmlTag()
@@ -77,8 +78,7 @@
             @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().RootId("rolesInputRoot").LabelDisplay(WebLocalizationKeys.USER_ROLES).ToHtmlTag()
-            @*            OperationName("/KYTAdmin").ToHtmlTag()*@
+            @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().RootId("rolesInputRoot").LabelDisplay(WebLocalizationKeys.USER_ROLES).OperationName("/UserRoles").ToHtmlTag()
         </div>
         <div class="fieldRow">
             <div id="newImage">

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FubuMVC.Core;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Enums;
 
 namespace KnowYourTurf.Core.Services
 {
@@ -71,6 +73,5 @@ namespace KnowYourTurf.Core.Services
             newItemsCSV.Split(',').Each(x => newItems.Add(_repository.Find<ENTITY>(Int32.Parse(x))));
             Update(origional, newItems, addEntity, removeEntity);
         }
-
     }
 }
