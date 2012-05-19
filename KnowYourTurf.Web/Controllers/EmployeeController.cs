@@ -43,7 +43,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult AddUpdate(ViewModel input)
         {
             var employee = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
-            var availableUserRoles = Enumeration.GetAll<UserType>(true).Select(x => new TokenInputDto { id = x.Key, name = x.Key});
+            var availableUserRoles = Enumeration.GetAll<UserType>(true).Select(x => new TokenInputDto { id = x.Value, name = x.Key});
             IEnumerable<TokenInputDto> selectedUserRoles;
             if (input.EntityId > 0 && employee.UserRoles != null)
                 selectedUserRoles =
