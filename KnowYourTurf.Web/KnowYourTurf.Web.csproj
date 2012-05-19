@@ -207,7 +207,7 @@
     <Compile Include="Controllers\ChemicalController.cs" />
     <Compile Include="Controllers\ChemicalListController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\DecisionCriticalController.cs" />
+    <Compile Include="Controllers\KnowYourTurfController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\DocumentListController.cs" />
     <Compile Include="Controllers\EmailController.cs" />

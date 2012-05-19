@@ -10,7 +10,6 @@
             Map(x => x.WindSpeed);
             Map(x => x.RainPrecipitation);
             Map(x => x.Humidity);
-            Map(x => x.EvaporationRate);
             Map(x => x.DewPoint);
         }
     }

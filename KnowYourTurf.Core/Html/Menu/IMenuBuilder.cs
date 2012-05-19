@@ -24,6 +24,7 @@ namespace KnowYourTurf.Core.Html.Menu
         IMenuBuilder addUrlParameter(string name, string value);
         IMenuBuilder CategoryGroupForItteration();
         IMenuBuilder EndCategoryGroup();
+        IMenuBuilder WithOperation(bool value);
     }
 
     public class MenuBuilder : IMenuBuilder
@@ -130,6 +131,15 @@ namespace KnowYourTurf.Core.Html.Menu
             lastItem.Url = lastItem.Url + "?" + name + "=" + value;
             return this;
         }
+
+        public IMenuBuilder WithOperation(bool value)
+        {
+            var _itemList = getList();
+            var lastItem = _itemList.LastOrDefault();
+            lastItem.Operation = lastItem.Text.RemoveWhiteSpace();
+            return this;
+        }
+
         public IMenuBuilder CreateNode(StringToken text, string cssClass = null)
         {
             return CreateNode(text.DefaultValue, cssClass);
@@ -299,6 +309,15 @@ namespace KnowYourTurf.Core.Html.Menu
             lastItem.Url = lastItem.Url + "?" + name + "=" + value;
             return this;
         }
+
+        public IMenuBuilder WithOperation(bool value)
+        {
+            var _itemList = getList();
+            var lastItem = _itemList.LastOrDefault();
+            lastItem.Operation = lastItem.Text.RemoveWhiteSpace();
+            return this;
+        }
+
         public IMenuBuilder CreateNode(StringToken text, string cssClass = null)
         {
             return CreateNode(text.DefaultValue, cssClass);
@@ -376,8 +395,11 @@ namespace KnowYourTurf.Core.Html.Menu
             var user = _repository.Find<User>(userId);
             _items.Each(x =>
             {
-                var operationName = "/MenuItem/" + x.Text.RemoveWhiteSpace();
-                if (_authorizationService.IsAllowed(user, operationName))
+                if(x.Operation.IsEmpty())
+                {
+                    permittedItems.Add(x);
+                }
+                else if (_authorizationService.IsAllowed(user, "/MenuItem/" + x.Operation))
                 {
                     permittedItems.Add(x);
                 }
@@ -391,6 +413,7 @@ namespace KnowYourTurf.Core.Html.Menu
         public string Text { get; set; }
         public string Url { get; set; }
         public string CssClass { get; set; }
+        public string Operation { get; set; }
         public IList<MenuItem> Children { get; set; }
     }
 }

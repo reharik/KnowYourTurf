@@ -22,29 +22,12 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IEmailTemplateService _emailService;
         private readonly IRepository _repository;
 
-        public TaskRunnerController( IEmailTemplateService emailService)
+        public TaskRunnerController(IRepository repository, IEmailTemplateService emailService)
         {
             _emailService = emailService;
-            _repository = new Repository(RepoConfig.NoFiltersSpecialInterceptor);
+            _repository = repository;
+            _repository.DisableFilter("CompanyConditionFilter");
         }
-
-        public ActionResult temp(ViewModel input)
-        {
-            var companies = _repository.FindAll<Company>();
-            var webClient = new WebClient();
-            var jss = new JavaScriptSerializer();
-
-
-            var d = 21;
-            while (d > 0)
-            {
-                companies.Each(x => loadLastWeeksWeatherObject(jss, webClient, x, DateTime.Now.Date.AddDays(-d)));
-                d--;
-                _repository.UnitOfWork.Commit();
-            }
-            return null;
-        }
-
 
         public ActionResult GetWeather(ViewModel input)
         {
@@ -55,37 +38,29 @@ namespace KnowYourTurf.Web.Controllers
             companies.Each(x =>
                                {
                                    loadWeatherObject(jss, webClient, x);
-//                                   loadLastWeeksWeatherObject(jss, webClient, x);
+                                   loadLastWeeksWeatherObject(jss, webClient, x);
                                });
             _repository.UnitOfWork.Commit();
             return null;
         }
 
-        private void loadWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company item)
+        private void loadWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company company)
         {
-            var url = "http://api.wunderground.com/api/8c25a57f987344bd/yesterday/q/" + item.ZipCode + ".json";
-            var weather = new Weather
-            {
-                CompanyId = item.EntityId,
-                Date = DateTime.Now.Date.AddDays(-1),
-            };
+            var url = "http://api.wunderground.com/api/8c25a57f987344bd/yesterday/q/" + company.ZipCode + ".json";
+            var date = DateTime.Now.Date.AddDays(-1);
+            var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId == company.EntityId).FirstOrDefault() ??
+                          new Weather { CompanyId = company.EntityId, Date = date };
             loadWeather(jss,webClient,weather,url);
         }
-        private void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company item, DateTime date)
+        private void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company company)
         {
-            var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" + item.ZipCode + ".json";
-            var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId== item.EntityId).FirstOrDefault() ??
-                          new Weather { CompanyId = item.EntityId, Date = date };
+            var date = DateTime.Now.Date;
+            var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" + company.ZipCode + ".json";
+            var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId== company.EntityId).FirstOrDefault() ??
+                          new Weather { CompanyId = company.EntityId, Date = date };
             loadWeather(jss, webClient, weather, url);
-            Thread.Sleep(10000);
+            Thread.Sleep(1000);
         }
-//        private void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company item)
-//        {
-//            var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + DateTime.Now.AddDays(-7).ToString("yyyyMMd") + "/q/" + item.ZipCode + ".json";
-//            var weather = _repository.Query<Weather>(x => x.Date == DateTime.Now.Date.AddDays(-8)).FirstOrDefault() ??
-//                          new Weather { CompanyId = item.EntityId, Date = DateTime.Now.Date.AddDays(-8) };
-//            loadWeather(jss, webClient, weather, url);
-//        }
 
         private void loadWeather(JavaScriptSerializer jss, WebClient webClient, Weather weather, string url)
         {
@@ -99,19 +74,22 @@ namespace KnowYourTurf.Web.Controllers
             var precip = 0d;
             var maxWindGust = 0d;
             var humidity = 0d;
+            var meanPressure = 0d;
             var dailySummary = companyWeatherInfoDto.History.DailySummary.FirstOrDefault();
             Double.TryParse(dailySummary.maxdewpti, out dewPoint);
             Double.TryParse(dailySummary.maxtempi, out maxTemp);
             Double.TryParse(dailySummary.mintempi, out minTemp);
-            Double.TryParse(dailySummary.rain, out precip);
+            Double.TryParse(dailySummary.precipi, out precip);
             Double.TryParse(dailySummary.maxwspdi, out maxWindGust);
             Double.TryParse(dailySummary.maxhumidity, out humidity);
+            Double.TryParse(dailySummary.meanpressurei, out meanPressure);
             weather.DewPoint = dewPoint;
             weather.HighTemperature = maxTemp;
             weather.LowTemperature = minTemp;
             weather.RainPrecipitation = precip;
             weather.WindSpeed = maxWindGust;
             weather.Humidity = humidity;
+            weather.Pressure = meanPressure;
             _repository.Save(weather);
         }
 
@@ -137,6 +115,12 @@ namespace KnowYourTurf.Web.Controllers
                                                                       var model = emailTemplateHandler.CreateModel(x, s);
                                                                       _emailService.SendSingleEmail(model);
                                                                   });
+                                            if(x.Frequency == EmailFrequency.Once.ToString())
+                                            {
+                                                x.Status = Status.InActive.ToString();
+                                                _repository.Save(x);
+                                                _repository.Commit();
+                                            }
                                        }
                                        catch (Exception ex)
                                        {
@@ -152,22 +136,24 @@ namespace KnowYourTurf.Web.Controllers
 
     public class CompanyWeatherInfoDto
     {
-        public WeatherHistory History { get; set; }
+        public WeatherHistoryDto History { get; set; }
     }
 
-    public class WeatherHistory
+    public class WeatherHistoryDto
     {
-        public IEnumerable<DailySummary> DailySummary { get; set; }
+        public IEnumerable<DailySummaryDto> DailySummary { get; set; }
     }
 
-    public class DailySummary
+    public class DailySummaryDto
     {
-        public string rain { get; set; }
+        public string precipi { get; set; }
         public string maxtempi { get; set; }
         public string mintempi { get; set; }
         public string maxhumidity { get; set; }
         public string maxdewpti { get; set; }
         public string maxwspdi { get; set; }
+
+        public string meanpressurei { get; set; }
     }
 
 }
