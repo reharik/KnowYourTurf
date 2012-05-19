@@ -25,6 +25,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x => x.LowTemperature);
             GridBuilder.DisplayFor(x => x.RainPrecipitation);
             GridBuilder.DisplayFor(x => x.WindSpeed);
+            GridBuilder.DisplayFor(x => x.Humidity);
             return this;
         }
     }
