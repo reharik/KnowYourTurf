@@ -100,12 +100,12 @@ namespace KnowYourTurf.Web.Controllers
 
         private void decorateModel(AddUpdateTaskViewModel input, TaskViewModel model)
         { 
-            if (input.From == "Field")
+            if (input.Param1 == "Field")
             {
                 if (model.Item.EntityId <= 0)
                     model.Item.Field = _repository.Find<Field>(input.ParentId);
             }
-            if (input.From == "Employee")
+            if (input.Param1 == "Employee")
             {
                 if (model.Item.EntityId <= 0)
                 {
@@ -113,7 +113,7 @@ namespace KnowYourTurf.Web.Controllers
                     model.SelectedEmployees.Add(new TokenInputDto { id = employee.EntityId.ToString(), name = employee.FullName });
                 }
             }
-            if (input.From == "Calculator")
+            if (input.Param1 == "Calculator")
             {
                 model.Item.Field = _repository.Find<Field>(input.Field);
                 model.Product = input.Product;

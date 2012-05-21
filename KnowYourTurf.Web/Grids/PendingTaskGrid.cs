@@ -24,8 +24,9 @@ namespace KnowYourTurf.Web.Grids
         {
             
             GridBuilder.LinkColumnFor(x => x.TaskType.Name)
+                .ReturnValueWithTrigger(x => x.Category.EntityId)
                 .ForAction<TaskController>(x => x.AddUpdate(null))
-                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToPerformAction(ColumnAction.AddUpdateItem).WithId("pending")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.ScheduledDate);
             GridBuilder.DisplayFor(x => x.ScheduledStartTime);

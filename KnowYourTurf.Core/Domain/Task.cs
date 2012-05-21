@@ -37,6 +37,8 @@ namespace KnowYourTurf.Core.Domain
         //this should be on the domain entity I just can't figure out how
         public virtual User CreatedBy { get; set; }
 
+        public virtual Category Category { get; set; }
+
         public virtual InventoryProduct InventoryProduct { get; set; }
         public virtual bool InventoryDecremented { get; set; }
 
@@ -75,7 +77,7 @@ namespace KnowYourTurf.Core.Domain
                 ScheduledStartTime = ScheduledStartTime,
                 InventoryProduct = InventoryProduct
             };
-            Employees.Each(newTask.AddEmployee);
+            Employees.ForEachItem(newTask.AddEmployee);
             return newTask;
         }
 

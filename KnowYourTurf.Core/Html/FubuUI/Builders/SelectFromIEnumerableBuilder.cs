@@ -31,7 +31,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
                                                var selectListItems = listPropertyInfo.GetValue(request.Model, null) as IEnumerable<SelectListItem>;
                                                if (selectListItems == null) return;
                                                
-                                               selectListItems.Each(option=> x.Option(option.Text, option.Value.IsNotEmpty() ? option.Value: ""));
+                                               selectListItems.ForEachItem(option=> x.Option(option.Text, option.Value.IsNotEmpty() ? option.Value: ""));
 
                                                if (value != null && value.ToString().IsNotEmpty())
                                                {

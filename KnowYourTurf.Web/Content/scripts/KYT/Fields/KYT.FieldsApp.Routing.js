@@ -12,6 +12,8 @@ KYT.Routing.FieldsApp = (function(KYT, Backbone){
     // ------
     FieldsApp.Router = Backbone.Marionette.AppRouter.extend({
           appRoutes: {
+              "*path/:entityId/:parentId/:rootId/:string": "showViews",
+              "*path/:entityId/:parentId/:rootId": "showViews",
               "*path/:entityId/:parentId": "showViews",
               "*path/:entityId": "showViews",
               "*path": "showViews"

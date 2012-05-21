@@ -58,7 +58,7 @@ namespace KnowYourTurf.Core.Services
             {
                 items.Add(new SelectListItem { Text = CoreLocalizationKeys.SELECT_ITEM.ToString(), Value = "" });
             }
-            entityList.Each( x =>
+            entityList.ForEachItem( x =>
                                  {
                                      if (textAccessor.GetValue(x) != null && valueAccessor.GetValue(x) != null)
                                      {
@@ -88,7 +88,7 @@ namespace KnowYourTurf.Core.Services
             {
                 items.Add(new SelectListItem { Text = CoreLocalizationKeys.SELECT_ITEM.ToString(), Value = "" });
             }
-            entityList.Each(x =>
+            entityList.ForEachItem(x =>
             {
                 if (text1Accessor.GetValue(x) != null && text2Accessor.GetValue(x) != null && valueAccessor.GetValue(x) != null)
                 {

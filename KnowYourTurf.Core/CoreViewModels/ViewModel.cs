@@ -24,5 +24,6 @@ namespace KnowYourTurf.Core
         public string deleteMultipleUrl { get; set; }
         public GridDefinition gridDef { get; set; }
         public List<string> headerButtons { get; set; }
+        public string addUpdate { get; set; }
     }
 }

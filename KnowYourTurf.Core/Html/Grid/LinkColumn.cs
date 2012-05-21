@@ -23,6 +23,8 @@ namespace KnowYourTurf.Core.Html.Grid
 
         private string _action;
         private string _gridName;
+        private List<TriggerValueDto<ENTITY>> _returnValueWithTriggerList;
+        private string _id;
 
         public LinkColumn(Expression<Func<ENTITY, object>> expression,string gridName = "")
         {
@@ -93,7 +95,7 @@ namespace KnowYourTurf.Core.Html.Grid
             if (value.IsEmpty()) return null;
             var span = new HtmlTag("span").Text(value);
             addToolTipAndClasses(span);
-            var anchor = buildAnchor(_item);
+            var anchor = buildAnchor(_item, _returnValueWithTriggerList);
             anchor.AddClasses(new[] { "linkColumn", _action });
 
             var div = BuildDiv();
@@ -117,20 +119,54 @@ namespace KnowYourTurf.Core.Html.Grid
             span.AddClasses(_divCssClasses);
         }
 
-        private HtmlTag buildAnchor(ENTITY item)
+        private HtmlTag buildAnchor(ENTITY item, List<TriggerValueDto<ENTITY>> expressions = null)
         {
             var anchor = new HtmlTag("a");
-            anchor.Attr("onclick", "KYT.vent.trigger('" + _action + "'," + item.EntityId + ")");
-
+            var extraValues = getCSVofExtraValues(item, expressions);
+            var id = _id.IsNotEmpty() ? _id + ":" : "";
+            anchor.Attr("onclick", "KYT.vent.trigger('" + id + _action + "'," + item.EntityId + extraValues + ")");
             return anchor;
         }
-     
+        private string getCSVofExtraValues(ENTITY item, IEnumerable<TriggerValueDto<ENTITY>> expressions)
+        {
+            if (expressions == null) return string.Empty;
+            var values = new List<string>();
+            expressions.ForEachItem(x => values.Add(getExtraValue(item, x)));
+            return "," + values.Aggregate((s1, s2) => s1 + "," + s2);
+        }
+
+        private string getExtraValue(ENTITY item, TriggerValueDto<ENTITY> expression)
+        {
+            if (expression == null) return string.Empty;
+            var propertyValue = ReflectionHelper.GetAccessor(expression.Expression).GetValue(item);
+            if (expression.Formatter != null)
+            {
+                propertyValue = expression.Formatter(propertyValue as string);
+            }
+            return propertyValue != null ? "'" + propertyValue + "'" : string.Empty;
+        }
         public ColumnBase<ENTITY> AddClassToSpan(string cssClass)
         {
             _divCssClasses.Add(cssClass);
             return this;
         }
 
+        public ColumnBase<ENTITY> WithId(string id)
+        {
+            _id = id;
+            return this;
+        }
 
+        public LinkColumn<ENTITY> ReturnValueWithTrigger(Expression<Func<ENTITY, object>> expression, Func<string, string> stringFormat = null)
+        {
+            if (_returnValueWithTriggerList == null) _returnValueWithTriggerList = new List<TriggerValueDto<ENTITY>>();
+            _returnValueWithTriggerList.Add(new TriggerValueDto<ENTITY> { Expression = expression, Formatter = stringFormat });
+            return this;
+        }
+    }
+    public class TriggerValueDto<ENTITY> where ENTITY : IGridEnabledClass
+    {
+        public Expression<Func<ENTITY, object>> Expression { get; set; }
+        public Func<string, string> Formatter { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace KnowYourTurf.Core.Services
             Action<ENTITY> removeEntity) where ENTITY : Entity
         {
             var remove = new List<ENTITY>();
-            origional.Each(x =>
+            origional.ForEachItem(x =>
             {
                 var newItem = newItems.FirstOrDefault(i => i.EntityId == x.EntityId);
                 if (newItem == null)
@@ -47,8 +47,8 @@ namespace KnowYourTurf.Core.Services
                     x.UpdateSelf(newItem);
                 }
             });
-            remove.Each(removeEntity);
-            newItems.Each(x =>
+            remove.ForEachItem(removeEntity);
+            newItems.ForEachItem(x =>
             {
                 if (!origional.Contains(x))
                 {
@@ -66,11 +66,11 @@ namespace KnowYourTurf.Core.Services
             if (newItemsCSV.IsEmpty())
             {
                 var remove = new List<ENTITY>();
-                origional.Each(remove.Add);
-                remove.Each(removeEntity);
+                origional.ForEachItem(remove.Add);
+                remove.ForEachItem(removeEntity);
                 return;
             }
-            newItemsCSV.Split(',').Each(x => newItems.Add(_repository.Find<ENTITY>(Int32.Parse(x))));
+            newItemsCSV.Split(',').ForEachItem(x => newItems.Add(_repository.Find<ENTITY>(Int32.Parse(x))));
             Update(origional, newItems, addEntity, removeEntity);
         }
     }

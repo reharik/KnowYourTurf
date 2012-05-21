@@ -163,7 +163,6 @@ KYT.Views.GridView = KYT.Views.View.extend({
     },
     initialize: function(){
         this.options = $.extend({},KYT.gridDefaults,this.options);
-        this.id=this.options.id;
     },
     render:function(){
         if(this.onPreRender)this.onPreRender();
@@ -184,6 +183,11 @@ KYT.Views.GridView = KYT.Views.View.extend({
         });
 
         var gridContainer = this.options.gridContainer;
+        // if we have more then one grid, jqgrid doesn't scope so we need different names.
+        if(this.options.gridContainer!="#gridContainer"){
+            this.$el.find("#gridContainer").attr("id",this.options.gridContainer.replace("#",""));
+        }
+
         $(gridContainer,this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
         $(window).bind('resize', function() { cc.gridHelper.adjustSize(gridContainer); }).trigger('resize');
         $(this.el).gridSearch({onClear:$.proxy(this.removeSearch,this),onSubmit:$.proxy(this.search,this)});
@@ -195,11 +199,11 @@ KYT.Views.GridView = KYT.Views.View.extend({
         KYT.vent.bind("DisplayItem",this.displayItem,this);
     },
     addNew:function(){
-        KYT.vent.trigger("route",this.options.addUpate,true);
+        KYT.vent.trigger("route",this.options.addUpdate,true);
         //$.publish('/contentLevel/grid_'+this.id+'/AddUpdateItem', [this.options.addUpdateUrl]);
     },
     editItem:function(id){
-        KYT.vent.trigger("route",this.options.addUpate+"/"+id,true);
+        KYT.vent.trigger("route",this.options.addUpdate+"/"+id,true);
     },
     displayItem:function(id){
         KYT.vent.trigger("route",this.options.display+"/"+id,true);
@@ -234,6 +238,7 @@ KYT.Views.GridView = KYT.Views.View.extend({
     },
     onClose:function(){
         KYT.vent.unbind("AddUpdateItem");
+        KYT.vent.unbind("DisplayItem");
     }
 
 });

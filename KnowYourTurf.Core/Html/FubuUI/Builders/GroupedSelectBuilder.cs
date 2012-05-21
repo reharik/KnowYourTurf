@@ -27,10 +27,10 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
                 var dictionary = listPropertyInfo.GetValue(request.Model, null) as IDictionary<string, IEnumerable<SelectListItem>>;
                 if (dictionary == null) return;
                 x.Option(CoreLocalizationKeys.SELECT_ITEM.ToString(),"");
-                dictionary.Keys.Each(key =>
+                dictionary.Keys.ForEachItem(key =>
                 {
                     x.OptionGroup(key);
-                    dictionary[key].Each(l => x.Option(l.Text, l.Value+"_"+key));
+                    dictionary[key].ForEachItem(l => x.Option(l.Text, l.Value+"_"+key));
                 });
                 if (value != null && value.ToString().IsNotEmpty())
                 {

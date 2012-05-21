@@ -71,7 +71,7 @@ namespace KnowYourTurf.Core.Html.Menu
             //this is so createnode can get the _list rather than the _categoryItems
             var categories = _categories;
             _categories = null;
-            categories.Each(x =>
+            categories.ForEachItem(x =>
                                  {
                                      IList<MenuItem> parent = _items;
                                      if (count > 1)
@@ -88,7 +88,7 @@ namespace KnowYourTurf.Core.Html.Menu
         }
         private void itterateOverCategoryItems(long entityId, IList<MenuItem> items, IList<MenuItem> parent = null)
         {
-            items.Each(c =>
+            items.ForEachItem(c =>
                            {
                                // this is so that c doesn't get modified each itteration
                                var instanceC = copyMenuItem(c);
@@ -219,7 +219,7 @@ namespace KnowYourTurf.Core.Html.Menu
             var permittedItems = new List<MenuItem>();
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);
-            _items.Each(x =>
+            _items.ForEachItem(x =>
                             {
                                 var operationName = "/MenuItem/"+x.Text.RemoveWhiteSpace();
                                 if (_authorizationService.IsAllowed(user, operationName))
@@ -281,7 +281,7 @@ namespace KnowYourTurf.Core.Html.Menu
 
         public IMenuBuilder EndCategoryGroup()
         {
-            _categories.Each(x =>
+            _categories.ForEachItem(x =>
             {
                 IList<MenuItem> parent = _items;
                 if (count > 1)
@@ -297,7 +297,7 @@ namespace KnowYourTurf.Core.Html.Menu
         }
         private void itterateOverCategoryItems(long entityId, IList<MenuItem> items, IList<MenuItem> parent = null)
         {
-            items.Each(c =>
+            items.ForEachItem(c =>
             {
                 if (c.Url.IsEmpty() && c.Children.Any())
                 {
@@ -403,7 +403,7 @@ namespace KnowYourTurf.Core.Html.Menu
             var permittedItems = new List<MenuItem>();
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);
-            _items.Each(x =>
+            _items.ForEachItem(x =>
             {
                 var operationName = "/MenuItem/" + x.Text.RemoveWhiteSpace();
                 if (_authorizationService.IsAllowed(user, operationName))

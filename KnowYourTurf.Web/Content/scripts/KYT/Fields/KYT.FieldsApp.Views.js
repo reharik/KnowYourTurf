@@ -217,6 +217,58 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         this.ajaxPopupDisplay.close();
     }
 });
+
+KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
+    events:_.extend({
+    }, KYT.Views.AjaxFormView.prototype.events),
+    viewLoaded:function(){
+        this.loadTokenizers();
+        var pendingGridView = new KYT.Views.EmployeeTaskGridView({el:"#pendingTaskGridContainer",
+            url:this.options.pendingGridUrl,
+            gridContainer: "#pendingGridContainer",
+            id:"pending",
+        param1:"Employee"});
+        var completedGridView = new KYT.Views.EmployeeTaskGridView({el:"#completedTaskGridContainer",
+          url:this.options.completedGridUrl,
+            gridContainer: "#completedGridContainer",
+            id:"completed",
+            display:"taskdisplay"});
+        pendingGridView.render();
+        completedGridView.render();
+        this.storeChild(pendingGridView);
+        this.storeChild(completedGridView);
+    },
+    loadTokenizers: function(){
+        var options = $.extend({el:"#rolesInputRoot"}, this.options.rolesOptions);
+        this.tokenView = new KYT.Views.TokenView(options);
+        this.tokenView.render();
+        this.storeChild(this.tokenView);
+    }
+});
+
+KYT.Views.EmployeeTaskGridView = KYT.Views.GridView.extend({
+    viewLoaded:function(){
+        KYT.vent.bind(this.options.id+":AddUpdateItem",this.editItem,this);
+        KYT.vent.bind(this.options.id+":DisplayItem",this.displayItem,this);
+    },
+    editItem:function(id,rootId){
+        var parentId = $("#employeeId").val();
+        var param1 = this.options.param1? "/"+this.options.param1:"";
+        KYT.vent.trigger("route","task/"+id+"/"+parentId+"/"+rootId+param1,true);
+    },
+    displayItem:function(id,rootId){
+        KYT.vent.trigger("route",this.options.display+"/"+id+"/0/"+rootId,true);
+    },
+    onClose:function(){
+        KYT.vent.unbind("AddUpdateItem");
+        KYT.vent.unbind("DisplayItem");
+        KYT.vent.unbind(this.options.id+":AddUpdateItem");
+        KYT.vent.unbind(this.options.id+":DisplayItem");
+    }
+
+});
+
+
 KYT.Views.AppointmentView = KYT.Views.AjaxFormView.extend({
     events:_.extend({
         'change [name="Appointment.Length"]':'handleTimeChange',

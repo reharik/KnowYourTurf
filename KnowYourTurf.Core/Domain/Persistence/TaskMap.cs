@@ -20,6 +20,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.InventoryDecremented);
             References(x => x.Field).LazyLoad();
             References(x => x.InventoryProduct).LazyLoad();
+            References(x => x.Category).LazyLoad();
             HasManyToMany(x => x.Equipment).Table("EquipmentToTask").Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
             HasManyToMany(x => x.Employees).Table("EmployeeToTask").Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
 

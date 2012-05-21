@@ -104,7 +104,7 @@ namespace KnowYourTurf.Web
             For<IEntityListGrid<Material>>().Use<MaterialListGrid>();
             For<IEntityListGrid<Chemical>>().Use<ChemicalListGrid>();
             For<IEntityListGrid<Fertilizer>>().Use<FertilizerListGrid>();
-            For<IViewOptionConfig>().Add<FieldsViewOptionList>();
+            For<IRouteTokenConfig>().Add<FieldsRouteTokenList>();
 
             For<IEmailTemplateHandler>().Use<EmployeeDailyTaskHandler>().Named("Daily TasksHandler");
 

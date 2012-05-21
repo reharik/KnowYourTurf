@@ -32,7 +32,7 @@ namespace KnowYourTurf.Web.Models
 
     public class AddUpdateTaskViewModel:ViewModel
     {
-        public string From { get; set; }
+        public string Param1 { get; set; }
         public long Field { get; set; }
         public string Product { get; set; }
         public double Quantity { get; set; }

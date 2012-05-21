@@ -118,7 +118,7 @@ namespace KnowYourTurf.Core.Html.Expressions
         private void addOptionItems(HtmlTextWriter html, string direction)
         {
             var items = direction == "selected" ? _selectedItems : _availableItems;
-            items.Each(x =>
+            items.ForEachItem(x =>
                            {
                                html.Write("<option value='" + x.Value + "'>" + x.Text + "</option>");
                            });

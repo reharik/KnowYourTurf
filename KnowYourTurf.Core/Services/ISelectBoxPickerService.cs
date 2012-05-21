@@ -32,7 +32,7 @@ namespace KnowYourTurf.Core.Services
         {
             var allItems = _selectListItemService.CreateList(text, value, false,softDelete).ToList();
             var _selectedItems = _selectListItemService.CreateList(selectedItems, text, value, false);
-            _selectedItems.Each(x =>
+            _selectedItems.ForEachItem(x =>
                                     {
                                         var availableListItem = allItems.FirstOrDefault(a=>a.Text==x.Text && a.Value==x.Value);
                                         if (availableListItem!=null) allItems.Remove(availableListItem);
@@ -49,7 +49,7 @@ namespace KnowYourTurf.Core.Services
         {
             var allItems = _selectListItemService.CreateList<ENUM>().ToList();
             var _selectedItems = selectedItems.Select(x => new SelectListItem {Text = x, Value = x});
-            _selectedItems.Each(x =>
+            _selectedItems.ForEachItem(x =>
             {
                 var availableListItem = allItems.FirstOrDefault(a => a.Text == x.Text && a.Value == x.Value);
                 if (availableListItem != null) allItems.Remove(availableListItem);
@@ -66,7 +66,7 @@ namespace KnowYourTurf.Core.Services
         {
             var result = new List<ENTITY>();
             if (dto ==null || dto.Selected == null) return result;
-            dto.Selected.Each(x =>
+            dto.Selected.ForEachItem(x =>
             {
                 var entity = _repository.Find<ENTITY>(Int64.Parse(x));
                 result.Add(entity);

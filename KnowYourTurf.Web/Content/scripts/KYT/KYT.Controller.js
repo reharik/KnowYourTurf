@@ -9,7 +9,7 @@
 KYT.Controller = (function(KYT, Backbone){
     var Controller = {};
 
-       Controller.showViews=function(splat,entityId, parentId){
+       Controller.showViews=function(splat,entityId, parentId,rootId,param1){
            var routeToken = _.find(KYT.routeTokens,function(item){
                return item.route == splat;
            });
@@ -18,6 +18,8 @@ KYT.Controller = (function(KYT, Backbone){
            var viewOptions = $.extend({},routeToken);
            if(entityId) viewOptions.url +="/"+entityId;
            if(parentId) viewOptions.url +="?ParentId="+parentId;
+           if(rootId) viewOptions.url +="&RootId="+rootId;
+           if(param1) viewOptions.url +="&Param1="+param1;
 
             var item = new KYT.Views[routeToken.viewName](viewOptions);
 
