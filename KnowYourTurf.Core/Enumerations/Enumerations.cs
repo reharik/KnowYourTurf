@@ -110,8 +110,8 @@ namespace KnowYourTurf.Core.Enums
     public class UserType : Enumeration
     {
         public static readonly UserType Empty = new UserType { IsActive = false, Key = "" };
-        public static readonly UserType Employee = new UserType { IsActive = true, Key = "Employee", Value = "1"};
-        public static readonly UserType Administrator = new UserType { IsActive = true, Key = "Administrator", Value = "2" };
+        public static readonly UserType Employee = new UserType { IsActive = true, Key = "Employee", Value = "2"};
+        public static readonly UserType Administrator = new UserType { IsActive = true, Key = "Administrator", Value = "1" };
         public static readonly UserType Facilities = new UserType { IsActive = true, Key = "Facilities", Value = "3" };
         public static readonly UserType MultiTenant = new UserType { IsActive = true, Key = "MultiTenant", Value = "4" };
         public static readonly UserType KYTAdmin = new UserType { IsActive = true, Key = "KYTAdmin", Value = "5" };
