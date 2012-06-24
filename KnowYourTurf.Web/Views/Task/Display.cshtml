@@ -4,7 +4,7 @@
 @using KnowYourTurf.Core.Html.FubuUI
 
 @{
-    Layout = "~/Views/Shared/_popupLayout.cshtml";
+    Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_DisplayLayout.cshtml";
 }
 
 <script>
@@ -28,7 +28,7 @@
                 @Html.ViewFor(x => x.Item.Field.Name).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
     </div>
     <div class="fieldRow">
-                @Html.ViewFor(x => x.Product).ToHtmlTag()
+                @Html.ViewFor(x => x.Item.InventoryProduct.Product.Name).ToHtmlTag()
     </div>
     <div class="fieldRow">
                 @Html.ViewFor(x => x.EquipmentNames).LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()

@@ -5,6 +5,7 @@
  * Time: 11:11 AM
  * To change this template use File | Settings | File Templates.
  */
+
 KYT.Views = {};
 KYT.Views.View = Backbone.View.extend({
     // Remove the child view and close it
@@ -147,6 +148,8 @@ KYT.Views.AjaxDisplayView = KYT.Views.View.extend({
         if(extraFormOptions){
             $.extend(true,this.options, extraFormOptions);
         }
+         //callback for render
+        this.viewLoaded();
         KYT.vent.trigger("display:"+this.id+":pageLoaded",this.options);
     },
     cancel:function(){
@@ -178,9 +181,10 @@ KYT.Views.GridView = KYT.Views.View.extend({
 //        if(gridControllerOptions){
 //            $.extend(true, this.options, gridControllerOptions);
 //        }
-        $.each(this.options.headerButtons,function(i,item){
-            $("."+item).show();
-        });
+
+        $.each(this.options.headerButtons,$.proxy(function(i,item){
+            $(this.el).find("."+item).show();
+        },this));
 
         var gridContainer = this.options.gridContainer;
         // if we have more then one grid, jqgrid doesn't scope so we need different names.
@@ -189,7 +193,8 @@ KYT.Views.GridView = KYT.Views.View.extend({
         }
 
         $(gridContainer,this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
-        $(window).bind('resize', function() { cc.gridHelper.adjustSize(gridContainer); }).trigger('resize');
+        ///////
+       // $(window).bind('resize', function() { cc.gridHelper.adjustSize(gridContainer); }).trigger('resize');
         $(this.el).gridSearch({onClear:$.proxy(this.removeSearch,this),onSubmit:$.proxy(this.search,this)});
         //callback for render
         this.viewLoaded();
@@ -250,7 +255,7 @@ KYT.Views.AjaxPopupFormModule  = KYT.Views.View.extend({
 
     render: function(){
         this.options.noBubbleUp=true;
-        this.popupForm = this.options.view ? new KYT.Views[this.options.view](this.options) :  new KYT.Views.AjaxFormView(this.options);
+        this.popupForm = this.options.view ? new KYT.Views[this.options.view](this.options) : new KYT.Views.AjaxFormView(this.options);
         this.popupForm.render();
         this.storeChild(this.popupForm);
         $(this.el).append(this.popupForm.el);

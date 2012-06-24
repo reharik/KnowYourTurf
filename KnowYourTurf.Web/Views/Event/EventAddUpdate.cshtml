@@ -8,22 +8,14 @@
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
 
-<script>
-var isCopy = '@Model.Copy';
-extraFormOptions.runAfterRenderFunction = function () {
-    if (isCopy == "True") {
-        $("#Event_EntityId").val(0);
-    }
-};
-</script>
-      
+
     <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
-@MvcHtmlString.Create(FormFor<EventController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Event.EntityId).ToString())
-            <input type="hidden" id="RootId" name="RootId" value="@Model.RootId"/>
+    @MvcHtmlString.Create(FormFor<EventController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+    @MvcHtmlString.Create(Html.HiddenFor(x => x.Event.EntityId).ToString())
+    <input type="hidden" id="RootId" name="RootId" value="@Model.RootId"/>
 
-   <div class="col left">
+    <div class="col left">
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.EventType).ToHtmlTag()
         </div>

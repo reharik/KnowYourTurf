@@ -7,12 +7,6 @@
  */
 
 KYT.Views.CalendarView = KYT.Views.View.extend({
-    events:{
-        'change [name=Location]' : 'resetCalendar',
-        'click .legendLabel' : 'legendLabelClick',
-        'click .legendHeader' : 'legendHeaderClick'
-    },
-
     render:function(){
         if(this.onPreRender)this.onPreRender();
        KYT.repository.ajaxGet(this.options.url, this.options.data, $.proxy(function(result){this.renderCallback(result)},this));
@@ -34,6 +28,9 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         this.viewLoaded();
         //general notification of pageloaded
         KYT.vent.trigger("calendar:"+this.id+":pageLoaded",this.options);
+        this.calendarBindings();
+    },
+    calendarBindings:function(){
         KYT.vent.bind("calendar:"+this.id+":eventDrop",this.eventDrop,this);
         KYT.vent.bind("calendar:"+this.id+":eventResize",this.eventResize,this);
         KYT.vent.bind("calendar:"+this.id+":dayClick",this.dayClick,this);
@@ -42,8 +39,6 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         KYT.vent.bind("ajaxPopupFormModule:editModule:cancel",this.formCancel,this);
         KYT.vent.bind("ajaxPopupDisplayModule:displayModule:cancel",this.displayCancel,this);
         KYT.vent.bind("popup:displayModule:edit",this.displayEdit,this);
-
-        this.setupLegend();
     },
     onClose:function(){
         KYT.vent.unbind("calendar:"+this.id+":eventDrop");
@@ -55,20 +50,12 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         KYT.vent.unbind("ajaxPopupDisplayModule:displayModule:cancel");
         KYT.vent.unbind("popup:displayModule:edit");
     },
-    setupLegend:function(){
-         if(this.options.trainers.length<=0){
-            $("#legend").hide();
-        }
-        $( "#legendTemplate" ).tmpl( this.options.trainers ).appendTo( "#legendItems" );
-        $(".legendHeader").addClass("showing");
-        $(".legendLabel").each(function(i,item){ $(item).addClass("showing"); });
-    },
     eventDrop:function(event, dayDelta,minuteDelta,allDay,revertFunc) {
         var data = {"EntityId":event.EntityId,
             "ScheduledDate":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "StartTime":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "EndTime":$.fullCalendar.formatDate( event.end,"M/d/yyyy hh:mm TT")};
-        KYT.repository.ajaxGet(this.options.EventChangedUrl,data, $.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
+        KYT.repository.ajaxGet(this.options.calendarDef.EventChangedUrl,data, $.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
     },
     eventResize:function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){
         var data = {"EntityId":event.EntityId,
@@ -76,23 +63,15 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             "StartTime":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "EndTime":$.fullCalendar.formatDate( event.end,"M/d/yyyy hh:mm TT")
         };
-        KYT.repository.ajaxGet(this.options.EventChangedUrl,data,$.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
+        KYT.repository.ajaxGet(this.options.calendarDef.EventChangedUrl,data,$.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
     },
     dayClick:function(date, allDay, jsEvent, view) {
-        if(new XDate(date).diffHours(new XDate())>0 && !this.options.calendarDef.CanEnterRetroactiveAppointments){
-            alert("That period is closed");
-            return;
-        }
         var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"), "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")};
-        this.editEvent(this.options.calendarDef.AddEditUrl,data);
+        this.editEvent(this.options.calendarDef.AddUpdateUrl,data);
     },
     eventClick:function(calEvent, jsEvent, view) {
-        if(calEvent.trainerId!= this.options.calendarDef.TrainerId && !this.options.calendarDef.CanSeeOthersAppointments){
-            return;
-        }
-        this.options.calendarDef.canEdit = new XDate(calEvent.start).diffHours(new XDate())<0 || this.options.calendarDef.CanEditPastAppointments;
-        var data = {"EntityId": calEvent.EntityId};
-        var builder = KYT.Views.popupButtonBuilder.builder("displayModule");
+        var data = {"EntityId": calEvent.EntityId, popup:true};
+        var builder =  KYT.Views.popupButtonBuilder.builder("displayModule");
         builder.addButton("Delete", $.proxy(this.deleteItem,this));
         builder.addEditButton();
         builder.addButton("Copy Event",$.proxy(this.copyItem,this));
@@ -111,17 +90,18 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
 
     },
     editEvent:function(url, data){
+        var rootId = $("#RootId").val();
+        var _data = $.extend({"RootId":rootId, Popup:true},data,{});
         var formOptions = {
             id: "editModule",
             url: url,
-            data:data,
-            view:"AppointmentView",
+            data:_data,
             buttons: KYT.Views.popupButtonBuilder.builder("editModule").standardEditButons()
         };
         this.ajaxPopupFormModule = new KYT.Views.AjaxPopupFormModule(formOptions);
         this.ajaxPopupFormModule.render();
         this.storeChild(this.ajaxPopupFormModule);
-        $(this.el).append(this.ajaxPopupFormModule.el);
+
     },
 
     changeEventCallback:function(result,revertFunc){
@@ -134,76 +114,36 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     copyItem:function(){
         var entityId = $("#EntityId",this.ajaxPopupDisplay.el).val();
         var data = {"EntityId":entityId,"Copy":true};
-        this.editEvent(this.options.calendarDef.AddEditUrl,data);
+        this.editEvent(this.options.calendarDef.AddUpdateUrl,data);
         this.ajaxPopupDisplay.close();
+        //this feels retarded for some reason
+        KYT.vent.bind("form:editModule:pageLoaded", function(){
+            $(this.ajaxPopupFormModule.el).find("#Event_EntityId").val(0);
+            KYT.vent.unbind("form:editModule:pageLoaded");
+        },this);
     },
 
     deleteItem: function(){
         if (confirm("Are you sure you would like to delete this Item?")) {
             var entityId = $("#EntityId").val();
-            KYT.repository.ajaxGet(this.options.calendarDef.DeleteUrl,{"EntityId":entityId}, $.proxy(function(result){
+            KYT.repository.ajaxGet(this.options.calendarDef.deleteUrl,{"EntityId":entityId}, $.proxy(function(result){
                 this.ajaxPopupDisplay.close();
-                if(!result.Success){
-                    alert(result.Message);
-                }else{
+//                if(!result.Success){
+//                    alert(result.Message);
+//                }else{
                    this.reload();
-                }
+//                }
             },this));
         }
     },
     displayEdit:function(event){
-        if(!this.options.calendarDef.canEdit){
-             alert("you can't edit retroactively");
-            return;
-        }
         var id = $("#EntityId",this.ajaxPopupDisplay.el).val();
         this.ajaxPopupDisplay.close();
-        this.editEvent(this.options.calendarDef.AddEditUrl+"/"+id);
+        this.editEvent(this.options.calendarDef.AddUpdateUrl+"/"+id);
     },
 
-
-    resetCalendar:function(){
-        var locId = $("[name=Location]").val();
-        var ids="";
-        $(".legendLabel").each(function(i,item){
-            if($(item).hasClass("showing")){
-                ids+= $("#trainerId",$(item).parent()).val()+",";
-            }
-        });
-        if(ids){
-            ids = ids.substr(0,ids.length-1);
-        }else{
-            ids="0";
-        }
-        this.replaceSource({url : this.options.calendarDef.Url, data:{Loc:locId, TrainerIds:ids} });
-        this.reload();
-    },
     reload:function(){
         $(this.options.calendarDef.calendarContainer,this.el).fullCalendar( 'refetchEvents' )
-    },
-
-    replaceSource:function(source){
-        $(this.options.calendarDef.calendarContainer,this.el).fullCalendar( 'replaceEventSource', source )
-    },
-    legendLabelClick:function(e){
-        $(e.target).toggleClass("showing");
-        this.resetCalendar();
-    },
-    legendHeaderClick:function(e){
-        if($(e.target).hasClass("showing")){
-            $(".legendHeader").removeClass("showing");
-            $(".legendLabel").each(function(i,item){
-                $(item).removeClass("showing");
-            })
-        }else{
-            $(".legendHeader").addClass("showing");
-            $(".legendLabel").each(function(i,item){
-                if(!$(item).hasClass("showing")){
-                    $(item).addClass("showing");
-                }
-            })
-        }
-        this.resetCalendar();
     },
 
     formSuccess:function(){
@@ -223,16 +163,21 @@ KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
     }, KYT.Views.AjaxFormView.prototype.events),
     viewLoaded:function(){
         this.loadTokenizers();
-        var pendingGridView = new KYT.Views.EmployeeTaskGridView({el:"#pendingTaskGridContainer",
+        var pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
             url:this.options.pendingGridUrl,
             gridContainer: "#pendingGridContainer",
+            route:"task",
             id:"pending",
-        param1:"Employee"});
-        var completedGridView = new KYT.Views.EmployeeTaskGridView({el:"#completedTaskGridContainer",
+            parentId: $("#employeeId").val(),
+            rootId: this.options.ParentId
+        });
+        var completedGridView = new KYT.Views.DahsboardGridView({el:"#completedTaskGridContainer",
           url:this.options.completedGridUrl,
             gridContainer: "#completedGridContainer",
             id:"completed",
-            display:"taskdisplay"});
+            parentId: $("#employeeId").val(),
+            rootId: this.options.ParentId,
+            route:"taskdisplay"});
         pendingGridView.render();
         completedGridView.render();
         this.storeChild(pendingGridView);
@@ -246,18 +191,76 @@ KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
     }
 });
 
-KYT.Views.EmployeeTaskGridView = KYT.Views.GridView.extend({
+KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
+    events:_.extend({
+    }, KYT.Views.AjaxFormView.prototype.events),
+    viewLoaded:function(){
+        var pendingGridView = new KYT.Views.DahsboardGridView({
+            el:"#pendingTaskGridContainer",
+            url:this.options.pendingGridUrl,
+            gridContainer: "#pendingGridContainer",
+            id:"pending",
+            parentId: $("#fieldId").val(),
+            rootId: this.options.ParentId,
+            route:"task"
+        });
+        var completedGridView = new KYT.Views.DahsboardGridView({
+            el:"#completedTaskGridContainer",
+            url:this.options.completedGridUrl,
+            gridContainer: "#completedGridContainer",
+            id:"completed",
+            parentId: $("#fieldId").val(),
+            rootId: this.options.ParentId,
+            route:"taskdisplay"
+        });
+        var photoGridView = new KYT.Views.DahsboardGridView({
+            el:"#photoGridContainer",
+            url:this.options.photoGridUrl,
+            gridContainer: "#photoGridContainer",
+            id:"photos",
+            route:"photo",
+            parentId: $("#fieldId").val(),
+            rootId: this.options.ParentId
+        });
+        var documentGridView = new KYT.Views.DahsboardGridView({
+            el:"#documentGridContainer",
+            url:this.options.documentGridUrl,
+            gridContainer: "#documentGridContainer",
+            id:"documents",
+            route:"document",
+            parentId: $("#fieldId").val(),
+            rootId: this.options.ParentId
+
+        });
+
+        pendingGridView.render();
+        completedGridView.render();
+        photoGridView.render();
+        documentGridView.render();
+        this.storeChild(pendingGridView);
+        this.storeChild(completedGridView);
+        this.storeChild(photoGridView);
+        this.storeChild(documentGridView);
+    }
+});
+
+KYT.Views.DahsboardGridView = KYT.Views.GridView.extend({
+    events:{
+        'click .new' : 'addNew',
+        'click .delete' : 'deleteItems'
+    },
     viewLoaded:function(){
         KYT.vent.bind(this.options.id+":AddUpdateItem",this.editItem,this);
         KYT.vent.bind(this.options.id+":DisplayItem",this.displayItem,this);
     },
-    editItem:function(id,rootId){
-        var parentId = $("#employeeId").val();
-        var param1 = this.options.param1? "/"+this.options.param1:"";
-        KYT.vent.trigger("route","task/"+id+"/"+parentId+"/"+rootId+param1,true);
+    addNew:function(){
+        KYT.vent.trigger("route",this.options.route+"/0/"+this.options.ParentId+"/"+this.options.RootId,true);
     },
-    displayItem:function(id,rootId){
-        KYT.vent.trigger("route",this.options.display+"/"+id+"/0/"+rootId,true);
+    editItem:function(id){
+        KYT.vent.trigger("route",this.options.route+"/"+id+"/"+this.options.ParentId+"/"+this.options.RootId,true);
+    },
+    displayItem:function(id){
+        KYT.vent.trigger("route",this.options.route+"/"+id,true);
     },
     onClose:function(){
         KYT.vent.unbind("AddUpdateItem");
@@ -265,7 +268,37 @@ KYT.Views.EmployeeTaskGridView = KYT.Views.GridView.extend({
         KYT.vent.unbind(this.options.id+":AddUpdateItem");
         KYT.vent.unbind(this.options.id+":DisplayItem");
     }
+});
 
+KYT.Views.TaskFormView = KYT.Views.AjaxFormView.extend({
+    viewLoaded:function(){
+        this.loadTokenizers();
+    },
+    loadTokenizers:function(){
+        var employeeTokenOptions = {
+            id:"employee",
+            el:"#employeeTokenizer",
+            availableItems:this.options.employeeOptions.availableItems,
+            selectedItems:this.options.employeeOptions.selectedItems,
+            inputSelector:this.options.employeeOptions.inputSelector
+        };
+
+        var equipmentTokenOptions = {
+            id:"equipment",
+            el:"#equipmentTokenizer",
+            availableItems:this.options.equipmentOptions.availableItems,
+            selectedItems:this.options.equipmentOptions.selectedItems,
+            inputSelector:this.options.equipmentOptions.inputSelector
+        };
+
+        this.employeeToken = new KYT.Views.TokenView(employeeTokenOptions);
+        this.employeeToken.render();
+        this.storeChild(this.employeeToken);
+
+        this.equipmentToken = new KYT.Views.TokenView(equipmentTokenOptions);
+        this.equipmentToken.render();
+        this.storeChild(this.equipmentToken);
+    }
 });
 
 
@@ -329,15 +362,7 @@ KYT.Views.AppointmentView = KYT.Views.AjaxFormView.extend({
         this.storeChild(this.tokenView);
     }
 });
-KYT.Views.ClientFormView = KYT.Views.AjaxFormView.extend({
-    events:_.extend({
-        'click .payment':'payment'
-    }, KYT.Views.AjaxFormView.prototype.events),
-    payment:function(){
-        var id = $(this.el).find("#EntityId").val();
-        KYT.vent.trigger("route","paymentlist/"+id,true);
-    }
-});
+
 KYT.Views.PaymentListView = KYT.Views.GridView.extend({
     addNew:function(){
         var parentId = $(this.el).find("#ParentId").val();
@@ -511,6 +536,6 @@ KYT.Views.FieldListView = KYT.Views.GridView.extend({
         KYT.vent.bind("Redirect",this.showDashboard,this);
     },
     showDashboard:function(id){
-        KYT.vent.trigger("route","fielddashboard/"+id,true);
+        KYT.vent.trigger("route","fielddashboard/"+id+"/"+this.options.ParentId,true);
     }
 });

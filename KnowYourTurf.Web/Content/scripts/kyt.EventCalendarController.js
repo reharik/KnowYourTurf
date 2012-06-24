@@ -34,7 +34,7 @@ kyt.CalendarController = kyt.Controller.extend({
     },
     additionalSubscriptions:function(){},
     dayClick:function(date, allDay, jsEvent, view) {
-         var rootId = $("#RootId").val();
+        var rootId = $("#RootId").val();
         var data = {"RootId":rootId,"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"), "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")};
         this.editEvent(this.options.AddUpdateUrl,data);
     },
@@ -43,7 +43,7 @@ kyt.CalendarController = kyt.Controller.extend({
         $("#dialogHolder").remove();
         $("#masterArea").after("<div id='dialogHolder'/>");
         var rootId = $("#RootId").val();
-        var _data = $.extend({"RootId":rootId},data,{});
+        var _data = $.extend({"RootId":rootId, Popup:true},data,{});
         _data.Popup=true;
         var moduleOptions = {
             id:"editModule",

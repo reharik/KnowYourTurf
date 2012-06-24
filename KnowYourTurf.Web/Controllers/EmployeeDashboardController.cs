@@ -50,7 +50,7 @@ namespace KnowYourTurf.Web.Controllers
                 PendingGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasksGrid(null)) + "?ParentId=" + entityId,
                 CompletedGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasksGrid(null)) + "?ParentId=" + entityId,
                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString(),
-                ReturnToList = input.EntityId>0
+                ReturnToList = input.EntityId>0,
             };
             return View("EmployeeDashboard", model);
         }

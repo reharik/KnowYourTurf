@@ -15,7 +15,8 @@
         availableItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableItems)),
         selectedItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedItems)),
         inputSelector:"#RolesInput",
-        name:"Roles"
+    name:"Roles"
+
     };
     extraFormOptions.rolesOptions = rolesOptions;
     extraFormOptions.pendingGridUrl=  " @MvcHtmlString.Create(Model.PendingGridUrl)";
@@ -106,21 +107,6 @@
         <div class="fieldRow">
             <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
             <div id="pendingTaskGridContainer"></div>
-
-@*            <div id="pendingTaskGridContainer" class="grid_5b">*@
-@*                <div class="content-header">*@
-@*                    <input class="search" /> *@
-@*                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>*@
-@*                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>*@
-@*                </div>*@
-@*                <div id="contentArea" class="content-inner">*@
-@*                    <div id="validation-container-wrapper">*@
-@*                        <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>*@
-@*                    </div>*@
-@*                    <table id="gridContainer_pt" class="scroll"></table>*@
-@*                    <div id="pager" class="scroll" style="text-align:center;"></div>*@
-@*                </div>*@
-@*            </div>*@
         </div>
     </div>
 
@@ -128,17 +114,6 @@
         <div class="fieldRow">
             <div class="gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
             <div id="completedTaskGridContainer" class="grid_4 KYT_AddNew_space"></div>
-@*                   <div id="completeTaskGridContainer" class="grid_4 KYT_AddNew_space">*@
-@*                <div class="content-header">*@
-@*                    <input class="search" /> *@
-@*                </div>*@
-@*                <div id="contentArea" class="content-inner">*@
-@*                    <div id="validation-container-wrapper">*@
-@*                        <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>*@
-@*                    </div>*@
-@*                    <table id="gridContainer_ct" class="scroll"></table>*@
-@*                    <div id="pager" class="scroll" style="text-align:center;"></div>*@
-@*                </div>*@
-@*            </div>*@
+
         </div>
     </div>

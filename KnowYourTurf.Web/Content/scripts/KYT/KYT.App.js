@@ -35,6 +35,14 @@ KYT.addInitializer(function(){
         $this.datepicker({ changeYear: true, changeMonth: true });
     });
 
+     $(".timePicker").live('focusin', function() {
+        var $this = $(this);
+        $this.timepicker({
+            showPeriod: true,
+            showLeadingZero: false
+        });
+    });
+
     KYT.vent.bind("route",function(route,triggerRoute){
         KYT.Routing.showRoute(route,triggerRoute);
     });
