@@ -24,15 +24,20 @@ namespace KnowYourTurf.Core.Services
 
         public ICrudManager ReceivePurchaseOrderLineItem(PurchaseOrderLineItem purchaseOrderLineItem, ICrudManager crudManager = null)
         {
-            var inventoryProducts = _repository.Query<InventoryProduct>(x=>x.Product.EntityId == purchaseOrderLineItem.Product.EntityId&&x.UnitType==purchaseOrderLineItem.UnitType);
-            var inventoryProduct = inventoryProducts.FirstOrDefault() ?? new InventoryProduct
-                                                                             {
-                                                                                 Product = purchaseOrderLineItem.Product,
-                                                                                 UnitType = purchaseOrderLineItem.UnitType,
-                                                                                 SizeOfUnit = purchaseOrderLineItem.SizeOfUnit.Value
-                                                                             };
+            var inventoryProducts = _repository.Query<InventoryProduct>(x=>x.ReadOnlyProduct.EntityId == purchaseOrderLineItem.ReadOnlyProduct.EntityId&&x.UnitType==purchaseOrderLineItem.UnitType);
+            InventoryProduct inventoryProduct;
+            if (inventoryProducts.FirstOrDefault() != null) {inventoryProduct = inventoryProducts.FirstOrDefault();}
+            else
+            {
+                inventoryProduct = new InventoryProduct
+                                       {
+                                           UnitType = purchaseOrderLineItem.UnitType,
+                                           SizeOfUnit = purchaseOrderLineItem.SizeOfUnit.Value
+                                       };
+                inventoryProduct.SetProduct(purchaseOrderLineItem.ReadOnlyProduct);
+            }
 
-            inventoryProduct.LastVendor = purchaseOrderLineItem.PurchaseOrder.Vendor;
+            inventoryProduct.SetLastVendor(purchaseOrderLineItem.PurchaseOrder.ReadOnlyVendor);
             if (inventoryProduct.Quantity.HasValue)
                 inventoryProduct.Quantity += purchaseOrderLineItem.TotalReceived.Value;
             else inventoryProduct.Quantity = purchaseOrderLineItem.TotalReceived.Value;
@@ -43,7 +48,7 @@ namespace KnowYourTurf.Core.Services
         public ICrudManager DecrementTaskProduct(Task task, ICrudManager crudManager=null)
         {
             if (crudManager == null) crudManager = new CrudManager(_repository);
-            if(task.InventoryProduct==null)
+            if(task.ReadOnlyInventoryProduct==null)
             {
                 return crudManager;
             }
@@ -54,9 +59,9 @@ namespace KnowYourTurf.Core.Services
                 crudManager.AddCrudReport(crudReport);
                 return crudManager;
             }
-            
-            task.InventoryProduct.Quantity -= task.QuantityUsed.Value;
-            return _saveEntityService.ProcessSave(task.InventoryProduct, crudManager);
+            var inventoryProduct = _repository.Find<InventoryProduct>(task.ReadOnlyInventoryProduct.EntityId);
+            inventoryProduct.Quantity -= task.QuantityUsed.Value;
+            return _saveEntityService.ProcessSave(inventoryProduct, crudManager);
         }
     }
 

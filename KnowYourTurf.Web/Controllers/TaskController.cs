@@ -44,7 +44,6 @@ namespace KnowYourTurf.Web.Controllers
             var selectedEmployees = task.Employees.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName }).OrderBy(x => x.name);
             var availableEquipment = _repository.FindAll<Equipment>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name }).OrderBy(x => x.name);
             var selectedEquipment = task.Equipment.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name }).OrderBy(x => x.name);
-            
             var model = new TaskViewModel
                             {//strangly I have to itterate this or NH freaks out
                                 AvailableEmployees = availableEmployees.ToList(),
@@ -60,14 +59,10 @@ namespace KnowYourTurf.Web.Controllers
                                 RootId = input.RootId,
 
             };
-//            if (task.EntityId > 0)
-//            {
-//                model.Product = task.GetProductIdAndName();
-//            }
-            decorateModel(input,model);
+
             if (input.Copy)
             {
-                model.Item = model.Item.CloneTask();
+                model.Item.EntityId = 0;
                 model.Item.Complete = false;
             }
                 
@@ -102,24 +97,24 @@ namespace KnowYourTurf.Web.Controllers
             IEnumerable<InventoryProduct> inventory = _repository.FindAll<InventoryProduct>();
             var chemicals =
                 _selectListItemService.CreateListWithConcatinatedText(
-                    inventory.Where(i => i.Product.InstantiatingType == "Chemical"),
-                    x => x.Product.Name,
+                    inventory.Where(i => i.ReadOnlyProduct.InstantiatingType == "Chemical"),
+                    x => x.ReadOnlyProduct.Name,
                     x => x.UnitType,
                     "-->",
                     y => y.EntityId,
                     false);
             var fertilizer =
                 _selectListItemService.CreateListWithConcatinatedText(
-                    inventory.Where(i => i.Product.InstantiatingType == "Fertilizer"),
-                    x => x.Product.Name,
+                    inventory.Where(i => i.ReadOnlyProduct.InstantiatingType == "Fertilizer"),
+                    x => x.ReadOnlyProduct.Name,
                     x => x.UnitType,
                     "-->",
                     x => x.EntityId,
                     false);
             var materials =
                 _selectListItemService.CreateListWithConcatinatedText(
-                    inventory.Where(i => i.Product.InstantiatingType == "Material"),
-                    x => x.Product.Name,
+                    inventory.Where(i => i.ReadOnlyProduct.InstantiatingType == "Material"),
+                    x => x.ReadOnlyProduct.Name,
                     x => x.UnitType,
                     "-->",
                     x => x.EntityId,
@@ -129,30 +124,6 @@ namespace KnowYourTurf.Web.Controllers
             dictionary.Add(WebLocalizationKeys.MATERIALS.ToString(), materials);
             dictionary.Add(WebLocalizationKeys.FERTILIZERS.ToString(), fertilizer);
             return dictionary;
-        }
-
-        private void decorateModel(AddUpdateTaskViewModel input, TaskViewModel model)
-        { 
-            if (input.Param1 == "Field")
-            {
-                if (model.Item.EntityId <= 0)
-                    model.Item.Field = _repository.Find<Field>(input.ParentId);
-            }
-            if (input.Param1 == "Employee")
-            {
-                if (model.Item.EntityId <= 0)
-                {
-                    var employee = _repository.Find<User>(input.ParentId);
-                    model.SelectedEmployees.Add(new TokenInputDto { id = employee.EntityId.ToString(), name = employee.FullName });
-                }
-            }
-            //TODO fix product cuz it should be on the Item.Product now
-            if (input.Param1 == "Calculator")
-            {
-                model.Item.Field = _repository.Find<Field>(input.Field);
-                model.Product = input.Product;
-                model.Item.QuantityNeeded = input.Quantity;
-            }
         }
 
         public ActionResult Display(ViewModel input)
@@ -197,14 +168,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(TaskViewModel input)
         {
-            var category = _repository.Find<Category>(input.RootId);
-            Task task;
-            if (input.Item.EntityId > 0) { task = category.Tasks.FirstOrDefault(x => x.EntityId == input.Item.EntityId); }
-            else
-            {
-                task = new Task();
-                category.AddTask(task);
-            }
+            var task = input.Item.EntityId > 0 ? _repository.Find<Task>(input.Item.EntityId) : new Task();
 
             mapItem(task, input.Item);
             mapChildren(task, input);
@@ -214,7 +178,7 @@ namespace KnowYourTurf.Web.Controllers
                 crudManager = _inventoryService.DecrementTaskProduct(task);
                 task.InventoryDecremented = true;
             }
-            crudManager = _saveEntityService.ProcessSave(category, crudManager);
+            crudManager = _saveEntityService.ProcessSave(task, crudManager);
             var notification = crudManager.Finish();
             return Json(notification);
         }
@@ -250,12 +214,12 @@ namespace KnowYourTurf.Web.Controllers
                 model.EquipmentInput.Split(',').Each(x => task.AddEquipment(_repository.Find<Equipment>(Int32.Parse(x))));
 
             task.TaskType = _repository.Find<TaskType>(model.Item.TaskType.EntityId);
-            task.Field = _repository.Find<Field>(model.Item.Field.EntityId);
+            task.SetField(_repository.Find<Field>(model.Item.ReadOnlyField.EntityId));
 //            if (model.Product!=null && model.Product.Contains("_"))
 //            {
 //                var product = model.Product.Split('_');
 //            task.InventoryProduct = _repository.Find<InventoryProduct>(Int64.Parse(product[0]));
-            task.InventoryProduct = _repository.Find<InventoryProduct>(model.Item.InventoryProduct.EntityId);
+            task.SetInventoryProduct(_repository.Find<InventoryProduct>(model.Item.ReadOnlyInventoryProduct.ReadOnlyProduct.EntityId));
 //            }else
 //            {
 //                task.InventoryProduct = null;

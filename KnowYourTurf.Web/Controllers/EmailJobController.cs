@@ -15,17 +15,14 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
-        private readonly ISelectBoxPickerService _selectBoxPickerService;
         private readonly ISelectListItemService _selectListItemService;
 
         public EmailJobController(IRepository repository,
             ISaveEntityService saveEntityService,
-            ISelectBoxPickerService selectBoxPickerService,
             ISelectListItemService selectListItemService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
-            _selectBoxPickerService = selectBoxPickerService;
             _selectListItemService = selectListItemService;
         }
 
@@ -88,7 +85,8 @@ namespace KnowYourTurf.Web.Controllers
             job.Sender = input.Item.Sender;
             job.Status = input.Item.Status;
             job.Subject = input.Item.Subject;
-            job.EmailTemplate = _repository.Find<EmailTemplate>(input.Item.EmailTemplate.EntityId);
+            var emailTemplate = _repository.Find<EmailTemplate>(input.Item.ReadOnlyEmailTemplate.EntityId);
+            job.SetEmailTemplate(emailTemplate);
             job.EmailJobType = _repository.Find<EmailJobType>(input.Item.EmailJobType.EntityId);
 
             job.ClearSubscriber();

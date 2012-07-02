@@ -35,7 +35,15 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
             Displays.If(x => x.Accessor.PropertyType == typeof(DateTime) || x.Accessor.PropertyType == typeof(DateTime?))
                 .BuildBy(req => req.RawValue != null ? new HtmlTag("span").Text(DateTime.Parse(req.RawValue.ToString()).ToLongDateString()) : new HtmlTag("span"));
             Displays.Always.BuildBy(req => new HtmlTag("span").Text(req.StringValue()));
-            Labels.Always.BuildBy(req => new HtmlTag("label").Attr("for", req.Accessor.Name).Text(req.Accessor.FieldName.ToSeperateWordsFromPascalCase()));
+            Labels.Always.BuildBy(req =>
+                                      {
+                                          var htmlTag = new HtmlTag("label").Attr("for", req.Accessor.Name);
+                                          var display = req.Accessor.FieldName.Contains("ReadOnly")
+                                                            ? req.Accessor.FieldName.Replace("ReadOnly", "")
+                                                            : req.Accessor.FieldName;
+                                          htmlTag.Text(display.ToSeperateWordsFromPascalCase());
+                                          return htmlTag;
+                                      });
             validationAttributes();
         }
 

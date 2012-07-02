@@ -46,6 +46,8 @@ KYT.addInitializer(function(){
     KYT.vent.bind("route",function(route,triggerRoute){
         KYT.Routing.showRoute(route,triggerRoute);
     });
+
+    KYT.notificationService = new cc.MessageNotficationService();
 });
 
 KYT.bind("initialize:after", function(){

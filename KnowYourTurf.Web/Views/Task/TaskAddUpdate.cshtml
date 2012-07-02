@@ -52,10 +52,10 @@
             @Html.SubmissionFor(x => x.Item.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Field).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.ReadOnlyField).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.InventoryProduct.Product).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.ReadOnlyInventoryProduct.ReadOnlyProduct).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Item.QuantityNeeded).ToHtmlTag()

@@ -13,17 +13,17 @@ namespace KnowYourTurf.Core.Services
 {
     public interface IDynamicExpressionBuilder
     {
-        Expression<Func<ENTITY, bool>> Build<ENTITY>(string json, bool isNullCheck = false) where ENTITY : DomainEntity;
-        Expression<Func<ENTITY, bool>> Build<ENTITY>(JqGridFilter filter, bool isNullCheck = false) where ENTITY : DomainEntity;
+        Expression<Func<ENTITY, bool>> Build<ENTITY>(string json, bool isNullCheck = false);
+        Expression<Func<ENTITY, bool>> Build<ENTITY>(JqGridFilter filter, bool isNullCheck = false);
     }
 
     public class DynamicExpressionBuilder : IDynamicExpressionBuilder
     {
-        public Expression<Func<ENTITY, bool>> Build<ENTITY>(string json, bool isNullCheck = false) where ENTITY : DomainEntity
+        public Expression<Func<ENTITY, bool>> Build<ENTITY>(string json, bool isNullCheck = false)
         {
             if (json.IsEmpty()) return null;
             var jqGridFilter = DeserializeJson(json);
-            return jqGridFilter.rules.Any(x => x.op == "ListContains" && x.listOfIds.Count() <= 0) ?
+            return jqGridFilter.rules.Any(x => x.op == "ListContains" && !x.listOfIds.Any()) ?
                 null :
                 Build<ENTITY>(jqGridFilter, isNullCheck);
         }
@@ -33,7 +33,7 @@ namespace KnowYourTurf.Core.Services
             JqGridFilter filter = jss.Deserialize<JqGridFilter>(json);
             return filter;
         }
-        public Expression<Func<ENTITY, bool>> Build<ENTITY>(JqGridFilter filter, bool isNullCheck = false) where ENTITY : DomainEntity
+        public Expression<Func<ENTITY, bool>> Build<ENTITY>(JqGridFilter filter, bool isNullCheck = false)
         {
             ParameterExpression pe = Expression.Parameter(typeof(ENTITY), "x");
             if (filter.groupOp == "NONE") return null;

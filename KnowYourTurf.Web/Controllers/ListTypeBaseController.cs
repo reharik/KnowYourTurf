@@ -137,7 +137,7 @@ namespace KnowYourTurf.Web.Controllers
         }
         private bool checkDependencies(EventType item, Notification notification)
         {
-            var dependantItems = _repository.Query<Event>(x => x.EventType== item);
+            var dependantItems = _repository.Query<Field>(x => x.Events.Any(y=>y.EventType== item));
             if (dependantItems.Any())
             {
                 if (notification.Message.IsEmpty())

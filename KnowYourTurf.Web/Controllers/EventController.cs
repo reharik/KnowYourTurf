@@ -26,8 +26,9 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate(AddUpdateEventViewModel input)
         {
+            // need category to get fields for dropdown;
             var category = _repository.Find<Category>(input.RootId);
-            var _event = input.EntityId > 0 ? category.Events.FirstOrDefault(x=>x.EntityId == input.EntityId) : new Event();
+            var _event = input.EntityId > 0 ? category.GetAllEvents().FirstOrDefault(x=>x.EntityId == input.EntityId) : new Event();
             _event.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : _event.ScheduledDate;
             _event.StartTime = input.StartTime.HasValue ? input.StartTime.Value : _event.StartTime;
             var fields = _selectListItemService.CreateList(category.Fields,x => x.Name, x => x.EntityId, true);
@@ -43,7 +44,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             if (_event.EntityId > 0)
             {
-                model.Field = _event.Field.EntityId;
+                model.Field = _event.ReadOnlyField.EntityId;
                 model.EventType = _event.EventType.EntityId;
             }
             return PartialView("EventAddUpdate", model);
@@ -51,7 +52,8 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Display(ViewModel input)
         {
-            var _event = _repository.Find<Event>(input.EntityId);
+            var field = _repository.Find<Field>(input.ParentId);
+            var _event = field.Events.FirstOrDefault(x => x.EntityId == input.EntityId);
             var model = new EventViewModel
                             {
                                 Event = _event,
@@ -63,24 +65,18 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Delete(ViewModel input)
         {
-            //TODO needs rule engine
-            var _event = _repository.Find<Event>(input.EntityId);
-            _repository.HardDelete(_event);
-            _repository.UnitOfWork.Commit();
-            return null;
+            var field = _repository.Find<Field>(input.ParentId);
+            var _event = field.Events.FirstOrDefault(x => x.EntityId == input.EntityId);
+            field.RemoveEvent(_event);
+            var crudManager = _saveEntityService.ProcessSave(field);
+            var notification = crudManager.Finish();
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Save(EventViewModel input)
         {
             var category = _repository.Find<Category>(input.RootId);
-            Event _event;
-            if (input.Event.EntityId > 0) { _event = category.Events.FirstOrDefault(x => x.EntityId == input.Event.EntityId); }
-            else
-            {
-                _event = new Event();
-                category.AddEvent(_event);
-            }
-
+            var _event = input.EntityId > 0 ? category.GetAllEvents().FirstOrDefault(x => x.EntityId == input.EntityId) : new Event();
             mapToDomain(input, _event);
             var crudManager = _saveEntityService.ProcessSave(category);
             var notification = crudManager.Finish();
@@ -92,7 +88,6 @@ namespace KnowYourTurf.Web.Controllers
         private Event mapToDomain(EventViewModel model, Event _event)
         {
             var _eventModel = model.Event;
-            var field = _repository.Find<Field>(model.Field);
             var eventType = _repository.Find<EventType>(model.EventType);
             _event.ScheduledDate = _eventModel.ScheduledDate;
             _event.StartTime = DateTime.Parse(_eventModel.ScheduledDate.Value.ToShortDateString() + " " + _eventModel.StartTime.Value.ToShortTimeString());
@@ -100,9 +95,12 @@ namespace KnowYourTurf.Web.Controllers
             {
                 _event.EndTime = DateTime.Parse(_eventModel.ScheduledDate.Value.ToShortDateString() + " " + _eventModel.EndTime.Value.ToShortTimeString());
             }
-
+            if(_event.ReadOnlyField.EntityId != model.Field)
+            {
+                var field = _repository.Find<Field>(model.Field);
+                _event.SetField(field);
+            }
             _event.EventType = eventType;
-            _event.Field = field;
             _event.Notes = _eventModel.Notes;
             return _event;
         }

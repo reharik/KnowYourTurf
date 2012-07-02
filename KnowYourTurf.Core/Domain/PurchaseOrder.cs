@@ -2,16 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Components.Validator;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class PurchaseOrder : DomainEntity
+    public class PurchaseOrder : DomainEntity, IPersistableObject
     {
+        /// <summary>
+        /// Aggregate Root that should not be modified through Purchase Order
+        /// </summary>
+        private Vendor _readOnlyVendor;
         [ValidateNonEmpty]
-        public virtual Vendor Vendor { get; set; }
+        public virtual Vendor ReadOnlyVendor { get { return _readOnlyVendor; } }
+        public virtual void SetVendor(Vendor vendor)
+        {
+            _readOnlyVendor = vendor;
+        }
+        ////
         [ValidateDecimalAttribute]
         public virtual double? SubTotal { get; set; }
         [ValidateDecimalAttribute]

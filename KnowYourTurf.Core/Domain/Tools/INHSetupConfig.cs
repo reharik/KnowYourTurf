@@ -27,6 +27,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
 
         public void GenerateSchema(Configuration config)
         {
+            new SchemaExport(config).Drop(false, true);
             new SchemaExport(config).Create(true, true);
         }
     }

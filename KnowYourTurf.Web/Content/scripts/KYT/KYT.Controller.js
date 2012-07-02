@@ -16,10 +16,10 @@ KYT.Controller = (function(KYT, Backbone){
            if(!routeToken)return;
            // this is so you don't set the id to the routetoken which stays in scope
            var viewOptions = $.extend({},routeToken);
-           if(entityId) viewOptions.url +="/"+entityId;
-           if(parentId) viewOptions.url +="?ParentId="+parentId;
-           if(rootId) viewOptions.url +="&RootId="+rootId;
-           if(param1) viewOptions.url +="&Param1="+param1;
+           if(entityId) {viewOptions.url +="/"+entityId; viewOptions.route+="/"+entityId;}
+           if(parentId) {viewOptions.url +="?ParentId="+parentId;viewOptions.route+="/"+parentId;}
+           if(rootId) {viewOptions.url +="&RootId="+rootId;viewOptions.route+="/"+rootId;}
+           if(param1) {viewOptions.url +="&Param1="+param1;viewOptions.route+="/"+param1;}
 
             var item = new KYT.Views[routeToken.viewName](viewOptions);
 

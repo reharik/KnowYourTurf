@@ -26,7 +26,6 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Task> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.TaskType.Name)
-                .ReturnValueWithTrigger(x => x.Category.EntityId)
                 .ForAction<TaskController>(x => x.Display(null))
                 .ToPerformAction(ColumnAction.DisplayItem).WithId("completed")
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);

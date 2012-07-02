@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Enums;
@@ -9,8 +10,10 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class Field : DomainEntity
+    public class Field : DomainEntity, IPersistableObject
     {
+        private Category _readOnlyCategory;
+        public virtual Category ReadOnlyCategory { get { return _readOnlyCategory; } }
         [ValidateNonEmpty]
         public virtual string Name { get; set; }
         [ValidateNonEmpty]
@@ -42,6 +45,7 @@ namespace KnowYourTurf.Core.Domain
         {
             if (!task.IsNew() && _tasks.Contains(task)) return;
             _tasks.Add(task);
+            task.SetField(this);
         }
 
         private readonly IList<Event> _events = new List<Event>();
@@ -72,6 +76,10 @@ namespace KnowYourTurf.Core.Domain
         }
         #endregion
 
+        public virtual void SetCategory(Category category)
+        {
+            _readOnlyCategory = category;
+        }
     }
 
     

@@ -60,15 +60,16 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
 
     initialize: function(){
        this.options = $.extend({},KYT.formDefaults,this.options);
-        this.$el = $(this.el);
     },
     config:function(){
         if(extraFormOptions){
             $.extend(true, this.options, extraFormOptions);
         }
-
-        this.options.crudFormOptions.successHandler = $.proxy(this.successHandler,this);
-        $(this.options.crudFormSelector,this.el).crudForm(this.options.crudFormOptions);
+        this.setupNotificationArea();
+        $(this.options.crudFormSelector,this.el).crudForm(this.options.crudFormOptions,this.options.areaName);
+        this.setupBeforeSubmitions();
+    },
+    setupBeforeSubmitions:function(){
         if(this.options.crudFormOptions.additionBeforeSubmitFunc){
             var array = !$.isArray(this.options.crudFormOptions.additionBeforeSubmitFunc)
                 ? [this.options.crudFormOptions.additionBeforeSubmitFunc]
@@ -77,26 +78,29 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
                 $(this.options.crudFormSelector,this.el).data('crudForm').setBeforeSubmitFuncs(item);
             },this));
         }
-        if($(".rte").size()>0){
-            $(".rte").cleditor(this.options.editorOptions);
-        }
+    },
+    setupNotificationArea:function(){
+        this.options.notificationArea = this.options.notificationArea
+                                ?this.options.notificationArea
+                                : new cc.NotificationArea(this.cid,"#errorMessagesGrid","#errorMessagesForm", KYT.vent);
+
+        this.options.notificationArea.render(this.el);
+        this.options.areaName = this.options.notificationArea.areaName();
+        KYT.vent.bind(this.options.areaName+":"+this.id+":success",this.successHandler,this);
+        KYT.notificationService.addArea(this.options.notificationArea);
     },
     saveItem:function(){
-        $(this.options.crudFormSelector,this.el).submit();
+        var $form = $(this.options.crudFormSelector,this.el);
+        $form.data().viewId = this.id;
+        $form.submit();
     },
     cancel:function(){
         KYT.vent.trigger("form:"+this.id+":cancel");
-        if(!this.options.noBubbleUp)
-            KYT.WorkflowManager.returnParentView();
+        if(!this.options.noBubbleUp) {KYT.WorkflowManager.returnParentView();}
     },
-    successHandler:function(result, form, notification){
-        var emh = cc.utilities.messageHandling.messageHandler();
-        var message = cc.utilities.messageHandling.mhMessage("success",result.Message,"");
-        emh.addMessage(message);
-        emh.showAllMessages(notification.getSuccessContainer(),true);
+    successHandler:function(result){
         KYT.vent.trigger("form:"+this.id+":success",result);
-        if(!this.options.noBubbleUp)
-            KYT.WorkflowManager.returnParentView(result,true);
+        if(!this.options.noBubbleUp){KYT.WorkflowManager.returnParentView(result,true);}
     }
 });
 
