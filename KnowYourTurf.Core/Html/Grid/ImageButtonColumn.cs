@@ -47,17 +47,17 @@ namespace KnowYourTurf.Core.Html.Grid
             anchor.Children.Add(divTag);
             return anchor.ToString();
         }
-
+        
         private HtmlTag buildAnchor(ENTITY item)
         {
             var anchor = new HtmlTag("a");
             string data = string.Empty;
-            if(_jsonData.IsNotEmpty())
+            if (_jsonData.IsNotEmpty())
             {
-                data = ","+_jsonData;
+                data = "," + _jsonData;
             }
-            anchor.Attr("onclick",
-                        "$.publish('/contentLevel/grid_" + _gridName + "/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "'" + data + "]);");
+            anchor.Attr("onclick", "KYT.vent.trigger('" + _action + "'," + item.EntityId + data+ ")");
+
             return anchor;
         }
 

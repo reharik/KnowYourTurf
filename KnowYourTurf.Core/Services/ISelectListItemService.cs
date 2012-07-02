@@ -14,12 +14,11 @@ namespace KnowYourTurf.Core.Services
     public interface ISelectListItemService
     {
         IEnumerable<SelectListItem> CreateList<ENTITY>(IEnumerable<ENTITY> entityList,
-                                                               Expression<Func<ENTITY, object>> text,
-                                                               Expression<Func<ENTITY, object>> value, bool addSelectItem)
-            where ENTITY : DomainEntity;
+                                                       Expression<Func<ENTITY, object>> text,
+                                                       Expression<Func<ENTITY, object>> value, bool addSelectItem);
 
         IEnumerable<SelectListItem> CreateList<ENTITY>(Expression<Func<ENTITY, object>> text, Expression<Func<ENTITY, object>> value, bool addSelectItem, bool softDelete = false)
-            where ENTITY : DomainEntity;
+            where ENTITY : IPersistableObject;
 
         IEnumerable<SelectListItem> CreateList<ENUM>(bool addSelectItem = false) where ENUM : Enumeration, new();
 
@@ -27,13 +26,13 @@ namespace KnowYourTurf.Core.Services
                                                                    string value);
 
         IEnumerable<SelectListItem> CreateListWithConcatinatedText<ENTITY>(IEnumerable<ENTITY> entityList,
-                                                                                           Expression<Func<ENTITY, object>> text1,
-                                                                                           Expression<Func<ENTITY, object>> text2,
-                                                                                           string seperator,
-                                                                                           Expression<Func<ENTITY, object>> value, bool addSelectItem)
-            where ENTITY : DomainEntity;
+                                                                           Expression<Func<ENTITY, object>> text1,
+                                                                           Expression<Func<ENTITY, object>> text2,
+                                                                           string seperator,
+                                                                           Expression<Func<ENTITY, object>> value,
+                                                                           bool addSelectItem);
 
-        IEnumerable<SelectListItem> CreateListWithConcatinatedText<ENTITY>(Expression<Func<ENTITY, object>> text1, Expression<Func<ENTITY, object>> text2, string seperator, Expression<Func<ENTITY, object>> value, bool addSelectItem) where ENTITY : DomainEntity;
+        IEnumerable<SelectListItem> CreateListWithConcatinatedText<ENTITY>(Expression<Func<ENTITY, object>> text1, Expression<Func<ENTITY, object>> text2, string seperator, Expression<Func<ENTITY, object>> value, bool addSelectItem) where ENTITY : IPersistableObject;
     }
 
     public class SelectListItemService : ISelectListItemService
@@ -48,7 +47,7 @@ namespace KnowYourTurf.Core.Services
         public IEnumerable<SelectListItem> CreateList<ENTITY>(IEnumerable<ENTITY> entityList, 
                                                               Expression<Func<ENTITY, object>> text,
                                                               Expression<Func<ENTITY, object>> value, bool addSelectItem) 
-            where ENTITY:DomainEntity
+            
         {
 
             IList<SelectListItem> items = new List<SelectListItem>();
@@ -58,7 +57,7 @@ namespace KnowYourTurf.Core.Services
             {
                 items.Add(new SelectListItem { Text = CoreLocalizationKeys.SELECT_ITEM.ToString(), Value = "" });
             }
-            entityList.Each( x =>
+            entityList.ForEachItem( x =>
                                  {
                                      if (textAccessor.GetValue(x) != null && valueAccessor.GetValue(x) != null)
                                      {
@@ -77,7 +76,6 @@ namespace KnowYourTurf.Core.Services
                                                               Expression<Func<ENTITY, object>> text2,
                                                               string seperator,
                                                               Expression<Func<ENTITY, object>> value, bool addSelectItem)
-            where ENTITY : DomainEntity
         {
 
             IList<SelectListItem> items = new List<SelectListItem>();
@@ -88,7 +86,7 @@ namespace KnowYourTurf.Core.Services
             {
                 items.Add(new SelectListItem { Text = CoreLocalizationKeys.SELECT_ITEM.ToString(), Value = "" });
             }
-            entityList.Each(x =>
+            entityList.ForEachItem(x =>
             {
                 if (text1Accessor.GetValue(x) != null && text2Accessor.GetValue(x) != null && valueAccessor.GetValue(x) != null)
                 {
@@ -102,13 +100,13 @@ namespace KnowYourTurf.Core.Services
             return items.OrderBy(x => x.Text);
         }
 
-        public IEnumerable<SelectListItem> CreateListWithConcatinatedText<ENTITY>(Expression<Func<ENTITY, object>> text1, Expression<Func<ENTITY, object>> text2, string seperator, Expression<Func<ENTITY, object>> value, bool addSelectItem) where ENTITY : DomainEntity
+        public IEnumerable<SelectListItem> CreateListWithConcatinatedText<ENTITY>(Expression<Func<ENTITY, object>> text1, Expression<Func<ENTITY, object>> text2, string seperator, Expression<Func<ENTITY, object>> value, bool addSelectItem) where ENTITY : IPersistableObject
         {
             var enumerable = _repository.FindAll<ENTITY>();
             return CreateListWithConcatinatedText(enumerable, text1, text2, seperator, value, addSelectItem);
         }
 
-        public IEnumerable<SelectListItem> CreateList<ENTITY>(Expression<Func<ENTITY, object>> text, Expression<Func<ENTITY, object>> value, bool addSelectItem, bool softDelete = false) where ENTITY : DomainEntity
+        public IEnumerable<SelectListItem> CreateList<ENTITY>(Expression<Func<ENTITY, object>> text, Expression<Func<ENTITY, object>> value, bool addSelectItem, bool softDelete = false) where ENTITY : IPersistableObject
         {
             var enumerable = _repository.FindAll<ENTITY>();
             return CreateList(enumerable, text, value, addSelectItem);

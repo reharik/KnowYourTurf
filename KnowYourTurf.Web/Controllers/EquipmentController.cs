@@ -106,9 +106,10 @@ namespace KnowYourTurf.Web.Controllers
                 _fileHandlerService.DeleteFile(equipment.ImageUrl);
                 equipment.ImageUrl = string.Empty;
             }
-            if (equipment.Vendor == null || equipment.Vendor.EntityId != input.Item.Vendor.EntityId)
+            if (equipment.ReadOnlyVendor == null || equipment.ReadOnlyVendor.EntityId != input.Item.ReadOnlyVendor.EntityId)
             {
-                equipment.Vendor = _repository.Find<Vendor>(input.Item.Vendor.EntityId);
+                var vendor = _repository.Find<Vendor>(input.Item.ReadOnlyVendor.EntityId);
+                equipment.SetVendor(vendor);
             }
             equipment.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
             var crudManager = _saveEntityService.ProcessSave(equipment);

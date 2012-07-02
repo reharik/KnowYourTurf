@@ -335,6 +335,9 @@
     <Compile Include="Services\IAuthenticationContext.cs" />
     <Compile Include="Services\ISecuritySetupService.cs" />
     <Compile Include="Services\IUploadedFileHandlerService.cs" />
+    <Compile Include="Services\ViewOptions\IRouteTokenBuilder.cs" />
+    <Compile Include="Services\ViewOptions\IRouteTokenConfig.cs" />
+    <Compile Include="Services\ViewOptions\RouteToken.cs" />
     <Compile Include="WebLocalizationKeys.cs" />
     <Compile Include="KYTWebRegistry.cs" />
     <Compile Include="Global.asax.cs">
@@ -505,7 +508,6 @@
     <Folder Include="Areas\Reports\Controllers\" />
     <Folder Include="Areas\Reports\Models\" />
     <Folder Include="Areas\Reports\Views\Shared\" />
-    <Folder Include="Logs\" />
     <Folder Include="Models\Email\" />
     <Folder Include="Properties\" />
   </ItemGroup>
@@ -581,18 +583,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AdminList\AdminList.cshtml" />
-    <Content Include="Views\CalculatorList\CalculatorList.cshtml" />
-    <Content Include="Views\ChemicalList\ChemicalList.cshtml" />
+    <Content Include="Views\CalculatorList\ItemList.cshtml" />
+    <Content Include="Views\ChemicalList\ItemList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\DocumentList\DocumentList.cshtml" />
+    <Content Include="Views\DocumentList\ItemList.cshtml" />
     <Content Include="Views\EmailJobList\ItemList.cshtml" />
     <Content Include="Views\EmailTemplateList\EmailTemplateList.cshtml" />
-    <Content Include="Views\EmployeeList\EmployeeList.cshtml" />
-    <Content Include="Views\EquipmentList\EquipmentList.cshtml" />
-    <Content Include="Views\FacilitiesList\FacilitiesList.cshtml" />
-    <Content Include="Views\FertilizerList\FertilizerList.cshtml" />
-    <Content Include="Views\FieldList\FieldList.cshtml" />
+    <Content Include="Views\EmployeeList\ItemList.cshtml" />
+    <Content Include="Views\EquipmentList\ItemList.cshtml" />
+    <Content Include="Views\FacilitiesList\ItemList.cshtml" />
+    <Content Include="Views\FertilizerList\ItemList.cshtml" />
+    <Content Include="Views\FieldList\ItemList.cshtml" />
     <Content Include="Views\InventoryList\InventoryChemicalList.cshtml" />
     <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
     <Content Include="Views\InventoryList\InventoryFertilizerList.cshtml" />
@@ -600,14 +602,14 @@
     <Content Include="Views\InventoryList\InventoryMaterialList.cshtml" />
     <Content Include="Views\InventoryList\InventoryMaterialView.cshtml" />
     <Content Include="Views\KnowYourTurf\Home.cshtml" />
-    <Content Include="Views\ListTypeList\ListType.cshtml" />
-    <Content Include="Views\MaterialList\MaterialList.cshtml" />
-    <Content Include="Views\PhotoList\PhotoList.cshtml" />
-    <Content Include="Views\PurchaseOrderList\PurchaseOrderList.cshtml" />
-    <Content Include="Views\TaskList\TaskList.cshtml" />
+    <Content Include="Views\ListTypeList\ItemList.cshtml" />
+    <Content Include="Views\MaterialList\ItemList.cshtml" />
+    <Content Include="Views\PhotoList\ItemList.cshtml" />
+    <Content Include="Views\PurchaseOrderList\ItemList.cshtml" />
+    <Content Include="Views\TaskList\ItemList.cshtml" />
     <Content Include="Views\VendorContactList\VendorContactList.cshtml" />
     <Content Include="Views\VendorList\VendorList.cshtml" />
-    <Content Include="Views\WeatherList\WeatherList.cshtml" />
+    <Content Include="Views\WeatherList\ItemList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Calculator\CalculatorAddUpdate.cshtml" />

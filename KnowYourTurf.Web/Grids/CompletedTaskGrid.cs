@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Grids
         {
             GridBuilder.LinkColumnFor(x => x.TaskType.Name)
                 .ForAction<TaskController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
+                .ToPerformAction(ColumnAction.DisplayItem).WithId("completed")
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.ScheduledDate);
             GridBuilder.DisplayFor(x => x.ScheduledStartTime);

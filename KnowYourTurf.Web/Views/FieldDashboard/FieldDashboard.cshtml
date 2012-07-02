@@ -10,137 +10,71 @@
 
 
 @section HeaderJavascript{
-     var pendingTaskaddUpdateUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdateUrl));
-     var photoaddUpdateUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdatePhotoUrl));
-     var documentaddUpdateUrl =@MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdateDocumentUrl));
-     var pendingGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition))
-     var completeGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CompletedListDefinition))
-     var photoGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.PhotoListDefinition))
-     var documentGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.DocumentListDefinition))
-     var deleteMultipleUrl = '@Model.DeleteMultipleUrl';
-     var deleteMultipleDocumentsUrl = '@Model.DeleteMultipleDocumentsUrl';
-     var deleteMultiplePhotosUrl = '@Model.DeleteMultiplePhotosUrl';
- 
-    $(document).ready(function() {
-        fdcOptions = {
-            pendingTaskaddUpdateUrl:pendingTaskaddUpdateUrl,
-            photoaddUpdateUrl:photoaddUpdateUrl,
-            documentaddUpdateUrl:documentaddUpdateUrl,
-            pendingGridDef:pendingGridDef,
-            completeGridDef:completeGridDef,
-            photoGridDef:photoGridDef,
-            documentGridDef:documentGridDef,
-            deleteMultipleUrl: deleteMultipleUrl,
-            deleteMultipleDocumentsUrl: deleteMultipleDocumentsUrl,
-            deleteMultiplePhotosUrl: deleteMultiplePhotosUrl }
-        new kyt.FieldDashboardController(fdcOptions);
-    });
+  
+    extraFormOptions = {
+    pendingGridUrl:'@Model.PendingGridUrl',
+    completedGridUrl:'@Model.CompletedGridUrl',
+    photoGridUrl:'@Model.PhotoGridUrl',
+    documentGridUrl: '@Model.DocumentGridUrl'
+    }
 }
-    <div class="KYT_DashInfo" id="masterArea">
-        <div id="validation-container-wrapper">
-            <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
-        </div>
-
+   
     @MvcHtmlString.Create(FormFor<FieldController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
         @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
         <input type="hidden" id="ParentId" name="ParentId" value="@Model.ParentId"/>
         <input type="hidden" id="RootId" value="@Model.ParentId"/>
-    <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
+        <div class="col left">
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.Abbreviation).ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.Size).ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
+                @Html.SubmissionFor(x => x.Item.FieldColor).InputId("FieldColor").ToHtmlTag()
+                <div id="colorPicker"></div>
+            </div>
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Abbreviation).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Size).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
-            @Html.SubmissionFor(x => x.Item.FieldColor).InputId("FieldColor").ToHtmlTag()
-            <div id="colorPicker"></div>
-        </div>
+    @EndForm()
+            
+    <div id="galleria" >
+        @foreach (var photo in Model.Item.Photos)
+        {
+            <img src="@photo.FileUrl" />
+        }
     </div>
-            @EndForm()
-            
-        <div id="galleria" >
-            
-                        @foreach (var photo in Model.Item.Photos)
-                        {
-                                <img src="@photo.FileUrl" />
-                        }
-        </div>
     <div class="col full clear"></div>
-<div class="col left">
-    @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
-    @StandardButtonFor("cancel", WebLocalizationKeys.CANCEL).AddClass("cancel").ToHtmlTag()
-</div>
-<div class="col full clear"><hr/></div>
+    <div class="col left">
+        @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
+        @StandardButtonFor("cancel", WebLocalizationKeys.CANCEL).AddClass("cancel").ToHtmlTag()
+    </div>
+    <div class="col full clear"><hr/></div>
 
     <div class="col left clear">
         <div class="fieldRow">
-        <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
-            <div id="pendingTaskGridContainer" class="grid_5b">
-                <div class="content-header">
-                    <input class="search" /> 
-                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
-                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
-                    @*                    <span class="title-name">@Model.Title</span>*@
-                </div>
-                <div id="contentArea" class="content-inner">
-                    <table id="gridContainer_pt" class="scroll"></table>
-                    <div id="pager" class="scroll" style="text-align:center;"></div>
-                </div>
-            </div>
+            <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
+            <div id="pendingTaskGridContainer"></div>
+        </div>
         <div class="fieldRow">
-        <div class="gridHeader">@WebLocalizationKeys.PHOTOS</div>
-            <div id="photoGridContainer" class="grid_5b">
-                <div class="content-header">
-                    <input class="search" /> 
-                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
-                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
-@*                    <span class="title-name">@Model.Title</span>*@
-                </div>
-                <div id="contentArea" class="content-inner">
-                        <table id="gridContainer_p" class="scroll"></table>
-                        <div id="pager" class="scroll" style="text-align:center;"></div>
-                </div>
-            </div>
+            <div class="gridHeader">@WebLocalizationKeys.PHOTOS</div>
+            <div id="photoGridContainer"></div>
         </div>
     </div>
-</div>
-
-    <div class="col right">
-        <div class="fieldRow">
+   
+<div class="col right">
+    <div class="fieldRow">
         <div class="gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
-            <div id="completeTaskGridContainer" class="grid_4 KYT_AddNew_space">
-                <div class="content-header">
-                    <input class="search" /> 
-@*                    <span class="title-name">@Model.Title</span>*@
-                </div>
-                <div id="contentArea" class="content-inner">
-                            <table id="gridContainer_ct" class="scroll"></table>
-                            <div id="pager" class="scroll" style="text-align:center;"></div>
-                </div>
-            </div>
-        </div>
-        <div class="fieldRow">
+        <div id="completedTaskGridContainer"></div>
+    </div>
+    <div class="fieldRow">
         <div class="gridHeader">@WebLocalizationKeys.DOCUMENTS</div>
-            <div id="documentGridContainer" class="grid_5b">
-                <div class="content-header">
-                    <input class="search" /> 
-                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
-                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
-@*                    <span class="title-name">@Model.Title</span>*@
-                </div>
-                <div id="contentArea" class="content-inner">
-                        <table id="gridContainer_d" class="scroll"></table>
-                        <div id="pager" class="scroll" style="text-align:center;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="documentGridContainer"></div>
+    </div>
 </div>

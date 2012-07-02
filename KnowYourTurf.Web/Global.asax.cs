@@ -59,6 +59,9 @@ namespace KnowYourTurf.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("elmah.axd");
             routes.MapRoute(
+               "KnowYourTurf",
+               "KnowYourTurf",
+               new { controller = "KnowYourTurf", action = "Home" }); routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{EntityId}", // URL with parameters
                 new { controller = "Login", action = "Login", EntityId = UrlParameter.Optional } // Parameter defaults

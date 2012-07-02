@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
 using System.Web.Mvc;
 using System.Web.Security;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Domain.Tools;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Services;
 using StructureMap;
@@ -65,8 +61,8 @@ namespace KnowYourTurf.Web.Controllers
                         notification.Message = string.Empty;
                         notification.Redirect = true;
                         notification.RedirectUrl = user.UserRoles.Any(x=>x.Name=="Facilities")
-                            ?"/KnowYourTurf/Home#/EventCalendar/EventCalendar"
-                            : "/KnowYourTurf/Home#/EmployeeDashboard/ViewEmployee/"+user.EntityId;
+                            ?"/KnowYourTurf/Home#/eventcalendar"
+                            : "/KnowYourTurf/Home#/employeedashboard/"+user.EntityId;
                     }
                 }
             }

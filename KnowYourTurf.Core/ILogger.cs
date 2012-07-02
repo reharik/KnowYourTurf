@@ -2,7 +2,7 @@
 using KnowYourTurf.Core;
 using log4net;
 
-namespace MethodFitness.Core
+namespace KnowYourTurf.Core
 {
     public interface ILogger
     {

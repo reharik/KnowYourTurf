@@ -7,7 +7,7 @@ using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class EmailJob:DomainEntity
+    public class EmailJob : DomainEntity, IPersistableObject
     {
         [ValidateNonEmpty]
         public virtual string Name { get; set; }
@@ -19,8 +19,17 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Frequency { get; set; }
         [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
+        /// <summary>
+        /// Aggregate Root that should not be modified through Email Job
+        /// </summary>
+        private EmailTemplate _readOnlyEmailTemplate;
         [ValidateNonEmpty]
-        public virtual EmailTemplate EmailTemplate { get; set; }
+        public virtual EmailTemplate ReadOnlyEmailTemplate { get { return _readOnlyEmailTemplate; } }
+        public virtual void SetEmailTemplate(EmailTemplate emailTemplate)
+        {
+            _readOnlyEmailTemplate = emailTemplate;
+        }
+        ////
         [ValidateNonEmpty]
         public virtual EmailJobType EmailJobType { get; set; }
 

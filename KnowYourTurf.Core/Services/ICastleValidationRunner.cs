@@ -9,15 +9,15 @@ namespace KnowYourTurf.Core.Services
 {
     public interface ICastleValidationRunner
     {
-        IEnumerable<ErrorInfo> GetErrors<ENTITY>(ENTITY entity) where ENTITY : DomainEntity;
-        CrudReport Validate<ENTITY>(ENTITY entity) where ENTITY : DomainEntity;
+        IEnumerable<ErrorInfo> GetErrors<ENTITY>(ENTITY entity) where ENTITY : IPersistableObject;
+        CrudReport Validate<ENTITY>(ENTITY entity) where ENTITY : IPersistableObject;
     }
 
     public class CastleValidationRunner : ICastleValidationRunner
     {
         private static readonly CachedValidationRegistry registry = new CachedValidationRegistry();
 
-        public IEnumerable<ErrorInfo> GetErrors<ENTITY>(ENTITY entity) where ENTITY : DomainEntity
+        public IEnumerable<ErrorInfo> GetErrors<ENTITY>(ENTITY entity) where ENTITY : IPersistableObject
         {
             var result = new List<ErrorInfo>();
             var runner = new ValidatorRunner(registry);
@@ -33,7 +33,7 @@ namespace KnowYourTurf.Core.Services
             return result;
         }
 
-        public CrudReport Validate<ENTITY>(ENTITY entity) where ENTITY : DomainEntity
+        public CrudReport Validate<ENTITY>(ENTITY entity) where ENTITY : IPersistableObject
         {
             var crudReport = new CrudReport();
             var runner = new ValidatorRunner(registry);

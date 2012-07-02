@@ -1,16 +1,18 @@
-using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Localization;
 
-namespace KnowYourTurf.Web.Controllers
+namespace KnowYourTurf.Core.Domain
 {
-    public class ListType:DomainEntity
+    public interface IListType { }
+    
+    public class ListType:DomainEntity, IPersistableObject, IListType
     {
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
     }
+
     public class DocumentCategory : ListType
     {
     }

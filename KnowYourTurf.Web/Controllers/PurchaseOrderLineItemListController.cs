@@ -32,7 +32,7 @@ namespace KnowYourTurf.Web.Controllers
             if (purchaseOrder == null) return null;
             var items = _dynamicExpressionQuery.PerformQuery(purchaseOrder.LineItems, input.filters);
 
-            if (input.PageSortFilter.SortColumn.IsEmpty()) items = items.OrderBy(x => x.Product.Name);
+            if (input.PageSortFilter.SortColumn.IsEmpty()) items = items.OrderBy(x => x.ReadOnlyProduct.Name);
             var model = _purchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items, "poliGrid");
             return Json(model, JsonRequestBehavior.AllowGet);
         }

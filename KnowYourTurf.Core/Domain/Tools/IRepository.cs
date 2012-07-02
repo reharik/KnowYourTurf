@@ -10,30 +10,28 @@ namespace KnowYourTurf.Core.Domain
     public interface IRepository
     {
         ISession CurrentSession();
-        void Save<ENTITY>(ENTITY entity)
-            where ENTITY : Entity;
+        void Save<ENTITY>(ENTITY entity) where ENTITY : IPersistableObject;
 
-        ENTITY Load<ENTITY>(long id)
-            where ENTITY : Entity;
+        ENTITY Load<ENTITY>(long id) where ENTITY : IPersistableObject;
 
-        IQueryable<ENTITY> Query<ENTITY>()
-            where ENTITY : Entity;
+        IQueryable<ENTITY> Query<ENTITY>() where ENTITY : IPersistableObject;
 
-        IQueryable<T> Query<T>(Expression<Func<T, bool>> where);
+        IQueryable<ENTITY> Query<ENTITY>(Expression<Func<ENTITY, bool>> where) where ENTITY : IPersistableObject;
 
-        T FindBy<T>(Expression<Func<T, bool>> where);
+        ENTITY FindBy<ENTITY>(Expression<Func<ENTITY, bool>> where) where ENTITY : IPersistableObject;
 
-        T Find<T>(long id) where T : Entity;
+        ENTITY Find<ENTITY>(long id) where ENTITY : IPersistableObject;
 
-        IEnumerable<T> FindAll<T>() where T : Entity;
+        IEnumerable<ENTITY> FindAll<ENTITY>() where ENTITY : IPersistableObject;
 
-        void HardDelete(object target);
+        IList<ENTITY> ExecuteCriteria<ENTITY>(DetachedCriteria criteria) where ENTITY : IPersistableObject;
 
-        void SoftDelete<ENTITY>(ENTITY entity) where ENTITY : Entity;
+        void HardDelete<ENTITY>(ENTITY entity) where ENTITY : IPersistableObject;
+
+        void SoftDelete<ENTITY>(ENTITY entity) where ENTITY : IPersistableObject;
         void Commit();
         void Rollback();
         void Initialize();
-        IList<ENTITY> ExecuteCriteria<ENTITY>(DetachedCriteria criteria) where ENTITY : Entity;
 
         void DisableFilter(string FilterName);
         void EnableFilter(string FilterName, string field, object value);

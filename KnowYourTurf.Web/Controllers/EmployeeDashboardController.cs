@@ -37,42 +37,51 @@ namespace KnowYourTurf.Web.Controllers
             long entityId;
             entityId = input.EntityId > 0 ? input.EntityId : _sessionContext.GetUserId();
             var employee = _repository.Find<User>(entityId);
-            
             var availableUserRoles = _repository.FindAll<UserRole>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name});
-            IEnumerable<TokenInputDto> selectedUserRoles;
-            if (employee.UserRoles != null)
-            {
-                selectedUserRoles = employee.UserRoles.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
-            }
-            else
-            {
-                selectedUserRoles = null;
-            }
+            var selectedUserRoles = employee.UserRoles != null
+                                                    ? employee.UserRoles.Select(x =>new TokenInputDto{id = x.EntityId.ToString(), name = x.Name})
+                                                    : null;
 
-            var url = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasks(null)) + "?ParentId=" + entityId;
-            var completeUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasks(null)) + "?ParentId=" + entityId;
             var model = new EmployeeDashboardViewModel
             {
                 //TODO put modficaztions here "Employee"
                 Item = employee,
                 AvailableItems = availableUserRoles,
                 SelectedItems = selectedUserRoles,
-                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + entityId+"&From=Employee",
-                GridDefinition = _pendingTaskGrid.GetGridDefinition(url),
-                CompletedListDefinition = _completedTaskGrid.GetGridDefinition(completeUrl),
-                EmployeeListUrl = UrlContext.GetUrlForAction<EmployeeListController>(x=>x.EmployeeList()),
-                DeleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.DeleteMultiple(null)),
+                PendingGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasksGrid(null)) + "?ParentId=" + entityId,
+                CompletedGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasksGrid(null)) + "?ParentId=" + entityId,
                 Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString(),
-                ReturnToList = input.EntityId>0
+                ReturnToList = input.EntityId>0,
             };
             return View("EmployeeDashboard", model);
         }
 
+        public ActionResult PendingTasksGrid(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasks(null)) + "?ParentId=" + input.ParentId;
+            ListViewModel model = new ListViewModel()
+            {
+//                addUpdate = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.ParentId + "&From=Employee",
+                gridDef = _pendingTaskGrid.GetGridDefinition(url),
+                ParentId = input.ParentId
+            };
+            return Json(model,JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult CompletedTasksGrid(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasks(null)) + "?ParentId=" + input.ParentId;
+            ListViewModel model = new ListViewModel()
+            {
+                gridDef = _completedTaskGrid.GetGridDefinition(url),
+                ParentId = input.ParentId
+            };
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult CompletedTasks(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters, x => x.Complete);
             var employeeItems = items.ToList().Where(x => x.Employees.Any(y => y.EntityId == input.ParentId)).AsQueryable();
-            var gridItemsViewModel = _completedTaskGrid.GetGridItemsViewModel(input.PageSortFilter, employeeItems, "completeTaskGrid");
+            var gridItemsViewModel = _completedTaskGrid.GetGridItemsViewModel(input.PageSortFilter, employeeItems);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 
@@ -80,7 +89,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters, x => !x.Complete);
             var employeeItems = items.ToList().Where(x => x.Employees.Any(y => y.EntityId == input.ParentId)).AsQueryable();
-            var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, employeeItems, "pendingTaskGrid");
+            var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, employeeItems);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

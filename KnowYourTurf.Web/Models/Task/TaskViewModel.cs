@@ -10,7 +10,7 @@ namespace KnowYourTurf.Web.Models
 {
     public class TaskViewModel:ViewModel
     {
-        public IEnumerable<SelectListItem> FieldList { get; set; }
+        public IDictionary<string, IEnumerable<SelectListItem>> FieldList { get; set; }
         public IEnumerable<SelectListItem> EquipmentList { get; set; }
         public IEnumerable<SelectListItem> TaskTypeList { get; set; }
         public string Product { get; set; }
@@ -28,11 +28,13 @@ namespace KnowYourTurf.Web.Models
 
         public IEnumerable<string> EmployeeNames { get; set; }
         public IEnumerable<string> EquipmentNames { get; set; }
+
+        public Dictionary<string, IEnumerable<SelectListItem>> InventoryProductList { get; set; }
     }
 
     public class AddUpdateTaskViewModel:ViewModel
     {
-        public string From { get; set; }
+        public string Param1 { get; set; }
         public long Field { get; set; }
         public string Product { get; set; }
         public double Quantity { get; set; }

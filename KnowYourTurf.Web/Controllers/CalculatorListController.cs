@@ -19,13 +19,13 @@ namespace KnowYourTurf.Web.Controllers
             _calculatorListGrid = calculatorListGrid;
         }
 
-        public ActionResult CalculatorList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<CalculatorListController>(x => x.Calculators(null));
             CalculatorListViewModel model = new CalculatorListViewModel()
             {
                 CreateATaskUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null))+"?From=Calculator",
-                GridDefinition = _calculatorListGrid.GetGridDefinition(url),
+                gridDef = _calculatorListGrid.GetGridDefinition(url),
             Title = WebLocalizationKeys.CALCULATORS.ToString()
             };
             return View(model);

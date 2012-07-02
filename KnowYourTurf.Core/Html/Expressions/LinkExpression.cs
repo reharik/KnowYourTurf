@@ -5,7 +5,7 @@ using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Html;
 using HtmlTags;
 
-namespace MethodFitness.Core.Html.Expressions
+namespace KnowYourTurf.Core.Html.Expressions
 {
     public class LinkExpression
     {
@@ -93,7 +93,7 @@ namespace MethodFitness.Core.Html.Expressions
 
         private void addClassesAndAttributesToRoot(HtmlTag root)
         {
-            HtmlAttributes.Each(x => root.Attr(x.Key, x.Value));
+            HtmlAttributes.ForEachItem(x => root.Attr(x.Key, x.Value));
         }
 
     }

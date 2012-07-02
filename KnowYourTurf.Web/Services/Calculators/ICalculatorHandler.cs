@@ -28,8 +28,8 @@ namespace KnowYourTurf.Web.Services
 
         public CalculatorViewModel GetViewModel()
         {
-            var products = _repository.Query<InventoryProduct>(x => x.Product.InstantiatingType == "Fertilizer");
-            var productItems = _selectListItemService.CreateListWithConcatinatedText(products, x => x.Product.Name, x => x.UnitType, " --> ", x => x.EntityId, true);
+            var products = _repository.Query<InventoryProduct>(x => x.ReadOnlyProduct.InstantiatingType == "Fertilizer");
+            var productItems = _selectListItemService.CreateListWithConcatinatedText(products, x => x.ReadOnlyProduct.Name, x => x.UnitType, " --> ", x => x.EntityId, true);
             var fieldItems = _selectListItemService.CreateList<Field>(x => x.Name, x => x.EntityId, true,true);
             return new FertilzierNeededCalcViewModel
             {
@@ -49,9 +49,9 @@ namespace KnowYourTurf.Web.Services
             var field = _repository.Find<Field>(Int64.Parse(input.Field));
             var inventoryProduct = _repository.Find<InventoryProduct>(Int64.Parse(input.Product));
             decimal bagSizeInPounds = _unitSizeTimesQuantyCalculator.CalculateLbsPerUnit(inventoryProduct);
-            double fertN = ((Fertilizer)inventoryProduct.Product).N;
-            double fertP = ((Fertilizer)inventoryProduct.Product).P;
-            double fertK = ((Fertilizer)inventoryProduct.Product).K;
+            double fertN = ((Fertilizer)inventoryProduct.ReadOnlyProduct).N;
+            double fertP = ((Fertilizer)inventoryProduct.ReadOnlyProduct).P;
+            double fertK = ((Fertilizer)inventoryProduct.ReadOnlyProduct).K;
             double? N = input.FertilizerRate / (fertN * .01) * field.Size * .001 / Convert.ToDouble(bagSizeInPounds) * Convert.ToDouble(bagSizeInPounds) * fertN / (field.Size * .001) * .01;
             double? P = input.FertilizerRate/(fertN*.01)*field.Size/1000*fertP*.44*.01/(field.Size/1000);
             double? K = input.FertilizerRate/(fertN*.01)*field.Size/1000*fertK*.83*.01/(field.Size/1000);

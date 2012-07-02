@@ -19,14 +19,14 @@ namespace KnowYourTurf.Web.Controllers
             _equipmentListGrid = equipmentListGrid;
         }
 
-        public ActionResult EquipmentList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<EquipmentListController>(x => x.Equipments(null));
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddUpdate(null)),
-                DeleteMultipleUrl= UrlContext.GetUrlForAction<EquipmentController>(x => x.DeleteMultiple(null)),
-                GridDefinition = _equipmentListGrid.GetGridDefinition(url),
+                deleteMultipleUrl= UrlContext.GetUrlForAction<EquipmentController>(x => x.DeleteMultiple(null)),
+                gridDef = _equipmentListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.EQUIPMENT.ToString()
             };
             return View(model);

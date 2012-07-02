@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using KnowYourTurf.Core;
+using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
@@ -24,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
             _documentCategoryListGrid = documentCategoryListGrid;
         }
 
-        public ActionResult ListType()
+        public ActionResult ItemList(ViewModel input)
         {
             var gridUrlET = UrlContext.GetUrlForAction<EventTypeController>(x => x.ListTypes(null));
             var gridUrlTT = UrlContext.GetUrlForAction<TaskTypeController>(x => x.ListTypes(null));
@@ -40,7 +42,7 @@ namespace KnowYourTurf.Web.Controllers
                                                   AddUpdateUrlTT = UrlContext.GetUrlForAction<TaskTypeController>(x => x.AddUpdate(null)),
                                                   AddUpdateUrlDC = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.AddUpdate(null)),
                                                   AddUpdateUrlPC = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.AddUpdate(null)),
-                                                  GridDefinition = _eventTypeListGrid.GetGridDefinition(gridUrlET),
+                                                  gridDef = _eventTypeListGrid.GetGridDefinition(gridUrlET),
                                                   ListDefinitionTT = _taskTypeListGrid.GetGridDefinition(gridUrlTT),
                                                   ListDefinitionDC = _documentCategoryListGrid.GetGridDefinition(gridUrlDC),
                                                   ListDefinitionPC = _photoCategoryListGrid.GetGridDefinition(gridUrlPC),

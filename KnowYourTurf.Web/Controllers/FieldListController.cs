@@ -22,17 +22,16 @@ namespace KnowYourTurf.Web.Controllers
             _repository = repository;
         }
 
-        public ActionResult FieldList(ViewModel input)
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null))+"?ParentId="+input.ParentId;
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl =  UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)),
-                GridDefinition = _fieldListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.FIELDS.ToString(),
-                ParentId = input.ParentId
+                gridDef = _fieldListGrid.GetGridDefinition(url),
+                Title = WebLocalizationKeys.FIELDS.ToString()
             };
-            return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Fields(GridItemsRequestModel input)

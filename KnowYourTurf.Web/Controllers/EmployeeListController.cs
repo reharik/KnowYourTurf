@@ -21,13 +21,13 @@ namespace KnowYourTurf.Web.Controllers
             _employeeListGrid = employeeListGrid;
         }
 
-        public ActionResult EmployeeList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<EmployeeListController>(x => x.Employees(null));
             var model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddUpdate(null)),
-                GridDefinition = _employeeListGrid.GetGridDefinition(url),
+                gridDef = _employeeListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.EMPLOYEES.ToString()
             };
             return View(model);

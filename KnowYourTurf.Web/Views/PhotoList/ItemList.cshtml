@@ -6,9 +6,8 @@
 @{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
 @section HeaderJavascript{
     $(document).ready(function(){
-        gridControllerOptions.deleteMultipleUrl = '@Model.DeleteMultipleUrl';
-    
-        new kyt.CrudController(gridControllerOptions);
+        gridControllerOptions.gridName = "photoGrid";
+        new kyt.ItemListController(gridControllerOptions);
     });
 }
 @section ExtraContentHeaderButtons{

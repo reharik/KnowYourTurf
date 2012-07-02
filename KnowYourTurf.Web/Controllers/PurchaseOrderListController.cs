@@ -22,7 +22,7 @@ namespace KnowYourTurf.Web.Controllers
         }
 
 
-        public ActionResult PurchaseOrderList(PurchaseOrderListViewModel input)
+        public ActionResult ItemList(PurchaseOrderListViewModel input)
         {
             var url = input.Completed
                           ? UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrdersCompleted(null))
@@ -30,8 +30,8 @@ namespace KnowYourTurf.Web.Controllers
             PurchaseOrderListViewModel model = new PurchaseOrderListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)),
-                DeleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.DeleteMultiple(null)),
-                GridDefinition = _purchaseOrderListGrid.GetGridDefinition(url),
+                deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.DeleteMultiple(null)),
+                gridDef = _purchaseOrderListGrid.GetGridDefinition(url),
                 Title = input.Completed ? WebLocalizationKeys.COMPLETED_PURCHASE_ORDERS.ToString() : WebLocalizationKeys.PURCHASE_ORDERS.ToString(),
                 Completed = input.Completed
             };

@@ -18,14 +18,14 @@ namespace KnowYourTurf.Web.Controllers
             _photoListGrid = photoListGrid;
         }
 
-        public ActionResult PhotoList(ListViewModel input)
+        public ActionResult ItemList(ListViewModel input)
         {
             var url = UrlContext.GetUrlForAction<PhotoListController>(x => x.Photos(null));
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)),
-                DeleteMultipleUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.DeleteMultiple(null)),
-                GridDefinition = _photoListGrid.GetGridDefinition(url),
+                deleteMultipleUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.DeleteMultiple(null)),
+                gridDef = _photoListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.PHOTOS.ToString()
             };
             return View(model);

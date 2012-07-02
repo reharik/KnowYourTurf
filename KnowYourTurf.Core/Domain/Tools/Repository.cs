@@ -61,24 +61,24 @@ namespace KnowYourTurf.Core.Domain
             return _unitOfWork.CurrentSession;
         }
 
-        public void Save<ENTITY>(ENTITY entity) where ENTITY : Entity
+        public void Save<ENTITY>(ENTITY entity) where ENTITY : IPersistableObject
         {
             _unitOfWork.CurrentSession.SaveOrUpdate(entity);
         }
 
-        public IEnumerable<T> FindAll<T>() where T : Entity
+        public IEnumerable<ENTITY> FindAll<ENTITY>() where ENTITY : IPersistableObject
         {
-            return _unitOfWork.CurrentSession.Query<T>();
+            return _unitOfWork.CurrentSession.Query<ENTITY>();
         }
 
-        public void HardDelete(object target)
+        public void HardDelete<ENTITY>(ENTITY entity) where ENTITY : IPersistableObject
         {
-            _unitOfWork.CurrentSession.Delete(target);
+            _unitOfWork.CurrentSession.Delete(entity);
         }
 
-        public void SoftDelete<ENTITY>(ENTITY entity) where ENTITY : Entity
+        public void SoftDelete<ENTITY>(ENTITY entity) where ENTITY : IPersistableObject
         {
-            entity.IsDeleted = true;
+            (entity as Entity).IsDeleted = true;
             _unitOfWork.CurrentSession.SaveOrUpdate(entity);
         }
 
@@ -97,35 +97,35 @@ namespace KnowYourTurf.Core.Domain
             _unitOfWork.Rollback();
         }
 
-        public IList<ENTITY> ExecuteCriteria<ENTITY>(DetachedCriteria criteria) where ENTITY : Entity
+        public IList<ENTITY> ExecuteCriteria<ENTITY>(DetachedCriteria criteria) where ENTITY : IPersistableObject
         {
             ICriteria executableCriteria = criteria.GetExecutableCriteria(_unitOfWork.CurrentSession);
             return executableCriteria.List<ENTITY>();
         }
 
-        public ENTITY Load<ENTITY>(long id) where ENTITY : Entity
+        public ENTITY Load<ENTITY>(long id) where ENTITY : IPersistableObject
         {
             return _unitOfWork.CurrentSession.Load<ENTITY>(id);
         }
 
-        public IQueryable<ENTITY> Query<ENTITY>() where ENTITY : Entity
+        public IQueryable<ENTITY> Query<ENTITY>() where ENTITY : IPersistableObject
         {
             return _unitOfWork.CurrentSession.Query<ENTITY>();
         }
 
-        public IQueryable<ENTITY> Query<ENTITY>(Expression<Func<ENTITY, bool>> where)
+        public IQueryable<ENTITY> Query<ENTITY>(Expression<Func<ENTITY, bool>> where) where ENTITY : IPersistableObject
         {
             return _unitOfWork.CurrentSession.Query<ENTITY>().Where(where);
         }
 
-        public T FindBy<T>(Expression<Func<T, bool>> where)
+        public ENTITY FindBy<ENTITY>(Expression<Func<ENTITY, bool>> where) where ENTITY : IPersistableObject
         {
-            return _unitOfWork.CurrentSession.Query<T>().FirstOrDefault(where);
+            return _unitOfWork.CurrentSession.Query<ENTITY>().FirstOrDefault(where);
         }
 
-        public T Find<T>(long id) where T : Entity
+        public ENTITY Find<ENTITY>(long id) where ENTITY : IPersistableObject
         {
-            return _unitOfWork.CurrentSession.Get<T>(id);
+            return _unitOfWork.CurrentSession.Get<ENTITY>(id);
         }
     }
 }

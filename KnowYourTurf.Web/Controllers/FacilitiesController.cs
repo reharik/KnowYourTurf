@@ -31,7 +31,7 @@ namespace KnowYourTurf.Web.Controllers
             _authorizationRepository = authorizationRepository;
         }
 
-        public ActionResult Facilities(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
             var facilities = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
             
@@ -49,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new UserViewModel
                             {
                                 Item = facilities,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)) + "/" + facilities.EntityId,
+                                AddUpdateUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.AddUpdate(null)) + "/" + facilities.EntityId,
                                 Title = WebLocalizationKeys.FACILITIES.ToString()
                             };
             return PartialView("FacilitiesView", model);

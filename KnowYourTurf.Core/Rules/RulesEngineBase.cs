@@ -11,7 +11,7 @@ namespace KnowYourTurf.Core
         public RulesResult ExecuteRules<ENTITY>(ENTITY entity) where ENTITY : DomainEntity
         {
             var rulesResult = new RulesResult {Success = true};
-            Rules.Each(x =>
+            Rules.ForEachItem(x =>
                            {
                                var result = x.Execute(entity);
                                if (!result.Success)

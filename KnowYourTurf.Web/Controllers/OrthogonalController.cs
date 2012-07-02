@@ -72,7 +72,7 @@
 //            _sessionContext.AddUpdateSessionItem(inAdminMode);
 //            return _authorizationService.IsAllowed(currentUser, "/AdminOrGreater")
 //                && (bool)inAdminMode.SessionObject
-//                    ? RedirectToAction("ListType", "ListTypeList")
+//                    ? RedirectToAction("ItemList", "ListTypeList")
 //                    : RedirectToAction("Home", "Home");
 //        }
 //    }

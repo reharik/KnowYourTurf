@@ -8,10 +8,7 @@
   var calendarDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CalendarDefinition));
   calendarDef.calendarContainer="#calendar";
   calendarDef.deleteUrl = "@MvcHtmlString.Create(Model.DeleteUrl)";
-
-    $(document).ready(function(){
-        new kyt.CalendarController(calendarDef);
-    });
+  extraFormOptions.calendarDef = calendarDef;
 </script>
 <input type="hidden" id="RootId" name="RootId" value="@Model.RootId"/>
 <div id='calendar'></div>

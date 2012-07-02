@@ -22,11 +22,11 @@ namespace KnowYourTurf.Web.Controllers
             _inventoryProductListGrid = inventoryProductListGrid;
         }
 
-        public ActionResult InventoryProductList(string productType)
+        public ActionResult ItemList(InventoryProductListViewModel input)
         {
             StringToken title = null;
             StringToken crudTitle = null;
-            switch(productType)
+            switch (input.ProductType)
             {
                 case "Chemical":
                     crudTitle = WebLocalizationKeys.INVENTORY_CHEMICAL_INFORMATION;
@@ -38,19 +38,19 @@ namespace KnowYourTurf.Web.Controllers
                     crudTitle = WebLocalizationKeys.INVENTORY_FERTILIZER_INFORMATION;
                     break;
             }
-            var url = UrlContext.GetUrlForAction<InventoryListController>(x => x.Products(null)) + "?ProductType=" + productType;
+            var url = UrlContext.GetUrlForAction<InventoryListController>(x => x.Products(null)) + "?ProductType=" + input.ProductType;
             ListViewModel model = new ListViewModel()
             {
                 //TODO put modifiler here "ProductType=" + productType
-                GridDefinition = _inventoryProductListGrid.GetGridDefinition(url),
+                gridDef = _inventoryProductListGrid.GetGridDefinition(url),
                 Title = crudTitle.ToString()
             };
-            return View("Inventory" + productType + "List", model);
+            return View("Inventory" + input.ProductType + "List", model);
         }
 
         public JsonResult Products(InventoryProductGridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<InventoryProduct>(input.filters,x=>x.Product.InstantiatingType == input.ProductType);
+            var items = _dynamicExpressionQuery.PerformQuery<InventoryProduct>(input.filters, x => x.ReadOnlyProduct.InstantiatingType == input.ProductType);
             var gridItemsViewModel = _inventoryProductListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
@@ -58,17 +58,17 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Display(InventoryProductListViewModel input)
         {
             var inventoryProduct = _repository.Find<InventoryProduct>(input.EntityId);
-            if (inventoryProduct.Product.InstantiatingType == "Chemical")
+            if (inventoryProduct.ReadOnlyProduct.InstantiatingType == "Chemical")
             {
                 var model = new InventoryChemicalViewModel {Item = inventoryProduct,Title=WebLocalizationKeys.INVENTORY_CHEMICAL_INFORMATION.ToString()};
                 return PartialView("InventoryChemicalView", model);
             }
-            if (inventoryProduct.Product.InstantiatingType == "Fertilizer")
+            if (inventoryProduct.ReadOnlyProduct.InstantiatingType == "Fertilizer")
             {
                 var model = new InventoryFertilizerViewModel { Item = inventoryProduct,Title=WebLocalizationKeys.INVENTORY_FERTILIZER_INFORMATION.ToString() };
                 return PartialView("InventoryFertilizerView", model);
             }
-            if (inventoryProduct.Product.InstantiatingType == "Material")
+            if (inventoryProduct.ReadOnlyProduct.InstantiatingType == "Material")
             {
                 var model = new InventoryMaterialViewModel { Item = inventoryProduct, Title = WebLocalizationKeys.INVENTORY_MATERIAL_INFORMATION.ToString()};
                 return PartialView("InventoryMaterialView", model);
@@ -91,16 +91,16 @@ namespace KnowYourTurf.Web.Controllers
     public class InventoryFertilizerViewModel : ViewModel
     {
         public InventoryProduct Item { get; set; }
-        public Fertilizer Fertilizer { get { return Item.Product as Fertilizer; } }
+        public Fertilizer Fertilizer { get { return Item.ReadOnlyProduct as Fertilizer; } }
     }
     public class InventoryChemicalViewModel :ViewModel
     {
         public InventoryProduct Item { get; set; }
-        public Chemical Chemical { get { return Item.Product as Chemical; } }
+        public Chemical Chemical { get { return Item.ReadOnlyProduct as Chemical; } }
     }
     public class InventoryMaterialViewModel : ViewModel
     {
         public InventoryProduct Item { get; set; }
-        public Material Material { get { return Item.Product as Material; } }
+        public Material Material { get { return Item.ReadOnlyProduct as Material; } }
     }
 }

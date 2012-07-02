@@ -22,7 +22,7 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<User> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.FullName)
-                .ForAction<FacilitiesController>(x => x.Facilities(null))
+                .ForAction<FacilitiesController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .IsSortable(false)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
