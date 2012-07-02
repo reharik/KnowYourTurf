@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
             var emailTemplateDTO = new EmailTemplateDTO
             {
                 Subject = CoreLocalizationKeys.DAILY_TASK_SUMMARY.ToString(),
-                Body = emailJob.EmailTemplate.Template,
+                Body = emailJob.ReadOnlyEmailTemplate.Template,
                 From = new MailAddress("DailyTasks@KnowYourTurf.Com", CoreLocalizationKeys.KNOWYOURTURF_DAILY_TASKS.ToString()),
                 To = new MailAddress(subscriber.Email, subscriber.FullName),
                 TokenValues = tokenValues
@@ -46,7 +46,7 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
                                var task = new HtmlTag("span");
                                var taskText = x.ScheduledDate.Value.ToLongDateString()+" "+x.ScheduledStartTime.Value.ToShortTimeString();
                                taskText += x.ScheduledEndTime.HasValue ? " To " + x.ScheduledEndTime.Value.ToShortTimeString() : "";
-                               taskText += ": " + x.TaskType.Name + " at " + x.Field.Name;
+                               taskText += ": " + x.TaskType.Name + " at " + x.ReadOnlyField.Name;
                                task.Text(taskText);
                                var br = new HtmlTag("br");
                                var notesSpan = new HtmlTag("span");

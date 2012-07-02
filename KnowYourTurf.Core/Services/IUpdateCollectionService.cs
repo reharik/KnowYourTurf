@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FubuMVC.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Enums;
 
 namespace KnowYourTurf.Core.Services
 {
@@ -14,10 +12,7 @@ namespace KnowYourTurf.Core.Services
                     Action<ENTITY> addEntity,
                     Action<ENTITY> removeEntity) where ENTITY : Entity;
 
-        void UpdateFromCSV<ENTITY>(IEnumerable<ENTITY> origional,
-                                                   string newItemsCSV,
-                                                   Action<ENTITY> addEntity,
-                                                   Action<ENTITY> removeEntity) where ENTITY : Entity;
+
     }
 
     public class UpdateCollectionService : IUpdateCollectionService
@@ -57,21 +52,5 @@ namespace KnowYourTurf.Core.Services
             });
         }
 
-        public void UpdateFromCSV<ENTITY>(IEnumerable<ENTITY> origional,
-                    string newItemsCSV,
-                    Action<ENTITY> addEntity,
-                    Action<ENTITY> removeEntity) where ENTITY : Entity
-        {
-            var newItems = new List<ENTITY>();
-            if (newItemsCSV.IsEmpty())
-            {
-                var remove = new List<ENTITY>();
-                origional.ForEachItem(remove.Add);
-                remove.ForEachItem(removeEntity);
-                return;
-            }
-            newItemsCSV.Split(',').ForEachItem(x => newItems.Add(_repository.Find<ENTITY>(Int32.Parse(x))));
-            Update(origional, newItems, addEntity, removeEntity);
-        }
     }
 }

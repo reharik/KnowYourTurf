@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         public string subViewName { get; set; }
         public string id { get; set; }
         public string route { get; set; }
-        public string addUpate { get; set; }
+        public string addUpdate { get; set; }
         public string display { get; set; }
         public bool isChild { get; set; }
         public bool noBubbleUp { get; set; }

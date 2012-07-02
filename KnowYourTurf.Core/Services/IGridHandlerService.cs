@@ -19,7 +19,7 @@
 
 //    public class GridHandlerService : IGridHandlerService
 //    {
-//        private readonly IRepository _repository;
+//        private readonly IRepository _aggregateRootRepo;
 //        private readonly ISessionContext _sessionContext;
 //        private readonly IContainer _container;
 

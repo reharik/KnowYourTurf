@@ -195,6 +195,7 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
     events:_.extend({
     }, KYT.Views.AjaxFormView.prototype.events),
     viewLoaded:function(){
+        $('#FieldColor',this.el).miniColors();
         var pendingGridView = new KYT.Views.DahsboardGridView({
             el:"#pendingTaskGridContainer",
             url:this.options.pendingGridUrl,

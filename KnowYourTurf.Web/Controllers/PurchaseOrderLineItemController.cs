@@ -29,7 +29,14 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate(ViewModel input)
         {
-            var purchaseOrderLineItem = input.EntityId > 0 ? _repository.Find<PurchaseOrderLineItem>(input.EntityId) : new PurchaseOrderLineItem();
+            PurchaseOrderLineItem purchaseOrderLineItem;
+            if (input.EntityId > 0)
+            {
+                var purchaseORder = _repository.Find<PurchaseOrder>(input.ParentId);
+                purchaseOrderLineItem = purchaseORder.LineItems.FirstOrDefault(x => x.EntityId == input.EntityId);
+            }
+            else { purchaseOrderLineItem = new PurchaseOrderLineItem(); }
+
             var model = new PurchaseOrderLineItemViewModel
             {
                 Item = purchaseOrderLineItem,
@@ -40,7 +47,8 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Display(ViewModel input)
         {
-            var purchaseOrderLineItem = _repository.Find<PurchaseOrderLineItem>(input.EntityId);
+            var purchaseOrder = _repository.Find<PurchaseOrder>(input.ParentId);
+            var purchaseOrderLineItem = purchaseOrder.LineItems.FirstOrDefault(x => x.EntityId == input.EntityId);
             var model = new PurchaseOrderLineItemViewModel
             {
                 Item = purchaseOrderLineItem,
@@ -51,10 +59,12 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Delete(ViewModel input)
         {
-            var purchaseOrderLineItem = _repository.Find<PurchaseOrderLineItem>(input.EntityId);
-            _repository.HardDelete(purchaseOrderLineItem);
-            _repository.UnitOfWork.Commit();
-            return null;
+            var purchaseOrder = _repository.Find<PurchaseOrder>(input.ParentId);
+            var purchaseOrderLineItem = purchaseOrder.LineItems.FirstOrDefault(x => x.EntityId == input.EntityId);
+            purchaseOrder.RemoveLineItem(purchaseOrderLineItem);
+            var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
+            var notification = crudManager.Finish();
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Save(PurchaseOrderLineItemViewModel input)
@@ -76,7 +86,8 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ReceivePurchaseOrderLineItem(ViewModel input)
         {
-            var purchaseOrderLineItem = _repository.Find<PurchaseOrderLineItem>(input.EntityId);
+            var purchaseOrder = _repository.Find<PurchaseOrder>(input.ParentId);
+            var purchaseOrderLineItem = purchaseOrder.LineItems.FirstOrDefault(x => x.EntityId == input.EntityId);
             var model = new PurchaseOrderLineItemViewModel
             {
                 Item = purchaseOrderLineItem,
@@ -87,18 +98,18 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult SaveReceived(PurchaseOrderLineItemViewModel input)
         {
-            var origionalPurchaseOrderLineItem = _repository.Find<PurchaseOrderLineItem>(input.Item.EntityId);
+            var purchaseOrder = _repository.Find<PurchaseOrder>(input.ParentId);
+            var origionalPurchaseOrderLineItem = purchaseOrder.LineItems.FirstOrDefault(x => x.EntityId == input.EntityId);
             origionalPurchaseOrderLineItem.QuantityOrdered = input.Item.QuantityOrdered;
             origionalPurchaseOrderLineItem.Price = input.Item.Price;
             origionalPurchaseOrderLineItem.TotalReceived = input.Item.TotalReceived;
             origionalPurchaseOrderLineItem.Completed = input.Item.Completed;
             origionalPurchaseOrderLineItem.UnitType = input.Item.UnitType;
             origionalPurchaseOrderLineItem.SizeOfUnit = input.Item.SizeOfUnit;
-            var crudManager = _saveEntityService.ProcessSave(origionalPurchaseOrderLineItem);
+            var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
             crudManager = _inventoryService.ReceivePurchaseOrderLineItem(origionalPurchaseOrderLineItem,crudManager);
             var notification = crudManager.Finish();
             return Json(notification);
-
         }
     }
 }

@@ -29,8 +29,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 AddUpdateUrl =  UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)),
                 gridDef = _fieldListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.FIELDS.ToString(),
-                ParentId = input.ParentId
+                Title = WebLocalizationKeys.FIELDS.ToString()
             };
             return Json(model, JsonRequestBehavior.AllowGet);
         }

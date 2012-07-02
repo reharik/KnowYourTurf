@@ -1,10 +1,8 @@
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class Photo:DomainEntity
+    public class Photo : DomainEntity, IPersistableObject
     {
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }

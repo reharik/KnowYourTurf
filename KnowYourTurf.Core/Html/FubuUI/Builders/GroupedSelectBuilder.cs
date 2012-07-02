@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using FubuMVC.Core;
 using FubuMVC.UI.Configuration;
 using HtmlTags;
+using KnowYourTurf.Core.Domain;
 
 namespace KnowYourTurf.Core.Html.FubuUI.Builders
 {
@@ -13,16 +14,21 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         {
             var propertyName = def.Accessor.FieldName;
             var listPropertyInfo = def.ModelType.GetProperty(propertyName + "List");
-            return listPropertyInfo != null && listPropertyInfo.PropertyType == typeof(IDictionary<string, IEnumerable<SelectListItem>>);
+            var readOnlyListPropertyInfo = def.ModelType.GetProperty(propertyName.Replace("ReadOnly", "") + "List");
+            return (listPropertyInfo != null && listPropertyInfo.PropertyType == typeof(IDictionary<string, IEnumerable<SelectListItem>>)) || (readOnlyListPropertyInfo != null && readOnlyListPropertyInfo.PropertyType == typeof(IDictionary<string, IEnumerable<SelectListItem>>));
         }
 
         public override HtmlTag Build(ElementRequest request)
         {
             Action<SelectTag> action = x =>
             {
-                var value = request.RawValue;
+                var value = request.RawValue is DomainEntity ? ((DomainEntity)request.RawValue).EntityId : request.RawValue;
 
                 var propertyName = request.ToAccessorDef().Accessor.FieldName;
+                propertyName = propertyName.Contains("ReadOnly")
+                                   ? propertyName.Replace("ReadOnly", "")
+                                   : propertyName;
+
                 var listPropertyInfo = request.ToAccessorDef().ModelType.GetProperty(propertyName + "List");
                 var dictionary = listPropertyInfo.GetValue(request.Model, null) as IDictionary<string, IEnumerable<SelectListItem>>;
                 if (dictionary == null) return;
@@ -34,18 +40,15 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
                     x.OptionGroup(key);
                     dictionary[key].ForEachItem(l =>
                                                     {
-                                                        if(l.Value == value.ToString())
+                                                        if(value!=null && l.Value == value.ToString())
                                                         {
-                                                            valueToSelect = l.Value + "_" + key;
+                                                            valueToSelect = l.Value;
                                                         }
-                                                        x.Option(l.Text, l.Value + "_" + key);
+                                                        x.Option(l.Text, l.Value);
                                                     });
                 });
 
-                if (valueToSelect.IsNotEmpty())
-                {
-                    x.SelectByValue(valueToSelect);
-                }
+                x.SelectByValue(valueToSelect);
             };
             return new SelectTag(action);
         }

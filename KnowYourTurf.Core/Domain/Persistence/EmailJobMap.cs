@@ -12,7 +12,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Description);
             Map(x => x.Frequency);
             Map(x => x.Status);
-            References(x => x.EmailTemplate);
+            References(x => x.ReadOnlyEmailTemplate).Access.CamelCaseField(Prefix.Underscore).LazyLoad();
             References(x => x.EmailJobType);
             HasManyToMany(x => x.Subscribers).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
         }

@@ -11,13 +11,14 @@ namespace KnowYourTurf.Core.Services
     {
         IQueryable<ENTITY> PerformQuery<ENTITY>(string json = null,
                                                 Expression<Func<ENTITY, bool>> extraFilters = null,
-                                                bool isNullCheck = false) where ENTITY : DomainEntity;
+                                                bool isNullCheck = false) where ENTITY : IPersistableObject;
 
-        Expression<Func<ENTITY, bool>> PrepareExpression<ENTITY>(string json, Expression<Func<ENTITY, bool>> extraFilters= null)where ENTITY : DomainEntity;
+        Expression<Func<ENTITY, bool>> PrepareExpression<ENTITY>(string json,
+                                                                 Expression<Func<ENTITY, bool>> extraFilters = null);
 
         IQueryable<ENTITY> PerformQuery<ENTITY>(IEnumerable<ENTITY> items, string json = null,
-                                                                Expression<Func<ENTITY, bool>> extraFilters = null,
-                                                                bool isNullCheck = false) where ENTITY : DomainEntity;
+                                                Expression<Func<ENTITY, bool>> extraFilters = null,
+                                                bool isNullCheck = false);
     }
 
     public class DynamicExpressionQuery : IDynamicExpressionQuery
@@ -33,24 +34,24 @@ namespace KnowYourTurf.Core.Services
 
         public IQueryable<ENTITY> PerformQuery<ENTITY>(string json = null,
                                                         Expression<Func<ENTITY, bool>> extraFilters = null,
-                                                        bool isNullCheck = false) where ENTITY : DomainEntity
+                                                        bool isNullCheck = false) where ENTITY : IPersistableObject
         {
             var expression = PrepareExpression(json, extraFilters);
             return expression == null ? _repository.Query<ENTITY>() : _repository.Query(expression);
         }
         public IQueryable<ENTITY> PerformQuery<ENTITY>(IEnumerable<ENTITY> items, string json = null,
                                                         Expression<Func<ENTITY, bool>> extraFilters = null,
-                                                        bool isNullCheck = false) where ENTITY : DomainEntity
+                                                        bool isNullCheck = false) 
         {
             var expression = PrepareExpression(json, extraFilters);
             return expression == null ? items.AsQueryable() : items.Where(expression.Compile()).AsQueryable();
         }
 
-        public Expression<Func<ENTITY, bool>> PrepareExpression<ENTITY>(string json, Expression<Func<ENTITY, bool>> extraFilters= null)where ENTITY : DomainEntity
+        public Expression<Func<ENTITY, bool>> PrepareExpression<ENTITY>(string json, Expression<Func<ENTITY, bool>> extraFilters = null) 
         {
             if (json.IsEmpty()) return extraFilters;
             var jqGridFilter = DeserializeJson(json);
-            if (jqGridFilter.rules.Any(x => x.op == "ListContains" && x.listOfIds.Count() <= 0)) return extraFilters;
+            if (jqGridFilter.rules.Any(x => x.op == "ListContains" && !x.listOfIds.Any())) return extraFilters;
             
             var expression = _dynamicExpressionBuilder.Build<ENTITY>(jqGridFilter);
             if(extraFilters == null)

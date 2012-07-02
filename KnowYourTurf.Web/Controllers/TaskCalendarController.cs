@@ -56,15 +56,15 @@ namespace KnowYourTurf.Web.Controllers
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
             var category = _repository.Find<Category>(input.ParentId);
-            var tasks = category.Tasks.Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
+            var tasks = category.GetAllTasks().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
             tasks.Each(x =>
                        events.Add(new CalendarEvent
                                       {
                                           EntityId = x.EntityId,
-                                          title = x.Field.Abbreviation + ": " + x.TaskType.Name,
+                                          title = x.ReadOnlyField.Abbreviation + ": " + x.TaskType.Name,
                                           start = x.ScheduledStartTime.ToString(),
                                           end = x.ScheduledEndTime.ToString(),
-                                          color = x.Field.FieldColor
+                                          color = x.ReadOnlyField.FieldColor
                                       })
                 );
             return Json(events, JsonRequestBehavior.AllowGet);

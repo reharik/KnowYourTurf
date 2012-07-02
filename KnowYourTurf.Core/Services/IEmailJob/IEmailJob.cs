@@ -41,7 +41,7 @@ namespace KnowYourTurf.Core.Services.IEmailJob
                                                              sb.Append(task.ScheduledStartTime);
                                                              sb.AppendLine();
                                                              sb.Append("Field: ");
-                                                             sb.Append(task.Field.Name);
+                                                             sb.Append(task.ReadOnlyField.Name);
                                                              sb.AppendLine();
                                                              sb.AppendLine();
                                                          });

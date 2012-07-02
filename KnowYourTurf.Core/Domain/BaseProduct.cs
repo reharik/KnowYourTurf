@@ -3,7 +3,7 @@ using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class BaseProduct : DomainEntity
+    public class BaseProduct : DomainEntity, IPersistableObject
     {
         [ValidateNonEmpty]
         public virtual string Name { get; set; }

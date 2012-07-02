@@ -1,4 +1,5 @@
 ﻿using KnowYourTurf.Core;
+using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Models

@@ -64,7 +64,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             currentItem.id = itemName;
             currentItem.viewName = "GridView";
             currentItem.route = itemName;
-            currentItem.addUpate = itemName.Replace("list", "");
+            currentItem.addUpdate = itemName.Replace("list", "");
             currentItem.display = itemName.Replace("list", "display");
             return this;
         }
@@ -123,7 +123,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
 
         public IRouteTokenBuilder AddUpdateToken(string addUpdate)
         {
-            currentItem.addUpate = addUpdate;
+            currentItem.addUpdate = addUpdate;
             return this;
         }
 

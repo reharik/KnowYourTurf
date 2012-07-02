@@ -6,6 +6,7 @@ using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models.VendorContact;
+using System.Linq;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -22,7 +23,13 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate(ViewModel input)
         {
-            var vendorContact = input.EntityId > 0 ? _repository.Find<VendorContact>(input.EntityId) : new VendorContact();
+            VendorContact vendorContact;
+            if (input.EntityId > 0)
+            {
+                var vendor = _repository.Find<Vendor>(input.ParentId);
+                vendorContact = vendor.Contacts.FirstOrDefault(x => x.EntityId == input.EntityId);
+            }
+            else{ vendorContact = new VendorContact();}
             var model = new VendorContactViewModel
                             {
                                 ParentId = input.ParentId > 0 ? input.ParentId : vendorContact.Vendor.EntityId,
@@ -34,7 +41,8 @@ namespace KnowYourTurf.Web.Controllers
       
         public ActionResult Display(ViewModel input)
         {
-            var vendorContact = _repository.Find<VendorContact>(input.EntityId);
+            var vendor = _repository.Find<Vendor>(input.ParentId);
+            var vendorContact = vendor.Contacts.FirstOrDefault(x => x.EntityId == input.EntityId);
             var model = new VendorContactViewModel
                             {
                                 Item = vendorContact,
@@ -46,38 +54,39 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Delete(ViewModel input)
         {
-            var vendorContact = _repository.Find<VendorContact>(input.EntityId);
-            _repository.HardDelete(vendorContact);
-            _repository.UnitOfWork.Commit();
-            return null;
+            var vendor = _repository.Find<Vendor>(input.ParentId);
+            var vendorContact = vendor.Contacts.FirstOrDefault(x => x.EntityId == input.EntityId);
+            vendor.RemoveContact(vendorContact);
+            var crudManager = _saveEntityService.ProcessSave(vendor);
+            var notification = crudManager.Finish();
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
-            input.EntityIds.Each(x =>
-            {
-                var vendorContact = _repository.Find<VendorContact>(x);
-                _repository.HardDelete(vendorContact);
-            });
-            _repository.Commit();
-            return Json(new Notification{Success = true}, JsonRequestBehavior.AllowGet);
+            var vendor = _repository.Find<Vendor>(input.ParentId);
+            var deleteContacts = vendor.Contacts.Where(x => input.EntityIds.Contains(x.EntityId));
+            deleteContacts.ForEachItem(vendor.RemoveContact);
+            var crudManager = _saveEntityService.ProcessSave(vendor);
+            var notification = crudManager.Finish();
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Save(VendorContactViewModel input)
         {
+            var vendor = _repository.Find<Vendor>(input.ParentId);
             VendorContact vendorContact;
-            if (input.Item.EntityId > 0)
+            if (input.EntityId > 0)
             {
-                vendorContact = _repository.Find<VendorContact>(input.Item.EntityId);
+                vendorContact = vendor.Contacts.FirstOrDefault(x => x.EntityId == input.EntityId);
             }
             else
             {
                 vendorContact = new VendorContact();
-                var vendor = _repository.Find<Vendor>(input.ParentId);
-                vendorContact.Vendor = vendor;
+                vendor.AddContact(vendorContact);
             }
             mapItem(vendorContact, input);
-            var crudManager = _saveEntityService.ProcessSave(vendorContact);
+            var crudManager = _saveEntityService.ProcessSave(vendor);
             var notification = crudManager.Finish();
             return Json(notification, JsonRequestBehavior.AllowGet);
         }

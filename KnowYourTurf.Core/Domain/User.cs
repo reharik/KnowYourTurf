@@ -10,7 +10,7 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class User : DomainEntity,IUser
+    public class User : DomainEntity,IUser, IPersistableObject
     {
         [ValidateNonEmpty]
         public virtual string FirstName { get; set; }

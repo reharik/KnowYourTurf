@@ -38,7 +38,8 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult VendorContacts(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<VendorContact>(input.filters, x => x.Vendor.EntityId == input.ParentId);
+            var vendor = _repository.Find<Vendor>(input.ParentId);
+            var items = _dynamicExpressionQuery.PerformQuery(vendor.Contacts,input.filters);
             var gridItemsViewModel = _vendorContactListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
