@@ -67,9 +67,9 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForForm<ChemicalController>(x => x.AddUpdate(null)).End();
 
             _builder.TokenForList<DocumentListController>(x => x.ItemList(null)).End();
-            _builder.TokenForForm<DocumentController>(x => x.AddUpdate(null)).End();
+            _builder.TokenForForm<DocumentController>(x => x.AddUpdate(null)).ViewName("DocumentView").End();
             _builder.TokenForList<PhotoListController>(x => x.ItemList(null)).End();
-            _builder.TokenForForm<PhotoController>(x => x.AddUpdate(null)).End();
+            _builder.TokenForForm<PhotoController>(x => x.AddUpdate(null)).ViewName("PhotoView").End();
 
             _builder.TokenForList<InventoryListController>(x => x.ItemList(null)).End();
 

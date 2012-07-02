@@ -168,8 +168,7 @@ KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
             gridContainer: "#pendingGridContainer",
             route:"task",
             id:"pending",
-            parentId: $("#employeeId").val(),
-            rootId: this.options.ParentId
+            parentId: $("#employeeId").val()
         });
         var completedGridView = new KYT.Views.DahsboardGridView({el:"#completedTaskGridContainer",
           url:this.options.completedGridUrl,
@@ -195,14 +194,15 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
     events:_.extend({
     }, KYT.Views.AjaxFormView.prototype.events),
     viewLoaded:function(){
+        var rel = KYT.State.get("Relationships");
         $('#FieldColor',this.el).miniColors();
         var pendingGridView = new KYT.Views.DahsboardGridView({
             el:"#pendingTaskGridContainer",
             url:this.options.pendingGridUrl,
             gridContainer: "#pendingGridContainer",
             id:"pending",
-            parentId: $("#fieldId").val(),
-            rootId: this.options.ParentId,
+            parentId:rel.entityId,
+            rootId: rel.parentId,
             route:"task"
         });
         var completedGridView = new KYT.Views.DahsboardGridView({
@@ -210,18 +210,19 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
             url:this.options.completedGridUrl,
             gridContainer: "#completedGridContainer",
             id:"completed",
-            parentId: $("#fieldId").val(),
-            rootId: this.options.ParentId,
+            parentId:rel.entityId,
+            rootId: rel.parentId,
             route:"taskdisplay"
         });
         var photoGridView = new KYT.Views.DahsboardGridView({
             el:"#photoGridContainer",
             url:this.options.photoGridUrl,
             gridContainer: "#photoGridContainer",
-            id:"photos",
+            id:"photo",
             route:"photo",
-            parentId: $("#fieldId").val(),
-            rootId: this.options.ParentId
+            parentId:rel.entityId,
+            rootId: rel.parentId,
+            parent:"Field"
         });
         var documentGridView = new KYT.Views.DahsboardGridView({
             el:"#documentGridContainer",
@@ -229,9 +230,9 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
             gridContainer: "#documentGridContainer",
             id:"documents",
             route:"document",
-            parentId: $("#fieldId").val(),
-            rootId: this.options.ParentId
-
+            parentId:rel.entityId,
+            rootId: rel.parentId,
+            parent:"Field"
         });
 
         pendingGridView.render();
@@ -255,13 +256,13 @@ KYT.Views.DahsboardGridView = KYT.Views.GridView.extend({
         KYT.vent.bind(this.options.id+":DisplayItem",this.displayItem,this);
     },
     addNew:function(){
-        KYT.vent.trigger("route",this.options.route+"/0/"+this.options.ParentId+"/"+this.options.RootId,true);
+        KYT.vent.trigger("route",KYT.generateRoute(this.options.route, 0, this.options.parentId,this.options.rootId,this.options.parent),true);
     },
     editItem:function(id){
-        KYT.vent.trigger("route",this.options.route+"/"+id+"/"+this.options.ParentId+"/"+this.options.RootId,true);
+        KYT.vent.trigger("route",KYT.generateRoute(this.options.route, id, this.options.parentId,this.options.rootId,this.options.parent),true);
     },
     displayItem:function(id){
-        KYT.vent.trigger("route",this.options.route+"/"+id,true);
+        KYT.vent.trigger("route",KYT.generateRoute(this.options.route, id, this.options.parentId,this.options.rootId),true);
     },
     onClose:function(){
         KYT.vent.unbind("AddUpdateItem");
@@ -301,6 +302,34 @@ KYT.Views.TaskFormView = KYT.Views.AjaxFormView.extend({
         this.storeChild(this.equipmentToken);
     }
 });
+
+KYT.Views.FieldListView = KYT.Views.GridView.extend({
+    viewLoaded:function(){
+        KYT.vent.bind("Redirect",this.showDashboard,this);
+    },
+    showDashboard:function(id){
+        KYT.vent.trigger("route",KYT.generateRoute("fielddashboard",+id,this.options.ParentId),true);
+    }
+});
+
+KYT.Views.PhotoView = KYT.Views.AjaxFormView.extend({
+    saveItem:function(){
+        var $form = $(this.options.crudFormSelector,this.el);
+        $form.append($("<input></input>").attr("id","Var").attr("type","hidden").val("Form"));
+        $form.data().viewId = this.id;
+        $form.submit();
+    }
+});
+
+KYT.Views.DocumentView = KYT.Views.AjaxFormView.extend({
+    saveItem:function(){
+        var $form = $(this.options.crudFormSelector,this.el);
+        $form.append($("<input></input>").attr("id","Var").attr("type","hidden").val("Form"));
+        $form.data().viewId = this.id;
+        $form.submit();
+    }
+});
+
 
 
 KYT.Views.AppointmentView = KYT.Views.AjaxFormView.extend({
@@ -532,11 +561,3 @@ KYT.Views.TrainerEditableTokenView = KYT.Views.EditableTokenView.extend({
 
 });
 
-KYT.Views.FieldListView = KYT.Views.GridView.extend({
-    viewLoaded:function(){
-        KYT.vent.bind("Redirect",this.showDashboard,this);
-    },
-    showDashboard:function(id){
-        KYT.vent.trigger("route","fielddashboard/"+id+"/"+this.options.ParentId,true);
-    }
-});

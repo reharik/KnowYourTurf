@@ -85,7 +85,7 @@ namespace KnowYourTurf.Web.Controllers
             var newDoc = mapToDomain(input, photo);
             photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos");
             var crudManager = _saveEntityService.ProcessSave(newDoc);
-            if (input.From == "Field")
+            if (input.Var == "Field")
             {
                 var field = _repository.Find<Field>(input.ParentId);
                 field.AddPhoto(photo);
@@ -93,7 +93,7 @@ namespace KnowYourTurf.Web.Controllers
             } 
             var notification = crudManager.Finish();
             notification.Variable = photo.FileUrl;
-            return Json(notification, "text/plain");
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
         private Photo mapToDomain(PhotoViewModel input, Photo photo)

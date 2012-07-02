@@ -12,8 +12,6 @@
 
     @MvcHtmlString.Create(FormFor<PhotoController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
         @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
-        @MvcHtmlString.Create(Html.HiddenFor(x => x.From).ToString())
-        @MvcHtmlString.Create(Html.HiddenFor(x => x.ParentId).ToString())
         
     <div class="col left">
         <div class="fieldRow">

@@ -9,7 +9,7 @@
 KYT.Controller = (function(KYT, Backbone){
     var Controller = {};
 
-       Controller.showViews=function(splat,entityId, parentId,rootId,param1){
+       Controller.showViews=function(splat,entityId, parentId,rootId,_var){
            var routeToken = _.find(KYT.routeTokens,function(item){
                return item.route == splat;
            });
@@ -19,9 +19,15 @@ KYT.Controller = (function(KYT, Backbone){
            if(entityId) {viewOptions.url +="/"+entityId; viewOptions.route+="/"+entityId;}
            if(parentId) {viewOptions.url +="?ParentId="+parentId;viewOptions.route+="/"+parentId;}
            if(rootId) {viewOptions.url +="&RootId="+rootId;viewOptions.route+="/"+rootId;}
-           if(param1) {viewOptions.url +="&Param1="+param1;viewOptions.route+="/"+param1;}
-
-            var item = new KYT.Views[routeToken.viewName](viewOptions);
+           if(_var) {viewOptions.url +="&Var="+_var;viewOptions.route+="/"+_var; viewOptions.extraVar = _var;}
+           KYT.State.set({"Relationships":
+               {
+                   "entityId":entityId?entityId:0,
+                   "parentId":parentId?parentId:0,
+                   "rootId":rootId?rootId:0
+               }
+           });
+           var item = new KYT.Views[routeToken.viewName](viewOptions);
 
            if(routeToken.isChild){
                var hasParent = KYT.WorkflowManager.addChildView(item);

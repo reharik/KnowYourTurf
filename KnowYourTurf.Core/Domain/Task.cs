@@ -16,6 +16,7 @@ namespace KnowYourTurf.Core.Domain
 
         /// <summary>
         /// Aggregate Root that should not be modified through Task
+        /// must have set on readonly field right now for model binder.
         /// </summary>
         private Field _readOnlyField;
         public virtual Field ReadOnlyField { get { return _readOnlyField; } set { _readOnlyField = value; } }

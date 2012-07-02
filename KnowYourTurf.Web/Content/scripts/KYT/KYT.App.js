@@ -57,6 +57,15 @@ KYT.bind("initialize:after", function(){
     }
 });
 
+KYT.generateRoute = function(route,_entityId,_parentId,_rootId,_var){
+    var rel = KYT.State.get("Relationships");
+    var entityId = _entityId?_entityId:0;
+    var parentId = _parentId && _parentId>0 ?_parentId:rel.parentId;
+    var rootId = _rootId && _rootId>0?_rootId:rel.rootId;
+    var variable = _var?"/"+_var:"";
+    return route+"/"+ entityId+ "/"+ parentId+ "/"+rootId+variable;
+};
+
 // calling start will run all of the initializers
 // this can be done from your JS file directly, or
 // from a script block in your HTML

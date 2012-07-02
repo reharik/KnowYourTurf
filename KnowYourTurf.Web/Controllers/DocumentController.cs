@@ -87,7 +87,7 @@ namespace KnowYourTurf.Web.Controllers
             var newDoc = mapToDomain(input, document);
             document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments");
             var crudManager = _saveEntityService.ProcessSave(newDoc);
-            if (input.From == "Field")
+            if (input.Var == "Field")
             {
                 var field = _repository.Find<Field>(input.ParentId);
                 field.AddDocument(document);

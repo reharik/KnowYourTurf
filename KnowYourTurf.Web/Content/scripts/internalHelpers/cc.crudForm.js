@@ -39,7 +39,6 @@ if (typeof KYT == "undefined") {
                 if(typeof(item) === 'function') item(_arr);
             });
         };
-        // public methods.
 
         var nArea = KYT.notificationService.retrieveArea(notificationAreaName);
         this.setBeforeSubmitFuncs = function(beforeSubmitFunc){

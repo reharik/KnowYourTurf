@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
-using KnowYourTurf.Core.Domain;
+﻿using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 
@@ -22,7 +16,6 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Task> BuildGrid()
         {
-            
             GridBuilder.LinkColumnFor(x => x.TaskType.Name)
                 .ForAction<TaskController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem).WithId("pending")

@@ -7,6 +7,49 @@
  */
 
 KYT.Views = {};
+
+// use like this
+// this._super("testMethod",arguments);
+
+
+(function(Backbone) {
+
+  // The super method takes two parameters: a method name
+  // and an array of arguments to pass to the overridden method.
+  // This is to optimize for the common case of passing 'arguments'.
+  function _super(methodName, args) {
+
+    // Keep track of how far up the prototype chain we have traversed,
+    // in order to handle nested calls to _super.
+    this._superCallObjects || (this._superCallObjects = {});
+    var currentObject = this._superCallObjects[methodName] || this,
+        parentObject  = findSuper(methodName, currentObject);
+    this._superCallObjects[methodName] = parentObject;
+    if(parentObject[methodName]){
+        var result = parentObject[methodName].apply(this, args || []);
+    }
+    delete this._superCallObjects[methodName];
+    return result;
+  }
+
+  // Find the next object up the prototype chain that has a
+  // different implementation of the method.
+  function findSuper(methodName, childObject) {
+    var object = childObject;
+    while (object[methodName] === childObject[methodName]) {
+      object = object.constructor.__super__;
+    }
+    return object;
+  }
+
+  _.each(["Model", "Collection", "View", "Router"], function(klass) {
+    Backbone[klass].prototype._super = _super;
+  });
+
+})(Backbone);
+
+
+
 KYT.Views.View = Backbone.View.extend({
     // Remove the child view and close it
     removeChildView: function(item){
@@ -208,14 +251,14 @@ KYT.Views.GridView = KYT.Views.View.extend({
         KYT.vent.bind("DisplayItem",this.displayItem,this);
     },
     addNew:function(){
-        KYT.vent.trigger("route",this.options.addUpdate,true);
+        KYT.vent.trigger("route",KYT.generateRoute(this.options.addUpdate),true);
         //$.publish('/contentLevel/grid_'+this.id+'/AddUpdateItem', [this.options.addUpdateUrl]);
     },
     editItem:function(id){
-        KYT.vent.trigger("route",this.options.addUpdate+"/"+id,true);
+        KYT.vent.trigger("route",KYT.generateRoute(this.options.addUpdate,id), true);
     },
     displayItem:function(id){
-        KYT.vent.trigger("route",this.options.display+"/"+id,true);
+        KYT.vent.trigger("route",KYT.generateRoute(this.options.display,id), true);
     },
     deleteItems:function(){
         if (confirm("Are you sure you would like to delete this Item?")) {
