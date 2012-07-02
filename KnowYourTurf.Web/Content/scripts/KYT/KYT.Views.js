@@ -537,6 +537,8 @@ KYT.Views.EditableTokenView = KYT.Views.TokenView.extend({
 });
 
 
+
+
 KYT.tokenDefaults = {
     availableItems:[],
     selectedItems: [],

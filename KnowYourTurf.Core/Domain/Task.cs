@@ -15,7 +15,7 @@ namespace KnowYourTurf.Core.Domain
     {
 
         /// <summary>
-        /// Aggregate Root that should not be modified through Email Job
+        /// Aggregate Root that should not be modified through Task
         /// </summary>
         private Field _readOnlyField;
         public virtual Field ReadOnlyField { get { return _readOnlyField; } set { _readOnlyField = value; } }

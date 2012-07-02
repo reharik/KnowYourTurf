@@ -29,8 +29,17 @@
     @Script("jqueryPlugins/jquery.form.js").ToHtmlTag()
     @Script("internalHelpers/cc.utilities.js").ToHtmlTag()
     @Script("internalHelpers/cc.crudForm.js").ToHtmlTag()
+    @Script("internalHelpers/cc.Notifications.js").ToHtmlTag()
     @Script("externalHelpers/underscore.js").ToHtmlTag()
     @Script("externalHelpers/backbone.js").ToHtmlTag()
+    @Script("externalHelpers/backbone.marionette.js").ToHtmlTag()
+    
+    @Script("KYT/KYT.App.js").ToHtmlTag()
+    @Script("KYT/KYT.Views.js").ToHtmlTag()
+    @Script("KYT/KYT.State.js").ToHtmlTag()
+    @Script("KYT/KYT.OneOffViews.js").ToHtmlTag()
+
+    
 
     @Script("kyt.baseClass.js").ToHtmlTag()
     @Script("kyt.PopupView.js").ToHtmlTag()
@@ -42,34 +51,15 @@
     @Script("externalHelpers/json2.js").ToHtmlTag()
     
     <script type="text/javascript">
-        
-        var forgotPasswordUrl =@MvcHtmlString.Create(JsonUtil.ToJson(Model.ForgotPasswordUrl));
-        var popupTitle = "@Model.ForgotPasswordTitle";
-		
-		kyt.contentLevelControllers = {};
-		var extraFormOptions = {};
-
+        var extraFormOptions = {};
+        extraFormOptions.forgotPasswordUrl=@MvcHtmlString.Create(JsonUtil.ToJson(Model.ForgotPasswordUrl));
+        extraFormOptions.popupTitle = "@Model.ForgotPasswordTitle";
+                
         $(document).ready(function () {
-            
-            $('.kyt_CRUD').crudForm({});
-            $("#save").click(function (event) {
-                $("#CRUDForm").submit();
-                event.preventDefault();
-            });
-
-            $("#forgotPasswordArea").hide();
-
-            $("#forgotPassword").click(function () {
-                new kyt.ForgottenPasswordController({el: "#forgotPassword",
-                        id: "forgotPasswordController",
-                        forgottenPasswordUrl: forgotPasswordUrl,
-                        title: popupTitle });
-            });
-
-            $("input[name='UserName']").focus();
-
+            var view = new KYT.Views.LoginView({el:"body#signin"});
+            view.render();
         });
-        </script>
+    </script>
     </head>
     <body id="signin">
         <div id="outer-wrapper">

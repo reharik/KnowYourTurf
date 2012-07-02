@@ -16,8 +16,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.ImageUrl);
             Map(x => x.Status);
             Map(x => x.FieldColor);
-            References(x=>x.ReadOnlyCategory).Access.CamelCaseField(Prefix.Underscore).LazyLoad();
-            HasMany(x => x.Tasks).Inverse().Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
+            References(x=>x.ReadOnlyCategory).Column("Category_id").Access.CamelCaseField(Prefix.Underscore).LazyLoad();
+            HasMany(x => x.Tasks).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
             HasMany(x => x.Events).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
             HasMany(x => x.Documents).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
             HasMany(x => x.Photos).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();

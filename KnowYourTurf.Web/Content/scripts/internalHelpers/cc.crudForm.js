@@ -1,5 +1,5 @@
-if (typeof kyt == "undefined") {
-            var kyt = {};
+if (typeof KYT == "undefined") {
+            var KYT = {};
 }
 
 (function($) {
