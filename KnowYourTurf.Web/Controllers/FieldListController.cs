@@ -24,7 +24,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ItemList(ViewModel input)
         {
-            var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null))+"?ParentId="+input.ParentId;
+            var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null)) + "?RootId=" + input.RootId;
             ListViewModel model = new ListViewModel()
             {
                 AddUpdateUrl =  UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)),
@@ -36,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult Fields(GridItemsRequestModel input)
         {
-            var category = _repository.Find<Category>(input.ParentId);
+            var category = _repository.Find<Category>(input.RootId);
             var items = _dynamicExpressionQuery.PerformQuery(category.Fields, input.filters);
             var gridItemsViewModel = _fieldListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);

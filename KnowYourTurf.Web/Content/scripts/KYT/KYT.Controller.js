@@ -19,12 +19,13 @@ KYT.Controller = (function(KYT, Backbone){
            if(entityId) {viewOptions.url +="/"+entityId; viewOptions.route+="/"+entityId;}
            if(parentId) {viewOptions.url +="?ParentId="+parentId;viewOptions.route+="/"+parentId;}
            if(rootId) {viewOptions.url +="&RootId="+rootId;viewOptions.route+="/"+rootId;}
-           if(_var) {viewOptions.url +="&Var="+_var;viewOptions.route+="/"+_var; viewOptions.extraVar = _var;}
+           if(_var) {viewOptions.url +="&Var="+_var;viewOptions.route+="/"+_var;}
            KYT.State.set({"Relationships":
                {
                    "entityId":entityId?entityId:0,
                    "parentId":parentId?parentId:0,
-                   "rootId":rootId?rootId:0
+                   "rootId":rootId?rootId:0,
+                   "extraVar":_var?_var:""
                }
            });
            var item = new KYT.Views[routeToken.viewName](viewOptions);

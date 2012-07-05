@@ -28,7 +28,7 @@ namespace KnowYourTurf.Core.Html.Grid
 
         public LinkColumn(Expression<Func<ENTITY, object>> expression,string gridName = "")
         {
-            _id = typeof(ENTITY).Name.ToLowerInvariant();
+            _id = typeof(ENTITY).Name.ToLowerInvariant()+"list";
 
             _gridName = gridName;
             _divCssClasses = new List<string>();

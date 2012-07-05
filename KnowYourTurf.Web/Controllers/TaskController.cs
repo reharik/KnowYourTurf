@@ -62,7 +62,7 @@ namespace KnowYourTurf.Web.Controllers
 
             if (input.Copy)
             {
-                model.Item.EntityId = 0;
+                // entityid is changed on view cuz the entity is in the NH graph here on server
                 model.Item.Complete = false;
             }
                 
@@ -168,7 +168,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(TaskViewModel input)
         {
-            var task = input.Item.EntityId > 0 ? _repository.Find<Task>(input.Item.EntityId) : new Task();
+            var task = input.EntityId > 0 ? _repository.Find<Task>(input.EntityId) : new Task();
 
             mapItem(task, input.Item);
             mapChildren(task, input);

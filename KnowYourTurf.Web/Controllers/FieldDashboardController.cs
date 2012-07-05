@@ -44,14 +44,12 @@ namespace KnowYourTurf.Web.Controllers
             var docuemntUrl = UrlContext.GetUrlForAction<FieldDashboardController>(x => x.DocumentGrid(null)) + "?ParentId=" + input.EntityId;
             var model = new FieldDashboardViewModel
                             {
-                                EntityId = input.EntityId,
                                 Item = field,
                                 PendingGridUrl =url,
                                 CompletedGridUrl = completeUrl,
                                 DocumentGridUrl = docuemntUrl,
                                 PhotoGridUrl = photoUrl,
                                 Title = WebLocalizationKeys.FIELD_INFORMATION.ToString(),
-                                ParentId = input.ParentId
                             };
            
             return View("FieldDashboard", model);

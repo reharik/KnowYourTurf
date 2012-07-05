@@ -32,7 +32,7 @@
     <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
 @MvcHtmlString.Create(FormFor<TaskController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-    @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
+    <input type="hidden" id="EntityId" name="EntityId" value="@Model.Item.EntityId"/>
     <input type="hidden" id="RootId" name="RootId" value="@Model.RootId"/>
 
     <div class="col left">

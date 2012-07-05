@@ -29,7 +29,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForForm<FieldDashboardController>(x => x.ViewField(null)).ViewName("FieldDashboardView").End();
 
             _builder.TokenForList<TaskListController>(x => x.ItemList(null)).End();
-            _builder.TokenForForm<TaskCalendarController>(x => x.TaskCalendar(null)).End();
+            _builder.TokenForForm<TaskCalendarController>(x => x.TaskCalendar(null)).ViewName("CalendarView").SubViewName("TaskFormView").End();
             _builder.TokenForForm<TaskController>(x => x.AddUpdate(null)).ViewName("TaskFormView").End();
             _builder.UrlForDisplay<TaskController>(x => x.Display(null)).End();
 
@@ -67,9 +67,9 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForForm<ChemicalController>(x => x.AddUpdate(null)).End();
 
             _builder.TokenForList<DocumentListController>(x => x.ItemList(null)).End();
-            _builder.TokenForForm<DocumentController>(x => x.AddUpdate(null)).ViewName("DocumentView").End();
+            _builder.TokenForForm<DocumentController>(x => x.AddUpdate(null)).End();
             _builder.TokenForList<PhotoListController>(x => x.ItemList(null)).End();
-            _builder.TokenForForm<PhotoController>(x => x.AddUpdate(null)).ViewName("PhotoView").End();
+            _builder.TokenForForm<PhotoController>(x => x.AddUpdate(null)).End();
 
             _builder.TokenForList<InventoryListController>(x => x.ItemList(null)).End();
 

@@ -66,7 +66,9 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         KYT.repository.ajaxGet(this.options.calendarDef.EventChangedUrl,data,$.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
     },
     dayClick:function(date, allDay, jsEvent, view) {
-        var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"), "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")};
+        var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"),
+            "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")
+        };
         this.editEvent(this.options.calendarDef.AddUpdateUrl,data);
     },
     eventClick:function(calEvent, jsEvent, view) {
@@ -90,12 +92,13 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
 
     },
     editEvent:function(url, data){
-        var rootId = $("#RootId").val();
+        var rootId = KYT.State.get("Relationships").rootId;
         var _data = $.extend({"RootId":rootId, Popup:true},data,{});
         var formOptions = {
             id: "editModule",
             url: url,
             data:_data,
+            view:this.options.subViewName,
             buttons: KYT.Views.popupButtonBuilder.builder("editModule").standardEditButons()
         };
         this.ajaxPopupFormModule = new KYT.Views.AjaxPopupFormModule(formOptions);
@@ -118,7 +121,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         this.ajaxPopupDisplay.close();
         //this feels retarded for some reason
         KYT.vent.bind("form:editModule:pageLoaded", function(){
-            $(this.ajaxPopupFormModule.el).find("#Event_EntityId").val(0);
+            $(this.ajaxPopupFormModule.el).find("#EntityId").val(0);
             KYT.vent.unbind("form:editModule:pageLoaded");
         },this);
     },
@@ -163,30 +166,34 @@ KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
     }, KYT.Views.AjaxFormView.prototype.events),
     viewLoaded:function(){
         this.loadTokenizers();
-        var pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
+        this.pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
             url:this.options.pendingGridUrl,
             gridContainer: "#pendingGridContainer",
             route:"task",
             id:"pending",
             parentId: $("#employeeId").val()
         });
-        var completedGridView = new KYT.Views.DahsboardGridView({el:"#completedTaskGridContainer",
+        this.completedGridView = new KYT.Views.DahsboardGridView({el:"#completedTaskGridContainer",
           url:this.options.completedGridUrl,
             gridContainer: "#completedGridContainer",
             id:"completed",
             parentId: $("#employeeId").val(),
             rootId: this.options.ParentId,
             route:"taskdisplay"});
-        pendingGridView.render();
-        completedGridView.render();
-        this.storeChild(pendingGridView);
-        this.storeChild(completedGridView);
+        this.pendingGridView.render();
+        this.completedGridView.render();
+        this.storeChild(this.pendingGridView);
+        this.storeChild(this.completedGridView);
     },
     loadTokenizers: function(){
         var options = $.extend({el:"#rolesInputRoot"}, this.options.rolesOptions);
         this.tokenView = new KYT.Views.TokenView(options);
         this.tokenView.render();
         this.storeChild(this.tokenView);
+    },
+    callbackAction: function(){
+        this.pendingGridView.callbackAction();
+        this.completedGridView.callbackAction();
     }
 });
 
@@ -196,38 +203,38 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
     viewLoaded:function(){
         var rel = KYT.State.get("Relationships");
         $('#FieldColor',this.el).miniColors();
-        var pendingGridView = new KYT.Views.DahsboardGridView({
+        this.pendingGridView = new KYT.Views.DahsboardGridView({
             el:"#pendingTaskGridContainer",
             url:this.options.pendingGridUrl,
-            gridContainer: "#pendingGridContainer",
+            gridContainer: "#pendingGridHolder",
             id:"pending",
             parentId:rel.entityId,
             rootId: rel.parentId,
             route:"task"
         });
-        var completedGridView = new KYT.Views.DahsboardGridView({
+        this.completedGridView = new KYT.Views.DahsboardGridView({
             el:"#completedTaskGridContainer",
             url:this.options.completedGridUrl,
-            gridContainer: "#completedGridContainer",
+            gridContainer: "#completedGridHolder",
             id:"completed",
             parentId:rel.entityId,
             rootId: rel.parentId,
             route:"taskdisplay"
         });
-        var photoGridView = new KYT.Views.DahsboardGridView({
+        this.photoGridView = new KYT.Views.DahsboardGridView({
             el:"#photoGridContainer",
             url:this.options.photoGridUrl,
-            gridContainer: "#photoGridContainer",
+            gridContainer: "#photoGridHolder",
             id:"photo",
             route:"photo",
             parentId:rel.entityId,
             rootId: rel.parentId,
             parent:"Field"
         });
-        var documentGridView = new KYT.Views.DahsboardGridView({
+        this.documentGridView = new KYT.Views.DahsboardGridView({
             el:"#documentGridContainer",
             url:this.options.documentGridUrl,
-            gridContainer: "#documentGridContainer",
+            gridContainer: "#documentGridHolder",
             id:"documents",
             route:"document",
             parentId:rel.entityId,
@@ -235,14 +242,20 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
             parent:"Field"
         });
 
-        pendingGridView.render();
-        completedGridView.render();
-        photoGridView.render();
-        documentGridView.render();
-        this.storeChild(pendingGridView);
-        this.storeChild(completedGridView);
-        this.storeChild(photoGridView);
-        this.storeChild(documentGridView);
+        this.pendingGridView.render();
+        this.completedGridView.render();
+        this.photoGridView.render();
+        this.documentGridView.render();
+        this.storeChild(this.pendingGridView);
+        this.storeChild(this.completedGridView);
+        this.storeChild(this.photoGridView);
+        this.storeChild(this.documentGridView);
+    },
+    callbackAction: function(){
+        this.pendingGridView.callbackAction();
+        this.completedGridView.callbackAction();
+        this.photoGridView.callbackAction();
+        this.documentGridView.callbackAction();
     }
 });
 
@@ -279,7 +292,7 @@ KYT.Views.TaskFormView = KYT.Views.AjaxFormView.extend({
     loadTokenizers:function(){
         var employeeTokenOptions = {
             id:"employee",
-            el:"#employeeTokenizer",
+            el:this.$el.find("#employeeTokenizer"),
             availableItems:this.options.employeeOptions.availableItems,
             selectedItems:this.options.employeeOptions.selectedItems,
             inputSelector:this.options.employeeOptions.inputSelector
@@ -287,7 +300,7 @@ KYT.Views.TaskFormView = KYT.Views.AjaxFormView.extend({
 
         var equipmentTokenOptions = {
             id:"equipment",
-            el:"#equipmentTokenizer",
+            el:this.$el.find("#equipmentTokenizer"),
             availableItems:this.options.equipmentOptions.availableItems,
             selectedItems:this.options.equipmentOptions.selectedItems,
             inputSelector:this.options.equipmentOptions.inputSelector
@@ -305,32 +318,12 @@ KYT.Views.TaskFormView = KYT.Views.AjaxFormView.extend({
 
 KYT.Views.FieldListView = KYT.Views.GridView.extend({
     viewLoaded:function(){
-        KYT.vent.bind("Redirect",this.showDashboard,this);
+        KYT.vent.bind(this.id+":Redirect",this.showDashboard,this);
     },
     showDashboard:function(id){
         KYT.vent.trigger("route",KYT.generateRoute("fielddashboard",+id,this.options.ParentId),true);
     }
 });
-
-KYT.Views.PhotoView = KYT.Views.AjaxFormView.extend({
-    saveItem:function(){
-        var $form = $(this.options.crudFormSelector,this.el);
-        $form.append($("<input></input>").attr("id","Var").attr("type","hidden").val("Form"));
-        $form.data().viewId = this.id;
-        $form.submit();
-    }
-});
-
-KYT.Views.DocumentView = KYT.Views.AjaxFormView.extend({
-    saveItem:function(){
-        var $form = $(this.options.crudFormSelector,this.el);
-        $form.append($("<input></input>").attr("id","Var").attr("type","hidden").val("Form"));
-        $form.data().viewId = this.id;
-        $form.submit();
-    }
-});
-
-
 
 KYT.Views.AppointmentView = KYT.Views.AjaxFormView.extend({
     events:_.extend({

@@ -28,19 +28,18 @@ namespace KnowYourTurf.Web.Controllers
                            DeleteUrl = UrlContext.GetUrlForAction<EventController>(x => x.Delete(null)),
                            CalendarDefinition = new CalendarDefinition
                                                    {
-                                                       Url = UrlContext.GetUrlForAction<EventCalendarController>(x => x.Events(null))+"?ParentId="+input.ParentId,
+                                                       Url = UrlContext.GetUrlForAction<EventCalendarController>(x => x.Events(null)) + "?RootId=" + input.RootId,
                                                        AddUpdateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate(null)),
                                                        DisplayUrl = UrlContext.GetUrlForAction<EventController>(x => x.Display(null)),
-                                                       EventChangedUrl = UrlContext.GetUrlForAction<EventCalendarController>(x => x.EventChanged(null)) +"?ParentId="+input.ParentId
-                                                   },
-                           RootId = input.ParentId
+                                                       EventChangedUrl = UrlContext.GetUrlForAction<EventCalendarController>(x => x.EventChanged(null))
+                                                   }
                        };
             return View(model);
         }
 
         public JsonResult EventChanged(EventChangedViewModel input)
         {
-            var field = _repository.Find<Field>(input.ParentId);
+            var field = _repository.Query<Field>(x => x.Tasks.Any(y => y.EntityId == input.EntityId)).FirstOrDefault();
             var _event = field.Events.FirstOrDefault(x => x.EntityId == input.EntityId);
             _event.ScheduledDate = input.ScheduledDate;
             _event.StartTime = input.StartTime;
@@ -55,8 +54,8 @@ namespace KnowYourTurf.Web.Controllers
             var eventsItems = new List<CalendarEvent>();
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
-            var field = _repository.Find<Field>(input.ParentId);
-            var events = field.Events.Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
+            var category = _repository.Find<Category>(input.RootId);
+            var events = category.GetAllEvents().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
             events.Each(x =>
                        eventsItems.Add(new CalendarEvent
                                       {
