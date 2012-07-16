@@ -251,6 +251,7 @@
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TaskListController.cs" />
     <Compile Include="Controllers\TaskRunnerController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\VendorContactController.cs" />
     <Compile Include="Controllers\VendorContactListController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
@@ -335,6 +336,7 @@
     <Compile Include="Services\IAuthenticationContext.cs" />
     <Compile Include="Services\ISecuritySetupService.cs" />
     <Compile Include="Services\IUploadedFileHandlerService.cs" />
+    <Compile Include="Services\ModelService.cs" />
     <Compile Include="Services\ViewOptions\IRouteTokenBuilder.cs" />
     <Compile Include="Services\ViewOptions\IRouteTokenConfig.cs" />
     <Compile Include="Services\ViewOptions\RouteToken.cs" />
@@ -727,6 +729,7 @@
     </None>
     <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
+    <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

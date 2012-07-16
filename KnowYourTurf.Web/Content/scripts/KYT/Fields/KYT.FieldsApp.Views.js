@@ -164,6 +164,11 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
 KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
     events:_.extend({
     }, KYT.Views.AjaxFormView.prototype.events),
+    initialize:function(){
+        this.options.noBubbleUp=true;
+        this.options.notificationArea = new cc.NotificationArea(this.cid,"#errorMessagesForm","#errorMessagesForm", KYT.vent);
+        this._super("initialize",arguments);
+    },
     viewLoaded:function(){
         this.loadTokenizers();
         this.pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
@@ -171,14 +176,11 @@ KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
             gridContainer: "#pendingGridContainer",
             route:"task",
             id:"pending",
-            parentId: $("#employeeId").val()
         });
         this.completedGridView = new KYT.Views.DahsboardGridView({el:"#completedTaskGridContainer",
           url:this.options.completedGridUrl,
             gridContainer: "#completedGridContainer",
             id:"completed",
-            parentId: $("#employeeId").val(),
-            rootId: this.options.ParentId,
             route:"taskdisplay"});
         this.pendingGridView.render();
         this.completedGridView.render();
@@ -225,21 +227,23 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
             el:"#photoGridContainer",
             url:this.options.photoGridUrl,
             gridContainer: "#photoGridHolder",
-            id:"photo",
+            id:"photolist",
             route:"photo",
             parentId:rel.entityId,
             rootId: rel.parentId,
-            parent:"Field"
+            parent:"Field",
+            messageContainer:"errorMessagesPhotoGrid"
         });
         this.documentGridView = new KYT.Views.DahsboardGridView({
             el:"#documentGridContainer",
             url:this.options.documentGridUrl,
             gridContainer: "#documentGridHolder",
-            id:"documents",
+            id:"documentlist",
             route:"document",
             parentId:rel.entityId,
             rootId: rel.parentId,
-            parent:"Field"
+            parent:"Field",
+            messageContainer:"errorMessagesDocGrid"
         });
 
         this.pendingGridView.render();
@@ -264,6 +268,11 @@ KYT.Views.DahsboardGridView = KYT.Views.GridView.extend({
         'click .new' : 'addNew',
         'click .delete' : 'deleteItems'
     },
+    initialize:function(){
+        this._super("initialize",arguments);
+        this.options.errorMessagesContainer=this.options.messageContainer?this.options.messageContainer:this.options.errorMessagesContainer;
+    },
+
     viewLoaded:function(){
         KYT.vent.bind(this.options.id+":AddUpdateItem",this.editItem,this);
         KYT.vent.bind(this.options.id+":DisplayItem",this.displayItem,this);
@@ -288,6 +297,7 @@ KYT.Views.DahsboardGridView = KYT.Views.GridView.extend({
 KYT.Views.TaskFormView = KYT.Views.AjaxFormView.extend({
     viewLoaded:function(){
         this.loadTokenizers();
+        KYT.calculator.applyTaskTransferData(this.$el);
     },
     loadTokenizers:function(){
         var employeeTokenOptions = {
@@ -312,7 +322,26 @@ KYT.Views.TaskFormView = KYT.Views.AjaxFormView.extend({
 
         this.equipmentToken = new KYT.Views.TokenView(equipmentTokenOptions);
         this.equipmentToken.render();
+
         this.storeChild(this.equipmentToken);
+    }
+});
+
+KYT.Views.EmailJobFormView = KYT.Views.AjaxFormView.extend({
+    viewLoaded:function(){
+        this.loadTokenizers();
+    },
+    loadTokenizers:function(){
+        var employeeTokenOptions = {
+            id:"employee",
+            el:this.$el.find("#employeeTokenizer"),
+            availableItems:this.options.employeeOptions.availableItems,
+            selectedItems:this.options.employeeOptions.selectedItems,
+            inputSelector:this.options.employeeOptions.inputSelector
+        };
+        this.employeeToken = new KYT.Views.TokenView(employeeTokenOptions);
+        this.employeeToken.render();
+        this.storeChild(this.employeeToken);
     }
 });
 
@@ -322,6 +351,45 @@ KYT.Views.FieldListView = KYT.Views.GridView.extend({
     },
     showDashboard:function(id){
         KYT.vent.trigger("route",KYT.generateRoute("fielddashboard",+id,this.options.ParentId),true);
+    }
+});
+
+KYT.Views.EmployeeListView = KYT.Views.GridView.extend({
+    viewLoaded:function(){
+        KYT.vent.bind(this.id+":Redirect",this.showDashboard,this);
+    },
+    showDashboard:function(id){
+        KYT.vent.trigger("route",KYT.generateRoute("employeedashboard",+id),true);
+    }
+});
+
+KYT.Views.DocumentFormView = KYT.Views.AjaxFormView.extend({
+     initialize:function(){
+        this.options.notificationArea = new cc.NotificationArea(this.cid,"#errorMessagesDocGrid","#errorMessagesForm", KYT.vent);
+        this._super("initialize",arguments);
+    }
+});
+
+KYT.Views.PhotoFormView = KYT.Views.AjaxFormView.extend({
+    initialize:function(){
+       this.options.notificationArea = new cc.NotificationArea(this.cid,"#errorMessagesPhotoGrid","#errorMessagesForm", KYT.vent);
+       this._super("initialize",arguments);
+   }
+});
+
+KYT.Views.CalculatorFormView = KYT.Views.AjaxFormView.extend({
+    events:_.extend({
+        'click #createTask':'addTask'
+    }, KYT.Views.AjaxFormView.prototype.events),
+
+    addTask:function(){
+        var fieldId = this.$el.find("[name=Field]").val();
+        KYT.calculator.setTaskTransferData(this.$el);
+        KYT.vent.trigger("route",KYT.generateRoute("task", 0, fieldId),true);
+    },
+    //calculate success handler
+    successHandler:function(result){
+        KYT.calculator.successHandler(result);
     }
 });
 

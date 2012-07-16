@@ -21,10 +21,11 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Status { get; set; }
         /// <summary>
         /// Aggregate Root that should not be modified through Email Job
+        /// must have set on readonly field right now for model binder.
         /// </summary>
         private EmailTemplate _readOnlyEmailTemplate;
         [ValidateNonEmpty]
-        public virtual EmailTemplate ReadOnlyEmailTemplate { get { return _readOnlyEmailTemplate; } }
+        public virtual EmailTemplate ReadOnlyEmailTemplate { get { return _readOnlyEmailTemplate; } set { _readOnlyEmailTemplate = value; } }
         public virtual void SetEmailTemplate(EmailTemplate emailTemplate)
         {
             _readOnlyEmailTemplate = emailTemplate;

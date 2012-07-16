@@ -36,7 +36,7 @@ var imageUrl = '@Model.Item.ImageUrl';
             @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Vendor).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.ReadOnlyVendor).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Item.TotalHours).ToHtmlTag()

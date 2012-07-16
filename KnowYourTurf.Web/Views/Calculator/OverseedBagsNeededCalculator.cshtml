@@ -5,10 +5,9 @@
 @using KnowYourTurf.Web.Controllers;
 
 @{
-    Layout = "~/Views/Shared/_popupLayout.cshtml";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
-        
+       
             @MvcHtmlString.Create(FormFor<CalculatorController>(x=>x.Calculate(null)).Class("CRUD").ElementId("CRUDForm").ToString())
 
             @MvcHtmlString.Create(Html.HiddenFor(x => x.EntityId).ToString())

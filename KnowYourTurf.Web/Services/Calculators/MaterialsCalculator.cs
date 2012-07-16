@@ -20,7 +20,7 @@ namespace KnowYourTurf.Web.Services
 
         public CalculatorViewModel GetViewModel()
         {
-            var fieldItems = _selectListItemService.CreateList<Field>(x => x.Name, x => x.EntityId, true,true);
+            var fieldItems = _selectListItemService.CreateFieldsSelectListItems();
             return new MaterialsCalcViewModel
             {
                 FieldList = fieldItems,

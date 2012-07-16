@@ -27,6 +27,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.LinkColumnFor(x => x.FullName)
                 .ForAction<EmployeeDashboardController>(x => x.ViewEmployee(null))
                 .ToPerformAction(ColumnAction.Redirect)
+                .WithId("employeelist")
                 .IsSortable(false)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.EmployeeId);

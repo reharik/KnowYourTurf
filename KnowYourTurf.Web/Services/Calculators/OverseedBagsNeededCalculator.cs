@@ -24,7 +24,7 @@ namespace KnowYourTurf.Web.Services
         {
             var products = _repository.Query<InventoryProduct>(x => x.ReadOnlyProduct.InstantiatingType == "Material");
             var productItems = _selectListItemService.CreateListWithConcatinatedText(products, x => x.ReadOnlyProduct.Name, x => x.UnitType, " --> ", x => x.EntityId, true);
-            var fieldItems = _selectListItemService.CreateList<Field>(x => x.Name, x => x.EntityId, true,true);
+            var fieldItems = _selectListItemService.CreateFieldsSelectListItems();
             return new OverseedBagsNeededCalcViewModel
             {
                 FieldList = fieldItems,

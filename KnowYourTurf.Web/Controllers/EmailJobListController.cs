@@ -27,7 +27,8 @@ namespace KnowYourTurf.Web.Controllers
                 AddUpdateUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.AddUpdate(null)),
                 gridDef = _emailJobListGrid.GetGridDefinition(url)
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult EmailJobs(GridItemsRequestModel input)

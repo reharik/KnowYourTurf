@@ -98,7 +98,7 @@ KYT.Views.View = Backbone.View.extend({
 KYT.Views.BaseFormView = KYT.Views.View.extend({
     events:{
         'click #save' : 'saveItem',
-        'click .cancel' : 'cancel'
+        'click #cancel' : 'cancel'
     },
 
     initialize: function(){
@@ -234,6 +234,7 @@ KYT.Views.GridView = KYT.Views.View.extend({
             window.location.replace(result.RedirectUrl);
             return;
         }
+        result.errorMessagesContainer = this.options.errorMessagesContainer;
         $(this.el).html($("#gridTemplate").tmpl(result));
         $.extend(this.options,result);
 //        if(gridControllerOptions){
@@ -314,8 +315,8 @@ KYT.Views.AjaxPopupFormModule  = KYT.Views.View.extend({
     },
 
     render: function(){
-            this.noBubbleUp=true;
-            this.isPopup=true;
+            this.options.noBubbleUp=true;
+            this.options.isPopup=true;
         this.popupForm = this.options.view ? new KYT.Views[this.options.view](this.options) : new KYT.Views.AjaxFormView(this.options);
         this.popupForm.render();
         this.storeChild(this.popupForm);
@@ -613,7 +614,8 @@ KYT.gridDefaults = {
     searchField:"Name",
     gridContainer: "#gridContainer",
     showSearch:true,
-    id:""
+    id:"",
+    errorMessagesContainer:"errorMessagesGrid"
 };
 
 KYT.formDefaults = {

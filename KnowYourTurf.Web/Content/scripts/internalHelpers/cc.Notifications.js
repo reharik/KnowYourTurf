@@ -16,9 +16,9 @@
 
 cc.MessageNotficationService = function(){
     this.areaCache = [];
+    this.extend = cc.extend;
 };
 
-cc.MessageNotficationService.extend = cc.extend;
     $.extend(cc.MessageNotficationService.prototype, {
         processResult:function(result, _area, viewId){
             if(typeof result == "string"){

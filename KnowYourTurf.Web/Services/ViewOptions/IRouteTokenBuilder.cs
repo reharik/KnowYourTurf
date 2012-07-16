@@ -60,7 +60,9 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         public IRouteTokenBuilder TokenForList<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, AreaName areaName = null) where CONTROLLER : Controller
         {
             currentItem.url = UrlContext.GetUrlForAction(action, areaName);
-            var itemName = typeof(CONTROLLER).Name.Replace("Controller", "").ToLowerInvariant();
+            var controllerName = typeof(CONTROLLER).Name.Replace("Controller", "");
+            currentItem.itemName = controllerName + "View";
+            var itemName = controllerName.ToLowerInvariant();
             currentItem.id = itemName;
             currentItem.viewName = "GridView";
             currentItem.route = itemName;
@@ -72,7 +74,9 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         public IRouteTokenBuilder TokenForForm<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, AreaName areaName = null) where CONTROLLER : Controller
         {
             currentItem.url = UrlContext.GetUrlForAction(action, areaName);
-            var itemName = typeof(CONTROLLER).Name.Replace("Controller", "").ToLowerInvariant();
+            var controllerName = typeof (CONTROLLER).Name.Replace("Controller", "");
+            currentItem.itemName = controllerName+"FormView";
+            var itemName = controllerName.ToLowerInvariant();
             currentItem.id = itemName;
             currentItem.viewName = "AjaxFormView";
             currentItem.route = itemName;
@@ -94,6 +98,11 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         public IRouteTokenBuilder Url<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, AreaName areaName = null) where CONTROLLER : Controller
         {
             currentItem.url = UrlContext.GetUrlForAction(action, areaName);
+            var controllerName = typeof(CONTROLLER).Name.Replace("Controller", "");
+            var itemName = controllerName.ToLowerInvariant();
+            currentItem.id = itemName;
+            currentItem.viewName = "AjaxFormView";
+            currentItem.route = itemName;
             return this;
         }
 

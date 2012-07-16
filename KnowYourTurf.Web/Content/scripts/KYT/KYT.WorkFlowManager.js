@@ -8,7 +8,8 @@
 KYT.WorkflowManager = (function(KYT, Backbone){
     var WFM =  Backbone.Model.extend({
         defaults: {
-            parentStack: []
+            parentStack: [],
+            workflowState: KYT.WorkflowState
         },
         addChildView:function(child){
             var parent = KYT.State.get("currentView");
@@ -43,6 +44,7 @@ KYT.WorkflowManager = (function(KYT, Backbone){
             }
             return true;
         },
+        workflowState:function(){return this.get("workflowState"); },
 
         cleanAllViews:function(){
             var currentView = KYT.State.get("currentView");
@@ -51,6 +53,7 @@ KYT.WorkflowManager = (function(KYT, Backbone){
             while (stack.length>0){
                 stack.pop().close();
             }
+            this.get("workflowState").clearState();
         }
     });
     return new WFM();

@@ -21,6 +21,8 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         [ScriptIgnore]
         public string Operation { get; set; }
 
+        public string itemName { get; set; }
+
         public void CreateUrl<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, AreaName areaName = null) where CONTROLLER : KYTController
         {
             url = UrlContext.GetUrlForAction(expression, areaName);
