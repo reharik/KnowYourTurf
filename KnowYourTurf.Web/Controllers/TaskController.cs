@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Controllers
             task.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : task.ScheduledDate;
             task.ScheduledStartTime= input.ScheduledStartTime.HasValue ? input.ScheduledStartTime.Value: task.ScheduledStartTime;
             var taskTypes = _selectListItemService.CreateList<TaskType>(x => x.Name, x => x.EntityId, true);
-            var fields = createFieldsSelectListItems(input.RootId);
+            var fields = _selectListItemService.CreateFieldsSelectListItems(input.RootId,input.ParentId);
             var products = createProductSelectListItems();
             var availableEmployees = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString() && x.UserRoles.Any(y=>y.Name==UserType.Employee.ToString()))
                 .Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).OrderBy(x=>x.name).ToList();
@@ -62,34 +62,14 @@ namespace KnowYourTurf.Web.Controllers
 
             if (input.Copy)
             {
-                model.Item.EntityId = 0;
+                // entityid is changed on view cuz the entity is in the NH graph here on server
                 model.Item.Complete = false;
             }
                 
             return PartialView("TaskAddUpdate", model);
         }
 
-        private Dictionary<string, IEnumerable<SelectListItem>> createFieldsSelectListItems(long categoryId)
-        {
-            var dictionary = new Dictionary<string, IEnumerable<SelectListItem>>();
-            if(categoryId>0)
-            {
-                var category = _repository.Find<Category>(categoryId);
-                var list = _selectListItemService.CreateList(category.Fields, x => x.Name, x => x.EntityId, false);
-                dictionary.Add(category.Name, list);
-            }
-            else
-            {
-                var categories = _repository.FindAll<Category>().AsQueryable().Fetch(x => x.Fields);
-                categories.ForEachItem(x =>
-                                           {
-                                               var list = _selectListItemService.CreateList(x.Fields, f => f.Name,
-                                                                                            f => f.EntityId, false);
-                                               dictionary.Add(x.Name, list);
-                                           });
-            }
-            return dictionary;
-        }
+        
 
         private Dictionary<string, IEnumerable<SelectListItem>> createProductSelectListItems()
         {
@@ -168,7 +148,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(TaskViewModel input)
         {
-            var task = input.Item.EntityId > 0 ? _repository.Find<Task>(input.Item.EntityId) : new Task();
+            var task = input.EntityId > 0 ? _repository.Find<Task>(input.EntityId) : new Task();
 
             mapItem(task, input.Item);
             mapChildren(task, input);

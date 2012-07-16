@@ -21,8 +21,6 @@
    
     @MvcHtmlString.Create(FormFor<FieldController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
         @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
-        <input type="hidden" id="ParentId" name="ParentId" value="@Model.ParentId"/>
-        <input type="hidden" id="RootId" value="@Model.ParentId"/>
         <div class="col left">
             <div class="fieldRow">
                 @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()

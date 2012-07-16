@@ -26,13 +26,14 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ItemList(ViewModel input)
         {
-            var url = UrlContext.GetUrlForAction<TaskListController>(x => x.Tasks(null))+"?ParentId="+input.ParentId;
+            var url = UrlContext.GetUrlForAction<TaskListController>(x => x.Tasks(null)) + "?RootId=" + input.RootId;
             ListViewModel model = new ListViewModel()
             {
                 //AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x => x.DeleteMultiple(null)),
                 gridDef = _taskListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.TASKS.ToString(),
+                searchField = "TaskType.Name"
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");

@@ -12,7 +12,8 @@ using KnowYourTurf.Web.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class PhotoController:KYTController
+    public class 
+        PhotoController:KYTController
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;

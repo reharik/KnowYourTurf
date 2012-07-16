@@ -25,16 +25,14 @@ namespace KnowYourTurf.Web.Controllers
         {
             var model = new CalendarViewModel
                        {
+                           DeleteUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Delete(null)),
                            CalendarDefinition = new CalendarDefinition
                                                    {
-                                                       Url = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.Events(null))+"?ParentId="+input.ParentId,
+                                                       Url = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.Events(null))+"?RootId="+input.RootId,
                                                        AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)),
                                                        DisplayUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Display(null)),
-                                                       EventChangedUrl = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.EventChanged(null)),
-                                                       DeleteUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Delete(null)) ,
-
-                                                   },
-                           RootId = input.ParentId
+                                                       EventChangedUrl = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.EventChanged(null))
+                                                   }
                        };
             return View(model);
         }
@@ -55,7 +53,7 @@ namespace KnowYourTurf.Web.Controllers
             var events = new List<CalendarEvent>();
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
-            var category = _repository.Find<Category>(input.ParentId);
+            var category = _repository.Find<Category>(input.RootId);
             var tasks = category.GetAllTasks().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
             tasks.Each(x =>
                        events.Add(new CalendarEvent

@@ -5,6 +5,7 @@ using FubuMVC.Core;
 using FubuMVC.UI.Configuration;
 using HtmlTags;
 using KnowYourTurf.Core.Domain;
+using System.Linq;
 
 namespace KnowYourTurf.Core.Html.FubuUI.Builders
 {
@@ -35,20 +36,35 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
                 x.Option(CoreLocalizationKeys.SELECT_ITEM.ToString(),"");
 
                 var valueToSelect = string.Empty;
-                dictionary.Keys.ForEachItem(key =>
+                if (dictionary.Keys.Count <= 1)
                 {
-                    x.OptionGroup(key);
-                    dictionary[key].ForEachItem(l =>
-                                                    {
-                                                        if(value!=null && l.Value == value.ToString())
-                                                        {
-                                                            valueToSelect = l.Value;
-                                                        }
-                                                        x.Option(l.Text, l.Value);
-                                                    });
-                });
+                    var selectListItems = dictionary[dictionary.Keys.FirstOrDefault()];
+                    if (selectListItems == null) return;
 
-                x.SelectByValue(valueToSelect);
+                    selectListItems.ForEachItem(option => x.Option(option.Text, option.Value.IsNotEmpty() ? option.Value : ""));
+
+                    if (value != null && value.ToString().IsNotEmpty())
+                    {
+                        x.SelectByValue(value.ToString());
+                    }
+                }
+                else
+                {
+                    dictionary.Keys.ForEachItem(key =>
+                    {
+                        x.OptionGroup(key);
+                        dictionary[key].ForEachItem(l =>
+                                                        {
+                                                            if (value != null && l.Value == value.ToString())
+                                                            {
+                                                                valueToSelect = l.Value;
+                                                            }
+                                                            x.Option(l.Text, l.Value);
+                                                        });
+                    });
+
+                    x.SelectByValue(valueToSelect);
+                }
             };
             return new SelectTag(action);
         }

@@ -55,6 +55,7 @@ namespace KnowYourTurf.Core.Domain
         {
             if (!fieldEvent.IsNew() && _events.Contains(fieldEvent)) return;
             _events.Add(fieldEvent);
+            fieldEvent.SetField(this);
         }
         
         private readonly IList<Document> _documents = new List<Document>();

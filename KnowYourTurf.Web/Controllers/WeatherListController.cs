@@ -28,7 +28,7 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _weatherListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.WEATHER.ToString()
             };
-            return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Weathers(GridItemsRequestModel input)

@@ -8,6 +8,7 @@ using FubuMVC.Core.Util;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Localization;
+using NHibernate.Linq;
 
 namespace KnowYourTurf.Core.Services
 {
@@ -33,6 +34,7 @@ namespace KnowYourTurf.Core.Services
                                                                            bool addSelectItem);
 
         IEnumerable<SelectListItem> CreateListWithConcatinatedText<ENTITY>(Expression<Func<ENTITY, object>> text1, Expression<Func<ENTITY, object>> text2, string seperator, Expression<Func<ENTITY, object>> value, bool addSelectItem) where ENTITY : IPersistableObject;
+        Dictionary<string, IEnumerable<SelectListItem>> CreateFieldsSelectListItems(long categoryId = 0, long fieldId = 0);
     }
 
     public class SelectListItemService : ISelectListItemService
@@ -133,6 +135,33 @@ namespace KnowYourTurf.Core.Services
                 selectListItem.Selected = true;
             }
             return entityList;
+        }
+
+        public Dictionary<string, IEnumerable<SelectListItem>> CreateFieldsSelectListItems(long categoryId = 0, long fieldId = 0)
+        {
+            var dictionary = new Dictionary<string, IEnumerable<SelectListItem>>();
+            if (fieldId > 0 && categoryId == 0)
+            {
+                var field = _repository.Find<Field>(fieldId);
+                categoryId = field.ReadOnlyCategory.EntityId;
+            }
+            if (categoryId > 0)
+            {
+                var category = _repository.Find<Category>(categoryId);
+                var list = CreateList(category.Fields, x => x.Name, x => x.EntityId, false);
+                dictionary.Add(category.Name, list);
+            }
+            else
+            {
+                var categories = _repository.FindAll<Category>().AsQueryable().Fetch(x => x.Fields);
+                categories.ForEachItem(x =>
+                {
+                    var list = CreateList(x.Fields, f => f.Name,
+                                                                 f => f.EntityId, false);
+                    dictionary.Add(x.Name, list);
+                });
+            }
+            return dictionary;
         }
     }
 }

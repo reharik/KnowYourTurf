@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.Domain;
 
 namespace KnowYourTurf.Web.Models
 {
@@ -12,6 +13,7 @@ namespace KnowYourTurf.Web.Models
         public string CalculatorDisplayName { get; set; }
         public string CalculatorName { get; set; }
         public bool Success { get { return true; } }
+        public Calculator Item { get; set; }
     }
 
     public class SuperInputCalcViewModel
@@ -37,7 +39,7 @@ namespace KnowYourTurf.Web.Models
     {
         [ValidateNonEmpty]
         public string Field { get; set; }
-        public IEnumerable<SelectListItem> FieldList { get; set; }
+        public IDictionary<string, IEnumerable<SelectListItem>> FieldList { get; set; }
         [ValidateNonEmpty]
         public string Product { get; set; }
         public IEnumerable<SelectListItem> ProductList { get; set; }
@@ -59,7 +61,7 @@ namespace KnowYourTurf.Web.Models
     {
         [ValidateNonEmpty]
         public string Field { get; set; }
-        public IEnumerable<SelectListItem> FieldList { get; set; }
+        public IDictionary<string, IEnumerable<SelectListItem>> FieldList { get; set; }
         [ValidateNonEmpty, ValidateDouble]
         public double? Drainageline { get; set; }
         [ValidateNonEmpty, ValidateDouble]
@@ -93,7 +95,7 @@ namespace KnowYourTurf.Web.Models
     {
         [ValidateNonEmpty]
         public string Field { get; set; }
-        public IEnumerable<SelectListItem> FieldList { get; set; }
+        public IDictionary<string, IEnumerable<SelectListItem>> FieldList { get; set; }
         [ValidateNonEmpty]
         public string Product { get; set; }
         public IEnumerable<SelectListItem> ProductList { get; set; }
@@ -110,7 +112,7 @@ namespace KnowYourTurf.Web.Models
     {
         [ValidateNonEmpty]
         public string Field { get; set; }
-        public IEnumerable<SelectListItem> FieldList { get; set; }
+        public IDictionary<string, IEnumerable<SelectListItem>> FieldList { get; set; }
         [ValidateNonEmpty]
         public string Product { get; set; }
         public IEnumerable<SelectListItem> ProductList { get; set; }

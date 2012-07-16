@@ -30,7 +30,9 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _employeeListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.EMPLOYEES.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Employees(GridItemsRequestModel input)

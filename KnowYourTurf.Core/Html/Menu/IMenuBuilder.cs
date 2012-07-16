@@ -102,7 +102,7 @@ namespace KnowYourTurf.Core.Html.Menu
                                }
                                else
                                {
-                                   instanceC.Url = instanceC.Url + "/0/" + entityId;
+                                   instanceC.Url = instanceC.Url + "/0/0/" + entityId;
                                }
                                if (parent != null) parent.Add(instanceC);
                            });

@@ -106,7 +106,7 @@ namespace KnowYourTurf.Web.Controllers
                 _fileHandlerService.DeleteFile(equipment.ImageUrl);
                 equipment.ImageUrl = string.Empty;
             }
-            if (equipment.ReadOnlyVendor == null || equipment.ReadOnlyVendor.EntityId != input.Item.ReadOnlyVendor.EntityId)
+            if (input.Item.ReadOnlyVendor!=null && (equipment.ReadOnlyVendor == null || equipment.ReadOnlyVendor.EntityId != input.Item.ReadOnlyVendor.EntityId))
             {
                 var vendor = _repository.Find<Vendor>(input.Item.ReadOnlyVendor.EntityId);
                 equipment.SetVendor(vendor);

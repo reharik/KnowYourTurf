@@ -29,7 +29,9 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _equipmentListGrid.GetGridDefinition(url),
                 Title = WebLocalizationKeys.EQUIPMENT.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Equipments(GridItemsRequestModel input)

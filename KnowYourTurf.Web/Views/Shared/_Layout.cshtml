@@ -58,6 +58,7 @@
     @Script("KYT/Fields/KYT.FieldsApp.Menu.js").ToHtmlTag()
     @Script("KYT/Fields/KYT.FieldsApp.Routing.js").ToHtmlTag()
     @Script("KYT/Fields/KYT.FieldsApp.Views.js").ToHtmlTag()
+    @Script("KYT/Fields/KYT.Services.js").ToHtmlTag()
     
     @Script("externalHelpers/superfish.js").ToHtmlTag()
     @Script("internalHelpers/cc.ccMenu.js").ToHtmlTag()
@@ -117,7 +118,7 @@
         </div>
         <div id="contentArea" class="content-inner">
             <div id="validation-container-wrapper">
-                <div id="errorMessagesGrid" class="dci_ErrorMessages errorMessages"><ul></ul></div>
+                <div id="${errorMessagesContainer}" class="dci_ErrorMessages errorMessages"><ul></ul></div>
             </div>
             {{if EntityId}}
             <input id="EntityId" type="hidden" value="${EntityId}"/>

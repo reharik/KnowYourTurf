@@ -18,5 +18,15 @@ KYT.State = (function(KYT, Backbone){
     return new State();
 })(KYT, Backbone);
 
-
-
+KYT.WorkflowState = (function(KYT, Backbone){
+    var WorkflowState =  Backbone.Model.extend({});
+    var workflowState;
+    return {
+        state:function(){
+            return workflowState ||new WorkflowState();
+        },
+        clearState:function(){
+            workflowState = new WorkflowState();
+        }
+    };
+})(KYT, Backbone);

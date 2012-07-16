@@ -31,7 +31,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken HOME = new WebLocalizationKeys("HOME", "Home");
         public static readonly StringToken EMPLOYEES = new WebLocalizationKeys("EMPLOYEES", "Employees");
         public static readonly StringToken ADMINS = new WebLocalizationKeys("ADMINS", "Admins");
-        public static readonly StringToken FACILITIES = new WebLocalizationKeys("FACILITIES", "AddUpdate");
+        public static readonly StringToken FACILITIES = new WebLocalizationKeys("FACILITIES", "Facilities");
         public static readonly StringToken VENDORS = new WebLocalizationKeys("VENDORS", "Vendors");
         public static readonly StringToken PRODUCTS = new WebLocalizationKeys("PRODUCTS", "Products");
         public static readonly StringToken INVENTORY = new WebLocalizationKeys("INVENTORY", "Inventory");
@@ -207,6 +207,8 @@ namespace KnowYourTurf.Web
         public static readonly StringToken SUBSCRIBERS = new WebLocalizationKeys("SUBSCRIBERS", "Subscribers");
 
         public static readonly StringToken DELETE_ITEMS = new WebLocalizationKeys("DELETE_ITEMS", "Delete these items");
+        public static readonly StringToken CALCULATE = new WebLocalizationKeys("CALCULATE", "Calculate");
+        public static readonly StringToken CREATE_TASK = new WebLocalizationKeys("CREATE_TASK", "Create Task");
         
 
     }

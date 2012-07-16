@@ -98,7 +98,7 @@ KYT.Views.View = Backbone.View.extend({
 KYT.Views.BaseFormView = KYT.Views.View.extend({
     events:{
         'click #save' : 'saveItem',
-        'click .cancel' : 'cancel'
+        'click #cancel' : 'cancel'
     },
 
     initialize: function(){
@@ -111,6 +111,17 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
         this.setupNotificationArea();
         $(this.options.crudFormSelector,this.el).crudForm(this.options.crudFormOptions,this.options.areaName);
         this.setupBeforeSubmitions();
+        if(!this.options.isPopup){
+            this.addReferenceValuesToForm();
+        }
+    },
+    addReferenceValuesToForm:function(){
+        var rel = KYT.State.get("Relationships");
+        var $form = $(this.options.crudFormSelector,this.el);
+        $form.append($("<input>").attr("name","EntityId").attr("type","hidden").val(rel.entityId));
+        $form.append($("<input>").attr("name","ParentId").attr("type","hidden").val(rel.parentId));
+        $form.append($("<input>").attr("name","RootId").attr("type","hidden").val(rel.rootId));
+        $form.append($("<input>").attr("name","Var").attr("type","hidden").val(rel.extraVar));
     },
     setupBeforeSubmitions:function(){
         if(this.options.crudFormOptions.additionBeforeSubmitFunc){
@@ -223,6 +234,7 @@ KYT.Views.GridView = KYT.Views.View.extend({
             window.location.replace(result.RedirectUrl);
             return;
         }
+        result.errorMessagesContainer = this.options.errorMessagesContainer;
         $(this.el).html($("#gridTemplate").tmpl(result));
         $.extend(this.options,result);
 //        if(gridControllerOptions){
@@ -247,8 +259,8 @@ KYT.Views.GridView = KYT.Views.View.extend({
         this.viewLoaded();
         //general notification of pageloaded
         KYT.vent.trigger("grid:"+this.id+":pageLoaded",this.options);
-        KYT.vent.bind("AddUpdateItem",this.editItem,this);
-        KYT.vent.bind("DisplayItem",this.displayItem,this);
+        KYT.vent.bind(this.id+":AddUpdateItem",this.editItem,this);
+        KYT.vent.bind(this.id+":DisplayItem",this.displayItem,this);
     },
     addNew:function(){
         KYT.vent.trigger("route",KYT.generateRoute(this.options.addUpdate),true);
@@ -281,9 +293,11 @@ KYT.Views.GridView = KYT.Views.View.extend({
         return false;
     },
     reloadGrid:function(){
-        KYT.vent.unbind("AddUpdateItem");
+        KYT.vent.unbind(this.id+":AddUpdateItem",this.editItem,this);
+        KYT.vent.unbind(this.id+":DisplayItem",this.displayItem,this);
         $(this.options.gridContainer).trigger("reloadGrid");
-        KYT.vent.bind("AddUpdateItem",this.editItem,this);
+        KYT.vent.bind(this.id+":AddUpdateItem",this.editItem,this);
+        KYT.vent.bind(this.id+":DisplayItem",this.displayItem,this);
     },
     callbackAction:function(){
         this.reloadGrid();
@@ -301,14 +315,15 @@ KYT.Views.AjaxPopupFormModule  = KYT.Views.View.extend({
     },
 
     render: function(){
-        this.options.noBubbleUp=true;
+            this.options.noBubbleUp=true;
+            this.options.isPopup=true;
         this.popupForm = this.options.view ? new KYT.Views[this.options.view](this.options) : new KYT.Views.AjaxFormView(this.options);
         this.popupForm.render();
         this.storeChild(this.popupForm);
         $(this.el).append(this.popupForm.el);
     },
     registerSubscriptions: function(){
-        KYT.vent.bind("form:"+this.id+":pageLoaded", this.loadPopupView, this);
+       KYT.vent.bind("form:"+this.id+":pageLoaded", this.loadPopupView, this);
         KYT.vent.bind("popup:"+this.id+":cancel", this.popupCancel, this);
         KYT.vent.bind("popup:"+this.id+":save", this.formSave, this);
         KYT.vent.bind("form:"+this.id+":success", this.formSuccess, this);
@@ -410,7 +425,7 @@ KYT.Views.PopupView = KYT.Views.View.extend({
 KYT.Views.TemplatedPopupView = KYT.Views.View.extend({
 
     initialize: function(){
-        this.options = $.extend({},mf.popupDefaults,this.options);
+        this.options = $.extend({},KYT.opupDefaults,this.options);
     },
     render:function(){
         $(this.el).append($(this.options.template).tmpl(this.options.data));
@@ -512,8 +527,10 @@ KYT.Views.TokenView = KYT.Views.View.extend({
     events:{
         'click #addNew' : 'addNew'
     },
-    initialize: function(){
+    initialize:function(){
         this.options = $.extend({},KYT.tokenDefaults,this.options);
+    },
+    render: function(){
 
         if(!this.options.availableItems || this.options.availableItems.length==0) {
             $("#noAssets",this.el).show();
@@ -597,7 +614,8 @@ KYT.gridDefaults = {
     searchField:"Name",
     gridContainer: "#gridContainer",
     showSearch:true,
-    id:""
+    id:"",
+    errorMessagesContainer:"errorMessagesGrid"
 };
 
 KYT.formDefaults = {
