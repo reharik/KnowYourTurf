@@ -14,7 +14,7 @@ CC.Elements.Textbox = function(data,$container){
         var name = this.$el.find("label").text();
         name = name.replace(":","");
         name = name.replace("*","");
-        return name;
+        return $(name).trim();
     }
 };
 $.extend(CC.Elements.Textbox.prototype,{

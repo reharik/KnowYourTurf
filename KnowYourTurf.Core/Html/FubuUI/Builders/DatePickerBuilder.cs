@@ -1,9 +1,23 @@
     using System;
     using FubuMVC.UI.Configuration;
     using HtmlTags;
+    using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
 
 namespace KnowYourTurf.Core.Html.FubuUI.Builders
 {
+    public class TextboxBuilder : ElementBuilder
+    {
+        protected override bool matches(AccessorDef def)
+        {
+            return true;
+        }
+
+        public override HtmlTag Build(ElementRequest request)
+        {
+            return new TextboxTag().Attr("data-bind", "value:" + KnowYourTurfHtmlConventions.DeriveElementName(request));
+        }
+    }
+
     public class DatePickerBuilder : ElementBuilder
     {
         protected override bool matches(AccessorDef def)
@@ -15,8 +29,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-            var date = request.StringValue().IsNotEmpty() ? DateTime.Parse(request.StringValue()).ToShortDateString() : "";
-            return new TextboxTag().Attr("value", date).AddClass("datePicker");
+          //  var date = request.StringValue().IsNotEmpty() ? DateTime.Parse(request.StringValue()).ToShortDateString() : "";
+            return new TextboxTag().Attr("data-bind", "value:" + KnowYourTurfHtmlConventions.DeriveElementName(request)).AddClass("datePicker");
         }
     }
 

@@ -1,4 +1,5 @@
-﻿@using KnowYourTurf.Core.Html.FubuUI
+﻿@using HtmlTags
+@using KnowYourTurf.Core.Html.FubuUI
 @model KnowYourTurf.Web.Controllers.TestModel
 
 @{
@@ -9,6 +10,8 @@
     @Script("jqueryPlugins/jquery-1.7.1.js").ToHtmlTag()
     @Script("externalHelpers/underscore.js").ToHtmlTag()
     @Script("externalHelpers/backbone.js").ToHtmlTag()    
+    @Script("externalHelpers/knockout-2.1.0.js").ToHtmlTag()    
+    @Script("externalHelpers/knockout.mapping.js").ToHtmlTag()    
     @Script("KYT/CC.ModelBinding/CC.NotificationService.js").ToHtmlTag()
     @Script("KYT/CC.ModelBinding/CC.ValidationRules.js").ToHtmlTag()
     @Script("KYT/CC.ModelBinding/CC.ValidationRunner.js").ToHtmlTag()
@@ -37,11 +40,18 @@
                  }
              }
          };
-         var modelService = CC.modelService;
-         var model = modelService.getModels(sampleJson, $("#container"));
-         $.each(model.collection, function(i, item) {
-             item.init();
-         });
+//         var modelService = CC.modelService;
+//         var model = modelService.getModels(sampleJson, $("#container"));
+//         $.each(model.collection, function(i, item) {
+//             item.init();
+
+
+//         });
+         var fuck = JSON.parse(@MvcHtmlString.Create(JsonUtil.ToJson(@Model)));
+            var model =  @MvcHtmlString.Create(JsonUtil.ToJson(@Model));
+            xxx_viewModel = ko.mapping.fromJS(model);
+            ko.applyBindings(xxx_viewModel);
+
      });
 
 </script>
@@ -52,6 +62,7 @@
     <div id="container">
         @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
         @Html.SubmissionFor(x => x.Item.Age).ToHtmlTag()
+        @Html.SubmissionFor(x => x.Item.BDay).ToHtmlTag()
     </div>
 </body>
 </html>
