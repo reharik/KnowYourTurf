@@ -18,7 +18,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Address1 { get; set; }
         public virtual string Address2 { get; set; }
         public virtual string City { get; set; }
-        [ValueOf(typeof(State))]
+        [ValueOfEnumeration(typeof(State))]
         public virtual string State { get; set; }
         public virtual string ZipCode { get; set; }
         public virtual string Country { get; set; }
@@ -28,7 +28,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string LogoUrl { get; set; }
         [TextArea]
         public virtual string Notes { get; set; }
-        [ValueOf(typeof(Status))]
+        [ValueOfEnumeration(typeof(Status))]
         public virtual string Status { get; set; }
 
         #region Collections

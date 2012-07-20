@@ -9,7 +9,7 @@ namespace KnowYourTurf.Core.Domain
     {
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
-        [ValueOf(typeof(Status))]
+        [ValueOfEnumeration(typeof(Status))]
         public virtual string Status { get; set; }
     }
 

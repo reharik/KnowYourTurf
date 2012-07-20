@@ -1,23 +1,9 @@
-    using System;
-    using FubuMVC.UI.Configuration;
-    using HtmlTags;
-    using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
+using System;
+using FubuMVC.UI.Configuration;
+using HtmlTags;
 
 namespace KnowYourTurf.Core.Html.FubuUI.Builders
 {
-    public class TextboxBuilder : ElementBuilder
-    {
-        protected override bool matches(AccessorDef def)
-        {
-            return true;
-        }
-
-        public override HtmlTag Build(ElementRequest request)
-        {
-            return new TextboxTag().Attr("data-bind", "value:" + KnowYourTurfHtmlConventions.DeriveElementName(request));
-        }
-    }
-
     public class DatePickerBuilder : ElementBuilder
     {
         protected override bool matches(AccessorDef def)
@@ -29,8 +15,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-          //  var date = request.StringValue().IsNotEmpty() ? DateTime.Parse(request.StringValue()).ToShortDateString() : "";
-            return new TextboxTag().Attr("data-bind", "value:" + KnowYourTurfHtmlConventions.DeriveElementName(request)).AddClass("datePicker");
+            var date = request.StringValue().IsNotEmpty() ? DateTime.Parse(request.StringValue()).ToShortDateString() : "";
+            return new TextboxTag().Attr("value", date).AddClass("datePicker");
         }
     }
 
@@ -60,8 +46,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-            return new HtmlTag("img").Attr("src", request.StringValue()).Attr("alt",request.Accessor.FieldName);
+            return new HtmlTag("img").Attr("src", request.StringValue()).Attr("alt", request.Accessor.FieldName);
         }
     }
 }
-    
+

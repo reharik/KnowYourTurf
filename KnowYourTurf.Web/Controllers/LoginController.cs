@@ -50,7 +50,7 @@ namespace KnowYourTurf.Web.Controllers
 
             try
             {
-                if (input.HasCredentials())
+                if (input.UserName.IsNotEmpty() && input.Password.IsNotEmpty())
                 {
                     var redirectUrl = string.Empty;
                     var user = _securityDataService.AuthenticateForUserId(input.UserName, input.Password);
@@ -122,9 +122,7 @@ namespace KnowYourTurf.Web.Controllers
         [ValidateNonEmpty]
         public string Password { get; set; }
         public bool RememberMe { get; set; }
-        public string RegisterUrl { get; set; }
         public string ForgotPasswordUrl { get; set; }
-        public string ForgotPasswordTitle { get; set; }
         
         public bool HasCredentials()
         {

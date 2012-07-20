@@ -10,7 +10,7 @@ namespace KnowYourTurf.Core.Localization
         public static Enumeration GetEnumeration(this PropertyInfo property, string key)
         {
             if (key == null) return null;
-            var valueOfAttribute = property.GetAttribute<ValueOfAttribute>();
+            var valueOfAttribute = property.GetAttribute<ValueOfEnumerationAttribute>();
             return valueOfAttribute != null ? Enumeration.CreateInstance(valueOfAttribute.LocalizedEnumType, key) : null;
         }
 
@@ -43,15 +43,20 @@ namespace KnowYourTurf.Core.Localization
     }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-    public class ValueOfAttribute : Attribute
+    public class ValueOfEnumerationAttribute : Attribute
     {
         public Type LocalizedEnumType { get; private set; }
 
-        public ValueOfAttribute(Type valueObjectType)
+        public ValueOfEnumerationAttribute(Type valueObjectType)
         {
             
             LocalizedEnumType = valueObjectType;
         }
+    }
+
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+    public class ValueOfIEnumerableAttribute : Attribute
+    {
     }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]

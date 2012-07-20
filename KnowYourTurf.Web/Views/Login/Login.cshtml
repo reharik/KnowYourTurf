@@ -33,6 +33,8 @@
     @Script("externalHelpers/underscore.js").ToHtmlTag()
     @Script("externalHelpers/backbone.js").ToHtmlTag()
     @Script("externalHelpers/backbone.marionette.js").ToHtmlTag()
+    @Script("externalHelpers/knockout-2.1.0.js").ToHtmlTag()    
+    @Script("externalHelpers/knockout.mapping.js").ToHtmlTag()    
     
     @Script("KYT/KYT.App.js").ToHtmlTag()
     @Script("KYT/KYT.Views.js").ToHtmlTag()
@@ -41,11 +43,11 @@
 
     
 
-    @Script("kyt.baseClass.js").ToHtmlTag()
-    @Script("kyt.PopupView.js").ToHtmlTag()
-    @Script("kyt.FormView.js").ToHtmlTag()
-    @Script("kyt.ajaxPopupFormModule.js").ToHtmlTag()
-    @Script("kyt.forgottenPasswordController.js").ToHtmlTag()
+@*    @Script("kyt.baseClass.js").ToHtmlTag()*@
+@*    @Script("kyt.PopupView.js").ToHtmlTag()*@
+@*    @Script("kyt.FormView.js").ToHtmlTag()*@
+@*    @Script("kyt.ajaxPopupFormModule.js").ToHtmlTag()*@
+@*    @Script("kyt.forgottenPasswordController.js").ToHtmlTag()*@
     @Script("jqueryPlugins/jquery.pubsub.js").ToHtmlTag()
     @Script("jqueryPlugins/jquery.metadata.js").ToHtmlTag()
     @Script("externalHelpers/json2.js").ToHtmlTag()
@@ -53,10 +55,10 @@
     <script type="text/javascript">
         var extraFormOptions = {};
         extraFormOptions.forgotPasswordUrl=@MvcHtmlString.Create(JsonUtil.ToJson(Model.ForgotPasswordUrl));
-        extraFormOptions.popupTitle = "@Model.ForgotPasswordTitle";
                 
         $(document).ready(function () {
-            var view = new KYT.Views.LoginView({el:"body#signin"});
+            var model =  @MvcHtmlString.Create(JsonUtil.ToJson(Model));
+            var view = new KYT.Views.LoginView({el:"body#signin",model:model});
             view.render();
         });
     </script>
@@ -66,8 +68,6 @@
             <div class="content-outer">
                 <div class="content-header"></div>
                 <div class="content-inner norequired">
-                    @MvcHtmlString.Create(FormFor<LoginController>(l => l.Login(null)).Class("kyt_CRUD").ElementId("CRUDForm").ToString())
-                        
                         <div class="signin">
                             <div class="col">
                                 <label class="big">@WebLocalizationKeys.SIGN_IN</label>
@@ -89,11 +89,9 @@
                                 <a href="#" id="forgotPassword">@WebLocalizationKeys.FORGOT_YOUR_PASSWORD</a>
                             </div>
                         </div>
-                    @EndForm()
                 </div>
                 <div class="content-footer"><span></span></div>
             </div>
         </div>
-        <div id="forgotPasswordArea"></div>
     </body>
 </html>

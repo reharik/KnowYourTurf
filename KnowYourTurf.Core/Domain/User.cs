@@ -24,7 +24,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Address1 { get; set; }
         public virtual string Address2 { get; set; }
         public virtual string City { get; set; }
-        [ValueOf(typeof(State))]
+        [ValueOfEnumeration(typeof(State))]
         public virtual string State { get; set; }
         public virtual string ZipCode { get; set; }
         [Tools.CustomAttributes.TextArea]
@@ -103,7 +103,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string LoginName { get; set; }
         [ValidateNonEmpty]
         public virtual string Password { get; set; }
-        [ValidateNonEmpty, ValueOf(typeof(Status))]
+        [ValidateNonEmpty, ValueOfEnumeration(typeof(Status))]
         public virtual string Status { get; set; }
         
         public virtual Guid ByPassToken { get; set; }

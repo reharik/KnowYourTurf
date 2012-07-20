@@ -45,7 +45,7 @@ namespace KnowYourTurf.Web
                 x.WithDefaultConventions();
             });
             
-            For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions>();
+            For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions2>();
             For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
             For<IElementNamingConvention>().Use<KnowYourTurfElementNamingConvention>();
             For(typeof(ITagGenerator<>)).Use(typeof(TagGenerator<>));

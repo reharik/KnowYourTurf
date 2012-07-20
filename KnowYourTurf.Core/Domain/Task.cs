@@ -39,7 +39,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual double? QuantityUsed { get; set; }
         [TextArea]
         public virtual string Notes { get; set; }
-        [ValueOf(typeof(UnitType))]
+        [ValueOfEnumeration(typeof(UnitType))]
         public virtual string UnitType { get; set; }
 
         public virtual bool Deleted { get; set; }

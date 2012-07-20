@@ -24,8 +24,6 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
             Editors.Builder<TimePickerBuilder>();
             Editors.IfPropertyIs<bool>().BuildBy(TagActionExpression.BuildCheckbox);
             Editors.If(x => x.Accessor.Name.ToLowerInvariant().Contains("password")).BuildBy(r => new PasswordTag().Attr("value", r.RawValue));
-            Editors.Builder<TextboxBuilder>();
-            
 //            Editors.Always.BuildBy(TagActionExpression.BuildTextbox);
             Editors.Always.Modify(AddElementName);
             Displays.Builder<ImageBuilder>();

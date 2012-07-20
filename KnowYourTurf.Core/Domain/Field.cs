@@ -22,7 +22,7 @@ namespace KnowYourTurf.Core.Domain
         [ValidateNonEmpty, ValidateIntegerAttribute]
         public virtual int Size { get; set; }
         public virtual string ImageUrl { get; set; }
-        [ValueOf(typeof(Status))]
+        [ValueOfEnumeration(typeof(Status))]
         public virtual string Status { get; set; }
         public virtual string FieldColor { get; set; }
 

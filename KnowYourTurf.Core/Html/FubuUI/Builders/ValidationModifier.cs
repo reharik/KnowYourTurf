@@ -12,10 +12,10 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         public TagModifier CreateModifier(AccessorDef accessorDef)
         {
             if (!accessorDef.Accessor.HasAttribute<ValidateNonEmptyAttribute>()) return null;
-            TagModifier modifier = (request, tag) =>
-                                   tag.AddValidationHelper(ValidationRule.Required + ":true",
-                                                           ValidationRule.Required + ": '" +
-                                                           CoreLocalizationKeys.FIELD_REQUIRED.ToFormat(request.Accessor.FieldName.ToSeperateWordsFromPascalCase()) +"'");
+            TagModifier modifier = (request, tag) => tag.AddClass("required");
+//                                   tag.AddValidationHelper(ValidationRule.Required + ":true",
+//                                                           ValidationRule.Required + ": '" +
+//                                                           CoreLocalizationKeys.FIELD_REQUIRED.ToFormat(request.Accessor.FieldName.ToSeperateWordsFromPascalCase()) +"'");
             return modifier;
         }
     }
@@ -28,12 +28,12 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
                 || accessorDef.Accessor.HasAttribute<ValidateDecimalAttribute>()
                 || accessorDef.Accessor.HasAttribute<ValidateIntegerAttribute>())
             {
-                TagModifier modifier = (request, tag) =>
-                                       tag.AddValidationHelper(ValidationRule.Number + ":true",
-                                                               ValidationRule.Number + ": '" +
-                                                               CoreLocalizationKeys.FIELD_MUST_BE_NUMBER.ToFormat(
-                                                                   request.Accessor.FieldName.
-                                                                       ToSeperateWordsFromPascalCase()) + "'");
+                TagModifier modifier = (request, tag) => tag.AddClass("number");
+//                                       tag.AddValidationHelper(ValidationRule.Number + ":true",
+//                                                               ValidationRule.Number + ": '" +
+//                                                               CoreLocalizationKeys.FIELD_MUST_BE_NUMBER.ToFormat(
+//                                                                   request.Accessor.FieldName.
+//                                                                       ToSeperateWordsFromPascalCase()) + "'");
                 return modifier;
             }
             return null;

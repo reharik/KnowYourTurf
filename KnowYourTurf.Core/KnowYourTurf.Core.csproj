@@ -161,9 +161,13 @@
     <Compile Include="Domain\Weather.cs" />
     <Compile Include="Html\Expressions\HtmlTagExpressionBase.cs" />
     <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
+    <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder2.cs" />
+    <Compile Include="Html\FubuUI\Builders\DatePickerBuilder2.cs" />
+    <Compile Include="Html\FubuUI\Builders\TextAreaBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\DateTimeDisplayBuilder.cs" />
     <Compile Include="Html\FubuUI\Builders\ImageFIleDisplayBuilder.cs" />
     <Compile Include="Html\FubuUI\Builders\TextAreaBuilder.cs" />
+    <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfHtmlConventions2.cs" />
     <Compile Include="Html\Grid\ColumnBase.cs" />
     <Compile Include="Html\Grid\GroupingColumn.cs" />
     <Compile Include="Html\Grid\ImageButtonColumn.cs" />

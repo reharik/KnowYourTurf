@@ -16,7 +16,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual double? Cost { get; set; }
         [ValidateInteger]
         public virtual int SizeOfUnit { get; set; }
-        [ValueOf(typeof(UnitType)), ValidateNonEmpty]
+        [ValueOfEnumeration(typeof(UnitType)), ValidateNonEmpty]
         public virtual string UnitType { get; set; }
         /// <summary>
         /// Aggregate Root that should not be modified through Email Job

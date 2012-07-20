@@ -9,7 +9,7 @@ namespace KnowYourTurf.Web.Controllers
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         public virtual DocumentCategory DocumentCategory { get; set; }
-        [ValueOf(typeof(DocumentFileType))]
+        [ValueOfEnumeration(typeof(DocumentFileType))]
         public virtual string FileType { get; set; }
         public virtual string FileUrl { get; set; }
     }
