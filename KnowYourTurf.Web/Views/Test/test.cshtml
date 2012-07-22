@@ -47,22 +47,39 @@
 
 
 //         });
-         var fuck = JSON.parse(@MvcHtmlString.Create(JsonUtil.ToJson(@Model)));
             var model =  @MvcHtmlString.Create(JsonUtil.ToJson(@Model));
             xxx_viewModel = ko.mapping.fromJS(model);
             ko.applyBindings(xxx_viewModel);
-
+//         $("[name='Item.Email']").change(function() {
+//             alert("hi");
+//         });
+         $("#save").click(function() {
+             $.ajax({
+                type: 'post',
+                url: "/test/save",
+                data: JSON.stringify(ko.mapping.toJS(xxx_viewModel)),
+                contentType: "application/json; charset=utf-8",
+                traditional: true,
+                success: function (data) {
+                 
+                }
+            });
+         });
      });
 
 </script>
     </head>
 
 <body >
-
-    <div id="container">
-        @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
-        @Html.SubmissionFor(x => x.Item.Age).ToHtmlTag()
-        @Html.SubmissionFor(x => x.Item.BDay).ToHtmlTag()
-    </div>
+<form>
+<div id="container">
+    @Html.SubmissionFor(x => x.Item.FirstName).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.Age).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.BDay).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.Email).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.Address).ToHtmlTag()
+    <input type="button" id="save" value="Save"/>
+</div>
+</form>
 </body>
 </html>

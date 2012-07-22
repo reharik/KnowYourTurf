@@ -11,12 +11,16 @@ namespace KnowYourTurf.Web.Controllers
          {
              return View(new TestModel {Item = new Test
                                                    {
-                                                       Name = "fred",
+                                                       FirstName = "fred",
                                                        Age = 32,
                                                        BDay=DateTime.Parse("1/5/1972"),
                                                        test2s = new[] {new Test2{Name = "fuck",Age = 2},new Test2{Name = "nutz",Age = 3}}
                                                    }});
          }
+        public ActionResult save(TestModel model)
+        {
+            return null;
+        }
     } 
     public class TestModel
     {
@@ -25,9 +29,11 @@ namespace KnowYourTurf.Web.Controllers
     public class Test
     {
         public IEnumerable<Test2> test2s { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
         public int Age { get; set; }
         public DateTime BDay { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
     }
 
     public class Test2

@@ -111,9 +111,9 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
         this.setupNotificationArea();
         $(this.options.crudFormSelector,this.el).crudForm(this.options.crudFormOptions,this.options.areaName);
         this.setupBeforeSubmitions();
-        if(!this.options.isPopup){
-            this.addReferenceValuesToForm();
-        }
+//        if(!this.options.isPopup){
+//            this.addReferenceValuesToForm();
+//        }
     },
     addReferenceValuesToForm:function(){
         var rel = KYT.State.get("Relationships");

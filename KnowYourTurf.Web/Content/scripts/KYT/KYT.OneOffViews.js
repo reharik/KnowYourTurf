@@ -19,7 +19,6 @@ KYT.Views.ResetPasswordView = KYT.Views.BaseFormView.extend({
 });
 
 KYT.Views.LoginView = KYT.Views.BaseFormView.extend({
-
     events: _.extend({
         "click #forgotPasswordLink": "forgotPasswordClick",
         "click #registrationLink": "registrationLinkClick",
@@ -30,8 +29,11 @@ KYT.Views.LoginView = KYT.Views.BaseFormView.extend({
         this.config();
         if (this.setBindings) { this.setBindings(); }
         $("input[name='UserName']").focus();
+        this.model = ko.mapping.fromJS(this.model);
+         ko.applyBindings(this.model);
         this.viewLoaded();
         KYT.vent.trigger("form:" + this.id + ":pageLoaded", this.options);
+
         return this;
     },
 
@@ -43,6 +45,7 @@ KYT.Views.LoginView = KYT.Views.BaseFormView.extend({
         };
         var forgottenPasswordView = new KYT.Views.AjaxPopupFormModule(popupOptions);
         forgottenPasswordView.render();
+
     },
 
     registrationLinkClick: function (e) {
