@@ -25,7 +25,7 @@ $.extend(CC.Elements.Textbox.prototype,{
         this.$el = this.$input.closest(".KYT_editor_root");
         this.fieldName = this.trimFieldName();
         this.$input.on("keyup",function(){that.validate(that);});
-        this.$input.val(this.value);
+        this.value = this.$input.val();
     },
     validate:function(element){
         CC.ValidationRunner.run(element);

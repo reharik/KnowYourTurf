@@ -12,7 +12,7 @@ CC.ValidationRunner = (function(){
     runner.run = function(CCElement){
         for(var rule in CCElement.validation){
             if(rule){
-                var isValid = validator[rule](CCElement.$input.val());
+                var isValid = validator[rule](CCElement.value);
                 if(!isValid){
                     CC.notification.add({key:CCElement.fieldName, message:CC.errorMessages[rule]});
                 }else{
