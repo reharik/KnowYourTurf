@@ -6,11 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
 CC={};
-
-
-
 CC.NotificationService = function(){
         this.messageContainer = "#messageContainer";
         this.msgObjects = [];
@@ -19,6 +15,7 @@ CC.NotificationService = function(){
 $.extend(CC.NotificationService.prototype,{
     add:function(msgObject){
         var exists = _.any(this.msgObjects,function(msg){
+            //TODO possibly replace this with CCElement.cid
             return msgObject.key === msg.key && msgObject.message === msg.message;
         });
         if(!exists){

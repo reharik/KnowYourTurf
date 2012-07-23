@@ -7,11 +7,10 @@
  */
 
 CC.Elements = {};
-CC.Elements.Textbox = function(data,$container){
+CC.Elements.Textbox = function($container){
     this.$container = $container;
-    $.extend(this,data);
     this.trimFieldName = function(){
-        var name = this.$el.find("label").text();
+        var name = this.$container.find("label").text();
         name = name.replace(":","");
         name = name.replace("*","");
         return $(name).trim();

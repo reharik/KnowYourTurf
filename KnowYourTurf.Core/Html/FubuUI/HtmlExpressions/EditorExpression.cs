@@ -95,9 +95,49 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             HtmlTag label = labelBuilder.ToHtmlTag();
             _htmlRoot.Children.Add(label);
             _htmlRoot.Children.Add(input);
+            addFlagToHtmlRoot(input.FirstChild());
             return _htmlRoot;
         }
-        
+
+        private void addFlagToHtmlRoot(HtmlTag input)
+        {
+            if(input is TextboxTag)
+            {
+                if(input.HasClass("number"))
+                {
+                    _htmlRoot.Attr("eltype", "number");
+                    return;
+                }
+                if (input.HasClass("datePicker"))
+                {
+                    _htmlRoot.Attr("eltype", "date");
+                    return;
+                }
+                if (input.HasClass("timePicker"))
+                {
+                    _htmlRoot.Attr("eltype", "time");
+                    return;
+                }
+                _htmlRoot.Attr("eltype", "textbox");
+                return;
+            }
+            if(input is SelectTag)
+            {
+                _htmlRoot.Attr("eltype", "select");
+                return;
+            }
+            if(input is CheckboxTag)
+            {
+                _htmlRoot.Attr("eltype", "checkbox");
+                return;
+            }
+            if(input.TagName() == "textarea")
+            {
+                _htmlRoot.Attr("eltype", "textarea");
+                return;
+            }
+        }
+
         private void addCustomLabel(EditorLabelExpression<VIEWMODEL> label)
         {
             if (_labelDisplay.IsNotEmpty()) label.CustomLabel(_labelDisplay);

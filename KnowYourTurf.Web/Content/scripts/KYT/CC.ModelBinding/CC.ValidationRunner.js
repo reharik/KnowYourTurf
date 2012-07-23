@@ -13,11 +13,13 @@ CC.ValidationRunner = (function(){
         for(var rule in CCElement.validation){
             if(rule){
                 var isValid = validator[rule](CCElement.value);
+                //TODO possibly replace this with CCElement.cid
                 if(!isValid){
                     CC.notification.add({key:CCElement.fieldName, message:CC.errorMessages[rule]});
                 }else{
                     CC.notification.remove({key:CCElement.fieldName, message:CC.errorMessages[rule]});
                 }
+                CCElement.isValid(isValid);
             }
         }
     };

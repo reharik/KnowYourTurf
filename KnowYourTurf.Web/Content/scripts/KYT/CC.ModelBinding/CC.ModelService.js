@@ -8,26 +8,25 @@
 if(!CC){CC={};}
 CC.notification = new CC.NotificationService();
 
-CC.ViewModel = function(){
+CC.ElementColection = function(){
     this.collection = [];
 };
 
-$.extend(CC.ViewModel.prototype, {
+$.extend(CC.ElementColection.prototype, {
     add:function(element){
         this.collection.push(element);
     }
 });
 
 
-CC.modelService = (function(){
+CC.elementService = (function(){
     var srv = {};
-    srv.getModels = function(json, $el){
-        var model = new CC.ViewModel();
-        for(var key in json){
-            var modelType = key.substring(0,key.indexOf('_'));
-            var element = new CC.Elements[modelType](json[key],$el);
+    srv.getElements = function($el){
+        var model = new CC.ElementColection();
+        $el.find("[eltype]").each(function(i,item){
+            var element = new CC.Elements[$(item).attr("eltype")]($(item));
             model.add(element);
-        }
+        });
         return model;
     };
     return srv;
