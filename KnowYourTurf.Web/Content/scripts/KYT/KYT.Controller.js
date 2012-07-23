@@ -17,19 +17,23 @@ KYT.Controller = (function(KYT, Backbone){
            // this is so you don't set the id to the routetoken which stays in scope
            var viewOptions = $.extend({}, routeToken);
            if (entityId) {
+               viewOptions.jsonUrl = viewOptions.url + "_json/" + entityId;
                viewOptions.url += "/" + entityId;
                viewOptions.route += "/" + entityId;
            }
            if (parentId) {
                viewOptions.url += "?ParentId=" + parentId;
+               viewOptions.jsonUrl += "?ParentId=" + parentId;
                viewOptions.route += "/" + parentId;
            }
            if (rootId) {
                viewOptions.url += "&RootId=" + rootId;
+               viewOptions.jsonUrl += "&RootId=" + rootId;
                viewOptions.route += "/" + rootId;
            }
            if (_var) {
                viewOptions.url += "&Var=" + _var;
+               viewOptions.jsonUrl += "&Var=" + _var;
                viewOptions.route += "/" + _var;
            }
            KYT.State.set({"Relationships":

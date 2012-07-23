@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
 using KnowYourTurf.Core.Localization;
 using FubuMVC.Core.Util;
 using FubuMVC.UI.Configuration;
@@ -17,7 +18,13 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-            return new SelectTag();
+            var selectTag = new SelectTag();
+            var elementName = KnowYourTurfHtmlConventions.DeriveElementName(request);
+            selectTag.Attr("data-bind", "options:" + elementName + "List," +
+                                        "optionsText:Text," +
+                                        "optionsValue:Value," +
+                                        "value:" + elementName + ",");
+            return selectTag;
         }
     }
 
@@ -30,7 +37,15 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-            return new SelectTag();
+            var selectTag = new SelectTag();
+            var elementName = KnowYourTurfHtmlConventions.DeriveElementName(request);
+            var elementRoot = elementName.Contains("EntityId") ? elementName.Replace(".EntityId", "") : elementName;
+            selectTag.Attr("data-bind", "options:" + elementRoot +"List," +
+                                        "optionsValue:Value," +
+                                        "optionsText:Text," +
+                                        "value:" + elementName + ",");
+
+            return selectTag;
         }
     }
 }

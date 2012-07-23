@@ -11,78 +11,63 @@
 
 
 @section HeaderJavascript{
-    var rolesOptions = {
-        availableItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableItems)),
-        selectedItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedItems)),
-        inputSelector:"#RolesInput",
-    name:"Roles"
-
-    };
-    extraFormOptions.rolesOptions = rolesOptions;
-    extraFormOptions.pendingGridUrl=  " @MvcHtmlString.Create(Model.PendingGridUrl)";
-    extraFormOptions.completedGridUrl= " @MvcHtmlString.Create(Model.CompletedGridUrl)";
 }
 
-@MvcHtmlString.Create(FormFor<EmployeeController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-    @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
-    @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())
-    <input type="hidden" id="returnToList" name="ReturnToList" value="@Model.ReturnToList"/>
-    <input type="hidden" id="employeeId" value="@Model.Item.EntityId"/>
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.EmployeeId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EmployeeId).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.FirstName).ToHtmlTag()
+            @Html.SubmissionFor(x => x.FirstName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.LastName).ToHtmlTag()
+            @Html.SubmissionFor(x => x.LastName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.EmergencyContact).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EmergencyContact).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.EmergencyContactPhone).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EmergencyContactPhone).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Password).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UserLoginInfo.Password).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Email).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Email).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.PhoneMobile).ToHtmlTag()
+            @Html.SubmissionFor(x => x.PhoneMobile).ToHtmlTag()
         </div>
     </div>
     <div class="col left">
      @{
-         if (Model.Item.ImageUrl.IsNotEmpty())
+         if (Model.ImageUrl.IsNotEmpty())
          {
              <div class="fieldRow">
-                 @Html.ViewFor(x => x.Item.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
+                 @Html.ViewFor(x => x.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
              </div>
          }
      }
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address1).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Address2).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address2).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.City).ToHtmlTag()
+            @Html.SubmissionFor(x => x.City).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.State).ToHtmlTag()
+            @Html.SubmissionFor(x => x.State).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ZipCode).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ZipCode).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Status).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UserLoginInfo.Status).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().RootId("rolesInputRoot").LabelDisplay(WebLocalizationKeys.USER_ROLES).OperationName("/UserRoles").ToHtmlTag()
@@ -95,7 +80,6 @@
     </div>
 
 
-@EndForm()
 <div class="col full clear"></div>
 <div class="col left">
     @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
@@ -114,6 +98,5 @@
         <div class="fieldRow">
             <div class="gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
             <div id="completedTaskGridContainer" class="grid_4 KYT_AddNew_space"></div>
-
         </div>
     </div>

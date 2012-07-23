@@ -5,6 +5,7 @@ using System.Web.Security;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Services;
 using StructureMap;
@@ -39,6 +40,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var loginViewModel = new LoginViewModel
                                      {
+                                         SaveUrl = UrlContext.GetUrlForAction<LoginController>(x=>x.Login(null))
                                      };
             return View(loginViewModel);
         }
@@ -91,10 +93,10 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Log_in(LoginViewModel input)
         {
             var user = _repository.Find<User>(input.EntityId);
-            if(user.UserLoginInfo.ByPassToken!=input.Guid)
-            {
-                return RedirectToAction("Login");
-            }
+//            if(user.UserLoginInfo.ByPassToken!=input.Guid)
+//            {
+//                return RedirectToAction("Login");
+//            }
             var redirectUrl = _authenticationContext.ThisUserHasBeenAuthenticated(user,false);
             user.UserLoginInfo.ByPassToken = Guid.Empty;
             var crudManager = _saveEntityService.ProcessSave(user);
@@ -115,19 +117,14 @@ namespace KnowYourTurf.Web.Controllers
 
     public class LoginViewModel : ViewModel
     {
-        public Guid Guid { get; set; }
-        public string SiteName { get { return CoreLocalizationKeys.SITE_NAME.ToString(); } }
         [ValidateNonEmpty]
         public string UserName { get; set; }
         [ValidateNonEmpty]
         public string Password { get; set; }
         public bool RememberMe { get; set; }
         public string ForgotPasswordUrl { get; set; }
-        
-        public bool HasCredentials()
-        {
-            return UserName.IsNotEmpty() && Password.IsNotEmpty();
-        }
+        public string SaveUrl { get; set; }
+
     }
 
     public class RegisterViewModel : ViewModel

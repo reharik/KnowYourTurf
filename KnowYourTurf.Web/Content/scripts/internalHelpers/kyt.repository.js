@@ -13,9 +13,10 @@ KYT.repository= (function(){
     var repositoryCallback = function(result,callback){
         if(result.LoggedOut){
             window.location.replace(result.RedirectUrl);
-            return;
+            return null;
         }
-        callback(result);
+        return result;
+        //callback(result);
     };
     return {
         ajaxPost:function(url, data, callback){
@@ -24,7 +25,19 @@ KYT.repository= (function(){
         },
         ajaxGet:function(url, data, callback){
              KYT.showThrob=true;
-            $.get(url,data,function(result){repositoryCallback(result,callback);
+            return $.when($.get(url,data)).done(repositoryCallback);
+//                ,function(result){repositoryCallback(result,callback);
+//            });
+        },
+        ajaxPostModel:function(url, data, callback){
+            KYT.showThrob=true;
+            $.ajax({
+                type:"post",
+                url: url,
+                data:data,
+                success:function(result){repositoryCallback(result,callback)},
+                contentType:  "application/json; charset=utf-8",
+                traditional:true
             });
         }
     }

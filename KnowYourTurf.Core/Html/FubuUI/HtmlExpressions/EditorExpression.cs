@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using KnowYourTurf.Core.Html.FubuUI.Tags;
 using KnowYourTurf.Security.Interfaces;
 using KnowYourTurf.Core.Localization;
 using FubuMVC.UI.Tags;
@@ -105,35 +106,40 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             {
                 if(input.HasClass("number"))
                 {
-                    _htmlRoot.Attr("eltype", "number");
+                    _htmlRoot.Attr("eltype", "Number");
                     return;
                 }
                 if (input.HasClass("datePicker"))
                 {
-                    _htmlRoot.Attr("eltype", "date");
+                    _htmlRoot.Attr("eltype", "Date");
                     return;
                 }
                 if (input.HasClass("timePicker"))
                 {
-                    _htmlRoot.Attr("eltype", "time");
+                    _htmlRoot.Attr("eltype", "Time");
                     return;
                 }
-                _htmlRoot.Attr("eltype", "textbox");
+                _htmlRoot.Attr("eltype", "Textbox");
+                return;
+            }
+            if (input is PasswordTag)
+            {
+                _htmlRoot.Attr("eltype", "Password");
                 return;
             }
             if(input is SelectTag)
             {
-                _htmlRoot.Attr("eltype", "select");
+                _htmlRoot.Attr("eltype", "Select");
                 return;
             }
             if(input is CheckboxTag)
             {
-                _htmlRoot.Attr("eltype", "checkbox");
+                _htmlRoot.Attr("eltype", "Checkbox");
                 return;
             }
             if(input.TagName() == "textarea")
             {
-                _htmlRoot.Attr("eltype", "textarea");
+                _htmlRoot.Attr("eltype", "Textarea");
                 return;
             }
         }

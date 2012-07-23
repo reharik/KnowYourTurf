@@ -9,19 +9,35 @@
 CC.ValidationRunner = (function(){
     var runner = {};
     var validator = CC.validationRules;
-    runner.run = function(CCElement){
-        for(var rule in CCElement.validation){
-            if(rule){
-                var isValid = validator[rule](CCElement.value);
+    function classList(elem){
+        var classList = elem.attr('class').split(/\s+/);
+        var classes = [];
+        $.each( classList, function(index, item){
+            classes.push(item);
+        });
+        return classList;
+    }
+    runner.runElement = function(CCElement){
+        $.each(classList(CCElement.$input), function(idx,rule){
+            if(rule && validator[rule]){
+                var isValid = validator[rule](CCElement.getValue());
                 //TODO possibly replace this with CCElement.cid
                 if(!isValid){
                     CC.notification.add({key:CCElement.fieldName, message:CC.errorMessages[rule]});
                 }else{
                     CC.notification.remove({key:CCElement.fieldName, message:CC.errorMessages[rule]});
                 }
-                CCElement.isValid(isValid);
+                CCElement.setValidState(isValid);
             }
-        }
+        });
+    };
+    runner.runViewModel = function(viewModel){
+        var isValid = true;
+        $.each(viewModel.collection,function(i,item){
+            item.validate();
+            if(!item.isValid) {isValid = false;}
+        });
+        return isValid;
     };
     return runner;
 })();

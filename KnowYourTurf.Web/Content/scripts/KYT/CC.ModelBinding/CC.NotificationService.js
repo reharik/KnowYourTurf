@@ -6,10 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 
-CC={};
 CC.NotificationService = function(){
-        this.messageContainer = "#messageContainer";
-        this.msgObjects = [];
+    this.messageContainer = "#messageContainer";
+    this.msgObjects = [];
 };
 
 $.extend(CC.NotificationService.prototype,{

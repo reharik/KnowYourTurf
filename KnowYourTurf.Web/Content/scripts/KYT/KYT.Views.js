@@ -46,6 +46,7 @@ KYT.Views = {};
     Backbone[klass].prototype._super = _super;
   });
 
+
 })(Backbone);
 
 
@@ -109,8 +110,8 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
             $.extend(true, this.options, extraFormOptions);
         }
         this.setupNotificationArea();
-        $(this.options.crudFormSelector,this.el).crudForm(this.options.crudFormOptions,this.options.areaName);
-        this.setupBeforeSubmitions();
+//        $(this.options.crudFormSelector,this.el).crudForm(this.options.crudFormOptions,this.options.areaName);
+//        this.setupBeforeSubmitions();
 //        if(!this.options.isPopup){
 //            this.addReferenceValuesToForm();
 //        }
@@ -169,14 +170,37 @@ KYT.Views.FormView = KYT.Views.BaseFormView.extend({
 
 KYT.Views.AjaxFormView = KYT.Views.BaseFormView.extend({
     render:function(){
-        KYT.repository.ajaxGet(this.options.url, this.options.data, $.proxy(function(result){this.renderCallback(result)},this));
+        var that = this;
+        var template = Backbone.Marionette.TemplateCache.get(this.options.route,this.options.url);
+        template.done(function(result){
+            $(that.el).html(result);
+            return this;
+        });
+//        template.(KYT.repository.ajaxGet(
+//              this.options.jsonUrl, this.options.data));
+//        template.pipe(that.renderCallback);
+////
+//        if(template){
+//            d.resolve();
+//        }
+//        d.then(function(template){
+//            $(that.el).html(template);
+//        });
+//          d.then(KYT.repository.ajaxGet(
+//              this.options.jsonUrl, this.options.data));
+//          d.done(that.renderCallback);
+
     },
     renderCallback:function(result){
         if(result.LoggedOut){
             window.location.replace(result.RedirectUrl);
             return;
         }
-        $(this.el).html(result);
+        this.model = result;
+        this.model = ko.mapping.fromJS(this.model);
+        ko.applyBindings(this.model,this.$el);
+        this.elementsViewmodel = CC.elementService.getElementsViewmodel(this.$el);
+        cc.elementService.initAllElements(this.elementsViewmodel);
         this.config();
         //callback for render
         this.viewLoaded();

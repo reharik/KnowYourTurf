@@ -5,14 +5,15 @@
  * Time: 3:06 PM
  * To change this template use File | Settings | File Templates.
  */
-if(!CC){CC={};}
 CC.notification = new CC.NotificationService();
 
-CC.ElementColection = function(){
+
+
+CC.ElementCollection = function(){
     this.collection = [];
 };
 
-$.extend(CC.ElementColection.prototype, {
+$.extend(CC.ElementCollection.prototype, {
     add:function(element){
         this.collection.push(element);
     }
@@ -21,13 +22,18 @@ $.extend(CC.ElementColection.prototype, {
 
 CC.elementService = (function(){
     var srv = {};
-    srv.getElements = function($el){
-        var model = new CC.ElementColection();
+    srv.getElementsViewmodel = function($el){
+        var model = new CC.ElementCollection();
         $el.find("[eltype]").each(function(i,item){
             var element = new CC.Elements[$(item).attr("eltype")]($(item));
             model.add(element);
         });
         return model;
+    };
+    srv.initAllElements = function(viewModel){
+        $.each(viewModel.collection, function(i,item){
+            item.init();
+        });
     };
     return srv;
 })();

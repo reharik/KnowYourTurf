@@ -18,7 +18,7 @@ KYT.addRegions({
   // an initializer to run this functional area
   // when the app starts up
 KYT.addInitializer(function(){
-  $.ajaxSetup({
+    $.ajaxSetup({
         cache: false,
         complete:function(){KYT.showThrob = false; $("#ajaxLoading").hide();},
         beforeSend:function(){setTimeout(function() {if(KYT.showThrob) $("#ajaxLoading").show(); }, 500)}
@@ -48,6 +48,26 @@ KYT.addInitializer(function(){
     });
 
     KYT.notificationService = new cc.MessageNotficationService();
+
+    Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId){
+        var that = this, template;
+
+            var post = (KYT.repository.ajaxGet(this.url, this.data));
+            return post.done(function(template){
+                            if (!template || template.length === 0){
+                              var msg = "Could not find template: '" + templateId + "'";
+                              var err = new Error(msg);
+                              //err.name = "NoTemplateError";
+                              throw err;
+                            }
+
+                            return template;
+                });
+    },
+
+    // overriding compileTemplate with passthrough function because we are not compiling
+    Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate){ return rawTemplate;}
+
 });
 
 KYT.bind("initialize:after", function(){

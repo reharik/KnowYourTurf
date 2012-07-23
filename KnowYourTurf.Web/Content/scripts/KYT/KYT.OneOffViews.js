@@ -22,7 +22,7 @@ KYT.Views.LoginView = KYT.Views.BaseFormView.extend({
     events: _.extend({
         "click #forgotPasswordLink": "forgotPasswordClick",
         "click #registrationLink": "registrationLinkClick",
-        "click .save": "submitClick"
+        "click .submit": "submitClick"
     }, KYT.Views.BaseFormView.prototype.events),
 
     render: function () {
@@ -30,7 +30,9 @@ KYT.Views.LoginView = KYT.Views.BaseFormView.extend({
         if (this.setBindings) { this.setBindings(); }
         $("input[name='UserName']").focus();
         this.model = ko.mapping.fromJS(this.model);
-         ko.applyBindings(this.model);
+        ko.applyBindings(this.model);
+        this.elementsViewmodel = CC.elementService.getElementsViewmodel(this.$el);
+        CC.elementService.initAllElements(this.elementsViewmodel);
         this.viewLoaded();
         KYT.vent.trigger("form:" + this.id + ":pageLoaded", this.options);
 
@@ -53,7 +55,19 @@ KYT.Views.LoginView = KYT.Views.BaseFormView.extend({
     },
 
     submitClick: function (e) {
-        return false;
+        var that = this;
+        var isValid = CC.ValidationRunner.runViewModel(this.elementsViewmodel);
+        if(!isValid){return;}
+        var data = JSON.stringify(ko.mapping.toJS(this.model));
+        KYT.repository.ajaxPostModel(data.SaveUrl,data,that.success);
+    },
+    success:function(result){
+        if(result.Success){
+            window.location.href =result.RedirectUrl;
+        }else{
+            //implement server errors here
+        }
+
     }
 
 });
