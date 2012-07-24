@@ -20,13 +20,9 @@ KYT.FieldsApp.Menu = (function(KYT, Backbone, $){
 
     var MenuView =  KYT.Views.View.extend({
         render:function(){
-            KYT.repository.ajaxGet(this.options.url, this.options.data, $.proxy(this.renderCallback,this));
+            KYT.repository.ajaxGet(this.options.url, this.options.data).done($.proxy(this.renderCallback,this));
         },
         renderCallback:function(result){
-            if(result.LoggedOut){
-                window.location.replace(result.RedirectUrl);
-                return;
-            }
             $(this.el).html(result);
             KYT.vent.bind("menuItem", this.menuItemClick,this);
             $(this.el).find(".ccMenu").ccMenu({ backLink: false, width : 220 });

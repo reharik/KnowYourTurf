@@ -109,12 +109,19 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
         if(extraFormOptions){
             $.extend(true, this.options, extraFormOptions);
         }
-        this.setupNotificationArea();
+//        this.setupNotificationArea();
+        this.bindModelAndElements();
 //        $(this.options.crudFormSelector,this.el).crudForm(this.options.crudFormOptions,this.options.areaName);
 //        this.setupBeforeSubmitions();
 //        if(!this.options.isPopup){
 //            this.addReferenceValuesToForm();
 //        }
+    },
+    bindModelAndElements:function(){
+        this.model = ko.mapping.fromJS(this.model);
+        ko.applyBindings(this.model,this.el);
+        this.elementsViewmodel = CC.elementService.getElementsViewmodel(this.$el);
+        CC.elementService.initAllElements(this.elementsViewmodel);
     },
     addReferenceValuesToForm:function(){
         var rel = KYT.State.get("Relationships");
@@ -170,37 +177,10 @@ KYT.Views.FormView = KYT.Views.BaseFormView.extend({
 
 KYT.Views.AjaxFormView = KYT.Views.BaseFormView.extend({
     render:function(){
-        var that = this;
-        var template = Backbone.Marionette.TemplateCache.get(this.options.route,this.options.url);
-        template.done(function(result){
-            $(that.el).html(result);
-            return this;
-        });
-//        template.(KYT.repository.ajaxGet(
-//              this.options.jsonUrl, this.options.data));
-//        template.pipe(that.renderCallback);
-////
-//        if(template){
-//            d.resolve();
-//        }
-//        d.then(function(template){
-//            $(that.el).html(template);
-//        });
-//          d.then(KYT.repository.ajaxGet(
-//              this.options.jsonUrl, this.options.data));
-//          d.done(that.renderCallback);
-
+        KYT.loadTemplateAndModel(this.options,this.$el,$.proxy(this.renderCallback,this));
     },
     renderCallback:function(result){
-        if(result.LoggedOut){
-            window.location.replace(result.RedirectUrl);
-            return;
-        }
         this.model = result;
-        this.model = ko.mapping.fromJS(this.model);
-        ko.applyBindings(this.model,this.$el);
-        this.elementsViewmodel = CC.elementService.getElementsViewmodel(this.$el);
-        cc.elementService.initAllElements(this.elementsViewmodel);
         this.config();
         //callback for render
         this.viewLoaded();
@@ -219,7 +199,7 @@ KYT.Views.AjaxDisplayView = KYT.Views.View.extend({
          this.$el = $(this.el);
     },
     render:function(){
-        KYT.repository.ajaxGet(this.options.url, this.options.data, $.proxy(this.renderCallback,this));
+        KYT.repository.ajaxGet(this.options.url, this.options.data).done($.proxy(this.renderCallback));
     },
     renderCallback:function(result){
         if(result.LoggedOut){
@@ -251,13 +231,9 @@ KYT.Views.GridView = KYT.Views.View.extend({
     },
     render:function(){
         if(this.onPreRender)this.onPreRender();
-        KYT.repository.ajaxGet(this.options.url, this.options.data, $.proxy(function(result){this.renderCallback(result)},this));
+        KYT.repository.ajaxGet(this.options.url, this.options.data).done($.proxy(this.renderCallback,this));
     },
     renderCallback:function(result){
-        if(result.LoggedOut){
-            window.location.replace(result.RedirectUrl);
-            return;
-        }
         result.errorMessagesContainer = this.options.errorMessagesContainer;
         $(this.el).html($("#gridTemplate").tmpl(result));
         $.extend(this.options,result);
@@ -300,8 +276,7 @@ KYT.Views.GridView = KYT.Views.View.extend({
         if (confirm("Are you sure you would like to delete this Item?")) {
             var ids = cc.gridMultiSelect.getCheckedBoxes();
             KYT.repository.ajaxGet(this.options.deleteMultipleUrl,
-                $.param({"EntityIds":ids},true),
-                $.proxy(function(){this.reloadGrid()},this));
+                $.param({"EntityIds":ids},true)).done($.proxy(function(){this.reloadGrid()},this));
         }
     },
     search:function(v){

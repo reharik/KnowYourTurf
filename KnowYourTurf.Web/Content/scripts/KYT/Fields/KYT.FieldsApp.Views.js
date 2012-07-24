@@ -9,7 +9,7 @@
 KYT.Views.CalendarView = KYT.Views.View.extend({
     render:function(){
         if(this.onPreRender)this.onPreRender();
-       KYT.repository.ajaxGet(this.options.url, this.options.data, $.proxy(function(result){this.renderCallback(result)},this));
+       KYT.repository.ajaxGet(this.options.url, this.options.data).done($.proxy(this.renderCallback));
     },
     renderCallback:function(result){
         if(result.LoggedOut){
@@ -55,7 +55,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             "ScheduledDate":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "StartTime":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "EndTime":$.fullCalendar.formatDate( event.end,"M/d/yyyy hh:mm TT")};
-        KYT.repository.ajaxGet(this.options.calendarDef.EventChangedUrl,data, $.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
+        KYT.repository.ajaxGet(this.options.calendarDef.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
     },
     eventResize:function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){
         var data = {"EntityId":event.EntityId,
@@ -63,7 +63,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             "StartTime":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "EndTime":$.fullCalendar.formatDate( event.end,"M/d/yyyy hh:mm TT")
         };
-        KYT.repository.ajaxGet(this.options.calendarDef.EventChangedUrl,data,$.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
+        KYT.repository.ajaxGet(this.options.calendarDef.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
     },
     dayClick:function(date, allDay, jsEvent, view) {
         var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"),
@@ -127,16 +127,17 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     },
 
     deleteItem: function(){
+        var that = this;
         if (confirm("Are you sure you would like to delete this Item?")) {
             var entityId = $("#EntityId").val();
-            KYT.repository.ajaxGet(this.options.calendarDef.deleteUrl,{"EntityId":entityId}, $.proxy(function(result){
-                this.ajaxPopupDisplay.close();
+            KYT.repository.ajaxGet(this.options.calendarDef.deleteUrl,{"EntityId":entityId}).done(function(result){
+                that.ajaxPopupDisplay.close();
 //                if(!result.Success){
 //                    alert(result.Message);
 //                }else{
-                   this.reload();
+                   that.reload();
 //                }
-            },this));
+            });
         }
     },
     displayEdit:function(event){
@@ -172,13 +173,13 @@ KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
     viewLoaded:function(){
         this.loadTokenizers();
         this.pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
-            url:this.options.pendingGridUrl,
+            url:this.model.pendingGridUrl(),
             gridContainer: "#pendingGridContainer",
             route:"task",
-            id:"pending",
+            id:"pending"
         });
         this.completedGridView = new KYT.Views.DahsboardGridView({el:"#completedTaskGridContainer",
-          url:this.options.completedGridUrl,
+          url:this.model.completedGridUrl(),
             gridContainer: "#completedGridContainer",
             id:"completed",
             route:"taskdisplay"});

@@ -3,7 +3,9 @@ using System.Web.Mvc;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html.Grid;
+using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Web.Models
 {
@@ -11,9 +13,9 @@ namespace KnowYourTurf.Web.Models
     {
         public IEnumerable<TokenInputDto> AvailableItems { get; set; }
         public IEnumerable<TokenInputDto> SelectedItems { get; set; }
-        public string PendingGridUrl { get; set; }
-        public string CompletedGridUrl { get; set; }
-        public bool ReturnToList { get; set; }
+        public string pendingGridUrl { get; set; }
+        public string completedGridUrl { get; set; }
+        public bool returnToList { get; set; }
 
 
 
@@ -25,7 +27,12 @@ namespace KnowYourTurf.Web.Models
         public string LastName { get; set; }
         public string EmergencyContact { get; set; }
         public string EmergencyContactPhone { get; set; }
-        public UserLoginInfoViewModel UserLoginInfo { get; set; }
+        [ValidateNonEmpty]
+        public string UserLoginInfoPassword { get; set; }
+        [ValidateNonEmpty]
+        [ValueOfEnumeration(typeof(Status))]
+        public string UserLoginInfoStatus { get; set; }
+        public IEnumerable<SelectListItem> UserLoginInfoStatusList { get; set; }
         [ValidateNonEmpty]
         public string Email { get; set; }
         [ValidateNonEmpty]
@@ -34,12 +41,13 @@ namespace KnowYourTurf.Web.Models
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
+        [ValueOfEnumeration(typeof(State))]
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string Notes { get; set; }
         public string RolesInput { get; set; }
         public IEnumerable<SelectListItem> StateList { get; set; }
-        public string SaveUrl { get; set; }
+        public string saveUrl { get; set; }
     }
 
     public class UserLoginInfoViewModel

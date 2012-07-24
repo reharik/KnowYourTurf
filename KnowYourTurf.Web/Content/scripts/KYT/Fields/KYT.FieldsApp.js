@@ -16,7 +16,9 @@ KYT.FieldsApp = (function(KYT, Backbone){
     };
 
     KYT.State.bind("change:application", function(e,f,g){
-        if(KYT.State.get("application")=="fields") FieldsApp.show();
+        if(KYT.State.get("application")=="fields") {
+            FieldsApp.show();
+        }
     });
 
     KYT.addInitializer(function(){

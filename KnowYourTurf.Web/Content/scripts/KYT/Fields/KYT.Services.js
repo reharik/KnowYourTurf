@@ -116,3 +116,16 @@ KYT.calculator = (function(){
 
     return calculatorService;
 }());
+
+KYT.loadTemplateAndModel = function(options, $el, callback){
+     var d = $.Deferred();
+        Backbone.Marionette.TemplateCache.get(options.route,options.templateUrl)
+            .pipe(function(result){
+                $el.html(result);
+                d.resolve();
+            });
+        d.done(function(){
+            var modelPromise = KYT.repository.ajaxGet(options.url, options.data);
+            modelPromise.done(callback)
+        });
+};

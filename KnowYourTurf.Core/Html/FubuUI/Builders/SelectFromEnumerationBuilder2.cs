@@ -21,9 +21,9 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
             var selectTag = new SelectTag();
             var elementName = KnowYourTurfHtmlConventions.DeriveElementName(request);
             selectTag.Attr("data-bind", "options:" + elementName + "List," +
-                                        "optionsText:Text," +
-                                        "optionsValue:Value," +
-                                        "value:" + elementName + ",");
+                                        "optionsText:'Text'," +
+                                        "optionsValue:'Value'," +
+                                        "value:" + elementName );
             return selectTag;
         }
     }
@@ -41,9 +41,9 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
             var elementName = KnowYourTurfHtmlConventions.DeriveElementName(request);
             var elementRoot = elementName.Contains("EntityId") ? elementName.Replace(".EntityId", "") : elementName;
             selectTag.Attr("data-bind", "options:" + elementRoot +"List," +
-                                        "optionsValue:Value," +
-                                        "optionsText:Text," +
-                                        "value:" + elementName + ",");
+                                        "optionsValue:'Value'," +
+                                        "optionsText:'Text'," +
+                                        "value:" + elementName);
 
             return selectTag;
         }

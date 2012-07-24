@@ -55,15 +55,15 @@ KYT.Views.LoginView = KYT.Views.BaseFormView.extend({
     },
 
     submitClick: function (e) {
-        var that = this;
         var isValid = CC.ValidationRunner.runViewModel(this.elementsViewmodel);
         if(!isValid){return;}
         var data = JSON.stringify(ko.mapping.toJS(this.model));
-        KYT.repository.ajaxPostModel(data.SaveUrl,data,that.success);
+        var promise = KYT.repository.ajaxPostModel(data.SaveUrl,data);
+        promise.done(this.success);
     },
     success:function(result){
         if(result.Success){
-            window.location.href =result.RedirectUrl;
+            window.location.href = result.RedirectUrl;
         }else{
             //implement server errors here
         }

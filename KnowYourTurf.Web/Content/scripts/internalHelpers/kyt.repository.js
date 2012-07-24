@@ -19,26 +19,23 @@ KYT.repository= (function(){
         //callback(result);
     };
     return {
-        ajaxPost:function(url, data, callback){
+        ajaxPost:function(url, data){
              KYT.showThrob=true;
-            $.post(url,data,function(result){ repositoryCallback(result,callback)});
+            $.post(url,data).done(repositoryCallback);
         },
-        ajaxGet:function(url, data, callback){
+        ajaxGet:function(url, data){
              KYT.showThrob=true;
-            return $.when($.get(url,data)).done(repositoryCallback);
-//                ,function(result){repositoryCallback(result,callback);
-//            });
+            return $.get(url,data).done(repositoryCallback);
         },
-        ajaxPostModel:function(url, data, callback){
+        ajaxPostModel:function(url, data){
             KYT.showThrob=true;
-            $.ajax({
+            return $.ajax({
                 type:"post",
                 url: url,
                 data:data,
-                success:function(result){repositoryCallback(result,callback)},
                 contentType:  "application/json; charset=utf-8",
                 traditional:true
-            });
+            }).done(repositoryCallback);
         }
     }
 }());

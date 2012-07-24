@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
@@ -10,6 +11,7 @@ using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using StructureMap;
+using NHibernate.Linq;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -34,80 +36,31 @@ namespace KnowYourTurf.Web.Controllers
             _sessionContext = sessionContext;
         }
 
-        public ActionResult ViewEmployee(ViewModel input)
+        public ActionResult ViewEmployee_Template(ViewModel input)
         {
-//            long entityId;
-//            entityId = input.EntityId > 0 ? input.EntityId : _sessionContext.GetUserId();
-//            var employee = _repository.Find<User>(entityId);
-//            var availableUserRoles = _repository.FindAll<UserRole>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name});
-//            var selectedUserRoles = employee.UserRoles != null
-//                                                    ? employee.UserRoles.Select(x =>new TokenInputDto{id = x.EntityId.ToString(), name = x.Name})
-//                                                    : null;
-
-            var model = new EmployeeDashboardViewModel
-            {
-                //TODO put modficaztions here "Employee"
-//                EmployeeId = employee.EmployeeId,
-//                FirstName = employee.FirstName,
-//                LastName = employee.LastName,
-//                EmergencyContact = employee.EmergencyContact,
-//                EmergencyContactPhone= employee.EmergencyContactPhone,
-//                UserLoginInfo = new UserLoginInfoViewModel
-//                                    {
-//                                        Password = employee.UserLoginInfo.Password,
-//                                        Status = employee.UserLoginInfo.Status
-//                                    },
-//                Email = employee.Email,
-//                PhoneMobile = employee.PhoneMobile,
-//                ImageUrl = employee.ImageUrl,
-//                Address1 = employee.Address1,
-//                Address2 = employee.Address2,
-//                City = employee.City,
-//                State = employee.State,
-//                ZipCode = employee.ZipCode,
-//                Notes = employee.Notes,
-            };
-            return View("EmployeeDashboard", model);
+            return View("EmployeeDashboard", new EmployeeDashboardViewModel());
         }
 
-        public ActionResult ViewEmployee_json(ViewModel input)
+        public ActionResult ViewEmployee(ViewModel input)
         {
             var entityId = input.EntityId > 0 ? input.EntityId : _sessionContext.GetUserId();
-            var employee = _repository.Find<User>(entityId);
+            var employee = _repository.Query<User>(x=>x.EntityId == entityId).Fetch(x=>x.UserLoginInfo).FirstOrDefault();
 //            var availableUserRoles = _repository.FindAll<UserRole>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
 //            var selectedUserRoles = employee.UserRoles != null
 //                                                    ? employee.UserRoles.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name })
 //                                                    : null;
 
-            var model = new EmployeeDashboardViewModel
-            {
-                EmployeeId = employee.EmployeeId,
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                EmergencyContact = employee.EmergencyContact,
-                EmergencyContactPhone = employee.EmergencyContactPhone,
-                UserLoginInfo = new UserLoginInfoViewModel
-                {
-                    Password = employee.UserLoginInfo.Password,
-                    Status = employee.UserLoginInfo.Status,
-                    StatusList = _selectListItemService.CreateList<Status>()
-                },
-                Email = employee.Email,
-                PhoneMobile = employee.PhoneMobile,
-                ImageUrl = employee.ImageUrl,
-                Address1 = employee.Address1,
-                Address2 = employee.Address2,
-                City = employee.City,
-                State = employee.State,
-                StateList = _selectListItemService.CreateList<State>(),
-                ZipCode = employee.ZipCode,
-                Notes = employee.Notes,
-                Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString(),
-                ReturnToList = input.EntityId > 0,
-                PendingGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasksGrid(null)) + "?ParentId=" + entityId,
-                CompletedGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasksGrid(null)) + "?ParentId=" + entityId,
-                SaveUrl = UrlContext.GetUrlForAction<EmployeeController>(x=>x.Save(null))
-            };
+           
+
+            var model = Mapper.Map<User, EmployeeDashboardViewModel>(employee);
+            model.StateList = _selectListItemService.CreateList<State>();
+            model.UserLoginInfoStatusList = _selectListItemService.CreateList<Status>();
+            model.Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString();
+            model.returnToList = input.EntityId > 0;
+            model.pendingGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasksGrid(null)) + "?ParentId=" + entityId;
+            model.completedGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasksGrid(null)) + "?ParentId=" + entityId;
+            model.saveUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.Save(null));
+            
             return Json(model,JsonRequestBehavior.AllowGet);
         }
 
