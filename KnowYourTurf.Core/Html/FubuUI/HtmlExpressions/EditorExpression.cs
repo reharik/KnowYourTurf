@@ -39,6 +39,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         private string _operation;
         private IAuthorizationService _authorizationService;
         private ISessionContext _sessionContext;
+        private string _elType;
 
         public EditorExpression(ITagGenerator<VIEWMODEL> generator, Expression<Func<VIEWMODEL, object>> expression)
         {
@@ -102,9 +103,14 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
 
         private void addFlagToHtmlRoot(HtmlTag input)
         {
-            if(input is TextboxTag)
+            if (_elType.IsNotEmpty())
             {
-                if(input.HasClass("number"))
+                _htmlRoot.Attr("eltype", _elType);
+                return;
+            }
+            if (input is TextboxTag)
+            {
+                if (input.HasClass("number"))
                 {
                     _htmlRoot.Attr("eltype", "Number");
                     return;
@@ -127,17 +133,17 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
                 _htmlRoot.Attr("eltype", "Password");
                 return;
             }
-            if(input is SelectTag)
+            if (input is SelectTag)
             {
                 _htmlRoot.Attr("eltype", "Select");
                 return;
             }
-            if(input is CheckboxTag)
+            if (input is CheckboxTag)
             {
                 _htmlRoot.Attr("eltype", "Checkbox");
                 return;
             }
-            if(input.TagName() == "textarea")
+            if (input.TagName() == "textarea")
             {
                 _htmlRoot.Attr("eltype", "Textarea");
                 return;
@@ -313,7 +319,11 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             return this;
         }
 
-
+        public EditorExpression<VIEWMODEL> ElType(string elType)
+        {
+            _elType = elType;
+            return this;
+        }
         
         #endregion
 

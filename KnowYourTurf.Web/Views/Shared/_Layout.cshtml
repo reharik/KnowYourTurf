@@ -8,7 +8,7 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    @CSS("jquery-ui-1.8.16.custom.css").ToHtmlTag()
+    @CSS("jquery-ui-1.8.22.custom.css").ToHtmlTag()
     @CSS("ui.multiselect.css").ToHtmlTag()
     @CSS("fileinput.css").ToHtmlTag()
     @CSS("ui.jqgrid.css").ToHtmlTag()
@@ -29,10 +29,10 @@
 
     @Script("jqueryPlugins/jquery-1.7.1.js").ToHtmlTag()
     @Script("jqueryPlugins/jquery.transform-0.9.3.min.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery-ui-1.8.16.custom.min.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery-ui-1.8.22.custom.min.js").ToHtmlTag()
     @Script("jqueryPlugins/jquery.validate.js").ToHtmlTag()
     @Script("jqueryPlugins/jquery.form.2.83.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.tokeninput.js").ToHtmlTag()
+    @Script("jqueryPlugins/cc.tokeninput2.js").ToHtmlTag()
     @Script("jqueryPlugins/jquery.ie-select-style.pack.js").ToHtmlTag()
     @Script("jqueryPlugins/jquery.pubsub.js").ToHtmlTag()
     @Script("jqueryPlugins/jquery.cleditor.min.js").ToHtmlTag()
@@ -64,6 +64,7 @@
     @Script("KYT/Fields/KYT.FieldsApp.Views.js").ToHtmlTag()
     @Script("KYT/Fields/KYT.Services.js").ToHtmlTag()
     
+    @Script("KYT/CC.ModelBinding/CC.CustomBindings.js").ToHtmlTag()
     @Script("KYT/CC.ModelBinding/CC.Elements.js").ToHtmlTag()
     @Script("KYT/CC.ModelBinding/CC.NotificationService.js").ToHtmlTag()
     @Script("KYT/CC.ModelBinding/CC.ModelService.js").ToHtmlTag()

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 

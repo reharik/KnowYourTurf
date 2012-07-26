@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 

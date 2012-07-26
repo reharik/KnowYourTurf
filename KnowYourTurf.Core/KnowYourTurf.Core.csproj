@@ -127,6 +127,7 @@
     </Compile>
     <Compile Include="CoreLocalizationKeys.cs" />
     <Compile Include="CoreViewModels\GridItemModels.cs" />
+    <Compile Include="CoreViewModels\TokenInputDto.cs" />
     <Compile Include="Domain\BaseProduct.cs" />
     <Compile Include="Domain\Calculator.cs" />
     <Compile Include="Domain\Category.cs" />

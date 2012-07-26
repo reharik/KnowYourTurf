@@ -324,7 +324,6 @@
     <Compile Include="Models\PurchaseOrderLineItem\PurchaseOrderLineItemViewModel.cs" />
     <Compile Include="Models\PurchaseOrder\PurchaseOrderViewModel.cs" />
     <Compile Include="Models\Task\TaskViewModel.cs" />
-    <Compile Include="Models\TokenInputDto\TokenInputDto.cs" />
     <Compile Include="Models\TokenViewModel.cs" />
     <Compile Include="Models\VendorContact\VendorContactViewModel.cs" />
     <Compile Include="Models\Vendor\VendorViewModel.cs" />
@@ -513,6 +512,7 @@
     <Folder Include="Areas\Reports\Models\" />
     <Folder Include="Areas\Reports\Views\Shared\" />
     <Folder Include="Models\Email\" />
+    <Folder Include="Models\TokenInputDto\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

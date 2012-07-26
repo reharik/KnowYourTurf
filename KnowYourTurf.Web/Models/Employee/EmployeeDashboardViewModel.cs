@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html.Grid;
@@ -11,8 +12,7 @@ namespace KnowYourTurf.Web.Models
 {
     public class EmployeeDashboardViewModel : ViewModel
     {
-        public IEnumerable<TokenInputDto> AvailableItems { get; set; }
-        public IEnumerable<TokenInputDto> SelectedItems { get; set; }
+        public TokenInputViewModel UserRoles { get; set; }
         public string pendingGridUrl { get; set; }
         public string completedGridUrl { get; set; }
         public bool returnToList { get; set; }
@@ -48,6 +48,7 @@ namespace KnowYourTurf.Web.Models
         public string RolesInput { get; set; }
         public IEnumerable<SelectListItem> StateList { get; set; }
         public string saveUrl { get; set; }
+
     }
 
     public class UserLoginInfoViewModel

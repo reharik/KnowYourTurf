@@ -45,10 +45,10 @@ namespace KnowYourTurf.Web.Controllers
         {
             var entityId = input.EntityId > 0 ? input.EntityId : _sessionContext.GetUserId();
             var employee = _repository.Query<User>(x=>x.EntityId == entityId).Fetch(x=>x.UserLoginInfo).FirstOrDefault();
-//            var availableUserRoles = _repository.FindAll<UserRole>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
-//            var selectedUserRoles = employee.UserRoles != null
-//                                                    ? employee.UserRoles.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name })
-//                                                    : null;
+            var availableUserRoles = _repository.FindAll<UserRole>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            var selectedUserRoles = employee.UserRoles != null
+                                                    ? employee.UserRoles.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name })
+                                                    : null;
 
            
 
@@ -60,7 +60,7 @@ namespace KnowYourTurf.Web.Controllers
             model.pendingGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasksGrid(null)) + "?ParentId=" + entityId;
             model.completedGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasksGrid(null)) + "?ParentId=" + entityId;
             model.saveUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.Save(null));
-            
+            model.UserRoles = new TokenInputViewModel { availableItems = availableUserRoles, selectedItems = selectedUserRoles };
             return Json(model,JsonRequestBehavior.AllowGet);
         }
 
@@ -101,4 +101,6 @@ namespace KnowYourTurf.Web.Controllers
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }
+
+    
 }

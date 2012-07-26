@@ -23,6 +23,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
             Editors.Builder<TimePickerBuilder2>();
             Editors.Builder<CheckboxBuilder2>();
             Editors.Builder<PasswordBuilder2>();
+            Editors.Builder<MultiSelectBuilder2>();
             // default builder
             Editors.Builder<TextboxBuilder2>();
             Editors.Always.Modify(AddElementName);

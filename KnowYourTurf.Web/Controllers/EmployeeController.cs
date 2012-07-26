@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Security.Interfaces;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;

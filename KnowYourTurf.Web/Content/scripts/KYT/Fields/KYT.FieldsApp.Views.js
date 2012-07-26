@@ -171,7 +171,7 @@ KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
         this._super("initialize",arguments);
     },
     viewLoaded:function(){
-        this.loadTokenizers();
+       // this.loadTokenizers();
         this.pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
             url:this.model.pendingGridUrl(),
             gridContainer: "#pendingGridContainer",

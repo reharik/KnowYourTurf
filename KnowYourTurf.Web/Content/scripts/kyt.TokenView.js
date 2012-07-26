@@ -31,7 +31,8 @@ kyt.TokenView = Backbone.View.extend({
             internalTokenMarkup:function(item) {
 //                var cssClass = that.options.tooltipAjaxUrl ? "class='kyt_tokenTooltip selectedItem' rel='" + this.options.tooltipAjaxUrl + "?EntityId=" + item.id + "'" : "class='selectedItem'";
                 var cssClass = "class='selectedItem'";
-                return "<p><a " + cssClass + ">" + item.name + "</a></p>";
+                // added () to value
+                return "<p><a " + cssClass + ">" + item.name() + "</a></p>";
             },
             afterTokenSelectedFunction:function() {
 //                $(".kyt_tokenTooltip").cluetip({showTitle: false,

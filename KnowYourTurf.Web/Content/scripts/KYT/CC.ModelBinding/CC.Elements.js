@@ -59,6 +59,27 @@ CC.Elements.Textbox = CC.Elements.Element.extend({
     }
 });
 
+CC.Elements.DateTextbox = CC.Elements.Element.extend({
+    init:function(){
+        var that = this;
+        this._super("init",arguments);
+        this.type = "datetextbox";
+        this.$input = this.$container.find("input");
+        $(this.$input).on("blur",function(){that.validate();});
+    }
+});
+
+CC.Elements.TimeTextbox = CC.Elements.Element.extend({
+    init:function(){
+        var that = this;
+        this._super("init",arguments);
+        this.type = "timetextbox";
+        this.$input = this.$container.find("input");
+        $(this.$input).on("blur",function(){that.validate();});
+        this.$input.datepicker({ changeYear: true, changeMonth: true });
+    }
+});
+
 CC.Elements.Password= CC.Elements.Element.extend({
     init:function(){
         var that = this;
@@ -80,6 +101,17 @@ CC.Elements.Select = CC.Elements.Element.extend({
     }
 });
 
-_.each(["Element", "Textbox"], function(klass) {
+CC.Elements.MultiSelect = CC.Elements.Element.extend({
+    init:function(){
+        var that = this;
+        this._super("init",arguments);
+        this.type = "select";
+        this.$input = this.$container.find("select");
+        this.$input.chosen();
+        this.$input.chosen().change(function(){that.validate()});
+    }
+});
+
+_.each(["Element", "Textbox", "Password","Select"], function(klass) {
     CC.Elements[klass].prototype._super = Backbone.View.prototype._super;
 });

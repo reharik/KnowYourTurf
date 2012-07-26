@@ -1,6 +1,7 @@
 using System;
 using FubuMVC.UI.Configuration;
 using HtmlTags;
+using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
 using KnowYourTurf.Core.Html.FubuUI.Tags;
 
@@ -103,6 +104,19 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
             root.Attr("data-bind", "attr: { href: mailto:" + KnowYourTurfHtmlConventions.DeriveElementName(request)+"}");
             root.Children.Add(new HtmlTag("span").Attr("data-bind", "text:" + KnowYourTurfHtmlConventions.DeriveElementName(request)));
             return root;
+        }
+    }
+
+    public class MultiSelectBuilder2 : ElementBuilder
+    {
+        protected override bool matches(AccessorDef def)
+        {
+            return def.Accessor.PropertyType == typeof(TokenInputViewModel);
+        }
+
+        public override HtmlTag Build(ElementRequest request)
+        {
+            return new HtmlTag("div").Attr("data-bind", "MultiSelect:" + KnowYourTurfHtmlConventions.DeriveElementName(request));
         }
     }
 }

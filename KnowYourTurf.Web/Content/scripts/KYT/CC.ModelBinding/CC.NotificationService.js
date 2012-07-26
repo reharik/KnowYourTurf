@@ -19,6 +19,8 @@ $.extend(CC.NotificationService.prototype,{
         });
         if(!exists){
             this.msgObjects.push(msgObject);
+            // check if errors are showing and if not show
+            //
         }
     },
     remove:function(element){

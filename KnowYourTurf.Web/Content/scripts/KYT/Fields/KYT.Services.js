@@ -118,7 +118,7 @@ KYT.calculator = (function(){
 }());
 
 KYT.loadTemplateAndModel = function(options, $el, callback){
-     var d = $.Deferred();
+     var d = new $.Deferred();
         Backbone.Marionette.TemplateCache.get(options.route,options.templateUrl)
             .pipe(function(result){
                 $el.html(result);

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;

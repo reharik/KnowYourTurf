@@ -571,7 +571,7 @@ KYT.Views.TokenView = KYT.Views.View.extend({
 });
 
 KYT.Views.EditableTokenView = KYT.Views.TokenView.extend({
-     events:_.extend({
+    events:_.extend({
         'click .tokenEditor' : 'tokenEditor'
     }, KYT.Views.TokenView.prototype.events),
     internalTokenMarkup: function(item) {
@@ -596,6 +596,30 @@ KYT.Views.EditableTokenView = KYT.Views.TokenView.extend({
 });
 
 
+KYT.Views.NotificationView = KYT.Views.View.extend({
+    events:_.extend({
+        "click #trapezoid":"toggle"
+    }, KYT.Views.View.prototype.events),
+    render: function(){
+        var $trap = $("<div>").attr("id","trapezoid");
+        $trap.text("vaslasdflasdf");
+      //  $trap.hide();
+        this.$el.html($trap);
+        $("#main-content").prepend(this.$el);
+        this.viewLoaded();
+        KYT.vent.trigger("form:"+this.id+":pageLoaded",this.options);
+        return this;
+    },
+    toggle:function(){
+        $("#trapezoid").hide("blind",{},2000).delay(800).show("blind",{},2000);
+    },
+    show:function(){
+        $("#trapezoid").show("blind",{},2000);
+    },
+    hide:function(){
+        $("#trapezoid").hide("blind",{},2000);
+    }
+});
 
 
 KYT.tokenDefaults = {
