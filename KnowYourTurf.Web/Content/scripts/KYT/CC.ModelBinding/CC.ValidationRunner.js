@@ -14,24 +14,32 @@ CC.ValidationRunner = (function(){
         return elem.attr('class').split(/\s+/);
     }
     runner.runElement = function(CCElement){
-        $.each(classList(CCElement.$input), function(idx,rule){
+        var elementIsValid = true;
+        var classes = classList(CCElement.$input);
+        $.each(classes, function(idx,rule){
             if(rule && validator[rule]){
                 var isValid = validator[rule](CCElement.getValue());
                 //TODO possibly replace this with CCElement.cid
                 if(!isValid){
+                    elementIsValid = false;
                     CC.notification.add({key:CCElement.fieldName, message:CC.errorMessages[rule]});
                 }else{
                     CC.notification.remove({key:CCElement.fieldName, message:CC.errorMessages[rule]});
                 }
-                CCElement.setValidState(isValid);
             }
         });
+        if(classes.length){
+            CCElement.setValidState(elementIsValid);
+        }else{
+            CCElement.isValid = elementIsValid;
+        }
     };
     runner.runViewModel = function(viewModel){
         var isValid = true;
         $.each(viewModel.collection,function(i,item){
             item.validate();
-            if(!item.isValid) {isValid = false;}
+            if(!item.isValid) {
+                isValid = false;}
         });
         return isValid;
     };
