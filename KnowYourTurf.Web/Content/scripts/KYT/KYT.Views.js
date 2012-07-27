@@ -76,6 +76,7 @@ KYT.Views.View = Backbone.View.extend({
       this.unbind();
       //this.unbindAll();
       this.remove();
+      this.elementsViewmodel = null;
 
       this.closeChildren();
 
@@ -152,9 +153,11 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
         KYT.notificationService.addArea(this.options.notificationArea);
     },
     saveItem:function(){
-        var $form = $(this.options.crudFormSelector,this.el);
-        $form.data().viewId = this.id;
-        $form.submit();
+        var isValid = CC.ValidationRunner.runViewModel(this.elementsViewmodel);
+        if(!isValid){return;}
+        var data = JSON.stringify(ko.mapping.toJS(this.model));
+        var promise = KYT.repository.ajaxPostModel(data.SaveUrl,data);
+        promise.done(this.successHandler);
     },
     cancel:function(){
         KYT.vent.trigger("form:"+this.id+":cancel");

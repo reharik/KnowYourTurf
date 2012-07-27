@@ -106,12 +106,18 @@ CC.Elements.MultiSelect = CC.Elements.Element.extend({
         var that = this;
         this._super("init",arguments);
         this.type = "select";
-        this.$input = this.$container.find("select");
-        this.$input.chosen();
-        this.$input.chosen().change(function(){that.validate()});
+        this.$input = this.$container.find("input.multiSelect");
+        this.$container.on(this.$input.attr("id")+":tokenizer:blur",that.multiSelectBlur);
+    },
+    multiSelectBlur: function(e, viewmodel){
+        this.selectedViewmodel = viewmodel;
+        this.validate();
+    },
+    getValue:function(){
+        return this.selectedViewmodel;
     }
 });
 
-_.each(["Element", "Textbox", "Password","Select"], function(klass) {
+_.each(["Element", "Textbox", "Password","Select", "MultiSelect"], function(klass) {
     CC.Elements[klass].prototype._super = Backbone.View.prototype._super;
 });

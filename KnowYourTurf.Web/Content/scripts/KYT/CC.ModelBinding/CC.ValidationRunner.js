@@ -10,12 +10,8 @@ CC.ValidationRunner = (function(){
     var runner = {};
     var validator = CC.validationRules;
     function classList(elem){
-        var classList = elem.attr('class').split(/\s+/);
-        var classes = [];
-        $.each( classList, function(index, item){
-            classes.push(item);
-        });
-        return classList;
+        if(!elem.attr('class')){return[];}
+        return elem.attr('class').split(/\s+/);
     }
     runner.runElement = function(CCElement){
         $.each(classList(CCElement.$input), function(idx,rule){

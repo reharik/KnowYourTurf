@@ -50,13 +50,6 @@ var DEFAULT_CLASSES = {
     tokenInput: "token-input-Input"
 };
 
-// Input box position "enum"
-var POSITION = {
-    BEFORE: 0,
-    AFTER: 1,
-    END: 2
-};
-
 // Keys "enum"
 var KEY = {
     BACKSPACE: 8,
@@ -76,48 +69,17 @@ var KEY = {
     COMMA: 188
 };
 
-// Additional public (exposed) methods
-var methods = {
-    init: function(url_or_data_or_function, options) {
-        var settings = $.extend({}, DEFAULT_SETTINGS, options || {});
-
-        return this.each(function () {
-            $(this).data("tokenInputObject", new $.TokenList(this, url_or_data_or_function, settings));
-        });
-    },
-    clear: function() {
-        this.data("tokenInputObject").clear();
-        return this;
-    },
-    add: function(item) {
-        this.data("tokenInputObject").add(item);
-        return this;
-    },
-    remove: function(item) {
-        this.data("tokenInputObject").remove(item);
-        return this;
-    },
-    addToAvailableList: function(item) {
-        this.data("tokenInputObject").addToAvailableList(item);
-        return this;
-    }
-};
-
 // Expose the .tokenInput function to jQuery as a plugin
-$.fn.tokenInput = function (method) {
-    // Method calling and initialization logic
-    if(methods[method]) {
-        return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-    } else {
-        return methods.init.apply(this, arguments);
-    }
+$.fn.tokenInput = function (viewmodel, options) {
+    var settings = $.extend({}, DEFAULT_SETTINGS, options || {});
+    return this.each(function () {
+        $(this).data("tokenInputObject", new $.TokenList(this, viewmodel, settings));
+    });
 };
 
 // TokenList class for each input
 $.TokenList = function (input, viewModel, settings) {
-    //
-    // Initialization_.any
-    //
+    var id = $(input).attr("id");
     var controlContainer = $("<div></div>");
     $(input).after(controlContainer);
     
@@ -194,6 +156,7 @@ $.TokenList = function (input, viewModel, settings) {
         .blur(function () {
             hide_dropdown();
             $(this).val("");
+            $(this).trigger(id+":tokenizer:blur",settings.viewModel.selectedItems);
         })
         //.bind("keyup keydown blur update", resize_input)
         .keydown(function (event) {
@@ -475,16 +438,8 @@ $.TokenList = function (input, viewModel, settings) {
 
     function populate_resultsModel(source){
         $(dropdown).children("*").not("ul").remove();
-        var deferred = $.Deferred();
-        clear_resultsModel(deferred);
-        deferred.done(function(){
-            _.each(source,function(item,i){settings.viewModel.resultsItems.push(item);})});
-    }
-
-     function clear_resultsModel(deferred){
-        var temp = settings.viewModel.resultsItems().splice(0,settings.viewModel.resultsItems().length);
-        _.each(temp,function(item,i){settings.viewModel.resultsItems.remove(item);});
-        deferred.resolve();
+        settings.viewModel.resultsItems.removeAll();
+        _.each(source,function(item,i){settings.viewModel.resultsItems.push(item);});
     }
 
      // Hide and clear the results dropdown
