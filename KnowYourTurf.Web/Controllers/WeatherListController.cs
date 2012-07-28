@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<WeatherController>(x => x.AddUpdate(null)),
                 gridDef = _weatherListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.WEATHER.ToString()
+                _Title = WebLocalizationKeys.WEATHER.ToString()
             };
             return Json(model, JsonRequestBehavior.AllowGet);
         }

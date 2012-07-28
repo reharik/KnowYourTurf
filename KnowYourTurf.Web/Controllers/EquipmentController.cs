@@ -40,7 +40,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Item = equipment,
                 VendorList = vendors,
-                Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString()
+                _Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString()
             };
             return PartialView("EquipmentAddUpdate", model);
         }
@@ -52,7 +52,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Item = equipment,
                 AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddUpdate(null)) + "/" + equipment.EntityId,
-                Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString()
+                _Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString()
             };
             return PartialView("EquipmentView", model);
         }

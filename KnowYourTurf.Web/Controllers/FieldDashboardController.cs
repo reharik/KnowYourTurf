@@ -49,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
                                 CompletedGridUrl = completeUrl,
                                 DocumentGridUrl = docuemntUrl,
                                 PhotoGridUrl = photoUrl,
-                                Title = WebLocalizationKeys.FIELD_INFORMATION.ToString(),
+                                _Title = WebLocalizationKeys.FIELD_INFORMATION.ToString(),
                             };
            
             return View("FieldDashboard", model);

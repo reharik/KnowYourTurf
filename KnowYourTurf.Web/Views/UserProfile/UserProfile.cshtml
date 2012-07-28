@@ -31,7 +31,7 @@
                 @Html.SubmissionFor(x => x.Item.LastName).AddClassToRoot("two-five last").ToHtmlTag()
             </div>
             <div class="fieldRow">
-                @Html.SubmissionFor(x => x.Item.Title).ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item._Title).ToHtmlTag()
             </div>
             <div class="fieldRow">
                 @Html.ViewFor(x => x.Item.UserLoginInfo.LoginName).AddClassToRoot("half").ToHtmlTag()

@@ -38,7 +38,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ViewEmployee_Template(ViewModel input)
         {
-            return View("EmployeeDashboard", new EmployeeDashboardViewModel());
+            return View("EmployeeDashboard", new UserViewModel());
         }
 
         public ActionResult ViewEmployee(ViewModel input)
@@ -52,15 +52,15 @@ namespace KnowYourTurf.Web.Controllers
 
            
 
-            var model = Mapper.Map<User, EmployeeDashboardViewModel>(employee);
-            model.StateList = _selectListItemService.CreateList<State>();
-            model.UserLoginInfoStatusList = _selectListItemService.CreateList<Status>();
-            model.Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString();
-            model.returnToList = input.EntityId > 0;
-            model.pendingGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasksGrid(null)) + "?ParentId=" + entityId;
-            model.completedGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasksGrid(null)) + "?ParentId=" + entityId;
-            model.saveUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.Save(null));
-            model.UserRoles = new TokenInputViewModel { availableItems = availableUserRoles, selectedItems = selectedUserRoles };
+            var model = Mapper.Map<User, UserViewModel>(employee);
+            model._StateList = _selectListItemService.CreateList<State>();
+            model._UserLoginInfoStatusList = _selectListItemService.CreateList<Status>();
+            model._Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString();
+            model._returnToList = input.EntityId > 0;
+            model._pendingGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasksGrid(null)) + "?ParentId=" + entityId;
+            model._completedGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasksGrid(null)) + "?ParentId=" + entityId;
+            model._saveUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.Save(null));
+            model.UserRoles = new TokenInputViewModel { _availableItems = availableUserRoles, selectedItems = selectedUserRoles };
             return Json(model,JsonRequestBehavior.AllowGet);
         }
 

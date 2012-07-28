@@ -42,7 +42,7 @@ namespace KnowYourTurf.Web.Controllers
                 Item = emailJob,
                 EmailTemplateList = emailTemplates,
                 EmailJobTypeList = emailTypes,
-                Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString(),
+                _Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString(),
                 AvailableEmployees = availableEmployees.ToList(),
                 SelectedEmployees = selectedEmployees.ToList()
             };
@@ -56,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Item = emailTemplate,
                 AddUpdateUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.AddUpdate(null)) + "/" + emailTemplate.EntityId,
-                Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString()
+                _Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString()
             };
             return PartialView("EmailJobView", model);
         }

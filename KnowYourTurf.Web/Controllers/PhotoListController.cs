@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
                 AddUpdateUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.DeleteMultiple(null)),
                 gridDef = _photoListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.PHOTOS.ToString()
+                _Title = WebLocalizationKeys.PHOTOS.ToString()
             };
             return View(model);
         }

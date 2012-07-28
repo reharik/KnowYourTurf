@@ -123,6 +123,9 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
         ko.applyBindings(this.model,this.el);
         this.elementsViewmodel = CC.elementService.getElementsViewmodel(this.$el);
         CC.elementService.initAllElements(this.elementsViewmodel);
+        this.mappingOptions ={ ignore: _.filter(_.keys(this.model),function(item){
+            return (item.indexOf('_') == 0 && item != "__ko_mapping__");
+        })};
     },
     addReferenceValuesToForm:function(){
         var rel = KYT.State.get("Relationships");
@@ -155,9 +158,10 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
     saveItem:function(){
         var isValid = CC.ValidationRunner.runViewModel(this.elementsViewmodel);
         if(!isValid){return;}
-        var data = JSON.stringify(ko.mapping.toJS(this.model));
-        var promise = KYT.repository.ajaxPostModel(data.SaveUrl,data);
-        promise.done(this.successHandler);
+
+        var data = JSON.stringify(ko.mapping.toJS(this.model,this.mappingOptions));
+        var promise = KYT.repository.ajaxPostModel(this.model._saveUrl(),data);
+        promise.done($.proxy(this.successHandler,this));
     },
     cancel:function(){
         KYT.vent.trigger("form:"+this.id+":cancel");

@@ -29,7 +29,7 @@ namespace KnowYourTurf.Web.Controllers
                 AddUpdateUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<VendorController>(x => x.DeleteMultiple(null)),
                 gridDef = _vendorListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.VENDORS.ToString()
+                _Title = WebLocalizationKeys.VENDORS.ToString()
             };
             return View(model);
         }

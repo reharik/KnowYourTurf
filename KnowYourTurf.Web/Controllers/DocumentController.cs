@@ -41,7 +41,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Item = document,
                 DocumentCategoryList = categoryItems,
-                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
+                _Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
                 Popup = input.Popup
             };
             return View(model);
@@ -54,7 +54,7 @@ namespace KnowYourTurf.Web.Controllers
                             {
                                 Item = document,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "/" + document.EntityId,
-                                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
+                                _Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
                                 Popup = input.Popup
                             };
             return View(model);

@@ -102,7 +102,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EventTypeViewModel
                             {
                                 Item = listType,
-                                Title = WebLocalizationKeys.EVENT_TYPE_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.EVENT_TYPE_INFORMATION.ToString()
 
                             };
             return PartialView(model);
@@ -117,7 +117,7 @@ namespace KnowYourTurf.Web.Controllers
                                 AddUpdateUrl =
                                     UrlContext.GetUrlForAction<EventTypeController>(x => x.AddUpdate(null)) + "/" +
                                     input.EntityId,
-                                Title = WebLocalizationKeys.EVENT_TYPE_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.EVENT_TYPE_INFORMATION.ToString()
                             };
             return PartialView(model);
         }
@@ -185,7 +185,7 @@ namespace KnowYourTurf.Web.Controllers
         public virtual ActionResult AddUpdate(ViewModel input)
         {
             var model = GetAddUpdate(input);
-            model.Title = WebLocalizationKeys.TASK_TYPE_INFORMATION.ToString();
+            model._Title = WebLocalizationKeys.TASK_TYPE_INFORMATION.ToString();
             return PartialView(model);
         }
         public override ActionResult Display(ViewModel input)
@@ -197,7 +197,7 @@ namespace KnowYourTurf.Web.Controllers
                                 AddUpdateUrl =
                                     UrlContext.GetUrlForAction<TaskTypeController>(x => x.AddUpdate(null)) + "/" +
                                     input.EntityId,
-                                Title = WebLocalizationKeys.TASK_TYPE_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.TASK_TYPE_INFORMATION.ToString()
                             };
             return PartialView(model);
         }
@@ -249,7 +249,7 @@ namespace KnowYourTurf.Web.Controllers
         public virtual ActionResult AddUpdate(ViewModel input)
         {
             var model = GetAddUpdate(input);
-            model.Title = WebLocalizationKeys.DOCUMENT_CATEGORY_INFORMATION.ToString();
+            model._Title = WebLocalizationKeys.DOCUMENT_CATEGORY_INFORMATION.ToString();
             return PartialView(model);
         }
 
@@ -262,7 +262,7 @@ namespace KnowYourTurf.Web.Controllers
                                 AddUpdateUrl =
                                     UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.AddUpdate(null)) + "/" +
                                     input.EntityId,
-                                Title = WebLocalizationKeys.DOCUMENT_CATEGORY_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.DOCUMENT_CATEGORY_INFORMATION.ToString()
                             };
             return PartialView(model);
         }
@@ -315,7 +315,7 @@ namespace KnowYourTurf.Web.Controllers
         public virtual ActionResult AddUpdate(ViewModel input)
         {
             var model = GetAddUpdate(input);
-            model.Title = WebLocalizationKeys.PHOTO_CATEGORY_INFORMATION.ToString();
+            model._Title = WebLocalizationKeys.PHOTO_CATEGORY_INFORMATION.ToString();
             return PartialView(model);
         }
 
@@ -328,7 +328,7 @@ namespace KnowYourTurf.Web.Controllers
                                 AddUpdateUrl =
                                     UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.AddUpdate(null)) + "/" +
                                     input.EntityId,
-                                Title = WebLocalizationKeys.PHOTO_CATEGORY_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.PHOTO_CATEGORY_INFORMATION.ToString()
                             };
             return PartialView(model);
         }

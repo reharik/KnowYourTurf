@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 CreateATaskUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null))+"?From=Calculator",
                 gridDef = _calculatorListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.CALCULATORS.ToString()
+                _Title = WebLocalizationKeys.CALCULATORS.ToString()
             };
             return Json(model, JsonRequestBehavior.AllowGet);
         }

@@ -28,7 +28,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 AddUpdateUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddUpdate(null)),
                 gridDef = _employeeListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.EMPLOYEES.ToString()
+                _Title = WebLocalizationKeys.EMPLOYEES.ToString()
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");

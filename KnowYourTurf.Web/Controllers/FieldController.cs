@@ -30,7 +30,7 @@ namespace KnowYourTurf.Web.Controllers
                 Item = field,
                 ParentId = input.ParentId,
                 AddUpdateUrl = UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)) + "/" + field.EntityId,
-                Title = WebLocalizationKeys.FIELD_INFORMATION.ToString()
+                _Title = WebLocalizationKeys.FIELD_INFORMATION.ToString()
             };
             return PartialView("FieldAddUpdate", model);
         }

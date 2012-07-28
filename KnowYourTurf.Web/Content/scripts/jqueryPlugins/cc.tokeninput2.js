@@ -240,7 +240,7 @@ $.TokenList = function (input, viewModel, settings) {
         .hide()
         .insertAfter(input_div);
     var dropdown_ul = $("<ul>")
-        .attr("data-bind","foreach: resultsItems")
+        .attr("data-bind","foreach: _resultsItems")
         .delegate("li","mouseover",function (event) {
             highlight_available_item($(this));
         })
@@ -287,10 +287,10 @@ $.TokenList = function (input, viewModel, settings) {
 
     this.addToAvailableList= function(item){
         // args for any callback may be wrong
-        if(!_.any(settings.viewModel.availableItems, function(i,existingItem){
+        if(!_.any(settings.viewModel._availableItems, function(i,existingItem){
             return(existingItem.id() == item.id);
         }))
-        settings.viewModel.availableItems.push(item);
+        settings.viewModel._availableItems.push(item);
     };
 
     //
@@ -393,7 +393,7 @@ $.TokenList = function (input, viewModel, settings) {
     }
 
     function find_modelItem_for_available_listItem (token){
-        return _.find(settings.viewModel.availableItems(), function(item,i){
+        return _.find(settings.viewModel._availableItems(), function(item,i){
             return $(token).attr("id")===item.id();
         })
     }
@@ -438,8 +438,8 @@ $.TokenList = function (input, viewModel, settings) {
 
     function populate_resultsModel(source){
         $(dropdown).children("*").not("ul").remove();
-        settings.viewModel.resultsItems.removeAll();
-        _.each(source,function(item,i){settings.viewModel.resultsItems.push(item);});
+        settings.viewModel._resultsItems.removeAll();
+        _.each(source,function(item,i){settings.viewModel._resultsItems.push(item);});
     }
 
      // Hide and clear the results dropdown
@@ -471,7 +471,7 @@ $.TokenList = function (input, viewModel, settings) {
     }
 
     function decorate_dropdown (query) {
-        if(settings.viewModel.resultsItems().length>0) {
+        if(settings.viewModel._resultsItems().length>0) {
             $.each($(dropdown_ul).find("li"), function(index, li) {
                 var $li = $(li);
                 $li.html(highlight_term($li.text(), query));
@@ -496,7 +496,7 @@ $.TokenList = function (input, viewModel, settings) {
     function show_dropdown_results() {
         var query = input_box.val().toLowerCase();
         if(!query || !query.length){
-            populate_resultsModel(settings.viewModel.availableItems());
+            populate_resultsModel(settings.viewModel._availableItems());
             decorate_dropdown("");
             show_dropdown();
             return;
@@ -507,7 +507,7 @@ $.TokenList = function (input, viewModel, settings) {
     // Do the actual search
     function run_search(query) {
             // Do the search through local data
-            var results= $.grep(settings.viewModel.availableItems(), function (row) {
+            var results= $.grep(settings.viewModel._availableItems(), function (row) {
                 // added () to value
                 return row.name().toLowerCase().indexOf(query.toLowerCase()) > -1;
             });
@@ -515,7 +515,7 @@ $.TokenList = function (input, viewModel, settings) {
             
     
             if($.isFunction(settings.onResult)) {
-                var callbackResult = settings.onResult.call(settings.viewModel.resultsItems);
+                var callbackResult = settings.onResult.call(settings.viewModel._resultsItems);
                 if(callbackResult){
                    populate_resultsModel(callbackResult);
                 }

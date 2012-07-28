@@ -44,7 +44,7 @@
 //            return new GridDefinition
 //                       {
 //                           Url = url,
-//                           Title = title.ToString(),
+//                           _Title = title.ToString(),
 //                           Columns = builtGrid.GetGridColumns(user)
 //                       };
 //        }

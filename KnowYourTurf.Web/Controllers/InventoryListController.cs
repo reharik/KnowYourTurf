@@ -43,7 +43,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 //TODO put modifiler here "ProductType=" + productType
                 gridDef = _inventoryProductListGrid.GetGridDefinition(url),
-                Title = crudTitle.ToString()
+                _Title = crudTitle.ToString()
             };
             return View("Inventory" + input.ProductType + "List", model);
         }
@@ -60,17 +60,17 @@ namespace KnowYourTurf.Web.Controllers
             var inventoryProduct = _repository.Find<InventoryProduct>(input.EntityId);
             if (inventoryProduct.ReadOnlyProduct.InstantiatingType == "Chemical")
             {
-                var model = new InventoryChemicalViewModel {Item = inventoryProduct,Title=WebLocalizationKeys.INVENTORY_CHEMICAL_INFORMATION.ToString()};
+                var model = new InventoryChemicalViewModel {Item = inventoryProduct,_Title=WebLocalizationKeys.INVENTORY_CHEMICAL_INFORMATION.ToString()};
                 return PartialView("InventoryChemicalView", model);
             }
             if (inventoryProduct.ReadOnlyProduct.InstantiatingType == "Fertilizer")
             {
-                var model = new InventoryFertilizerViewModel { Item = inventoryProduct,Title=WebLocalizationKeys.INVENTORY_FERTILIZER_INFORMATION.ToString() };
+                var model = new InventoryFertilizerViewModel { Item = inventoryProduct,_Title=WebLocalizationKeys.INVENTORY_FERTILIZER_INFORMATION.ToString() };
                 return PartialView("InventoryFertilizerView", model);
             }
             if (inventoryProduct.ReadOnlyProduct.InstantiatingType == "Material")
             {
-                var model = new InventoryMaterialViewModel { Item = inventoryProduct, Title = WebLocalizationKeys.INVENTORY_MATERIAL_INFORMATION.ToString()};
+                var model = new InventoryMaterialViewModel { Item = inventoryProduct, _Title = WebLocalizationKeys.INVENTORY_MATERIAL_INFORMATION.ToString()};
                 return PartialView("InventoryMaterialView", model);
             }
             return null;

@@ -35,7 +35,7 @@ kyt.TokenView = Backbone.View.extend({
                 return "<p><a " + cssClass + ">" + item.name() + "</a></p>";
             },
             afterTokenSelectedFunction:function() {
-//                $(".kyt_tokenTooltip").cluetip({showTitle: false,
+//                $(".kyt_tokenTooltip").cluetip({show_Title: false,
 //                    cluetipClass: 'rounded',
 //                    arrows: true,
 //                    hoverIntent: {

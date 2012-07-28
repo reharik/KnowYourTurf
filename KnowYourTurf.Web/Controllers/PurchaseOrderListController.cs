@@ -32,7 +32,7 @@ namespace KnowYourTurf.Web.Controllers
                 AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.DeleteMultiple(null)),
                 gridDef = _purchaseOrderListGrid.GetGridDefinition(url),
-                Title = input.Completed ? WebLocalizationKeys.COMPLETED_PURCHASE_ORDERS.ToString() : WebLocalizationKeys.PURCHASE_ORDERS.ToString(),
+                _Title = input.Completed ? WebLocalizationKeys.COMPLETED_PURCHASE_ORDERS.ToString() : WebLocalizationKeys.PURCHASE_ORDERS.ToString(),
                 Completed = input.Completed
             };
             return View(model);

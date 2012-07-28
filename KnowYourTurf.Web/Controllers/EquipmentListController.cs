@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Controllers
                 AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl= UrlContext.GetUrlForAction<EquipmentController>(x => x.DeleteMultiple(null)),
                 gridDef = _equipmentListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.EQUIPMENT.ToString()
+                _Title = WebLocalizationKeys.EQUIPMENT.ToString()
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");

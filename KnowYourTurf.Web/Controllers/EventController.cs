@@ -39,7 +39,7 @@ namespace KnowYourTurf.Web.Controllers
                                 FieldList = fields,
                                 EventTypeList = _eventTypes,
                                 Event = _event,
-                                Title = WebLocalizationKeys.EVENT_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.EVENT_INFORMATION.ToString()
             };
             if (_event.EntityId > 0)
             {
@@ -57,7 +57,7 @@ namespace KnowYourTurf.Web.Controllers
                             {
                                 Event = _event,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate(null)) + "/" + _event.EntityId,
-                                Title = WebLocalizationKeys.EVENT_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.EVENT_INFORMATION.ToString()
             };
             return PartialView("EventView", model);
         }

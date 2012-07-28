@@ -53,7 +53,7 @@ namespace KnowYourTurf.Web.Controllers
                 deleteMultipleUrl = deleteMany,
                 gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url),
                 PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl),
-                Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString()
+                _Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString()
 
             };
             return PartialView("PurchaseOrderBuilder", model);

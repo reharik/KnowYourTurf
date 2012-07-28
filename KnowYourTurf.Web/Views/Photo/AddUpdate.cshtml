@@ -7,7 +7,7 @@
     Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
 }
 <script>
-    extraFormOptions.title = '@Model.Title';
+    extraFormOptions.title = '@Model.__Title';
 </script>
 
     @MvcHtmlString.Create(FormFor<PhotoController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())

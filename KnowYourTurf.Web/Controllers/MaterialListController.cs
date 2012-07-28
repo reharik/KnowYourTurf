@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Controllers
                 AddUpdateUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.DeleteMultiple(null)),
                 gridDef = _materialListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.MATERIALS.ToString()
+                _Title = WebLocalizationKeys.MATERIALS.ToString()
             };
             return View(model);
         }

@@ -20,7 +20,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         {
             var selectTag = new SelectTag();
             var elementName = KnowYourTurfHtmlConventions.DeriveElementName(request);
-            selectTag.Attr("data-bind", "options:" + elementName + "List," +
+            selectTag.Attr("data-bind", "options:_" + elementName + "List," +
                                         "optionsText:'Text'," +
                                         "optionsValue:'Value'," +
                                         "value:" + elementName );
@@ -40,7 +40,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
             var selectTag = new SelectTag();
             var elementName = KnowYourTurfHtmlConventions.DeriveElementName(request);
             var elementRoot = elementName.Contains("EntityId") ? elementName.Replace(".EntityId", "") : elementName;
-            selectTag.Attr("data-bind", "options:" + elementRoot +"List," +
+            selectTag.Attr("data-bind", "options:_" + elementRoot +"List," +
                                         "optionsValue:'Value'," +
                                         "optionsText:'Text'," +
                                         "value:" + elementName);

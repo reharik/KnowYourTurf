@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new MaterialViewModel
             {
                 Item = material,
-                Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
+                _Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
             };
             return PartialView("MaterialAddUpdate", model);
         }
@@ -38,7 +38,7 @@ namespace KnowYourTurf.Web.Controllers
                             {
                                 Item = material,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.AddUpdate(null)) + "/" + material.EntityId,
-                                Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
                             };
             return PartialView("MaterialView", model);
         }

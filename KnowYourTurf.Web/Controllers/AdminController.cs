@@ -4,6 +4,7 @@ using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
+using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
 using StructureMap;
 
@@ -29,26 +30,28 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Admin(ViewModel input)
         {
-            var admin = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
-            
-            var model = new UserViewModel
-            {
-                Item = admin,
-                Title = WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString()
-            };
-            return PartialView("AdminAddUpdate", model);
+//            var admin = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
+//            
+//            var model = new UserViewModel
+//            {
+//                Item = admin,
+//                _Title = WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString()
+//            };
+//            return PartialView("AdminAddUpdate", model);
+            return null;
         }
       
         public ActionResult Display(ViewModel input)
         {
-            var admin = _repository.Find<User>(input.EntityId);
-            var model = new UserViewModel
-                            {
-                                Item= admin,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<AdminController>(x => x.Admin(null)) + "/" + admin.EntityId,
-                                Title = WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString()
-                            };
-            return PartialView("AdminView", model);
+//            var admin = _repository.Find<User>(input.EntityId);
+//            var model = new UserViewModel
+//                            {
+//                                Item= admin,
+//                                AddUpdateUrl = UrlContext.GetUrlForAction<AdminController>(x => x.Admin(null)) + "/" + admin.EntityId,
+//                                _Title = WebLocalizationKeys.ADMINISTRATOR_INFORMATION.ToString()
+//                            };
+//            return PartialView("AdminView", model);
+            return null;
         }
 
         public ActionResult Delete(ViewModel input)
@@ -69,9 +72,9 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Save(UserViewModel input)
         {
             User administrator;
-            if (input.Item.EntityId > 0)
+            if (input.EntityId > 0)
             {
-                administrator = _repository.Find<User>(input.Item.EntityId);
+                administrator = _repository.Find<User>(input.EntityId);
             }
             else
             {
@@ -98,22 +101,21 @@ namespace KnowYourTurf.Web.Controllers
 
         private User mapToDomain(UserViewModel model, User administrator)
         {
-            var adminModel = model.Item;
-            administrator.Address1 = adminModel.Address1;
-            administrator.Address2= adminModel.Address2;
-            administrator.FirstName= adminModel.FirstName;
-            administrator.LastName = adminModel.LastName;
-            administrator.Email = adminModel.Email;
-            administrator.PhoneMobile = adminModel.PhoneMobile;
-            administrator.City = adminModel.City;
-            administrator.State = adminModel.State;
-            administrator.ZipCode = adminModel.ZipCode;
-            administrator.Notes = adminModel.Notes;
+            administrator.Address1 = model.Address1;
+            administrator.Address2 = model.Address2;
+            administrator.FirstName = model.FirstName;
+            administrator.LastName = model.LastName;
+            administrator.Email = model.Email;
+            administrator.PhoneMobile = model.PhoneMobile;
+            administrator.City = model.City;
+            administrator.State = model.State;
+            administrator.ZipCode = model.ZipCode;
+            administrator.Notes = model.Notes;
             administrator.UserLoginInfo = new UserLoginInfo()
                                               {
-                                                  Password = adminModel.UserLoginInfo.Password,
-                                                  LoginName = adminModel.Email,
-                                                  Status = adminModel.UserLoginInfo.Status,
+                                                  Password = model.UserLoginInfoPassword,
+                                                  LoginName = model.Email,
+                                                  Status = model.UserLoginInfoStatus,
                                               };
             administrator.AddUserRole(new UserRole { Name = UserType.Administrator.ToString() });
             administrator.AddUserRole(new UserRole { Name = UserType.Employee.ToString() });

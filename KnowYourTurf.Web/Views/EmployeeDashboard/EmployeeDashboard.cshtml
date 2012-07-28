@@ -1,4 +1,4 @@
-﻿@model KnowYourTurf.Web.Models.EmployeeDashboardViewModel
+﻿@model KnowYourTurf.Web.Models.UserViewModel
 @using KnowYourTurf.Core;
 @using KnowYourTurf.Core.Html.Expressions
 @using KnowYourTurf.Web
@@ -40,14 +40,14 @@
         </div>
     </div>
 <div class="col left">
-    @{
-        if (Model.ImageUrl.IsNotEmpty())
-        {
-            <div class="fieldRow">
+@*    @{*@
+@*        if (Model.ImageUrl.IsNotEmpty())*@
+@*        {*@
+@*            <div class="fieldRow">*@
                 @Html.ViewFor(x => x.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
-            </div>
-        }
-    }
+@*            </div>*@
+@*        }*@
+@*    }*@
     <div class="fieldRow">
         @Html.SubmissionFor(x => x.Address1).ToHtmlTag()
     </div>

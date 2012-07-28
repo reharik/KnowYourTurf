@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new FertilizerViewModel
             {
                 Item = fertilizer,
-                Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
+                _Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
             };
             return PartialView("FertilizerAddUpdate", model);
         }
@@ -38,7 +38,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Item = fertilizer,
                 AddUpdateUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddUpdate(null)) + "/" + fertilizer.EntityId,
-                Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
+                _Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
             };
             return PartialView("FertilizerView", model);
         }

@@ -171,15 +171,17 @@ KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
         this._super("initialize",arguments);
     },
     viewLoaded:function(){
+        this.mappingOptions.ignore.push("_availableItems");
+        this.mappingOptions.ignore.push("_resultsItems");
        // this.loadTokenizers();
         this.pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
-            url:this.model.pendingGridUrl(),
+            url:this.model._pendingGridUrl(),
             gridContainer: "#pendingGridContainer",
             route:"task",
             id:"pending"
         });
         this.completedGridView = new KYT.Views.DahsboardGridView({el:"#completedTaskGridContainer",
-          url:this.model.completedGridUrl(),
+          url:this.model._completedGridUrl(),
             gridContainer: "#completedGridContainer",
             id:"completed",
             route:"taskdisplay"});

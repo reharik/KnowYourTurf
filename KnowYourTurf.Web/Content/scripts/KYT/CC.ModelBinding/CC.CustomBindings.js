@@ -9,7 +9,7 @@
 ko.bindingHandlers.MultiSelect = {
     init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
          var model = valueAccessor();
-        model.resultsItems = ko.observableArray();
+        model._resultsItems = ko.observableArray();
         $(element).tokenInput(model, {
                 internalTokenMarkup:function(){
                     var anchor = $("<a>").addClass("selectedItem").attr("data-bind",'text:name');
@@ -26,3 +26,4 @@ ko.bindingHandlers.MultiSelect = {
     }
 
 };
+

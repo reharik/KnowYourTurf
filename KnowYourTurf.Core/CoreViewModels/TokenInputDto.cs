@@ -9,7 +9,7 @@ namespace KnowYourTurf.Core.CoreViewModels
     }
     public class TokenInputViewModel
     {
-        public IEnumerable<TokenInputDto> availableItems { get; set; }
+        public IEnumerable<TokenInputDto> _availableItems { get; set; }
         public IEnumerable<TokenInputDto> selectedItems { get; set; }
     }
 }

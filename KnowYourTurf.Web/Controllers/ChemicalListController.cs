@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Controllers
                 AddUpdateUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.DeleteMultiple(null)),
                 gridDef = _chemicalListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.CHEMICALS.ToString()
+                _Title = WebLocalizationKeys.CHEMICALS.ToString()
             };
             return View(model);
         }

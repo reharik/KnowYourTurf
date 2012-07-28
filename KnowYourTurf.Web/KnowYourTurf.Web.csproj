@@ -308,7 +308,6 @@
     <Compile Include="Models\Calculator\CalculatorViewModel.cs" />
     <Compile Include="Models\Chemical\ChemicalViewModel.cs" />
     <Compile Include="Models\EmailJob\EmailJobViewModel.cs" />
-    <Compile Include="Models\Employee\EmployeeDashboardViewModel.cs" />
     <Compile Include="Models\Employee\UserViewModel.cs" />
     <Compile Include="Models\Enum\ListTypeListViewModel.cs" />
     <Compile Include="Models\Enum\TaskTypeViewModel.cs" />

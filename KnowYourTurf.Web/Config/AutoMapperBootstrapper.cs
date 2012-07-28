@@ -8,7 +8,7 @@ namespace KnowYourTurf.Web.Config
     {
         public virtual void BootstrapAutoMapper()
         {
-            Mapper.CreateMap<User, EmployeeDashboardViewModel>().ForMember(d => d.UserRoles, o => o.Ignore());
+            Mapper.CreateMap<User, UserViewModel>().ForMember(d => d.UserRoles, o => o.Ignore());
              
         }
 

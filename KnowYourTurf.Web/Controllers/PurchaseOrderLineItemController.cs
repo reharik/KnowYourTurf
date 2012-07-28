@@ -91,7 +91,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new PurchaseOrderLineItemViewModel
             {
                 Item = purchaseOrderLineItem,
-                Title = WebLocalizationKeys.RECEIVE_PURCHASE_ORDER_ITEM.ToString()
+                _Title = WebLocalizationKeys.RECEIVE_PURCHASE_ORDER_ITEM.ToString()
             };
             return PartialView("ReceivePurchaseOrderLineItem", model);
         }

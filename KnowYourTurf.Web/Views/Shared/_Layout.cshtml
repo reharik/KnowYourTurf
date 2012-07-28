@@ -50,7 +50,7 @@
     @Script("externalHelpers/backbone.js").ToHtmlTag()
     @Script("externalHelpers/backbone.marionette.js").ToHtmlTag()
     @Script("externalHelpers/knockout-2.1.0.debug.js").ToHtmlTag()    
-    @Script("externalHelpers/knockout.mapping.js").ToHtmlTag()    
+    @Script("externalHelpers/knockout.mapping-lastest.debug.js").ToHtmlTag()    
     @Script("KYT/KYT.App.js").ToHtmlTag()
     @Script("KYT/KYT.Controller.js").ToHtmlTag()
     @Script("KYT/KYT.Header.js").ToHtmlTag()
@@ -125,7 +125,7 @@
             <input class="search" /> 
             <button style="display:none" id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
             <button style="display:none" class="delete" title="@WebLocalizationKeys.DELETE_ITEMS"></button>
-            <span class="title-name">${Title}</span>
+            <span class="title-name">${_Title}</span>
         </div>
         <div id="contentArea" class="content-inner">
             <div id="validation-container-wrapper">

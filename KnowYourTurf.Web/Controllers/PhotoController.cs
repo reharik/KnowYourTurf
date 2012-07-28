@@ -42,7 +42,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Item = photo,
                 PhotoCategoryList = categoryItems,
-                Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString(),
+                _Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString(),
                 Popup = input.Popup
             };
             return View(model);
@@ -55,7 +55,7 @@ namespace KnowYourTurf.Web.Controllers
                             {
                                 Item = photo,
                                 AddUpdateUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.AddUpdate(null)) + "/" + photo.EntityId,
-                                Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString()
                             };
             return View(model);
         }

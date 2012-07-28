@@ -10,7 +10,7 @@ namespace KnowYourTurf.Core
         public long RootId { get; set; }
         public string AddUpdateUrl { get; set; }
         public string Var { get; set; }
-        public string Title { get; set; }
+        public string _Title { get; set; }
         public bool Popup { get; set; }
     }
 

@@ -55,7 +55,7 @@ namespace KnowYourTurf.Web.Controllers
                                 ProductList = products,
                                 TaskTypeList = taskTypes,
                                 Item = task,
-                                Title = WebLocalizationKeys.TASK_INFORMATION.ToString(),
+                                _Title = WebLocalizationKeys.TASK_INFORMATION.ToString(),
                                 Popup = input.Popup,
                                 RootId = input.RootId,
 
@@ -119,7 +119,7 @@ namespace KnowYourTurf.Web.Controllers
                                 EmployeeNames = task.Employees.Select(x =>  x.FullName ),
                                 EquipmentNames = task.Equipment.Select(x => x.Name ),
                                 AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.AddUpdate(null))+"/"+task.EntityId,
-                                Title = WebLocalizationKeys.TASK_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.TASK_INFORMATION.ToString()
 
             };
             return PartialView( model);

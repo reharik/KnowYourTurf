@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Controllers
                 AddUpdateUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl= UrlContext.GetUrlForAction<FertilizerController>(x => x.DeleteMultiple(null)),
                 gridDef = _fertilizerListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.FERTILIZERS.ToString()
+                _Title = WebLocalizationKeys.FERTILIZERS.ToString()
             };
             return View(model);
         }
