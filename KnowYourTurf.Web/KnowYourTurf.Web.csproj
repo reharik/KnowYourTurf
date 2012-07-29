@@ -314,7 +314,6 @@
     <Compile Include="Models\Equipment\EquipmentViewModel.cs" />
     <Compile Include="Models\Event\EventViewModel.cs" />
     <Compile Include="Models\Fertilizer\FertilizerViewModel.cs" />
-    <Compile Include="Models\Field\FieldDashboardViewModel.cs" />
     <Compile Include="Models\Field\FieldViewModel.cs" />
     <Compile Include="Models\Material\MaterialViewModel.cs" />
     <Compile Include="Models\Orthogonal\HeaderViewModel.cs" />

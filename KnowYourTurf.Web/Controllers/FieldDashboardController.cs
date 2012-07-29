@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using AutoMapper;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
@@ -35,6 +36,11 @@ namespace KnowYourTurf.Web.Controllers
             _documentListGrid = documentListGrid;
         }
 
+        public ActionResult ViewField_Template(ViewModel input)
+        {
+            return View("FieldDashboard", new FieldViewModel());
+        }
+
         public ActionResult ViewField(ViewModel input)
         {
             var field = _repository.Find<Field>(input.EntityId);
@@ -42,17 +48,15 @@ namespace KnowYourTurf.Web.Controllers
             var completeUrl = UrlContext.GetUrlForAction<FieldDashboardController>(x => x.CompletedTasksGrid(null)) +"?ParentId=" + input.EntityId;
             var photoUrl = UrlContext.GetUrlForAction<FieldDashboardController>(x => x.PhotoGrid(null)) + "?ParentId=" + input.EntityId;
             var docuemntUrl = UrlContext.GetUrlForAction<FieldDashboardController>(x => x.DocumentGrid(null)) + "?ParentId=" + input.EntityId;
-            var model = new FieldDashboardViewModel
-                            {
-                                Item = field,
-                                PendingGridUrl =url,
-                                CompletedGridUrl = completeUrl,
-                                DocumentGridUrl = docuemntUrl,
-                                PhotoGridUrl = photoUrl,
-                                _Title = WebLocalizationKeys.FIELD_INFORMATION.ToString(),
-                            };
-           
-            return View("FieldDashboard", model);
+            var model = Mapper.Map<Field, FieldViewModel>(field);
+            model._PendingGridUrl = url;
+            model._CompletedGridUrl = completeUrl;
+            model._DocumentGridUrl = docuemntUrl;
+            model._PhotoGridUrl = photoUrl;
+            model._saveUrl = UrlContext.GetUrlForAction<FieldController>(x => x.Save(null));
+            model._Title = WebLocalizationKeys.FIELD_INFORMATION.ToString();
+
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult CompletedTasksGrid(ViewModel input)
