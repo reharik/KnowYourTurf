@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Security.Interfaces;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
@@ -20,19 +21,26 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISaveEntityService _saveEntityService;
         private readonly ISelectListItemService _selectListItemService;
         private readonly IInventoryService _inventoryService;
+        private readonly IUpdateCollectionService _updateCollectionService;
 
         public TaskController(IRepository repository,
             ISaveEntityService saveEntityService,
             ISelectListItemService selectListItemService,
-            IInventoryService inventoryService)
+            IInventoryService inventoryService,
+            IUpdateCollectionService updateCollectionService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _selectListItemService = selectListItemService;
             _inventoryService = inventoryService;
+            _updateCollectionService = updateCollectionService;
+        }
+        public ActionResult AddUpdate_Template(AddUpdateTaskViewModel input)
+        {
+            return View("TaskAddUpdate", new TaskViewModel());
         }
 
-        public ActionResult AddUpdate(AddUpdateTaskViewModel input)
+        public ActionResult AddUpdate(TaskViewModel input)
         {
             var task = input.EntityId > 0 ? _repository.Find<Task>(input.EntityId) : new Task();
             task.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : task.ScheduledDate;
@@ -45,36 +53,33 @@ namespace KnowYourTurf.Web.Controllers
             var selectedEmployees = task.Employees.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName }).OrderBy(x => x.name);
             var availableEquipment = _repository.FindAll<Equipment>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name }).OrderBy(x => x.name);
             var selectedEquipment = task.Equipment.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name }).OrderBy(x => x.name);
-            var model = new TaskViewModel
-                            {//strangly I have to itterate this or NH freaks out
-                                AvailableEmployees = availableEmployees.ToList(),
-                                SelectedEmployees = selectedEmployees.ToList(),
-                                AvailableEquipment = availableEquipment.ToList(),
-                                SelectedEquipment = selectedEquipment,
-                                FieldList = fields,
-                                ProductList = products,
-                                TaskTypeList = taskTypes,
-                                Item = task,
-                                _Title = WebLocalizationKeys.TASK_INFORMATION.ToString(),
-                                Popup = input.Popup,
-                                RootId = input.RootId,
+            var model = Mapper.Map<Task, TaskViewModel>(task);
+            model.Employees = new TokenInputViewModel { _availableItems = availableEmployees, selectedItems = selectedEmployees };
+            model.Equipment = new TokenInputViewModel { _availableItems = availableEquipment, selectedItems = selectedEquipment};
+            model.ReadOnlyField = 2;
+            model._ReadOnlyFieldList = fields;
+            model.ReadOnlyInventoryProductReadOnlyProduct = 5;
+            model._ReadOnlyInventoryProductReadOnlyProductList = products;
+            model._TaskTypeList = taskTypes;
+            model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
+            model.Popup = input.Popup;
+            model.RootId = input.RootId;
 
-            };
+            model._saveUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Save(null));
 
             if (input.Copy)
             {
                 // entityid is changed on view cuz the entity is in the NH graph here on server
-                model.Item.Complete = false;
+                model.Complete = false;
             }
                 
-            return PartialView("TaskAddUpdate", model);
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
-        
 
-        private Dictionary<string, IEnumerable<SelectListItem>> createProductSelectListItems()
+
+        private GroupSelectViewModel createProductSelectListItems()
         {
-            var dictionary = new Dictionary<string, IEnumerable<SelectListItem>>();
             IEnumerable<InventoryProduct> inventory = _repository.FindAll<InventoryProduct>();
             var chemicals =
                 _selectListItemService.CreateListWithConcatinatedText(
@@ -100,29 +105,31 @@ namespace KnowYourTurf.Web.Controllers
                     "-->",
                     x => x.EntityId,
                     false);
+            var groups = new GroupSelectViewModel();
+            groups.Groups.Add(new SelectGroup {Label = "Chemicals", Children = chemicals});
+            groups.Groups.Add(new SelectGroup {Label = "Ferilizers", Children = fertilizer});
+            groups.Groups.Add(new SelectGroup {Label = "Materials", Children = materials});
 
-            dictionary.Add(WebLocalizationKeys.CHEMICALS.ToString(), chemicals);
-            dictionary.Add(WebLocalizationKeys.MATERIALS.ToString(), materials);
-            dictionary.Add(WebLocalizationKeys.FERTILIZERS.ToString(), fertilizer);
-            return dictionary;
+            return groups;
         }
 
         public ActionResult Display(ViewModel input)
         {
-            var task = _repository.Find<Task>(input.EntityId);
-//            var productName = task.GetProductName();
-            var model = new TaskViewModel
-                            {
-                                Popup = input.Popup,
-                                Item = task,
-//                                Product = productName,
-                                EmployeeNames = task.Employees.Select(x =>  x.FullName ),
-                                EquipmentNames = task.Equipment.Select(x => x.Name ),
-                                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.AddUpdate(null))+"/"+task.EntityId,
-                                _Title = WebLocalizationKeys.TASK_INFORMATION.ToString()
-
-            };
-            return PartialView( model);
+//            var task = _repository.Find<Task>(input.EntityId);
+////            var productName = task.GetProductName();
+//            var model = new TaskViewModel
+//                            {
+//                                Popup = input.Popup,
+//                                Item = task,
+////                                Product = productName,
+//                                _EmployeeNames = task.Employees.Select(x =>  x.FullName ),
+//                                _EquipmentNames = task.Equipment.Select(x => x.Name ),
+//                                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.AddUpdate(null))+"/"+task.EntityId,
+//                                _Title = WebLocalizationKeys.TASK_INFORMATION.ToString()
+//
+//            };
+//            return PartialView( model);
+            return null;
         }
 
         public ActionResult Delete(ViewModel input)
@@ -151,7 +158,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var task = input.EntityId > 0 ? _repository.Find<Task>(input.EntityId) : new Task();
 
-            mapItem(task, input.Item);
+            mapItem(task, input);
             mapChildren(task, input);
             ICrudManager crudManager = null;
             if (task.Complete && !task.InventoryDecremented)
@@ -164,7 +171,7 @@ namespace KnowYourTurf.Web.Controllers
             return Json(notification);
         }
 
-        private void mapItem(Task item, Task input)
+        private void mapItem(Task item, TaskViewModel input)
         {
             item.ScheduledDate = input.ScheduledDate;
             item.ScheduledStartTime = null;
@@ -188,23 +195,22 @@ namespace KnowYourTurf.Web.Controllers
         private void mapChildren(Task task,TaskViewModel model)
         {
             task.ClearEmployees();
-            task.ClearEquipment(); 
-            if(model.EmployeeInput.IsNotEmpty())
-                model.EmployeeInput.Split(',').Each(x => task.AddEmployee(_repository.Find<User>(Int32.Parse(x))));
-            if(model.EquipmentInput.IsNotEmpty())
-                model.EquipmentInput.Split(',').Each(x => task.AddEquipment(_repository.Find<Equipment>(Int32.Parse(x))));
+            task.ClearEquipment();
+            var newEmployees = new List<User>();
+            var newEquipment = new List<Equipment>();
+            if(model.Employees.selectedItems != null)
+            {model.Employees.selectedItems.Each(x => newEmployees.Add(_repository.Find<User>(Int32.Parse(x.id))));}
+            _updateCollectionService.Update(task.Employees, newEmployees, task.AddEmployee, task.RemoveEmployee);
 
-            task.TaskType = _repository.Find<TaskType>(model.Item.TaskType.EntityId);
-            task.SetField(_repository.Find<Field>(model.Item.ReadOnlyField.EntityId));
-//            if (model.Product!=null && model.Product.Contains("_"))
-//            {
-//                var product = model.Product.Split('_');
-//            task.InventoryProduct = _repository.Find<InventoryProduct>(Int64.Parse(product[0]));
-            task.SetInventoryProduct(_repository.Find<InventoryProduct>(model.Item.ReadOnlyInventoryProduct.ReadOnlyProduct.EntityId));
-//            }else
-//            {
-//                task.InventoryProduct = null;
-//            }
+            if (model.Equipment.selectedItems != null)
+            {model.Equipment.selectedItems.Each(x => newEquipment.Add(_repository.Find<Equipment>(Int32.Parse(x.id))));}
+            _updateCollectionService.Update(task.Equipment, newEquipment, task.AddEquipment, task.RemoveEquipment);
+
+            task.TaskType = _repository.Find<TaskType>(model.TaskType);
+            task.SetField(_repository.Find<Field>(model.ReadOnlyField));
+            task.SetInventoryProduct(_repository.Find<InventoryProduct>(model.ReadOnlyInventoryProductReadOnlyProduct));
         }
     }
+
+    
 }

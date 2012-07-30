@@ -2,12 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Components.Validator;
-using FubuMVC.Core;
 using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
-using KnowYourTurf.Core;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Localization;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Core.Domain
 {
@@ -84,7 +81,7 @@ namespace KnowYourTurf.Core.Domain
         {
             var newTask = new Task
             {
-                CreatedBy = CreatedBy,
+//                CreatedBy = CreatedBy,
                 TaskType = TaskType,
                 Notes = Notes,
                 ScheduledDate = ScheduledDate,

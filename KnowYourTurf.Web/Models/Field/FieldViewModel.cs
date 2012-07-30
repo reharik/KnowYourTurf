@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using KnowYourTurf.Core;
-using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Models
 {
-    public class FieldViewModel : ListViewModel
+    public class FieldViewModel : ViewModel
     {
         public FieldViewModel()
         {
@@ -21,10 +20,10 @@ namespace KnowYourTurf.Web.Models
         public bool DeleteImage { get; set; }
         public IEnumerable<Photo> Photos { get; set; }
 
-        public string _CompletedGridUrl { get; set; }
-        public string _DocumentGridUrl { get; set; }
-        public string _PhotoGridUrl { get; set; }
-        public string _PendingGridUrl { get; set; }
+        public string _completedGridUrl { get; set; }
+        public string _documentGridUrl { get; set; }
+        public string _photoGridUrl { get; set; }
+        public string _pendingGridUrl { get; set; }
         public string _AddUpdatePhotoUrl { get; set; }
         public string _AddUpdateDocumentUrl { get; set; }
         public string _DeleteMultiplePhotosUrl { get; set; }

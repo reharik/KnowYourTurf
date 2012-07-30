@@ -18,6 +18,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
             numbers();
             Editors.Builder<SelectFromEnumerationBuilder2>();
             Editors.Builder<SelectFromIEnumerableBuilder2>();
+            Editors.Builder<GroupSelectedBuilder2>();
             Editors.Builder<TextAreaBuilder2>();
             Editors.Builder<DatePickerBuilder2>();
             Editors.Builder<TimePickerBuilder2>();

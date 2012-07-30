@@ -31,10 +31,10 @@
                 @Html.ViewFor(x => x.Item.ReadOnlyInventoryProduct.ReadOnlyProduct.Name).ToHtmlTag()
     </div>
     <div class="fieldRow">
-                @Html.ViewFor(x => x.EquipmentNames).LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
+                @Html.ViewFor(x => x._EquipmentNames).LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
     </div>
     <div class="fieldRow">
-                @Html.ViewFor(x => x.EmployeeNames).LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
+                @Html.ViewFor(x => x._EmployeeNames).LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
     </div>
     <div class="fieldRow">
                 @Html.ViewFor(x => x.Item.Notes).ToHtmlTag()

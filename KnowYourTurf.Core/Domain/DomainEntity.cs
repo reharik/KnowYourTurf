@@ -9,8 +9,8 @@ namespace KnowYourTurf.Core.Domain
         public virtual long EntityId { get; set; }
         public virtual DateTime? DateCreated { get; set; }
         public virtual DateTime? LastModified { get; set; }
-        public virtual User CreatedBy { get; set; }
-        public virtual User ModifiedBy { get; set; }
+        public virtual long CreatedBy { get; set; }
+        public virtual long ModifiedBy { get; set; }
         public virtual bool IsDeleted { get; set; }
         public virtual bool IsNew()
         {

@@ -16,6 +16,8 @@ CC.validationRules = (function(){
         required : function(value) {
             return value ?true:false;
         },
-        number : function(value) {}
+        number : function(value) {
+            return true;
+        }
     };
 }());

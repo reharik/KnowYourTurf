@@ -27,3 +27,18 @@ ko.bindingHandlers.MultiSelect = {
 
 };
 
+ko.bindingHandlers.option = {
+    update: function(element, valueAccessor) {
+       var value = ko.utils.unwrapObservable(valueAccessor());
+       ko.selectExtensions.writeValue(element, value.Value());
+    }
+};
+
+ko.bindingHandlers.test = {
+    update: function(element, valueAccessor) {
+       var value = ko.utils.unwrapObservable(valueAccessor());
+         ko.utils.arrayForEach(element.options,function(item){
+            item.selected = item.value == value;
+        });
+    }
+};

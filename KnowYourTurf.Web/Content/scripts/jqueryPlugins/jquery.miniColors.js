@@ -390,7 +390,7 @@ if(jQuery) (function($) {
 				
 				input.data('hsb', hsb);
 				var hex = hsb2hex(hsb);	
-				if( updateInputValue ) input.val('#' + hex);
+				if( updateInputValue ) input.val('#' + hex).change();
 				input.data('trigger').css('backgroundColor', '#' + hex);
 				if( input.data('selector') ) input.data('selector').find('.miniColors-colors').css('backgroundColor', '#' + hsb2hex({ h: hsb.h, s: 100, b: 100 }));
 				

@@ -112,17 +112,17 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             {
                 if (input.HasClass("number"))
                 {
-                    _htmlRoot.Attr("eltype", "Number");
+                    _htmlRoot.Attr("eltype", "NumberTextbox");
                     return;
                 }
                 if (input.HasClass("datePicker"))
                 {
-                    _htmlRoot.Attr("eltype", "Date");
+                    _htmlRoot.Attr("eltype", "DateTextbox");
                     return;
                 }
                 if (input.HasClass("timePicker"))
                 {
-                    _htmlRoot.Attr("eltype", "Time");
+                    _htmlRoot.Attr("eltype", "TimeTextbox");
                     return;
                 }
                 _htmlRoot.Attr("eltype", "Textbox");

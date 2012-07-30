@@ -80,6 +80,39 @@ CC.Elements.TimeTextbox = CC.Elements.Element.extend({
     }
 });
 
+CC.Elements.NumberTextbox = CC.Elements.Element.extend({
+    init:function(){
+        var that = this;
+        this._super("init",arguments);
+        this.type = "numbertextbox";
+        this.$input = this.$container.find("input");
+        $(this.$input).on("blur",function(){that.validate();});
+        this.$input.datepicker({ changeYear: true, changeMonth: true });
+    }
+});
+
+CC.Elements.Textarea = CC.Elements.Element.extend({
+    init:function(){
+        var that = this;
+        this._super("init",arguments);
+        this.type = "textarea";
+        this.$input = this.$container.find("input");
+        $(this.$input).on("blur",function(){that.validate();});
+        this.$input.datepicker({ changeYear: true, changeMonth: true });
+    }
+});
+
+CC.Elements.Checkbox = CC.Elements.Element.extend({
+    init:function(){
+        var that = this;
+        this._super("init",arguments);
+        this.type = "checkbox";
+        this.$input = this.$container.find("input");
+        $(this.$input).on("blur",function(){that.validate();});
+        this.$input.datepicker({ changeYear: true, changeMonth: true });
+    }
+});
+
 CC.Elements.Password= CC.Elements.Element.extend({
     init:function(){
         var that = this;

@@ -328,3 +328,7 @@ div.footer div.col {
     z-index: 100000;
     left: 250px;
 }
+
+.dashboardGrid{
+    height:400px;
+}

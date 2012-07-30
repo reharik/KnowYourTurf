@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 
 namespace KnowYourTurf.Web.Models
@@ -39,7 +40,7 @@ namespace KnowYourTurf.Web.Models
     {
         [ValidateNonEmpty]
         public string Field { get; set; }
-        public IDictionary<string, IEnumerable<SelectListItem>> FieldList { get; set; }
+        public GroupSelectViewModel FieldList { get; set; }
         [ValidateNonEmpty]
         public string Product { get; set; }
         public IEnumerable<SelectListItem> ProductList { get; set; }
@@ -61,7 +62,7 @@ namespace KnowYourTurf.Web.Models
     {
         [ValidateNonEmpty]
         public string Field { get; set; }
-        public IDictionary<string, IEnumerable<SelectListItem>> FieldList { get; set; }
+        public GroupSelectViewModel FieldList { get; set; }
         [ValidateNonEmpty, ValidateDouble]
         public double? Drainageline { get; set; }
         [ValidateNonEmpty, ValidateDouble]
@@ -95,7 +96,7 @@ namespace KnowYourTurf.Web.Models
     {
         [ValidateNonEmpty]
         public string Field { get; set; }
-        public IDictionary<string, IEnumerable<SelectListItem>> FieldList { get; set; }
+        public GroupSelectViewModel FieldList { get; set; }
         [ValidateNonEmpty]
         public string Product { get; set; }
         public IEnumerable<SelectListItem> ProductList { get; set; }
@@ -112,7 +113,7 @@ namespace KnowYourTurf.Web.Models
     {
         [ValidateNonEmpty]
         public string Field { get; set; }
-        public IDictionary<string, IEnumerable<SelectListItem>> FieldList { get; set; }
+        public GroupSelectViewModel FieldList { get; set; }
         [ValidateNonEmpty]
         public string Product { get; set; }
         public IEnumerable<SelectListItem> ProductList { get; set; }

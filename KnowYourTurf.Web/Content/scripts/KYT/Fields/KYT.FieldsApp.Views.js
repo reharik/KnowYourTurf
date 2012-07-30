@@ -210,7 +210,7 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
         $('#FieldColor',this.el).miniColors();
         this.pendingGridView = new KYT.Views.DahsboardGridView({
             el:"#pendingTaskGridContainer",
-            url:this.options.pendingGridUrl,
+            url:this.model._pendingGridUrl(),
             gridContainer: "#pendingGridHolder",
             id:"pending",
             parentId:rel.entityId,
@@ -219,7 +219,7 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
         });
         this.completedGridView = new KYT.Views.DahsboardGridView({
             el:"#completedTaskGridContainer",
-            url:this.options.completedGridUrl,
+            url:this.model._completedGridUrl(),
             gridContainer: "#completedGridHolder",
             id:"completed",
             parentId:rel.entityId,
@@ -228,7 +228,7 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
         });
         this.photoGridView = new KYT.Views.DahsboardGridView({
             el:"#photoGridContainer",
-            url:this.options.photoGridUrl,
+            url:this.model._photoGridUrl(),
             gridContainer: "#photoGridHolder",
             id:"photolist",
             route:"photo",
@@ -239,7 +239,7 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
         });
         this.documentGridView = new KYT.Views.DahsboardGridView({
             el:"#documentGridContainer",
-            url:this.options.documentGridUrl,
+            url:this.model._documentGridUrl(),
             gridContainer: "#documentGridHolder",
             id:"documentlist",
             route:"document",

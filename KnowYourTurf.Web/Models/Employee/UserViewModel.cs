@@ -46,7 +46,6 @@ namespace KnowYourTurf.Web.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string Notes { get; set; }
-        public string RolesInput { get; set; }
         public IEnumerable<SelectListItem> _StateList { get; set; }
         public string _saveUrl { get; set; }
 

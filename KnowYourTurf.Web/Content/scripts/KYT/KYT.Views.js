@@ -119,6 +119,7 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
 //        }
     },
     bindModelAndElements:function(){
+        // make sure to apply ids prior to ko mapping.
         this.model = ko.mapping.fromJS(this.model);
         ko.applyBindings(this.model,this.el);
         this.elementsViewmodel = CC.elementService.getElementsViewmodel(this.$el);
@@ -126,35 +127,44 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
         this.mappingOptions ={ ignore: _.filter(_.keys(this.model),function(item){
             return (item.indexOf('_') == 0 && item != "__ko_mapping__");
         })};
-    },
-    addReferenceValuesToForm:function(){
-        var rel = KYT.State.get("Relationships");
-        var $form = $(this.options.crudFormSelector,this.el);
-        $form.append($("<input>").attr("name","EntityId").attr("type","hidden").val(rel.entityId));
-        $form.append($("<input>").attr("name","ParentId").attr("type","hidden").val(rel.parentId));
-        $form.append($("<input>").attr("name","RootId").attr("type","hidden").val(rel.rootId));
-        $form.append($("<input>").attr("name","Var").attr("type","hidden").val(rel.extraVar));
-    },
-    setupBeforeSubmitions:function(){
-        if(this.options.crudFormOptions.additionBeforeSubmitFunc){
-            var array = !$.isArray(this.options.crudFormOptions.additionBeforeSubmitFunc)
-                ? [this.options.crudFormOptions.additionBeforeSubmitFunc]
-                : this.options.crudFormOptions.additionBeforeSubmitFunc;
-            $(array).each($.proxy(function(i,item){
-                $(this.options.crudFormSelector,this.el).data('crudForm').setBeforeSubmitFuncs(item);
-            },this));
-        }
-    },
-    setupNotificationArea:function(){
-        this.options.notificationArea = this.options.notificationArea
-                                ?this.options.notificationArea
-                                : new cc.NotificationArea(this.cid,"#errorMessagesGrid","#errorMessagesForm", KYT.vent);
+        this.addIdsToModel();
 
-        this.options.notificationArea.render(this.el);
-        this.options.areaName = this.options.notificationArea.areaName();
-        KYT.vent.bind(this.options.areaName+":"+this.id+":success",this.successHandler,this);
-        KYT.notificationService.addArea(this.options.notificationArea);
     },
+    addIdsToModel:function(){
+        var rel = KYT.State.get("Relationships");
+        this.model.EntityId = rel.entityId;
+        this.model.ParentId = rel.parentId;
+        this.model.RootId = rel.rootId;
+        this.model.Var = rel.extraVar;
+    },
+//    addReferenceValuesToForm:function(){
+//        var rel = KYT.State.get("Relationships");
+//        var $form = $(this.options.crudFormSelector,this.el);
+//        $form.append($("<input>").attr("name","EntityId").attr("type","hidden").val(rel.entityId));
+//        $form.append($("<input>").attr("name","ParentId").attr("type","hidden").val(rel.parentId));
+//        $form.append($("<input>").attr("name","RootId").attr("type","hidden").val(rel.rootId));
+//        $form.append($("<input>").attr("name","Var").attr("type","hidden").val(rel.extraVar));
+//    },
+//    setupBeforeSubmitions:function(){
+//        if(this.options.crudFormOptions.additionBeforeSubmitFunc){
+//            var array = !$.isArray(this.options.crudFormOptions.additionBeforeSubmitFunc)
+//                ? [this.options.crudFormOptions.additionBeforeSubmitFunc]
+//                : this.options.crudFormOptions.additionBeforeSubmitFunc;
+//            $(array).each($.proxy(function(i,item){
+//                $(this.options.crudFormSelector,this.el).data('crudForm').setBeforeSubmitFuncs(item);
+//            },this));
+//        }
+//    },
+//    setupNotificationArea:function(){
+//        this.options.notificationArea = this.options.notificationArea
+//                                ?this.options.notificationArea
+//                                : new cc.NotificationArea(this.cid,"#errorMessagesGrid","#errorMessagesForm", KYT.vent);
+//
+//        this.options.notificationArea.render(this.el);
+//        this.options.areaName = this.options.notificationArea.areaName();
+//        KYT.vent.bind(this.options.areaName+":"+this.id+":success",this.successHandler,this);
+//        KYT.notificationService.addArea(this.options.notificationArea);
+//    },
     saveItem:function(){
         var isValid = CC.ValidationRunner.runViewModel(this.elementsViewmodel);
         if(!isValid){return;}

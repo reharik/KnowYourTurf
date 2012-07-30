@@ -127,6 +127,7 @@
     </Compile>
     <Compile Include="CoreLocalizationKeys.cs" />
     <Compile Include="CoreViewModels\GridItemModels.cs" />
+    <Compile Include="CoreViewModels\GroupSelectViewModel.cs" />
     <Compile Include="CoreViewModels\TokenInputDto.cs" />
     <Compile Include="Domain\BaseProduct.cs" />
     <Compile Include="Domain\Calculator.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Domain\Weather.cs" />
     <Compile Include="Html\Expressions\HtmlTagExpressionBase.cs" />
     <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
+    <Compile Include="Html\FubuUI\Builders\GroupedSelectBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\DatePickerBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\TextAreaBuilder2.cs" />

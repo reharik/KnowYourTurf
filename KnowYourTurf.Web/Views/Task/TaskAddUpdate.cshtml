@@ -9,84 +9,59 @@
     Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
 }
 
-<script>
-    var availableEmployees = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableEmployees)) ;
-    var selectedEmployees = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedEmployees)) ;
-    var availableEquipment = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableEquipment)) ;
-    var selectedEquipment = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedEquipment)) ;
-    var employeeOptions = {
-        availableItems: availableEmployees,
-        selectedItems: selectedEmployees,
-        inputSelector:"#EmployeeInput"
-    };
-    var equipmentOptions = {
-        availableItems: availableEquipment,
-        selectedItems: selectedEquipment,
-        inputSelector:"#EquipmentInput"
-    };
-    extraFormOptions.employeeOptions = employeeOptions;
-    extraFormOptions.equipmentOptions = equipmentOptions;
-    extraFormOptions.title = '@Model.__Title';
-</script>
-        
-    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
-
-@MvcHtmlString.Create(FormFor<TaskController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-    <input type="hidden" id="EntityId" name="EntityId" value="@Model.Item.EntityId"/>
-    <input type="hidden" id="RootId" name="RootId" value="@Model.RootId"/>
+<div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.TaskType).ToHtmlTag()
+            @Html.SubmissionFor(x => x.TaskType).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ScheduledDate).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ScheduledDate).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ScheduledStartTime).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ScheduledStartTime).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ScheduledEndTime).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ScheduledEndTime).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
+            @Html.SubmissionFor(x => x.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ReadOnlyField).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ReadOnlyField).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ReadOnlyInventoryProduct.ReadOnlyProduct).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ReadOnlyInventoryProductReadOnlyProduct).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.QuantityNeeded).ToHtmlTag()
+            @Html.SubmissionFor(x => x.QuantityNeeded).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.QuantityUsed).ToHtmlTag()
+            @Html.SubmissionFor(x => x.QuantityUsed).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            
-            @Html.SubmissionFor(x => x.Item.Notes).AddClassToInput("KYT_editor_label_left").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Notes).AddClassToInput("KYT_editor_label_left").ToHtmlTag()
         </div>
         <div class="fieldRow">
-        @if (Model.Item.Complete)
-        {
-            @Html.ViewFor(x => x.Item.Complete).ToHtmlTag()
-        }
-        else
-        {
-            @Html.SubmissionFor(x => x.Item.Complete).ToHtmlTag()
-        }
+@*        @if (Model.Item.Complete)*@
+@*        {*@
+@*            @Html.ViewFor(x => x.Item.Complete).ToHtmlTag()*@
+@*        }*@
+@*        else*@
+@*        {*@
+            @Html.SubmissionFor(x => x.Complete).ToHtmlTag()
+@*        }*@
         </div>
     </div>
     <div class="col full clear">
         <div class="fieldRow">
             <div id="employeeTokenizer">
-                @Html.SubmissionFor(x => x.EmployeeInput).InputId("EmployeeInput").HideInput().LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
+                @Html.SubmissionFor(x => x.Employees).HideInput().ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
             </div>
         </div>
         <div class="fieldRow">
             <div id="equipmentTokenizer">
-                @Html.SubmissionFor(x => x.EquipmentInput).InputId("EquipmentInput").HideInput().LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
+                @Html.SubmissionFor(x => x.Equipment).HideInput().ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
             </div>
         </div>
     </div>

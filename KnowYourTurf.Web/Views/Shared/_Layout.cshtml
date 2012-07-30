@@ -128,15 +128,6 @@
             <span class="title-name">${_Title}</span>
         </div>
         <div id="contentArea" class="content-inner">
-            <div id="validation-container-wrapper">
-                <div id="${errorMessagesContainer}" class="dci_ErrorMessages errorMessages"><ul></ul></div>
-            </div>
-            {{if EntityId}}
-            <input id="EntityId" type="hidden" value="${EntityId}"/>
-            {{/if}}
-            {{if ParentId}}
-            <input id="ParentId" type="hidden" value="${ParentId}"/>
-            {{/if}}
             <table id="gridContainer" class="scroll"></table>
             <div id="pager" class="scroll" style="text-align:center;"></div>
         </div>

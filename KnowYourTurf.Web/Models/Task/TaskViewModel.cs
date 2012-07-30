@@ -5,32 +5,48 @@ using Castle.Components.Validator;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
+using KnowYourTurf.Core.Enums;
+using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
+using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Models
 {
     public class TaskViewModel:ViewModel
     {
-        public IDictionary<string, IEnumerable<SelectListItem>> FieldList { get; set; }
-        public IEnumerable<SelectListItem> EquipmentList { get; set; }
-        public IEnumerable<SelectListItem> TaskTypeList { get; set; }
-        public string Product { get; set; }
-        public IDictionary<string,IEnumerable<SelectListItem>> ProductList { get; set; }
-        public Task Item { get; set; }
+        public GroupSelectViewModel _ReadOnlyFieldList { get; set; }
+        public GroupSelectViewModel _ReadOnlyInventoryProductReadOnlyProductList { get; set; }
+        public IEnumerable<SelectListItem> _EquipmentList { get; set; }
+        public IEnumerable<SelectListItem> _TaskTypeList { get; set; }
+
+        public TokenInputViewModel Employees { get; set; }
+        public TokenInputViewModel Equipment { get; set; }
+
+        public IEnumerable<string> _EmployeeNames { get; set; }
+        public IEnumerable<string> _EquipmentNames { get; set; }
+
+        public string _saveUrl { get; set; }
         public bool Copy { get; set; }
 
-        public IEnumerable<TokenInputDto> AvailableEmployees { get; set; }
-        public List<TokenInputDto> SelectedEmployees { get; set; }
-        public IEnumerable<TokenInputDto> AvailableEquipment { get; set; }
-        public IEnumerable<TokenInputDto> SelectedEquipment { get; set; }
-
-        public string EmployeeInput { get; set; }
-        public string EquipmentInput { get; set; }
-
-        public IEnumerable<string> EmployeeNames { get; set; }
-        public IEnumerable<string> EquipmentNames { get; set; }
-
-        public Dictionary<string, IEnumerable<SelectListItem>> InventoryProductList { get; set; }
+        [ValidateNonEmpty]
+        [ValueOfIEnumerableAttribute]
+        public int TaskType { get; set; }
+        [ValidateNonEmpty]
+        public DateTime? ScheduledDate { get; set; }
+        [ValidateNonEmpty]
+        public DateTime? ScheduledStartTime { get; set; }
+        public DateTime? ScheduledEndTime { get; set; }
+        public string ActualTimeSpent { get; set; }
+        public int ReadOnlyField { get; set; }
+        public int ReadOnlyInventoryProductReadOnlyProduct { get; set; }
+        [ValidateDouble]
+        public double? QuantityNeeded { get; set; }
+        [ValidateDouble]
+        public double? QuantityUsed { get; set; }
+        [TextArea]
+        public string Notes { get; set; }
+        public bool Complete { get; set; }
     }
 
     public class AddUpdateTaskViewModel:ViewModel

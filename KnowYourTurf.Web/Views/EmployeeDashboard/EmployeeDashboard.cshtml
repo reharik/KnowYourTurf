@@ -70,7 +70,7 @@
         @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
     </div>
     <div class="fieldRow">
-        @Html.SubmissionFor(x => x.UserRoles).HideInput().ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.USER_ROLES).ToHtmlTag() 
+        @Html.SubmissionFor(x => x.UserRoles).HideInput().ElType("MultiSelect").ToHtmlTag() 
         @*            .OperationName("/UserRoles").ToHtmlTag()*@
     </div>
     <div class="fieldRow">

@@ -49,10 +49,10 @@ namespace KnowYourTurf.Web.Controllers
             var photoUrl = UrlContext.GetUrlForAction<FieldDashboardController>(x => x.PhotoGrid(null)) + "?ParentId=" + input.EntityId;
             var docuemntUrl = UrlContext.GetUrlForAction<FieldDashboardController>(x => x.DocumentGrid(null)) + "?ParentId=" + input.EntityId;
             var model = Mapper.Map<Field, FieldViewModel>(field);
-            model._PendingGridUrl = url;
-            model._CompletedGridUrl = completeUrl;
-            model._DocumentGridUrl = docuemntUrl;
-            model._PhotoGridUrl = photoUrl;
+            model._pendingGridUrl = url;
+            model._completedGridUrl = completeUrl;
+            model._documentGridUrl = docuemntUrl;
+            model._photoGridUrl = photoUrl;
             model._saveUrl = UrlContext.GetUrlForAction<FieldController>(x => x.Save(null));
             model._Title = WebLocalizationKeys.FIELD_INFORMATION.ToString();
 
