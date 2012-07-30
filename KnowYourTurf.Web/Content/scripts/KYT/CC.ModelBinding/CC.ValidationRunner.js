@@ -19,12 +19,12 @@ CC.ValidationRunner = (function(){
         $.each(classes, function(idx,rule){
             if(rule && validator[rule]){
                 var isValid = validator[rule](CCElement.getValue());
-                //TODO possibly replace this with CCElement.cid
+                var possibleErrorMsg = new CC.NotificationMessage(CCElement.cid, CCElement.fieldName+" "+CC.errorMessages[rule],"error");
                 if(!isValid){
                     elementIsValid = false;
-                    CC.notification.add({key:CCElement.fieldName, message:CC.errorMessages[rule]});
+                    CC.notification.add(possibleErrorMsg);
                 }else{
-                    CC.notification.remove({key:CCElement.fieldName, message:CC.errorMessages[rule]});
+                    CC.notification.remove(possibleErrorMsg);
                 }
             }
         });

@@ -5,9 +5,6 @@
  * Time: 3:06 PM
  * To change this template use File | Settings | File Templates.
  */
-CC.notification = new CC.NotificationService();
-
-
 
 CC.ElementCollection = function(){
     this.collection = [];

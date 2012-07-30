@@ -127,6 +127,8 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
         this.mappingOptions ={ ignore: _.filter(_.keys(this.model),function(item){
             return (item.indexOf('_') == 0 && item != "__ko_mapping__");
         })};
+        this.mappingOptions.ignore.push("_availableItems");
+        this.mappingOptions.ignore.push("_resultsItems");
         this.addIdsToModel();
 
     },
@@ -178,6 +180,9 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
         if(!this.options.noBubbleUp) {KYT.WorkflowManager.returnParentView();}
     },
     successHandler:function(result){
+        if(!result.Success){
+            CC.notification.add();
+        }
         KYT.vent.trigger("form:"+this.id+":success",result);
         if(!this.options.noBubbleUp){KYT.WorkflowManager.returnParentView(result,true);}
     }

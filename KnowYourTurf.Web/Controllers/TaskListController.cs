@@ -42,7 +42,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult Tasks(GridItemsRequestModel input)
         {
-            var tasks = _repository.Query<Task>(x => x.ReadOnlyField.ReadOnlyCategory.EntityId == input.ParentId);
+            var tasks = _repository.Query<Task>(x => x.ReadOnlyField.ReadOnlyCategory.EntityId == input.RootId);
             var items = _dynamicExpressionQuery.PerformQuery(tasks, input.filters);
             var gridItemsViewModel = _taskListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);

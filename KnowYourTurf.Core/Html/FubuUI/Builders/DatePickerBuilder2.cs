@@ -31,7 +31,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-            return new TextboxTag().Attr("data-bind", "value:" + KnowYourTurfHtmlConventions.DeriveElementName(request)).AddClass("datePicker");
+            return new TextboxTag().Attr("data-bind", "dateString:" + KnowYourTurfHtmlConventions.DeriveElementName(request)).AddClass("datePicker");
         }
     }
 
@@ -46,7 +46,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-            return new TextboxTag().Attr("data-bind", "value:" + KnowYourTurfHtmlConventions.DeriveElementName(request)).AddClass("timePicker");
+            return new TextboxTag().Attr("data-bind", "timeString:" + KnowYourTurfHtmlConventions.DeriveElementName(request)).AddClass("timePicker");
         }
     }
 

@@ -110,7 +110,13 @@
             </div>
             <div id="main-content">
                 <div class="content-outer" >
+                    <div id="messageContainer">
+                            <ul data-bind="foreach:messages">
+                                <li data-bind="text:message,css: { error: status()=='error', warning: status()=='warning', success: status()=='success' }"></li>
+                            </ul>
+                        </div>
                     <div id="contentInner">
+                        
                         @RenderBody()
                     </div>
                     <div class="content-footer"><span>&nbsp;</span></div>

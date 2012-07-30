@@ -156,7 +156,7 @@ $.TokenList = function (input, viewModel, settings) {
         .blur(function () {
             hide_dropdown();
             $(this).val("");
-            $(this).trigger(id+":tokenizer:blur",settings.viewModel.selectedItems);
+            $(this).trigger(id+":tokenizer:blur",settings.viewModel.selectedItems());
         })
         //.bind("keyup keydown blur update", resize_input)
         .keydown(function (event) {

@@ -29,10 +29,6 @@ KYT.Views.LoginView = KYT.Views.BaseFormView.extend({
         this.config();
         if (this.setBindings) { this.setBindings(); }
         $("input[name='UserName']").focus();
-        this.model = ko.mapping.fromJS(this.model);
-        ko.applyBindings(this.model);
-        this.elementsViewmodel = CC.elementService.getElementsViewmodel(this.$el);
-        CC.elementService.initAllElements(this.elementsViewmodel);
         this.viewLoaded();
         KYT.vent.trigger("form:" + this.id + ":pageLoaded", this.options);
 
@@ -65,7 +61,7 @@ KYT.Views.LoginView = KYT.Views.BaseFormView.extend({
         if(result.Success){
             window.location.href = result.RedirectUrl;
         }else{
-            //implement server errors here
+            CC.notification.handleResult(result);
         }
 
     }

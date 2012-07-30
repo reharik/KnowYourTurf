@@ -76,7 +76,7 @@ CC.Elements.TimeTextbox = CC.Elements.Element.extend({
         this.type = "timetextbox";
         this.$input = this.$container.find("input");
         $(this.$input).on("blur",function(){that.validate();});
-        this.$input.datepicker({ changeYear: true, changeMonth: true });
+        this.$input.timepicker({showPeriod: true,showLeadingZero: false});
     }
 });
 
@@ -129,8 +129,8 @@ CC.Elements.Select = CC.Elements.Element.extend({
         this._super("init",arguments);
         this.type = "select";
         this.$input = this.$container.find("select");
-//        this.$input.chosen();
-//        this.$input.chosen().change(function(){that.validate()});
+        this.$input.chosen();
+        this.$input.chosen().change(function(){that.validate()});
     }
 });
 
@@ -140,7 +140,7 @@ CC.Elements.MultiSelect = CC.Elements.Element.extend({
         this._super("init",arguments);
         this.type = "select";
         this.$input = this.$container.find("input.multiSelect");
-        this.$container.on(this.$input.attr("id")+":tokenizer:blur",that.multiSelectBlur);
+        this.$container.on(this.$input.attr("id")+":tokenizer:blur",$.proxy(that.multiSelectBlur,that));
     },
     multiSelectBlur: function(e, viewmodel){
         this.selectedViewmodel = viewmodel;

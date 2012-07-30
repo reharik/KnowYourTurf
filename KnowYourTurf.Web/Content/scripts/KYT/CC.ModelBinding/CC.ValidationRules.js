@@ -8,7 +8,7 @@
 
 
 CC.errorMessages = {
-    "required":" field is Required"
+    "required":"field is Required"
 };
 
 CC.validationRules = (function(){

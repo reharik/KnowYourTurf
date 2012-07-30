@@ -103,8 +103,9 @@ ko.utils = new (function () {
 
         arrayRemoveItem: function (array, itemToRemove) {
             var index = ko.utils.arrayIndexOf(array, itemToRemove);
-            if (index >= 0)
+            if (index >= 0){
                 array.splice(index, 1);
+            }
         },
 
         arrayGetDistinctValues: function (array) {

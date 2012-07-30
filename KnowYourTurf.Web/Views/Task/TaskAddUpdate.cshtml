@@ -9,11 +9,11 @@
     Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
 }
 
-<div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
+
 
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.TaskType).ToHtmlTag()
+            @Html.SubmissionFor(x => x.TaskTypeEntityId).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.ScheduledDate).ToHtmlTag()
@@ -28,10 +28,10 @@
             @Html.SubmissionFor(x => x.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ReadOnlyField).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ReadOnlyFieldEntityId).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ReadOnlyInventoryProductReadOnlyProduct).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ReadOnlyInventoryProductReadOnlyProductEntityId).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.QuantityNeeded).ToHtmlTag()

@@ -332,3 +332,36 @@ div.footer div.col {
 .dashboardGrid{
     height:400px;
 }
+
+#messageContainer ul {
+    list-style: none;
+}
+
+.error {
+	background: url(../images/validation_error.png) 10px 3px no-repeat;
+	background-color: #FF9999;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    margin: 5px;
+    padding: 3px 3px 3px 40px;
+    line-height: 25px;
+}
+
+.success {
+    font-size:13px;
+    font-weight:bold;
+    width:auto;
+    height:auto;
+    line-height: 25px;
+    margin:0 30px 10px 30px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    margin-top: 15px;
+}
+
+.invalid{
+    border: 1px solid red;
+}
+.valid{
+    border: 1px solid green;
+}

@@ -15,10 +15,10 @@ namespace KnowYourTurf.Web.Models
 {
     public class TaskViewModel:ViewModel
     {
-        public GroupSelectViewModel _ReadOnlyFieldList { get; set; }
-        public GroupSelectViewModel _ReadOnlyInventoryProductReadOnlyProductList { get; set; }
+        public GroupSelectViewModel _ReadOnlyFieldEntityIdList { get; set; }
+        public GroupSelectViewModel _ReadOnlyInventoryProductReadOnlyProductEntityIdList { get; set; }
         public IEnumerable<SelectListItem> _EquipmentList { get; set; }
-        public IEnumerable<SelectListItem> _TaskTypeList { get; set; }
+        public IEnumerable<SelectListItem> _TaskTypeEntityIdList { get; set; }
 
         public TokenInputViewModel Employees { get; set; }
         public TokenInputViewModel Equipment { get; set; }
@@ -31,15 +31,15 @@ namespace KnowYourTurf.Web.Models
 
         [ValidateNonEmpty]
         [ValueOfIEnumerableAttribute]
-        public int TaskType { get; set; }
+        public int TaskTypeEntityId { get; set; }
         [ValidateNonEmpty]
         public DateTime? ScheduledDate { get; set; }
         [ValidateNonEmpty]
         public DateTime? ScheduledStartTime { get; set; }
         public DateTime? ScheduledEndTime { get; set; }
         public string ActualTimeSpent { get; set; }
-        public int ReadOnlyField { get; set; }
-        public int ReadOnlyInventoryProductReadOnlyProduct { get; set; }
+        public int ReadOnlyFieldEntityId { get; set; }
+        public int ReadOnlyInventoryProductReadOnlyProductEntityId { get; set; }
         [ValidateDouble]
         public double? QuantityNeeded { get; set; }
         [ValidateDouble]

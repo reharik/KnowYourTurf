@@ -56,11 +56,9 @@ namespace KnowYourTurf.Web.Controllers
             var model = Mapper.Map<Task, TaskViewModel>(task);
             model.Employees = new TokenInputViewModel { _availableItems = availableEmployees, selectedItems = selectedEmployees };
             model.Equipment = new TokenInputViewModel { _availableItems = availableEquipment, selectedItems = selectedEquipment};
-            model.ReadOnlyField = 2;
-            model._ReadOnlyFieldList = fields;
-            model.ReadOnlyInventoryProductReadOnlyProduct = 5;
-            model._ReadOnlyInventoryProductReadOnlyProductList = products;
-            model._TaskTypeList = taskTypes;
+            model._ReadOnlyFieldEntityIdList = fields;
+            model._ReadOnlyInventoryProductReadOnlyProductEntityIdList = products;
+            model._TaskTypeEntityIdList = taskTypes;
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             model.Popup = input.Popup;
             model.RootId = input.RootId;
@@ -198,17 +196,17 @@ namespace KnowYourTurf.Web.Controllers
             task.ClearEquipment();
             var newEmployees = new List<User>();
             var newEquipment = new List<Equipment>();
-            if(model.Employees.selectedItems != null)
+            if (model.Employees !=null && model.Employees.selectedItems != null)
             {model.Employees.selectedItems.Each(x => newEmployees.Add(_repository.Find<User>(Int32.Parse(x.id))));}
             _updateCollectionService.Update(task.Employees, newEmployees, task.AddEmployee, task.RemoveEmployee);
 
-            if (model.Equipment.selectedItems != null)
+            if (model.Equipment!=null && model.Equipment.selectedItems != null)
             {model.Equipment.selectedItems.Each(x => newEquipment.Add(_repository.Find<Equipment>(Int32.Parse(x.id))));}
             _updateCollectionService.Update(task.Equipment, newEquipment, task.AddEquipment, task.RemoveEquipment);
 
-            task.TaskType = _repository.Find<TaskType>(model.TaskType);
-            task.SetField(_repository.Find<Field>(model.ReadOnlyField));
-            task.SetInventoryProduct(_repository.Find<InventoryProduct>(model.ReadOnlyInventoryProductReadOnlyProduct));
+            task.TaskType = _repository.Find<TaskType>(model.TaskTypeEntityId);
+            task.SetField(_repository.Find<Field>(model.ReadOnlyFieldEntityId));
+            task.SetInventoryProduct(_repository.Find<InventoryProduct>(model.ReadOnlyInventoryProductReadOnlyProductEntityId));
         }
     }
 

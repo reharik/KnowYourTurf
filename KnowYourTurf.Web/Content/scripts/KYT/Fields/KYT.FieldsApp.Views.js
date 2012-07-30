@@ -171,9 +171,6 @@ KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
         this._super("initialize",arguments);
     },
     viewLoaded:function(){
-        this.mappingOptions.ignore.push("_availableItems");
-        this.mappingOptions.ignore.push("_resultsItems");
-       // this.loadTokenizers();
         this.pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
             url:this.model._pendingGridUrl(),
             gridContainer: "#pendingGridContainer",
@@ -189,12 +186,6 @@ KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
         this.completedGridView.render();
         this.storeChild(this.pendingGridView);
         this.storeChild(this.completedGridView);
-    },
-    loadTokenizers: function(){
-        var options = $.extend({el:"#rolesInputRoot"}, this.options.rolesOptions);
-        this.tokenView = new KYT.Views.TokenView(options);
-        this.tokenView.render();
-        this.storeChild(this.tokenView);
     },
     callbackAction: function(){
         this.pendingGridView.callbackAction();
@@ -299,34 +290,7 @@ KYT.Views.DahsboardGridView = KYT.Views.GridView.extend({
 
 KYT.Views.TaskFormView = KYT.Views.AjaxFormView.extend({
     viewLoaded:function(){
-        this.loadTokenizers();
         KYT.calculator.applyTaskTransferData(this.$el);
-    },
-    loadTokenizers:function(){
-        var employeeTokenOptions = {
-            id:"employee",
-            el:this.$el.find("#employeeTokenizer"),
-            availableItems:this.options.employeeOptions.availableItems,
-            selectedItems:this.options.employeeOptions.selectedItems,
-            inputSelector:this.options.employeeOptions.inputSelector
-        };
-
-        var equipmentTokenOptions = {
-            id:"equipment",
-            el:this.$el.find("#equipmentTokenizer"),
-            availableItems:this.options.equipmentOptions.availableItems,
-            selectedItems:this.options.equipmentOptions.selectedItems,
-            inputSelector:this.options.equipmentOptions.inputSelector
-        };
-
-        this.employeeToken = new KYT.Views.TokenView(employeeTokenOptions);
-        this.employeeToken.render();
-        this.storeChild(this.employeeToken);
-
-        this.equipmentToken = new KYT.Views.TokenView(equipmentTokenOptions);
-        this.equipmentToken.render();
-
-        this.storeChild(this.equipmentToken);
     }
 });
 
