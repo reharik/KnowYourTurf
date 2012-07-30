@@ -129,8 +129,8 @@ CC.Elements.Select = CC.Elements.Element.extend({
         this._super("init",arguments);
         this.type = "select";
         this.$input = this.$container.find("select");
-        this.$input.chosen();
-        this.$input.chosen().change(function(){that.validate()});
+//        this.$input.chosen();
+//        this.$input.chosen().change(function(){that.validate()});
     }
 });
 

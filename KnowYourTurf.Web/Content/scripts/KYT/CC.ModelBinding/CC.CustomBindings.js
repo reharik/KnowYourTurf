@@ -34,11 +34,13 @@ ko.bindingHandlers.option = {
     }
 };
 
-ko.bindingHandlers.test = {
+ko.bindingHandlers.selectedOption = {
     update: function(element, valueAccessor) {
        var value = ko.utils.unwrapObservable(valueAccessor());
          ko.utils.arrayForEach(element.options,function(item){
             item.selected = item.value == value;
         });
+        ko.selectExtensions.writeValue(element, value);
+
     }
 };

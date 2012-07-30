@@ -27,7 +27,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
             Action<SelectTag> action = x =>
                                            {
                                                var elementName = KnowYourTurfHtmlConventions.DeriveElementName(request);
-                                               x.Attr("data-bind", "foreach: _" + elementName +"List.Groups, test:"+elementName);
+                                               x.Attr("data-bind", "foreach: _" + elementName +"List.Groups, selectedOption:"+elementName);
                                                var optGroup = new HtmlTag("optgroup").Attr("data-bind","attr: {label: Label}, foreach: Children");
                                                var opt = new HtmlTag("option").Attr("data-bind","text: Text, option: $data");
                                                optGroup.Children.Add(opt);
