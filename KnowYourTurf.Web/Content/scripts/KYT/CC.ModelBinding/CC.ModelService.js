@@ -13,6 +13,12 @@ CC.ElementCollection = function(){
 $.extend(CC.ElementCollection.prototype, {
     add:function(element){
         this.collection.push(element);
+    },
+    destroy:function(){
+        _.each(this.collection, function(item){
+            item.destroy();
+        });
+        this.collection = [];
     }
 });
 

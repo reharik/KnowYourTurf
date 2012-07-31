@@ -7,14 +7,14 @@ namespace KnowYourTurf.Core.CoreViewModels
     {
        public GroupSelectViewModel()
        {
-           Groups = new List<SelectGroup>();
+           groups = new List<SelectGroup>();
        }
 
-       public List<SelectGroup> Groups { get; set; }
+       public List<SelectGroup> groups { get; set; }
     }   
     public class SelectGroup
     {
-        public string Label { get; set; }
-        public IEnumerable<SelectListItem> Children { get; set; }
+        public string label { get; set; }
+        public IEnumerable<SelectListItem> children { get; set; }
     }
 }

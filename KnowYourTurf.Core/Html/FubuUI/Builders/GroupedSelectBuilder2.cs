@@ -22,11 +22,20 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
             Action<SelectTag> action = x =>
                                            {
                                                var elementName = KnowYourTurfHtmlConventions.DeriveElementName(request);
-                                               x.Attr("data-bind", "foreach: _" + elementName + "List.Groups, value:" + elementName);
-                                               var optGroup = new HtmlTag("optgroup").Attr("data-bind","attr: {label: Label}, foreach: Children");
-                                               var opt = new HtmlTag("option").Attr("data-bind","text: Text, value: Value");
-                                               optGroup.Children.Add(opt);
-                                               x.Children.Add(optGroup);
+                                               x.Attr("data-bind", "groupedSelect:_" + elementName + "List," +
+                                                                    "optionsText:'Text'," +
+                                                                    "optionsValue:'Value'," +
+                                                                    "optionsCaption:'" + CoreLocalizationKeys.SELECT_ITEM.ToString() + "'," +
+                                                                    "value:" + elementName);
+
+
+
+//                                               var elementName = KnowYourTurfHtmlConventions.DeriveElementName(request);
+//                                               x.Attr("data-bind", "foreach: _" + elementName + "List.Groups, value:" + elementName);
+//                                               var optGroup = new HtmlTag("optgroup").Attr("data-bind","attr: {label: Label}, foreach: Children");
+//                                               var opt = new HtmlTag("option").Attr("data-bind","text: Text, value: Value");
+//                                               optGroup.Children.Add(opt);
+//                                               x.Children.Add(optGroup);
                                            };
             return new SelectTag(action);
         }

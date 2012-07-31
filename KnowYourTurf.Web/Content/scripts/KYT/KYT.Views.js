@@ -75,8 +75,10 @@ KYT.Views.View = Backbone.View.extend({
     close: function(){
       this.unbind();
       //this.unbindAll();
+      if(this.elementsViewmodel){
+        this.elementsViewmodel.destroy();
+      }
       this.remove();
-      this.elementsViewmodel = null;
 
       this.closeChildren();
 
@@ -134,6 +136,7 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
     },
     addIdsToModel:function(){
         var rel = KYT.State.get("Relationships");
+        if(!rel){return;}
         this.model.EntityId = rel.entityId;
         this.model.ParentId = rel.parentId;
         this.model.RootId = rel.rootId;
@@ -181,7 +184,8 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
     },
     successHandler:function(result){
         if(!result.Success){
-            CC.notification.add();
+            $.proxy(CC.notification.handleResult(result),this);
+            return;
         }
         KYT.vent.trigger("form:"+this.id+":success",result);
         if(!this.options.noBubbleUp){KYT.WorkflowManager.returnParentView(result,true);}

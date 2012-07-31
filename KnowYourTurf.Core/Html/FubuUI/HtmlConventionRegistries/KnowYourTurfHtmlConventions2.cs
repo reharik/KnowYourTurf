@@ -15,7 +15,6 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
     {
         public KnowYourTurfHtmlConventions2()
         {
-            numbers();
             Editors.Builder<SelectFromEnumerationBuilder2>();
             Editors.Builder<SelectFromIEnumerableBuilder2>();
             Editors.Builder<GroupSelectedBuilder2>();
@@ -46,7 +45,9 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
                                           htmlTag.Text(display.ToSeperateWordsFromPascalCase());
                                           return htmlTag;
                                       });
+            numbers();
             validationAttributes();
+
         }
 
         public static void AddElementName(ElementRequest request, HtmlTag tag)
@@ -78,12 +79,12 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
 
         private void numbers()
         {
-            Editors.IfPropertyIs<Int32>().Attr("max", Int32.MaxValue);
-            Editors.IfPropertyIs<Int16>().Attr("max", Int16.MaxValue);
+            Editors.IfPropertyIs<Int32>().Modify(x=>{if(x.TagName()==new TextboxTag().TagName()) x.Attr("max", Int32.MaxValue);});
+            Editors.IfPropertyIs<Int16>().Modify(x=>{if(x.TagName()==new TextboxTag().TagName()) x.Attr("max", Int16.MaxValue);});
             //Editors.IfPropertyIs<Int64>().Attr("max", Int64.MaxValue);
-            Editors.IfPropertyTypeIs(IsIntegerBased).AddClass("integer");
-            Editors.IfPropertyTypeIs(IsFloatingPoint).AddClass("number");
-            Editors.IfPropertyTypeIs(IsIntegerBased).Attr("mask", "wholeNumber");
+            Editors.IfPropertyTypeIs(IsIntegerBased).Modify(x=>{if(x.TagName()==new TextboxTag().TagName()) x.AddClass("integer");});
+            Editors.IfPropertyTypeIs(IsFloatingPoint).Modify(x=>{if(x.TagName()==new TextboxTag().TagName()) x.AddClass("number");});
+            Editors.IfPropertyTypeIs(IsIntegerBased).Modify(x => { if (x.TagName() == new TextboxTag().TagName()) x.Attr("mask", "wholeNumber"); });
         }
 
         private void validationAttributes()

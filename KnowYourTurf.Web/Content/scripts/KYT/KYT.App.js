@@ -18,11 +18,7 @@ KYT.addRegions({
   // an initializer to run this functional area
   // when the app starts up
 KYT.addInitializer(function(){
-    $.ajaxSetup({
-        cache: false,
-        complete:function(){KYT.showThrob = false; $("#ajaxLoading").hide();},
-        beforeSend:function(){setTimeout(function() {if(KYT.showThrob) $("#ajaxLoading").show(); }, 500)}
-    });
+
     $("#ajaxLoading").hide();
 
     jQuery.validator.addMethod("number", function(value, element) {
@@ -30,18 +26,7 @@ KYT.addInitializer(function(){
     }, "Please enter a valid number.");
 
     // the events delegate doesn't seem to be picking up focusin
-    $(".datePicker").live('focusin', function() {
-        var $this = $(this);
-        $this.datepicker({ changeYear: true, changeMonth: true });
-    });
 
-     $(".timePicker").live('focusin', function() {
-        var $this = $(this);
-        $this.timepicker({
-            showPeriod: true,
-            showLeadingZero: false
-        });
-    });
 
     KYT.vent.bind("route",function(route,triggerRoute){
         KYT.Routing.showRoute(route,triggerRoute);

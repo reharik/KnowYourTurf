@@ -83,7 +83,7 @@
                     <div class="signin">
                         <div class="col">
                             <label class="big">@WebLocalizationKeys.SIGN_IN</label>
-                                 
+                             <form>    
                             <div class="fieldRow">
                                 @Html.SubmissionFor(x => x.UserName).ToHtmlTag()
                             </div>
@@ -98,6 +98,7 @@
                             @StandardButtonFor("submit", WebLocalizationKeys.SIGN_IN).AddClass("submit").AddClass("kyt_submitButton").ToHtmlTag()
                             <a href="#" id="forgotPassword">@WebLocalizationKeys.FORGOT_YOUR_PASSWORD</a>
                         </div>
+                        </form>
                     </div>
                 </div>
                 <div class="content-footer"><span></span></div>

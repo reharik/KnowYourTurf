@@ -104,9 +104,9 @@ namespace KnowYourTurf.Web.Controllers
                     x => x.EntityId,
                     false);
             var groups = new GroupSelectViewModel();
-            groups.Groups.Add(new SelectGroup {Label = "Chemicals", Children = chemicals});
-            groups.Groups.Add(new SelectGroup {Label = "Ferilizers", Children = fertilizer});
-            groups.Groups.Add(new SelectGroup {Label = "Materials", Children = materials});
+            groups.groups.Add(new SelectGroup {label = "Chemicals", children = chemicals});
+            groups.groups.Add(new SelectGroup {label = "Ferilizers", children = fertilizer});
+            groups.groups.Add(new SelectGroup {label = "Materials", children = materials});
 
             return groups;
         }

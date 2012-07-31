@@ -79,8 +79,8 @@ $.fn.tokenInput = function (viewmodel, options) {
 
 // TokenList class for each input
 $.TokenList = function (input, viewModel, settings) {
-    var id = $(input).attr("id");
-    var controlContainer = $("<div></div>");
+    var id = $(input).attr("name");
+    var controlContainer = $("<div></div>").attr("id",id+"_container");
     $(input).after(controlContainer);
     
     settings.viewModel = viewModel;

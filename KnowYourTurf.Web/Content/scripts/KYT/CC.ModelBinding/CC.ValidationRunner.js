@@ -16,9 +16,14 @@ CC.ValidationRunner = (function(){
     runner.runElement = function(CCElement){
         var elementIsValid = true;
         var classes = classList(CCElement.$input);
+        var val = CCElement.getValue();
+        if((!val || val=="") && !_.any(classes,function(item){return item == "required"})){
+            CCElement.isValid = true;
+            return;
+        }
         $.each(classes, function(idx,rule){
             if(rule && validator[rule]){
-                var isValid = validator[rule](CCElement.getValue());
+                var isValid = validator[rule](CCElement);
                 var possibleErrorMsg = new CC.NotificationMessage(CCElement.cid, CCElement.fieldName+" "+CC.errorMessages[rule],"error");
                 if(!isValid){
                     elementIsValid = false;

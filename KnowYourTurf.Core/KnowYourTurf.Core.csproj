@@ -272,7 +272,6 @@
     <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder.cs" />
     <Compile Include="Html\FubuUI\Builders\ValidationModifier.cs" />
     <Compile Include="Html\FubuUI\FubuUIHtmlExtensions.cs" />
-    <Compile Include="Html\FubuUI\HtmlConventionRegistries\CustomTagActionExpressions.cs" />
     <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfElementNamingConvention.cs" />
     <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfHtmlConventions.cs" />
     <Compile Include="Html\FubuUI\HtmlExpressions\DropdownInputExpression.cs" />

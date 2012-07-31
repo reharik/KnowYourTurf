@@ -150,7 +150,7 @@ namespace KnowYourTurf.Core.Services
             {
                 var category = _repository.Find<Category>(categoryId);
                 var list = CreateList(category.Fields, x => x.Name, x => x.EntityId, false);
-                groups.Groups.Add(new SelectGroup{Label = category.Name, Children = list});
+                groups.groups.Add(new SelectGroup{label = category.Name, children = list});
             }
             else
             {
@@ -158,7 +158,7 @@ namespace KnowYourTurf.Core.Services
                 categories.ForEachItem(x =>
                 {
                     var list = CreateList(x.Fields, f => f.Name, f => f.EntityId, false);
-                    groups.Groups.Add(new SelectGroup{Label = x.Name, Children = list});
+                    groups.groups.Add(new SelectGroup{label = x.Name, children = list});
 
                 });
             }

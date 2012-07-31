@@ -31,15 +31,26 @@ $.extend(CC.NotificationService.prototype,{
             && item.message() === msgObject.message();
         });
     },
+
+    removeById:function(cid){
+        this.viewmodel.messages.remove(function(item){
+            return item.elementCid()===cid;
+        });
+    },
     handleResult:function(result){
+        var that=this;
         if(!result.Success){
             if(result.Message){
-                this.add(new CC.NotificationMessage(this.cid, result.Message,"error"));
+                that.add(new CC.NotificationMessage(this.cid, result.Message,"error"));
             }
             if(result.Errors){
                 _.each(result.Errors,function(item){
-                    this.add(new CC.NotificationMessage(this.cid, item.PropertyName+ " "+item.ErrorMessage,"error"));
+                    that.add(new CC.NotificationMessage(this.cid, item.ErrorMessage,"error"));
                 })
+            }
+        }else{
+            if(result.Message){
+                that.add(new CC.NotificationMessage(this.cid, result.Message,"success"));
             }
         }
     }

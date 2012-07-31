@@ -11,24 +11,39 @@ if (typeof KYT == "undefined") {
 
 KYT.repository= (function(){
     var repositoryCallback = function(result,callback){
+
         if(result.LoggedOut){
             window.location.replace(result.RedirectUrl);
             return null;
         }
+        clearTimeout(KYT.throbberTimeout);
+//        KYT.throbberTimeout=null;
+        KYT.showThrob=false;
+        $("#ajaxLoading").hide();
         return result;
         //callback(result);
     };
+    var throbber = function(){
+        KYT.showThrob=true;
+        if(!KYT.throbberTimeout){
+            KYT.throbberTimeout = setTimeout(function() {
+                if(KYT.showThrob) {
+                    $("#ajaxLoading").show();
+                }
+            }, 500);
+        }
+    };
     return {
         ajaxPost:function(url, data){
-             KYT.showThrob=true;
+            throbber();
             $.post(url,data).done(repositoryCallback);
         },
         ajaxGet:function(url, data){
-             KYT.showThrob=true;
+            throbber();
             return $.get(url,data).done(repositoryCallback);
         },
         ajaxPostModel:function(url, data){
-            KYT.showThrob=true;
+            throbber();
             return $.ajax({
                 type:"post",
                 url: url,
