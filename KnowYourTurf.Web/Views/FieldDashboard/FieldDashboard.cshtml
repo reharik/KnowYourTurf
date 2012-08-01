@@ -25,7 +25,6 @@
                 <div id="colorPicker"></div>
             </div>
         </div>
-    @EndForm()
             
 @*    <div id="galleria" >*@
 @*        @foreach (var photo in Model.Photos)*@
@@ -33,7 +32,11 @@
 @*            <img src="@photo.FileUrl" />*@
 @*        }*@
 @*    </div>*@
-    <div class="col full clear"></div>
+<div class="col full clear">
+    <div class="fieldRow">
+        @Html.SubmissionFor(x => x._pictures).InputId("photoGallery").HideLabel().ToHtmlTag()
+    </div> 
+</div>
     <div class="col left">
         @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
         @StandardButtonFor("cancel", WebLocalizationKeys.CANCEL).AddClass("cancel").ToHtmlTag()

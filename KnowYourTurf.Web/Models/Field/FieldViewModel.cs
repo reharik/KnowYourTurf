@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Models
@@ -18,7 +19,6 @@ namespace KnowYourTurf.Web.Models
         public string FieldColor { get; set; }
         public string FileUrl { get; set; }
         public bool DeleteImage { get; set; }
-        public IEnumerable<Photo> Photos { get; set; }
 
         public string _completedGridUrl { get; set; }
         public string _documentGridUrl { get; set; }
@@ -30,7 +30,9 @@ namespace KnowYourTurf.Web.Models
         public string _DeleteMultipleDocumentsUrl { get; set; }
         public List<string> _PhotoHeaderButtons { get; set; }
         public List<string> _DocumentHeaderButtons { get; set; }
+        public IEnumerable<PhotoDto> _Photos { get; set; }
 
         public string _saveUrl { get; set; }
+
     }
 }

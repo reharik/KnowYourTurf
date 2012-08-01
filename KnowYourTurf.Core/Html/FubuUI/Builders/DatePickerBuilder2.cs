@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using FubuMVC.UI.Configuration;
 using HtmlTags;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
 using KnowYourTurf.Core.Html.FubuUI.Tags;
+using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Core.Html.FubuUI.Builders
 {
@@ -116,7 +118,23 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-            return new TextboxTag().Id(request.Accessor.Name).AddClass("multiSelect").Attr("data-bind", "MultiSelect:" + KnowYourTurfHtmlConventions.DeriveElementName(request));
+            return new TextboxTag().Id(request.Accessor.Name).AddClass("multiSelect");//.Attr("data-bind", "MultiSelect:" + KnowYourTurfHtmlConventions.DeriveElementName(request));
+        }
+    }
+
+    public class PictureGallery : ElementBuilder
+    {
+        protected  override  bool matches(AccessorDef def)
+        {
+            return def.Accessor.PropertyType == typeof(IEnumerable<PhotoDto>);
+        }
+        public override HtmlTag Build(ElementRequest request)
+        {
+            var ul = new HtmlTag("ul").Attr("data-bind", "foreach:" + KnowYourTurfHtmlConventions.DeriveElementName(request));
+            var li = new HtmlTag("li");
+            li.Children.Add(new HtmlTag("image").Attr("data-bind", "attr:{src:FileUrl}"));
+            ul.Children.Add(li);
+            return ul;
         }
     }
 }

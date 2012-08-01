@@ -55,6 +55,7 @@ namespace KnowYourTurf.Web.Controllers
             model._photoGridUrl = photoUrl;
             model._saveUrl = UrlContext.GetUrlForAction<FieldController>(x => x.Save(null));
             model._Title = WebLocalizationKeys.FIELD_INFORMATION.ToString();
+            model._Photos = field.Photos.Select(x => new PhotoDto {FileUrl = x.FileUrl});
 
             return Json(model,JsonRequestBehavior.AllowGet);
         }
@@ -158,4 +159,6 @@ namespace KnowYourTurf.Web.Controllers
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }
+
+    
 }

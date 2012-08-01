@@ -334,7 +334,6 @@
     <Compile Include="Services\EmailHandlers\IEmailTemplateHandler.cs" />
     <Compile Include="Services\IAuthenticationContext.cs" />
     <Compile Include="Services\ISecuritySetupService.cs" />
-    <Compile Include="Services\IUploadedFileHandlerService.cs" />
     <Compile Include="Services\ModelService.cs" />
     <Compile Include="Services\ViewOptions\IRouteTokenBuilder.cs" />
     <Compile Include="Services\ViewOptions\IRouteTokenConfig.cs" />

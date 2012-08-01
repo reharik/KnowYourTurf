@@ -148,6 +148,12 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
                 _htmlRoot.Attr("eltype", "Textarea");
                 return;
             }
+            if (input.TagName() == "ul")
+            {
+                _htmlRoot.Attr("eltype", "PictureGallery");
+                return;
+            }
+
         }
 
         private void addCustomLabel(EditorLabelExpression<VIEWMODEL> label)

@@ -111,6 +111,13 @@ namespace KnowYourTurf.Web.Controllers
             }
             return document;
         }
+
+        public ActionResult docs(ViewModel input)
+        {
+            var docs = _repository.FindAll<Document>();
+            var model = docs.Select(x => new DocumentDto {file = x});
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 
     public class DocumentViewModel:ViewModel
@@ -118,5 +125,15 @@ namespace KnowYourTurf.Web.Controllers
         public Document Item { get; set; }
         public IEnumerable<SelectListItem> DocumentCategoryList { get; set; }
         public long DocumentCategory { get; set; }
+    }
+
+    public class DocViewModel : ViewModel
+    {
+        public IEnumerable<DocumentDto> files { get; set; } 
+    }
+
+    public class DocumentDto
+    {
+        public Document file { get; set; }
     }
 }

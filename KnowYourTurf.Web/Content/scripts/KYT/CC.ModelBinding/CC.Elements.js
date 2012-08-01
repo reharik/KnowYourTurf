@@ -102,7 +102,7 @@ CC.Elements.TimeTextbox = CC.Elements.Element.extend({
     },
     destroy:function(){
         this.$input.off("change");
-       // this.$input.timepicker("destroy");
+        this.$input.timepicker("destroy");
         this._super("destroy",arguments);
     }
 });
@@ -169,11 +169,10 @@ CC.Elements.Select = CC.Elements.Element.extend({
         this._super("init",arguments);
         this.type = "select";
         this.$input = this.$container.find("select");
-        this.chosen = this.$input.chosen();
-        this.$input.chosen().change(function(){that.validate()});
+        this.$input.select2();
     },
     destroy:function(){
-       $(".chzn-container *").unbind().remove();
+        this.$input.select2("destroy");
         this._super("destroy",arguments);
     }
 });

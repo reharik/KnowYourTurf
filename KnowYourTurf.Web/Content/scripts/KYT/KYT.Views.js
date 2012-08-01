@@ -647,7 +647,6 @@ KYT.Views.NotificationView = KYT.Views.View.extend({
     }
 });
 
-
 KYT.tokenDefaults = {
     availableItems:[],
     selectedItems: [],
