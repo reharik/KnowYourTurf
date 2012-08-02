@@ -168,10 +168,7 @@ CC.Elements.FileSubmission = CC.Elements.Element.extend({
         this._super("init",arguments);
         this.type = "file";
         this.$input = this.$container.find("input");
-        this.$input.fileUploader({
-            buttonClear: '#px-clear',
-            selectFileLabel: 'Select files'
-        });
+        this.$input.customFileInput();
     }
 });
 

@@ -150,15 +150,9 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         }
         public override HtmlTag Build(ElementRequest request)
         {
-            var form = new HtmlTag("form")
-                .Attr("method", "post")
-                .Attr("enctype", "multipart/form-data")
-                .Attr("data-bind","attr:{action:_submitFileUrl}");
-            var clear = new HtmlTag("button").Id("px-clear").Attr("type", "reset");
+            
             var file = new HtmlTag("input").Attr("type", "file").AddClass("fileUpload");
-            form.Children.Add(file);
-            form.Children.Add(clear);
-            return form;
+            return file;
         }
     }
 }

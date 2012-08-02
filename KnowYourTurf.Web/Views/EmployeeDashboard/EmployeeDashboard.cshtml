@@ -69,7 +69,7 @@
             @*            .OperationName("/UserRoles").ToHtmlTag()*@
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x =>x._submitFileUrl).HideInput().ToHtmlTag() 
+            @Html.SubmissionFor(x => x._submitFileUrl).InputId("_submitFileUrl").HideLabel().ToHtmlTag() 
         </div>
     </div>
 

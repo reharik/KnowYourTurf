@@ -293,9 +293,6 @@
 				.data('formId', 'pxupload'+ itr)
 				.append(' \
 					<ul class="actions ui-helper-clearfix"> \
-						<li title="Upload" class="upload ui-state-default ui-corner-all"> \
-							<span class="ui-icon ui-icon-circle-triangle-e"></span> \
-						</li> \
 						<li title="Delete" class="delete ui-state-default ui-corner-all"> \
 							<span class="ui-icon ui-icon-circle-minus"></span> \
 						</li> \

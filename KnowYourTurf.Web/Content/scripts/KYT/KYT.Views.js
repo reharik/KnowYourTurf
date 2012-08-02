@@ -173,10 +173,23 @@ KYT.Views.BaseFormView = KYT.Views.View.extend({
     saveItem:function(){
         var isValid = CC.ValidationRunner.runViewModel(this.elementsViewmodel);
         if(!isValid){return;}
-
-        var data = JSON.stringify(ko.mapping.toJS(this.model,this.mappingOptions));
-        var promise = KYT.repository.ajaxPostModel(this.model._saveUrl(),data);
-        promise.done($.proxy(this.successHandler,this));
+        var data;
+        var fileInputs = $('input:file', this.$el).length > 0;
+        if(fileInputs){
+            var that = this;
+            data = ko.mapping.toJS(this.model,this.mappingOptions);
+            var ajaxFileUpload = new CC.AjaxFileUpload($("#_submitFileUrl")[0],{
+                action:that.model._saveUrl(),
+                onComplete:function(file,response){that.successHandler(response);}
+            });
+            ajaxFileUpload.setData(data);
+            ajaxFileUpload.submit()
+        }
+        else{
+            data = JSON.stringify(ko.mapping.toJS(this.model,this.mappingOptions));
+            var promise = KYT.repository.ajaxPostModel(this.model._saveUrl(),data);
+            promise.done($.proxy(this.successHandler,this));
+        }
     },
     cancel:function(){
         KYT.vent.trigger("form:"+this.id+":cancel");
