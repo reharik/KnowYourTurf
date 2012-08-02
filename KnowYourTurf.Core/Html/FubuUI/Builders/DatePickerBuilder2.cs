@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using FubuMVC.Core.Util;
 using FubuMVC.UI.Configuration;
 using HtmlTags;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
 using KnowYourTurf.Core.Html.FubuUI.Tags;
+using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Core.Html.FubuUI.Builders
@@ -62,7 +64,9 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-            return new HtmlTag("img").Attr("data-bind", "attr: { href: " + KnowYourTurfHtmlConventions.DeriveElementName(request) + " }").Attr("alt", request.Accessor.FieldName);
+            return new HtmlTag("img").Attr("data-bind",
+                " attr: { href: " + KnowYourTurfHtmlConventions.DeriveElementName(request) + " }")
+                .Attr("alt", request.Accessor.FieldName);
         }
     }
 
@@ -135,6 +139,26 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
             li.Children.Add(new HtmlTag("image").Attr("data-bind", "attr:{src:FileUrl}"));
             ul.Children.Add(li);
             return ul;
+        }
+    }
+
+    public class FileUploader : ElementBuilder
+    {
+        protected override bool matches(AccessorDef def)
+        {
+            return def.Accessor.Name == "_submitFileUrl";
+        }
+        public override HtmlTag Build(ElementRequest request)
+        {
+            var form = new HtmlTag("form")
+                .Attr("method", "post")
+                .Attr("enctype", "multipart/form-data")
+                .Attr("data-bind","attr:{action:_submitFileUrl}");
+            var clear = new HtmlTag("button").Id("px-clear").Attr("type", "reset");
+            var file = new HtmlTag("input").Attr("type", "file").AddClass("fileUpload");
+            form.Children.Add(file);
+            form.Children.Add(clear);
+            return form;
         }
     }
 }

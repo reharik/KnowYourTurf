@@ -25,6 +25,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
             Editors.Builder<PasswordBuilder2>();
             Editors.Builder<MultiSelectBuilder2>();
             Editors.Builder<PictureGallery>();
+            Editors.Builder<FileUploader>();
             // default builder
             Editors.Builder<TextboxBuilder2>();
             Editors.Always.Modify(AddElementName);

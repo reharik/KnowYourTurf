@@ -163,6 +163,27 @@ CC.Elements.Password= CC.Elements.Element.extend({
     }
 });
 
+CC.Elements.FileSubmission = CC.Elements.Element.extend({
+    init:function(){
+        this._super("init",arguments);
+        this.type = "file";
+        this.$input = this.$container.find("input");
+        this.$input.fileUploader({
+            buttonClear: '#px-clear',
+            selectFileLabel: 'Select files'
+        });
+    }
+});
+
+CC.Elements.PictureGallery= CC.Elements.Element.extend({
+    init:function(){
+        this._super("init",arguments);
+        this.type = "ul";
+        this.$input = this.$container.find("ul");
+        this.$input.galleryView();
+    }
+});
+
 CC.Elements.Select = CC.Elements.Element.extend({
     init:function(){
         var that = this;
@@ -200,6 +221,6 @@ CC.Elements.MultiSelect = CC.Elements.Element.extend({
     }
 });
 
-_.each(["Element", "Textbox", "Password","Select", "MultiSelect"], function(klass) {
+_.each(["Element", "Textbox", "Password","Select", "MultiSelect","PictureGallery","FileSubmission"], function(klass) {
     CC.Elements[klass].prototype._super = Backbone.View.prototype._super;
 });

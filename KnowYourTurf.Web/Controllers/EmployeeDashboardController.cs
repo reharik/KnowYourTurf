@@ -60,6 +60,7 @@ namespace KnowYourTurf.Web.Controllers
             model._pendingGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.PendingTasksGrid(null)) + "?ParentId=" + entityId;
             model._completedGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasksGrid(null)) + "?ParentId=" + entityId;
             model._saveUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.Save(null));
+            model._submitFileUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.SaveFile(null));
             model.UserRoles = new TokenInputViewModel { _availableItems = availableUserRoles, selectedItems = selectedUserRoles };
             return Json(model,JsonRequestBehavior.AllowGet);
         }

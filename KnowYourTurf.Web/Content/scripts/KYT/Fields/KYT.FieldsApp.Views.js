@@ -199,7 +199,6 @@ KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
     viewLoaded:function(){
         var rel = KYT.State.get("Relationships");
         $('#FieldColor',this.el).miniColors();
-        $("#photoGallery").galleryView();
         this.pendingGridView = new KYT.Views.DahsboardGridView({
             el:"#pendingTaskGridContainer",
             url:this.model._pendingGridUrl(),

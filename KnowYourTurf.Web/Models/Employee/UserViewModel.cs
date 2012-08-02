@@ -48,6 +48,6 @@ namespace KnowYourTurf.Web.Models
         public string Notes { get; set; }
         public IEnumerable<SelectListItem> _StateList { get; set; }
         public string _saveUrl { get; set; }
-
+        public string _submitFileUrl { get; set; }
     }
 }

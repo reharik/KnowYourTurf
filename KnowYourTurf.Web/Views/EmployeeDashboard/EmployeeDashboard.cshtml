@@ -39,46 +39,39 @@
             @Html.SubmissionFor(x => x.PhoneMobile).ToHtmlTag()
         </div>
     </div>
-<div class="col left">
-@*    @{*@
-@*        if (Model.ImageUrl.IsNotEmpty())*@
-@*        {*@
-            <div class="fieldRow">
-                @Html.ViewFor(x => x.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
-            </div>
-@*        }*@
-@*    }*@
-    <div class="fieldRow">
-        @Html.SubmissionFor(x => x.Address1).ToHtmlTag()
-    </div>
-    <div class="fieldRow">
-        @Html.SubmissionFor(x => x.Address2).ToHtmlTag()
-    </div>
-    <div class="fieldRow">
-        @Html.SubmissionFor(x => x.City).ToHtmlTag()
-    </div>
-    <div class="fieldRow">
-        @Html.SubmissionFor(x => x.State).ToHtmlTag()
-    </div>
-    <div class="fieldRow">
-        @Html.SubmissionFor(x => x.ZipCode).ToHtmlTag()
-    </div>
-    <div class="fieldRow">
-        @Html.SubmissionFor(x => x.UserLoginInfoStatus).ToHtmlTag()
-    </div>
-    <div class="fieldRow">
-        @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
-    </div>
-    <div class="fieldRow">
-        @Html.SubmissionFor(x => x.UserRoles).HideInput().ElType("MultiSelect").ToHtmlTag() 
-        @*            .OperationName("/UserRoles").ToHtmlTag()*@
-    </div>
-    <div class="fieldRow">
-        <div id="newImage">
-            <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Address1).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Address2).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.City).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.State).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.ZipCode).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.UserLoginInfoStatus).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.UserRoles).HideInput().ElType("MultiSelect").ToHtmlTag() 
+            @*            .OperationName("/UserRoles").ToHtmlTag()*@
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x =>x._submitFileUrl).HideInput().ToHtmlTag() 
         </div>
     </div>
-</div>
 
 
 <div class="col full clear"></div>
