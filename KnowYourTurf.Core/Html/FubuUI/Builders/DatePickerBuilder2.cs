@@ -151,7 +151,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         public override HtmlTag Build(ElementRequest request)
         {
             
-            var file = new HtmlTag("input").Attr("type", "file").AddClass("fileUpload");
+            var file = new HtmlTag("input").Attr("type", "file").Attr("size",45);
             return file;
         }
     }
