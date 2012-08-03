@@ -163,15 +163,34 @@ CC.AjaxFileUpload = (function () {
             document.body.appendChild(form);
             
             // Create hidden input element for each data key
-            for (var prop in settings.data) {
-                if (settings.data.hasOwnProperty(prop)){
+            function createElement(obj, key, prefix) {
+                if (obj.hasOwnProperty(key)) {
                     var el = document.createElement("input");
                     el.setAttribute('type', 'hidden');
-                    el.setAttribute('name', prop);
-                    el.setAttribute('value', settings.data[prop]);
+                    el.setAttribute('name', prefix + key);
+                    el.setAttribute('value', obj[key]);
                     form.appendChild(el);
                 }
             }
+            function createElements(obj, prefix) {
+                for (var key in obj) {
+                    if(obj.hasOwnProperty(key) && $.isPlainObject(obj[key])){
+                        createElements(obj[key],key+".");
+                    }else if(obj.hasOwnProperty(key) && $.isArray(obj[key])){
+                        $(obj[key]).each(function(i,item){
+                            if(!$.isPlainObject(item) && !$.isArray(item)){
+                                createElement(obj,item,key+"["+i+"].");
+                            }else{
+                                createElements(item, prefix+key+"["+i+"].");
+                            }
+                        });
+                    }else{
+                        createElement(obj, key, prefix);
+                    }
+                }
+            }
+
+            createElements(settings.data,'');
             return form;
         },
         /**
@@ -291,7 +310,13 @@ CC.AjaxFileUpload = (function () {
 
             form.submit();
 
-            $(parent).append($("<input>").attr("type","file").attr("name",name).attr("id",name));
+            $(parent).append($("<input>")
+                .attr("type","file")
+                .attr("name",name)
+                .attr("id",name)
+                .addClass("customfile-input")
+                .attr("size",45)
+            );
             // request set, clean up
             $(form).remove();
 

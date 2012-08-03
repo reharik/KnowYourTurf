@@ -209,6 +209,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken DELETE_ITEMS = new WebLocalizationKeys("DELETE_ITEMS", "Delete these items");
         public static readonly StringToken CALCULATE = new WebLocalizationKeys("CALCULATE", "Calculate");
         public static readonly StringToken CREATE_TASK = new WebLocalizationKeys("CREATE_TASK", "Create Task");
+        public static readonly StringToken EMPLOYEE_PHOTO = new WebLocalizationKeys("EMPLOYEE_PHOTO", "Employee Photo");
         
 
     }

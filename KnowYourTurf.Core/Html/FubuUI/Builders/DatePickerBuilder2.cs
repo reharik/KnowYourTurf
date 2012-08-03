@@ -122,7 +122,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-            return new TextboxTag().Id(request.Accessor.Name).AddClass("multiSelect");//.Attr("data-bind", "MultiSelect:" + KnowYourTurfHtmlConventions.DeriveElementName(request));
+            return new TextboxTag().Id(request.Accessor.Name).AddClass("multiSelect").Attr("data-bind", "MultiSelect:" + KnowYourTurfHtmlConventions.DeriveElementName(request));
         }
     }
 
