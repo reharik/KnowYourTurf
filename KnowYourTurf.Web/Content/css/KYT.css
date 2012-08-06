@@ -366,3 +366,10 @@ div.footer div.col {
 .valid{
     border: 1px solid green;
 }
+
+.deleteImage {
+    background: url("../images/delete.png") no-repeat;
+    width: 95px !important;
+    height: 25px !important;
+    vertical-align: bottom;
+}

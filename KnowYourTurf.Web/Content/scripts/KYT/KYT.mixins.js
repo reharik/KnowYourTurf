@@ -22,7 +22,7 @@ KYT.mixins.modelAndElementsMixin = {
         // make sure to apply ids prior to ko mapping.
         this.model = ko.mapping.fromJS(this.model);
         ko.applyBindings(this.model,this.el);
-        this.elementsViewmodel = CC.elementService.getElementsViewmodel(this.$el);
+        this.elementsViewmodel = CC.elementService.getElementsViewmodel(this);
         this.mappingOptions ={ ignore: _.filter(_.keys(this.model),function(item){
             return (item.indexOf('_') == 0 && item != "__ko_mapping__");
         })};
@@ -55,7 +55,7 @@ KYT.mixins.formMixin = {
         if(fileInputs.length > 0 && _.any(fileInputs, function(item){return $(item).val();})){
             var that = this;
             data = ko.mapping.toJS(this.model,this.mappingOptions);
-            var ajaxFileUpload = new CC.AjaxFileUpload($("#_submitFileUrl")[0],{
+            var ajaxFileUpload = new CC.AjaxFileUpload(fileInputs[0],{
                 action:that.model._saveUrl(),
                 onComplete:function(file,response){that.successHandler(response);}
             });

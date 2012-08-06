@@ -16,17 +16,12 @@
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.VendorEntityId).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.TotalHours).ToHtmlTag()
+       <div class="fieldRow">
+           @Html.SubmissionFor(x => x.TotalHours).ToHtmlTag()
+       </div>
+       <div class="fieldRow">
+            @Html.SubmissionFor(x => x.ImageUrl).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-             <div id="showImage" >
-                @Html.ViewFor(x => x.ImageUrl).HideLabel().AddClassToInput("KYT_displayImage").ToHtmlTag()
-                @StandardButtonFor("deleteImage", WebLocalizationKeys.DELETE).ToHtmlTag()
-            </div>
-            <div id="newImage">
-                <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
-        </div>
-    </div>
+
 </div>
 

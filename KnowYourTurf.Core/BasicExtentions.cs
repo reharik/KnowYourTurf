@@ -293,6 +293,11 @@ namespace KnowYourTurf.Core
             return UrlContext.GetFullUrl(formattedUrl);
         }
 
+        public static string AddImageSizeToName(string imageNameOrUrl, string imageSize)
+        {
+            return imageNameOrUrl.Insert(imageNameOrUrl.LastIndexOf("."), "_" + imageSize);
+        }
+
             //public static Continuation ToContinuation(this Result result, Continuation continuation)
         //{
         //    List<ErrorInfo> errors = new List<ErrorInfo>();

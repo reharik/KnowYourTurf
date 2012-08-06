@@ -118,7 +118,8 @@ namespace KnowYourTurf.Web.Controllers
                 var vendor = _repository.Find<Vendor>(input.VendorEntityId);
                 equipment.SetVendor(vendor);
             }
-            equipment.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
+            var url = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
+            equipment.ImageUrl = equipment.ImageUrl.IsNotEmpty()?
             var crudManager = _saveEntityService.ProcessSave(equipment);
             var notification = crudManager.Finish();
             return Json(notification, "text/plain");
@@ -128,7 +129,6 @@ namespace KnowYourTurf.Web.Controllers
     public class EquipmentViewModel:ViewModel
     {
         public string _saveUrl { get; set; }
-        public string _submitFileUrl { get; set; }
         public IEnumerable<SelectListItem> _VendorEntityIdList { get; set; }
 
         [ValidateNonEmpty]
@@ -140,7 +140,6 @@ namespace KnowYourTurf.Web.Controllers
         [ValidateDecimal]
         public int TotalHours { get; set; }
         public string ImageUrl { get; set; }
-
         public bool DeleteImage { get; set; }
     }
 

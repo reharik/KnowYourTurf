@@ -153,7 +153,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
                 _htmlRoot.Attr("eltype", "PictureGallery");
                 return;
             }
-            if (input.Attr("type") == "file")
+            if (input.HasClass("imageInputContainer"))
             {
                 _htmlRoot.Attr("eltype", "FileSubmission");
                 return;

@@ -146,13 +146,25 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
     {
         protected override bool matches(AccessorDef def)
         {
-            return def.Accessor.Name == "_submitFileUrl";
+            return def.Accessor.PropertyType == typeof(string)
+               && def.Accessor.FieldName.EndsWith("ImageUrl");
         }
         public override HtmlTag Build(ElementRequest request)
         {
-            
-            var file = new HtmlTag("input").Attr("type", "file").Attr("size",45);
-            return file;
+            var container = new HtmlTag("div").AddClass("imageInputContainer");
+            var imageContainer = new HtmlTag("div").AddClass("imageContainer");
+            var name = KnowYourTurfHtmlConventions.DeriveElementName(request);
+            var thumb = new HtmlTag("img").Attr("data-bind", "attr: { src: " + name + " }").Attr("alt", request.Accessor.FieldName);
+            var delete = new HtmlTag("input").Attr("type", "button").AddClass("deleteImage").Attr("value", "     Delete");
+
+            var inputContainer = new HtmlTag("div").AddClass("inputContainer");
+            var file = new HtmlTag("input").Attr("type", "file").Attr("size", 45).Attr("id", name).Attr("name", name);
+            imageContainer.Children.Add(thumb);
+            imageContainer.Children.Add(delete);
+            inputContainer.Children.Add(file);
+            container.Children.Add(imageContainer);
+            container.Children.Add(inputContainer);
+            return container;
         }
     }
 }

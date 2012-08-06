@@ -25,11 +25,11 @@ $.extend(CC.ElementCollection.prototype, {
 
 CC.elementService = (function(){
     var srv = {};
-    srv.getElementsViewmodel = function($el){
+    srv.getElementsViewmodel = function(view){
         var model = new CC.ElementCollection();
-        $el.find("[eltype]").each(function(i,item){
+        view.$el.find("[eltype]").each(function(i,item){
             var element = new CC.Elements[$(item).attr("eltype")]($(item));
-            element.init();
+            element.init(view);
             model.add(element);
         });
         return model;

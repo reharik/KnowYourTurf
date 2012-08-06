@@ -305,7 +305,7 @@ CC.AjaxFileUpload = (function () {
             var form = this._createForm(iframe);
 
             var parent = $(this._input).parent();
-            var name = $(this._input).attr("name");
+            var name = $(this._input).attr("id");
             form.appendChild(this._input);
 
             form.submit();

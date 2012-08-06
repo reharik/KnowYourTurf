@@ -164,9 +164,28 @@ CC.Elements.Password= CC.Elements.Element.extend({
 });
 
 CC.Elements.FileSubmission = CC.Elements.Element.extend({
-    init:function(){
+    init:function(view){
         this._super("init",arguments);
         this.type = "file";
+        this.$input = this.$container.find("#ImageUrl");
+        if(view.model.ImageUrl()){
+            this.showImage();
+        }else{
+            this.showInput();
+        }
+        this.$container.find(".deleteImage").on("click",$.proxy(function(){
+            this.showInput();
+            view.model.DeleteImage(true);
+        },this));
+    },
+
+    showImage:function(){
+        this.$container.find(".imageContainer").show();
+        this.$container.find(".inputContainer").hide();
+    },
+    showInput:function(){
+        this.$container.find(".imageContainer").hide();
+        this.$container.find(".inputContainer").show();
         this.$input.customFileInput();
     }
 });
