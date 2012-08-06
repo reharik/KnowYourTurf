@@ -3,9 +3,9 @@ using System.Web.Mvc;
 
 namespace KnowYourTurf.Core.CoreViewModels
 {
-   public class GroupSelectViewModel
+   public class GroupedSelectViewModel
     {
-       public GroupSelectViewModel()
+       public GroupedSelectViewModel()
        {
            groups = new List<SelectGroup>();
        }

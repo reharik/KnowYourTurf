@@ -8,22 +8,14 @@
 
 KYT.Views.CalendarView = KYT.Views.View.extend({
     render:function(){
-        if(this.onPreRender)this.onPreRender();
-       KYT.repository.ajaxGet(this.options.url, this.options.data).done($.proxy(this.renderCallback));
+       KYT.repository.ajaxGet(this.options.url, this.options.data)
+           .done($.proxy(this.renderCallback,this));
     },
     renderCallback:function(result){
-        if(result.LoggedOut){
-            window.location.replace(result.RedirectUrl);
-            return;
-        }
-        $(this.el).html(result);
-        if(extraFormOptions){
-            $.extend(true, this.options, extraFormOptions);
-        }
-
-        var calContainer = this.options.calendarDef.calendarContainer;
-        this.options.calendarDef.id=this.id;
-        $(calContainer,this.el).asCalendar(this.options.calendarDef);
+        $(this.el).html($('<div>').attr('id','calendar'));
+        this.model = result.CalendarDefinition;
+        this.model.id=this.id;
+        $("#calendar",this.el).asCalendar(this.model);
         //callback for render
         this.viewLoaded();
         //general notification of pageloaded
@@ -55,7 +47,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             "ScheduledDate":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "StartTime":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "EndTime":$.fullCalendar.formatDate( event.end,"M/d/yyyy hh:mm TT")};
-        KYT.repository.ajaxGet(this.options.calendarDef.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
+        KYT.repository.ajaxGet(this.model.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
     },
     eventResize:function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){
         var data = {"EntityId":event.EntityId,
@@ -63,13 +55,13 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             "StartTime":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "EndTime":$.fullCalendar.formatDate( event.end,"M/d/yyyy hh:mm TT")
         };
-        KYT.repository.ajaxGet(this.options.calendarDef.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
+        KYT.repository.ajaxGet(this.model.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
     },
     dayClick:function(date, allDay, jsEvent, view) {
         var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"),
             "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")
         };
-        this.editEvent(this.options.calendarDef.AddUpdateUrl,data);
+        this.editEvent(this.model.AddUpdateUrl,data);
     },
     eventClick:function(calEvent, jsEvent, view) {
         var data = {"EntityId": calEvent.EntityId, popup:true};
@@ -81,7 +73,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
 
         var formOptions = {
             id: "displayModule",
-            url: this.options.calendarDef.DisplayUrl,
+            url: this.model.DisplayUrl,
             data:data,
             buttons:builder.getButtons()
         };
@@ -117,7 +109,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     copyItem:function(){
         var entityId = $("#EntityId",this.ajaxPopupDisplay.el).val();
         var data = {"EntityId":entityId,"Copy":true};
-        this.editEvent(this.options.calendarDef.AddUpdateUrl,data);
+        this.editEvent(this.model.AddUpdateUrl,data);
         this.ajaxPopupDisplay.close();
         //this feels retarded for some reason
         KYT.vent.bind("form:editModule:pageLoaded", function(){
@@ -130,7 +122,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         var that = this;
         if (confirm("Are you sure you would like to delete this Item?")) {
             var entityId = $("#EntityId").val();
-            KYT.repository.ajaxGet(this.options.calendarDef.deleteUrl,{"EntityId":entityId}).done(function(result){
+            KYT.repository.ajaxGet(this.model.DeleteUrl,{"EntityId":entityId}).done(function(result){
                 that.ajaxPopupDisplay.close();
 //                if(!result.Success){
 //                    alert(result.Message);
@@ -143,11 +135,11 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     displayEdit:function(event){
         var id = $("#EntityId",this.ajaxPopupDisplay.el).val();
         this.ajaxPopupDisplay.close();
-        this.editEvent(this.options.calendarDef.AddUpdateUrl+"/"+id);
+        this.editEvent(this.model.AddUpdateUrl+"/"+id);
     },
 
     reload:function(){
-        $(this.options.calendarDef.calendarContainer,this.el).fullCalendar( 'refetchEvents' )
+        $('#calendar',this.el).fullCalendar( 'refetchEvents' )
     },
 
     formSuccess:function(){
@@ -162,13 +154,12 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     }
 });
 
-KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
-    events:_.extend({
-    }, KYT.Views.AjaxFormView.prototype.events),
+KYT.Views.EmployeeDashboardView = KYT.Views.View.extend({
     initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
         this.options.noBubbleUp=true;
-        this.options.notificationArea = new cc.NotificationArea(this.cid,"#errorMessagesForm","#errorMessagesForm", KYT.vent);
-        this._super("initialize",arguments);
     },
     viewLoaded:function(){
         this.pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
@@ -193,9 +184,12 @@ KYT.Views.EmployeeDashboardView = KYT.Views.AjaxFormView.extend({
     }
 });
 
-KYT.Views.FieldDashboardView = KYT.Views.AjaxFormView.extend({
-    events:_.extend({
-    }, KYT.Views.AjaxFormView.prototype.events),
+KYT.Views.FieldDashboardView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
     viewLoaded:function(){
         var rel = KYT.State.get("Relationships");
         $('#FieldColor',this.el).miniColors();
@@ -288,13 +282,23 @@ KYT.Views.DahsboardGridView = KYT.Views.GridView.extend({
     }
 });
 
-KYT.Views.TaskFormView = KYT.Views.AjaxFormView.extend({
+KYT.Views.TaskFormView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
     viewLoaded:function(){
-        KYT.calculator.applyTaskTransferData(this.$el);
+        KYT.calculator.applyTaskTransferData(this.model);
     }
 });
 
-KYT.Views.EmailJobFormView = KYT.Views.AjaxFormView.extend({
+KYT.Views.EmailJobFormView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
     viewLoaded:function(){
         this.loadTokenizers();
     },
@@ -330,262 +334,59 @@ KYT.Views.EmployeeListView = KYT.Views.GridView.extend({
     }
 });
 
-KYT.Views.DocumentFormView = KYT.Views.AjaxFormView.extend({
-     initialize:function(){
-        this.options.notificationArea = new cc.NotificationArea(this.cid,"#errorMessagesDocGrid","#errorMessagesForm", KYT.vent);
-        this._super("initialize",arguments);
-    }
-});
-
-KYT.Views.PhotoFormView = KYT.Views.AjaxFormView.extend({
+KYT.Views.DocumentFormView = KYT.Views.View.extend({
     initialize:function(){
-       this.options.notificationArea = new cc.NotificationArea(this.cid,"#errorMessagesPhotoGrid","#errorMessagesForm", KYT.vent);
-       this._super("initialize",arguments);
-   }
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
 });
 
-KYT.Views.CalculatorFormView = KYT.Views.AjaxFormView.extend({
-    events:_.extend({
-        'click #createTask':'addTask'
-    }, KYT.Views.AjaxFormView.prototype.events),
+KYT.Views.PhotoFormView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    }
+});
 
+KYT.Views.CalculatorFormView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "formMixin",{
+            saveItem:function(){
+                var data = JSON.stringify(ko.mapping.toJS(this.model,this.mappingOptions));
+                var promise = KYT.repository.ajaxPostModel(this.model._calculateUrl(),data);
+                promise.done($.proxy(this.successHandler,this));
+            },
+            successHandler:function(result){
+                KYT.calculator.successHandler(this.model,result);
+            }
+        });
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+        this.options.templateUrl += this.options.url.substring(this.options.url.lastIndexOf("/"));
+    },
+    events:{'click #createTask':'addTask'},
     addTask:function(){
-        var fieldId = this.$el.find("[name=Field]").val();
-        KYT.calculator.setTaskTransferData(this.$el);
+        var fieldId = this.model.FieldEntityId();
+        KYT.calculator.setTaskTransferData(this.model);
         KYT.vent.trigger("route",KYT.generateRoute("task", 0, fieldId),true);
-    },
-    //calculate success handler
-    successHandler:function(result){
-        KYT.calculator.successHandler(result);
     }
+
 });
 
-KYT.Views.AppointmentView = KYT.Views.AjaxFormView.extend({
-    events:_.extend({
-        'change [name="Appointment.Length"]':'handleTimeChange',
-        'change [name="sHour"]':'handleTimeChange',
-        'change [name="sMinutes"]':'handleTimeChange',
-        'change [name="sAMPM"]':'handleTimeChange'
-
-    }, KYT.Views.AjaxFormView.prototype.events),
-
-    viewLoaded:function(){
-        this.loadTokenizers();
-    },
-    handleTimeChange:function(){
-        var startTime = this.getStartTime();
-        var endTimeString = this.getEndTimeString(startTime);
-        $("#endTime").text(endTimeString);
-    },
-    getEndTimeString:function(startTime){
-        var min;
-        switch($("[name='Appointment.Length']").val()){
-            case "Hour":
-                min = 60;
-                break;
-            case "Half Hour":
-                min = 30;
-                break;
-            case "Hour and a Half":
-                min = 90;
-                break;
-        }
-        var endTime = startTime.addMinutes(min);
-        var endHour = endTime.getHours();
-            var amPm = "AM";
-            if(endHour>12){
-                endHour-=12;
-                amPm="PM";
-            }
-            var min = endTime.getMinutes().toString();
-            if(min == "0"){
-                min="00";
-            }
-            return endHour+":"+min+" "+amPm;
-    },
-    getStartTime:function(){
-        var hour = $("[name='sHour']").val();
-        var min = $("[name='sMinutes']").val();
-        if($("[name='sAMPM']").val()=="PM"){
-            hour = new Number(hour)+12;
-        }
-        return new XDate().setHours(hour).setMinutes(min);
-    },
-
-    loadTokenizers: function(){
-        var options = $.extend({},this.options,{el:"#clients"});
-
-        this.tokenView = new KYT.Views.TokenView(options);
-        this.tokenView.render();
-        this.storeChild(this.tokenView);
-    }
-});
-
-KYT.Views.PaymentListView = KYT.Views.GridView.extend({
-    addNew:function(){
-        var parentId = $(this.el).find("#ParentId").val();
-        KYT.vent.trigger("route",this.options.addUpate+"/0/"+parentId ,true);
-    },
-    editItem:function(id,itemType){
-        var parentId = $(this.el).find("#ParentId").val();
-        var _itemType = itemType?itemType:"";
-        // fix this for all assets
-        KYT.vent.trigger("route",this.options.addUpate+"/"+id+"/"+parentId,true);
-    }
-});
-
-KYT.Views.PaymentFormView = KYT.Views.AjaxFormView.extend({
-    events:_.extend({
-    },KYT.Views.AjaxFormView.prototype.events),
-    viewLoaded:function(){
-        $("#fullHour").change($.proxy(function(e){
-            this.calculateTotal("FullHour","#fullHourTotal",e.target);
-        },this));
-        $("#halfHour").change($.proxy(function(e){
-            this.calculateTotal("HalfHour","#halfHourTotal",e.target);
-        },this));
-        $("#fullHourTenPack").change($.proxy(function(e){
-            this.calculateTotal("FullHourTenPack","#fullHourTenPackTotal",e.target);
-        },this));
-        $("#halfHourTenPack").change($.proxy(function(e){
-            this.calculateTotal("HalfHourTenPack","#halfHourTenPackTotal",e.target);
-        },this));
-        $("#pair").change($.proxy(function(e){
-            this.calculateTotal("Pair","#pairTotal",e.target);
-        },this));
-
-        this.calculateTotal("FullHour","#fullHourTotal","#fullHour");
-        this.calculateTotal("HalfHour","#halfHourTotal","#halfHour");
-        this.calculateTotal("FullHourTenPack","#fullHourTenPackTotal","#fullHourTenPack");
-        this.calculateTotal("HalfHourTenPack","#halfHourTenPackTotal","#halfHourTenPack");
-        this.calculateTotal("Pair","#pairTotal","#pair");
-
-    },
-    calculateTotal:function(type, totalSelector, numberSelector){
-        var number = $(numberSelector).val();
-        var itemTotal = (this.options.sessionRates[type] * number);
-        $(totalSelector).text("$" + itemTotal);
-        var total = parseInt($("#fullHourTotal").text().substring(1))
-            + parseInt($("#halfHourTotal").text().substring(1))
-            + parseInt($("#fullHourTenPackTotal").text().substring(1))
-            + parseInt($("#halfHourTenPackTotal").text().substring(1))
-            + parseInt($("#pairTotal").text().substring(1));
-        $("#total").val(total);
-
-    }
-});
-
-KYT.Views.TrainerFormView = KYT.Views.AjaxFormView.extend({
-     events:_.extend({
-        'click #trainerPayments' : 'trainerPayments',
-         'click #payTrainer' : 'payTrainer'
-    }, KYT.Views.AjaxFormView.prototype.events),
-    viewLoaded:function(){
-        this.$el.find(this.options.crudFormSelector).data().crudForm.setBeforeSubmitFuncs(this.clientRateBeforeSubmit);
-        this.loadPlugins();
-        this.loadTokenizers();
-    },
-    clientRateBeforeSubmit:function(arr){
-        var items =$("[name='ClientsInput']").data('selectedItems');
-        if(items&&$(items).size()>0){
-            $.each(items, function(i,item){
-            arr.push({"name":"SelectedClients["+i+"].id","value":item.id});
-            arr.push({"name":"SelectedClients["+i+"].name","value":item.name});
-            arr.push({"name":"SelectedClients["+i+"].percentage","value":item.percentage});
-            })
-        }
-    },
-    loadTokenizers: function(){
-        var clientOptions = $.extend({el:"#clients", id:"clientToken"},this.options.clientOptions);
-        var userRoleOptions = $.extend({el:"#userRoles"},this.options.userRolesOptions);
-        this.clientsView = new KYT.Views.TrainerEditableTokenView(clientOptions);
-        this.clientsView.render();
-        this.storeChild(this.clientsView);
-
-        this.userRolesView = new KYT.Views.TokenView(userRoleOptions);
-        this.userRolesView.render();
-        this.storeChild(this.userRolesView);
-    },
-    loadPlugins:function(){
-        $('#color',"#detailArea").miniColors();
-    },
-    trainerPayments:function(){
-        var id = $(this.el).find("#EntityId").val();
-        KYT.vent.trigger("route","trainerpaymentlist/"+id,true);
-    },
-    payTrainer:function(){
-        var id = $(this.el).find("#EntityId").val();
-        KYT.vent.trigger("route","paytrainerlist/"+id,true);
-    }
-});
-
-KYT.Views.TrainerEditableTokenView = KYT.Views.EditableTokenView.extend({
-     events:_.extend({
-        'click .tokenEditor' : 'tokenEditor'
-    }, KYT.Views.EditableTokenView.prototype.events),
-    internalTokenMarkup: function(item) {
-        var cssClass = "class='selectedItem'";
-        return "<p><a " + cssClass + ">" + item.name+" ( "+item.percentage + " )</a><a href='javascript:void(0);' class='tokenEditor' >&nbsp;-- Edit</a><input id='itemId' type='hidden' value='"+item.id+"' </p>";
-    },
+KYT.Views.ForumView = KYT.Views.View.extend({
     render:function(){
-        KYT.vent.bind("popup:templatePopup:save",this.tokenSave,this);
-        KYT.vent.bind("popup:templatePopup:cancel",this.tokenCancel,this);
-    },
-    onClose:function(){
-        KYT.vent.unbind("popup:templatePopup:save");
-        KYT.vent.unbind("popup:templatePopup:cancel");
-    },
-    afterTokenSelectedFunction:function(item) {
-        if(!$(this.options.inputSelector,this.el).data("selectedItems"))$(this.options.inputSelector,this.el).data("selectedItems",[]);
-        $(this.options.inputSelector,this.el).data("selectedItems").push(item);
-    },
-    deleteToken:function(hidden_input,token_data) {
-        var data = $(this.options.inputSelector,this.el).data("selectedItems");
-        var idx=0;
-        $.each(data,function(i,item){
-            if(item.id == hidden_input.id){
-                idx=i;
-            }
-        });
-        data.splice(idx,1);
-    },
-    tokenEditor:function(e){
-        this.options.currentlyEditing = $(e.target).prev("a");
-        var id = $(e.target).next("input#itemId").val();
-        var data = $(this.options.inputSelector,this.el).data("selectedItems");
-        var dataItem;
-        $.each(data,function(i,item){
-            if(item.id == id) dataItem = item;
-        });
-        var buttons = this.options.buttons?this.options.buttons:KYT.Views.popupButtonBuilder.builder("templatePopup").standardEditButons();
-        var popupOptions = {
-            id:"templatePopup",
-            buttons: buttons,
-            data:dataItem,
-            template:"#percentageTemplate"
-        };
-        this.templatedPopupView = new KYT.Views.TemplatedPopupView(popupOptions);
-        this.templatedPopupView.render();
-        this.storeChild(this.templatedPopupView);
-
-    },
-    tokenSave:function(){
-        var id = $("#editingId").val();
-        var data = $(this.options.inputSelector,this.options.el).data("selectedItems");
-        var dataItem;
-        $.each(data,function(i,item){
-            if(item.id == id) dataItem = item;
-        });
-        dataItem.percentage = $("#newTrainerPercentage").val();
-        var anchor = $(this.options.currentlyEditing).text();
-        var newText = anchor.substr(0,anchor.indexOf('(')) +"( "+$("#newTrainerPercentage").val()+" ) ";
-        $(this.options.currentlyEditing).text(newText);
-//        KYT.vent.unbind("popup:templatePopup:save");
-        this.templatedPopupView.close();
-    },
-    tokenCancel:function(){
-        this.templatedPopupView.close();
+        var iframe = $('<iframe>')
+            .attr('name','KYTForum')
+            .attr('height','600px')
+            .attr('width','100%')
+            .attr("frameBorder",0)
+            .attr('scrolling','yes')
+            .attr('style','overflow-x:hidden')
+            .attr('src','http://kytforum.websitetoolbox.com/');
+        this.$el.append(iframe)
     }
-
 });
+
 

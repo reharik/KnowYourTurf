@@ -348,6 +348,7 @@ div.footer div.col {
 }
 
 .success {
+    background-color: #00cc00;
     font-size:13px;
     font-weight:bold;
     width:auto;

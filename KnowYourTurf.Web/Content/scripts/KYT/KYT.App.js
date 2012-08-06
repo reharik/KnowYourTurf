@@ -32,28 +32,15 @@ KYT.addInitializer(function(){
         KYT.Routing.showRoute(route,triggerRoute);
     });
 
-    KYT.notificationService = new cc.MessageNotficationService();
+
     CC.notification = new CC.NotificationService();
     Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId){
-        var post = (KYT.repository.ajaxGet(this.url, this.data));
-        return post.done(
-            function(template){
-                if (!template || template.length === 0){
-                  var msg = "Could not find template: '" + templateId + "'";
-                  var err = new Error(msg);
-                  //err.name = "NoTemplateError";
-                  throw err;
-                }
-
-                return template;
-            }
-        );
+        return KYT.repository.ajaxGet(this.url, this.data);
     },
 
     // overriding compileTemplate with passthrough function because we are not compiling
-    Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate){ return rawTemplate;}
+    Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate){ return rawTemplate;};
 
-//    KYT.notificationView = new KYT.Views.NotificationView().render();
 });
 
 KYT.bind("initialize:after", function(){

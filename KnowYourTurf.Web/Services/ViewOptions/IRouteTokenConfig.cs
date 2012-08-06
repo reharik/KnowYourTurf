@@ -46,7 +46,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForList<WeatherListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<WeatherController>(x => x.AddUpdate(null)).End();
 
-            _builder.Url<ForumController>(x => x.Forum(null)).End();
+            _builder.JustRoute("Forum").End();
 
             _builder.TokenForList<EmailJobListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<EmailJobController>(x => x.AddUpdate(null)).End();

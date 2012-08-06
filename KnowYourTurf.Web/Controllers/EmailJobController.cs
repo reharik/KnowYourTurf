@@ -86,8 +86,8 @@ namespace KnowYourTurf.Web.Controllers
             job.Sender = input.Item.Sender;
             job.Status = input.Item.Status;
             job.Subject = input.Item.Subject;
-            var emailTemplate = _repository.Find<EmailTemplate>(input.Item.ReadOnlyEmailTemplate.EntityId);
-            job.SetEmailTemplate(emailTemplate);
+            var emailTemplate = _repository.Find<EmailTemplate>(input.Item.EmailTemplate.EntityId);
+            job.EmailTemplate = emailTemplate;
             job.EmailJobType = _repository.Find<EmailJobType>(input.Item.EmailJobType.EntityId);
 
             job.ClearSubscriber();

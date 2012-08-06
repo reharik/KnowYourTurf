@@ -18,26 +18,9 @@ namespace KnowYourTurf.Core.Domain
         public virtual int SizeOfUnit { get; set; }
         [ValueOfEnumeration(typeof(UnitType)), ValidateNonEmpty]
         public virtual string UnitType { get; set; }
-        /// <summary>
-        /// Aggregate Root that should not be modified through Email Job
-        /// </summary>
-        private Vendor _readOnlyLastVendor;
-        public virtual Vendor ReadOnlyLastVendor { get { return _readOnlyLastVendor; } }
-        public virtual void SetLastVendor(Vendor vendor)
-        {
-            _readOnlyLastVendor = vendor;
-        }
-        ////
-        /// <summary>
-        /// Aggregate Root that should not be modified through Inventory
-        /// </summary>
-        private BaseProduct _readOnlyProduct;
+
+        public virtual Vendor LastVendor { get;  set; }
         [ValidateNonEmpty]
-        public virtual BaseProduct ReadOnlyProduct { get { return _readOnlyProduct; } set { _readOnlyProduct = value; } }
-        public virtual void SetProduct(BaseProduct product)
-        {
-            _readOnlyProduct = product;
-        }
-        ////
+        public virtual BaseProduct Product { get; set; }
     }
 }

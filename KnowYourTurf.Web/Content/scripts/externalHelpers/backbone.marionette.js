@@ -1207,19 +1207,22 @@ _.extend(Marionette.TemplateCache, {
 _.extend(Marionette.TemplateCache.prototype, {
 
   // Internal method to load the template asynchronously.
-  load: function(){
+  //REH 8.4.12 made load return a promise.
+    load: function(){
     var that = this;
-
-    // Guard clause to prevent loading this template more than once
+    var dfd = new $.Deferred();
     if (this.compiledTemplate){
-      return this.compiledTemplate;
+        dfd.resolve(this.compiledTemplate);
+        return dfd.promise();
     }
 
     // Load the template and compile it
-    var template = this.loadTemplate(this.templateId);
-    this.compiledTemplate = this.compileTemplate(template);
-
-    return this.compiledTemplate;
+    $.when(this.loadTemplate(this.templateId))
+    .then(function(template){
+        that.compiledTemplate = that.compileTemplate(template);
+        dfd.resolve(that.compiledTemplate);
+    });
+    return dfd.promise();
   },
 
   // Load a template from the DOM, by default. Override

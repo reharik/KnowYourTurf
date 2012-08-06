@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<Field, FieldViewModel>();
             Mapper.CreateMap<Photo, PhotoDto>();
             Mapper.CreateMap<Task, TaskViewModel>().ForMember(d => d.Equipment, o => o.Ignore()).ForMember(d => d.Employees, o => o.Ignore());
-
+            Mapper.CreateMap<Equipment, EquipmentViewModel>();
         }
 
         public static void Bootstrap()

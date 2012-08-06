@@ -133,7 +133,7 @@
     </Compile>
     <Compile Include="CoreLocalizationKeys.cs" />
     <Compile Include="CoreViewModels\GridItemModels.cs" />
-    <Compile Include="CoreViewModels\GroupSelectViewModel.cs" />
+    <Compile Include="CoreViewModels\GroupedSelectViewModel.cs" />
     <Compile Include="CoreViewModels\PictureDto.cs" />
     <Compile Include="CoreViewModels\TokenInputDto.cs" />
     <Compile Include="Domain\BaseProduct.cs" />

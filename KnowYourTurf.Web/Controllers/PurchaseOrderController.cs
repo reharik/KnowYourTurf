@@ -47,7 +47,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 Item = purchaseOrder,
                 VendorList = vendors,
-                VendorId = purchaseOrder.EntityId > 0 ? purchaseOrder.ReadOnlyVendor.EntityId : 0,
+                VendorId = purchaseOrder.EntityId > 0 ? purchaseOrder.Vendor.EntityId : 0,
                 ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null)),
                 CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)),
                 deleteMultipleUrl = deleteMany,
@@ -105,11 +105,11 @@ namespace KnowYourTurf.Web.Controllers
             if(input.PurchaseOrderId<=0)
             {
                 var vendor = _repository.Find<Vendor>(input.VendorId);
-                purchaseOrder.SetVendor(vendor);
+                purchaseOrder.Vendor = vendor;
             }
             var baseProduct = _repository.Find<BaseProduct>(input.EntityId);
             var purchaseOrderLineItem = new PurchaseOrderLineItem();
-            purchaseOrderLineItem.SetProduct(baseProduct);
+            purchaseOrderLineItem.Product = baseProduct;
             purchaseOrder.AddLineItem(purchaseOrderLineItem);
 
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
@@ -128,14 +128,14 @@ namespace KnowYourTurf.Web.Controllers
             else
             {
                 purchaseOrder = new PurchaseOrder();
-                purchaseOrder.SetVendor(vendor);
+                purchaseOrder.Vendor = vendor;
             }
             var baseProduct = _repository.Find<BaseProduct>(input.EntityId);
             var purchaseOrderLineItem = new PurchaseOrderLineItem
                                             {
                                                 PurchaseOrder = purchaseOrder
                                             };
-            purchaseOrderLineItem.SetProduct(baseProduct);
+            purchaseOrderLineItem.Product = baseProduct;
 
             var model = new PurchaseOrderLineItemViewModel
                                                      {
@@ -155,15 +155,15 @@ namespace KnowYourTurf.Web.Controllers
             else
             {
                 purchaseOrder = new PurchaseOrder();
-                purchaseOrder.SetVendor(vendor);
+                purchaseOrder.Vendor = vendor;
             }
-            var baseProduct = _repository.Find<BaseProduct>(input.Item.ReadOnlyProduct.EntityId);
+            var baseProduct = _repository.Find<BaseProduct>(input.Item.Product.EntityId);
             var newPo = purchaseOrder.EntityId == 0;
             var purchaseOrderLineItem = new PurchaseOrderLineItem
             {
                 PurchaseOrder = purchaseOrder
             };
-            purchaseOrderLineItem.SetProduct(baseProduct);
+            purchaseOrderLineItem.Product = baseProduct;
             mapItem(purchaseOrderLineItem, input.Item);
             _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder, purchaseOrderLineItem);
             vendor.AddPurchaseOrder(purchaseOrder);

@@ -1,19 +1,8 @@
 ﻿@model KnowYourTurf.Web.Models.EventViewModel
-@using KnowYourTurf.Core
-@using KnowYourTurf.Web
 @using KnowYourTurf.Core.Html.FubuUI
-@using KnowYourTurf.Web.Controllers
-@using KnowYourTurf.Core.Html.Expressions
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
-
-
-    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
-
-    @MvcHtmlString.Create(FormFor<EventController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-    <input type="hidden" id="RootId" name="RootId" value="@Model.RootId"/>
-    <input type="hidden" id="EntityId" name="EntityId" value="@Model.Event.EntityId"/>
 
     <div class="col left">
         <div class="fieldRow">
@@ -35,4 +24,3 @@
             @Html.SubmissionFor(x => x.Event.Notes).ToHtmlTag()
         </div>
     </div>
-@EndForm()

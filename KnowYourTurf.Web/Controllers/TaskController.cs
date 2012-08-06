@@ -38,7 +38,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult AddUpdate_Template(AddUpdateTaskViewModel input)
         {
             return View("TaskAddUpdate", new TaskViewModel());
-        }
+        }   
 
         public ActionResult AddUpdate(TaskViewModel input)
         {
@@ -56,8 +56,8 @@ namespace KnowYourTurf.Web.Controllers
             var model = Mapper.Map<Task, TaskViewModel>(task);
             model.Employees = new TokenInputViewModel { _availableItems = availableEmployees, selectedItems = selectedEmployees };
             model.Equipment = new TokenInputViewModel { _availableItems = availableEquipment, selectedItems = selectedEquipment};
-            model._ReadOnlyFieldEntityIdList = fields;
-            model._ReadOnlyInventoryProductReadOnlyProductEntityIdList = products;
+            model._FieldEntityIdList = fields;
+            model._InventoryProductProductEntityIdList = products;
             model._TaskTypeEntityIdList = taskTypes;
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             model.Popup = input.Popup;
@@ -76,34 +76,34 @@ namespace KnowYourTurf.Web.Controllers
 
 
 
-        private GroupSelectViewModel createProductSelectListItems()
+        private GroupedSelectViewModel createProductSelectListItems()
         {
             IEnumerable<InventoryProduct> inventory = _repository.FindAll<InventoryProduct>();
             var chemicals =
                 _selectListItemService.CreateListWithConcatinatedText(
-                    inventory.Where(i => i.ReadOnlyProduct.InstantiatingType == "Chemical"),
-                    x => x.ReadOnlyProduct.Name,
+                    inventory.Where(i => i.Product.InstantiatingType == "Chemical"),
+                    x => x.Product.Name,
                     x => x.UnitType,
                     "-->",
                     y => y.EntityId,
                     false);
             var fertilizer =
                 _selectListItemService.CreateListWithConcatinatedText(
-                    inventory.Where(i => i.ReadOnlyProduct.InstantiatingType == "Fertilizer"),
-                    x => x.ReadOnlyProduct.Name,
+                    inventory.Where(i => i.Product.InstantiatingType == "Fertilizer"),
+                    x => x.Product.Name,
                     x => x.UnitType,
                     "-->",
                     x => x.EntityId,
                     false);
             var materials =
                 _selectListItemService.CreateListWithConcatinatedText(
-                    inventory.Where(i => i.ReadOnlyProduct.InstantiatingType == "Material"),
-                    x => x.ReadOnlyProduct.Name,
+                    inventory.Where(i => i.Product.InstantiatingType == "Material"),
+                    x => x.Product.Name,
                     x => x.UnitType,
                     "-->",
                     x => x.EntityId,
                     false);
-            var groups = new GroupSelectViewModel();
+            var groups = new GroupedSelectViewModel();
             groups.groups.Add(new SelectGroup {label = "Chemicals", children = chemicals});
             groups.groups.Add(new SelectGroup {label = "Ferilizers", children = fertilizer});
             groups.groups.Add(new SelectGroup {label = "Materials", children = materials});
@@ -205,8 +205,8 @@ namespace KnowYourTurf.Web.Controllers
             _updateCollectionService.Update(task.Equipment, newEquipment, task.AddEquipment, task.RemoveEquipment);
 
             task.TaskType = _repository.Find<TaskType>(model.TaskTypeEntityId);
-            task.SetField(_repository.Find<Field>(model.ReadOnlyFieldEntityId));
-            task.SetInventoryProduct(_repository.Find<InventoryProduct>(model.ReadOnlyInventoryProductReadOnlyProductEntityId));
+            task.Field = _repository.Find<Field>(model.FieldEntityId);
+            task.InventoryProduct = _repository.Find<InventoryProduct>(model.InventoryProductProductEntityId);
         }
     }
 

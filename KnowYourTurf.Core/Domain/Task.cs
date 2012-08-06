@@ -10,18 +10,7 @@ namespace KnowYourTurf.Core.Domain
 {
     public class Task : DomainEntity, IPersistableObject
     {
-
-        /// <summary>
-        /// Aggregate Root that should not be modified through Task
-        /// must have set on readonly field right now for model binder.
-        /// </summary>
-        private Field _readOnlyField;
-        public virtual Field ReadOnlyField { get { return _readOnlyField; } set { _readOnlyField = value; } }
-        public virtual void SetField(Field field)
-        {
-            _readOnlyField = field;
-        }
-        ////
+        public virtual Field Field { get; set; }
         [ValidateNonEmpty]
         public virtual TaskType TaskType { get; set; }
         [ValidateNonEmpty]
@@ -42,16 +31,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual bool Deleted { get; set; }
         public virtual bool Complete { get; set; }
 
-        /// <summary>
-        /// Aggregate Root that should not be modified through Task
-        /// </summary>
-        private InventoryProduct _readOnlyInventoryProduct;
-        public virtual InventoryProduct ReadOnlyInventoryProduct { get { return _readOnlyInventoryProduct; } set { _readOnlyInventoryProduct = value; } }
-        public virtual void SetInventoryProduct(InventoryProduct inventoryProduct)
-        {
-            _readOnlyInventoryProduct = inventoryProduct;
-        }
-        ////
+        public virtual InventoryProduct InventoryProduct { get; set; }
         public virtual bool InventoryDecremented { get; set; }
 
         #region Collections
@@ -80,16 +60,15 @@ namespace KnowYourTurf.Core.Domain
         public virtual Task CloneTask()
         {
             var newTask = new Task
-            {
-//                CreatedBy = CreatedBy,
-                TaskType = TaskType,
-                Notes = Notes,
-                ScheduledDate = ScheduledDate,
-                ScheduledEndTime = ScheduledEndTime,
-                ScheduledStartTime = ScheduledStartTime
-            };
-            newTask.SetInventoryProduct(ReadOnlyInventoryProduct);
-            newTask.SetField(_readOnlyField);
+                              {
+                                  TaskType = TaskType,
+                                  Notes = Notes,
+                                  ScheduledDate = ScheduledDate,
+                                  ScheduledEndTime = ScheduledEndTime,
+                                  ScheduledStartTime = ScheduledStartTime,
+                                  InventoryProduct = InventoryProduct,
+                                  Field = Field
+                              };
             Employees.ForEachItem(newTask.AddEmployee);
             return newTask;
         }
@@ -97,12 +76,12 @@ namespace KnowYourTurf.Core.Domain
         // these violate law of demiter.  fix with methods on aggroots
         public virtual string GetProductName()
         {
-            return ReadOnlyInventoryProduct != null ? ReadOnlyInventoryProduct.ReadOnlyProduct.Name : "";
+            return InventoryProduct != null ? InventoryProduct.Product.Name : "";
         }
         
         public virtual string GetProductIdAndName()
         {
-            return ReadOnlyInventoryProduct != null ? ReadOnlyInventoryProduct.EntityId + "_" + ReadOnlyInventoryProduct.ReadOnlyProduct.InstantiatingType + "s" : "";
+            return InventoryProduct != null ? InventoryProduct.EntityId + "_" + InventoryProduct.Product.InstantiatingType + "s" : "";
         }
 
         public virtual bool IsAssignedToEmployee(long employeeId)

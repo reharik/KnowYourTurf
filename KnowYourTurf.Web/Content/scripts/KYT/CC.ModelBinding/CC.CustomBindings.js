@@ -113,6 +113,10 @@ ko.bindingHandlers['groupedSelect'] = {
             ko.cleanNode(element.options[0]);
             element.remove(0);
         }
+        while(element.children.length >0){
+            ko.cleanNode(element.children[0]);
+            $(element.children[0]).remove();
+        }
 
         if (value) {
             var allBindings = allBindingsAccessor();
@@ -178,8 +182,5 @@ ko.bindingHandlers['groupedSelect'] = {
             ko.utils.ensureSelectElementIsRenderedCorrectly(element);
         }
     }
-
-
 };
-
 

@@ -9,17 +9,9 @@ namespace KnowYourTurf.Core.Domain
     {
         [ValidateNonEmpty]
         public virtual EventType EventType { get; set; }
-        /// <summary>
-        /// Aggregate Root that should not be modified through Event
-        /// </summary>
-        private Field _readOnlyField;
+
         [ValidateNonEmpty]
-        public virtual Field ReadOnlyField { get { return _readOnlyField; } }
-        public virtual void SetField(Field field)
-        {
-            _readOnlyField = field;
-        }
-        ////
+        public virtual Field Field { get;  set; }
         [ValidateNonEmpty]
         public virtual DateTime? ScheduledDate { get; set; }
         [ValidateNonEmpty]

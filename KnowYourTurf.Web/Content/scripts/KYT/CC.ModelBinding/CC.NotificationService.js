@@ -9,7 +9,12 @@
 CC.NotificationService = function(){
     this.messageContainer = $("#messageContainer").get(0);
     this.viewmodel = {
-        messages: ko.observableArray()
+        messages: ko.observableArray(),
+        fadeOut: function(item){
+            if(item.nodeType ==1){
+                $(item).hide("slow");
+            }
+        }
     };
     ko.applyBindings(this.viewmodel,this.messageContainer);
 };
@@ -21,8 +26,10 @@ $.extend(CC.NotificationService.prototype,{
         });
         if(!exists){
             this.viewmodel.messages.push(msgObject);
-            // check if errors are showing and if not show
-            //
+            if(msgObject.shouldSelfDestruct){
+                msgObject.parent = this;
+                msgObject.selfDestruct();
+            }
         }
     },
     remove:function(msgObject){
@@ -37,30 +44,48 @@ $.extend(CC.NotificationService.prototype,{
             return item.elementCid()===cid;
         });
     },
-    handleResult:function(result){
+
+    removeAllErrorsById:function(cid){
+         this.viewmodel.messages.remove(function(item){
+            return item.elementCid()===cid && item.status()==='error';
+        });
+    },
+
+    handleResult:function(result, cid){
         var that=this;
         if(!result.Success){
             if(result.Message){
-                that.add(new CC.NotificationMessage(this.cid, result.Message,"error"));
+                that.add(new CC.NotificationMessage(cid, result.Message,"error"));
             }
             if(result.Errors){
                 _.each(result.Errors,function(item){
-                    that.add(new CC.NotificationMessage(this.cid, item.ErrorMessage,"error"));
+                    that.add(new CC.NotificationMessage(cid, item.ErrorMessage,"error"));
                 })
             }
         }else{
             if(result.Message){
-                that.add(new CC.NotificationMessage(this.cid, result.Message,"success"));
+                that.add(new CC.NotificationMessage(cid, result.Message,"success",true));
+                that.removeAllErrorsById(cid);
             }
         }
+        return result.Success;
     }
 });
 
 
-CC.NotificationMessage = function(elementCid, message, status){
+CC.NotificationMessage = function(elementCid, message, status, _shouldSelfDestruct){
     this.message = ko.observable(message);
     this.elementCid = ko.observable(elementCid);
     this.status = ko.observable(status);
+    this.parent = null;
+    this.shouldSelfDestruct = _shouldSelfDestruct;
+    this.selfDestruct = function(time){
+        var that = this;
+        setTimeout(function(){
+            that.parent.remove(that);
+        }, time ? time : 2000);
+    };
+
 };
 
 

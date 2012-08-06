@@ -12,8 +12,8 @@ namespace KnowYourTurf.Core.Domain
 {
     public class Field : DomainEntity, IPersistableObject
     {
-        private Category _readOnlyCategory;
-        public virtual Category ReadOnlyCategory { get { return _readOnlyCategory; } }
+        public virtual Category Category { get; private set; }
+
         [ValidateNonEmpty]
         public virtual string Name { get; set; }
         [ValidateNonEmpty]
@@ -45,7 +45,7 @@ namespace KnowYourTurf.Core.Domain
         {
             if (!task.IsNew() && _tasks.Contains(task)) return;
             _tasks.Add(task);
-            task.SetField(this);
+            task.Field = this;
         }
 
         private readonly IList<Event> _events = new List<Event>();
@@ -55,7 +55,7 @@ namespace KnowYourTurf.Core.Domain
         {
             if (!fieldEvent.IsNew() && _events.Contains(fieldEvent)) return;
             _events.Add(fieldEvent);
-            fieldEvent.SetField(this);
+            fieldEvent.Field = this;
         }
         
         private readonly IList<Document> _documents = new List<Document>();
@@ -79,7 +79,7 @@ namespace KnowYourTurf.Core.Domain
 
         public virtual void SetCategory(Category category)
         {
-            _readOnlyCategory = category;
+            Category = category;
         }
     }
 

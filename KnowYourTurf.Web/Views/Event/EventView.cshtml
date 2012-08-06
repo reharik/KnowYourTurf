@@ -26,7 +26,7 @@
             @MvcHtmlString.Create(Html.ViewFor(x => x.Event.EndTime).ToString())
         </div>
         <div class="fieldRow">
-            @MvcHtmlString.Create(Html.ViewFor(x => x.Event.ReadOnlyField.Name).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToString())
+            @MvcHtmlString.Create(Html.ViewFor(x => x.Event.Field.Name).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToString())
         </div>
         <div class="fieldRow">
             @MvcHtmlString.Create(Html.ViewFor(x => x.Event.Notes).ToString())

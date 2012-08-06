@@ -16,7 +16,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.UnitType);
             Map(x => x.Taxable);
             Map(x => x.SizeOfUnit);
-            References(x => x.ReadOnlyProduct).Access.CamelCaseField(Prefix.Underscore).Not.LazyLoad();
+            References(x => x.Product);
             References(x => x.PurchaseOrder);
         }
 

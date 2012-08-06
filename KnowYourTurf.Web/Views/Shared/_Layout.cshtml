@@ -66,6 +66,7 @@
     @Script("externalHelpers/knockout.mapping-lastest.debug.js").ToHtmlTag()    
     @Script("KYT/KYT.App.js").ToHtmlTag()
     @Script("KYT/KYT.Controller.js").ToHtmlTag()
+    @Script("KYT/KYT.Mixins.js").ToHtmlTag()
     @Script("KYT/KYT.Header.js").ToHtmlTag()
     @Script("KYT/KYT.Views.js").ToHtmlTag()
     @Script("KYT/KYT.Routing.js").ToHtmlTag()
@@ -125,8 +126,8 @@
             <div id="main-content">
                 <div class="content-outer" >
                     <div id="messageContainer">
-                            <ul data-bind="foreach:messages">
-                                <li data-bind="text:message,css: { error: status()=='error', warning: status()=='warning', success: status()=='success' }"></li>
+                            <ul data-bind="foreach:{data:messages, beforeRemove: fadeOut}">
+                                <li data-bind="text:message, css: { error: status()=='error', warning: status()=='warning', success: status()=='success' }"></li>
                             </ul>
                         </div>
                     <div id="contentInner">

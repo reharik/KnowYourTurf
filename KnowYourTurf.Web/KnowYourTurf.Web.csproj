@@ -311,7 +311,6 @@
     <Compile Include="Models\Employee\UserViewModel.cs" />
     <Compile Include="Models\Enum\ListTypeListViewModel.cs" />
     <Compile Include="Models\Enum\TaskTypeViewModel.cs" />
-    <Compile Include="Models\Equipment\EquipmentViewModel.cs" />
     <Compile Include="Models\Event\EventViewModel.cs" />
     <Compile Include="Models\Fertilizer\FertilizerViewModel.cs" />
     <Compile Include="Models\Field\FieldViewModel.cs" />
@@ -584,7 +583,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AdminList\AdminList.cshtml" />
-    <Content Include="Views\CalculatorList\ItemList.cshtml" />
     <Content Include="Views\ChemicalList\ItemList.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -592,7 +590,6 @@
     <Content Include="Views\EmailJobList\ItemList.cshtml" />
     <Content Include="Views\EmailTemplateList\EmailTemplateList.cshtml" />
     <Content Include="Views\EmployeeList\ItemList.cshtml" />
-    <Content Include="Views\EquipmentList\ItemList.cshtml" />
     <Content Include="Views\FacilitiesList\ItemList.cshtml" />
     <Content Include="Views\FertilizerList\ItemList.cshtml" />
     <Content Include="Views\FieldList\ItemList.cshtml" />
@@ -647,9 +644,6 @@
     <Content Include="Views\Event\EventView.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\EventCalendar\EventCalendar.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\_DisplayLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -680,9 +674,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Task\TaskAddUpdate.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\TaskRunner\GetWeather.cshtml" />

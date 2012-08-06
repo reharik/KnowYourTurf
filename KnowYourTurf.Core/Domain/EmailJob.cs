@@ -19,18 +19,8 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Frequency { get; set; }
         [ValueOfEnumeration(typeof(Status))]
         public virtual string Status { get; set; }
-        /// <summary>
-        /// Aggregate Root that should not be modified through Email Job
-        /// must have set on readonly field right now for model binder.
-        /// </summary>
-        private EmailTemplate _readOnlyEmailTemplate;
         [ValidateNonEmpty]
-        public virtual EmailTemplate ReadOnlyEmailTemplate { get { return _readOnlyEmailTemplate; } set { _readOnlyEmailTemplate = value; } }
-        public virtual void SetEmailTemplate(EmailTemplate emailTemplate)
-        {
-            _readOnlyEmailTemplate = emailTemplate;
-        }
-        ////
+        public virtual EmailTemplate EmailTemplate { get; set; }
         [ValidateNonEmpty]
         public virtual EmailJobType EmailJobType { get; set; }
 

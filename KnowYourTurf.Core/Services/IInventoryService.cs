@@ -24,7 +24,7 @@ namespace KnowYourTurf.Core.Services
 
         public ICrudManager ReceivePurchaseOrderLineItem(PurchaseOrderLineItem purchaseOrderLineItem, ICrudManager crudManager = null)
         {
-            var inventoryProducts = _repository.Query<InventoryProduct>(x=>x.ReadOnlyProduct.EntityId == purchaseOrderLineItem.ReadOnlyProduct.EntityId&&x.UnitType==purchaseOrderLineItem.UnitType);
+            var inventoryProducts = _repository.Query<InventoryProduct>(x=>x.Product.EntityId == purchaseOrderLineItem.Product.EntityId&&x.UnitType==purchaseOrderLineItem.UnitType);
             InventoryProduct inventoryProduct;
             if (inventoryProducts.FirstOrDefault() != null) {inventoryProduct = inventoryProducts.FirstOrDefault();}
             else
@@ -34,10 +34,10 @@ namespace KnowYourTurf.Core.Services
                                            UnitType = purchaseOrderLineItem.UnitType,
                                            SizeOfUnit = purchaseOrderLineItem.SizeOfUnit.Value
                                        };
-                inventoryProduct.SetProduct(purchaseOrderLineItem.ReadOnlyProduct);
+                inventoryProduct.Product =purchaseOrderLineItem.Product;
             }
 
-            inventoryProduct.SetLastVendor(purchaseOrderLineItem.PurchaseOrder.ReadOnlyVendor);
+            inventoryProduct.LastVendor = purchaseOrderLineItem.PurchaseOrder.Vendor;
             if (inventoryProduct.Quantity.HasValue)
                 inventoryProduct.Quantity += purchaseOrderLineItem.TotalReceived.Value;
             else inventoryProduct.Quantity = purchaseOrderLineItem.TotalReceived.Value;
@@ -48,7 +48,7 @@ namespace KnowYourTurf.Core.Services
         public ICrudManager DecrementTaskProduct(Task task, ICrudManager crudManager=null)
         {
             if (crudManager == null) crudManager = new CrudManager(_repository);
-            if(task.ReadOnlyInventoryProduct==null)
+            if(task.InventoryProduct==null)
             {
                 return crudManager;
             }
@@ -59,7 +59,7 @@ namespace KnowYourTurf.Core.Services
                 crudManager.AddCrudReport(crudReport);
                 return crudManager;
             }
-            var inventoryProduct = _repository.Find<InventoryProduct>(task.ReadOnlyInventoryProduct.EntityId);
+            var inventoryProduct = _repository.Find<InventoryProduct>(task.InventoryProduct.EntityId);
             inventoryProduct.Quantity -= task.QuantityUsed.Value;
             return _saveEntityService.ProcessSave(inventoryProduct, crudManager);
         }

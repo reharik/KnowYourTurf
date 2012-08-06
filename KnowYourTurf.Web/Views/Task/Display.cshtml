@@ -25,10 +25,10 @@
                 @Html.ViewFor(x => x.Item.ScheduledDate).LabelDisplay(WebLocalizationKeys.DATE).ToHtmlTag()
     </div>
     <div class="fieldRow">
-                @Html.ViewFor(x => x.Item.ReadOnlyField.Name).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
+                @Html.ViewFor(x => x.Item.Field.Name).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
     </div>
     <div class="fieldRow">
-                @Html.ViewFor(x => x.Item.ReadOnlyInventoryProduct.ReadOnlyProduct.Name).ToHtmlTag()
+                @Html.ViewFor(x => x.Item.InventoryProduct.Product.Name).ToHtmlTag()
     </div>
     <div class="fieldRow">
                 @Html.ViewFor(x => x._EquipmentNames).LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()

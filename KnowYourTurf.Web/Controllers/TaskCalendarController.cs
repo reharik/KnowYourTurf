@@ -25,16 +25,16 @@ namespace KnowYourTurf.Web.Controllers
         {
             var model = new CalendarViewModel
                        {
-                           DeleteUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Delete(null)),
                            CalendarDefinition = new CalendarDefinition
                                                    {
                                                        Url = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.Events(null))+"?RootId="+input.RootId,
                                                        AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)),
                                                        DisplayUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Display(null)),
+                                                       DeleteUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Delete(null)),
                                                        EventChangedUrl = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.EventChanged(null))
                                                    }
                        };
-            return View(model);
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult EventChanged(TaskChangedViewModel input)
@@ -59,10 +59,10 @@ namespace KnowYourTurf.Web.Controllers
                        events.Add(new CalendarEvent
                                       {
                                           EntityId = x.EntityId,
-                                          title = x.ReadOnlyField.Abbreviation + ": " + x.TaskType.Name,
+                                          title = x.Field.Abbreviation + ": " + x.TaskType.Name,
                                           start = x.ScheduledStartTime.ToString(),
                                           end = x.ScheduledEndTime.ToString(),
-                                          color = x.ReadOnlyField.FieldColor
+                                          color = x.Field.FieldColor
                                       })
                 );
             return Json(events, JsonRequestBehavior.AllowGet);

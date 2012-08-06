@@ -24,7 +24,7 @@ CC.ValidationRunner = (function(){
         $.each(classes, function(idx,rule){
             if(rule && validator[rule]){
                 var isValid = validator[rule](CCElement);
-                var possibleErrorMsg = new CC.NotificationMessage(CCElement.cid, CCElement.fieldName+" "+CC.errorMessages[rule],"error");
+                var possibleErrorMsg = new CC.NotificationMessage(CCElement.cid, CCElement.friendlyName+" "+CC.errorMessages[rule],"error");
                 if(!isValid){
                     elementIsValid = false;
                     CC.notification.add(possibleErrorMsg);
@@ -41,11 +41,15 @@ CC.ValidationRunner = (function(){
     };
     runner.runViewModel = function(viewModel){
         var isValid = true;
-        $.each(viewModel.collection,function(i,item){
-            item.validate();
-            if(!item.isValid) {
-                isValid = false;}
-        });
+        var collection = viewModel.collection;
+        for (var el in collection){
+            if(collection.hasOwnProperty(el)){
+                collection[el].validate();
+                if(!collection[el].isValid) {
+                    isValid = false;
+                }
+            }
+        }
         return isValid;
     };
     return runner;

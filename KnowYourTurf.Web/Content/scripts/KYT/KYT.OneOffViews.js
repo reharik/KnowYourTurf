@@ -6,10 +6,13 @@
  * To change this template use File | Settings | File Templates.
  */
 
-KYT.Views.ResetPasswordView = KYT.Views.BaseFormView.extend({
+KYT.Views.ResetPasswordView = KYT.Views.View.extend({
+    initialize: function(){
+        KYT.mixin(this, "baseFormView");
+    },
     render: function(){
         KYT.notificationService = new cc.MessageNotficationService();
-        this.config();
+        this.bindModelAndElements();
         if(this.setBindings){this.setBindings();}
         $("input[name='Password']").focus();
         this.viewLoaded();
@@ -18,15 +21,19 @@ KYT.Views.ResetPasswordView = KYT.Views.BaseFormView.extend({
     }
 });
 
-KYT.Views.LoginView = KYT.Views.BaseFormView.extend({
-    events: _.extend({
+KYT.Views.LoginView = KYT.Views.View.extend({
+    registerEvents: function(){ this.events ={
         "click #forgotPasswordLink": "forgotPasswordClick",
         "click #registrationLink": "registrationLinkClick",
         "click .submit": "submitClick"
-    }, KYT.Views.BaseFormView.prototype.events),
-
+    }},
+    initialize: function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+        this.registerEvents();
+    },
     render: function () {
-        this.config();
+        this.bindModelAndElements();
         if (this.setBindings) { this.setBindings(); }
         $("input[name='UserName']").focus();
         this.viewLoaded();

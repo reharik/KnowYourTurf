@@ -43,7 +43,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             if (_event.EntityId > 0)
             {
-                model.Field = _event.ReadOnlyField.EntityId;
+                model.Field = _event.Field.EntityId;
                 model.EventType = _event.EventType.EntityId;
             }
             return PartialView("EventAddUpdate", model);
@@ -94,14 +94,14 @@ namespace KnowYourTurf.Web.Controllers
             {
                 _event.EndTime = DateTime.Parse(_eventModel.ScheduledDate.Value.ToShortDateString() + " " + _eventModel.EndTime.Value.ToShortTimeString());
             }
-            if (_event.ReadOnlyField ==null || _event.ReadOnlyField.EntityId != model.Field)
+            if (_event.Field ==null || _event.Field.EntityId != model.Field)
             {
                 var field = _repository.Find<Field>(model.Field);
                 field.AddEvent(_event);
             }
             _event.EventType = eventType;
             _event.Notes = _eventModel.Notes;
-            return _event.ReadOnlyField;
+            return _event.Field;
         }
     }
 

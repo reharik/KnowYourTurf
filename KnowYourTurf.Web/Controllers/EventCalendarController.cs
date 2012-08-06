@@ -25,16 +25,16 @@ namespace KnowYourTurf.Web.Controllers
         {
             var model = new CalendarViewModel
                        {
-                           DeleteUrl = UrlContext.GetUrlForAction<EventController>(x => x.Delete(null)),
                            CalendarDefinition = new CalendarDefinition
                                                    {
                                                        Url = UrlContext.GetUrlForAction<EventCalendarController>(x => x.Events(null)) + "?RootId=" + input.RootId,
                                                        AddUpdateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate(null)),
                                                        DisplayUrl = UrlContext.GetUrlForAction<EventController>(x => x.Display(null)),
+                                                       DeleteUrl = UrlContext.GetUrlForAction<EventController>(x => x.Delete(null)),
                                                        EventChangedUrl = UrlContext.GetUrlForAction<EventCalendarController>(x => x.EventChanged(null))
                                                    }
                        };
-            return View(model);
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult EventChanged(EventChangedViewModel input)
@@ -60,7 +60,7 @@ namespace KnowYourTurf.Web.Controllers
                        eventsItems.Add(new CalendarEvent
                                       {
                                           EntityId = x.EntityId,
-                                          title = x.ReadOnlyField.Abbreviation+": "+ x.EventType.Name,
+                                          title = x.Field.Abbreviation+": "+ x.EventType.Name,
                                           start = x.StartTime.ToString(),
                                           end = x.EndTime.ToString(),
                                           color = x.EventType.EventColor

@@ -11,11 +11,11 @@ namespace KnowYourTurf.Core.Domain
         /// Aggregate Root that should not be modified through Equipment
         /// must have set on readonly field right now for model binder.
         /// </summary>
-        private Vendor _readOnlyVendor;
-        public virtual Vendor ReadOnlyVendor { get { return _readOnlyVendor; } set { _readOnlyVendor = value; } }
+        private Vendor _vendor;
+        public virtual Vendor Vendor { get { return _vendor; } set { _vendor = value; } }
         public virtual void SetVendor(Vendor vendor)
         {
-            _readOnlyVendor = vendor;
+            _vendor = vendor;
         }
         ////
         [ValidateNonEmpty]

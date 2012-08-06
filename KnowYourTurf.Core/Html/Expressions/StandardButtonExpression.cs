@@ -59,6 +59,13 @@ namespace KnowYourTurf.Core.Html.Expressions
             return this;
         }
 
+        public StandardButtonExpression Attr(string attribute, string value)
+        {
+            HtmlAttributes.Add(attribute,value);
+            return this;
+        }
+
+
         public StandardButtonExpression ElementId(string id)
         {
             _id = id;

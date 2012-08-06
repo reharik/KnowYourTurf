@@ -14,7 +14,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
             var listPropertyInfo = def.ModelType.GetProperty("_"+propertyName + "List");
 //            var readOnlyListPropertyInfo = def.ModelType.GetProperty(propertyName.Replace("ReadOnly", "") + "List");
             return (listPropertyInfo != null &&
-                    listPropertyInfo.PropertyType == typeof(GroupSelectViewModel));
+                    listPropertyInfo.PropertyType == typeof(GroupedSelectViewModel));
         }
 
         public override HtmlTag Build(ElementRequest request)

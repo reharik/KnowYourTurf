@@ -41,9 +41,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
             Labels.Always.BuildBy(req =>
                                       {
                                           var htmlTag = new HtmlTag("label").Attr("for", req.Accessor.Name);
-                                          var display = req.Accessor.FieldName.Contains("ReadOnly")
-                                                            ? req.Accessor.FieldName.Replace("ReadOnly", "")
-                                                            : req.Accessor.FieldName;
+                                          var display = req.Accessor.FieldName;
                                           htmlTag.Text(display.ToSeperateWordsFromPascalCase());
                                           return htmlTag;
                                       });

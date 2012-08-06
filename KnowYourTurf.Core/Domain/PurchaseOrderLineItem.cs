@@ -9,17 +9,8 @@ namespace KnowYourTurf.Core.Domain
 {
     public class PurchaseOrderLineItem : DomainEntity, IEquatable<PurchaseOrderLineItem>
     {
-        /// <summary>
-        /// Aggregate Root that should not be modified through PurchaseOrderLineItem
-        /// </summary>
-        private BaseProduct _readOnlyProduct;
         [ValidateNonEmpty]
-        public virtual BaseProduct ReadOnlyProduct { get { return _readOnlyProduct; } }
-        public virtual void SetProduct(BaseProduct product)
-        {
-            _readOnlyProduct = product;
-        }
-        ////
+        public virtual BaseProduct Product { get; set; }
         [ValidateNonEmpty,ValidateInteger]
         public virtual int? QuantityOrdered { get; set; }
         [ValidateDecimal]
@@ -43,7 +34,7 @@ namespace KnowYourTurf.Core.Domain
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return Equals(obj.ReadOnlyProduct.EntityId, ReadOnlyProduct.EntityId) && Equals(obj.GetType(), GetType());
+            return Equals(obj.Product.EntityId, Product.EntityId) && Equals(obj.GetType(), GetType());
         }
     }
 

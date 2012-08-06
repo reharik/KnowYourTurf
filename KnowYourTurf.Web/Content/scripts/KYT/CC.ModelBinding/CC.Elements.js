@@ -26,8 +26,10 @@ CC.Elements.Element.extend = Backbone.View.extend;
 $.extend(CC.Elements.Element.prototype,{
     init:function(){
         this.cid = _.uniqueId("c");
+        this.$input = this.$container.find("input");
         this.type = "Element";
-        this.fieldName = this.trimFieldName();
+        this.friendlyName = this.trimFieldName();
+        this.name = this.$input.attr('name');
     },
     validate:function(){
         CC.ValidationRunner.runElement(this);
@@ -57,7 +59,6 @@ CC.Elements.Textbox = CC.Elements.Element.extend({
         var that = this;
         this._super("init",arguments);
         this.type = "textbox";
-        this.$input = this.$container.find("input");
         this.$input.on("change",function(){that.validate();});
     },
     destroy:function(){
@@ -71,7 +72,6 @@ CC.Elements.DateTextbox = CC.Elements.Element.extend({
         var that = this;
         this._super("init",arguments);
         this.type = "datetextbox";
-        this.$input = this.$container.find("input");
         this.$label = this.$container.find("label");
         this.$input.on("change",function(){that.validate();});
         this.$input.scroller({
@@ -80,7 +80,7 @@ CC.Elements.DateTextbox = CC.Elements.Element.extend({
             display: 'modal',
             mode: 'scroller',
             dateOrder: 'mmddyyyy',
-            headerPreText:this.$label.is(":visible")?this.$label.text()+" ":''
+            headerPreText:this.$label.is(":visible")?this.friendlyName+" ":''
         });
     },
     destroy:function(){
@@ -94,7 +94,6 @@ CC.Elements.TimeTextbox = CC.Elements.Element.extend({
         var that = this;
         this._super("init",arguments);
         this.type = "timetextbox";
-        this.$input = this.$container.find("input");
         this.$label = this.$container.find("label");
         this.$input.on("change",function(){that.validate();});
         this.$input.scroller({
@@ -117,7 +116,6 @@ CC.Elements.NumberTextbox = CC.Elements.Element.extend({
         var that = this;
         this._super("init",arguments);
         this.type = "numbertextbox";
-        this.$input = this.$container.find("input");
         this.$input.on("change",function(){that.validate();});
     },
     destroy:function(){
@@ -131,7 +129,6 @@ CC.Elements.Textarea = CC.Elements.Element.extend({
         var that = this;
         this._super("init",arguments);
         this.type = "textarea";
-        this.$input = this.$container.find("input");
         this.$input.on("change",function(){that.validate();});
     },
     destroy:function(){
@@ -145,7 +142,6 @@ CC.Elements.Checkbox = CC.Elements.Element.extend({
         var that = this;
         this._super("init",arguments);
         this.type = "checkbox";
-        this.$input = this.$container.find("input");
         this.$input.on("change",function(){that.validate();});
     },
     destroy:function(){
@@ -159,7 +155,6 @@ CC.Elements.Password= CC.Elements.Element.extend({
         var that = this;
         this._super("init",arguments);
         this.type = "textbox";
-        this.$input = this.$container.find("input");
         this.$input.on("change",function(){that.validate();});
     },
     destroy:function(){
@@ -172,7 +167,6 @@ CC.Elements.FileSubmission = CC.Elements.Element.extend({
     init:function(){
         this._super("init",arguments);
         this.type = "file";
-        this.$input = this.$container.find("input");
         this.$input.customFileInput();
     }
 });
@@ -182,13 +176,14 @@ CC.Elements.PictureGallery= CC.Elements.Element.extend({
         this._super("init",arguments);
         this.type = "ul";
         this.$input = this.$container.find("ul");
-        this.$input.galleryView();
+        if(this.$input.find("li").size>0){
+            this.$input.galleryView({panel_width:500,panel_height:250});
+        }
     }
 });
 
 CC.Elements.Select = CC.Elements.Element.extend({
     init:function(){
-        var that = this;
         this._super("init",arguments);
         this.type = "select";
         this.$input = this.$container.find("select");

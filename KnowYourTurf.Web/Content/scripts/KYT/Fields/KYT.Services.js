@@ -9,123 +9,120 @@
 
 KYT.calculator = (function(){
     var calculatorService = {
-        successHandler:function(result){
-            var calculatorName = $("#CalculatorName").val();
-            successHandlers[calculatorName](result);
+        successHandler:function(model,result){
+            successHandlers[result._calculatorName](model,result);
         },
-        setTaskTransferData:function($el){
+        setTaskTransferData:function(model){
             var wfs = KYT.WorkflowManager.workflowState().state();
-            var calculatorName = $el.find("#CalculatorName").val();
-            wfs.set("calculatorName",calculatorName);
-            wfs.set("taskData",taskTransferData[calculatorName]());
+            wfs.set("calculatorName",model._calculatorName());
+            wfs.set("taskData",taskTransferData[model._calculatorName()](model));
         },
-        applyTaskTransferData:function($el){
+        applyTaskTransferData:function(model){
             var wfs = KYT.WorkflowManager.workflowState().state();
             if(wfs.get("calculatorName")){
-                applyTaskData[wfs.get("calculatorName")]($el,wfs.get("taskData"));
+                applyTaskData[wfs.get("calculatorName")](model,wfs.get("taskData"));
             }
         }
     };
     var successHandlers = {
-        FertilizerNeeded: function(result){
-            $("#N").text(result.N.toString()).addClass("KYT_boldResult");
-            $("#P").text(result.P.toString()).addClass("KYT_boldResult");
-            $("#K").text(result.K.toString()).addClass("KYT_boldResult");
-            $("#BagsNeeded").text(result.BagsNeeded.toString()).addClass("KYT_boldResult");
-            $("#BagSize").text(result.BagSize.toString());
-            $("#FieldArea").text(result.FieldArea.toString());
-            $(":button:contains('Create Task')").removeClass('ui-state-disabled').removeAttr("disabled");
+        FertilizerNeeded: function(model, result){
+            model.N(result.N);
+            model.P(result.P);
+            model.K(result.K);
+            model.BagsNeeded(result.BagsNeeded);
+            model.BagSize(result.BagSize);
+            model.FieldArea(result.FieldArea);
+            $("#createTask").removeClass('ui-state-disabled').removeAttr("disabled");
         },
-        Materials: function(result){
-            $("#FieldArea").text(result.FieldArea.toString());
-            $("#TotalMaterials").text(result.TotalMaterials.toString()).addClass("KYT_boldResult");
-            $(":button:contains('Create Task')").removeClass('ui-state-disabled').removeAttr("disabled");
+        Materials: function(model, result){
+           model.FieldArea(result.FieldArea);
+           model.TotalMaterials(result.TotalMaterials);
+            $("#createTask").removeClass('ui-state-disabled').removeAttr("disabled");
         },
-        Sand: function(result){
-            $("#TotalSand").text(result.TotalSand.toString()).addClass("KYT_boldResult");
-            $(":button:contains('Create Task')").removeClass('ui-state-disabled').removeAttr("disabled");
+        Sand: function(model,result){
+            model.TotalSand(result.TotalSand);
+            $("#createTask").removeClass('ui-state-disabled').removeAttr("disabled");
         },
-        OverseedBagsNeeded:function(result){
-          $("#BagSize").text(result.BagSize.toString());
-            $("#FieldArea").text(result.FieldArea.toString());
-            $("#BagsNeeded").text(result.BagsNeeded.toString()).addClass("KYT_boldResult");
-            $(":button:contains('Create Task')").removeClass('ui-state-disabled').removeAttr("disabled");
+        OverseedBagsNeeded:function(model, result){
+            model.BagSize(result.BagSize);
+            model.FieldArea(result.FieldArea);
+            model.BagsNeeded(result.BagsNeeded);
+            $("#createTask").removeClass('ui-state-disabled').removeAttr("disabled");
         },
-        OverseedRateNeeded:function(result){
-            $("#BagSize").text(result.BagSize.toString());
-            $("#FieldArea").text(result.FieldArea.toString());
-            $("#SeedRate").text(result.SeedRate.toString()).addClass("KYT_boldResult");
-            $(":button:contains('Create Task')").removeClass('ui-state-disabled').removeAttr("disabled");
+        OverseedRateNeeded:function(model,result){
+            model.BagSize(result.BagSize);
+            model.FieldArea(result.FieldArea);
+            model.SeedRate(result.SeedRate);
+            $("#createTask").removeClass('ui-state-disabled').removeAttr("disabled");
         }
     };
     var taskTransferData = {
-        FertilizerNeeded: function(){
-           return {Field : $("[name=Field]").val(),
-                Product:$("[name=Product]").val(),
-                Quantity: $("#BagsNeeded").text()
+        FertilizerNeeded: function(model){
+           return {FieldEntityId : model.FieldEntityId(),
+                ProductEntityId:model.ProductEntityId(),
+                Quantity: model.BagsNeeded()
             };
         },
-        Materials: function(){
-            return {Field : $("[name=Field]").val(),
-                Quantity: $("#TotalMaterials").text()
+        Materials: function(model){
+           return {FieldEntityId : model.FieldEntityId(),
+                Quantity: model.TotalMaterials()
             };
         },
-        Sand: function(){
-            return {Field : $("[name=Field]").val(),
-                Quantity: $("#TotalSand").text()
+        Sand: function(model){
+           return {FieldEntityId : model.FieldEntityId(),
+                Quantity: model.TotalSand()
             };
         },
-        OverseedBagsNeeded:function(){
-            return {Field : $("[name=Field]").val(),
-                Product:$("[name=Product]").val(),
-                Quantity: $("#BagsNeeded").text()
+        OverseedBagsNeeded:function(model){
+           return {FieldEntityId : model.FieldEntityId(),
+                ProductEntityId:model.ProductEntityId(),
+                Quantity: model.BagsNeeded()
             };
         },
-        OverseedRateNeeded:function(){
-            return {Field : $("[name=Field]").val(),
-                Product:$("[name=Product]").val(),
-                Quantity: $("#BagsUsed").val()
+        OverseedRateNeeded:function(model){
+           return {FieldEntityId : model.FieldEntityId(),
+                ProductEntityId:model.ProductEntityId(),
+                Quantity: model.BagsUsed()
             };
         }
     };
     var applyTaskData = {
-        FertilizerNeeded: function($el, taskData){
-            $el.find("[name='Item.ReadOnlyField.EntityId']").val(taskData.Field);
-            $el.find("[name='Item.ReadOnlyInventoryProduct.ReadOnlyProduct.EntityId']").val(taskData.Product);
-            $el.find("[name='Item.QuantityNeeded']").val(taskData.Quantity);
+        FertilizerNeeded: function(model, taskData){
+            model.FieldEntityId(taskData.FieldEntityId);
+            model.InventoryProductProductEntityId(taskData.ProductEntityId);
+            model.QuantityNeeded(taskData.Quantity);
         },
-        Materials: function($el, taskData){
-            $el.find("[name='Item.ReadOnlyInventoryProduct.ReadOnlyProduct.EntityId']").val(taskData.Field);
-            $el.find("[name='Item.QuantityNeeded']").val(taskData.Quantity);
+        Materials: function(model, taskData){
+            model.InventoryProductProductEntityId(taskData.ProductEntityId);
+            model.QuantityNeeded(taskData.Quantity);
         },
-        Sand: function($el, taskData){
-            $el.find("[name='Item.ReadOnlyInventoryProduct.ReadOnlyProduct.EntityId']").val(taskData.Field);
-            $el.find("[name='Item.QuantityNeeded']").val(taskData.Quantity);
+        Sand: function(model, taskData){
+            model.InventoryProductProductEntityId(taskData.ProductEntityId);
+            model.QuantityNeeded(taskData.Quantity);
         },
-        OverseedBagsNeeded:function($el, taskData){
-            $el.find("[name='Item.ReadOnlyField.EntityId']").val(taskData.Field);
-            $el.find("[name='Item.ReadOnlyInventoryProduct.ReadOnlyProduct.EntityId']").val(taskData.Product);
-            $el.find("[name='Item.QuantityNeeded']").val(taskData.Quantity);
+        OverseedBagsNeeded:function(model, taskData){
+            model.FieldEntityId(taskData.FieldEntityId);
+            model.InventoryProductProductEntityId(taskData.ProductEntityId);
+            model.QuantityNeeded(taskData.Quantity);
         },
-        OverseedRateNeeded:function($el, taskData){
-            $el.find("[name='Item.ReadOnlyField.EntityId']").val(taskData.Field);
-            $el.find("[name='Item.ReadOnlyInventoryProduct.ReadOnlyProduct.EntityId']").val(taskData.Product);
-            $el.find("[name='Item.QuantityNeeded']").val(taskData.Quantity);
+        OverseedRateNeeded:function(model, taskData){
+            model.FieldEntityId(taskData.FieldEntityId);
+            model.InventoryProductProductEntityId(taskData.ProductEntityId);
+            model.QuantityNeeded(taskData.Quantity);
         }
     };
 
     return calculatorService;
 }());
 
-KYT.loadTemplateAndModel = function(options, $el, callback){
-     var d = new $.Deferred();
-        Backbone.Marionette.TemplateCache.get(options.route,options.templateUrl)
-            .pipe(function(result){
-                $el.html(result);
+KYT.loadTemplateAndModel = function(view){
+    var d = new $.Deferred();
+    $.when(Backbone.Marionette.TemplateCache.get(view.options.route,view.options.templateUrl),
+        KYT.repository.ajaxGet(view.options.url, view.options.data))
+    .done(function(html,data){
+            view.$el.html(html);
+            view.model = data[0];
                 d.resolve();
-            });
-        d.done(function(){
-            var modelPromise = KYT.repository.ajaxGet(options.url, options.data);
-            modelPromise.done(callback)
         });
+    return d.promise();
 };

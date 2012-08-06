@@ -7,17 +7,8 @@ namespace KnowYourTurf.Core.Domain
 {
     public class PurchaseOrder : DomainEntity, IPersistableObject
     {
-        /// <summary>
-        /// Aggregate Root that should not be modified through Purchase Order
-        /// </summary>
-        private Vendor _readOnlyVendor;
         [ValidateNonEmpty]
-        public virtual Vendor ReadOnlyVendor { get { return _readOnlyVendor; } }
-        public virtual void SetVendor(Vendor vendor)
-        {
-            _readOnlyVendor = vendor;
-        }
-        ////
+        public virtual Vendor Vendor { get; set; }
         [ValidateDecimalAttribute]
         public virtual double? SubTotal { get; set; }
         [ValidateDecimalAttribute]

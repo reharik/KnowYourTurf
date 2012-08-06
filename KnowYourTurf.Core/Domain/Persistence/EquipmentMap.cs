@@ -10,7 +10,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.TotalHours);
             Map(x => x.Description);
             Map(x => x.ImageUrl);
-            References(x => x.ReadOnlyVendor).Access.CamelCaseField(Prefix.Underscore).LazyLoad();
+            References(x => x.Vendor);
         }
     }
 }

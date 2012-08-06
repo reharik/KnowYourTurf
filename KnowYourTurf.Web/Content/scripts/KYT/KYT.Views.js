@@ -7,10 +7,8 @@
  */
 
 KYT.Views = {};
-
 // use like this
 // this._super("testMethod",arguments);
-
 
 (function(Backbone) {
 
@@ -48,8 +46,6 @@ KYT.Views = {};
 
 
 })(Backbone);
-
-
 
 KYT.Views.View = Backbone.View.extend({
     // Remove the child view and close it
@@ -99,143 +95,32 @@ KYT.Views.View = Backbone.View.extend({
     }
   });
 
-KYT.Views.BaseFormView = KYT.Views.View.extend({
-    events:{
-        'click #save' : 'saveItem',
-        'click #cancel' : 'cancel'
-    },
 
+KYT.Views.FormView = KYT.Views.View.extend({
     initialize: function(){
-       this.options = $.extend({},KYT.formDefaults,this.options);
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
     },
-    config:function(){
-        if(extraFormOptions){
-            $.extend(true, this.options, extraFormOptions);
-        }
-//        this.setupNotificationArea();
-        this.bindModelAndElements();
-//        $(this.options.crudFormSelector,this.el).crudForm(this.options.crudFormOptions,this.options.areaName);
-//        this.setupBeforeSubmitions();
-//        if(!this.options.isPopup){
-//            this.addReferenceValuesToForm();
-//        }
-    },
-    bindModelAndElements:function(){
-        // make sure to apply ids prior to ko mapping.
-        this.model = ko.mapping.fromJS(this.model);
-        ko.applyBindings(this.model,this.el);
-        this.elementsViewmodel = CC.elementService.getElementsViewmodel(this.$el);
-        CC.elementService.initAllElements(this.elementsViewmodel);
-        this.mappingOptions ={ ignore: _.filter(_.keys(this.model),function(item){
-            return (item.indexOf('_') == 0 && item != "__ko_mapping__");
-        })};
-        this.mappingOptions.ignore.push("_availableItems");
-        this.mappingOptions.ignore.push("_resultsItems");
-        this.addIdsToModel();
-
-    },
-    addIdsToModel:function(){
-        var rel = KYT.State.get("Relationships");
-        if(!rel){return;}
-        this.model.EntityId = rel.entityId;
-        this.model.ParentId = rel.parentId;
-        this.model.RootId = rel.rootId;
-        this.model.Var = rel.extraVar;
-    },
-//    addReferenceValuesToForm:function(){
-//        var rel = KYT.State.get("Relationships");
-//        var $form = $(this.options.crudFormSelector,this.el);
-//        $form.append($("<input>").attr("name","EntityId").attr("type","hidden").val(rel.entityId));
-//        $form.append($("<input>").attr("name","ParentId").attr("type","hidden").val(rel.parentId));
-//        $form.append($("<input>").attr("name","RootId").attr("type","hidden").val(rel.rootId));
-//        $form.append($("<input>").attr("name","Var").attr("type","hidden").val(rel.extraVar));
-//    },
-//    setupBeforeSubmitions:function(){
-//        if(this.options.crudFormOptions.additionBeforeSubmitFunc){
-//            var array = !$.isArray(this.options.crudFormOptions.additionBeforeSubmitFunc)
-//                ? [this.options.crudFormOptions.additionBeforeSubmitFunc]
-//                : this.options.crudFormOptions.additionBeforeSubmitFunc;
-//            $(array).each($.proxy(function(i,item){
-//                $(this.options.crudFormSelector,this.el).data('crudForm').setBeforeSubmitFuncs(item);
-//            },this));
-//        }
-//    },
-//    setupNotificationArea:function(){
-//        this.options.notificationArea = this.options.notificationArea
-//                                ?this.options.notificationArea
-//                                : new cc.NotificationArea(this.cid,"#errorMessagesGrid","#errorMessagesForm", KYT.vent);
-//
-//        this.options.notificationArea.render(this.el);
-//        this.options.areaName = this.options.notificationArea.areaName();
-//        KYT.vent.bind(this.options.areaName+":"+this.id+":success",this.successHandler,this);
-//        KYT.notificationService.addArea(this.options.notificationArea);
-//    },
-    saveItem:function(){
-        var isValid = CC.ValidationRunner.runViewModel(this.elementsViewmodel);
-        if(!isValid){return;}
-        var data;
-        var fileInputs = $('input:file', this.$el).length > 0;
-        if(fileInputs){
-            var that = this;
-            data = ko.mapping.toJS(this.model,this.mappingOptions);
-            var ajaxFileUpload = new CC.AjaxFileUpload($("#_submitFileUrl")[0],{
-                action:that.model._saveUrl(),
-                onComplete:function(file,response){that.successHandler(response);}
-            });
-            ajaxFileUpload.setData(data);
-            ajaxFileUpload.submit()
-        }
-        else{
-            data = JSON.stringify(ko.mapping.toJS(this.model,this.mappingOptions));
-            var promise = KYT.repository.ajaxPostModel(this.model._saveUrl(),data);
-            promise.done($.proxy(this.successHandler,this));
-        }
-    },
-    cancel:function(){
-        KYT.vent.trigger("form:"+this.id+":cancel");
-        if(!this.options.noBubbleUp) {KYT.WorkflowManager.returnParentView();}
-    },
-    successHandler:function(result){
-        if(!result.Success){
-            $.proxy(CC.notification.handleResult(result),this);
-            return;
-        }
-        KYT.vent.trigger("form:"+this.id+":success",result);
-        if(!this.options.noBubbleUp){KYT.WorkflowManager.returnParentView(result,true);}
-    }
-});
-
-KYT.Views.FormView = KYT.Views.BaseFormView.extend({
     render: function(){
-        this.config();
+        this.bindModelAndElements();
         this.viewLoaded();
         KYT.vent.trigger("form:"+this.id+":pageLoaded",this.options);
         return this;
     }
 });
 
-KYT.Views.AjaxFormView = KYT.Views.BaseFormView.extend({
-    render:function(){
-        KYT.loadTemplateAndModel(this.options,this.$el,$.proxy(this.renderCallback,this));
-    },
-    renderCallback:function(result){
-        this.model = result;
-        this.config();
-        //callback for render
-        this.viewLoaded();
-        //general notification of pageloaded
-        KYT.vent.trigger("form:"+this.id+":pageLoaded",this.options);
-        $(this.el).find("form :input:visible:enabled:first").focus();
+KYT.Views.AjaxFormView = KYT.Views.View.extend({
+    initialize: function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
     }
 });
 
 KYT.Views.AjaxDisplayView = KYT.Views.View.extend({
-    events:{
-        'click .cancel' : 'cancel'
-    },
-    initialize: function(){
-        this.options = $.extend({},KYT.displayDefaults,this.options);
-         this.$el = $(this.el);
+    initialize:function(){
+        KYT.mixin(this, "baseFormView");
+        KYT.mixin(this, "ajaxFormMixin");
     },
     render:function(){
         KYT.repository.ajaxGet(this.options.url, this.options.data).done($.proxy(this.renderCallback));
@@ -269,16 +154,13 @@ KYT.Views.GridView = KYT.Views.View.extend({
         this.options = $.extend({},KYT.gridDefaults,this.options);
     },
     render:function(){
-        if(this.onPreRender)this.onPreRender();
-        KYT.repository.ajaxGet(this.options.url, this.options.data).done($.proxy(this.renderCallback,this));
+        KYT.repository.ajaxGet(this.options.url, this.options.data)
+            .done($.proxy(this.renderCallback,this));
     },
     renderCallback:function(result){
         result.errorMessagesContainer = this.options.errorMessagesContainer;
         $(this.el).html($("#gridTemplate").tmpl(result));
         $.extend(this.options,result);
-//        if(gridControllerOptions){
-//            $.extend(true, this.options, gridControllerOptions);
-//        }
 
         $.each(this.options.headerButtons,$.proxy(function(i,item){
             $(this.el).find("."+item).show();
@@ -292,18 +174,14 @@ KYT.Views.GridView = KYT.Views.View.extend({
 
         $(gridContainer,this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
         ///////
-       // $(window).bind('resize', function() { cc.gridHelper.adjustSize(gridContainer); }).trigger('resize');
         $(this.el).gridSearch({onClear:$.proxy(this.removeSearch,this),onSubmit:$.proxy(this.search,this)});
-        //callback for render
         this.viewLoaded();
-        //general notification of pageloaded
         KYT.vent.trigger("grid:"+this.id+":pageLoaded",this.options);
         KYT.vent.bind(this.id+":AddUpdateItem",this.editItem,this);
         KYT.vent.bind(this.id+":DisplayItem",this.displayItem,this);
     },
     addNew:function(){
         KYT.vent.trigger("route",KYT.generateRoute(this.options.addUpdate),true);
-        //$.publish('/contentLevel/grid_'+this.id+'/AddUpdateItem', [this.options.addUpdateUrl]);
     },
     editItem:function(id){
         KYT.vent.trigger("route",KYT.generateRoute(this.options.addUpdate,id), true);
@@ -314,8 +192,8 @@ KYT.Views.GridView = KYT.Views.View.extend({
     deleteItems:function(){
         if (confirm("Are you sure you would like to delete this Item?")) {
             var ids = cc.gridMultiSelect.getCheckedBoxes();
-            KYT.repository.ajaxGet(this.options.deleteMultipleUrl,
-                $.param({"EntityIds":ids},true)).done($.proxy(function(){this.reloadGrid()},this));
+            KYT.repository.ajaxGet(this.options.deleteMultipleUrl, $.param({"EntityIds":ids},true))
+                .done($.proxy(function(){this.reloadGrid()},this));
         }
     },
     search:function(v){
@@ -344,7 +222,6 @@ KYT.Views.GridView = KYT.Views.View.extend({
         KYT.vent.unbind("AddUpdateItem");
         KYT.vent.unbind("DisplayItem");
     }
-
 });
 
 KYT.Views.AjaxPopupFormModule  = KYT.Views.View.extend({
@@ -679,20 +556,3 @@ KYT.gridDefaults = {
     errorMessagesContainer:"errorMessagesGrid"
 };
 
-KYT.formDefaults = {
-    id:"",
-    data:{},
-    crudFormSelector:"#CRUDForm",
-    crudFormOptions:{
-        errorContainer:"#errorMessagesForm",
-        successContainer:"#errorMessagesGrid",
-        additionBeforeSubmitFunc:null
-    },
-    runAfterRenderFunction: null
-};
-
-KYT.displayDefaults = {
-    id:"",
-    data:{},
-    runAfterRenderFunction: null
-};

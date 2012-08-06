@@ -13,8 +13,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Cost);
             Map(x => x.UnitType);
             Map(x => x.SizeOfUnit);
-            References(x => x.ReadOnlyLastVendor).Access.CamelCaseField(Prefix.Underscore).LazyLoad();
-            References(x => x.ReadOnlyProduct).Access.CamelCaseField(Prefix.Underscore).Not.LazyLoad();
+            References(x => x.LastVendor);
+            References(x => x.Product);
             DiscriminateSubClassesOnColumn<string>("Discriminator").AlwaysSelectWithValue();
 
         }

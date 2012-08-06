@@ -28,6 +28,9 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         IRouteTokenBuilder Operation(string operation);
         IRouteTokenBuilder End();
         void WithoutPermissions(bool withOutPermissions);
+        IRouteTokenBuilder NoModel();
+        IRouteTokenBuilder NoTemplate();
+        IRouteTokenBuilder JustRoute(string route);
     }
 
     public class RouteTokenBuilder : IRouteTokenBuilder
@@ -151,6 +154,25 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         public IRouteTokenBuilder Operation(string operation)
         {
             currentItem.Operation = operation;
+            return this;
+        }
+
+        public IRouteTokenBuilder NoModel()
+        {
+            currentItem.noModel = true;
+            return this;
+        }
+
+        public IRouteTokenBuilder NoTemplate()
+        {
+            currentItem.noTemplate = true;
+            return this;
+        }
+
+        public IRouteTokenBuilder JustRoute(string route)
+        {
+            currentItem.route = route.ToLowerInvariant();
+            currentItem.viewName= route + "View";
             return this;
         }
 

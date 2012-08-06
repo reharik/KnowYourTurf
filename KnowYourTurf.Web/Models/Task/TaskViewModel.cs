@@ -15,8 +15,8 @@ namespace KnowYourTurf.Web.Models
 {
     public class TaskViewModel:ViewModel
     {
-        public GroupSelectViewModel _ReadOnlyFieldEntityIdList { get; set; }
-        public GroupSelectViewModel _ReadOnlyInventoryProductReadOnlyProductEntityIdList { get; set; }
+        public GroupedSelectViewModel _FieldEntityIdList { get; set; }
+        public GroupedSelectViewModel _InventoryProductProductEntityIdList { get; set; }
         public IEnumerable<SelectListItem> _EquipmentList { get; set; }
         public IEnumerable<SelectListItem> _TaskTypeEntityIdList { get; set; }
 
@@ -30,7 +30,7 @@ namespace KnowYourTurf.Web.Models
         public bool Copy { get; set; }
 
         [ValidateNonEmpty]
-        [ValueOfIEnumerableAttribute]
+        [ValueOfIEnumerable]
         public int TaskTypeEntityId { get; set; }
         [ValidateNonEmpty]
         public DateTime? ScheduledDate { get; set; }
@@ -38,8 +38,8 @@ namespace KnowYourTurf.Web.Models
         public DateTime? ScheduledStartTime { get; set; }
         public DateTime? ScheduledEndTime { get; set; }
         public string ActualTimeSpent { get; set; }
-        public int ReadOnlyFieldEntityId { get; set; }
-        public int ReadOnlyInventoryProductReadOnlyProductEntityId { get; set; }
+        public int FieldEntityId { get; set; }
+        public int InventoryProductProductEntityId { get; set; }
         [ValidateDouble]
         public double? QuantityNeeded { get; set; }
         [ValidateDouble]

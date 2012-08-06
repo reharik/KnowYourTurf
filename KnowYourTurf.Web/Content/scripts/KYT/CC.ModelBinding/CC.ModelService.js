@@ -7,18 +7,18 @@
  */
 
 CC.ElementCollection = function(){
-    this.collection = [];
+    this.collection = {};
 };
 
 $.extend(CC.ElementCollection.prototype, {
     add:function(element){
-        this.collection.push(element);
+        this.collection[element.name] = element;
     },
     destroy:function(){
-        _.each(this.collection, function(item){
-            item.destroy();
-        });
-        this.collection = [];
+        for(var el in this.collection){
+            this.collection[el].destroy();
+        }
+        this.collection = {};
     }
 });
 
@@ -29,14 +29,10 @@ CC.elementService = (function(){
         var model = new CC.ElementCollection();
         $el.find("[eltype]").each(function(i,item){
             var element = new CC.Elements[$(item).attr("eltype")]($(item));
+            element.init();
             model.add(element);
         });
         return model;
-    };
-    srv.initAllElements = function(viewModel){
-        $.each(viewModel.collection, function(i,item){
-            item.init();
-        });
     };
     return srv;
 })();

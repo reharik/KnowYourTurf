@@ -50,7 +50,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult Products(InventoryProductGridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<InventoryProduct>(input.filters, x => x.ReadOnlyProduct.InstantiatingType == input.ProductType);
+            var items = _dynamicExpressionQuery.PerformQuery<InventoryProduct>(input.filters, x => x.Product.InstantiatingType == input.ProductType);
             var gridItemsViewModel = _inventoryProductListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
@@ -58,17 +58,17 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Display(InventoryProductListViewModel input)
         {
             var inventoryProduct = _repository.Find<InventoryProduct>(input.EntityId);
-            if (inventoryProduct.ReadOnlyProduct.InstantiatingType == "Chemical")
+            if (inventoryProduct.Product.InstantiatingType == "Chemical")
             {
                 var model = new InventoryChemicalViewModel {Item = inventoryProduct,_Title=WebLocalizationKeys.INVENTORY_CHEMICAL_INFORMATION.ToString()};
                 return PartialView("InventoryChemicalView", model);
             }
-            if (inventoryProduct.ReadOnlyProduct.InstantiatingType == "Fertilizer")
+            if (inventoryProduct.Product.InstantiatingType == "Fertilizer")
             {
                 var model = new InventoryFertilizerViewModel { Item = inventoryProduct,_Title=WebLocalizationKeys.INVENTORY_FERTILIZER_INFORMATION.ToString() };
                 return PartialView("InventoryFertilizerView", model);
             }
-            if (inventoryProduct.ReadOnlyProduct.InstantiatingType == "Material")
+            if (inventoryProduct.Product.InstantiatingType == "Material")
             {
                 var model = new InventoryMaterialViewModel { Item = inventoryProduct, _Title = WebLocalizationKeys.INVENTORY_MATERIAL_INFORMATION.ToString()};
                 return PartialView("InventoryMaterialView", model);
@@ -91,16 +91,16 @@ namespace KnowYourTurf.Web.Controllers
     public class InventoryFertilizerViewModel : ViewModel
     {
         public InventoryProduct Item { get; set; }
-        public Fertilizer Fertilizer { get { return Item.ReadOnlyProduct as Fertilizer; } }
+        public Fertilizer Fertilizer { get { return Item.Product as Fertilizer; } }
     }
     public class InventoryChemicalViewModel :ViewModel
     {
         public InventoryProduct Item { get; set; }
-        public Chemical Chemical { get { return Item.ReadOnlyProduct as Chemical; } }
+        public Chemical Chemical { get { return Item.Product as Chemical; } }
     }
     public class InventoryMaterialViewModel : ViewModel
     {
         public InventoryProduct Item { get; set; }
-        public Material Material { get { return Item.ReadOnlyProduct as Material; } }
+        public Material Material { get { return Item.Product as Material; } }
     }
 }

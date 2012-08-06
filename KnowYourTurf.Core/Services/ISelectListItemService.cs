@@ -35,7 +35,7 @@ namespace KnowYourTurf.Core.Services
                                                                            bool addSelectItem);
 
         IEnumerable<SelectListItem> CreateListWithConcatinatedText<ENTITY>(Expression<Func<ENTITY, object>> text1, Expression<Func<ENTITY, object>> text2, string seperator, Expression<Func<ENTITY, object>> value, bool addSelectItem) where ENTITY : IPersistableObject;
-        GroupSelectViewModel CreateFieldsSelectListItems(long categoryId = 0, long fieldId = 0);
+        GroupedSelectViewModel CreateFieldsSelectListItems(long categoryId = 0, long fieldId = 0);
     }
 
     public class SelectListItemService : ISelectListItemService
@@ -138,13 +138,13 @@ namespace KnowYourTurf.Core.Services
             return entityList;
         }
 
-        public GroupSelectViewModel CreateFieldsSelectListItems(long categoryId = 0, long fieldId = 0)
+        public GroupedSelectViewModel CreateFieldsSelectListItems(long categoryId = 0, long fieldId = 0)
         {
-            var groups = new GroupSelectViewModel();
+            var groups = new GroupedSelectViewModel();
             if (fieldId > 0 && categoryId == 0)
             {
                 var field = _repository.Find<Field>(fieldId);
-                categoryId = field.ReadOnlyCategory.EntityId;
+                categoryId = field.Category.EntityId;
             }
             if (categoryId > 0)
             {

@@ -7,7 +7,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
         public EventMap()
         {
             References(x => x.EventType);
-            References(x => x.ReadOnlyField).Access.CamelCaseField(Prefix.Underscore).LazyLoad();
+            References(x => x.Field);
             Map(x => x.ScheduledDate);
             Map(x => x.StartTime);
             Map(x => x.EndTime);

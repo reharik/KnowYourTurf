@@ -14,7 +14,7 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class EmployeeController : AdminControllerBase
+    public class EmployeeController : KYTController
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
@@ -200,9 +200,5 @@ namespace KnowYourTurf.Web.Controllers
             return employee;
         }
 
-        public JsonResult SaveFile(ViewModel input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

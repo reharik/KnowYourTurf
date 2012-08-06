@@ -27,10 +27,10 @@
             @Html.SubmissionFor(x => x.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ReadOnlyFieldEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.FieldEntityId).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ReadOnlyInventoryProductReadOnlyProductEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.InventoryProductProductEntityId).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.QuantityNeeded).ToHtmlTag()
@@ -52,7 +52,7 @@
 @*        }*@
         </div>
     </div>
-    <div class="col full clear">
+    <div class="col left clear">
         <div class="fieldRow">
             <div id="employeeTokenizer">
                 @Html.SubmissionFor(x => x.Employees).HideInput().ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
