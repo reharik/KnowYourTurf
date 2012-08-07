@@ -192,17 +192,8 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapChildren(Task task,TaskViewModel model)
         {
-            task.ClearEmployees();
-            task.ClearEquipment();
-            var newEmployees = new List<User>();
-            var newEquipment = new List<Equipment>();
-            if (model.Employees !=null && model.Employees.selectedItems != null)
-            {model.Employees.selectedItems.Each(x => newEmployees.Add(_repository.Find<User>(Int32.Parse(x.id))));}
-            _updateCollectionService.Update(task.Employees, newEmployees, task.AddEmployee, task.RemoveEmployee);
-
-            if (model.Equipment!=null && model.Equipment.selectedItems != null)
-            {model.Equipment.selectedItems.Each(x => newEquipment.Add(_repository.Find<Equipment>(Int32.Parse(x.id))));}
-            _updateCollectionService.Update(task.Equipment, newEquipment, task.AddEquipment, task.RemoveEquipment);
+            _updateCollectionService.Update(task.Employees, model.Employees, task.AddEmployee, task.RemoveEmployee);
+            _updateCollectionService.Update(task.Equipment, model.Equipment, task.AddEquipment, task.RemoveEquipment);
 
             task.TaskType = _repository.Find<TaskType>(model.TaskTypeEntityId);
             task.Field = _repository.Find<Field>(model.FieldEntityId);

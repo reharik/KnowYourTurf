@@ -109,8 +109,11 @@ namespace KnowYourTurf.Web.Controllers
                 employee.ImageUrl = string.Empty;
             }
 
-            employee.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Employees");
-            employee.ImageFriendlyName = employee.FirstName + "_" + employee.LastName;
+            if (_fileHandlerService.RequsetHasFile())
+            {
+                employee.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Employees");
+                employee.ImageFriendlyName = employee.FirstName + "_" + employee.LastName;
+            }
             var crudManager = _saveEntityService.ProcessSave(employee);
 
             var notification = crudManager.Finish();
@@ -185,17 +188,11 @@ namespace KnowYourTurf.Web.Controllers
             employee.UserLoginInfo.Password = model.UserLoginInfoPassword;
             employee.UserLoginInfo.LoginName = model.Email;
             employee.UserLoginInfo.Status = model.UserLoginInfoStatus;
-            if (model.UserRoles==null || !model.UserRoles.selectedItems.Any())
+            _updateCollectionService.Update(employee.UserRoles, model.UserRoles, employee.AddUserRole, employee.RemoveUserRole);
+            if (!employee.UserRoles.Any())
             {
-                employee.EmptyUserRoles();
                 var emp = _repository.Query<UserRole>(x => x.Name == UserType.Employee.ToString()).FirstOrDefault();
                 employee.AddUserRole(emp);
-            }
-            else
-            {
-                var newItems = new List<UserRole>();
-                model.UserRoles.selectedItems.Each(x => newItems.Add(_repository.Query<UserRole>(y=>y.EntityId==Int32.Parse(x.id)).FirstOrDefault()));
-                _updateCollectionService.Update(employee.UserRoles, newItems, employee.AddUserRole, employee.RemoveUserRole);
             }
             return employee;
         }

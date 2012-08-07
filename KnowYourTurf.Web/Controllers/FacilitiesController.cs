@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using AutoMapper;
 using KnowYourTurf.Security.Interfaces;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -18,44 +19,40 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISaveEntityService _saveEntityService;
         private readonly IFileHandlerService _fileHandlerService;
         private readonly ISessionContext _sessionContext;
+        private readonly ISelectListItemService _selectListItemService;
         private readonly IAuthorizationRepository _authorizationRepository;
 
         public FacilitiesController(IRepository repository,
             ISaveEntityService saveEntityService,
             IFileHandlerService fileHandlerService,
-            ISessionContext sessionContext, IAuthorizationRepository authorizationRepository)
+            ISessionContext sessionContext,
+            ISelectListItemService selectListItemService,
+            IAuthorizationRepository authorizationRepository)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _fileHandlerService = fileHandlerService;
             _sessionContext = sessionContext;
+            _selectListItemService = selectListItemService;
             _authorizationRepository = authorizationRepository;
+        }
+
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("FacilitiesAddUpdate", new UserViewModel());
         }
 
         public ActionResult AddUpdate(ViewModel input)
         {
-//            var facilities = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
-//            
-//            var model = new UserViewModel
-//            {
-//                Item = facilities,
-//                _Title = WebLocalizationKeys.FACILITIES.ToString()
-//            };
-//            return PartialView("FacilitiesAddUpdate", model);
-            return null;
-        }
-      
-        public ActionResult Display(ViewModel input)
-        {
-//            var facilities = _repository.Find<User>(input.EntityId);
-//            var model = new UserViewModel
-//                            {
-//                                Item = facilities,
-//                                AddUpdateUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.AddUpdate(null)) + "/" + facilities.EntityId,
-//                                _Title = WebLocalizationKeys.FACILITIES.ToString()
-//                            };
-//            return PartialView("FacilitiesView", model);
-            return null;
+            var facilities = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
+            var model = Mapper.Map<User, UserViewModel>(facilities);
+            model.ImageUrl = model.ImageUrl.IsNotEmpty() ? BasicExtentions.AddImageSizeToName(model.ImageUrl, "thumb") : "";
+            model._StateList = _selectListItemService.CreateList<State>();
+            model._Title = WebLocalizationKeys.FACILITIES.ToString();
+            model._saveUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Save(null));
+            model._UserLoginInfoStatusList = _selectListItemService.CreateList<Status>(true);
+            
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Delete(ViewModel input)

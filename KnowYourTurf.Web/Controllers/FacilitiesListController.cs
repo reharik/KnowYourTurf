@@ -30,7 +30,9 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _gridHandlerService.GetGridDefinition(url),
                 _Title = WebLocalizationKeys.FACILITIES.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Facilitiess(GridItemsRequestModel input)

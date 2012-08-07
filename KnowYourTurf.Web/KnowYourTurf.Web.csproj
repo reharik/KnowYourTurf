@@ -718,6 +718,7 @@
       <DependentUpon>knowyourturf_testDataSet.xsd</DependentUpon>
     </None>
     <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />
+    <Content Include="Views\ListTypeList\Display.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>

@@ -258,7 +258,6 @@ KYT.Views.DahsboardGridView = KYT.Views.GridView.extend({
     },
     initialize:function(){
         this._super("initialize",arguments);
-        this.options.errorMessagesContainer=this.options.messageContainer?this.options.messageContainer:this.options.errorMessagesContainer;
     },
 
     viewLoaded:function(){
@@ -298,21 +297,6 @@ KYT.Views.EmailJobFormView = KYT.Views.View.extend({
         KYT.mixin(this, "formMixin");
         KYT.mixin(this, "ajaxFormMixin");
         KYT.mixin(this, "modelAndElementsMixin");
-    },
-    viewLoaded:function(){
-        this.loadTokenizers();
-    },
-    loadTokenizers:function(){
-        var employeeTokenOptions = {
-            id:"employee",
-            el:this.$el.find("#employeeTokenizer"),
-            availableItems:this.options.employeeOptions.availableItems,
-            selectedItems:this.options.employeeOptions.selectedItems,
-            inputSelector:this.options.employeeOptions.inputSelector
-        };
-        this.employeeToken = new KYT.Views.TokenView(employeeTokenOptions);
-        this.employeeToken.render();
-        this.storeChild(this.employeeToken);
     }
 });
 
@@ -389,4 +373,55 @@ KYT.Views.ForumView = KYT.Views.View.extend({
     }
 });
 
+KYT.Views.ListTypeListView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        this.taskTypeGridView = new KYT.Views.DahsboardGridView({
+            el:"#taskTypeGridContainer",
+            url:this.model._taskTypeGridUrl(),
+            gridContainer: "#taskTypeGridHolder",
+            id:"taskType",
+            route:"tasktype"
+        });
+        this.eventTypeGridView = new KYT.Views.DahsboardGridView({
+            el:"#eventTypeGridContainer",
+            url:this.model._eventTypeGridUrl(),
+            gridContainer: "#eventTypeGridHolder",
+            id:"eventType",
+            route:"eventtype"
+        });
+        this.photoCategoryGridView = new KYT.Views.DahsboardGridView({
+            el:"#photoCategoryGridContainer",
+            url:this.model._photoCategoryGridUrl(),
+            gridContainer: "#photoCategoryGridHolder",
+            id:"photoCategory",
+            route:"photocategory",
+        });
+        this.documentCategoryGridView = new KYT.Views.DahsboardGridView({
+            el:"#documentCategoryGridContainer",
+            url:this.model._documentCategoryGridUrl(),
+            gridContainer: "#documentCategoryGridHolder",
+            id:"documentCategory",
+            route:"documentcategory"
+        });
+
+        this.taskTypeGridView.render();
+        this.eventTypeGridView.render();
+        this.photoCategoryGridView.render();
+        this.documentCategoryGridView.render();
+        this.storeChild(this.taskTypeGridView);
+        this.storeChild(this.eventTypeGridView);
+        this.storeChild(this.photoCategoryGridView);
+        this.storeChild(this.documentCategoryGridView);
+    },
+    callbackAction: function(){
+        this.taskTypeGridView.callbackAction();
+        this.eventTypeGridView.callbackAction();
+        this.photoCategoryGridView.callbackAction();
+        this.documentCategoryGridView.callbackAction();
+    }
+});
 

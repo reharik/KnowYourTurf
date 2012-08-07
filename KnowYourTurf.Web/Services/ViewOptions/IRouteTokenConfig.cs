@@ -57,7 +57,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForList<FacilitiesListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<FacilitiesController>(x => x.AddUpdate(null)).End();
 
-            _builder.TokenForList<ListTypeListController>(x => x.ItemList(null)).End();
+            _builder.TokenForList<ListTypeListController>(x => x.Display(null)).ViewName("ListTypeListView").End();
 
             _builder.TokenForList<MaterialListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<MaterialController>(x => x.AddUpdate(null)).End();

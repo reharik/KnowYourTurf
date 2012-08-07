@@ -82,7 +82,7 @@ $.TokenList = function (input, viewModel, settings) {
     var id = $(input).attr("name");
     var controlContainer = $("<div></div>").attr("id",id+"_container");
     $(input).after(controlContainer);
-    
+    $(input).hide();
     settings.viewModel = viewModel;
 
     // Build class names

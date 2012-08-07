@@ -83,7 +83,6 @@
     <ProjectReference Include="..\KnowYourTurf.Web\KnowYourTurf.Web.csproj">
       <Project>{67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2}</Project>
       <Name>KnowYourTurf.Web</Name>
-      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

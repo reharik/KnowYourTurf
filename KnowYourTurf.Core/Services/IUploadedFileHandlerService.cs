@@ -13,6 +13,7 @@ namespace KnowYourTurf.Web.Services
         string SaveAndReturnUrlForFile(string root);
         bool DoesImageExist(string url);
         void DeleteFile(string url);
+        bool RequsetHasFile();
     }
 
     public class FileHandlerService : IFileHandlerService
@@ -26,7 +27,7 @@ namespace KnowYourTurf.Web.Services
 
         public bool DoesImageExist(string url)
         {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "HEAD";
 
             bool exists;
@@ -43,12 +44,24 @@ namespace KnowYourTurf.Web.Services
 
         }
 
-        public string SaveAndReturnUrlForFile(string root)
+        private HttpPostedFile getFile()
         {
-            var file = HttpContext.Current.Request.Files.AllKeys.Length > 0 &&
+             var file = HttpContext.Current.Request.Files.AllKeys.Length > 0 &&
                    HttpContext.Current.Request.Files[0].ContentLength > 0
                        ? HttpContext.Current.Request.Files[0]
                        : null;
+            return file;
+        }
+
+        public bool RequsetHasFile()
+        {
+            var file = getFile();
+            return file != null && file.ContentLength > 0;
+        }
+
+        public string SaveAndReturnUrlForFile(string root)
+        {
+            var file = getFile();
             if (file == null || file.ContentLength <= 0) return null;
 
             var pathForFile = GetPhysicalPathForFile(root);

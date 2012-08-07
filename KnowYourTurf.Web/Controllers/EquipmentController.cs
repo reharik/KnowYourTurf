@@ -118,11 +118,13 @@ namespace KnowYourTurf.Web.Controllers
                 var vendor = _repository.Find<Vendor>(input.VendorEntityId);
                 equipment.SetVendor(vendor);
             }
-            var url = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
-            equipment.ImageUrl = equipment.ImageUrl.IsNotEmpty()?
+            if (_fileHandlerService.RequsetHasFile())
+            {
+                equipment.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
+            }
             var crudManager = _saveEntityService.ProcessSave(equipment);
             var notification = crudManager.Finish();
-            return Json(notification, "text/plain");
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
     }
 

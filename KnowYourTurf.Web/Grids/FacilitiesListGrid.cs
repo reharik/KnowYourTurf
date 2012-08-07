@@ -23,7 +23,7 @@ namespace KnowYourTurf.Web.Grids
         {
             GridBuilder.LinkColumnFor(x => x.FullName)
                 .ForAction<FacilitiesController>(x => x.AddUpdate(null))
-                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .ToPerformAction(ColumnAction.AddUpdateItem).WithId("facilitieslist")
                 .IsSortable(false)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.PhoneMobile);
