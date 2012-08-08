@@ -34,13 +34,7 @@ kyt.GridView = Backbone.View.extend({
             var ids = cc.gridMultiSelect.getCheckedBoxes(this.options.gridContainer);
             kyt.repository.ajaxGet(this.options.deleteMultipleUrl,
                 $.param({"EntityIds":ids},true),
-                $.proxy(function(result){
-                    var notification = cc.utilities.messageHandling.notificationResult();
-                    notification.setErrorContainer("#errorMessagesGrid");
-                    notification.setSuccessContainer("#errorMessagesGrid");
-                    notification.result(result);
-                    this.reloadGrid();
-                },this));
+                    this.reloadGrid);
         }
     },
 

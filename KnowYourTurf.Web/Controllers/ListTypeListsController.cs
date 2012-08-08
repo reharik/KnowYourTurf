@@ -39,6 +39,11 @@ namespace KnowYourTurf.Web.Controllers
                                                   _taskTypeGridUrl = UrlContext.GetUrlForAction<ListTypeListController>(x => x.TaskTypeGrid(null)),
                                                   _documentCategoryGridUrl = UrlContext.GetUrlForAction<ListTypeListController>(x => x.DocumentCategoryGrid(null)),
                                                   _photoCategoryGridUrl = UrlContext.GetUrlForAction<ListTypeListController>(x => x.PhotoCategoryGrid(null)),
+
+                                                  _deleteMultipleTaskTypesUrl = UrlContext.GetUrlForAction<TaskTypeController>(x => x.DeleteMultiple(null)),
+                                                  _deleteMultipleEventTypesUrl = UrlContext.GetUrlForAction<EventTypeController>(x => x.DeleteMultiple(null)),
+                                                  _deleteMultiplePhotoCatUrl = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.DeleteMultiple(null)),
+                                                  _deleteMultipleDocCatUrl = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.DeleteMultiple(null)),
                                               };
             return Json(model,JsonRequestBehavior.AllowGet);
         }
@@ -51,6 +56,8 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _eventTypeListGrid.GetGridDefinition(url),
                 ParentId = input.ParentId
             };
+            model.headerButtons.Add("delete");
+            model.headerButtons.Add("new");
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         public ActionResult TaskTypeGrid(ViewModel input)
@@ -61,6 +68,8 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _taskTypeListGrid.GetGridDefinition(url),
                 ParentId = input.ParentId
             };
+            model.headerButtons.Add("delete");
+            model.headerButtons.Add("new");
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         public ActionResult DocumentCategoryGrid(ViewModel input)
@@ -71,6 +80,8 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _documentCategoryListGrid.GetGridDefinition(url),
                 ParentId = input.ParentId
             };
+            model.headerButtons.Add("delete");
+            model.headerButtons.Add("new");
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         public ActionResult PhotoCategoryGrid(ViewModel input)
@@ -81,6 +92,8 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _photoCategoryListGrid.GetGridDefinition(url),
                 ParentId = input.ParentId
             };
+            model.headerButtons.Add("delete");
+            model.headerButtons.Add("new");
             return Json(model, JsonRequestBehavior.AllowGet);
         }
     

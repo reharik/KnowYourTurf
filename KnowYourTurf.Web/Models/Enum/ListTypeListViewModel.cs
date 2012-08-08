@@ -9,9 +9,9 @@ namespace KnowYourTurf.Web.Models
         public string _eventTypeGridUrl { get; set; }
         public string _photoCategoryGridUrl { get; set; }
         public string _documentCategoryGridUrl { get; set; }
-        public GridDefinition ListDefinitionTT { get; set; }
-        public GridDefinition ListDefinitionDC { get; set; }
-        public GridDefinition ListDefinitionPC { get; set; }
-
+        public string _deleteMultipleTaskTypesUrl { get; set; }
+        public string _deleteMultipleEventTypesUrl { get; set; }
+        public string _deleteMultiplePhotoCatUrl { get; set; }
+        public string _deleteMultipleDocCatUrl { get; set; }
     }
 }

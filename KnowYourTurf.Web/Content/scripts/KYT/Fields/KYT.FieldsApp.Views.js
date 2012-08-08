@@ -379,32 +379,46 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
+        // the gridview rendercallback over writes deleteMultipleUrl so we have to load it here
+        KYT.vent.bind("grid:tasktypelist:pageLoaded",function(options){
+             this.taskTypeGridView.options.deleteMultipleUrl = this.model._deleteMultipleTaskTypesUrl();
+        },this);
+        KYT.vent.bind("grid:eventtypelist:pageLoaded",function(){
+             this.taskTypeGridView.options.deleteMultipleUrl = this.model._deleteMultipleEventTypesUrl();
+        },this);
+        KYT.vent.bind("grid:photocategorylist:pageLoaded",function(options){
+             options.deleteMultipleUrl = this.model._deleteMultiplePhotoCatUrl();
+        },this);
+        KYT.vent.bind("grid:documentcategorylist:pageLoaded",function(){
+             this.taskTypeGridView.options.deleteMultipleUrl = this.model._deleteMultipleDocCatUrl();
+        },this);
         this.taskTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#taskTypeGridContainer",
             url:this.model._taskTypeGridUrl(),
             gridContainer: "#taskTypeGridHolder",
-            id:"taskType",
+            id:"tasktypelist",
             route:"tasktype"
+
         });
         this.eventTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#eventTypeGridContainer",
             url:this.model._eventTypeGridUrl(),
             gridContainer: "#eventTypeGridHolder",
-            id:"eventType",
+            id:"eventtypelist",
             route:"eventtype"
         });
         this.photoCategoryGridView = new KYT.Views.DahsboardGridView({
             el:"#photoCategoryGridContainer",
             url:this.model._photoCategoryGridUrl(),
             gridContainer: "#photoCategoryGridHolder",
-            id:"photoCategory",
-            route:"photocategory",
+            id:"photocategorylist",
+            route:"photocategory"
         });
         this.documentCategoryGridView = new KYT.Views.DahsboardGridView({
             el:"#documentCategoryGridContainer",
             url:this.model._documentCategoryGridUrl(),
             gridContainer: "#documentCategoryGridHolder",
-            id:"documentCategory",
+            id:"documentcategorylist",
             route:"documentcategory"
         });
 
@@ -424,4 +438,5 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         this.documentCategoryGridView.callbackAction();
     }
 });
+
 

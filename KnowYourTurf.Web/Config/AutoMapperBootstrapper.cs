@@ -16,6 +16,11 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<Task, TaskViewModel>().ForMember(d => d.Equipment, o => o.Ignore()).ForMember(d => d.Employees, o => o.Ignore());
             Mapper.CreateMap<Equipment, EquipmentViewModel>();
             Mapper.CreateMap<EmailJob, EmailJobViewModel>().ForMember(d => d.Subscribers, o => o.Ignore());
+            Mapper.CreateMap<EventType, EventTypeViewModel>();
+            Mapper.CreateMap<TaskType, TaskTypeViewModel>();
+            Mapper.CreateMap<PhotoCategory, ListTypeViewModel>();
+            Mapper.CreateMap<DocumentCategory, ListTypeViewModel>();
+        
         }
 
         public static void Bootstrap()
