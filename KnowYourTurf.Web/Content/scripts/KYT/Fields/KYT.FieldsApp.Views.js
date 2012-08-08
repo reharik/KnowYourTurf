@@ -381,16 +381,16 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
     viewLoaded:function(){
         // the gridview rendercallback over writes deleteMultipleUrl so we have to load it here
         KYT.vent.bind("grid:tasktypelist:pageLoaded",function(options){
-             this.taskTypeGridView.options.deleteMultipleUrl = this.model._deleteMultipleTaskTypesUrl();
+             options.deleteMultipleUrl = this.model._deleteMultipleTaskTypesUrl();
         },this);
-        KYT.vent.bind("grid:eventtypelist:pageLoaded",function(){
-             this.taskTypeGridView.options.deleteMultipleUrl = this.model._deleteMultipleEventTypesUrl();
+        KYT.vent.bind("grid:eventtypelist:pageLoaded",function(options){
+             options.deleteMultipleUrl = this.model._deleteMultipleEventTypesUrl();
         },this);
         KYT.vent.bind("grid:photocategorylist:pageLoaded",function(options){
              options.deleteMultipleUrl = this.model._deleteMultiplePhotoCatUrl();
         },this);
-        KYT.vent.bind("grid:documentcategorylist:pageLoaded",function(){
-             this.taskTypeGridView.options.deleteMultipleUrl = this.model._deleteMultipleDocCatUrl();
+        KYT.vent.bind("grid:documentcategorylist:pageLoaded",function(options){
+             options.deleteMultipleUrl = this.model._deleteMultipleDocCatUrl();
         },this);
         this.taskTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#taskTypeGridContainer",
