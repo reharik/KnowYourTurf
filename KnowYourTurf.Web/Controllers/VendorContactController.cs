@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
+using AutoMapper;
 using FubuMVC.Core;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models.VendorContact;
@@ -14,13 +16,21 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
+        private readonly ISelectListItemService _selectListItemService;
 
-        public VendorContactController(IRepository repository,ISaveEntityService saveEntityService)
+        public VendorContactController(IRepository repository,
+            ISaveEntityService saveEntityService,
+            ISelectListItemService selectListItemService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
+            _selectListItemService = selectListItemService;
         }
 
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("VendorContactAddUpdate", new VendorContactViewModel());
+        }
         public ActionResult AddUpdate(ViewModel input)
         {
             VendorContact vendorContact;
@@ -30,28 +40,17 @@ namespace KnowYourTurf.Web.Controllers
                 vendorContact = vendor.Contacts.FirstOrDefault(x => x.EntityId == input.EntityId);
             }
             else{ vendorContact = new VendorContact();}
-            var model = new VendorContactViewModel
-                            {
-                                ParentId = input.ParentId > 0 ? input.ParentId : vendorContact.Vendor.EntityId,
-                                Item = vendorContact,
-                                _Title = WebLocalizationKeys.VENDOR_CONTACT_INFORMATION.ToString()
-                            };
-            return PartialView("VendorContactAddUpdate", model);
+            var status = _selectListItemService.CreateList<Status>(true);
+            var states = _selectListItemService.CreateList<State>(true);
+            var model = Mapper.Map<VendorContact,VendorContactViewModel>(vendorContact);
+            model.ParentId = input.ParentId > 0 ? input.ParentId : vendorContact.Vendor.EntityId;
+            model._Title = WebLocalizationKeys.VENDOR_CONTACT_INFORMATION.ToString();
+            model._saveUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.Save(null));
+            model._StatusList = status;
+            model._StateList = states;
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
       
-        public ActionResult Display(ViewModel input)
-        {
-            var vendor = _repository.Find<Vendor>(input.ParentId);
-            var vendorContact = vendor.Contacts.FirstOrDefault(x => x.EntityId == input.EntityId);
-            var model = new VendorContactViewModel
-                            {
-                                Item = vendorContact,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddUpdate(null)) + "/" + vendorContact.EntityId,
-                                _Title = WebLocalizationKeys.VENDOR_CONTACT_INFORMATION.ToString()
-                            };
-            return PartialView("VendorContactView", model);
-        }
-
         public ActionResult Delete(ViewModel input)
         {
             var vendor = _repository.Find<Vendor>(input.ParentId);
@@ -93,19 +92,18 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(VendorContact vendorContact, VendorContactViewModel input)
         {
-            vendorContact.Address1 = input.Item.Address1;
-            vendorContact.Address2 = input.Item.Address2;
-            vendorContact.City = input.Item.City;
-            vendorContact.Country = input.Item.Country;
-            vendorContact.Email = input.Item.Email;
-            vendorContact.Fax = input.Item.Fax;
-            vendorContact.FirstName = input.Item.FirstName;
-            vendorContact.LastName = input.Item.LastName;
-            vendorContact.Notes = input.Item.Notes;
-            vendorContact.Phone = input.Item.Phone;
-            vendorContact.State = input.Item.State;
-            vendorContact.Status = input.Item.State;
-            vendorContact.ZipCode = input.Item.ZipCode;
+            vendorContact.Address1 = input.Address1;
+            vendorContact.Address2 = input.Address2;
+            vendorContact.City = input.City;
+            vendorContact.Email = input.Email;
+            vendorContact.Fax = input.Fax;
+            vendorContact.FirstName = input.FirstName;
+            vendorContact.LastName = input.LastName;
+            vendorContact.Notes = input.Notes;
+            vendorContact.Phone = input.Phone;
+            vendorContact.State = input.State;
+            vendorContact.Status = input.Status;
+            vendorContact.ZipCode = input.ZipCode;
         }
     }
 }

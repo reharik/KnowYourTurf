@@ -17,7 +17,8 @@ namespace KnowYourTurf.Core.Services
         void Update<ENTITY>(IEnumerable<ENTITY> origional,
                             TokenInputViewModel tokenInputViewModel,
                             Action<ENTITY> addEntity,
-                            Action<ENTITY> removeEntity) where ENTITY : Entity, IPersistableObject;
+                            Action<ENTITY> removeEntity,
+            Func<ENTITY, ENTITY, bool> comparer = null) where ENTITY : Entity, IPersistableObject;
 
 
     }
@@ -62,25 +63,37 @@ namespace KnowYourTurf.Core.Services
         public void Update<ENTITY>(IEnumerable<ENTITY> origional,
             TokenInputViewModel tokenInputViewModel,
             Action<ENTITY> addEntity,
-            Action<ENTITY> removeEntity) where ENTITY : Entity, IPersistableObject
+            Action<ENTITY> removeEntity,
+            Func<ENTITY,ENTITY,bool> comparer = null) where ENTITY : Entity, IPersistableObject
         {
+            if(comparer == null)
+            {
+                comparer = (entity, entity1) => entity.EntityId == entity1.EntityId;
+            }
             var newItems = new List<ENTITY>();
             if (tokenInputViewModel != null && tokenInputViewModel.selectedItems != null)
             { tokenInputViewModel.selectedItems.Each(x => newItems.Add(_repository.Find<ENTITY>(long.Parse(x.id)))); }
-
+            
             var remove = new List<ENTITY>();
-            origional.ForEachItem(x =>
+            if (newItems.Any())
             {
-                var newItem = newItems.FirstOrDefault(i => i.EntityId == x.EntityId);
-                if (newItem == null)
+                origional.Where(x => comparer(x, newItems.FirstOrDefault())).ForEachItem(x =>
                 {
-                    remove.Add(x);
-                }
-                else
-                {
-                    x.UpdateSelf(newItem);
-                }
-            });
+                    var newItem = newItems.FirstOrDefault(i => i.EntityId == x.EntityId);
+                    if (newItem == null)
+                    {
+                        remove.Add(x);
+                    }
+                    else
+                    {
+                        x.UpdateSelf(newItem);
+                    }
+                });
+            }
+            else
+            {
+                remove = origional.ToList();
+            }
             remove.ForEachItem(removeEntity);
             newItems.ForEachItem(x =>
             {

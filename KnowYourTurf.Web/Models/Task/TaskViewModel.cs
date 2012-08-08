@@ -30,7 +30,6 @@ namespace KnowYourTurf.Web.Models
         public bool Copy { get; set; }
 
         [ValidateNonEmpty]
-        [ValueOfIEnumerable]
         public int TaskTypeEntityId { get; set; }
         [ValidateNonEmpty]
         public DateTime? ScheduledDate { get; set; }

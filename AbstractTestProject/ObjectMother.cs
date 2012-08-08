@@ -23,7 +23,7 @@ namespace AbstractTestProject
     {
         public virtual string Name { get; set; }
         public virtual DateTime Time { get; set; }
-        [ValueOfEnumeration(typeof(State))]
+        [ValueOf(typeof(State))]
         public string State { get; set; }
     }
 }

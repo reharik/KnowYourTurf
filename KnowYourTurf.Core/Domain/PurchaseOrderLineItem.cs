@@ -26,7 +26,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual DateTime? DateRecieved { get; set; }
         [ValidateInteger]
         public virtual int? SizeOfUnit { get; set; }
-        [ValidateNonEmpty, ValueOfEnumeration(typeof(UnitType))]
+        [ValidateNonEmpty, ValueOf(typeof(UnitType))]
         public virtual string UnitType { get; set; }
         public virtual bool Taxable { get; set; }
 

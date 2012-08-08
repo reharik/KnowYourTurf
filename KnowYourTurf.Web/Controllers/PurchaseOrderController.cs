@@ -75,7 +75,6 @@ namespace KnowYourTurf.Web.Controllers
             var model = new POListViewModel()
             {
                 Item = purchaseOrder,
-                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" + purchaseOrder.EntityId
             };
             return PartialView("PurchaseOrderView", model);
         }

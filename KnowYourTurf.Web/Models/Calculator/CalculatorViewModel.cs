@@ -44,7 +44,6 @@ namespace KnowYourTurf.Web.Models
 
         [ValidateNonEmpty]
         public int FieldEntityId { get; set; }
-        [ValueOfIEnumerable]
         [ValidateNonEmpty]
         public int ProductEntityId { get; set; }
         [ValidateDouble]
@@ -65,7 +64,6 @@ namespace KnowYourTurf.Web.Models
     {
         public GroupedSelectViewModel _FieldEntityIdList { get; set; }
 
-        [ValueOfIEnumerable]
         public int FieldEntityId { get; set; }
      
         [ValidateNonEmpty, ValidateDouble]
@@ -106,7 +104,6 @@ namespace KnowYourTurf.Web.Models
         [ValidateNonEmpty]
         public int FieldEntityId { get; set; }
         [ValidateNonEmpty]
-        [ValueOfIEnumerable]
         public int ProductEntityId { get; set; }
         public string BagSize { get; set; }
         public string FieldArea { get; set; }
@@ -126,7 +123,6 @@ namespace KnowYourTurf.Web.Models
         [ValidateNonEmpty]
         public int FieldEntityId { get; set; }
         [ValidateNonEmpty]
-        [ValueOfIEnumerable]
         public int ProductEntityId { get; set; }
         public string BagSize { get; set; }
         public string FieldArea { get; set; }

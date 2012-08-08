@@ -33,9 +33,9 @@ $.extend(CC.NotificationService.prototype,{
         }
     },
     remove:function(msgObject){
-        this.viewmodel.messages.remove(function(item){
-            return item.elementCid()===msgObject.elementCid()
-            && item.message() === msgObject.message();
+        this.viewmodel.messages.remove(function(msg){
+            return msg.elementCid()===msgObject.elementCid()
+            && msg.message() === msgObject.message();
         });
     },
 

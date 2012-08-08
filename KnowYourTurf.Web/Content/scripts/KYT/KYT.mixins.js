@@ -21,6 +21,7 @@ KYT.mixins.modelAndElementsMixin = {
     bindModelAndElements:function(){
         // make sure to apply ids prior to ko mapping.
         this.model = ko.mapping.fromJS(this.model);
+        this.extendModel();
         ko.applyBindings(this.model,this.el);
         this.elementsViewmodel = CC.elementService.getElementsViewmodel(this);
         this.mappingOptions ={ ignore: _.filter(_.keys(this.model),function(item){
@@ -30,6 +31,20 @@ KYT.mixins.modelAndElementsMixin = {
         this.mappingOptions.ignore.push("_resultsItems");
         this.addIdsToModel();
 
+    },
+    extendModel:function(){
+        this.model._createdText = ko.computed(function() {
+            if(this.model.EntityId()>0 && this.model.DateCreated()){
+                return "Added " + new XDate(this.model.DateCreated()).toString("MMM d, yyyy");
+            }
+            return "";
+        }, this);
+        this.model._title = ko.computed(function(){
+            if(this.model.EntityId()<=0 && this.model._Title()){
+                return "Add New "+this.model._Title();
+            }
+            return this.model._Title() ? this.model._Title() : "";
+        },this);
     },
     addIdsToModel:function(){
         var rel = KYT.State.get("Relationships");

@@ -10,7 +10,7 @@ namespace KnowYourTurf.Web.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        [ValueOfEnumeration(typeof(Status))]
+        [ValueOf(typeof(Status))]
         public string Status { get; set; }
         public string _saveUrl { get; set; }
         public IEnumerable<SelectListItem> _StatusList { get; set; }
@@ -22,8 +22,4 @@ namespace KnowYourTurf.Web.Models
 
     }
 
-    public class TaskTypeViewModel : ListTypeViewModel
-    {
-        public string TaskColor { get; set; }
-    }
 }

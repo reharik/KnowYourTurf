@@ -24,13 +24,13 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Address1 { get; set; }
         public virtual string Address2 { get; set; }
         public virtual string City { get; set; }
-        [ValueOfEnumeration(typeof(State))]
+        [ValueOf(typeof(State))]
         public virtual string State { get; set; }
         public virtual string ZipCode { get; set; }
         [Tools.CustomAttributes.TextArea]
         public virtual string Notes { get; set; }
         public virtual DateTime? BirthDate { get; set; }
-        public virtual string ImageUrl { get; set; }
+        public virtual string FileUrl { get; set; }
         public virtual string ImageFriendlyName { get; set; }
         public virtual Company Company { get; set; }
         public virtual CultureInfo LanguageDefault { get; set; }
@@ -103,7 +103,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string LoginName { get; set; }
         [ValidateNonEmpty]
         public virtual string Password { get; set; }
-        [ValidateNonEmpty, ValueOfEnumeration(typeof(Status))]
+        [ValidateNonEmpty, ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
         
         public virtual Guid ByPassToken { get; set; }

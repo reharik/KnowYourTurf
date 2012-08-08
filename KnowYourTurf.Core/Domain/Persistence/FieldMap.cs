@@ -13,7 +13,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Description);
             Map(x => x.Abbreviation);
             Map(x => x.Size);
-            Map(x => x.ImageUrl);
+            Map(x => x.FileUrl);
             Map(x => x.Status);
             Map(x => x.FieldColor);
             References(x => x.Category);

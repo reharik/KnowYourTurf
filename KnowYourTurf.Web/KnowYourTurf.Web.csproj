@@ -582,32 +582,10 @@
     <Content Include="Views\Orthogonal\KnowYourTurfMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminList\AdminList.cshtml" />
-    <Content Include="Views\ChemicalList\ItemList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\DocumentList\ItemList.cshtml" />
-    <Content Include="Views\EmailJobList\ItemList.cshtml" />
-    <Content Include="Views\EmailTemplateList\EmailTemplateList.cshtml" />
-    <Content Include="Views\EmployeeList\ItemList.cshtml" />
-    <Content Include="Views\FacilitiesList\ItemList.cshtml" />
-    <Content Include="Views\FertilizerList\ItemList.cshtml" />
-    <Content Include="Views\FieldList\ItemList.cshtml" />
-    <Content Include="Views\InventoryList\InventoryChemicalList.cshtml" />
-    <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
-    <Content Include="Views\InventoryList\InventoryFertilizerList.cshtml" />
-    <Content Include="Views\InventoryList\InventoryFertilizerView.cshtml" />
-    <Content Include="Views\InventoryList\InventoryMaterialList.cshtml" />
-    <Content Include="Views\InventoryList\InventoryMaterialView.cshtml" />
     <Content Include="Views\KnowYourTurf\Home.cshtml" />
     <Content Include="Views\ListTypeList\ItemList.cshtml" />
-    <Content Include="Views\MaterialList\ItemList.cshtml" />
-    <Content Include="Views\PhotoList\ItemList.cshtml" />
-    <Content Include="Views\PurchaseOrderList\ItemList.cshtml" />
     <Content Include="Views\TaskList\ItemList.cshtml" />
-    <Content Include="Views\VendorContactList\VendorContactList.cshtml" />
-    <Content Include="Views\VendorList\VendorList.cshtml" />
-    <Content Include="Views\WeatherList\ItemList.cshtml" />
+    <Content Include="Views\VendorContactList\ItemList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Calculator\CalculatorAddUpdate.cshtml" />

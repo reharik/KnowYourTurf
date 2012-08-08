@@ -15,9 +15,9 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Sender { get; set; }
         public virtual string Subject { get; set; }
         [ValidateNonEmpty]
-        [ValueOfEnumeration(typeof(EmailFrequency))]
+        [ValueOf(typeof(EmailFrequency))]
         public virtual string Frequency { get; set; }
-        [ValueOfEnumeration(typeof(Status))]
+        [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
         [ValidateNonEmpty]
         public virtual EmailTemplate EmailTemplate { get; set; }

@@ -3,17 +3,14 @@
 
 <script>
     @RenderSection("ExtraCss", false)
-
     @RenderSection("HeaderScripts", false)
-
-    var contentArea;
-    var extraFormOptions ={}
-        @RenderSection("HeaderJavascript", false)
+    @RenderSection("HeaderJavascript", false)
 </script>
 
    <div class="content-header">
         @RenderSection("ExtraContentHeaderButtons", false)
-        <span class="title-name">@Model._Title</span>
+        <span class="title-name" data-bind="text:_title"></span>
+        <span class="title-added" data-bind="text:_createdText" ></span>
     </div>
     <div id="contentArea" class="content-inner">
     <div id="errorMessagesForm" class="mf_ErrorMessages errorMessages"><ul></ul></div>

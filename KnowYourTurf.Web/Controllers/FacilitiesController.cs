@@ -46,7 +46,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var facilities = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
             var model = Mapper.Map<User, UserViewModel>(facilities);
-            model.ImageUrl = model.ImageUrl.IsNotEmpty() ? BasicExtentions.AddImageSizeToName(model.ImageUrl, "thumb") : "";
+            model.FileUrl = model.FileUrl.IsNotEmpty() ? BasicExtentions.AddImageSizeToName(model.FileUrl, "thumb") : "";
             model._StateList = _selectListItemService.CreateList<State>();
             model._Title = WebLocalizationKeys.FACILITIES.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Save(null));
@@ -88,11 +88,11 @@ namespace KnowYourTurf.Web.Controllers
             mapRolesToGroups(facilities);
             if (input.DeleteImage)
             {
-                _fileHandlerService.DeleteFile(facilities.ImageUrl);
-                facilities.ImageUrl = string.Empty;
+                _fileHandlerService.DeleteFile(facilities.FileUrl);
+                facilities.FileUrl = string.Empty;
             }
 
-            facilities.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Facilitiess");
+            facilities.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Facilitiess");
             facilities.ImageFriendlyName = facilities.FirstName + "_" + facilities.LastName;
             var crudManager = _saveEntityService.ProcessSave(facilities);
 

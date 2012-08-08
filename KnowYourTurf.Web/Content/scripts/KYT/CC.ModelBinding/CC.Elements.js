@@ -167,8 +167,8 @@ CC.Elements.FileSubmission = CC.Elements.Element.extend({
     init:function(view){
         this._super("init",arguments);
         this.type = "file";
-        this.$input = this.$container.find("#ImageUrl");
-        if(view.model.ImageUrl()){
+        this.$input = this.$container.find("#FileUrl");
+        if(view.model.FileUrl()){
             this.showImage();
         }else{
             this.showInput();

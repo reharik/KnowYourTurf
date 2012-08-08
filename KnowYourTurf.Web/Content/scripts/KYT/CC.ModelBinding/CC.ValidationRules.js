@@ -9,16 +9,16 @@
 
 CC.errorMessages = {
     "required":"field is Required",
-    "minlength":"field is Required",
-    "maxlength":"field is Required",
-    "rangelength":"field is Required",
-    "email":"field is Required",
-    "url":"field is Required",
-    "date":"field is Required",
-    "number":"field is Required",
-    "digits":"field is Required",
-    "creditcard":"field is Required",
-    "equalTo":"field is Required"
+    "minlength":"field should be a certain min",
+    "maxlength":"field should be a certain max",
+    "rangelength":"field should be with in a range",
+    "email":"field should be valid email",
+    "url":"field should be valid url",
+    "date":"field should be a valid date",
+    "number":"field should be a number",
+    "digits":"field should be didgets",
+    "creditcard":"field should be a valid creditcard",
+    "equalTo":"field should be equal to"
 };
 
 CC.validationRules = (function(){

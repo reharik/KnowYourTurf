@@ -16,7 +16,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual double? Cost { get; set; }
         [ValidateInteger]
         public virtual int SizeOfUnit { get; set; }
-        [ValueOfEnumeration(typeof(UnitType)), ValidateNonEmpty]
+        [ValueOf(typeof(UnitType)), ValidateNonEmpty]
         public virtual string UnitType { get; set; }
 
         public virtual Vendor LastVendor { get;  set; }

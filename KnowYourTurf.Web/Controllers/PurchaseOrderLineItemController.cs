@@ -52,7 +52,6 @@ namespace KnowYourTurf.Web.Controllers
             var model = new PurchaseOrderLineItemViewModel
             {
                 Item = purchaseOrderLineItem,
-                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.AddUpdate(null)) + "/" + purchaseOrderLineItem.EntityId
             };
             return PartialView("PurchaseOrderLineItemView", model);
         }

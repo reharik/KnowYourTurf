@@ -31,18 +31,18 @@ namespace KnowYourTurf.Web.Models
         [ValidateNonEmpty]
         public string UserLoginInfoPassword { get; set; }
         [ValidateNonEmpty]
-        [ValueOfEnumeration(typeof(Status))]
+        [ValueOf(typeof(Status))]
         public string UserLoginInfoStatus { get; set; }
         public IEnumerable<SelectListItem> _UserLoginInfoStatusList { get; set; }
         [ValidateNonEmpty]
         public string Email { get; set; }
         [ValidateNonEmpty]
         public string PhoneMobile { get; set; }
-        public string ImageUrl { get; set; }
+        public string FileUrl { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
-        [ValueOfEnumeration(typeof(State))]
+        [ValueOf(typeof(State))]
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string Notes { get; set; }

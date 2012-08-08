@@ -12,7 +12,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
     {
         protected override bool matches(AccessorDef def)
         {
-            return def.Accessor.HasAttribute<ValueOfEnumerationAttribute>();
+            return def.Accessor.HasAttribute<ValueOfAttribute>();
         }
 
         public override HtmlTag Build(ElementRequest request)

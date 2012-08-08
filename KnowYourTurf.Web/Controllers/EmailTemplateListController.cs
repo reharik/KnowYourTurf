@@ -24,7 +24,6 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<EmailTemplateListController>(x => x.EmailTemplates(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddUpdate(null)),
                 gridDef = _emailTemplateListGrid.GetGridDefinition(url)
             };
             return View(model);

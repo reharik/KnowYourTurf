@@ -24,7 +24,6 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<EquipmentListController>(x => x.Equipments(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl= UrlContext.GetUrlForAction<EquipmentController>(x => x.DeleteMultiple(null)),
                 gridDef = _equipmentListGrid.GetGridDefinition(url),
                 _Title = WebLocalizationKeys.EQUIPMENT.ToString()

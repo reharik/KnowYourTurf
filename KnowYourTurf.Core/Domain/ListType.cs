@@ -9,7 +9,7 @@ namespace KnowYourTurf.Core.Domain
     {
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
-        [ValueOfEnumeration(typeof(Status))]
+        [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
     }
 
@@ -18,7 +18,6 @@ namespace KnowYourTurf.Core.Domain
     }
     public class TaskType : ListType
     {
-        public virtual string TaskColor { get; set; }
     }
     public class EventType : ListType
     {

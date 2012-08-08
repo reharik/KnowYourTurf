@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
 using KnowYourTurf.Core.Localization;
 using FubuMVC.Core.Util;
@@ -13,7 +14,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
     {
         protected override bool matches(AccessorDef def)
         {
-            return def.Accessor.HasAttribute<ValueOfEnumerationAttribute>();
+            return def.Accessor.HasAttribute<ValueOfAttribute>();
         }
 
         public override HtmlTag Build(ElementRequest request)
@@ -32,7 +33,9 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
     {
         protected override bool matches(AccessorDef def)
         {
-            return def.Accessor.HasAttribute<ValueOfIEnumerableAttribute>();
+            var propertyName = def.Accessor.FieldName;
+            var listPropertyInfo = def.ModelType.GetProperty("_" + propertyName + "List");
+            return (listPropertyInfo != null && listPropertyInfo.PropertyType == typeof(IEnumerable<SelectListItem>));
         }
 
         public override HtmlTag Build(ElementRequest request)

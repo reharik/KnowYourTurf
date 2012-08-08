@@ -56,7 +56,6 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EventViewModel
                             {
                                 Event = _event,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate(null)) + "/" + _event.EntityId,
                                 _Title = WebLocalizationKeys.EVENT_INFORMATION.ToString()
             };
             return PartialView("EventView", model);

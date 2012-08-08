@@ -86,11 +86,11 @@ namespace KnowYourTurf.Web.Controllers
 
             if (input.DeleteImage)
             {
-                _fileHandlerService.DeleteFile(administrator.ImageUrl);
-                administrator.ImageUrl = string.Empty;
+                _fileHandlerService.DeleteFile(administrator.FileUrl);
+                administrator.FileUrl = string.Empty;
             }
 
-            administrator.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Admins");
+            administrator.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Admins");
             administrator.ImageFriendlyName = administrator.FirstName + "_" + administrator.LastName;
             var crudManager = _saveEntityService.ProcessSave(administrator);
                 var user = _repository.Find<User>(administrator.EntityId);

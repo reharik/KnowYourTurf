@@ -24,14 +24,12 @@ namespace KnowYourTurf.Web.Models
         public string Description { get; set; }
         public string Subject { get; set; }
         [ValidateNonEmpty]
-        [ValueOfEnumeration(typeof(EmailFrequency))]
+        [ValueOf(typeof(EmailFrequency))]
         public string Frequency { get; set; }
-        [ValueOfEnumeration(typeof(Status))]
+        [ValueOf(typeof(Status))]
         public string Status { get; set; }
 
-        [ValueOfIEnumerable]
         public int EmailTemplateEntityId { get; set; }
-        [ValueOfIEnumerable]
         public int EmailJobTypeEntityId { get; set; }
 
         public string _saveUrl { get; set; }

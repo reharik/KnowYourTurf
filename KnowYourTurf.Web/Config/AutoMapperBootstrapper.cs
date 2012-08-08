@@ -3,6 +3,10 @@ using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Controllers;
 using KnowYourTurf.Web.Models;
+using KnowYourTurf.Web.Models.Fertilizer;
+using KnowYourTurf.Web.Models.Material;
+using KnowYourTurf.Web.Models.Vendor;
+using KnowYourTurf.Web.Models.VendorContact;
 
 namespace KnowYourTurf.Web.Config
 {
@@ -17,9 +21,16 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<Equipment, EquipmentViewModel>();
             Mapper.CreateMap<EmailJob, EmailJobViewModel>().ForMember(d => d.Subscribers, o => o.Ignore());
             Mapper.CreateMap<EventType, EventTypeViewModel>();
-            Mapper.CreateMap<TaskType, TaskTypeViewModel>();
+            Mapper.CreateMap<TaskType, ListTypeViewModel>();
             Mapper.CreateMap<PhotoCategory, ListTypeViewModel>();
             Mapper.CreateMap<DocumentCategory, ListTypeViewModel>();
+            Mapper.CreateMap<Material, MaterialViewModel>();
+            Mapper.CreateMap<Fertilizer, FertilizerViewModel>();
+            Mapper.CreateMap<Chemical, ChemicalViewModel>();
+            Mapper.CreateMap<Document, DocumentViewModel>();
+            Mapper.CreateMap<Photo, PhotoViewModel>();
+            Mapper.CreateMap<Vendor, VendorViewModel>();
+            Mapper.CreateMap<VendorContact, VendorContactViewModel>();
         
         }
 

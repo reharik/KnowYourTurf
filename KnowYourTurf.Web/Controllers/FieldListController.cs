@@ -27,7 +27,6 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null)) + "?RootId=" + input.RootId;
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl =  UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)),
                 gridDef = _fieldListGrid.GetGridDefinition(url),
                 _Title = WebLocalizationKeys.FIELDS.ToString()
             };

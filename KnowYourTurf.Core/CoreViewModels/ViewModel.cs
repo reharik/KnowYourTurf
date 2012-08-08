@@ -8,9 +8,10 @@ namespace KnowYourTurf.Core
         public long EntityId { get; set; }
         public long ParentId { get; set; }
         public long RootId { get; set; }
-        public string AddUpdateUrl { get; set; }
         public string Var { get; set; }
         public string _Title { get; set; }
+        public string DateCreated { get; set; }
+
         public bool Popup { get; set; }
     }
 
@@ -25,6 +26,5 @@ namespace KnowYourTurf.Core
         public GridDefinition gridDef { get; set; }
         public List<string> headerButtons { get; set; }
         public string searchField { get; set; }
-//        public string addUpdate { get; set; }
     }
 }

@@ -105,13 +105,13 @@ namespace KnowYourTurf.Web.Controllers
             mapRolesToGroups(employee);
             if (input.DeleteImage)
             {
-                _fileHandlerService.DeleteFile(employee.ImageUrl);
-                employee.ImageUrl = string.Empty;
+                _fileHandlerService.DeleteFile(employee.FileUrl);
+                employee.FileUrl = string.Empty;
             }
 
             if (_fileHandlerService.RequsetHasFile())
             {
-                employee.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Employees");
+                employee.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Employees");
                 employee.ImageFriendlyName = employee.FirstName + "_" + employee.LastName;
             }
             var crudManager = _saveEntityService.ProcessSave(employee);

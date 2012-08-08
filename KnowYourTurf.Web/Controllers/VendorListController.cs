@@ -21,17 +21,18 @@ namespace KnowYourTurf.Web.Controllers
             _vendorListGrid = vendorListGrid;
         }
 
-        public ActionResult VendorList(ListViewModel input)
+        public ActionResult ItemList(ListViewModel input)
         {
             var url = UrlContext.GetUrlForAction<VendorListController>(x => x.Vendors(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<VendorController>(x => x.DeleteMultiple(null)),
                 gridDef = _vendorListGrid.GetGridDefinition(url),
                 _Title = WebLocalizationKeys.VENDORS.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         
         public JsonResult Vendors(GridItemsRequestModel input)

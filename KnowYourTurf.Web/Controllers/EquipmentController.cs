@@ -110,8 +110,8 @@ namespace KnowYourTurf.Web.Controllers
             equipment.Description = input.Description;
             if (input.DeleteImage)
             {
-                _fileHandlerService.DeleteFile(equipment.ImageUrl);
-                equipment.ImageUrl = string.Empty;
+                _fileHandlerService.DeleteFile(equipment.FileUrl);
+                equipment.FileUrl = string.Empty;
             }
             if (input.VendorEntityId >0 && (equipment.Vendor == null || equipment.Vendor.EntityId != input.VendorEntityId))
             {
@@ -120,7 +120,7 @@ namespace KnowYourTurf.Web.Controllers
             }
             if (_fileHandlerService.RequsetHasFile())
             {
-                equipment.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
+                equipment.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
             }
             var crudManager = _saveEntityService.ProcessSave(equipment);
             var notification = crudManager.Finish();
@@ -136,12 +136,11 @@ namespace KnowYourTurf.Web.Controllers
         [ValidateNonEmpty]
         public string Name { get; set; }
         public string Description { get; set; }
-        [ValueOfIEnumerable]
         public int VendorEntityId { get; set; }
         [ValidateNonEmpty]
         [ValidateDecimal]
         public int TotalHours { get; set; }
-        public string ImageUrl { get; set; }
+        public string FileUrl { get; set; }
         public bool DeleteImage { get; set; }
     }
 

@@ -191,7 +191,7 @@ KYT.Views.GridView = KYT.Views.View.extend({
     },
     deleteItems:function(){
         if (confirm("Are you sure you would like to delete this Item?")) {
-            var ids = cc.gridMultiSelect.getCheckedBoxes();
+            var ids = cc.gridMultiSelect.getCheckedBoxes(this.options.gridContainer);
             KYT.repository.ajaxGet(this.options.deleteMultipleUrl, $.param({"EntityIds":ids},true))
                 .done($.proxy(function(){this.reloadGrid()},this));
         }

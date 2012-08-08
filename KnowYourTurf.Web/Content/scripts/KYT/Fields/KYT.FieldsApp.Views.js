@@ -318,6 +318,15 @@ KYT.Views.EmployeeListView = KYT.Views.GridView.extend({
     }
 });
 
+KYT.Views.VendorListView = KYT.Views.GridView.extend({
+    viewLoaded:function(){
+        KYT.vent.bind(this.id+":Redirect",this.showContacts,this);
+    },
+    showContacts:function(id){
+        KYT.vent.trigger("route",KYT.generateRoute("vendorcontactlist",0,+id),true);
+    }
+});
+
 KYT.Views.DocumentFormView = KYT.Views.View.extend({
     initialize:function(){
         KYT.mixin(this, "formMixin");
@@ -438,5 +447,29 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         this.documentCategoryGridView.callbackAction();
     }
 });
+
+KYT.Views.EventTypeFormView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        $('#EventColor',this.el).miniColors();
+    }
+});
+
+KYT.Views.TaskTypeFormView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        $('#TaskColor',this.el).miniColors();
+    }
+});
+
+
 
 

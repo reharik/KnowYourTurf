@@ -29,7 +29,6 @@ namespace KnowYourTurf.Web.Controllers
                           : UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrders(null));
             PurchaseOrderListViewModel model = new PurchaseOrderListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.DeleteMultiple(null)),
                 gridDef = _purchaseOrderListGrid.GetGridDefinition(url),
                 _Title = input.Completed ? WebLocalizationKeys.COMPLETED_PURCHASE_ORDERS.ToString() : WebLocalizationKeys.PURCHASE_ORDERS.ToString(),

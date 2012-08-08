@@ -84,6 +84,11 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForForm<DocumentCategoryController>(x => x.AddUpdate(null)).End();
             _builder.TokenForForm<PhotoCategoryController>(x => x.AddUpdate(null)).End();
 
+            _builder.TokenForList<VendorListController>(x => x.ItemList(null)).End();
+            _builder.TokenForForm<VendorController>(x => x.AddUpdate(null)).End();
+
+            _builder.TokenForList<VendorContactListController>(x => x.ItemList(null)).End();
+            _builder.TokenForForm<VendorContactController>(x => x.AddUpdate(null)).End();
             //_builder.TokenForForm<PayTrainerController>(x => x.AddUpdate(null), AreaName.Billing).End();
 
             return _builder.Items;

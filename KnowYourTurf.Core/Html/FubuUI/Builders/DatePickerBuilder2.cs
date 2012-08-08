@@ -59,7 +59,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         protected override bool matches(AccessorDef def)
         {
             return def.Accessor.PropertyType == typeof(string)
-                && def.Accessor.FieldName.EndsWith("ImageUrl");
+                && def.Accessor.FieldName.EndsWith("FileUrl");
         }
 
         public override HtmlTag Build(ElementRequest request)
@@ -147,7 +147,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         protected override bool matches(AccessorDef def)
         {
             return def.Accessor.PropertyType == typeof(string)
-               && def.Accessor.FieldName.EndsWith("ImageUrl");
+               && (def.Accessor.FieldName.EndsWith("FileUrl"));
         }
         public override HtmlTag Build(ElementRequest request)
         {

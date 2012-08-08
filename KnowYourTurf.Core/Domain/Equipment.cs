@@ -21,6 +21,6 @@ namespace KnowYourTurf.Core.Domain
         [ValidateNonEmpty]
         [ValidateDecimal]
         public virtual double TotalHours { get; set; }
-        public virtual string ImageUrl { get; set; }
+        public virtual string FileUrl { get; set; }
     }
 }

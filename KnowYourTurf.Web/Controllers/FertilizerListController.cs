@@ -24,12 +24,11 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<FertilizerListController>(x => x.Fertilizers(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl= UrlContext.GetUrlForAction<FertilizerController>(x => x.DeleteMultiple(null)),
                 gridDef = _fertilizerListGrid.GetGridDefinition(url),
                 _Title = WebLocalizationKeys.FERTILIZERS.ToString()
             };
-            return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Fertilizers(GridItemsRequestModel input)
