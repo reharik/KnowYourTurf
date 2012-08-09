@@ -31,6 +31,11 @@ namespace KnowYourTurf.Web.Controllers
             _receivePurchaseOrderLineItemGrid = ObjectFactory.Container.GetInstance < IEntityListGrid<PurchaseOrderLineItem>>("Recieve");
         }
 
+        public ActionResult PurchaseOrderCommit_Template(ViewModel input)
+        {
+            return View("PurchaseOrderCommit", new POCommitViewModel());
+        }
+
         public ActionResult PurchaseOrderCommit(ViewModel input)
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
@@ -43,7 +48,7 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _receivePurchaseOrderLineItemGrid.GetGridDefinition(url),
                 _Title = WebLocalizationKeys.COMMIT_PURCHASE_ORDER.ToString()
             };
-            return View("PurchaseOrderCommit",model);
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ClosePurchaseOrder(ViewModel input)

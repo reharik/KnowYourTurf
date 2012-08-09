@@ -7,26 +7,47 @@
  */
 KYT.mixins = {};
 
-KYT.mixin = function(target, mixin, overrides){
-    if(target.events && KYT.mixins[mixin].events){
-        var events = $.extend({}, target.events, KYT.mixins[mixin].events)
+KYT.mixin = function(target, mixin, preserveRender){
+
+    var mixinObj = KYT.mixins[mixin];
+    for (var prop in mixinObj) {
+        if (mixinObj.hasOwnProperty(prop) && !target[prop] )
+            if(prop=="render"&&preserveRender==true) {
+                return;
+            }
+            target[prop] = mixinObj[prop];
     }
-    $.extend(target,KYT.mixins[mixin],overrides||{});
-    if(events){
-        target.events = events;
-    }
+//
+//    if(target.events && KYT.mixins[mixin].events){
+//        var events = $.extend({}, target.events, KYT.mixins[mixin].events)
+//    }
+//
+//    $.extend(target,KYT.mixins[mixin],overrides||{});
+//
+//
+//    if(events){
+//        target.events = events;
+//    }
 };
 
 KYT.mixins.modelAndElementsMixin = {
-    bindModelAndElements:function(){
+    bindModelAndElements:function(arrayOfIgnoreItems){
         // make sure to apply ids prior to ko mapping.
-        this.model = ko.mapping.fromJS(this.model);
+        var that = this;
+        this.mappingOptions ={ ignore:[] };
+        if(arrayOfIgnoreItems){
+             _.each(arrayOfIgnoreItems,function(item){
+                 that.mappingOptions.ignore.push(item);});
+        }
+        this.model = ko.mapping.fromJS(this.rawModel,this.mappingOptions);
         this.extendModel();
         ko.applyBindings(this.model,this.el);
         this.elementsViewmodel = CC.elementService.getElementsViewmodel(this);
-        this.mappingOptions ={ ignore: _.filter(_.keys(this.model),function(item){
+        var ignore = _.filter(_.keys(this.model),function(item){
             return (item.indexOf('_') == 0 && item != "__ko_mapping__");
-        })};
+        });
+        _.each(ignore,function(item){
+            that.mappingOptions.ignore.push(item);});
         this.mappingOptions.ignore.push("_availableItems");
         this.mappingOptions.ignore.push("_resultsItems");
         this.addIdsToModel();
@@ -49,10 +70,10 @@ KYT.mixins.modelAndElementsMixin = {
     addIdsToModel:function(){
         var rel = KYT.State.get("Relationships");
         if(!rel){return;}
-        this.model.EntityId = rel.entityId;
-        this.model.ParentId = rel.parentId;
-        this.model.RootId = rel.rootId;
-        this.model.Var = rel.extraVar;
+        this.model.EntityId(rel.entityId);
+        this.model.ParentId(rel.parentId);
+        this.model.RootId(rel.rootId);
+        this.model.Var(rel.extraVar);
     }
 };
 

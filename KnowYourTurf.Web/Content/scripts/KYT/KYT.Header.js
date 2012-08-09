@@ -13,7 +13,6 @@ KYT.Header = (function(KYT, Backbone){
         events:{
             'click #userSettings' : 'userSettings'
         },
-
         initialize: function(){
             this.setupAppSelectionEvents();
             this.setupGlobalSettings();
@@ -61,7 +60,7 @@ KYT.Header = (function(KYT, Backbone){
     KYT.addInitializer(function(){
         Header.view = new Header.HeaderView({
             el: $("#main-header")
-        }).render();
+        });
         // dont' really need to add this to the KYT.header.show() here
         // cuz there will only ever be one header but if we do you need a
         // surrounding div for main-header and set the KYT.header to that

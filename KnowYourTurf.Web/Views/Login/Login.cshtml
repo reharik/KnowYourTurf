@@ -65,7 +65,8 @@
                 
         $(document).ready(function () {
             var model =  @MvcHtmlString.Create(JsonUtil.ToJson(Model));
-            var view = new KYT.Views.LoginView({el:".signin",model:model});
+            var view = new KYT.Views.LoginView({el:".signin"});
+            view.rawModel = model;
             view.render();
         });
     </script>

@@ -292,6 +292,45 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
     }
 });
 
+KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
+    initialize:function(){
+         KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin",true);
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    renderCallback:function(){
+        this.bindModelAndElements(["PoliListDefinition","gridDef"]);
+        this.model.PoliListDefinition = this.rawModel.PoliListDefinition;
+        this.model.gridDef = this.rawModel.gridDef;
+        this.viewLoaded();
+        KYT.vent.trigger("form:"+this.id+":pageLoaded",this.options);
+        $(this.el).find("form :input:visible:enabled:first").focus();
+    },
+    viewLoaded:function(){
+        this.showPOInfo();
+        this.productsGridView = new KYT.Views.GridView({el:"#productGridArea",
+          url:this.model._completedGridUrl(),
+            gridContainer: "#completedGridContainer",
+            id:"completed",
+            route:"taskdisplay"});
+        this.pendingGridView.render();
+        this.completedGridView.render();
+        this.storeChild(this.pendingGridView);
+    },
+    showPOInfo:function(){
+        if(this.model.EntityId()>0){
+            $("#viewPOID",this.$el).show();
+            $("#viewVendor",this.$el).show();
+            $("#editVendor",this.$el).hide();
+        }else{
+            $("#viewPOID",this.$el).hide();
+            $("#viewVendor",this.$el).hide();
+            $("#editVendor",this.$el).show();
+        }
+    }
+});
+
+
 KYT.Views.EmailJobFormView = KYT.Views.View.extend({
     initialize:function(){
         KYT.mixin(this, "formMixin");
@@ -332,7 +371,7 @@ KYT.Views.DocumentFormView = KYT.Views.View.extend({
         KYT.mixin(this, "formMixin");
         KYT.mixin(this, "ajaxFormMixin");
         KYT.mixin(this, "modelAndElementsMixin");
-    },
+    }
 });
 
 KYT.Views.PhotoFormView = KYT.Views.View.extend({
@@ -345,19 +384,18 @@ KYT.Views.PhotoFormView = KYT.Views.View.extend({
 
 KYT.Views.CalculatorFormView = KYT.Views.View.extend({
     initialize:function(){
-        KYT.mixin(this, "formMixin",{
-            saveItem:function(){
-                var data = JSON.stringify(ko.mapping.toJS(this.model,this.mappingOptions));
-                var promise = KYT.repository.ajaxPostModel(this.model._calculateUrl(),data);
-                promise.done($.proxy(this.successHandler,this));
-            },
-            successHandler:function(result){
-                KYT.calculator.successHandler(this.model,result);
-            }
-        });
+        KYT.mixin(this, "formMixin");
         KYT.mixin(this, "ajaxFormMixin");
         KYT.mixin(this, "modelAndElementsMixin");
         this.options.templateUrl += this.options.url.substring(this.options.url.lastIndexOf("/"));
+    },
+    saveItem:function(){
+        var data = JSON.stringify(ko.mapping.toJS(this.model,this.mappingOptions));
+        var promise = KYT.repository.ajaxPostModel(this.model._calculateUrl(),data);
+        promise.done($.proxy(this.successHandler,this));
+    },
+    successHandler:function(result){
+        KYT.calculator.successHandler(this.model,result);
     },
     events:{'click #createTask':'addTask'},
     addTask:function(){

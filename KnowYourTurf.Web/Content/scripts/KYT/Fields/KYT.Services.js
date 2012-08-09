@@ -121,7 +121,7 @@ KYT.loadTemplateAndModel = function(view){
         KYT.repository.ajaxGet(view.options.url, view.options.data))
     .done(function(html,data){
             view.$el.html(html);
-            view.model = data[0];
+            view.rawModel = data[0];
                 d.resolve();
         });
     return d.promise();

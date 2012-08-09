@@ -24,7 +24,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ItemList(PurchaseOrderListViewModel input)
         {
-            var url = input.Completed
+            var url = input.Var == "Completed"
                           ? UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrdersCompleted(null))
                           : UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrders(null));
             PurchaseOrderListViewModel model = new PurchaseOrderListViewModel()
@@ -34,7 +34,7 @@ namespace KnowYourTurf.Web.Controllers
                 _Title = input.Completed ? WebLocalizationKeys.COMPLETED_PURCHASE_ORDERS.ToString() : WebLocalizationKeys.PURCHASE_ORDERS.ToString(),
                 Completed = input.Completed
             };
-            return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult PurchaseOrders(GridItemsRequestModel input)

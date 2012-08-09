@@ -31,6 +31,11 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<Photo, PhotoViewModel>();
             Mapper.CreateMap<Vendor, VendorViewModel>();
             Mapper.CreateMap<VendorContact, VendorContactViewModel>();
+            Mapper.CreateMap<InventoryProduct, InventoryFertilizerViewModel>();
+            Mapper.CreateMap<InventoryProduct, InventoryChemicalViewModel>();
+            Mapper.CreateMap<InventoryProduct, InventoryMaterialViewModel>();
+            Mapper.CreateMap<PurchaseOrder, POListViewModel>();
+
         
         }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using AutoMapper;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
@@ -21,7 +22,10 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IEntityListGrid<PurchaseOrderLineItem> _purchaseOrderLineItemGrid;
         private readonly IPurchaseOrderLineItemService _purchaseOrderLineItemService;
 
-        public PurchaseOrderController(IRepository repository, ISaveEntityService saveEntityService, ISelectListItemService selectListItemService, IDynamicExpressionQuery dynamicExpressionQuery,
+        public PurchaseOrderController(IRepository repository,
+            ISaveEntityService saveEntityService,
+            ISelectListItemService selectListItemService,
+            IDynamicExpressionQuery dynamicExpressionQuery,
             IEntityListGrid<BaseProduct> purchaseOrderSelectorGrid,
             IEntityListGrid<PurchaseOrderLineItem> purchaseOrderLineItemGrid,
             IPurchaseOrderLineItemService purchaseOrderLineItemService
@@ -36,6 +40,11 @@ namespace KnowYourTurf.Web.Controllers
             _purchaseOrderLineItemService = purchaseOrderLineItemService;
         }
 
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("PurchaseOrderBuilder", new POListViewModel());
+        }
+
         public ActionResult AddUpdate(ViewModel input)
         {
             var purchaseOrder = input.EntityId > 0 ? _repository.Find<PurchaseOrder>(input.EntityId) : new PurchaseOrder();
@@ -43,20 +52,17 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null))+"?Vendor=0";
             var PoliUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.PurchaseOrderLineItems(null)) + "?EntityId=" + purchaseOrder.EntityId;
             var deleteMany = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + purchaseOrder.EntityId;
-            POListViewModel model = new POListViewModel()
-            {
-                Item = purchaseOrder,
-                VendorList = vendors,
-                VendorId = purchaseOrder.EntityId > 0 ? purchaseOrder.Vendor.EntityId : 0,
-                ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null)),
-                CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)),
-                deleteMultipleUrl = deleteMany,
-                gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url),
-                PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl),
-                _Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString()
 
-            };
-            return PartialView("PurchaseOrderBuilder", model);
+
+            POListViewModel model = Mapper.Map<PurchaseOrder, POListViewModel>(purchaseOrder);
+            model._VendorEntityIdList = vendors;
+            model.ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));
+            model.CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null));
+            model.deleteMultipleUrl = deleteMany;
+            model.gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url);
+            model.PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl);
+            model._Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString();
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         
@@ -67,16 +73,6 @@ namespace KnowYourTurf.Web.Controllers
 
             var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items, "productGrid");
             return Json(model, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Display(ViewModel input)
-        {
-            var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
-            var model = new POListViewModel()
-            {
-                Item = purchaseOrder,
-            };
-            return PartialView("PurchaseOrderView", model);
         }
 
         public ActionResult Delete(ViewModel input)

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
+﻿using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web;
 using KnowYourTurf.Web.Controllers;
-using KnowYourTurf.Web.Grids;
 
 namespace KnowYourTurf.Core.Domain
 {

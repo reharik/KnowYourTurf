@@ -697,6 +697,9 @@
     </None>
     <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />
     <Content Include="Views\ListTypeList\Display.cshtml" />
+    <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
+    <Content Include="Views\InventoryList\InventoryFertilizerView.cshtml" />
+    <Content Include="Views\InventoryList\InventoryMaterialView.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>

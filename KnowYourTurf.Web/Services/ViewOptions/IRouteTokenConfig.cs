@@ -89,7 +89,10 @@ namespace KnowYourTurf.Web.Services.ViewOptions
 
             _builder.TokenForList<VendorContactListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<VendorContactController>(x => x.AddUpdate(null)).End();
-            //_builder.TokenForForm<PayTrainerController>(x => x.AddUpdate(null), AreaName.Billing).End();
+
+            _builder.TokenForList<PurchaseOrderListController>(x => x.ItemList(null)).End();
+            _builder.TokenForForm<PurchaseOrderController>(x => x.AddUpdate(null)).End();
+
 
             return _builder.Items;
         }
