@@ -146,81 +146,15 @@ KYT.Views.AjaxDisplayView = KYT.Views.View.extend({
 });
 
 KYT.Views.GridView = KYT.Views.View.extend({
-    events:{
-        'click .new' : 'addNew',
-        'click .delete' : 'deleteItems'
-    },
     initialize: function(){
-        this.options = $.extend({},KYT.gridDefaults,this.options);
-    },
-    render:function(){
-        KYT.repository.ajaxGet(this.options.url, this.options.data)
-            .done($.proxy(this.renderCallback,this));
-    },
-    renderCallback:function(result){
-        result.errorMessagesContainer = this.options.errorMessagesContainer;
-        $(this.el).html($("#gridTemplate").tmpl(result));
-        $.extend(this.options,result);
-
-        $.each(this.options.headerButtons,$.proxy(function(i,item){
-            $(this.el).find("."+item).show();
-        },this));
-
-        var gridContainer = this.options.gridContainer;
-        // if we have more then one grid, jqgrid doesn't scope so we need different names.
-        if(this.options.gridContainer!="#gridContainer"){
-            this.$el.find("#gridContainer").attr("id",this.options.gridContainer.replace("#",""));
-        }
-
-        $(gridContainer,this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
-        ///////
-        $(this.el).gridSearch({onClear:$.proxy(this.removeSearch,this),onSubmit:$.proxy(this.search,this)});
-        this.viewLoaded();
-        KYT.vent.trigger("grid:"+this.id+":pageLoaded",this.options);
-        KYT.vent.bind(this.id+":AddUpdateItem",this.editItem,this);
-        KYT.vent.bind(this.id+":DisplayItem",this.displayItem,this);
-    },
-    addNew:function(){
-        KYT.vent.trigger("route",KYT.generateRoute(this.options.addUpdate),true);
-    },
-    editItem:function(id){
-        KYT.vent.trigger("route",KYT.generateRoute(this.options.addUpdate,id), true);
-    },
-    displayItem:function(id){
-        KYT.vent.trigger("route",KYT.generateRoute(this.options.display,id), true);
-    },
-    deleteItems:function(){
-        if (confirm("Are you sure you would like to delete this Item?")) {
-            var ids = cc.gridMultiSelect.getCheckedBoxes(this.options.gridContainer);
-            KYT.repository.ajaxGet(this.options.deleteMultipleUrl, $.param({"EntityIds":ids},true))
-                .done($.proxy(function(){this.reloadGrid()},this));
-        }
-    },
-    search:function(v){
-        var searchItem = {"field": this.options.searchField ,"data": v };
-        var filter = {"group":"AND",rules:[searchItem]};
-        var obj = {"filters":""  + JSON.stringify(filter) + ""};
-        $(this.options.gridContainer).jqGrid('setGridParam',{postData:obj});
-        this.reloadGrid();
-    },
-    removeSearch:function(){
-        delete $(this.options.gridContainer).jqGrid('getGridParam' ,'postData')["filters"];
-        this.reloadGrid();
-        return false;
-    },
-    reloadGrid:function(){
-        KYT.vent.unbind(this.id+":AddUpdateItem",this.editItem,this);
-        KYT.vent.unbind(this.id+":DisplayItem",this.displayItem,this);
-        $(this.options.gridContainer).trigger("reloadGrid");
-        KYT.vent.bind(this.id+":AddUpdateItem",this.editItem,this);
-        KYT.vent.bind(this.id+":DisplayItem",this.displayItem,this);
-    },
-    callbackAction:function(){
-        this.reloadGrid();
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+        this.setupBindings();
     },
     onClose:function(){
-        KYT.vent.unbind("AddUpdateItem");
-        KYT.vent.unbind("DisplayItem");
+        this.unbindBindings();
     }
 });
 

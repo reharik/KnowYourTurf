@@ -11,11 +11,13 @@ KYT.mixin = function(target, mixin, preserveRender){
 
     var mixinObj = KYT.mixins[mixin];
     for (var prop in mixinObj) {
-        if (mixinObj.hasOwnProperty(prop) && !target[prop] )
-            if(prop=="render"&&preserveRender==true) {
-                return;
+        if(prop=="render"){
+            if(preserveRender!=true){
+                target[prop] = mixinObj[prop];
             }
+        }else if(!target[prop] && mixinObj.hasOwnProperty(prop)){
             target[prop] = mixinObj[prop];
+        }
     }
 //
 //    if(target.events && KYT.mixins[mixin].events){
@@ -130,3 +132,93 @@ KYT.mixins.ajaxFormMixin = {
         $(this.el).find("form :input:visible:enabled:first").focus();
     }
 };
+
+KYT.mixins.ajaxGridMixin = {
+    render:function(){
+        KYT.repository.ajaxGet(this.options.url, this.options.data)
+            .done($.proxy(this.renderCallback,this));
+    },
+    renderCallback:function(result){
+        result.errorMessagesContainer = this.options.errorMessagesContainer;
+        $(this.el).html($("#gridTemplate").tmpl(result));
+        $.extend(this.options,result,KYT.gridDefaults);
+        this.setupGrid();
+        this.viewLoaded();
+        KYT.vent.trigger("grid:"+this.id+":pageLoaded",this.options);
+
+    }
+};
+
+KYT.mixins.setupGridMixin = {
+    setupGrid: function() {
+        $.each(this.options.headerButtons, $.proxy(function(i, item) {
+            $(this.el).find("." + item).show();
+        }, this));
+        var gridContainer = this.options.gridContainer;
+        // if we have more then one grid, jqgrid doesn't scope so we need different names.
+        if (this.options.gridContainer != "#gridContainer") {
+            this.$el.find("#gridContainer").attr("id", this.options.gridContainer.replace("#", ""));
+        }
+        $(gridContainer, this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
+        ///////
+        $(this.el).gridSearch({onClear:$.proxy(this.removeSearch, this),onSubmit:$.proxy(this.search, this)});
+    }
+};
+
+KYT.mixins.defaultGridEventsMixin = {
+    events:{
+        'click .new' : 'addNew',
+        'click .delete' : 'deleteItems'
+    },
+    setupBindings:function(){
+        KYT.vent.bind(this.id+":AddUpdateItem",this.editItem,this);
+        KYT.vent.bind(this.id+":DisplayItem",this.displayItem,this);
+    },
+    unbindBindings:function(){
+        KYT.vent.unbind(this.id+":AddUpdateItem",this.editItem,this);
+        KYT.vent.unbind(this.id+":DisplayItem",this.displayItem,this);
+    },
+    addNew:function(){
+        KYT.vent.trigger("route",KYT.generateRoute(this.options.addUpdate),true);
+    },
+    editItem:function(id){
+        KYT.vent.trigger("route",KYT.generateRoute(this.options.addUpdate,id), true);
+    },
+    displayItem:function(id){
+        KYT.vent.trigger("route",KYT.generateRoute(this.options.display,id), true);
+    },
+    deleteItems:function(){
+        if (confirm("Are you sure you would like to delete this Item?")) {
+            var ids = cc.gridMultiSelect.getCheckedBoxes(this.options.gridContainer);
+            KYT.repository.ajaxGet(this.options.deleteMultipleUrl, $.param({"EntityIds":ids},true))
+                .done($.proxy(function(){this.reloadGrid()},this));
+        }
+    },
+    reloadGrid:function(){
+        KYT.vent.unbind(this.id+":AddUpdateItem",this.editItem,this);
+        KYT.vent.unbind(this.id+":DisplayItem",this.displayItem,this);
+        $(this.options.gridContainer).trigger("reloadGrid");
+        KYT.vent.bind(this.id+":AddUpdateItem",this.editItem,this);
+        KYT.vent.bind(this.id+":DisplayItem",this.displayItem,this);
+    },
+    // used by children to update parent grid
+    callbackAction:function(){
+        this.reloadGrid();
+    }
+};
+
+KYT.mixins.setupGridSearchMixin = {
+    search:function(v){
+        var searchItem = {"field": this.options.searchField ,"data": v };
+        var filter = {"group":"AND",rules:[searchItem]};
+        var obj = {"filters":""  + JSON.stringify(filter) + ""};
+        $(this.options.gridContainer).jqGrid('setGridParam',{postData:obj});
+        this.reloadGrid();
+    },
+    removeSearch:function(){
+        delete $(this.options.gridContainer).jqGrid('getGridParam' ,'postData')["filters"];
+        this.reloadGrid();
+        return false;
+    }
+};
+

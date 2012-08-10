@@ -49,26 +49,31 @@ namespace KnowYourTurf.Web.Controllers
         {
             var purchaseOrder = input.EntityId > 0 ? _repository.Find<PurchaseOrder>(input.EntityId) : new PurchaseOrder();
             var vendors = _selectListItemService.CreateList<Vendor>(x=>x.Company,x=>x.EntityId,true);
-            var url = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null))+"?Vendor=0";
-            var PoliUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.PurchaseOrderLineItems(null)) + "?EntityId=" + purchaseOrder.EntityId;
-            var deleteMany = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + purchaseOrder.EntityId;
-
 
             POListViewModel model = Mapper.Map<PurchaseOrder, POListViewModel>(purchaseOrder);
             model._VendorEntityIdList = vendors;
-            model.ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));
-            model.CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null));
-            model.deleteMultipleUrl = deleteMany;
-            model.gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url);
-            model.PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl);
+            model._VendorProductsUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x=>x.Products(null)), 
+            model._POLIUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x=>x.ItemList(null)), 
+            model._ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));
+            model._CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null));
             model._Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString();
             return Json(model,JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult VendorProductList(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null))+"/"+input.EntityId;
+            var model = new ListViewModel()
+            {
+                gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url),
+                _Title = WebLocalizationKeys.PRODUCTS.ToString(),
+            };
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         
         public JsonResult Products(PoSelectorGridItemsRequestModel input)
         {
-            var vendor = _repository.Find<Vendor>(input.Vendor);
+            var vendor = _repository.Find<Vendor>(input.EntityId);
             var items = _dynamicExpressionQuery.PerformQuery(vendor.Products, input.filters);
 
             var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items, "productGrid");

@@ -251,18 +251,13 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
     }
 });
 
-KYT.Views.DahsboardGridView = KYT.Views.GridView.extend({
-    events:{
-        'click .new' : 'addNew',
-        'click .delete' : 'deleteItems'
-    },
-    initialize:function(){
-        this._super("initialize",arguments);
-    },
-
-    viewLoaded:function(){
-        KYT.vent.bind(this.options.id+":AddUpdateItem",this.editItem,this);
-        KYT.vent.bind(this.options.id+":DisplayItem",this.displayItem,this);
+KYT.Views.DahsboardGridView = KYT.Views.View.extend({
+     initialize: function(){
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+        this.setupBindings();
     },
     addNew:function(){
         KYT.vent.trigger("route",KYT.generateRoute(this.options.route, 0, this.options.parentId,this.options.rootId,this.options.parent),true);
@@ -274,10 +269,7 @@ KYT.Views.DahsboardGridView = KYT.Views.GridView.extend({
         KYT.vent.trigger("route",KYT.generateRoute(this.options.route, id, this.options.parentId,this.options.rootId),true);
     },
     onClose:function(){
-        KYT.vent.unbind("AddUpdateItem");
-        KYT.vent.unbind("DisplayItem");
-        KYT.vent.unbind(this.options.id+":AddUpdateItem");
-        KYT.vent.unbind(this.options.id+":DisplayItem");
+        this.unbindBindings();
     }
 });
 
@@ -293,42 +285,60 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
 });
 
 KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
-    initialize:function(){
-         KYT.mixin(this, "formMixin");
-        KYT.mixin(this, "ajaxFormMixin",true);
-        KYT.mixin(this, "modelAndElementsMixin");
+    events:{
+        'click #save' : 'saveItem',
+        'click #cancel' : 'cancel'
     },
-    renderCallback:function(){
-        this.bindModelAndElements(["PoliListDefinition","gridDef"]);
-        this.model.PoliListDefinition = this.rawModel.PoliListDefinition;
-        this.model.gridDef = this.rawModel.gridDef;
-        this.viewLoaded();
-        KYT.vent.trigger("form:"+this.id+":pageLoaded",this.options);
-        $(this.el).find("form :input:visible:enabled:first").focus();
+    initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
         this.showPOInfo();
-        this.productsGridView = new KYT.Views.GridView({el:"#productGridArea",
-          url:this.model._completedGridUrl(),
-            gridContainer: "#completedGridContainer",
-            id:"completed",
+    },
+    showVendorProducts:function(){
+        $("#productGridArea").show();
+        this.productsGridView = new KYT.Views.GridView({
+            el:"#productGridArea",
+            url:this.model._VendorProductsUrls() + "/" + this.model.VendorEntityId(),
+            grouping:true,
+            groupingView : {
+                groupField : ['InstantiatingType'],
+                groupColumnShow : [false]
+            },
+            id:"vendorProductsGrid",
             route:"taskdisplay"});
-        this.pendingGridView.render();
-        this.completedGridView.render();
-        this.storeChild(this.pendingGridView);
+        this.productsGridView.render();
+        this.storeChild(this.productsGridView);
+    },
+    showPOLI:function(){
+        $("#poliGridArea").show();
+        this.POLIGridView = new KYT.Views.GridView({
+            el:"#poliGridArea",
+            url:this.model._VendorProductsUrls() + "/" + this.model.EntityId(),
+            id:"poliGrid"});
+        this.POLIGridView.render();
+        this.storeChild(this.POLIGridView);
     },
     showPOInfo:function(){
         if(this.model.EntityId()>0){
             $("#viewPOID",this.$el).show();
             $("#viewVendor",this.$el).show();
             $("#editVendor",this.$el).hide();
+            this.showVendorProducts();
+            this.showPOLI();
         }else{
             $("#viewPOID",this.$el).hide();
             $("#viewVendor",this.$el).hide();
             $("#editVendor",this.$el).show();
+            $("#poliGridArea").hide();
+            $("#productGridArea").hide();
         }
     }
 });
+
+
 
 
 KYT.Views.EmailJobFormView = KYT.Views.View.extend({
