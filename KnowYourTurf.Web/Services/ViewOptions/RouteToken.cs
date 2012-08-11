@@ -12,6 +12,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         public string url { get; set; }
         public string viewName { get; set; }
         public string subViewName { get; set; }
+        public string subViewRoute { get; set; }
         public string id { get; set; }
         public string route { get; set; }
         public string addUpdate { get; set; }

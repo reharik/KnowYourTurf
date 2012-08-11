@@ -1,5 +1,6 @@
 ﻿@model KnowYourTurf.Web.Models.SandCalcViewModel
 @using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web
 
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
@@ -22,3 +23,8 @@
             @Html.ViewFor(x => x.TotalSand).InputId("TotalSand").ToHtmlTag()
         </div>
     </div>
+    @section FormButtons{
+     @StandardButtonFor("save", WebLocalizationKeys.CALCULATE).AddClass("save").ToHtmlTag()
+     @StandardButtonFor("createTask", WebLocalizationKeys.CREATE_TASK).AddClass("cancel").AddClass("ui-state-disabled").Attr("disabled","disabled").ToHtmlTag()
+     @StandardButtonFor("cancel", WebLocalizationKeys.RETURN).AddClass("cancel").ToHtmlTag()
+}

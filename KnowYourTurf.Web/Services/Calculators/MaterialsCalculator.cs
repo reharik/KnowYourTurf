@@ -38,6 +38,7 @@ namespace KnowYourTurf.Web.Services
             double material = ((field.Size * (input.Depth / 12)) / 27) + (input.Drainageline * (input.DitchlineWidth / input.DitchDepth) / 27) - (3.14 * (input.PipeRadius / 12)*2 * input.Drainageline / 27);
             model.TotalMaterials = Convert.ToDouble(Math.Round(Convert.ToDecimal(material), 2));
             model.FieldArea = field.Size;
+            model._calculatorName = WebLocalizationKeys.MATERIALS.ToString();
             continuation.Target = model;
             //(
             //    (

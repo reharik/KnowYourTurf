@@ -21,6 +21,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         IRouteTokenBuilder RouteToken(string route);
         IRouteTokenBuilder ViewName(string viewName);
         IRouteTokenBuilder SubViewName(string subViewName);
+        IRouteTokenBuilder SubViewRouteToken(string route);
         IRouteTokenBuilder ViewId(string ViewId);
         IRouteTokenBuilder AddUpdateToken(string addUpdate);
         IRouteTokenBuilder IsChild(bool isChild = true);
@@ -124,6 +125,12 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         public IRouteTokenBuilder SubViewName(string subViewName)
         {
             currentItem.subViewName = subViewName;
+            return this;
+        }
+
+        public IRouteTokenBuilder SubViewRouteToken(string route)
+        {
+            currentItem.subViewRoute = route;
             return this;
         }
 

@@ -4,12 +4,7 @@ using System.Web.Mvc;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
-using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
-using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Models
 {
@@ -17,7 +12,6 @@ namespace KnowYourTurf.Web.Models
     {
         public GroupedSelectViewModel _FieldEntityIdList { get; set; }
         public GroupedSelectViewModel _InventoryProductProductEntityIdList { get; set; }
-        public IEnumerable<SelectListItem> _EquipmentList { get; set; }
         public IEnumerable<SelectListItem> _TaskTypeEntityIdList { get; set; }
 
         public TokenInputViewModel Employees { get; set; }

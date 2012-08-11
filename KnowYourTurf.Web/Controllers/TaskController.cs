@@ -30,14 +30,14 @@ namespace KnowYourTurf.Web.Controllers
             IUpdateCollectionService updateCollectionService)
         {
             _repository = repository;
-            _saveEntityService = saveEntityService;
+            _saveEntityService = saveEntityService; 
             _selectListItemService = selectListItemService;
             _inventoryService = inventoryService;
             _updateCollectionService = updateCollectionService;
         }
         public ActionResult AddUpdate_Template(AddUpdateTaskViewModel input)
         {
-            return View("TaskAddUpdate", new TaskViewModel());
+            return View("TaskAddUpdate", new TaskViewModel{Popup = input.Popup});
         }   
 
         public ActionResult AddUpdate(TaskViewModel input)

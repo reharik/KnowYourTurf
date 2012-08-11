@@ -88,7 +88,9 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         var _data = $.extend({"RootId":rootId, Popup:true},data,{});
         var formOptions = {
             id: "editModule",
+            route: this.options.subViewRoute,
             url: url,
+            templateUrl: url+"_Template?Popup=true",
             data:_data,
             view:this.options.subViewName,
             buttons: KYT.Views.popupButtonBuilder.builder("editModule").standardEditButons()
@@ -273,6 +275,17 @@ KYT.Views.DahsboardGridView = KYT.Views.View.extend({
     }
 });
 
+//KYT.Views.TaskFormPopupView = KYT.Views.View.extend({
+//    initialize:function(){
+//        KYT.mixin(this, "formMixin");
+////        KYT.mixin(this, "ajaxFormMixin");
+//        KYT.mixin(this, "modelAndElementsMixin");
+//    },
+//    viewLoaded:function(){
+//        KYT.calculator.applyTaskTransferData(this.model,this.$el);
+//    }
+//});
+
 KYT.Views.TaskFormView = KYT.Views.View.extend({
     initialize:function(){
         KYT.mixin(this, "formMixin");
@@ -280,7 +293,7 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
-        KYT.calculator.applyTaskTransferData(this.model);
+        KYT.calculator.applyTaskTransferData(this.model,this.$el);
     }
 });
 
@@ -407,9 +420,11 @@ KYT.Views.CalculatorFormView = KYT.Views.View.extend({
     successHandler:function(result){
         KYT.calculator.successHandler(this.model,result);
     },
-    events:{'click #createTask':'addTask'},
+    events:{'click #createTask':'addTask',
+    'click #save' : 'saveItem',
+        'click #cancel' : 'cancel'},
     addTask:function(){
-        var fieldId = this.model.FieldEntityId();
+        var fieldId = this.model.FieldEntityId?this.model.FieldEntityId():0;
         KYT.calculator.setTaskTransferData(this.model);
         KYT.vent.trigger("route",KYT.generateRoute("task", 0, fieldId),true);
     }

@@ -15,7 +15,7 @@
             allDayDefault:false,
             slotMinutes:15,
             events: calendarDefinition.Url,
-            dayClick: function(date, allDay, jsEvent, view){ KYT.vent.trigger("calendar:"+calendarDefinition.id+":dayClick", date, allDay, jsEvent, view);},
+            dayClick: function(date, allDay, jsEvent, view){KYT.vent.trigger("calendar:"+calendarDefinition.id+":dayClick", date, allDay, jsEvent, view);},
             eventClick: function(calEvent, jsEvent, view){ KYT.vent.trigger("calendar:"+calendarDefinition.id+":eventClick", calEvent, jsEvent, view);},
             eventDrop: function(event, dayDelta,minuteDelta,allDay,revertFunc){ KYT.vent.trigger("calendar:"+calendarDefinition.id+":eventDrop", event, dayDelta,minuteDelta,allDay,revertFunc);},
             eventResize: function(event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){KYT.vent.trigger("calendar:"+calendarDefinition.id+":eventResize", event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view );}

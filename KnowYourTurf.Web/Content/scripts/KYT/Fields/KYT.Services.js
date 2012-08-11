@@ -17,10 +17,10 @@ KYT.calculator = (function(){
             wfs.set("calculatorName",model._calculatorName());
             wfs.set("taskData",taskTransferData[model._calculatorName()](model));
         },
-        applyTaskTransferData:function(model){
+        applyTaskTransferData:function(model, $el){
             var wfs = KYT.WorkflowManager.workflowState().state();
             if(wfs.get("calculatorName")){
-                applyTaskData[wfs.get("calculatorName")](model,wfs.get("taskData"));
+                applyTaskData[wfs.get("calculatorName")](model,wfs.get("taskData"),$el);
             }
         }
     };
@@ -69,7 +69,7 @@ KYT.calculator = (function(){
             };
         },
         Sand: function(model){
-           return {FieldEntityId : model.FieldEntityId(),
+           return {
                 Quantity: model.TotalSand()
             };
         },
@@ -87,28 +87,34 @@ KYT.calculator = (function(){
         }
     };
     var applyTaskData = {
-        FertilizerNeeded: function(model, taskData){
+        FertilizerNeeded: function(model, taskData, $el){
             model.FieldEntityId(taskData.FieldEntityId);
             model.InventoryProductProductEntityId(taskData.ProductEntityId);
             model.QuantityNeeded(taskData.Quantity);
+            $el.find("[name='InventoryProductProductEntityId']").data().select2.initSelection();
+            $el.find("[name='FieldEntityId']").data().select2.initSelection();
         },
-        Materials: function(model, taskData){
-            model.InventoryProductProductEntityId(taskData.ProductEntityId);
+        Materials: function(model, taskData, $el){
+            model.FieldEntityId(taskData.FieldEntityId);
+            model.QuantityNeeded(taskData.Quantity);
+            $el.find("[name='FieldEntityId']").data().select2.initSelection();
+        },
+        Sand: function(model, taskData, $el){
             model.QuantityNeeded(taskData.Quantity);
         },
-        Sand: function(model, taskData){
-            model.InventoryProductProductEntityId(taskData.ProductEntityId);
-            model.QuantityNeeded(taskData.Quantity);
-        },
-        OverseedBagsNeeded:function(model, taskData){
+        OverseedBagsNeeded:function(model, taskData, $el){
             model.FieldEntityId(taskData.FieldEntityId);
             model.InventoryProductProductEntityId(taskData.ProductEntityId);
             model.QuantityNeeded(taskData.Quantity);
+            $el.find("[name='InventoryProductProductEntityId']").data().select2.initSelection();
+            $el.find("[name='FieldEntityId']").data().select2.initSelection();
         },
-        OverseedRateNeeded:function(model, taskData){
+        OverseedRateNeeded:function(model, taskData, $el){
             model.FieldEntityId(taskData.FieldEntityId);
             model.InventoryProductProductEntityId(taskData.ProductEntityId);
             model.QuantityNeeded(taskData.Quantity);
+            $el.find("[name='InventoryProductProductEntityId']").data().select2.initSelection();
+            $el.find("[name='FieldEntityId']").data().select2.initSelection();
         }
     };
 
