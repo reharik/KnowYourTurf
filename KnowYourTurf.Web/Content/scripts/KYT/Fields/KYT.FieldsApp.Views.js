@@ -74,6 +74,9 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         var formOptions = {
             id: "displayModule",
             url: this.model.DisplayUrl,
+            route: this.model.DisplayRoute,
+            templateUrl: this.model.DisplayUrl+"_Template?Popup=true",
+            view:this.options.subViewName,
             data:data,
             buttons:builder.getButtons()
         };
@@ -275,16 +278,16 @@ KYT.Views.DahsboardGridView = KYT.Views.View.extend({
     }
 });
 
-//KYT.Views.TaskFormPopupView = KYT.Views.View.extend({
-//    initialize:function(){
-//        KYT.mixin(this, "formMixin");
-////        KYT.mixin(this, "ajaxFormMixin");
-//        KYT.mixin(this, "modelAndElementsMixin");
-//    },
-//    viewLoaded:function(){
-//        KYT.calculator.applyTaskTransferData(this.model,this.$el);
-//    }
-//});
+KYT.Views.TaskFormPopupView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        KYT.calculator.applyTaskTransferData(this.model,this.$el);
+    }
+});
 
 KYT.Views.TaskFormView = KYT.Views.View.extend({
     initialize:function(){

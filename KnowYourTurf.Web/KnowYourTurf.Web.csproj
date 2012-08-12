@@ -334,9 +334,9 @@
     <Compile Include="Services\IAuthenticationContext.cs" />
     <Compile Include="Services\ISecuritySetupService.cs" />
     <Compile Include="Services\ModelService.cs" />
-    <Compile Include="Services\ViewOptions\IRouteTokenBuilder.cs" />
-    <Compile Include="Services\ViewOptions\IRouteTokenConfig.cs" />
-    <Compile Include="Services\ViewOptions\RouteToken.cs" />
+    <Compile Include="Services\RouteTokens\IRouteTokenBuilder.cs" />
+    <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
+    <Compile Include="Services\RouteTokens\RouteToken.cs" />
     <Compile Include="WebLocalizationKeys.cs" />
     <Compile Include="KYTWebRegistry.cs" />
     <Compile Include="Global.asax.cs">

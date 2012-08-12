@@ -120,6 +120,19 @@ KYT.mixins.formMixin = {
     }
 };
 
+KYT.mixins.displayMixin = {
+    events:{
+        'click #save' : 'saveItem',
+        'click #cancel' : 'cancel'
+    },
+    cancel:function(){
+        KYT.vent.trigger("form:"+this.id+":cancel");
+        if(!this.options.noBubbleUp) {KYT.WorkflowManager.returnParentView();}
+    }
+};
+
+
+
 KYT.mixins.ajaxFormMixin = {
     render:function(){
         $.when(KYT.loadTemplateAndModel(this))

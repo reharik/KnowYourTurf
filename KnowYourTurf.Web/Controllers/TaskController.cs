@@ -110,24 +110,21 @@ namespace KnowYourTurf.Web.Controllers
 
             return groups;
         }
+        public ActionResult Display_Template(ViewModel input)
+        {
+            return View("Display", new DisplayTaskViewModel{Popup = input.Popup});
+        }
 
         public ActionResult Display(ViewModel input)
         {
-//            var task = _repository.Find<Task>(input.EntityId);
-////            var productName = task.GetProductName();
-//            var model = new TaskViewModel
-//                            {
-//                                Popup = input.Popup,
-//                                Item = task,
-////                                Product = productName,
-//                                _EmployeeNames = task.Employees.Select(x =>  x.FullName ),
-//                                _EquipmentNames = task.Equipment.Select(x => x.Name ),
-//                                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x=>x.AddUpdate(null))+"/"+task.EntityId,
-//                                _Title = WebLocalizationKeys.TASK_INFORMATION.ToString()
-//
-//            };
-//            return PartialView( model);
-            return null;
+            var task = _repository.Find<Task>(input.EntityId);
+            var model = Mapper.Map<Task, DisplayTaskViewModel>(task);
+            model.Popup = input.Popup;
+            model._EmployeeNames = task.Employees.Select(x => x.FullName);
+            model._EquipmentNames = task.Equipment.Select(x => x.Name);
+            model._AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null));
+            model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Delete(ViewModel input)

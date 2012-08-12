@@ -17,9 +17,7 @@ namespace KnowYourTurf.Web.Models
         public TokenInputViewModel Employees { get; set; }
         public TokenInputViewModel Equipment { get; set; }
 
-        public IEnumerable<string> _EmployeeNames { get; set; }
-        public IEnumerable<string> _EquipmentNames { get; set; }
-
+        
         public string _saveUrl { get; set; }
         public bool Copy { get; set; }
 
@@ -40,6 +38,19 @@ namespace KnowYourTurf.Web.Models
         [TextArea]
         public string Notes { get; set; }
         public bool Complete { get; set; }
+
+    }
+
+    public class DisplayTaskViewModel:ViewModel
+    {
+        public string TaskTypeName { get; set; }
+        public DateTime ScheduledDate { get; set; }
+        public string FieldName { get; set; }
+        public string InventoryProductProductName { get; set; }
+        public string Notes { get; set; }
+        public string _AddUpdateUrl { get; set; }
+        public IEnumerable<string> _EmployeeNames { get; set; }
+        public IEnumerable<string> _EquipmentNames { get; set; }
     }
 
     public class AddUpdateTaskViewModel:ViewModel

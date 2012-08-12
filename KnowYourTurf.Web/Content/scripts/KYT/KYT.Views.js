@@ -119,29 +119,9 @@ KYT.Views.AjaxFormView = KYT.Views.View.extend({
 
 KYT.Views.AjaxDisplayView = KYT.Views.View.extend({
     initialize:function(){
-        KYT.mixin(this, "baseFormView");
+        KYT.mixin(this, "displayMixin");
         KYT.mixin(this, "ajaxFormMixin");
-    },
-    render:function(){
-        KYT.repository.ajaxGet(this.options.url, this.options.data).done($.proxy(this.renderCallback));
-    },
-    renderCallback:function(result){
-        if(result.LoggedOut){
-            window.location.replace(result.RedirectUrl);
-            return;
-        }
-        $(this.el).html(result);
-        if(extraFormOptions){
-            $.extend(true,this.options, extraFormOptions);
-        }
-         //callback for render
-        this.viewLoaded();
-        KYT.vent.trigger("display:"+this.id+":pageLoaded",this.options);
-    },
-    cancel:function(){
-        KYT.vent.trigger("display:"+this.id+":cancel",this.id);
-        if(!this.options.noBubbleUp)
-            KYT.WorkflowManager.returnParentView();
+        KYT.mixin(this, "modelAndElementsMixin");
     }
 });
 
@@ -212,7 +192,9 @@ KYT.Views.AjaxPopupDisplayModule  = KYT.Views.View.extend({
         this.registerSubscriptions();
     },
     render: function(){
-        this.popupDisplay = this.options.view ? new this.options.view(this.options) : new KYT.Views.AjaxDisplayView(this.options);
+        this.options.noBubbleUp=true;
+        this.options.isPopup=true;
+        this.popupDisplay = this.options.view ? new KYT.Views[this.options.view](this.options) : new KYT.Views.AjaxDisplayView(this.options);
         this.popupDisplay.render();
         this.storeChild(this.popupDisplay);
         $(this.el).append(this.popupDisplay.el);
