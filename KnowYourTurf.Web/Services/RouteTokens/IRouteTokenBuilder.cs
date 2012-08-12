@@ -31,6 +31,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         IRouteTokenBuilder NoModel();
         IRouteTokenBuilder NoTemplate();
         IRouteTokenBuilder JustRoute(string route);
+        IRouteTokenBuilder SubRouteToken(string route);
     }
 
     public class RouteTokenBuilder : IRouteTokenBuilder
@@ -173,6 +174,12 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         {
             currentItem.route = route.ToLowerInvariant();
             currentItem.viewName= route + "View";
+            return this;
+        }
+
+        public IRouteTokenBuilder SubRouteToken(string route)
+        {
+            currentItem.subViewRoute = route.ToLowerInvariant();
             return this;
         }
 
