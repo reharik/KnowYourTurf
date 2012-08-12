@@ -81,7 +81,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         var formOptions = {
             id: "displayModule",
             url: this.model.DisplayUrl,
-            route: this.model.DisplayRoute,
+            route: "display"+this.model.subViewRoute,
             templateUrl: this.model.DisplayUrl+"_Template?Popup=true",
             view: "Display" + this.options.subViewName,
             AddUpdateUrl: this.model.AddUpdateUrl,
