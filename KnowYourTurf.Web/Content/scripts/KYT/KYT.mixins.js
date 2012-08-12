@@ -19,17 +19,6 @@ KYT.mixin = function(target, mixin, preserveRender){
             target[prop] = mixinObj[prop];
         }
     }
-//
-//    if(target.events && KYT.mixins[mixin].events){
-//        var events = $.extend({}, target.events, KYT.mixins[mixin].events)
-//    }
-//
-//    $.extend(target,KYT.mixins[mixin],overrides||{});
-//
-//
-//    if(events){
-//        target.events = events;
-//    }
 };
 
 KYT.mixins.modelAndElementsMixin = {
@@ -52,8 +41,6 @@ KYT.mixins.modelAndElementsMixin = {
             that.mappingOptions.ignore.push(item);});
         this.mappingOptions.ignore.push("_availableItems");
         this.mappingOptions.ignore.push("_resultsItems");
-        this.addIdsToModel();
-
     },
     extendModel:function(){
         this.model._createdText = ko.computed(function() {
@@ -122,16 +109,26 @@ KYT.mixins.formMixin = {
 
 KYT.mixins.displayMixin = {
     events:{
-        'click #save' : 'saveItem',
         'click #cancel' : 'cancel'
     },
     cancel:function(){
-        KYT.vent.trigger("form:"+this.id+":cancel");
+        KYT.vent.trigger("display:"+this.id+":cancel");
         if(!this.options.noBubbleUp) {KYT.WorkflowManager.returnParentView();}
     }
 };
 
 
+KYT.mixins.ajaxDisplayMixin = {
+    render:function(){
+        $.when(KYT.loadTemplateAndModel(this))
+         .done($.proxy(this.renderCallback,this));
+    },
+    renderCallback:function(){
+        this.bindModelAndElements();
+        this.viewLoaded();
+        KYT.vent.trigger("display:"+this.id+":pageLoaded",this.options);
+    }
+};
 
 KYT.mixins.ajaxFormMixin = {
     render:function(){
@@ -142,7 +139,6 @@ KYT.mixins.ajaxFormMixin = {
         this.bindModelAndElements();
         this.viewLoaded();
         KYT.vent.trigger("form:"+this.id+":pageLoaded",this.options);
-        $(this.el).find("form :input:visible:enabled:first").focus();
     }
 };
 

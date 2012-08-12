@@ -70,15 +70,23 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         builder.addEditButton();
         builder.addButton("Copy Event",$.proxy(this.copyItem,this));
         builder.addCancelButton();
-
+//
+        //
+        //
+        // need to get route some how so that template can get loaded
+        // need to get route some how so that template can get loaded
+        //
+        //
+        //
         var formOptions = {
             id: "displayModule",
             url: this.model.DisplayUrl,
             route: this.model.DisplayRoute,
             templateUrl: this.model.DisplayUrl+"_Template?Popup=true",
-            view:this.options.subViewName,
+            view: "Display" + this.options.subViewName,
+            AddUpdateUrl: this.model.AddUpdateUrl,
             data:data,
-            buttons:builder.getButtons()
+            buttons: builder.getButtons()
         };
         this.ajaxPopupDisplay = new KYT.Views.AjaxPopupDisplayModule(formOptions);
         this.ajaxPopupDisplay.render();
@@ -112,13 +120,13 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     },
 
     copyItem:function(){
-        var entityId = $("#EntityId",this.ajaxPopupDisplay.el).val();
+        var entityId = this.ajaxPopupDisplay.popupDisplay.model.EntityId();
         var data = {"EntityId":entityId,"Copy":true};
+        this.displayCancel();
         this.editEvent(this.model.AddUpdateUrl,data);
-        this.ajaxPopupDisplay.close();
         //this feels retarded for some reason
         KYT.vent.bind("form:editModule:pageLoaded", function(){
-            $(this.ajaxPopupFormModule.el).find("#EntityId").val(0);
+            this.ajaxPopupFormModule.popupForm.model.EntityId(0);
             KYT.vent.unbind("form:editModule:pageLoaded");
         },this);
     },
@@ -126,9 +134,9 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     deleteItem: function(){
         var that = this;
         if (confirm("Are you sure you would like to delete this Item?")) {
-            var entityId = $("#EntityId").val();
+            var entityId = this.ajaxPopupDisplay.popupDisplay.model.EntityId();
             KYT.repository.ajaxGet(this.model.DeleteUrl,{"EntityId":entityId}).done(function(result){
-                that.ajaxPopupDisplay.close();
+                that.displayCancel();
 //                if(!result.Success){
 //                    alert(result.Message);
 //                }else{
@@ -138,8 +146,8 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         }
     },
     displayEdit:function(event){
-        var id = $("#EntityId",this.ajaxPopupDisplay.el).val();
-        this.ajaxPopupDisplay.close();
+        var id = this.ajaxPopupDisplay.popupDisplay.model.EntityId();
+        this.displayCancel();
         this.editEvent(this.model.AddUpdateUrl+"/"+id);
     },
 
@@ -150,12 +158,15 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     formSuccess:function(){
         this.formCancel();
         this.reload();
+        this.removeChildView(this.ajaxPopupFormModule)
     },
     formCancel:function(){
         this.ajaxPopupFormModule.close();
+        this.removeChildView(this.ajaxPopupFormModule)
     },
     displayCancel:function(){
         this.ajaxPopupDisplay.close();
+        this.removeChildView(this.ajaxPopupDisplay)
     }
 });
 
@@ -196,6 +207,7 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
+        this.addIdsToModel();
         var rel = KYT.State.get("Relationships");
         $('#FieldColor',this.el).miniColors();
         this.pendingGridView = new KYT.Views.DahsboardGridView({
@@ -278,7 +290,7 @@ KYT.Views.DahsboardGridView = KYT.Views.View.extend({
     }
 });
 
-KYT.Views.TaskFormPopupView = KYT.Views.View.extend({
+KYT.Views.TaskFormView = KYT.Views.View.extend({
     initialize:function(){
         KYT.mixin(this, "formMixin");
         KYT.mixin(this, "ajaxFormMixin");
@@ -286,13 +298,13 @@ KYT.Views.TaskFormPopupView = KYT.Views.View.extend({
     },
     viewLoaded:function(){
         KYT.calculator.applyTaskTransferData(this.model,this.$el);
-    }
+    },
 });
 
-KYT.Views.TaskFormView = KYT.Views.View.extend({
+KYT.Views.DisplayTaskFormView = KYT.Views.View.extend({
     initialize:function(){
-        KYT.mixin(this, "formMixin");
-        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "displayMixin");
+        KYT.mixin(this, "ajaxDisplayMixin");
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
