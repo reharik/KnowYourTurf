@@ -8,20 +8,24 @@ namespace KnowYourTurf.Web.Models
 {
     public class EventViewModel:ViewModel
     {
-        public Core.Domain.Event Event { get; set; }
-        [ValidateNonEmpty]
-        public long Field { get; set; }
-        public IEnumerable<SelectListItem> FieldList { get; set; }
-        [ValidateNonEmpty]
-        public long EventType { get; set; }
-        public IEnumerable<SelectListItem> EventTypeList { get; set; }
+        public IEnumerable<SelectListItem> _FieldEntityIdList { get; set; }
+        public IEnumerable<SelectListItem> _EventTypeEntityIdList { get; set; }
         public bool Copy { get; set; }
+
+        [ValidateNonEmpty]
+        public int FieldEntityId { get; set; }
+        [ValidateNonEmpty]
+        public int EventTypeEntityId { get; set; }
+        [ValidateNonEmpty]
+        public DateTime? ScheduledDate { get; set; }
+        [ValidateNonEmpty]
+        public DateTime? StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
+        public string Notes { get; set; }
+
+        public string FieldName { get; set; }
+        public string EventTypeName { get; set; }
     }
     
-    public class AddUpdateEventViewModel : ViewModel
-    {
-        public DateTime? StartTime { get; set; }
-        public bool Copy { get; set; }
-        public DateTime? ScheduledDate { get; set; }
-    }
+    
 }

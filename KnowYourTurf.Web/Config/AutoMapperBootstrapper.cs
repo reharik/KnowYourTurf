@@ -36,6 +36,7 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<InventoryProduct, InventoryChemicalViewModel>();
             Mapper.CreateMap<InventoryProduct, InventoryMaterialViewModel>();
             Mapper.CreateMap<PurchaseOrder, POListViewModel>();
+            Mapper.CreateMap<Event, EventViewModel>();
 
         
         }

@@ -33,7 +33,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForForm<TaskController>(x => x.AddUpdate(null)).End();
             _builder.UrlForDisplay<TaskController>(x => x.Display(null)).End();
 
-            _builder.TokenForList<EventCalendarController>(x => x.EventCalendar(null)).ViewName("CalendarView").End();
+            _builder.TokenForList<EventCalendarController>(x => x.EventCalendar(null)).ViewName("CalendarView").SubViewName("TaskFormView").End();
             _builder.TokenForList<EquipmentListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<EquipmentController>(x => x.AddUpdate(null)).End();
 
