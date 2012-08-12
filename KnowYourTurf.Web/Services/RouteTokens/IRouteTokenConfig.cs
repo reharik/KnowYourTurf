@@ -29,11 +29,11 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForForm<FieldDashboardController>(x => x.ViewField(null)).ViewName("FieldDashboardView").End();
 
             _builder.TokenForList<TaskListController>(x => x.ItemList(null)).End();
-            _builder.TokenForForm<TaskCalendarController>(x => x.TaskCalendar(null)).ViewName("CalendarView").SubViewName("TaskFormView").SubRouteToken("task").End();
+            _builder.TokenForForm<TaskCalendarController>(x => x.TaskCalendar(null)).ViewName("CalendarView").SubViewName("TaskFormView").End();
             _builder.TokenForForm<TaskController>(x => x.AddUpdate(null)).End();
             _builder.UrlForDisplay<TaskController>(x => x.Display(null)).End();
 
-            _builder.TokenForList<EventCalendarController>(x => x.EventCalendar(null)).ViewName("CalendarView").SubViewName("TaskFormView").End();
+            _builder.TokenForList<EventCalendarController>(x => x.EventCalendar(null)).ViewName("CalendarView").End();
             _builder.TokenForList<EquipmentListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<EquipmentController>(x => x.AddUpdate(null)).End();
 

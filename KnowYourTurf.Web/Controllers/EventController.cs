@@ -46,12 +46,13 @@ namespace KnowYourTurf.Web.Controllers
             model._FieldEntityIdList = fields;
             model._EventTypeEntityIdList = _eventTypes;
             model._Title = WebLocalizationKeys.EVENT_INFORMATION.ToString();
+            model._saveUrl = UrlContext.GetUrlForAction<EventController>(x => x.Save(null));
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Display_Template(ViewModel input)
         {
-            return View("EventView", new EventViewModel());
+            return View("EventDisplay", new EventViewModel());
         }
         public ActionResult Display(ViewModel input)
         {

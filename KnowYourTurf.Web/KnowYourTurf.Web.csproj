@@ -619,7 +619,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Event\EventAddUpdate.cshtml" />
-    <Content Include="Views\Event\EventView.cshtml" />
+    <Content Include="Views\Event\EventDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_DisplayLayout.cshtml" />

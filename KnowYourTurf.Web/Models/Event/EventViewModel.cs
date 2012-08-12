@@ -25,6 +25,7 @@ namespace KnowYourTurf.Web.Models
 
         public string FieldName { get; set; }
         public string EventTypeName { get; set; }
+        public string _saveUrl { get; set; }
     }
     
     

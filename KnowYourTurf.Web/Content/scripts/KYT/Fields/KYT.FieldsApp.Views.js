@@ -58,9 +58,9 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         KYT.repository.ajaxGet(this.model.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
     },
     dayClick:function(date, allDay, jsEvent, view) {
-        var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"),
-            "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")
-        };
+        var data = this.getIds(0);
+        data.ScheduledDate= $.fullCalendar.formatDate( date,"M/d/yyyy");
+        data.ScheduledStartTime= $.fullCalendar.formatDate( date,"hh:mm TT");
         this.editEvent(this.model.AddUpdateUrl,data);
     },
     eventClick:function(calEvent, jsEvent, view) {
@@ -70,20 +70,13 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         builder.addEditButton();
         builder.addButton("Copy Event",$.proxy(this.copyItem,this));
         builder.addCancelButton();
-//
-        //
-        //
-        // need to get route some how so that template can get loaded
-        // need to get route some how so that template can get loaded
-        //
-        //
-        //
+
         var formOptions = {
             id: "displayModule",
             url: this.model.DisplayUrl,
-            route: "display"+this.model.subViewRoute,
+            route: this.model.DisplayRoute,
             templateUrl: this.model.DisplayUrl+"_Template?Popup=true",
-            view: "Display" + this.options.subViewName,
+            view: this.options.subViewName?"Display" + this.options.subViewName:"",
             AddUpdateUrl: this.model.AddUpdateUrl,
             data:data,
             buttons: builder.getButtons()
@@ -95,14 +88,13 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
 
     },
     editEvent:function(url, data){
-        var rootId = KYT.State.get("Relationships").rootId;
-        var _data = $.extend({"RootId":rootId, Popup:true},data,{});
+        data.Popup = true;
         var formOptions = {
             id: "editModule",
-            route: this.options.subViewRoute,
+            route: this.model.AddUpdateRoute,
             url: url,
             templateUrl: url+"_Template?Popup=true",
-            data:_data,
+            data:data,
             view:this.options.subViewName,
             buttons: KYT.Views.popupButtonBuilder.builder("editModule").standardEditButons()
         };
@@ -120,8 +112,8 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     },
 
     copyItem:function(){
-        var entityId = this.ajaxPopupDisplay.popupDisplay.model.EntityId();
-        var data = {"EntityId":entityId,"Copy":true};
+        var data = this.getIds(this.ajaxPopupDisplay.popupDisplay.model.EntityId());
+        data.Copy = true;
         this.displayCancel();
         this.editEvent(this.model.AddUpdateUrl,data);
         //this feels retarded for some reason
@@ -134,8 +126,8 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     deleteItem: function(){
         var that = this;
         if (confirm("Are you sure you would like to delete this Item?")) {
-            var entityId = this.ajaxPopupDisplay.popupDisplay.model.EntityId();
-            KYT.repository.ajaxGet(this.model.DeleteUrl,{"EntityId":entityId}).done(function(result){
+
+            KYT.repository.ajaxGet(this.model.DeleteUrl,this.getIds(this.ajaxPopupDisplay.popupDisplay.model.EntityId())).done(function(result){
                 that.displayCancel();
 //                if(!result.Success){
 //                    alert(result.Message);
@@ -146,9 +138,19 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         }
     },
     displayEdit:function(event){
-        var id = this.ajaxPopupDisplay.popupDisplay.model.EntityId();
         this.displayCancel();
-        this.editEvent(this.model.AddUpdateUrl+"/"+id);
+        this.editEvent(this.model.AddUpdateUrl,this.getIds(this.ajaxPopupDisplay.popupDisplay.model.EntityId()));
+    },
+
+    getIds:function(entityId){
+        var rel = KYT.State.get("Relationships");
+        var rootId = rel.rootId;
+        var parentId = rel.parentId;
+        return {
+            entityId:entityId,
+            parentId:parentId,
+            rootId:rootId
+        };
     },
 
     reload:function(){
@@ -294,17 +296,6 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
     initialize:function(){
         KYT.mixin(this, "formMixin");
         KYT.mixin(this, "ajaxFormMixin");
-        KYT.mixin(this, "modelAndElementsMixin");
-    },
-    viewLoaded:function(){
-        KYT.calculator.applyTaskTransferData(this.model,this.$el);
-    },
-});
-
-KYT.Views.DisplayTaskFormView = KYT.Views.View.extend({
-    initialize:function(){
-        KYT.mixin(this, "displayMixin");
-        KYT.mixin(this, "ajaxDisplayMixin");
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){

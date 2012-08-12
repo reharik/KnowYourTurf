@@ -28,10 +28,15 @@ namespace KnowYourTurf.Web.Controllers
                            CalendarDefinition = new CalendarDefinition
                                                    {
                                                        Url = UrlContext.GetUrlForAction<EventCalendarController>(x => x.Events(null)) + "?RootId=" + input.RootId,
+                                                       AddUpdateTemplateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate_Template(null)),
                                                        AddUpdateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate(null)),
+                                                       AddUpdateRoute = "event",
+                                                       DisplayTemplateUrl = UrlContext.GetUrlForAction<EventController>(x => x.Display_Template(null)),
                                                        DisplayUrl = UrlContext.GetUrlForAction<EventController>(x => x.Display(null)),
+                                                       DisplayRoute = "eventdisplay",
                                                        DeleteUrl = UrlContext.GetUrlForAction<EventController>(x => x.Delete(null)),
                                                        EventChangedUrl = UrlContext.GetUrlForAction<EventCalendarController>(x => x.EventChanged(null))
+                                               
                                                    }
                        };
             return Json(model,JsonRequestBehavior.AllowGet);
