@@ -4,6 +4,7 @@ using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -24,6 +25,20 @@ namespace KnowYourTurf.Web.Controllers
             _purchaseOrderLineItemGrid = purchaseOrderLineItemGrid;
             _saveEntityService = saveEntityService;
             _dynamicExpressionQuery = dynamicExpressionQuery;
+        }
+
+        public ActionResult ItemList(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.PurchaseOrderLineItems(null)) + "/" + input.EntityId; 
+            var model = new ListViewModel()
+            {
+                gridDef = _purchaseOrderLineItemGrid.GetGridDefinition(url),
+                _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
+                deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "/" + input.EntityId
+            };
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult PurchaseOrderLineItems(GridItemsRequestModel input)
