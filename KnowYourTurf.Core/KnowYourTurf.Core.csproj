@@ -170,6 +170,7 @@
     <Compile Include="Domain\Weather.cs" />
     <Compile Include="Html\Expressions\HtmlTagExpressionBase.cs" />
     <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
+    <Compile Include="Html\FubuUI\Builders\DateTimeDisplayBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\GroupedSelectBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\DatePickerBuilder2.cs" />

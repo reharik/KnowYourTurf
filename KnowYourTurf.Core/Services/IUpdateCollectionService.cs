@@ -9,7 +9,7 @@ namespace KnowYourTurf.Core.Services
 {
     public interface IUpdateCollectionService
     {
-        void Update<ENTITY>(IEnumerable<ENTITY> origional,
+        void UpdateCollectionDetails<ENTITY>(IEnumerable<ENTITY> origional,
                     IEnumerable<ENTITY> newItems,
                     Action<ENTITY> addEntity,
                     Action<ENTITY> removeEntity) where ENTITY : Entity;
@@ -32,7 +32,7 @@ namespace KnowYourTurf.Core.Services
             _repository = repository;
         }
 
-        public void Update<ENTITY>(IEnumerable<ENTITY> origional,
+        public void UpdateCollectionDetails<ENTITY>(IEnumerable<ENTITY> origional,
             IEnumerable<ENTITY> newItems,
             Action<ENTITY> addEntity,
             Action<ENTITY> removeEntity) where ENTITY : Entity
@@ -79,14 +79,9 @@ namespace KnowYourTurf.Core.Services
             {
                 origional.Where(x => comparer(x, newItems.FirstOrDefault())).ForEachItem(x =>
                 {
-                    var newItem = newItems.FirstOrDefault(i => i.EntityId == x.EntityId);
-                    if (newItem == null)
+                    if (!newItems.Any(i => i.EntityId == x.EntityId))
                     {
                         remove.Add(x);
-                    }
-                    else
-                    {
-                        x.UpdateSelf(newItem);
                     }
                 });
             }

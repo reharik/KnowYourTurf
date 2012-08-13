@@ -28,8 +28,12 @@ namespace KnowYourTurf.Web.Controllers
                            CalendarDefinition = new CalendarDefinition
                                                    {
                                                        Url = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.Events(null))+"?RootId="+input.RootId,
+                                                       AddUpdateTemplateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate_Template(null)),
                                                        AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)),
+                                                       AddUpdateRoute = "task",
+                                                       DisplayTemplateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Display_Template(null)),
                                                        DisplayUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Display(null)),
+                                                       DisplayRoute = "taskdisplay",
                                                        DeleteUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Delete(null)),
                                                        EventChangedUrl = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.EventChanged(null))
                                                    }

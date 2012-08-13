@@ -334,9 +334,9 @@
     <Compile Include="Services\IAuthenticationContext.cs" />
     <Compile Include="Services\ISecuritySetupService.cs" />
     <Compile Include="Services\ModelService.cs" />
-    <Compile Include="Services\ViewOptions\IRouteTokenBuilder.cs" />
-    <Compile Include="Services\ViewOptions\IRouteTokenConfig.cs" />
-    <Compile Include="Services\ViewOptions\RouteToken.cs" />
+    <Compile Include="Services\RouteTokens\IRouteTokenBuilder.cs" />
+    <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
+    <Compile Include="Services\RouteTokens\RouteToken.cs" />
     <Compile Include="WebLocalizationKeys.cs" />
     <Compile Include="KYTWebRegistry.cs" />
     <Compile Include="Global.asax.cs">
@@ -619,7 +619,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Event\EventAddUpdate.cshtml" />
-    <Content Include="Views\Event\EventView.cshtml" />
+    <Content Include="Views\Event\EventDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_DisplayLayout.cshtml" />

@@ -33,10 +33,9 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
             Displays.Builder<ImageBuilder2>();
             Displays.Builder<EmailDisplayBuilder2>();
             Displays.Builder<ListDisplayBuilder>();
-            Displays.Builder<DateTimeDisplayBuilder>();
+            Displays.Builder<DateDisplayBuilder2>();
+            Displays.Builder<TimeDisplayBuilder2>();
             Displays.Builder<ImageFileDisplayBuilder>();
-            Displays.If(x => x.Accessor.PropertyType == typeof(DateTime) || x.Accessor.PropertyType == typeof(DateTime?))
-                .BuildBy(req => req.RawValue != null ? new HtmlTag("span").Text(DateTime.Parse(req.RawValue.ToString()).ToLongDateString()) : new HtmlTag("span"));
             Displays.Always.BuildBy(req => new HtmlTag("span").Attr("data-bind", "text:" + KnowYourTurfHtmlConventions.DeriveElementName(req)));
             Labels.Always.BuildBy(req =>
                                       {

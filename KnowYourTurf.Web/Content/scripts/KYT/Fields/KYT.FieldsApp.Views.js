@@ -58,9 +58,9 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         KYT.repository.ajaxGet(this.model.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
     },
     dayClick:function(date, allDay, jsEvent, view) {
-        var data = {"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"),
-            "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")
-        };
+        var data = this.getIds(0);
+        data.ScheduledDate= $.fullCalendar.formatDate( date,"M/d/yyyy");
+        data.ScheduledStartTime= $.fullCalendar.formatDate( date,"hh:mm TT");
         this.editEvent(this.model.AddUpdateUrl,data);
     },
     eventClick:function(calEvent, jsEvent, view) {
@@ -74,8 +74,12 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         var formOptions = {
             id: "displayModule",
             url: this.model.DisplayUrl,
+            route: this.model.DisplayRoute,
+            templateUrl: this.model.DisplayUrl+"_Template?Popup=true",
+            view: this.options.subViewName?"Display" + this.options.subViewName:"",
+            AddUpdateUrl: this.model.AddUpdateUrl,
             data:data,
-            buttons:builder.getButtons()
+            buttons: builder.getButtons()
         };
         this.ajaxPopupDisplay = new KYT.Views.AjaxPopupDisplayModule(formOptions);
         this.ajaxPopupDisplay.render();
@@ -84,12 +88,13 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
 
     },
     editEvent:function(url, data){
-        var rootId = KYT.State.get("Relationships").rootId;
-        var _data = $.extend({"RootId":rootId, Popup:true},data,{});
+        data.Popup = true;
         var formOptions = {
             id: "editModule",
+            route: this.model.AddUpdateRoute,
             url: url,
-            data:_data,
+            templateUrl: url+"_Template?Popup=true",
+            data:data,
             view:this.options.subViewName,
             buttons: KYT.Views.popupButtonBuilder.builder("editModule").standardEditButons()
         };
@@ -107,13 +112,13 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     },
 
     copyItem:function(){
-        var entityId = $("#EntityId",this.ajaxPopupDisplay.el).val();
-        var data = {"EntityId":entityId,"Copy":true};
+        var data = this.getIds(this.ajaxPopupDisplay.popupDisplay.model.EntityId());
+        data.Copy = true;
+        this.displayCancel();
         this.editEvent(this.model.AddUpdateUrl,data);
-        this.ajaxPopupDisplay.close();
         //this feels retarded for some reason
         KYT.vent.bind("form:editModule:pageLoaded", function(){
-            $(this.ajaxPopupFormModule.el).find("#EntityId").val(0);
+            this.ajaxPopupFormModule.popupForm.model.EntityId(0);
             KYT.vent.unbind("form:editModule:pageLoaded");
         },this);
     },
@@ -121,9 +126,9 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     deleteItem: function(){
         var that = this;
         if (confirm("Are you sure you would like to delete this Item?")) {
-            var entityId = $("#EntityId").val();
-            KYT.repository.ajaxGet(this.model.DeleteUrl,{"EntityId":entityId}).done(function(result){
-                that.ajaxPopupDisplay.close();
+
+            KYT.repository.ajaxGet(this.model.DeleteUrl,this.getIds(this.ajaxPopupDisplay.popupDisplay.model.EntityId())).done(function(result){
+                that.displayCancel();
 //                if(!result.Success){
 //                    alert(result.Message);
 //                }else{
@@ -133,9 +138,19 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         }
     },
     displayEdit:function(event){
-        var id = $("#EntityId",this.ajaxPopupDisplay.el).val();
-        this.ajaxPopupDisplay.close();
-        this.editEvent(this.model.AddUpdateUrl+"/"+id);
+        this.displayCancel();
+        this.editEvent(this.model.AddUpdateUrl,this.getIds(this.ajaxPopupDisplay.popupDisplay.model.EntityId()));
+    },
+
+    getIds:function(entityId){
+        var rel = KYT.State.get("Relationships");
+        var rootId = rel.rootId;
+        var parentId = rel.parentId;
+        return {
+            entityId:entityId,
+            parentId:parentId,
+            rootId:rootId
+        };
     },
 
     reload:function(){
@@ -145,12 +160,15 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     formSuccess:function(){
         this.formCancel();
         this.reload();
+        this.removeChildView(this.ajaxPopupFormModule)
     },
     formCancel:function(){
         this.ajaxPopupFormModule.close();
+        this.removeChildView(this.ajaxPopupFormModule)
     },
     displayCancel:function(){
         this.ajaxPopupDisplay.close();
+        this.removeChildView(this.ajaxPopupDisplay)
     }
 });
 
@@ -191,6 +209,7 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
+        this.addIdsToModel();
         var rel = KYT.State.get("Relationships");
         $('#FieldColor',this.el).miniColors();
         this.pendingGridView = new KYT.Views.DahsboardGridView({
@@ -280,7 +299,7 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
-        KYT.calculator.applyTaskTransferData(this.model);
+        KYT.calculator.applyTaskTransferData(this.model,this.$el);
     }
 });
 
@@ -407,9 +426,11 @@ KYT.Views.CalculatorFormView = KYT.Views.View.extend({
     successHandler:function(result){
         KYT.calculator.successHandler(this.model,result);
     },
-    events:{'click #createTask':'addTask'},
+    events:{'click #createTask':'addTask',
+    'click #save' : 'saveItem',
+        'click #cancel' : 'cancel'},
     addTask:function(){
-        var fieldId = this.model.FieldEntityId();
+        var fieldId = this.model.FieldEntityId?this.model.FieldEntityId():0;
         KYT.calculator.setTaskTransferData(this.model);
         KYT.vent.trigger("route",KYT.generateRoute("task", 0, fieldId),true);
     }

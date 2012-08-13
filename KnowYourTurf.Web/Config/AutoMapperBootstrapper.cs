@@ -18,6 +18,7 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<Field, FieldViewModel>();
             Mapper.CreateMap<Photo, PhotoDto>();
             Mapper.CreateMap<Task, TaskViewModel>().ForMember(d => d.Equipment, o => o.Ignore()).ForMember(d => d.Employees, o => o.Ignore());
+            Mapper.CreateMap<Task, DisplayTaskViewModel>();
             Mapper.CreateMap<Equipment, EquipmentViewModel>();
             Mapper.CreateMap<EmailJob, EmailJobViewModel>().ForMember(d => d.Subscribers, o => o.Ignore());
             Mapper.CreateMap<EventType, EventTypeViewModel>();
@@ -35,6 +36,7 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<InventoryProduct, InventoryChemicalViewModel>();
             Mapper.CreateMap<InventoryProduct, InventoryMaterialViewModel>();
             Mapper.CreateMap<PurchaseOrder, POListViewModel>();
+            Mapper.CreateMap<Event, EventViewModel>();
 
         
         }

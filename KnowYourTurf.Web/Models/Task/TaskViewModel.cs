@@ -4,12 +4,7 @@ using System.Web.Mvc;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
-using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
-using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Models
 {
@@ -17,15 +12,12 @@ namespace KnowYourTurf.Web.Models
     {
         public GroupedSelectViewModel _FieldEntityIdList { get; set; }
         public GroupedSelectViewModel _InventoryProductProductEntityIdList { get; set; }
-        public IEnumerable<SelectListItem> _EquipmentList { get; set; }
         public IEnumerable<SelectListItem> _TaskTypeEntityIdList { get; set; }
 
         public TokenInputViewModel Employees { get; set; }
         public TokenInputViewModel Equipment { get; set; }
 
-        public IEnumerable<string> _EmployeeNames { get; set; }
-        public IEnumerable<string> _EquipmentNames { get; set; }
-
+        
         public string _saveUrl { get; set; }
         public bool Copy { get; set; }
 
@@ -46,6 +38,19 @@ namespace KnowYourTurf.Web.Models
         [TextArea]
         public string Notes { get; set; }
         public bool Complete { get; set; }
+
+    }
+
+    public class DisplayTaskViewModel:ViewModel
+    {
+        public string TaskTypeName { get; set; }
+        public DateTime ScheduledDate { get; set; }
+        public string FieldName { get; set; }
+        public string InventoryProductProductName { get; set; }
+        public string Notes { get; set; }
+        public string _AddUpdateUrl { get; set; }
+        public IEnumerable<string> _EmployeeNames { get; set; }
+        public IEnumerable<string> _EquipmentNames { get; set; }
     }
 
     public class AddUpdateTaskViewModel:ViewModel
