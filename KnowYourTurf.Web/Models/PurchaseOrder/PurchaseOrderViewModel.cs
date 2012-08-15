@@ -16,5 +16,9 @@ namespace KnowYourTurf.Web.Models
 
         public string ReturnUrl { get; set; }
         public string CommitUrl { get; set; }
+        public string _VendorProductsUrl { get; set; }
+        public string _POLIUrl { get; set; }
+        public string _ReturnUrl { get; set; }
+        public string _CommitUrl { get; set; }
     }
 }

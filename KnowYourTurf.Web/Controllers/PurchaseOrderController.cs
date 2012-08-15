@@ -52,10 +52,10 @@ namespace KnowYourTurf.Web.Controllers
 
             POListViewModel model = Mapper.Map<PurchaseOrder, POListViewModel>(purchaseOrder);
             model._VendorEntityIdList = vendors;
-//            model._VendorProductsUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x=>x.Products(null)), 
-//            model._POLIUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x=>x.ItemList(null)), 
-//            model._ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));
-//            model._CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null));
+            model._VendorProductsUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null));
+            model._POLIUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.ItemList(null)); 
+            model._ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));
+            model._CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null));
             model._Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString();
             return Json(model,JsonRequestBehavior.AllowGet);
         }

@@ -5,7 +5,7 @@ using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Web.Controllers;
 
-namespace KnowYourTurf.Web.Services.ViewOptions
+namespace KnowYourTurf.Web.Services.RouteTokens
 {
     public class RouteToken
     {

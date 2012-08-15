@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
             _dynamicExpressionQuery = dynamicExpressionQuery;
         }
 
-        public JsonResult PurchaseOrderLineItems(GridItemsRequestModel input)
+        public JsonResult ItemList (GridItemsRequestModel input)
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
             if (purchaseOrder == null) return null;

@@ -329,7 +329,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         $("#productGridArea").show();
         this.productsGridView = new KYT.Views.GridView({
             el:"#productGridArea",
-            url:this.model._VendorProductsUrls() + "/" + this.model.VendorEntityId(),
+            url:this.model._VendorProductsUrl() + "/" + this.model.VendorEntityId(),
             grouping:true,
             groupingView : {
                 groupField : ['InstantiatingType'],
