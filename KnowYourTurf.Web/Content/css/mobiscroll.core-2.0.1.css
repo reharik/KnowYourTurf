@@ -5,7 +5,7 @@
     position: absolute;
     top: 5%;
     left: 0;
-    z-index: 1001;
+    z-index: 1021;
     color: #000;
     font-family: arial, verdana, sans-serif;
     font-size: 14px;
@@ -26,7 +26,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 1021;
     opacity: .2;
     filter:Alpha(Opacity=20);
 }

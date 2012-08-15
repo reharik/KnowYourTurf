@@ -35,7 +35,10 @@ kyt.CalendarController = kyt.Controller.extend({
     additionalSubscriptions:function(){},
     dayClick:function(date, allDay, jsEvent, view) {
         var rootId = $("#RootId").val();
-        var data = {"RootId":rootId,"ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"), "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")};
+        var data = {"RootId":rootId,
+            "ScheduledDate" : $.fullCalendar.formatDate( date,"M/d/yyyy"),
+            "ScheduledStartTime": $.fullCalendar.formatDate( date,"hh:mm TT")
+        };
         this.editEvent(this.options.AddUpdateUrl,data);
     },
 

@@ -32,7 +32,12 @@ ko.bindingHandlers.dateString = {
         //handle the field changing
         ko.utils.registerEventHandler(element, "change", function () {
             var observable = valueAccessor();
-            observable($(element).val());
+            if(element.nodeName  == "SPAN"){
+                observable($(element).text());
+            }
+            if(element.nodeName  == "INPUT"){
+                observable($(element).val());
+            }
         });
 
         //handle disposal (if KO removes by the template binding)
@@ -43,12 +48,24 @@ ko.bindingHandlers.dateString = {
         // handle .net crappy json
         var valueUnwrapped = ko.utils.unwrapObservable(valueAccessor());
         var formattedDate = valueUnwrapped? new XDate(new Date(parseInt(valueUnwrapped.substr(6)))).toString("MM/dd/yyyy"):"";
-        $(element).val(formattedDate).change();
+        if(element.nodeName  == "SPAN"){
+           $(element).text(formattedDate).change();
+        }
+        if(element.nodeName  == "INPUT"){
+            $(element).val(formattedDate).change();
+        }
+
     },
     //update the control when the view model changes
     update: function(element, valueAccessor) {
         var value = ko.utils.unwrapObservable(valueAccessor());
-        $(element).val(value);
+        if(element.nodeName  == "SPAN"){
+           $(element).text(value);
+        }
+        if(element.nodeName  == "INPUT"){
+            $(element).val(value);
+        }
+
     }
 };
 
@@ -57,7 +74,13 @@ ko.bindingHandlers.timeString = {
         //handle the field changing
         ko.utils.registerEventHandler(element, "change", function () {
             var observable = valueAccessor();
-            observable($(element).val());
+            if(element.nodeName  == "SPAN"){
+               observable($(element).text());
+            }
+            if(element.nodeName  == "INPUT"){
+                observable($(element).val());
+            }
+
         });
 
         //handle disposal (if KO removes by the template binding)
@@ -68,11 +91,22 @@ ko.bindingHandlers.timeString = {
         // handle .net crappy json
         var valueUnwrapped = ko.utils.unwrapObservable(valueAccessor());
         var formattedTime = valueUnwrapped? new XDate(new Date(parseInt(valueUnwrapped.substr(6)))).toString("hh:mm TT"):"";
-        $(element).val(formattedTime).change();
+        if(element.nodeName  == "SPAN"){
+           $(element).text(formattedTime).change();
+        }
+        if(element.nodeName  == "INPUT"){
+            $(element).val(formattedTime).change();
+        }
     },
     //update the control when the view model changes
     update: function(element, valueAccessor) {
         var value = ko.utils.unwrapObservable(valueAccessor());
+        if(element.nodeName  == "SPAN"){
+           $(element).text(value);
+        }
+        if(element.nodeName  == "INPUT"){
+            $(element).val(value);
+        }
         $(element).val(value);
     }
 };
