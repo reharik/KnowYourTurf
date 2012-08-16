@@ -172,6 +172,7 @@
     <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
     <Compile Include="Html\FubuUI\Builders\DateTimeDisplayBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\GroupedSelectBuilder2.cs" />
+    <Compile Include="Html\FubuUI\Builders\ListDisplayBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\DatePickerBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\TextAreaBuilder2.cs" />
