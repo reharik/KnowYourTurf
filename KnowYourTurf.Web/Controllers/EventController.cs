@@ -7,6 +7,7 @@ using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using AutoMapper;
+using NHibernate.Linq;
 
 
 namespace KnowYourTurf.Web.Controllers
@@ -65,8 +66,11 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Delete(ViewModel input)
         {
-            var field = _repository.Find<Field>(input.ParentId);
-            var _event = field.Events.FirstOrDefault(x => x.EntityId == input.EntityId);
+            var category = _repository.Query<Category>(x => x.EntityId == input.RootId)
+                .Fetch(x => x.Fields.FirstOrDefault(y => y.Events.Any(z => z.EntityId == input.EntityId))).FirstOrDefault();
+
+            var field = category.Fields.FirstOrDefault(y => y.Events.Any(z => z.EntityId == input.EntityId));
+            var _event =field.Events.FirstOrDefault(x => x.EntityId == input.EntityId);
             field.RemoveEvent(_event);
             var crudManager = _saveEntityService.ProcessSave(field);
             var notification = crudManager.Finish();

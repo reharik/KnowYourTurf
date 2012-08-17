@@ -148,7 +148,6 @@ KYT.mixins.ajaxGridMixin = {
             .done($.proxy(this.renderCallback,this));
     },
     renderCallback:function(result){
-        result.errorMessagesContainer = this.options.errorMessagesContainer;
         $(this.el).html($("#gridTemplate").tmpl(result));
         $.extend(this.options,result,KYT.gridDefaults);
         this.setupGrid();
@@ -163,12 +162,14 @@ KYT.mixins.setupGridMixin = {
         $.each(this.options.headerButtons, $.proxy(function(i, item) {
             $(this.el).find("." + item).show();
         }, this));
-        var gridContainer = this.options.gridContainer;
         // if we have more then one grid, jqgrid doesn't scope so we need different names.
-        if (this.options.gridContainer != "#gridContainer") {
+        if (!this.options.gridContainer){
+            this.options.gridContainer = "#gridContainer";
+        }else{
             this.$el.find("#gridContainer").attr("id", this.options.gridContainer.replace("#", ""));
         }
-        $(gridContainer, this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
+
+        $(this.options.gridContainer, this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
         ///////
         $(this.el).gridSearch({onClear:$.proxy(this.removeSearch, this),onSubmit:$.proxy(this.search, this)});
     }

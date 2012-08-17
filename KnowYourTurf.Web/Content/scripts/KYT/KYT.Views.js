@@ -466,9 +466,7 @@ KYT.popupDefaults = {
 
 KYT.gridDefaults = {
     searchField:"Name",
-    gridContainer: "#gridContainer",
     showSearch:true,
-    id:"",
-    errorMessagesContainer:"errorMessagesGrid"
+    id:""
 };
 
