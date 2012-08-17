@@ -19,7 +19,6 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISelectListItemService _selectListItemService;
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
         private readonly IEntityListGrid<BaseProduct> _purchaseOrderSelectorGrid;
-        private readonly IEntityListGrid<PurchaseOrderLineItem> _purchaseOrderLineItemGrid;
         private readonly IPurchaseOrderLineItemService _purchaseOrderLineItemService;
 
         public PurchaseOrderController(IRepository repository,
@@ -27,7 +26,6 @@ namespace KnowYourTurf.Web.Controllers
             ISelectListItemService selectListItemService,
             IDynamicExpressionQuery dynamicExpressionQuery,
             IEntityListGrid<BaseProduct> purchaseOrderSelectorGrid,
-            IEntityListGrid<PurchaseOrderLineItem> purchaseOrderLineItemGrid,
             IPurchaseOrderLineItemService purchaseOrderLineItemService
             )
         {
@@ -36,7 +34,6 @@ namespace KnowYourTurf.Web.Controllers
             _selectListItemService = selectListItemService;
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _purchaseOrderSelectorGrid = purchaseOrderSelectorGrid;
-            _purchaseOrderLineItemGrid = purchaseOrderLineItemGrid;
             _purchaseOrderLineItemService = purchaseOrderLineItemService;
         }
 
@@ -52,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
 
             POListViewModel model = Mapper.Map<PurchaseOrder, POListViewModel>(purchaseOrder);
             model._VendorEntityIdList = vendors;
-            model._VendorProductsUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null));
+            model._VendorProductsUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.VendorProductList(null));
             model._POLIUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.ItemList(null)); 
             model._ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));
             model._CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null));

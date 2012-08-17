@@ -312,14 +312,38 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         KYT.mixin(this, "formMixin");
         KYT.mixin(this, "ajaxFormMixin");
         KYT.mixin(this, "modelAndElementsMixin");
+        this.setupBindings();
     },
     viewLoaded:function(){
         this.showPOInfo();
+    },
+    setupBindings:function(){
+        KYT.vent.bind("productGrid:Other", this.addToOrder,this);
+        KYT.vent.bind("productGrid:Display", this.displayProduct,this);
+        KYT.vent.bind("poliGrid:Delete", this.deleteItem,this);
+        KYT.vent.bind("poliGrid:AddUpdateItem", this.editItem,this);
+        KYT.vent.bind("poliGrid:Display", this.displayItem,this);
+        KYT.vent.bind('popup_displayModule:cancel', this.displayCancel,this);
+        KYT.vent.bind('popup_displayModule:edit', this.displayEdit,this);
+        KYT.vent.bind('form_editModule:success', this.itemSuccess,this);
+        this._super("setupBindings",arguments);
+    },
+    unbindBindings:function(){
+        KYT.vent.unbind("productGrid:Other", this.addToOrder,this);
+        KYT.vent.unbind("productGrid:Display", this.displayProduct,this);
+        KYT.vent.unbind("poliGrid:Delete", this.deleteItem,this);
+        KYT.vent.unbind("poliGrid:AddUpdateItem", this.editItem,this);
+        KYT.vent.unbind("poliGrid:Display", this.displayItem,this);
+        KYT.vent.unbind('popup_displayModule:cancel', this.displayCancel,this);
+        KYT.vent.unbind('popup_displayModule:edit', this.displayEdit,this);
+        KYT.vent.unbind('form_editModule:success', this.itemSuccess,this);
+        this._super("unbindBindings",arguments);
     },
     showVendorProducts:function(){
         $("#productGridArea").show();
         this.productsGridView = new KYT.Views.GridView({
             el:"#productGridArea",
+            gridContainer: "#productGrid",
             url:this.model._VendorProductsUrl() + "/" + this.model.VendorEntityId(),
             grouping:true,
             groupingView : {
@@ -335,7 +359,8 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         $("#poliGridArea").show();
         this.POLIGridView = new KYT.Views.GridView({
             el:"#poliGridArea",
-            url:this.model._VendorProductsUrls() + "/" + this.model.EntityId(),
+            gridContainer: "#poliGrid",
+            url:this.model._POLIUrl() + "/" + this.model.EntityId(),
             id:"poliGrid"});
         this.POLIGridView.render();
         this.storeChild(this.POLIGridView);
@@ -354,6 +379,76 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
             $("#poliGridArea").hide();
             $("#productGridArea").hide();
         }
+    },
+    addToOrder:function(id){
+        kyt.repository.ajaxGet(this.model._AddToOrderId()+"/"+id,{"PurchaseOrderId":this.model.EntityId(),"VendorId":this.model.VendorEntityId()})
+            .done($.proxy(this.addToOrderCallback,this));
+    },
+    addToOrderCallback:function(result){
+        if($("#Item_EntityId").val()==0){
+            var vendorName = $("#vendor :selected").text();
+            $("#viewVendor").find("span", ".KYT_view_display").text(vendorName);
+        }
+        $("#Item_EntityId").val(result.EntityId);
+        this.showPOData();
+        var url = this.views.poliGridView.getUrl();
+        url = url.substr(0,url.indexOf("?EntityId"));
+        url = url+"?EntityId="+result.EntityId;
+        this.views.poliGridView.setUrl(url);
+        this.views.poliGridView.reloadGrid();
+    },
+    displayProduct:function(id){
+        var builder = kyt.popupButtonBuilder.builder("displayModule");
+        var button = builder.addButton("Return",builder.addCancelButton()).getButtons();
+        var moduleOptions = {
+            id:"displayProductPopup",
+            url: this.model._displayProductUrl()+"/"+id,
+            buttons: button
+        };
+        this.modules.displayProductPopup= new kyt.AjaxPopupDisplayModule(moduleOptions);
+    },
+
+    displayItem:function(id){
+        var moduleOptions = {
+            id:"displayItemPopup",
+            url: this.model._displayItemUrl()+"/"+id,
+            buttons: kyt.popupButtonBuilder.builder("displayModule").standardDisplayButtons()
+        };
+        this.modules.displayItemPopup = new kyt.AjaxPopupDisplayModule(moduleOptions);
+    },
+        //from display
+    displayProductCancel:function(){
+        this.displayProductPopup.close();
+    },
+
+    displayEdit:function(id){
+        this.modules.popupDisplay.destroy();
+        this.editItem(data);
+    },
+
+    deleteItem:function(id){
+        if (confirm("Are you sure you would like to delete this Item?")) {
+            KYT.repository.ajaxGet(this.model._removePOLItemUrl()).done($.proxy(this.views.poliGridView.reloadGrid,this));
+        }
+    },
+    editItem:function(id){
+        var moduleOptions = {
+            id:"editModule",
+            url: this.model._editPOLItemUrl()+"/"+id,
+            data:{"ParentId":this.model.EntityId()}
+        };
+        this.modules.popupForm = new kyt.AjaxPopupFormModule(moduleOptions);
+    },
+
+    itemSuccess:function(){
+       this.itemCancel();
+       this.views.poliGridView.reloadGrid();
+    },
+    itemCancel: function(){
+       this.modules.popupForm.destroy();
+    },
+    commitPO:function(){
+        KYT.vent.trigger("route",this.model._commitPOUrl()+"/"+this.model.EntityId());
     }
 });
 

@@ -29,7 +29,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ItemList(ViewModel input)
         {
-            var url = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.PurchaseOrderLineItems(null)) + "/" + input.EntityId; 
+            var url = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.Items(null)) + "/" + input.EntityId; 
             var model = new ListViewModel()
             {
                 gridDef = _purchaseOrderLineItemGrid.GetGridDefinition(url),
@@ -41,7 +41,7 @@ namespace KnowYourTurf.Web.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ItemList (GridItemsRequestModel input)
+        public JsonResult Items (GridItemsRequestModel input)
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
             if (purchaseOrder == null) return null;
