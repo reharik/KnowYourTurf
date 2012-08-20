@@ -51,8 +51,8 @@ namespace KnowYourTurf.Web.Grids
         {
 
             GridBuilder.LinkColumnFor(x => x.Product.Name)
-                .ForAction<PurchaseOrderLineItemController>(x => x.ReceivePurchaseOrderLineItem(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("poliGrid")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.QuantityOrdered);
             GridBuilder.DisplayFor(x => x.Price).FormatValue(GridColumnFormatter.Currency);

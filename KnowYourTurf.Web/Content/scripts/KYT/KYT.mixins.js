@@ -176,43 +176,49 @@ KYT.mixins.setupGridMixin = {
 };
 
 KYT.mixins.defaultGridEventsMixin = {
-    events:{
-        'click .new' : 'addNew',
-        'click .delete' : 'deleteItems'
+    events: {
+        'click .new': 'addNew',
+        'click .delete': 'deleteItems'
     },
-    setupBindings:function(){
-        KYT.vent.bind(this.id+":AddUpdateItem",this.editItem,this);
-        KYT.vent.bind(this.id+":DisplayItem",this.displayItem,this);
-    },
-    unbindBindings:function(){
-        KYT.vent.unbind(this.id+":AddUpdateItem",this.editItem,this);
-        KYT.vent.unbind(this.id+":DisplayItem",this.displayItem,this);
-    },
-    addNew:function(){
-        KYT.vent.trigger("route",KYT.generateRoute(this.options.addUpdate),true);
-    },
-    editItem:function(id){
-        KYT.vent.trigger("route",KYT.generateRoute(this.options.addUpdate,id), true);
-    },
-    displayItem:function(id){
-        KYT.vent.trigger("route",KYT.generateRoute(this.options.display,id), true);
-    },
-    deleteItems:function(){
-        if (confirm("Are you sure you would like to delete this Item?")) {
-            var ids = cc.gridMultiSelect.getCheckedBoxes(this.id);
-            KYT.repository.ajaxGet(this.options.deleteMultipleUrl, $.param({"EntityIds":ids},true))
-                .done($.proxy(function(){this.reloadGrid()},this));
+    setupBindings: function () {
+        KYT.vent.bind(this.id + ":AddUpdateItem", this.editItem, this);
+        KYT.vent.bind(this.id + ":DisplayItem", this.displayItem, this);
+        if ($.isFunction(this._setupBindings)) {
+            this._setupBindings();
         }
     },
-    reloadGrid:function(){
-        KYT.vent.unbind(this.id+":AddUpdateItem",this.editItem,this);
-        KYT.vent.unbind(this.id+":DisplayItem",this.displayItem,this);
-        $("#"+this.id).trigger("reloadGrid");
-        KYT.vent.bind(this.id+":AddUpdateItem",this.editItem,this);
-        KYT.vent.bind(this.id+":DisplayItem",this.displayItem,this);
+    unbindBindings: function () {
+        KYT.vent.unbind(this.id + ":AddUpdateItem", this.editItem, this);
+        KYT.vent.unbind(this.id + ":DisplayItem", this.displayItem, this);
+        if ($.isFunction(this._unbindBindings)) {
+            this._unbindBindings();
+        }
+    },
+    addNew: function () {
+        KYT.vent.trigger("route", KYT.generateRoute(this.options.addUpdate), true);
+    },
+    editItem: function (id) {
+        KYT.vent.trigger("route", KYT.generateRoute(this.options.addUpdate, id), true);
+    },
+    displayItem: function (id) {
+        KYT.vent.trigger("route", KYT.generateRoute(this.options.display, id), true);
+    },
+    deleteItems: function () {
+        if (confirm("Are you sure you would like to delete this Item?")) {
+            var ids = cc.gridMultiSelect.getCheckedBoxes(this.id);
+            KYT.repository.ajaxGet(this.options.deleteMultipleUrl, $.param({ "EntityIds": ids }, true))
+                .done($.proxy(function () { this.reloadGrid() }, this));
+        }
+    },
+    reloadGrid: function () {
+        KYT.vent.unbind(this.id + ":AddUpdateItem", this.editItem, this);
+        KYT.vent.unbind(this.id + ":DisplayItem", this.displayItem, this);
+        $("#" + this.id).trigger("reloadGrid");
+        KYT.vent.bind(this.id + ":AddUpdateItem", this.editItem, this);
+        KYT.vent.bind(this.id + ":DisplayItem", this.displayItem, this);
     },
     // used by children to update parent grid
-    callbackAction:function(){
+    callbackAction: function () {
         this.reloadGrid();
     }
 };

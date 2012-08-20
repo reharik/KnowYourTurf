@@ -296,6 +296,28 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
     }
 });
 
+KYT.Views.PurchaseOrderListView = KYT.Views.View.extend({
+    _setupBindings:function(){
+        KYT.vent.bind(this.id+":Redirect",this.commitPO,this);
+    },
+    _unbindBindings:function(){
+        KYT.vent.unbind(this.id+":Redirect",this.commitPO,this);
+    },
+    initialize: function(){
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+        this.setupBindings();
+    },
+    onClose:function(){
+        this.unbindBindings();
+    },
+    commitPO:function(id){
+        KYT.vent.trigger("route",KYT.generateRoute("purchaseordercommit",id),true);
+    }
+});
+
 KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     events:{
         'click #commit' : 'commitPO',
@@ -441,13 +463,16 @@ KYT.Views.PurchaseOrderCommitFormView = KYT.Views.View.extend({
         this.showPOLI();
     },
     showPOLI:function(){
-        this.POLIGridView = new KYT.Views.GridView({
+        this.POLIGridView = new KYT.Views.CommitPOGridView({
             el:"#poliGridArea",
             gridOptions:{
                 multiselect:false
             },
             url:this.model._POLIUrl(),
-            id:"poliGrid"});
+            addUpdate:this.options.addUpdate,
+            id:"poliGrid",
+            parentId:this.model.EntityId()
+        });
         this.POLIGridView.render();
         this.storeChild(this.POLIGridView);
     },
@@ -466,6 +491,27 @@ KYT.Views.PurchaseOrderCommitFormView = KYT.Views.View.extend({
 
 });
 
+KYT.Views.CommitPOGridView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+        this.setupBindings();
+    },
+    onClose:function(){
+        this.unbindBindings();
+    },
+    _setupBindings: function () {
+        KYT.vent.bind(this.id + ":AddUpdateItem", this.editItem, this);
+    },
+    _unbindBindings: function () {
+        KYT.vent.unbind(this.id + ":AddUpdateItem", this.editItem, this);
+    },
+    editItem: function (id) {
+        KYT.vent.trigger("route", KYT.generateRoute(this.options.addUpdate, id,this.options.parentId), true);
+    }
+});
 
 KYT.Views.EmailJobFormView = KYT.Views.View.extend({
     initialize:function(){
@@ -480,7 +526,7 @@ KYT.Views.FieldListView = KYT.Views.GridView.extend({
         KYT.vent.bind(this.id+":Redirect",this.showDashboard,this);
     },
     showDashboard:function(id){
-        KYT.vent.trigger("route",KYT.generateRoute("fielddashboard",+id,this.options.ParentId),true);
+        KYT.vent.trigger("route",KYT.generateRoute("fielddashboard",id,this.options.ParentId),true);
     }
 });
 
@@ -489,7 +535,7 @@ KYT.Views.EmployeeListView = KYT.Views.GridView.extend({
         KYT.vent.bind(this.id+":Redirect",this.showDashboard,this);
     },
     showDashboard:function(id){
-        KYT.vent.trigger("route",KYT.generateRoute("employeedashboard",+id),true);
+        KYT.vent.trigger("route",KYT.generateRoute("employeedashboard",id),true);
     }
 });
 
@@ -498,7 +544,7 @@ KYT.Views.VendorListView = KYT.Views.GridView.extend({
         KYT.vent.bind(this.id+":Redirect",this.showContacts,this);
     },
     showContacts:function(id){
-        KYT.vent.trigger("route",KYT.generateRoute("vendorcontactlist",0,+id),true);
+        KYT.vent.trigger("route",KYT.generateRoute("vendorcontactlist",0,id),true);
     }
 });
 
