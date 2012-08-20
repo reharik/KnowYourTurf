@@ -9,9 +9,14 @@ namespace KnowYourTurf.Web.Models
         public IEnumerable<SelectListItem> _VendorEntityIdList { get; set; }
         public int VendorEntityId { get; set; }
         public string VendorCompany { get; set; }
-        public string _ReturnUrl { get; set; }
-        public string _CommitUrl { get; set; }
-        public string _VendorProductsUrl { get; set; }
+        public string _commitPOUrl { get; set; }
+        public string _vendorProductsUrl { get; set; }
         public string _POLIUrl { get; set; }
+
+        public string _addToOrderUrl { get; set; }
+
+        public string _removePOLItemUrl { get; set; }
+
+        public string _editPOLItemUrl { get; set; }
     }
 }

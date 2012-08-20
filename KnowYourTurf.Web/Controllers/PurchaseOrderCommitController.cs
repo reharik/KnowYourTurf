@@ -14,8 +14,6 @@ namespace KnowYourTurf.Web.Controllers
 {
     public class PurchaseOrderCommitController:KYTController
     {
-        private readonly IGrid<PurchaseOrderLineItem> _grid;
-        private Pager<PurchaseOrderLineItem> _pager;
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -39,13 +37,12 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult PurchaseOrderCommit(ViewModel input)
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
-            var url = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderLineItems(null))+"?EntityId="+input.EntityId;
-            POCommitViewModel model = new POCommitViewModel()
+            var model = new POCommitViewModel()
             {   
-                ClosePOUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x=>x.ClosePurchaseOrder(null)),
-                PurchaseOrder = purchaseOrder,
-                deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + purchaseOrder.EntityId,
-                gridDef = _receivePurchaseOrderLineItemGrid.GetGridDefinition(url),
+                EntityId = input.EntityId,
+                _POLIUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x=>x.PurchaseOrderLineItemList(null))+"/"+input.EntityId,
+                VendorCompany = purchaseOrder.Vendor.Company,
+                _ClosePOUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.ClosePurchaseOrder(null)) + "/" + input.EntityId,
                 _Title = WebLocalizationKeys.COMMIT_PURCHASE_ORDER.ToString()
             };
             return Json(model,JsonRequestBehavior.AllowGet);
@@ -60,6 +57,18 @@ namespace KnowYourTurf.Web.Controllers
             var notification = crudManager.Finish();
             notification.RedirectUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));
             return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult PurchaseOrderLineItemList(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderLineItems(null)) + "/" + input.EntityId;
+            var model = new ListViewModel()
+            {
+                gridDef = _receivePurchaseOrderLineItemGrid.GetGridDefinition(url),
+                _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
+                deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + input.EntityId,
+            };
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult PurchaseOrderLineItems(GridItemsRequestModel input)

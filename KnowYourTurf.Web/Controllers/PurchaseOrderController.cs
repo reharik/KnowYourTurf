@@ -49,10 +49,12 @@ namespace KnowYourTurf.Web.Controllers
 
             POListViewModel model = Mapper.Map<PurchaseOrder, POListViewModel>(purchaseOrder);
             model._VendorEntityIdList = vendors;
-            model._VendorProductsUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.VendorProductList(null));
+            model._vendorProductsUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.VendorProductList(null));
             model._POLIUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.ItemList(null)); 
-            model._ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));
-            model._CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null));
+            model._commitPOUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null));
+            model._addToOrderUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddItemToPO(null));
+            model._removePOLItemUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.Delete(null));
+            model._editPOLItemUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.AddUpdate(null));
             model._Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString();
             return Json(model,JsonRequestBehavior.AllowGet);
         }
@@ -96,52 +98,7 @@ namespace KnowYourTurf.Web.Controllers
             return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Save(POSaveViewModel input)
-        {
-            PurchaseOrder purchaseOrder = input.PurchaseOrderId>0 ? _repository.Find<PurchaseOrder>(input.PurchaseOrderId) : new PurchaseOrder();
-            if(input.PurchaseOrderId<=0)
-            {
-                var vendor = _repository.Find<Vendor>(input.VendorId);
-                purchaseOrder.Vendor = vendor;
-            }
-            var baseProduct = _repository.Find<BaseProduct>(input.EntityId);
-            var purchaseOrderLineItem = new PurchaseOrderLineItem();
-            purchaseOrderLineItem.Product = baseProduct;
-            purchaseOrder.AddLineItem(purchaseOrderLineItem);
-
-            var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
-            var notification = crudManager.Finish();
-            notification.EntityId = purchaseOrder.EntityId;
-            return Json(notification, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult AddItem(ViewModel input)
-        {
-            var vendor = _repository.Find<Vendor>(input.RootId);
-            
-            PurchaseOrder purchaseOrder;
-            if (input.ParentId > 0)
-            {purchaseOrder = vendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId);}
-            else
-            {
-                purchaseOrder = new PurchaseOrder();
-                purchaseOrder.Vendor = vendor;
-            }
-            var baseProduct = _repository.Find<BaseProduct>(input.EntityId);
-            var purchaseOrderLineItem = new PurchaseOrderLineItem
-                                            {
-                                                PurchaseOrder = purchaseOrder
-                                            };
-            purchaseOrderLineItem.Product = baseProduct;
-
-            var model = new PurchaseOrderLineItemViewModel
-                                                     {
-                                                         Item = purchaseOrderLineItem
-                                                     };
-            return View(model);
-        }
-
-        public ActionResult SaveItem(PurchaseOrderLineItemViewModel input)
+        public JsonResult AddItemToPO(PurchaseOrderLineItemViewModel input)
         {
             var vendor = _repository.Find<Vendor>(input.RootId);
             PurchaseOrder purchaseOrder;
@@ -151,33 +108,69 @@ namespace KnowYourTurf.Web.Controllers
             }
             else
             {
-                purchaseOrder = new PurchaseOrder();
-                purchaseOrder.Vendor = vendor;
+                purchaseOrder = new PurchaseOrder {Vendor = vendor};
+                vendor.AddPurchaseOrder(purchaseOrder);
             }
-            var baseProduct = _repository.Find<BaseProduct>(input.Item.Product.EntityId);
-            var newPo = purchaseOrder.EntityId == 0;
-            var purchaseOrderLineItem = new PurchaseOrderLineItem
-            {
-                PurchaseOrder = purchaseOrder
-            };
-            purchaseOrderLineItem.Product = baseProduct;
-            mapItem(purchaseOrderLineItem, input.Item);
-            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder, purchaseOrderLineItem);
-            vendor.AddPurchaseOrder(purchaseOrder);
-            
+            var baseProduct = _repository.Find<BaseProduct>(input.EntityId);
+            var purchaseOrderLineItem = new PurchaseOrderLineItem {Product = baseProduct};
+            mapItem(purchaseOrderLineItem, input);
+            purchaseOrder.AddLineItem(purchaseOrderLineItem);
+
             var crudManager = _saveEntityService.ProcessSave(vendor);
             var notification = crudManager.Finish();
-            notification.Data = new {poId = purchaseOrder.EntityId};
-            if(newPo)
-            {
-                notification.Redirect = true;
-                notification.RedirectUrl=UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" +
-                        vendor.EntityId+"?ParentId="+ purchaseOrder.EntityId;
-            }
+            notification.EntityId = purchaseOrder.EntityId;
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
-        private void mapItem(PurchaseOrderLineItem item, PurchaseOrderLineItem input)
+        /// ?????? ///
+
+//        public ActionResult AddItem(ViewModel input)
+//        {
+//            var vendor = _repository.Find<Vendor>(input.RootId);
+//            
+//            PurchaseOrder purchaseOrder;
+//            purchaseOrder = input.ParentId > 0 ? vendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId) : new PurchaseOrder { Vendor = vendor };
+//            var baseProduct = _repository.Find<BaseProduct>(input.EntityId);
+//            var purchaseOrderLineItem = new PurchaseOrderLineItem
+//                                            {
+//                                                PurchaseOrder = purchaseOrder
+//                                            };
+//            purchaseOrderLineItem.Product = baseProduct;
+//
+//            var model = new PurchaseOrderLineItemViewModel
+//                                                     {
+//                                                         Item = purchaseOrderLineItem
+//                                                     };
+//            return View(model);
+//        }
+
+//        public ActionResult SaveItem(PurchaseOrderLineItemViewModel input)
+//        {
+//
+//            var baseProduct = _repository.Find<BaseProduct>(input.Item.Product.EntityId);
+//            var newPo = purchaseOrder.EntityId == 0;
+//            var purchaseOrderLineItem = new PurchaseOrderLineItem
+//            {
+//                PurchaseOrder = purchaseOrder
+//            };
+//            purchaseOrderLineItem.Product = baseProduct;
+//            mapItem(purchaseOrderLineItem, input.Item);
+//            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder, purchaseOrderLineItem);
+//            vendor.AddPurchaseOrder(purchaseOrder);
+//            
+//            var crudManager = _saveEntityService.ProcessSave(vendor);
+//            var notification = crudManager.Finish();
+//            notification.Data = new {poId = purchaseOrder.EntityId};
+//            if(newPo)
+//            {
+//                notification.Redirect = true;
+//                notification.RedirectUrl=UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" +
+//                        vendor.EntityId+"?ParentId="+ purchaseOrder.EntityId;
+//            }
+//            return Json(notification, JsonRequestBehavior.AllowGet);
+//        }
+
+        private void mapItem(PurchaseOrderLineItem item, PurchaseOrderLineItemViewModel input)
         {
             item.QuantityOrdered = input.QuantityOrdered;
             item.SizeOfUnit = input.SizeOfUnit;
@@ -190,12 +183,5 @@ namespace KnowYourTurf.Web.Controllers
     public class PoSelectorGridItemsRequestModel : GridItemsRequestModel
     {
         public long Vendor { get; set; }
-    }
-
-    public class POSaveViewModel:ViewModel
-    {
-        public IEnumerable<long> ProductIds { get; set; }
-        public long VendorId { get; set; }
-        public long PurchaseOrderId { get; set; }
     }
 }

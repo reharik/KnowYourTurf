@@ -36,7 +36,12 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
             Displays.Builder<DateDisplayBuilder2>();
             Displays.Builder<TimeDisplayBuilder2>();
             Displays.Builder<ImageFileDisplayBuilder>();
-            Displays.Always.BuildBy(req => new HtmlTag("span").Attr("data-bind", "text:" + KnowYourTurfHtmlConventions.DeriveElementName(req)));
+            Displays.Always.BuildBy(req =>
+                                        {
+                                            var placeHolder = new HtmlTag("span").Text(" ");
+                                                placeHolder.Children.Add(new HtmlTag("span").Attr("data-bind", "text:" + KnowYourTurfHtmlConventions.DeriveElementName(req)));
+                                            return placeHolder;
+                                        });
             Labels.Always.BuildBy(req =>
                                       {
                                           var htmlTag = new HtmlTag("label").Attr("for", req.Accessor.Name);

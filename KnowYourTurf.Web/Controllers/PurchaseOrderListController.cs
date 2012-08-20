@@ -34,6 +34,7 @@ namespace KnowYourTurf.Web.Controllers
                 _Title = input.Completed ? WebLocalizationKeys.COMPLETED_PURCHASE_ORDERS.ToString() : WebLocalizationKeys.PURCHASE_ORDERS.ToString(),
                 Completed = input.Completed
             };
+            model.headerButtons.Add("new");
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 

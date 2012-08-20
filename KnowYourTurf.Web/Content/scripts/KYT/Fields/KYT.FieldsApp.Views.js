@@ -182,14 +182,12 @@ KYT.Views.EmployeeDashboardView = KYT.Views.View.extend({
     viewLoaded:function(){
         this.pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
             url:this.model._pendingGridUrl(),
-            gridContainer: "#pendingGridContainer",
             route:"task",
-            id:"pending"
+            id:"pendingTaskGrid"
         });
         this.completedGridView = new KYT.Views.DahsboardGridView({el:"#completedTaskGridContainer",
           url:this.model._completedGridUrl(),
-            gridContainer: "#completedGridContainer",
-            id:"completed",
+            id:"completedTaskGrid",
             route:"taskdisplay"});
         this.pendingGridView.render();
         this.completedGridView.render();
@@ -215,8 +213,7 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
         this.pendingGridView = new KYT.Views.DahsboardGridView({
             el:"#pendingTaskGridContainer",
             url:this.model._pendingGridUrl(),
-            gridContainer: "#pendingGridHolder",
-            id:"pending",
+            id:"pendingGrid",
             parentId:rel.entityId,
             rootId: rel.parentId,
             route:"task"
@@ -224,8 +221,7 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
         this.completedGridView = new KYT.Views.DahsboardGridView({
             el:"#completedTaskGridContainer",
             url:this.model._completedGridUrl(),
-            gridContainer: "#completedGridHolder",
-            id:"completed",
+            id:"completedGrid",
             parentId:rel.entityId,
             rootId: rel.parentId,
             route:"taskdisplay"
@@ -233,19 +229,16 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
         this.photoGridView = new KYT.Views.DahsboardGridView({
             el:"#photoGridContainer",
             url:this.model._photoGridUrl(),
-            gridContainer: "#photoGridHolder",
             id:"photolist",
-            route:"photo",
+            route:"photoGrid",
             parentId:rel.entityId,
             rootId: rel.parentId,
             parent:"Field",
-            messageContainer:"errorMessagesPhotoGrid"
         });
         this.documentGridView = new KYT.Views.DahsboardGridView({
             el:"#documentGridContainer",
             url:this.model._documentGridUrl(),
-            gridContainer: "#documentGridHolder",
-            id:"documentlist",
+            id:"documentGrid",
             route:"document",
             parentId:rel.entityId,
             rootId: rel.parentId,
@@ -305,8 +298,9 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
 
 KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     events:{
-        'click #save' : 'saveItem',
-        'click #cancel' : 'cancel'
+        'click #commit' : 'commitPO',
+        'click #return' : 'cancelPO',
+        'change #editVendor' : 'selectVendor'
     },
     initialize:function(){
         KYT.mixin(this, "formMixin");
@@ -315,40 +309,36 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         this.setupBindings();
     },
     viewLoaded:function(){
-        this.showPOInfo();
+        this.showPOInfo(this.model.EntityId()==0);
     },
     setupBindings:function(){
         KYT.vent.bind("productGrid:Other", this.addToOrder,this);
-        KYT.vent.bind("productGrid:Display", this.displayProduct,this);
-        KYT.vent.bind("poliGrid:Delete", this.deleteItem,this);
-        KYT.vent.bind("poliGrid:AddUpdateItem", this.editItem,this);
-        KYT.vent.bind("poliGrid:Display", this.displayItem,this);
-        KYT.vent.bind('popup_displayModule:cancel', this.displayCancel,this);
-        KYT.vent.bind('popup_displayModule:edit', this.displayEdit,this);
-        KYT.vent.bind('form_editModule:success', this.itemSuccess,this);
+        KYT.vent.bind("poliGrid:Delete", this.removeItemFromPO,this);
+        KYT.vent.bind("poliGrid:AddUpdateItem", this.editPOItem,this);
+        KYT.vent.bind('ajaxPopupFormModule:editPOItem:success', this.editPOItemSuccess,this);
+        KYT.vent.bind('ajaxPopupFormModule:editPOItem:cancel', this.editPOItemCancel,this);
         this._super("setupBindings",arguments);
     },
     unbindBindings:function(){
         KYT.vent.unbind("productGrid:Other", this.addToOrder,this);
-        KYT.vent.unbind("productGrid:Display", this.displayProduct,this);
-        KYT.vent.unbind("poliGrid:Delete", this.deleteItem,this);
-        KYT.vent.unbind("poliGrid:AddUpdateItem", this.editItem,this);
-        KYT.vent.unbind("poliGrid:Display", this.displayItem,this);
-        KYT.vent.unbind('popup_displayModule:cancel', this.displayCancel,this);
-        KYT.vent.unbind('popup_displayModule:edit', this.displayEdit,this);
-        KYT.vent.unbind('form_editModule:success', this.itemSuccess,this);
+        KYT.vent.unbind("poliGrid:Delete", this.removeItemFromPO,this);
+        KYT.vent.unbind("poliGrid:AddUpdateItem", this.editPOItem,this);
+        KYT.vent.unbind('ajaxPopupFormModule:editPOItem:success', this.editPOItemSuccess,this);
+        KYT.vent.unbind('ajaxPopupFormModule:editPOItem:cancel', this.editPOItemCancel,this);
         this._super("unbindBindings",arguments);
     },
     showVendorProducts:function(){
         $("#productGridArea").show();
         this.productsGridView = new KYT.Views.GridView({
             el:"#productGridArea",
-            gridContainer: "#productGrid",
-            url:this.model._VendorProductsUrl() + "/" + this.model.VendorEntityId(),
+            url:this.model._vendorProductsUrl() + "/" + this.model.VendorEntityId(),
             grouping:true,
-            groupingView : {
-                groupField : ['InstantiatingType'],
-                groupColumnShow : [false]
+            gridOptions:{
+                multiselect:false,
+                groupingView : {
+                    groupField : ['InstantiatingType'],
+                    groupColumnShow : [false]
+                }
             },
             id:"vendorProductsGrid",
             route:"taskdisplay"});
@@ -359,100 +349,122 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         $("#poliGridArea").show();
         this.POLIGridView = new KYT.Views.GridView({
             el:"#poliGridArea",
-            gridContainer: "#poliGrid",
+            gridOptions:{
+                multiselect:false,
+            },
             url:this.model._POLIUrl() + "/" + this.model.EntityId(),
             id:"poliGrid"});
         this.POLIGridView.render();
         this.storeChild(this.POLIGridView);
     },
-    showPOInfo:function(){
-        if(this.model.EntityId()>0){
-            $("#viewPOID",this.$el).show();
-            $("#viewVendor",this.$el).show();
-            $("#editVendor",this.$el).hide();
-            this.showVendorProducts();
-            this.showPOLI();
-        }else{
+    showPOInfo:function(editable){
+        if(editable){
             $("#viewPOID",this.$el).hide();
             $("#viewVendor",this.$el).hide();
             $("#editVendor",this.$el).show();
             $("#poliGridArea").hide();
             $("#productGridArea").hide();
+        }else{
+            $("#viewPOID",this.$el).show();
+            $("#viewVendor",this.$el).show();
+            $("#editVendor",this.$el).hide();
+            this.showVendorProducts();
+            this.showPOLI();
+        }
+    },
+    selectVendor:function(){
+        if(this.model.VendorEntityId()>0){
+            this.showPOInfo(false);
+            this.model.VendorCompany(this.$el.find("#editVendor :selected").text());
         }
     },
     addToOrder:function(id){
-        kyt.repository.ajaxGet(this.model._AddToOrderId()+"/"+id,{"PurchaseOrderId":this.model.EntityId(),"VendorId":this.model.VendorEntityId()})
+        KYT.repository.ajaxGet(this.model._addToOrderUrl()+"/"+id,{"ParentId":this.model.EntityId(),"RootId":this.model.VendorEntityId()})
             .done($.proxy(this.addToOrderCallback,this));
     },
     addToOrderCallback:function(result){
-        if($("#Item_EntityId").val()==0){
-            var vendorName = $("#vendor :selected").text();
-            $("#viewVendor").find("span", ".KYT_view_display").text(vendorName);
+        if(this.model.EntityId()==0 && result.EntityId>0){
+            this.setupNewPO(result.EntityId);
         }
-        $("#Item_EntityId").val(result.EntityId);
-        this.showPOData();
-        var url = this.views.poliGridView.getUrl();
-        url = url.substr(0,url.indexOf("?EntityId"));
-        url = url+"?EntityId="+result.EntityId;
-        this.views.poliGridView.setUrl(url);
-        this.views.poliGridView.reloadGrid();
+        this.POLIGridView.reloadGrid();
     },
-    displayProduct:function(id){
-        var builder = kyt.popupButtonBuilder.builder("displayModule");
-        var button = builder.addButton("Return",builder.addCancelButton()).getButtons();
-        var moduleOptions = {
-            id:"displayProductPopup",
-            url: this.model._displayProductUrl()+"/"+id,
-            buttons: button
-        };
-        this.modules.displayProductPopup= new kyt.AjaxPopupDisplayModule(moduleOptions);
+    setupNewPO:function(id){
+        this.model.EntityId(id);
+        var url = $("#"+this.POLIGridView.id).getGridParam("url");
+        url = url.substr(0,url.lastIndexOf("/")+1) + this.model.EntityId();
+        $("#"+this.POLIGridView.id).setGridParam({"url":url});
+        var currentRoute = KYT.Routing.getCurrentRoute();
+        currentRoute = currentRoute.substr(0,currentRoute.indexOf("/")+1)+this.model.EntityId()+"/"+this.model.ParentId()+"/"+this.model.VendorEntityId();
+        KYT.vent.trigger("route", currentRoute,false);
     },
-
-    displayItem:function(id){
-        var moduleOptions = {
-            id:"displayItemPopup",
-            url: this.model._displayItemUrl()+"/"+id,
-            buttons: kyt.popupButtonBuilder.builder("displayModule").standardDisplayButtons()
-        };
-        this.modules.displayItemPopup = new kyt.AjaxPopupDisplayModule(moduleOptions);
-    },
-        //from display
-    displayProductCancel:function(){
-        this.displayProductPopup.close();
-    },
-
-    displayEdit:function(id){
-        this.modules.popupDisplay.destroy();
-        this.editItem(data);
-    },
-
-    deleteItem:function(id){
-        if (confirm("Are you sure you would like to delete this Item?")) {
-            KYT.repository.ajaxGet(this.model._removePOLItemUrl()).done($.proxy(this.views.poliGridView.reloadGrid,this));
+    removeItemFromPO:function(id){
+        if (confirm("Are you sure you would like to remove this Item from the Purchase Order?")) {
+            KYT.repository.ajaxGet(this.model._removePOLItemUrl()+"/"+id,{"ParentId":this.model.EntityId()})
+                .done($.proxy(this.POLIGridView.reloadGrid,this.POLIGridView));
         }
     },
-    editItem:function(id){
+    editPOItem:function(id){
         var moduleOptions = {
-            id:"editModule",
+            id:"editPOItem",
             url: this.model._editPOLItemUrl()+"/"+id,
+            templateUrl: this.model._editPOLItemUrl()+"_Template",
             data:{"ParentId":this.model.EntityId()}
         };
-        this.modules.popupForm = new kyt.AjaxPopupFormModule(moduleOptions);
+        this.editPOItem = new KYT.Views.AjaxPopupFormModule(moduleOptions);
+        this.editPOItem.render();
     },
-
-    itemSuccess:function(){
-       this.itemCancel();
-       this.views.poliGridView.reloadGrid();
+    editPOItemSuccess:function(){
+       this.editPOItem.close();
+       this.POLIGridView.reloadGrid();
     },
-    itemCancel: function(){
-       this.modules.popupForm.destroy();
+    editPOItemCancel: function(){
+       this.editPOItem.close()
     },
     commitPO:function(){
-        KYT.vent.trigger("route",this.model._commitPOUrl()+"/"+this.model.EntityId());
+        KYT.vent.trigger("route","purchaseordercommit/"+this.model.EntityId(),true);
+    },
+    cancelPO:function(){
+        KYT.vent.trigger("form:"+this.id+":cancel");
+        if(!this.options.noBubbleUp) {KYT.WorkflowManager.returnParentView();}
     }
 });
 
+KYT.Views.PurchaseOrderCommitFormView = KYT.Views.View.extend({
+     events:{
+        'click #closePO' : 'closePO'
+    },
+    initialize:function(){
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        this.showPOLI();
+    },
+    showPOLI:function(){
+        this.POLIGridView = new KYT.Views.GridView({
+            el:"#poliGridArea",
+            gridOptions:{
+                multiselect:false
+            },
+            url:this.model._POLIUrl(),
+            id:"poliGrid"});
+        this.POLIGridView.render();
+        this.storeChild(this.POLIGridView);
+    },
+    closePO:function(){
+        KYT.repository.ajaxGet(this.model._ClosePOUrl())
+            .done($.proxy(this.closePOCallback,this));
+    },
+    closePOCallback:function(_result){
+        var result = typeof _result =="string" ? JSON.parse(_result) : _result;
+        if(!CC.notification.handleResult(result,this.cid)){
+            return;
+        }
+        KYT.vent.trigger("PO:"+this.id+":closed");
+        KYT.vent.trigger("route","purchaseorderlist",true);
+    }
 
+});
 
 
 KYT.Views.EmailJobFormView = KYT.Views.View.extend({
@@ -568,30 +580,26 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         this.taskTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#taskTypeGridContainer",
             url:this.model._taskTypeGridUrl(),
-            gridContainer: "#taskTypeGridHolder",
-            id:"tasktypelist",
+            id:"taskTypeGrid",
             route:"tasktype"
 
         });
         this.eventTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#eventTypeGridContainer",
             url:this.model._eventTypeGridUrl(),
-            gridContainer: "#eventTypeGridHolder",
-            id:"eventtypelist",
+            id:"eventTypeGrid",
             route:"eventtype"
         });
         this.photoCategoryGridView = new KYT.Views.DahsboardGridView({
             el:"#photoCategoryGridContainer",
             url:this.model._photoCategoryGridUrl(),
-            gridContainer: "#photoCategoryGridHolder",
-            id:"photocategorylist",
+            id:"photoCategoryGrid",
             route:"photocategory"
         });
         this.documentCategoryGridView = new KYT.Views.DahsboardGridView({
             el:"#documentCategoryGridContainer",
             url:this.model._documentCategoryGridUrl(),
-            gridContainer: "#documentCategoryGridHolder",
-            id:"documentcategorylist",
+            id:"documentCategoryGrid",
             route:"documentcategory"
         });
 

@@ -36,8 +36,6 @@ namespace KnowYourTurf.Web.Controllers
                 _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "/" + input.EntityId
             };
-            model.headerButtons.Add("new");
-            model.headerButtons.Add("delete");
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
