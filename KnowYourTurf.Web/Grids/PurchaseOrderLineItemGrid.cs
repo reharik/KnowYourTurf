@@ -52,7 +52,7 @@ namespace KnowYourTurf.Web.Grids
 
             GridBuilder.LinkColumnFor(x => x.Product.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
-                .WithId("poliGrid")
+                .WithId("commitPoliGrid")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.QuantityOrdered);
             GridBuilder.DisplayFor(x => x.Price).FormatValue(GridColumnFormatter.Currency);
@@ -62,4 +62,26 @@ namespace KnowYourTurf.Web.Grids
             return this;
         }
     }
+
+    public class CompetedPurchaseOrderLineItemGrid : Grid<PurchaseOrderLineItem>, IEntityListGrid<PurchaseOrderLineItem>
+    {
+        public CompetedPurchaseOrderLineItemGrid(IGridBuilder<PurchaseOrderLineItem> gridBuilder,
+            ISessionContext sessionContext,
+            IRepository repository)
+            : base(gridBuilder, sessionContext, repository)
+        {
+        }
+
+        protected override Grid<PurchaseOrderLineItem> BuildGrid()
+        {
+            GridBuilder.DisplayFor(x => x.Product.Name);
+            GridBuilder.DisplayFor(x => x.QuantityOrdered);
+            GridBuilder.DisplayFor(x => x.Price).FormatValue(GridColumnFormatter.Currency);
+            GridBuilder.DisplayFor(x => x.SubTotal).FormatValue(GridColumnFormatter.Currency);
+            GridBuilder.DisplayFor(x => x.Tax).FormatValue(GridColumnFormatter.Currency);
+            GridBuilder.DisplayFor(x => x.TotalReceived);
+            return this;
+        }
+    }
+
 }

@@ -178,6 +178,7 @@ KYT.Views.EmployeeDashboardView = KYT.Views.View.extend({
         KYT.mixin(this, "ajaxFormMixin");
         KYT.mixin(this, "modelAndElementsMixin");
         this.options.noBubbleUp=true;
+        KYT.vent.bind("form:"+this.id+":success",this.reload,this);
     },
     viewLoaded:function(){
         this.pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
@@ -197,6 +198,9 @@ KYT.Views.EmployeeDashboardView = KYT.Views.View.extend({
     callbackAction: function(){
         this.pendingGridView.callbackAction();
         this.completedGridView.callbackAction();
+    },
+    reload:function(){
+        this.render();
     }
 });
 
@@ -233,7 +237,7 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
             route:"photoGrid",
             parentId:rel.entityId,
             rootId: rel.parentId,
-            parent:"Field",
+            parent:"Field"
         });
         this.documentGridView = new KYT.Views.DahsboardGridView({
             el:"#documentGridContainer",
@@ -242,8 +246,7 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
             route:"document",
             parentId:rel.entityId,
             rootId: rel.parentId,
-            parent:"Field",
-            messageContainer:"errorMessagesDocGrid"
+            parent:"Field"
         });
 
         this.pendingGridView.render();
@@ -299,9 +302,18 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
 KYT.Views.PurchaseOrderListView = KYT.Views.View.extend({
     _setupBindings:function(){
         KYT.vent.bind(this.id+":Redirect",this.commitPO,this);
+        KYT.vent.bind(this.id + ":AddUpdateItem", this.editItem, this);
     },
     _unbindBindings:function(){
         KYT.vent.unbind(this.id+":Redirect",this.commitPO,this);
+        KYT.vent.unbind(this.id + ":AddUpdateItem", this.editItem, this);
+    },
+    editItem: function (id) {
+        if(this.options.Var == "Completed"){
+            KYT.vent.trigger("route", KYT.generateRoute("purchaseordercommit", id), true);
+        }else{
+            KYT.vent.trigger("route", KYT.generateRoute(this.options.addUpdate, id), true);
+        }
     },
     initialize: function(){
         KYT.mixin(this, "ajaxGridMixin");
@@ -464,13 +476,13 @@ KYT.Views.PurchaseOrderCommitFormView = KYT.Views.View.extend({
     },
     showPOLI:function(){
         this.POLIGridView = new KYT.Views.CommitPOGridView({
-            el:"#poliGridArea",
+            el:"#commitPoliGridArea",
             gridOptions:{
                 multiselect:false
             },
             url:this.model._POLIUrl(),
             addUpdate:this.options.addUpdate,
-            id:"poliGrid",
+            id:"commitPoliGrid",
             parentId:this.model.EntityId()
         });
         this.POLIGridView.render();

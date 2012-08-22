@@ -99,8 +99,13 @@ namespace KnowYourTurf.Web
             For<IEntityListGrid<User>>().Add<AdminListGrid>().Named("Admins");
             For<IEntityListGrid<User>>().Add<FacilitiesListGrid>().Named("AddUpdate");
 
+            For<IEntityListGrid<PurchaseOrder>>().Use<PurchaseOrderListGrid>();
+            For<IEntityListGrid<PurchaseOrder>>().Add<CompletedPurchaseOrderListGrid>().Named("Completed");
+
+
             For<IEntityListGrid<PurchaseOrderLineItem>>().Use<PurchaseOrderLineItemGrid>();
             For<IEntityListGrid<PurchaseOrderLineItem>>().Add<ReceivePurchaseOrderLineItemGrid>().Named("Recieve");
+            For<IEntityListGrid<PurchaseOrderLineItem>>().Add<CompetedPurchaseOrderLineItemGrid>().Named("Completed");
             For<IEntityListGrid<Material>>().Use<MaterialListGrid>();
             For<IEntityListGrid<Chemical>>().Use<ChemicalListGrid>();
             For<IEntityListGrid<Fertilizer>>().Use<FertilizerListGrid>();

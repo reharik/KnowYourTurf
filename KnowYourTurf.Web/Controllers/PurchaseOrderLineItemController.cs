@@ -110,6 +110,8 @@ namespace KnowYourTurf.Web.Controllers
             model.EntityId = input.EntityId;
             model.ParentId = input.ParentId;
             model._Title = WebLocalizationKeys.RECEIVE_PURCHASE_ORDER_ITEM.ToString();
+            model._UnitTypeList = _selectListItemService.CreateList<UnitType>(true);
+            model._saveUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.SaveReceived(null));
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 

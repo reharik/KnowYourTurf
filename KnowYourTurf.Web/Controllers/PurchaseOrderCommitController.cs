@@ -74,7 +74,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult PurchaseOrderLineItems(GridItemsRequestModel input)
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
-            var items = _dynamicExpressionQuery.PerformQuery(purchaseOrder.LineItems,input.filters, x => x.PurchaseOrder.EntityId == input.EntityId && !x.Completed);
+            var items = _dynamicExpressionQuery.PerformQuery(purchaseOrder.LineItems,input.filters, x=> !x.Completed);
             var model = _receivePurchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(model, JsonRequestBehavior.AllowGet);
         }

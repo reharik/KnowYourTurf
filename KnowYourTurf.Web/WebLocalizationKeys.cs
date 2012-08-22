@@ -46,6 +46,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken EVENTS = new WebLocalizationKeys("EVENTS", "Events");
         public static readonly StringToken PURCHASE_ORDERS = new WebLocalizationKeys("PURCHASE_ORDERS", "Purchase Orders");
         public static readonly StringToken COMPLETED_PURCHASE_ORDERS = new WebLocalizationKeys("COMPLETED_PURCHASE_ORDERS", "Completed Purchase Orders");
+        public static readonly StringToken COMPLETED_PURCHASE_ORDER = new WebLocalizationKeys("COMPLETED_PURCHASE_ORDER", "Completed Purchase Order");
         public static readonly StringToken ADMIN = new WebLocalizationKeys("ADMIN", "Admin");
         public static readonly StringToken CALCULATORS = new WebLocalizationKeys("CALCULATORS", "Calculators");
         public static readonly StringToken EMAIL_TEMPLATES = new WebLocalizationKeys("EMAIL_TEMPLATES", "Email Templates");

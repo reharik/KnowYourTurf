@@ -94,8 +94,10 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForList<PurchaseOrderListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<PurchaseOrderController>(x => x.AddUpdate(null)).End();
 
-            _builder.TokenForList<PurchaseOrderLineItemListController>(x => x.ItemList(null)).End();
-            _builder.TokenForForm<PurchaseOrderLineItemController>(x => x.AddUpdate(null)).End();
+            _builder.TokenForForm<PurchaseOrderLineItemController>(x => x.ReceivePurchaseOrderLineItem(null)).End();
+
+            _builder.TokenForList<CompletedPurchaseOrderListController>(x => x.ItemList(null)).End();
+            _builder.TokenForList<CompletedPurchaseOrderDisplayController>(x => x.ItemList(null)).End();
 
             _builder.TokenForForm<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)).AddUpdateToken("purchaseorderlineitem").End();
 

@@ -37,7 +37,7 @@
     </div>
     <div class="col left">
         <div class="fieldRow">
-            @Html.ViewFor(x => x.FileUrl).LabelDisplay(WebLocalizationKeys.EMPLOYEE_PHOTO).ToHtmlTag()
+            @Html.SubmissionFor(x => x.FileUrl).LabelDisplay(WebLocalizationKeys.EMPLOYEE_PHOTO).ToHtmlTag() 
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Address1).ToHtmlTag()
@@ -61,12 +61,9 @@
             @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.UserRoles).ElType("MultiSelect").ToHtmlTag() 
-            @*            .OperationName("/UserRoles").ToHtmlTag()*@
+            @Html.SubmissionFor(x => x.UserRoles).ElType("MultiSelect").OperationName("/UserRoles").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FileUrl).LabelDisplay(WebLocalizationKeys.EMPLOYEE_PHOTO).ToHtmlTag() 
-        </div>
+        
     </div>
 
 

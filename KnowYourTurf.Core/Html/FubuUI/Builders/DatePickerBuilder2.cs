@@ -65,7 +65,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         public override HtmlTag Build(ElementRequest request)
         {
             return new HtmlTag("img").Attr("data-bind",
-                " attr: { href: " + KnowYourTurfHtmlConventions.DeriveElementName(request) + " }")
+                " attr: { src: " + KnowYourTurfHtmlConventions.DeriveElementName(request) + " }")
                 .Attr("alt", request.Accessor.FieldName);
         }
     }

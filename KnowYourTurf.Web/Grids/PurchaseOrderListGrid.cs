@@ -18,7 +18,6 @@ namespace KnowYourTurf.Core.Domain
         protected override Grid<PurchaseOrder> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.DateCreated)
-                .ForAction<PurchaseOrderController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.EntityId).DisplayHeader(WebLocalizationKeys.PO_Number);
@@ -31,6 +30,33 @@ namespace KnowYourTurf.Core.Domain
                 .ForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null))
                 .ToPerformAction(ColumnAction.Redirect)
                 .ImageName("KYTcopy.png");
+            return this;
+        }
+
+    }
+
+    public class CompletedPurchaseOrderListGrid : Grid<PurchaseOrder>, IEntityListGrid<PurchaseOrder>
+    {
+
+        public CompletedPurchaseOrderListGrid(IGridBuilder<PurchaseOrder> gridBuilder,
+            ISessionContext sessionContext,
+            IRepository repository)
+            : base(gridBuilder, sessionContext, repository)
+        {
+        }
+
+        protected override Grid<PurchaseOrder> BuildGrid()
+        {
+            GridBuilder.LinkColumnFor(x => x.DateCreated)
+                .ToPerformAction(ColumnAction.DisplayItem)
+                .WithId("completedpurchaseorderlist")
+                .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+            GridBuilder.DisplayFor(x => x.EntityId).DisplayHeader(WebLocalizationKeys.PO_Number);
+            GridBuilder.DisplayFor(x => x.Vendor.Company);
+            GridBuilder.DisplayFor(x => x.SubTotal).FormatValue(GridColumnFormatter.Currency);
+            GridBuilder.DisplayFor(x => x.Tax).FormatValue(GridColumnFormatter.Currency);
+            GridBuilder.DisplayFor(x => x.Fees).FormatValue(GridColumnFormatter.Currency);
+            GridBuilder.DisplayFor(x => x.Total).FormatValue(GridColumnFormatter.Currency);
             return this;
         }
 

@@ -64,7 +64,7 @@ namespace KnowYourTurf.Web.Menus
                         .CreateNode(WebLocalizationKeys.PURCHASE_ORDERS)
                         .HasChildren()
                             .CreateTagNode<PurchaseOrderListController>(WebLocalizationKeys.CURRENT)
-                            .CreateTagNode<PurchaseOrderListController>(WebLocalizationKeys.COMPLETED).Route("purchaseorderlist/0/0/0/Completed")
+                            .CreateTagNode<CompletedPurchaseOrderListController>(WebLocalizationKeys.COMPLETED)
                         .EndChildren()
                     .EndChildren()
                 .MenuTree(withoutPermissions);

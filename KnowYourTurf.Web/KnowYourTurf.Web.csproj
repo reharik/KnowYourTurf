@@ -208,6 +208,8 @@
     <Compile Include="Controllers\CalculatorListController.cs" />
     <Compile Include="Controllers\ChemicalController.cs" />
     <Compile Include="Controllers\ChemicalListController.cs" />
+    <Compile Include="Controllers\CompletedPurchaseOrderListController.cs" />
+    <Compile Include="Controllers\CompletedPurchaseOrderDisplayController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\KnowYourTurfController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
