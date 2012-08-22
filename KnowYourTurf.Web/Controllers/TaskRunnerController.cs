@@ -58,7 +58,6 @@ namespace KnowYourTurf.Web.Controllers
             var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId== company.EntityId).FirstOrDefault() ??
                           new Weather { CompanyId = company.EntityId, Date = date };
             loadWeather(jss, webClient, weather, url);
-            Thread.Sleep(10000);
         }
 
         private void loadWeather(JavaScriptSerializer jss, WebClient webClient, Weather weather, string url)
@@ -90,6 +89,7 @@ namespace KnowYourTurf.Web.Controllers
             weather.Humidity = humidity;
             weather.Pressure = meanPressure;
             _repository.Save(weather);
+            Thread.Sleep(70000);
         }
 
         // this is obviously shite. plese rewrite the whole thing if people start using it.
