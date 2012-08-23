@@ -58,12 +58,12 @@ namespace KnowYourTurf.Web.Controllers
             var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId== company.EntityId).FirstOrDefault() ??
                           new Weather { CompanyId = company.EntityId, Date = date };
             loadWeather(jss, webClient, weather, url);
-            Thread.Sleep(10000);
         }
 
         private void loadWeather(JavaScriptSerializer jss, WebClient webClient, Weather weather, string url)
         {
             var result = webClient.DownloadString(url);
+            Thread.Sleep(10000);
             if (result.IsEmpty()) return;
             var companyWeatherInfoDto = jss.Deserialize<CompanyWeatherInfoDto>(result);
             if (companyWeatherInfoDto == null || companyWeatherInfoDto.History == null || companyWeatherInfoDto.History.DailySummary == null) return;
