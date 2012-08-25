@@ -46,6 +46,7 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString();
             model.Popup = input.Popup;
             model._saveUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.Save(null));
+            model.Var = input.Var;
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 

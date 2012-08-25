@@ -24,7 +24,6 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Calculator> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x=>x.Name)
-                .ForAction<CalculatorController>(x => x.Calculator(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.DateCreated);

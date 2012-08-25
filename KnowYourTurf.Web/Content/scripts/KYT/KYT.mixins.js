@@ -41,6 +41,7 @@ KYT.mixins.modelAndElementsMixin = {
             that.mappingOptions.ignore.push(item);});
         this.mappingOptions.ignore.push("_availableItems");
         this.mappingOptions.ignore.push("_resultsItems");
+        KYT.vent.trigger("model:"+this.id+"modelLoaded");
     },
     extendModel:function(){
         this.model._createdText = ko.computed(function() {
@@ -163,13 +164,13 @@ KYT.mixins.setupGridMixin = {
             $(this.el).find("." + item).show();
         }, this));
         // if we have more then one grid, jqgrid doesn't scope so we need different names.
-        if (!this.id){
-            this.id = "gridContainer";
-        }else{
-            this.$el.find("#gridContainer").attr("id", this.id);
+        if (this.options.gridId) {
+            this.$el.find("#gridContainer").attr("id", this.options.gridId);
+        } else {
+            this.options.gridId = "gridContainer";
         }
 
-        $("#"+this.id, this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
+        $("#" + this.options.gridId, this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
         ///////
         $(this.el).gridSearch({onClear:$.proxy(this.removeSearch, this),onSubmit:$.proxy(this.search, this)});
     }
@@ -181,15 +182,15 @@ KYT.mixins.defaultGridEventsMixin = {
         'click .delete': 'deleteItems'
     },
     setupBindings: function () {
-        KYT.vent.bind(this.id + ":AddUpdateItem", this.editItem, this);
-        KYT.vent.bind(this.id + ":DisplayItem", this.displayItem, this);
+        KYT.vent.bind(this.options.gridId + ":AddUpdateItem", this.editItem, this);
+        KYT.vent.bind(this.options.gridId + ":DisplayItem", this.displayItem, this);
         if ($.isFunction(this._setupBindings)) {
             this._setupBindings();
         }
     },
     unbindBindings: function () {
-        KYT.vent.unbind(this.id + ":AddUpdateItem", this.editItem, this);
-        KYT.vent.unbind(this.id + ":DisplayItem", this.displayItem, this);
+        KYT.vent.unbind(this.options.gridId + ":AddUpdateItem", this.editItem, this);
+        KYT.vent.unbind(this.options.gridId + ":DisplayItem", this.displayItem, this);
         if ($.isFunction(this._unbindBindings)) {
             this._unbindBindings();
         }
@@ -205,17 +206,17 @@ KYT.mixins.defaultGridEventsMixin = {
     },
     deleteItems: function () {
         if (confirm("Are you sure you would like to delete this Item?")) {
-            var ids = cc.gridMultiSelect.getCheckedBoxes(this.id);
+            var ids = cc.gridMultiSelect.getCheckedBoxes(this.options.gridId);
             KYT.repository.ajaxGet(this.options.deleteMultipleUrl, $.param({ "EntityIds": ids }, true))
                 .done($.proxy(function () { this.reloadGrid() }, this));
         }
     },
     reloadGrid: function () {
-        KYT.vent.unbind(this.id + ":AddUpdateItem", this.editItem, this);
-        KYT.vent.unbind(this.id + ":DisplayItem", this.displayItem, this);
-        $("#" + this.id).trigger("reloadGrid");
-        KYT.vent.bind(this.id + ":AddUpdateItem", this.editItem, this);
-        KYT.vent.bind(this.id + ":DisplayItem", this.displayItem, this);
+        KYT.vent.unbind(this.options.gridId + ":AddUpdateItem", this.editItem, this);
+        KYT.vent.unbind(this.options.gridId + ":DisplayItem", this.displayItem, this);
+        $("#" + this.options.gridId).trigger("reloadGrid");
+        KYT.vent.bind(this.options.gridId + ":AddUpdateItem", this.editItem, this);
+        KYT.vent.bind(this.options.gridId + ":DisplayItem", this.displayItem, this);
     },
     // used by children to update parent grid
     callbackAction: function () {
@@ -228,11 +229,11 @@ KYT.mixins.setupGridSearchMixin = {
         var searchItem = {"field": this.options.searchField ,"data": v };
         var filter = {"group":"AND",rules:[searchItem]};
         var obj = {"filters":""  + JSON.stringify(filter) + ""};
-        $("#"+this.id).jqGrid('setGridParam',{postData:obj});
+        $("#"+this.options.gridId).jqGrid('setGridParam',{postData:obj});
         this.reloadGrid();
     },
     removeSearch:function(){
-        delete $("#"+this.id).jqGrid('getGridParam' ,'postData')["filters"];
+        delete $("#"+this.options.gridId).jqGrid('getGridParam' ,'postData')["filters"];
         this.reloadGrid();
         return false;
     }

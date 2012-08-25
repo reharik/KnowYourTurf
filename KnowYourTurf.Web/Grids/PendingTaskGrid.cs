@@ -17,8 +17,7 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Task> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.TaskType.Name)
-                .ForAction<TaskController>(x => x.AddUpdate(null))
-                .ToPerformAction(ColumnAction.AddUpdateItem).WithId("pending")
+                .ToPerformAction(ColumnAction.AddUpdateItem).WithId("pendingTaskList")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.ScheduledDate);
             GridBuilder.DisplayFor(x => x.ScheduledStartTime);

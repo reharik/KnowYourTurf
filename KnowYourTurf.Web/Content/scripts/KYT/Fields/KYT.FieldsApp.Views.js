@@ -184,12 +184,19 @@ KYT.Views.EmployeeDashboardView = KYT.Views.View.extend({
         this.pendingGridView = new KYT.Views.DahsboardGridView({el:"#pendingTaskGridContainer",
             url:this.model._pendingGridUrl(),
             route:"task",
-            id:"pendingTaskGrid"
+            gridId:"pendingTaskList",
+            gridOptions:{
+                multiselect:false,
+            }
         });
         this.completedGridView = new KYT.Views.DahsboardGridView({el:"#completedTaskGridContainer",
           url:this.model._completedGridUrl(),
-            id:"completedTaskGrid",
-            route:"taskdisplay"});
+            gridId:"completedTaskList",
+            route:"taskdisplay",
+            gridOptions:{
+                multiselect:false,
+            }
+        });
         this.pendingGridView.render();
         this.completedGridView.render();
         this.storeChild(this.pendingGridView);
@@ -217,7 +224,7 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
         this.pendingGridView = new KYT.Views.DahsboardGridView({
             el:"#pendingTaskGridContainer",
             url:this.model._pendingGridUrl(),
-            id:"pendingGrid",
+            gridId:"pendingTaskList",
             parentId:rel.entityId,
             rootId: rel.parentId,
             route:"task"
@@ -225,24 +232,30 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
         this.completedGridView = new KYT.Views.DahsboardGridView({
             el:"#completedTaskGridContainer",
             url:this.model._completedGridUrl(),
-            id:"completedGrid",
+            gridId:"completedTaskList",
             parentId:rel.entityId,
             rootId: rel.parentId,
+            gridOptions:{
+                multiselect:false,
+            },
             route:"taskdisplay"
         });
         this.photoGridView = new KYT.Views.DahsboardGridView({
             el:"#photoGridContainer",
             url:this.model._photoGridUrl(),
-            id:"photolist",
-            route:"photoGrid",
+            gridId:"photolist",
+            route:"photo",
             parentId:rel.entityId,
             rootId: rel.parentId,
+            gridOptions:{
+                multiselect:false,
+            },
             parent:"Field"
         });
         this.documentGridView = new KYT.Views.DahsboardGridView({
             el:"#documentGridContainer",
             url:this.model._documentGridUrl(),
-            id:"documentGrid",
+            gridId:"documentlist",
             route:"document",
             parentId:rel.entityId,
             rootId: rel.parentId,
@@ -272,6 +285,8 @@ KYT.Views.DahsboardGridView = KYT.Views.View.extend({
         KYT.mixin(this, "setupGridMixin");
         KYT.mixin(this, "defaultGridEventsMixin");
         KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
         this.setupBindings();
     },
     addNew:function(){
@@ -320,6 +335,8 @@ KYT.Views.PurchaseOrderListView = KYT.Views.View.extend({
         KYT.mixin(this, "setupGridMixin");
         KYT.mixin(this, "defaultGridEventsMixin");
         KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
         this.setupBindings();
     },
     onClose:function(){
@@ -340,9 +357,10 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         KYT.mixin(this, "formMixin");
         KYT.mixin(this, "ajaxFormMixin");
         KYT.mixin(this, "modelAndElementsMixin");
-        this.setupBindings();
+
     },
     viewLoaded:function(){
+        this.setupBindings();
         this.showPOInfo(this.model.EntityId()==0);
     },
     setupBindings:function(){
@@ -482,7 +500,7 @@ KYT.Views.PurchaseOrderCommitFormView = KYT.Views.View.extend({
             },
             url:this.model._POLIUrl(),
             addUpdate:this.options.addUpdate,
-            id:"commitPoliGrid",
+            gridId:"commitPoliGrid",
             parentId:this.model.EntityId()
         });
         this.POLIGridView.render();
@@ -509,6 +527,8 @@ KYT.Views.CommitPOGridView = KYT.Views.View.extend({
         KYT.mixin(this, "setupGridMixin");
         KYT.mixin(this, "defaultGridEventsMixin");
         KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
         this.setupBindings();
     },
     onClose:function(){
@@ -565,6 +585,9 @@ KYT.Views.DocumentFormView = KYT.Views.View.extend({
         KYT.mixin(this, "formMixin");
         KYT.mixin(this, "ajaxFormMixin");
         KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        this.addIdsToModel();
     }
 });
 
@@ -573,6 +596,9 @@ KYT.Views.PhotoFormView = KYT.Views.View.extend({
         KYT.mixin(this, "formMixin");
         KYT.mixin(this, "ajaxFormMixin");
         KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        this.addIdsToModel();
     }
 });
 
@@ -592,7 +618,7 @@ KYT.Views.CalculatorFormView = KYT.Views.View.extend({
         KYT.calculator.successHandler(this.model,result);
     },
     events:{'click #createTask':'addTask',
-    'click #save' : 'saveItem',
+        'click #save' : 'saveItem',
         'click #cancel' : 'cancel'},
     addTask:function(){
         var fieldId = this.model.FieldEntityId?this.model.FieldEntityId():0;
@@ -638,26 +664,26 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         this.taskTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#taskTypeGridContainer",
             url:this.model._taskTypeGridUrl(),
-            id:"taskTypeGrid",
+            gridId:"tasktypelist",
             route:"tasktype"
 
         });
         this.eventTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#eventTypeGridContainer",
             url:this.model._eventTypeGridUrl(),
-            id:"eventTypeGrid",
+            gridId:"eventtypelist",
             route:"eventtype"
         });
         this.photoCategoryGridView = new KYT.Views.DahsboardGridView({
             el:"#photoCategoryGridContainer",
             url:this.model._photoCategoryGridUrl(),
-            id:"photoCategoryGrid",
+            gridId:"photocategorylist",
             route:"photocategory"
         });
         this.documentCategoryGridView = new KYT.Views.DahsboardGridView({
             el:"#documentCategoryGridContainer",
             url:this.model._documentCategoryGridUrl(),
-            id:"documentCategoryGrid",
+            gridId:"documentcategorylist",
             route:"documentcategory"
         });
 

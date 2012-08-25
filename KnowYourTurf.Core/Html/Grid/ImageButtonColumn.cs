@@ -22,7 +22,7 @@ namespace KnowYourTurf.Core.Html.Grid
 
         public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, string gridName = "") where CONTROLLER : Controller
         {
-            _id = typeof(ENTITY).Name.ToLowerInvariant() + "list";
+            _id = "gridContainer";
             _gridName = gridName;
             var actionUrl = UrlContext.GetUrlForAction(expression);
             _actionUrl = actionUrl;

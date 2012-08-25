@@ -131,6 +131,8 @@ KYT.Views.GridView = KYT.Views.View.extend({
         KYT.mixin(this, "setupGridMixin");
         KYT.mixin(this, "defaultGridEventsMixin");
         KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
         this.setupBindings();
     },
     onClose:function(){

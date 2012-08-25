@@ -17,10 +17,10 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Photo> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.Name)
-                .ForAction<PhotoController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_EVENT);
-            GridBuilder.DisplayFor(x => x.PhotoCategory.Name).DisplayHeader(WebLocalizationKeys.DOCUMENT_CATEGORY);
+            GridBuilder.DisplayFor(x => x.PhotoCategory.Name)
+                .DisplayHeader(WebLocalizationKeys.DOCUMENT_CATEGORY);
             return this;
         }
     }
