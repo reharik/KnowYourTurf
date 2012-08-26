@@ -5,26 +5,52 @@
  * Time: 10:52 AM
  * To change this template use File | Settings | File Templates.
  */
+if (typeof KYT == "undefined") {
+    var KYT = {};
+}
 
-kyt.repository= (function(){
+KYT.repository= (function(){
     var repositoryCallback = function(result,callback){
-        clearTimeout(showLoader);
-        $("#ajaxLoading").hide();
+
         if(result.LoggedOut){
             window.location.replace(result.RedirectUrl);
-            return;
+            return null;
         }
-        callback(result);
+        clearTimeout(KYT.throbberTimeout);
+//        KYT.throbberTimeout=null;
+        KYT.showThrob=false;
+        $("#ajaxLoading").hide();
+        return result;
+        //callback(result);
+    };
+    var throbber = function(){
+        KYT.showThrob=true;
+        if(!KYT.throbberTimeout){
+            KYT.throbberTimeout = setTimeout(function() {
+                if(KYT.showThrob) {
+                    $("#ajaxLoading").show();
+                }
+            }, 500);
+        }
     };
     return {
-        ajaxPost:function(url, data, callback){
-            showLoader = setTimeout(function() { $("#ajaxLoading").show(); }, 1000);
-            $.post(url,data,function(result){ repositoryCallback(result,callback)});
+        ajaxPost:function(url, data){
+            throbber();
+            $.post(url,data).done(repositoryCallback);
         },
-        ajaxGet:function(url, data, callback){
-            showLoader = setTimeout(function() { $("#ajaxLoading").show(); }, 1000);
-            $.get(url,data,function(result){repositoryCallback(result,callback);
-            });
+        ajaxGet:function(url, data){
+            throbber();
+            return $.get(url,data).done(repositoryCallback);
+        },
+        ajaxPostModel:function(url, data){
+            throbber();
+            return $.ajax({
+                type:"post",
+                url: url,
+                data:data,
+                contentType:  "application/json; charset=utf-8",
+                traditional:true
+            }).done(repositoryCallback);
         }
     }
 }());

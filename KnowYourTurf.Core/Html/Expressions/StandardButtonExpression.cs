@@ -4,7 +4,7 @@ using KnowYourTurf.Core;
 using KnowYourTurf.Core.Localization;
 using HtmlTags;
 
-namespace MethodFitness.Core.Html.Expressions
+namespace KnowYourTurf.Core.Html.Expressions
 {
     public class StandardButtonExpression
     {
@@ -38,8 +38,8 @@ namespace MethodFitness.Core.Html.Expressions
 
         private void addClassesAndAttributesToRoot(HtmlTag root)
         {
-            HtmlAttributes.Each(x => root.Attr(x.Key, x.Value));
-            CssClasses.Each(x => root.AddClass(x));
+            HtmlAttributes.ForEachItem(x => root.Attr(x.Key, x.Value));
+            CssClasses.ForEachItem(x => root.AddClass(x));
         }
 
         public StandardButtonExpression LocalizedText(StringToken token)
@@ -58,6 +58,13 @@ namespace MethodFitness.Core.Html.Expressions
             CssClasses.Add(cssClass);
             return this;
         }
+
+        public StandardButtonExpression Attr(string attribute, string value)
+        {
+            HtmlAttributes.Add(attribute,value);
+            return this;
+        }
+
 
         public StandardButtonExpression ElementId(string id)
         {

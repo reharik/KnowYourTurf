@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowYourTurf.Core", "KnowYo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowYourTurf.Security", "KnowYourTuf.Security\KnowYourTurf.Security.csproj", "{DBA372FE-3D52-45B3-AF82-B37696328764}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractTestProject", "AbstractTestProject\AbstractTestProject.csproj", "{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,16 @@ Global
 		{DBA372FE-3D52-45B3-AF82-B37696328764}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DBA372FE-3D52-45B3-AF82-B37696328764}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DBA372FE-3D52-45B3-AF82-B37696328764}.Release|x86.ActiveCfg = Release|Any CPU
+		{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

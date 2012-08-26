@@ -60,7 +60,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
                                            };
             SelectTag tag = new SelectTag(action);
             string name = string.Empty;
-            request.Accessor.Names.Each(x => name += x + ".");
+            request.Accessor.Names.ForEachItem(x => name += x + ".");
             name = name.Substring(0, name.Length-1);
             tag.Attr("name", name);
             addInternalCssClasses(_htmlRoot, tag);

@@ -24,7 +24,9 @@ namespace KnowYourTurf.Core.Html.Menu
         IMenuBuilder addUrlParameter(string name, string value);
         IMenuBuilder CategoryGroupForItteration();
         IMenuBuilder EndCategoryGroup();
-        IMenuBuilder WithOperation(bool value);
+
+        IMenuBuilder CreateTagNode<CONTROLLER>(StringToken text) where CONTROLLER : Controller;
+        IMenuBuilder Route(string route);
     }
 
     public class MenuBuilder : IMenuBuilder
@@ -69,7 +71,7 @@ namespace KnowYourTurf.Core.Html.Menu
             //this is so createnode can get the _list rather than the _categoryItems
             var categories = _categories;
             _categories = null;
-            categories.Each(x =>
+            categories.ForEachItem(x =>
                                  {
                                      IList<MenuItem> parent = _items;
                                      if (count > 1)
@@ -86,7 +88,7 @@ namespace KnowYourTurf.Core.Html.Menu
         }
         private void itterateOverCategoryItems(long entityId, IList<MenuItem> items, IList<MenuItem> parent = null)
         {
-            items.Each(c =>
+            items.ForEachItem(c =>
                            {
                                // this is so that c doesn't get modified each itteration
                                var instanceC = copyMenuItem(c);
@@ -100,7 +102,7 @@ namespace KnowYourTurf.Core.Html.Menu
                                }
                                else
                                {
-                                   instanceC.Url = instanceC.Url + "?ParentId=" + entityId;
+                                   instanceC.Url = instanceC.Url + "/0/0/" + entityId;
                                }
                                if (parent != null) parent.Add(instanceC);
                            });
@@ -205,7 +207,14 @@ namespace KnowYourTurf.Core.Html.Menu
             });
             return this;
         }
+        public IMenuBuilder Route(string route)
+        {
+            var _itemList = getList();
+            var lastItem = _itemList.LastOrDefault();
+            lastItem.Url = route;
+            return this;
 
+        } 
 
         public IList<MenuItem> MenuTree(bool withoutPermissions = false)
         {
@@ -219,7 +228,7 @@ namespace KnowYourTurf.Core.Html.Menu
             var permittedItems = new List<MenuItem>();
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);
-            _items.Each(x =>
+            _items.ForEachItem(x =>
                             {
                                 var operationName = "/MenuItem/"+x.Text.RemoveWhiteSpace();
                                 if (_authorizationService.IsAllowed(user, operationName))
@@ -228,6 +237,19 @@ namespace KnowYourTurf.Core.Html.Menu
                                 }
                             });
             return permittedItems;
+        }
+
+        public IMenuBuilder CreateTagNode<CONTROLLER>(StringToken text) where CONTROLLER : Controller
+        {
+            var _itemList = getList();
+            var type = typeof(CONTROLLER).Name.ToLowerInvariant();
+            type = type.Replace("controller", "");
+            _itemList.Add(new MenuItem
+            {
+                Text = text.DefaultValue,
+                Url = type
+            });
+            return this;
         }
     }
 
@@ -268,7 +290,7 @@ namespace KnowYourTurf.Core.Html.Menu
 
         public IMenuBuilder EndCategoryGroup()
         {
-            _categories.Each(x =>
+            _categories.ForEachItem(x =>
             {
                 IList<MenuItem> parent = _items;
                 if (count > 1)
@@ -284,7 +306,7 @@ namespace KnowYourTurf.Core.Html.Menu
         }
         private void itterateOverCategoryItems(long entityId, IList<MenuItem> items, IList<MenuItem> parent = null)
         {
-            items.Each(c =>
+            items.ForEachItem(c =>
             {
                 if (c.Url.IsEmpty() && c.Children.Any())
                 {
@@ -379,7 +401,13 @@ namespace KnowYourTurf.Core.Html.Menu
             });
             return this;
         }
-
+        public IMenuBuilder Route(string route)
+        {
+            var _itemList = getList();
+            var lastItem = _itemList.LastOrDefault();
+            lastItem.Url = route;
+            return this;
+        } 
 
         public IList<MenuItem> MenuTree(bool withoutPermissions = false)
         {
@@ -393,7 +421,7 @@ namespace KnowYourTurf.Core.Html.Menu
             var permittedItems = new List<MenuItem>();
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);
-            _items.Each(x =>
+            _items.ForEachItem(x =>
             {
                 if(x.Operation.IsEmpty())
                 {
@@ -406,6 +434,19 @@ namespace KnowYourTurf.Core.Html.Menu
             });
             return permittedItems;
         }
+
+        public IMenuBuilder CreateTagNode<CONTROLLER>(StringToken text) where CONTROLLER : Controller
+        {
+            var _itemList = getList();
+            var type = typeof(CONTROLLER).Name.ToLowerInvariant();
+            type = type.Replace("controller", "");
+            _itemList.Add(new MenuItem
+            {
+                Text = text.DefaultValue,
+                Url = type
+            });
+            return this;
+        } 
     }
 
     public class MenuItem

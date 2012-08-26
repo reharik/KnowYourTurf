@@ -22,20 +22,17 @@ namespace KnowYourTurf.Web.Controllers
         }
 
 
-        public ActionResult PurchaseOrderList(PurchaseOrderListViewModel input)
+        public ActionResult ItemList(ListViewModel input)
         {
-            var url = input.Completed
-                          ? UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrdersCompleted(null))
-                          : UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrders(null));
-            PurchaseOrderListViewModel model = new PurchaseOrderListViewModel()
+            var url = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrders(null));
+            ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)),
-                DeleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.DeleteMultiple(null)),
-                GridDefinition = _purchaseOrderListGrid.GetGridDefinition(url),
-                Title = input.Completed ? WebLocalizationKeys.COMPLETED_PURCHASE_ORDERS.ToString() : WebLocalizationKeys.PURCHASE_ORDERS.ToString(),
-                Completed = input.Completed
+                deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.DeleteMultiple(null)),
+                gridDef = _purchaseOrderListGrid.GetGridDefinition(url),
+                _Title = WebLocalizationKeys.PURCHASE_ORDERS.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult PurchaseOrders(GridItemsRequestModel input)
@@ -55,30 +52,6 @@ namespace KnowYourTurf.Web.Controllers
             var gridItemsViewModel = _purchaseOrderListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
-
-        public JsonResult PurchaseOrdersCompleted(GridItemsRequestModel input)
-        {
-            var items = _dynamicExpressionQuery.PerformQuery<PurchaseOrder>(input.filters, x => x.Completed == true);
-            Action<IGridColumn, PurchaseOrder> mod = (c, v) =>
-            {
-                if (c.GetType() == typeof(ImageButtonColumn<PurchaseOrder>) && c.ColumnIndex == 2
-                    || c.GetType() == typeof(ImageButtonColumn<PurchaseOrder>) && c.ColumnIndex == 10)
-                {
-                    var col = (ImageButtonColumn<PurchaseOrder>)c;
-                    col.AddDataToEvent("{ 'ParentId' : " + v.EntityId + "}");
-                }
-            };
-            _purchaseOrderListGrid.AddColumnModifications(mod);
-
-            var gridItemsViewModel = _purchaseOrderListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
-        }
-
-
     }
 
-    public class PurchaseOrderListViewModel:ListViewModel
-    {
-        public bool Completed { get; set; }
-    }
 }

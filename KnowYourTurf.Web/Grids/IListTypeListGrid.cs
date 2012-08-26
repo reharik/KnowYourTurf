@@ -1,10 +1,5 @@
-using System;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 
@@ -22,8 +17,8 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<EventType> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.Name, "eventTypeGrid")
-                .ForAction<EventTypeController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("eventtypelist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
@@ -41,9 +36,9 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<TaskType> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name, "taskTypeGrid")
-                .ForAction<TaskTypeController>(x => x.AddUpdate(null))
+            GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("tasktypelist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
@@ -61,9 +56,9 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<PhotoCategory> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name, "photoCategoryGrid")
-                .ForAction<PhotoCategoryController>(x => x.AddUpdate(null))
+            GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("photocategorylist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
@@ -81,9 +76,9 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<DocumentCategory> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name, "documentCategoryGrid")
-                .ForAction<DocumentCategoryController>(x => x.AddUpdate(null))
+            GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("documentcategorylist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;

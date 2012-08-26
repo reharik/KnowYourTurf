@@ -11,7 +11,7 @@ using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class Vendor : DomainEntity
+    public class Vendor : DomainEntity, IPersistableObject
     {
         [ValidateNonEmpty]
         public virtual string Company { get; set; }
@@ -64,7 +64,7 @@ namespace KnowYourTurf.Core.Domain
         {
             if (!purchaseOrder.IsNew() && _purchaseOrders.Contains(purchaseOrder)) return;
             _purchaseOrders.Add(purchaseOrder);
-            purchaseOrder.Vendor = this;
+            purchaseOrder.Vendor =this;
         }
         public virtual void RemovePurchaseOrder(PurchaseOrder purchaseOrder) { _purchaseOrders.Remove(purchaseOrder); }
         public virtual IEnumerable<PurchaseOrder> GetPurchaseOrderInProcess() { return _purchaseOrders.Where(x => !x.Completed); }

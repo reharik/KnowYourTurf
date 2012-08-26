@@ -7,7 +7,7 @@ using KnowYourTurf.Core;
 using KnowYourTurf.Core.Html.Expressions;
 using KnowYourTurf.Core.Html.Menu;
 
-namespace MethodFitness.Core.Html.Menu
+namespace KnowYourTurf.Core.Html.Menu
 {
     public class MenuExpression : HtmlTagExpressionBase
     {
@@ -49,7 +49,7 @@ namespace MethodFitness.Core.Html.Menu
         private void renderListItems(HtmlTag ul, IEnumerable<MenuItem> items)
         {
             if (_items == null) return;
-            items.Each(x => ul.Children.Add(getLiItem(x)));
+            items.ForEachItem(x => ul.Children.Add(getLiItem(x)));
         }
         private HtmlTag getLiItem(MenuItem item)
         {

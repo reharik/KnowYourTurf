@@ -1,9 +1,5 @@
-using System;
-using System.Linq;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 
@@ -20,11 +16,11 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Photo> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name, "photoGrid")
-                .ForAction<PhotoController>(x => x.AddUpdate(null))
-                .ToPerformAction(ColumnAction.AddUpdateItem)
+            GridBuilder.LinkColumnFor(x => x.Name)
+                .ToPerformAction(ColumnAction.AddUpdateItem).WithId("photolist")
                 .ToolTip(WebLocalizationKeys.EDIT_EVENT);
-            GridBuilder.DisplayFor(x => x.PhotoCategory.Name).DisplayHeader(WebLocalizationKeys.DOCUMENT_CATEGORY);
+            GridBuilder.DisplayFor(x => x.PhotoCategory.Name)
+                .DisplayHeader(WebLocalizationKeys.DOCUMENT_CATEGORY);
             return this;
         }
     }

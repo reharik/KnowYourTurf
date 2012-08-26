@@ -16,7 +16,7 @@ namespace Generator
                      });
            
             For<IConventionFinder>().Use<DefaultConventionFinder>();
-            For<ILocalizedStringLoader>().Use<LocalizedStringLoader>();
+         //   For<ILocalizedStringLoader>().Use<LocalizedStringLoader>();
 
         }
     }

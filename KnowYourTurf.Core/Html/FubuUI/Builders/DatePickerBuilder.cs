@@ -1,6 +1,6 @@
-    using System;
-    using FubuMVC.UI.Configuration;
-    using HtmlTags;
+using System;
+using FubuMVC.UI.Configuration;
+using HtmlTags;
 
 namespace KnowYourTurf.Core.Html.FubuUI.Builders
 {
@@ -46,8 +46,8 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
 
         public override HtmlTag Build(ElementRequest request)
         {
-            return new HtmlTag("img").Attr("src", request.StringValue()).Attr("alt",request.Accessor.FieldName);
+            return new HtmlTag("img").Attr("src", request.StringValue()).Attr("alt", request.Accessor.FieldName);
         }
     }
 }
-    
+

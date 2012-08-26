@@ -443,28 +443,29 @@ namespace Generator
             _task1 = new Task
             {
                 TaskType = taskType1,
-                Field = _field1,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
                 ScheduledStartTime = DateTime.Parse("3/3/2011 5:30 AM"),
                 ScheduledEndTime = DateTime.Parse("3/3/2011 6:30 AM"),
                 Notes = "Notes1",
-                InventoryProduct = _invenotyMaterial1,
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString()
             };
+            _task1.Field =_field1;
+            _task1.InventoryProduct = _inventoryMaterial2;
 
             _task2 = new Task
             {
                 TaskType = taskType2,
-                Field=_field2,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
                 ScheduledStartTime = DateTime.Parse("3/3/2011 6:30 AM"),
                 ScheduledEndTime = DateTime.Parse("3/3/2011 7:30 AM"),
                 Notes = "Notes2",
-                InventoryProduct = _inventoryChemical2,
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString()
             };
+            _task2.Field = _field2;
+            _task2.InventoryProduct = _inventoryChemical2;
+
             _task1.AddEmployee(_employee1);
             _task1.AddEmployee(_employee2);
             _task1.AddEquipment(_equip1);
@@ -478,28 +479,29 @@ namespace Generator
             _task3 = new Task
             {
                 TaskType = taskType1,
-                Field = _field3,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
                 ScheduledStartTime = DateTime.Parse("3/3/2011 5:30 AM"),
                 ScheduledEndTime = DateTime.Parse("3/3/2011 6:30 AM"),
                 Notes = "Notes1",
-                InventoryProduct = _invenotyMaterial1,
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString()
             };
+            _task3.Field = _field3;
+            _task3.InventoryProduct = _invenotyMaterial1;
 
             _task4 = new Task
             {
                 TaskType = taskType2,
-                Field = _field4,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
                 ScheduledStartTime = DateTime.Parse("3/3/2011 6:30 AM"),
                 ScheduledEndTime = DateTime.Parse("3/3/2011 7:30 AM"),
                 Notes = "Notes2",
-                InventoryProduct = _inventoryChemical2,
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString()
             };
+            _task4.Field = _field4;
+            _task4.InventoryProduct = _inventoryChemical2;
+
             _task3.AddEmployee(_employee1);
             _task3.AddEmployee(_employee2);
             _task3.AddEquipment(_equip1);
@@ -509,13 +511,10 @@ namespace Generator
             _task4.AddEquipment(_equip1);
             _task4.AddEquipment(_equip2);
 
-            _category1.AddTask(_task1);
-            _category1.AddTask(_task2);
-//            _category2.AddTask(_task3);
-//            _category2.AddTask(_task4);
-
-            _repository.Save(_category1);
-//            _repository.Save(_category2);
+            _repository.Save(_task1);
+            _repository.Save(_task2);
+//            _repository.Save(_task3);
+//            _repository.Save(_task4);
 
         }
 
@@ -560,66 +559,68 @@ namespace Generator
             _repository.Save(_vendor1);
             _repository.Save(_vendor2);
 
-            var purchaseOrder1 = new PurchaseOrder {Vendor = _vendor1, DateCreated = DateTime.Parse("1/5/2009")};
+            var purchaseOrder1 = new PurchaseOrder {DateCreated = DateTime.Parse("1/5/2009")};
+            purchaseOrder1.Vendor = _vendor1;
             var poli1 = new PurchaseOrderLineItem()
             {
-                Product = _fertilizer1,
                 Price = 10,
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
                 Taxable = true
             };
+            poli1.Product = _fertilizer1;
 
             var poli2 = new PurchaseOrderLineItem()
             {
-                Product = _fertilizer1,
                 Price = 10,
                 UnitType = UnitType.Bags.ToString(),
                 QuantityOrdered = 5,
                 SizeOfUnit = 5,
                 Taxable = true
             };
+            poli2.Product = _fertilizer1;
 
             var poli3 = new PurchaseOrderLineItem()
             {
-                Product = _materials1,
                 Price = 10,
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
                 Taxable = true
             };
+            poli3.Product = _materials1;
 
             var poli4 = new PurchaseOrderLineItem()
             {
-                Product = _materials2,
                 Price = 10,
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
                 Taxable = true
             };
+            poli4.Product = _materials2;
 
             var poli5 = new PurchaseOrderLineItem()
             {
-                Product = _chemical2,
                 Price = 10,
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
                 Taxable = true
             };
+            poli5.Product =_chemical2;
 
             var poli6 = new PurchaseOrderLineItem()
             {
-                Product = _chemical1,
                 Price = 10,
                 UnitType = UnitType.Bags.ToString(),
                 QuantityOrdered = 5,
                 SizeOfUnit = 5,
                 Taxable = true
             };
+            poli6.Product = _chemical1;
+
             _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder1, poli1);
             _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder1, poli2);
             _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder1, poli3);
@@ -690,10 +691,6 @@ namespace Generator
             _vendor2.AddContact(_contact1v2);
             _vendor2.AddContact(_contact2v2);
             
-            _repository.Save(_contact1v1);
-            _repository.Save(_contact2v1);
-            _repository.Save(_contact1v2);
-            _repository.Save(_contact2v2);
             _repository.Save(_vendor1);
             _repository.Save(_vendor2);
         }
@@ -701,12 +698,19 @@ namespace Generator
         public void CreateInventory()
         {
 
-            _inventoryChemical1 = new InventoryProduct() { Product = _chemical1, Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10};
-            _inventoryChemical2 = new InventoryProduct() { Product = _chemical2, Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
-            _inventoryFertilizer1 = new InventoryProduct() { Product = _fertilizer1, Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
-            _inventoryFertilizer2 = new InventoryProduct() { Product = _fertilizer2, Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
-            _invenotyMaterial1 = new InventoryProduct() { Product = _materials1, Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
-            _inventoryMaterial2 = new InventoryProduct() { Product = _materials2, Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
+            _inventoryChemical1 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10};
+            _inventoryChemical2 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
+            _inventoryFertilizer1 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
+            _inventoryFertilizer2 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
+            _invenotyMaterial1 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
+            _inventoryMaterial2 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
+            _inventoryChemical1.Product = _chemical1;
+            _inventoryChemical2.Product = _chemical2;
+            _inventoryFertilizer1.Product = _fertilizer1;
+            _inventoryFertilizer2.Product = _fertilizer2;
+            _invenotyMaterial1.Product = _materials1;
+            _inventoryMaterial2.Product = _materials2;
+            
             _repository.Save(_inventoryChemical1);
             _repository.Save(_inventoryChemical2);
             _repository.Save(_inventoryFertilizer1);

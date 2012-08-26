@@ -24,8 +24,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
             Editors.Builder<TimePickerBuilder>();
             Editors.IfPropertyIs<bool>().BuildBy(TagActionExpression.BuildCheckbox);
             Editors.If(x => x.Accessor.Name.ToLowerInvariant().Contains("password")).BuildBy(r => new PasswordTag().Attr("value", r.RawValue));
-            
-            Editors.Always.BuildBy(TagActionExpression.BuildTextbox);
+//            Editors.Always.BuildBy(TagActionExpression.BuildTextbox);
             Editors.Always.Modify(AddElementName);
             Displays.Builder<ImageBuilder>();
             Displays.Builder<EmailDisplayBuilder>();
@@ -35,7 +34,15 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
             Displays.If(x => x.Accessor.PropertyType == typeof(DateTime) || x.Accessor.PropertyType == typeof(DateTime?))
                 .BuildBy(req => req.RawValue != null ? new HtmlTag("span").Text(DateTime.Parse(req.RawValue.ToString()).ToLongDateString()) : new HtmlTag("span"));
             Displays.Always.BuildBy(req => new HtmlTag("span").Text(req.StringValue()));
-            Labels.Always.BuildBy(req => new HtmlTag("label").Attr("for", req.Accessor.Name).Text(req.Accessor.FieldName.ToSeperateWordsFromPascalCase()));
+            Labels.Always.BuildBy(req =>
+                                      {
+                                          var htmlTag = new HtmlTag("label").Attr("for", req.Accessor.Name);
+                                          var display = req.Accessor.FieldName.Contains("ReadOnly")
+                                                            ? req.Accessor.FieldName.Replace("ReadOnly", "")
+                                                            : req.Accessor.FieldName;
+                                          htmlTag.Text(display.ToSeperateWordsFromPascalCase());
+                                          return htmlTag;
+                                      });
             validationAttributes();
         }
 
@@ -43,24 +50,27 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries
         {
             if (tag.IsInputElement())
             {
-                var name = request.Accessor.Name;
-                if (request.Accessor is FubuMVC.Core.Util.PropertyChain)
-                {
-                    name = ((FubuMVC.Core.Util.PropertyChain)(request.Accessor)).Names.Aggregate((current, next) => current + "." + next);
-                    var isDomainEntity =false;
-                    var de = request.Accessor.PropertyType.BaseType;
-                    while(de.Name!="Object")
-                    {
-                        if (de.Name == "DomainEntity") isDomainEntity = true;
-                        de = de.BaseType;
-                    }
-                    if (isDomainEntity) name += ".EntityId";
-
-                }
-                //var name = request.Accessor.Name.Substring(0, request.Accessor.Name.IndexOf(request.Accessor.FieldName)) + "." + request.Accessor.FieldName; 
-                //tag.Attr("name", name);
-                tag.Attr("name", name);
+                tag.Attr("name", DeriveElementName(request));
             }
+        }
+
+        public static string DeriveElementName(ElementRequest request)
+        {
+            var name = request.Accessor.Name;
+            if (request.Accessor is FubuMVC.Core.Util.PropertyChain)
+            {
+                name = ((FubuMVC.Core.Util.PropertyChain)(request.Accessor)).Names.Aggregate((current, next) => current + "." + next);
+                var isDomainEntity = false;
+                var de = request.Accessor.PropertyType.BaseType;
+                while (de.Name != "Object")
+                {
+                    if (de.Name == "DomainEntity") isDomainEntity = true;
+                    de = de.BaseType;
+                }
+                if (isDomainEntity) name += ".EntityId";
+
+            }
+            return name;
         }
 
         private void numbers()

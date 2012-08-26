@@ -4,6 +4,8 @@ using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 using KnowYourTurf.Web.Models;
+using NHibernate.Linq;
+using System.Linq;
 
 namespace KnowYourTurf.Web.Services
 {
@@ -11,6 +13,7 @@ namespace KnowYourTurf.Web.Services
     {
         CalculatorViewModel GetViewModel();
         Continuation Calculate(SuperInputCalcViewModel input);
+        CalculatorViewModel EmptyViewModel();
     }
 
     public class FertilizerNeededCalculator : ICalculatorHandler
@@ -26,19 +29,23 @@ namespace KnowYourTurf.Web.Services
             _selectListItemService = selectListItemService;
         }
 
+        public CalculatorViewModel EmptyViewModel()
+        {
+            return new FertilzierNeededCalcViewModel();
+        }
+
         public CalculatorViewModel GetViewModel()
         {
             var products = _repository.Query<InventoryProduct>(x => x.Product.InstantiatingType == "Fertilizer");
             var productItems = _selectListItemService.CreateListWithConcatinatedText(products, x => x.Product.Name, x => x.UnitType, " --> ", x => x.EntityId, true);
-            var fieldItems = _selectListItemService.CreateList<Field>(x => x.Name, x => x.EntityId, true,true);
+            var fieldItems = _selectListItemService.CreateFieldsSelectListItems();
             return new FertilzierNeededCalcViewModel
             {
-                FieldList = fieldItems,
-                ProductList = productItems,
-                CalculatorDisplayName = WebLocalizationKeys.FERTILIZER_NEEDED_DISPLAY.ToString(),
-                CalculatorName = WebLocalizationKeys.FERTILIZER_NEEDED.ToString(),
-                CalculateUrl =UrlContext.GetUrlForAction<CalculatorController>(x=>x.Calculate(null)),
-//                SaveJSSuccssCallback = "kyt.calculator.controller.fertilizerNeededSuccess"
+                _FieldEntityIdList = fieldItems,
+                _ProductEntityIdList = productItems,
+                _calculatorDisplayName = WebLocalizationKeys.FERTILIZER_NEEDED_DISPLAY.ToString(),
+                _calculatorName = WebLocalizationKeys.FERTILIZER_NEEDED.ToString(),
+                _calculateUrl =UrlContext.GetUrlForAction<CalculatorController>(x=>x.Calculate(null)),
             };
         }
 
@@ -46,8 +53,8 @@ namespace KnowYourTurf.Web.Services
         {
             var continuation = new Continuation();
             var model = new FertilzierNeededCalcViewModel();
-            var field = _repository.Find<Field>(Int64.Parse(input.Field));
-            var inventoryProduct = _repository.Find<InventoryProduct>(Int64.Parse(input.Product));
+            var field = _repository.Find<Field>(input.FieldEntityId);
+            var inventoryProduct = _repository.Query<InventoryProduct>(x=>x.EntityId == input.ProductEntityId).Fetch(x=>x.Product).FirstOrDefault();
             decimal bagSizeInPounds = _unitSizeTimesQuantyCalculator.CalculateLbsPerUnit(inventoryProduct);
             double fertN = ((Fertilizer)inventoryProduct.Product).N;
             double fertP = ((Fertilizer)inventoryProduct.Product).P;
@@ -63,6 +70,7 @@ namespace KnowYourTurf.Web.Services
             model.BagsNeeded = Convert.ToDouble(Math.Round(Convert.ToDecimal(bagsNeeded), 2));
             model.BagSize = inventoryProduct.SizeOfUnit + " " + inventoryProduct.UnitType;
             model.FieldArea = field.Size.ToString();
+            model._calculatorName = WebLocalizationKeys.FERTILIZER_NEEDED.ToString();
             continuation.Target = model;
 
             return continuation;

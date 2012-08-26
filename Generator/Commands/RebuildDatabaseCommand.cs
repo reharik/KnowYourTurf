@@ -7,12 +7,10 @@ namespace Generator.Commands
 {
     public class RebuildDatabaseCommand : IGeneratorCommand
     {
-        private readonly ILocalizedStringLoader _loader;
         private readonly IRepository _repository;
 
-        public RebuildDatabaseCommand(IRepository repository, ILocalizedStringLoader loader)
+        public RebuildDatabaseCommand(IRepository repository)
         {
-            _loader = loader;
             _repository = repository;
         }
 

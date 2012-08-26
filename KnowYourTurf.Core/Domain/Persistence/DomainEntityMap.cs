@@ -12,8 +12,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.LastModified);
             Map(x => x.DateCreated);
             Map(x => x.IsDeleted);
-            References(x => x.CreatedBy);
-            References(x => x.ModifiedBy);
+//            References(x => x.CreatedBy);
+//            References(x => x.ModifiedBy);
         }
 
     }

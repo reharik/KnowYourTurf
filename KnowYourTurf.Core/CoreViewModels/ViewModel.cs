@@ -1,5 +1,4 @@
-using System;
-using KnowYourTurf.Core.Domain;
+using System.Collections.Generic;
 using KnowYourTurf.Core.Html.Grid;
 
 namespace KnowYourTurf.Core
@@ -9,16 +8,23 @@ namespace KnowYourTurf.Core
         public long EntityId { get; set; }
         public long ParentId { get; set; }
         public long RootId { get; set; }
-        public string AddUpdateUrl { get; set; }
-        public string From { get; set; }
-        public string Title { get; set; }
+        public string Var { get; set; }
+        public string _Title { get; set; }
+        public string DateCreated { get; set; }
+
         public bool Popup { get; set; }
     }
 
     public class ListViewModel : ViewModel
     {
-        public GridDefinition GridDefinition { get; set; }
-        public bool NotPopup { get; set; }
-        public string DeleteMultipleUrl { get; set; }
+        public ListViewModel()
+        {
+            headerButtons = new List<string>();
+        }
+
+        public string deleteMultipleUrl { get; set; }
+        public GridDefinition gridDef { get; set; }
+        public List<string> headerButtons { get; set; }
+        public string searchField { get; set; }
     }
 }

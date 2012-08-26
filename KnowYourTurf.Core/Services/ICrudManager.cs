@@ -45,7 +45,7 @@ namespace KnowYourTurf.Core.Services
         public Notification Finish()
         {
             var notification = new Notification { Success = true };
-            GetCrudReports().Each(x =>
+            GetCrudReports().ForEachItem(x =>
             {
                 if (!x.Success)
                 {
@@ -53,7 +53,7 @@ namespace KnowYourTurf.Core.Services
                     if (notification.Errors == null)
                         notification.Errors = x.GetErrorInfos().ToList();
                     else
-                        x.GetErrorInfos().Each(notification.Errors.Add).ToList();
+                        x.GetErrorInfos().ForEachItem(notification.Errors.Add).ToList();
                 }
             });
             if (notification.Success)

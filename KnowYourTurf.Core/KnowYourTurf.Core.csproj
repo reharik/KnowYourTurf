@@ -70,6 +70,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>..\lib\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Mvc">
+      <HintPath>..\lib\ImageResizer.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\lib\log4net.dll</HintPath>
     </Reference>
@@ -127,8 +133,12 @@
     </Compile>
     <Compile Include="CoreLocalizationKeys.cs" />
     <Compile Include="CoreViewModels\GridItemModels.cs" />
+    <Compile Include="CoreViewModels\GroupedSelectViewModel.cs" />
+    <Compile Include="CoreViewModels\PictureDto.cs" />
+    <Compile Include="CoreViewModels\TokenInputDto.cs" />
     <Compile Include="Domain\BaseProduct.cs" />
     <Compile Include="Domain\Calculator.cs" />
+    <Compile Include="Domain\Category.cs" />
     <Compile Include="Domain\Company.cs" />
     <Compile Include="Domain\Continuation.cs" />
     <Compile Include="Domain\Chemical.cs" />
@@ -141,6 +151,7 @@
     <Compile Include="Domain\Event.cs" />
     <Compile Include="Domain\Fertilizer.cs" />
     <Compile Include="Domain\Field.cs" />
+    <Compile Include="Domain\IPersistableObject.cs" />
     <Compile Include="Domain\ListType.cs" />
     <Compile Include="Domain\Persistence\EmailJobTypeMap.cs" />
     <Compile Include="Domain\Persistence\ListTypeMap.cs" />
@@ -159,9 +170,16 @@
     <Compile Include="Domain\Weather.cs" />
     <Compile Include="Html\Expressions\HtmlTagExpressionBase.cs" />
     <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
+    <Compile Include="Html\FubuUI\Builders\DateTimeDisplayBuilder2.cs" />
+    <Compile Include="Html\FubuUI\Builders\GroupedSelectBuilder2.cs" />
+    <Compile Include="Html\FubuUI\Builders\ListDisplayBuilder2.cs" />
+    <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder2.cs" />
+    <Compile Include="Html\FubuUI\Builders\DatePickerBuilder2.cs" />
+    <Compile Include="Html\FubuUI\Builders\TextAreaBuilder2.cs" />
     <Compile Include="Html\FubuUI\Builders\DateTimeDisplayBuilder.cs" />
     <Compile Include="Html\FubuUI\Builders\ImageFIleDisplayBuilder.cs" />
     <Compile Include="Html\FubuUI\Builders\TextAreaBuilder.cs" />
+    <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfHtmlConventions2.cs" />
     <Compile Include="Html\Grid\ColumnBase.cs" />
     <Compile Include="Html\Grid\GroupingColumn.cs" />
     <Compile Include="Html\Grid\ImageButtonColumn.cs" />
@@ -182,6 +200,7 @@
     <Compile Include="Services\IEmailJob\IEmailJob.cs" />
     <Compile Include="Services\IEmailTemplateService.cs" />
     <Compile Include="Services\IEntityListGrid.cs" />
+    <Compile Include="Services\IFileUploaderService.cs" />
     <Compile Include="Services\IGetCompanyIdService.cs" />
     <Compile Include="Domain\InventoryProduct.cs" />
     <Compile Include="Domain\Tools\IRepository.cs" />
@@ -253,7 +272,6 @@
     <Compile Include="Html\Expressions\LinkExpression.cs" />
     <Compile Include="Html\Expressions\MetaExpression.cs" />
     <Compile Include="Html\Expressions\ScriptReferenceExpression.cs" />
-    <Compile Include="Html\Expressions\SelectBoxPickerExpression.cs" />
     <Compile Include="Html\Expressions\StyledButtonExpression.cs" />
     <Compile Include="Html\Expressions\SubmitButtonExpression.cs" />
     <Compile Include="Html\FubuUI\Builders\DatePickerBuilder.cs" />
@@ -264,7 +282,6 @@
     <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder.cs" />
     <Compile Include="Html\FubuUI\Builders\ValidationModifier.cs" />
     <Compile Include="Html\FubuUI\FubuUIHtmlExtensions.cs" />
-    <Compile Include="Html\FubuUI\HtmlConventionRegistries\CustomTagActionExpressions.cs" />
     <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfElementNamingConvention.cs" />
     <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfHtmlConventions.cs" />
     <Compile Include="Html\FubuUI\HtmlExpressions\DropdownInputExpression.cs" />
@@ -300,12 +317,12 @@
     <Compile Include="Services\IKYTPermissionsService.cs" />
     <Compile Include="Services\IPurchaseOrderLineItemService.cs" />
     <Compile Include="Services\ISaveEntityService.cs" />
-    <Compile Include="Services\ISelectBoxPickerService.cs" />
     <Compile Include="Services\ISelectListItemService.cs" />
     <Compile Include="Services\ISessionContext.cs" />
     <Compile Include="Services\DateTimeUtilities.cs" />
     <Compile Include="Services\IUnitSizeTimesQuantyCalculator.cs" />
     <Compile Include="Services\IUpdateCollectionService.cs" />
+    <Compile Include="Services\IUploadedFileHandlerService.cs" />
     <Compile Include="Services\ReceivePurchaseOrderService.cs" />
     <Compile Include="Services\SecurityDataService.cs" />
     <Compile Include="Services\StructureMapServiceLocator.cs" />
@@ -317,6 +334,9 @@
       <Project>{DBA372FE-3D52-45B3-AF82-B37696328764}</Project>
       <Name>KnowYourTurf.Security</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attributes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

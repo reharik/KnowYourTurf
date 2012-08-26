@@ -1,8 +1,6 @@
 ﻿@model KnowYourTurf.Web.Controllers.InventoryFertilizerViewModel
-@using KnowYourTurf.Core
-@using KnowYourTurf.Web
 @using KnowYourTurf.Core.Html.FubuUI
-@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Web
 
 
 @{
@@ -11,18 +9,31 @@
         
   <div class="col left">
         <div class="fieldRow">
-             @Html.ViewFor(x => x.Fertilizer.Name).ToHtmlTag()
+            @Html.ViewFor(x => x.Name).ToHtmlTag()
          </div>
         <div class="fieldRow">
-           @Html.ViewFor(x => x.Fertilizer.Description).ToHtmlTag()
+            @Html.ViewFor(x => x.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Fertilizer.N).ToHtmlTag()
+            @Html.ViewFor(x => x.N).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Fertilizer.P).ToHtmlTag()
+            @Html.ViewFor(x => x.P).ToHtmlTag()
         </div>
+      <div class="fieldRow">
+          @Html.ViewFor(x => x.K).ToHtmlTag()
+      </div>
+       <div class="fieldRow">
+            @Html.ViewFor(x => x.Quantity).ToHtmlTag()
+         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Fertilizer.K).ToHtmlTag()
-        </div>
+            @Html.ViewFor(x => x.SizeOfUnit).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.UnitType).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.LastVendorCompany).LabelDisplay(WebLocalizationKeys.PREVIOUS_VENDOR).ToHtmlTag()
+         </div>
+
     </div>

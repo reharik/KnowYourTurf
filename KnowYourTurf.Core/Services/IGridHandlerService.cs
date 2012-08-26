@@ -19,7 +19,7 @@
 
 //    public class GridHandlerService : IGridHandlerService
 //    {
-//        private readonly IRepository _repository;
+//        private readonly IRepository _aggregateRootRepo;
 //        private readonly ISessionContext _sessionContext;
 //        private readonly IContainer _container;
 
@@ -44,7 +44,7 @@
 //            return new GridDefinition
 //                       {
 //                           Url = url,
-//                           Title = title.ToString(),
+//                           _Title = title.ToString(),
 //                           Columns = builtGrid.GetGridColumns(user)
 //                       };
 //        }

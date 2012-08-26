@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Enums;
@@ -9,8 +10,10 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class Field : DomainEntity
+    public class Field : DomainEntity, IPersistableObject
     {
+        public virtual Category Category { get; private set; }
+
         [ValidateNonEmpty]
         public virtual string Name { get; set; }
         [ValidateNonEmpty]
@@ -18,7 +21,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Abbreviation { get; set; }
         [ValidateNonEmpty, ValidateIntegerAttribute]
         public virtual int Size { get; set; }
-        public virtual string ImageUrl { get; set; }
+        public virtual string FileUrl { get; set; }
         [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
         public virtual string FieldColor { get; set; }
@@ -42,6 +45,7 @@ namespace KnowYourTurf.Core.Domain
         {
             if (!task.IsNew() && _tasks.Contains(task)) return;
             _tasks.Add(task);
+            task.Field = this;
         }
 
         private readonly IList<Event> _events = new List<Event>();
@@ -51,6 +55,7 @@ namespace KnowYourTurf.Core.Domain
         {
             if (!fieldEvent.IsNew() && _events.Contains(fieldEvent)) return;
             _events.Add(fieldEvent);
+            fieldEvent.Field = this;
         }
         
         private readonly IList<Document> _documents = new List<Document>();
@@ -72,6 +77,10 @@ namespace KnowYourTurf.Core.Domain
         }
         #endregion
 
+        public virtual void SetCategory(Category category)
+        {
+            Category = category;
+        }
     }
 
     

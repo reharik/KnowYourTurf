@@ -18,12 +18,13 @@ using FubuMVC.UI;
 using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
 using KnowYourTurf.Web.Services.EmailHandlers;
-using MethodFitness.Core;
+using KnowYourTurf.Core;
+using KnowYourTurf.Web.Services.ViewOptions;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
-using Log4NetLogger = MethodFitness.Core.Log4NetLogger;
+using Log4NetLogger = KnowYourTurf.Core.Log4NetLogger;
 using StructureMapServiceLocator = KnowYourTurf.Core.Services.StructureMapServiceLocator;
 
 namespace KnowYourTurf.Web
@@ -44,7 +45,7 @@ namespace KnowYourTurf.Web
                 x.WithDefaultConventions();
             });
             
-            For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions>();
+            For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions2>();
             For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
             For<IElementNamingConvention>().Use<KnowYourTurfElementNamingConvention>();
             For(typeof(ITagGenerator<>)).Use(typeof(TagGenerator<>));
@@ -96,13 +97,19 @@ namespace KnowYourTurf.Web
 
             For<IEntityListGrid<User>>().Use<EmployeeListGrid>();
             For<IEntityListGrid<User>>().Add<AdminListGrid>().Named("Admins");
-            For<IEntityListGrid<User>>().Add<FacilitiesListGrid>().Named("Facilities");
+            For<IEntityListGrid<User>>().Add<FacilitiesListGrid>().Named("AddUpdate");
+
+            For<IEntityListGrid<PurchaseOrder>>().Use<PurchaseOrderListGrid>();
+            For<IEntityListGrid<PurchaseOrder>>().Add<CompletedPurchaseOrderListGrid>().Named("Completed");
+
 
             For<IEntityListGrid<PurchaseOrderLineItem>>().Use<PurchaseOrderLineItemGrid>();
             For<IEntityListGrid<PurchaseOrderLineItem>>().Add<ReceivePurchaseOrderLineItemGrid>().Named("Recieve");
+            For<IEntityListGrid<PurchaseOrderLineItem>>().Add<CompetedPurchaseOrderLineItemGrid>().Named("Completed");
             For<IEntityListGrid<Material>>().Use<MaterialListGrid>();
             For<IEntityListGrid<Chemical>>().Use<ChemicalListGrid>();
             For<IEntityListGrid<Fertilizer>>().Use<FertilizerListGrid>();
+            For<IRouteTokenConfig>().Add<FieldsRouteTokenList>();
 
             For<IEmailTemplateHandler>().Use<EmployeeDailyTaskHandler>().Named("Daily TasksHandler");
 

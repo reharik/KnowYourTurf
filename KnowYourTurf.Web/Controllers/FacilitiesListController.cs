@@ -18,19 +18,20 @@ namespace KnowYourTurf.Web.Controllers
         public FacilitiesListController(IDynamicExpressionQuery dynamicExpressionQuery)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _gridHandlerService = ObjectFactory.Container.GetInstance<IEntityListGrid<User>>("Facilities");
+            _gridHandlerService = ObjectFactory.Container.GetInstance<IEntityListGrid<User>>("AddUpdate");
         }
 
-        public ActionResult FacilitiesList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<FacilitiesListController>(x => x.Facilitiess(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)),
-                GridDefinition = _gridHandlerService.GetGridDefinition(url),
-                Title = WebLocalizationKeys.FACILITIES.ToString()
+                gridDef = _gridHandlerService.GetGridDefinition(url),
+                _Title = WebLocalizationKeys.FACILITIES.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Facilitiess(GridItemsRequestModel input)

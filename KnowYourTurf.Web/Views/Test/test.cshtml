@@ -1,0 +1,85 @@
+﻿@using HtmlTags
+@using KnowYourTurf.Core.Html.FubuUI
+@model KnowYourTurf.Web.Controllers.TestModel
+
+@{
+    Layout = "";
+}
+<html>
+<head>
+    @Script("jqueryPlugins/jquery-1.7.1.js").ToHtmlTag()
+    @Script("externalHelpers/underscore.js").ToHtmlTag()
+    @Script("externalHelpers/backbone.js").ToHtmlTag()    
+    @Script("externalHelpers/knockout-2.1.0.js").ToHtmlTag()    
+    @Script("externalHelpers/knockout.mapping.js").ToHtmlTag()    
+    @Script("KYT/CC.ModelBinding/CC.NotificationService.js").ToHtmlTag()
+    @Script("KYT/CC.ModelBinding/CC.ValidationRules.js").ToHtmlTag()
+    @Script("KYT/CC.ModelBinding/CC.ValidationRunner.js").ToHtmlTag()
+    @Script("KYT/CC.ModelBinding/CC.Models.js").ToHtmlTag()
+    @Script("KYT/CC.ModelBinding/CC.Elements.js").ToHtmlTag()
+    @Script("KYT/CC.ModelBinding/CC.ModelService.js").ToHtmlTag()
+ <script type="text/javascript">
+     $(function () {
+
+         var sampleJson = {
+             "Textbox_Item_Name": {
+                 "type": "string",
+                 "name": "Item.Name",
+                 "value": "Raif",
+                 "validation": {
+                     "required": true
+                 }
+             },
+             "Textbox_Item_Age": {
+                 "type": "int",
+                 "name": "Item.Age",
+                 "value": "32",
+                 "validation": {
+                     "required": true,
+                     "number": true
+                 }
+             }
+         };
+//         var modelService = CC.modelService;
+//         var model = modelService.getModels(sampleJson, $("#container"));
+//         $.each(model.collection, function(i, item) {
+//             item.init();
+
+
+//         });
+            var model =  @MvcHtmlString.Create(JsonUtil.ToJson(@Model));
+            xxx_viewModel = ko.mapping.fromJS(model);
+            ko.applyBindings(xxx_viewModel);
+//         $("[name='Item.Email']").change(function() {
+//             alert("hi");
+//         });
+         $("#save").click(function() {
+             $.ajax({
+                type: 'post',
+                url: "/test/save",
+                data: JSON.stringify(ko.mapping.toJS(xxx_viewModel)),
+                contentType: "application/json; charset=utf-8",
+                traditional: true,
+                success: function (data) {
+                 
+                }
+            });
+         });
+     });
+
+</script>
+    </head>
+
+<body >
+<form>
+<div id="container">
+    @Html.SubmissionFor(x => x.Item.FirstName).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.Age).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.BDay).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.Email).ToHtmlTag()
+    @Html.SubmissionFor(x => x.Item.Address).ToHtmlTag()
+    <input type="button" id="save" value="Save"/>
+</div>
+</form>
+</body>
+</html>

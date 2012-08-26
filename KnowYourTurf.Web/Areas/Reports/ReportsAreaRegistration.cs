@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MethodFitness.Web.Areas.Reports
+namespace KnowYourTurf.Web.Areas.Reports
 {
     public class ReportsAreaRegistration : AreaRegistration
     {

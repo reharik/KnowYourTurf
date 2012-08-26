@@ -21,16 +21,17 @@ namespace KnowYourTurf.Web.Controllers
             _employeeListGrid = employeeListGrid;
         }
 
-        public ActionResult EmployeeList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<EmployeeListController>(x => x.Employees(null));
             var model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddUpdate(null)),
-                GridDefinition = _employeeListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.EMPLOYEES.ToString()
+                gridDef = _employeeListGrid.GetGridDefinition(url),
+                _Title = WebLocalizationKeys.EMPLOYEES.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Employees(GridItemsRequestModel input)

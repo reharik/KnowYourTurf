@@ -1,30 +1,23 @@
 ﻿@model KnowYourTurf.Web.Models.EventTypeViewModel
 @using KnowYourTurf.Core.Html.FubuUI
 @using KnowYourTurf.Web
-@using KnowYourTurf.Web.Controllers
-@using KnowYourTurf.Core.Html.Expressions
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-
-
-            @MvcHtmlString.Create(FormFor("/EventType/SaveEventType").Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
    <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Status).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Status).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
-            @Html.SubmissionFor(x => x.Item.EventColor).InputId("EventColor").ToHtmlTag()
+            @Html.SubmissionFor(x => x.EventColor).HideLabel().InputId("EventColor").ToHtmlTag()
             <div id="colorPicker"></div>
         </div>
     </div>
-            @EndForm()
 

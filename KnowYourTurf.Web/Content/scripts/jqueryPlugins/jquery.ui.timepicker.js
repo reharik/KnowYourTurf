@@ -213,6 +213,7 @@
                     return this._get(inst, key);
                 });
             $.data(target, PROP_NAME, inst);
+            $.timepicker.count ++;
         },
 
         /* Handle keystrokes. */
@@ -1323,6 +1324,18 @@
             var inst= this._getInst(input);
             if ( inst == undefined) { return -1; }
             return inst.minutes;
+        },
+        _destroyTimepicker: function(input){
+            $(input).unbind("setData.timepicker");
+            $(input).unbind("getData.timepicker");
+            $(input).unbind("focus.timepicker");
+            $(input).unbind("click.timepicker");
+            $.removeData(input, PROP_NAME);
+            $.timepicker.count --;
+            if($.timepicker.count<=0){
+                $(document).unbind("mousedown",$.timepicker._checkExternalClick);
+                $.timepicker = null;
+            }
         }
 
     });
@@ -1340,13 +1353,15 @@
             $(document).mousedown($.timepicker._checkExternalClick).
 			find('body').append($.timepicker.tpDiv);
             $.timepicker.initialized = true;
+            $.timepicker.count = 0;
         }
 
 
 
+        var _options = options;
         var otherArgs = Array.prototype.slice.call(arguments, 1);
-        if (typeof options == 'string' && (options == 'getTime' || options == 'getHour' || options == 'getMinute' ))
-            return $.timepicker['_' + options + 'Timepicker'].
+        if (typeof _options == 'string' && (_options == 'getTime' || _options == 'getHour' || _options == 'getMinute' || _options=='destroy' ))
+            return $.timepicker['_' + _options + 'Timepicker'].
 			    apply($.timepicker, [this[0]].concat(otherArgs));
         if (options == 'option' && arguments.length == 2 && typeof arguments[1] == 'string')
             return $.timepicker['_' + options + 'Timepicker'].

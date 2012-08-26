@@ -4,6 +4,8 @@ using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
+using NHibernate.Linq;
+using System.Linq;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -22,24 +24,26 @@ namespace KnowYourTurf.Web.Controllers
             _repository = repository;
         }
 
-        public ActionResult TaskList(ViewModel input)
+        public ActionResult ItemList(ViewModel input)
         {
-            var url = UrlContext.GetUrlForAction<TaskListController>(x => x.Tasks(null))+"?ParentId="+input.ParentId;
+            var url = UrlContext.GetUrlForAction<TaskListController>(x => x.Tasks(null)) + "?RootId=" + input.RootId;
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)),
-                DeleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x => x.DeleteMultiple(null)),
-                GridDefinition = _taskListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.TASKS.ToString(),
-                ParentId = input.ParentId
+                //AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)),
+                deleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x => x.DeleteMultiple(null)),
+                gridDef = _taskListGrid.GetGridDefinition(url),
+                _Title = WebLocalizationKeys.TASKS.ToString(),
+                searchField = "TaskType.Name"
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Tasks(GridItemsRequestModel input)
         {
-            var category = _repository.Find<Category>(input.ParentId);
-            var items = _dynamicExpressionQuery.PerformQuery(category.Tasks,input.filters);
+            var tasks = _repository.Query<Task>(x => x.Field.Category.EntityId == input.RootId);
+            var items = _dynamicExpressionQuery.PerformQuery(tasks, input.filters);
             var gridItemsViewModel = _taskListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }

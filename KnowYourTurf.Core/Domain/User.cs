@@ -10,7 +10,7 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class User : DomainEntity,IUser
+    public class User : DomainEntity,IUser, IPersistableObject
     {
         [ValidateNonEmpty]
         public virtual string FirstName { get; set; }
@@ -30,7 +30,7 @@ namespace KnowYourTurf.Core.Domain
         [Tools.CustomAttributes.TextArea]
         public virtual string Notes { get; set; }
         public virtual DateTime? BirthDate { get; set; }
-        public virtual string ImageUrl { get; set; }
+        public virtual string FileUrl { get; set; }
         public virtual string ImageFriendlyName { get; set; }
         public virtual Company Company { get; set; }
         public virtual CultureInfo LanguageDefault { get; set; }

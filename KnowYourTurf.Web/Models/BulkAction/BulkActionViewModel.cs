@@ -5,6 +5,6 @@ namespace KnowYourTurf.Web.Controllers
 {
     public class BulkActionViewModel : ViewModel
     {
-        public IEnumerable<int> EntityIds { get; set; }
+        public IEnumerable<long> EntityIds { get; set; }
     }
 }

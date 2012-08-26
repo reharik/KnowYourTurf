@@ -12,10 +12,10 @@ using KnowYourTurf.Web.Config;
 using KnowYourTurf.Web.Menus;
 using KnowYourTurf.Web.Services;
 using KnowYourTurf.Web.Services.EmailHandlers;
-using MethodFitness.Core;
+using KnowYourTurf.Core;
 using NHibernate;
 using StructureMap.Configuration.DSL;
-using Log4NetLogger = MethodFitness.Core.Log4NetLogger;
+using Log4NetLogger = KnowYourTurf.Core.Log4NetLogger;
 
 namespace KnowYourTurf.Web
 {
