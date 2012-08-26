@@ -28,7 +28,7 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _chemicalListGrid.GetGridDefinition(url),
                 _Title = WebLocalizationKeys.CHEMICALS.ToString()
             };
-            return View(model);
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Chemicals(GridItemsRequestModel input)

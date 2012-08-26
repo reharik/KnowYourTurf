@@ -49,7 +49,6 @@ namespace KnowYourTurf.Core.Domain
         {
             GridBuilder.LinkColumnFor(x => x.DateCreated)
                 .ToPerformAction(ColumnAction.DisplayItem)
-                .WithId("completedpurchaseorderlist")
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.EntityId).DisplayHeader(WebLocalizationKeys.PO_Number);
             GridBuilder.DisplayFor(x => x.Vendor.Company);
