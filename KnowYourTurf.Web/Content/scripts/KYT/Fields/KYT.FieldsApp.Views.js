@@ -564,7 +564,7 @@ KYT.Views.CommitPOGridView = KYT.Views.View.extend({
     }
 });
 
-KYT.Views.NoActionGrid = KYT.Views.View.extend({
+KYT.Views.NoMultiSelectGrid = KYT.Views.View.extend({
     initialize:function(){
         KYT.mixin(this, "ajaxGridMixin");
         KYT.mixin(this, "setupGridMixin");
@@ -573,6 +573,12 @@ KYT.Views.NoActionGrid = KYT.Views.View.extend({
         this.options.gridOptions = {
             multiselect:false
         }
+    },
+    viewLoaded:function(){
+        this.setupBindings();
+    },
+    onClose:function(){
+        this.unbindBindings();
     }
 });
 

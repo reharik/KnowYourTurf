@@ -33,7 +33,9 @@ namespace KnowYourTurf.Web
         public static readonly StringToken ADMINS = new WebLocalizationKeys("ADMINS", "Admins");
         public static readonly StringToken FACILITIES = new WebLocalizationKeys("FACILITIES", "Facilities");
         public static readonly StringToken VENDORS = new WebLocalizationKeys("VENDORS", "Vendors");
+        public static readonly StringToken VENDOR = new WebLocalizationKeys("VENDOR", "Vendor");
         public static readonly StringToken PRODUCTS = new WebLocalizationKeys("PRODUCTS", "Products");
+        public static readonly StringToken PRODUCT = new WebLocalizationKeys("PRODUCT", "Product");
         public static readonly StringToken INVENTORY = new WebLocalizationKeys("INVENTORY", "Inventory");
         public static readonly StringToken MATERIALS = new WebLocalizationKeys("MATERIALS", "Materials");
         public static readonly StringToken FERTILIZERS = new WebLocalizationKeys("FERTILIZERS", "Fertilizers");
@@ -50,7 +52,9 @@ namespace KnowYourTurf.Web
         public static readonly StringToken ADMIN = new WebLocalizationKeys("ADMIN", "Admin");
         public static readonly StringToken CALCULATORS = new WebLocalizationKeys("CALCULATORS", "Calculators");
         public static readonly StringToken EMAIL_TEMPLATES = new WebLocalizationKeys("EMAIL_TEMPLATES", "Email Templates");
+        public static readonly StringToken EMAIL_TEMPLATE = new WebLocalizationKeys("EMAIL_TEMPLATE", "Email Template");
         public static readonly StringToken EMAIL_JOBS = new WebLocalizationKeys("EMAIL_JOBS", "Email Jobs");
+        public static readonly StringToken EMAIL_JOB_TYPE = new WebLocalizationKeys("EMAIL_JOB_TYPE", "Email Job Type");
 
 
         public static readonly StringToken EMPLOYEE_INFORMATION = new WebLocalizationKeys("EMPLOYEE_INFORMATION", "Employee Information");
@@ -88,10 +92,12 @@ namespace KnowYourTurf.Web
         public static readonly StringToken TASK_TYPE_INFORMATION = new WebLocalizationKeys("TASK_TYPE_INFORMATION", "Task Type Information");
         public static readonly StringToken NEW_TASK_TYPE = new WebLocalizationKeys("NEW_TASK_TYPE", "Add New Task Type");
         public static readonly StringToken TASK_TYPES = new WebLocalizationKeys("TASK_TYPES", "Task Types");
+        public static readonly StringToken TASK_TYPE = new WebLocalizationKeys("TASK_TYPE", "Task Type");
 
         public static readonly StringToken EVENT_TYPE_INFORMATION = new WebLocalizationKeys("EVENT_TYPE_INFORMATION", "Event Type Information");
         public static readonly StringToken NEW_EVENT_TYPE = new WebLocalizationKeys("NEW_EVENT_TYPE", "Add New Event Type");
         public static readonly StringToken EVENT_TYPES = new WebLocalizationKeys("EVENT_TYPES", "Event Types");
+        public static readonly StringToken EVENT_TYPE = new WebLocalizationKeys("EVENT_TYPE", "Event Type");
 
         public static readonly StringToken EVENT_INFORMATION = new WebLocalizationKeys("EVENT_INFORMATION", "Event Information");
 
@@ -212,7 +218,11 @@ namespace KnowYourTurf.Web
         public static readonly StringToken CREATE_TASK = new WebLocalizationKeys("CREATE_TASK", "Create Task");
         public static readonly StringToken EMPLOYEE_PHOTO = new WebLocalizationKeys("EMPLOYEE_PHOTO", "Employee Photo");
         public static readonly StringToken FACILITIES_PHOTO = new WebLocalizationKeys("FACILITIES_PHOTO", "Facilities Photo");
-        
+
+        public static readonly StringToken PASSWORD = new WebLocalizationKeys("PASSWORD", "Password");
+        public static readonly StringToken STATUS = new WebLocalizationKeys("STATUS", "Status");
+        public static readonly StringToken CALCULATOR_NAME = new WebLocalizationKeys("CALCULATOR_NAME", "Calculator Name");
+
 
     }
 }

@@ -1,12 +1,13 @@
 ﻿@model KnowYourTurf.Web.Models.EventViewModel
 @using KnowYourTurf.Core.Html.FubuUI
+@using KnowYourTurf.Web
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
 
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EventTypeEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EventTypeEntityId).LabelDisplay(WebLocalizationKeys.EVENT_TYPE).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.ScheduledDate).ToHtmlTag()
@@ -18,7 +19,7 @@
             @Html.SubmissionFor(x => x.EndTime).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FieldEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.FieldEntityId).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Notes).ToHtmlTag()

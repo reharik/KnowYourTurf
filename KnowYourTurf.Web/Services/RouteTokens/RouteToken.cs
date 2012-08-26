@@ -24,8 +24,8 @@ namespace KnowYourTurf.Web.Services.RouteTokens
         public string itemName { get; set; }
         public bool noModel { get; set; }
         public bool noTemplate { get; set; }
-
         public string subViewRoute { get; set; }
+        public string gridId { get; set; }
 
         public void CreateUrl<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, AreaName areaName = null) where CONTROLLER : KYTController
         {

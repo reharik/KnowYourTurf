@@ -67,9 +67,9 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForList<ChemicalListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<ChemicalController>(x => x.AddUpdate(null)).End();
 
-            _builder.TokenForList<DocumentListController>(x => x.ItemList(null)).End();
+            _builder.TokenForList<DocumentListController>(x => x.ItemList(null)).GridId("documentlist").End();
             _builder.TokenForForm<DocumentController>(x => x.AddUpdate(null)).End();
-            _builder.TokenForList<PhotoListController>(x => x.ItemList(null)).End();
+            _builder.TokenForList<PhotoListController>(x => x.ItemList(null)).GridId("photolist").End();
             _builder.TokenForForm<PhotoController>(x => x.AddUpdate(null)).End();
 
             _builder.TokenForList<InventoryListController>(x => x.ItemList(null)).End();
@@ -96,8 +96,8 @@ namespace KnowYourTurf.Web.Services.ViewOptions
 
             _builder.TokenForForm<PurchaseOrderLineItemController>(x => x.ReceivePurchaseOrderLineItem(null)).End();
 
-            _builder.TokenForList<CompletedPurchaseOrderListController>(x => x.ItemList(null)).ViewName("NoActionGrid").End();
-            _builder.TokenForList<CompletedPurchaseOrderDisplayController>(x => x.ItemList(null)).ViewName("NoActionGrid").End();
+            _builder.TokenForList<CompletedPurchaseOrderListController>(x => x.ItemList(null)).ViewName("NoMultiSelectGrid").End();
+            _builder.TokenForList<CompletedPurchaseOrderDisplayController>(x => x.ItemList(null)).ViewName("NoMultiSelectGrid").End();
 
             _builder.TokenForForm<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)).AddUpdateToken("purchaseorderlineitem").End();
 

@@ -14,7 +14,7 @@
             @Html.SubmissionFor(x => x.LastName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.UserLoginInfoPassword).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UserLoginInfoPassword).LabelDisplay(WebLocalizationKeys.PASSWORD).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Email).ToHtmlTag()

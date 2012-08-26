@@ -22,10 +22,10 @@
             @Html.SubmissionFor(x => x.Status).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmailJobTypeEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EmailJobTypeEntityId).LabelDisplay(WebLocalizationKeys.EMAIL_JOB_TYPE).ToHtmlTag()
         </div>
          <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmailTemplateEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EmailTemplateEntityId).LabelDisplay(WebLocalizationKeys.EMAIL_TEMPLATES).ToHtmlTag()
         </div>
     </div>
      <div class="col left clear">

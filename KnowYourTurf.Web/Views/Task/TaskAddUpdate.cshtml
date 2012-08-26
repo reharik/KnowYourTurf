@@ -1,10 +1,6 @@
 ﻿@model KnowYourTurf.Web.Models.TaskViewModel
-@using HtmlTags
-@using KnowYourTurf.Core
 @using KnowYourTurf.Web
 @using KnowYourTurf.Core.Html.FubuUI
-@using KnowYourTurf.Web.Controllers
-@using KnowYourTurf.Core.Html.Expressions
 @{
     Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
 }
@@ -12,7 +8,7 @@
 
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.TaskTypeEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.TaskTypeEntityId).LabelDisplay(WebLocalizationKeys.TASK_TYPE).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.ScheduledDate).ToHtmlTag()
@@ -27,10 +23,10 @@
             @Html.SubmissionFor(x => x.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FieldEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.FieldEntityId).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.InventoryProductProductEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.InventoryProductProductEntityId).LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.QuantityNeeded).ToHtmlTag()
@@ -42,14 +38,7 @@
             @Html.SubmissionFor(x => x.Notes).AddClassToInput("KYT_editor_label_left").ToHtmlTag()
         </div>
         <div class="fieldRow">
-@*        @if (Model.Item.Complete)*@
-@*        {*@
-@*            @Html.ViewFor(x => x.Item.Complete).ToHtmlTag()*@
-@*        }*@
-@*        else*@
-@*        {*@
             @Html.SubmissionFor(x => x.Complete).ToHtmlTag()
-@*        }*@
         </div>
     </div>
     <div class="col left clear">

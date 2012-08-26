@@ -21,7 +21,7 @@
             </div>
             <div class="fieldRow">
                 @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
-                @Html.SubmissionFor(x => x.FieldColor).InputId("FieldColor").ToHtmlTag()
+                @Html.SubmissionFor(x => x.FieldColor).HideLabel().InputId("FieldColor").ToHtmlTag()
                 <div id="colorPicker"></div>
             </div>
         </div>

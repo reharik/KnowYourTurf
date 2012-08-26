@@ -26,7 +26,7 @@
             @Html.SubmissionFor(x => x.EmergencyContactPhone).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.UserLoginInfoPassword).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UserLoginInfoPassword).LabelDisplay(WebLocalizationKeys.PASSWORD).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Email).ToHtmlTag()
@@ -55,7 +55,7 @@
             @Html.SubmissionFor(x => x.ZipCode).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.UserLoginInfoStatus).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UserLoginInfoStatus).LabelDisplay(WebLocalizationKeys.STATUS).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Notes).ToHtmlTag()

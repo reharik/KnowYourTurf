@@ -14,7 +14,7 @@
             @Html.SubmissionFor(x => x.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.VendorEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.VendorEntityId).LabelDisplay(WebLocalizationKeys.VENDOR).ToHtmlTag()
         </div>
        <div class="fieldRow">
            @Html.SubmissionFor(x => x.TotalHours).ToHtmlTag()

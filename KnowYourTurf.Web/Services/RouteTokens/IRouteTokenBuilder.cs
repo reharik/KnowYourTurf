@@ -33,6 +33,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         IRouteTokenBuilder NoTemplate();
         IRouteTokenBuilder JustRoute(string route);
         IRouteTokenBuilder SubRouteToken(string route);
+        IRouteTokenBuilder GridId(string gridId);
     }
 
     public class RouteTokenBuilder : IRouteTokenBuilder
@@ -181,6 +182,12 @@ namespace KnowYourTurf.Web.Services.ViewOptions
         public IRouteTokenBuilder SubRouteToken(string route)
         {
             currentItem.subViewRoute = route.ToLowerInvariant();
+            return this;
+        }
+
+        public IRouteTokenBuilder GridId(string gridId)
+        {
+            currentItem.gridId = gridId;
             return this;
         }
 

@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
@@ -25,9 +17,7 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<User> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.FullName)
-                .ForAction<EmployeeDashboardController>(x => x.ViewEmployee(null))
                 .ToPerformAction(ColumnAction.Redirect)
-                .WithId("employeelist")
                 .IsSortable(false)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.EmployeeId);

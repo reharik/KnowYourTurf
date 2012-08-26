@@ -76,7 +76,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<DocumentCategory> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name, "documentCategoryGrid")
+            GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .WithId("documentcategorylist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);

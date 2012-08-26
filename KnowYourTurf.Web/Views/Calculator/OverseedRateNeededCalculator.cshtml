@@ -10,13 +10,13 @@
 
     <div class="col left">
         <div class="fieldRow">
-            @Html.ViewFor(x => x._calculatorDisplayName).ToHtmlTag()
+            @Html.ViewFor(x => x._calculatorDisplayName).LabelDisplay(WebLocalizationKeys.CALCULATOR_NAME).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FieldEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.FieldEntityId).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ProductEntityId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ProductEntityId).LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.BagsUsed).InputId("BagsUsed").ToHtmlTag()
