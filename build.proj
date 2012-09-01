@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Stage" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
     <ToolsPath>$(MSBuildProjectDirectory)\lib</ToolsPath>
@@ -15,7 +15,7 @@
 <!-- ____________PUBLIC TASKS_______________  -->
 
   <Target Name="Build" DependsOnTargets="_build;_unitTests" />
-  <Target Name="Stage" DependsOnTargets="_build;_unitTests;_outputWebFiles;" />
+  <Target Name="Push" DependsOnTargets="_build;_unitTests;_outputWebFiles;" />
 
  <Target Name="_outputWebFiles" >
     <ItemGroup>
@@ -41,14 +41,14 @@
     </Time>
 
     <PropertyGroup>
-      <OutputDirectory>c:\development\BuildFiles\KnowYourTurf\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute)</OutputDirectory>
+      <OutputDirectory>f:\WebSites\KnowYourTurf</OutputDirectory>
     </PropertyGroup>
 
     <MakeDir Directories="$(OutputDirectory)"  />
     <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputDirectory)\%(RecursiveDir)" />
     <Zip Files="@(WebFiles)"
-      WorkingDirectory="$(OutputDirectory)"
-      ZipFileName="$(OutputDirectory)\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
+      WorkingDirectory="f:\WebSites\BackUp\KnowYourTurf"
+      ZipFileName="f:\WebSites\BackUp\KnowYourTurf\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
       ZipLevel="9" />
  </Target>
 
