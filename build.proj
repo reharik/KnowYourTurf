@@ -15,7 +15,7 @@
 <!-- ____________PUBLIC TASKS_______________  -->
 
   <Target Name="Build" DependsOnTargets="_build;_unitTests" />
-  <Target Name="Stage" DependsOnTargets="_build;_unitTests;_outputWebFiles;" />
+  <Target Name="Push" DependsOnTargets="_build;_unitTests;_outputWebFiles;" />
 
  <Target Name="_outputWebFiles" >
     <ItemGroup>
