@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="c:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll" total="0" failures="0" not-run="0" date="2012-05-23" time="07:22:21">
+<test-results name="c:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll" total="1" failures="0" not-run="0" date="2012-08-31" time="21:17:45">
   <environment nunit-version="2.4.7.0" clr-version="4.0.30319.269" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="c:\Development\KnowYourTurf" machine-name="RHARIK" user="Owner" user-domain="RHARIK" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite name="c:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll" success="True" time="0.001" asserts="0">
-    <results />
+  <test-suite name="c:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll" success="True" time="0.145" asserts="0">
+    <results>
+      <test-suite name="KnowYourTurf" success="True" time="0.141" asserts="0">
+        <results>
+          <test-suite name="Tests" success="True" time="0.137" asserts="0">
+            <results>
+              <test-suite name="when_calling_getImageSize" success="True" time="0.121" asserts="0">
+                <results>
+                  <test-case name="KnowYourTurf.Tests.when_calling_getImageSize.should_return_the_url_with_the_size_in_the_right_place" executed="True" success="True" time="0.114" asserts="1" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
   </test-suite>
 </test-results>

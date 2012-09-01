@@ -28,6 +28,7 @@
 						 KnowYourTurf.Web\*.csproj.*;
 						 KnowYourTurf.Web\*.sln;
 						 KnowYourTurf.Web\CustomerPhotos\**;
+						 KnowYourTurf.Web\CustomerDocuments\**;
 						 KnowYourTurf.Web\App_Data\**;
 						 KnowYourTurf.Web\Logs\**; 		 " />
     </ItemGroup>
@@ -45,7 +46,11 @@
 
     <MakeDir Directories="$(OutputDirectory)"  />
     <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputDirectory)\%(RecursiveDir)" />
-  </Target>
+    <Zip Files="@(WebFiles)"
+      WorkingDirectory="$(OutputDirectory)"
+      ZipFileName="$(OutputDirectory)\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
+      ZipLevel="9" />
+ </Target>
 
   <Target Name="myTemp" >
     <Message Text="Current Date and Time: $(Month).$(Day).$(Year)-$(Hour).$(Minute)" />

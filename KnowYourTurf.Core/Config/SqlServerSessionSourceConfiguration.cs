@@ -12,6 +12,7 @@ namespace KnowYourTurf.Core.Domain
         IPersistenceConfigurer DBConfiguration(string connectionString);
         Action<MappingConfiguration> MappingConfiguration();
         void GenerateSchema(Configuration configuration);
+        void ClusteredIndexOnManyToMany(Configuration configuration);
     }
 
     public interface ISessionFactoryConfiguration
@@ -39,10 +40,11 @@ namespace KnowYourTurf.Core.Domain
                 .Mappings(_config.MappingConfiguration())
                 .ExposeConfiguration(x=>
                 {
+                    _config.ClusteredIndexOnManyToMany(x);
                     _config.GenerateSchema(x);
                     x.SetProperty("adonet.batch_size", "100");
                     x.SetProperty("generate_statistics", "true");
-                    KnowYourTurf.Security.Security.Configure<User>(x, SecurityTableStructure.Schema);
+                    Security.Security.Configure<User>(x, SecurityTableStructure.Schema);
 
                 })
                 .BuildSessionFactory();
@@ -57,7 +59,7 @@ namespace KnowYourTurf.Core.Domain
                 {
                     x.SetProperty("adonet.batch_size", "100");
                     x.SetProperty("generate_statistics", "true");
-                    KnowYourTurf.Security.Security.Configure<User>(x, SecurityTableStructure.Prefix);
+                    Security.Security.Configure<User>(x, SecurityTableStructure.Prefix);
 
                 })
                 .BuildSessionFactory();

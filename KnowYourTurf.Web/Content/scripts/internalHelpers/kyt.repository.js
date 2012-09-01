@@ -17,11 +17,9 @@ KYT.repository= (function(){
             return null;
         }
         clearTimeout(KYT.throbberTimeout);
-//        KYT.throbberTimeout=null;
         KYT.showThrob=false;
         $("#ajaxLoading").hide();
         return result;
-        //callback(result);
     };
     var throbber = function(){
         KYT.showThrob=true;

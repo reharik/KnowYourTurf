@@ -25,7 +25,7 @@ KYT.Views.LoginView = KYT.Views.View.extend({
     registerEvents: function(){ this.events ={
         "click #forgotPasswordLink": "forgotPasswordClick",
         "click #registrationLink": "registrationLinkClick",
-        "click .submit": "submitClick"
+        "click .save": "submitClick"
     }},
     initialize: function(){
         KYT.mixin(this, "formMixin");

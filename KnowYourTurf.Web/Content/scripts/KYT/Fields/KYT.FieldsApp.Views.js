@@ -796,6 +796,19 @@ KYT.Views.TaskTypeFormView = KYT.Views.View.extend({
     }
 });
 
+KYT.Views.InventoryDisplayView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "displayMixin");
+        KYT.mixin(this, "ajaxDisplayMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+        this.options.templateUrl += this.options.url.substr(this.options.url.indexOf("Display/")+7);
+    },
+    viewLoaded:function(){
+        $('#TaskColor',this.el).miniColors();
+    }
+});
+
+
 
 
 

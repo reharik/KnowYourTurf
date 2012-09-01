@@ -21,13 +21,6 @@ KYT.addInitializer(function(){
 
     $("#ajaxLoading").hide();
 
-    jQuery.validator.addMethod("number", function(value, element) {
-        return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(value);
-    }, "Please enter a valid number.");
-
-    // the events delegate doesn't seem to be picking up focusin
-
-
     KYT.vent.bind("route",function(route,triggerRoute){
         KYT.Routing.showRoute(route,triggerRoute);
     });

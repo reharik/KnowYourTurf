@@ -123,6 +123,7 @@
     <Compile Include="BasicExtentions.cs" />
     <Compile Include="Config\CustomIdentitiy.cs" />
     <Compile Include="Config\CustomPrincipal.cs" />
+    <Compile Include="Config\MsSqlAzureDialect.cs" />
     <Compile Include="Config\NullSqlServerSessionSourceConfiguration.cs" />
     <Compile Include="Config\SaveUpdateInterceptorWithCompanyFilter.cs" />
     <Compile Include="Config\SiteConfiguration.cs" />
