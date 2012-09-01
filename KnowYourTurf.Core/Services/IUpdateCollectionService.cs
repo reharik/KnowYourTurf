@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using FubuMVC.Core;
+using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Enums;
 
 namespace KnowYourTurf.Core.Services
 {
     public interface IUpdateCollectionService
     {
-        void Update<ENTITY>(IEnumerable<ENTITY> origional,
+        void UpdateCollectionDetails<ENTITY>(IEnumerable<ENTITY> origional,
                     IEnumerable<ENTITY> newItems,
                     Action<ENTITY> addEntity,
                     Action<ENTITY> removeEntity) where ENTITY : Entity;
 
-        void UpdateFromCSV<ENTITY>(IEnumerable<ENTITY> origional,
-                                                   string newItemsCSV,
-                                                   Action<ENTITY> addEntity,
-                                                   Action<ENTITY> removeEntity) where ENTITY : Entity;
+        void Update<ENTITY>(IEnumerable<ENTITY> origional,
+                            TokenInputViewModel tokenInputViewModel,
+                            Action<ENTITY> addEntity,
+                            Action<ENTITY> removeEntity,
+            Func<ENTITY, ENTITY, bool> comparer = null) where ENTITY : Entity, IPersistableObject;
+
+
     }
 
     public class UpdateCollectionService : IUpdateCollectionService
@@ -29,13 +32,13 @@ namespace KnowYourTurf.Core.Services
             _repository = repository;
         }
 
-        public void Update<ENTITY>(IEnumerable<ENTITY> origional,
+        public void UpdateCollectionDetails<ENTITY>(IEnumerable<ENTITY> origional,
             IEnumerable<ENTITY> newItems,
             Action<ENTITY> addEntity,
             Action<ENTITY> removeEntity) where ENTITY : Entity
         {
             var remove = new List<ENTITY>();
-            origional.Each(x =>
+            origional.ForEachItem(x =>
             {
                 var newItem = newItems.FirstOrDefault(i => i.EntityId == x.EntityId);
                 if (newItem == null)
@@ -47,8 +50,8 @@ namespace KnowYourTurf.Core.Services
                     x.UpdateSelf(newItem);
                 }
             });
-            remove.Each(removeEntity);
-            newItems.Each(x =>
+            remove.ForEachItem(removeEntity);
+            newItems.ForEachItem(x =>
             {
                 if (!origional.Contains(x))
                 {
@@ -57,21 +60,43 @@ namespace KnowYourTurf.Core.Services
             });
         }
 
-        public void UpdateFromCSV<ENTITY>(IEnumerable<ENTITY> origional,
-                    string newItemsCSV,
-                    Action<ENTITY> addEntity,
-                    Action<ENTITY> removeEntity) where ENTITY : Entity
+        public void Update<ENTITY>(IEnumerable<ENTITY> origional,
+            TokenInputViewModel tokenInputViewModel,
+            Action<ENTITY> addEntity,
+            Action<ENTITY> removeEntity,
+            Func<ENTITY,ENTITY,bool> comparer = null) where ENTITY : Entity, IPersistableObject
         {
-            var newItems = new List<ENTITY>();
-            if (newItemsCSV.IsEmpty())
+            if(comparer == null)
             {
-                var remove = new List<ENTITY>();
-                origional.Each(remove.Add);
-                remove.Each(removeEntity);
-                return;
+                comparer = (entity, entity1) => entity.EntityId == entity1.EntityId;
             }
-            newItemsCSV.Split(',').Each(x => newItems.Add(_repository.Find<ENTITY>(Int32.Parse(x))));
-            Update(origional, newItems, addEntity, removeEntity);
+            var newItems = new List<ENTITY>();
+            if (tokenInputViewModel != null && tokenInputViewModel.selectedItems != null)
+            { tokenInputViewModel.selectedItems.Each(x => newItems.Add(_repository.Find<ENTITY>(long.Parse(x.id)))); }
+            
+            var remove = new List<ENTITY>();
+            if (newItems.Any())
+            {
+                origional.Where(x => comparer(x, newItems.FirstOrDefault())).ForEachItem(x =>
+                {
+                    if (!newItems.Any(i => i.EntityId == x.EntityId))
+                    {
+                        remove.Add(x);
+                    }
+                });
+            }
+            else
+            {
+                remove = origional.ToList();
+            }
+            remove.ForEachItem(removeEntity);
+            newItems.ForEachItem(x =>
+            {
+                if (!origional.Contains(x))
+                {
+                    addEntity(x);
+                }
+            });
         }
     }
 }

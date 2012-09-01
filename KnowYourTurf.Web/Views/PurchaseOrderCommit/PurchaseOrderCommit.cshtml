@@ -4,48 +4,21 @@
 @using KnowYourTurf.Core.Html.FubuUI
 
 @{ Layout = "~/Views/Shared/_emptyLayout.cshtml"; }
-@section HeaderScripts{
-}
-@section HeaderJavascript{
-    var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition));
-    var addUpdateUrl = "@MvcHtmlString.Create(Model.AddUpdateUrl)";
-    var deleteMultipleUrl = "@MvcHtmlString.Create(Model.DeleteMultipleUrl)";
-    var contentArea;
-    var gridControllerOptions = { gridDef: gridDef,
-        addUpdateUrl: addUpdateUrl,
-        deleteMultipleUrl: deleteMultipleUrl,
-        el:"#masterArea"
-    };
-    gridControllerOptions.closePOUrl = '@MvcHtmlString.Create(Model.ClosePOUrl)';
-     gridControllerOptions.searchField = 'PurchaseOrderLineItem.Product.Name';
-    $(document).ready(function(){
-        new kyt.PurchaseOrderCommitController(gridControllerOptions);
-    });
-}
 
-        @MvcHtmlString.Create(Html.HiddenFor(x => x.PurchaseOrder.EntityId).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.ViewFor(x => x.PurchaseOrder.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToHtmlTag()
+            @Html.ViewFor(x => x.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.PurchaseOrder.Vendor.Company).RootId("viewVendor").ToHtmlTag()
+            @Html.ViewFor(x => x.VendorCompany).RootId("viewVendor").ToHtmlTag()
         </div>
     </div>
-    <div class="col full clear">
+     <div class="col full clear">
         <div class="fieldRow">
-            @StandardButtonFor("savePO", WebLocalizationKeys.CLOSE_THIS_PURCHASE_ORDER).AddClass("saveNotFixed").ToHtmlTag()
-           <div class="content-header">
-                <input class="search" /> 
-                <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
-                <span class="title-name">@Model.Title</span>
-            </div>
-            <div id="contentArea" class="content-inner">
-            <div id="validation-container-wrapper">
-                <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
-            </div>
-                     <table id="gridContainer" class="scroll"></table>
-        @*            <div id="pager" class="scroll" style="text-align:center;"></div>*@
+            <div id="commitPoliGridArea">
             </div>
         </div>
+    </div>
+    <div class="footer">
+        @StandardButtonFor("closePO", WebLocalizationKeys.CLOSE_THIS_PURCHASE_ORDER).AddClass("saveNotFixed").ToHtmlTag()
     </div>

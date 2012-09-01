@@ -5,7 +5,8 @@ namespace KnowYourTurf.Web.Models
 {
     public class POCommitViewModel : ListViewModel
     {
-        public string ClosePOUrl { get; set; }
-        public PurchaseOrder PurchaseOrder { get; set; }
+        public string _ClosePOUrl { get; set; }
+        public string _POLIUrl { get; set; }
+        public string VendorCompany { get; set; }
     }
 }

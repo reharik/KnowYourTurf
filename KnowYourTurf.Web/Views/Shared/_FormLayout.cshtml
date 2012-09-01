@@ -1,4 +1,5 @@
-﻿@using KnowYourTurf.Web;
+﻿@using FubuMVC.Core.Util
+@using KnowYourTurf.Web;
 @using HtmlTags
 
 <script>
@@ -13,18 +14,21 @@
 
    <div class="content-header">
         @RenderSection("ExtraContentHeaderButtons", false)
-        <span class="title-name">@Model.Title</span>
         <button class="close cancel" title="@WebLocalizationKeys.CLOSE"></button>
-        @if (Model.Item.EntityId > 0)
-        {
-            <span class="title-added">@WebLocalizationKeys.DATE_ADDED.ToFormat(Model.Item.DateCreated.ToLongDateString())</span>
-        }
+        <span class="title-name" data-bind="text:_title"></span>
+        <span class="title-added" data-bind="text:_createdText" ></span>
     </div>
     <div id="contentArea" class="content-inner">
-    <div id="errorMessagesForm" class="mf_ErrorMessages errorMessages"><ul></ul></div>
         @RenderBody()
         <div class="footer">
-            @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
-            @StandardButtonFor("cancel", WebLocalizationKeys.CANCEL).AddClass("cancel").ToHtmlTag()
+            @if (@RenderSection("FormButtons", false) != null)
+            {
+                @RenderSection("FormButtons", false);
+            }
+            else
+            {
+                @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
+                @StandardButtonFor("cancel", WebLocalizationKeys.CANCEL).AddClass("cancel").ToHtmlTag()
+            }
         </div>
     </div>

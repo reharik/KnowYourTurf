@@ -88,7 +88,6 @@ namespace KnowYourTurf.Core.Enums
     [Serializable]
     public class UnitType : Enumeration
     {
-        public static readonly UnitType Empty = new UnitType { IsActive = true, Key = "-- Please Select --",Value = ""};
         public static readonly UnitType Bags = new UnitType { IsActive = true, Key = "Bag(s)" };
         public static readonly UnitType Buckets = new UnitType { IsActive = true, Key = "Bucket(s)" };
         public static readonly UnitType Ea = new UnitType { IsActive = true, Key = "Ea." };

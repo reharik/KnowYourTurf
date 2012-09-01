@@ -1,4 +1,4 @@
-if (typeof cc == "undefined") {
+ if (typeof cc == "undefined") {
             var cc = {};
 }
 

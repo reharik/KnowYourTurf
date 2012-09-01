@@ -23,7 +23,7 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<EmailJob> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.Name)
-                .ForAction<EmailJobController>(x => x.EmailJob(null))
+                .ForAction<EmailJobController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Subject);

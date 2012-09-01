@@ -26,7 +26,7 @@
 //            var purchaseOrder = _repository.Find<PurchaseOrder>(POId);
 //            var notification = new Notification();
 //            var completed = true;
-//            purchaseOrder.GetLineItems().Each(x =>
+//            purchaseOrder.GetLineItems().ForEachItem(x =>
 //            {
 //                if (x.TotalReceived <= 0)
 //                {

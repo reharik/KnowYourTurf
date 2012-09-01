@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using KnowYourTurf.Core.Html.FubuUI.Tags;
 using KnowYourTurf.Security.Interfaces;
 using KnowYourTurf.Core.Localization;
 using FubuMVC.UI.Tags;
@@ -38,6 +39,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
         private string _operation;
         private IAuthorizationService _authorizationService;
         private ISessionContext _sessionContext;
+        private string _elType;
 
         public EditorExpression(ITagGenerator<VIEWMODEL> generator, Expression<Func<VIEWMODEL, object>> expression)
         {
@@ -95,9 +97,70 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             HtmlTag label = labelBuilder.ToHtmlTag();
             _htmlRoot.Children.Add(label);
             _htmlRoot.Children.Add(input);
+            addFlagToHtmlRoot(input.FirstChild());
             return _htmlRoot;
         }
-        
+
+        private void addFlagToHtmlRoot(HtmlTag input)
+        {
+            if (_elType.IsNotEmpty())
+            {
+                _htmlRoot.Attr("eltype", _elType);
+                return;
+            }
+            if (input is TextboxTag)
+            {
+                if (input.HasClass("number"))
+                {
+                    _htmlRoot.Attr("eltype", "NumberTextbox");
+                    return;
+                }
+                if (input.HasClass("datePicker"))
+                {
+                    _htmlRoot.Attr("eltype", "DateTextbox");
+                    return;
+                }
+                if (input.HasClass("timePicker"))
+                {
+                    _htmlRoot.Attr("eltype", "TimeTextbox");
+                    return;
+                }
+                _htmlRoot.Attr("eltype", "Textbox");
+                return;
+            }
+            if (input is PasswordTag)
+            {
+                _htmlRoot.Attr("eltype", "Password");
+                return;
+            }
+            if (input is SelectTag)
+            {
+                _htmlRoot.Attr("eltype", "Select");
+                return;
+            }
+            if (input is CheckboxTag)
+            {
+                _htmlRoot.Attr("eltype", "Checkbox");
+                return;
+            }
+            if (input.TagName() == "textarea")
+            {
+                _htmlRoot.Attr("eltype", "Textarea");
+                return;
+            }
+            if (input.TagName() == "ul")
+            {
+                _htmlRoot.Attr("eltype", "PictureGallery");
+                return;
+            }
+            if (input.HasClass("imageInputContainer"))
+            {
+                _htmlRoot.Attr("eltype", "FileSubmission");
+                return;
+            }
+
+        }
+
         private void addCustomLabel(EditorLabelExpression<VIEWMODEL> label)
         {
             if (_labelDisplay.IsNotEmpty()) label.CustomLabel(_labelDisplay);
@@ -267,7 +330,11 @@ namespace KnowYourTurf.Core.Html.FubuUI.HtmlExpressions
             return this;
         }
 
-
+        public EditorExpression<VIEWMODEL> ElType(string elType)
+        {
+            _elType = elType;
+            return this;
+        }
         
         #endregion
 

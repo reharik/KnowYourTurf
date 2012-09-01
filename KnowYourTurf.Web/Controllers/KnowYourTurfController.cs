@@ -1,16 +1,26 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Html;
+using KnowYourTurf.Web.Services.RouteTokens;
+using KnowYourTurf.Web.Services.ViewOptions;
 
 namespace KnowYourTurf.Web.Controllers
 {
     public class KnowYourTurfController:KYTController
     {
-         public ActionResult Home(ViewModel input)
+        private IRouteTokenConfig _routeTokenConfig;
+
+        public KnowYourTurfController(IRouteTokenConfig routeTokenConfig)
+        {
+            _routeTokenConfig = routeTokenConfig;
+        }
+
+        public ActionResult Home(ViewModel input)
          {
              var knowYourTurfViewModel = new KnowYourTurfViewModel
                                                  {
-//                                                     UserProfileUrl = UrlContext.GetUrlForAction<TrainerController>(x => x.AddUpdate(null))
+                                                    SerializedRoutes = _routeTokenConfig.Build(true)
                                                  };
              return View(knowYourTurfViewModel);
          }
@@ -23,6 +33,7 @@ namespace KnowYourTurf.Web.Controllers
         public string mode { get; set; }
         public string FirstTimeUrl { get; set; }
         public string UserProfileUrl { get; set; }
+        public IList<RouteToken> SerializedRoutes { get; set; }
 
     }
 }

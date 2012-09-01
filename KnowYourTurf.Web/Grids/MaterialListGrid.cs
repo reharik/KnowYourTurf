@@ -42,8 +42,7 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Material> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.Name)
-                .ForAction<MaterialController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
+                .ToPerformAction(ColumnAction.DisplayItem)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             return this;
         }

@@ -22,22 +22,20 @@ namespace KnowYourTurf.Web.Controllers
             _repository = repository;
         }
 
-        public ActionResult FieldList(ViewModel input)
+        public ActionResult ItemList(ViewModel input)
         {
-            var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null))+"?ParentId="+input.ParentId;
+            var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null)) + "?RootId=" + input.RootId;
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl =  UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)),
-                GridDefinition = _fieldListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.FIELDS.ToString(),
-                ParentId = input.ParentId
+                gridDef = _fieldListGrid.GetGridDefinition(url),
+                _Title = WebLocalizationKeys.FIELDS.ToString()
             };
-            return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Fields(GridItemsRequestModel input)
         {
-            var category = _repository.Find<Category>(input.ParentId);
+            var category = _repository.Find<Category>(input.RootId);
             var items = _dynamicExpressionQuery.PerformQuery(category.Fields, input.filters);
             var gridItemsViewModel = _fieldListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);

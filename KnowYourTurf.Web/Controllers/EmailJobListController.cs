@@ -19,15 +19,15 @@ namespace KnowYourTurf.Web.Controllers
             _emailJobListGrid = emailJobListGrid;
         }
 
-        public ActionResult ItemList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<EmailJobListController>(x => x.EmailJobs(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)),
-                GridDefinition = _emailJobListGrid.GetGridDefinition(url)
+                gridDef = _emailJobListGrid.GetGridDefinition(url)
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult EmailJobs(GridItemsRequestModel input)

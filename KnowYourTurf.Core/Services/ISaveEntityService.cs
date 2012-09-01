@@ -4,7 +4,7 @@ namespace KnowYourTurf.Core.Services
 {
     public interface ISaveEntityService
     {
-        ICrudManager ProcessSave<DOMAINMODEL>(DOMAINMODEL model, ICrudManager crudManager=null) where DOMAINMODEL : DomainEntity;
+        ICrudManager ProcessSave<DOMAINMODEL>(DOMAINMODEL model, ICrudManager crudManager = null) where DOMAINMODEL : IPersistableObject;
     }
 
     public class SaveEntityService : ISaveEntityService
@@ -19,7 +19,7 @@ namespace KnowYourTurf.Core.Services
         }
 
         public ICrudManager ProcessSave<DOMAINMODEL>(DOMAINMODEL model, ICrudManager crudManager = null)
-            where DOMAINMODEL : DomainEntity
+            where DOMAINMODEL : IPersistableObject
         {
             if(crudManager==null) crudManager = new CrudManager(_repository);
             var report = _castleValidationRunner.Validate(model);

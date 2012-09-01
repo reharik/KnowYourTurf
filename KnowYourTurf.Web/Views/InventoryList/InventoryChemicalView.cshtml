@@ -1,6 +1,4 @@
-﻿@model KnowYourTurf.Web.Controllers.InventoryChemicalViewModel
-@using KnowYourTurf.Core
-@using KnowYourTurf.Web
+﻿@model InventoryChemicalViewModel
 @using KnowYourTurf.Core.Html.FubuUI
 @using KnowYourTurf.Web.Controllers
 
@@ -11,27 +9,27 @@
         
    <div class="col left">
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Chemical.Name).ToHtmlTag()
+            @Html.ViewFor(x => x.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Chemical.Description).ToHtmlTag()
+            @Html.ViewFor(x => x.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Chemical.Manufacturer).ToHtmlTag()
+            @Html.ViewFor(x => x.Manufacturer).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Chemical.ActiveIngredient).ToHtmlTag()
+            @Html.ViewFor(x => x.ActiveIngredient).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Chemical.ActiveIngredientPercent).ToHtmlTag()
+            @Html.ViewFor(x => x.ActiveIngredientPercent).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Chemical.EPAEstNumber).ToHtmlTag()
+            @Html.ViewFor(x => x.EPAEstNumber).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Chemical.EPARegNumber).ToHtmlTag()
+            @Html.ViewFor(x => x.EPARegNumber).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Chemical.Notes).ToHtmlTag()
+            @Html.ViewFor(x => x.Notes).ToHtmlTag()
         </div>
     </div>

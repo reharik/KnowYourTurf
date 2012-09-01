@@ -46,8 +46,7 @@ DEALLOCATE FK_KILLER
 
         public static void DeleteReaddDb(ISessionFactory source)
         {
-            using (ISession session = source.OpenSession(new SaveUpdateInterceptor()))
-            {
+                var session = source.OpenSession(new SaveUpdateInterceptor());
                 var sql =
                     "USE [master] alter database KnowYourTurf_DEV set single_user with rollback immediate DROP DATABASE KnowYourTurf_DEV CREATE DATABASE KnowYourTurf_DEV";
 
@@ -55,7 +54,7 @@ DEALLOCATE FK_KILLER
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-            }
+                session.Close();
         }
 
         public static void killRhinoSecurity(ISessionFactory source)

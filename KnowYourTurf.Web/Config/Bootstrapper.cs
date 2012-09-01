@@ -52,6 +52,7 @@ namespace KnowYourTurf.Web.Config
                 StructureMapBootstrapper.Bootstrap();
                 ModelBindingBootstaper.Bootstrap();
             }
+            AutoMapperBootstrapper.Bootstrap();
             // sets SM as CSL
             ServiceLocator.SetLocatorProvider(() => new StructureMapServiceLocator());
             // sets MVCDependencyResolver to use the CSL

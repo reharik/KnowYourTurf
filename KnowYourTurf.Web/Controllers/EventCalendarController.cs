@@ -25,26 +25,31 @@ namespace KnowYourTurf.Web.Controllers
         {
             var model = new CalendarViewModel
                        {
-                           DeleteUrl = UrlContext.GetUrlForAction<EventController>(x => x.Delete(null)),
                            CalendarDefinition = new CalendarDefinition
                                                    {
-                                                       Url = UrlContext.GetUrlForAction<EventCalendarController>(x => x.Events(null))+"?ParentId="+input.ParentId,
+                                                       Url = UrlContext.GetUrlForAction<EventCalendarController>(x => x.Events(null)) + "?RootId=" + input.RootId,
+                                                       AddUpdateTemplateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate_Template(null)),
                                                        AddUpdateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate(null)),
+                                                       AddUpdateRoute = "event",
+                                                       DisplayTemplateUrl = UrlContext.GetUrlForAction<EventController>(x => x.Display_Template(null)),
                                                        DisplayUrl = UrlContext.GetUrlForAction<EventController>(x => x.Display(null)),
-                                                       EventChangedUrl = UrlContext.GetUrlForAction<EventCalendarController>(x => x.EventChanged(null)) 
-                                                   },
-                           RootId = input.ParentId
+                                                       DisplayRoute = "eventdisplay",
+                                                       DeleteUrl = UrlContext.GetUrlForAction<EventController>(x => x.Delete(null)),
+                                                       EventChangedUrl = UrlContext.GetUrlForAction<EventCalendarController>(x => x.EventChanged(null))
+                                               
+                                                   }
                        };
-            return View(model);
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult EventChanged(EventChangedViewModel input)
         {
-            var _event = _repository.Find<Event>(input.EntityId);
+            var field = _repository.Query<Field>(x => x.Tasks.Any(y => y.EntityId == input.EntityId)).FirstOrDefault();
+            var _event = field.Events.FirstOrDefault(x => x.EntityId == input.EntityId);
             _event.ScheduledDate = input.ScheduledDate;
             _event.StartTime = input.StartTime;
             _event.EndTime = input.EndTime;
-            var crudManager = _saveEntityService.ProcessSave(_event);
+            var crudManager = _saveEntityService.ProcessSave(field);
             var notification = crudManager.Finish();
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
@@ -54,8 +59,8 @@ namespace KnowYourTurf.Web.Controllers
             var eventsItems = new List<CalendarEvent>();
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
-            var category = _repository.Find<Category>(input.ParentId);
-            var events = category.Events.Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
+            var category = _repository.Find<Category>(input.RootId);
+            var events = category.GetAllEvents().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
             events.Each(x =>
                        eventsItems.Add(new CalendarEvent
                                       {

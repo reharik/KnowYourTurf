@@ -4,6 +4,8 @@ using System.Web.Mvc;
 using FubuMVC.Core;
 using FubuMVC.UI.Configuration;
 using HtmlTags;
+using KnowYourTurf.Core.Domain;
+using System.Linq;
 
 namespace KnowYourTurf.Core.Html.FubuUI.Builders
 {
@@ -13,28 +15,55 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         {
             var propertyName = def.Accessor.FieldName;
             var listPropertyInfo = def.ModelType.GetProperty(propertyName + "List");
-            return listPropertyInfo != null && listPropertyInfo.PropertyType == typeof(IDictionary<string, IEnumerable<SelectListItem>>);
+            var readOnlyListPropertyInfo = def.ModelType.GetProperty(propertyName.Replace("ReadOnly", "") + "List");
+            return (listPropertyInfo != null && listPropertyInfo.PropertyType == typeof(IDictionary<string, IEnumerable<SelectListItem>>)) || (readOnlyListPropertyInfo != null && readOnlyListPropertyInfo.PropertyType == typeof(IDictionary<string, IEnumerable<SelectListItem>>));
         }
 
         public override HtmlTag Build(ElementRequest request)
         {
             Action<SelectTag> action = x =>
             {
-                var value = request.RawValue;
+                var value = request.RawValue is DomainEntity ? ((DomainEntity)request.RawValue).EntityId : request.RawValue;
 
                 var propertyName = request.ToAccessorDef().Accessor.FieldName;
+                propertyName = propertyName.Contains("ReadOnly")
+                                   ? propertyName.Replace("ReadOnly", "")
+                                   : propertyName;
+
                 var listPropertyInfo = request.ToAccessorDef().ModelType.GetProperty(propertyName + "List");
                 var dictionary = listPropertyInfo.GetValue(request.Model, null) as IDictionary<string, IEnumerable<SelectListItem>>;
                 if (dictionary == null) return;
                 x.Option(CoreLocalizationKeys.SELECT_ITEM.ToString(),"");
-                dictionary.Keys.Each(key =>
+
+                var valueToSelect = string.Empty;
+                if (dictionary.Keys.Count <= 1)
                 {
-                    x.OptionGroup(key);
-                    dictionary[key].Each(l => x.Option(l.Text, l.Value+"_"+key));
-                });
-                if (value != null && value.ToString().IsNotEmpty())
+                    var selectListItems = dictionary[dictionary.Keys.FirstOrDefault()];
+                    if (selectListItems == null) return;
+
+                    selectListItems.ForEachItem(option => x.Option(option.Text, option.Value.IsNotEmpty() ? option.Value : ""));
+
+                    if (value != null && value.ToString().IsNotEmpty())
+                    {
+                        x.SelectByValue(value.ToString());
+                    }
+                }
+                else
                 {
-                    x.SelectByValue(value.ToString());
+                    dictionary.Keys.ForEachItem(key =>
+                    {
+                        x.OptionGroup(key);
+                        dictionary[key].ForEachItem(l =>
+                                                        {
+                                                            if (value != null && l.Value == value.ToString())
+                                                            {
+                                                                valueToSelect = l.Value;
+                                                            }
+                                                            x.Option(l.Text, l.Value);
+                                                        });
+                    });
+
+                    x.SelectByValue(valueToSelect);
                 }
             };
             return new SelectTag(action);

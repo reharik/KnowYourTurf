@@ -16,13 +16,20 @@ namespace KnowYourTurf.Web.Controllers
             _repository = repository;
         }
 
+        public ActionResult Calculator_Template(ViewModel input)
+        {
+            var calculator = _repository.Find<Calculator>(input.EntityId);
+            var calculatorHandler = ObjectFactory.Container.GetInstance<ICalculatorHandler>(calculator.Name + "Calculator");
+            return View(calculator.Name + "Calculator", calculatorHandler.EmptyViewModel());
+        }
+
         public ActionResult Calculator(ViewModel input)
         {
             var calculator = _repository.Find<Calculator>(input.EntityId);
             var calculatorHandler = ObjectFactory.Container.GetInstance<ICalculatorHandler>(calculator.Name + "Calculator");
             CalculatorViewModel model = calculatorHandler.GetViewModel();
             model.EntityId = input.EntityId;
-            return PartialView(calculator.Name+"Calculator", model);
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Calculate(SuperInputCalcViewModel input)
@@ -35,7 +42,6 @@ namespace KnowYourTurf.Web.Controllers
                 Notification notification = new Notification(continuation);
                 return Json(notification, JsonRequestBehavior.AllowGet);
             }
-
             return Json(continuation.Target,JsonRequestBehavior.AllowGet);
         }
     }

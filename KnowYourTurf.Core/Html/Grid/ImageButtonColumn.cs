@@ -18,8 +18,11 @@ namespace KnowYourTurf.Core.Html.Grid
          private string _action;
         private string _jsonData;
         private string _gridName;
+        private string _id;
+
         public ImageButtonColumn<ENTITY> ForAction<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, string gridName = "") where CONTROLLER : Controller
         {
+            _id = "gridContainer";
             _gridName = gridName;
             var actionUrl = UrlContext.GetUrlForAction(expression);
             _actionUrl = actionUrl;
@@ -47,23 +50,30 @@ namespace KnowYourTurf.Core.Html.Grid
             anchor.Children.Add(divTag);
             return anchor.ToString();
         }
-
+        
         private HtmlTag buildAnchor(ENTITY item)
         {
             var anchor = new HtmlTag("a");
+            var id = _id.IsNotEmpty() ? _id + ":" : "";
             string data = string.Empty;
-            if(_jsonData.IsNotEmpty())
+            if (_jsonData.IsNotEmpty())
             {
-                data = ","+_jsonData;
+                data = "," + _jsonData;
             }
-            anchor.Attr("onclick",
-                        "$.publish('/contentLevel/grid_" + _gridName + "/" + _action + "',['" + _actionUrl + "/" + item.EntityId + "'" + data + "]);");
+            anchor.Attr("onclick", "KYT.vent.trigger('" +id + _action + "'," + item.EntityId + data+ ")");
+
             return anchor;
         }
 
         public void AddDataToEvent(string jsonObject)
         {
             _jsonData = jsonObject;
+        }
+
+        public ImageButtonColumn<ENTITY> WithId(string id)
+        {
+            _id = id;
+            return this;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using AutoMapper;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
@@ -18,12 +19,13 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISelectListItemService _selectListItemService;
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
         private readonly IEntityListGrid<BaseProduct> _purchaseOrderSelectorGrid;
-        private readonly IEntityListGrid<PurchaseOrderLineItem> _purchaseOrderLineItemGrid;
         private readonly IPurchaseOrderLineItemService _purchaseOrderLineItemService;
 
-        public PurchaseOrderController(IRepository repository, ISaveEntityService saveEntityService, ISelectListItemService selectListItemService, IDynamicExpressionQuery dynamicExpressionQuery,
+        public PurchaseOrderController(IRepository repository,
+            ISaveEntityService saveEntityService,
+            ISelectListItemService selectListItemService,
+            IDynamicExpressionQuery dynamicExpressionQuery,
             IEntityListGrid<BaseProduct> purchaseOrderSelectorGrid,
-            IEntityListGrid<PurchaseOrderLineItem> purchaseOrderLineItemGrid,
             IPurchaseOrderLineItemService purchaseOrderLineItemService
             )
         {
@@ -32,52 +34,49 @@ namespace KnowYourTurf.Web.Controllers
             _selectListItemService = selectListItemService;
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _purchaseOrderSelectorGrid = purchaseOrderSelectorGrid;
-            _purchaseOrderLineItemGrid = purchaseOrderLineItemGrid;
             _purchaseOrderLineItemService = purchaseOrderLineItemService;
+        }
+
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("PurchaseOrderBuilder", new POListViewModel());
         }
 
         public ActionResult AddUpdate(ViewModel input)
         {
             var purchaseOrder = input.EntityId > 0 ? _repository.Find<PurchaseOrder>(input.EntityId) : new PurchaseOrder();
             var vendors = _selectListItemService.CreateList<Vendor>(x=>x.Company,x=>x.EntityId,true);
-            var url = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null))+"?Vendor=0";
-            var PoliUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.PurchaseOrderLineItems(null)) + "?EntityId=" + purchaseOrder.EntityId;
-            var deleteMany = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + purchaseOrder.EntityId;
-            POListViewModel model = new POListViewModel()
-            {
-                Item = purchaseOrder,
-                VendorList = vendors,
-                VendorId = purchaseOrder.EntityId > 0 ? purchaseOrder.Vendor.EntityId : 0,
-                ReturnUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.PurchaseOrderList(null)),
-                CommitUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)),
-                DeleteMultipleUrl = deleteMany,
-                GridDefinition = _purchaseOrderSelectorGrid.GetGridDefinition(url),
-                PoliListDefinition = _purchaseOrderLineItemGrid.GetGridDefinition(PoliUrl),
-                Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString()
 
-            };
-            return PartialView("PurchaseOrderBuilder", model);
+            POListViewModel model = Mapper.Map<PurchaseOrder, POListViewModel>(purchaseOrder);
+            model._VendorEntityIdList = vendors;
+            model._vendorProductsUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.VendorProductList(null));
+            model._POLIUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.ItemList(null)); 
+            model._commitPOUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null));
+            model._addToOrderUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddItemToPO(null));
+            model._removePOLItemUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.Delete(null));
+            model._editPOLItemUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.AddUpdate(null));
+            model._Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString();
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult VendorProductList(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null))+"/"+input.EntityId;
+            var model = new ListViewModel()
+            {
+                gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url),
+                _Title = WebLocalizationKeys.PRODUCTS.ToString(),
+            };
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         
         public JsonResult Products(PoSelectorGridItemsRequestModel input)
         {
-            var vendor = _repository.Find<Vendor>(input.Vendor);
+            var vendor = _repository.Find<Vendor>(input.EntityId);
             var items = _dynamicExpressionQuery.PerformQuery(vendor.Products, input.filters);
 
             var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items, "productGrid");
             return Json(model, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Display(ViewModel input)
-        {
-            var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
-            var model = new POListViewModel()
-            {
-                Item = purchaseOrder,
-                AddUpdateUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" + purchaseOrder.EntityId
-            };
-            return PartialView("PurchaseOrderView", model);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -99,74 +98,79 @@ namespace KnowYourTurf.Web.Controllers
             return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Save(POSaveViewModel input)
+        public JsonResult AddItemToPO(PurchaseOrderLineItemViewModel input)
         {
-            PurchaseOrder purchaseOrder = input.PurchaseOrderId>0 ? _repository.Find<PurchaseOrder>(input.PurchaseOrderId) : new PurchaseOrder();
-            if(input.PurchaseOrderId<=0)
+            var vendor = _repository.Find<Vendor>(input.RootId);
+            PurchaseOrder purchaseOrder;
+            if (input.ParentId > 0)
             {
-                var vendor = _repository.Find<Vendor>(input.VendorId);
-                purchaseOrder.Vendor = vendor;
+                purchaseOrder = vendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId);
+            }
+            else
+            {
+                purchaseOrder = new PurchaseOrder {Vendor = vendor};
+                vendor.AddPurchaseOrder(purchaseOrder);
             }
             var baseProduct = _repository.Find<BaseProduct>(input.EntityId);
-            purchaseOrder.AddLineItem(new PurchaseOrderLineItem { Product = baseProduct });
+            var purchaseOrderLineItem = new PurchaseOrderLineItem {Product = baseProduct};
+            mapItem(purchaseOrderLineItem, input);
+            purchaseOrder.AddLineItem(purchaseOrderLineItem);
 
-            var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
+            var crudManager = _saveEntityService.ProcessSave(vendor);
             var notification = crudManager.Finish();
             notification.EntityId = purchaseOrder.EntityId;
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult AddItem(ViewModel input)
-        {
-            var vendor = _repository.Find<Vendor>(input.RootId);
-            
-            var purchaseOrder = input.ParentId > 0
-                                    ? vendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId)
-                                    : new PurchaseOrder{Vendor = vendor};
-            var baseProduct = _repository.Find<BaseProduct>(input.EntityId);
-            var purchaseOrderLineItem = new PurchaseOrderLineItem
-                                            {
-                                                Product = baseProduct,
-                                                PurchaseOrder = purchaseOrder
-                                            };
+        /// ?????? ///
 
-            var model = new PurchaseOrderLineItemViewModel
-                                                     {
-                                                         Item = purchaseOrderLineItem
-                                                     };
-            return View(model);
-        }
+//        public ActionResult AddItem(ViewModel input)
+//        {
+//            var vendor = _repository.Find<Vendor>(input.RootId);
+//            
+//            PurchaseOrder purchaseOrder;
+//            purchaseOrder = input.ParentId > 0 ? vendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId) : new PurchaseOrder { Vendor = vendor };
+//            var baseProduct = _repository.Find<BaseProduct>(input.EntityId);
+//            var purchaseOrderLineItem = new PurchaseOrderLineItem
+//                                            {
+//                                                PurchaseOrder = purchaseOrder
+//                                            };
+//            purchaseOrderLineItem.Product = baseProduct;
+//
+//            var model = new PurchaseOrderLineItemViewModel
+//                                                     {
+//                                                         Item = purchaseOrderLineItem
+//                                                     };
+//            return View(model);
+//        }
 
-        public ActionResult SaveItem(PurchaseOrderLineItemViewModel input)
-        {
-            var vendor = _repository.Find<Vendor>(input.RootId);
-            var purchaseOrder = input.ParentId > 0
-                                    ? vendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId)
-                                    : new PurchaseOrder{Vendor = vendor};
-            var baseProduct = _repository.Find<BaseProduct>(input.Item.Product.EntityId);
-            var newPo = purchaseOrder.EntityId == 0;
-            var purchaseOrderLineItem = new PurchaseOrderLineItem
-            {
-                Product = baseProduct,
-                PurchaseOrder = purchaseOrder
-            };
-            mapItem(purchaseOrderLineItem, input.Item);
-            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder, purchaseOrderLineItem);
-            vendor.AddPurchaseOrder(purchaseOrder);
-            
-            var crudManager = _saveEntityService.ProcessSave(vendor);
-            var notification = crudManager.Finish();
-            notification.Data = new {poId = purchaseOrder.EntityId};
-            if(newPo)
-            {
-                notification.Redirect = true;
-                notification.RedirectUrl=UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" +
-                        vendor.EntityId+"?ParentId="+ purchaseOrder.EntityId;
-            }
-            return Json(notification, JsonRequestBehavior.AllowGet);
-        }
+//        public ActionResult SaveItem(PurchaseOrderLineItemViewModel input)
+//        {
+//
+//            var baseProduct = _repository.Find<BaseProduct>(input.Item.Product.EntityId);
+//            var newPo = purchaseOrder.EntityId == 0;
+//            var purchaseOrderLineItem = new PurchaseOrderLineItem
+//            {
+//                PurchaseOrder = purchaseOrder
+//            };
+//            purchaseOrderLineItem.Product = baseProduct;
+//            mapItem(purchaseOrderLineItem, input.Item);
+//            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder, purchaseOrderLineItem);
+//            vendor.AddPurchaseOrder(purchaseOrder);
+//            
+//            var crudManager = _saveEntityService.ProcessSave(vendor);
+//            var notification = crudManager.Finish();
+//            notification.Data = new {poId = purchaseOrder.EntityId};
+//            if(newPo)
+//            {
+//                notification.Redirect = true;
+//                notification.RedirectUrl=UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" +
+//                        vendor.EntityId+"?ParentId="+ purchaseOrder.EntityId;
+//            }
+//            return Json(notification, JsonRequestBehavior.AllowGet);
+//        }
 
-        private void mapItem(PurchaseOrderLineItem item, PurchaseOrderLineItem input)
+        private void mapItem(PurchaseOrderLineItem item, PurchaseOrderLineItemViewModel input)
         {
             item.QuantityOrdered = input.QuantityOrdered;
             item.SizeOfUnit = input.SizeOfUnit;
@@ -179,12 +183,5 @@ namespace KnowYourTurf.Web.Controllers
     public class PoSelectorGridItemsRequestModel : GridItemsRequestModel
     {
         public long Vendor { get; set; }
-    }
-
-    public class POSaveViewModel:ViewModel
-    {
-        public IEnumerable<long> ProductIds { get; set; }
-        public long VendorId { get; set; }
-        public long PurchaseOrderId { get; set; }
     }
 }

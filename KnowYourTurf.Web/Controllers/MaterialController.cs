@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
@@ -20,29 +21,33 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("MaterialAddUpdate", new MaterialViewModel());
+        }
+
         public ActionResult AddUpdate(ViewModel input)
         {
             var material = input.EntityId > 0 ? _repository.Find<Material>(input.EntityId) : new Material();
-            var model = new MaterialViewModel
-            {
-                Item = material,
-                Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
-            };
-            return PartialView("MaterialAddUpdate", model);
-        }
-      
-        public ActionResult Display(ViewModel input)
-        {
-            var material = _repository.Find<Material>(input.EntityId);
-            var model = new MaterialViewModel
-                            {
-                                Item = material,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.AddUpdate(null)) + "/" + material.EntityId,
-                                Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString()
-                            };
-            return PartialView("MaterialView", model);
+            var model = Mapper.Map<Material, MaterialViewModel>(material);
+            model._Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString();
+            model._saveUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.Save(null));
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Display_Template(ViewModel input)
+        {
+            return View("MaterialView", new MaterialViewModel());
+        }
+
+        public ActionResult Display(ViewModel input)
+        {
+            var material =  _repository.Find<Material>(input.EntityId);
+            var model = Mapper.Map<Material, MaterialViewModel>(material);
+            model._Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+      
         public ActionResult Delete(ViewModel input)
         {
             var material = _repository.Find<Material>(input.EntityId);
@@ -82,7 +87,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(MaterialViewModel input)
         {
-            var material = input.Item.EntityId > 0 ? _repository.Find<Material>(input.Item.EntityId) : new Material();
+            var material = input.EntityId > 0 ? _repository.Find<Material>(input.EntityId) : new Material();
             mapItem(material, input);
             var crudManager = _saveEntityService.ProcessSave(material);
             var notification = crudManager.Finish();
@@ -91,9 +96,9 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(Material material, MaterialViewModel input)
         {
-            material.Description = input.Item.Description;
-            material.Name = input.Item.Name;
-            material.Notes = input.Item.Name;
+            material.Description = input.Description;
+            material.Name = input.Name;
+            material.Notes = input.Notes;
         }
     }
 }

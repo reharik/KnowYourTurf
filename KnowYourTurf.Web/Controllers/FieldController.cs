@@ -24,15 +24,16 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate(ViewModel input)
         {
-            var field = input.EntityId > 0 ? _repository.Find<Field>(input.EntityId) : new Field();
-            var model = new FieldViewModel
-            {
-                Item = field,
-                ParentId = input.ParentId,
-                AddUpdateUrl = UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)) + "/" + field.EntityId,
-                Title = WebLocalizationKeys.FIELD_INFORMATION.ToString()
-            };
-            return PartialView("FieldAddUpdate", model);
+//            var field = input.EntityId > 0 ? _repository.Find<Field>(input.EntityId) : new Field();
+//            var model = new FieldViewModel
+//            {
+//                Item = field,
+//                ParentId = input.ParentId,
+//                AddUpdateUrl = UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)) + "/" + field.EntityId,
+//                _Title = WebLocalizationKeys.FIELD_INFORMATION.ToString()
+//            };
+//            return PartialView("FieldAddUpdate", model);
+            return null;
         }
 
         public ActionResult Delete(ViewModel input)
@@ -52,20 +53,19 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(FieldViewModel input)
         {
-            var category = _repository.Find<Category>(input.ParentId);
+            var category = _repository.Find<Category>(input.RootId);
             Field field;
-            if (input.Item.EntityId > 0) { field = category.Fields.FirstOrDefault(x => x.EntityId == input.Item.EntityId); }
+            if (input.EntityId > 0) { field = category.Fields.FirstOrDefault(x => x.EntityId == input.EntityId); }
             else
             {
                 field = new Field();
                 category.AddField(field);
             }
-            field.Description = input.Item.Description;
-            field.Name = input.Item.Name;
-            field.Abbreviation= input.Item.Abbreviation;
-            field.Size = input.Item.Size;
-            field.Status = input.Item.Status;
-            field.FieldColor= input.Item.FieldColor;
+            field.Description = input.Description;
+            field.Name = input.Name;
+            field.Abbreviation= input.Abbreviation;
+            field.Size = input.Size;
+            field.FieldColor= input.FieldColor;
             
             var crudManager = _saveEntityService.ProcessSave(category);
             var notification = crudManager.Finish();

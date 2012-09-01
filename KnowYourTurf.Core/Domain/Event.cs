@@ -9,8 +9,9 @@ namespace KnowYourTurf.Core.Domain
     {
         [ValidateNonEmpty]
         public virtual EventType EventType { get; set; }
+
         [ValidateNonEmpty]
-        public virtual Field Field { get; set; }
+        public virtual Field Field { get;  set; }
         [ValidateNonEmpty]
         public virtual DateTime? ScheduledDate { get; set; }
         [ValidateNonEmpty]

@@ -25,23 +25,18 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ViewAdmin(ViewModel input)
         {
-            var admin = _repository.Find<User>(input.EntityId);
-            var model = new UserViewModel
-            {
-                Item = admin,
-                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId+"&From=Admin",
-               
-            };
-            return View("AdminDashboard", model);
+//            var admin = _repository.Find<User>(input.EntityId);
+//            var model = new UserViewModel
+//            {
+//                Item = admin,
+//                AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId+"&From=Admin",
+//               
+//            };
+//            return View("AdminDashboard", model);
+            return null;
         }
     }
 
-    public class UserViewModel:ViewModel
-    {
-        public User Item { get; set; }
-        public bool DeleteImage { get; set; }
-        public string RolesInput { get; set; }
-        public IEnumerable<TokenInputDto> AvailableItems { get; set; }
-        public IEnumerable<TokenInputDto> SelectedItems{ get; set; }
-    }
+    
+
 }

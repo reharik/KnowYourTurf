@@ -179,13 +179,13 @@ kyt.FieldDashboardController  = kyt.Controller.extend({
         $('#FieldColor',"#masterArea").miniColors();
     },
     deletePendingTask:function(url){
-        kyt.repository.ajaxPost(url, $.proxy(function(){this.views.pendingTaskGridView.reloadGrid()},this))
+        kyt.repository.ajaxPost(url).done($.proxy(this.views.pendingTaskGridView.reloadGrid,this));
     },
     deletePhoto:function(url){
-        kyt.repository.ajaxPost(url, $.proxy(function(){this.views.photoGridView.reloadGrid()},this))
+        kyt.repository.ajaxPost(url).done($.proxy(this.views.photoGridView.reloadGrid,this));
     },
     deleteDocument:function(url){
-        kyt.repository.ajaxPost(url, $.proxy(function(){this.views.documentGridView.reloadGrid()},this))
+        kyt.repository.ajaxPost(url).done($.proxy(this.views.documentGridView.reloadGrid,this));
     },
     //from popupformmodule
     loadTokenizers:function(formOptions){

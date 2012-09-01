@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x => x.Fax);
             GridBuilder.DisplayFor(x => x.Website);
             GridBuilder.ImageButtonColumn()
-                .ForAction<VendorContactListController>(x => x.VendorContactList(null))
+                .ForAction<VendorContactListController>(x => x.ItemList(null))
                 .ToPerformAction(ColumnAction.Redirect)
                 .ImageName("AddContact.png");
             return this;

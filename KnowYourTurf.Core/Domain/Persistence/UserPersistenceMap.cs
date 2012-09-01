@@ -20,7 +20,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(c => c.BirthDate);
             Map(c => c.Notes);
             Map(c => c.LanguageDefault);
-            Map(x => x.ImageUrl);
+            Map(x => x.FileUrl);
             Map(x => x.EmergencyContact);
             Map(x => x.EmergencyContactPhone);
             Map(x => x.EmployeeId);

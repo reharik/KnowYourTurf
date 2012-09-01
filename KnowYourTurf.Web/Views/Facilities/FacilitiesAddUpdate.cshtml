@@ -1,60 +1,53 @@
-﻿@model UserViewModel
+﻿@model KnowYourTurf.Web.Models.UserViewModel
 @using KnowYourTurf.Core.Html.FubuUI
-@using KnowYourTurf.Web.Controllers
-@using KnowYourTurf.Core.Html.Expressions
+@using KnowYourTurf.Web
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
 
 
-@MvcHtmlString.Create(FormFor<FacilitiesController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-@MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
-@MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.FirstName).ToHtmlTag()
+            @Html.SubmissionFor(x => x.FirstName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.LastName).ToHtmlTag()
+            @Html.SubmissionFor(x => x.LastName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Password).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UserLoginInfoPassword).LabelDisplay(WebLocalizationKeys.PASSWORD).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Email).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Email).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.PhoneMobile).ToHtmlTag()
+            @Html.SubmissionFor(x => x.PhoneMobile).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Status).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UserLoginInfoStatus).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            <div id="newImage">
-                <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
-            </div>
+            @Html.ViewFor(x => x.FileUrl).LabelDisplay(WebLocalizationKeys.FACILITIES_PHOTO).ToHtmlTag()
         </div>
     </div>
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address1).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Address2).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address2).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.City).ToHtmlTag()
+            @Html.SubmissionFor(x => x.City).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.State).ToHtmlTag()
+            @Html.SubmissionFor(x => x.State).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ZipCode).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ZipCode).ToHtmlTag()
         </div>
         
     </div>
-@EndForm()
-
+@EndForm()                             

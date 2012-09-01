@@ -14,7 +14,7 @@ using KnowYourTurf.Web.Services;
 using FubuMVC.UI;
 using FubuMVC.UI.Configuration;
 using FubuMVC.UI.Tags;
-using MethodFitness.Core;
+using KnowYourTurf.Core;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using StructureMap.Configuration.DSL;

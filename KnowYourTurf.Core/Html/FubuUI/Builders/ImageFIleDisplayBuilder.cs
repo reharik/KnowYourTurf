@@ -13,7 +13,7 @@ namespace KnowYourTurf.Core.Html.FubuUI.Builders
         public override HtmlTag Build(ElementRequest request)
         {
             HtmlTag root = new HtmlTag("a");
-            root.Attr("href", request.RawValue);
+            root.Attr("src", request.RawValue);
             root.Attr("target", "_blank");
             root.Id(request.Accessor.FieldName);
             root.Children.Add(new HtmlTag("span"));

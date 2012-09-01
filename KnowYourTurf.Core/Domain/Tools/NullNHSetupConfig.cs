@@ -23,6 +23,11 @@ namespace KnowYourTurf.Core.Domain.Persistence
         {
             return;
         }
+
+        public void ClusteredIndexOnManyToMany(Configuration configuration)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

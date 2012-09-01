@@ -1,31 +1,23 @@
 ﻿@model KnowYourTurf.Web.Models.Fertilizer.FertilizerViewModel
-@using KnowYourTurf.Core
-@using KnowYourTurf.Web
 @using KnowYourTurf.Core.Html.FubuUI
-@using KnowYourTurf.Web.Controllers
-@using KnowYourTurf.Core.Html.Expressions
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-        
-            @MvcHtmlString.Create(FormFor<FertilizerController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
-    <div class="col left">
+      <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.N).ToHtmlTag()
+            @Html.SubmissionFor(x => x.N).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.P).ToHtmlTag()
+            @Html.SubmissionFor(x => x.P).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.K).ToHtmlTag()
-        </div>
+            @Html.SubmissionFor(x => x.K).ToHtmlTag()
+        </div>                             
     </div>
-            @EndForm()
 

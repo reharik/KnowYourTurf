@@ -19,16 +19,15 @@ namespace KnowYourTurf.Web.Controllers
             _weatherListGrid = weatherListGrid;
         }
 
-        public ActionResult WeatherList(ListViewModel input)
+        public ActionResult ItemList(ListViewModel input)
         {
             var url = UrlContext.GetUrlForAction<WeatherListController>(x => x.Weathers(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<WeatherController>(x => x.AddUpdate(null)),
-                GridDefinition = _weatherListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.WEATHER.ToString()
+                gridDef = _weatherListGrid.GetGridDefinition(url),
+                _Title = WebLocalizationKeys.WEATHER.ToString()
             };
-            return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Weathers(GridItemsRequestModel input)

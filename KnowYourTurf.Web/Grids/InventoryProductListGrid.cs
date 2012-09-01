@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
-using KnowYourTurf.Core.Domain;
+﻿using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 
@@ -24,8 +18,7 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<InventoryProduct> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.Product.Name)
-                .ForAction<InventoryListController>(x => x.Display(null))
-                .ToPerformAction(ColumnAction.Display)
+                .ToPerformAction(ColumnAction.DisplayItem)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.Quantity);
             GridBuilder.DisplayFor(x => x.SizeOfUnit);

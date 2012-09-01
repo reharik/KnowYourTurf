@@ -1,81 +1,53 @@
 ﻿@model KnowYourTurf.Web.Models.Vendor.VendorViewModel
-@using HtmlTags
-@using KnowYourTurf.Core
-@using KnowYourTurf.Web
 @using KnowYourTurf.Core.Html.FubuUI
-@using KnowYourTurf.Web.Controllers
-@using KnowYourTurf.Core.Html.Expressions
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-<script>
-    var chemicalOptions = {
-        availableItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableChemicals)),
-        selectedItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedChemicals)) ,
-        inputSelector:"#ChemicalInput"
-    };
-    extraFormOptions.chemicalOptions = chemicalOptions;
-
-    var fertilizerOptions = {
-        availableItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableFertilizers)),
-        selectedItems:  @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedFertilizers)) ,
-        inputSelector:"#FertilizerInput"
-    };
-    extraFormOptions.fertilizerOptions= fertilizerOptions;
-
-    var materialOptions= {
-        availableItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableMaterials)),
-        selectedItems:  @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedMaterials)) ,
-        inputSelector:"#MaterialInput"
-    };
-    extraFormOptions.materialOptions = materialOptions;
 </script>
 
-            @MvcHtmlString.Create(FormFor<VendorController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Company).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Company).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Phone).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Phone).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Fax).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Fax).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address1).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Address2).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address2).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.City).ToHtmlTag()
+            @Html.SubmissionFor(x => x.City).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.State).ToHtmlTag()
+            @Html.SubmissionFor(x => x.State).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ZipCode).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ZipCode).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Website).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Website).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Status).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Status).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
 
-            @Html.SubmissionFor(x => x.ChemicalInput).InputId("ChemicalInput").HideInput().LabelDisplay(WebLocalizationKeys.CHEMICALS).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Chemicals).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FertilizerInput).InputId("FertilizerInput").HideInput().LabelDisplay(WebLocalizationKeys.FERTILIZERS).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Fertilizers).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.MaterialInput).InputId("MaterialInput").HideInput().LabelDisplay(WebLocalizationKeys.MATERIALS).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Materials).ToHtmlTag()
         </div>
     </div>
             

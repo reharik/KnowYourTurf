@@ -6,10 +6,14 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Web.Mvc;
 using FubuMVC.Core;
 using FubuMVC.Core.Util;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
+using KnowYourTurf.Core.Localization;
+using KnowYourTurf.Core.Services;
+using StructureMap;
 using xVal.ServerSide;
 
 namespace KnowYourTurf.Core
@@ -78,28 +82,28 @@ namespace KnowYourTurf.Core
         {
             return values.Count(evaluator) > 0;
         }
-//
-//        [DebuggerStepThrough]
-//        public static IEnumerable<T> Each<T>(this IEnumerable<T> values, Action<T> eachAction)
-//        {
-//            foreach (var item in values)
-//            {
-//                eachAction(item);
-//            }
-//
-//            return values;
-//        }
-//
-//        [DebuggerStepThrough]
-//        public static IEnumerable Each(this IEnumerable values, Action<object> eachAction)
-//        {
-//            foreach (var item in values)
-//            {
-//                eachAction(item);
-//            }
-//
-//            return values;
-//        }
+
+        [DebuggerStepThrough]
+        public static IEnumerable<T> ForEachItem<T>(this IEnumerable<T> values, Action<T> eachAction)
+        {
+            foreach (var item in values)
+            {
+                eachAction(item);
+            }
+
+            return values;
+        }
+
+        [DebuggerStepThrough]
+        public static IEnumerable ForEachItem(this IEnumerable values, Action<object> eachAction)
+        {
+            foreach (var item in values)
+            {
+                eachAction(item);
+            }
+
+            return values;
+        }
 
         [DebuggerStepThrough]
         public static int IterateFromZero(this int maxCount, Action<int> eachAction)
@@ -140,7 +144,7 @@ namespace KnowYourTurf.Core
 
         public static IList<T> AddRange<T>(this IList<T> list, IEnumerable<T> items)
         {
-            items.Each(list.Add);
+            items.ForEachItem(list.Add);
             return list;
         }
 
@@ -289,13 +293,17 @@ namespace KnowYourTurf.Core
             return UrlContext.GetFullUrl(formattedUrl);
         }
 
-            
+        public static string AddImageSizeToName(string imageNameOrUrl, string imageSize)
+        {
+            return imageNameOrUrl.Insert(imageNameOrUrl.LastIndexOf("."), "_" + imageSize);
+        }
+
             //public static Continuation ToContinuation(this Result result, Continuation continuation)
         //{
         //    List<ErrorInfo> errors = new List<ErrorInfo>();
         //    if(result.Errors!=null)
         //    {
-        //        result.Errors.Each(x => errors.Add(new ErrorInfo(x.Category.ToString(), x.Description)));
+        //        result.Errors.ForEachItem(x => errors.Add(new ErrorInfo(x.Category.ToString(), x.Description)));
         //    }
         //    continuation.Success = result.Success;
         //    continuation.ErrorCount = result.ErrorCount;

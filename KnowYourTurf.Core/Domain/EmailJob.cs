@@ -7,7 +7,7 @@ using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class EmailJob:DomainEntity
+    public class EmailJob : DomainEntity, IPersistableObject
     {
         [ValidateNonEmpty]
         public virtual string Name { get; set; }
