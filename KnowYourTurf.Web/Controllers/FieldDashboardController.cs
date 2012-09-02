@@ -92,8 +92,7 @@ namespace KnowYourTurf.Web.Controllers
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters,
                                                                    x =>
                                                                    x.Field.EntityId == input.ParentId && !x.Complete);
-            var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items,
-                                                                            "pendingTaskGrid");
+            var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 
@@ -124,8 +123,7 @@ namespace KnowYourTurf.Web.Controllers
            {
                items = field.Photos.Where(photoWhereClause.Compile());
            }
-            var gridItemsViewModel = _photoListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable(),
-                                                                          "photoGrid");
+            var gridItemsViewModel = _photoListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable());
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 
@@ -154,8 +152,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 items = field.Documents.Where(documentWhereClause.Compile());
             }
-            var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable(),
-                                                                          "documentGrid");
+            var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable());
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

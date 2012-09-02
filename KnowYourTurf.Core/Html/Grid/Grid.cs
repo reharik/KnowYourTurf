@@ -14,7 +14,7 @@ namespace KnowYourTurf.Core.Html.Grid
     {
         void AddColumnModifications(Action<IGridColumn, T> modification);
         GridDefinition GetGridDefinition(string url);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items, string gridName = null);
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items);
     }
 
     public abstract class Grid<T> : IGrid<T> where T : IGridEnabledClass
@@ -39,11 +39,11 @@ namespace KnowYourTurf.Core.Html.Grid
             return GridBuilder.ToGridColumns(user);
         }
 
-        private IEnumerable GetGridRows(IEnumerable rawResults, User user, string gridName)
+        private IEnumerable GetGridRows(IEnumerable rawResults, User user)
         {
             foreach (T x in rawResults)
             {
-                yield return new GridRow { id = x.EntityId, cell = GridBuilder.ToGridRow(x, user, _modifications, gridName) };
+                yield return new GridRow { id = x.EntityId, cell = GridBuilder.ToGridRow(x, user, _modifications) };
             }
         }
 
@@ -71,7 +71,7 @@ namespace KnowYourTurf.Core.Html.Grid
             };
         }
 
-        public GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items, string gridName = null)
+        public GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<T> items)
         {
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);
@@ -79,7 +79,7 @@ namespace KnowYourTurf.Core.Html.Grid
             var pageAndSort = pager.PageAndSort(items, pageSortFilter);
             var model = new GridItemsViewModel
             {
-                items = BuildGrid().GetGridRows(pageAndSort.Items, user,gridName),
+                items = BuildGrid().GetGridRows(pageAndSort.Items, user),
                 page = pageAndSort.Page,
                 records = pageAndSort.TotalRows,
                 total = pageAndSort.TotalPages

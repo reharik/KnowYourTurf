@@ -32,7 +32,7 @@ if (typeof cc.grid == 'undefined') {
             },
             loadtext:"",
             //emptyrecords:"aint go nothin",
-            gridComplete:function(){$(this).find(".cbox").parent().addClass("jqg_cb");$.publish("/contentLevel/gridLoadComplete",[this.rows.length-1])},
+            gridComplete:function(){$(this).find(".cbox").parent().addClass("jqg_cb");},
             sortorder: "asc",
             sortname:cc.grid.columnService.defaultSortColumnName(gridDefinition),
             onSortCol:function(index,iCol,sortorder) {cc.gridHelper.adjustSortStyles(index,iCol,sortorder);},

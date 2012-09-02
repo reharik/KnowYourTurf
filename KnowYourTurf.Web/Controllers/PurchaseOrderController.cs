@@ -75,7 +75,7 @@ namespace KnowYourTurf.Web.Controllers
             var vendor = _repository.Find<Vendor>(input.EntityId);
             var items = _dynamicExpressionQuery.PerformQuery(vendor.Products, input.filters);
 
-            var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items, "productGrid");
+            var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 

@@ -40,7 +40,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var loginViewModel = new LoginViewModel
                                      {
-                                         SaveUrl = UrlContext.GetUrlForAction<LoginController>(x=>x.Login(null))
+                                         _saveUrl = UrlContext.GetUrlForAction<LoginController>(x=>x.Login(null))
                                      };
             return View(loginViewModel);
         }
@@ -123,7 +123,7 @@ namespace KnowYourTurf.Web.Controllers
         public string Password { get; set; }
         public bool RememberMe { get; set; }
         public string ForgotPasswordUrl { get; set; }
-        public string SaveUrl { get; set; }
+        public string _saveUrl { get; set; }
 
     }
 

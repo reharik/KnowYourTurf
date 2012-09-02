@@ -24,7 +24,6 @@ KYT.Views.ResetPasswordView = KYT.Views.View.extend({
 KYT.Views.LoginView = KYT.Views.View.extend({
     registerEvents: function(){ this.events ={
         "click #forgotPasswordLink": "forgotPasswordClick",
-        "click #registrationLink": "registrationLinkClick",
         "click .save": "submitClick"
     }},
     initialize: function(){

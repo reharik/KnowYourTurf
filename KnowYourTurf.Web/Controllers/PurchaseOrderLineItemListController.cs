@@ -46,7 +46,7 @@ namespace KnowYourTurf.Web.Controllers
             var items = _dynamicExpressionQuery.PerformQuery(purchaseOrder.LineItems, input.filters);
 
             if (input.PageSortFilter.SortColumn.IsEmpty()) items = items.OrderBy(x => x.Product.Name);
-            var model = _purchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items, "poliGrid");
+            var model = _purchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
