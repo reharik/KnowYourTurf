@@ -35,7 +35,6 @@ namespace KnowYourTurf.Core.Domain.Persistence
 
         public void ClusteredIndexOnManyToMany(Configuration configuration)
         {
-
             configuration.CollectionMappings.Where(x => !x.IsOneToMany).ForEachItem(x =>
                 {
                     const string columnFormat = "{0}_id";
