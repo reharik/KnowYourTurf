@@ -53,15 +53,11 @@ KYT.Views.LoginView = KYT.Views.View.extend({
 
     },
 
-    registrationLinkClick: function (e) {
-        window.location.href = "/Registration/#newregistration";
-    },
-
     submitClick: function (e) {
         var isValid = CC.ValidationRunner.runViewModel(this.elementsViewmodel);
         if(!isValid){return;}
         var data = JSON.stringify(ko.mapping.toJS(this.model));
-        var promise = KYT.repository.ajaxPostModel(data.SaveUrl,data);
+        var promise = KYT.repository.ajaxPostModel(this.model._saveUrl(),data);
         promise.done(this.success);
     },
     success:function(result){
