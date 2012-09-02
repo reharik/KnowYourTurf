@@ -15,9 +15,9 @@
 <!-- ____________PUBLIC TASKS_______________  -->
 
   <Target Name="Build" DependsOnTargets="_build;_unitTests" />
-  <Target Name="Push" DependsOnTargets="_build;_unitTests;_outputWebFiles;" />
+  <Target Name="Push" DependsOnTargets="_build;_unitTests;_pushToQA;" />
 
- <Target Name="_outputWebFiles" >
+ <Target Name="_pushToQA" >
     <ItemGroup>
       <WebFiles Include="KnowYourTurf.Web\**\*.*;"
                 Exclude="KnowYourTurf.Web\obj\**;
@@ -41,13 +41,13 @@
     </Time>
 
     <PropertyGroup>
-      <OutputDirectory>f:\WebSites\KnowYourTurf</OutputDirectory>
+      <OutputDirectory>f:\WebSites\KnowYourTurf_QA</OutputDirectory>
     </PropertyGroup>
 
     <MakeDir Directories="$(OutputDirectory)"  />
     <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputDirectory)\%(RecursiveDir)" />
     <Zip Files="@(WebFiles)"
-      WorkingDirectory="f:\WebSites\BackUp\KnowYourTurf"
+      WorkingDirectory="f:\WebSites\BackUp\KnowYourTurf_QA"
       ZipFileName="f:\WebSites\BackUp\KnowYourTurf\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
       ZipLevel="9" />
  </Target>
