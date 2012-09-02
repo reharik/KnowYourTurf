@@ -48,7 +48,7 @@
     <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputDirectory)\%(RecursiveDir)" />
     <Zip Files="@(WebFiles)"
       WorkingDirectory="f:\WebSites\BackUp\KnowYourTurf_QA"
-      ZipFileName="f:\WebSites\BackUp\KnowYourTurf\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
+      ZipFileName="f:\WebSites\BackUp\KnowYourTurf_QA\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
       ZipLevel="9" />
  </Target>
 
