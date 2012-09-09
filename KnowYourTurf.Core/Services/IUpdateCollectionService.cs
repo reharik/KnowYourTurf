@@ -4,6 +4,7 @@ using System.Linq;
 using FubuMVC.Core;
 using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Core.Services
 {
@@ -21,6 +22,11 @@ namespace KnowYourTurf.Core.Services
             Func<ENTITY, ENTITY, bool> comparer = null) where ENTITY : Entity, IPersistableObject;
 
 
+        void UpdateEnum<ENUM>(IEnumerable<ENUM> origional,
+                                              TokenInputViewModel tokenInputViewModel,
+                                              Action<ENUM> addEntity,
+                                              Action<ENUM> removeEntity,
+                                              Func<ENUM, ENUM, bool> comparer = null) where ENUM : Enumeration;
     }
 
     public class UpdateCollectionService : IUpdateCollectionService
@@ -64,22 +70,61 @@ namespace KnowYourTurf.Core.Services
             TokenInputViewModel tokenInputViewModel,
             Action<ENTITY> addEntity,
             Action<ENTITY> removeEntity,
-            Func<ENTITY,ENTITY,bool> comparer = null) where ENTITY : Entity, IPersistableObject
+            Func<ENTITY, ENTITY, bool> comparer = null) where ENTITY : Entity, IPersistableObject
         {
-            if(comparer == null)
+            if (comparer == null)
             {
                 comparer = (entity, entity1) => entity.EntityId == entity1.EntityId;
             }
             var newItems = new List<ENTITY>();
             if (tokenInputViewModel != null && tokenInputViewModel.selectedItems != null)
             { tokenInputViewModel.selectedItems.Each(x => newItems.Add(_repository.Find<ENTITY>(long.Parse(x.id)))); }
-            
+
             var remove = new List<ENTITY>();
             if (newItems.Any())
             {
                 origional.Where(x => comparer(x, newItems.FirstOrDefault())).ForEachItem(x =>
                 {
                     if (!newItems.Any(i => i.EntityId == x.EntityId))
+                    {
+                        remove.Add(x);
+                    }
+                });
+            }
+            else
+            {
+                remove = origional.ToList();
+            }
+            remove.ForEachItem(removeEntity);
+            newItems.ForEachItem(x =>
+            {
+                if (!origional.Contains(x))
+                {
+                    addEntity(x);
+                }
+            });
+        }
+
+        public void UpdateEnum<ENUM>(IEnumerable<ENUM> origional,
+                TokenInputViewModel tokenInputViewModel,
+                Action<ENUM> addEntity,
+                Action<ENUM> removeEntity,
+                Func<ENUM, ENUM, bool> comparer = null) where ENUM : Enumeration
+        {
+            if (comparer == null)
+            {
+                comparer = (ccEnum, ccEnum1) => ccEnum.Key == ccEnum1.Key;
+            }
+            var newItems = new List<ENUM>();
+            if (tokenInputViewModel != null && tokenInputViewModel.selectedItems != null)
+            { tokenInputViewModel.selectedItems.Each(x => newItems.Add((ENUM)Enumeration.CreateInstance(typeof(ENUM), x.name))); }
+
+            var remove = new List<ENUM>();
+            if (newItems.Any())
+            {
+                origional.Where(x => comparer(x, newItems.FirstOrDefault())).ForEachItem(x =>
+                {
+                    if (!newItems.Any(i => i.Key == x.Key))
                     {
                         remove.Add(x);
                     }

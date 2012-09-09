@@ -808,7 +808,49 @@ KYT.Views.InventoryDisplayView = KYT.Views.View.extend({
     }
 });
 
+KYT.Views.WeatherListView = KYT.Views.View.extend({
+    initialize:function(){
+        this.options.gridOptions ={multiselect:false,
+            sortorder:"desc",sortname:"Date"
+        };
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){this.setupBindings();},
+    onClose:function(){this.unbindBindings();}
+});
 
+KYT.Views.PendingTaskListView = KYT.Views.View.extend({
+    initialize: function(){
+       this.options.gridId="pendingTaskList";
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
+        this.setupBindings();},
+    onClose:function(){this.unbindBindings();},
+    callbackAction: function () {
+        this.reloadGrid();
+    }
+
+});
+
+KYT.Views.CompletedTaskListView = KYT.Views.View.extend({
+    initialize: function(){
+        this.options.gridId="completedTaskList";
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
+        this.setupBindings();},
+    onClose:function(){this.unbindBindings();}
+});
 
 
 

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using AutoMapper;
+using KnowYourTurf.Core.CoreViewModels;
+using KnowYourTurf.Core.Html;
+using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Security.Interfaces;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
@@ -22,13 +26,15 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IFileHandlerService _fileHandlerService;
         private readonly IAuthorizationRepository _authorizationRepository;
         private readonly IUpdateCollectionService _updateCollectionService;
+        private readonly ISelectListItemService _selectListItemService;
 
         public EmployeeController(IRepository repository,
             ISaveEntityService saveEntityService,
             ISessionContext sessionContext,
             IFileHandlerService fileHandlerService,
             IAuthorizationRepository authorizationRepository,
-            IUpdateCollectionService updateCollectionService)
+            IUpdateCollectionService updateCollectionService,
+            ISelectListItemService selectListItemService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
@@ -36,27 +42,31 @@ namespace KnowYourTurf.Web.Controllers
             _fileHandlerService = fileHandlerService;
             _authorizationRepository = authorizationRepository;
             _updateCollectionService = updateCollectionService;
+            _selectListItemService = selectListItemService;
+        }
+
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("EmployeeAddUpdate", new UserViewModel());
         }
 
         public ActionResult AddUpdate(ViewModel input)
         {
-//            var employee = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
-//            var availableUserRoles = Enumeration.GetAll<UserType>(true).Select(x => new TokenInputDto { id = x.Key, name = x.Key});
-//            IEnumerable<TokenInputDto> selectedUserRoles;
-//            if (input.EntityId > 0 && employee.UserRoles != null)
-//                selectedUserRoles =
-//                    employee.UserRoles.Select(x => new TokenInputDto {id = x.EntityId.ToString(), name = x.Name});
-//            else selectedUserRoles = null;
-//
-//            var model = new UserViewModel
-//            {
-//                Item = employee,
-//                AvailableItems = availableUserRoles,
-//                SelectedItems = selectedUserRoles,
-//                _Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString()
-//            };
-//            return PartialView("EmployeeAddUpdate", model);
-            return null;
+            var employee = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
+            var availableUserRoles = _repository.FindAll<UserRole>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
+            IEnumerable<TokenInputDto> selectedUserRoles;
+            if (input.EntityId > 0 && employee.UserRoles != null)
+                selectedUserRoles = employee.UserRoles.Select(x => new TokenInputDto {id = x.EntityId.ToString(), name = x.Name});
+            else selectedUserRoles = availableUserRoles.Where(x => x.name == "Employee");
+
+            var model = Mapper.Map<User, UserViewModel>(employee);
+            model.FileUrl = model.FileUrl.IsNotEmpty() ? BasicExtentions.AddImageSizeToName(model.FileUrl, "thumb") : "";
+            model._StateList = _selectListItemService.CreateList<State>();
+            model._UserLoginInfoStatusList = _selectListItemService.CreateList<Status>();
+            model._Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString();
+            model._saveUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.Save(null));
+            model.UserRoles = new TokenInputViewModel { _availableItems = availableUserRoles, selectedItems = selectedUserRoles };
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
       
         public ActionResult Display(ViewModel input)

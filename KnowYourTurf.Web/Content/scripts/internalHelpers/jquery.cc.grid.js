@@ -37,6 +37,8 @@ if (typeof cc.grid == 'undefined') {
             sortname:cc.grid.columnService.defaultSortColumnName(gridDefinition),
             onSortCol:function(index,iCol,sortorder) {cc.gridHelper.adjustSortStyles(index,iCol,sortorder);},
             jsonReader: {
+
+
                 repeatitems: true,
                 root: "items",
                 cell: "cell",
