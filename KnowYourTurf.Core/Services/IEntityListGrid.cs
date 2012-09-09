@@ -11,6 +11,6 @@ namespace KnowYourTurf.Core.Services
     {
         void AddColumnModifications(Action<IGridColumn, ENTITY> modification);
         GridDefinition GetGridDefinition(string url);
-        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<ENTITY> items, string gridName = null);
+        GridItemsViewModel GetGridItemsViewModel(PageSortFilter pageSortFilter, IQueryable<ENTITY> items);
     }
 }

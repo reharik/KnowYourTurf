@@ -11,7 +11,7 @@ namespace KnowYourTurf.Core.Html.Grid
     {
         List<IGridColumn> columns { get; }
         IList<IDictionary<string, string>> ToGridColumns(User user);
-        string[] ToGridRow(ENTITY item, User user, IEnumerable<Action<IGridColumn, ENTITY>> modifications, string gridName = "");
+        string[] ToGridRow(ENTITY item, User user, IEnumerable<Action<IGridColumn, ENTITY>> modifications);
 
         DisplayColumn<ENTITY> DisplayFor(Expression<Func<ENTITY, object>> expression);
         HiddenColumn<ENTITY> HideColumnFor(Expression<Func<ENTITY, object>> expression);
@@ -36,13 +36,13 @@ namespace KnowYourTurf.Core.Html.Grid
             get { return _columns; }
         }
 
-        public string[] ToGridRow(ENTITY item, User user, IEnumerable<Action<IGridColumn, ENTITY>> modifications, string gridName = "")
+        public string[] ToGridRow(ENTITY item, User user, IEnumerable<Action<IGridColumn, ENTITY>> modifications)
         {
             var cellValues = new List<string>();
             foreach (var column in columns)
             {
                 modifications.ForEachItem(x => x.Invoke(column, item));
-                string value = column.BuildColumn(item, user, _authorizationService, gridName);
+                string value = column.BuildColumn(item, user, _authorizationService);
                 cellValues.Add(value ?? string.Empty);
             }
             return cellValues.ToArray();

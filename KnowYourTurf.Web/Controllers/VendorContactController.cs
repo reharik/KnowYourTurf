@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
 using FubuMVC.Core;
@@ -64,7 +65,8 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
             var vendor = _repository.Find<Vendor>(input.ParentId);
-            var deleteContacts = vendor.Contacts.Where(x => input.EntityIds.Contains(x.EntityId));
+            var deleteContacts = new List<VendorContact>();
+            vendor.Contacts.Where(x => input.EntityIds.Contains(x.EntityId)).ForEachItem(deleteContacts.Add);
             deleteContacts.ForEachItem(vendor.RemoveContact);
             var crudManager = _saveEntityService.ProcessSave(vendor);
             var notification = crudManager.Finish();

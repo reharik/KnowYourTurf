@@ -88,10 +88,9 @@ namespace KnowYourTurf.Core.Html.Grid
             return this;
         }
 
-        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService, string gridName = "")
+        public override string BuildColumn(object item, User user, IAuthorizationService _authorizationService)
         {
             // if a name is given in the controller it overrides the name given in the grid declaration
-            if (gridName.IsNotEmpty()) _gridName = gridName;
             var _item = (ENTITY)item;
             var value = FormatValue(_item, user, _authorizationService);
             if (value.IsEmpty()) return null;

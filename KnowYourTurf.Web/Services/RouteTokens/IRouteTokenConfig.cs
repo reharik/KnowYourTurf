@@ -29,7 +29,8 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForForm<FieldController>(x => x.AddUpdate(null)).End();
             _builder.TokenForForm<FieldDashboardController>(x => x.ViewField(null)).ViewName("FieldDashboardView").End();
 
-            _builder.TokenForList<TaskListController>(x => x.ItemList(null)).End();
+            _builder.TokenForList<TaskListController>(x => x.ItemList(null)).ViewName("PendingTaskListView").End();
+            _builder.TokenForList<TaskListController>(x => x.CompletedTasksGrid(null)).ViewName("CompletedTaskListView").RouteToken("completedtasks").End();
             _builder.TokenForForm<TaskCalendarController>(x => x.TaskCalendar(null)).ViewName("CalendarView").SubViewName("TaskFormView").End();
             _builder.TokenForForm<TaskController>(x => x.AddUpdate(null)).End();
             _builder.UrlForDisplay<TaskController>(x => x.Display(null)).End();

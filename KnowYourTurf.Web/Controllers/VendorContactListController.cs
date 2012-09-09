@@ -32,6 +32,8 @@ namespace KnowYourTurf.Web.Controllers
                 deleteMultipleUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.DeleteMultiple(null)) + "?ParentId=" + input.ParentId,
                 _Title = "("+vendor.Company+") "+ WebLocalizationKeys.VENDOR_CONTACTS
             };
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 

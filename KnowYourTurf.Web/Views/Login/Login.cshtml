@@ -25,11 +25,6 @@
      @CSS("kyt.css").ToHtmlTag()
     @Script("jqueryPlugins/jquery-1.7.1.js").ToHtmlTag()
     @Script("jqueryPlugins/jquery-ui-1.8.16.custom.min.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.validate.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.form.js").ToHtmlTag()
-    @Script("internalHelpers/cc.utilities.js").ToHtmlTag()
-    @Script("internalHelpers/cc.crudForm.js").ToHtmlTag()
-    @Script("internalHelpers/cc.Notifications.js").ToHtmlTag()
     @Script("externalHelpers/underscore.js").ToHtmlTag()
     @Script("externalHelpers/backbone.js").ToHtmlTag()
     @Script("externalHelpers/backbone.marionette.js").ToHtmlTag()
@@ -50,13 +45,6 @@
     @Script("KYT/CC.ModelBinding/CC.ValidationRunner.js").ToHtmlTag()
     @Script("internalHelpers/kyt.repository.js").ToHtmlTag()
 
-        @*    @Script("kyt.baseClass.js").ToHtmlTag()*@
-@*    @Script("kyt.PopupView.js").ToHtmlTag()*@
-@*    @Script("kyt.FormView.js").ToHtmlTag()*@
-@*    @Script("kyt.ajaxPopupFormModule.js").ToHtmlTag()*@
-@*    @Script("kyt.forgottenPasswordController.js").ToHtmlTag()*@
-    @Script("jqueryPlugins/jquery.pubsub.js").ToHtmlTag()
-    @Script("jqueryPlugins/jquery.metadata.js").ToHtmlTag()
     @Script("externalHelpers/json2.js").ToHtmlTag()
     
     <script type="text/javascript">
@@ -78,14 +66,12 @@
                 <div class="content-inner norequired">
                     <div id="messageContainer">
                         <ul data-bind="foreach:messages">
-@*                            *@
                             <li data-bind="text:message,css: { error: status()=='error', warning: status()=='warning', success: status()=='success' }"></li>
                         </ul>
                     </div>
                     <div class="signin">
                         <div class="col">
                             <label class="big">@WebLocalizationKeys.SIGN_IN</label>
-                             <form>    
                             <div class="fieldRow">
                                 @Html.SubmissionFor(x => x.UserName).ToHtmlTag()
                             </div>
@@ -100,7 +86,6 @@
                             @StandardButtonFor("submit", WebLocalizationKeys.SIGN_IN).AddClass("save").AddClass("kyt_submitButton").ToHtmlTag()
                             <a href="#" id="forgotPassword">@WebLocalizationKeys.FORGOT_YOUR_PASSWORD</a>
                         </div>
-                        </form>
                     </div>
                 </div>
                 <div class="content-footer"><span></span></div>

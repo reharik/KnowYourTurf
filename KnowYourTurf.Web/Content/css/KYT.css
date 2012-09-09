@@ -318,17 +318,6 @@ div.footer div.col {
     margin-bottom: 10px;
 }
 
-#trapezoid {
-	border-top: 100px solid yellow;
-	border-left: 50px solid transparent;
-	border-right: 50px solid transparent;
-	height: 0;
-	width: 600px;
-    position: fixed;
-    z-index: 100000;
-    left: 250px;
-}
-
 .dashboardGrid{
     height:400px;
 }
