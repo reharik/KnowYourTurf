@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Security.Interfaces;
+using CC.Core.DomainTools;
+using CC.Security.Interfaces;
 using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
 using StructureMap;

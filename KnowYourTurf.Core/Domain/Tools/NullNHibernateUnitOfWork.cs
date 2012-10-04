@@ -1,3 +1,4 @@
+using CC.Core.DomainTools;
 using NHibernate;
 
 namespace KnowYourTurf.Core.Domain

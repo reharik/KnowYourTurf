@@ -1,5 +1,4 @@
-using System;
-using KnowYourTurf.Core.Localization;
+using CC.Core.Localization;
 
 namespace KnowYourTurf.Web
 {

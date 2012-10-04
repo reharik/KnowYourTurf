@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using KnowYourTurf.Security;
+using CC.Core.Domain;
+using CC.Core.Enumerations;
+using CC.Core.Localization;
+using CC.Security;
 using Castle.Components.Validator;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
+using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Core.Domain
 {

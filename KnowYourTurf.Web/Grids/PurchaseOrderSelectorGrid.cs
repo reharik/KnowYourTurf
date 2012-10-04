@@ -1,15 +1,14 @@
-﻿using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
+﻿using CC.Core.DomainTools;
+using CC.Core.Html.Grid;
+using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Grids
 {
     public class PurchaseOrderSelectorGrid : Grid<BaseProduct>, IEntityListGrid<BaseProduct>
     {
-        public PurchaseOrderSelectorGrid(IGridBuilder<BaseProduct> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public PurchaseOrderSelectorGrid(IGridBuilder<BaseProduct> gridBuilder)
+            : base(gridBuilder)
         {
         }
 

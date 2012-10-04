@@ -1,4 +1,3 @@
-using FubuMVC.Core;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
@@ -19,7 +18,7 @@ namespace KnowYourTurf.UnitTests.Rules
             var result = new RuleResult {Success = true};
             var count = 0;
             var _field = field as Field;
-            _field.Events.Each(x => { if (x .StartTime > _systemClock.Now) count++; });
+            _field.Events.ForEachItem(x => { if (x .StartTime > _systemClock.Now) count++; });
             if(count>0)
             {
                 result.Success = false;

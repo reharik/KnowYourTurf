@@ -1,10 +1,10 @@
 using System;
 using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
 using FubuMVC.Core;
-using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Services;
 using KnowYourTurf.Web.Services.EmailHandlers;
 using StructureMap;
 

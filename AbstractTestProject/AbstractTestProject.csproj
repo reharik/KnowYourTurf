@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CC.Core">
+      <HintPath>..\lib\CC.Core.dll</HintPath>
+    </Reference>
     <Reference Include="FubuMVC.Core">
       <HintPath>..\lib\FubuMVC.Core.dll</HintPath>
     </Reference>

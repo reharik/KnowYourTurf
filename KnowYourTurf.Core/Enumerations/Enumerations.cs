@@ -1,5 +1,5 @@
 using System;
-using KnowYourTurf.Core.Localization;
+using CC.Core.Localization;
 
 namespace KnowYourTurf.Core.Enums
 {
@@ -23,68 +23,7 @@ namespace KnowYourTurf.Core.Enums
         public static readonly ExtraViewModelData InputMasks = new ExtraViewModelData { IsActive = true, Key = "mask" };
     }
 
-    [Serializable]
-    public class State : Enumeration
-    {
-        public static readonly State Empty = new State { IsActive = false, Key = "" };
-        public static readonly State AL = new State { IsActive = true, Key = "AL" };
-        public static readonly State AK = new State { IsActive = true, Key = "AK" };
-        public static readonly State AZ = new State { IsActive = true, Key = "AZ" };
-        public static readonly State AR = new State { IsActive = true, Key = "AR" };
-        public static readonly State CA = new State { IsActive = true, Key = "CA" };
-        public static readonly State CO = new State { IsActive = true, Key = "CO" };
-        public static readonly State CT = new State { IsActive = true, Key = "CT" };
-        public static readonly State DE = new State { IsActive = true, Key = "DE" };
-        public static readonly State FL = new State { IsActive = true, Key = "FL" };
-        public static readonly State GA = new State { IsActive = true, Key = "GA" };
-        public static readonly State HI = new State { IsActive = true, Key = "HI" };
-        public static readonly State ID = new State { IsActive = true, Key = "ID" };
-        public static readonly State IL = new State { IsActive = true, Key = "IL" };
-        public static readonly State IA = new State { IsActive = true, Key = "IA" };
-        public static readonly State KS = new State { IsActive = true, Key = "KS" };
-        public static readonly State KY = new State { IsActive = true, Key = "KY" };
-        public static readonly State LA = new State { IsActive = true, Key = "LA" };
-        public static readonly State ME = new State { IsActive = true, Key = "ME" };
-        public static readonly State MD = new State { IsActive = true, Key = "MD" };
-        public static readonly State MA = new State { IsActive = true, Key = "MA" };
-        public static readonly State MI = new State { IsActive = true, Key = "MI" };
-        public static readonly State MN = new State { IsActive = true, Key = "MN" };
-        public static readonly State MS = new State { IsActive = true, Key = "MS" };
-        public static readonly State MO = new State { IsActive = true, Key = "MO" };
-        public static readonly State MT = new State { IsActive = true, Key = "MT" };
-        public static readonly State NE = new State { IsActive = true, Key = "NE" };
-        public static readonly State NV = new State { IsActive = true, Key = "NV" };
-        public static readonly State NH = new State { IsActive = true, Key = "NH" };
-        public static readonly State NJ = new State { IsActive = true, Key = "NJ" };
-        public static readonly State NM = new State { IsActive = true, Key = "NM" };
-        public static readonly State NY = new State { IsActive = true, Key = "NY" };
-        public static readonly State NC = new State { IsActive = true, Key = "NC" };
-        public static readonly State ND = new State { IsActive = true, Key = "ND" };
-        public static readonly State OH = new State { IsActive = true, Key = "OH" };
-        public static readonly State OK = new State { IsActive = true, Key = "OK" };
-        public static readonly State OR = new State { IsActive = true, Key = "OR" };
-        public static readonly State PA = new State { IsActive = true, Key = "PA" };
-        public static readonly State RI = new State { IsActive = true, Key = "RI" };
-        public static readonly State SC = new State { IsActive = true, Key = "SC" };
-        public static readonly State SD = new State { IsActive = true, Key = "SD" };
-        public static readonly State TN = new State { IsActive = true, Key = "TN" };
-        public static readonly State TX = new State { IsActive = true, Key = "TX" };
-        public static readonly State UT = new State { IsActive = true, Key = "UT" };
-        public static readonly State VT = new State { IsActive = true, Key = "VT" };
-        public static readonly State VA = new State { IsActive = true, Key = "VA" };
-        public static readonly State WA = new State { IsActive = true, Key = "WA" };
-        public static readonly State WV = new State { IsActive = true, Key = "WV" };
-        public static readonly State WI = new State { IsActive = true, Key = "WI" };
-    }
-
-    [Serializable]
-    public class Country : Enumeration
-    {
-        public static readonly Country Empty = new Country { IsActive = false, Key = "" };
-        public static readonly Country USA = new Country { IsActive = true, Key = "USA" };
-        public static readonly Country Canada = new Country { IsActive = true, Key = "Canada" };
-    }
-
+  
     [Serializable]
     public class UnitType : Enumeration
     {

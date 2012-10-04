@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using CC.Core.Domain;
+using CC.Core.Enumerations;
+using CC.Core.Localization;
 using Castle.Components.Validator;
-using FluentNHibernate.MappingModel;
 using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
+using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Core.Domain
 {

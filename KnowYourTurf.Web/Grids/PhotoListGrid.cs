@@ -1,5 +1,4 @@
-using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
+using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 
@@ -7,10 +6,8 @@ namespace KnowYourTurf.Web.Grids
 {
     public class PhotoListGrid : Grid<Photo>, IEntityListGrid<Photo>
     {
-        public PhotoListGrid(IGridBuilder<Photo> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public PhotoListGrid(IGridBuilder<Photo> gridBuilder)
+            : base(gridBuilder)
         {
         }
 

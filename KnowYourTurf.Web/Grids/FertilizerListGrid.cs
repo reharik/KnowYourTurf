@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
+﻿using CC.Core.DomainTools;
+using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 
@@ -14,10 +9,8 @@ namespace KnowYourTurf.Web.Grids
     public class FertilizerListGrid : Grid<Fertilizer>, IEntityListGrid<Fertilizer>
     {
 
-        public FertilizerListGrid(IGridBuilder<Fertilizer> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public FertilizerListGrid(IGridBuilder<Fertilizer> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
@@ -38,10 +31,8 @@ namespace KnowYourTurf.Web.Grids
     public class POFertilizerListGrid : Grid<Fertilizer>, IEntityListGrid<Fertilizer>
     {
 
-        public POFertilizerListGrid(IGridBuilder<Fertilizer> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public POFertilizerListGrid(IGridBuilder<Fertilizer> gridBuilder)
+            : base(gridBuilder)
         {
         }
 

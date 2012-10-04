@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CC.Core.CoreViewModelAndDTOs;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.CoreViewModels;
 

@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;

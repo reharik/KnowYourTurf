@@ -1,17 +1,14 @@
-﻿using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
+﻿using CC.Core.Html.Grid;
+using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
     public class TaskListGrid : Grid<Task>, IEntityListGrid<Task>
     {
 
-        public TaskListGrid(IGridBuilder<Task> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public TaskListGrid(IGridBuilder<Task> gridBuilder)
+            : base(gridBuilder)
         {
         }
 

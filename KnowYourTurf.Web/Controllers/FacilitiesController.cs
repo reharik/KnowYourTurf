@@ -1,15 +1,20 @@
 ﻿using System.Web.Mvc;
 using AutoMapper;
-using KnowYourTurf.Security.Interfaces;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Enumerations;
+using CC.Core.Html;
+using CC.Core.Services;
+using CC.Security.Interfaces;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
 using System.Linq;
 using StructureMap;
+using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Controllers
 {

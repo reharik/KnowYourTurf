@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
+﻿using CC.Core.DomainTools;
+using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 
@@ -14,10 +8,8 @@ namespace KnowYourTurf.Web.Grids
 {
     public class ChemicalListGrid : Grid<Chemical>, IEntityListGrid<Chemical>
     {
-        public ChemicalListGrid(IGridBuilder<Chemical> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public ChemicalListGrid(IGridBuilder<Chemical> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
@@ -38,10 +30,8 @@ namespace KnowYourTurf.Web.Grids
 
     public class POChemicalListGrid : Grid<Chemical>, IEntityListGrid<Chemical>
     {
-        public POChemicalListGrid(IGridBuilder<Chemical> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public POChemicalListGrid(IGridBuilder<Chemical> gridBuilder)
+            : base(gridBuilder)
         {
         }
 

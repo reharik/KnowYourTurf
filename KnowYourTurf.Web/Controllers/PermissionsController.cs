@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using KnowYourTurf.Security.Interfaces;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Security.Interfaces;
 using FubuMVC.Core;
-using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 
 namespace KnowYourTurf.Web.Controllers

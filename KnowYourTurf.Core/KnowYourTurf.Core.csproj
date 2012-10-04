@@ -51,17 +51,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="CC.Core">
+      <HintPath>..\lib\CC.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Core.Utilities">
+      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Security">
+      <HintPath>..\lib\CC.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.UI.Helpers">
+      <HintPath>..\lib\CC.UI.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="FubuMVC.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\FubuMVC.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="FubuMVC.UI">
-      <HintPath>..\lib\FubuMVC.UI.dll</HintPath>
     </Reference>
     <Reference Include="HtmlTags">
       <HintPath>..\lib\HtmlTags.dll</HintPath>
@@ -133,10 +137,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CoreLocalizationKeys.cs" />
-    <Compile Include="CoreViewModels\GridItemModels.cs" />
-    <Compile Include="CoreViewModels\GroupedSelectViewModel.cs" />
     <Compile Include="CoreViewModels\PictureDto.cs" />
-    <Compile Include="CoreViewModels\TokenInputDto.cs" />
     <Compile Include="Domain\BaseProduct.cs" />
     <Compile Include="Domain\Calculator.cs" />
     <Compile Include="Domain\Category.cs" />
@@ -152,7 +153,6 @@
     <Compile Include="Domain\Event.cs" />
     <Compile Include="Domain\Fertilizer.cs" />
     <Compile Include="Domain\Field.cs" />
-    <Compile Include="Domain\IPersistableObject.cs" />
     <Compile Include="Domain\ListType.cs" />
     <Compile Include="Domain\Persistence\EmailJobTypeMap.cs" />
     <Compile Include="Domain\Persistence\ListTypeMap.cs" />
@@ -171,23 +171,6 @@
     <Compile Include="Domain\Weather.cs" />
     <Compile Include="Html\Expressions\HtmlTagExpressionBase.cs" />
     <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
-    <Compile Include="Html\FubuUI\Builders\DateTimeDisplayBuilder2.cs" />
-    <Compile Include="Html\FubuUI\Builders\GroupedSelectBuilder2.cs" />
-    <Compile Include="Html\FubuUI\Builders\ListDisplayBuilder2.cs" />
-    <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder2.cs" />
-    <Compile Include="Html\FubuUI\Builders\DatePickerBuilder2.cs" />
-    <Compile Include="Html\FubuUI\Builders\TextAreaBuilder2.cs" />
-    <Compile Include="Html\FubuUI\Builders\DateTimeDisplayBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\ImageFIleDisplayBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\TextAreaBuilder.cs" />
-    <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfHtmlConventions2.cs" />
-    <Compile Include="Html\Grid\ColumnBase.cs" />
-    <Compile Include="Html\Grid\GroupingColumn.cs" />
-    <Compile Include="Html\Grid\ImageButtonColumn.cs" />
-    <Compile Include="Html\Grid\HiddenColumn.cs" />
-    <Compile Include="Html\Grid\ImageColumn.cs" />
-    <Compile Include="Html\Grid\DisplayColumn.cs" />
-    <Compile Include="Html\Grid\LinkColumn.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="Rules\FieldHasNoOutstandingEvents.cs" />
     <Compile Include="Rules\FieldHasNoOutstandingTasks.cs" />
@@ -196,23 +179,16 @@
     <Compile Include="Rules\EmployeeHasNoOutstandingTasks.cs" />
     <Compile Include="Rules\RulesEngineBase.cs" />
     <Compile Include="Services\ICustomAuthorizationRepository.cs" />
-    <Compile Include="Services\ICrudManager.cs" />
-    <Compile Include="Services\IDynamicExpressionQuery.cs" />
     <Compile Include="Services\IEmailJob\IEmailJob.cs" />
     <Compile Include="Services\IEmailTemplateService.cs" />
     <Compile Include="Services\IEntityListGrid.cs" />
     <Compile Include="Services\IFileUploaderService.cs" />
     <Compile Include="Services\IGetCompanyIdService.cs" />
     <Compile Include="Domain\InventoryProduct.cs" />
-    <Compile Include="Domain\Tools\IRepository.cs" />
-    <Compile Include="Domain\Tools\IUnitOfWork.cs" />
     <Compile Include="Domain\LocalizedEnumeration.cs" />
     <Compile Include="Domain\LocalizedProperty.cs" />
     <Compile Include="Domain\LocalizedText.cs" />
     <Compile Include="Domain\Material.cs" />
-    <Compile Include="Domain\Tools\Repository.cs" />
-    <Compile Include="Domain\Tools\UnitOfWork.cs" />
-    <Compile Include="Domain\Notification.cs" />
     <Compile Include="Domain\Persistence\BaseProductMap.cs" />
     <Compile Include="Domain\Persistence\CompanyMap.cs" />
     <Compile Include="Domain\Persistence\CalculatorMap.cs" />
@@ -275,66 +251,21 @@
     <Compile Include="Html\Expressions\ScriptReferenceExpression.cs" />
     <Compile Include="Html\Expressions\StyledButtonExpression.cs" />
     <Compile Include="Html\Expressions\SubmitButtonExpression.cs" />
-    <Compile Include="Html\FubuUI\Builders\DatePickerBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\ListDisplayBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\GroupedSelectBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\SelectFromIEnumerableBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\EmailDisplayBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\SelectFromEnumerationBuilder.cs" />
-    <Compile Include="Html\FubuUI\Builders\ValidationModifier.cs" />
-    <Compile Include="Html\FubuUI\FubuUIHtmlExtensions.cs" />
-    <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfElementNamingConvention.cs" />
-    <Compile Include="Html\FubuUI\HtmlConventionRegistries\KnowYourTurfHtmlConventions.cs" />
-    <Compile Include="Html\FubuUI\HtmlExpressions\DropdownInputExpression.cs" />
-    <Compile Include="Html\FubuUI\HtmlExpressions\EditorExpression.cs" />
-    <Compile Include="Html\FubuUI\HtmlExpressions\EditorInputExpression.cs" />
-    <Compile Include="Html\FubuUI\HtmlExpressions\EditorLabelExpression.cs" />
-    <Compile Include="Html\FubuUI\HtmlExpressions\ViewDisplayExpression.cs" />
-    <Compile Include="Html\FubuUI\HtmlExpressions\ViewExpression.cs" />
-    <Compile Include="Html\FubuUI\HtmlExpressions\ViewLabelExpression.cs" />
-    <Compile Include="Html\FubuUI\Tags\PasswordTag.cs" />
-    <Compile Include="Html\FubuUI\Tags\RadioButtonTag.cs" />
-    <Compile Include="Html\Grid\Grid.cs" />
-    <Compile Include="Html\Grid\GridBuilder.cs" />
-    <Compile Include="Html\Grid\Pager.cs" />
-    <Compile Include="Html\Grid\PageSortFilter.cs" />
     <Compile Include="Html\HtmlExtensions.cs" />
-    <Compile Include="Html\Menu\IMenuBuilder.cs" />
-    <Compile Include="Html\Menu\MenuExpression.cs" />
-    <Compile Include="Html\UrlContext.cs" />
-    <Compile Include="Localization\Enumeration.cs" />
-    <Compile Include="Localization\Header.cs" />
-    <Compile Include="Localization\LocalizationDataProvider.cs" />
-    <Compile Include="Localization\LocalizationManager.cs" />
-    <Compile Include="Localization\LocalizedEnum.cs" />
-    <Compile Include="Localization\LocalizedEnumRegistry.cs" />
-    <Compile Include="Localization\StringToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CompleteTaskService.cs" />
-    <Compile Include="Services\ICastleValidationRunner.cs" />
-    <Compile Include="Services\IDynamicExpressionBuilder.cs" />
     <Compile Include="Services\IGridHandlerService.cs" />
     <Compile Include="Services\IInventoryService.cs" />
     <Compile Include="Services\IKYTPermissionsService.cs" />
     <Compile Include="Services\IPurchaseOrderLineItemService.cs" />
-    <Compile Include="Services\ISaveEntityService.cs" />
-    <Compile Include="Services\ISelectListItemService.cs" />
     <Compile Include="Services\ISessionContext.cs" />
     <Compile Include="Services\DateTimeUtilities.cs" />
     <Compile Include="Services\IUnitSizeTimesQuantyCalculator.cs" />
-    <Compile Include="Services\IUpdateCollectionService.cs" />
     <Compile Include="Services\IUploadedFileHandlerService.cs" />
     <Compile Include="Services\ReceivePurchaseOrderService.cs" />
     <Compile Include="Services\SecurityDataService.cs" />
     <Compile Include="Services\StructureMapServiceLocator.cs" />
     <Compile Include="Services\SystemClock.cs" />
-    <Compile Include="CoreViewModels\ViewModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\KnowYourTuf.Security\KnowYourTurf.Security.csproj">
-      <Project>{DBA372FE-3D52-45B3-AF82-B37696328764}</Project>
-      <Name>KnowYourTurf.Security</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attributes\" />

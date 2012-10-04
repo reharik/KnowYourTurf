@@ -1,4 +1,4 @@
-﻿using KnowYourTurf.Core.Html.Grid;
+﻿using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web;
 using KnowYourTurf.Web.Controllers;
@@ -8,10 +8,8 @@ namespace KnowYourTurf.Core.Domain
     public class PurchaseOrderListGrid : Grid<PurchaseOrder>, IEntityListGrid<PurchaseOrder>
     {
 
-        public PurchaseOrderListGrid(IGridBuilder<PurchaseOrder> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public PurchaseOrderListGrid(IGridBuilder<PurchaseOrder> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
@@ -38,10 +36,8 @@ namespace KnowYourTurf.Core.Domain
     public class CompletedPurchaseOrderListGrid : Grid<PurchaseOrder>, IEntityListGrid<PurchaseOrder>
     {
 
-        public CompletedPurchaseOrderListGrid(IGridBuilder<PurchaseOrder> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public CompletedPurchaseOrderListGrid(IGridBuilder<PurchaseOrder> gridBuilder)
+            : base(gridBuilder)
         {
         }
 

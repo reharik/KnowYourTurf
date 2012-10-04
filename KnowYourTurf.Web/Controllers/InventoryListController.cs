@@ -1,12 +1,12 @@
 ﻿using System.Web.Mvc;
 using AutoMapper;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Localization;
+using CC.Core.Services;
 using Castle.Components.Validator;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers

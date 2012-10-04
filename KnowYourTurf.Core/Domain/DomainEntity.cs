@@ -1,17 +1,17 @@
 using System;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Services;
+using CC.Core.Html.Grid;
 
 namespace KnowYourTurf.Core.Domain
 {
     public abstract class Entity: IEquatable<Entity>
     {
-        public virtual long EntityId { get; set; }
+        public virtual int EntityId { get; set; }
         public virtual DateTime? DateCreated { get; set; }
         public virtual DateTime? LastModified { get; set; }
-        public virtual long CreatedBy { get; set; }
-        public virtual long ModifiedBy { get; set; }
+        public virtual int CreatedBy { get; set; }
+        public virtual int ModifiedBy { get; set; }
         public virtual bool IsDeleted { get; set; }
+        public virtual bool Archived { get; set; }
         public virtual bool IsNew()
         {
             return EntityId == 0;

@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
-using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
+using CC.Core.DomainTools;
+using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 
@@ -13,10 +7,8 @@ namespace KnowYourTurf.Web.Grids
 {
     public class DocumentListGrid : Grid<Document>, IEntityListGrid<Document>
     {
-        public DocumentListGrid(IGridBuilder<Document> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public DocumentListGrid(IGridBuilder<Document> gridBuilder)
+            : base(gridBuilder)
         {
         }
 

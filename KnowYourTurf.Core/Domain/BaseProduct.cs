@@ -1,4 +1,5 @@
-﻿using Castle.Components.Validator;
+﻿using CC.Core.Domain;
+using Castle.Components.Validator;
 using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 
 namespace KnowYourTurf.Core.Domain

@@ -1,5 +1,4 @@
-﻿using KnowYourTurf.Core;
-using KnowYourTurf.Core.Localization;
+﻿using CC.Core.Domain;
 
 namespace KnowYourTurf.Core.Domain
 {

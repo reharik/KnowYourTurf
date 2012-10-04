@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Services;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
-using KnowYourTurf.Web.Services;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers

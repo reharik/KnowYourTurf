@@ -1,4 +1,5 @@
 ﻿using System;
+using CC.Core.CoreViewModelAndDTOs;
 
 namespace KnowYourTurf.Core
 {

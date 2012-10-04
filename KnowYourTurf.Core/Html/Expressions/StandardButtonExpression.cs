@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using FubuMVC.Core;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Localization;
+using CC.Core.Localization;
 using HtmlTags;
 
 namespace KnowYourTurf.Core.Html.Expressions

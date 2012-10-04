@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using KnowYourTurf.Core.Html.Menu;
+using CC.Core.Html.Menu;
 
 namespace KnowYourTurf.Web.Models
 {
