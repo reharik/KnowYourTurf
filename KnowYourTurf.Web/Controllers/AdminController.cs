@@ -64,10 +64,10 @@ namespace KnowYourTurf.Web.Controllers
             var rulesResult = rulesEngineBase.ExecuteRules(admin);
             if(!rulesResult.Success)
             {
-                Notification notification = new Notification(rulesResult);
+                var notification = new RulesNotification(rulesResult);
                 return Json(notification);
             }
-            _repository.SoftDelete(admin);
+            _repository.Delete(admin);
             _repository.UnitOfWork.Commit();
             return null;
         }

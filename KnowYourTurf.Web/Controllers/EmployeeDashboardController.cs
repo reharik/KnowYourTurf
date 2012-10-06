@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Enumerations;
@@ -54,7 +55,7 @@ namespace KnowYourTurf.Web.Controllers
            
 
             var model = Mapper.Map<User, UserViewModel>(employee);
-            model.FileUrl = model.FileUrl.IsNotEmpty()?BasicExtentions.AddImageSizeToName(model.FileUrl, "thumb"):"";
+            model.FileUrl = model.FileUrl.IsNotEmpty() ? model.AddImageSizeToName("thumb") : "";
             model._StateList = _selectListItemService.CreateList<State>();
             model._UserLoginInfoStatusList = _selectListItemService.CreateList<Status>();
             model._Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString();
@@ -72,7 +73,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
 //                addUpdate = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)) + "?ParentId=" + input.ParentId + "&From=Employee",
-                gridDef = _pendingTaskGrid.GetGridDefinition(url),
+                gridDef = _pendingTaskGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
             return Json(model,JsonRequestBehavior.AllowGet);
@@ -82,7 +83,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasks(null)) + "?ParentId=" + input.ParentId;
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _completedTaskGrid.GetGridDefinition(url),
+                gridDef = _completedTaskGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -91,7 +92,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters, x => x.Complete);
             var employeeItems = items.ToList().Where(x => x.Employees.Any(y => y.EntityId == input.ParentId)).AsQueryable();
-            var gridItemsViewModel = _completedTaskGrid.GetGridItemsViewModel(input.PageSortFilter, employeeItems);
+            var gridItemsViewModel = _completedTaskGrid.GetGridItemsViewModel(input.PageSortFilter, employeeItems, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 
@@ -99,7 +100,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters, x => !x.Complete);
             var employeeItems = items.ToList().Where(x => x.Employees.Any(y => y.EntityId == input.ParentId)).AsQueryable();
-            var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, employeeItems);
+            var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, employeeItems, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

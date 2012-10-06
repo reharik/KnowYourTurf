@@ -43,10 +43,10 @@ namespace KnowYourTurf.Web.Controllers
             var rulesResult = rulesEngineBase.ExecuteRules(field);
             if (!rulesResult.Success)
             {
-                Notification notification = new Notification(rulesResult);
+                var notification = new RulesNotification(rulesResult);
                 return Json(notification);
             } 
-            _repository.SoftDelete(field);
+            _repository.Delete(field);
             _repository.UnitOfWork.Commit();
             return null;
         }

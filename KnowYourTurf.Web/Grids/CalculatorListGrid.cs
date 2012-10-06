@@ -17,7 +17,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.LinkColumnFor(x=>x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
-            GridBuilder.DisplayFor(x => x.DateCreated);
+            GridBuilder.DisplayFor(x => x.CreatedDate);
             return this;
         }
     }

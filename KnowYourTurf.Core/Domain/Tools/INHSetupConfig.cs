@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using CC.Core;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using KnowYourTurf.Core.Config;

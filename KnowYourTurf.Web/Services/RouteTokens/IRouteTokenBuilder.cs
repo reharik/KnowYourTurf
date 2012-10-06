@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using CC.Core;
 using CC.Core.DomainTools;
 using CC.Core.Html;
 using CC.Security.Interfaces;
@@ -66,7 +67,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
 
         public IRouteTokenBuilder TokenForList<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, AreaName areaName = null) where CONTROLLER : Controller
         {
-            currentItem.url = UrlContext.GetUrlForAction(action, areaName);
+            currentItem.url = UrlContext.GetUrlForAction(action,areaName);
             var controllerName = typeof(CONTROLLER).Name.Replace("Controller", "");
             currentItem.itemName = controllerName + "View";
             var itemName = controllerName.ToLowerInvariant();

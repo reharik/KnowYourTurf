@@ -21,7 +21,7 @@ namespace KnowYourTurf.Web.Grids
                 .ForAction<EmailTemplateController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
-            GridBuilder.DisplayFor(x => x.DateCreated);
+            GridBuilder.DisplayFor(x => x.CreatedDate);
             return this;
         }
     }

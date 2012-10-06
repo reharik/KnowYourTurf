@@ -54,22 +54,20 @@
     <Reference Include="CC.Core">
       <HintPath>..\lib\CC.Core.dll</HintPath>
     </Reference>
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="CC.Security">
       <HintPath>..\lib\CC.Security.dll</HintPath>
     </Reference>
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Elmah">
       <HintPath>..\lib\Elmah.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate, Version=1.2.0.694, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="FubuMVC.Core">
-      <HintPath>..\lib\FubuMVC.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="FubuMVC.UI, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\FubuMVC.UI.dll</HintPath>
     </Reference>
     <Reference Include="HibernatingRhinos.Profiler.Appender">
       <HintPath>..\lib\HibernatingRhinos.Profiler.Appender.dll</HintPath>
@@ -271,7 +269,7 @@
     <Compile Include="Controllers\VendorListController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="Controllers\WeatherListController.cs" />
-    <Compile Include="Filters\AddUserToViewFilterAttribute.cs" />
+    <Compile Include="Filters\AddUserToViewModelFilter.cs" />
     <Compile Include="Filters\AdminFilterAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filters\PermissionValidationAttribute.cs" />

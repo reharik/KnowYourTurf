@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using Alpinely.TownCrier;
+using CC.Core;
 using CC.Core.DomainTools;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;

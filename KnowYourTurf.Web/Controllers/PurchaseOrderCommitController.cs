@@ -4,11 +4,11 @@ using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
 using CC.Core.Services;
-using FubuMVC.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using StructureMap;
+using CC.Core;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -52,7 +52,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
             purchaseOrder.Completed = true;
-            purchaseOrder.LineItems.Where(x => !x.Completed).Each(x => x.Completed = true);
+            purchaseOrder.LineItems.Where(x => !x.Completed).ForEachItem(x => x.Completed = true);
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
             var notification = crudManager.Finish();
             notification.RedirectUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));

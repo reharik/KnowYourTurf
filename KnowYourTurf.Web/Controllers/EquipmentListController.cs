@@ -25,7 +25,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 deleteMultipleUrl= UrlContext.GetUrlForAction<EquipmentController>(x => x.DeleteMultiple(null)),
-                gridDef = _equipmentListGrid.GetGridDefinition(url),
+                gridDef = _equipmentListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.EQUIPMENT.ToString()
             };
             model.headerButtons.Add("new");
@@ -36,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Equipments(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Equipment>(input.filters);
-            var gridItemsViewModel = _equipmentListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _equipmentListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

@@ -124,7 +124,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicExtentions.cs" />
+    <Compile Include="BasicExtensions.cs" />
     <Compile Include="Config\CustomIdentitiy.cs" />
     <Compile Include="Config\CustomPrincipal.cs" />
     <Compile Include="Config\MsSqlAzureDialect.cs" />
@@ -162,6 +162,9 @@
     <Compile Include="Domain\Persistence\UserRoleMap.cs" />
     <Compile Include="Domain\Persistence\WeatherMap.cs" />
     <Compile Include="Domain\Photo.cs" />
+    <Compile Include="Domain\Tools\NoFilterRepository.cs" />
+    <Compile Include="Domain\Tools\NoInterceptorNoFiltersRepository.cs" />
+    <Compile Include="Domain\Tools\NoInterceptorNoFiltersUnitOfWork.cs" />
     <Compile Include="Domain\Tools\NullNHSetupConfig.cs" />
     <Compile Include="Domain\Tools\NullNHibernateUnitOfWork.cs" />
     <Compile Include="Domain\Tools\CustomAttributes\TextAreaAttribute.cs" />

@@ -67,7 +67,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<FieldDashboardController>(x => x.CompletedTasks(null)) + "?ParentId=" + input.ParentId;
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _completedTaskGrid.GetGridDefinition(url),
+                gridDef = _completedTaskGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -75,7 +75,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult CompletedTasks(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters, x => x.Field.EntityId == input.ParentId && x.Complete);
-            var gridItemsViewModel = _completedTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _completedTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 
@@ -84,7 +84,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<FieldDashboardController>(x => x.PendingTasks(null)) + "?ParentId=" + input.ParentId;
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _pendingTaskGrid.GetGridDefinition(url),
+                gridDef = _pendingTaskGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -94,7 +94,7 @@ namespace KnowYourTurf.Web.Controllers
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters,
                                                                    x =>
                                                                    x.Field.EntityId == input.ParentId && !x.Complete);
-            var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 
@@ -103,7 +103,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<FieldDashboardController>(x => x.Photos(null)) + "?ParentId=" + input.ParentId;
             var model = new ListViewModel()
             {
-                gridDef = _photoListGrid.GetGridDefinition(url),
+                gridDef = _photoListGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId,
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.DeleteMultiple(null))
             };
@@ -125,7 +125,7 @@ namespace KnowYourTurf.Web.Controllers
            {
                items = field.Photos.Where(photoWhereClause.Compile());
            }
-            var gridItemsViewModel = _photoListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable());
+            var gridItemsViewModel = _photoListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable(), input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 
@@ -134,7 +134,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<FieldDashboardController>(x => x.Documents(null)) + "?ParentId=" + input.ParentId;
             var model = new ListViewModel()
             {
-                gridDef = _documentListGrid.GetGridDefinition(url),
+                gridDef = _documentListGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId,
                 deleteMultipleUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.DeleteMultiple(null))
             };
@@ -154,7 +154,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 items = field.Documents.Where(documentWhereClause.Compile());
             }
-            var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable());
+            var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable(), input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

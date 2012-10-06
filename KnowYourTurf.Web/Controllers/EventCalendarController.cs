@@ -6,11 +6,10 @@ using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
 using CC.Core.Services;
-using FubuMVC.Core;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
+using CC.Core;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -65,7 +64,7 @@ namespace KnowYourTurf.Web.Controllers
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
             var category = _repository.Find<Category>(input.RootId);
             var events = category.GetAllEvents().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
-            events.Each(x =>
+            events.ForEachItem(x =>
                        eventsItems.Add(new CalendarEvent
                                       {
                                           EntityId = x.EntityId,

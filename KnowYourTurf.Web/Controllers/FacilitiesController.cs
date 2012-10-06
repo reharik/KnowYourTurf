@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using AutoMapper;
+using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Enumerations;
@@ -51,7 +52,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var facilities = input.EntityId > 0 ? _repository.Find<User>(input.EntityId) : new User();
             var model = Mapper.Map<User, UserViewModel>(facilities);
-            model.FileUrl = model.FileUrl.IsNotEmpty() ? BasicExtentions.AddImageSizeToName(model.FileUrl, "thumb") : "";
+            model.FileUrl = model.FileUrl.IsNotEmpty() ? model.FileUrl.AddImageSizeToName("thumb") : "";
             model._StateList = _selectListItemService.CreateList<State>();
             model._Title = WebLocalizationKeys.FACILITIES.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Save(null));
@@ -67,10 +68,10 @@ namespace KnowYourTurf.Web.Controllers
             var rulesResult = rulesEngineBase.ExecuteRules(facilities);
             if(!rulesResult.Success)
             {
-                Notification notification = new Notification(rulesResult);
+                var notification = new RulesNotification(rulesResult);
                 return Json(notification);
             }
-            _repository.SoftDelete(facilities);
+            _repository.Delete(facilities);
             _repository.UnitOfWork.Commit();
             return null;
         }

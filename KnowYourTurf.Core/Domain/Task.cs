@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CC.Core;
 using CC.Core.Domain;
 using CC.Core.Localization;
 using Castle.Components.Validator;

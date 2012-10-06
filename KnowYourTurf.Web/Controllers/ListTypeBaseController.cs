@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
@@ -38,7 +39,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult ListTypes(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<LISTTYPE>(input.filters);
-            var gridItemsViewModel = _listTypeListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _listTypeListGrid.GetGridItemsViewModel(input.PageSortFilter, items,input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 

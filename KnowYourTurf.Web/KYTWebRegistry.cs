@@ -1,10 +1,15 @@
 using Alpinely.TownCrier;
 using CC.Core.DomainTools;
+using CC.Core.Html.CCUI.HtmlConventionRegistries;
 using CC.Core.Html.Grid;
 using CC.Core.Localization;
 using CC.Security.Interfaces;
 using CC.Security.Services;
+using CC.UI.Helpers;
+using CC.UI.Helpers.Configuration;
+using CC.UI.Helpers.Tags;
 using KnowYourTurf.Core.Domain.Persistence;
+using KnowYourTurf.Core.Domain.Tools;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Core;
@@ -14,9 +19,6 @@ using KnowYourTurf.Web.Config;
 using KnowYourTurf.Web.Grids;
 using KnowYourTurf.Web.Menus;
 using KnowYourTurf.Web.Services;
-using FubuMVC.UI;
-using FubuMVC.UI.Configuration;
-using FubuMVC.UI.Tags;
 using KnowYourTurf.Web.Services.EmailHandlers;
 using KnowYourTurf.Web.Services.ViewOptions;
 using Microsoft.Practices.ServiceLocation;
@@ -44,9 +46,9 @@ namespace KnowYourTurf.Web
                 x.WithDefaultConventions();
             });
             
-            For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions2>();
+            For<HtmlConventionRegistry>().Add<HtmlConventionRegistry>();
             For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
-            For<IElementNamingConvention>().Use<KnowYourTurfElementNamingConvention>();
+            For<IElementNamingConvention>().Use<CCElementNamingConvention>();
             For(typeof(ITagGenerator<>)).Use(typeof(TagGenerator<>));
             For<TagProfileLibrary>().Singleton();
             For<INHSetupConfig>().Use<KYTNHSetupConfig>();
@@ -57,19 +59,15 @@ namespace KnowYourTurf.Web
                 .EqualToAppSetting("KnowYourTurf.sql_server_connection_string");
             For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory());
 
-            For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithCompanyFilter()));
-            For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor())).Named("NoFiltersSpecialInterceptor");
-            For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession()).Named("NoFiltersOrInterceptor");
+            For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor()));
+            For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession()).Named("NoInterceptorNoFilters");
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFilters)).Named("NoFilters");
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFiltersOrInterceptor)).Named("NoFiltersOrInterceptor");
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFiltersSpecialInterceptor)).Named("NoFiltersSpecialInterceptor");
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<NoInterceptorNoFiltersUnitOfWork>().Named("NoInterceptorNoFilters");
 
             For<IRepository>().Use<Repository>();
-            For<IRepository>().Add(x => new Repository(RepoConfig.NoFilters)).Named("NoFilters");
-            For<IRepository>().Add(x => new Repository(RepoConfig.NoFiltersOrInterceptor)).Named("NoFiltersOrInterceptor");
-            For<IRepository>().Add(x => new Repository(RepoConfig.NoFiltersSpecialInterceptor)).Named("NoFiltersSpecialInterceptor");
+            For<IRepository>().Add<NoFilterRepository>().Named("NoFilters");
+            For<IRepository>().Add<NoInterceptorNoFiltersRepository>().Named("NoInterceptorNoFilters");
 
 
             For<IMergedEmailFactory>().Use<MergedEmailFactory>();

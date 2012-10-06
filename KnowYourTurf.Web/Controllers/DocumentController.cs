@@ -74,18 +74,15 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(DocumentViewModel input)
         {
-            var coId = _sessionContext.GetCompanyId();
-            var document = input.EntityId > 0 ? _repository.Find<Document>(input.EntityId) : new Document();
-            var newDoc = mapToDomain(input, document);
+            // change to switch when we add docs to other things.
+            var field = _repository.Find<Field>(input.ParentId);
+            var document = field.Documents.FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Document();
+            document = mapToDomain(input, document);
             document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments");
-            var crudManager = _saveEntityService.ProcessSave(newDoc);
-            if (input.Var == "Field")
-            {
-                var field = _repository.Find<Field>(input.ParentId);
-                field.AddDocument(document);
-                crudManager = _saveEntityService.ProcessSave(field, crudManager);
-            }
-            
+
+            field.AddDocument(document);
+            var crudManager = _saveEntityService.ProcessSave(field);
+
             var notification = crudManager.Finish();
             return Json(notification, "text/plain");
         }

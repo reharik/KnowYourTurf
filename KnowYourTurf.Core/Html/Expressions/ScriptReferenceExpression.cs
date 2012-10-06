@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using CC.Core;
 using CC.Core.Html;
 using HtmlTags;
 using KnowYourTurf.Core.Config;

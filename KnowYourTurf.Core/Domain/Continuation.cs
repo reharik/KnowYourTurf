@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using CC.Core;
+using CC.Core.DomainTools;
 using xVal.ServerSide;
 using System.Linq;
 
@@ -49,6 +51,16 @@ namespace KnowYourTurf.Core.Domain
             {
                 Message = Message.IsNotEmpty() ? Message + ", " + continuation.Message : continuation.Message;
             }
+        }
+
+        public Notification ReturnNotification()
+        {
+            return new Notification
+                {
+                    Errors = Errors,
+                    Message = Message,
+                    Success = Success
+                };
         }
     }
 

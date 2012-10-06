@@ -34,7 +34,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Materials(GridItemsRequestModel input)
         {
               var items = _dynamicExpressionQuery.PerformQuery<Material>(input.filters);
-            var gridItemsViewModel = _materialListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+              var gridItemsViewModel = _materialListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

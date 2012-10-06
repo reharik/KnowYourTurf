@@ -40,8 +40,7 @@ namespace KnowYourTurf.Web.Controllers
             var continuation = calculatorHandler.Calculate(input);
             if(!continuation.Success)
             {
-                Notification notification = new Notification(continuation);
-                return Json(notification, JsonRequestBehavior.AllowGet);
+                return Json(continuation.ReturnNotification(), JsonRequestBehavior.AllowGet);
             }
             return Json(continuation.Target,JsonRequestBehavior.AllowGet);
         }

@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using CC.Core;
+using CC.Core.DomainTools;
 using KnowYourTurf.Core.Domain;
+using xVal.ServerSide;
 
 namespace KnowYourTurf.Core
 {
@@ -42,5 +46,14 @@ namespace KnowYourTurf.Core
     {
         public bool Success { get; set; }
         public string Message { get; set; }
+    }
+
+    public class RulesNotification:Notification
+    {
+        public RulesNotification(RulesResult result)
+        {
+            Success = result.Success;
+            Errors = result.RuleResults.Select(x => new ErrorInfo("", x.Message)).ToList();
+        }
     }
 }

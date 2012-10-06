@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CC.Core;
 using CC.Core.Localization;
 using HtmlTags;
 

@@ -45,7 +45,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 //TODO put modifiler here "ProductType=" + productType
-                gridDef = _inventoryProductListGrid.GetGridDefinition(url),
+                gridDef = _inventoryProductListGrid.GetGridDefinition(url, input.User),
                 _Title = crudTitle.ToString(),
                 searchField = "Product.Name"
             };
@@ -55,7 +55,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Products(InventoryProductGridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<InventoryProduct>(input.filters, x => x.Product.InstantiatingType == input.ProductType);
-            var gridItemsViewModel = _inventoryProductListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _inventoryProductListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 

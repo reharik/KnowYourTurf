@@ -25,7 +25,7 @@ namespace KnowYourTurf.Web.Controllers
             CalculatorListViewModel model = new CalculatorListViewModel()
             {
                 CreateATaskUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null))+"?From=Calculator",
-                gridDef = _calculatorListGrid.GetGridDefinition(url),
+                gridDef = _calculatorListGrid.GetGridDefinition(url,input.User),
                 _Title = WebLocalizationKeys.CALCULATORS.ToString()
             };
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -34,7 +34,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Calculators(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Calculator>(input.filters);
-            var gridItemsViewModel = _calculatorListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _calculatorListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

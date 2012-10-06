@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<EmailTemplateListController>(x => x.EmailTemplates(null));
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _emailTemplateListGrid.GetGridDefinition(url)
+                gridDef = _emailTemplateListGrid.GetGridDefinition(url, input.User)
             };
             return View(model);
         }
@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult EmailTemplates(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<EmailTemplate>();
-            var gridItemsViewModel = _emailTemplateListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _emailTemplateListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

@@ -43,7 +43,7 @@ namespace KnowYourTurf.Core.Config
                     {
                         state[i] = systemClock.Now;
                     }
-                    if (!domainEntity.DateCreated.HasValue && "DateCreated".Equals(propertyNames[i]))
+                    if (!domainEntity.CreatedDate.HasValue && "DateCreated".Equals(propertyNames[i]))
                     {
                         state[i] = systemClock.Now;
                     }
@@ -51,7 +51,7 @@ namespace KnowYourTurf.Core.Config
                     {
                         state[i] = getCompanyIdService.Execute();
                     }
-                    if (domainEntity.CreatedBy <= 0 && "CreatedBy".Equals(propertyNames[i]))
+                    if (domainEntity.CreatedBy ==null && "CreatedBy".Equals(propertyNames[i]))
                     {
                         state[i] = currentUserId;
                     }
@@ -98,7 +98,7 @@ namespace KnowYourTurf.Core.Config
                     {
                         state[i] = systemClock.Now;
                     }
-                    if (!domainEntity.DateCreated.HasValue && "DateCreated".Equals(propertyNames[i]))
+                    if (!domainEntity.CreatedDate.HasValue && "DateCreated".Equals(propertyNames[i]))
                     {
                         state[i] = systemClock.Now;
                     }
