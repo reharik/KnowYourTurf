@@ -25,7 +25,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ListViewModel()
             {
                 deleteMultipleUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.DeleteMultiple(null)),
-                gridDef = _materialListGrid.GetGridDefinition(url),
+                gridDef = _materialListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.MATERIALS.ToString()
             };
             return Json(model, JsonRequestBehavior.AllowGet);

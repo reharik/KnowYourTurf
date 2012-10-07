@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Web.Mvc;
+using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
@@ -34,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.Items(null)) + "/" + input.EntityId; 
             var model = new ListViewModel()
             {
-                gridDef = _purchaseOrderLineItemGrid.GetGridDefinition(url),
+                gridDef = _purchaseOrderLineItemGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "/" + input.EntityId
             };
@@ -48,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
             var items = _dynamicExpressionQuery.PerformQuery(purchaseOrder.LineItems, input.filters);
 
             if (input.PageSortFilter.SortColumn.IsEmpty()) items = items.OrderBy(x => x.Product.Name);
-            var model = _purchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var model = _purchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 

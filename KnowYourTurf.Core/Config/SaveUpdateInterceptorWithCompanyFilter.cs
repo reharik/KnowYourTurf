@@ -1,4 +1,5 @@
 using System;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 using NHibernate;

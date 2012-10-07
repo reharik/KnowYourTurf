@@ -29,7 +29,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<VendorContactListController>(x => x.VendorContacts(null)) + "?ParentId=" + input.ParentId;
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _vendorContactListGrid.GetGridDefinition(url),
+                gridDef = _vendorContactListGrid.GetGridDefinition(url, input.User),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.DeleteMultiple(null)) + "?ParentId=" + input.ParentId,
                 _Title = "("+vendor.Company+") "+ WebLocalizationKeys.VENDOR_CONTACTS
             };
@@ -42,7 +42,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var vendor = _repository.Find<Vendor>(input.ParentId);
             var items = _dynamicExpressionQuery.PerformQuery(vendor.Contacts,input.filters);
-            var gridItemsViewModel = _vendorContactListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _vendorContactListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

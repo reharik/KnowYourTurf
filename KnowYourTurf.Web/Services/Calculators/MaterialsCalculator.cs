@@ -21,7 +21,7 @@ namespace KnowYourTurf.Web.Services
 
         public CalculatorViewModel GetViewModel()
         {
-            var fieldItems = _selectListItemService.CreateFieldsSelectListItems();
+            var fieldItems = ((KYTSelectListItemService)_selectListItemService).CreateFieldsSelectListItems();
             return new MaterialsCalcViewModel
             {
                 _FieldEntityIdList = fieldItems,

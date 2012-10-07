@@ -31,16 +31,11 @@ namespace KnowYourTurf.Web.Areas.Portfolio.Controllers
             _container = container;
         }
 
-        public PartialViewResult KnowYourTurfHeader()
+        public PartialViewResult KnowYourTurfHeader(ViewModel input)
         {
-            User user=null;
-            if (User.Identity.IsAuthenticated)
-            {
-                user = _repository.Find<User>(_sessionContext.GetUserId());
-            }
             HeaderViewModel model = new HeaderViewModel
                                         {
-                                            User = user,
+                                            User = (User) input.User,
                                             LoggedIn = User.Identity.IsAuthenticated,
                                             NotificationSuccessFunction = "kyt.popupCrud.controller.success",
                                             HelpUrl = UrlContext.GetUrlForAction<OrthogonalController>(x=>x.Help())

@@ -61,7 +61,7 @@ namespace Generator
             CreateCompany();
             CreateUserRoles();
             CreateUser();
-            _purchaseOrderLineItemService = new PurchaseOrderLineItemService(new UserSessionFake(_defaultUser));
+            _purchaseOrderLineItemService = new PurchaseOrderLineItemService(null);
             
             CreateEmployee();
             CreateField();
@@ -560,7 +560,7 @@ namespace Generator
             _repository.Save(_vendor1);
             _repository.Save(_vendor2);
 
-            var purchaseOrder1 = new PurchaseOrder {DateCreated = DateTime.Parse("1/5/2009")};
+            var purchaseOrder1 = new PurchaseOrder {CreatedDate = DateTime.Parse("1/5/2009")};
             purchaseOrder1.Vendor = _vendor1;
             var poli1 = new PurchaseOrderLineItem()
             {
@@ -568,7 +568,7 @@ namespace Generator
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false
             };
             poli1.Product = _fertilizer1;
 
@@ -578,7 +578,7 @@ namespace Generator
                 UnitType = UnitType.Bags.ToString(),
                 QuantityOrdered = 5,
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false
             };
             poli2.Product = _fertilizer1;
 
@@ -588,7 +588,7 @@ namespace Generator
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false
             };
             poli3.Product = _materials1;
 
@@ -598,7 +598,7 @@ namespace Generator
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false
             };
             poli4.Product = _materials2;
 
@@ -608,7 +608,7 @@ namespace Generator
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false
             };
             poli5.Product =_chemical2;
 
@@ -618,7 +618,7 @@ namespace Generator
                 UnitType = UnitType.Bags.ToString(),
                 QuantityOrdered = 5,
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false
             };
             poli6.Product = _chemical1;
 

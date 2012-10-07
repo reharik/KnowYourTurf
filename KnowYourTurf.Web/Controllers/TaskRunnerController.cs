@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using FluentNHibernate.Utils;

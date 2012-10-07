@@ -64,7 +64,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null))+"/"+input.EntityId;
             var model = new ListViewModel()
             {
-                gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url),
+                gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.PRODUCTS.ToString(),
             };
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -75,7 +75,7 @@ namespace KnowYourTurf.Web.Controllers
             var vendor = _repository.Find<Vendor>(input.EntityId);
             var items = _dynamicExpressionQuery.PerformQuery(vendor.Products, input.filters);
 
-            var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 

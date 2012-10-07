@@ -87,7 +87,7 @@ namespace KnowYourTurf.Core.Enums
     }
 
     [Serializable]
-    public class AreaName : Enumeration
+    public class AreaName : CC.Core.Enumerations.AreaName
     {
         public static readonly AreaName Empty = new AreaName { IsActive = false, Key = "" };
     }

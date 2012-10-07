@@ -24,7 +24,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.DeleteMultiple(null)),
-                gridDef = _photoListGrid.GetGridDefinition(url),
+                gridDef = _photoListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.PHOTOS.ToString()
             };
             model.headerButtons.Add("new");
@@ -35,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Photos(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Photo>(input.filters);
-            var gridItemsViewModel = _photoListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _photoListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

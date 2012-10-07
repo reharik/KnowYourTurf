@@ -34,6 +34,9 @@
     <Reference Include="Alpinely.TownCrier, Version=1.1.0.13346, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\lib\Alpinely.TownCrier.dll</HintPath>
     </Reference>
+    <Reference Include="CC.Core">
+      <HintPath>..\lib\CC.Core.dll</HintPath>
+    </Reference>
     <Reference Include="FubuMVC.UI, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\lib\FubuMVC.UI.dll</HintPath>
     </Reference>

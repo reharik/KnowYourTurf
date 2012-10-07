@@ -10,7 +10,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
         public EntityMap()
         {
             Id(x => x.EntityId);
-            Map(x => x.ChangeDate);
+            Map(x => x.ChangedDate);
             Map(x => x.CreatedDate);
             Map(x => x.IsDeleted);
 //            References(x => x.CreatedBy);

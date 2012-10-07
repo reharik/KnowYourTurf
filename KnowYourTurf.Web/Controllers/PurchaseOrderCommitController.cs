@@ -64,7 +64,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderLineItems(null)) + "/" + input.EntityId;
             var model = new ListViewModel()
             {
-                gridDef = _receivePurchaseOrderLineItemGrid.GetGridDefinition(url),
+                gridDef = _receivePurchaseOrderLineItemGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + input.EntityId,
             };
@@ -75,7 +75,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
             var items = _dynamicExpressionQuery.PerformQuery(purchaseOrder.LineItems,input.filters, x=> !x.Completed);
-            var model = _receivePurchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var model = _receivePurchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
     }

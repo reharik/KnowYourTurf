@@ -1,6 +1,6 @@
 ﻿@model KnowYourTurf.Web.Models.CalculatorViewModel
+@using CC.Core.Html.CCUI
 @using KnowYourTurf.Web
-@using KnowYourTurf.Core.Html.FubuUI
 
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
@@ -11,6 +11,6 @@
             @MvcHtmlString.Create(WebLocalizationKeys.CALCULATOR.ToString())
         </div>
         
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Calculator.EntityId).ToString())
-            @Html.SubmissionFor(x => x.Calculator.Name).ToHtmlTag()
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.EntityId).ToString())
+            @Html.SubmissionFor(x => x._calculatorName).ToHtmlTag()
 

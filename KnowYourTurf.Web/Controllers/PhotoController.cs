@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using CC.Core;
@@ -73,16 +74,12 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(PhotoViewModel input)
         {
-            var photo = input.EntityId > 0 ? _repository.Find<Photo>(input.EntityId) : new Photo();
-            var newDoc = mapToDomain(input, photo);
+            var field = _repository.Find<Field>(input.ParentId);
+            var photo = field.Photos.FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Photo();
+            photo = mapToDomain(input, photo);
             photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos");
-            var crudManager = _saveEntityService.ProcessSave(newDoc);
-            if (input.Var == "Field")
-            {
-                var field = _repository.Find<Field>(input.ParentId);
-                field.AddPhoto(photo);
-                crudManager = _saveEntityService.ProcessSave(field, crudManager);
-            } 
+            field.AddPhoto(photo);
+            var crudManager = _saveEntityService.ProcessSave(field);
             var notification = crudManager.Finish();
             notification.Variable = photo.FileUrl;
             return Json(notification, JsonRequestBehavior.AllowGet);

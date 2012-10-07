@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Filters
             var repository = ObjectFactory.Container.GetInstance<IRepository>();
             var customPrincipal = (CustomPrincipal)filterContext.HttpContext.User;
             var user = repository.Find<User>(customPrincipal.UserId);
-            ((ViewModel)filterContext.ActionParameters).User = user;
+            ((ViewModel)filterContext.ActionParameters["input"]).User = user;
         }
     }
 }

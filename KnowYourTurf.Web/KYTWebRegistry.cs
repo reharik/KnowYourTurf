@@ -1,8 +1,11 @@
 using Alpinely.TownCrier;
+using CC.Core.Domain;
 using CC.Core.DomainTools;
 using CC.Core.Html.CCUI.HtmlConventionRegistries;
 using CC.Core.Html.Grid;
 using CC.Core.Localization;
+using CC.Core.Services;
+using CC.Security;
 using CC.Security.Interfaces;
 using CC.Security.Services;
 using CC.UI.Helpers;
@@ -40,13 +43,16 @@ namespace KnowYourTurf.Web
                 x.ConnectImplementationsToTypesClosing(typeof(IEntityListGrid<>));
                 x.AssemblyContainingType(typeof(CoreLocalizationKeys));
                 x.AssemblyContainingType(typeof(MergedEmailFactory));
+                x.AssemblyContainingType<Entity>();
+                x.AssemblyContainingType<IUser>();
+                x.AssemblyContainingType<HtmlConventionRegistry>();  
                 x.AddAllTypesOf<ICalculatorHandler>().NameBy(t => t.Name);
                 x.AddAllTypesOf<RulesEngineBase>().NameBy(t => t.Name);
                 x.AddAllTypesOf<IEmailTemplateHandler>().NameBy(t => t.Name);
                 x.WithDefaultConventions();
             });
-            
-            For<HtmlConventionRegistry>().Add<HtmlConventionRegistry>();
+
+            For<HtmlConventionRegistry>().Add<CCHtmlConventions2>();
             For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
             For<IElementNamingConvention>().Use<CCElementNamingConvention>();
             For(typeof(ITagGenerator<>)).Use(typeof(TagGenerator<>));
@@ -62,14 +68,15 @@ namespace KnowYourTurf.Web
             For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor()));
             For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession()).Named("NoInterceptorNoFilters");
 
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<KYTUnitOfWork>();
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<UnitOfWork>().Named("NoFilters");
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<NoInterceptorNoFiltersUnitOfWork>().Named("NoInterceptorNoFilters");
 
             For<IRepository>().Use<Repository>();
             For<IRepository>().Add<NoFilterRepository>().Named("NoFilters");
             For<IRepository>().Add<NoInterceptorNoFiltersRepository>().Named("NoInterceptorNoFilters");
 
-
+            For<ISelectListItemService>().Use<KYTSelectListItemService>();
             For<IMergedEmailFactory>().Use<MergedEmailFactory>();
             For<ITemplateParser>().Use<TemplateParser>();
 

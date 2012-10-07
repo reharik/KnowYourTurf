@@ -156,12 +156,16 @@
     <Compile Include="Domain\ListType.cs" />
     <Compile Include="Domain\Persistence\EmailJobTypeMap.cs" />
     <Compile Include="Domain\Persistence\ListTypeMap.cs" />
+    <Compile Include="Domain\Persistence\OperationsMap.cs" />
+    <Compile Include="Domain\Persistence\PermissionMap.cs" />
     <Compile Include="Domain\Persistence\PhotoMap.cs" />
     <Compile Include="Domain\Persistence\DocumentMap.cs" />
     <Compile Include="Domain\Persistence\EmailTemplateMap.cs" />
     <Compile Include="Domain\Persistence\UserRoleMap.cs" />
+    <Compile Include="Domain\Persistence\UsersGroupMap.cs" />
     <Compile Include="Domain\Persistence\WeatherMap.cs" />
     <Compile Include="Domain\Photo.cs" />
+    <Compile Include="Domain\Tools\KYTUnitOfWork.cs" />
     <Compile Include="Domain\Tools\NoFilterRepository.cs" />
     <Compile Include="Domain\Tools\NoInterceptorNoFiltersRepository.cs" />
     <Compile Include="Domain\Tools\NoInterceptorNoFiltersUnitOfWork.cs" />
@@ -174,6 +178,8 @@
     <Compile Include="Domain\Weather.cs" />
     <Compile Include="Html\Expressions\HtmlTagExpressionBase.cs" />
     <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
+    <Compile Include="Html\Menu\IKYTMenuBuilder.cs" />
+    <Compile Include="Html\Menu\KYTGenMenuBuilder.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="Rules\FieldHasNoOutstandingEvents.cs" />
     <Compile Include="Rules\FieldHasNoOutstandingTasks.cs" />
@@ -268,7 +274,6 @@
     <Compile Include="Services\ReceivePurchaseOrderService.cs" />
     <Compile Include="Services\SecurityDataService.cs" />
     <Compile Include="Services\StructureMapServiceLocator.cs" />
-    <Compile Include="Services\SystemClock.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attributes\" />

@@ -15,7 +15,7 @@ namespace KnowYourTurf.Core.Domain
 
         protected override Grid<PurchaseOrder> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.DateCreated)
+            GridBuilder.LinkColumnFor(x => x.CreatedDate)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.EntityId).DisplayHeader(WebLocalizationKeys.PO_Number);
@@ -43,7 +43,7 @@ namespace KnowYourTurf.Core.Domain
 
         protected override Grid<PurchaseOrder> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.DateCreated)
+            GridBuilder.LinkColumnFor(x => x.CreatedDate)
                 .ToPerformAction(ColumnAction.DisplayItem)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.EntityId).DisplayHeader(WebLocalizationKeys.PO_Number);

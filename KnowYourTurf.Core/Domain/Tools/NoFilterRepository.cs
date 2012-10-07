@@ -7,7 +7,7 @@ namespace KnowYourTurf.Core.Domain.Tools
     {
         public NoFilterRepository()
         {
-            _unitOfWork = ObjectFactory.Container.GetInstance<IUnitOfWork>();
+            _unitOfWork = ObjectFactory.Container.GetInstance<IUnitOfWork>("NoFilters");
             _unitOfWork.Initialize();
         }
     }

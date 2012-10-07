@@ -12,6 +12,7 @@ using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
+using KnowYourTurf.Web.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -46,7 +47,7 @@ namespace KnowYourTurf.Web.Controllers
             task.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : task.ScheduledDate;
             task.ScheduledStartTime= input.ScheduledStartTime.HasValue ? input.ScheduledStartTime.Value: task.ScheduledStartTime;
             var taskTypes = _selectListItemService.CreateList<TaskType>(x => x.Name, x => x.EntityId, true);
-            var fields = _selectListItemService.CreateFieldsSelectListItems(input.RootId,input.ParentId);
+            var fields = ((KYTSelectListItemService)_selectListItemService).CreateFieldsSelectListItems(input.RootId, input.ParentId);
             var products = createProductSelectListItems();
             var availableEmployees = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString() && x.UserRoles.Any(y=>y.Name==UserType.Employee.ToString()))
                 .Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).OrderBy(x=>x.name).ToList();
@@ -155,14 +156,14 @@ namespace KnowYourTurf.Web.Controllers
 
             mapItem(task, input);
             mapChildren(task, input);
-            ICrudManager crudManager = null;
+            IValidationManager validationManager = null;
             if (task.Complete && !task.InventoryDecremented)
             {
-                crudManager = _inventoryService.DecrementTaskProduct(task);
+                validationManager = _inventoryService.DecrementTaskProduct(task);
                 task.InventoryDecremented = true;
             }
-            crudManager = _saveEntityService.ProcessSave(task, crudManager);
-            var notification = crudManager.Finish();
+            validationManager = _saveEntityService.ProcessSave(task, validationManager);
+            var notification = validationManager.Finish();
             return Json(notification);
         }
 

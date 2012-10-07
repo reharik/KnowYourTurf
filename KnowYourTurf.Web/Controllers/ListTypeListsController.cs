@@ -53,7 +53,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<EventTypeController>(x => x.ListTypes(null));
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _eventTypeListGrid.GetGridDefinition(url),
+                gridDef = _eventTypeListGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
             model.headerButtons.Add("delete");

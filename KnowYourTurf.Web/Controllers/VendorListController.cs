@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 deleteMultipleUrl = UrlContext.GetUrlForAction<VendorController>(x => x.DeleteMultiple(null)),
-                gridDef = _vendorListGrid.GetGridDefinition(url),
+                gridDef = _vendorListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.VENDORS.ToString()
             };
             model.headerButtons.Add("new");
@@ -48,7 +48,7 @@ namespace KnowYourTurf.Web.Controllers
                                           };
 
             _vendorListGrid.AddColumnModifications(mod);
-            var gridItemsViewModel = _vendorListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _vendorListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

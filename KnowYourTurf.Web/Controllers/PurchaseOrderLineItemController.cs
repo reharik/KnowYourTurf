@@ -127,7 +127,7 @@ namespace KnowYourTurf.Web.Controllers
             origionalPurchaseOrderLineItem.UnitType = input.UnitType;
             origionalPurchaseOrderLineItem.SizeOfUnit = input.SizeOfUnit;
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
-            crudManager = _inventoryService.ReceivePurchaseOrderLineItem(origionalPurchaseOrderLineItem,crudManager);
+            crudManager = _inventoryService.ReceivePurchaseOrderLineItem(origionalPurchaseOrderLineItem);
             var notification = crudManager.Finish();
             return Json(notification);
         }

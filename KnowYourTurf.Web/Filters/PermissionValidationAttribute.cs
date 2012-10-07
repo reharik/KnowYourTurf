@@ -13,7 +13,7 @@ namespace KnowYourTurf.Web.Filters
             var controllerOperation = string.Format("/{0}",filterContext.Controller.GetType().Name);
             var actionOperation = string.Format("{0}/{1}", controllerOperation, actionName);
             var authorizationService = ObjectFactory.Container.GetInstance<IAuthorizationService>();
-            var user = ((ViewModel) filterContext.ActionParameters).User;
+            var user = ((ViewModel)filterContext.ActionParameters["input"]).User;
             if(!authorizationService.IsAllowed(user,controllerOperation))
             {
                 if (!authorizationService.IsAllowed(user, actionOperation))
