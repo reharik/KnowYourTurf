@@ -16,7 +16,7 @@ namespace KnowYourTurf.Web.Grids
 
      protected override Grid<VendorContact> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.FullName)
+            GridBuilder.LinkColumnFor(x => x.FullName, "KYT")
                 .ForAction<VendorContactController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .IsSortable(false)

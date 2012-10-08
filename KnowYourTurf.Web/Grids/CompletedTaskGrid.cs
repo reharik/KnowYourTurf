@@ -13,7 +13,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Task> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.TaskType.Name)
+            GridBuilder.LinkColumnFor(x => x.TaskType.Name, "KYT")
                 .ToPerformAction(ColumnAction.DisplayItem).WithId("completedTaskList")
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.ScheduledDate);

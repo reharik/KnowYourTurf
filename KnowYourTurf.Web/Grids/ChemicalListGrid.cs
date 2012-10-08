@@ -15,8 +15,8 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Chemical> BuildGrid()
         {
-           
-            GridBuilder.LinkColumnFor(x => x.Name)
+
+            GridBuilder.LinkColumnFor(x => x.Name, "KYT")
                 .ForAction<ChemicalController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Chemical> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name)
+            GridBuilder.LinkColumnFor(x => x.Name, "KYT")
                 .ForAction<ChemicalController>(x => x.Display(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);

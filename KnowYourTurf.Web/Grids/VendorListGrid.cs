@@ -16,8 +16,8 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Vendor> BuildGrid()
         {
-            
-            GridBuilder.LinkColumnFor(x => x.Company)
+
+            GridBuilder.LinkColumnFor(x => x.Company, "KYT")
                 .ForAction<VendorController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x => x.Phone);
             GridBuilder.DisplayFor(x => x.Fax);
             GridBuilder.DisplayFor(x => x.Website);
-            GridBuilder.ImageButtonColumn()
+            GridBuilder.ImageButtonColumn("KYT")
                 .ForAction<VendorContactListController>(x => x.ItemList(null))
                 .ToPerformAction(ColumnAction.Redirect)
                 .ImageName("AddContact.png");

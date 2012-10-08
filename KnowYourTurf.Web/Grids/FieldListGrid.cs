@@ -15,7 +15,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Field> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name)
+            GridBuilder.LinkColumnFor(x => x.Name, "KYT")
                 .ForAction<FieldDashboardController>(x => x.ViewField(null))
                 .ToPerformAction(ColumnAction.Redirect)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);

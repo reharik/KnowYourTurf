@@ -14,11 +14,11 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<PurchaseOrderLineItem> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
+            GridBuilder.ImageButtonColumn("KYT")
                 .ToPerformAction(ColumnAction.Delete).WithId("poliGrid")
                 .ImageName("delete_sm.png")
                 .ToolTip(WebLocalizationKeys.DELETE_ITEM).Width(22);
-            GridBuilder.LinkColumnFor(x => x.Product.Name)
+            GridBuilder.LinkColumnFor(x => x.Product.Name, "KYT")
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .WithId("poliGrid")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
@@ -41,7 +41,7 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<PurchaseOrderLineItem> BuildGrid()
         {
 
-            GridBuilder.LinkColumnFor(x => x.Product.Name)
+            GridBuilder.LinkColumnFor(x => x.Product.Name, "KYT")
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .WithId("commitPoliGrid")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);

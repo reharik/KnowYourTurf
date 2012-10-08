@@ -26,7 +26,9 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IEntityListGrid<Task> _completedTaskGrid;
         private readonly ISessionContext _sessionContext;
 
-        public EmployeeDashboardController(IRepository repository, ISelectListItemService selectListItemService, IDynamicExpressionQuery dynamicExpressionQuery,
+        public EmployeeDashboardController(IRepository repository,
+            ISelectListItemService selectListItemService,
+            IDynamicExpressionQuery dynamicExpressionQuery,
             ISessionContext sessionContext)
         {
             _repository = repository;

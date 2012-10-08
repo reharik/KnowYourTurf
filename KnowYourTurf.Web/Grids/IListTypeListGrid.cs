@@ -31,7 +31,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<TaskType> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name)
+            GridBuilder.LinkColumnFor(x => x.Name, "KYT")
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .WithId("tasktypelist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
@@ -49,7 +49,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<PhotoCategory> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name)
+            GridBuilder.LinkColumnFor(x => x.Name, "KYT")
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .WithId("photocategorylist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
@@ -67,7 +67,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<DocumentCategory> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name)
+            GridBuilder.LinkColumnFor(x => x.Name, "KYT")
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .WithId("documentcategorylist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);

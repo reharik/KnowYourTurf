@@ -16,7 +16,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<User> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.FullName)
+            GridBuilder.LinkColumnFor(x => x.FullName, "KYT")
                 .ForAction<AdminDashboardController>(x => x.ViewAdmin(null))
                 .ToPerformAction(ColumnAction.Redirect)
                 .IsSortable(false)

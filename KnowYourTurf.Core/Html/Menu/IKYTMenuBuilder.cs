@@ -111,6 +111,18 @@ namespace KnowYourTurf.Core.Html.Menu
                            });
         }
 
+        protected override  IList<MenuItem> getList()
+        {
+            if (_categories != null && count > 0)
+            {
+                var lastCatParentItem = _parentItems.LastOrDefault();
+                return lastCatParentItem != null ? lastCatParentItem.Children : _categoryItems;
+            }
+            var lastParentItem = _parentItems.LastOrDefault();
+            return lastParentItem != null ? lastParentItem.Children : _items;
+        }
+
+
         private MenuItem copyMenuItem(MenuItem menuItem)
         {
             return new MenuItem
@@ -190,4 +202,5 @@ namespace KnowYourTurf.Core.Html.Menu
             return this;
         }
     }
+
 }

@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<InventoryProduct> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Product.Name)
+            GridBuilder.LinkColumnFor(x => x.Product.Name, "KYT")
                 .ToPerformAction(ColumnAction.DisplayItem)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.Quantity);
