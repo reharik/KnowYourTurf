@@ -162,7 +162,7 @@ namespace KnowYourTurf.Web.Controllers
                 validationManager = _inventoryService.DecrementTaskProduct(task);
                 task.InventoryDecremented = true;
             }
-            validationManager = _saveEntityService.ProcessSave(task, validationManager);
+            validationManager = _saveEntityService.ProcessSave(task, validationManager??new ValidationManager(_repository));
             var notification = validationManager.Finish();
             return Json(notification);
         }

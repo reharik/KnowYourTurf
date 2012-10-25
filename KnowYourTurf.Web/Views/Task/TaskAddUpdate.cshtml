@@ -44,12 +44,12 @@
     <div class="col left clear">
         <div class="fieldRow">
             <div id="employeeTokenizer">
-                @Html.SubmissionFor(x => x.Employees).HideInput().ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
+                @Html.SubmissionFor(x => x.Employees).ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
             </div>
         </div>
         <div class="fieldRow">
             <div id="equipmentTokenizer">
-                @Html.SubmissionFor(x => x.Equipment).HideInput().ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
+                @Html.SubmissionFor(x => x.Equipment).ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
             </div>
         </div>
     </div>

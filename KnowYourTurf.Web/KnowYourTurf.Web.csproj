@@ -297,11 +297,6 @@
     <Compile Include="Grids\VendorContactListGrid.cs" />
     <Compile Include="Grids\VendorListGrid.cs" />
     <Compile Include="Grids\WeatherListGrid.cs" />
-    <Compile Include="knowyourturf_testDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>knowyourturf_testDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="KYTTestRegistry.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\IMenuConfig.cs" />
@@ -711,17 +706,6 @@
     <EmbeddedResource Include="Areas\Reports\Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="knowyourturf_testDataSet.xsc">
-      <DependentUpon>knowyourturf_testDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="knowyourturf_testDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>knowyourturf_testDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="knowyourturf_testDataSet.xss">
-      <DependentUpon>knowyourturf_testDataSet.xsd</DependentUpon>
-    </None>
     <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />
     <Content Include="Views\ListTypeList\Display.cshtml" />
     <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />

@@ -13,8 +13,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.ChangedDate);
             Map(x => x.CreatedDate);
             Map(x => x.IsDeleted);
-//            References(x => x.CreatedBy);
-//            References(x => x.ModifiedBy);
+            References(x => x.CreatedBy).Class<User>();
+            References(x => x.ChangedBy).Class<User>();
         }
 
     }

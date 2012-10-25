@@ -178,6 +178,7 @@
     <Compile Include="Domain\Weather.cs" />
     <Compile Include="Html\Expressions\HtmlTagExpressionBase.cs" />
     <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
+    <Compile Include="Html\HtmlConventionRegistries\KYTKOHtmlConventionRegistry.cs" />
     <Compile Include="Html\Menu\IKYTMenuBuilder.cs" />
     <Compile Include="Html\Menu\KYTGenMenuBuilder.cs" />
     <Compile Include="ILogger.cs" />

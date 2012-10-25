@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using CC.Core.CoreViewModelAndDTOs;
 using Castle.Components.Validator;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 
 namespace KnowYourTurf.Web.Models
@@ -57,7 +55,7 @@ namespace KnowYourTurf.Web.Models
     public class AddUpdateTaskViewModel:ViewModel
     {
         public string Param1 { get; set; }
-        public long Field { get; set; }
+        public int Field { get; set; }
         public string Product { get; set; }
         public double Quantity { get; set; }
         public bool Copy { get; set; }

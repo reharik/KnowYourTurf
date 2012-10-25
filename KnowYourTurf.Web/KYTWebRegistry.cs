@@ -14,6 +14,7 @@ using CC.UI.Helpers.Tags;
 using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Domain.Tools;
 using KnowYourTurf.Core.Enums;
+using KnowYourTurf.Core.Html.HtmlConventionRegistries;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Config;
@@ -52,7 +53,7 @@ namespace KnowYourTurf.Web
                 x.WithDefaultConventions();
             });
 
-            For<HtmlConventionRegistry>().Add<CCHtmlConventions2>();
+            For<HtmlConventionRegistry>().Add<KYTKOHtmlConventionRegistry>();
             For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
             For<IElementNamingConvention>().Use<CCElementNamingConvention>();
             For(typeof(ITagGenerator<>)).Use(typeof(TagGenerator<>));
@@ -65,7 +66,7 @@ namespace KnowYourTurf.Web
                 .EqualToAppSetting("KnowYourTurf.sql_server_connection_string");
             For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory());
 
-            For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor()));
+            For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithCompanyFilter()));
             For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession()).Named("NoInterceptorNoFilters");
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<KYTUnitOfWork>();

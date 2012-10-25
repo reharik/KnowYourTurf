@@ -89,7 +89,7 @@ namespace KnowYourTurf.Core.Html.Menu
             });
             return this;
         }
-        private void itterateOverCategoryItems(long entityId, IList<MenuItem> items, IList<MenuItem> parent = null)
+        private void itterateOverCategoryItems(int entityId, IList<MenuItem> items, IList<MenuItem> parent = null)
         {
             items.ForEachItem(c =>
                            {

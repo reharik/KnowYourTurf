@@ -182,6 +182,6 @@ namespace KnowYourTurf.Web.Controllers
 
     public class PoSelectorGridItemsRequestModel : GridItemsRequestModel
     {
-        public long Vendor { get; set; }
+        public int Vendor { get; set; }
     }
 }

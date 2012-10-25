@@ -86,7 +86,7 @@ namespace KnowYourTurf.Core.Domain
             return InventoryProduct != null ? InventoryProduct.EntityId + "_" + InventoryProduct.Product.InstantiatingType + "s" : "";
         }
 
-        public virtual bool IsAssignedToEmployee(long employeeId)
+        public virtual bool IsAssignedToEmployee(int employeeId)
         {
             var employee = Employees.FirstOrDefault(x=>x.EntityId == employeeId);
             return employee != null;

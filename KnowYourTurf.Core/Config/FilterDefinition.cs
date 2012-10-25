@@ -8,7 +8,7 @@ namespace KnowYourTurf.Core.Config
         public CompanyConditionFilter()
         {
             WithName("CompanyConditionFilter")
-                .AddParameter("CompanyId",NHibernate.NHibernateUtil.Int64);
+                .AddParameter("CompanyId",NHibernate.NHibernateUtil.Int32);
         }
     }
 
