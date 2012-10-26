@@ -109,7 +109,7 @@ html .fc,
 ------------------------------------------------------------------------*/
 	
 .fc-content {
-	clear: both;
+	/*clear: both; seems to break the layout*/
 	}
 	
 .fc-view {

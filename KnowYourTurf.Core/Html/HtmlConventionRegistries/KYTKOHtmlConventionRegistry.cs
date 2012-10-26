@@ -15,6 +15,8 @@ namespace KnowYourTurf.Core.Html.HtmlConventionRegistries
         public override void EditorsChain()
         {
             Editors.Builder<TimePickerBuilder2>();
+//            Editors.Builder<ImageBuilder2>();
+            Editors.Builder<PictureGallery>();
             base.EditorsChain();
         }
     }

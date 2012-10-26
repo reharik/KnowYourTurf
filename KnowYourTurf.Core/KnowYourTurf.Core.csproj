@@ -137,7 +137,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CoreLocalizationKeys.cs" />
-    <Compile Include="CoreViewModels\PictureDto.cs" />
     <Compile Include="Domain\BaseProduct.cs" />
     <Compile Include="Domain\Calculator.cs" />
     <Compile Include="Domain\Category.cs" />

@@ -185,6 +185,7 @@ namespace KnowYourTurf.Web.Controllers
             employee.City = model.City;
             employee.State = model.State;
             employee.ZipCode = model.ZipCode;
+            employee.FileUrl = model.FileUrl;
             employee.Notes = model.Notes;
             if(employee.UserLoginInfo == null)
             {

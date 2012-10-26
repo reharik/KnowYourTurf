@@ -1,4 +1,3 @@
-//using FubuMVC.Core;
 //using KnowYourTurf.Core.Domain;
 
 //namespace KnowYourTurf.Core.Services
