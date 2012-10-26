@@ -2,12 +2,15 @@
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using CC.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using StructureMap;
@@ -36,7 +39,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult ListTypes(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<LISTTYPE>(input.filters);
-            var gridItemsViewModel = _listTypeListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _listTypeListGrid.GetGridItemsViewModel(input.PageSortFilter, items,input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
-using KnowYourTurf.Core.CoreViewModels;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Localization;
-using KnowYourTurf.Security.Interfaces;
-using FluentNHibernate.Utils;
+using CC.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Enumerations;
+using CC.Core.Html;
+using CC.Core.Services;
+using CC.Security.Interfaces;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
@@ -15,6 +16,7 @@ using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
 using System.Linq;
 using StructureMap;
+using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -60,7 +62,7 @@ namespace KnowYourTurf.Web.Controllers
             else selectedUserRoles = availableUserRoles.Where(x => x.name == "Employee");
 
             var model = Mapper.Map<User, UserViewModel>(employee);
-            model.FileUrl = model.FileUrl.IsNotEmpty() ? BasicExtentions.AddImageSizeToName(model.FileUrl, "thumb") : "";
+            model.FileUrl = model.FileUrl.IsNotEmpty() ? model.FileUrl.AddImageSizeToName("thumb") : "";
             model._StateList = _selectListItemService.CreateList<State>();
             model._UserLoginInfoStatusList = _selectListItemService.CreateList<Status>();
             model._Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString();
@@ -89,10 +91,10 @@ namespace KnowYourTurf.Web.Controllers
             var rulesResult = rulesEngineBase.ExecuteRules(employee);
             if(!rulesResult.Success)
             {
-                Notification notification = new Notification(rulesResult);
+                var notification = new RulesNotification(rulesResult);
                 return Json(notification);
             }
-            _repository.SoftDelete(employee);
+            _repository.Delete(employee);
             _repository.UnitOfWork.Commit();
             return null;
         }
@@ -183,6 +185,7 @@ namespace KnowYourTurf.Web.Controllers
             employee.City = model.City;
             employee.State = model.State;
             employee.ZipCode = model.ZipCode;
+            employee.FileUrl = model.FileUrl;
             employee.Notes = model.Notes;
             if(employee.UserLoginInfo == null)
             {

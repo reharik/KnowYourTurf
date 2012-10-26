@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 
@@ -53,7 +53,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<EventTypeController>(x => x.ListTypes(null));
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _eventTypeListGrid.GetGridDefinition(url),
+                gridDef = _eventTypeListGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
             model.headerButtons.Add("delete");
@@ -65,7 +65,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<TaskTypeController>(x => x.ListTypes(null));
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _taskTypeListGrid.GetGridDefinition(url),
+                gridDef = _taskTypeListGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
             model.headerButtons.Add("delete");
@@ -77,7 +77,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.ListTypes(null));
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _documentCategoryListGrid.GetGridDefinition(url),
+                gridDef = _documentCategoryListGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
             model.headerButtons.Add("delete");
@@ -89,7 +89,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.ListTypes(null));
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _photoCategoryListGrid.GetGridDefinition(url),
+                gridDef = _photoCategoryListGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
             model.headerButtons.Add("delete");

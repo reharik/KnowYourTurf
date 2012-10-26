@@ -1,4 +1,5 @@
 ﻿using System;
+using CC.Core.CoreViewModelAndDTOs;
 
 namespace KnowYourTurf.Core
 {
@@ -35,7 +36,7 @@ namespace KnowYourTurf.Core
 
     public class CalendarEvent
     {
-        public long EntityId { get; set; }
+        public int EntityId { get; set; }
         public string title { get; set; }
         public string start { get; set; }
         public string end { get; set; }

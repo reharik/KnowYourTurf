@@ -1,4 +1,5 @@
-﻿using KnowYourTurf.Core;
+﻿using CC.Core.CoreViewModelAndDTOs;
+using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 
 namespace KnowYourTurf.Web.Models

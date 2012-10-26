@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Castle.Components.Validator; 
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
-using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Localization;
+using CC.Core.CoreViewModelAndDTOs;
+using Castle.Components.Validator;
 
 namespace KnowYourTurf.Web.Models
 {
@@ -20,9 +17,9 @@ namespace KnowYourTurf.Web.Models
 
     public class SuperInputCalcViewModel
     {
-        public long EntityId { get; set; }
-        public long FieldEntityId { get; set; }
-        public long ProductEntityId { get; set; }
+        public int EntityId { get; set; }
+        public int FieldEntityId { get; set; }
+        public int ProductEntityId { get; set; }
         public double? FertilizerRate { get; set; }
         public double Drainageline { get; set; }
         public double DitchlineWidth { get; set; }

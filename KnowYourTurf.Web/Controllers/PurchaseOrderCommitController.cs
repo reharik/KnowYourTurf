@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using FubuMVC.Core;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using StructureMap;
+using CC.Core;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -52,7 +52,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
             purchaseOrder.Completed = true;
-            purchaseOrder.LineItems.Where(x => !x.Completed).Each(x => x.Completed = true);
+            purchaseOrder.LineItems.Where(x => !x.Completed).ForEachItem(x => x.Completed = true);
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
             var notification = crudManager.Finish();
             notification.RedirectUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));
@@ -64,7 +64,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.PurchaseOrderLineItems(null)) + "/" + input.EntityId;
             var model = new ListViewModel()
             {
-                gridDef = _receivePurchaseOrderLineItemGrid.GetGridDefinition(url),
+                gridDef = _receivePurchaseOrderLineItemGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + input.EntityId,
             };
@@ -75,7 +75,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
             var items = _dynamicExpressionQuery.PerformQuery(purchaseOrder.LineItems,input.filters, x=> !x.Completed);
-            var model = _receivePurchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var model = _receivePurchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
     }

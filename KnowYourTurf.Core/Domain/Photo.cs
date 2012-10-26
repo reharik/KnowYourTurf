@@ -1,3 +1,4 @@
+using CC.Core.Domain;
 using KnowYourTurf.Core.Domain;
 
 namespace KnowYourTurf.Web.Controllers

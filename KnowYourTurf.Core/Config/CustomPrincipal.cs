@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
+using CC.Core;
 
 namespace KnowYourTurf.Core.Config
 {
@@ -29,8 +30,8 @@ namespace KnowYourTurf.Core.Config
 
         public IIdentity Identity{ get { return _identity; } }
 
-        public long UserId { get{return _userId.IsNotEmpty()? Int64.Parse(_userId):0;} } 
-        public long CompanyId { get { return _companyId.IsNotEmpty()? Int64.Parse(_companyId):0; } }
+        public int UserId { get{return _userId.IsNotEmpty()? Int32.Parse(_userId):0;} } 
+        public int CompanyId { get { return _companyId.IsNotEmpty()? Int32.Parse(_companyId):0; } }
         public string UserRoles { get { return _userRoles; } }
     }
 }

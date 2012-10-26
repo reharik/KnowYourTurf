@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
@@ -39,8 +40,7 @@ namespace KnowYourTurf.Web.Controllers
             var continuation = calculatorHandler.Calculate(input);
             if(!continuation.Success)
             {
-                Notification notification = new Notification(continuation);
-                return Json(notification, JsonRequestBehavior.AllowGet);
+                return Json(continuation.ReturnNotification(), JsonRequestBehavior.AllowGet);
             }
             return Json(continuation.Target,JsonRequestBehavior.AllowGet);
         }

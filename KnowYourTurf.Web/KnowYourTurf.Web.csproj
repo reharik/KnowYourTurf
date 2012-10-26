@@ -14,6 +14,7 @@
     <AssemblyName>KnowYourTurf.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,19 +51,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="CC.Core">
+      <HintPath>..\lib\CC.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Security">
+      <HintPath>..\lib\CC.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Elmah">
       <HintPath>..\lib\Elmah.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate, Version=1.2.0.694, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="FubuMVC.Core">
-      <HintPath>..\lib\FubuMVC.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="FubuMVC.UI, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\FubuMVC.UI.dll</HintPath>
     </Reference>
     <Reference Include="HibernatingRhinos.Profiler.Appender">
       <HintPath>..\lib\HibernatingRhinos.Profiler.Appender.dll</HintPath>
@@ -264,7 +269,7 @@
     <Compile Include="Controllers\VendorListController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="Controllers\WeatherListController.cs" />
-    <Compile Include="Filters\AddUserToViewFilterAttribute.cs" />
+    <Compile Include="Filters\AddUserToViewModelFilter.cs" />
     <Compile Include="Filters\AdminFilterAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filters\PermissionValidationAttribute.cs" />
@@ -292,11 +297,6 @@
     <Compile Include="Grids\VendorContactListGrid.cs" />
     <Compile Include="Grids\VendorListGrid.cs" />
     <Compile Include="Grids\WeatherListGrid.cs" />
-    <Compile Include="knowyourturf_testDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>knowyourturf_testDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="KYTTestRegistry.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\IMenuConfig.cs" />
@@ -337,6 +337,7 @@
     <Compile Include="Services\EmailHandlers\IEmailTemplateHandler.cs" />
     <Compile Include="Services\IAuthenticationContext.cs" />
     <Compile Include="Services\ISecuritySetupService.cs" />
+    <Compile Include="Services\KYTSelectListItemService.cs" />
     <Compile Include="Services\ModelService.cs" />
     <Compile Include="Services\RouteTokens\IRouteTokenBuilder.cs" />
     <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
@@ -566,10 +567,6 @@
     <Content Include="Views\Shared\PhoneTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KnowYourTuf.Security\KnowYourTurf.Security.csproj">
-      <Project>{DBA372FE-3D52-45B3-AF82-B37696328764}</Project>
-      <Name>KnowYourTurf.Security</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
@@ -709,17 +706,6 @@
     <EmbeddedResource Include="Areas\Reports\Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="knowyourturf_testDataSet.xsc">
-      <DependentUpon>knowyourturf_testDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="knowyourturf_testDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>knowyourturf_testDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="knowyourturf_testDataSet.xss">
-      <DependentUpon>knowyourturf_testDataSet.xsd</DependentUpon>
-    </None>
     <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />
     <Content Include="Views\ListTypeList\Display.cshtml" />
     <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />

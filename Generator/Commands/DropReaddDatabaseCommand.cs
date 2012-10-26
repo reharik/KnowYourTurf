@@ -1,4 +1,5 @@
-﻿using KnowYourTurf.Core.Domain;
+﻿using CC.Core.DomainTools;
+using KnowYourTurf.Core.Domain;
 using NHibernate;
 using StructureMap;
 

@@ -1,14 +1,17 @@
 using System;
 using System.Security.Principal;
 using System.Web;
+using CC.Core.DomainTools;
+using CC.Core.Services;
+using CC.Security;
 using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
 
 namespace KnowYourTurf.Core.Services
 {
-    public interface ISessionContext
+    public interface ISessionContext : ICCSessionContext
     {
-        User GetCurrentUser();
+        IUser GetCurrentUser();
         object RetrieveSessionObject(Guid sessionKey);
         object RetrieveSessionObject(string sessionKey);
         void AddUpdateSessionItem(SessionItem item);
@@ -17,8 +20,8 @@ namespace KnowYourTurf.Core.Services
         string MapPath(string url);
         HttpPostedFile RetrieveUploadedFile();
         SessionItem RetrieveSessionItem(string sessionKey);
-        long GetCompanyId();
-        long GetUserId();
+        int GetCompanyId();
+        int GetUserId();
         Company GetCurrentCompany();
         bool IsAuthenticated();
         bool IsInRole(string role);
@@ -34,9 +37,19 @@ namespace KnowYourTurf.Core.Services
             _repository = repository;
         }
 
-        public User GetCurrentUser()
+        public IUser GetCurrentUser()
         {
             return  _repository.Find<User>(GetUserId());
+        }
+
+        int ISessionContext.GetUserId()
+        {
+            return GetUserId();
+        }
+
+        int ICCSessionContext.GetUserId()
+        {
+            return GetUserId();
         }
 
         public Company GetCurrentCompany()
@@ -101,13 +114,14 @@ namespace KnowYourTurf.Core.Services
             return HttpContext.Current.Request.Files.AllKeys.Length > 0 ? HttpContext.Current.Request.Files[0] : null;
         }
 
-        public long GetCompanyId()
+        public int GetCompanyId()
         {
             var httpContext = HttpContext.Current;
             var customPrincipal = httpContext != null ? httpContext.User as CustomPrincipal : null;
             return customPrincipal != null ? customPrincipal.CompanyId : 0;
         }
-        public long GetUserId()
+
+        public int GetUserId()
         {
             var httpContext = HttpContext.Current;
             var customPrincipal = httpContext != null ? httpContext.User as CustomPrincipal : null;
@@ -122,92 +136,92 @@ namespace KnowYourTurf.Core.Services
         public object SessionObject { get; set; }
     }
 
-    public class UserSessionFake : ISessionContext
-    {
-        private User _currentUser;
-        public UserSessionFake(User currentUser)
-        {
-            _currentUser = currentUser;
-        }
-
-        public virtual User GetCurrentUser()
-        {
-            return _currentUser;
-        }
-
-        public bool CheckIfSessionItemIsStale<ENTITY>(Guid sessionKey) where ENTITY : DomainEntity
-        {
-            throw new NotImplementedException();
-        }
-
-        public object RetrieveSessionObject(Guid sessionKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object RetrieveSessionObject(string sessionKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddUpdateSessionItem(SessionItem item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveSessionItem(Guid sessionKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveSessionItem(string sessionKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string MapPath(string url)
-        {
-            throw new NotImplementedException();
-        }
-
-        public HttpPostedFile RetrieveUploadedFile()
-        {
-            throw new NotImplementedException();
-        }
-
-        public SessionItem RetrieveSessionItem(string sessionKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public long GetCompanyId()
-        {
-            throw new NotImplementedException();
-        }
-
-        public long GetUserId()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Company GetCurrentCompany()
-        {
-            return _currentUser.Company;
-        }
-
-        public bool IsAuthenticated()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsInRole(string role)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ClearSession()
-        {
-            throw new NotImplementedException();
-        }
-    }
+//    public class UserSessionFake : ISessionContext
+//    {
+//        private User _currentUser;
+//        public UserSessionFake(User currentUser)
+//        {
+//            _currentUser = currentUser;
+//        }
+//
+//        public virtual User GetCurrentUser()
+//        {
+//            return _currentUser;
+//        }
+//
+//        public bool CheckIfSessionItemIsStale<ENTITY>(Guid sessionKey) where ENTITY : DomainEntity
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public object RetrieveSessionObject(Guid sessionKey)
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public object RetrieveSessionObject(string sessionKey)
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public void AddUpdateSessionItem(SessionItem item)
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public void RemoveSessionItem(Guid sessionKey)
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public void RemoveSessionItem(string sessionKey)
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public string MapPath(string url)
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public HttpPostedFile RetrieveUploadedFile()
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public SessionItem RetrieveSessionItem(string sessionKey)
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public long GetCompanyId()
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public long GetUserId()
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public Company GetCurrentCompany()
+//        {
+//            return _currentUser.Company;
+//        }
+//
+//        public bool IsAuthenticated()
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public bool IsInRole(string role)
+//        {
+//            throw new NotImplementedException();
+//        }
+//
+//        public void ClearSession()
+//        {
+//            throw new NotImplementedException();
+//        }
+//    }
 }

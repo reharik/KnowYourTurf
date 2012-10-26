@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Web.Services.RouteTokens;

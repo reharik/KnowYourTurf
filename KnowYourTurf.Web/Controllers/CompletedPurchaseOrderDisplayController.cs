@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
 using StructureMap;
 using NHibernate.Linq;
@@ -30,7 +29,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<CompletedPurchaseOrderDisplayController>(x => x.Items(null)) + "/"+input.EntityId;
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _purchaseOrderListGrid.GetGridDefinition(url),
+                gridDef = _purchaseOrderListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.COMPLETED_PURCHASE_ORDERS.ToString()
             };
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -40,7 +39,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var po = _repository.Query<PurchaseOrder>(x => x.EntityId == input.EntityId).Fetch(x => x.LineItems).FirstOrDefault();
             var items = _dynamicExpressionQuery.PerformQuery(po.LineItems, input.filters);
-            var gridItemsViewModel = _purchaseOrderListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _purchaseOrderListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

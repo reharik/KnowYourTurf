@@ -318,9 +318,6 @@ div.footer div.col {
     margin-bottom: 10px;
 }
 
-.dashboardGrid{
-    height:400px;
-}
 
 #messageContainer ul {
     list-style: none;
@@ -361,4 +358,8 @@ div.footer div.col {
     width: 95px !important;
     height: 25px !important;
     vertical-align: bottom;
+}
+
+.dashboardGrid{
+    height: 500px;
 }

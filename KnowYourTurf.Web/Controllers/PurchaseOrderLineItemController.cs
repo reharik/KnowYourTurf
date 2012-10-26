@@ -1,11 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
-using KnowYourTurf.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 
@@ -126,7 +127,7 @@ namespace KnowYourTurf.Web.Controllers
             origionalPurchaseOrderLineItem.UnitType = input.UnitType;
             origionalPurchaseOrderLineItem.SizeOfUnit = input.SizeOfUnit;
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
-            crudManager = _inventoryService.ReceivePurchaseOrderLineItem(origionalPurchaseOrderLineItem,crudManager);
+            crudManager = _inventoryService.ReceivePurchaseOrderLineItem(origionalPurchaseOrderLineItem);
             var notification = crudManager.Finish();
             return Json(notification);
         }

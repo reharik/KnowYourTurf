@@ -1,5 +1,6 @@
+using CC.Core.Domain;
+using CC.Core.Localization;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Core.Domain
 {

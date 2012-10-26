@@ -195,7 +195,7 @@ CC.Elements.PictureGallery= CC.Elements.Element.extend({
         this._super("init",arguments);
         this.type = "ul";
         this.$input = this.$container.find("ul");
-        if(this.$input.find("li").size>0){
+        if(this.$input.find("li").size()>0){
             this.$input.galleryView({panel_width:500,panel_height:250});
         }
     }

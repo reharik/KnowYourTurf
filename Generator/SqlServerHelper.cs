@@ -56,40 +56,5 @@ DEALLOCATE FK_KILLER
                 cmd.ExecuteNonQuery();
                 session.Close();
         }
-
-        public static void killRhinoSecurity(ISessionFactory source)
-        {
-            using (ISession session = source.OpenSession(new SaveUpdateInterceptor()))
-            {
-                var sql =
-                    "delete security_UsersToUsersGroups;delete security_UsersGroupsHierarchy;delete security_Permissions;delete security_UsersGroups;delete security_Operations;";
-
-                IDbConnection conn = session.Connection;
-                var cmd = conn.CreateCommand();
-                cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
-            }
-        }
-
-        public static void AddRhinoSecurity(ISessionFactory source)
-        {
-            using (ISession session = source.OpenSession())
-            {
-                try
-                {
-                    var rhinoSecurityScript = new System.IO.StreamReader("new_rhinosecurity.sql");
-                    string sql = rhinoSecurityScript.ReadToEnd();
-                    rhinoSecurityScript.Close();
-                    IDbConnection conn = session.Connection;
-                    var cmd = conn.CreateCommand();
-                    cmd.CommandText = sql;
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
-            }
-        }
     }
 }

@@ -1,5 +1,5 @@
 using AutoMapper;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Controllers;
 using KnowYourTurf.Web.Models;

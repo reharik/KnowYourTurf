@@ -1,4 +1,4 @@
-﻿using KnowYourTurf.Security.Interfaces;
+﻿using CC.Security.Interfaces;
 using KnowYourTurf.Core.Enums;
 
 namespace KnowYourTurf.Core.Services

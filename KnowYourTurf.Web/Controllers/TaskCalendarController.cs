@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using FubuMVC.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
+using CC.Core;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -59,7 +62,7 @@ namespace KnowYourTurf.Web.Controllers
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
             var category = _repository.Find<Category>(input.RootId);
             var tasks = category.GetAllTasks().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
-            tasks.Each(x =>
+            tasks.ForEachItem(x =>
                        events.Add(new CalendarEvent
                                       {
                                           EntityId = x.EntityId,

@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.DomainTools;
+using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 
@@ -14,16 +9,14 @@ namespace KnowYourTurf.Web.Grids
     public class VendorContactListGrid : Grid<VendorContact>, IEntityListGrid<VendorContact>
     {
 
-     public VendorContactListGrid(IGridBuilder<VendorContact> gridBuilder,
-         ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+     public VendorContactListGrid(IGridBuilder<VendorContact> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
      protected override Grid<VendorContact> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.FullName)
+            GridBuilder.LinkColumnFor(x => x.FullName, "KYT")
                 .ForAction<VendorContactController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .IsSortable(false)

@@ -1,4 +1,7 @@
 using System;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
@@ -24,7 +27,7 @@ namespace KnowYourTurf.Web.Services
         {
             var products = _repository.Query<InventoryProduct>(x => x.Product.InstantiatingType == "Material");
             var productItems = _selectListItemService.CreateListWithConcatinatedText(products, x => x.Product.Name, x => x.UnitType, " --> ", x => x.EntityId, true);
-            var fieldItems = _selectListItemService.CreateFieldsSelectListItems();
+            var fieldItems = ((KYTSelectListItemService)_selectListItemService).CreateFieldsSelectListItems();
             return new OverseedBagsNeededCalcViewModel
             {
                 _FieldEntityIdList = fieldItems,

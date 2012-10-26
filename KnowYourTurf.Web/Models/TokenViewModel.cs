@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
 
 namespace KnowYourTurf.Web.Models
 {

@@ -1,5 +1,5 @@
 ﻿@model KnowYourTurf.Web.Models.FieldViewModel
-@using KnowYourTurf.Core.Html.FubuUI
+@using CC.Core.Html.CCUI
 @using KnowYourTurf.Web
 
 
@@ -37,24 +37,24 @@
     </div>
     <div class="col full clear"><hr/></div>
 
-    <div class="col left clear">
+    <div class="col left clear ">
         <div class="fieldRow dashboardGrid">
             <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
-            <div id="pendingTaskGridContainer"></div>
+            <div id="pendingTaskGridContainer" class="dashboardGrid"></div>
         </div>
-        <div class="fieldRow dashboardGrid">
+        <div class="fieldRow  dashboardGrid">
             <div class="gridHeader">@WebLocalizationKeys.PHOTOS</div>
-            <div id="photoGridContainer"></div>
+            <div id="photoGridContainer" class="dashboardGrid"></div>
         </div>
     </div>
    
-<div class="col right">
-    <div class="fieldRow dashboardGrid">
+<div class="col right ">
+    <div class="fieldRow  dashboardGrid">
         <div class="gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
-        <div id="completedTaskGridContainer"></div>
+        <div id="completedTaskGridContainer" class="dashboardGrid"></div>
     </div>
-    <div class="fieldRow dashboardGrid">
+    <div class="fieldRow  dashboardGrid">
         <div class="gridHeader">@WebLocalizationKeys.DOCUMENTS</div>
-        <div id="documentGridContainer"></div>
+        <div id="documentGridContainer" class="dashboardGrid"></div>
     </div>
 </div>

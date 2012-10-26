@@ -1,7 +1,7 @@
 using System;
+using CC.Core.Enumerations;
+using CC.Core.Localization;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 
 namespace AbstractTestProject
 {

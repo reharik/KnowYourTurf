@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using CC.Core.Domain;
+using CC.Core.Enumerations;
+using CC.Core.Localization;
 using Castle.Components.Validator;
-using FluentNHibernate.MappingModel;
 using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
+using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Core.Domain
 {
@@ -71,7 +69,7 @@ namespace KnowYourTurf.Core.Domain
 
         #endregion
 
-        public virtual bool PurchaseOrderHasBeenCompleted(long purchaseOrderId)
+        public virtual bool PurchaseOrderHasBeenCompleted(int purchaseOrderId)
         {
             var purchaseOrder = GetCompletedPurchaseOrders().FirstOrDefault(x => x.EntityId == purchaseOrderId);
             foreach (var li in purchaseOrder.LineItems)
@@ -80,19 +78,19 @@ namespace KnowYourTurf.Core.Domain
         }
 
 
-        public virtual double AmountOfSubTotalForPurchaseOrder(long purchaseOrderId)
+        public virtual double AmountOfSubTotalForPurchaseOrder(int purchaseOrderId)
         {
             var purchaseOrder = GetCompletedPurchaseOrders().FirstOrDefault(x => x.EntityId == purchaseOrderId);
             return purchaseOrder.LineItems.Sum(x => x.SubTotal.Value);
         }
 
-        public virtual double TotalTaxForPurchaseOrder(long purchaseOrderId)
+        public virtual double TotalTaxForPurchaseOrder(int purchaseOrderId)
         {
             var purchaseOrder = GetCompletedPurchaseOrders().FirstOrDefault(x => x.EntityId == purchaseOrderId);
             return purchaseOrder.LineItems.Sum(x => x.Tax.Value);
         }
 
-        public virtual double TotalAmountDueForPurchaseOrder(long purchaseOrderId)
+        public virtual double TotalAmountDueForPurchaseOrder(int purchaseOrderId)
         {
             var purchaseOrder = GetCompletedPurchaseOrders().FirstOrDefault(x => x.EntityId == purchaseOrderId);
             return purchaseOrder.LineItems.Sum(x => x.SubTotal.Value + x.Tax.Value);

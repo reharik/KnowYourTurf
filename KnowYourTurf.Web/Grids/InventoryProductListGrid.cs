@@ -1,23 +1,20 @@
-﻿using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
+﻿using CC.Core.Html.Grid;
+using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
     public class InventoryProductListGrid : Grid<InventoryProduct>, IEntityListGrid<InventoryProduct>
     {
 
-        public InventoryProductListGrid(IGridBuilder<InventoryProduct> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public InventoryProductListGrid(IGridBuilder<InventoryProduct> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<InventoryProduct> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Product.Name)
+            GridBuilder.LinkColumnFor(x => x.Product.Name, "KYT")
                 .ToPerformAction(ColumnAction.DisplayItem)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.Quantity);

@@ -1,21 +1,20 @@
+using CC.Core.DomainTools;
+using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Grids
 {
     public class FacilitiesListGrid : Grid<User>, IEntityListGrid<User>
     {
-        public FacilitiesListGrid(IGridBuilder<User> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public FacilitiesListGrid(IGridBuilder<User> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<User> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.FullName)
+            GridBuilder.LinkColumnFor(x => x.FullName, "KYT")
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .IsSortable(false)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);

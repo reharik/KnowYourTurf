@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using CC.Core.Domain;
 
 namespace KnowYourTurf.Core.Domain
 {

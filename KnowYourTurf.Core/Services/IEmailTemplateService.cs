@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Mail;
 using Alpinely.TownCrier;
+using CC.Core;
 using StructureMap;
 
 namespace KnowYourTurf.Core.Services

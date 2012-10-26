@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using CC.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using Castle.Components.Validator;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
 
 namespace KnowYourTurf.Web.Controllers

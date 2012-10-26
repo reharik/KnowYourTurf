@@ -1,5 +1,4 @@
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Html.Grid;
+using CC.Core.CoreViewModelAndDTOs;
 
 namespace KnowYourTurf.Web.Models
 {
