@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Weather> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Date, "KYT")
+            GridBuilder.LinkColumnFor(x => x.Date)
                 .ToPerformAction(ColumnAction.DisplayItem)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.DewPoint);

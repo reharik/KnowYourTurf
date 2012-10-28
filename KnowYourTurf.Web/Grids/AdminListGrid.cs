@@ -1,5 +1,6 @@
 using CC.Core.DomainTools;
 using CC.Core.Html.Grid;
+using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
@@ -16,7 +17,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<User> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.FullName, "KYT")
+            GridBuilder.LinkColumnFor(x => x.FullName)
                 .ForAction<AdminDashboardController>(x => x.ViewAdmin(null))
                 .ToPerformAction(ColumnAction.Redirect)
                 .IsSortable(false)

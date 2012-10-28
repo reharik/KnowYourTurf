@@ -8,6 +8,7 @@ using CC.Core.Enumerations;
 using CC.Core.Html;
 using CC.Core.Services;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
@@ -35,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
             _selectListItemService = selectListItemService;
             _dynamicExpressionQuery = dynamicExpressionQuery;
             //completed used for pending so that you can't edit on employee page
-            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("PendingTasks");
+            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
             _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
             _sessionContext = sessionContext;
         }

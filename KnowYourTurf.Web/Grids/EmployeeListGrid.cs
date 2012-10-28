@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<User> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.FullName, "KYT")
+            GridBuilder.LinkColumnFor(x => x.FullName)
                 .ToPerformAction(ColumnAction.Redirect)
                 .IsSortable(false)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
