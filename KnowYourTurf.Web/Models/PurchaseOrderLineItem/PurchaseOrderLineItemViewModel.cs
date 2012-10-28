@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Localization;
 using Castle.Components.Validator;
-using KnowYourTurf.Core;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Web.Models
 {

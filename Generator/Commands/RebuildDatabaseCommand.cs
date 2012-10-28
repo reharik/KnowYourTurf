@@ -1,3 +1,4 @@
+using CC.Core.DomainTools;
 using KnowYourTurf.Core.Domain;
 using NHibernate;
 using StructureMap;
@@ -18,13 +19,16 @@ namespace Generator.Commands
 
         public void Execute(string[] args)
         {
+//            var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
+//            SqlServerHelper.DeleteReaddDb(sessionFactory);
+
 
             ObjectFactory.Configure(x => x.For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactoryAndGenerateSchema()));
             var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
-//            SqlServerHelper.DeleteReaddDb(sessionFactory);
+
+//            var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
 
             new DataLoader().Load();
-            SqlServerHelper.AddRhinoSecurity(sessionFactory);
 
             var securitySetup = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
             securitySetup.Execute(null);

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Html.Grid;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -28,7 +28,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.DeleteMultiple(null)),
-                gridDef = _purchaseOrderListGrid.GetGridDefinition(url),
+                gridDef = _purchaseOrderListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.PURCHASE_ORDERS.ToString()
             };
             model.headerButtons.Add("new");
@@ -49,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             _purchaseOrderListGrid.AddColumnModifications(mod);
 
-            var gridItemsViewModel = _purchaseOrderListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _purchaseOrderListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

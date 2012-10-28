@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -25,7 +25,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ListViewModel()
             {
                 deleteMultipleUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.DeleteMultiple(null)),
-                gridDef = _materialListGrid.GetGridDefinition(url),
+                gridDef = _materialListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.MATERIALS.ToString()
             };
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -34,7 +34,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Materials(GridItemsRequestModel input)
         {
               var items = _dynamicExpressionQuery.PerformQuery<Material>(input.filters);
-            var gridItemsViewModel = _materialListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+              var gridItemsViewModel = _materialListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

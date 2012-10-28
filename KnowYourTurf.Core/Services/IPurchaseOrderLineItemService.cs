@@ -1,5 +1,4 @@
-using FubuMVC.Core;
-using KnowYourTurf.Core;
+using CC.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 
@@ -33,7 +32,7 @@ namespace KnowYourTurf.Web.Controllers
             purchaseOrder.AddLineItem(purchaseOrderLineItem);
             var sub = 0d;
             var tax = 0d;
-            purchaseOrder.LineItems.Each(x =>
+            purchaseOrder.LineItems.ForEachItem(x =>
                                                   {
                                                       if (x.QuantityOrdered.HasValue && x.Price.HasValue)
                                                       {

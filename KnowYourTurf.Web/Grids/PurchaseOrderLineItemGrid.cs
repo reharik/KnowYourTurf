@@ -1,31 +1,24 @@
-﻿using System;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
+﻿using CC.Core.DomainTools;
+using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
     public class PurchaseOrderLineItemGrid : Grid<PurchaseOrderLineItem>, IEntityListGrid<PurchaseOrderLineItem>
     {
-        public PurchaseOrderLineItemGrid(IGridBuilder<PurchaseOrderLineItem> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public PurchaseOrderLineItemGrid(IGridBuilder<PurchaseOrderLineItem> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<PurchaseOrderLineItem> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn()
+            GridBuilder.ImageButtonColumn("KYT")
                 .ToPerformAction(ColumnAction.Delete).WithId("poliGrid")
                 .ImageName("delete_sm.png")
                 .ToolTip(WebLocalizationKeys.DELETE_ITEM).Width(22);
-            GridBuilder.LinkColumnFor(x => x.Product.Name)
+            GridBuilder.LinkColumnFor(x => x.Product.Name, "KYT")
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .WithId("poliGrid")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
@@ -40,17 +33,15 @@ namespace KnowYourTurf.Web.Grids
 
     public class ReceivePurchaseOrderLineItemGrid : Grid<PurchaseOrderLineItem>, IEntityListGrid<PurchaseOrderLineItem>
     {
-        public ReceivePurchaseOrderLineItemGrid(IGridBuilder<PurchaseOrderLineItem> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public ReceivePurchaseOrderLineItemGrid(IGridBuilder<PurchaseOrderLineItem> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<PurchaseOrderLineItem> BuildGrid()
         {
 
-            GridBuilder.LinkColumnFor(x => x.Product.Name)
+            GridBuilder.LinkColumnFor(x => x.Product.Name, "KYT")
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .WithId("commitPoliGrid")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
@@ -65,10 +56,8 @@ namespace KnowYourTurf.Web.Grids
 
     public class CompetedPurchaseOrderLineItemGrid : Grid<PurchaseOrderLineItem>, IEntityListGrid<PurchaseOrderLineItem>
     {
-        public CompetedPurchaseOrderLineItemGrid(IGridBuilder<PurchaseOrderLineItem> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public CompetedPurchaseOrderLineItemGrid(IGridBuilder<PurchaseOrderLineItem> gridBuilder)
+            : base(gridBuilder)
         {
         }
 

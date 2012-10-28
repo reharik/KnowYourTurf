@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CC.Core;
+using CC.Core.Domain;
+using CC.Core.Localization;
 using Castle.Components.Validator;
 using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Core.Domain
 {
@@ -84,7 +86,7 @@ namespace KnowYourTurf.Core.Domain
             return InventoryProduct != null ? InventoryProduct.EntityId + "_" + InventoryProduct.Product.InstantiatingType + "s" : "";
         }
 
-        public virtual bool IsAssignedToEmployee(long employeeId)
+        public virtual bool IsAssignedToEmployee(int employeeId)
         {
             var employee = Employees.FirstOrDefault(x=>x.EntityId == employeeId);
             return employee != null;

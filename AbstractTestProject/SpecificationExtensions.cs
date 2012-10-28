@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Xml;
-using FubuMVC.Core;
-using FubuMVC.Core.Util;
-using KnowYourTurf.Core.Domain;
+using CC.Core.Domain;
+using CC.Core.Utilities;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using Rhino.Mocks;
@@ -14,6 +13,7 @@ using Rhino.Mocks.Constraints;
 using Rhino.Mocks.Interfaces;
 using Is = NUnit.Framework.SyntaxHelpers.Is;
 using Text = NUnit.Framework.SyntaxHelpers.Text;
+using CC.Core;
 
 namespace AbstractTestProject
 {
@@ -257,7 +257,7 @@ namespace AbstractTestProject
 
         public static void ShouldContainAllOf(this string actual, params string[] expectedItems)
         {
-            expectedItems.Each(expected => actual.ShouldContain(expected));
+            expectedItems.ForEachItem(expected => actual.ShouldContain(expected));
         }
 
         public static void ShouldContain<T>(this IEnumerable<T> actual, Func<T, bool> expected)
@@ -333,8 +333,8 @@ namespace AbstractTestProject
             if (actual.Count == 0 && expected.Count == 0) return;
 
             string message = "";
-            actual.Each(o => message += string.Format("Extra:  {0}\n", (object)o));
-            expected.Each(o => message += string.Format("Missing:  {0}\n", o));
+            actual.ForEachItem(o => message += string.Format("Extra:  {0}\n", (object)o));
+            expected.ForEachItem(o => message += string.Format("Missing:  {0}\n", o));
 
             Assert.Fail(message);
         }
@@ -402,7 +402,7 @@ namespace AbstractTestProject
             var constraint = new CapturingConstraint();
             var constraints = new List<AbstractConstraint>();
 
-            method.GetParameters().Each(p => constraints.Add(constraint));
+            method.GetParameters().ForEachItem(p => constraints.Add(constraint));
 
             var expectation = expectAction(mock).Constraints(constraints.ToArray()).Repeat.Any();
             optionsAction(expectation);

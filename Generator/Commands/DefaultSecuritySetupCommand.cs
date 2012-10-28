@@ -18,10 +18,6 @@ namespace Generator.Commands
 
         public void Execute(string[] args)
         {
-            ObjectFactory.Configure(x => x.For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory()));
-            var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
-            SqlServerHelper.killRhinoSecurity(sessionFactory);
-            SqlServerHelper.AddRhinoSecurity(sessionFactory);
             _securitySetupService.ExecuteAll();
         }
     }

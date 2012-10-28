@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
-using KnowYourTurf.Core.Html;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
             ListViewModel model = new ListViewModel()
             {
                 deleteMultipleUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.DeleteMultiple(null)),
-                gridDef = _documentListGrid.GetGridDefinition(url),
+                gridDef = _documentListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.DOCUMENTS.ToString()
             };
             model.headerButtons.Add("new");
@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Documents(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Document>(input.filters);
-            var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

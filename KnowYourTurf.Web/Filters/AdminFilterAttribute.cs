@@ -1,6 +1,6 @@
 using System.Web.Mvc;
 using System.Web.Routing;
-using KnowYourTurf.Security.Interfaces;
+using CC.Security.Interfaces;
 using KnowYourTurf.Core.Services;
 using StructureMap;
 

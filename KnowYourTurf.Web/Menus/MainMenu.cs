@@ -1,6 +1,9 @@
 using System.Collections.Generic;
-using KnowYourTurf.Core.Enums;
+using CC.Core.DomainTools;
+using CC.Core.Html.Menu;
+using CC.Security;
 using KnowYourTurf.Core.Html.Menu;
+using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Config;
 using KnowYourTurf.Web.Controllers;
 
@@ -8,19 +11,27 @@ namespace KnowYourTurf.Web.Menus
 {
     public class MainMenu : IMenuConfig
     {
-        private readonly IMenuBuilder _builder;
+        private readonly IKYTMenuBuilder _builder;
+        private readonly ISessionContext _sessionContext;
+        private readonly IRepository _repository;
 
-        public MainMenu(IMenuBuilder builder)
+        public MainMenu(IKYTMenuBuilder builder, ISessionContext sessionContext)
         {
             _builder = builder;
+            _sessionContext = sessionContext;
         }
 
         public IList<MenuItem> Build(bool withoutPermissions = false)
         {
-            return DefaultMenubuilder(withoutPermissions);
+            IUser user = null;
+            if(!withoutPermissions)
+            {
+                user = _sessionContext.GetCurrentUser();
+            }
+            return DefaultMenubuilder(user);
         }
 
-        private IList<MenuItem> DefaultMenubuilder(bool withoutPermissions = false)
+        private IList<MenuItem> DefaultMenubuilder(IUser user = null)
         {
             return _builder
                 .CreateTagNode<EmployeeDashboardController>(WebLocalizationKeys.HOME)
@@ -71,7 +82,7 @@ namespace KnowYourTurf.Web.Menus
                             .CreateTagNode<CompletedPurchaseOrderListController>(WebLocalizationKeys.COMPLETED)
                         .EndChildren()
                     .EndChildren()
-                .MenuTree(withoutPermissions);
+                .MenuTree(user);
         }
     }
 }

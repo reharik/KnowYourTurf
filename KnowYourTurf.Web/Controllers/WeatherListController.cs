@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -24,7 +24,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<WeatherListController>(x => x.Weathers(null));
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _weatherListGrid.GetGridDefinition(url),
+                gridDef = _weatherListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.WEATHER.ToString()
             };
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -33,7 +33,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Weathers(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Weather>();
-            var gridItemsViewModel = _weatherListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _weatherListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

@@ -1,7 +1,8 @@
 using System;
+using CC.Core.Domain;
+using CC.Core.Localization;
 using Castle.Components.Validator;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Core.Domain
 {

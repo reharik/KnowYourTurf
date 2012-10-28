@@ -1,4 +1,5 @@
 using System;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 using NHibernate;
@@ -34,16 +35,16 @@ namespace KnowYourTurf.Core.Config
             if (entity is DomainEntity)
             {
                 var sessionContext = ObjectFactory.Container.GetInstance<ISessionContext>();
-                var currentUserId = sessionContext.GetUserId();
+                var currentUser = sessionContext.GetCurrentUser();
                 var systemClock = ObjectFactory.Container.GetInstance<ISystemClock>();
                 var getCompanyIdService = ObjectFactory.GetInstance<IGetCompanyIdService>();
                 for (int i = 0; i < propertyNames.Length; i++)
                 {
-                    if ("LastModified".Equals(propertyNames[i]))
+                    if ("ChangedDate".Equals(propertyNames[i]))
                     {
                         state[i] = systemClock.Now;
                     }
-                    if (!domainEntity.DateCreated.HasValue && "DateCreated".Equals(propertyNames[i]))
+                    if (!domainEntity.CreatedDate.HasValue && "CreatedDate".Equals(propertyNames[i]))
                     {
                         state[i] = systemClock.Now;
                     }
@@ -51,13 +52,13 @@ namespace KnowYourTurf.Core.Config
                     {
                         state[i] = getCompanyIdService.Execute();
                     }
-                    if (domainEntity.CreatedBy <= 0 && "CreatedBy".Equals(propertyNames[i]))
+                    if (domainEntity.CreatedBy ==null && "CreatedBy".Equals(propertyNames[i]))
                     {
-                        state[i] = currentUserId;
+                        state[i] = currentUser;
                     }
-                    if ("ModifiedBy".Equals(propertyNames[i]))
+                    if ("ChangedBy".Equals(propertyNames[i]))
                     {
-                        state[i] = currentUserId;
+                        state[i] = currentUser;
                     }
                 }
                 return true;
@@ -98,7 +99,7 @@ namespace KnowYourTurf.Core.Config
                     {
                         state[i] = systemClock.Now;
                     }
-                    if (!domainEntity.DateCreated.HasValue && "DateCreated".Equals(propertyNames[i]))
+                    if (!domainEntity.CreatedDate.HasValue && "DateCreated".Equals(propertyNames[i]))
                     {
                         state[i] = systemClock.Now;
                     }

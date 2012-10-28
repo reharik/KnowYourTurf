@@ -1,22 +1,19 @@
-﻿using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
+﻿using CC.Core.Html.Grid;
+using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
     public class PendingTaskGrid : Grid<Task>, IEntityListGrid<Task>
     {
-        public PendingTaskGrid(IGridBuilder<Task> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public PendingTaskGrid(IGridBuilder<Task> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<Task> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.TaskType.Name)
+            GridBuilder.LinkColumnFor(x => x.TaskType.Name, "KYT")
                 .ToPerformAction(ColumnAction.AddUpdateItem).WithId("pendingTaskList")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.ScheduledDate);

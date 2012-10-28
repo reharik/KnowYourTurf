@@ -11,8 +11,6 @@ if (typeof CC == "undefined") {
 }
 CC.Elements={};
 
-
-
 CC.Elements.Element = function($container){
      this.$container = $container;
      this.trimFieldName = function(){
@@ -195,7 +193,7 @@ CC.Elements.PictureGallery= CC.Elements.Element.extend({
         this._super("init",arguments);
         this.type = "ul";
         this.$input = this.$container.find("ul");
-        if(this.$input.find("li").size>0){
+        if(this.$input.find("li").size()>0){
             this.$input.galleryView({panel_width:500,panel_height:250});
         }
     }
@@ -203,9 +201,12 @@ CC.Elements.PictureGallery= CC.Elements.Element.extend({
 
 CC.Elements.Select = CC.Elements.Element.extend({
     init:function(){
+        var that = this;
         this._super("init",arguments);
         this.type = "select";
         this.$input = this.$container.find("select");
+        this.name = this.$input.attr('name');
+        this.$input.on("change",function(){that.validate();});
         this.$input.select2();
     },
     destroy:function(){

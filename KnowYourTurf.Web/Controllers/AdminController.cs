@@ -1,4 +1,7 @@
 ﻿using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Services;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
@@ -61,10 +64,10 @@ namespace KnowYourTurf.Web.Controllers
             var rulesResult = rulesEngineBase.ExecuteRules(admin);
             if(!rulesResult.Success)
             {
-                Notification notification = new Notification(rulesResult);
+                var notification = new RulesNotification(rulesResult);
                 return Json(notification);
             }
-            _repository.SoftDelete(admin);
+            _repository.Delete(admin);
             _repository.UnitOfWork.Commit();
             return null;
         }

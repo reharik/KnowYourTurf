@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+﻿using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {

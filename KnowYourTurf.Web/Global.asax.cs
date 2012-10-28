@@ -5,6 +5,7 @@ using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using CC.Core.DomainTools;
 using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;

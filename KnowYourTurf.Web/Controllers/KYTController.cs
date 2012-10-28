@@ -6,7 +6,9 @@ namespace KnowYourTurf.Web.Controllers
 {
 
 //    [AddUserToViewFilter, CustomAuthorize, PermissionValidation]
-    [Config.CustomAuthorize, PermissionValidation]
+    [CustomAuthorize(Order = 2)]
+    [PermissionValidation(Order = 3)]
+    [AddUserToViewModelFilter(Order = 1)]
     public class KYTController : Controller
     {
         protected string RenderViewToString()

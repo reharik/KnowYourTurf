@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using KnowYourTurf.Security.Model;
-using KnowYourTurf.Security.Services;
+using CC.Security.Model;
+using CC.Security.Services;
 using NHibernate;
 
 namespace KnowYourTurf.Core.Services

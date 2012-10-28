@@ -1,4 +1,5 @@
 using System;
+using CC.Core.DomainTools;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
@@ -56,96 +57,110 @@ namespace Generator
             //genregistry has no companyfilter and special getcompanyidservice
             _repository = ObjectFactory.Container.GetInstance<IRepository>();
             _repository.UnitOfWork.Initialize();
+            _purchaseOrderLineItemService = new PurchaseOrderLineItemService(null);
 
             CreateCompany();
-            CreateUserRoles();
-            CreateUser();
-            _purchaseOrderLineItemService = new PurchaseOrderLineItemService(new UserSessionFake(_defaultUser));
+            LoadForCompany(_company.EntityId);
             
-            CreateEmployee();
-            CreateField();
-            CreateEquipment();
-            CreateChemical();
-            CreateMaterials();
-            CreateFertilizer();
-            CreateInventory();
-            CreateTask();
-            CreateEventType();
-
-            CreateVendor();
-            CreateVendorContact();
-            CreateCalculator();
-            CreateDocumentCategory();
-            CreatePhotoCategory();
-            CreateEmailTemplate();
-            CreateEmailJobType();
             _repository.UnitOfWork.Commit();
 
         }
 
-        private void CreateUserRoles()
+        private void LoadForCompany(int companyId)
+        {
+            CreateUserRoles(companyId);
+            CreateUser(companyId);
+
+            CreateEmployee(companyId);
+            CreateField(companyId);
+            CreateEquipment(companyId);
+            CreateChemical(companyId);
+            CreateMaterials(companyId);
+            CreateFertilizer(companyId);
+            CreateInventory(companyId);
+            CreateTask(companyId);
+            CreateEventType(companyId);
+
+            CreateVendor(companyId);
+            CreateVendorContact(companyId);
+            CreateCalculator(companyId);
+            CreateDocumentCategory(companyId);
+            CreatePhotoCategory(companyId);
+            CreateEmailTemplate(companyId);
+            CreateEmailJobType(companyId);
+        }
+
+        private void CreateUserRoles(int companyId)
         {
             _userRoleAdmin = new UserRole
             {
-                Name = UserType.Administrator.ToString()
+                Name = UserType.Administrator.ToString(),
+                CompanyId = companyId
             };
             _userRoleEmployee = new UserRole
             {
-                Name = UserType.Employee.ToString()
+                Name = UserType.Employee.ToString(),
+                CompanyId = companyId
             };
             _userRoleFac = new UserRole
             {
-                Name = UserType.Facilities.ToString()
+                Name = UserType.Facilities.ToString(),
+                CompanyId = companyId
             };
             _repository.Save(_userRoleAdmin);
             _repository.Save(_userRoleEmployee);
             _repository.Save(_userRoleFac);
         }
 
-        private void CreateEmailTemplate()
+        private void CreateEmailTemplate(int companyId)
         {
             var template = new EmailTemplate
                                     {
                                         Name = "EmployeeDailyTask",
                                         Template =
-                                            "<p>Hi {%=name%},</p><p>Here are your tasks for {%=data%}:</p><p>{%=tasks%}</p><p>Thank you,</p><p>Management</p>"
+                                            "<p>Hi {%=name%},</p><p>Here are your tasks for {%=data%}:</p><p>{%=tasks%}</p><p>Thank you,</p><p>Management</p>",
+                                        CompanyId = companyId
                                     };
             _repository.Save(template);
         }
 
 
-        private void CreateDocumentCategory()
+        private void CreateDocumentCategory(int companyId)
         {
             var category = new DocumentCategory
             {
                 Name = "Field",
                 Description = "pictures of fields",
-                Status = Status.Active.ToString()
+                Status = Status.Active.ToString(),
+                CompanyId = companyId
             };
             var category2 = new DocumentCategory
             {
                 Name = "People",
                 Description = "pictures of people",
-                Status = Status.Active.ToString()
+                Status = Status.Active.ToString(),
+                CompanyId = companyId
             };
             _repository.Save(category);
             _repository.Save(category2);
 
         }
 
-        private void CreatePhotoCategory()
+        private void CreatePhotoCategory(int companyId)
         {
             var category = new PhotoCategory
             {
                 Name = "Field",
                 Description = "pictures of fields",
-                Status = Status.Active.ToString()
+                Status = Status.Active.ToString(),
+                CompanyId = companyId
             };
             var category2 = new PhotoCategory
             {
                 Name = "People",
                 Description = "pictures of people",
-                Status = Status.Active.ToString()
+                Status = Status.Active.ToString(),
+                CompanyId = companyId
             };
             _repository.Save(category);
             _repository.Save(category2);
@@ -153,14 +168,38 @@ namespace Generator
         }
 
 
-        private void CreateCalculator()
+        private void CreateCalculator(int companyId)
         {
-            var fertilizerNeeded = new Calculator { Name = "FertilizerNeeded" };
-            var materials = new Calculator { Name = "Materials" };
-            var sand = new Calculator { Name = "Sand" };
-            var overseedBagsNeeded = new Calculator { Name = "OverseedBagsNeeded" };
-            var overseedRateNeeded = new Calculator { Name = "OverseedRateNeeded" };
-            var fertilizerUsed = new Calculator { Name = "FertilizerUsed" };
+            var fertilizerNeeded = new Calculator
+            {
+                Name = "FertilizerNeeded",
+                CompanyId = companyId
+            };
+            var materials = new Calculator
+            {
+                Name = "Materials",
+                CompanyId = companyId
+            };
+            var sand = new Calculator
+            {
+                Name = "Sand",
+                CompanyId = companyId
+            };
+            var overseedBagsNeeded = new Calculator
+            {
+                Name = "OverseedBagsNeeded",
+                CompanyId = companyId
+            };
+            var overseedRateNeeded = new Calculator
+            {
+                Name = "OverseedRateNeeded",
+                CompanyId = companyId
+            };
+            var fertilizerUsed = new Calculator
+            {
+                Name = "FertilizerUsed",
+                CompanyId = companyId
+            };
             _repository.Save(fertilizerNeeded);
             _repository.Save(fertilizerUsed);
             _repository.Save(materials);
@@ -180,21 +219,23 @@ namespace Generator
             _repository.Save(_company);
         }
 
-        private void CreateEquipment()
+        private void CreateEquipment(int companyId)
         {
             _equip1 = new Equipment
                              {
-                                 Name = "Truck"
+                                 Name = "Truck",
+                                 CompanyId = companyId
                              };
             _equip2 = new Equipment
                              {
-                                 Name = "Plane"
+                                 Name = "Plane",
+                                 CompanyId = companyId
                              };
             _repository.Save(_equip1);
             _repository.Save(_equip2);
         }
 
-        private void CreateUser()
+        private void CreateUser(int companyId)
         {
             _defaultUser = new User()
             {
@@ -202,13 +243,14 @@ namespace Generator
                 FirstName = "Raif",
                 LastName = "Harik",
                 Company = _company,
-                CompanyId = _company.EntityId
+                CompanyId = companyId
             };
             _defaultUser.UserLoginInfo = new UserLoginInfo
                                              {
                                                  LoginName = "Admin",
                                                  Password = "123",
-                                                 Status = "Active"
+                                                 Status = "Active",
+                                                 CompanyId = companyId
                                              };
             _defaultUser.AddUserRole(_userRoleAdmin);
             _defaultUser.AddUserRole(_userRoleEmployee);
@@ -217,12 +259,13 @@ namespace Generator
                 FirstName = "Amahl",
                 LastName = "Harik",
                 Company = _company,
-                CompanyId = _company.EntityId
+                CompanyId = companyId
             };
             altUser.UserLoginInfo = new UserLoginInfo
             {
                 LoginName = "alt",
                 Password = "alt",
+                CompanyId = companyId
             };
             altUser.AddUserRole(_userRoleAdmin);
             altUser.AddUserRole(_userRoleEmployee);
@@ -231,13 +274,14 @@ namespace Generator
             {
                 FirstName = "Amahl",
                 LastName = "Harik",
-                Company = _company
+                CompanyId = companyId
             };
             facilities.UserLoginInfo = new UserLoginInfo
             {
                 LoginName = "facilities",
                 Password = "facilities",
-                Status = "Active"
+                Status = "Active",
+                CompanyId = companyId
             };
             facilities.AddUserRole(_userRoleFac);
 
@@ -248,7 +292,7 @@ namespace Generator
 
         }
 
-        private void CreateEmployee()
+        private void CreateEmployee(int companyId)
         {
             _employee1 = new User()
             {
@@ -265,13 +309,14 @@ namespace Generator
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
-                CompanyId = _company.EntityId
+                CompanyId = companyId
                 };
             _employee1.UserLoginInfo = new UserLoginInfo
             {
                 LoginName = "reharik@gmail.com",
                 Password = "123",
-                Status = "Active"
+                Status = "Active",
+                CompanyId = companyId
             };
 
             _employee2 = new User()
@@ -289,13 +334,14 @@ namespace Generator
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
-                CompanyId = _company.EntityId
+                CompanyId = companyId
                 };
             _employee2.UserLoginInfo = new UserLoginInfo
             {
                 LoginName = "amahl@gmail.com",
                 Password = "123",
-                Status = "Active"
+                Status = "Active",
+                CompanyId = companyId
             };
 
             _employeeAdmin1 = new User()
@@ -313,13 +359,14 @@ namespace Generator
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
-                CompanyId = _company.EntityId
+                CompanyId = companyId
             };
             _employeeAdmin1.UserLoginInfo = new UserLoginInfo
             {
                 LoginName = "mark@gmail.com",
                 Password = "123",
-                Status = "Active"
+                Status = "Active",
+                CompanyId = companyId
             };
 
             _employeeAdmin2 = new User()
@@ -337,13 +384,14 @@ namespace Generator
                 State = "Tx",
                 ZipCode = "12345",
                 Company = _company,
-                CompanyId = _company.EntityId
+                CompanyId = companyId
             };
             _employeeAdmin2.UserLoginInfo = new UserLoginInfo
             {
                 LoginName = "chris@gmail.com",
                 Password = "123",
-                Status = "Active"
+                Status = "Active",
+                CompanyId = companyId
             };
             _employee1.AddUserRole(_userRoleEmployee);
             _employee2.AddUserRole(_userRoleEmployee);
@@ -358,14 +406,15 @@ namespace Generator
             _repository.Save(_employeeAdmin2);
         }
 
-        private void CreateField()
+        private void CreateField(int companyId)
         {
             _field1 = new Field
             {
                 Name = "field1",
                 Description = "SomeField1",
                 Size = 22000,
-                Abbreviation = "SFF"
+                Abbreviation = "SFF",
+                CompanyId = companyId
             };
 
             _field2 = new Field
@@ -373,14 +422,16 @@ namespace Generator
                 Name = "field2",
                 Description = "SomeField2",
                 Size = 120000,
-                Abbreviation = "SOFF"
+                Abbreviation = "SOFF",
+                CompanyId = companyId
             };
             _field3 = new Field
             {
                 Name = "field3",
                 Description = "SomeField1",
                 Size = 22000,
-                Abbreviation = "SFF"
+                Abbreviation = "SFF",
+                CompanyId = companyId
             };
 
             _field4 = new Field
@@ -388,7 +439,8 @@ namespace Generator
                 Name = "field3",
                 Description = "SomeField2",
                 Size = 120000,
-                Abbreviation = "SOFF"
+                Abbreviation = "SOFF",
+                CompanyId = companyId
             };
 
 
@@ -400,43 +452,48 @@ namespace Generator
 //            _repository.Save(_category2);
         }
 
-        private void CreateEventType()
+        private void CreateEventType(int companyId)
         {
             var eventType1 = new EventType
             {
                 Name = "some event",
-                Status = Status.Active.ToString()
+                Status = Status.Active.ToString(),
+                CompanyId = companyId
             };
             var eventType2 = new EventType
             {
                 Name = "some other event",
-                Status = Status.Active.ToString()
+                Status = Status.Active.ToString(),
+                CompanyId = companyId
             };
             _repository.Save(eventType1);
             _repository.Save(eventType2);
         }
 
-        private void CreateEmailJobType()
+        private void CreateEmailJobType(int companyId)
         {
             var ejt = new EmailJobType()
             {
                 Name = "Daily Tasks",
-                Status = Status.Active.ToString()
+                Status = Status.Active.ToString(),
+                CompanyId = companyId
             };
             _repository.Save(ejt);
         }
 
-        private void CreateTask()
+        private void CreateTask(int companyId)
         {
             var taskType1 = new TaskType
             {
                 Name = "Mow",
-                Status = Status.Active.ToString()
+                Status = Status.Active.ToString(),
+                CompanyId = companyId
             };
             var taskType2 = new TaskType
             {
                 Name = "Water",
-                Status = Status.Active.ToString()
+                Status = Status.Active.ToString(),
+                CompanyId = companyId
             };
             _repository.Save(taskType1);
             _repository.Save(taskType2);
@@ -448,7 +505,8 @@ namespace Generator
                 ScheduledEndTime = DateTime.Parse("3/3/2011 6:30 AM"),
                 Notes = "Notes1",
                 QuantityNeeded = 4,
-                UnitType = UnitType.Tons.ToString()
+                UnitType = UnitType.Tons.ToString(),
+                CompanyId = companyId
             };
             _task1.Field =_field1;
             _task1.InventoryProduct = _inventoryMaterial2;
@@ -461,7 +519,8 @@ namespace Generator
                 ScheduledEndTime = DateTime.Parse("3/3/2011 7:30 AM"),
                 Notes = "Notes2",
                 QuantityNeeded = 4,
-                UnitType = UnitType.Tons.ToString()
+                UnitType = UnitType.Tons.ToString(),
+                CompanyId = companyId
             };
             _task2.Field = _field2;
             _task2.InventoryProduct = _inventoryChemical2;
@@ -484,7 +543,8 @@ namespace Generator
                 ScheduledEndTime = DateTime.Parse("3/3/2011 6:30 AM"),
                 Notes = "Notes1",
                 QuantityNeeded = 4,
-                UnitType = UnitType.Tons.ToString()
+                UnitType = UnitType.Tons.ToString(),
+                CompanyId = companyId
             };
             _task3.Field = _field3;
             _task3.InventoryProduct = _invenotyMaterial1;
@@ -497,7 +557,8 @@ namespace Generator
                 ScheduledEndTime = DateTime.Parse("3/3/2011 7:30 AM"),
                 Notes = "Notes2",
                 QuantityNeeded = 4,
-                UnitType = UnitType.Tons.ToString()
+                UnitType = UnitType.Tons.ToString(),
+                CompanyId = companyId
             };
             _task4.Field = _field4;
             _task4.InventoryProduct = _inventoryChemical2;
@@ -518,7 +579,7 @@ namespace Generator
 
         }
 
-        private void CreateVendor()
+        private void CreateVendor(int companyId)
         {
             _vendor1 = new Vendor
             {
@@ -527,7 +588,8 @@ namespace Generator
                 Fax = "123.456.7891",
                 Website = "www.somewebsite1.com",
                 LogoUrl = "someurl1",
-                Notes = "notes1"
+                Notes = "notes1",
+                CompanyId = companyId
             };
 
             _vendor2 = new Vendor
@@ -537,7 +599,8 @@ namespace Generator
                 Fax = "123.456.7891",
                 Website = "www.somewebsite2.com",
                 LogoUrl = "someurl2",
-                Notes = "notes2"
+                Notes = "notes2",
+                CompanyId = companyId
             };
 
             _vendor1.AddProduct(_fertilizer1);
@@ -559,7 +622,11 @@ namespace Generator
             _repository.Save(_vendor1);
             _repository.Save(_vendor2);
 
-            var purchaseOrder1 = new PurchaseOrder {DateCreated = DateTime.Parse("1/5/2009")};
+            var purchaseOrder1 = new PurchaseOrder
+            {
+                CreatedDate = DateTime.Parse("1/5/2009"),
+                CompanyId = companyId
+            };
             purchaseOrder1.Vendor = _vendor1;
             var poli1 = new PurchaseOrderLineItem()
             {
@@ -567,7 +634,8 @@ namespace Generator
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false,
+                CompanyId = companyId
             };
             poli1.Product = _fertilizer1;
 
@@ -577,7 +645,8 @@ namespace Generator
                 UnitType = UnitType.Bags.ToString(),
                 QuantityOrdered = 5,
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false,
+                CompanyId = companyId
             };
             poli2.Product = _fertilizer1;
 
@@ -587,7 +656,8 @@ namespace Generator
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false,
+                CompanyId = companyId
             };
             poli3.Product = _materials1;
 
@@ -597,7 +667,8 @@ namespace Generator
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false,
+                CompanyId = companyId
             };
             poli4.Product = _materials2;
 
@@ -607,7 +678,8 @@ namespace Generator
                 QuantityOrdered = 5,
                 UnitType = UnitType.Bags.ToString(),
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false,
+                CompanyId = companyId
             };
             poli5.Product =_chemical2;
 
@@ -617,7 +689,8 @@ namespace Generator
                 UnitType = UnitType.Bags.ToString(),
                 QuantityOrdered = 5,
                 SizeOfUnit = 5,
-                Taxable = true
+                Taxable = false,
+                CompanyId = companyId
             };
             poli6.Product = _chemical1;
 
@@ -632,7 +705,7 @@ namespace Generator
 
         }
 
-        private void CreateVendorContact()
+        private void CreateVendorContact(int companyId)
         {
             _contact1v1 = new VendorContact
                                  {
@@ -646,6 +719,7 @@ namespace Generator
                                      Fax = "512.228.60690",
                                      State = "RI",
                                      Status = "Active",
+                                     CompanyId = companyId
                                  };
             _contact1v2 = new VendorContact
                              {
@@ -659,6 +733,7 @@ namespace Generator
                                  Fax = "512.228.60690",
                                  State = "RI",
                                  Status = "Active",
+                                 CompanyId = companyId
                              };
             _contact2v1 = new VendorContact
             {
@@ -672,6 +747,7 @@ namespace Generator
                 Fax = "512.228.60690",
                 State = "Tx",
                 Status = "Active",
+                CompanyId = companyId
             };
             _contact2v2 = new VendorContact
             {
@@ -685,6 +761,7 @@ namespace Generator
                 Fax = "512.228.60690",
                 State = "Tx",
                 Status = "Active",
+                CompanyId = companyId
             };
             _vendor1.AddContact(_contact1v1);
             _vendor1.AddContact(_contact2v1);
@@ -695,15 +772,51 @@ namespace Generator
             _repository.Save(_vendor2);
         }
 
-        public void CreateInventory()
+        public void CreateInventory(int companyId)
         {
 
-            _inventoryChemical1 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10};
-            _inventoryChemical2 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
-            _inventoryFertilizer1 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
-            _inventoryFertilizer2 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
-            _invenotyMaterial1 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
-            _inventoryMaterial2 = new InventoryProduct() { Quantity = 10, UnitType = UnitType.Tons.Key, SizeOfUnit = 10 };
+            _inventoryChemical1 = new InventoryProduct()
+            {
+                Quantity = 10,
+                UnitType = UnitType.Tons.Key,
+                SizeOfUnit = 10,
+                CompanyId = companyId
+            };
+            _inventoryChemical2 = new InventoryProduct()
+            {
+                Quantity = 10,
+                UnitType = UnitType.Tons.Key,
+                SizeOfUnit = 10,
+                CompanyId = companyId
+            };
+            _inventoryFertilizer1 = new InventoryProduct()
+            {
+                Quantity = 10,
+                UnitType = UnitType.Tons.Key,
+                SizeOfUnit = 10,
+                CompanyId = companyId
+            };
+            _inventoryFertilizer2 = new InventoryProduct()
+            {
+                Quantity = 10,
+                UnitType = UnitType.Tons.Key,
+                SizeOfUnit = 10,
+                CompanyId = companyId
+            };
+            _invenotyMaterial1 = new InventoryProduct()
+            {
+                Quantity = 10,
+                UnitType = UnitType.Tons.Key,
+                SizeOfUnit = 10,
+                CompanyId = companyId
+            };
+            _inventoryMaterial2 = new InventoryProduct()
+            {
+                Quantity = 10,
+                UnitType = UnitType.Tons.Key,
+                SizeOfUnit = 10,
+                CompanyId = companyId
+            };
             _inventoryChemical1.Product = _chemical1;
             _inventoryChemical2.Product = _chemical2;
             _inventoryFertilizer1.Product = _fertilizer1;
@@ -719,30 +832,33 @@ namespace Generator
             _repository.Save(_inventoryMaterial2);
         }
 
-        private void CreateMaterials()
+        private void CreateMaterials(int companyId)
         {
             _materials1 = new Material
             {
-                Name = "Kryptonite", 
+                Name = "Kryptonite",
+                CompanyId = companyId
             };
 
             _materials2 = new Material
             {
-                Name = "FoolsGold", 
+                Name = "FoolsGold",
+                CompanyId = companyId
             };
 
             _repository.Save(_materials1);
             _repository.Save(_materials2);
         }
 
-        private void CreateFertilizer()
+        private void CreateFertilizer(int companyId)
         {
             _fertilizer1 = new Fertilizer
             {
                 Name = "cow poop",
                 N = 10,
                 P = 10,
-                K = 10
+                K = 10,
+                CompanyId = companyId
             };
 
             _fertilizer2 = new Fertilizer
@@ -750,23 +866,26 @@ namespace Generator
                 Name = "Chicken poop",
                 N = 10,
                 P = 10,
-                K = 10
+                K = 10,
+                CompanyId = companyId
             };
 
             _repository.Save(_fertilizer1);
             _repository.Save(_fertilizer2);
         }
 
-        private void CreateChemical()
+        private void CreateChemical(int companyId)
         {
             _chemical1 = new Chemical()
             {
                 Name = "Lsd",
+                CompanyId = companyId
             };
 
             _chemical2 = new Chemical()
             {
                 Name = "PCP",
+                CompanyId = companyId
             };
 
             _repository.Save(_chemical1);

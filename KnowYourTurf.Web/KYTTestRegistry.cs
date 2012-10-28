@@ -1,20 +1,21 @@
-using KnowYourTurf.Security.Interfaces;
-using KnowYourTurf.Security.Services;
 using Alpinely.TownCrier;
+using CC.Core.DomainTools;
+using CC.Core.Html.CCUI.HtmlConventionRegistries;
+using CC.Core.Html.Grid;
+using CC.Core.Localization;
+using CC.Security.Interfaces;
+using CC.Security.Services;
+using CC.UI.Helpers;
+using CC.UI.Helpers.Configuration;
+using CC.UI.Helpers.Tags;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Domain.Tools;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Web.Menus;
 using KnowYourTurf.Web.Services;
-using FubuMVC.UI;
-using FubuMVC.UI.Configuration;
-using FubuMVC.UI.Tags;
-using KnowYourTurf.Core;
+
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using StructureMap.Configuration.DSL;
@@ -33,9 +34,10 @@ namespace KnowYourTurf.Web.Config
                          x.AssemblyContainingType(typeof (MergedEmailFactory));
                          x.WithDefaultConventions();
                      });
-            For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions>();
+            For<HtmlConventionRegistry>().Add<CCHtmlConventions2>();
+            For<IElementNamingConvention>().Use<CCElementNamingConvention>();
+
             For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
-            For<IElementNamingConvention>().Use<KnowYourTurfElementNamingConvention>();
             For(typeof (ITagGenerator<>)).Use(typeof (TagGenerator<>));
             For<TagProfileLibrary>().Singleton();
             For<INHSetupConfig>().Use<NullNHSetupConfig>();
@@ -44,20 +46,15 @@ namespace KnowYourTurf.Web.Config
             For<ISessionFactory>().Use<NullSessionFactory>();
 
             For<ISession>().Use<NullSession>();
-            For<ISession>().Use<NullSession>().Named("NoFilters");
-            For<ISession>().Use<NullSession>().Named("NoFiltersOrInterceptor");
-            For<ISession>().Use<NullSession>().Named("NoFiltersSpecialInterceptor");
+            For<ISession>().Use<NullSession>().Named("NoInterceptorNoFilters");
 
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFilters)).Named("NoFilters");
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFiltersOrInterceptor)).Named("NoFiltersOrInterceptor");
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFiltersSpecialInterceptor)).Named("NoFiltersSpecialInterceptor");
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<UnitOfWork>().Named("NoInterceptorNoFilters");
 
             For<IRepository>().Use<Repository>();
-            For<IRepository>().Add(x => new Repository(RepoConfig.NoFilters)).Named("NoFilters");
-            For<IRepository>().Add(x => new Repository(RepoConfig.NoFiltersOrInterceptor)).Named("NoFiltersOrInterceptor");
-            For<IRepository>().Add(x => new Repository(RepoConfig.NoFiltersSpecialInterceptor)).Named("NoFiltersSpecialInterceptor");
+            For<IRepository>().Add<Repository>().Named("NoFilters");
+            For<IRepository>().Add<Repository>().Named("NoInterceptorNoFilters");
 
             For<ILocalizationDataProvider>().Use<LocalizationDataProvider>();
             For<IAuthenticationContext>().Use<WebAuthenticationContext>();

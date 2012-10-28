@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Enumerations;
+using CC.Core.Localization;
 using Castle.Components.Validator;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
-using KnowYourTurf.Core.Services;
+using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Models.Vendor
 {

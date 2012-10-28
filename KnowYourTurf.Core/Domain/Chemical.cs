@@ -1,6 +1,4 @@
 ﻿using Castle.Components.Validator;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Core.Domain
 {

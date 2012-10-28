@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AutoMapper;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using FluentNHibernate.Utils;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using System.Linq;
@@ -64,7 +64,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.Products(null))+"/"+input.EntityId;
             var model = new ListViewModel()
             {
-                gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url),
+                gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.PRODUCTS.ToString(),
             };
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -75,7 +75,7 @@ namespace KnowYourTurf.Web.Controllers
             var vendor = _repository.Find<Vendor>(input.EntityId);
             var items = _dynamicExpressionQuery.PerformQuery(vendor.Products, input.filters);
 
-            var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
@@ -182,6 +182,6 @@ namespace KnowYourTurf.Web.Controllers
 
     public class PoSelectorGridItemsRequestModel : GridItemsRequestModel
     {
-        public long Vendor { get; set; }
+        public int Vendor { get; set; }
     }
 }

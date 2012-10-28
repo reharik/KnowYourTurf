@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using CC.Core.Domain;
+using CC.Core.Localization;
 using Castle.Components.Validator;
-using KnowYourTurf.Core;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Core.Domain

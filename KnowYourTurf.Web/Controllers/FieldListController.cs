@@ -1,8 +1,9 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -27,7 +28,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null)) + "?RootId=" + input.RootId;
             ListViewModel model = new ListViewModel()
             {
-                gridDef = _fieldListGrid.GetGridDefinition(url),
+                gridDef = _fieldListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.FIELDS.ToString()
             };
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -37,7 +38,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var category = _repository.Find<Category>(input.RootId);
             var items = _dynamicExpressionQuery.PerformQuery(category.Fields, input.filters);
-            var gridItemsViewModel = _fieldListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _fieldListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

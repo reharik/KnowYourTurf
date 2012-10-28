@@ -281,6 +281,8 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
 
 KYT.Views.DahsboardGridView = KYT.Views.View.extend({
      initialize: function(){
+        this.options.gridOptions=this.options.gridOptions||{};
+        this.options.gridOptions.height="400px";
         KYT.mixin(this, "ajaxGridMixin");
         KYT.mixin(this, "setupGridMixin");
         KYT.mixin(this, "defaultGridEventsMixin");

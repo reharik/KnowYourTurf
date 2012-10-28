@@ -1,11 +1,6 @@
-using System;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.DomainTools;
+using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 
@@ -14,16 +9,14 @@ namespace KnowYourTurf.Web.Grids
     public class AdminListGrid : Grid<User>, IEntityListGrid<User>
     {
 
-        public AdminListGrid(IGridBuilder<User> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public AdminListGrid(IGridBuilder<User> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<User> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.FullName)
+            GridBuilder.LinkColumnFor(x => x.FullName, "KYT")
                 .ForAction<AdminDashboardController>(x => x.ViewAdmin(null))
                 .ToPerformAction(ColumnAction.Redirect)
                 .IsSortable(false)

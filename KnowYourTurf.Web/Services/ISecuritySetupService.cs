@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using KnowYourTurf.Security.Interfaces;
-using FubuMVC.Core;
+using CC.Core.DomainTools;
+using CC.Security.Interfaces;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Config;
-using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web.Controllers;
 using StructureMap;
+using CC.Core;
 
 namespace KnowYourTurf.Web.Services
 {
@@ -95,10 +95,10 @@ namespace KnowYourTurf.Web.Services
         public void CreateOperationsForAllMenuItems()
         {
             var menuConfig = _container.GetAllInstances<IMenuConfig>();
-            menuConfig.Each(x =>
+            menuConfig.ForEachItem(x =>
             {
                 var menuItems = x.Build(true);
-                menuItems.Each(m =>
+                menuItems.ForEachItem(m =>
                 {
                     var operation = "/MenuItem/" + m.Text.RemoveWhiteSpace();
                     if (!Operations.Contains(operation))
@@ -124,11 +124,11 @@ namespace KnowYourTurf.Web.Services
         public void AssociateAllUsersWithThierTypeGroup()
         {
             var admins = _repository.Query<User>(x => x.UserRoles.Any(y=>y.Name == SecurityUserGroups.Administrator.ToString()));
-            admins.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Administrator.ToString()));
+            admins.ForEachItem(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Administrator.ToString()));
             var facilities = _repository.Query<User>(x => x.UserRoles.Any(y => y.Name == SecurityUserGroups.Facilities.ToString()));
-            facilities.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Facilities.ToString()));
+            facilities.ForEachItem(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Facilities.ToString()));
             var employees = _repository.Query<User>(x => !x.UserRoles.Any(y => y.Name == SecurityUserGroups.Facilities.ToString()));
-            employees.Each(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Employee.ToString()));
+            employees.ForEachItem(x => _authorizationRepository.AssociateUserWith(x, SecurityUserGroups.Employee.ToString()));
         }
 
         public void CreateUserGroups()

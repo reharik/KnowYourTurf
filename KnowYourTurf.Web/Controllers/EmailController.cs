@@ -1,10 +1,10 @@
 using System;
 using System.Web.Mvc;
-using FubuMVC.Core;
-using KnowYourTurf.Core;
+using CC.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Services;
 using KnowYourTurf.Web.Services.EmailHandlers;
 using StructureMap;
 
@@ -27,7 +27,7 @@ namespace KnowYourTurf.Web.Controllers
             var emailJob = _repository.Find<EmailJob>(input.EntityId);
             var emailTemplateHandler = ObjectFactory.Container.GetInstance<IEmailTemplateHandler>(emailJob.Name+"Handler");
             try{ 
-                emailJob.Subscribers.Each(x=>
+                emailJob.Subscribers.ForEachItem(x=>
                                                     {
                                                         var model = emailTemplateHandler.CreateModel(emailJob, x);
                                                         _emailService.SendSingleEmail(model);
