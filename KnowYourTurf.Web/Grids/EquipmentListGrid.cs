@@ -16,7 +16,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Equipment> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name, "KYT")
+            GridBuilder.LinkColumnFor(x => x.Name)
                 .ForAction<EquipmentController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);

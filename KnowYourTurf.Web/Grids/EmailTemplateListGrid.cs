@@ -17,7 +17,7 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<EmailTemplate> BuildGrid()
         {
 
-            GridBuilder.LinkColumnFor(x => x.Name, "KYT")
+            GridBuilder.LinkColumnFor(x => x.Name)
                 .ForAction<EmailTemplateController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);

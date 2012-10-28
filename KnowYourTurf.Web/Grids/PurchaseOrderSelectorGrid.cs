@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<BaseProduct> BuildGrid()
         {
-            GridBuilder.ImageButtonColumn("KYT")
+            GridBuilder.ImageButtonColumn()
                 .ToPerformAction(ColumnAction.Other).WithId("productGrid")
                 .ImageName("KYTadd.png")
                 .ToolTip(WebLocalizationKeys.ADD_ITEM_TO_PO);

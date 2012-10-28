@@ -17,7 +17,6 @@ namespace KnowYourTurf.Core.Services
         void AddUpdateSessionItem(SessionItem item);
         void RemoveSessionItem(Guid sessionKey);
         void RemoveSessionItem(string sessionKey);
-        string MapPath(string url);
         HttpPostedFile RetrieveUploadedFile();
         SessionItem RetrieveSessionItem(string sessionKey);
         int GetCompanyId();
