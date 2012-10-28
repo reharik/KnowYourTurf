@@ -28,6 +28,7 @@ namespace KnowYourTurf.Web.Models
         public DateTime? ScheduledStartTime { get; set; }
         public DateTime? ScheduledEndTime { get; set; }
         public string ActualTimeSpent { get; set; }
+        [ValidateNonEmpty]
         public int FieldEntityId { get; set; }
         public int InventoryProductProductEntityId { get; set; }
         [ValidateDouble]

@@ -191,7 +191,6 @@
     <Compile Include="Services\IEmailJob\IEmailJob.cs" />
     <Compile Include="Services\IEmailTemplateService.cs" />
     <Compile Include="Services\IEntityListGrid.cs" />
-    <Compile Include="Services\IFileUploaderService.cs" />
     <Compile Include="Services\IGetCompanyIdService.cs" />
     <Compile Include="Domain\InventoryProduct.cs" />
     <Compile Include="Domain\LocalizedEnumeration.cs" />
@@ -270,7 +269,7 @@
     <Compile Include="Services\ISessionContext.cs" />
     <Compile Include="Services\DateTimeUtilities.cs" />
     <Compile Include="Services\IUnitSizeTimesQuantyCalculator.cs" />
-    <Compile Include="Services\IUploadedFileHandlerService.cs" />
+    <Compile Include="Services\IFileHandlerService.cs" />
     <Compile Include="Services\ReceivePurchaseOrderService.cs" />
     <Compile Include="Services\SecurityDataService.cs" />
     <Compile Include="Services\StructureMapServiceLocator.cs" />

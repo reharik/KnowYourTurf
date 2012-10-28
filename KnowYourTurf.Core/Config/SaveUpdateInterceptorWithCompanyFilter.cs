@@ -40,11 +40,11 @@ namespace KnowYourTurf.Core.Config
                 var getCompanyIdService = ObjectFactory.GetInstance<IGetCompanyIdService>();
                 for (int i = 0; i < propertyNames.Length; i++)
                 {
-                    if ("LastModified".Equals(propertyNames[i]))
+                    if ("ChangedDate".Equals(propertyNames[i]))
                     {
                         state[i] = systemClock.Now;
                     }
-                    if (!domainEntity.CreatedDate.HasValue && "DateCreated".Equals(propertyNames[i]))
+                    if (!domainEntity.CreatedDate.HasValue && "CreatedDate".Equals(propertyNames[i]))
                     {
                         state[i] = systemClock.Now;
                     }
@@ -56,7 +56,7 @@ namespace KnowYourTurf.Core.Config
                     {
                         state[i] = currentUser;
                     }
-                    if ("ModifiedBy".Equals(propertyNames[i]))
+                    if ("ChangedBy".Equals(propertyNames[i]))
                     {
                         state[i] = currentUser;
                     }

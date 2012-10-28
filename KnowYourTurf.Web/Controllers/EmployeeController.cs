@@ -9,6 +9,7 @@ using CC.Core.Html;
 using CC.Core.Services;
 using CC.Security.Interfaces;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
@@ -117,6 +118,13 @@ namespace KnowYourTurf.Web.Controllers
             mapRolesToGroups(employee);
             if (input.DeleteImage)
             {
+                _fileHandlerService.DeleteFile(employee.FileUrl);
+                employee.FileUrl = string.Empty;
+            }
+            if(_fileHandlerService.RequsetHasFile())
+            {
+                employee.FileUrl =
+                    _fileHandlerService.SaveAndReturnUrlForFile(SiteConfig.Settings().CustomerPhotosEmployeePath);
             }
 
             var crudManager = _saveEntityService.ProcessSave(employee);
@@ -185,7 +193,6 @@ namespace KnowYourTurf.Web.Controllers
             employee.City = model.City;
             employee.State = model.State;
             employee.ZipCode = model.ZipCode;
-            employee.FileUrl = model.FileUrl;
             employee.Notes = model.Notes;
             if(employee.UserLoginInfo == null)
             {
