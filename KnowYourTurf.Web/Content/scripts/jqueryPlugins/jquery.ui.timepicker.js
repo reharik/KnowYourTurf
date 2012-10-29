@@ -1,5 +1,5 @@
 /*
- * jQuery UI Timepicker 0.3.0
+ * jQuery UI Timepicker 0.3.1
  *
  * Copyright 2010-2011, Francois Gelinas
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -40,7 +40,7 @@
 
 (function ($) {
 
-    $.extend($.ui, { timepicker: { version: "0.3.0"} });
+    $.extend($.ui, { timepicker: { version: "0.3.1"} });
 
     var PROP_NAME = 'timepicker',
         tpuuid = new Date().getTime();
@@ -213,7 +213,6 @@
                     return this._get(inst, key);
                 });
             $.data(target, PROP_NAME, inst);
-            $.timepicker.count ++;
         },
 
         /* Handle keystrokes. */
@@ -409,7 +408,7 @@
                     inst.tpDiv.show(showAnim, $.timepicker._get(inst, 'showOptions'), duration, postProcess);
                 }
                 else {
-                    inst.tpDiv[showAnim || 'show']((showAnim ? duration : null), postProcess);
+                    inst.tpDiv.show((showAnim ? duration : null), postProcess);
                 }
                 if (!showAnim || !duration) { postProcess(); }
                 if (inst.input.is(':visible') && !inst.input.is(':disabled')) { inst.input.focus(); }
@@ -810,6 +809,26 @@
         },
 
 
+        /* Detach a timepicker from its control.
+           @param  target    element - the target input field or division or span */
+        _destroyTimepicker: function(target) {
+            var $target = $(target);
+            var inst = $.data(target, PROP_NAME);
+            if (!$target.hasClass(this.markerClassName)) {
+                return;
+            }
+            var nodeName = target.nodeName.toLowerCase();
+            $.removeData(target, PROP_NAME);
+            if (nodeName == 'input') {
+                inst.append.remove();
+                inst.trigger.remove();
+                $target.removeClass(this.markerClassName)
+                    .unbind('focus.timepicker', this._showTimepicker)
+                    .unbind('click.timepicker', this._adjustZIndex);
+            } else if (nodeName == 'div' || nodeName == 'span')
+                $target.removeClass(this.markerClassName).empty();
+        },
+
         /* Enable the date picker to a jQuery selection.
            @param  target    element - the target input field or division or span */
         _enableTimepicker: function(target) {
@@ -959,13 +978,9 @@
 					    (showAnim == 'fadeIn' ? 'fadeOut' : 'hide'))]((showAnim ? duration : null), postProcess);
                 }
                 if (!showAnim) { postProcess(); }
-                var onClose = this._get(inst, 'onClose');
-                if (onClose) {
-                    onClose.apply(
-                        (inst.input ? inst.input[0] : null),
-					    [(inst.input ? inst.input.val() : ''), inst]);  // trigger custom callback
-                }
+
                 this._timepickerShowing = false;
+
                 this._lastInput = null;
                 if (this._inDialog) {
                     this._dialogInput.css({ position: 'absolute', left: '0', top: '-100px' });
@@ -975,6 +990,14 @@
                     }
                 }
                 this._inDialog = false;
+
+                var onClose = this._get(inst, 'onClose');
+                 if (onClose) {
+                     onClose.apply(
+                         (inst.input ? inst.input[0] : null),
+ 					    [(inst.input ? inst.input.val() : ''), inst]);  // trigger custom callback
+                 }
+
             }
         },
 
@@ -1156,7 +1179,7 @@
         },
 
         deselectTime: function(event) {
-            var id = $(e.target).attr("data-timepicker-instance-id"),
+            var id = $(event.target).attr("data-timepicker-instance-id"),
                 $target = $(id),
                 inst = this._getInst($target[0]);
             inst.hours = -1;
@@ -1247,8 +1270,10 @@
                 return '';
             }
 
-            if ((inst.hours < 0) || (inst.hours > 23)) { inst.hours = 12; }
-            if ((inst.minutes < 0) || (inst.minutes > 59)) { inst.minutes = 0; }
+            // default to 0 AM if hours is not valid
+            if ((inst.hours < inst.hours.starts) || (inst.hours > inst.hours.ends )) { inst.hours = 0; }
+            // default to 0 minutes if minute is not valid
+            if ((inst.minutes < inst.minutes.starts) || (inst.minutes > inst.minutes.ends)) { inst.minutes = 0; }
 
             var period = "",
                 showPeriod = (this._get(inst, 'showPeriod') == true),
@@ -1261,6 +1286,10 @@
                 selectedMinutes = inst.minutes ? inst.minutes : 0,
                 displayHours = selectedHours ? selectedHours : 0,
                 parsedTime = '';
+
+            // fix some display problem when hours or minutes are not selected yet
+            if (displayHours == -1) { displayHours = 0 }
+            if (selectedMinutes == -1) { selectedMinutes = 0 }
 
             if (showPeriod) { 
                 if (inst.hours == 0) {
@@ -1324,18 +1353,6 @@
             var inst= this._getInst(input);
             if ( inst == undefined) { return -1; }
             return inst.minutes;
-        },
-        _destroyTimepicker: function(input){
-            $(input).unbind("setData.timepicker");
-            $(input).unbind("getData.timepicker");
-            $(input).unbind("focus.timepicker");
-            $(input).unbind("click.timepicker");
-            $.removeData(input, PROP_NAME);
-            $.timepicker.count --;
-            if($.timepicker.count<=0){
-                $(document).unbind("mousedown",$.timepicker._checkExternalClick);
-                $.timepicker = null;
-            }
         }
 
     });
@@ -1353,15 +1370,13 @@
             $(document).mousedown($.timepicker._checkExternalClick).
 			find('body').append($.timepicker.tpDiv);
             $.timepicker.initialized = true;
-            $.timepicker.count = 0;
         }
 
 
 
-        var _options = options;
         var otherArgs = Array.prototype.slice.call(arguments, 1);
-        if (typeof _options == 'string' && (_options == 'getTime' || _options == 'getHour' || _options == 'getMinute' || _options=='destroy' ))
-            return $.timepicker['_' + _options + 'Timepicker'].
+        if (typeof options == 'string' && (options == 'getTime' || options == 'getHour' || options == 'getMinute' ))
+            return $.timepicker['_' + options + 'Timepicker'].
 			    apply($.timepicker, [this[0]].concat(otherArgs));
         if (options == 'option' && arguments.length == 2 && typeof arguments[1] == 'string')
             return $.timepicker['_' + options + 'Timepicker'].
@@ -1386,7 +1401,7 @@
     $.timepicker = new Timepicker(); // singleton instance
     $.timepicker.initialized = false;
     $.timepicker.uuid = new Date().getTime();
-    $.timepicker.version = "0.3.0";
+    $.timepicker.version = "0.3.1";
 
     // Workaround for #4055
     // Add another global to avoid noConflict issues with inline event handlers

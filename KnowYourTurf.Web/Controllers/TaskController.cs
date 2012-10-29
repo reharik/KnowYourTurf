@@ -13,6 +13,7 @@ using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
+using FluentNHibernate.Conventions;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -41,7 +42,7 @@ namespace KnowYourTurf.Web.Controllers
             return View("TaskAddUpdate", new TaskViewModel{Popup = input.Popup});
         }   
 
-        public ActionResult AddUpdate(TaskViewModel input)
+        public ActionResult AddUpdate(AddUpdateTaskViewModel input)
         {
             var task = input.EntityId > 0 ? _repository.Find<Task>(input.EntityId) : new Task();
             task.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : task.ScheduledDate;
@@ -60,6 +61,8 @@ namespace KnowYourTurf.Web.Controllers
             model._FieldEntityIdList = fields;
             model._InventoryProductProductEntityIdList = products;
             model._TaskTypeEntityIdList = taskTypes;
+            model.ScheduledStartTimeString = task.ScheduledStartTime.Value.ToShortTimeString();
+            model.ScheduledEndTimeString = task.ScheduledEndTime.HasValue? task.ScheduledEndTime.Value.ToShortTimeString():"";
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             model.Popup = input.Popup;
             model.RootId = input.RootId;
@@ -171,14 +174,11 @@ namespace KnowYourTurf.Web.Controllers
         {
             item.ScheduledDate = input.ScheduledDate;
             item.ScheduledStartTime = null;
-            if (input.ScheduledStartTime.HasValue)
-                item.ScheduledStartTime =
-                    DateTime.Parse(input.ScheduledDate.Value.ToShortDateString() + " " +
-                                   input.ScheduledStartTime.Value.ToShortTimeString());
+            item.ScheduledStartTime = DateTime.Parse(input.ScheduledDate.Value.ToShortDateString() + " " + input.ScheduledStartTimeString);
             item.ScheduledEndTime = null;
-            if (input.ScheduledEndTime.HasValue)
+            if(!string.IsNullOrEmpty(input.ScheduledEndTimeString))
             {
-                item.ScheduledEndTime = DateTime.Parse(input.ScheduledDate.Value.ToShortDateString() + " " + input.ScheduledEndTime.Value.ToShortTimeString());
+                item.ScheduledEndTime = DateTime.Parse(input.ScheduledDate.Value.ToShortDateString() + " " + input.ScheduledEndTimeString);
             }
             item.ActualTimeSpent = input.ActualTimeSpent;
             item.QuantityNeeded = input.QuantityNeeded;
