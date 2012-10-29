@@ -65,6 +65,50 @@ CC.Elements.Textbox = CC.Elements.Element.extend({
     }
 });
 
+//CC.Elements.DateTextbox = CC.Elements.Element.extend({
+//    init:function(){
+//        var that = this;
+//        this._super("init",arguments);
+//        this.type = "datetextbox";
+//        this.$label = this.$container.find("label");
+//        this.$input.on("change",function(){that.validate();});
+//        this.$input.scroller({
+//            preset: 'date',
+//            theme: 'default',
+//            display: 'modal',
+//            mode: 'scroller',
+//            dateOrder: 'mmddyyyy',
+//            headerPreText:this.$label.is(":visible")?this.friendlyName+" ":''
+//        });
+//    },
+//    destroy:function(){
+//        this.$input.off("change");
+//        this._super("destroy",arguments);
+//    }
+//});
+
+//CC.Elements.TimeTextbox = CC.Elements.Element.extend({
+//    init:function(){
+//        var that = this;
+//        this._super("init",arguments);
+//        this.type = "timetextbox";
+//        this.$label = this.$container.find("label");
+//        this.$input.on("change",function(){that.validate();});
+//        this.$input.scroller({
+//            preset: 'time',
+//            theme: 'default',
+//            display: 'modal',
+//            mode: 'scroller',
+//            dateOrder: 'hh:mm',
+//            headerPreText:this.$label.is(":visible")?this.$label.text()+" ":''
+//        });
+//    },
+//    destroy:function(){
+//        this.$input.off("change");
+//        this._super("destroy",arguments);
+//    }
+//});
+
 CC.Elements.DateTextbox = CC.Elements.Element.extend({
     init:function(){
         var that = this;
@@ -72,14 +116,7 @@ CC.Elements.DateTextbox = CC.Elements.Element.extend({
         this.type = "datetextbox";
         this.$label = this.$container.find("label");
         this.$input.on("change",function(){that.validate();});
-        this.$input.scroller({
-            preset: 'date',
-            theme: 'default',
-            display: 'modal',
-            mode: 'scroller',
-            dateOrder: 'mmddyyyy',
-            headerPreText:this.$label.is(":visible")?this.friendlyName+" ":''
-        });
+        this.$input.datepicker({ changeYear: true, changeMonth: true });
     },
     destroy:function(){
         this.$input.off("change");
@@ -92,23 +129,19 @@ CC.Elements.TimeTextbox = CC.Elements.Element.extend({
         var that = this;
         this._super("init",arguments);
         this.type = "timetextbox";
-        this.$label = this.$container.find("label");
+        this.$input = this.$container.find("input");
         this.$input.on("change",function(){that.validate();});
-        this.$input.scroller({
-            preset: 'time',
-            theme: 'default',
-            display: 'modal',
-            mode: 'scroller',
-            dateOrder: 'hh:mm',
-            headerPreText:this.$label.is(":visible")?this.$label.text()+" ":''
-        });
+        this.$input.timepicker({showPeriod: true,showLeadingZero: false,
+            onClose: function(text, inst){
+                $(this).change();
+            }});
     },
     destroy:function(){
         this.$input.off("change");
+        this.$input.timepicker("destroy");
         this._super("destroy",arguments);
     }
 });
-
 CC.Elements.NumberTextbox = CC.Elements.Element.extend({
     init:function(){
         var that = this;
