@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
 using CC.Core.Localization;
 using Castle.Components.Validator;
 using KnowYourTurf.Core.Enums;
@@ -17,6 +18,7 @@ namespace KnowYourTurf.Web.Models
 
         [ValidateNonEmpty]
         public string Name { get; set; }
+        [TextArea]
         public string Description { get; set; }
         public string Subject { get; set; }
         [ValidateNonEmpty]
@@ -25,7 +27,9 @@ namespace KnowYourTurf.Web.Models
         [ValueOf(typeof(Status))]
         public string Status { get; set; }
 
+        [ValidateNonEmpty]
         public int EmailTemplateEntityId { get; set; }
+        [ValidateNonEmpty]
         public int EmailJobTypeEntityId { get; set; }
 
         public string _saveUrl { get; set; }

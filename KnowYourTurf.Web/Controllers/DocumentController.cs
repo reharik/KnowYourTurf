@@ -4,9 +4,11 @@ using System.Web.Mvc;
 using AutoMapper;
 using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
 using CC.Core.DomainTools;
 using CC.Core.Html;
 using CC.Core.Services;
+using Castle.Components.Validator;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Services;
@@ -110,9 +112,12 @@ namespace KnowYourTurf.Web.Controllers
     {
         public IEnumerable<SelectListItem> _DocumentCategoryEntityIdList { get; set; }
 
+        [ValidateNonEmpty]
         public virtual string Name { get; set; }
+        [TextArea]
         public virtual string Description { get; set; }
         public virtual int DocumentCategoryEntityId { get; set; }
+        [ValidateNonEmpty]
         public virtual string FileUrl { get; set; }
 
         public string _saveUrl { get; set; }

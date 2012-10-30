@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using CC.Core.CoreViewModelAndDTOs;
+using Castle.Components.Validator;
 using KnowYourTurf.Core;
 
 namespace KnowYourTurf.Web.Models
@@ -8,6 +9,7 @@ namespace KnowYourTurf.Web.Models
     public class POListViewModel : ViewModel
     {
         public IEnumerable<SelectListItem> _VendorEntityIdList { get; set; }
+        [ValidateNonEmpty]
         public int VendorEntityId { get; set; }
         public string VendorCompany { get; set; }
         public string _commitPOUrl { get; set; }

@@ -169,7 +169,7 @@ KYT.Views.AjaxPopupFormModule  = KYT.Views.View.extend({
         this.notification = null;
     },
     loadPopupView:function(formOptions){
-        this.$el.append("<div id=\"popupMessageContainer\"><ul data-bind=\"foreach:{data:messages, beforeRemove: fadeOut}\"><li data-bind=\"text:message, css: { error: status()=='error', warning: status()=='warning', success: status()=='success' }\"></li></ul></div>");
+        this.$el.find("#popupMessageContainer").append("<ul data-bind=\"foreach:{data:messages, beforeRemove: fadeOut}\"><li data-bind=\"text:message, css: { error: status()=='error', warning: status()=='warning', success: status()=='success' }\"></li></ul>");
         this.popupForm.notification.render(this.$el.find("#popupMessageContainer").get(0));
         var buttons = formOptions.buttons?formOptions.buttons:KYT.Views.popupButtonBuilder.builder(formOptions.id).standardEditButons();
         var popupOptions = {

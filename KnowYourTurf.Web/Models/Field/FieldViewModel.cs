@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
+using Castle.Components.Validator;
 
 namespace KnowYourTurf.Web.Models
 {
@@ -10,9 +12,13 @@ namespace KnowYourTurf.Web.Models
             _PhotoHeaderButtons = new List<string>();
             _DocumentHeaderButtons = new List<string>();
         }
+        [ValidateNonEmpty]
         public string Name { get; set; }
         public string Abbreviation { get; set; }
+        [ValidateNonEmpty]
+        [TextArea]
         public string Description { get; set; }
+        [ValidateNonEmpty, ValidateIntegerAttribute]
         public int Size { get; set; }
         public string FieldColor { get; set; }
         public string FileUrl { get; set; }

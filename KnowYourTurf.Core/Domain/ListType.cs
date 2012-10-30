@@ -1,5 +1,6 @@
 using CC.Core.Domain;
 using CC.Core.Localization;
+using Castle.Components.Validator;
 using KnowYourTurf.Core.Enums;
 
 namespace KnowYourTurf.Core.Domain
@@ -8,6 +9,7 @@ namespace KnowYourTurf.Core.Domain
     
     public class ListType:DomainEntity, IPersistableObject, IListType
     {
+        [ValidateNonEmpty]
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         [ValueOf(typeof(Status))]

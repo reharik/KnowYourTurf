@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using AutoMapper;
 using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
 using CC.Core.DomainTools;
 using CC.Core.Html;
 using CC.Core.Services;
@@ -136,6 +137,7 @@ namespace KnowYourTurf.Web.Controllers
 
         [ValidateNonEmpty]
         public string Name { get; set; }
+        [TextArea]
         public string Description { get; set; }
         public int VendorEntityId { get; set; }
         [ValidateNonEmpty]

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
 using CC.Core.Localization;
 using Castle.Components.Validator;
 using KnowYourTurf.Core.Enums;
@@ -13,6 +14,7 @@ namespace KnowYourTurf.Web.Models
         public string _saveUrl { get; set; }
 
         public string ProductName { get; set; }
+        [TextArea]
         public string ProductDescription { get; set; }
         [ValidateNonEmpty, ValidateInteger]
         public int? QuantityOrdered { get; set; }
