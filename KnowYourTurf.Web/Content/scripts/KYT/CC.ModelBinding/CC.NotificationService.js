@@ -7,7 +7,6 @@
  */
 
 CC.NotificationService = function(){
-    this.messageContainer = $("#messageContainer").get(0);
     this.viewmodel = {
         messages: ko.observableArray(),
         fadeOut: function(item){
@@ -16,10 +15,12 @@ CC.NotificationService = function(){
             }
         }
     };
-    ko.applyBindings(this.viewmodel,this.messageContainer);
 };
 
 $.extend(CC.NotificationService.prototype,{
+    render:function(selector){
+        ko.applyBindings(this.viewmodel,selector);
+    },
     add:function(msgObject){
         var exists = _.any(this.viewmodel.messages(),function(msg){
             return msgObject.elementCid() === msg.elementCid() && msgObject.message() === msg.message();
@@ -29,6 +30,7 @@ $.extend(CC.NotificationService.prototype,{
             if(msgObject.shouldSelfDestruct){
                 msgObject.parent = this;
                 msgObject.selfDestruct();
+
             }
         }
     },
@@ -45,9 +47,9 @@ $.extend(CC.NotificationService.prototype,{
         });
     },
 
-    removeAllErrorsById:function(cid){
+    removeAllErrorsByViewId:function(viewId){
          this.viewmodel.messages.remove(function(item){
-            return item.elementCid()===cid && item.status()==='error';
+            return item.viewId()===viewId&& item.status()==='error';
         });
     },
 
@@ -65,7 +67,7 @@ $.extend(CC.NotificationService.prototype,{
         }else{
             if(result.Message){
                 that.add(new CC.NotificationMessage(cid, result.Message,"success",true));
-                that.removeAllErrorsById(cid);
+                that.removeAllErrorsByViewId(cid);
             }
         }
         return result.Success;
@@ -73,9 +75,10 @@ $.extend(CC.NotificationService.prototype,{
 });
 
 
-CC.NotificationMessage = function(elementCid, message, status, _shouldSelfDestruct){
+CC.NotificationMessage = function(elementCid, viewId, message, status, _shouldSelfDestruct){
     this.message = ko.observable(message);
     this.elementCid = ko.observable(elementCid);
+    this.viewId = ko.observable(viewId);
     this.status = ko.observable(status);
     this.parent = null;
     this.shouldSelfDestruct = _shouldSelfDestruct;

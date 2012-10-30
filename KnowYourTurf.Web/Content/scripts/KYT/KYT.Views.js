@@ -95,7 +95,6 @@ KYT.Views.View = Backbone.View.extend({
     }
   });
 
-
 KYT.Views.FormView = KYT.Views.View.extend({
     initialize: function(){
         KYT.mixin(this, "formMixin");
@@ -149,9 +148,12 @@ KYT.Views.AjaxPopupFormModule  = KYT.Views.View.extend({
         this.options.noBubbleUp=true;
         this.options.isPopup=true;
         this.popupForm = this.options.view && KYT.Views[this.options.view] ? new KYT.Views[this.options.view](this.options) : new KYT.Views.AjaxFormView(this.options);
+        this.popupForm.notification = new CC.NotificationService();
+
         this.popupForm.render();
         this.storeChild(this.popupForm);
         $(this.el).append(this.popupForm.el);
+
     },
     registerSubscriptions: function(){
        KYT.vent.bind("form:"+this.id+":pageLoaded", this.loadPopupView, this);
@@ -164,8 +166,11 @@ KYT.Views.AjaxPopupFormModule  = KYT.Views.View.extend({
          KYT.vent.unbind("popup:"+this.id+":cancel");
         KYT.vent.unbind("popup:"+this.id+":save");
         KYT.vent.unbind("form:"+this.id+":success");
+        this.notification = null;
     },
     loadPopupView:function(formOptions){
+        this.$el.append("<div id=\"popupMessageContainer\"><ul data-bind=\"foreach:{data:messages, beforeRemove: fadeOut}\"><li data-bind=\"text:message, css: { error: status()=='error', warning: status()=='warning', success: status()=='success' }\"></li></ul></div>");
+        this.popupForm.notification.render(this.$el.find("#popupMessageContainer").get(0));
         var buttons = formOptions.buttons?formOptions.buttons:KYT.Views.popupButtonBuilder.builder(formOptions.id).standardEditButons();
         var popupOptions = {
             id:this.id,
@@ -232,11 +237,11 @@ KYT.Views.AjaxPopupDisplayModule  = KYT.Views.View.extend({
 KYT.Views.PopupView = KYT.Views.View.extend({
     render:function(){
         $(".ui-dialog").remove();
-        var errorMessages = $("div[id*='errorMessages']", this.el);
-        if(errorMessages){
-            var id = errorMessages.attr("id");
-            errorMessages.attr("id","errorMessagesPU").removeClass(id).addClass("errorMessagesPU");
-        }
+//        var errorMessages = $("div[id*='errorMessages']", this.el);
+//        if(errorMessages){
+//            var id = errorMessages.attr("id");
+//            errorMessages.attr("id","errorMessagesPU").removeClass(id).addClass("errorMessagesPU");
+//        }
 
         $(this.el).dialog({
             modal: true,
@@ -254,9 +259,7 @@ KYT.Views.PopupView = KYT.Views.View.extend({
     }
 });
 
-
 KYT.Views.TemplatedPopupView = KYT.Views.View.extend({
-
     initialize: function(){
         this.options = $.extend({},KYT.opupDefaults,this.options);
     },
@@ -272,11 +275,8 @@ KYT.Views.TemplatedPopupView = KYT.Views.View.extend({
         var view = new KYT.Views.PopupView(popupOptions);
         view.render();
         this.storeChild(view);
-
     }
 });
-
-
 
 KYT.Views.popupButtonBuilder = (function(){
     return {
@@ -428,7 +428,6 @@ KYT.Views.EditableTokenView = KYT.Views.TokenView.extend({
     },
     tokenEditor:function(e){}
 });
-
 
 KYT.Views.NotificationView = KYT.Views.View.extend({
     events:_.extend({

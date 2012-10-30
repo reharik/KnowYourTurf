@@ -27,9 +27,10 @@ CC.elementService = (function(){
     var srv = {};
     srv.getElementsViewmodel = function(view){
         var model = new CC.ElementCollection();
+        var isPopup = view.$el.find("#popupMessageContainer").size()>0
         view.$el.find("[eltype]").each(function(i,item){
             var element = new CC.Elements[$(item).attr("eltype")]($(item));
-            element.init(view);
+            element.init(view,isPopup);
             model.add(element);
         });
         return model;
