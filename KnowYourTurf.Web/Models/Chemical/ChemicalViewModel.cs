@@ -1,6 +1,7 @@
 ﻿using CC.Core.CoreViewModelAndDTOs;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
+using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 
 namespace KnowYourTurf.Web.Models
 {
@@ -8,6 +9,7 @@ namespace KnowYourTurf.Web.Models
     {
         [ValidateNonEmpty]
         public string Name { get; set; }
+        [TextArea]
         public string Description { get; set; }
         public string Notes { get; set; }
         public string Manufacturer { get; set; }

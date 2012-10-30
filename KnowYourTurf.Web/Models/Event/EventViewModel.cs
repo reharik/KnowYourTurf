@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
 
@@ -22,6 +23,7 @@ namespace KnowYourTurf.Web.Models
         [ValidateNonEmpty]
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
+        [TextArea]
         public string Notes { get; set; }
 
         public string FieldName { get; set; }

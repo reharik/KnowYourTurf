@@ -140,7 +140,8 @@ CC.Elements.TimeTextbox = CC.Elements.Element.extend({
     },
     destroy:function(){
         this.$input.off("change");
-        this.$input.timepicker("destroy");
+        // this thows an internal ( to the timepicker ) error.
+//        this.$input.timepicker("destroy");
         this._super("destroy",arguments);
     }
 });

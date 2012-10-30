@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using AutoMapper;
 using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
 using CC.Core.DomainTools;
 using CC.Core.Html;
 using CC.Core.Localization;
@@ -116,6 +117,7 @@ namespace KnowYourTurf.Web.Controllers
     {
         [ValidateNonEmpty]
         public string Name { get; set; }
+        [TextArea]
         public string Description { get; set; }
         public string Notes { get; set; }
         public double? Quantity { get; set; }

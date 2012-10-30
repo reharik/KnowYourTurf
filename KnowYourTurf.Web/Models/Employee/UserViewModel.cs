@@ -15,9 +15,6 @@ namespace KnowYourTurf.Web.Models
         public string _completedGridUrl { get; set; }
         public bool _returnToList { get; set; }
 
-
-
-
         public bool DeleteImage { get; set; }
         public string EmployeeId { get; set; }
         [ValidateNonEmpty]
