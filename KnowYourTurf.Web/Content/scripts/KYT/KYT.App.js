@@ -27,6 +27,7 @@ KYT.addInitializer(function(){
 
 
     CC.notification = new CC.NotificationService();
+    CC.notification.render($("#messageContainer").get(0));
     Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(templateId){
         return KYT.repository.ajaxGet(this.url, this.data);
     },

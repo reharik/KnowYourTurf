@@ -13,7 +13,8 @@ CC.ValidationRunner = (function(){
         if(!elem.attr('class')){return[];}
         return elem.attr('class').split(/\s+/);
     }
-    runner.runElement = function(CCElement){
+
+    runner.runElement = function(CCElement,notification){
         var elementIsValid = true;
         var classes = classList(CCElement.$input);
         var val = CCElement.getValue();
@@ -24,12 +25,12 @@ CC.ValidationRunner = (function(){
         $.each(classes, function(idx,rule){
             if(rule && validator[rule]){
                 var isValid = validator[rule](CCElement);
-                var possibleErrorMsg = new CC.NotificationMessage(CCElement.cid, CCElement.friendlyName+" "+CC.errorMessages[rule],"error");
+                var possibleErrorMsg = new CC.NotificationMessage(CCElement.cid, CCElement.viewId, CCElement.friendlyName+" "+CC.errorMessages[rule],"error");
                 if(!isValid){
                     elementIsValid = false;
-                    CC.notification.add(possibleErrorMsg);
+                    notification.add(possibleErrorMsg);
                 }else{
-                    CC.notification.remove(possibleErrorMsg);
+                    notification.remove(possibleErrorMsg);
                 }
             }
         });
