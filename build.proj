@@ -31,7 +31,7 @@
 						 KnowYourTurf.Web\CustomerDocuments\**;
 						 KnowYourTurf.Web\App_Data\**;
 						 KnowYourTurf.Web\Logs\**;,
-             KnowYourTurf.Web\connectionStrings.config" />
+             KnowYourTurf.Web\connectionStrings.config;" />
     </ItemGroup>
     <Time>
       <Output TaskParameter="Month" PropertyName="Month" />
