@@ -47,8 +47,8 @@ namespace KnowYourTurf.Web.Models
         public DateTime ScheduledDate { get; set; }
         public string FieldName { get; set; }
         public string InventoryProductProductName { get; set; }
-        public DateTime? ScheduledStartTime { get; set; }
-        public DateTime? ScheduledEndTime { get; set; }
+        public string ScheduledStartTimeString { get; set; }
+        public string ScheduledEndTimeString { get; set; }
         public string Notes { get; set; }
         public string _AddUpdateUrl { get; set; }
         public IEnumerable<string> _EmployeeNames { get; set; }
