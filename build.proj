@@ -30,7 +30,7 @@
 						 KnowYourTurf.Web\CustomerPhotos\**;
 						 KnowYourTurf.Web\CustomerDocuments\**;
 						 KnowYourTurf.Web\App_Data\**;
-						 KnowYourTurf.Web\Logs\**;,
+						 KnowYourTurf.Web\Logs\**;
              KnowYourTurf.Web\connectionStrings.config;" />
     </ItemGroup>
     <Time>
