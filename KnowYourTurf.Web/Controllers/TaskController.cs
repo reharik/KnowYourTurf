@@ -123,6 +123,8 @@ namespace KnowYourTurf.Web.Controllers
         {
             var task = _repository.Find<Task>(input.EntityId);
             var model = Mapper.Map<Task, DisplayTaskViewModel>(task);
+            model.ScheduledEndTimeString = task.ScheduledStartTime.Value.ToShortTimeString();
+            model.ScheduledEndTimeString = task.ScheduledEndTime.HasValue ? task.ScheduledEndTime.Value.ToShortTimeString() : "";
             model.Popup = input.Popup;
             model._EmployeeNames = task.Employees.Select(x => x.FullName);
             model._EquipmentNames = task.Equipment.Select(x => x.Name);
