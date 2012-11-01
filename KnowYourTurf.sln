@@ -4,7 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{6F48924F-C2DB-4A18-B77B-A8474A468456}"
 	ProjectSection(SolutionItems) = preProject
 		build.bat = build.bat
-		build.proj = build.proj
 		Filestream-Notes.txt = Filestream-Notes.txt
 		Gen.bat = Gen.bat
 	EndProjectSection

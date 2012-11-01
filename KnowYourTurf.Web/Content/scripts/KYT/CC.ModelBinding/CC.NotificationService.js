@@ -57,16 +57,16 @@ $.extend(CC.NotificationService.prototype,{
         var that=this;
         if(!result.Success){
             if(result.Message){
-                that.add(new CC.NotificationMessage(cid, result.Message,"error"));
+                that.add(new CC.NotificationMessage("",cid, result.Message,"error"));
             }
             if(result.Errors){
                 _.each(result.Errors,function(item){
-                    that.add(new CC.NotificationMessage(cid, item.ErrorMessage,"error"));
+                    that.add(new CC.NotificationMessage("",cid, item.ErrorMessage,"error"));
                 })
             }
         }else{
             if(result.Message){
-                that.add(new CC.NotificationMessage(cid, result.Message,"success",true));
+                that.add(new CC.NotificationMessage("",cid, result.Message,"success",true));
                 that.removeAllErrorsByViewId(cid);
             }
         }
