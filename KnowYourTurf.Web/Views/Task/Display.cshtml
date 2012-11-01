@@ -15,10 +15,10 @@
                     @Html.ViewFor(x => x.ScheduledDate).LabelDisplay(WebLocalizationKeys.DATE).ToHtmlTag()
         </div>
         <div class="fieldRow">
-                    @Html.ViewFor(x => x.ScheduledStartTime).ToHtmlTag()
+                    @Html.ViewFor(x => x.ScheduledStartTimeString).LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
         </div>
         <div class="fieldRow">
-                    @Html.ViewFor(x => x.ScheduledEndTime).ToHtmlTag()
+                    @Html.ViewFor(x => x.ScheduledEndTimeString).LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
         </div>
         <div class="fieldRow">
                     @Html.ViewFor(x => x.FieldName).ToHtmlTag()
