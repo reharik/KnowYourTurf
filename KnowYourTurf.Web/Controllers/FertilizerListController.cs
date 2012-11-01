@@ -28,6 +28,7 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _fertilizerListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.FERTILIZERS.ToString()
             };
+            model.headerButtons.Add("new");
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
