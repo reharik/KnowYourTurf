@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<Photo> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.Name)
-                .ToPerformAction(ColumnAction.AddUpdateItem).WithId("photolist")
+                .ToPerformAction(ColumnAction.AddUpdateItem).WithId("photolistGrid")
                 .ToolTip(WebLocalizationKeys.EDIT_EVENT);
             GridBuilder.DisplayFor(x => x.PhotoCategory.Name)
                 .DisplayHeader(WebLocalizationKeys.DOCUMENT_CATEGORY);

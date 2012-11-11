@@ -166,8 +166,8 @@
     <Compile Include="Domain\Photo.cs" />
     <Compile Include="Domain\Tools\KYTUnitOfWork.cs" />
     <Compile Include="Domain\Tools\NoFilterRepository.cs" />
-    <Compile Include="Domain\Tools\NoInterceptorNoFiltersRepository.cs" />
-    <Compile Include="Domain\Tools\NoInterceptorNoFiltersUnitOfWork.cs" />
+    <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersRepository.cs" />
+    <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersUnitOfWork.cs" />
     <Compile Include="Domain\Tools\NullNHSetupConfig.cs" />
     <Compile Include="Domain\Tools\NullNHibernateUnitOfWork.cs" />
     <Compile Include="Domain\Tools\CustomAttributes\TextAreaAttribute.cs" />
@@ -272,6 +272,7 @@
     <Compile Include="Services\ReceivePurchaseOrderService.cs" />
     <Compile Include="Services\SecurityDataService.cs" />
     <Compile Include="Services\StructureMapServiceLocator.cs" />
+    <Compile Include="SqlServerHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attributes\" />

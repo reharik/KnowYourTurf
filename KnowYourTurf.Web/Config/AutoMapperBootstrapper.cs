@@ -32,12 +32,13 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<Photo, PhotoViewModel>();
             Mapper.CreateMap<Vendor, VendorViewModel>();
             Mapper.CreateMap<VendorContact, VendorContactViewModel>();
-            Mapper.CreateMap<InventoryProduct, InventoryFertilizerViewModel>();
-            Mapper.CreateMap<InventoryProduct, InventoryChemicalViewModel>();
-            Mapper.CreateMap<InventoryProduct, InventoryMaterialViewModel>();
+            Mapper.CreateMap<InventoryProduct, InventoryFertilizerViewModel>().ForMember(x => x.Name, x => x.ResolveUsing(y => y.Product.Name)).ForMember(x => x.Description, x => x.ResolveUsing(y => y.Product.Description));
+            Mapper.CreateMap<InventoryProduct, InventoryChemicalViewModel>().ForMember(x => x.Name, x => x.ResolveUsing(y => y.Product.Name)).ForMember(x => x.Description, x => x.ResolveUsing(y => y.Product.Description));
+            Mapper.CreateMap<InventoryProduct, InventoryMaterialViewModel>().ForMember(x => x.Name, x => x.ResolveUsing(y => y.Product.Name)).ForMember(x => x.Description, x => x.ResolveUsing(y => y.Product.Description));
             Mapper.CreateMap<PurchaseOrder, POListViewModel>();
             Mapper.CreateMap<Event, EventViewModel>();
             Mapper.CreateMap<PurchaseOrderLineItem, PurchaseOrderLineItemViewModel>();
+            Mapper.CreateMap<PurchaseOrderLineItem, ReceivePurchaseOrderLineItemViewModel>();
 
         
         }

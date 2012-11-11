@@ -67,15 +67,15 @@ namespace KnowYourTurf.Web
             For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory());
 
             For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithCompanyFilter()));
-            For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession()).Named("NoInterceptorNoFilters");
+            For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor())).Named("SpecialInterceptorNoFilters");
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<KYTUnitOfWork>();
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<UnitOfWork>().Named("NoFilters");
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<NoInterceptorNoFiltersUnitOfWork>().Named("NoInterceptorNoFilters");
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<SpecialInterceptorNoFiltersUnitOfWork>().Named("SpecialInterceptorNoFilters");
 
             For<IRepository>().Use<Repository>();
             For<IRepository>().Add<NoFilterRepository>().Named("NoFilters");
-            For<IRepository>().Add<NoInterceptorNoFiltersRepository>().Named("NoInterceptorNoFilters");
+            For<IRepository>().Add<SpecialInterceptorNoFiltersRepository>().Named("SpecialInterceptorNoFilters");
 
             For<ISelectListItemService>().Use<KYTSelectListItemService>();
             For<IMergedEmailFactory>().Use<MergedEmailFactory>();
