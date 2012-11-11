@@ -1,14 +1,17 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
 using CC.Core.Services;
+using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
+using xVal.ServerSide;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -100,14 +103,14 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ReceivePurchaseOrderLineItem_Template(ViewModel input)
         {
-            return View("ReceivePurchaseOrderLineItem", new PurchaseOrderLineItemViewModel());
+            return View("ReceivePurchaseOrderLineItem", new ReceivePurchaseOrderLineItemViewModel());
         }
 
         public ActionResult ReceivePurchaseOrderLineItem(ViewModel input)
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.ParentId);
             var purchaseOrderLineItem = purchaseOrder.LineItems.FirstOrDefault(x => x.EntityId == input.EntityId);
-            var model = Mapper.Map<PurchaseOrderLineItem, PurchaseOrderLineItemViewModel>(purchaseOrderLineItem);
+            var model = Mapper.Map<PurchaseOrderLineItem, ReceivePurchaseOrderLineItemViewModel>(purchaseOrderLineItem);
             model.EntityId = input.EntityId;
             model.ParentId = input.ParentId;
             model._Title = WebLocalizationKeys.RECEIVE_PURCHASE_ORDER_ITEM.ToString();
@@ -118,6 +121,14 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult SaveReceived(PurchaseOrderLineItemViewModel input)
         {
+            if(!input.TotalReceived.HasValue)
+            {
+                var error = new Notification {Success = false};
+                error.Errors=new List<ErrorInfo> {new ErrorInfo(WebLocalizationKeys.TOTAL_RECEIVED.ToString(),
+                                                   CoreLocalizationKeys.FIELD_REQUIRED.ToFormat(
+                                                       WebLocalizationKeys.TOTAL_RECEIVED.ToString()))};
+                return Json(error);
+            }
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.ParentId);
             var origionalPurchaseOrderLineItem = purchaseOrder.LineItems.FirstOrDefault(x => x.EntityId == input.EntityId);
             origionalPurchaseOrderLineItem.QuantityOrdered = input.QuantityOrdered;

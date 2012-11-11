@@ -225,6 +225,8 @@ namespace KnowYourTurf.Web
         public static readonly StringToken SCHEDULED_START_TIME = new WebLocalizationKeys("SCHEDULED_START_TIME", "Scheduled Start Time");
         public static readonly StringToken SCHEDULED_END_TIME = new WebLocalizationKeys("SCHEDULED_END_TIME", "Scheduled End Time");
 
+        public static readonly StringToken TOTAL_RECEIVED = new WebLocalizationKeys("TOTAL_RECEIVED", "Total Received");
+
 
     }
 }
