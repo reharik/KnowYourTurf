@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
         public TaskRunnerController(IEmailTemplateService emailService)
         {
             _emailService = emailService;
-            _repository = ObjectFactory.Container.GetInstance<IRepository>("NoFiltersSpecialInterceptor");
+            _repository = ObjectFactory.Container.GetInstance<IRepository>("SpecialInterceptorNoFilters");
         }
 
 //        public ActionResult GetWeather(ViewModel input)
