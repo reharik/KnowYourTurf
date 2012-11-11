@@ -1,29 +1,21 @@
-using System;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
     public class EventTypeListGrid : Grid<EventType>, IEntityListGrid<EventType>
     {
-        public EventTypeListGrid(IGridBuilder<EventType> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public EventTypeListGrid(IGridBuilder<EventType> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<EventType> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.Name, "eventTypeGrid")
-                .ForAction<EventTypeController>(x => x.AddUpdate(null))
                 .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("eventtypelist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
@@ -32,18 +24,16 @@ namespace KnowYourTurf.Web.Grids
 
     public class TaskTypeListGrid : Grid<TaskType>, IEntityListGrid<TaskType>
     {
-        public TaskTypeListGrid(IGridBuilder<TaskType> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public TaskTypeListGrid(IGridBuilder<TaskType> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<TaskType> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name, "taskTypeGrid")
-                .ForAction<TaskTypeController>(x => x.AddUpdate(null))
+            GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("tasktypelist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
@@ -52,18 +42,16 @@ namespace KnowYourTurf.Web.Grids
 
     public class PhotoCategoryListGrid : Grid<PhotoCategory>, IEntityListGrid<PhotoCategory>
     {
-        public PhotoCategoryListGrid(IGridBuilder<PhotoCategory> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public PhotoCategoryListGrid(IGridBuilder<PhotoCategory> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<PhotoCategory> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name, "photoCategoryGrid")
-                .ForAction<PhotoCategoryController>(x => x.AddUpdate(null))
+            GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("photocategorylist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
@@ -72,18 +60,16 @@ namespace KnowYourTurf.Web.Grids
 
     public class DocumentCategoryListGrid : Grid<DocumentCategory>, IEntityListGrid<DocumentCategory>
     {
-        public DocumentCategoryListGrid(IGridBuilder<DocumentCategory> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public DocumentCategoryListGrid(IGridBuilder<DocumentCategory> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<DocumentCategory> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x => x.Name, "documentCategoryGrid")
-                .ForAction<DocumentCategoryController>(x => x.AddUpdate(null))
+            GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("documentcategorylist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;

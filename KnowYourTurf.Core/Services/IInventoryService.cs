@@ -1,4 +1,6 @@
 ﻿using System;
+using CC.Core.DomainTools;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
 using System.Linq;
 using xVal.ServerSide;
@@ -7,8 +9,8 @@ namespace KnowYourTurf.Core.Services
 {
     public interface IInventoryService
     {
-        ICrudManager ReceivePurchaseOrderLineItem(PurchaseOrderLineItem purchaseOrderLineItem, ICrudManager crudManager=null);
-        ICrudManager DecrementTaskProduct(Task task, ICrudManager crudManager = null);
+        IValidationManager ReceivePurchaseOrderLineItem(PurchaseOrderLineItem purchaseOrderLineItem, IValidationManager crudManager = null);
+        IValidationManager DecrementTaskProduct(Task task, IValidationManager crudManager = null);
     }
 
     public class InventoryService : IInventoryService
@@ -22,41 +24,46 @@ namespace KnowYourTurf.Core.Services
             _saveEntityService = saveEntityService;
         }
 
-        public ICrudManager ReceivePurchaseOrderLineItem(PurchaseOrderLineItem purchaseOrderLineItem, ICrudManager crudManager = null)
+        public IValidationManager ReceivePurchaseOrderLineItem(PurchaseOrderLineItem purchaseOrderLineItem, IValidationManager crudManager = null)
         {
             var inventoryProducts = _repository.Query<InventoryProduct>(x=>x.Product.EntityId == purchaseOrderLineItem.Product.EntityId&&x.UnitType==purchaseOrderLineItem.UnitType);
-            var inventoryProduct = inventoryProducts.FirstOrDefault() ?? new InventoryProduct
-                                                                             {
-                                                                                 Product = purchaseOrderLineItem.Product,
-                                                                                 UnitType = purchaseOrderLineItem.UnitType,
-                                                                                 SizeOfUnit = purchaseOrderLineItem.SizeOfUnit.Value
-                                                                             };
+            InventoryProduct inventoryProduct;
+            if (inventoryProducts.FirstOrDefault() != null) {inventoryProduct = inventoryProducts.FirstOrDefault();}
+            else
+            {
+                inventoryProduct = new InventoryProduct
+                                       {
+                                           UnitType = purchaseOrderLineItem.UnitType,
+                                           SizeOfUnit = purchaseOrderLineItem.SizeOfUnit.Value
+                                       };
+                inventoryProduct.Product =purchaseOrderLineItem.Product;
+            }
 
             inventoryProduct.LastVendor = purchaseOrderLineItem.PurchaseOrder.Vendor;
             if (inventoryProduct.Quantity.HasValue)
                 inventoryProduct.Quantity += purchaseOrderLineItem.TotalReceived.Value;
             else inventoryProduct.Quantity = purchaseOrderLineItem.TotalReceived.Value;
 
-            return _saveEntityService.ProcessSave(inventoryProduct, crudManager);
+            return _saveEntityService.ProcessSave(inventoryProduct);
         }
 
-        public ICrudManager DecrementTaskProduct(Task task, ICrudManager crudManager=null)
+        public IValidationManager DecrementTaskProduct(Task task, IValidationManager crudManager = null)
         {
-            if (crudManager == null) crudManager = new CrudManager(_repository);
+            if (crudManager == null) crudManager = new ValidationManager(_repository);
             if(task.InventoryProduct==null)
             {
                 return crudManager;
             }
             if(!task.QuantityUsed.HasValue)
             {
-                var crudReport = new CrudReport{Success = false};
+                var crudReport = new ValidationReport { Success = false };
                 crudReport.AddErrorInfo(new ErrorInfo("QuantityUsed", CoreLocalizationKeys.QUANTITY_USED_REQUIRED.ToString()));
-                crudManager.AddCrudReport(crudReport);
+                crudManager.AddValidationReport(crudReport);
                 return crudManager;
             }
-            
-            task.InventoryProduct.Quantity -= task.QuantityUsed.Value;
-            return _saveEntityService.ProcessSave(task.InventoryProduct, crudManager);
+            var inventoryProduct = _repository.Find<InventoryProduct>(task.InventoryProduct.EntityId);
+            inventoryProduct.Quantity -= task.QuantityUsed.Value;
+            return _saveEntityService.ProcessSave(inventoryProduct, crudManager);
         }
     }
 

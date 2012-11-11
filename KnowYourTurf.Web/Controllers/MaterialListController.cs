@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -19,23 +19,23 @@ namespace KnowYourTurf.Web.Controllers
             _materialListGrid = materialListGrid;
         }
 
-        public ActionResult MaterialList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url =UrlContext.GetUrlForAction<MaterialListController>(x => x.Materials(null));
-            ListViewModel model = new ListViewModel()
+            var model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.AddUpdate(null)),
-                DeleteMultipleUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.DeleteMultiple(null)),
-                GridDefinition = _materialListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.MATERIALS.ToString()
+                deleteMultipleUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.DeleteMultiple(null)),
+                gridDef = _materialListGrid.GetGridDefinition(url, input.User),
+                _Title = WebLocalizationKeys.MATERIALS.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Materials(GridItemsRequestModel input)
         {
-              var items = _dynamicExpressionQuery.PerformQuery<Material>(input.filters);
-            var gridItemsViewModel = _materialListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var items = _dynamicExpressionQuery.PerformQuery<Material>(input.filters);
+            var gridItemsViewModel = _materialListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

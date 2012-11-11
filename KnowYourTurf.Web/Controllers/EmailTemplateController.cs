@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -24,7 +24,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmailTemplateViewModel
             {
                 EmailTemplate = emailTemplate,
-                Title = WebLocalizationKeys.EMAIL_TEMPLATE_INFORMATION.ToString()
+                _Title = WebLocalizationKeys.EMAIL_TEMPLATE_INFORMATION.ToString()
             };
             return PartialView("EmailTemplateAddUpdate", model);
         }
@@ -35,8 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new EmailTemplateViewModel
                             {
                                 EmailTemplate = emailTemplate,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddUpdate(null)) + "/" + emailTemplate.EntityId,
-                                Title = WebLocalizationKeys.EMAIL_TEMPLATE_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.EMAIL_TEMPLATE_INFORMATION.ToString()
                             };
             return PartialView("EmailTemplateView", model);
         }

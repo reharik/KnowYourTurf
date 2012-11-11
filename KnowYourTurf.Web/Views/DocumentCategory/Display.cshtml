@@ -1,13 +1,11 @@
 ﻿@model KnowYourTurf.Web.Models.ListTypeViewModel
-@using KnowYourTurf.Core
-@using KnowYourTurf.Web
-@using KnowYourTurf.Core.Html.FubuUI
+@using CC.Core.Html.CCUI
 
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
     <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
-        @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId, new { @class = "copyEntityId" }).ToString())
+        @MvcHtmlString.Create(Html.HiddenFor(x => x.EntityId, new { @class = "copyEntityId" }).ToString())
             @MvcHtmlString.Create(Html.HiddenFor(x => x.AddEditUrl).ToString())
             <input type="hidden" id="EntityId" value="@Model.Item.EntityId"/>
             @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())

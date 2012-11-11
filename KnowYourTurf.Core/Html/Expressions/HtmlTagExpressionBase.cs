@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FubuMVC.Core;
+using CC.Core;
 using HtmlTags;
 
 namespace KnowYourTurf.Core.Html.Expressions
@@ -37,7 +37,7 @@ namespace KnowYourTurf.Core.Html.Expressions
         {
             if (attributes != null)
             {
-                attributes.Each(x => _rootTag.Attr(x.Key, x.Value));
+                attributes.ForEachItem(x => _rootTag.Attr(x.Key, x.Value));
             }
         }
 

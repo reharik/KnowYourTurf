@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
-using KnowYourTurf.Core.Html;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -20,23 +20,24 @@ namespace KnowYourTurf.Web.Controllers
             _documentListGrid = documentListGrid;
         }
 
-        public ActionResult DocumentList(ListViewModel input)
+        public ActionResult ItemList(ListViewModel input)
         {
             var url = UrlContext.GetUrlForAction<DocumentListController>(x => x.Documents(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)),
-                DeleteMultipleUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.DeleteMultiple(null)),
-                GridDefinition = _documentListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.DOCUMENTS.ToString()
+                deleteMultipleUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.DeleteMultiple(null)),
+                gridDef = _documentListGrid.GetGridDefinition(url, input.User),
+                _Title = WebLocalizationKeys.DOCUMENTS.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         
         public JsonResult Documents(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Document>(input.filters);
-            var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

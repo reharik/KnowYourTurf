@@ -1,4 +1,5 @@
-﻿using KnowYourTurf.Core.Domain;
+﻿using CC.Core.DomainTools;
+using KnowYourTurf.Core.Domain;
 using NHibernate;
 using StructureMap;
 
@@ -7,12 +8,10 @@ namespace Generator.Commands
 {
     public class DropReaddDatabaseCommand : IGeneratorCommand
     {
-        private readonly ILocalizedStringLoader _loader;
         private readonly IRepository _repository;
 
-        public DropReaddDatabaseCommand(IRepository repository, ILocalizedStringLoader loader)
+        public DropReaddDatabaseCommand(IRepository repository)
         {
-            _loader = loader;
             _repository = repository;
         }
 

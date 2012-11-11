@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using FubuMVC.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
+using CC.Core;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -27,16 +30,18 @@ namespace KnowYourTurf.Web.Controllers
                        {
                            CalendarDefinition = new CalendarDefinition
                                                    {
-                                                       Url = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.Events(null))+"?ParentId="+input.ParentId,
+                                                       Url = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.Events(null))+"?RootId="+input.RootId,
+                                                       AddUpdateTemplateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate_Template(null)),
                                                        AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)),
+                                                       AddUpdateRoute = "task",
+                                                       DisplayTemplateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Display_Template(null)),
                                                        DisplayUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Display(null)),
-                                                       EventChangedUrl = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.EventChanged(null)),
-                                                       DeleteUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Delete(null)) ,
-
-                                                   },
-                           RootId = input.ParentId
+                                                       DisplayRoute = "taskdisplay",
+                                                       DeleteUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Delete(null)),
+                                                       EventChangedUrl = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.EventChanged(null))
+                                                   }
                        };
-            return View(model);
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult EventChanged(TaskChangedViewModel input)
@@ -55,9 +60,9 @@ namespace KnowYourTurf.Web.Controllers
             var events = new List<CalendarEvent>();
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
-            var category = _repository.Find<Category>(input.ParentId);
-            var tasks = category.Tasks.Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
-            tasks.Each(x =>
+            var category = _repository.Find<Category>(input.RootId);
+            var tasks = category.GetAllTasks().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
+            tasks.ForEachItem(x =>
                        events.Add(new CalendarEvent
                                       {
                                           EntityId = x.EntityId,

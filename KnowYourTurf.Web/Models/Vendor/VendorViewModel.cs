@@ -1,24 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Services;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Enumerations;
+using CC.Core.Localization;
+using Castle.Components.Validator;
+using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
+using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Models.Vendor
 {
     public class VendorViewModel : ViewModel
     {
         public IEnumerable<string> VendorContactNames{ get; set; }
-        public Core.Domain.Vendor Item { get; set; }
+        public TokenInputViewModel Chemicals { get; set; }
+        public TokenInputViewModel Fertilizers { get; set; }
+        public TokenInputViewModel Materials { get; set; }
 
-        public string ChemicalInput { get; set; }
-        public string FertilizerInput { get; set; }
-        public string MaterialInput { get; set; }
-        public IEnumerable<TokenInputDto> AvailableChemicals { get; set; }
-        public IEnumerable<TokenInputDto> SelectedChemicals { get; set; }
-        public IEnumerable<TokenInputDto> AvailableFertilizers { get; set; }
-        public IEnumerable<TokenInputDto> SelectedFertilizers { get; set; }
-        public IEnumerable<TokenInputDto> AvailableMaterials { get; set; }
-        public IEnumerable<TokenInputDto> SelectedMaterials { get; set; }
+        [ValidateNonEmpty]
+        public string Company { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string City { get; set; }
+        [ValueOf(typeof(State))]
+        public string State { get; set; }
+        public string ZipCode { get; set; }
+        public string Phone { get; set; }
+        public string Fax { get; set; }
+        public string Website { get; set; }
+        [TextArea]
+        public string Notes { get; set; }
+        [ValueOf(typeof(Status))]
+        public string Status { get; set; }
+
+        public string _saveUrl { get; set; }
+
+        public IEnumerable<SelectListItem> _StateList { get; set; }
+
+        public IEnumerable<SelectListItem> _StatusList { get; set; }
     }
 }

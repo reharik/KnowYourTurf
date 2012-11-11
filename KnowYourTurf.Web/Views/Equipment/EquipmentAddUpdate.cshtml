@@ -1,55 +1,27 @@
-﻿@model KnowYourTurf.Web.Models.Equipment.EquipmentViewModel
-@using KnowYourTurf.Core
+﻿@model EquipmentViewModel
+@using CC.Core.Html.CCUI
 @using KnowYourTurf.Web
-@using KnowYourTurf.Core.Html.FubuUI
 @using KnowYourTurf.Web.Controllers
-@using KnowYourTurf.Core.Html.Expressions
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-<script>
-var imageUrl = '@Model.Item.ImageUrl';
-    extraFormOptions.runAfterRenderFunction = function () {
-        if (imageUrl) {
-            $("#showImage", this.el).show();
-            $("#newImage", this.el).hide();
-        } else {
-            $("#showImage", this.el).hide();
-            $("#newImage", this.el).show();
-        }
-        $("#deleteImage", this.el).click(function () {
-            $("#showImage", this.el).hide();
-            $("#newImage", this.el).show();
-            $("#DeleteImage", this.el).val(true);
-        });        
-    }
-</script>
 
-            @MvcHtmlString.Create(FormFor<EquipmentController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
    <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Vendor).ToHtmlTag()
+            @Html.SubmissionFor(x => x.VendorEntityId).LabelDisplay(WebLocalizationKeys.VENDOR).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.TotalHours).ToHtmlTag()
+       <div class="fieldRow">
+           @Html.SubmissionFor(x => x.TotalHours).ToHtmlTag()
+       </div>
+       <div class="fieldRow">
+            @Html.SubmissionFor(x => x.FileUrl).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-             <div id="showImage" >
-                @Html.ViewFor(x => x.Item.ImageUrl).HideLabel().AddClassToInput("KYT_displayImage").ToHtmlTag()
-                @StandardButtonFor("deleteImage", WebLocalizationKeys.DELETE).ToHtmlTag()
-            </div>
-            <div id="newImage">
-                <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
-        </div>
-    </div>
+
 </div>
-@EndForm()
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using FubuMVC.Core;
+using CC.Core;
+using CC.Core.DomainTools;
 using xVal.ServerSide;
 using System.Linq;
 
@@ -18,7 +19,7 @@ namespace KnowYourTurf.Core.Domain
                               ? Message + ", "
                               : string.Empty;
             var errors = string.Empty;
-            Errors.Each(x => errors += x.ErrorMessage +", ");
+            Errors.ForEachItem(x => errors += x.ErrorMessage +", ");
             errors.Remove(errors.LastIndexOf(","));
             return message + errors;
         }
@@ -50,6 +51,16 @@ namespace KnowYourTurf.Core.Domain
             {
                 Message = Message.IsNotEmpty() ? Message + ", " + continuation.Message : continuation.Message;
             }
+        }
+
+        public Notification ReturnNotification()
+        {
+            return new Notification
+                {
+                    Errors = Errors,
+                    Message = Message,
+                    Success = Success
+                };
         }
     }
 

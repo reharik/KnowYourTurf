@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -21,22 +21,23 @@ namespace KnowYourTurf.Web.Controllers
             _employeeListGrid = employeeListGrid;
         }
 
-        public ActionResult EmployeeList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<EmployeeListController>(x => x.Employees(null));
             var model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.AddUpdate(null)),
-                GridDefinition = _employeeListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.EMPLOYEES.ToString()
+                gridDef = _employeeListGrid.GetGridDefinition(url, input.User),
+                _Title = WebLocalizationKeys.EMPLOYEES.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Employees(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserRoles.Any(i=>i.Name==UserType.Employee.ToString()) && x.UserLoginInfo.Status==Status.Active.ToString());
-            var gridItemsViewModel = _employeeListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _employeeListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

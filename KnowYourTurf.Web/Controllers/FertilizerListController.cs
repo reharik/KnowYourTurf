@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -19,23 +19,23 @@ namespace KnowYourTurf.Web.Controllers
             _fertilizerListGrid = fertilizerListGrid;
         }
 
-        public ActionResult FertilizerList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<FertilizerListController>(x => x.Fertilizers(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddUpdate(null)),
-                DeleteMultipleUrl= UrlContext.GetUrlForAction<FertilizerController>(x => x.DeleteMultiple(null)),
-                GridDefinition = _fertilizerListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.FERTILIZERS.ToString()
+                deleteMultipleUrl= UrlContext.GetUrlForAction<FertilizerController>(x => x.DeleteMultiple(null)),
+                gridDef = _fertilizerListGrid.GetGridDefinition(url, input.User),
+                _Title = WebLocalizationKeys.FERTILIZERS.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Fertilizers(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Fertilizer>(input.filters);
-            var gridItemsViewModel = _fertilizerListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _fertilizerListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

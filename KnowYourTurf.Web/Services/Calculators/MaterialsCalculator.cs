@@ -1,7 +1,8 @@
 using System;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Controllers;
 using KnowYourTurf.Web.Models;
 
@@ -20,14 +21,13 @@ namespace KnowYourTurf.Web.Services
 
         public CalculatorViewModel GetViewModel()
         {
-            var fieldItems = _selectListItemService.CreateList<Field>(x => x.Name, x => x.EntityId, true,true);
+            var fieldItems = ((KYTSelectListItemService)_selectListItemService).CreateFieldsSelectListItems();
             return new MaterialsCalcViewModel
             {
-                FieldList = fieldItems,
-                CalculatorDisplayName = WebLocalizationKeys.MATERIALS.ToString(),
-                CalculatorName = WebLocalizationKeys.MATERIALS.ToString(),
-                CalculateUrl = UrlContext.GetUrlForAction<CalculatorController>(x => x.Calculate(null)),
-//                SaveJSSuccssCallback = "kyt.calculator.controller.materialsSuccess"
+                _FieldEntityIdList = fieldItems,
+                _calculatorDisplayName = WebLocalizationKeys.MATERIALS.ToString(),
+                _calculatorName = WebLocalizationKeys.MATERIALS.ToString(),
+                _calculateUrl = UrlContext.GetUrlForAction<CalculatorController>(x => x.Calculate(null)),
             };
         }
 
@@ -35,10 +35,11 @@ namespace KnowYourTurf.Web.Services
         {
             var continuation = new Continuation();
             var model = new MaterialsCalcViewModel();
-            var field = _repository.Find<Field>(Int64.Parse(input.Field));
+            var field = _repository.Find<Field>(input.FieldEntityId);
             double material = ((field.Size * (input.Depth / 12)) / 27) + (input.Drainageline * (input.DitchlineWidth / input.DitchDepth) / 27) - (3.14 * (input.PipeRadius / 12)*2 * input.Drainageline / 27);
             model.TotalMaterials = Convert.ToDouble(Math.Round(Convert.ToDecimal(material), 2));
             model.FieldArea = field.Size;
+            model._calculatorName = WebLocalizationKeys.MATERIALS.ToString();
             continuation.Target = model;
             //(
             //    (
@@ -52,6 +53,11 @@ namespace KnowYourTurf.Web.Services
             //)
             //*area
             return continuation;
+        }
+
+        public CalculatorViewModel EmptyViewModel()
+        {
+            return new MaterialsCalcViewModel();
         }
     }
 }

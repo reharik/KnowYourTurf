@@ -1,41 +1,33 @@
 ﻿@model KnowYourTurf.Web.Models.ChemicalViewModel
-@using KnowYourTurf.Core
-@using KnowYourTurf.Web
-@using KnowYourTurf.Core.Html.FubuUI
-@using KnowYourTurf.Web.Controllers
-@using KnowYourTurf.Core.Html.Expressions
+@using CC.Core.Html.CCUI
 
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-
-@MvcHtmlString.Create(FormFor<ChemicalController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-    @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Name).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Description).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Manufacturer).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Manufacturer).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ActiveIngredient).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ActiveIngredient).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ActiveIngredientPercent).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ActiveIngredientPercent).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.EPAEstNumber).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EPAEstNumber).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.EPARegNumber).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EPARegNumber).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
         </div>
     </div>
-@EndForm()
 

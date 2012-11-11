@@ -1,16 +1,12 @@
 ﻿using System;
 using System.IO;
-using System.Web;
 using System.Web.Mvc;
-using FubuMVC.Core;
+using CC.Core;
+using CC.UI.Helpers;
+using CC.UI.Helpers.Tags;
 using KnowYourTurf.Core;
-using KnowYourTurf.Core.Services;
-using FubuMVC.UI;
-using FubuMVC.UI.Tags;
 using Microsoft.Practices.ServiceLocation;
-using NHibernate.Mapping;
 using StructureMap;
-using StructureMap.Configuration;
 using log4net.Config;
 
 namespace KnowYourTurf.Web.Config
@@ -52,6 +48,7 @@ namespace KnowYourTurf.Web.Config
                 StructureMapBootstrapper.Bootstrap();
                 ModelBindingBootstaper.Bootstrap();
             }
+            AutoMapperBootstrapper.Bootstrap();
             // sets SM as CSL
             ServiceLocator.SetLocatorProvider(() => new StructureMapServiceLocator());
             // sets MVCDependencyResolver to use the CSL
@@ -62,7 +59,7 @@ namespace KnowYourTurf.Web.Config
 
             var library = ObjectFactory.Container.GetInstance<TagProfileLibrary>();
             var conventions = ObjectFactory.Container.GetAllInstances<HtmlConventionRegistry>();
-            conventions.Each(library.ImportRegistry);
+            conventions.ForEachItem(library.ImportRegistry);
 
             //SecurityBootstrapper.Bootstrap();
         }

@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using FubuMVC.Core;
-using KnowYourTurf.Core;
+using AutoMapper;
+using CC.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
+using Castle.Components.Validator;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -33,31 +36,22 @@ namespace KnowYourTurf.Web.Controllers
             _sessionContext = sessionContext;
         }
 
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("AddUpdate",new DocumentViewModel());
+        }
+
         public ActionResult AddUpdate(ViewModel input)
         {
             var document = input.EntityId > 0 ? _repository.Find<Document>(input.EntityId) : new Document();
             var categoryItems = _selectListItemService.CreateList<DocumentCategory>(x=>x.Name,x=>x.EntityId,true);
-            var model = new DocumentViewModel
-            {
-                Item = document,
-                DocumentCategoryList = categoryItems,
-                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
-                Popup = input.Popup
-            };
-            return View(model);
-        }
-      
-        public ActionResult Display(DocumentViewModel input)
-        {
-            var document = _repository.Find<Document>(input.EntityId);
-            var model = new DocumentViewModel
-                            {
-                                Item = document,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.AddUpdate(null)) + "/" + document.EntityId,
-                                Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString(),
-                                Popup = input.Popup
-                            };
-            return View(model);
+            var model = Mapper.Map<Document, DocumentViewModel>(document);
+            model._DocumentCategoryEntityIdList = categoryItems;
+            model._Title = WebLocalizationKeys.DOCUMENT_INFORMATION.ToString();
+            model.Popup = input.Popup;
+            model._saveUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.Save(null));
+            model.Var = input.Var;
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -69,7 +63,7 @@ namespace KnowYourTurf.Web.Controllers
         }
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
-            input.EntityIds.Each(x =>
+            input.EntityIds.ForEachItem(x =>
             {
                 var item = _repository.Find<Document>(x);
                 _fileHandlerService.DeleteFile(item.FileUrl);
@@ -82,41 +76,60 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(DocumentViewModel input)
         {
-            var coId = _sessionContext.GetCompanyId();
-            var document = input.Item.EntityId > 0 ? _repository.Find<Document>(input.Item.EntityId) : new Document();
-            var newDoc = mapToDomain(input, document);
+            // change to switch when we add docs to other things.
+            var field = _repository.Find<Field>(input.ParentId);
+            var document = field.Documents.FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Document();
+            document = mapToDomain(input, document);
             document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments");
-            var crudManager = _saveEntityService.ProcessSave(newDoc);
-            if (input.From == "Field")
-            {
-                var field = _repository.Find<Field>(input.ParentId);
-                field.AddDocument(document);
-                crudManager = _saveEntityService.ProcessSave(field, crudManager);
-            }
-            
+
+            field.AddDocument(document);
+            var crudManager = _saveEntityService.ProcessSave(field);
+
             var notification = crudManager.Finish();
             return Json(notification, "text/plain");
         }
 
         private Document mapToDomain(DocumentViewModel input, Document document)
         {
-            var documentModel = input.Item;
-            document.FileType = documentModel.FileType;
-            
-            document.Name = documentModel.Name;
-            document.Description = documentModel.Description;
-            if (document.DocumentCategory == null || document.DocumentCategory.EntityId != input.Item.DocumentCategory.EntityId)
+            document.Name = input.Name;
+            document.Description = input.Description;
+            if (document.DocumentCategory == null || document.DocumentCategory.EntityId != input.DocumentCategoryEntityId)
             {
-                document.DocumentCategory = _repository.Find<DocumentCategory>(input.Item.DocumentCategory.EntityId);
+                document.DocumentCategory = _repository.Find<DocumentCategory>(input.DocumentCategoryEntityId);
             }
             return document;
+        }
+
+        public ActionResult docs(ViewModel input)
+        {
+            var docs = _repository.FindAll<Document>();
+            var model = docs.Select(x => new DocumentDto {file = x});
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 
     public class DocumentViewModel:ViewModel
     {
-        public Document Item { get; set; }
-        public IEnumerable<SelectListItem> DocumentCategoryList { get; set; }
-        public long DocumentCategory { get; set; }
+        public IEnumerable<SelectListItem> _DocumentCategoryEntityIdList { get; set; }
+
+        [ValidateNonEmpty]
+        public virtual string Name { get; set; }
+        [TextArea]
+        public virtual string Description { get; set; }
+        public virtual int DocumentCategoryEntityId { get; set; }
+        [ValidateNonEmpty]
+        public virtual string FileUrl { get; set; }
+
+        public string _saveUrl { get; set; }
+    }
+
+    public class DocViewModel : ViewModel
+    {
+        public IEnumerable<DocumentDto> files { get; set; } 
+    }
+
+    public class DocumentDto
+    {
+        public Document file { get; set; }
     }
 }

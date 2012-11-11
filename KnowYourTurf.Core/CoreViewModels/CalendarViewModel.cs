@@ -1,4 +1,5 @@
 ﻿using System;
+using CC.Core.CoreViewModelAndDTOs;
 
 namespace KnowYourTurf.Core
 {
@@ -21,17 +22,21 @@ namespace KnowYourTurf.Core
         public string Title { get; set; }
 
         public string AddUpdateUrl { get; set; }
+        public string AddUpdateTemplateUrl { get; set; }
+        public string AddUpdateRoute { get; set; }
 
         public string EventChangedUrl { get; set; }
 
         public string DisplayUrl { get; set; }
+        public string DisplayTemplateUrl { get; set; }
+        public string DisplayRoute { get; set; }
 
         public string DeleteUrl { get; set; }
     }
 
     public class CalendarEvent
     {
-        public long EntityId { get; set; }
+        public int EntityId { get; set; }
         public string title { get; set; }
         public string start { get; set; }
         public string end { get; set; }

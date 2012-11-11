@@ -1,8 +1,9 @@
-﻿using Castle.Components.Validator;
+﻿using CC.Core.Domain;
+using Castle.Components.Validator;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class Fertilizer : BaseProduct
+    public class Fertilizer : BaseProduct, IPersistableObject
     {
         public override string InstantiatingType{get{return "Fertilizer";}}
         [ValidateNonEmpty, ValidateDoubleAttribute]

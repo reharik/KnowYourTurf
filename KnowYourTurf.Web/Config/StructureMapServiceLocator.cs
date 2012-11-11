@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CC.Core;
 using KnowYourTurf.Core;
 using Microsoft.Practices.ServiceLocation;
 using StructureMap;

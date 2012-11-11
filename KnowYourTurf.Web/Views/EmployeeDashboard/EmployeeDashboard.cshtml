@@ -1,113 +1,72 @@
-﻿@model KnowYourTurf.Web.Models.EmployeeDashboardViewModel
-@using KnowYourTurf.Core;
-@using KnowYourTurf.Core.Html.Expressions
+﻿@model KnowYourTurf.Web.Models.UserViewModel
+@using CC.Core.Html.CCUI
 @using KnowYourTurf.Web
-@using KnowYourTurf.Core.Html.FubuUI
-@using HtmlTags
-@using KnowYourTurf.Web.Controllers
 
 
 @{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
 
 
 @section HeaderJavascript{
-    var pendingTaskaddUpdateUrl = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AddUpdateUrl));
-    var pendingGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition))
-    var completeGridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.CompletedListDefinition))
-     var availableRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableItems)) ;
-    var selectedRoles = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedItems)) ;
-    var rolesOptions = {
-        availableItems: availableRoles,
-        selectedItems: selectedRoles,
-        inputSelector:"#RolesInput",
-        name:"Roles"
-    };
-    extraFormOptions.rolesOptions = rolesOptions;
-    $(document).ready(function() {
-        edcOptions = {
-            pendingTaskaddUpdateUrl:pendingTaskaddUpdateUrl,
-            pendingGridDef:pendingGridDef,
-            completeGridDef:completeGridDef,
-            rolesOptions:rolesOptions,
-            employeeListUrl:'@Model.EmployeeListUrl',
-            deleteMultipleUrl:'@Model.DeleteMultipleUrl'
-        }
-        new kyt.EmployeeDashboardController(edcOptions);
-    });
 }
 
-@MvcHtmlString.Create(FormFor<EmployeeController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-    @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
-    @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())
-    <input type="hidden" id="returnToList" name="ReturnToList" value="@Model.ReturnToList"/>
     <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.EmployeeId).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EmployeeId).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.FirstName).ToHtmlTag()
+            @Html.SubmissionFor(x => x.FirstName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.LastName).ToHtmlTag()
+            @Html.SubmissionFor(x => x.LastName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.EmergencyContact).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EmergencyContact).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.EmergencyContactPhone).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EmergencyContactPhone).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Password).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UserLoginInfoPassword).LabelDisplay(WebLocalizationKeys.PASSWORD).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Email).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Email).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.PhoneMobile).ToHtmlTag()
+            @Html.SubmissionFor(x => x.PhoneMobile).ToHtmlTag()
         </div>
     </div>
     <div class="col left">
-     @{
-         if (Model.Item.ImageUrl.IsNotEmpty())
-         {
-             <div class="fieldRow">
-                 @Html.ViewFor(x => x.Item.ImageUrl).HideLabel().AddClassToInput("KYT_dashboardImage").ToHtmlTag()
-             </div>
-         }
-     }
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Address1).ToHtmlTag()
+            @Html.SubmissionFor(x => x.FileUrl).LabelDisplay(WebLocalizationKeys.EMPLOYEE_PHOTO).ToHtmlTag() 
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Address2).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address1).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.City).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address2).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.State).ToHtmlTag()
+            @Html.SubmissionFor(x => x.City).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.ZipCode).ToHtmlTag()
+            @Html.SubmissionFor(x => x.State).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.UserLoginInfo.Status).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ZipCode).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Notes).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UserLoginInfoStatus).LabelDisplay(WebLocalizationKeys.STATUS).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.RolesInput).InputId("RolesInput").HideInput().RootId("rolesInputRoot").LabelDisplay(WebLocalizationKeys.USER_ROLES).OperationName("/UserRoles").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            <div id="newImage">
-                <p><input type="file" id="fileUpload" name="fileUpload" size="23"/></p><br />
-            </div>
+            @Html.SubmissionFor(x => x.UserRoles).ElType("MultiSelect").OperationName("/UserRoles").ToHtmlTag()
         </div>
+        
     </div>
 
 
-@EndForm()
 <div class="col full clear"></div>
 <div class="col left">
     @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
@@ -115,38 +74,16 @@
 </div>
 <div class="col full clear"><hr/></div>
 
-<div class="col left clear">
-        <div class="fieldRow">
-        <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
-            <div id="pendingTaskGridContainer" class="grid_5b">
-                <div class="content-header">
-                    <input class="search" /> 
-                </div>
-                <div id="contentArea" class="content-inner">
-                    <div id="validation-container-wrapper">
-                        <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
-                    </div>
-                    <table id="gridContainer_pt" class="scroll"></table>
-                    <div id="pager" class="scroll" style="text-align:center;"></div>
-                </div>
-            </div>
+    <div class="col left clear">
+        <div class="fieldRow dashboardGrid">
+            <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
+            <div id="pendingTaskGridContainer" ></div>
         </div>
     </div>
 
-    <div class="col right ">
-        <div class="fieldRow">
+    <div class="col right">
+        <div class="fieldRow dashboardGrid">
             <div class="gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
-                   <div id="completeTaskGridContainer" class="grid_4 KYT_AddNew_space">
-                <div class="content-header">
-                    <input class="search" /> 
-                </div>
-                <div id="contentArea" class="content-inner">
-                    <div id="validation-container-wrapper">
-                        <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
-                    </div>
-                    <table id="gridContainer_ct" class="scroll"></table>
-                    <div id="pager" class="scroll" style="text-align:center;"></div>
-                </div>
-            </div>
+            <div id="completedTaskGridContainer" class="grid_4 KYT_AddNew_space"></div>
         </div>
     </div>

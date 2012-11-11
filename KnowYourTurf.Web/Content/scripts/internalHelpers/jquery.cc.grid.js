@@ -17,7 +17,7 @@ if (typeof cc.grid == 'undefined') {
             mtype: 'GET',
             colNames: cc.grid.columnService.columnNames(gridDefinition),
             colModel: cc.grid.columnService.columnModel(gridDefinition),
-            rowNum: 1000,
+            rowNum: 100,
             multiselect: true,
             scrollOffset:0,
             altRows:true,
@@ -32,11 +32,13 @@ if (typeof cc.grid == 'undefined') {
             },
             loadtext:"",
             //emptyrecords:"aint go nothin",
-            gridComplete:function(){$(this).find(".cbox").parent().addClass("jqg_cb");$.publish("/contentLevel/gridLoadComplete",[this.rows.length-1])},
+            gridComplete:function(){$(this).find(".cbox").parent().addClass("jqg_cb");},
             sortorder: "asc",
             sortname:cc.grid.columnService.defaultSortColumnName(gridDefinition),
             onSortCol:function(index,iCol,sortorder) {cc.gridHelper.adjustSortStyles(index,iCol,sortorder);},
             jsonReader: {
+
+
                 repeatitems: true,
                 root: "items",
                 cell: "cell",

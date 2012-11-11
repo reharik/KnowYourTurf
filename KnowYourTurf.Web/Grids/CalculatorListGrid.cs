@@ -1,33 +1,23 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
+﻿using CC.Core.DomainTools;
+using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
     public class CalculatorListGrid : Grid<Calculator>, IEntityListGrid<Calculator>
     {
-        public CalculatorListGrid(IGridBuilder<Calculator> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public CalculatorListGrid(IGridBuilder<Calculator> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<Calculator> BuildGrid()
         {
-            GridBuilder.LinkColumnFor(x=>x.Name)
-                .ForAction<CalculatorController>(x => x.Calculator(null))
+            GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
-            GridBuilder.DisplayFor(x => x.DateCreated);
+            GridBuilder.DisplayFor(x => x.CreatedDate);
             return this;
         }
     }

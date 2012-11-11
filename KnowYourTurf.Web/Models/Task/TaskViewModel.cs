@@ -1,39 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
 using Castle.Components.Validator;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Services;
+using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 
 namespace KnowYourTurf.Web.Models
 {
     public class TaskViewModel:ViewModel
     {
-        public IEnumerable<SelectListItem> FieldList { get; set; }
-        public IEnumerable<SelectListItem> EquipmentList { get; set; }
-        public IEnumerable<SelectListItem> TaskTypeList { get; set; }
-        public string Product { get; set; }
-        public IDictionary<string,IEnumerable<SelectListItem>> ProductList { get; set; }
-        public Task Item { get; set; }
+        public GroupedSelectViewModel _FieldEntityIdList { get; set; }
+        public GroupedSelectViewModel _InventoryProductProductEntityIdList { get; set; }
+        public IEnumerable<SelectListItem> _TaskTypeEntityIdList { get; set; }
+
+        public TokenInputViewModel Employees { get; set; }
+        public TokenInputViewModel Equipment { get; set; }
+
+        
+        public string _saveUrl { get; set; }
         public bool Copy { get; set; }
 
-        public IEnumerable<TokenInputDto> AvailableEmployees { get; set; }
-        public List<TokenInputDto> SelectedEmployees { get; set; }
-        public IEnumerable<TokenInputDto> AvailableEquipment { get; set; }
-        public IEnumerable<TokenInputDto> SelectedEquipment { get; set; }
+        [ValidateNonEmpty]
+        public int TaskTypeEntityId { get; set; }
+        [ValidateNonEmpty]
+        public DateTime? ScheduledDate { get; set; }
+        [ValidateNonEmpty]
+        public string ScheduledStartTimeString { get; set; }
+        public string ScheduledEndTimeString { get; set; }
+        public string ActualTimeSpent { get; set; }
+        [ValidateNonEmpty]
+        public int FieldEntityId { get; set; }
+        public int InventoryProductProductEntityId { get; set; }
+        [ValidateDouble]
+        public double? QuantityNeeded { get; set; }
+        [ValidateDouble]
+        public double? QuantityUsed { get; set; }
+        [TextArea]
+        public string Notes { get; set; }
+        public bool Complete { get; set; }
 
-        public string EmployeeInput { get; set; }
-        public string EquipmentInput { get; set; }
+    }
 
-        public IEnumerable<string> EmployeeNames { get; set; }
-        public IEnumerable<string> EquipmentNames { get; set; }
+    public class DisplayTaskViewModel:ViewModel
+    {
+        public string TaskTypeName { get; set; }
+        public DateTime ScheduledDate { get; set; }
+        public string FieldName { get; set; }
+        public string InventoryProductProductName { get; set; }
+        public string ScheduledStartTimeString { get; set; }
+        public string ScheduledEndTimeString { get; set; }
+        public string Notes { get; set; }
+        public string _AddUpdateUrl { get; set; }
+        public IEnumerable<string> _EmployeeNames { get; set; }
+        public IEnumerable<string> _EquipmentNames { get; set; }
     }
 
     public class AddUpdateTaskViewModel:ViewModel
     {
-        public string From { get; set; }
-        public long Field { get; set; }
+        public string Param1 { get; set; }
+        public int Field { get; set; }
         public string Product { get; set; }
         public double Quantity { get; set; }
         public bool Copy { get; set; }

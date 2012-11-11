@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
-using KnowYourTurf.Core;
+﻿using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -26,7 +24,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new WeatherViewModel
             {
                 Item = weather,
-                Title = WebLocalizationKeys.WEATHER_INFORMATION.ToString()
+                _Title = WebLocalizationKeys.WEATHER_INFORMATION.ToString()
             };
             return PartialView("WeatherAddUpdate", model);
         }
@@ -37,8 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new WeatherViewModel
                             {
                                 Item = weather,
-                                AddUpdateUrl = UrlContext.GetUrlForAction<WeatherController>(x => x.AddUpdate(null)) + "/" + weather.EntityId,
-                                Title = WebLocalizationKeys.WEATHER_INFORMATION.ToString()
+                                _Title = WebLocalizationKeys.WEATHER_INFORMATION.ToString()
                             };
             return PartialView("WeatherView", model);
         }

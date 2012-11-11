@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -19,23 +19,24 @@ namespace KnowYourTurf.Web.Controllers
             _equipmentListGrid = equipmentListGrid;
         }
 
-        public ActionResult EquipmentList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<EquipmentListController>(x => x.Equipments(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddUpdate(null)),
-                DeleteMultipleUrl= UrlContext.GetUrlForAction<EquipmentController>(x => x.DeleteMultiple(null)),
-                GridDefinition = _equipmentListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.EQUIPMENT.ToString()
+                deleteMultipleUrl= UrlContext.GetUrlForAction<EquipmentController>(x => x.DeleteMultiple(null)),
+                gridDef = _equipmentListGrid.GetGridDefinition(url, input.User),
+                _Title = WebLocalizationKeys.EQUIPMENT.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Equipments(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Equipment>(input.filters);
-            var gridItemsViewModel = _equipmentListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _equipmentListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

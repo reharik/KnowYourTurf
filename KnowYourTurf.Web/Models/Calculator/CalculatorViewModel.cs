@@ -1,24 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
 using Castle.Components.Validator;
-using KnowYourTurf.Core;
 
 namespace KnowYourTurf.Web.Models
 {
     public abstract class CalculatorViewModel:ViewModel
     {
-        public string CalculateUrl { get; set; }
-        public string CreateATaskUrl { get; set; }
-        public string CalculatorDisplayName { get; set; }
-        public string CalculatorName { get; set; }
+        public string _calculateUrl { get; set; }
+        public string _createATaskUrl { get; set; }
+        public string _calculatorDisplayName { get; set; }
+        public string _calculatorName { get; set; }
+        public string _saveUrl { get; set; }
         public bool Success { get { return true; } }
     }
 
     public class SuperInputCalcViewModel
     {
-        public long EntityId { get; set; }
-        public string Field { get; set; }
-        public string Product { get; set; }
+        public int EntityId { get; set; }
+        public int FieldEntityId { get; set; }
+        public int ProductEntityId { get; set; }
         public double? FertilizerRate { get; set; }
         public double Drainageline { get; set; }
         public double DitchlineWidth { get; set; }
@@ -35,12 +36,13 @@ namespace KnowYourTurf.Web.Models
 
     public class FertilzierNeededCalcViewModel: CalculatorViewModel
     {
+        public GroupedSelectViewModel _FieldEntityIdList { get; set; }
+        public IEnumerable<SelectListItem> _ProductEntityIdList { get; set; }
+
         [ValidateNonEmpty]
-        public string Field { get; set; }
-        public IEnumerable<SelectListItem> FieldList { get; set; }
+        public int FieldEntityId { get; set; }
         [ValidateNonEmpty]
-        public string Product { get; set; }
-        public IEnumerable<SelectListItem> ProductList { get; set; }
+        public int ProductEntityId { get; set; }
         [ValidateDouble]
         public double? N { get; set; }
         [ValidateDouble]
@@ -57,9 +59,10 @@ namespace KnowYourTurf.Web.Models
 
     public class MaterialsCalcViewModel : CalculatorViewModel
     {
-        [ValidateNonEmpty]
-        public string Field { get; set; }
-        public IEnumerable<SelectListItem> FieldList { get; set; }
+        public GroupedSelectViewModel _FieldEntityIdList { get; set; }
+
+        public int FieldEntityId { get; set; }
+     
         [ValidateNonEmpty, ValidateDouble]
         public double? Drainageline { get; set; }
         [ValidateNonEmpty, ValidateDouble]
@@ -91,12 +94,14 @@ namespace KnowYourTurf.Web.Models
 
     public class OverseedBagsNeededCalcViewModel:CalculatorViewModel
     {
+        public GroupedSelectViewModel _FieldEntityIdList { get; set; }
+        public IEnumerable<SelectListItem> _ProductEntityIdList { get; set; }
+
+
         [ValidateNonEmpty]
-        public string Field { get; set; }
-        public IEnumerable<SelectListItem> FieldList { get; set; }
+        public int FieldEntityId { get; set; }
         [ValidateNonEmpty]
-        public string Product { get; set; }
-        public IEnumerable<SelectListItem> ProductList { get; set; }
+        public int ProductEntityId { get; set; }
         public string BagSize { get; set; }
         public string FieldArea { get; set; }
         public double? BagsNeeded { get; set; }
@@ -108,12 +113,14 @@ namespace KnowYourTurf.Web.Models
 
     public class OverseedRateNeededCalcViewModel : CalculatorViewModel
     {
+        public GroupedSelectViewModel _FieldEntityIdList { get; set; }
+        public IEnumerable<SelectListItem> _ProductEntityIdList { get; set; }
+
+
         [ValidateNonEmpty]
-        public string Field { get; set; }
-        public IEnumerable<SelectListItem> FieldList { get; set; }
+        public int FieldEntityId { get; set; }
         [ValidateNonEmpty]
-        public string Product { get; set; }
-        public IEnumerable<SelectListItem> ProductList { get; set; }
+        public int ProductEntityId { get; set; }
         public string BagSize { get; set; }
         public string FieldArea { get; set; }
         [ValidateNonEmpty, ValidateDouble]

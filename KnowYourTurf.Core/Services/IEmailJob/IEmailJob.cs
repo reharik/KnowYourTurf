@@ -4,7 +4,8 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using Alpinely.TownCrier;
-using FubuMVC.Core;
+using CC.Core;
+using CC.Core.DomainTools;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 
@@ -29,10 +30,10 @@ namespace KnowYourTurf.Core.Services.IEmailJob
             var factory = new MergedEmailFactory(new TemplateParser());
             var employees = _repository.Query<User>(x => x.UserRoles.Any(r=>r.Name == UserType.Employee.ToString()));
             var emailTemplate = _repository.Query<EmailTemplate>(x => x.Name == "Daily Tasks List").FirstOrDefault();
-            employees.Each(x =>
+            employees.ForEachItem(x =>
                                {
                                    var sb = new StringBuilder();
-                                   x.Tasks.Where(t=>t.ScheduledDate >= DateTime.Now && t.ScheduledDate <= DateTime.Now.AddDays(1)).Each(task =>
+                                   x.Tasks.Where(t=>t.ScheduledDate >= DateTime.Now && t.ScheduledDate <= DateTime.Now.AddDays(1)).ForEachItem(task =>
                                                          {
                                                              sb.Append("Task Type: ");
                                                              sb.Append(task.TaskType.Name);

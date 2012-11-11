@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
-using FubuMVC.Core;
 using HtmlTags;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Models;
+using CC.Core;
 
 namespace KnowYourTurf.Web.Services.EmailHandlers
 {
@@ -39,7 +38,7 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
         {
             var rootTag = new DivTag("tasks");
             var ul = new HtmlTag("ul");
-            tasks.OrderBy(x=>x.ScheduledDate).Each(x=>
+            tasks.OrderBy(x=>x.ScheduledDate).ForEachItem(x=>
                            {
                                var li = new HtmlTag("li");
                                var liDiv = new DivTag("liDiv");

@@ -1,8 +1,9 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -22,24 +23,26 @@ namespace KnowYourTurf.Web.Controllers
             _repository = repository;
         }
 
-        public ActionResult VendorContactList(ListViewModel input)
+        public ActionResult ItemList(ListViewModel input)
         {
-            var vendor = _repository.Find<Vendor>(input.EntityId);
-            var url = UrlContext.GetUrlForAction<VendorContactListController>(x => x.VendorContacts(null)) + "?ParentId=" + input.EntityId;
+            var vendor = _repository.Find<Vendor>(input.ParentId);
+            var url = UrlContext.GetUrlForAction<VendorContactListController>(x => x.VendorContacts(null)) + "?ParentId=" + input.ParentId;
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.AddUpdate(null)) + "?ParentId=" + input.EntityId,
-                GridDefinition = _vendorContactListGrid.GetGridDefinition(url),
-                DeleteMultipleUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.DeleteMultiple(null)) + "?ParentId=" + input.EntityId,
-                Title = "("+vendor.Company+") "+ WebLocalizationKeys.VENDOR_CONTACTS
+                gridDef = _vendorContactListGrid.GetGridDefinition(url, input.User),
+                deleteMultipleUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.DeleteMultiple(null)) + "?ParentId=" + input.ParentId,
+                _Title = "("+vendor.Company+") "+ WebLocalizationKeys.VENDOR_CONTACTS
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult VendorContacts(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<VendorContact>(input.filters, x => x.Vendor.EntityId == input.ParentId);
-            var gridItemsViewModel = _vendorContactListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var vendor = _repository.Find<Vendor>(input.ParentId);
+            var items = _dynamicExpressionQuery.PerformQuery(vendor.Contacts,input.filters);
+            var gridItemsViewModel = _vendorContactListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

@@ -1,9 +1,13 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using AutoMapper;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Localization;
+using CC.Core.Services;
+using Castle.Components.Validator;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -22,11 +26,11 @@ namespace KnowYourTurf.Web.Controllers
             _inventoryProductListGrid = inventoryProductListGrid;
         }
 
-        public ActionResult InventoryProductList(string productType)
+        public ActionResult ItemList(InventoryProductListViewModel input)
         {
             StringToken title = null;
             StringToken crudTitle = null;
-            switch(productType)
+            switch (input.Var)
             {
                 case "Chemical":
                     crudTitle = WebLocalizationKeys.INVENTORY_CHEMICAL_INFORMATION;
@@ -38,42 +42,63 @@ namespace KnowYourTurf.Web.Controllers
                     crudTitle = WebLocalizationKeys.INVENTORY_FERTILIZER_INFORMATION;
                     break;
             }
-            var url = UrlContext.GetUrlForAction<InventoryListController>(x => x.Products(null)) + "?ProductType=" + productType;
+            var url = UrlContext.GetUrlForAction<InventoryListController>(x => x.Products(null)) + "?ProductType=" + input.Var;
             ListViewModel model = new ListViewModel()
             {
                 //TODO put modifiler here "ProductType=" + productType
-                GridDefinition = _inventoryProductListGrid.GetGridDefinition(url),
-                Title = crudTitle.ToString()
+                gridDef = _inventoryProductListGrid.GetGridDefinition(url, input.User),
+                _Title = crudTitle.ToString(),
+                searchField = "Product.Name"
             };
-            return View("Inventory" + productType + "List", model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Products(InventoryProductGridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<InventoryProduct>(input.filters,x=>x.Product.InstantiatingType == input.ProductType);
-            var gridItemsViewModel = _inventoryProductListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var items = _dynamicExpressionQuery.PerformQuery<InventoryProduct>(input.filters, x => x.Product.InstantiatingType == input.ProductType);
+            var gridItemsViewModel = _inventoryProductListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Display(InventoryProductListViewModel input)
+
+        public ActionResult Display_Template(InventoryProductListViewModel input)
         {
             var inventoryProduct = _repository.Find<InventoryProduct>(input.EntityId);
             if (inventoryProduct.Product.InstantiatingType == "Chemical")
             {
-                var model = new InventoryChemicalViewModel {Item = inventoryProduct,Title=WebLocalizationKeys.INVENTORY_CHEMICAL_INFORMATION.ToString()};
-                return PartialView("InventoryChemicalView", model);
+                return View("InventoryChemicalView", new InventoryChemicalViewModel());
             }
             if (inventoryProduct.Product.InstantiatingType == "Fertilizer")
             {
-                var model = new InventoryFertilizerViewModel { Item = inventoryProduct,Title=WebLocalizationKeys.INVENTORY_FERTILIZER_INFORMATION.ToString() };
-                return PartialView("InventoryFertilizerView", model);
+                return View("InventoryFertilizerView", new InventoryFertilizerViewModel());
             }
             if (inventoryProduct.Product.InstantiatingType == "Material")
             {
-                var model = new InventoryMaterialViewModel { Item = inventoryProduct, Title = WebLocalizationKeys.INVENTORY_MATERIAL_INFORMATION.ToString()};
-                return PartialView("InventoryMaterialView", model);
+                return View("InventoryMaterialView", new InventoryMaterialViewModel());
             }
             return null;
+        }
+
+        public ActionResult Display(InventoryProductListViewModel input)
+        {
+            InventoryProductViewModel model = new InventoryProductViewModel();
+            var inventoryProduct = _repository.Find<InventoryProduct>(input.EntityId);
+            if (inventoryProduct.Product.InstantiatingType == "Chemical")
+            {
+                model = Mapper.Map<InventoryProduct, InventoryChemicalViewModel>(inventoryProduct);
+                model._Title = WebLocalizationKeys.INVENTORY_CHEMICAL_INFORMATION.ToString();
+            }
+            if (inventoryProduct.Product.InstantiatingType == "Fertilizer")
+            {
+                model = Mapper.Map<InventoryProduct, InventoryFertilizerViewModel>(inventoryProduct);
+                model._Title = WebLocalizationKeys.INVENTORY_FERTILIZER_INFORMATION.ToString();
+            }
+            if (inventoryProduct.Product.InstantiatingType == "Material")
+            {
+                model = Mapper.Map<InventoryProduct, InventoryMaterialViewModel>(inventoryProduct);
+                model._Title = WebLocalizationKeys.INVENTORY_MATERIAL_INFORMATION.ToString();
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
     }
@@ -88,19 +113,38 @@ namespace KnowYourTurf.Web.Controllers
         public string ProductType { get; set; }
     }
 
-    public class InventoryFertilizerViewModel : ViewModel
+    public class InventoryProductViewModel : ViewModel
     {
-        public InventoryProduct Item { get; set; }
-        public Fertilizer Fertilizer { get { return Item.Product as Fertilizer; } }
+        [ValidateNonEmpty]
+        public string Name { get; set; }
+        [TextArea]
+        public string Description { get; set; }
+        public string Notes { get; set; }
+        public double? Quantity { get; set; }
+        public int SizeOfUnit { get; set; }
+        public string UnitType { get; set; }
+        public string LastVendorCompany { get; set; }
+}
+
+    public class InventoryFertilizerViewModel : InventoryProductViewModel
+    {
+        [ValidateNonEmpty, ValidateDouble]
+        public double N { get; set; }
+        [ValidateNonEmpty, ValidateDouble]
+        public double P { get; set; }
+        [ValidateNonEmpty, ValidateDouble]
+        public double K { get; set; }
     }
-    public class InventoryChemicalViewModel :ViewModel
+    public class InventoryChemicalViewModel : InventoryProductViewModel
     {
-        public InventoryProduct Item { get; set; }
-        public Chemical Chemical { get { return Item.Product as Chemical; } }
+        public string Manufacturer { get; set; }
+        public string ActiveIngredient { get; set; }
+        [ValidateDecimal]
+        public decimal ActiveIngredientPercent { get; set; }
+        public string EPARegNumber { get; set; }
+        public string EPAEstNumber { get; set; }
     }
-    public class InventoryMaterialViewModel : ViewModel
+    public class InventoryMaterialViewModel : InventoryProductViewModel
     {
-        public InventoryProduct Item { get; set; }
-        public Material Material { get { return Item.Product as Material; } }
     }
 }

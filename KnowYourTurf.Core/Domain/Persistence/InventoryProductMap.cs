@@ -14,7 +14,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.UnitType);
             Map(x => x.SizeOfUnit);
             References(x => x.LastVendor);
-            References(x => x.Product).Not.LazyLoad();
+            References(x => x.Product);
             DiscriminateSubClassesOnColumn<string>("Discriminator").AlwaysSelectWithValue();
 
         }

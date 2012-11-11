@@ -1,4 +1,3 @@
-//using FubuMVC.Core;
 //using KnowYourTurf.Core.Domain;
 
 //namespace KnowYourTurf.Core.Services
@@ -19,7 +18,7 @@
 
 //        public void CompleteTask(Task task)
 //        {
-//            task.GetMaterialsRequired().Each(x =>
+//            task.GetMaterialsRequired().ForEachItem(x =>
 //            {
 //                if (x.QuantityUsed <= 0) return;
 //                var material = _repository.Find<InventoryMaterial>(x.Material.EntityId);
@@ -27,7 +26,7 @@
 //                _repository.Save(material);
 //            });
 
-//            task.GetFertilizersRequired().Each(x =>
+//            task.GetFertilizersRequired().ForEachItem(x =>
 //            {
 //                if (x.QuantityUsed <= 0) return;
 //                var fertilizer = _repository.Find<InventoryFertilizer>(x.Fertilizer.EntityId);

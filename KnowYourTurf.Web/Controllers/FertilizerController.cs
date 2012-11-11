@@ -1,11 +1,14 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
+using CC.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models.Fertilizer;
 
 namespace KnowYourTurf.Web.Controllers
@@ -20,27 +23,31 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("FertilizerAddUpdate", new FertilizerViewModel());
+        }
+
         public ActionResult AddUpdate(ViewModel input)
         {
             var fertilizer = input.EntityId > 0 ? _repository.Find<Fertilizer>(input.EntityId) : new Fertilizer();
-            var model = new FertilizerViewModel
-            {
-                Item = fertilizer,
-                Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
-            };
-            return PartialView("FertilizerAddUpdate", model);
+            var model = Mapper.Map<Fertilizer, FertilizerViewModel>(fertilizer);
+            model._Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString();
+            model._saveUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.Save(null));
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Display_Template(ViewModel input)
+        {
+            return View("FertilizerView", new FertilizerViewModel());
         }
 
         public ActionResult Display(ViewModel input)
         {
             var fertilizer = _repository.Find<Fertilizer>(input.EntityId);
-            var model = new FertilizerViewModel
-            {
-                Item = fertilizer,
-                AddUpdateUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.AddUpdate(null)) + "/" + fertilizer.EntityId,
-                Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString()
-            };
-            return PartialView("FertilizerView", model);
+            var model = Mapper.Map<Fertilizer, FertilizerViewModel>(fertilizer);
+            model._Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString();
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -82,7 +89,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(FertilizerViewModel input)
         {
-            Fertilizer fertilizer = input.Item.EntityId > 0 ? _repository.Find<Fertilizer>(input.Item.EntityId) : new Fertilizer();
+            Fertilizer fertilizer = input.EntityId > 0 ? _repository.Find<Fertilizer>(input.EntityId) : new Fertilizer();
             mapItem(fertilizer, input);
             var crudManager = _saveEntityService.ProcessSave(fertilizer);
             var notification = crudManager.Finish();
@@ -91,12 +98,12 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(Fertilizer fertilizer, FertilizerViewModel input)
         {
-            fertilizer.Description = input.Item.Description;
-            fertilizer.K = input.Item.K;
-            fertilizer.N = input.Item.N;
-            fertilizer.Name = input.Item.Name;
-            fertilizer.Notes = input.Item.Notes;
-            fertilizer.P = input.Item.P;
+            fertilizer.Description = input.Description;
+            fertilizer.K = input.K;
+            fertilizer.N = input.N;
+            fertilizer.Name = input.Name;
+            fertilizer.Notes = input.Notes;
+            fertilizer.P = input.P;
         }
     }
 }

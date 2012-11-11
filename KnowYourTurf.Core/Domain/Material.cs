@@ -1,9 +1,8 @@
-﻿using KnowYourTurf.Core;
-using KnowYourTurf.Core.Localization;
+﻿using CC.Core.Domain;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class Material : BaseProduct
+    public class Material : BaseProduct, IPersistableObject
     {
         public override string InstantiatingType { get { return "Material"; } }
     }

@@ -1,48 +1,37 @@
-﻿@model KnowYourTurf.Web.Models.PurchaseOrderLineItemViewModel
-@using KnowYourTurf.Core
-@using KnowYourTurf.Web
-@using KnowYourTurf.Core.Html.FubuUI
-@using KnowYourTurf.Web.Controllers
-@using KnowYourTurf.Core.Html.Expressions
+﻿@model KnowYourTurf.Web.Models.ReceivePurchaseOrderLineItemViewModel
+@using CC.Core.Html.CCUI
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-        
-
-            @MvcHtmlString.Create(FormFor<PurchaseOrderLineItemController>(x=>x.SaveReceived(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Item.Product.Name).ToHtmlTag()
+            @Html.ViewFor(x => x.ProductName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Item.Product.Description).ToHtmlTag()
+            @Html.ViewFor(x => x.ProductDescription).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.QuantityOrdered).ToHtmlTag()
+            @Html.SubmissionFor(x => x.QuantityOrdered).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.SizeOfUnit).ToHtmlTag()
+            @Html.SubmissionFor(x => x.SizeOfUnit).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.UnitType).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UnitType).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Price).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Price).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Item.SubTotal).ToHtmlTag()
+            @Html.ViewFor(x => x.SubTotal).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.ViewFor(x => x.Item.Tax).ToHtmlTag()
+            @Html.ViewFor(x => x.Tax).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.TotalReceived).ToHtmlTag()
+            @Html.SubmissionFor(x => x.TotalReceived).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Completed).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Completed).ToHtmlTag()
         </div>
     </div>
-
-            @EndForm()
-

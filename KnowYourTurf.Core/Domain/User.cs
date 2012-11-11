@@ -2,15 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using KnowYourTurf.Security;
+using CC.Core.Domain;
+using CC.Core.Enumerations;
+using CC.Core.Localization;
+using CC.Security;
 using Castle.Components.Validator;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
+using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class User : DomainEntity,IUser
+    public class User : DomainEntity,IUser, IPersistableObject
     {
         [ValidateNonEmpty]
         public virtual string FirstName { get; set; }
@@ -30,7 +32,7 @@ namespace KnowYourTurf.Core.Domain
         [Tools.CustomAttributes.TextArea]
         public virtual string Notes { get; set; }
         public virtual DateTime? BirthDate { get; set; }
-        public virtual string ImageUrl { get; set; }
+        public virtual string FileUrl { get; set; }
         public virtual string ImageFriendlyName { get; set; }
         public virtual Company Company { get; set; }
         public virtual CultureInfo LanguageDefault { get; set; }

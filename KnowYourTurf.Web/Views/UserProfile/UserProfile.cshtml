@@ -1,8 +1,6 @@
-﻿@model UserViewModel
-@using KnowYourTurf.Core.Html.Expressions
-@using KnowYourTurf.Core.Html.FubuUI
+﻿@model KnowYourTurf.Web.Models.UserViewModel
+@using CC.Core.Html.CCUI
 @using KnowYourTurf.Web
-@using KnowYourTurf.Web.Controllers
 @using HtmlTags
 
 @{ Layout = "~/Views/Shared/_FormLayout.cshtml"; }
@@ -31,7 +29,7 @@
                 @Html.SubmissionFor(x => x.Item.LastName).AddClassToRoot("two-five last").ToHtmlTag()
             </div>
             <div class="fieldRow">
-                @Html.SubmissionFor(x => x.Item.Title).ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item._Title).ToHtmlTag()
             </div>
             <div class="fieldRow">
                 @Html.ViewFor(x => x.Item.UserLoginInfo.LoginName).AddClassToRoot("half").ToHtmlTag()

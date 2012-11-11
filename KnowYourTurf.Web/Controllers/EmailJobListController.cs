@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -19,21 +19,21 @@ namespace KnowYourTurf.Web.Controllers
             _emailJobListGrid = emailJobListGrid;
         }
 
-        public ActionResult ItemList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<EmailJobListController>(x => x.EmailJobs(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.EmailJob(null)),
-                GridDefinition = _emailJobListGrid.GetGridDefinition(url)
+                gridDef = _emailJobListGrid.GetGridDefinition(url, input.User)
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult EmailJobs(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<EmailJob>(input.filters);
-            var gridItemsViewModel = _emailJobListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _emailJobListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

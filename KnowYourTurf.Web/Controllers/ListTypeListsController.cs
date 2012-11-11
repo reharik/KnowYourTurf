@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core.Html;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 
@@ -24,36 +26,78 @@ namespace KnowYourTurf.Web.Controllers
             _documentCategoryListGrid = documentCategoryListGrid;
         }
 
-        public ActionResult ListType()
+        public ActionResult Display_Template(ViewModel input)
         {
-            var gridUrlET = UrlContext.GetUrlForAction<EventTypeController>(x => x.ListTypes(null));
-            var gridUrlTT = UrlContext.GetUrlForAction<TaskTypeController>(x => x.ListTypes(null));
-            var gridUrlDC = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.ListTypes(null));
-            var gridUrlPC = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.ListTypes(null));
-            var dmET = UrlContext.GetUrlForAction<EventTypeController>(x => x.DeleteMultiple(null));
-            var dmTT = UrlContext.GetUrlForAction<TaskTypeController>(x => x.DeleteMultiple(null));
-            var dmDC = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.DeleteMultiple(null));
-            var dmPC = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.DeleteMultiple(null));
-            ListTypeListViewModel model = new ListTypeListViewModel()
-                                              {
-                                                  AddUpdateUrlET = UrlContext.GetUrlForAction<EventTypeController>(x => x.AddUpdate(null)),
-                                                  AddUpdateUrlTT = UrlContext.GetUrlForAction<TaskTypeController>(x => x.AddUpdate(null)),
-                                                  AddUpdateUrlDC = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.AddUpdate(null)),
-                                                  AddUpdateUrlPC = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.AddUpdate(null)),
-                                                  GridDefinition = _eventTypeListGrid.GetGridDefinition(gridUrlET),
-                                                  ListDefinitionTT = _taskTypeListGrid.GetGridDefinition(gridUrlTT),
-                                                  ListDefinitionDC = _documentCategoryListGrid.GetGridDefinition(gridUrlDC),
-                                                  ListDefinitionPC = _photoCategoryListGrid.GetGridDefinition(gridUrlPC),
-                                                  PopupTitleET = WebLocalizationKeys.EVENT_INFORMATION.ToString(),
-                                                  PopupTitleTT = WebLocalizationKeys.TASK_INFORMATION.ToString(),
-                                                  PopupTitlePC = WebLocalizationKeys.PHOTO_CATEGORY_INFORMATION.ToString(),
-                                                  PopupTitleDC = WebLocalizationKeys.DOCUMENT_CATEGORY_INFORMATION.ToString(),
-                                                  DeleteMultipleET = dmET,
-                                                  DeleteMultipleTT = dmTT,
-                                                  DeleteMultipleDC = dmDC,
-                                                  DeleteMultiplePC = dmPC,
-                                              };
-            return View(model);
+            return View("Display",new ListTypeListViewModel());
         }
+
+        public ActionResult Display(ViewModel input)
+        {
+            var model = new ListTypeListViewModel()
+                                              {
+                                                  _eventTypeGridUrl = UrlContext.GetUrlForAction<ListTypeListController>(x => x.EventTypeGrid(null)),
+                                                  _taskTypeGridUrl = UrlContext.GetUrlForAction<ListTypeListController>(x => x.TaskTypeGrid(null)),
+                                                  _documentCategoryGridUrl = UrlContext.GetUrlForAction<ListTypeListController>(x => x.DocumentCategoryGrid(null)),
+                                                  _photoCategoryGridUrl = UrlContext.GetUrlForAction<ListTypeListController>(x => x.PhotoCategoryGrid(null)),
+
+                                                  _deleteMultipleTaskTypesUrl = UrlContext.GetUrlForAction<TaskTypeController>(x => x.DeleteMultiple(null)),
+                                                  _deleteMultipleEventTypesUrl = UrlContext.GetUrlForAction<EventTypeController>(x => x.DeleteMultiple(null)),
+                                                  _deleteMultiplePhotoCatUrl = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.DeleteMultiple(null)),
+                                                  _deleteMultipleDocCatUrl = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.DeleteMultiple(null)),
+                                              };
+            return Json(model,JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EventTypeGrid(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<EventTypeController>(x => x.ListTypes(null));
+            ListViewModel model = new ListViewModel()
+            {
+                gridDef = _eventTypeListGrid.GetGridDefinition(url, input.User),
+                ParentId = input.ParentId
+            };
+            model.headerButtons.Add("delete");
+            model.headerButtons.Add("new");
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult TaskTypeGrid(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<TaskTypeController>(x => x.ListTypes(null));
+            ListViewModel model = new ListViewModel()
+            {
+                gridDef = _taskTypeListGrid.GetGridDefinition(url, input.User),
+                ParentId = input.ParentId
+            };
+            model.headerButtons.Add("delete");
+            model.headerButtons.Add("new");
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DocumentCategoryGrid(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.ListTypes(null));
+            ListViewModel model = new ListViewModel()
+            {
+                gridDef = _documentCategoryListGrid.GetGridDefinition(url, input.User),
+                ParentId = input.ParentId
+            };
+            model.headerButtons.Add("delete");
+            model.headerButtons.Add("new");
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult PhotoCategoryGrid(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.ListTypes(null));
+            ListViewModel model = new ListViewModel()
+            {
+                gridDef = _photoCategoryListGrid.GetGridDefinition(url, input.User),
+                ParentId = input.ParentId
+            };
+            model.headerButtons.Add("delete");
+            model.headerButtons.Add("new");
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+    
+    
+    
     }
 }

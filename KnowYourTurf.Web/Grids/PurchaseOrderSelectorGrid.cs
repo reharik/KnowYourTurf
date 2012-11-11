@@ -1,34 +1,26 @@
-﻿using System;
-using System.Linq;
-using HtmlTags;
-using KnowYourTurf.Core.CoreViewModels;
+﻿using CC.Core.DomainTools;
+using CC.Core.Html.Grid;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
     public class PurchaseOrderSelectorGrid : Grid<BaseProduct>, IEntityListGrid<BaseProduct>
     {
-        public PurchaseOrderSelectorGrid(IGridBuilder<BaseProduct> gridBuilder,
-            ISessionContext sessionContext,
-            IRepository repository)
-            : base(gridBuilder, sessionContext, repository)
+        public PurchaseOrderSelectorGrid(IGridBuilder<BaseProduct> gridBuilder)
+            : base(gridBuilder)
         {
         }
 
         protected override Grid<BaseProduct> BuildGrid()
         {
             GridBuilder.ImageButtonColumn()
-                .ForAction<PurchaseOrderController>(x=>x.Save(null))
-                .ToPerformAction(ColumnAction.Other)
+                .ToPerformAction(ColumnAction.Other).WithId("productGrid")
                 .ImageName("KYTadd.png")
                 .ToolTip(WebLocalizationKeys.ADD_ITEM_TO_PO);
             GridBuilder.DisplayFor(x => x.Name);
             GridBuilder.DisplayFor(x => x.Description);
-            GridBuilder.DisplayFor(x => x.InstantiatingType);
+            GridBuilder.GroupingColumnFor(x => x.InstantiatingType);
             return this;
         }
     }

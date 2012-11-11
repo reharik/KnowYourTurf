@@ -1,3 +1,4 @@
+using FluentNHibernate;
 using FluentNHibernate.Mapping;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Enums;
@@ -12,13 +13,14 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Description);
             Map(x => x.Abbreviation);
             Map(x => x.Size);
-            Map(x => x.ImageUrl);
+            Map(x => x.FileUrl);
             Map(x => x.Status);
             Map(x => x.FieldColor);
-            HasMany(x => x.Tasks).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
+            References(x => x.Category);
+            HasMany(x => x.Tasks).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
             HasMany(x => x.Events).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
-            HasMany(x => x.Documents).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
-            HasMany(x => x.Photos).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
+            HasManyToMany(x => x.Documents).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
+            HasManyToMany(x => x.Photos).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
         }
     }
 }

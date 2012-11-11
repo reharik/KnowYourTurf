@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
+using CC.Core.Domain;
+using CC.Core.Localization;
 using Castle.Components.Validator;
-using KnowYourTurf.Core;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class EmailJob:DomainEntity
+    public class EmailJob : DomainEntity, IPersistableObject
     {
         [ValidateNonEmpty]
         public virtual string Name { get; set; }

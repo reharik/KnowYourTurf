@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
+using CC.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
+using Castle.Components.Validator;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Models.Equipment;
 using KnowYourTurf.Web.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -32,30 +37,34 @@ namespace KnowYourTurf.Web.Controllers
             _selectListItemService = selectListItemService;
         }
 
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("EquipmentAddUpdate", new EquipmentViewModel());
+        }
+
         public ActionResult AddUpdate(ViewModel input)
         {
             var equipment = input.EntityId > 0 ? _repository.Find<Equipment>(input.EntityId) : new Equipment();
             var vendors = _selectListItemService.CreateList<Vendor>(x => x.Company, x => x.EntityId, true);
-            var model = new EquipmentViewModel
-            {
-                Item = equipment,
-                VendorList = vendors,
-                Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString()
-            };
-            return PartialView("EquipmentAddUpdate", model);
+            var model = Mapper.Map<Equipment, EquipmentViewModel>(equipment);
+            
+            model._VendorEntityIdList = vendors;
+            model._Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString();
+            model._saveUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.Save(null));
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Display(ViewModel input)
-        {
-            var equipment = _repository.Find<Equipment>(input.EntityId);
-            var model = new EquipmentViewModel
-            {
-                Item = equipment,
-                AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddUpdate(null)) + "/" + equipment.EntityId,
-                Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString()
-            };
-            return PartialView("EquipmentView", model);
-        }
+//        public ActionResult Display(ViewModel input)
+//        {
+//            var equipment = _repository.Find<Equipment>(input.EntityId);
+//            var model = new EquipmentViewModel
+//            {
+//                Item = equipment,
+//                AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.AddUpdate(null)) + "/" + equipment.EntityId,
+//                _Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString()
+//            };
+//            return PartialView("EquipmentView", model);
+//        }
 
         public ActionResult Delete(ViewModel input)
         {
@@ -97,23 +106,45 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(EquipmentViewModel input)
         {
-            var equipment = input.Item.EntityId > 0 ? _repository.Find<Equipment>(input.Item.EntityId) : new Equipment();
-            equipment.Name = input.Item.Name;
-            equipment.TotalHours = input.Item.TotalHours;
-            equipment.Description = input.Item.Description;
+            var equipment = input.EntityId > 0 ? _repository.Find<Equipment>(input.EntityId) : new Equipment();
+            equipment.Name = input.Name;
+            equipment.TotalHours = input.TotalHours;
+            equipment.Description = input.Description;
             if (input.DeleteImage)
             {
-                _fileHandlerService.DeleteFile(equipment.ImageUrl);
-                equipment.ImageUrl = string.Empty;
+                _fileHandlerService.DeleteFile(equipment.FileUrl);
+                equipment.FileUrl = string.Empty;
             }
-            if (equipment.Vendor == null || equipment.Vendor.EntityId != input.Item.Vendor.EntityId)
+            if (input.VendorEntityId >0 && (equipment.Vendor == null || equipment.Vendor.EntityId != input.VendorEntityId))
             {
-                equipment.Vendor = _repository.Find<Vendor>(input.Item.Vendor.EntityId);
+                var vendor = _repository.Find<Vendor>(input.VendorEntityId);
+                equipment.SetVendor(vendor);
             }
-            equipment.ImageUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
+            if (_fileHandlerService.RequsetHasFile())
+            {
+                equipment.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
+            }
             var crudManager = _saveEntityService.ProcessSave(equipment);
             var notification = crudManager.Finish();
-            return Json(notification, "text/plain");
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
     }
+
+    public class EquipmentViewModel:ViewModel
+    {
+        public string _saveUrl { get; set; }
+        public IEnumerable<SelectListItem> _VendorEntityIdList { get; set; }
+
+        [ValidateNonEmpty]
+        public string Name { get; set; }
+        [TextArea]
+        public string Description { get; set; }
+        public int VendorEntityId { get; set; }
+        [ValidateNonEmpty]
+        [ValidateDecimal]
+        public int TotalHours { get; set; }
+        public string FileUrl { get; set; }
+        public bool DeleteImage { get; set; }
+    }
+
 }

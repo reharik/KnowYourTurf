@@ -1,3 +1,5 @@
+using FluentNHibernate.Mapping;
+
 namespace KnowYourTurf.Core.Domain.Persistence
 {
     public class EventMap : DomainEntityMap<Event>

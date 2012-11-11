@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
+using CC.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using StructureMap;
@@ -32,112 +36,104 @@ namespace KnowYourTurf.Web.Controllers
             _listTypeListGrid = listTypeListGrid;
         }
 
-        public virtual ListTypeViewModel GetAddUpdate(ViewModel input)
+        public JsonResult ListTypes(GridItemsRequestModel input)
+        {
+            var items = _dynamicExpressionQuery.PerformQuery<LISTTYPE>(input.filters);
+            var gridItemsViewModel = _listTypeListGrid.GetGridItemsViewModel(input.PageSortFilter, items,input.User);
+            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        protected LISTTYPE getListType(ViewModel input)
         {
             var listType = input.EntityId > 0
                                ? _repository.Find<LISTTYPE>(input.EntityId)
                                : Activator.CreateInstance<LISTTYPE>();
-            var model = new ListTypeViewModel
-                            {
-                                Item = listType,
-                            };
-            return model;
+            return listType;
         }
-
-        public JsonResult ListTypes(GridItemsRequestModel input)
-        {
-            var items = _dynamicExpressionQuery.PerformQuery<LISTTYPE>(input.filters);
-            var gridItemsViewModel = _listTypeListGrid.GetGridItemsViewModel(input.PageSortFilter, items,
-                                                                             typeof (LISTTYPE).Name + "Grid");
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
-        }
-
-        public virtual ActionResult Display(ViewModel input)
-        {
-            var listType = _repository.Find<LISTTYPE>(input.EntityId);
-            var model = new ListTypeViewModel
-                            {
-                                Item = listType,
-                            };
-            return PartialView(model);
-        }
-
 
         public virtual ActionResult SaveListType(ListTypeViewModel input)
         {
-            var listType = input.Item.EntityId > 0
-                               ? _repository.Find<LISTTYPE>(input.Item.EntityId)
-                               : Activator.CreateInstance<LISTTYPE>();
-            listType.Description = input.Item.Description;
-            listType.Name = input.Item.Name;
-            listType.Status = input.Item.Status;
-            var crudManager = _saveEntityService.ProcessSave(listType);
-            var notification = crudManager.Finish();
-            notification.Variable = typeof (LISTTYPE).Name;
+            var listType = mapListType(input);
+            var notification = saveListType(listType);
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
+
+        public LISTTYPE mapListType(ListTypeViewModel input)
+        {
+            var listType = input.EntityId > 0
+                   ? _repository.Find<LISTTYPE>(input.EntityId)
+                   : Activator.CreateInstance<LISTTYPE>();
+            listType.Description = input.Description;
+            listType.Name = input.Name;
+            listType.Status = input.Status;
+            return listType;
+        }
+
+        protected Notification saveListType(LISTTYPE listType)
+        {
+            var crudManager = _saveEntityService.ProcessSave(listType);
+            var notification = crudManager.Finish();
+            notification.Variable = typeof(LISTTYPE).Name;
+            return notification;
+        }
+
+        protected Notification deleteMultiple(BulkActionViewModel input, Func<LISTTYPE, Notification, bool> checkDependencies)
+        {
+            var notification = new Notification {Success = true};
+            input.EntityIds.Each(x =>
+                                     {
+                                         var item = _repository.Find<LISTTYPE>(x);
+                                         if (checkDependencies(item, notification))
+                                         {
+                                             _repository.HardDelete(item);
+                                         }
+                                     });
+            _repository.Commit();
+            return notification;
+        }
+
     }
 
     public class EventTypeController : ListTypeBaseController<EventType>
     {
         private readonly IRepository _repository;
-        private readonly ISaveEntityService _saveEntityService;
+        private readonly ISelectListItemService _selectListItemService;
 
         public EventTypeController(IDynamicExpressionQuery dynamicExpressionQuery,
                                    IRepository repository,
                                    ISaveEntityService saveEntityService,
+                                   ISelectListItemService selectListItemService,
                                    IEntityListGrid<EventType> listTypeListGrid)
-            : base(
-                dynamicExpressionQuery, repository, saveEntityService, listTypeListGrid)
+            : base(dynamicExpressionQuery, repository, saveEntityService, listTypeListGrid)
         {
             _repository = repository;
-            _saveEntityService = saveEntityService;
+            _selectListItemService = selectListItemService;
+        }
+
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("AddUpdate",new EventTypeViewModel());
         }
 
         public ActionResult AddUpdate(ViewModel input)
         {
-            var listType = input.EntityId > 0
-                               ? _repository.Find<EventType>(input.EntityId)
-                               : Activator.CreateInstance<EventType>();
-            var model = new EventTypeViewModel
-                            {
-                                Item = listType,
-                                Title = WebLocalizationKeys.EVENT_TYPE_INFORMATION.ToString()
-
-                            };
-            return PartialView(model);
+            var listType = getListType(input);
+            var model = Mapper.Map<EventType, EventTypeViewModel>(listType);
+            model._Title = WebLocalizationKeys.EVENT_TYPE_INFORMATION.ToString();
+            model._saveUrl = UrlContext.GetUrlForAction<EventTypeController>(x => x.SaveEventType(null));
+            model._StatusList = _selectListItemService.CreateList<Status>();
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        public override ActionResult Display(ViewModel input)
-        {
-            var listType = _repository.Find<EventType>(input.EntityId);
-            var model = new ListTypeViewModel
-                            {
-                                Item = listType,
-                                AddUpdateUrl =
-                                    UrlContext.GetUrlForAction<EventTypeController>(x => x.AddUpdate(null)) + "/" +
-                                    input.EntityId,
-                                Title = WebLocalizationKeys.EVENT_TYPE_INFORMATION.ToString()
-                            };
-            return PartialView(model);
-        }
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
-            var notification = new Notification { Success = true };
-            input.EntityIds.Each(x =>
-            {
-                var item = _repository.Find<EventType>(x);
-                if (checkDependencies(item, notification))
-                {
-                    _repository.HardDelete(item);
-                }
-            });
-            _repository.Commit();
+            var notification = deleteMultiple(input, checkDependencies); 
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
-        private bool checkDependencies(EventType item, Notification notification)
+
+        protected virtual bool checkDependencies(EventType item, Notification notification)
         {
-            var dependantItems = _repository.Query<Event>(x => x.EventType== item);
+            var dependantItems = _repository.Query<Field>(x => x.Events.Any(y=>y.EventType== item));
             if (dependantItems.Any())
             {
                 if (notification.Message.IsEmpty())
@@ -153,16 +149,9 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult SaveEventType(EventTypeViewModel input)
         {
-            var listType = input.Item.EntityId > 0
-                               ? _repository.Find<EventType>(input.Item.EntityId)
-                               : Activator.CreateInstance<EventType>();
-            listType.Description = input.Item.Description;
-            listType.Name = input.Item.Name;
-            listType.Status = input.Item.Status;
-            listType.EventColor = input.Item.EventColor;
-            var crudManager = _saveEntityService.ProcessSave(listType);
-            var notification = crudManager.Finish();
-            notification.Variable = typeof (EventType).Name;
+            var listType = mapListType(input);
+            listType.EventColor = input.EventColor;
+            var notification = saveListType(listType);
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
@@ -171,51 +160,42 @@ namespace KnowYourTurf.Web.Controllers
     public class TaskTypeController : ListTypeBaseController<TaskType>
     {
         private readonly IRepository _repository;
+        private readonly ISelectListItemService _selectListItemService;
 
         public TaskTypeController(IDynamicExpressionQuery dynamicExpressionQuery,
                                   IRepository repository,
                                   ISaveEntityService saveEntityService,
+                                  ISelectListItemService selectListItemService,
                                   IEntityListGrid<TaskType> listTypeListGrid)
             : base(dynamicExpressionQuery, repository, saveEntityService, listTypeListGrid
                 )
         {
             _repository = repository;
+            _selectListItemService = selectListItemService;
         }
 
-        public virtual ActionResult AddUpdate(ViewModel input)
+        public ActionResult AddUpdate_Template(ViewModel input)
         {
-            var model = GetAddUpdate(input);
-            model.Title = WebLocalizationKeys.TASK_TYPE_INFORMATION.ToString();
-            return PartialView(model);
+            return View("AddUpdate", new ListTypeViewModel());
         }
-        public override ActionResult Display(ViewModel input)
+
+        public ActionResult AddUpdate(ViewModel input)
         {
-            var listType = _repository.Find<TaskType>(input.EntityId);
-            var model = new ListTypeViewModel
-                            {
-                                Item = listType,
-                                AddUpdateUrl =
-                                    UrlContext.GetUrlForAction<TaskTypeController>(x => x.AddUpdate(null)) + "/" +
-                                    input.EntityId,
-                                Title = WebLocalizationKeys.TASK_TYPE_INFORMATION.ToString()
-                            };
-            return PartialView(model);
+            var listType = getListType(input);
+            var model = Mapper.Map<TaskType, ListTypeViewModel>(listType);
+            model._saveUrl = UrlContext.GetUrlForAction<TaskTypeController>(x => x.SaveTaskType(null));
+            model._Title = WebLocalizationKeys.TASK_TYPE_INFORMATION.ToString();
+            model._StatusList = _selectListItemService.CreateList<Status>();
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
-            var notification = new Notification { Success = true };
-            input.EntityIds.Each(x =>
-            {
-                var item = _repository.Find<TaskType>(x);
-                if (checkDependencies(item, notification))
-                {
-                    _repository.HardDelete(item);
-                }
-            });
-            _repository.Commit();
+            var notification = deleteMultiple(input, checkDependencies);
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
-        private bool checkDependencies(TaskType item, Notification notification)
+
+        protected virtual bool checkDependencies(TaskType item, Notification notification)
         {
             var dependantItems = _repository.Query<Task>(x => x.TaskType == item);
             if (dependantItems.Any())
@@ -229,14 +209,23 @@ namespace KnowYourTurf.Web.Controllers
             }
             return true;
         }
+
+        public ActionResult SaveTaskType(ListTypeViewModel input)
+        {
+            var listType = mapListType(input);
+            var notification = saveListType(listType);
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
     }
 
     public class DocumentCategoryController : ListTypeBaseController<DocumentCategory>
     {
         private readonly IRepository _repository;
+        private readonly ISelectListItemService _selectListItemService;
 
         public DocumentCategoryController(IDynamicExpressionQuery dynamicExpressionQuery,
                                           IRepository repository,
+                                          ISelectListItemService selectListItemService,
                                           ISaveEntityService saveEntityService,
                                           IEntityListGrid<DocumentCategory> listTypeListGrid)
             : base(
@@ -244,43 +233,31 @@ namespace KnowYourTurf.Web.Controllers
                 listTypeListGrid)
         {
             _repository = repository;
+            _selectListItemService = selectListItemService;
         }
 
-        public virtual ActionResult AddUpdate(ViewModel input)
+        public ActionResult AddUpdate_Template(ViewModel input)
         {
-            var model = GetAddUpdate(input);
-            model.Title = WebLocalizationKeys.DOCUMENT_CATEGORY_INFORMATION.ToString();
-            return PartialView(model);
+            return View("AddUpdate", new ListTypeViewModel());
         }
 
-        public override ActionResult Display(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
-            var listType = _repository.Find<DocumentCategory>(input.EntityId);
-            var model = new ListTypeViewModel
-                            {
-                                Item = listType,
-                                AddUpdateUrl =
-                                    UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.AddUpdate(null)) + "/" +
-                                    input.EntityId,
-                                Title = WebLocalizationKeys.DOCUMENT_CATEGORY_INFORMATION.ToString()
-                            };
-            return PartialView(model);
+            var listType = getListType(input);
+            var model = Mapper.Map<DocumentCategory, ListTypeViewModel>(listType);
+            model._saveUrl = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.SaveListType(null));
+            model._Title = WebLocalizationKeys.DOCUMENT_CATEGORY_INFORMATION.ToString();
+            model._StatusList = _selectListItemService.CreateList<Status>();
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
-            var notification = new Notification { Success = true };
-            input.EntityIds.Each(x =>
-            {
-                var item = _repository.Find<DocumentCategory>(x);
-                if (checkDependencies(item, notification))
-                {
-                    _repository.HardDelete(item);
-                }
-            });
-            _repository.Commit();
+            var notification = deleteMultiple(input, checkDependencies);
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
-        private bool checkDependencies(DocumentCategory item, Notification notification)
+
+        protected virtual bool checkDependencies(DocumentCategory item, Notification notification)
         {
             var dependantItems = _repository.Query<Document>(x => x.DocumentCategory== item);
             if (dependantItems.Any())
@@ -300,9 +277,11 @@ namespace KnowYourTurf.Web.Controllers
     public class PhotoCategoryController : ListTypeBaseController<PhotoCategory>
     {
         private readonly IRepository _repository;
+        private readonly ISelectListItemService _selectListItemService;
 
         public PhotoCategoryController(IDynamicExpressionQuery dynamicExpressionQuery,
                                        IRepository repository,
+                                       ISelectListItemService selectListItemService,
                                        ISaveEntityService saveEntityService,
                                        IEntityListGrid<PhotoCategory> listTypeListGrid)
             : base(
@@ -310,46 +289,31 @@ namespace KnowYourTurf.Web.Controllers
                 listTypeListGrid)
         {
             _repository = repository;
+            _selectListItemService = selectListItemService;
         }
 
-        public virtual ActionResult AddUpdate(ViewModel input)
+        public ActionResult AddUpdate_Template(ViewModel input)
         {
-            var model = GetAddUpdate(input);
-            model.Title = WebLocalizationKeys.PHOTO_CATEGORY_INFORMATION.ToString();
-            return PartialView(model);
+            return View("AddUpdate", new ListTypeViewModel());
         }
 
-        public override ActionResult Display(ViewModel input)
+        public ActionResult AddUpdate(ViewModel input)
         {
-            var listType = _repository.Find<PhotoCategory>(input.EntityId);
-            var model = new ListTypeViewModel
-                            {
-                                Item = listType,
-                                AddUpdateUrl =
-                                    UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.AddUpdate(null)) + "/" +
-                                    input.EntityId,
-                                Title = WebLocalizationKeys.PHOTO_CATEGORY_INFORMATION.ToString()
-                            };
-            return PartialView(model);
+            var listType = getListType(input);
+            var model = Mapper.Map<PhotoCategory, ListTypeViewModel>(listType);
+            model._saveUrl = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.SaveListType(null));
+            model._Title = WebLocalizationKeys.PHOTO_CATEGORY_INFORMATION.ToString();
+            model._StatusList = _selectListItemService.CreateList<Status>();
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
-            var notification = new Notification { Success = true };
-            input.EntityIds.Each(x =>
-            {
-                var item = _repository.Find<PhotoCategory>(x);
-                if (checkDependencies(item, notification))
-                {
-                    _repository.HardDelete(item);
-                }
-            });
-            _repository.Commit();
+            var notification = deleteMultiple(input, checkDependencies);
             return Json(notification, JsonRequestBehavior.AllowGet);
-
-
         }
 
-        private bool checkDependencies(PhotoCategory item, Notification notification)
+        protected virtual  bool checkDependencies(PhotoCategory item, Notification notification)
         {
             var dependantItems = _repository.Query<Photo>(x=>x.PhotoCategory==item);
             if (dependantItems.Any())

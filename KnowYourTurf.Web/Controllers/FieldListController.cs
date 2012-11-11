@@ -1,8 +1,9 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -22,24 +23,22 @@ namespace KnowYourTurf.Web.Controllers
             _repository = repository;
         }
 
-        public ActionResult FieldList(ViewModel input)
+        public ActionResult ItemList(ViewModel input)
         {
-            var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null))+"?ParentId="+input.ParentId;
+            var url = UrlContext.GetUrlForAction<FieldListController>(x => x.Fields(null)) + "?RootId=" + input.RootId;
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl =  UrlContext.GetUrlForAction<FieldController>(x => x.AddUpdate(null)),
-                GridDefinition = _fieldListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.FIELDS.ToString(),
-                ParentId = input.ParentId
+                gridDef = _fieldListGrid.GetGridDefinition(url, input.User),
+                _Title = WebLocalizationKeys.FIELDS.ToString()
             };
-            return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Fields(GridItemsRequestModel input)
         {
-            var category = _repository.Find<Category>(input.ParentId);
+            var category = _repository.Find<Category>(input.RootId);
             var items = _dynamicExpressionQuery.PerformQuery(category.Fields, input.filters);
-            var gridItemsViewModel = _fieldListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _fieldListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

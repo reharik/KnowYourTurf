@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CC.Core;
+using CC.Core.Domain;
+using CC.Core.Localization;
 using Castle.Components.Validator;
-using FubuMVC.Core;
 using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
-using KnowYourTurf.Core;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
-using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class  Task : DomainEntity
+    public class Task : DomainEntity, IPersistableObject
     {
+        public virtual Field Field { get; set; }
         [ValidateNonEmpty]
         public virtual TaskType TaskType { get; set; }
         [ValidateNonEmpty]
@@ -32,10 +32,6 @@ namespace KnowYourTurf.Core.Domain
 
         public virtual bool Deleted { get; set; }
         public virtual bool Complete { get; set; }
-        [ValidateNonEmpty]
-        public virtual Field Field { get; set; }
-        //this should be on the domain entity I just can't figure out how
-        public virtual User CreatedBy { get; set; }
 
         public virtual InventoryProduct InventoryProduct { get; set; }
         public virtual bool InventoryDecremented { get; set; }
@@ -54,6 +50,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual void ClearEmployees() { _employees = new List<User>(); }
         private IList<User> _employees = new List<User>();
         public virtual IEnumerable<User> Employees { get { return _employees; } }
+
         public virtual void RemoveEmployee(User employee) { _employees.Remove(employee); }
         public virtual void AddEmployee(User employee)
         {
@@ -65,20 +62,20 @@ namespace KnowYourTurf.Core.Domain
         public virtual Task CloneTask()
         {
             var newTask = new Task
-            {
-                CreatedBy = CreatedBy,
-                Field = Field,
-                TaskType = TaskType,
-                Notes = Notes,
-                ScheduledDate = ScheduledDate,
-                ScheduledEndTime = ScheduledEndTime,
-                ScheduledStartTime = ScheduledStartTime,
-                InventoryProduct = InventoryProduct
-            };
-            Employees.Each(newTask.AddEmployee);
+                              {
+                                  TaskType = TaskType,
+                                  Notes = Notes,
+                                  ScheduledDate = ScheduledDate,
+                                  ScheduledEndTime = ScheduledEndTime,
+                                  ScheduledStartTime = ScheduledStartTime,
+                                  InventoryProduct = InventoryProduct,
+                                  Field = Field
+                              };
+            Employees.ForEachItem(newTask.AddEmployee);
             return newTask;
         }
 
+        // these violate law of demiter.  fix with methods on aggroots
         public virtual string GetProductName()
         {
             return InventoryProduct != null ? InventoryProduct.Product.Name : "";
@@ -89,11 +86,13 @@ namespace KnowYourTurf.Core.Domain
             return InventoryProduct != null ? InventoryProduct.EntityId + "_" + InventoryProduct.Product.InstantiatingType + "s" : "";
         }
 
-        public virtual bool IsAssignedToEmployee(long employeeId)
+        public virtual bool IsAssignedToEmployee(int employeeId)
         {
             var employee = Employees.FirstOrDefault(x=>x.EntityId == employeeId);
             return employee != null;
         }
+        
+        
     }
 
 

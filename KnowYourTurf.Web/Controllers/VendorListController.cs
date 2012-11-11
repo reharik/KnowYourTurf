@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Html.Grid;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Core.Html.Grid;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -21,17 +21,18 @@ namespace KnowYourTurf.Web.Controllers
             _vendorListGrid = vendorListGrid;
         }
 
-        public ActionResult VendorList(ListViewModel input)
+        public ActionResult ItemList(ListViewModel input)
         {
             var url = UrlContext.GetUrlForAction<VendorListController>(x => x.Vendors(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<VendorController>(x => x.AddUpdate(null)),
-                DeleteMultipleUrl = UrlContext.GetUrlForAction<VendorController>(x => x.DeleteMultiple(null)),
-                GridDefinition = _vendorListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.VENDORS.ToString()
+                deleteMultipleUrl = UrlContext.GetUrlForAction<VendorController>(x => x.DeleteMultiple(null)),
+                gridDef = _vendorListGrid.GetGridDefinition(url, input.User),
+                _Title = WebLocalizationKeys.VENDORS.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         
         public JsonResult Vendors(GridItemsRequestModel input)
@@ -47,7 +48,7 @@ namespace KnowYourTurf.Web.Controllers
                                           };
 
             _vendorListGrid.AddColumnModifications(mod);
-            var gridItemsViewModel = _vendorListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _vendorListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

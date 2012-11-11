@@ -1,95 +1,59 @@
 ﻿@model KnowYourTurf.Web.Models.TaskViewModel
-@using HtmlTags
-@using KnowYourTurf.Core
+@using CC.Core.Html.CCUI
 @using KnowYourTurf.Web
-@using KnowYourTurf.Core.Html.FubuUI
-@using KnowYourTurf.Web.Controllers
-@using KnowYourTurf.Core.Html.Expressions
 @{
     Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
 }
 
-<script>
-    var availableEmployees = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableEmployees)) ;
-    var selectedEmployees = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedEmployees)) ;
-    var availableEquipment = @MvcHtmlString.Create(JsonUtil.ToJson(Model.AvailableEquipment)) ;
-    var selectedEquipment = @MvcHtmlString.Create(JsonUtil.ToJson(Model.SelectedEquipment)) ;
-    var employeeOptions = {
-        availableItems: availableEmployees,
-        selectedItems: selectedEmployees,
-        inputSelector:"#EmployeeInput"
-    };
-    var equipmentOptions = {
-        availableItems: availableEquipment,
-        selectedItems: selectedEquipment,
-        inputSelector:"#EquipmentInput"
-    };
-    extraFormOptions.employeeOptions = employeeOptions;
-    extraFormOptions.equipmentOptions = equipmentOptions;
-    extraFormOptions.title = '@Model.Title';
-</script>
-        
-    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
 
-@MvcHtmlString.Create(FormFor<TaskController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-@MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
-<input type="hidden" id="RootId" name="RootId" value="@Model.RootId"/>
-
-<div class="col left">
-<div class="fieldRow">
-    @Html.SubmissionFor(x => x.Item.TaskType).ToHtmlTag()
-</div>
-<div class="fieldRow">
-    @Html.SubmissionFor(x => x.Item.ScheduledDate).ToHtmlTag()
-</div>
-<div class="fieldRow">
-    @Html.SubmissionFor(x => x.Item.ScheduledStartTime).ToHtmlTag()
-</div>
-<div class="fieldRow">
-    @Html.SubmissionFor(x => x.Item.ScheduledEndTime).ToHtmlTag()
-</div>
-<div class="fieldRow">
-    @Html.SubmissionFor(x => x.Item.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
-</div>
-<div class="fieldRow">
-    @Html.SubmissionFor(x => x.Item.Field).ToHtmlTag()
-</div>
-<div class="fieldRow">
-    @Html.SubmissionFor(x => x.Product).ToHtmlTag()
-</div>
-<div class="fieldRow">
-    @Html.SubmissionFor(x => x.Item.QuantityNeeded).ToHtmlTag()
-</div>
-<div class="fieldRow">
-    @Html.SubmissionFor(x => x.Item.QuantityUsed).ToHtmlTag()
-</div>
-<div class="fieldRow">
-            
-    @Html.SubmissionFor(x => x.Item.Notes).AddClassToInput("KYT_editor_label_left").ToHtmlTag()
-</div>
-<div class="fieldRow">
-@if (Model.Item.Complete)
-{
-    @Html.ViewFor(x => x.Item.Complete).ToHtmlTag()
-}
-else
-{
-    @Html.SubmissionFor(x => x.Item.Complete).ToHtmlTag()}
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.TaskTypeEntityId).LabelDisplay(WebLocalizationKeys.TASK_TYPE).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.ScheduledDate).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.ScheduledStartTimeString).ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.ScheduledEndTimeString).ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.FieldEntityId).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.InventoryProductProductEntityId).LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.QuantityNeeded).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.QuantityUsed).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Notes).AddClassToInput("KYT_editor_label_left").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Complete).ToHtmlTag()
         </div>
     </div>
-    <div class="col full clear">
+    <div class="col left clear">
         <div class="fieldRow">
-                    <div id="employeeTokenizer">
-                @Html.SubmissionFor(x => x.EmployeeInput).InputId("EmployeeInput").HideInput().LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
+            <div id="employeeTokenizer">
+                @Html.SubmissionFor(x => x.Employees).ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
             </div>
         </div>
         <div class="fieldRow">
             <div id="equipmentTokenizer">
-                @Html.SubmissionFor(x => x.EquipmentInput).InputId("EquipmentInput").HideInput().LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
+                @Html.SubmissionFor(x => x.Equipment).ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
             </div>
         </div>
     </div>
             
-            @EndForm()
+@EndForm()
 
 

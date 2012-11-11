@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -24,8 +24,7 @@ namespace KnowYourTurf.Web.Controllers
             var url = UrlContext.GetUrlForAction<EmailTemplateListController>(x => x.EmailTemplates(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<EmailTemplateController>(x => x.AddUpdate(null)),
-                GridDefinition = _emailTemplateListGrid.GetGridDefinition(url)
+                gridDef = _emailTemplateListGrid.GetGridDefinition(url, input.User)
             };
             return View(model);
         }
@@ -33,7 +32,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult EmailTemplates(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<EmailTemplate>();
-            var gridItemsViewModel = _emailTemplateListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _emailTemplateListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

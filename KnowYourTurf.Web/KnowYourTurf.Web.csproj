@@ -14,6 +14,7 @@
     <AssemblyName>KnowYourTurf.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,28 +39,35 @@
     </Reference>
     <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\Antlr3.Runtime.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\lib\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Components.Validator">
       <HintPath>..\lib\Castle.Components.Validator.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="CC.Core">
+      <HintPath>..\lib\CC.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Security">
+      <HintPath>..\lib\CC.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Elmah">
       <HintPath>..\lib\Elmah.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate, Version=1.2.0.694, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="FubuMVC.Core">
-      <HintPath>..\lib\FubuMVC.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="FubuMVC.UI, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\FubuMVC.UI.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="HibernatingRhinos.Profiler.Appender">
       <HintPath>..\lib\HibernatingRhinos.Profiler.Appender.dll</HintPath>
@@ -73,7 +81,7 @@
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\Iesi.Collections.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="ImageResizer">
       <HintPath>..\lib\ImageResizer.dll</HintPath>
@@ -83,7 +91,7 @@
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\log4net.dll</HintPath>
+      <HintPath>..\lib\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
@@ -94,22 +102,22 @@
     </Reference>
     <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\NHibernate.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate.ByteCode.Castle, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\NHibernate.ByteCode.Castle.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
     <Reference Include="Remotion.Data.Linq, Version=1.13.41.2, Culture=neutral, PublicKeyToken=cab60358ab4081ea, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\fluentnhibernate\Remotion.Data.Linq.dll</HintPath>
+      <HintPath>..\lib\fluentnhibernate\Remotion.Data.Linq.dll</HintPath>
     </Reference>
     <Reference Include="RouteDebug">
       <HintPath>..\lib\RouteDebug.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StructureMap">
-      <HintPath>..\..\lib\StructureMap.dll</HintPath>
+      <HintPath>..\lib\StructureMap.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.Entity" />
@@ -191,6 +199,7 @@
     <Compile Include="Areas\Reports\WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
     <Compile Include="Config\CustomAuthorizationAttribute.cs" />
     <Content Include="Areas\Reports\Views\Web.config" />
@@ -206,6 +215,8 @@
     <Compile Include="Controllers\CalculatorListController.cs" />
     <Compile Include="Controllers\ChemicalController.cs" />
     <Compile Include="Controllers\ChemicalListController.cs" />
+    <Compile Include="Controllers\CompletedPurchaseOrderListController.cs" />
+    <Compile Include="Controllers\CompletedPurchaseOrderDisplayController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\KnowYourTurfController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
@@ -251,13 +262,14 @@
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TaskListController.cs" />
     <Compile Include="Controllers\TaskRunnerController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\VendorContactController.cs" />
     <Compile Include="Controllers\VendorContactListController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Controllers\VendorListController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="Controllers\WeatherListController.cs" />
-    <Compile Include="Filters\AddUserToViewFilterAttribute.cs" />
+    <Compile Include="Filters\AddUserToViewModelFilter.cs" />
     <Compile Include="Filters\AdminFilterAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filters\PermissionValidationAttribute.cs" />
@@ -285,11 +297,6 @@
     <Compile Include="Grids\VendorContactListGrid.cs" />
     <Compile Include="Grids\VendorListGrid.cs" />
     <Compile Include="Grids\WeatherListGrid.cs" />
-    <Compile Include="knowyourturf_testDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>knowyourturf_testDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="KYTTestRegistry.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\IMenuConfig.cs" />
@@ -305,14 +312,11 @@
     <Compile Include="Models\Calculator\CalculatorViewModel.cs" />
     <Compile Include="Models\Chemical\ChemicalViewModel.cs" />
     <Compile Include="Models\EmailJob\EmailJobViewModel.cs" />
-    <Compile Include="Models\Employee\EmployeeDashboardViewModel.cs" />
     <Compile Include="Models\Employee\UserViewModel.cs" />
     <Compile Include="Models\Enum\ListTypeListViewModel.cs" />
     <Compile Include="Models\Enum\TaskTypeViewModel.cs" />
-    <Compile Include="Models\Equipment\EquipmentViewModel.cs" />
     <Compile Include="Models\Event\EventViewModel.cs" />
     <Compile Include="Models\Fertilizer\FertilizerViewModel.cs" />
-    <Compile Include="Models\Field\FieldDashboardViewModel.cs" />
     <Compile Include="Models\Field\FieldViewModel.cs" />
     <Compile Include="Models\Material\MaterialViewModel.cs" />
     <Compile Include="Models\Orthogonal\HeaderViewModel.cs" />
@@ -321,7 +325,6 @@
     <Compile Include="Models\PurchaseOrderLineItem\PurchaseOrderLineItemViewModel.cs" />
     <Compile Include="Models\PurchaseOrder\PurchaseOrderViewModel.cs" />
     <Compile Include="Models\Task\TaskViewModel.cs" />
-    <Compile Include="Models\TokenInputDto\TokenInputDto.cs" />
     <Compile Include="Models\TokenViewModel.cs" />
     <Compile Include="Models\VendorContact\VendorContactViewModel.cs" />
     <Compile Include="Models\Vendor\VendorViewModel.cs" />
@@ -334,7 +337,11 @@
     <Compile Include="Services\EmailHandlers\IEmailTemplateHandler.cs" />
     <Compile Include="Services\IAuthenticationContext.cs" />
     <Compile Include="Services\ISecuritySetupService.cs" />
-    <Compile Include="Services\IUploadedFileHandlerService.cs" />
+    <Compile Include="Services\KYTSelectListItemService.cs" />
+    <Compile Include="Services\ModelService.cs" />
+    <Compile Include="Services\RouteTokens\IRouteTokenBuilder.cs" />
+    <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
+    <Compile Include="Services\RouteTokens\RouteToken.cs" />
     <Compile Include="WebLocalizationKeys.cs" />
     <Compile Include="KYTWebRegistry.cs" />
     <Compile Include="Global.asax.cs">
@@ -470,6 +477,27 @@
     <Content Include="Content\scripts\kyt.TokenView.js" />
     <Content Include="Content\scripts\kyt.TrainerController.js" />
     <Content Include="Content\scripts\kyt.userProfileController.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.AjaxFileUpload.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.CustomBindings.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.Elements.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.ModelService.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.NotificationService.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.ValidationRules.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.ValidationRunner.js" />
+    <Content Include="Content\scripts\KYT\Fields\KYT.FieldsApp.js" />
+    <Content Include="Content\scripts\KYT\Fields\KYT.FieldsApp.Menu.js" />
+    <Content Include="Content\scripts\KYT\Fields\KYT.FieldsApp.Routing.js" />
+    <Content Include="Content\scripts\KYT\Fields\KYT.FieldsApp.Views.js" />
+    <Content Include="Content\scripts\KYT\Fields\KYT.Services.js" />
+    <Content Include="Content\scripts\KYT\KYT.App.js" />
+    <Content Include="Content\scripts\KYT\KYT.Controller.js" />
+    <Content Include="Content\scripts\KYT\KYT.Header.js" />
+    <Content Include="Content\scripts\KYT\KYT.mixins.js" />
+    <Content Include="Content\scripts\KYT\KYT.OneOffViews.js" />
+    <Content Include="Content\scripts\KYT\KYT.Routing.js" />
+    <Content Include="Content\scripts\KYT\KYT.State.js" />
+    <Content Include="Content\scripts\KYT\KYT.Views.js" />
+    <Content Include="Content\scripts\KYT\KYT.WorkFlowManager.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\themes\base\jquery-ui.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -485,6 +513,7 @@
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="SiteDown.htm" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -505,8 +534,8 @@
     <Folder Include="Areas\Reports\Controllers\" />
     <Folder Include="Areas\Reports\Models\" />
     <Folder Include="Areas\Reports\Views\Shared\" />
-    <Folder Include="Logs\" />
     <Folder Include="Models\Email\" />
+    <Folder Include="Models\TokenInputDto\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -539,10 +568,6 @@
     <Content Include="Views\Shared\PhoneTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KnowYourTuf.Security\KnowYourTurf.Security.csproj">
-      <Project>{DBA372FE-3D52-45B3-AF82-B37696328764}</Project>
-      <Name>KnowYourTurf.Security</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
@@ -580,34 +605,10 @@
     <Content Include="Views\Orthogonal\KnowYourTurfMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminList\AdminList.cshtml" />
-    <Content Include="Views\CalculatorList\CalculatorList.cshtml" />
-    <Content Include="Views\ChemicalList\ChemicalList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\DocumentList\DocumentList.cshtml" />
-    <Content Include="Views\EmailJobList\ItemList.cshtml" />
-    <Content Include="Views\EmailTemplateList\EmailTemplateList.cshtml" />
-    <Content Include="Views\EmployeeList\EmployeeList.cshtml" />
-    <Content Include="Views\EquipmentList\EquipmentList.cshtml" />
-    <Content Include="Views\FacilitiesList\FacilitiesList.cshtml" />
-    <Content Include="Views\FertilizerList\FertilizerList.cshtml" />
-    <Content Include="Views\FieldList\FieldList.cshtml" />
-    <Content Include="Views\InventoryList\InventoryChemicalList.cshtml" />
-    <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
-    <Content Include="Views\InventoryList\InventoryFertilizerList.cshtml" />
-    <Content Include="Views\InventoryList\InventoryFertilizerView.cshtml" />
-    <Content Include="Views\InventoryList\InventoryMaterialList.cshtml" />
-    <Content Include="Views\InventoryList\InventoryMaterialView.cshtml" />
     <Content Include="Views\KnowYourTurf\Home.cshtml" />
-    <Content Include="Views\ListTypeList\ListType.cshtml" />
-    <Content Include="Views\MaterialList\MaterialList.cshtml" />
-    <Content Include="Views\PhotoList\PhotoList.cshtml" />
-    <Content Include="Views\PurchaseOrderList\PurchaseOrderList.cshtml" />
-    <Content Include="Views\TaskList\TaskList.cshtml" />
-    <Content Include="Views\VendorContactList\VendorContactList.cshtml" />
-    <Content Include="Views\VendorList\VendorList.cshtml" />
-    <Content Include="Views\WeatherList\WeatherList.cshtml" />
+    <Content Include="Views\ListTypeList\ItemList.cshtml" />
+    <Content Include="Views\TaskList\ItemList.cshtml" />
+    <Content Include="Views\VendorContactList\ItemList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Calculator\CalculatorAddUpdate.cshtml" />
@@ -641,10 +642,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Event\EventAddUpdate.cshtml" />
-    <Content Include="Views\Event\EventView.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\EventCalendar\EventCalendar.cshtml" />
+    <Content Include="Views\Event\EventDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_DisplayLayout.cshtml" />
@@ -679,9 +677,6 @@
     <Content Include="Views\Task\TaskAddUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\TaskRunner\GetWeather.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -712,19 +707,13 @@
     <EmbeddedResource Include="Areas\Reports\Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="knowyourturf_testDataSet.xsc">
-      <DependentUpon>knowyourturf_testDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="knowyourturf_testDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>knowyourturf_testDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="knowyourturf_testDataSet.xss">
-      <DependentUpon>knowyourturf_testDataSet.xsd</DependentUpon>
-    </None>
     <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />
+    <Content Include="Views\ListTypeList\Display.cshtml" />
+    <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
+    <Content Include="Views\InventoryList\InventoryFertilizerView.cshtml" />
+    <Content Include="Views\InventoryList\InventoryMaterialView.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
+    <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -743,7 +732,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
-          <DevelopmentServerPort>6666</DevelopmentServerPort>
+          <DevelopmentServerPort>555</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Stage" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
     <ToolsPath>$(MSBuildProjectDirectory)\lib</ToolsPath>
@@ -15,9 +15,9 @@
 <!-- ____________PUBLIC TASKS_______________  -->
 
   <Target Name="Build" DependsOnTargets="_build;_unitTests" />
-  <Target Name="Stage" DependsOnTargets="_build;_unitTests;_outputWebFiles;" />
+  <Target Name="Push" DependsOnTargets="_build;_unitTests;_pushToQA;" />
 
- <Target Name="_outputWebFiles" >
+ <Target Name="_pushToQA" >
     <ItemGroup>
       <WebFiles Include="KnowYourTurf.Web\**\*.*;"
                 Exclude="KnowYourTurf.Web\obj\**;
@@ -28,8 +28,11 @@
 						 KnowYourTurf.Web\*.csproj.*;
 						 KnowYourTurf.Web\*.sln;
 						 KnowYourTurf.Web\CustomerPhotos\**;
+						 KnowYourTurf.Web\CustomerDocuments\**;
 						 KnowYourTurf.Web\App_Data\**;
-						 KnowYourTurf.Web\Logs\**; 		 " />
+						 KnowYourTurf.Web\Logs\**;
+             KnowYourTurf.Web\connectionStrings.config;
+             KnowYourTurf.Web\web.config;" />
     </ItemGroup>
     <Time>
       <Output TaskParameter="Month" PropertyName="Month" />
@@ -40,12 +43,16 @@
     </Time>
 
     <PropertyGroup>
-      <OutputDirectory>c:\development\BuildFiles\KnowYourTurf\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute)</OutputDirectory>
+      <OutputDirectory>f:\WebSites\KnowYourTurf_QA</OutputDirectory>
     </PropertyGroup>
 
     <MakeDir Directories="$(OutputDirectory)"  />
     <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputDirectory)\%(RecursiveDir)" />
-  </Target>
+    <Zip Files="@(WebFiles)"
+      WorkingDirectory="f:\WebSites\BackUp\KnowYourTurf_QA"
+      ZipFileName="f:\WebSites\BackUp\KnowYourTurf_QA\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
+      ZipLevel="9" />
+ </Target>
 
   <Target Name="myTemp" >
     <Message Text="Current Date and Time: $(Month).$(Day).$(Year)-$(Hour).$(Minute)" />

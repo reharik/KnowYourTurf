@@ -55,7 +55,7 @@ div.fieldRow textarea
     color: #666666;
     display: block;
     margin: 8px 10px;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
  div.fieldRow label {
@@ -305,7 +305,7 @@ div.footer div.col {
 }
 
 /************************/
-.KYT_view_label{
+.view_label{
     float: left;
     font-weight: bold;
     padding-right: 8px;
@@ -316,4 +316,50 @@ div.footer div.col {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 10px;
+}
+
+
+#messageContainer ul {
+    list-style: none;
+}
+
+.error {
+	background: url(../images/validation_error.png) 10px 3px no-repeat;
+	background-color: #FF9999;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    margin: 5px;
+    padding: 3px 3px 3px 40px;
+    line-height: 25px;
+}
+
+.success {
+    background-color: #00cc00;
+    font-size:13px;
+    font-weight:bold;
+    width:auto;
+    height:auto;
+    line-height: 25px;
+    margin:0 30px 10px 30px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    margin-top: 15px;
+}
+
+.invalid{
+    border: 1px solid red;
+}
+.valid{
+    border: 1px solid green;
+}
+
+.deleteImage {
+    background: url("../images/delete.png") no-repeat;
+    width: 95px !important;
+    height: 25px !important;
+    vertical-align: bottom;
+}
+
+.dashboardGrid{
+    height: 500px;
 }

@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -19,23 +19,23 @@ namespace KnowYourTurf.Web.Controllers
             _chemicalListGrid = chemicalListGrid;
         }
 
-        public ActionResult ChemicalList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<ChemicalListController>(x => x.Chemicals(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.AddUpdate(null)),
-                DeleteMultipleUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.DeleteMultiple(null)),
-                GridDefinition = _chemicalListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.CHEMICALS.ToString()
+                deleteMultipleUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.DeleteMultiple(null)),
+                gridDef = _chemicalListGrid.GetGridDefinition(url,input.User),
+                _Title = WebLocalizationKeys.CHEMICALS.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Chemicals(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Chemical>(input.filters);
-            var gridItemsViewModel = _chemicalListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _chemicalListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

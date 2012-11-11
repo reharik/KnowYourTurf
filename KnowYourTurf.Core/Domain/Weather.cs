@@ -1,8 +1,9 @@
 ﻿using System;
+using CC.Core.Domain;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class Weather:DomainEntity
+    public class Weather : DomainEntity, IPersistableObject
     {
         public virtual DateTime Date { get; set; }
         public virtual double HighTemperature { get; set; }

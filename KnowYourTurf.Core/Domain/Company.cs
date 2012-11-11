@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
+using CC.Core.Domain;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class Company : DomainEntity
+    public class Company : DomainEntity, IPersistableObject
     {
         public virtual string Name { get; set; }
         public virtual double TaxRate { get; set; }
@@ -17,41 +19,6 @@ namespace KnowYourTurf.Core.Domain
         {
             if (!category.IsNew() && _categories.Contains(category)) return;
             _categories.Add(category);
-        }
-        #endregion
-    }
-
-    public class Category:DomainEntity
-    {
-        public virtual string Name { get; set; }
-        public virtual string Description { get; set; }
-        #region Collections
-        private IList<Field> _fields = new List<Field>();
-        public virtual IEnumerable<Field> Fields { get { return _fields; } }
-        public virtual void ClearField() { _fields = new List<Field>(); }
-        public virtual void RemoveField(Field field) { _fields.Remove(field); }
-        public virtual void AddField(Field field)
-        {
-            if (!field.IsNew() && _fields.Contains(field)) return;
-            _fields.Add(field);
-        }
-        private IList<Task> _tasks = new List<Task>();
-        public virtual IEnumerable<Task> Tasks { get { return _tasks; } }
-        public virtual void ClearTask() { _tasks = new List<Task>(); }
-        public virtual void RemoveTask(Task task) { _tasks.Remove(task); }
-        public virtual void AddTask(Task task)
-        {
-            if (!task.IsNew() && _tasks.Contains(task)) return;
-            _tasks.Add(task);
-        }
-        private IList<Event> _events = new List<Event>();
-        public virtual IEnumerable<Event> Events { get { return _events; } }
-        public virtual void ClearEvent() { _events = new List<Event>(); }
-        public virtual void RemoveEvent(Event _event) { _events.Remove(_event); }
-        public virtual void AddEvent(Event _event)
-        {
-            if (!_event.IsNew() && _events.Contains(_event)) return;
-            _events.Add(_event);
         }
         #endregion
     }

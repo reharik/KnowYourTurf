@@ -1,8 +1,12 @@
 using System.Linq;
 using System.Web.Mvc;
+using CC.Core;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Services;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 
@@ -26,14 +30,26 @@ namespace KnowYourTurf.Web.Controllers
             _dynamicExpressionQuery = dynamicExpressionQuery;
         }
 
-        public JsonResult PurchaseOrderLineItems(GridItemsRequestModel input)
+        public ActionResult ItemList(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.Items(null)) + "/" + input.EntityId; 
+            var model = new ListViewModel()
+            {
+                gridDef = _purchaseOrderLineItemGrid.GetGridDefinition(url, input.User),
+                _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
+                deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "/" + input.EntityId
+            };
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Items (GridItemsRequestModel input)
         {
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
             if (purchaseOrder == null) return null;
             var items = _dynamicExpressionQuery.PerformQuery(purchaseOrder.LineItems, input.filters);
 
             if (input.PageSortFilter.SortColumn.IsEmpty()) items = items.OrderBy(x => x.Product.Name);
-            var model = _purchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items, "poliGrid");
+            var model = _purchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 

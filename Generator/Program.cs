@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using FubuMVC.Core;
-using KnowYourTurf.Core;
+using CC.Core;
 using KnowYourTurf.Web;
 using StructureMap;
 using log4net.Config;
@@ -52,7 +51,7 @@ namespace Generator
 
             var maxLength = commands.Max(c=>c.toCanonicalCommandName().Length);
 
-            commands.Each(
+            commands.ForEachItem(
                 c =>
                 Console.WriteLine("    {0, " + (maxLength + 1) + "} -> {1}", c.toCanonicalCommandName(), c.Description));
 

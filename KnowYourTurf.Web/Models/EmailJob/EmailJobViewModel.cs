@@ -1,20 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Services;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
+using CC.Core.Localization;
+using Castle.Components.Validator;
+using KnowYourTurf.Core.Enums;
 
 namespace KnowYourTurf.Web.Models
 {
     public class EmailJobViewModel:ViewModel
     {
-        public EmailJob Item { get; set; }
-        public string EmployeeInput { get; set; }
-        public IEnumerable<TokenInputDto> AvailableEmployees { get; set; }
-        public IEnumerable<TokenInputDto> SelectedEmployees { get; set; }
-        public IEnumerable<SelectListItem> EmailTemplateList { get; set; }
+        public TokenInputViewModel Subscribers { get; set; }
+        public IEnumerable<SelectListItem> _EmailTemplateEntityIdList { get; set; }
+        public IEnumerable<SelectListItem> _EmailJobTypeEntityIdList { get; set; }
+        public IEnumerable<SelectListItem> _FrequencyList { get; set; }
+        public IEnumerable<SelectListItem> _StatusList { get; set; }
 
-        public IEnumerable<SelectListItem> EmailJobTypeList { get; set; }
+        [ValidateNonEmpty]
+        public string Name { get; set; }
+        [TextArea]
+        public string Description { get; set; }
+        public string Subject { get; set; }
+        [ValidateNonEmpty]
+        [ValueOf(typeof(EmailFrequency))]
+        public string Frequency { get; set; }
+        [ValueOf(typeof(Status))]
+        public string Status { get; set; }
+
+        [ValidateNonEmpty]
+        public int EmailTemplateEntityId { get; set; }
+        [ValidateNonEmpty]
+        public int EmailJobTypeEntityId { get; set; }
+
+        public string _saveUrl { get; set; }
     }
 }

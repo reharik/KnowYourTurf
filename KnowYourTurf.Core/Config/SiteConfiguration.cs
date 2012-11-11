@@ -1,19 +1,15 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Web.Script.Serialization;
+using CC.Core.Services;
 
 namespace KnowYourTurf.Core.Config
 {
-    public class SiteConfiguration
+    public class SiteConfiguration : SiteConfigurationBase
     {
-        public virtual string Name { get; set; }
-        public virtual string Host { get; set; }
-        public virtual string DCIUrl { get; set; }
-        public virtual string LanguageDefault { get; set; }
-        public virtual string ScriptsPath { get; set; }
-        public virtual string CssPath { get; set; }
-        public virtual string ImagesPath { get; set; }
-        public virtual string WebSiteRoot { get; set; }
         public virtual string NumberOfFieldsPerCategory { get; set; }
+        public virtual string CustomerPhotosEmployeePath { get; set; }
+        public virtual string CustomerPhotosFacilitiesPath { get; set; }
     }
 
     public static class SiteConfig
@@ -26,4 +22,13 @@ namespace KnowYourTurf.Core.Config
             return siteConfiguration;
         }
     }
+
+    public class InjectableSiteConfig : IInjectableSiteConfig
+    {
+        public SiteConfigurationBase Settings()
+        {
+            return SiteConfig.Settings();
+        }
+    }
+
 }

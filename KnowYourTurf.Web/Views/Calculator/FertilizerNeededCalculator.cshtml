@@ -1,27 +1,19 @@
 ﻿@model KnowYourTurf.Web.Models.FertilzierNeededCalcViewModel
-@using KnowYourTurf.Core.Html.Expressions;
+@using CC.Core.Html.CCUI
 @using KnowYourTurf.Web
-@using KnowYourTurf.Core.Html.FubuUI
-@using KnowYourTurf.Web.Controllers;
 
 @{
-    Layout = "~/Views/Shared/_popupLayout.cshtml";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
-
-            @MvcHtmlString.Create(FormFor<CalculatorController>(x=>x.Calculate(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.EntityId).ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.CalculatorName).ToString())
     <div class="col left">
         <div class="fieldRow">
-            @Html.ViewFor(x => x.CalculatorDisplayName).ToHtmlTag()
+            @Html.ViewFor(x => x._calculatorDisplayName).LabelDisplay(WebLocalizationKeys.CALCULATOR_NAME).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Field).ToHtmlTag()
+            @Html.SubmissionFor(x => x.FieldEntityId).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Product).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ProductEntityId).LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.ViewFor(x => x.N).InputId("N").ToHtmlTag()
@@ -45,4 +37,9 @@
             @Html.SubmissionFor(x => x.FertilizerRate).ToHtmlTag()
         </div>
     </div>
-            @EndForm()
+
+@section FormButtons{
+     @StandardButtonFor("save", WebLocalizationKeys.CALCULATE).AddClass("save").ToHtmlTag()
+     @StandardButtonFor("createTask", WebLocalizationKeys.CREATE_TASK).AddClass("cancel").AddClass("ui-state-disabled").Attr("disabled","disabled").ToHtmlTag()
+     @StandardButtonFor("cancel", WebLocalizationKeys.RETURN).AddClass("cancel").ToHtmlTag()
+}

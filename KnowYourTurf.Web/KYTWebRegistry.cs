@@ -1,29 +1,35 @@
-using KnowYourTurf.Security.Interfaces;
-using KnowYourTurf.Security.Services;
 using Alpinely.TownCrier;
+using CC.Core.Domain;
+using CC.Core.DomainTools;
+using CC.Core.Html.CCUI.HtmlConventionRegistries;
+using CC.Core.Html.Grid;
+using CC.Core.Localization;
+using CC.Core.Services;
+using CC.Security;
+using CC.Security.Interfaces;
+using CC.Security.Services;
+using CC.UI.Helpers;
+using CC.UI.Helpers.Configuration;
+using CC.UI.Helpers.Tags;
 using KnowYourTurf.Core.Domain.Persistence;
+using KnowYourTurf.Core.Domain.Tools;
 using KnowYourTurf.Core.Enums;
+using KnowYourTurf.Core.Html.HtmlConventionRegistries;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html.FubuUI.HtmlConventionRegistries;
-using KnowYourTurf.Core.Html.Grid;
-using KnowYourTurf.Core.Localization;
 using KnowYourTurf.Web.Config;
 using KnowYourTurf.Web.Grids;
 using KnowYourTurf.Web.Menus;
 using KnowYourTurf.Web.Services;
-using FubuMVC.UI;
-using FubuMVC.UI.Configuration;
-using FubuMVC.UI.Tags;
 using KnowYourTurf.Web.Services.EmailHandlers;
-using MethodFitness.Core;
+using KnowYourTurf.Web.Services.ViewOptions;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
-using Log4NetLogger = MethodFitness.Core.Log4NetLogger;
+using Log4NetLogger = KnowYourTurf.Core.Log4NetLogger;
 using StructureMapServiceLocator = KnowYourTurf.Core.Services.StructureMapServiceLocator;
 
 namespace KnowYourTurf.Web
@@ -38,15 +44,18 @@ namespace KnowYourTurf.Web
                 x.ConnectImplementationsToTypesClosing(typeof(IEntityListGrid<>));
                 x.AssemblyContainingType(typeof(CoreLocalizationKeys));
                 x.AssemblyContainingType(typeof(MergedEmailFactory));
+                x.AssemblyContainingType<Entity>();
+                x.AssemblyContainingType<IUser>();
+                x.AssemblyContainingType<HtmlConventionRegistry>();  
                 x.AddAllTypesOf<ICalculatorHandler>().NameBy(t => t.Name);
                 x.AddAllTypesOf<RulesEngineBase>().NameBy(t => t.Name);
                 x.AddAllTypesOf<IEmailTemplateHandler>().NameBy(t => t.Name);
                 x.WithDefaultConventions();
             });
-            
-            For<HtmlConventionRegistry>().Add<KnowYourTurfHtmlConventions>();
+
+            For<HtmlConventionRegistry>().Add<KYTKOHtmlConventionRegistry>();
             For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
-            For<IElementNamingConvention>().Use<KnowYourTurfElementNamingConvention>();
+            For<IElementNamingConvention>().Use<CCElementNamingConvention>();
             For(typeof(ITagGenerator<>)).Use(typeof(TagGenerator<>));
             For<TagProfileLibrary>().Singleton();
             For<INHSetupConfig>().Use<KYTNHSetupConfig>();
@@ -58,20 +67,17 @@ namespace KnowYourTurf.Web
             For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory());
 
             For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithCompanyFilter()));
-            For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor())).Named("NoFiltersSpecialInterceptor");
-            For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession()).Named("NoFiltersOrInterceptor");
+            For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor())).Named("SpecialInterceptorNoFilters");
 
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFilters)).Named("NoFilters");
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFiltersOrInterceptor)).Named("NoFiltersOrInterceptor");
-            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add(context => new UnitOfWork(RepoConfig.NoFiltersSpecialInterceptor)).Named("NoFiltersSpecialInterceptor");
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<KYTUnitOfWork>();
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<UnitOfWork>().Named("NoFilters");
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<SpecialInterceptorNoFiltersUnitOfWork>().Named("SpecialInterceptorNoFilters");
 
             For<IRepository>().Use<Repository>();
-            For<IRepository>().Add(x => new Repository(RepoConfig.NoFilters)).Named("NoFilters");
-            For<IRepository>().Add(x => new Repository(RepoConfig.NoFiltersOrInterceptor)).Named("NoFiltersOrInterceptor");
-            For<IRepository>().Add(x => new Repository(RepoConfig.NoFiltersSpecialInterceptor)).Named("NoFiltersSpecialInterceptor");
+            For<IRepository>().Add<NoFilterRepository>().Named("NoFilters");
+            For<IRepository>().Add<SpecialInterceptorNoFiltersRepository>().Named("SpecialInterceptorNoFilters");
 
-
+            For<ISelectListItemService>().Use<KYTSelectListItemService>();
             For<IMergedEmailFactory>().Use<MergedEmailFactory>();
             For<ITemplateParser>().Use<TemplateParser>();
 
@@ -87,6 +93,7 @@ namespace KnowYourTurf.Web
             For<IPermissionsService>().HybridHttpOrThreadLocalScoped().Use<PermissionsService>();
             For<ISecuritySetupService>().Use<DefaultSecuritySetupService>();
             For<ILogger>().Use(() => new Log4NetLogger(typeof(string)));
+            For<ICCSessionContext>().Use<SessionContext>();
 
             For(typeof(IGridBuilder<>)).Use(typeof(GridBuilder<>));
 
@@ -96,13 +103,19 @@ namespace KnowYourTurf.Web
 
             For<IEntityListGrid<User>>().Use<EmployeeListGrid>();
             For<IEntityListGrid<User>>().Add<AdminListGrid>().Named("Admins");
-            For<IEntityListGrid<User>>().Add<FacilitiesListGrid>().Named("Facilities");
+            For<IEntityListGrid<User>>().Add<FacilitiesListGrid>().Named("AddUpdate");
+
+            For<IEntityListGrid<PurchaseOrder>>().Use<PurchaseOrderListGrid>();
+            For<IEntityListGrid<PurchaseOrder>>().Add<CompletedPurchaseOrderListGrid>().Named("Completed");
+
 
             For<IEntityListGrid<PurchaseOrderLineItem>>().Use<PurchaseOrderLineItemGrid>();
             For<IEntityListGrid<PurchaseOrderLineItem>>().Add<ReceivePurchaseOrderLineItemGrid>().Named("Recieve");
+            For<IEntityListGrid<PurchaseOrderLineItem>>().Add<CompetedPurchaseOrderLineItemGrid>().Named("Completed");
             For<IEntityListGrid<Material>>().Use<MaterialListGrid>();
             For<IEntityListGrid<Chemical>>().Use<ChemicalListGrid>();
             For<IEntityListGrid<Fertilizer>>().Use<FertilizerListGrid>();
+            For<IRouteTokenConfig>().Add<FieldsRouteTokenList>();
 
             For<IEmailTemplateHandler>().Use<EmployeeDailyTaskHandler>().Named("Daily TasksHandler");
 

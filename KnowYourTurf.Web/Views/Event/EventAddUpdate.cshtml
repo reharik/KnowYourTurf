@@ -1,46 +1,27 @@
 ﻿@model KnowYourTurf.Web.Models.EventViewModel
-@using KnowYourTurf.Core
+@using CC.Core.Html.CCUI
 @using KnowYourTurf.Web
-@using KnowYourTurf.Core.Html.FubuUI
-@using KnowYourTurf.Web.Controllers
-@using KnowYourTurf.Core.Html.Expressions
 @{
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
 
-<script>
-var isCopy = '@Model.Copy';
-extraFormOptions.runAfterRenderFunction = function () {
-    if (isCopy == "True") {
-        $("#Event_EntityId").val(0);
-    }
-};
-</script>
-      
-    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
-
-@MvcHtmlString.Create(FormFor<EventController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Event.EntityId).ToString())
-            <input type="hidden" id="RootId" name="RootId" value="@Model.RootId"/>
-
-   <div class="col left">
+    <div class="col left">
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EventType).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EventTypeEntityId).LabelDisplay(WebLocalizationKeys.EVENT_TYPE).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Event.ScheduledDate).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ScheduledDate).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Event.StartTime).ToHtmlTag()
+            @Html.SubmissionFor(x => x.StartTime).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Event.EndTime).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EndTime).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Field).ToHtmlTag()
+            @Html.SubmissionFor(x => x.FieldEntityId).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Event.Notes).ToHtmlTag()
+            @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
         </div>
     </div>
-@EndForm()

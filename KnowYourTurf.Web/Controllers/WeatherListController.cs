@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -19,22 +19,21 @@ namespace KnowYourTurf.Web.Controllers
             _weatherListGrid = weatherListGrid;
         }
 
-        public ActionResult WeatherList(ListViewModel input)
+        public ActionResult ItemList(ListViewModel input)
         {
             var url = UrlContext.GetUrlForAction<WeatherListController>(x => x.Weathers(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<WeatherController>(x => x.AddUpdate(null)),
-                GridDefinition = _weatherListGrid.GetGridDefinition(url),
-                Title = WebLocalizationKeys.WEATHER.ToString()
+                gridDef = _weatherListGrid.GetGridDefinition(url, input.User),
+                _Title = WebLocalizationKeys.WEATHER.ToString()
             };
-            return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Weathers(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Weather>();
-            var gridItemsViewModel = _weatherListGrid.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _weatherListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

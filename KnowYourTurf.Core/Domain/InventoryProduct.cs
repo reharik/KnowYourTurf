@@ -1,11 +1,12 @@
 using System;
+using CC.Core.Domain;
+using CC.Core.Localization;
 using Castle.Components.Validator;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class InventoryProduct : DomainEntity
+    public class InventoryProduct : DomainEntity, IPersistableObject
     {
         public virtual DateTime? LastUsed { get; set; }
         [ValidateDouble]
@@ -18,7 +19,9 @@ namespace KnowYourTurf.Core.Domain
         public virtual int SizeOfUnit { get; set; }
         [ValueOf(typeof(UnitType)), ValidateNonEmpty]
         public virtual string UnitType { get; set; }
-        public virtual Vendor LastVendor { get; set; }
+
+        public virtual Vendor LastVendor { get;  set; }
+        [ValidateNonEmpty]
         public virtual BaseProduct Product { get; set; }
     }
 }

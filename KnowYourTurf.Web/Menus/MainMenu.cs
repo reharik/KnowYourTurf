@@ -1,6 +1,9 @@
 using System.Collections.Generic;
-using KnowYourTurf.Core.Enums;
+using CC.Core.DomainTools;
+using CC.Core.Html.Menu;
+using CC.Security;
 using KnowYourTurf.Core.Html.Menu;
+using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Config;
 using KnowYourTurf.Web.Controllers;
 
@@ -8,66 +11,78 @@ namespace KnowYourTurf.Web.Menus
 {
     public class MainMenu : IMenuConfig
     {
-        private readonly IMenuBuilder _builder;
+        private readonly IKYTMenuBuilder _builder;
+        private readonly ISessionContext _sessionContext;
+        private readonly IRepository _repository;
 
-        public MainMenu(IMenuBuilder builder)
+        public MainMenu(IKYTMenuBuilder builder, ISessionContext sessionContext)
         {
             _builder = builder;
+            _sessionContext = sessionContext;
         }
 
         public IList<MenuItem> Build(bool withoutPermissions = false)
         {
-            return DefaultMenubuilder(withoutPermissions);
+            IUser user = null;
+            if(!withoutPermissions)
+            {
+                user = _sessionContext.GetCurrentUser();
+            }
+            return DefaultMenubuilder(user);
         }
 
-        private IList<MenuItem> DefaultMenubuilder(bool withoutPermissions = false)
+        private IList<MenuItem> DefaultMenubuilder(IUser user = null)
         {
             return _builder
-                .CreateNode<EmployeeDashboardController>(c => c.ViewEmployee(null), WebLocalizationKeys.HOME).WithOperation(true)
+                .CreateTagNode<EmployeeDashboardController>(WebLocalizationKeys.HOME)
                 .CategoryGroupForItteration()
-                .CreateNode<FieldListController>(c => c.FieldList(null), WebLocalizationKeys.FIELDS)
-                .CreateNode(WebLocalizationKeys.TASKS).WithOperation(true)
+                .CreateTagNode<FieldListController>(WebLocalizationKeys.FIELDS)
+                .CreateNode(WebLocalizationKeys.TASKS)
                     .HasChildren()
-                    .CreateNode<TaskListController>(c => c.TaskList(null), WebLocalizationKeys.TASK_LIST).WithOperation(true)
-                    .CreateNode<TaskCalendarController>(c => c.TaskCalendar(null), WebLocalizationKeys.TASK_CALENDAR).WithOperation(true)
+                        .CreateNode(WebLocalizationKeys.TASK_LIST)
+                            .HasChildren()
+                                .CreateTagNode<TaskListController>(WebLocalizationKeys.TASKS)
+                                .CreateTagNode<TaskListController>(WebLocalizationKeys.COMPLETED).Route("completedtasks")
+                            .EndChildren()
+                    .CreateTagNode<TaskCalendarController>(WebLocalizationKeys.TASK_CALENDAR)
                     .EndChildren()
-                .CreateNode<EventCalendarController>(c => c.EventCalendar(null), WebLocalizationKeys.EVENTS).WithOperation(true)
+                .CreateTagNode<EventCalendarController>(WebLocalizationKeys.EVENTS)
                 .EndCategoryGroup()
-                .CreateNode<EquipmentListController>(c => c.EquipmentList(), WebLocalizationKeys.EQUIPMENT).WithOperation(true)
-                .CreateNode<CalculatorListController>(c => c.CalculatorList(), WebLocalizationKeys.CALCULATORS).WithOperation(true)
-                .CreateNode<WeatherListController>(c => c.WeatherList(null), WebLocalizationKeys.WEATHER).WithOperation(true)
-                .CreateNode<ForumController>(c => c.Forum(), WebLocalizationKeys.FORUM)
-                 .CreateNode(WebLocalizationKeys.ADMIN_TOOLS, "tools").WithOperation(true)
+                .CreateTagNode<EquipmentListController>(WebLocalizationKeys.EQUIPMENT)
+                .CreateTagNode<CalculatorListController>(WebLocalizationKeys.CALCULATORS)
+                .CreateTagNode<WeatherListController>(WebLocalizationKeys.WEATHER)
+                .CreateTagNode<ForumController>(WebLocalizationKeys.FORUM)
+                 .CreateNode(WebLocalizationKeys.ADMIN_TOOLS, "tools")
                     .HasChildren()
-                        .CreateNode<EmailJobListController>(c => c.ItemList(), WebLocalizationKeys.EMAIL_JOBS).WithOperation(true)
-                        .CreateNode<EmployeeListController>(c => c.EmployeeList(), WebLocalizationKeys.EMPLOYEES).WithOperation(true)
-                        .CreateNode<FacilitiesListController>(c => c.FacilitiesList(), WebLocalizationKeys.FACILITIES).WithOperation(true)
-                        .CreateNode<ListTypeListController>(c => c.ListType(), WebLocalizationKeys.ENUMERATIONS).WithOperation(true)
+                        .CreateTagNode<EmailJobListController>(WebLocalizationKeys.EMAIL_JOBS)
+                        .CreateTagNode<EmployeeListController>(WebLocalizationKeys.EMPLOYEES)
+                        .CreateTagNode<FacilitiesListController>(WebLocalizationKeys.FACILITIES)
+                        .CreateTagNode<ListTypeListController>(WebLocalizationKeys.ENUMERATIONS)
 
-                        .CreateNode(WebLocalizationKeys.PRODUCTS).WithOperation(true)
+                        .CreateNode(WebLocalizationKeys.PRODUCTS)
                         .HasChildren()
-                            .CreateNode<MaterialListController>(c => c.MaterialList(), WebLocalizationKeys.MATERIALS).WithOperation(true)
-                            .CreateNode<FertilizerListController>(c => c.FertilizerList(), WebLocalizationKeys.FERTILIZERS).WithOperation(true)
-                            .CreateNode<ChemicalListController>(c => c.ChemicalList(), WebLocalizationKeys.CHEMICALS).WithOperation(true)
+                            .CreateTagNode<MaterialListController>(WebLocalizationKeys.MATERIALS)
+                            .CreateTagNode<FertilizerListController>(WebLocalizationKeys.FERTILIZERS)
+                            .CreateTagNode<ChemicalListController>(WebLocalizationKeys.CHEMICALS)
                         .EndChildren()
-                        .CreateNode<DocumentListController>(c => c.DocumentList(null), WebLocalizationKeys.DOCUMENTS).WithOperation(true)
-                        .CreateNode<PhotoListController>(c => c.PhotoList(null), WebLocalizationKeys.PHOTOS).WithOperation(true)
+                        .CreateTagNode<DocumentListController>(WebLocalizationKeys.DOCUMENTS)
+                        .CreateTagNode<PhotoListController>(WebLocalizationKeys.PHOTOS)
                 //.CreateNode<EmailJobListController>(c => c.ItemList(), WebLocalizationKeys.EMAIL_JOBS)
                 //.CreateNode<EmailTemplateListController>(c => c.EmailTemplateList(null), WebLocalizationKeys.EMAIL_TEMPLATES)
-                        .CreateNode<VendorListController>(c => c.VendorList(null), WebLocalizationKeys.VENDORS).WithOperation(true)
-                        .CreateNode(WebLocalizationKeys.INVENTORY).WithOperation(true)
+                        .CreateTagNode<VendorListController>(WebLocalizationKeys.VENDORS)
+                        .CreateNode(WebLocalizationKeys.INVENTORY)
                         .HasChildren()
-                            .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.MATERIALS, "ProductType=Material").WithOperation(true)
-                            .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.FERTILIZERS, "ProductType=Fertilizer").WithOperation(true)
-                            .CreateNode<InventoryListController>(c => c.InventoryProductList(null), WebLocalizationKeys.CHEMICALS, "ProductType=Chemical").WithOperation(true)
+                            .CreateTagNode<InventoryListController>(WebLocalizationKeys.MATERIALS).Route("inventorylist/0/0/0/Material")//, "ProductType=Material")
+                            .CreateTagNode<InventoryListController>(WebLocalizationKeys.FERTILIZERS).Route("inventorylist/0/0/0/Fertilizer")//, "ProductType=Fertilizer")
+                            .CreateTagNode<InventoryListController>(WebLocalizationKeys.CHEMICALS).Route("inventorylist/0/0/0/Chemical")//, "ProductType=Chemical")
                         .EndChildren()
-                        .CreateNode(WebLocalizationKeys.PURCHASE_ORDERS).WithOperation(true)
+                        .CreateNode(WebLocalizationKeys.PURCHASE_ORDERS)
                         .HasChildren()
-                            .CreateNode<PurchaseOrderListController>(c => c.PurchaseOrderList(null), WebLocalizationKeys.CURRENT).WithOperation(true)
-                            .CreateNode<PurchaseOrderListController>(c => c.PurchaseOrderList(null), WebLocalizationKeys.COMPLETED).addUrlParameter("Completed", "true").WithOperation(true)
+                            .CreateTagNode<PurchaseOrderListController>(WebLocalizationKeys.CURRENT)
+                            .CreateTagNode<CompletedPurchaseOrderListController>(WebLocalizationKeys.COMPLETED)
                         .EndChildren()
                     .EndChildren()
-                .MenuTree(withoutPermissions);
+                .MenuTree(user);
         }
     }
 }

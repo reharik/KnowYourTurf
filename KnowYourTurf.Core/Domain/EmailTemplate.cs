@@ -1,9 +1,10 @@
+using CC.Core.Domain;
 using Castle.Components.Validator;
 using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class EmailTemplate:DomainEntity
+    public class EmailTemplate:DomainEntity, IPersistableObject
     {
         [ValidateNonEmpty]
         public virtual string Name { get; set; }

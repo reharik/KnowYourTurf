@@ -6,13 +6,13 @@ namespace KnowYourTurf.Core.Services
 {
     public interface IGetCompanyIdService
     {
-        long Execute();
+        int Execute();
     }
 
 
     public class GetCompanyIdService : IGetCompanyIdService
     {
-        public long Execute()
+        public int Execute()
         {
             var httpContext = HttpContext.Current;
             var customPrincipal = httpContext!=null ? httpContext.User as CustomPrincipal:null;
@@ -22,7 +22,7 @@ namespace KnowYourTurf.Core.Services
 
     public class DataLoaderGetCompanyIdService:IGetCompanyIdService
     {
-        public long Execute()
+        public int Execute()
         {
             return 1;
         }

@@ -1,22 +1,26 @@
-using KnowYourTurf.Core.Domain;
+using CC.Core.Domain;
+using CC.Core.Localization;
+using Castle.Components.Validator;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Localization;
 
-namespace KnowYourTurf.Web.Controllers
+namespace KnowYourTurf.Core.Domain
 {
-    public class ListType:DomainEntity
+    public interface IListType { }
+    
+    public class ListType:DomainEntity, IPersistableObject, IListType
     {
+        [ValidateNonEmpty]
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
     }
+
     public class DocumentCategory : ListType
     {
     }
     public class TaskType : ListType
     {
-        public virtual string TaskColor { get; set; }
     }
     public class EventType : ListType
     {

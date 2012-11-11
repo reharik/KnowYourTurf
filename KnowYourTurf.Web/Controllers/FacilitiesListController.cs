@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.CoreViewModels;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.Html;
+using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Html;
 using KnowYourTurf.Core.Services;
 using StructureMap;
 
@@ -18,25 +18,26 @@ namespace KnowYourTurf.Web.Controllers
         public FacilitiesListController(IDynamicExpressionQuery dynamicExpressionQuery)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _gridHandlerService = ObjectFactory.Container.GetInstance<IEntityListGrid<User>>("Facilities");
+            _gridHandlerService = ObjectFactory.Container.GetInstance<IEntityListGrid<User>>("AddUpdate");
         }
 
-        public ActionResult FacilitiesList()
+        public ActionResult ItemList(ViewModel input)
         {
             var url = UrlContext.GetUrlForAction<FacilitiesListController>(x => x.Facilitiess(null));
             ListViewModel model = new ListViewModel()
             {
-                AddUpdateUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Facilities(null)),
-                GridDefinition = _gridHandlerService.GetGridDefinition(url),
-                Title = WebLocalizationKeys.FACILITIES.ToString()
+                gridDef = _gridHandlerService.GetGridDefinition(url, input.User),
+                _Title = WebLocalizationKeys.FACILITIES.ToString()
             };
-            return View(model);
+            model.headerButtons.Add("new");
+            model.headerButtons.Add("delete");
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Facilitiess(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserRoles.Any(r=>r.Name==UserType.Facilities.ToString()));
-            var gridItemsViewModel = _gridHandlerService.GetGridItemsViewModel(input.PageSortFilter, items);
+            var gridItemsViewModel = _gridHandlerService.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }
     }

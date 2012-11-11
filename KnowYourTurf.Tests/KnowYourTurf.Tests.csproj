@@ -32,13 +32,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Alpinely.TownCrier, Version=1.1.0.13346, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\lib\Alpinely.TownCrier.dll</HintPath>
+      <HintPath>..\lib\Alpinely.TownCrier.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Core">
+      <HintPath>..\lib\CC.Core.dll</HintPath>
     </Reference>
     <Reference Include="FubuMVC.UI, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\lib\FubuMVC.UI.dll</HintPath>
+      <HintPath>..\lib\FubuMVC.UI.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>
@@ -68,6 +74,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AbstractTestProject\AbstractTestProject.csproj">
+      <Project>{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}</Project>
+      <Name>AbstractTestProject</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
@@ -76,7 +86,6 @@
     <ProjectReference Include="..\KnowYourTurf.Web\KnowYourTurf.Web.csproj">
       <Project>{67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2}</Project>
       <Name>KnowYourTurf.Web</Name>
-      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +95,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BasicExtensionsTester.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

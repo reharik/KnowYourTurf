@@ -1,3 +1,5 @@
+using FluentNHibernate.Mapping;
+
 namespace KnowYourTurf.Core.Domain.Persistence
 {
     public class PurchaseOrderLineItemMap : DomainEntityMap<PurchaseOrderLineItem>
@@ -14,7 +16,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.UnitType);
             Map(x => x.Taxable);
             Map(x => x.SizeOfUnit);
-            References(x => x.Product).Not.LazyLoad();
+            References(x => x.Product);
             References(x => x.PurchaseOrder);
         }
 
