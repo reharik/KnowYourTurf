@@ -2,9 +2,9 @@ using FluentNHibernate.Mapping;
 
 namespace KnowYourTurf.Core.Domain.Persistence
 {
-    public class VendorMap : DomainEntityMap<Vendor>
+    public class VendorBaseMap : DomainEntityMap<VendorBase>
     {
-        public VendorMap()
+        public VendorBaseMap()
         {
             Map(x => x.Company);
             Map(x => x.Address1);
@@ -20,6 +20,24 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Status);
             Map(x => x.Website);
             HasMany(x => x.Contacts).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
+            DiscriminateSubClassesOnColumn<string>("VendorType");
+        }
+    }
+
+    public class EquipmentVendorMap : SubclassMap<EquipmentVendor>
+    {
+        public EquipmentVendorMap()
+        {
+            DiscriminatorValue("EquipmentVendor");
+            HasManyToMany(x => x.EquipmentTypes).Access.CamelCaseField(Prefix.Underscore).LazyLoad();
+        }
+    }
+
+    public class FieldVendorMap : SubclassMap<FieldVendor>
+    {
+        public FieldVendorMap()
+        {
+            DiscriminatorValue("FieldVendor");
             HasManyToMany(x => x.Products).Access.CamelCaseField(Prefix.Underscore).LazyLoad();
             HasMany(x => x.PurchaseOrders).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
         }

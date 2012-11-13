@@ -26,8 +26,9 @@ namespace Generator
                 command = commands.FirstOrDefault(c => c.toCanonicalCommandName() == args[0].toCanonicalCommandName());
                 if (command == null) //displayHelpAndExit(args, commands);
                 {
+                    displayHelpAndExit(args,commands);
 //                    command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
-                    command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("rebuilddatabase");
+                 //   command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("rebuilddatabase");
                 }
                 command.Execute(args);
             }

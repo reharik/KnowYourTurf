@@ -13,7 +13,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Model);
             Map(x => x.SerialNumber);
             Map(x => x.WarrentyInfo);
-            References(x => x.Vendor);
+            References(x => x.Site);
+            References(x => x.FieldVendor);
         }
     }
 }

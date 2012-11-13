@@ -15,8 +15,8 @@ namespace Generator
         private Field _field2;
         private Task _task1;
         private Task _task2;
-        private Vendor _vendor2;
-        private Vendor _vendor1;
+        private FieldVendor _vendor2;
+        private FieldVendor _vendor1;
         private Material _materials1;
         private Material _materials2;
         private Fertilizer _fertilizer2;
@@ -45,8 +45,8 @@ namespace Generator
         private UserRole _userRoleAdmin;
         private UserRole _userRoleEmployee;
         private UserRole _userRoleFac;
-        private Category _category1;
-        private Category _category2;
+        private Site _category1;
+        private Site _category2;
         private Field _field3;
         private Field _field4;
         private Task _task3;
@@ -211,8 +211,8 @@ namespace Generator
         private void CreateCompany()
         {
             _company = new Company { Name = "KYT", ZipCode = "78702", TaxRate = 8.25,NumberOfCategories = 2};
-            _category1 = new Category { Name = "Field 1" };
-//            _category2 = new Category { Name = "Field 2" };
+            _category1 = new Site { Name = "Field 1" };
+//            _category2 = new Site { Name = "Field 2" };
             _company.AddCategory(_category1);
 //            _company.AddCategory(_category2);
 
@@ -581,7 +581,7 @@ namespace Generator
 
         private void CreateVendor(int companyId)
         {
-            _vendor1 = new Vendor
+            _vendor1 = new FieldVendor
             {
                 Company = "Some Company1",
                 Phone = "555.123.4567",
@@ -592,7 +592,7 @@ namespace Generator
                 CompanyId = companyId
             };
 
-            _vendor2 = new Vendor
+            _vendor2 = new FieldVendor
             {
                 Company = "Some Company2",
                 Phone = "555.123.4567",
@@ -627,7 +627,7 @@ namespace Generator
                 CreatedDate = DateTime.Parse("1/5/2009"),
                 CompanyId = companyId
             };
-            purchaseOrder1.Vendor = _vendor1;
+            purchaseOrder1.FieldVendor = _vendor1;
             var poli1 = new PurchaseOrderLineItem()
             {
                 Price = 10,

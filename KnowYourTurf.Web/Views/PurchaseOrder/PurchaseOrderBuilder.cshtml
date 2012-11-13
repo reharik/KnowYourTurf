@@ -10,10 +10,10 @@
         @Html.ViewFor(x => x.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToHtmlTag()
         </div>
         <div class="fieldRow">
-        @Html.ViewFor(x => x.VendorCompany).RootId("viewVendor").ToHtmlTag()
+        @Html.ViewFor(x => x.VendorCompany).RootId("viewFieldVendor").ToHtmlTag()
         </div>
         <div class="fieldRow">
-        @Html.SubmissionFor(x => x.VendorEntityId).InputId("vendor").RootId("editVendor").ToHtmlTag()
+        @Html.SubmissionFor(x => x.VendorEntityId).InputId("FieldVendor").RootId("editFieldVendor").ToHtmlTag()
         </div>
     </div>
 

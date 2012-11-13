@@ -76,4 +76,58 @@ namespace KnowYourTurf.Web.Grids
         }
     }
 
+    public class EquipmentTaskTypeListGrid : Grid<EquipmentTaskType>, IEntityListGrid<EquipmentTaskType>
+    {
+        public EquipmentTaskTypeListGrid(IGridBuilder<EquipmentTaskType> gridBuilder)
+            : base(gridBuilder)
+        {
+        }
+
+        protected override Grid<EquipmentTaskType> BuildGrid()
+        {
+            GridBuilder.LinkColumnFor(x => x.Name)
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("documentcategorylist")
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
+            GridBuilder.DisplayFor(x => x.Status);
+            return this;
+        }
+    }
+
+    public class EquipmentTypeListGrid : Grid<EquipmentType>, IEntityListGrid<EquipmentType>
+    {
+        public EquipmentTypeListGrid(IGridBuilder<EquipmentType> gridBuilder)
+            : base(gridBuilder)
+        {
+        }
+
+        protected override Grid<EquipmentType> BuildGrid()
+        {
+            GridBuilder.LinkColumnFor(x => x.Name)
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("documentcategorylist")
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
+            GridBuilder.DisplayFor(x => x.Status);
+            return this;
+        }
+    }
+
+    public class PartListGrid : Grid<Part>, IEntityListGrid<Part>
+    {
+        public PartListGrid(IGridBuilder<Part> gridBuilder)
+            : base(gridBuilder)
+        {
+        }
+
+        protected override Grid<Part> BuildGrid()
+        {
+            GridBuilder.LinkColumnFor(x => x.Name)
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("documentcategorylist")
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
+            GridBuilder.DisplayFor(x => x.Status);
+            return this;
+        }
+    }
+
 }

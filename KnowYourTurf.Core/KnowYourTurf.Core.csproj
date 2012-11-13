@@ -124,7 +124,8 @@
     <Compile Include="CoreLocalizationKeys.cs" />
     <Compile Include="Domain\BaseProduct.cs" />
     <Compile Include="Domain\Calculator.cs" />
-    <Compile Include="Domain\Category.cs" />
+    <Compile Include="Domain\EquipmentVendor.cs" />
+    <Compile Include="Domain\Site.cs" />
     <Compile Include="Domain\Company.cs" />
     <Compile Include="Domain\Continuation.cs" />
     <Compile Include="Domain\Chemical.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Domain\Tools\NullSession.cs" />
     <Compile Include="Domain\Tools\NullSessionFactory.cs" />
     <Compile Include="Domain\UserRole.cs" />
+    <Compile Include="Domain\VendorBase.cs" />
     <Compile Include="Domain\Weather.cs" />
     <Compile Include="Html\Expressions\HtmlTagExpressionBase.cs" />
     <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
@@ -234,7 +236,7 @@
     <Compile Include="Domain\PurchaseOrderLineItem.cs" />
     <Compile Include="Domain\Task.cs" />
     <Compile Include="Domain\User.cs" />
-    <Compile Include="Domain\Vendor.cs" />
+    <Compile Include="Domain\FieldVendor.cs" />
     <Compile Include="Domain\VendorContact.cs" />
     <Compile Include="Enumerations\Enumerations.cs" />
     <Compile Include="Html\Expressions\BoundExpression.cs" />

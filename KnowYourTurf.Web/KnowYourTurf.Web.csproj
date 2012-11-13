@@ -717,6 +717,9 @@
     <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
     <Content Include="Views\InventoryList\InventoryFertilizerView.cshtml" />
     <Content Include="Views\InventoryList\InventoryMaterialView.cshtml" />
+    <Content Include="Views\EquipmentTaskType\AddUpdate.cshtml" />
+    <Content Include="Views\EquipmentType\AddUpdate.cshtml" />
+    <Content Include="Views\Part\AddUpdate.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>

@@ -10,6 +10,8 @@ namespace KnowYourTurf.Core.Domain
 {
     public class Equipment : DomainEntity, IPersistableObject
     {
+        public virtual Site Site { get; private set; }
+
         [ValidateNonEmpty]
         public virtual string Name { get; set; }
         [TextArea]
@@ -27,11 +29,11 @@ namespace KnowYourTurf.Core.Domain
         /// Aggregate Root that should not be modified through Equipment
         /// must have set on readonly field right now for model binder.
         /// </summary>
-        private Vendor _vendor;
-        public virtual Vendor Vendor { get { return _vendor; } set { _vendor = value; } }
-        public virtual void SetVendor(Vendor vendor)
+        private FieldVendor mFieldVendor;
+        public virtual FieldVendor FieldVendor { get { return mFieldVendor; } set { mFieldVendor = value; } }
+        public virtual void SetVendor(FieldVendor fieldVendor)
         {
-            _vendor = vendor;
+            mFieldVendor = fieldVendor;
         }
 
         #region Collections
@@ -75,5 +77,9 @@ namespace KnowYourTurf.Core.Domain
         }
         #endregion
 
+        public virtual void SetSite(Site site)
+        {
+            Site = site;
+        }
     }
 }

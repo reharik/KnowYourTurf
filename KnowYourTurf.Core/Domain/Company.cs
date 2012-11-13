@@ -11,14 +11,14 @@ namespace KnowYourTurf.Core.Domain
         public virtual string ZipCode { get; set; }
         public virtual int NumberOfCategories { get; set; }
         #region Collections
-        private IList<Category> _categories = new List<Category>();
-        public virtual IEnumerable<Category> Categories { get { return _categories; } }
-        public virtual void ClearCategory() { _categories = new List<Category>(); }
-        public virtual void RemoveCategory(Category category) { _categories.Remove(category); }
-        public virtual void AddCategory(Category category)
+        private IList<Site> _categories = new List<Site>();
+        public virtual IEnumerable<Site> Categories { get { return _categories; } }
+        public virtual void ClearCategory() { _categories = new List<Site>(); }
+        public virtual void RemoveCategory(Site site) { _categories.Remove(site); }
+        public virtual void AddCategory(Site site)
         {
-            if (!category.IsNew() && _categories.Contains(category)) return;
-            _categories.Add(category);
+            if (!site.IsNew() && _categories.Contains(site)) return;
+            _categories.Add(site);
         }
         #endregion
     }

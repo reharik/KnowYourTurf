@@ -83,6 +83,22 @@ namespace KnowYourTurf.Web
         public static readonly StringToken EQUIPMENT_INFORMATION = new WebLocalizationKeys("EQUIPMENT_INFORMATION", "Equipment Information");
         public static readonly StringToken NEW_EQUIPMENT = new WebLocalizationKeys("NEW_EQUIPMENT", "Add New Equipment");
 
+        public static readonly StringToken EQUIPMENT_TASK_TYPE_INFORMATION = new WebLocalizationKeys("EQUIPMENT_TASK_TYPE_INFORMATION", "Equipment Task Type Information");
+        public static readonly StringToken NEW_EQUIPMENT_TASK_TYPE = new WebLocalizationKeys("NEW_EQUIPMENT_TASK_TYPE", "Add New Equipment Task Type");
+        public static readonly StringToken EQUIPMENT_TASK_TYPES = new WebLocalizationKeys("EQUIPMENT_TASK_TYPES", "Equipment Task Types");
+        public static readonly StringToken EQUIPMENT_TASK_TYPE = new WebLocalizationKeys("EVENT_TYPE", "Equipment Task Type");
+
+        public static readonly StringToken EQUIPMENT_TYPE_INFORMATION = new WebLocalizationKeys("EQUIPMENT_TYPE_INFORMATION", "Equipment Type Information");
+        public static readonly StringToken NEW_EQUIPMENT_TYPE = new WebLocalizationKeys("NEW_EQUIPMENT_TYPE", "Add New Equipment Type");
+        public static readonly StringToken EQUIPMENT_TYPES = new WebLocalizationKeys("EQUIPMENT_TYPES", "Equipment Types");
+        public static readonly StringToken EQUIPMENT_TYPE = new WebLocalizationKeys("EQUIPMENT_TYPE", "Equipment Type");
+
+        public static readonly StringToken PART_INFORMATION = new WebLocalizationKeys("PART_INFORMATION", "Part Information");
+        public static readonly StringToken NEW_PART = new WebLocalizationKeys("NEW_PART", "Add New Part");
+        public static readonly StringToken PARTS = new WebLocalizationKeys("PARTS", "Parts");
+        public static readonly StringToken PART = new WebLocalizationKeys("PART", "Part");
+
+
         public static readonly StringToken TASK_INFORMATION = new WebLocalizationKeys("TASK_INFORMATION", "Task Information");
         public static readonly StringToken NEW_TASK = new WebLocalizationKeys("NEW_TASK", "Add New Task");
         public static readonly StringToken PENDING_TASKS = new WebLocalizationKeys("PENDING_TASKS", "Pending Tasks");
@@ -207,6 +223,9 @@ namespace KnowYourTurf.Web
         public static readonly StringToken COULD_NOT_DELETE_EVENTTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EVENTTYPE", "Could not delete one or more item because it is being used in one or more Event");
         public static readonly StringToken COULD_NOT_DELETE_PHOTOCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_PHOTOCATEGORY", "Could not delete one or more item because it is being used in one or more Photo");
         public static readonly StringToken COULD_NOT_DELETE_DOCUMENTCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_DOCUMENTCATEGORY", "Could not delete one or more item because it is being used in one or more Document");
+        public static readonly StringToken COULD_NOT_DELETE_EQUIPMENTTASKTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EQUIPMENTTASKTYPE", "Could not delete one or more item because it is being used in one or more Equipment Task");
+        public static readonly StringToken COULD_NOT_DELETE_EQUIPMENTTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EQUIPMENTTYPE", "Could not delete one or more item because it is being used in one or more piece of Equipment");
+        public static readonly StringToken COULD_NOT_DELETE_PART = new WebLocalizationKeys("COULD_NOT_DELETE_PART", "Could not delete one or more item because it is being used in one or more Equipment Task");
 
         public static readonly StringToken CURRENT = new WebLocalizationKeys("CURRENT", "Current");
         public static readonly StringToken COMPLETED = new WebLocalizationKeys("COMPLETED", "Completed");

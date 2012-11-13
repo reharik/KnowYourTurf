@@ -45,7 +45,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult AddUpdate(ViewModel input)
         {
             var equipment = input.EntityId > 0 ? _repository.Find<Equipment>(input.EntityId) : new Equipment();
-            var vendors = _selectListItemService.CreateList<Vendor>(x => x.Company, x => x.EntityId, true);
+            var vendors = _selectListItemService.CreateList<FieldVendor>(x => x.Company, x => x.EntityId, true);
             var model = Mapper.Map<Equipment, EquipmentViewModel>(equipment);
             
             model._VendorEntityIdList = vendors;

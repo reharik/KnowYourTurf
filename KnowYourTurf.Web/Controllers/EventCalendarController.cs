@@ -62,7 +62,7 @@ namespace KnowYourTurf.Web.Controllers
             var eventsItems = new List<CalendarEvent>();
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
-            var category = _repository.Find<Category>(input.RootId);
+            var category = _repository.Find<Site>(input.RootId);
             var events = category.GetAllEvents().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
             events.ForEachItem(x =>
                        eventsItems.Add(new CalendarEvent

@@ -53,7 +53,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(FieldViewModel input)
         {
-            var category = _repository.Find<Category>(input.RootId);
+            var category = _repository.Find<Site>(input.RootId);
             Field field;
             if (input.EntityId > 0) { field = category.Fields.FirstOrDefault(x => x.EntityId == input.EntityId); }
             else

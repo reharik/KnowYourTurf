@@ -26,4 +26,10 @@ namespace KnowYourTurf.Web.Models
 
     }
 
+    public class PartViewModel : ListTypeViewModel
+    {
+        public string Vendor { get; set; }
+        public string FileUrl { get; set; }
+    }
+
 }

@@ -14,13 +14,14 @@ namespace KnowYourTurf.Core.Domain.Persistence
         }
     }
 
-    public class CategoryMap : DomainEntityMap<Category>
+    public class SiteMap : DomainEntityMap<Site>
     {
-        public CategoryMap()
+        public SiteMap()
         {
             Map(x => x.Name);
             Map(x => x.Description);
             HasMany(x => x.Fields).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
+            HasMany(x => x.Equipment).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
         }
     }
 }

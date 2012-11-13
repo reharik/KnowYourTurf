@@ -41,7 +41,7 @@ namespace KnowYourTurf.Web.Controllers
             {   
                 EntityId = input.EntityId,
                 _POLIUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x=>x.PurchaseOrderLineItemList(null))+"/"+input.EntityId,
-                VendorCompany = purchaseOrder.Vendor.Company,
+                VendorCompany = purchaseOrder.FieldVendor.Company,
                 _ClosePOUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.ClosePurchaseOrder(null)) + "/" + input.EntityId,
                 _Title = WebLocalizationKeys.COMMIT_PURCHASE_ORDER.ToString()
             };

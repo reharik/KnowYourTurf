@@ -30,7 +30,7 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<Chemical, ChemicalViewModel>();
             Mapper.CreateMap<Document, DocumentViewModel>();
             Mapper.CreateMap<Photo, PhotoViewModel>();
-            Mapper.CreateMap<Vendor, VendorViewModel>();
+            Mapper.CreateMap<FieldVendor, VendorViewModel>();
             Mapper.CreateMap<VendorContact, VendorContactViewModel>();
             Mapper.CreateMap<InventoryProduct, InventoryFertilizerViewModel>().ForMember(x => x.Name, x => x.ResolveUsing(y => y.Product.Name)).ForMember(x => x.Description, x => x.ResolveUsing(y => y.Product.Description));
             Mapper.CreateMap<InventoryProduct, InventoryChemicalViewModel>().ForMember(x => x.Name, x => x.ResolveUsing(y => y.Product.Name)).ForMember(x => x.Description, x => x.ResolveUsing(y => y.Product.Description));

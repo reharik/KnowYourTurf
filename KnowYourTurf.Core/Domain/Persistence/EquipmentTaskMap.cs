@@ -15,8 +15,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             References(x => x.TaskType);
             References(x => x.Equipment);
             References(x => x.InventoryProduct);
-            HasManyToMany(x => x.Parts).Table("PartToTask").Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
-            HasManyToMany(x => x.Employees).Table("EmployeeToTask").Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
+            HasManyToMany(x => x.Parts).Table("PartToEquipmentTask").Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
+            HasManyToMany(x => x.Employees).Table("EmployeeToEquipmentTask").Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
 
         }
     }
