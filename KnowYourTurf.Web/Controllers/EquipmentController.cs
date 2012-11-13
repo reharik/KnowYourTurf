@@ -110,20 +110,7 @@ namespace KnowYourTurf.Web.Controllers
             equipment.Name = input.Name;
             equipment.TotalHours = input.TotalHours;
             equipment.Description = input.Description;
-            if (input.DeleteImage)
-            {
-                _fileHandlerService.DeleteFile(equipment.FileUrl);
-                equipment.FileUrl = string.Empty;
-            }
-            if (input.VendorEntityId >0 && (equipment.Vendor == null || equipment.Vendor.EntityId != input.VendorEntityId))
-            {
-                var vendor = _repository.Find<Vendor>(input.VendorEntityId);
-                equipment.SetVendor(vendor);
-            }
-            if (_fileHandlerService.RequsetHasFile())
-            {
-                equipment.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
-            }
+            
             var crudManager = _saveEntityService.ProcessSave(equipment);
             var notification = crudManager.Finish();
             return Json(notification, JsonRequestBehavior.AllowGet);

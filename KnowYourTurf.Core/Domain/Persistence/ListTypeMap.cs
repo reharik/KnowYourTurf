@@ -37,6 +37,13 @@ namespace KnowYourTurf.Core.Domain.Persistence
         }
     }
 
+    public class EquipmentTaskTypeMap : ListTypeMap<EquipmentTaskType>
+    {
+        public EquipmentTaskTypeMap()
+        {
+        }
+    }
+
     public class EventTypeMap : ListTypeMap<EventType>
     {
         public EventTypeMap()

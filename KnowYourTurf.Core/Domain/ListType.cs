@@ -22,6 +22,9 @@ namespace KnowYourTurf.Core.Domain
     public class TaskType : ListType
     {
     }
+    public class EquipmentTaskType : ListType
+    {
+    }
     public class EventType : ListType
     {
         public virtual string EventColor { get; set; }

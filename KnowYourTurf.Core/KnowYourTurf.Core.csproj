@@ -143,6 +143,7 @@
     <Compile Include="Domain\Company.cs" />
     <Compile Include="Domain\Continuation.cs" />
     <Compile Include="Domain\Chemical.cs" />
+    <Compile Include="Domain\EquipmentTask.cs" />
     <Compile Include="Domain\Document.cs" />
     <Compile Include="Domain\DomainEntity.cs" />
     <Compile Include="Domain\EmailJob.cs" />
@@ -153,6 +154,8 @@
     <Compile Include="Domain\Fertilizer.cs" />
     <Compile Include="Domain\Field.cs" />
     <Compile Include="Domain\ListType.cs" />
+    <Compile Include="Domain\Part.cs" />
+    <Compile Include="Domain\Persistence\EquipmentTaskMap.cs" />
     <Compile Include="Domain\Persistence\EmailJobTypeMap.cs" />
     <Compile Include="Domain\Persistence\ListTypeMap.cs" />
     <Compile Include="Domain\Persistence\OperationsMap.cs" />
