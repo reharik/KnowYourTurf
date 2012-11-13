@@ -62,12 +62,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core">
-      <HintPath>..\lib\CC.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Security">
-      <HintPath>..\lib\CC.Security.dll</HintPath>
-    </Reference>
     <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
@@ -179,6 +173,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Core\CC.Core.csproj">
+      <Project>{5E0B0CA2-BD5E-4953-A336-2AADC00CD81B}</Project>
+      <Name>CC.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Security\CC.Security.csproj">
+      <Project>{DBA372FE-3D52-45B3-AF82-B37696328764}</Project>
+      <Name>CC.Security</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CannibalCoder\CC.UI.Helpers\CC.UI.Helpers.csproj">
       <Project>{0DBFB19C-E106-4807-AA4B-FC8D128A3438}</Project>
       <Name>CC.UI.Helpers</Name>

@@ -52,4 +52,13 @@ namespace KnowYourTurf.Core.Domain.Persistence
         }
     }
 
+    public class PartMap : ListTypeMap<Part>
+    {
+        public PartMap()
+        {
+            Map(x => x.Vendor);
+            Map(x => x.FileUrl);
+        }
+    }
+
 }
