@@ -60,11 +60,11 @@ namespace KnowYourTurf.Core.Domain
 
         private readonly IList<Document> _documents = new List<Document>();
         public virtual IEnumerable<Document> Documents { get { return _documents; } }
-        public virtual void RemoveDocument(Document fieldDocument) { _documents.Remove(fieldDocument); }
-        public virtual void AddDocument(Document fieldDocument)
+        public virtual void RemoveDocument(Document document) { _documents.Remove(document); }
+        public virtual void AddDocument(Document document)
         {
-            if (!fieldDocument.IsNew() && _documents.Contains(fieldDocument)) return;
-            _documents.Add(fieldDocument);
+            if (!document.IsNew() && _documents.Contains(document)) return;
+            _documents.Add(document);
         }
 
         private readonly IList<Photo> _photos = new List<Photo>();

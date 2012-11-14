@@ -2,6 +2,7 @@
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.Html;
 using CC.Core.Services;
+using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
@@ -27,7 +28,6 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _photoListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.PHOTOS.ToString()
             };
-            model.headerButtons.Add("new");
             model.headerButtons.Add("delete");
             return Json(model, JsonRequestBehavior.AllowGet);
         }

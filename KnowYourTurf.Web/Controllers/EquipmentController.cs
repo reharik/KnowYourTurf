@@ -133,7 +133,6 @@ namespace KnowYourTurf.Web.Controllers
         [ValidateNonEmpty]
         [ValidateDecimal]
         public int TotalHours { get; set; }
-        public string FileUrl { get; set; }
         public bool DeleteImage { get; set; }
     
         public string _completedGridUrl { get; set; }
