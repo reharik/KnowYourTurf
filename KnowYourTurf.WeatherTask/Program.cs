@@ -1,26 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Web.Script.Serialization;
 using CC.Core;
 using CC.Core.DomainTools;
+using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web;
 using KnowYourTurf.Web.Controllers;
 using StructureMap;
+using log4net.Config;
 
 namespace KnowYourTurf.WeatherTask
 {
     public class Program
     {
         private static IRepository _repository;
+        private static ILogger _logger;
 
         static void Main(string[] args)
         {
             Initialize();
 
-            _repository = ObjectFactory.Container.GetInstance<IRepository>("NoInterceptorNoFilters");
+            _repository = ObjectFactory.Container.GetInstance<IRepository>("SpecialInterceptorNoFilters");
+            _logger = ObjectFactory.Container.GetInstance<ILogger>();
             GetWeather();
         }
 
@@ -30,8 +36,24 @@ namespace KnowYourTurf.WeatherTask
             {
                 x.AddRegistry(new KYTWebRegistry());
             });
+            XmlConfigurator.ConfigureAndWatch(new FileInfo(locateFileAsAbsolutePath("log4net.config")));
+
         }
 
+        private static string locateFileAsAbsolutePath(string filename)
+        {
+            if (Path.IsPathRooted(filename))
+                return filename;
+            string applicationBase = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            string path = Path.Combine(applicationBase, filename);
+            if (!File.Exists(path))
+            {
+                path = Path.Combine(Path.Combine(applicationBase, "bin"), filename);
+                if (!File.Exists(path))
+                    path = Path.Combine(Path.Combine(applicationBase, ".."), filename);
+            }
+            return path;
+        }
 
         public static void GetWeather()
         {
@@ -41,6 +63,7 @@ namespace KnowYourTurf.WeatherTask
 
             companies.ForEachItem(x =>
             {
+                _logger.LogInfo(x.Name+", "+DateTime.Now.ToString());
                 loadWeatherObject(jss, webClient, x);
                 loadLastWeeksWeatherObject(jss, webClient, x);
             });
@@ -97,4 +120,26 @@ namespace KnowYourTurf.WeatherTask
         }
 
     }
+
+    public class CompanyWeatherInfoDto
+    {
+        public WeatherHistoryDto History { get; set; }
+    }
+
+    public class WeatherHistoryDto
+    {
+        public IEnumerable<DailySummaryDto> DailySummary { get; set; }
+    }
+
+    public class DailySummaryDto
+    {
+        public string precipi { get; set; }
+        public string maxtempi { get; set; }
+        public string mintempi { get; set; }
+        public string maxhumidity { get; set; }
+        public string maxdewpti { get; set; }
+        public string maxwspdi { get; set; }
+        public string meanpressurei { get; set; }
+    }
+
 }
