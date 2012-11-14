@@ -20,7 +20,7 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IEntityListGrid<PhotoCategory> _photoCategoryListGrid;
         private readonly IEntityListGrid<DocumentCategory> _documentCategoryListGrid;
         private readonly IEntityListGrid<EquipmentTaskType> _equipmentTaskTypeListGrid;
-        private readonly IEntityListGrid<EquipmentTask> _equipmentTypeListGrid;
+        private readonly IEntityListGrid<EquipmentType> _equipmentTypeListGrid;
         private readonly IEntityListGrid<Part> _partListGrid;
 
         public ListTypeListController(
@@ -29,8 +29,9 @@ namespace KnowYourTurf.Web.Controllers
             IEntityListGrid<PhotoCategory> photoCategoryListGrid,
             IEntityListGrid<DocumentCategory> documentCategoryListGrid,
             IEntityListGrid<EquipmentTaskType> equipmentTaskTypeListGrid,
-            IEntityListGrid<EquipmentTask> equipmentTypeListGrid,
-            IEntityListGrid<Part> partListGrid)
+            IEntityListGrid<EquipmentType> equipmentTypeListGrid,
+            IEntityListGrid<Part> partListGrid
+            )
         {
             _eventTypeListGrid = eventTypeListGrid;
             _taskTypeListGrid = taskTypeListGrid;

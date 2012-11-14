@@ -733,12 +733,20 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         KYT.vent.bind("grid:documentcategorylist:pageLoaded",function(options){
              options.deleteMultipleUrl = this.model._deleteMultipleDocCatUrl();
         },this);
+        KYT.vent.bind("grid:equipmenttasktypelist:pageLoaded",function(options){
+             options.deleteMultipleUrl = this.model._deleteMultipleEquipTaskTypeUrl();
+        },this);
+        KYT.vent.bind("grid:equipmentttypelist:pageLoaded",function(options){
+             options.deleteMultipleUrl = this.model._deleteMultipleEquipTypeUrl();
+        },this);
+        KYT.vent.bind("grid:partlist:pageLoaded",function(options){
+             options.deleteMultipleUrl = this.model._deleteMultiplePartsUrl();
+        },this);
         this.taskTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#taskTypeGridContainer",
             url:this.model._taskTypeGridUrl(),
             gridId:"tasktypelist",
             route:"tasktype"
-
         });
         this.eventTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#eventTypeGridContainer",
@@ -758,21 +766,49 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
             gridId:"documentcategorylist",
             route:"documentcategory"
         });
+        this.equipmentTaskTypeGridView = new KYT.Views.DahsboardGridView({
+            el:"#equipmentTaskTypeGridContainer",
+            url:this.model._equipmentTaskTypeGridUrl(),
+            gridId:"equipmenttasktypelist",
+            route:"equipmenttasktype"
+        });
+        this.equipmentTypeGridView = new KYT.Views.DahsboardGridView({
+            el:"#equipmentTypeGridContainer",
+            url:this.model._equipmentTypeGridUrl(),
+            gridId:"equipmenttypelist",
+            route:"equipmenttype"
+        });
+        this.partGridView = new KYT.Views.DahsboardGridView({
+            el:"#partsGridContainer",
+            url:this.model._partsGridUrl(),
+            gridId:"partlist",
+            route:"part"
+        });
+
 
         this.taskTypeGridView.render();
         this.eventTypeGridView.render();
         this.photoCategoryGridView.render();
         this.documentCategoryGridView.render();
+        this.equipmentTaskTypeGridView.render();
+        this.equipmentTypeGridView.render();
+        this.partGridView.render();
         this.storeChild(this.taskTypeGridView);
         this.storeChild(this.eventTypeGridView);
         this.storeChild(this.photoCategoryGridView);
         this.storeChild(this.documentCategoryGridView);
+        this.storeChild(this.equipmentTaskTypeGridView);
+        this.storeChild(this.equipmentTypeGridView);
+        this.storeChild(this.partGridView);
     },
     callbackAction: function(){
         this.taskTypeGridView.callbackAction();
         this.eventTypeGridView.callbackAction();
         this.photoCategoryGridView.callbackAction();
         this.documentCategoryGridView.callbackAction();
+        this.equipmentTaskTypeGridView.callbackAction();
+        this.equipmentTypeGridView.callbackAction();
+        this.partGridView.callbackAction();
     }
 });
 

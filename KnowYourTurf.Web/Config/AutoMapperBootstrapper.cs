@@ -25,6 +25,9 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<TaskType, ListTypeViewModel>();
             Mapper.CreateMap<PhotoCategory, ListTypeViewModel>();
             Mapper.CreateMap<DocumentCategory, ListTypeViewModel>();
+            Mapper.CreateMap<EquipmentTaskType, ListTypeViewModel>();
+            Mapper.CreateMap<EquipmentType, ListTypeViewModel>();
+            Mapper.CreateMap<Part, PartViewModel>();
             Mapper.CreateMap<Material, MaterialViewModel>();
             Mapper.CreateMap<Fertilizer, FertilizerViewModel>();
             Mapper.CreateMap<Chemical, ChemicalViewModel>();
@@ -39,7 +42,6 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<Event, EventViewModel>();
             Mapper.CreateMap<PurchaseOrderLineItem, PurchaseOrderLineItemViewModel>();
             Mapper.CreateMap<PurchaseOrderLineItem, ReceivePurchaseOrderLineItemViewModel>();
-
         
         }
 

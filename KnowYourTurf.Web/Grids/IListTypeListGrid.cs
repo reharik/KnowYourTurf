@@ -87,7 +87,7 @@ namespace KnowYourTurf.Web.Grids
         {
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
-                .WithId("documentcategorylist")
+                .WithId("equipmenttasktypelist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
@@ -105,7 +105,7 @@ namespace KnowYourTurf.Web.Grids
         {
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
-                .WithId("documentcategorylist")
+                .WithId("equipmentTypelist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
@@ -123,7 +123,7 @@ namespace KnowYourTurf.Web.Grids
         {
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
-                .WithId("documentcategorylist")
+                .WithId("partlist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;
