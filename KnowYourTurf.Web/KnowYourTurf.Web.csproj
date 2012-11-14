@@ -202,6 +202,7 @@
     <Compile Include="Controllers\ChemicalListController.cs" />
     <Compile Include="Controllers\CompletedPurchaseOrderListController.cs" />
     <Compile Include="Controllers\CompletedPurchaseOrderDisplayController.cs" />
+    <Compile Include="Controllers\EquipmentDashboardController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\KnowYourTurfController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
@@ -262,6 +263,9 @@
     <Compile Include="Grids\CalculatorListGrid.cs" />
     <Compile Include="Grids\ChemicalListGrid.cs" />
     <Compile Include="Grids\CompletedTaskGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskCompletedGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskPendingGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskListGrid.cs" />
     <Compile Include="Grids\DocumentListGrid.cs" />
     <Compile Include="Grids\EmailJobListGrid.cs" />
     <Compile Include="Grids\EmailTemplateListGrid.cs" />
@@ -720,6 +724,7 @@
     <Content Include="Views\EquipmentTaskType\AddUpdate.cshtml" />
     <Content Include="Views\EquipmentType\AddUpdate.cshtml" />
     <Content Include="Views\Part\AddUpdate.cshtml" />
+    <Content Include="Views\EquipmentDashboard\EquipmentDashboard.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>
