@@ -75,6 +75,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             id: "displayModule",
             url: this.model.DisplayUrl,
             route: this.model.DisplayRoute,
+            title: this.model.PopupTitle,
             templateUrl: this.model.DisplayUrl+"_Template?Popup=true",
             view: this.options.subViewName?"Display" + this.options.subViewName:"",
             AddUpdateUrl: this.model.AddUpdateUrl,
@@ -93,6 +94,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             id: "editModule",
             route: this.model.AddUpdateRoute,
             url: url,
+            title: this.model.PopupTitle,
             templateUrl: url+"_Template?Popup=true",
             data:data,
             view:this.options.subViewName,
@@ -420,7 +422,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     events:{
         'click #commit' : 'commitPO',
         'click #return' : 'cancelPO',
-        'change #editVendor' : 'selectVendor'
+        'change #editFieldVendor' : 'selectVendor'
     },
     initialize:function(){
         KYT.mixin(this, "formMixin");
@@ -481,14 +483,14 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     showPOInfo:function(editable){
         if(editable){
             $("#viewPOID",this.$el).hide();
-            $("#viewVendor",this.$el).hide();
-            $("#editVendor",this.$el).show();
+            $("#viewFieldVendor",this.$el).hide();
+            $("#editFieldVendor",this.$el).show();
             $("#poliGridArea").hide();
             $("#productGridArea").hide();
         }else{
             $("#viewPOID",this.$el).show();
-            $("#viewVendor",this.$el).show();
-            $("#editVendor",this.$el).hide();
+            $("#viewFieldVendor",this.$el).show();
+            $("#editFieldVendor",this.$el).hide();
             this.showVendorProducts();
             this.showPOLI();
         }
@@ -496,7 +498,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     selectVendor:function(){
         if(this.model.VendorEntityId()>0){
             this.showPOInfo(false);
-            this.model.VendorCompany(this.$el.find("#editVendor :selected").text());
+            this.model.VendorCompany(this.$el.find("#editFieldVendor :selected").text());
         }
     },
     addToOrder:function(id){
@@ -528,6 +530,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         var moduleOptions = {
             id:"editPOItem",
             url: this.model._editPOLItemUrl()+"/"+id,
+            title: this.model._editPOLItemTitle(),
             templateUrl: this.model._editPOLItemUrl()+"_Template",
             data:{"ParentId":this.model.EntityId()}
         };
@@ -728,6 +731,26 @@ KYT.Views.VendorListView = KYT.Views.View.extend({
     },
     viewLoaded:function(){
          KYT.vent.bind(this.options.gridId+":Redirect",this.showContacts,this);
+        this.setupBindings();
+    },
+    onClose:function(){
+        KYT.vent.unbind(this.options.gridId+":Redirect",this.showContacts,this);
+        this.unbindBindings();
+    },
+    showContacts:function(id){
+        KYT.vent.trigger("route",KYT.generateRoute("vendorcontactlist",0,id),true);
+    }
+});
+
+KYT.Views.EquipmentVendorListView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
+        KYT.vent.bind(this.options.gridId+":Redirect",this.showContacts,this);
         this.setupBindings();
     },
     onClose:function(){

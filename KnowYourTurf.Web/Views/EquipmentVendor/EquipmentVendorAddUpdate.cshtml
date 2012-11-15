@@ -1,4 +1,4 @@
-﻿@model KnowYourTurf.Web.Models.Vendor.VendorViewModel
+﻿@model KnowYourTurf.Web.Models.EquipmentVendor.EquipmentVendorViewModel
 @using CC.Core.Html.CCUI
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
@@ -38,16 +38,7 @@
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-
-            @Html.SubmissionFor(x => x.Chemicals).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Fertilizers).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Materials).ToHtmlTag()
-        </div>
+      
     </div>
             
             

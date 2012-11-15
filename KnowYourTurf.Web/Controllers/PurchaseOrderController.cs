@@ -55,6 +55,7 @@ namespace KnowYourTurf.Web.Controllers
             model._addToOrderUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddItemToPO(null));
             model._removePOLItemUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.Delete(null));
             model._editPOLItemUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.AddUpdate(null));
+            model._editPOLItemTitle = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEM.ToString();
             model._Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString();
             return Json(model,JsonRequestBehavior.AllowGet);
         }

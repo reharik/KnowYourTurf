@@ -32,6 +32,7 @@ namespace KnowYourTurf.Core
         public string DisplayRoute { get; set; }
 
         public string DeleteUrl { get; set; }
+        public string PopupTitle { get; set; }
     }
 
     public class CalendarEvent

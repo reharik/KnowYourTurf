@@ -25,7 +25,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ItemList(ListViewModel input)
         {
-            var vendor = _repository.Find<FieldVendor>(input.ParentId);
+            var vendor = _repository.Find<VendorBase>(input.ParentId);
             var url = UrlContext.GetUrlForAction<VendorContactListController>(x => x.VendorContacts(null)) + "?ParentId=" + input.ParentId;
             ListViewModel model = new ListViewModel()
             {
@@ -40,7 +40,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult VendorContacts(GridItemsRequestModel input)
         {
-            var vendor = _repository.Find<FieldVendor>(input.ParentId);
+            var vendor = _repository.Find<VendorBase>(input.ParentId);
             var items = _dynamicExpressionQuery.PerformQuery(vendor.Contacts,input.filters);
             var gridItemsViewModel = _vendorContactListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);

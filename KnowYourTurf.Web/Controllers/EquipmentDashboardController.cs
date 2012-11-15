@@ -23,11 +23,13 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IEntityListGrid<EquipmentTask> _completedTaskGrid;
         private readonly IEntityListGrid<Photo> _photoListGrid;
         private readonly IEntityListGrid<Document> _documentListGrid;
+        private readonly ISelectListItemService _selectListItemService;
 
         public EquipmentDashboardController(IRepository repository,
                                         IDynamicExpressionQuery dynamicExpressionQuery,
                                         IEntityListGrid<Photo> photoListGrid,
-                                        IEntityListGrid<Document> documentListGrid)
+                                        IEntityListGrid<Document> documentListGrid,
+            ISelectListItemService selectListItemService)
         {
             _repository = repository;
             _dynamicExpressionQuery = dynamicExpressionQuery;
@@ -35,6 +37,7 @@ namespace KnowYourTurf.Web.Controllers
             _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("CompletedTasks");
             _photoListGrid = photoListGrid;
             _documentListGrid = documentListGrid;
+            _selectListItemService = selectListItemService;
         }
 
         public ActionResult ViewEquipment_Template(ViewModel input)
@@ -49,7 +52,10 @@ namespace KnowYourTurf.Web.Controllers
             var completeUrl = UrlContext.GetUrlForAction<EquipmentDashboardController>(x => x.CompletedTasksGrid(null)) +"?ParentId=" + input.EntityId;
             var photoUrl = UrlContext.GetUrlForAction<EquipmentDashboardController>(x => x.PhotoGrid(null)) + "?ParentId=" + input.EntityId;
             var docuemntUrl = UrlContext.GetUrlForAction<EquipmentDashboardController>(x => x.DocumentGrid(null)) + "?ParentId=" + input.EntityId;
+            var equipmentTypes = _selectListItemService.CreateList<EquipmentType>(x => x.Name, x => x.EntityId, true);
+            
             var model = Mapper.Map<Equipment, EquipmentViewModel>(equipment);
+            model._EquipmentTypeEntityIdList = equipmentTypes;
             model._pendingGridUrl = url;
             model._completedGridUrl = completeUrl;
             model._documentGridUrl = docuemntUrl;

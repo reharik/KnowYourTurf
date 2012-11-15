@@ -38,7 +38,9 @@ namespace KnowYourTurf.Web.Controllers
                                                        DisplayUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Display(null)),
                                                        DisplayRoute = "taskdisplay",
                                                        DeleteUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Delete(null)),
-                                                       EventChangedUrl = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.EventChanged(null))
+                                                       EventChangedUrl = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.EventChanged(null)),
+                                                       PopupTitle = WebLocalizationKeys.TASK_INFORMATION.ToString()
+
                                                    }
                        };
             return Json(model,JsonRequestBehavior.AllowGet);

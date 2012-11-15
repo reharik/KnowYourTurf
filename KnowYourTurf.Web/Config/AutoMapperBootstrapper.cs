@@ -1,8 +1,10 @@
 using AutoMapper;
 using CC.Core.CoreViewModelAndDTOs;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Web.Controllers;
 using KnowYourTurf.Web.Models;
+using KnowYourTurf.Web.Models.EquipmentVendor;
 using KnowYourTurf.Web.Models.Fertilizer;
 using KnowYourTurf.Web.Models.Material;
 using KnowYourTurf.Web.Models.Vendor;
@@ -45,6 +47,7 @@ namespace KnowYourTurf.Web.Config
 
             Mapper.CreateMap<EquipmentTask, EquipmentTaskViewModel>().ForMember(d => d.Parts, o => o.Ignore()).ForMember(d => d.Employees, o => o.Ignore());
             Mapper.CreateMap<EquipmentTask, DisplayEquipmentTaskViewModel>();
+            Mapper.CreateMap<EquipmentVendor, EquipmentVendorViewModel>();
         
         }
 

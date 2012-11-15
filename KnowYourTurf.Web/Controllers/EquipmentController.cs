@@ -46,9 +46,11 @@ namespace KnowYourTurf.Web.Controllers
         {
             var equipment = input.EntityId > 0 ? _repository.Find<Equipment>(input.EntityId) : new Equipment();
             var vendors = _selectListItemService.CreateList<FieldVendor>(x => x.Company, x => x.EntityId, true);
+            var equipmentTypes = _selectListItemService.CreateList<EquipmentType>(x => x.Name, x => x.EntityId, true);
             var model = Mapper.Map<Equipment, EquipmentViewModel>(equipment);
-            
+
             model._VendorEntityIdList = vendors;
+            model._EquipmentTypeEntityIdList= equipmentTypes;
             model._Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.Save(null));
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -130,6 +132,7 @@ namespace KnowYourTurf.Web.Controllers
         [TextArea]
         public string Description { get; set; }
         public int VendorEntityId { get; set; }
+        public IEnumerable<SelectListItem> EquipmentTypeEntityId { get; set; }
         [ValidateNonEmpty]
         [ValidateDecimal]
         public int TotalHours { get; set; }
@@ -146,6 +149,7 @@ namespace KnowYourTurf.Web.Controllers
         public List<string> _PhotoHeaderButtons { get; set; }
         public List<string> _DocumentHeaderButtons { get; set; }
         public IEnumerable<SelectListItem> _VendorEntityIdList { get; set; }
+        public IEnumerable<SelectListItem> _EquipmentTypeEntityIdList { get; set; }
         public IEnumerable<PhotoDto> _Photos { get; set; }
 
         public string _saveUrl { get; set; }

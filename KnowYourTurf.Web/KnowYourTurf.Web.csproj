@@ -202,6 +202,8 @@
     <Compile Include="Controllers\ChemicalListController.cs" />
     <Compile Include="Controllers\CompletedPurchaseOrderListController.cs" />
     <Compile Include="Controllers\CompletedPurchaseOrderDisplayController.cs" />
+    <Compile Include="Controllers\EquipmentVendorController.cs" />
+    <Compile Include="Controllers\EquipmentVendorListController.cs" />
     <Compile Include="Controllers\EquipmentTaskCalendarController.cs" />
     <Compile Include="Controllers\EquipmentTaskController.cs" />
     <Compile Include="Controllers\EquipmentTaskListController.cs" />
@@ -266,6 +268,7 @@
     <Compile Include="Grids\CalculatorListGrid.cs" />
     <Compile Include="Grids\ChemicalListGrid.cs" />
     <Compile Include="Grids\CompletedTaskGrid.cs" />
+    <Compile Include="Grids\EquipmentVendorListGrid.cs" />
     <Compile Include="Grids\EquipmentTaskCompletedGrid.cs" />
     <Compile Include="Grids\EquipmentTaskPendingGrid.cs" />
     <Compile Include="Grids\EquipmentTaskListGrid.cs" />
@@ -303,6 +306,7 @@
     <Compile Include="Models\BulkAction\BulkActionViewModel.cs" />
     <Compile Include="Models\Calculator\CalculatorViewModel.cs" />
     <Compile Include="Models\Chemical\ChemicalViewModel.cs" />
+    <Compile Include="Models\EquipmentVendor\EquipmentVendorViewModel.cs" />
     <Compile Include="Models\EquipmentTask\EquipmentTaskViewModel.cs" />
     <Compile Include="Models\EmailJob\EmailJobViewModel.cs" />
     <Compile Include="Models\Employee\UserViewModel.cs" />
@@ -731,6 +735,7 @@
     <Content Include="Views\EquipmentDashboard\EquipmentDashboard.cshtml" />
     <Content Include="Views\EquipmentTask\EquipmentTaskAddUpdate.cshtml" />
     <Content Include="Views\EquipmentTask\Display.cshtml" />
+    <Content Include="Views\EquipmentVendor\EquipmentVendorAddUpdate.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>

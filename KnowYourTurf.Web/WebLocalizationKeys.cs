@@ -32,6 +32,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken ADMINS = new WebLocalizationKeys("ADMINS", "Admins");
         public static readonly StringToken FACILITIES = new WebLocalizationKeys("FACILITIES", "Facilities");
         public static readonly StringToken VENDORS = new WebLocalizationKeys("VENDORS", "Vendors");
+        public static readonly StringToken EQUIPMENT_VENDORS = new WebLocalizationKeys("EQUIPMENT_VENDORS", "Equipment Vendors");
         public static readonly StringToken VENDOR = new WebLocalizationKeys("VENDOR", "Vendor");
         public static readonly StringToken PRODUCTS = new WebLocalizationKeys("PRODUCTS", "Products");
         public static readonly StringToken PRODUCT = new WebLocalizationKeys("PRODUCT", "Product");
@@ -155,6 +156,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken PO_NUMBER = new WebLocalizationKeys("PO_NUMBER", "PO Number");
         public static readonly StringToken VENDOR_PRODUCTS = new WebLocalizationKeys("VENDOR_PRODUCTS", "Vendor Products");
         public static readonly StringToken PURCHASE_ORDER_LINE_ITEMS = new WebLocalizationKeys("PURCHASE_ORDER_LINE_ITEMS", "Purchase Order Line Items");
+        public static readonly StringToken PURCHASE_ORDER_LINE_ITEM = new WebLocalizationKeys("PURCHASE_ORDER_LINE_ITEM", "Purchase Order Line Item");
         public static readonly StringToken LINE_ITEMS = new WebLocalizationKeys("LINE_ITEMS", "Line Items");
         public static readonly StringToken COPY_TASK = new WebLocalizationKeys("COPY_TASK", "Duplicate Task");
         public static readonly StringToken EDIT_TASK = new WebLocalizationKeys("EDIT_TASK", "Edit Task");
@@ -223,6 +225,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken COULD_NOT_DELETE_FOR_TASK = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_TASK", "Could not delete one or more item because it is being used in one or more Task");
         public static readonly StringToken COULD_NOT_DELETE_FOR_VENDOR = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_VENDOR", "Could not delete one or more item because it is being used by one or more Vendor");
         public static readonly StringToken COULD_NOT_DELETE_FOR_PURCHASEORDER = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_PURCHASEORDER", "Could not delete one or more item because it is being used in one or more Purchase Order");
+        public static readonly StringToken COULD_NOT_DELETE_FOR_EQUIPMENT = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_EQUIPMENT", "Could not delete one or more item because it is being used by one or more piece of Equipment");
         public static readonly StringToken COULD_NOT_DELETE_EVENTTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EVENTTYPE", "Could not delete one or more item because it is being used in one or more Event");
         public static readonly StringToken COULD_NOT_DELETE_PHOTOCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_PHOTOCATEGORY", "Could not delete one or more item because it is being used in one or more Photo");
         public static readonly StringToken COULD_NOT_DELETE_DOCUMENTCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_DOCUMENTCATEGORY", "Could not delete one or more item because it is being used in one or more Document");

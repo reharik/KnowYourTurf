@@ -79,6 +79,7 @@ namespace KnowYourTurf.Web.Menus
                         .CreateTagNode<PhotoListController>(WebLocalizationKeys.PHOTOS)
                 //.CreateNode<EmailJobListController>(c => c.ItemList(), WebLocalizationKeys.EMAIL_JOBS)
                 //.CreateNode<EmailTemplateListController>(c => c.EmailTemplateList(null), WebLocalizationKeys.EMAIL_TEMPLATES)
+                        .CreateTagNode<EquipmentVendorListController>(WebLocalizationKeys.EQUIPMENT_VENDORS)
                         .CreateTagNode<VendorListController>(WebLocalizationKeys.VENDORS)
                         .CreateNode(WebLocalizationKeys.INVENTORY)
                         .HasChildren()
