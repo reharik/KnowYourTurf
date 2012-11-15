@@ -25,9 +25,6 @@ namespace KnowYourTurf.Core.Domain
         public virtual bool Deleted { get; set; }
         public virtual bool Complete { get; set; }
 
-        public virtual InventoryProduct InventoryProduct { get; set; }
-        public virtual bool InventoryDecremented { get; set; }
-
         #region Collections
         public virtual void ClearPart() { _parts = new List<Part>(); }
         private IList<Part> _parts = new List<Part>();
@@ -58,7 +55,6 @@ namespace KnowYourTurf.Core.Domain
                                   TaskType = TaskType,
                                   Notes = Notes,
                                   ScheduledDate = ScheduledDate,
-                                  InventoryProduct = InventoryProduct,
                                   Equipment = Equipment
                               };
             Employees.ForEachItem(newTask.AddEmployee);

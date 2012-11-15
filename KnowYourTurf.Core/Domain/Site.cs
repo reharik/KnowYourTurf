@@ -33,16 +33,7 @@ namespace KnowYourTurf.Core.Domain
             _fields.Add(field);
             field.SetSite(this);
         }
-        private IList<Equipment> _equipment = new List<Equipment>();
-        public virtual IEnumerable<Equipment> Equipment { get { return _equipment; } }
-        public virtual void ClearEquipment() { _equipment = new List<Equipment>(); }
-        public virtual void RemoveEquipment(Equipment equipment) { _equipment.Remove(equipment); }
-        public virtual void AddEquipment(Equipment equipment)
-        {
-            if (!equipment.IsNew() && _equipment.Contains(equipment)) return;
-            _equipment.Add(equipment);
-            equipment.SetSite(this);
-        }
+      
         #endregion
     }
 }

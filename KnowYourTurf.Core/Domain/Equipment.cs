@@ -4,6 +4,7 @@ using System.Linq;
 using CC.Core.CustomAttributes;
 using CC.Core.Domain;
 using Castle.Components.Validator;
+using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Core.Domain
@@ -29,11 +30,11 @@ namespace KnowYourTurf.Core.Domain
         /// Aggregate Root that should not be modified through Equipment
         /// must have set on readonly field right now for model binder.
         /// </summary>
-        private FieldVendor mFieldVendor;
-        public virtual FieldVendor FieldVendor { get { return mFieldVendor; } set { mFieldVendor = value; } }
-        public virtual void SetVendor(FieldVendor fieldVendor)
+        private EquipmentVendor _equipmentVendor;
+        public virtual EquipmentVendor EquipmentVendor { get { return _equipmentVendor; } set { _equipmentVendor = value; } }
+        public virtual void SetVendor(EquipmentVendor equipmentVendor)
         {
-            mFieldVendor = fieldVendor;
+            _equipmentVendor = equipmentVendor;
         }
 
         #region Collections
@@ -80,6 +81,11 @@ namespace KnowYourTurf.Core.Domain
         public virtual void SetSite(Site site)
         {
             Site = site;
+        }
+
+        public IEnumerable<EquipmentTask> GetAllEquipmentTasks(Func<EquipmentTask,bool> _where = null )
+        {
+            return _where != null ? Tasks.Where(_where) : Tasks;
         }
     }
 }

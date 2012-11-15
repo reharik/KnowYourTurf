@@ -202,6 +202,9 @@
     <Compile Include="Controllers\ChemicalListController.cs" />
     <Compile Include="Controllers\CompletedPurchaseOrderListController.cs" />
     <Compile Include="Controllers\CompletedPurchaseOrderDisplayController.cs" />
+    <Compile Include="Controllers\EquipmentTaskCalendarController.cs" />
+    <Compile Include="Controllers\EquipmentTaskController.cs" />
+    <Compile Include="Controllers\EquipmentTaskListController.cs" />
     <Compile Include="Controllers\EquipmentDashboardController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\KnowYourTurfController.cs" />
@@ -300,6 +303,7 @@
     <Compile Include="Models\BulkAction\BulkActionViewModel.cs" />
     <Compile Include="Models\Calculator\CalculatorViewModel.cs" />
     <Compile Include="Models\Chemical\ChemicalViewModel.cs" />
+    <Compile Include="Models\EquipmentTask\EquipmentTaskViewModel.cs" />
     <Compile Include="Models\EmailJob\EmailJobViewModel.cs" />
     <Compile Include="Models\Employee\UserViewModel.cs" />
     <Compile Include="Models\Enum\ListTypeListViewModel.cs" />

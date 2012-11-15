@@ -14,7 +14,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.SerialNumber);
             Map(x => x.WarrentyInfo);
             References(x => x.Site);
-            References(x => x.FieldVendor);
+            References(x => x.EquipmentVendor);
             HasMany(x => x.Tasks).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
             HasManyToMany(x => x.Documents).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
             HasManyToMany(x => x.Photos).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
