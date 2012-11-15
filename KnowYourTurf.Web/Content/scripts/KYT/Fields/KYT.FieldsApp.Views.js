@@ -977,5 +977,35 @@ KYT.Views.CompletedTaskListView = KYT.Views.View.extend({
     onClose:function(){this.unbindBindings();}
 });
 
+KYT.Views.PendingEquipmentTaskListView = KYT.Views.View.extend({
+    initialize: function(){
+       this.options.gridId="pendingTaskList";
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
+        this.setupBindings();},
+    onClose:function(){this.unbindBindings();},
+    callbackAction: function () {
+        this.reloadGrid();
+    }
+
+});
+
+KYT.Views.CompletedEquipmentTaskListView = KYT.Views.View.extend({
+    initialize: function(){
+        this.options.gridId="completedTaskList";
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
+        this.setupBindings();},
+    onClose:function(){this.unbindBindings();}
+});
+
 
 

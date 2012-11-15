@@ -42,6 +42,9 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<Event, EventViewModel>();
             Mapper.CreateMap<PurchaseOrderLineItem, PurchaseOrderLineItemViewModel>();
             Mapper.CreateMap<PurchaseOrderLineItem, ReceivePurchaseOrderLineItemViewModel>();
+
+            Mapper.CreateMap<EquipmentTask, EquipmentTaskViewModel>().ForMember(d => d.Parts, o => o.Ignore()).ForMember(d => d.Employees, o => o.Ignore());
+            Mapper.CreateMap<EquipmentTask, DisplayEquipmentTaskViewModel>();
         
         }
 

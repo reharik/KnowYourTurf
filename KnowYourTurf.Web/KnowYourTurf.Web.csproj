@@ -729,6 +729,8 @@
     <Content Include="Views\EquipmentType\AddUpdate.cshtml" />
     <Content Include="Views\Part\AddUpdate.cshtml" />
     <Content Include="Views\EquipmentDashboard\EquipmentDashboard.cshtml" />
+    <Content Include="Views\EquipmentTask\EquipmentTaskAddUpdate.cshtml" />
+    <Content Include="Views\EquipmentTask\Display.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>

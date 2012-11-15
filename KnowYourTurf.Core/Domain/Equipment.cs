@@ -83,7 +83,7 @@ namespace KnowYourTurf.Core.Domain
             Site = site;
         }
 
-        public IEnumerable<EquipmentTask> GetAllEquipmentTasks(Func<EquipmentTask,bool> _where = null )
+        public virtual IEnumerable<EquipmentTask> GetAllEquipmentTasks(Func<EquipmentTask,bool> _where = null )
         {
             return _where != null ? Tasks.Where(_where) : Tasks;
         }

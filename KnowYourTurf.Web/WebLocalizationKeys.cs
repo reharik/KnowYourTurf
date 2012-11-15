@@ -41,6 +41,9 @@ namespace KnowYourTurf.Web
         public static readonly StringToken CHEMICALS = new WebLocalizationKeys("CHEMICALS", "Chemicals");
         public static readonly StringToken FIELDS = new WebLocalizationKeys("FIELDS", "Fields");
         public static readonly StringToken EQUIPMENT = new WebLocalizationKeys("EQUIPMENT", "Equipment");
+        public static readonly StringToken EQUIPMENT_TASK_LISTS = new WebLocalizationKeys("EQUIPMENT_TASK_LISTS", "Equipment Tasks Lists");
+        public static readonly StringToken EQUIPMENT_TASKS = new WebLocalizationKeys("EQUIPMENT_TASKS", "Equipment Tasks");
+        public static readonly StringToken EQUIPMENT_TASK_CALENDAR = new WebLocalizationKeys("EQUIPMENT_TASK_CALENDAR", "Equipment Task Calendar");
         public static readonly StringToken TASKS = new WebLocalizationKeys("TASKS", "Tasks");
         public static readonly StringToken TASK_LIST = new WebLocalizationKeys("TASK_LIST", "Task List");
         public static readonly StringToken TASK_CALENDAR = new WebLocalizationKeys("TASK_CALENDAR", "Task Calendar");

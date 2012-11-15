@@ -39,7 +39,12 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForList<EquipmentListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<EquipmentController>(x => x.AddUpdate(null)).End();
             _builder.TokenForForm<EquipmentDashboardController>(x => x.ViewEquipment(null)).ViewName("EquipmentDashboardView").End();
-
+            _builder.TokenForList<EquipmentTaskCalendarController>(x => x.EquipmentTaskCalendar(null)).ViewName("CalendarView").End();
+            _builder.TokenForList<EquipmentTaskListController>(x => x.ItemList(null)).ViewName("PendingEquipmentTaskListView").End();
+            _builder.TokenForList<EquipmentTaskListController>(x => x.CompletedEquipmentTasksGrid(null)).ViewName("CompletedEquipmentTaskListView").RouteToken("completedequipmenttasks").End();
+            _builder.TokenForForm<EquipmentTaskController>(x => x.AddUpdate(null)).End();
+            _builder.UrlForDisplay<EquipmentTaskController>(x => x.Display(null)).End();
+          
             _builder.TokenForList<CalculatorListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<CalculatorController>(x => x.Calculator(null)).End();
 

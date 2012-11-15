@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ItemList(ViewModel input)
         {
-            var _pendingEquipmentTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("PendingEquipmentTasks");
+            var _pendingEquipmentTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("PendingTasks");
             var url = UrlContext.GetUrlForAction<EquipmentTaskListController>(x => x.EquipmentTasks(null)) + "?RootId=" + input.RootId;
             ListViewModel model = new ListViewModel()
             {
@@ -43,7 +43,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult EquipmentTasks(GridItemsRequestModel input)
         {
-            var _pendingEquipmentTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("PendingEquipmentTasks");
+            var _pendingEquipmentTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("PendingTasks");
             var equipment = _repository.Query<Equipment>( x => x.Tasks.Any(y =>!y.Complete));
             var equipTasks = new List<EquipmentTask>();
             equipment.ForEachItem(x => equipTasks.AddRange(x.GetAllEquipmentTasks(y => !y.Complete)));
@@ -55,7 +55,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult CompletedEquipmentTasksGrid(ViewModel input)
         {
-            var _completedEquipmentTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("CompletedEquipmentTasks");
+            var _completedEquipmentTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("CompletedTasks");
             var url = UrlContext.GetUrlForAction<EquipmentTaskListController>(x => x.CompletedEquipmentTasks(null)) + "?RootId=" + input.RootId;
             ListViewModel model = new ListViewModel()
             {
@@ -68,7 +68,7 @@ namespace KnowYourTurf.Web.Controllers
         }
         public JsonResult CompletedEquipmentTasks(GridItemsRequestModel input)
         {
-            var _completedEquipmentTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("CompletedEquipmentTasks");
+            var _completedEquipmentTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("CompletedTasks");
             var equipment = _repository.Query<Equipment>( x => x.Tasks.Any(y =>!y.Complete));
             var equipTasks = new List<EquipmentTask>();
             equipment.ForEachItem(x => equipTasks.AddRange(x.GetAllEquipmentTasks(y => y.Complete)));

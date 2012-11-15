@@ -42,7 +42,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var equipmentTask = input.EntityId > 0 ? _repository.Find<EquipmentTask>(input.EntityId) : new EquipmentTask();
             equipmentTask.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : equipmentTask.ScheduledDate;
-            var equipmentEquipmentTaskTypes = _selectListItemService.CreateList<EquipmentTaskType>(x => x.Name, x => x.EntityId, true);
+            var equipmentTaskTypes = _selectListItemService.CreateList<EquipmentTaskType>(x => x.Name, x => x.EntityId, true);
             var equipment = _selectListItemService.CreateList<Equipment>(x=>x.Name,x=>x.EntityId,true);
             var availableEmployees = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString() && x.UserRoles.Any(y=>y.Name==UserType.Employee.ToString()))
                 .Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).OrderBy(x=>x.name).ToList();
@@ -54,6 +54,7 @@ namespace KnowYourTurf.Web.Controllers
             model.Employees = new TokenInputViewModel { _availableItems = availableEmployees, selectedItems = selectedEmployees };
             model.Parts = new TokenInputViewModel { _availableItems = availableParts, selectedItems = selectedParts };
             model._EquipmentEntityIdList = equipment;
+            model._TaskTypeEntityIdList = equipmentTaskTypes;
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             model.Popup = input.Popup;
             model.RootId = input.RootId;
