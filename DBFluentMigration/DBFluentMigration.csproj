@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BD319DCA-9D65-4D7B-AAAD-B6A0C2838593}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DBFluentMigration</RootNamespace>
+    <AssemblyName>DBFluentMigration</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentMigrator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentMigrator.1.0.5.0\lib\35\FluentMigrator.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Iteration_0\CreateInitialDB.cs" />
+    <Compile Include="Iteration_1\1_1_Add_Columns_To_Equipment.cs" />
+    <Compile Include="Iteration_1\1_2_Update_Rename_Vendor.cs" />
+    <Compile Include="Iteration_1\1_7_Add_DocumentToEquipment.cs" />
+    <Compile Include="Iteration_1\1_6_Add_EquipmentTask.cs" />
+    <Compile Include="Iteration_1\1_9_Add_PartToEquipmentTask.cs" />
+    <Compile Include="Iteration_1\1_10_Add_PhotoToEquipment.cs" />
+    <Compile Include="Iteration_1\1_11_EquipmentTypeToEquipmentVendor.cs" />
+    <Compile Include="Iteration_1\1_5_Add_EquipmentType.cs" />
+    <Compile Include="Iteration_1\1_4_Add_EquipmentTaskType.cs" />
+    <Compile Include="Iteration_1\1_2_Rename_BaseProductToVendor.cs" />
+    <Compile Include="Iteration_1\1_1_Rename_Category_To_Site.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBFluentMigration.dll.config" />
+    <Compile Include="Iteration_1\1_3_Add_Part.cs" />
+    <None Include="MigrateApp\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
+    <None Include="MigrateApp\Migrate.exe.config" />
+    <None Include="MigrateApp\policy.2.0.Npgsql.config" />
+    <None Include="MigrateApp\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Iteration_1\1_8_Add_EmployeeToEquipmentTask.cs" />
+    <Content Include="MigrateApp\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
+    <Content Include="MigrateApp\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
+    <Content Include="MigrateApp\amd64\sqlceca40.dll" />
+    <Content Include="MigrateApp\amd64\sqlcecompact40.dll" />
+    <Content Include="MigrateApp\amd64\sqlceer40EN.dll" />
+    <Content Include="MigrateApp\amd64\sqlceme40.dll" />
+    <Content Include="MigrateApp\amd64\sqlceqp40.dll" />
+    <Content Include="MigrateApp\amd64\sqlcese40.dll" />
+    <Content Include="MigrateApp\FirebirdSql.Data.FirebirdClient.dll" />
+    <Content Include="MigrateApp\FluentMigrator.dll" />
+    <Content Include="MigrateApp\FluentMigrator.MSBuild.dll" />
+    <Content Include="MigrateApp\FluentMigrator.MSBuild.pdb" />
+    <Content Include="MigrateApp\FluentMigrator.NAnt.dll" />
+    <Content Include="MigrateApp\FluentMigrator.NAnt.pdb" />
+    <Content Include="MigrateApp\FluentMigrator.pdb" />
+    <Content Include="MigrateApp\FluentMigrator.Runner.dll" />
+    <Content Include="MigrateApp\FluentMigrator.Runner.pdb" />
+    <Content Include="MigrateApp\FluentMigrator.xml" />
+    <Content Include="MigrateApp\Migrate.exe" />
+    <Content Include="MigrateApp\Migrate.pdb" />
+    <Content Include="MigrateApp\Mono.Security.dll" />
+    <Content Include="MigrateApp\MySql.Data.dll" />
+    <Content Include="MigrateApp\Npgsql.dll" />
+    <Content Include="MigrateApp\Npgsql.pdb" />
+    <Content Include="MigrateApp\Npgsql.XML" />
+    <Content Include="MigrateApp\Oracle.DataAccess.dll" />
+    <Content Include="MigrateApp\policy.2.0.Npgsql.dll" />
+    <Content Include="MigrateApp\System.Data.SQLite.dll" />
+    <Content Include="MigrateApp\System.Data.SqlServerCe.dll" />
+    <Content Include="MigrateApp\System.Data.SqlServerCe.Entity.dll" />
+    <Content Include="MigrateApp\x86\Microsoft.VC90.CRT\msvcr90.dll" />
+    <Content Include="MigrateApp\x86\Microsoft.VC90.CRT\README_ENU.txt" />
+    <Content Include="MigrateApp\x86\sqlceca40.dll" />
+    <Content Include="MigrateApp\x86\sqlcecompact40.dll" />
+    <Content Include="MigrateApp\x86\sqlceer40EN.dll" />
+    <Content Include="MigrateApp\x86\sqlceme40.dll" />
+    <Content Include="MigrateApp\x86\sqlceqp40.dll" />
+    <Content Include="MigrateApp\x86\sqlcese40.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
