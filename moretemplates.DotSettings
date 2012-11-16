@@ -1,0 +1,115 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Text/@EntryValue">using FluentMigrator;&#xD;
+&#xD;
+namespace $NAMESPACE$&#xD;
+{&#xD;
+    [Migration($VERSION$)]&#xD;
+    public class $CLASS$ : Migration&#xD;
+    {&#xD;
+        public override void Up()&#xD;
+        {      &#xD;
+			Create.Table("$Table$").InSchema("dbo")&#xD;
+               .WithColumn("EntityId").AsInt32().PrimaryKey().Identity().NotNullable()&#xD;
+					$END$      &#xD;
+				.WithColumn("IsDeleted").AsBoolean().Nullable()&#xD;
+                .WithColumn("CompanyId").AsInt32().Nullable()&#xD;
+				.WithColumn("CreatedBy_Id").AsInt32().Nullable()&#xD;
+                .WithColumn("ChangedBy_Id").AsInt32().Nullable()&#xD;
+				.WithColumn("ChangedDate").AsDateTime().Nullable()&#xD;
+                .WithColumn("CreatedDate").AsDateTime().Nullable();&#xD;
+&#xD;
+			Create.ForeignKey("FK_$Table$_oneToMany_User_Created").FromTable("$Table$").InSchema("dbo").ForeignColumns("CreatedBy_Id").ToTable("User").InSchema("dbo").PrimaryColumns("EntityId");&#xD;
+            Create.ForeignKey("FK_$Table$_oneToMany_User_Changed").FromTable("$Table$").InSchema("dbo").ForeignColumns("ChangedBy_Id").ToTable("User").InSchema("dbo").PrimaryColumns("EntityId");&#xD;
+        }&#xD;
+&#xD;
+        public override void Down()&#xD;
+        {         &#xD;
+			Delete.Table("$Table$");&#xD;
+        }&#xD;
+    }&#xD;
+}</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/CustomProperties/=FileName/@EntryIndexedValue">MigrationNewClass</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/CustomProperties/=Extension/@EntryIndexedValue"></s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/CustomProperties/=ValidateFileName/@EntryIndexedValue">False</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=NAMESPACE/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=VERSION/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=VERSION/Expression/@EntryValue">getCurrentTime("yyyyMMddHHmm")</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=VERSION/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=VERSION/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=CLASS/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=Table/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=Table/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Field/=Table/Order/@EntryValue">3</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Text/@EntryValue">using FluentMigrator;&#xD;
+&#xD;
+namespace $NAMESPACE$&#xD;
+{&#xD;
+    [Migration($VERSION$)]&#xD;
+    public class $CLASS$ : Migration&#xD;
+    {&#xD;
+       public override void Up()&#xD;
+        {&#xD;
+            Create.Table("$FirstTable$To$SecondTable$").InSchema("dbo")&#xD;
+                  .WithColumn("$FirstTable$_id").AsInt32().PrimaryKey().NotNullable()&#xD;
+                  .WithColumn("$SecondTable$_id").AsInt32().PrimaryKey().NotNullable();&#xD;
+            &#xD;
+            Create.ForeignKey("FK_$FirstTable$_manyToMany_$SecondTable$")&#xD;
+                 .FromTable("$FirstTable$To$SecondTable$")&#xD;
+                 .InSchema("dbo")&#xD;
+                 .ForeignColumns("$FirstTable$_id")&#xD;
+                 .ToTable("$FirstTable$")&#xD;
+                 .InSchema("dbo")&#xD;
+                 .PrimaryColumns("EntityId");&#xD;
+            Create.ForeignKey("FK_$SecondTable$_manyToMany_$FirstTable$")&#xD;
+                  .FromTable("$FirstTable$To$SecondTable$")&#xD;
+                  .InSchema("dbo")&#xD;
+                  .ForeignColumns("$SecondTable$_id")&#xD;
+                  .ToTable("$SecondTable$")&#xD;
+                  .InSchema("dbo")&#xD;
+                  .PrimaryColumns("EntityId");&#xD;
+        }&#xD;
+&#xD;
+        public override void Down()&#xD;
+        {         &#xD;
+			Delete.Table("$FirstTable$To$SecondTable$");&#xD;
+        }&#xD;
+    }&#xD;
+}</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/CustomProperties/=ValidateFileName/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/CustomProperties/=FileName/@EntryIndexedValue">NewFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=NAMESPACE/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=VERSION/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=VERSION/Expression/@EntryValue">getCurrentTime("yyyyMMddHHmm")</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=VERSION/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=VERSION/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=CLASS/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=FirstTable/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=FirstTable/Expression/@EntryValue">suggestVariableName()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=FirstTable/Order/@EntryValue">3</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=SecondTable/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=SecondTable/Expression/@EntryValue">suggestVariableName()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Field/=SecondTable/Order/@EntryValue">4</s:Int64></wpf:ResourceDictionary>
