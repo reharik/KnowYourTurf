@@ -37,6 +37,8 @@ namespace KnowYourTurf.Web.Menus
                 .CreateTagNode<EmployeeDashboardController>(WebLocalizationKeys.HOME)
                 .CategoryGroupForItteration()
                 .CreateTagNode<FieldListController>(WebLocalizationKeys.FIELDS)
+                .CreateTagNode<CalculatorListController>(WebLocalizationKeys.CALCULATORS)
+
                 .CreateNode(WebLocalizationKeys.TASKS)
                     .HasChildren()
                         .CreateNode(WebLocalizationKeys.TASK_LIST)
@@ -59,7 +61,6 @@ namespace KnowYourTurf.Web.Menus
                     .CreateTagNode<EquipmentTaskCalendarController>(WebLocalizationKeys.EQUIPMENT_TASK_CALENDAR)
                     .EndChildren()
 
-                .CreateTagNode<CalculatorListController>(WebLocalizationKeys.CALCULATORS)
                 .CreateTagNode<WeatherListController>(WebLocalizationKeys.WEATHER)
                 .CreateTagNode<ForumController>(WebLocalizationKeys.FORUM)
                  .CreateNode(WebLocalizationKeys.ADMIN_TOOLS, "tools")
