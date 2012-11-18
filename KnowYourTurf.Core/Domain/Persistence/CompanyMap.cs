@@ -14,9 +14,9 @@ namespace KnowYourTurf.Core.Domain.Persistence
         }
     }
 
-    public class CategoryMap : DomainEntityMap<Category>
+    public class SiteMap : DomainEntityMap<Site>
     {
-        public CategoryMap()
+        public SiteMap()
         {
             Map(x => x.Name);
             Map(x => x.Description);

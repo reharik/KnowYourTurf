@@ -35,8 +35,8 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate(EventViewModel input)
         {
-            // need category to get fields for dropdown;
-            var category = _repository.Find<Category>(input.RootId);
+            // need Site to get fields for dropdown;
+            var category = _repository.Find<Site>(input.RootId);
             var _event = input.EntityId > 0 ? category.GetAllEvents().FirstOrDefault(x=>x.EntityId == input.EntityId) : new Event();
             _event.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : _event.ScheduledDate;
             _event.StartTime = input.StartTime.HasValue ? input.StartTime.Value : _event.StartTime;
@@ -67,7 +67,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Delete(ViewModel input)
         {
-            var category = _repository.Query<Category>(x => x.EntityId == input.RootId)
+            var category = _repository.Query<Site>(x => x.EntityId == input.RootId)
                 .Fetch(x => x.Fields.FirstOrDefault(y => y.Events.Any(z => z.EntityId == input.EntityId))).FirstOrDefault();
 
             var field = category.Fields.FirstOrDefault(y => y.Events.Any(z => z.EntityId == input.EntityId));
@@ -80,7 +80,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(EventViewModel input)
         {
-            var category = _repository.Find<Category>(input.RootId);
+            var category = _repository.Find<Site>(input.RootId);
             var _event = input.EntityId > 0 ? category.GetAllEvents().FirstOrDefault(x => x.EntityId == input.EntityId) : new Event();
             var field = mapToDomain(input, _event);
             var crudManager = _saveEntityService.ProcessSave(field);

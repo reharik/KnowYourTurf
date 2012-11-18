@@ -51,17 +51,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core">
-      <HintPath>..\lib\CC.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Security">
-      <HintPath>..\lib\CC.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Elmah">
       <HintPath>..\lib\Elmah.dll</HintPath>
     </Reference>
@@ -74,10 +63,6 @@
     </Reference>
     <Reference Include="HibernatingRhinos.Profiler.Appender.NHibernateLog4Net">
       <HintPath>..\lib\HibernatingRhinos.Profiler.Appender.NHibernateLog4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlTags, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\HtmlTags.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -217,6 +202,12 @@
     <Compile Include="Controllers\ChemicalListController.cs" />
     <Compile Include="Controllers\CompletedPurchaseOrderListController.cs" />
     <Compile Include="Controllers\CompletedPurchaseOrderDisplayController.cs" />
+    <Compile Include="Controllers\EquipmentVendorController.cs" />
+    <Compile Include="Controllers\EquipmentVendorListController.cs" />
+    <Compile Include="Controllers\EquipmentTaskCalendarController.cs" />
+    <Compile Include="Controllers\EquipmentTaskController.cs" />
+    <Compile Include="Controllers\EquipmentTaskListController.cs" />
+    <Compile Include="Controllers\EquipmentDashboardController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\KnowYourTurfController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
@@ -250,7 +241,6 @@
     <Compile Include="Controllers\ListTypeListsController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\MaterialListController.cs" />
-    <Compile Include="Controllers\OrthogonalController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\PhotoListController.cs" />
     <Compile Include="Controllers\PurchaseOrderCommitController.cs" />
@@ -277,6 +267,10 @@
     <Compile Include="Grids\CalculatorListGrid.cs" />
     <Compile Include="Grids\ChemicalListGrid.cs" />
     <Compile Include="Grids\CompletedTaskGrid.cs" />
+    <Compile Include="Grids\EquipmentVendorListGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskCompletedGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskPendingGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskListGrid.cs" />
     <Compile Include="Grids\DocumentListGrid.cs" />
     <Compile Include="Grids\EmailJobListGrid.cs" />
     <Compile Include="Grids\EmailTemplateListGrid.cs" />
@@ -304,13 +298,15 @@
     <Compile Include="Config\StructureMapControllerFactory.cs" />
     <Compile Include="Config\StructureMapServiceLocator.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\OrthoganalController.cs" />
+    <Compile Include="Controllers\OrthogonalController.cs" />
     <Compile Include="Controllers\PermissionsController.cs" />
     <Compile Include="CustomViewPage.cs" />
     <Compile Include="Menus\HeaderMenu.cs" />
     <Compile Include="Models\BulkAction\BulkActionViewModel.cs" />
     <Compile Include="Models\Calculator\CalculatorViewModel.cs" />
     <Compile Include="Models\Chemical\ChemicalViewModel.cs" />
+    <Compile Include="Models\EquipmentVendor\EquipmentVendorViewModel.cs" />
+    <Compile Include="Models\EquipmentTask\EquipmentTaskViewModel.cs" />
     <Compile Include="Models\EmailJob\EmailJobViewModel.cs" />
     <Compile Include="Models\Employee\UserViewModel.cs" />
     <Compile Include="Models\Enum\ListTypeListViewModel.cs" />
@@ -328,6 +324,9 @@
     <Compile Include="Models\TokenViewModel.cs" />
     <Compile Include="Models\VendorContact\VendorContactViewModel.cs" />
     <Compile Include="Models\Vendor\VendorViewModel.cs" />
+    <Compile Include="Security\Operations.cs" />
+    <Compile Include="Security\Permissions.cs" />
+    <Compile Include="Security\UserGroups.cs" />
     <Compile Include="Services\Calculators\ICalculatorHandler.cs" />
     <Compile Include="Services\Calculators\MaterialsCalculator.cs" />
     <Compile Include="Services\Calculators\OverseedBagsNeededCalculator.cs" />
@@ -568,6 +567,26 @@
     <Content Include="Views\Shared\PhoneTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Core.Utils\CC.Core.Utilities.csproj">
+      <Project>{54970D60-6123-4227-9C72-04CA09BAF7B9}</Project>
+      <Name>CC.Core.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Core\CC.Core.csproj">
+      <Project>{5E0B0CA2-BD5E-4953-A336-2AADC00CD81B}</Project>
+      <Name>CC.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Security\CC.Security.csproj">
+      <Project>{DBA372FE-3D52-45B3-AF82-B37696328764}</Project>
+      <Name>CC.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.UI.Helpers\CC.UI.Helpers.csproj">
+      <Project>{0DBFB19C-E106-4807-AA4B-FC8D128A3438}</Project>
+      <Name>CC.UI.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\HtmlTags\HtmlTags\HtmlTags.csproj">
+      <Project>{F01C84F2-6E41-404C-AC8D-BF189A9EC05B}</Project>
+      <Name>HtmlTags</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
@@ -712,6 +731,13 @@
     <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
     <Content Include="Views\InventoryList\InventoryFertilizerView.cshtml" />
     <Content Include="Views\InventoryList\InventoryMaterialView.cshtml" />
+    <Content Include="Views\EquipmentTaskType\AddUpdate.cshtml" />
+    <Content Include="Views\EquipmentType\AddUpdate.cshtml" />
+    <Content Include="Views\Part\AddUpdate.cshtml" />
+    <Content Include="Views\EquipmentDashboard\EquipmentDashboard.cshtml" />
+    <Content Include="Views\EquipmentTask\EquipmentTaskAddUpdate.cshtml" />
+    <Content Include="Views\EquipmentTask\Display.cshtml" />
+    <Content Include="Views\EquipmentVendor\EquipmentVendorAddUpdate.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>

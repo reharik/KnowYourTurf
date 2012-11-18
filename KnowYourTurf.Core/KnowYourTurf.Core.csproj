@@ -51,24 +51,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core">
-      <HintPath>..\lib\CC.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Core.Utilities">
-      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Security">
-      <HintPath>..\lib\CC.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.UI.Helpers">
-      <HintPath>..\lib\CC.UI.Helpers.dll</HintPath>
-    </Reference>
     <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlTags">
-      <HintPath>..\lib\HtmlTags.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -139,10 +124,12 @@
     <Compile Include="CoreLocalizationKeys.cs" />
     <Compile Include="Domain\BaseProduct.cs" />
     <Compile Include="Domain\Calculator.cs" />
-    <Compile Include="Domain\Category.cs" />
+    <Compile Include="Domain\EquipmentVendor.cs" />
+    <Compile Include="Domain\Site.cs" />
     <Compile Include="Domain\Company.cs" />
     <Compile Include="Domain\Continuation.cs" />
     <Compile Include="Domain\Chemical.cs" />
+    <Compile Include="Domain\EquipmentTask.cs" />
     <Compile Include="Domain\Document.cs" />
     <Compile Include="Domain\DomainEntity.cs" />
     <Compile Include="Domain\EmailJob.cs" />
@@ -153,6 +140,8 @@
     <Compile Include="Domain\Fertilizer.cs" />
     <Compile Include="Domain\Field.cs" />
     <Compile Include="Domain\ListType.cs" />
+    <Compile Include="Domain\Part.cs" />
+    <Compile Include="Domain\Persistence\EquipmentTaskMap.cs" />
     <Compile Include="Domain\Persistence\EmailJobTypeMap.cs" />
     <Compile Include="Domain\Persistence\ListTypeMap.cs" />
     <Compile Include="Domain\Persistence\OperationsMap.cs" />
@@ -174,6 +163,7 @@
     <Compile Include="Domain\Tools\NullSession.cs" />
     <Compile Include="Domain\Tools\NullSessionFactory.cs" />
     <Compile Include="Domain\UserRole.cs" />
+    <Compile Include="Domain\VendorBase.cs" />
     <Compile Include="Domain\Weather.cs" />
     <Compile Include="Html\Expressions\HtmlTagExpressionBase.cs" />
     <Compile Include="Html\Expressions\StandardButtonExpression.cs" />
@@ -246,7 +236,7 @@
     <Compile Include="Domain\PurchaseOrderLineItem.cs" />
     <Compile Include="Domain\Task.cs" />
     <Compile Include="Domain\User.cs" />
-    <Compile Include="Domain\Vendor.cs" />
+    <Compile Include="Domain\FieldVendor.cs" />
     <Compile Include="Domain\VendorContact.cs" />
     <Compile Include="Enumerations\Enumerations.cs" />
     <Compile Include="Html\Expressions\BoundExpression.cs" />
@@ -276,6 +266,28 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attributes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Core.Utils\CC.Core.Utilities.csproj">
+      <Project>{54970D60-6123-4227-9C72-04CA09BAF7B9}</Project>
+      <Name>CC.Core.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Core\CC.Core.csproj">
+      <Project>{5E0B0CA2-BD5E-4953-A336-2AADC00CD81B}</Project>
+      <Name>CC.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Security\CC.Security.csproj">
+      <Project>{DBA372FE-3D52-45B3-AF82-B37696328764}</Project>
+      <Name>CC.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.UI.Helpers\CC.UI.Helpers.csproj">
+      <Project>{0DBFB19C-E106-4807-AA4B-FC8D128A3438}</Project>
+      <Name>CC.UI.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\HtmlTags\HtmlTags\HtmlTags.csproj">
+      <Project>{F01C84F2-6E41-404C-AC8D-BF189A9EC05B}</Project>
+      <Name>HtmlTags</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

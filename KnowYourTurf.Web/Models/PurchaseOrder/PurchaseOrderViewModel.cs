@@ -21,5 +21,7 @@ namespace KnowYourTurf.Web.Models
         public string _removePOLItemUrl { get; set; }
 
         public string _editPOLItemUrl { get; set; }
+
+        public string _editPOLItemTitle { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace KnowYourTurf.Core.Domain
 {
     public class Field : DomainEntity, IPersistableObject
     {
-        public virtual Category Category { get; private set; }
+        public virtual Site Site { get; private set; }
 
         [ValidateNonEmpty]
         public virtual string Name { get; set; }
@@ -76,9 +76,9 @@ namespace KnowYourTurf.Core.Domain
         }
         #endregion
 
-        public virtual void SetCategory(Category category)
+        public virtual void SetSite(Site site)
         {
-            Category = category;
+            Site = site;
         }
     }
 

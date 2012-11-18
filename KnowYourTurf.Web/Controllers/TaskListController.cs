@@ -41,7 +41,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult Tasks(GridItemsRequestModel input)
         {
             var _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("PendingTasks");
-            var tasks = _repository.Query<Task>(x => x.Field.Category.EntityId == input.RootId && !x.Complete);
+            var tasks = _repository.Query<Task>(x => x.Field.Site.EntityId == input.RootId && !x.Complete);
             var items = _dynamicExpressionQuery.PerformQuery(tasks, input.filters);
             var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
@@ -63,7 +63,7 @@ namespace KnowYourTurf.Web.Controllers
         public JsonResult CompletedTasks(GridItemsRequestModel input)
         {
             var _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
-            var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters,x => x.Field.Category.EntityId == input.RootId && x.Complete);
+            var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters,x => x.Field.Site.EntityId == input.RootId && x.Complete);
             var gridItemsViewModel = _completedTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }

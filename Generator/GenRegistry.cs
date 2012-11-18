@@ -1,6 +1,5 @@
 ﻿using CC.Core.Domain;
 using CC.Core.DomainTools;
-using CC.Core.Html.Menu;
 using CC.Core.Localization;
 using CC.Security;
 using CC.Security.Interfaces;

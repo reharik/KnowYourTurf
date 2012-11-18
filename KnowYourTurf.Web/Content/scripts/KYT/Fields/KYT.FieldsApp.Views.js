@@ -75,6 +75,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             id: "displayModule",
             url: this.model.DisplayUrl,
             route: this.model.DisplayRoute,
+            title: this.model.PopupTitle,
             templateUrl: this.model.DisplayUrl+"_Template?Popup=true",
             view: this.options.subViewName?"Display" + this.options.subViewName:"",
             AddUpdateUrl: this.model.AddUpdateUrl,
@@ -93,6 +94,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             id: "editModule",
             route: this.model.AddUpdateRoute,
             url: url,
+            title: this.model.PopupTitle,
             templateUrl: url+"_Template?Popup=true",
             data:data,
             view:this.options.subViewName,
@@ -279,6 +281,73 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
     }
 });
 
+KYT.Views.EquipmentDashboardView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        this.addIdsToModel();
+        var rel = KYT.State.get("Relationships");
+        this.pendingGridView = new KYT.Views.DahsboardGridView({
+            el:"#pendingTaskGridContainer",
+            url:this.model._pendingGridUrl(),
+            gridId:"pendingTaskList",
+            parentId:rel.entityId,
+            rootId: rel.parentId,
+            route:"equipmenttask"
+        });
+        this.completedGridView = new KYT.Views.DahsboardGridView({
+            el:"#completedTaskGridContainer",
+            url:this.model._completedGridUrl(),
+            gridId:"completedTaskList",
+            parentId:rel.entityId,
+            rootId: rel.parentId,
+            gridOptions:{
+                multiselect:false
+            },
+            route:"equipmenttaskdisplay"
+        });
+        this.photoGridView = new KYT.Views.DahsboardGridView({
+            el:"#photoGridContainer",
+            url:this.model._photoGridUrl(),
+            gridId:"photolist",
+            route:"photo",
+            parentId:rel.entityId,
+            rootId: rel.parentId,
+            gridOptions:{
+                multiselect:false
+            },
+            parent:"Equipment"
+        });
+        this.documentGridView = new KYT.Views.DahsboardGridView({
+            el:"#documentGridContainer",
+            url:this.model._documentGridUrl(),
+            gridId:"documentlist",
+            route:"document",
+            parentId:rel.entityId,
+            rootId: rel.parentId,
+            parent:"Equipment"
+        });
+
+        this.pendingGridView.render();
+        this.completedGridView.render();
+        this.photoGridView.render();
+        this.documentGridView.render();
+        this.storeChild(this.pendingGridView);
+        this.storeChild(this.completedGridView);
+        this.storeChild(this.photoGridView);
+        this.storeChild(this.documentGridView);
+    },
+    callbackAction: function(){
+        this.pendingGridView.callbackAction();
+        this.completedGridView.callbackAction();
+        this.photoGridView.callbackAction();
+        this.documentGridView.callbackAction();
+    }
+});
+
 KYT.Views.DahsboardGridView = KYT.Views.View.extend({
      initialize: function(){
         this.options.gridOptions=this.options.gridOptions||{};
@@ -353,7 +422,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     events:{
         'click #commit' : 'commitPO',
         'click #return' : 'cancelPO',
-        'change #editVendor' : 'selectVendor'
+        'change #editFieldVendor' : 'selectVendor'
     },
     initialize:function(){
         KYT.mixin(this, "formMixin");
@@ -414,14 +483,14 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     showPOInfo:function(editable){
         if(editable){
             $("#viewPOID",this.$el).hide();
-            $("#viewVendor",this.$el).hide();
-            $("#editVendor",this.$el).show();
+            $("#viewFieldVendor",this.$el).hide();
+            $("#editFieldVendor",this.$el).show();
             $("#poliGridArea").hide();
             $("#productGridArea").hide();
         }else{
             $("#viewPOID",this.$el).show();
-            $("#viewVendor",this.$el).show();
-            $("#editVendor",this.$el).hide();
+            $("#viewFieldVendor",this.$el).show();
+            $("#editFieldVendor",this.$el).hide();
             this.showVendorProducts();
             this.showPOLI();
         }
@@ -429,7 +498,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     selectVendor:function(){
         if(this.model.VendorEntityId()>0){
             this.showPOInfo(false);
-            this.model.VendorCompany(this.$el.find("#editVendor :selected").text());
+            this.model.VendorCompany(this.$el.find("#editFieldVendor :selected").text());
         }
     },
     addToOrder:function(id){
@@ -461,6 +530,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         var moduleOptions = {
             id:"editPOItem",
             url: this.model._editPOLItemUrl()+"/"+id,
+            title: this.model._editPOLItemTitle(),
             templateUrl: this.model._editPOLItemUrl()+"_Template",
             data:{"ParentId":this.model.EntityId()}
         };
@@ -612,6 +682,26 @@ KYT.Views.FieldListView = KYT.Views.View.extend({
     }
 });
 
+KYT.Views.EquipmentListView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
+        KYT.vent.bind(this.options.gridId+":Redirect",this.showDashboard,this);
+        this.setupBindings();
+    },
+    onClose:function(){
+        KYT.vent.unbind(this.options.gridId+":Redirect",this.showDashboard,this);
+        this.unbindBindings();
+    },
+    showDashboard:function(id){
+        KYT.vent.trigger("route",KYT.generateRoute("equipmentdashboard",id,this.options.ParentId),true);
+    }
+});
+
 KYT.Views.EmployeeListView = KYT.Views.View.extend({
     initialize:function(){
         KYT.mixin(this, "ajaxGridMixin");
@@ -641,6 +731,26 @@ KYT.Views.VendorListView = KYT.Views.View.extend({
     },
     viewLoaded:function(){
          KYT.vent.bind(this.options.gridId+":Redirect",this.showContacts,this);
+        this.setupBindings();
+    },
+    onClose:function(){
+        KYT.vent.unbind(this.options.gridId+":Redirect",this.showContacts,this);
+        this.unbindBindings();
+    },
+    showContacts:function(id){
+        KYT.vent.trigger("route",KYT.generateRoute("vendorcontactlist",0,id),true);
+    }
+});
+
+KYT.Views.EquipmentVendorListView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
+        KYT.vent.bind(this.options.gridId+":Redirect",this.showContacts,this);
         this.setupBindings();
     },
     onClose:function(){
@@ -733,12 +843,20 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         KYT.vent.bind("grid:documentcategorylist:pageLoaded",function(options){
              options.deleteMultipleUrl = this.model._deleteMultipleDocCatUrl();
         },this);
+        KYT.vent.bind("grid:equipmenttasktypelist:pageLoaded",function(options){
+             options.deleteMultipleUrl = this.model._deleteMultipleEquipTaskTypeUrl();
+        },this);
+        KYT.vent.bind("grid:equipmentttypelist:pageLoaded",function(options){
+             options.deleteMultipleUrl = this.model._deleteMultipleEquipTypeUrl();
+        },this);
+        KYT.vent.bind("grid:partlist:pageLoaded",function(options){
+             options.deleteMultipleUrl = this.model._deleteMultiplePartsUrl();
+        },this);
         this.taskTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#taskTypeGridContainer",
             url:this.model._taskTypeGridUrl(),
             gridId:"tasktypelist",
             route:"tasktype"
-
         });
         this.eventTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#eventTypeGridContainer",
@@ -758,21 +876,49 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
             gridId:"documentcategorylist",
             route:"documentcategory"
         });
+        this.equipmentTaskTypeGridView = new KYT.Views.DahsboardGridView({
+            el:"#equipmentTaskTypeGridContainer",
+            url:this.model._equipmentTaskTypeGridUrl(),
+            gridId:"equipmenttasktypelist",
+            route:"equipmenttasktype"
+        });
+        this.equipmentTypeGridView = new KYT.Views.DahsboardGridView({
+            el:"#equipmentTypeGridContainer",
+            url:this.model._equipmentTypeGridUrl(),
+            gridId:"equipmenttypelist",
+            route:"equipmenttype"
+        });
+        this.partGridView = new KYT.Views.DahsboardGridView({
+            el:"#partsGridContainer",
+            url:this.model._partsGridUrl(),
+            gridId:"partlist",
+            route:"part"
+        });
+
 
         this.taskTypeGridView.render();
         this.eventTypeGridView.render();
         this.photoCategoryGridView.render();
         this.documentCategoryGridView.render();
+        this.equipmentTaskTypeGridView.render();
+        this.equipmentTypeGridView.render();
+        this.partGridView.render();
         this.storeChild(this.taskTypeGridView);
         this.storeChild(this.eventTypeGridView);
         this.storeChild(this.photoCategoryGridView);
         this.storeChild(this.documentCategoryGridView);
+        this.storeChild(this.equipmentTaskTypeGridView);
+        this.storeChild(this.equipmentTypeGridView);
+        this.storeChild(this.partGridView);
     },
     callbackAction: function(){
         this.taskTypeGridView.callbackAction();
         this.eventTypeGridView.callbackAction();
         this.photoCategoryGridView.callbackAction();
         this.documentCategoryGridView.callbackAction();
+        this.equipmentTaskTypeGridView.callbackAction();
+        this.equipmentTypeGridView.callbackAction();
+        this.partGridView.callbackAction();
     }
 });
 
@@ -842,6 +988,36 @@ KYT.Views.PendingTaskListView = KYT.Views.View.extend({
 });
 
 KYT.Views.CompletedTaskListView = KYT.Views.View.extend({
+    initialize: function(){
+        this.options.gridId="completedTaskList";
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
+        this.setupBindings();},
+    onClose:function(){this.unbindBindings();}
+});
+
+KYT.Views.PendingEquipmentTaskListView = KYT.Views.View.extend({
+    initialize: function(){
+       this.options.gridId="pendingTaskList";
+        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "setupGridMixin");
+        KYT.mixin(this, "defaultGridEventsMixin");
+        KYT.mixin(this, "setupGridSearchMixin");
+    },
+    viewLoaded:function(){
+        this.setupBindings();},
+    onClose:function(){this.unbindBindings();},
+    callbackAction: function () {
+        this.reloadGrid();
+    }
+
+});
+
+KYT.Views.CompletedEquipmentTaskListView = KYT.Views.View.extend({
     initialize: function(){
         this.options.gridId="completedTaskList";
         KYT.mixin(this, "ajaxGridMixin");

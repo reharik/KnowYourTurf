@@ -29,7 +29,6 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _documentListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.DOCUMENTS.ToString()
             };
-            model.headerButtons.Add("new");
             model.headerButtons.Add("delete");
             return Json(model, JsonRequestBehavior.AllowGet);
         }

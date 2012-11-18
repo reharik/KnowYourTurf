@@ -20,7 +20,7 @@ namespace KnowYourTurf.Core.Domain
         [ValueOf(typeof(UnitType)), ValidateNonEmpty]
         public virtual string UnitType { get; set; }
 
-        public virtual Vendor LastVendor { get;  set; }
+        public virtual FieldVendor LastVendor { get;  set; }
         [ValidateNonEmpty]
         public virtual BaseProduct Product { get; set; }
     }

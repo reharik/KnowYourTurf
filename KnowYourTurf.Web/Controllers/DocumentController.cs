@@ -76,14 +76,17 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(DocumentViewModel input)
         {
-            // change to switch when we add docs to other things.
-            var field = _repository.Find<Field>(input.ParentId);
-            var document = field.Documents.FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Document();
+            var methodInfo = typeof(Repository).GetMethod("Find");
+            var type = typeof(Document).Assembly.GetType("KnowYourTurf.Core.Domain." + input.Var);
+            var genericMethod = methodInfo.MakeGenericMethod(new[] { type });
+            dynamic entity = genericMethod.Invoke(_repository, new[] { (object)input.ParentId });
+
+            var document = ((IEnumerable<Document>)entity.Documents).FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Document();
             document = mapToDomain(input, document);
             document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments");
 
-            field.AddDocument(document);
-            var crudManager = _saveEntityService.ProcessSave(field);
+            entity.AddDocument(document);
+            var crudManager = _saveEntityService.ProcessSave(entity);
 
             var notification = crudManager.Finish();
             return Json(notification, "text/plain");
@@ -93,7 +96,10 @@ namespace KnowYourTurf.Web.Controllers
         {
             document.Name = input.Name;
             document.Description = input.Description;
-            if (document.DocumentCategory == null || document.DocumentCategory.EntityId != input.DocumentCategoryEntityId)
+            if (input.DocumentCategoryEntityId==0)
+            {
+                document.DocumentCategory = null;
+            }else if (document.DocumentCategory == null || document.DocumentCategory.EntityId != input.DocumentCategoryEntityId)
             {
                 document.DocumentCategory = _repository.Find<DocumentCategory>(input.DocumentCategoryEntityId);
             }

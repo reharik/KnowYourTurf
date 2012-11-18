@@ -36,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult Fields(GridItemsRequestModel input)
         {
-            var category = _repository.Find<Category>(input.RootId);
+            var category = _repository.Find<Site>(input.RootId);
             var items = _dynamicExpressionQuery.PerformQuery(category.Fields, input.filters);
             var gridItemsViewModel = _fieldListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
