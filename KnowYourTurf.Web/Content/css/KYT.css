@@ -55,6 +55,7 @@ div.fieldRow textarea
     color: #666666;
     display: block;
     margin: 8px 10px;
+     clear:both;
     /*overflow: hidden;*/
 }
 

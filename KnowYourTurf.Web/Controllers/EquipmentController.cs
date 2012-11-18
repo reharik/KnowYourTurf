@@ -12,6 +12,7 @@ using Castle.Components.Validator;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Services;
 
@@ -45,10 +46,12 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult AddUpdate(ViewModel input)
         {
             var equipment = input.EntityId > 0 ? _repository.Find<Equipment>(input.EntityId) : new Equipment();
-            var vendors = _selectListItemService.CreateList<Vendor>(x => x.Company, x => x.EntityId, true);
+            var vendors = _selectListItemService.CreateList<EquipmentVendor>(x => x.Company, x => x.EntityId, true);
+            var equipmentTypes = _selectListItemService.CreateList<EquipmentType>(x => x.Name, x => x.EntityId, true);
             var model = Mapper.Map<Equipment, EquipmentViewModel>(equipment);
-            
-            model._VendorEntityIdList = vendors;
+
+            model._EquipmentVendorEntityIdList = vendors;
+            model._EquipmentTypeEntityIdList= equipmentTypes;
             model._Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.Save(null));
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -110,20 +113,10 @@ namespace KnowYourTurf.Web.Controllers
             equipment.Name = input.Name;
             equipment.TotalHours = input.TotalHours;
             equipment.Description = input.Description;
-            if (input.DeleteImage)
-            {
-                _fileHandlerService.DeleteFile(equipment.FileUrl);
-                equipment.FileUrl = string.Empty;
-            }
-            if (input.VendorEntityId >0 && (equipment.Vendor == null || equipment.Vendor.EntityId != input.VendorEntityId))
-            {
-                var vendor = _repository.Find<Vendor>(input.VendorEntityId);
-                equipment.SetVendor(vendor);
-            }
-            if (_fileHandlerService.RequsetHasFile())
-            {
-                equipment.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos/Equipment");
-            }
+            equipment.EquipmentType = input.EquipmentTypeEntityId > 0 ? _repository.Find<EquipmentType>(input.EquipmentTypeEntityId) : null;
+            equipment.EquipmentVendor = input.EquipmentVendorEntityId > 0 ? _repository.Find<EquipmentVendor>(input.EquipmentVendorEntityId) : null;
+
+            
             var crudManager = _saveEntityService.ProcessSave(equipment);
             var notification = crudManager.Finish();
             return Json(notification, JsonRequestBehavior.AllowGet);
@@ -132,19 +125,39 @@ namespace KnowYourTurf.Web.Controllers
 
     public class EquipmentViewModel:ViewModel
     {
-        public string _saveUrl { get; set; }
-        public IEnumerable<SelectListItem> _VendorEntityIdList { get; set; }
-
+        public EquipmentViewModel()
+        {
+            _PhotoHeaderButtons = new List<string>();
+            _DocumentHeaderButtons = new List<string>();
+        }
+        
         [ValidateNonEmpty]
         public string Name { get; set; }
         [TextArea]
         public string Description { get; set; }
-        public int VendorEntityId { get; set; }
+        public int EquipmentTypeEntityId { get; set; }
+        public int EquipmentVendorEntityId { get; set; }
         [ValidateNonEmpty]
         [ValidateDecimal]
         public int TotalHours { get; set; }
-        public string FileUrl { get; set; }
         public bool DeleteImage { get; set; }
+    
+        public string _completedGridUrl { get; set; }
+        public string _documentGridUrl { get; set; }
+        public string _photoGridUrl { get; set; }
+        public string _pendingGridUrl { get; set; }
+        public string _AddUpdatePhotoUrl { get; set; }
+        public string _AddUpdateDocumentUrl { get; set; }
+        public string _DeleteMultiplePhotosUrl { get; set; }
+        public string _DeleteMultipleDocumentsUrl { get; set; }
+        public List<string> _PhotoHeaderButtons { get; set; }
+        public List<string> _DocumentHeaderButtons { get; set; }
+        public IEnumerable<SelectListItem> _EquipmentVendorEntityIdList { get; set; }
+        public IEnumerable<SelectListItem> _EquipmentTypeEntityIdList { get; set; }
+        public IEnumerable<PhotoDto> _Photos { get; set; }
+
+        public string _saveUrl { get; set; }
+
     }
 
 }

@@ -46,7 +46,7 @@ namespace KnowYourTurf.Core.Html.Menu
 
         protected IList<MenuItem> _categoryItems = new List<MenuItem>();
         protected int count = 0;
-        protected IList<Category> _categories;
+        protected IList<Site> _categories;
 
         public virtual IKYTMenuBuilder CategoryGroupForItteration()
         {

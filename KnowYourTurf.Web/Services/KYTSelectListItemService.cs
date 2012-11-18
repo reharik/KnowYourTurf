@@ -23,17 +23,17 @@ namespace KnowYourTurf.Web.Services
             if (fieldId > 0 && categoryId == 0)
             {
                 var field = _repository.Find<Field>(fieldId);
-                categoryId = field.Category.EntityId;
+                categoryId = field.Site.EntityId;
             }
             if (categoryId > 0)
             {
-                var category = _repository.Find<Category>(categoryId);
+                var category = _repository.Find<Site>(categoryId);
                 var list = CreateList(category.Fields, x => x.Name, x => x.EntityId, false);
                 groups.groups.Add(new SelectGroup { label = category.Name, children = list });
             }
             else
             {
-                var categories = _repository.FindAll<Category>().AsQueryable().Fetch(x => x.Fields);
+                var categories = _repository.FindAll<Site>().AsQueryable().Fetch(x => x.Fields);
                 categories.ForEachItem(x =>
                 {
                     var list = CreateList(x.Fields, f => f.Name, f => f.EntityId, false);

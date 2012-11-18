@@ -195,9 +195,9 @@ namespace KnowYourTurf.Web.Controllers
             _updateCollectionService.Update(task.Employees, model.Employees, task.AddEmployee, task.RemoveEmployee);
             _updateCollectionService.Update(task.Equipment, model.Equipment, task.AddEquipment, task.RemoveEquipment);
 
-            task.TaskType = _repository.Find<TaskType>(model.TaskTypeEntityId);
-            task.Field = _repository.Find<Field>(model.FieldEntityId);
-            task.InventoryProduct = _repository.Find<InventoryProduct>(model.InventoryProductProductEntityId);
+            task.TaskType = model.TaskTypeEntityId>0? _repository.Find<TaskType>(model.TaskTypeEntityId):null;
+            task.Field = model.FieldEntityId>0?_repository.Find<Field>(model.FieldEntityId):null;
+            task.InventoryProduct = model.InventoryProductProductEntityId>0?_repository.Find<InventoryProduct>(model.InventoryProductProductEntityId):null;
         }
     }
 

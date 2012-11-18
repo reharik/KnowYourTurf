@@ -1,8 +1,7 @@
 using CC.Core.Domain;
 using Castle.Components.Validator;
-using KnowYourTurf.Core.Domain;
 
-namespace KnowYourTurf.Web.Controllers
+namespace KnowYourTurf.Core.Domain
 {
     public class Photo : DomainEntity, IPersistableObject
     {

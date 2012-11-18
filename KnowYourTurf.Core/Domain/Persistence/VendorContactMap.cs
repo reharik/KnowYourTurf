@@ -18,7 +18,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Status);
             Map(x => x.Phone);
             Map(x => x.Notes);
-            References(x => x.Vendor);
+            References(x => x.Vendor).ForeignKey("Vendor_id");
         }
 
       

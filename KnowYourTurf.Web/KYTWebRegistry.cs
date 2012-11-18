@@ -100,6 +100,9 @@ namespace KnowYourTurf.Web
             For<IEntityListGrid<Task>>().Use<TaskListGrid>();
             For<IEntityListGrid<Task>>().Add<CompletedTaskGrid>().Named("CompletedTasks");
             For<IEntityListGrid<Task>>().Add<PendingTaskGrid>().Named("PendingTasks");
+            For<IEntityListGrid<EquipmentTask>>().Use<EquipmentTaskListGrid>();
+            For<IEntityListGrid<EquipmentTask>>().Add<EquipmentTaskCompletedGrid>().Named("CompletedTasks");
+            For<IEntityListGrid<EquipmentTask>>().Add<EquipmentTaskPendingGrid>().Named("PendingTasks");
 
             For<IEntityListGrid<User>>().Use<EmployeeListGrid>();
             For<IEntityListGrid<User>>().Add<AdminListGrid>().Named("Admins");

@@ -39,7 +39,7 @@ namespace KnowYourTurf.Web.Controllers
             VendorContact vendorContact;
             if (input.EntityId > 0)
             {
-                var vendor = _repository.Find<Vendor>(input.ParentId);
+                var vendor = _repository.Find<VendorBase>(input.ParentId);
                 vendorContact = vendor.Contacts.FirstOrDefault(x => x.EntityId == input.EntityId);
             }
             else{ vendorContact = new VendorContact();}
@@ -56,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
       
         public ActionResult Delete(ViewModel input)
         {
-            var vendor = _repository.Find<Vendor>(input.ParentId);
+            var vendor = _repository.Find<VendorBase>(input.ParentId);
             var vendorContact = vendor.Contacts.FirstOrDefault(x => x.EntityId == input.EntityId);
             vendor.RemoveContact(vendorContact);
             var crudManager = _saveEntityService.ProcessSave(vendor);
@@ -66,7 +66,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
-            var vendor = _repository.Find<Vendor>(input.ParentId);
+            var vendor = _repository.Find<VendorBase>(input.ParentId);
             var deleteContacts = new List<VendorContact>();
             vendor.Contacts.Where(x => input.EntityIds.Contains(x.EntityId)).ForEachItem(deleteContacts.Add);
             deleteContacts.ForEachItem(vendor.RemoveContact);
@@ -77,7 +77,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(VendorContactViewModel input)
         {
-            var vendor = _repository.Find<Vendor>(input.ParentId);
+            var vendor = _repository.Find<VendorBase>(input.ParentId);
             VendorContact vendorContact;
             if (input.EntityId > 0)
             {

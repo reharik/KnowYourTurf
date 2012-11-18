@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
+using Castle.Components.Validator;
+using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
+
+namespace KnowYourTurf.Web.Models
+{
+    public class EquipmentTaskViewModel:ViewModel
+    {
+        public IEnumerable<SelectListItem> _TaskTypeEntityIdList { get; set; }
+        public IEnumerable<SelectListItem> _EquipmentEntityIdList { get; set; }
+        public TokenInputViewModel Employees { get; set; }
+        public TokenInputViewModel Parts { get; set; }
+
+        
+        public string _saveUrl { get; set; }
+        public bool Copy { get; set; }
+
+        [ValidateNonEmpty]
+        public int TaskTypeEntityId { get; set; }
+        [ValidateNonEmpty]
+        public DateTime? ScheduledDate { get; set; }
+//        [ValidateNonEmpty]
+//        public string ScheduledStartTimeString { get; set; }
+//        public string ScheduledEndTimeString { get; set; }
+        public string ActualTimeSpent { get; set; }
+        [ValidateNonEmpty]
+        public int EquipmentEntityId { get; set; }
+        [TextArea]
+        public string Notes { get; set; }
+        public bool Complete { get; set; }
+
+    }
+
+    public class DisplayEquipmentTaskViewModel : ViewModel
+    {
+        public string TaskTypeName { get; set; }
+        public DateTime ScheduledDate { get; set; }
+        public string EquipmentName { get; set; }
+        public string Notes { get; set; }
+        public string _AddUpdateUrl { get; set; }
+        public IEnumerable<string> _EmployeeNames { get; set; }
+        public IEnumerable<string> _PartsNames { get; set; }
+    }
+
+    public class AddUpdateEquipmentTaskViewModel : ViewModel
+    {
+        public int Equipment { get; set; }
+        public bool Copy { get; set; }
+        public DateTime? ScheduledDate { get; set; }
+    }
+}
