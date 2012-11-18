@@ -2,13 +2,13 @@
 
 namespace Generator.Commands
 {
-    public class SecurityCommand: IGeneratorCommand
+    public class SecurityUpdateCommand: IGeneratorCommand
     {
         private readonly IPermissions _permissions;
         private readonly IOperations _operations;
         private readonly IUserGroups _userGroups;
 
-        public SecurityCommand(IPermissions permissions,
+        public SecurityUpdateCommand(IPermissions permissions,
             IOperations operations,
             IUserGroups userGroups)
         {
