@@ -19,7 +19,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Phone);
             Map(x => x.Status);
             Map(x => x.Website);
-            HasMany(x => x.Contacts).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
+            HasMany(x => x.Contacts).Access.CamelCaseField(Prefix.Underscore).KeyColumn("Vendor_id").LazyLoad().Cascade.AllDeleteOrphan();
             DiscriminateSubClassesOnColumn<string>("VendorType");
         }
     }
@@ -29,7 +29,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
         public EquipmentVendorMap()
         {
             DiscriminatorValue("EquipmentVendor");
-            HasManyToMany(x => x.EquipmentTypes).Access.CamelCaseField(Prefix.Underscore).LazyLoad();
+            HasManyToMany(x => x.EquipmentTypes).ParentKeyColumn("Vendor_id").Access.CamelCaseField(Prefix.Underscore).LazyLoad();
         }
     }
 
@@ -38,8 +38,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
         public FieldVendorMap()
         {
             DiscriminatorValue("FieldVendor");
-            HasManyToMany(x => x.Products).Access.CamelCaseField(Prefix.Underscore).LazyLoad();
-            HasMany(x => x.PurchaseOrders).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
+            HasManyToMany(x => x.Products).Access.CamelCaseField(Prefix.Underscore).ParentKeyColumn("Vendor_id").LazyLoad();
+            HasMany(x => x.PurchaseOrders).Access.CamelCaseField(Prefix.Underscore).KeyColumn("Vendor_id").LazyLoad().Cascade.AllDeleteOrphan();
         }
     }
 }

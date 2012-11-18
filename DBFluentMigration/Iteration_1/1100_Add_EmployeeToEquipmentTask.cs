@@ -2,7 +2,7 @@
 
 namespace DBFluentMigration.Iteration_1
 {
-    [Migration(1008)]
+    [Migration(1100)]
     public class Add_EmployeeToEquipmentTask : Migration
     {
        public override void Up()

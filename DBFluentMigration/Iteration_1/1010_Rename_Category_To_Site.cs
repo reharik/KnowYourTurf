@@ -2,7 +2,7 @@
 
 namespace DBFluentMigration.Iteration_1
 {
-    [Migration(1001)]
+    [Migration(1010)]
     public class Rename_Category_To_Site : Migration
     {
         public override void Up()

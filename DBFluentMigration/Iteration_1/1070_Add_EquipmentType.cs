@@ -2,12 +2,12 @@
 
 namespace DBFluentMigration.Iteration_1
 {
-    [Migration(1004)]
-    public class Add_EquipmentTaskType : Migration
+    [Migration(1070)]
+    public class Add_EquipmentType : Migration
     {
         public override void Up()
         {
-            Create.Table("EquipmentTaskType").InSchema("dbo")
+            Create.Table("EquipmentType").InSchema("dbo")
                   .WithColumn("EntityId").AsInt32().PrimaryKey().Identity().NotNullable()
                   .WithColumn("Name").AsString().Nullable()
                   .WithColumn("Description").AsString().Nullable()
@@ -20,15 +20,15 @@ namespace DBFluentMigration.Iteration_1
                 .WithColumn("CreatedDate").AsDateTime().Nullable();
 
 
-            Create.ForeignKey("FK_EquipmentTaskType_oneToMany_User_Created")
-                  .FromTable("EquipmentTaskType")
+            Create.ForeignKey("FK_EquipmentType_oneToMany_User_Created")
+                  .FromTable("EquipmentType")
                   .InSchema("dbo")
                   .ForeignColumns("CreatedBy_Id")
                   .ToTable("User")
                   .InSchema("dbo")
                   .PrimaryColumns("EntityId");
-            Create.ForeignKey("FK_EquipmentTaskType_oneToMany_User_Changed")
-                  .FromTable("EquipmentTaskType")
+            Create.ForeignKey("FK_EquipmentType_oneToMany_User_Changed")
+                  .FromTable("EquipmentType")
                   .InSchema("dbo")
                   .ForeignColumns("ChangedBy_Id")
                   .ToTable("User")
@@ -38,7 +38,7 @@ namespace DBFluentMigration.Iteration_1
 
         public override void Down()
         {
-            Delete.Table("EquipmentTaskType");
+            Delete.Table("EquipmentType");
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace DBFluentMigration.Iteration_1
 {
-    [Migration(1011)]
+    [Migration(1130)]
     public class EquipmentTypeToEquipmentVendor : Migration
     {
         public override void Up()

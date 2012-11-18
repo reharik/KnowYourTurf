@@ -39,7 +39,7 @@ namespace KnowYourTurf.Core.Services
                 inventoryProduct.Product =purchaseOrderLineItem.Product;
             }
 
-            inventoryProduct.LastFieldVendor = purchaseOrderLineItem.PurchaseOrder.FieldVendor;
+            inventoryProduct.LastVendor = purchaseOrderLineItem.PurchaseOrder.Vendor;
             if (inventoryProduct.Quantity.HasValue)
                 inventoryProduct.Quantity += purchaseOrderLineItem.TotalReceived.Value;
             else inventoryProduct.Quantity = purchaseOrderLineItem.TotalReceived.Value;

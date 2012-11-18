@@ -2,7 +2,7 @@
 
 namespace DefaultNamespace
 {
-    [Migration(1003)]
+    [Migration(1050)]
     public class Add_Part : Migration
     {
         public override void Up()

@@ -12,7 +12,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Tax);
             Map(x => x.Total);
             Map(x => x.DateReceived);
-            References(x => x.FieldVendor);
+            References(x => x.Vendor);
             HasMany(x => x.LineItems).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
         }
     }

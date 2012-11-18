@@ -241,7 +241,6 @@
     <Compile Include="Controllers\ListTypeListsController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\MaterialListController.cs" />
-    <Compile Include="Controllers\OrthogonalController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\PhotoListController.cs" />
     <Compile Include="Controllers\PurchaseOrderCommitController.cs" />
@@ -299,7 +298,7 @@
     <Compile Include="Config\StructureMapControllerFactory.cs" />
     <Compile Include="Config\StructureMapServiceLocator.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\OrthoganalController.cs" />
+    <Compile Include="Controllers\OrthogonalController.cs" />
     <Compile Include="Controllers\PermissionsController.cs" />
     <Compile Include="CustomViewPage.cs" />
     <Compile Include="Menus\HeaderMenu.cs" />
@@ -325,6 +324,9 @@
     <Compile Include="Models\TokenViewModel.cs" />
     <Compile Include="Models\VendorContact\VendorContactViewModel.cs" />
     <Compile Include="Models\Vendor\VendorViewModel.cs" />
+    <Compile Include="Security\Operations.cs" />
+    <Compile Include="Security\Permissions.cs" />
+    <Compile Include="Security\UserGroups.cs" />
     <Compile Include="Services\Calculators\ICalculatorHandler.cs" />
     <Compile Include="Services\Calculators\MaterialsCalculator.cs" />
     <Compile Include="Services\Calculators\OverseedBagsNeededCalculator.cs" />

@@ -84,7 +84,7 @@ namespace KnowYourTurf.Web.Controllers
         }
         private bool checkDependencies(FieldVendor item, Notification notification)
         {
-            var dependantItems = _repository.Query<PurchaseOrder>(x => x.FieldVendor == item);
+            var dependantItems = _repository.Query<PurchaseOrder>(x => x.Vendor == item);
             if (dependantItems.Any())
             {
                 if (notification.Message.IsEmpty())

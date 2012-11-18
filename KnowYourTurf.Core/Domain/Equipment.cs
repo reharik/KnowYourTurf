@@ -11,8 +11,6 @@ namespace KnowYourTurf.Core.Domain
 {
     public class Equipment : DomainEntity, IPersistableObject
     {
-        public virtual Site Site { get; private set; }
-
         [ValidateNonEmpty]
         public virtual string Name { get; set; }
         [TextArea]
@@ -25,6 +23,8 @@ namespace KnowYourTurf.Core.Domain
         [ValidateNonEmpty]
         [ValidateDecimal]
         public virtual double TotalHours { get; set; }
+        [ValidateNonEmpty]
+        public virtual EquipmentType EquipmentType { get; set; }
         
         /// <summary>
         /// Aggregate Root that should not be modified through Equipment
@@ -77,11 +77,6 @@ namespace KnowYourTurf.Core.Domain
             _photos.Add(fieldPhoto);
         }
         #endregion
-
-        public virtual void SetSite(Site site)
-        {
-            Site = site;
-        }
 
         public virtual IEnumerable<EquipmentTask> GetAllEquipmentTasks(Func<EquipmentTask,bool> _where = null )
         {

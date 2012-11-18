@@ -9,6 +9,7 @@ using CC.Core.DomainTools;
 using CC.Core.Html;
 using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using StructureMap;
@@ -53,15 +54,17 @@ namespace KnowYourTurf.Web.Controllers
             var photoUrl = UrlContext.GetUrlForAction<EquipmentDashboardController>(x => x.PhotoGrid(null)) + "?ParentId=" + input.EntityId;
             var docuemntUrl = UrlContext.GetUrlForAction<EquipmentDashboardController>(x => x.DocumentGrid(null)) + "?ParentId=" + input.EntityId;
             var equipmentTypes = _selectListItemService.CreateList<EquipmentType>(x => x.Name, x => x.EntityId, true);
+            var vendors = _selectListItemService.CreateList<EquipmentVendor>(x => x.Company, x => x.EntityId, true);
             
             var model = Mapper.Map<Equipment, EquipmentViewModel>(equipment);
             model._EquipmentTypeEntityIdList = equipmentTypes;
+            model._EquipmentVendorEntityIdList = vendors;
             model._pendingGridUrl = url;
             model._completedGridUrl = completeUrl;
             model._documentGridUrl = docuemntUrl;
             model._photoGridUrl = photoUrl;
             model._saveUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.Save(null));
-            model._Title = WebLocalizationKeys.FIELD_INFORMATION.ToString();
+            model._Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString();
             model._Photos = equipment.Photos.Select(x => new PhotoDto {FileUrl = x.FileUrl});
 
             return Json(model,JsonRequestBehavior.AllowGet);

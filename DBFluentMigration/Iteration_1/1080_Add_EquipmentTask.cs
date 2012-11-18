@@ -2,7 +2,7 @@
 
 namespace DBFluentMigration.Iteration_1
 {
-    [Migration(1006)]
+    [Migration(1080)]
     public class Add_EquipmentTask : Migration
     {
         public override void Up()
@@ -13,7 +13,8 @@ namespace DBFluentMigration.Iteration_1
                 .WithColumn("ActualTimeSpent").AsString().Nullable()
                 .WithColumn("Notes").AsString().Nullable()
                 .WithColumn("Deleted").AsBoolean().Nullable()
-                .WithColumn("EquipmentTaskType_id").AsInt32().Nullable()
+                .WithColumn("Complete").AsBoolean().Nullable()
+                .WithColumn("TaskType_id").AsInt32().Nullable()
                 .WithColumn("Equipment_id").AsInt32().Nullable()
                 .WithColumn("IsDeleted").AsBoolean().Nullable()
                 .WithColumn("CompanyId").AsInt32().Nullable()
@@ -25,7 +26,7 @@ namespace DBFluentMigration.Iteration_1
             Create.ForeignKey("FK_EquipmentTask_oneToMany_EquipmentTaskType")
                   .FromTable("EquipmentTask")
                   .InSchema("dbo")
-                  .ForeignColumns("EquipmentTaskType_id")
+                  .ForeignColumns("TaskType_id")
                   .ToTable("EquipmentTaskType")
                   .InSchema("dbo")
                   .PrimaryColumns("EntityId");

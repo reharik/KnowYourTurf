@@ -9,7 +9,7 @@ namespace KnowYourTurf.Core.Domain
     public class PurchaseOrder : DomainEntity, IPersistableObject
     {
         [ValidateNonEmpty]
-        public virtual FieldVendor FieldVendor { get; set; }
+        public virtual FieldVendor Vendor { get; set; }
         [ValidateDecimalAttribute]
         public virtual double? SubTotal { get; set; }
         [ValidateDecimalAttribute]

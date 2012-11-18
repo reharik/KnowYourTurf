@@ -1,6 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Text/@EntryValue">using FluentMigrator;&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Description/@EntryValue">ManyToManyMigration</s:String>
+  <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Text/@EntryValue">using FluentMigrator;&#xD;
 &#xD;
 namespace $NAMESPACE$&#xD;
 {&#xD;
@@ -31,8 +32,8 @@ namespace $NAMESPACE$&#xD;
 }</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Reformat/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/CustomProperties/=FileName/@EntryIndexedValue">MigrationNewClass</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/CustomProperties/=Extension/@EntryIndexedValue"></s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/CustomProperties/=FileName/@EntryIndexedValue">ManyToManyMigration</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/CustomProperties/=ValidateFileName/@EntryIndexedValue">False</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
@@ -92,7 +93,8 @@ namespace $NAMESPACE$&#xD;
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/CustomProperties/=ValidateFileName/@EntryIndexedValue">False</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/CustomProperties/=FileName/@EntryIndexedValue">NewFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5D0ACB0CD26C77499A8919AC0096C47F/Description/@EntryValue">DomainEntityMigrator</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/CustomProperties/=FileName/@EntryIndexedValue">DomainEntityMigrator</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F37E98954554524993D18A54709D4ED2/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>

@@ -296,7 +296,7 @@ KYT.Views.EquipmentDashboardView = KYT.Views.View.extend({
             gridId:"pendingTaskList",
             parentId:rel.entityId,
             rootId: rel.parentId,
-            route:"task"
+            route:"equipmenttask"
         });
         this.completedGridView = new KYT.Views.DahsboardGridView({
             el:"#completedTaskGridContainer",
@@ -307,7 +307,7 @@ KYT.Views.EquipmentDashboardView = KYT.Views.View.extend({
             gridOptions:{
                 multiselect:false
             },
-            route:"taskdisplay"
+            route:"equipmenttaskdisplay"
         });
         this.photoGridView = new KYT.Views.DahsboardGridView({
             el:"#photoGridContainer",

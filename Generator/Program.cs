@@ -17,17 +17,15 @@ namespace Generator
             try
             {
                 Initialize();
-                //                var command = new EnterStringsCommand(ObjectFactory.GetInstance<ILocalizedStringLoader>(), ObjectFactory.GetInstance<IRepository>());
-                //var command = new RebuildDatabaseCommand(ObjectFactory.GetInstance<ISessionSource>(), ObjectFactory.GetInstance<IRepository>(), ObjectFactory.GetInstance<ILocalizedStringLoader>(),ObjectFactory.GetInstance<PersistenceModel>());
                 IGeneratorCommand command = null;
 
                 var commands = ObjectFactory.GetAllInstances<IGeneratorCommand>();
-                if (args.Length == 0) displayHelpAndExit(args, commands);
+//                if (args.Length == 0) displayHelpAndExit(args, commands);
                 command = commands.FirstOrDefault(c => c.toCanonicalCommandName() == args[0].toCanonicalCommandName());
                 if (command == null) //displayHelpAndExit(args, commands);
                 {
                     displayHelpAndExit(args,commands);
-//                    command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
+//                    command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("dataload");
                  //   command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("rebuilddatabase");
                 }
                 command.Execute(args);

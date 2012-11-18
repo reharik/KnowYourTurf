@@ -51,16 +51,19 @@ namespace Generator
         private Field _field4;
         private Task _task3;
         private Task _task4;
+        private EquipmentType _equipmentType1;
 
-        public void Load()
+        public void Load(IRepository repository)
         {
+            _repository = repository;
             //genregistry has no companyfilter and special getcompanyidservice
-            _repository = ObjectFactory.Container.GetInstance<IRepository>();
-            _repository.UnitOfWork.Initialize();
+//            _repository = ObjectFactory.Container.GetInstance<IRepository>();
+//            _repository.UnitOfWork.Initialize();
             _purchaseOrderLineItemService = new PurchaseOrderLineItemService(null);
 
             CreateCompany();
             LoadForCompany(_company.EntityId);
+//            LoadForCompany(_company.EntityId);
             
             _repository.UnitOfWork.Commit();
 
@@ -73,6 +76,7 @@ namespace Generator
 
             CreateEmployee(companyId);
             CreateField(companyId);
+            CreateEquipmentType(companyId);
             CreateEquipment(companyId);
             CreateChemical(companyId);
             CreateMaterials(companyId);
@@ -80,7 +84,7 @@ namespace Generator
             CreateInventory(companyId);
             CreateTask(companyId);
             CreateEventType(companyId);
-
+//
             CreateVendor(companyId);
             CreateVendorContact(companyId);
             CreateCalculator(companyId);
@@ -219,16 +223,30 @@ namespace Generator
             _repository.Save(_company);
         }
 
+        private void CreateEquipmentType(int companyId)
+        {
+            _equipmentType1 = new EquipmentType
+                                  {
+                                      Name = "type 1",
+                                      CompanyId = companyId,
+                                      Status = "Active"
+                                  };
+            _repository.Save(_equipmentType1);
+        }
+
+
         private void CreateEquipment(int companyId)
         {
             _equip1 = new Equipment
                              {
                                  Name = "Truck",
+                                 EquipmentType = _equipmentType1,
                                  CompanyId = companyId
                              };
             _equip2 = new Equipment
                              {
                                  Name = "Plane",
+                                 EquipmentType = _equipmentType1,
                                  CompanyId = companyId
                              };
             _repository.Save(_equip1);
@@ -602,7 +620,7 @@ namespace Generator
                 Notes = "notes2",
                 CompanyId = companyId
             };
-
+//
             _vendor1.AddProduct(_fertilizer1);
             _vendor1.AddProduct(_fertilizer2);
             _vendor2.AddProduct(_fertilizer1);
@@ -627,7 +645,7 @@ namespace Generator
                 CreatedDate = DateTime.Parse("1/5/2009"),
                 CompanyId = companyId
             };
-            purchaseOrder1.FieldVendor = _vendor1;
+            purchaseOrder1.Vendor = _vendor1;
             var poli1 = new PurchaseOrderLineItem()
             {
                 Price = 10,

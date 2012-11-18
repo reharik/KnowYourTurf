@@ -109,7 +109,7 @@ namespace KnowYourTurf.Web.Controllers
             }
             else
             {
-                purchaseOrder = new PurchaseOrder {FieldVendor = vendor};
+                purchaseOrder = new PurchaseOrder {Vendor = vendor};
                 vendor.AddPurchaseOrder(purchaseOrder);
             }
             var baseProduct = _repository.Find<BaseProduct>(input.EntityId);

@@ -2,7 +2,7 @@
 
 namespace DBFluentMigration.Iteration_1
 {
-    [Migration(1010)]
+    [Migration(1120)]
     public class PhotoToEquipment : Migration
     {
         public override void Up()

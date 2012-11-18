@@ -29,7 +29,7 @@ namespace KnowYourTurf.Core.Domain
         {
             if (!purchaseOrder.IsNew() && _purchaseOrders.Contains(purchaseOrder)) return;
             _purchaseOrders.Add(purchaseOrder);
-            purchaseOrder.FieldVendor =this;
+            purchaseOrder.Vendor =this;
         }
         public virtual void RemovePurchaseOrder(PurchaseOrder purchaseOrder) { _purchaseOrders.Remove(purchaseOrder); }
         public virtual IEnumerable<PurchaseOrder> GetPurchaseOrderInProcess() { return _purchaseOrders.Where(x => !x.Completed); }

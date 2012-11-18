@@ -56,7 +56,7 @@ namespace KnowYourTurf.Web.Menus
                         .CreateNode(WebLocalizationKeys.EQUIPMENT_TASK_LISTS)
                             .HasChildren()
                                 .CreateTagNode<EquipmentTaskListController>(WebLocalizationKeys.EQUIPMENT_TASKS)
-                                .CreateTagNode<EquipmentTaskListController>(WebLocalizationKeys.COMPLETED).Route("completedequipmenttasks")
+                                .CreateTagNode<EquipmentTaskListController>(WebLocalizationKeys.COMPLETED_EQUIPMENT_TASKS).Route("completedequipmenttasks")
                             .EndChildren()
                     .CreateTagNode<EquipmentTaskCalendarController>(WebLocalizationKeys.EQUIPMENT_TASK_CALENDAR)
                     .EndChildren()

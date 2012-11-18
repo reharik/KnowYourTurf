@@ -2,7 +2,7 @@
 
 namespace DBFluentMigration.Iteration_1
 {
-    [Migration(1012)]
+    [Migration(1020)]
     public class Rename_BaseProductToVendor : Migration
     {
         public override void Up()

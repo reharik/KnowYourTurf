@@ -44,22 +44,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Iteration_0\CreateInitialDB.cs" />
-    <Compile Include="Iteration_1\1_1_Add_Columns_To_Equipment.cs" />
-    <Compile Include="Iteration_1\1_2_Update_Rename_Vendor.cs" />
-    <Compile Include="Iteration_1\1_7_Add_DocumentToEquipment.cs" />
-    <Compile Include="Iteration_1\1_6_Add_EquipmentTask.cs" />
-    <Compile Include="Iteration_1\1_9_Add_PartToEquipmentTask.cs" />
-    <Compile Include="Iteration_1\1_10_Add_PhotoToEquipment.cs" />
-    <Compile Include="Iteration_1\1_11_EquipmentTypeToEquipmentVendor.cs" />
-    <Compile Include="Iteration_1\1_5_Add_EquipmentType.cs" />
-    <Compile Include="Iteration_1\1_4_Add_EquipmentTaskType.cs" />
-    <Compile Include="Iteration_1\1_2_Rename_BaseProductToVendor.cs" />
-    <Compile Include="Iteration_1\1_1_Rename_Category_To_Site.cs" />
+    <Compile Include="Iteration_1\1075_Add_Columns_To_Equipment.cs" />
+    <Compile Include="Iteration_1\1030_Update_Rename_Vendor.cs" />
+    <Compile Include="Iteration_1\1090_Add_DocumentToEquipment.cs" />
+    <Compile Include="Iteration_1\1080_Add_EquipmentTask.cs" />
+    <Compile Include="Iteration_1\1110_Add_PartToEquipmentTask.cs" />
+    <Compile Include="Iteration_1\1120_Add_PhotoToEquipment.cs" />
+    <Compile Include="Iteration_1\1130_EquipmentTypeToEquipmentVendor.cs" />
+    <Compile Include="Iteration_1\1070_Add_EquipmentType.cs" />
+    <Compile Include="Iteration_1\1060_Add_EquipmentTaskType.cs" />
+    <Compile Include="Iteration_1\1020_Rename_BaseProductToVendor.cs" />
+    <Compile Include="Iteration_1\1010_Rename_Category_To_Site.cs" />
+    <Compile Include="Iteration_1\1150_Alter_LotsOfTables_FK_Nullable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DBFluentMigration.dll.config" />
-    <Compile Include="Iteration_1\1_3_Add_Part.cs" />
+    <Compile Include="Iteration_1\1050_Add_Part.cs" />
     <None Include="MigrateApp\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="MigrateApp\Migrate.exe.config" />
     <None Include="MigrateApp\policy.2.0.Npgsql.config" />
@@ -67,7 +68,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Iteration_1\1_8_Add_EmployeeToEquipmentTask.cs" />
+    <Compile Include="Iteration_1\1100_Add_EmployeeToEquipmentTask.cs" />
     <Content Include="MigrateApp\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
     <Content Include="MigrateApp\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
     <Content Include="MigrateApp\amd64\sqlceca40.dll" />
@@ -107,7 +108,16 @@
     <Content Include="MigrateApp\x86\sqlceqp40.dll" />
     <Content Include="MigrateApp\x86\sqlcese40.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Security\CC.Security.csproj">
+      <Project>{DBA372FE-3D52-45B3-AF82-B37696328764}</Project>
+      <Name>CC.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KnowYourTurf.Web\KnowYourTurf.Web.csproj">
+      <Project>{67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2}</Project>
+      <Name>KnowYourTurf.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

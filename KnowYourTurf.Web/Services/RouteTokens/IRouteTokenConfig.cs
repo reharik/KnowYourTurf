@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Web.Areas.Portfolio.Controllers;
 using KnowYourTurf.Web.Controllers;
 using KnowYourTurf.Web.Services.RouteTokens;
 

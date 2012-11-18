@@ -2,7 +2,7 @@
 
 namespace a
 {
-    [Migration(1007)]
+    [Migration(1090)]
     public class Add_DocumentToEquipment : Migration
     {
         public override void Up()

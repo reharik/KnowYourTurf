@@ -13,8 +13,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Model);
             Map(x => x.SerialNumber);
             Map(x => x.WarrentyInfo);
-            References(x => x.Site);
-            References(x => x.EquipmentVendor);
+            References(x => x.EquipmentVendor).Column("Vendor_id");
+            References(x => x.EquipmentType);
             HasMany(x => x.Tasks).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
             HasManyToMany(x => x.Documents).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
             HasManyToMany(x => x.Photos).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
