@@ -62,6 +62,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.UI.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
@@ -132,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandRegistry.cs" />
+    <Compile Include="Commands\Copy of SecurityCommand.cs" />
     <Compile Include="Commands\DataLoadCommand.cs" />
     <Compile Include="Commands\DefaultSecuritySetupCommand.cs" />
     <Compile Include="Commands\DropReaddDatabaseCommand.cs" />
@@ -179,18 +196,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CannibalCoder\CC.Core\CC.Core.csproj">
-      <Project>{5E0B0CA2-BD5E-4953-A336-2AADC00CD81B}</Project>
-      <Name>CC.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CannibalCoder\CC.Security\CC.Security.csproj">
-      <Project>{DBA372FE-3D52-45B3-AF82-B37696328764}</Project>
-      <Name>CC.Security</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CannibalCoder\CC.UI.Helpers\CC.UI.Helpers.csproj">
-      <Project>{0DBFB19C-E106-4807-AA4B-FC8D128A3438}</Project>
-      <Name>CC.UI.Helpers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>

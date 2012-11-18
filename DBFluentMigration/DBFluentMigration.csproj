@@ -109,10 +109,6 @@
     <Content Include="MigrateApp\x86\sqlcese40.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CannibalCoder\CC.Security\CC.Security.csproj">
-      <Project>{DBA372FE-3D52-45B3-AF82-B37696328764}</Project>
-      <Name>CC.Security</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KnowYourTurf.Web\KnowYourTurf.Web.csproj">
       <Project>{67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2}</Project>
       <Name>KnowYourTurf.Web</Name>
