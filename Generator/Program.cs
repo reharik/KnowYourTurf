@@ -20,7 +20,7 @@ namespace Generator
                 IGeneratorCommand command = null;
 
                 var commands = ObjectFactory.GetAllInstances<IGeneratorCommand>();
-//                if (args.Length == 0) displayHelpAndExit(args, commands);
+                if (args.Length == 0) displayHelpAndExit(args, commands);
                 command = commands.FirstOrDefault(c => c.toCanonicalCommandName() == args[0].toCanonicalCommandName());
                 if (command == null) //displayHelpAndExit(args, commands);
                 {

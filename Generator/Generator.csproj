@@ -148,7 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandRegistry.cs" />
-    <Compile Include="Commands\Copy of SecurityCommand.cs" />
+    <Compile Include="Commands\SecurityUpdateCommand.cs" />
     <Compile Include="Commands\DataLoadCommand.cs" />
     <Compile Include="Commands\DefaultSecuritySetupCommand.cs" />
     <Compile Include="Commands\DropReaddDatabaseCommand.cs" />
@@ -196,6 +196,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DBFluentMigration\DBFluentMigration.csproj">
+      <Project>{BD319DCA-9D65-4D7B-AAAD-B6A0C2838593}</Project>
+      <Name>DBFluentMigration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
