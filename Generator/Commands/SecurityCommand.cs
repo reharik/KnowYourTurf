@@ -1,4 +1,6 @@
-﻿using KnowYourTurf.Web.Security;
+﻿using CC.Security.Interfaces;
+using DBFluentMigration.Iteration_0;
+using KnowYourTurf.Web.Security;
 
 namespace Generator.Commands
 {
@@ -7,14 +9,16 @@ namespace Generator.Commands
         private readonly IPermissions _permissions;
         private readonly IOperations _operations;
         private readonly IUserGroups _userGroups;
+        private readonly IAuthorizationRepository _authorizationRepository;
 
         public SecurityCommand(IPermissions permissions,
             IOperations operations,
-            IUserGroups userGroups)
+            IUserGroups userGroups, IAuthorizationRepository authorizationRepository)
         {
             _permissions = permissions;
             _operations = operations;
             _userGroups = userGroups;
+            _authorizationRepository = authorizationRepository;
         }
 
         public string Description { get { return "Sets Permissions to initial state"; } }
@@ -23,12 +27,8 @@ namespace Generator.Commands
         {
             _userGroups.CreateUserGroups();
             _userGroups.AssociateAllUsersWithTheirTypeGroup();
-            _operations.CreateControllerOptions();
-            _operations.CreateMenuItemOptions();
-            _operations.CreateMiscItems();
-            _permissions.GrantAdminPermissions();
-            _permissions.GrantFacilitiesPermissions();
-            _permissions.GrantEmployeePermissions();
+            new CreateInitialOperations(_operations).Update();
+            new CreateInitialPermissions(_authorizationRepository,_permissions).Update();
         }
     }
 }
