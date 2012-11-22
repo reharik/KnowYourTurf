@@ -585,13 +585,6 @@
     <Content Include="Views\Shared\PhoneTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
-      <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
-      <Name>KnowYourTurf.Core</Name>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -738,6 +731,12 @@
     <Content Include="Views\EquipmentVendor\EquipmentVendorAddUpdate.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.CoreBuild.csproj">
+      <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
+      <Name>KnowYourTurf.CoreBuild</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
