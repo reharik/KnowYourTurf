@@ -249,9 +249,6 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
             route:"photo",
             parentId:rel.entityId,
             rootId: rel.parentId,
-            gridOptions:{
-                multiselect:false
-            },
             parent:"Field"
         });
         this.documentGridView = new KYT.Views.DahsboardGridView({
@@ -316,9 +313,6 @@ KYT.Views.EquipmentDashboardView = KYT.Views.View.extend({
             route:"photo",
             parentId:rel.entityId,
             rootId: rel.parentId,
-            gridOptions:{
-                multiselect:false
-            },
             parent:"Equipment"
         });
         this.documentGridView = new KYT.Views.DahsboardGridView({
@@ -368,6 +362,17 @@ KYT.Views.DahsboardGridView = KYT.Views.View.extend({
     },
     displayItem:function(id){
         KYT.vent.trigger("route",KYT.generateRoute(this.options.route, id, this.options.parentId,this.options.rootId),true);
+    },
+    deleteItems: function () {
+        if (confirm("Are you sure you would like to delete this Item?")) {
+            var ids = cc.gridMultiSelect.getCheckedBoxes(this.options.gridId);
+            KYT.repository.ajaxGet(this.options.deleteMultipleUrl,
+                $.param({ "EntityIds": ids,
+                    "ParentId":this.options.parentId,
+                    "RootId":this.options.rootId,
+                    "Var":this.options.parent}, true))
+                .done($.proxy(function () { this.reloadGrid() }, this));
+        }
     },
     onClose:function(){
         this.unbindBindings();

@@ -23,7 +23,7 @@ namespace KnowYourTurf.Web.Models
         [ValidateNonEmpty]
         public int TaskTypeEntityId { get; set; }
         [ValidateNonEmpty]
-        public DateTime? ScheduledDate { get; set; }
+        public string ScheduledDate { get; set; }
         [ValidateNonEmpty]
         public string ScheduledStartTimeString { get; set; }
         public string ScheduledEndTimeString { get; set; }
@@ -62,7 +62,7 @@ namespace KnowYourTurf.Web.Models
         public string Product { get; set; }
         public double Quantity { get; set; }
         public bool Copy { get; set; }
-        public DateTime? ScheduledDate { get; set; }
-        public DateTime? ScheduledStartTime { get; set; }
+        public string ScheduledDate { get; set; }
+        public string ScheduledStartTime { get; set; }
     }
 }

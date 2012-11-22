@@ -32,7 +32,7 @@ namespace KnowYourTurf.Web.Security
         {
             _authorizationRepository = authorizationRepository;
             _permissionsBuilderService = permissionsBuilderService;
-            _permissionsService = permissionsService;
+//            _permissionsService = permissionsService;
         }
 
         

@@ -30,13 +30,12 @@ namespace KnowYourTurf.Web.Security
         public Operations(IAuthorizationRepository authorizationRepository)
         {
             _authorizationRepository = authorizationRepository;
-            _allOperations = _authorizationRepository.GetAllOperations();
         }
-
-        
 
         public void CreateOperationForControllerType(string controllerName) 
         {
+            if(_allOperations==null) _allOperations = _authorizationRepository.GetAllOperations();
+
             if (!_allOperations.Any(x => x.Name == "/" + controllerName))
             {
                 _authorizationRepository.CreateOperation("/" + controllerName);
@@ -45,6 +44,7 @@ namespace KnowYourTurf.Web.Security
 
         public void CreateOperationForMenuItem(string menuItemName)
         {
+            if (_allOperations == null) _allOperations = _authorizationRepository.GetAllOperations();
             if (!_allOperations.Any(x => x.Name == "/MenuItem/" + menuItemName))
             {
                 _authorizationRepository.CreateOperation("/MenuItem/" + menuItemName);
@@ -53,6 +53,7 @@ namespace KnowYourTurf.Web.Security
 
         public void CreateOperation(string operation)
         {
+            if (_allOperations == null) _allOperations = _authorizationRepository.GetAllOperations();
             if (!_allOperations.Any(x => x.Name == operation))
             {
                 _authorizationRepository.CreateOperation(operation);

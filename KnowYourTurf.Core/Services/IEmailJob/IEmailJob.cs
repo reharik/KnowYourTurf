@@ -8,6 +8,7 @@ using CC.Core;
 using CC.Core.DomainTools;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
+using NHibernate.Linq;
 
 namespace KnowYourTurf.Core.Services.IEmailJob
 {
@@ -28,7 +29,7 @@ namespace KnowYourTurf.Core.Services.IEmailJob
         public void Execute()
         {
             var factory = new MergedEmailFactory(new TemplateParser());
-            var employees = _repository.Query<User>(x => x.UserRoles.Any(r=>r.Name == UserType.Employee.ToString()));
+            var employees = _repository.Query<User>(x => x.UserRoles.Any(r=>r.Name == UserType.Employee.ToString())).Fetch(x=>x.Tasks);
             var emailTemplate = _repository.Query<EmailTemplate>(x => x.Name == "Daily Tasks List").FirstOrDefault();
             employees.ForEachItem(x =>
                                {

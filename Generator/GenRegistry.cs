@@ -31,7 +31,7 @@ namespace KnowYourTurf.Web
                 x.TheCallingAssembly();
                 x.ConnectImplementationsToTypesClosing(typeof(IEntityListGrid<>));
                 x.AssemblyContainingType(typeof(CoreLocalizationKeys));
-                x.AssemblyContainingType(typeof(WebLocalizationKeys));
+//                x.AssemblyContainingType(typeof(WebLocalizationKeys));
                 x.AssemblyContainingType<Entity>();
                 x.AssemblyContainingType<IUser>();
                 x.AssemblyContainingType<HtmlConventionRegistry>(); 

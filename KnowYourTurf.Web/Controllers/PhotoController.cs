@@ -55,25 +55,25 @@ namespace KnowYourTurf.Web.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-
-        public ActionResult Delete(ViewModel input)
-        {
-            var photo = _repository.Find<Photo>(input.EntityId);
-            _repository.HardDelete(photo);
-            _repository.UnitOfWork.Commit();
-            return null;
-        }
-
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
+            var methodInfo = typeof(Repository).GetMethod("Find");
+            var type = typeof(Photo).Assembly.GetType("KnowYourTurf.Core.Domain." + input.Var);
+            var genericMethod = methodInfo.MakeGenericMethod(new[] { type });
+            dynamic entity = genericMethod.Invoke(_repository, new[] { (object)input.ParentId });
+            var photoUrls = new List<string>();
             input.EntityIds.ForEachItem(x =>
             {
-                var item = _repository.Find<Photo>(x);
-                _fileHandlerService.DeleteFile(item.FileUrl);
-                _repository.HardDelete(item);
+                var photo = ((IEnumerable<Photo>)entity.Photos).FirstOrDefault(y => y.EntityId == x);
+                photoUrls.Add(photo.FileUrl);
+                entity.RemovePhoto(photo);
             });
-            _repository.Commit();
-            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+            var notification = _saveEntityService.ProcessSave(entity).Finish();
+            if(notification.Success)
+            {
+                photoUrls.ForEachItem(_fileHandlerService.DeleteFile);
+            }
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Save(PhotoViewModel input)
@@ -85,7 +85,7 @@ namespace KnowYourTurf.Web.Controllers
 
             var photo = ((IEnumerable<Photo>)entity.Photos).FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Photo();
             photo = mapToDomain(input, photo);
-            photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos");
+            photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos", entity.CompanyId);
             entity.AddPhoto(photo);
             var crudManager = _saveEntityService.ProcessSave(entity);
             var notification = crudManager.Finish();
