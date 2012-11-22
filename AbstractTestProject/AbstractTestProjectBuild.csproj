@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -51,14 +59,6 @@
     <Compile Include="SpecificationExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CannibalCoder\CC.Core.Utils\CC.Core.Utilities.csproj">
-      <Project>{54970D60-6123-4227-9C72-04CA09BAF7B9}</Project>
-      <Name>CC.Core.Utilities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CannibalCoder\CC.Core\CC.Core.csproj">
-      <Project>{5E0B0CA2-BD5E-4953-A336-2AADC00CD81B}</Project>
-      <Name>CC.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
