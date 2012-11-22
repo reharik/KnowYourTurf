@@ -91,7 +91,6 @@ namespace Generator
             CreateDocumentCategory(companyId);
             CreatePhotoCategory(companyId);
             CreateEmailTemplate(companyId);
-            CreateEmailJobType(companyId);
         }
 
         private void CreateUserRoles(int companyId)
@@ -129,7 +128,7 @@ namespace Generator
 
             var template2 = new EmailTemplate
             {
-                Name = "EmployeeDailyTask",
+                Name = "EquipmentMaintenanceNotification",
                 Template =
                     "<p>Hi {%=name%},</p><p>Your {%=equipmentName%} has passed the Total Hours limit you identified.</p><p>Please create a Task and update the threshold as needed.</p><p>Thank you,</p><p>Management</p>",
                 CompanyId = companyId
@@ -497,16 +496,7 @@ namespace Generator
             _repository.Save(eventType2);
         }
 
-        private void CreateEmailJobType(int companyId)
-        {
-            var ejt = new EmailJobType()
-            {
-                Name = "Daily Tasks",
-                Status = Status.Active.ToString(),
-                CompanyId = companyId
-            };
-            _repository.Save(ejt);
-        }
+       
 
         private void CreateTask(int companyId)
         {

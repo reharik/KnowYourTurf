@@ -112,6 +112,7 @@ namespace KnowYourTurf.Web.Controllers
             var equipment = input.EntityId > 0 ? _repository.Find<Equipment>(input.EntityId) : new Equipment();
             equipment.Name = input.Name;
             equipment.TotalHours = input.TotalHours;
+            equipment.Threshold = input.Threshold;
             equipment.Description = input.Description;
             equipment.EquipmentType = input.EquipmentTypeEntityId > 0 ? _repository.Find<EquipmentType>(input.EquipmentTypeEntityId) : null;
             equipment.EquipmentVendor = input.EquipmentVendorEntityId > 0 ? _repository.Find<EquipmentVendor>(input.EquipmentVendorEntityId) : null;
@@ -138,8 +139,9 @@ namespace KnowYourTurf.Web.Controllers
         public int EquipmentTypeEntityId { get; set; }
         public int EquipmentVendorEntityId { get; set; }
         [ValidateNonEmpty]
-        [ValidateDecimal]
-        public int TotalHours { get; set; }
+        [ValidateDouble]
+        public double TotalHours { get; set; }
+        public double Threshold { get; set; }
         public bool DeleteImage { get; set; }
     
         public string _completedGridUrl { get; set; }

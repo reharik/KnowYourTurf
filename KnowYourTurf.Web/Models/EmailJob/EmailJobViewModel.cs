@@ -12,7 +12,6 @@ namespace KnowYourTurf.Web.Models
     {
         public TokenInputViewModel Subscribers { get; set; }
         public IEnumerable<SelectListItem> _EmailTemplateEntityIdList { get; set; }
-        public IEnumerable<SelectListItem> _EmailJobTypeEntityIdList { get; set; }
         public IEnumerable<SelectListItem> _FrequencyList { get; set; }
         public IEnumerable<SelectListItem> _StatusList { get; set; }
 
@@ -29,8 +28,6 @@ namespace KnowYourTurf.Web.Models
 
         [ValidateNonEmpty]
         public int EmailTemplateEntityId { get; set; }
-        [ValidateNonEmpty]
-        public int EmailJobTypeEntityId { get; set; }
 
         public string _saveUrl { get; set; }
     }
