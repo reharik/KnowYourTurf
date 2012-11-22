@@ -60,6 +60,7 @@
     <Compile Include="Iteration_1\1020_Rename_BaseProductToVendor.cs" />
     <Compile Include="Iteration_1\1010_Rename_Category_To_Site.cs" />
     <Compile Include="Iteration_1\1150_Alter_LotsOfTables_FK_Nullable.cs" />
+    <Compile Include="Iteration_1\1040_Remove_Column_From_Photo_And_Doc.cs" />
     <Compile Include="Iteration_1\SecurityUpdates\1010_UpdateOperations.cs" />
     <Compile Include="Iteration_1\SecurityUpdates\1020_UpdatePermissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

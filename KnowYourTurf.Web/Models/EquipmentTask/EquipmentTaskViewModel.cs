@@ -21,7 +21,7 @@ namespace KnowYourTurf.Web.Models
         [ValidateNonEmpty]
         public int TaskTypeEntityId { get; set; }
         [ValidateNonEmpty]
-        public DateTime? ScheduledDate { get; set; }
+        public string ScheduledDate { get; set; }
 //        [ValidateNonEmpty]
 //        public string ScheduledStartTimeString { get; set; }
 //        public string ScheduledEndTimeString { get; set; }
