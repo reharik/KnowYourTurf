@@ -460,7 +460,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var listType = getListType(input);
             var model = Mapper.Map<Part, PartViewModel>(listType);
-            model._Title = WebLocalizationKeys.EVENT_TYPE_INFORMATION.ToString();
+            model._Title = WebLocalizationKeys.PART_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<PartController>(x => x.SavePart(null));
             model._StatusList = _selectListItemService.CreateList<Status>();
             return Json(model, JsonRequestBehavior.AllowGet);

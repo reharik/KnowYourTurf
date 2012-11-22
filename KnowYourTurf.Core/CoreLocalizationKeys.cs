@@ -29,6 +29,7 @@ namespace KnowYourTurf.Core
 
         public static readonly StringToken KNOWYOURTURF_DAILY_TASKS = new CoreLocalizationKeys("KNOWYOURTURF_DAILY_TASKS", "Know your turf Daily Tasks");
         public static readonly StringToken DAILY_TASK_SUMMARY = new CoreLocalizationKeys("DAILY_TASK_SUMMARY", "Daily Task summary");
+        public static readonly StringToken EQUIPMENT_MAINTENANCE_NOTIFICATION = new CoreLocalizationKeys("EQUIPMENT_MAINTENANCE_NOTIFICATION", "Equipment Maintenance Notification");
         public static readonly StringToken BUISNESS_RULE = new CoreLocalizationKeys("BUISNESS_RULE", "Business Rule");
         
     }

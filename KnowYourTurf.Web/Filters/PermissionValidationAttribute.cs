@@ -10,16 +10,20 @@ namespace KnowYourTurf.Web.Filters
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var actionName = filterContext.RouteData.Values["action"];
-            var controllerOperation = string.Format("/{0}",filterContext.Controller.GetType().Name);
+            var controllerOperation = string.Format("/{0}", filterContext.Controller.GetType().Name);
             var actionOperation = string.Format("{0}/{1}", controllerOperation, actionName);
             var authorizationService = ObjectFactory.Container.GetInstance<IAuthorizationService>();
-            var user = ((ViewModel)filterContext.ActionParameters["input"]).User;
-            if(!authorizationService.IsAllowed(user,controllerOperation))
+            if (filterContext.ActionParameters.ContainsKey("input"))
             {
-                if (!authorizationService.IsAllowed(user, actionOperation))
+                var user = ((ViewModel) filterContext.ActionParameters["input"]).User;
+                if (!authorizationService.IsAllowed(user, controllerOperation))
                 {
-                    filterContext.Controller.TempData["ErrorMessage"] = string.Format("You are not authorized to perform operation: {0}", actionOperation);
-                    filterContext.Result = new HttpUnauthorizedResult();
+                    if (!authorizationService.IsAllowed(user, actionOperation))
+                    {
+                        filterContext.Controller.TempData["ErrorMessage"] =
+                            string.Format("You are not authorized to perform operation: {0}", actionOperation);
+                        filterContext.Result = new HttpUnauthorizedResult();
+                    }
                 }
             }
         }

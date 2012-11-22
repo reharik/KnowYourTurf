@@ -69,13 +69,8 @@ namespace KnowYourTurf.EmailTask
                                                                     (x.Frequency == EmailFrequency.Weekly.ToString() &&
                                                                      DateTime.Now.Day == 1)))
                     {
-                        var emailTemplateHandler =
-                            ObjectFactory.Container.GetInstance<IEmailTemplateHandler>(x.EmailJobType.Name + "Handler");
-                        x.Subscribers.ForEachItem(s =>
-                                                      {
-                                                          var model = emailTemplateHandler.CreateModel(x, s);
-                                                          _emailService.SendSingleEmail(model);
-                                                      });
+                        var emailTemplateHandler = ObjectFactory.Container.GetInstance<IEmailTemplateHandler>(x.EmailJobType.Name + "Handler");
+                        emailTemplateHandler.Execute(x);
                         if (x.Frequency == EmailFrequency.Once.ToString())
                         {
                             x.Status = Status.InActive.ToString();
