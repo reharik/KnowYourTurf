@@ -126,6 +126,15 @@ namespace Generator
                                         CompanyId = companyId
                                     };
             _repository.Save(template);
+
+            var template2 = new EmailTemplate
+            {
+                Name = "EmployeeDailyTask",
+                Template =
+                    "<p>Hi {%=name%},</p><p>Your {%=equipmentName%} has passed the Total Hours limit you identified.</p><p>Please create a Task and update the threshold as needed.</p><p>Thank you,</p><p>Management</p>",
+                CompanyId = companyId
+            };
+            _repository.Save(template2);
         }
 
 

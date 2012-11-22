@@ -56,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
             model.Parts = new TokenInputViewModel { _availableItems = availableParts, selectedItems = selectedParts };
             model._EquipmentEntityIdList = equipment;
             model._TaskTypeEntityIdList = equipmentTaskTypes;
-            model.ScheduledDate = equipmentTask.ScheduledDate.Value.ToShortDateString();
+            model.ScheduledDate = equipmentTask.ScheduledDate.HasValue ? equipmentTask.ScheduledDate.Value.ToShortDateString():"";
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             model.Popup = input.Popup;
             model.RootId = input.RootId;

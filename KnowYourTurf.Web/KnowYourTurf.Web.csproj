@@ -349,6 +349,7 @@
     <Compile Include="Services\Calculators\OverseedBagsNeededCalculator.cs" />
     <Compile Include="Services\Calculators\OverseedRateNeededCalculator.cs" />
     <Compile Include="Services\Calculators\SandCalculator.cs" />
+    <Compile Include="Services\EmailHandlers\EquipmentMaintenanceHandler.cs" />
     <Compile Include="Services\EmailHandlers\EmployeeDailyTaskHandler.cs" />
     <Compile Include="Services\EmailHandlers\IEmailTemplateHandler.cs" />
     <Compile Include="Services\IAuthenticationContext.cs" />

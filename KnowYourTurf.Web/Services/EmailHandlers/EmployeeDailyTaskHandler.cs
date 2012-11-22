@@ -12,26 +12,35 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
 {
     public class EmployeeDailyTaskHandler : IEmailTemplateHandler
     {
-        public EmailTemplateDTO CreateModel(EmailJob emailJob, User subscriber)
+        private readonly IEmailTemplateService _emailTemplateService;
+
+        public EmployeeDailyTaskHandler(IEmailTemplateService emailTemplateService)
         {
-            var employee = subscriber;
-            var tasks = employee.Tasks.Where(x=>x.ScheduledDate.Value.Date == DateTime.Now.Date);
-            var tasksHtml = buildHtmlForTasks(tasks);
-            var tokenValues = new Dictionary<string, string>
-                      {
-                          {"name", subscriber.FullName},
-                          {"data", DateTime.Now.ToLongDateString()},
-                          {"tasks",tasksHtml.ToString()}
-                      };
-            var emailTemplateDTO = new EmailTemplateDTO
+            _emailTemplateService = emailTemplateService;
+        }
+
+        public void Execute(EmailJob emailJob)
+        {
+            emailJob.Subscribers.ForEachItem(sub =>
             {
-                Subject = CoreLocalizationKeys.DAILY_TASK_SUMMARY.ToString(),
-                Body = emailJob.EmailTemplate.Template,
-                From = new MailAddress("DailyTasks@KnowYourTurf.Com", CoreLocalizationKeys.KNOWYOURTURF_DAILY_TASKS.ToString()),
-                To = new MailAddress(subscriber.Email, subscriber.FullName),
-                TokenValues = tokenValues
-            };
-            return emailTemplateDTO;
+                var tasks = sub.Tasks.Where(x=>x.ScheduledDate.Value.Date == DateTime.Now.Date);
+                var tasksHtml = buildHtmlForTasks(tasks);
+                var tokenValues = new Dictionary<string, string>
+                            {
+                                {"name", sub.FullName},
+                                {"data", DateTime.Now.ToLongDateString()},
+                                {"tasks",tasksHtml.ToString()}
+                            };
+                var emailTemplateDTO = new EmailTemplateDTO
+                {
+                    Subject = CoreLocalizationKeys.DAILY_TASK_SUMMARY.ToString(),
+                    Body = emailJob.EmailTemplate.Template,
+                    From = new MailAddress("DailyTasks@KnowYourTurf.Com", CoreLocalizationKeys.KNOWYOURTURF_DAILY_TASKS.ToString()),
+                    To = new MailAddress(sub.Email, sub.FullName),
+                    TokenValues = tokenValues
+                };
+                _emailTemplateService.SendSingleEmail(emailTemplateDTO);
+            });
         }
 
         private HtmlTag buildHtmlForTasks(IEnumerable<Task> tasks)

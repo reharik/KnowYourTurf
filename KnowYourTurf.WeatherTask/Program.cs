@@ -81,10 +81,16 @@ namespace KnowYourTurf.WeatherTask
         private static void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company company)
         {
             var date = DateTime.Now.Date;
-            var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" + company.ZipCode + ".json";
-            var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId == company.EntityId).FirstOrDefault() ??
-                          new Weather { CompanyId = company.EntityId, Date = date };
-            loadWeather(jss, webClient, weather, url);
+            for (int i = 1; i <= 7; i++)
+            {
+                date = date.AddDays(-1);
+                var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" +
+                          company.ZipCode + ".json";
+                var weather =
+                    _repository.Query<Weather>(x => x.Date == date && x.CompanyId == company.EntityId).FirstOrDefault() ??
+                    new Weather {CompanyId = company.EntityId, Date = date};
+                loadWeather(jss, webClient, weather, url);
+            }
         }
 
         private static void loadWeather(JavaScriptSerializer jss, WebClient webClient, Weather weather, string url)

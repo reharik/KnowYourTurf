@@ -37,12 +37,12 @@ namespace KnowYourTurf.Web.Controllers
                                             User = (User) input.User,
                                             LoggedIn = User.Identity.IsAuthenticated,
                                             NotificationSuccessFunction = "kyt.popupCrud.controller.success",
-                                            HelpUrl = UrlContext.GetUrlForAction<OrthogonalController>(x=>x.Help())
+                                            HelpUrl = UrlContext.GetUrlForAction<OrthogonalController>(x=>x.Help(null))
                                         };
             return PartialView(model);
         }
 
-        public ActionResult Help()
+        public ActionResult Help(ViewModel input)
         {
             return View();
         }
