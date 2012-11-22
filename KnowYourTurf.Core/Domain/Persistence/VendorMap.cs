@@ -29,7 +29,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
         public EquipmentVendorMap()
         {
             DiscriminatorValue("EquipmentVendor");
-            HasManyToMany(x => x.EquipmentTypes).ParentKeyColumn("Vendor_id").Access.CamelCaseField(Prefix.Underscore).LazyLoad();
+            HasManyToMany(x => x.EquipmentTypes).Access.CamelCaseField(Prefix.Underscore).ParentKeyColumn("Vendor_id").LazyLoad();
         }
     }
 

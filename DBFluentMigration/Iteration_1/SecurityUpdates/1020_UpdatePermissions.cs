@@ -44,6 +44,11 @@ namespace DBFluentMigration.Iteration_1.SecurityUpdates
             _permissions.CreateControllerPermission("EquipmentVendorController", UserType.Administrator, 10);
             _permissions.CreateControllerPermission("EquipmentVendorListController", UserType.Administrator, 10);
 
+
+            //fix for fb206
+            _permissions.CreateControllerPermission("CompletedPurchaseOrderDisplayController", UserType.Administrator, 10);
+
+
             _permissions.CreateMenuPermission(UserType.Administrator, "EquipmentVendors", 10);
             _permissions.CreateMenuPermission(UserType.Administrator, "EquipmentTasks", 10);
             _permissions.CreateMenuPermission(UserType.Administrator, "EquipmentTasksLists", 10);

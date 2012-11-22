@@ -197,7 +197,11 @@
     <Compile Include="Rules\DeleteEmployeeRules.cs" />
     <Compile Include="Rules\EmployeeHasNoOutstandingTasks.cs" />
     <Compile Include="Rules\RulesEngineBase.cs" />
+    <Compile Include="Security\Operations.cs" />
+    <Compile Include="Security\Permissions.cs" />
+    <Compile Include="Security\UserGroups.cs" />
     <Compile Include="Services\ICustomAuthorizationRepository.cs" />
+    <Compile Include="Services\IEmailJob\EquipmentEmailJob.cs" />
     <Compile Include="Services\IEmailJob\IEmailJob.cs" />
     <Compile Include="Services\IEmailTemplateService.cs" />
     <Compile Include="Services\IEntityListGrid.cs" />

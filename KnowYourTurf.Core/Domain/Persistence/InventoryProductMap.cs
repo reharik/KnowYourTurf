@@ -13,7 +13,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Cost);
             Map(x => x.UnitType);
             Map(x => x.SizeOfUnit);
-            References(x => x.LastVendor);
+            References(x => x.LastVendor).Column("LastVendor_id");
             References(x => x.Product);
             DiscriminateSubClassesOnColumn<string>("Discriminator").AlwaysSelectWithValue();
 

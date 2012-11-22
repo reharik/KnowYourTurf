@@ -8,17 +8,14 @@ namespace Generator.Commands
     {
         private readonly IPermissions _permissions;
         private readonly IOperations _operations;
-        private readonly IUserGroups _userGroups;
         private readonly IRepository _repository;
 
         public SecurityUpdateCommand(IPermissions permissions,
             IOperations operations,
-            IUserGroups userGroups,
             IRepository repository)
         {
             _permissions = permissions;
             _operations = operations;
-            _userGroups = userGroups;
             _repository = repository;
         }
 

@@ -54,23 +54,25 @@ namespace KnowYourTurf.Web.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Delete(ViewModel input)
-        {
-            var document = _repository.Find<Document>(input.EntityId);
-            _repository.HardDelete(document);
-            _repository.UnitOfWork.Commit();
-            return null;
-        }
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
+            var methodInfo = typeof(Repository).GetMethod("Find");
+            var type = typeof(Document).Assembly.GetType("KnowYourTurf.Core.Domain." + input.Var);
+            var genericMethod = methodInfo.MakeGenericMethod(new[] { type });
+            dynamic entity = genericMethod.Invoke(_repository, new[] { (object)input.ParentId });
+            var documentUrls = new List<string>();
             input.EntityIds.ForEachItem(x =>
             {
-                var item = _repository.Find<Document>(x);
-                _fileHandlerService.DeleteFile(item.FileUrl);
-                _repository.HardDelete(item);
+                var document = ((IEnumerable<Document>)entity.Documents).FirstOrDefault(y => y.EntityId == x);
+                documentUrls.Add(document.FileUrl);
+                entity.RemoveDocument(document);
             });
-            _repository.Commit();
-            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+            var notification = _saveEntityService.ProcessSave(entity).Finish();
+            if (notification.Success)
+            {
+                documentUrls.ForEachItem(_fileHandlerService.DeleteFile);
+            }
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -83,7 +85,7 @@ namespace KnowYourTurf.Web.Controllers
 
             var document = ((IEnumerable<Document>)entity.Documents).FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Document();
             document = mapToDomain(input, document);
-            document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments");
+            document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments",entity.CompanyId);
 
             entity.AddDocument(document);
             var crudManager = _saveEntityService.ProcessSave(entity);

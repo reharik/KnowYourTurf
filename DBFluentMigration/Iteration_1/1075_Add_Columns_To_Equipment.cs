@@ -12,6 +12,7 @@ namespace DBFluentMigration.Iteration_1
             Alter.Table("Equipment").AddColumn("SerialNumber").AsString(255).Nullable();
             Alter.Table("Equipment").AddColumn("WarrentyInfo").AsString(255).Nullable();
             Alter.Table("Equipment").AddColumn("EquipmentType_id").AsInt32().Nullable();
+            Alter.Table("Equipment").AddColumn("Threshold").AsDouble().Nullable();
              
             Create.ForeignKey("FK_Equipment_oneToMany_EquipmentType")
                      .FromTable("Equipment")

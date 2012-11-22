@@ -23,6 +23,10 @@ namespace DBFluentMigration.Iteration_1.SecurityUpdates
             _operations.CreateOperationForControllerType("EquipmentVendorController");
             _operations.CreateOperationForControllerType("EquipmentVendorListController");
 
+            //fix for fb206
+            _operations.CreateOperationForControllerType("CompletedPurchaseOrderDisplayController");
+
+
             _operations.CreateOperationForMenuItem("EquipmentVendors");
             _operations.CreateOperationForMenuItem("EquipmentTasks");
             _operations.CreateOperationForMenuItem("EquipmentTasksLists");

@@ -8,6 +8,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
         {
             Map(x => x.Name);
             Map(x => x.TotalHours);
+            Map(x => x.Threshold);
             Map(x => x.Description);
             Map(x => x.Make);
             Map(x => x.Model);

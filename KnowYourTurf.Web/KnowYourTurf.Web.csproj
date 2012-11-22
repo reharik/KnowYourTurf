@@ -344,9 +344,6 @@
     <Compile Include="Models\TokenViewModel.cs" />
     <Compile Include="Models\VendorContact\VendorContactViewModel.cs" />
     <Compile Include="Models\Vendor\VendorViewModel.cs" />
-    <Compile Include="Security\Operations.cs" />
-    <Compile Include="Security\Permissions.cs" />
-    <Compile Include="Security\UserGroups.cs" />
     <Compile Include="Services\Calculators\ICalculatorHandler.cs" />
     <Compile Include="Services\Calculators\MaterialsCalculator.cs" />
     <Compile Include="Services\Calculators\OverseedBagsNeededCalculator.cs" />
