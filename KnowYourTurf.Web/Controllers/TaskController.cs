@@ -62,7 +62,8 @@ namespace KnowYourTurf.Web.Controllers
             model._InventoryProductProductEntityIdList = products;
             model._TaskTypeEntityIdList = taskTypes;
             model.ScheduledStartTimeString = task.ScheduledStartTime.HasValue?task.ScheduledStartTime.Value.ToShortTimeString():"";
-            model.ScheduledEndTimeString = task.ScheduledEndTime.HasValue? task.ScheduledEndTime.Value.ToShortTimeString():"";
+            model.ScheduledEndTimeString = task.ScheduledEndTime.HasValue ? task.ScheduledEndTime.Value.ToShortTimeString() : "";
+            model.ScheduledDate = task.ScheduledDate.Value.ToShortDateString();
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             model.Popup = input.Popup;
             model.RootId = input.RootId;
