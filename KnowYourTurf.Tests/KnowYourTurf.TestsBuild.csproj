@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KnowYourTurf.Tests</RootNamespace>
-    <AssemblyName>KnowYourTurf.Tests</AssemblyName>
+    <AssemblyName>KnowYourTurf.TestsBuild</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

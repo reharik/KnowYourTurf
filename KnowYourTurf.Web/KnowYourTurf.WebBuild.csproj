@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KnowYourTurf.Web</RootNamespace>
-    <AssemblyName>KnowYourTurf.Web</AssemblyName>
+    <AssemblyName>KnowYourTurf.WebBuild</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
