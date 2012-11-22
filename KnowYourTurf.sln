@@ -6,6 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		build.bat = build.bat
 		Filestream-Notes.txt = Filestream-Notes.txt
 		Gen.bat = Gen.bat
+		updateDB.bat = updateDB.bat
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator", "Generator\Generator.csproj", "{E40B313E-1001-41D6-825F-F87B3CB68E2F}"

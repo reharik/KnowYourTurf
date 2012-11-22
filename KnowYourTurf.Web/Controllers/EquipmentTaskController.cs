@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using CC.Core.CoreViewModelAndDTOs;
@@ -55,6 +56,7 @@ namespace KnowYourTurf.Web.Controllers
             model.Parts = new TokenInputViewModel { _availableItems = availableParts, selectedItems = selectedParts };
             model._EquipmentEntityIdList = equipment;
             model._TaskTypeEntityIdList = equipmentTaskTypes;
+            model.ScheduledDate = equipmentTask.ScheduledDate.Value.ToShortDateString();
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             model.Popup = input.Popup;
             model.RootId = input.RootId;
@@ -124,7 +126,7 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(EquipmentTask item, EquipmentTaskViewModel input)
         {
-            item.ScheduledDate = input.ScheduledDate;
+            item.ScheduledDate = DateTime.Parse(input.ScheduledDate);
             item.ActualTimeSpent = input.ActualTimeSpent;
             item.Notes = input.Notes;
             item.Complete = input.Complete;

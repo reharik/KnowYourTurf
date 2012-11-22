@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
@@ -13,7 +14,6 @@ using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
-using FluentNHibernate.Conventions;
 
 namespace KnowYourTurf.Web.Controllers
 {
