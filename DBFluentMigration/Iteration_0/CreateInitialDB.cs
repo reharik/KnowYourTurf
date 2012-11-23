@@ -49,7 +49,7 @@ namespace Migrations
                 .WithColumn("CompanyId").AsInt32().Nullable()
                 .WithColumn("LoginName").AsString().Nullable()
                 .WithColumn("Password").AsString().Nullable()
-                .WithColumn("Status").AsString().Nullable()
+                .WithColumn("Salt").AsString().Nullable()
                 .WithColumn("ByPassToken").AsGuid().Nullable()
                 .WithColumn("CreatedBy_id").AsInt32().Nullable()
                 .WithColumn("ChangedBy_id").AsInt32().Nullable();

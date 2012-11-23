@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Services;
@@ -19,16 +20,19 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISaveEntityService _saveEntityService;
         private readonly IFileHandlerService _fileHandlerService;
         private readonly ISessionContext _sessionContext;
+        private readonly ISecurityDataService _securityDataService;
 
         public AdminController(IRepository repository,
             ISaveEntityService saveEntityService,
             IFileHandlerService fileHandlerService,
-            ISessionContext sessionContext)
+            ISessionContext sessionContext,
+            ISecurityDataService securityDataService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _fileHandlerService = fileHandlerService;
             _sessionContext = sessionContext;
+            _securityDataService = securityDataService;
         }
 
         public ActionResult Admin(ViewModel input)
@@ -86,7 +90,7 @@ namespace KnowYourTurf.Web.Controllers
                 administrator.Company = company;
             }
             administrator = mapToDomain(input, administrator);
-
+            handlePassword(input,administrator);
             if (input.DeleteImage)
             {
                 _fileHandlerService.DeleteFile(administrator.FileUrl);
@@ -117,12 +121,21 @@ namespace KnowYourTurf.Web.Controllers
             administrator.UserLoginInfo = new UserLoginInfo()
                                               {
                                                   Password = model.UserLoginInfoPassword,
-                                                  LoginName = model.Email,
-                                                  Status = model.UserLoginInfoStatus,
+                                                  LoginName = model.Email
                                               };
             administrator.AddUserRole(new UserRole { Name = UserType.Administrator.ToString() });
             administrator.AddUserRole(new UserRole { Name = UserType.Employee.ToString() });
             return administrator;
+        }
+
+        private void handlePassword(UserViewModel input, User origional)
+        {
+            if (input.UserLoginInfoPassword.IsNotEmpty())
+            {
+                origional.UserLoginInfo.Salt = _securityDataService.CreateSalt();
+                origional.UserLoginInfo.Password = _securityDataService.CreatePasswordHash(input.UserLoginInfoPassword,
+                                                            origional.UserLoginInfo.Salt);
+            }
         }
     }
 }

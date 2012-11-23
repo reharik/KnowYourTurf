@@ -108,7 +108,6 @@ namespace Generator
                                              {
                                                  LoginName = "Admin",
                                                  Password = "123",
-                                                 Status = "Active",
                                                  CompanyId = companyId
                                              };
             _defaultUser.AddUserRole(_userRoleAdmin);

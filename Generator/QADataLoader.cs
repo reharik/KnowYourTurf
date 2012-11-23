@@ -20,6 +20,7 @@ namespace Generator
         private Company _company;
         private IPurchaseOrderLineItemService _purchaseOrderLineItemService;
         private readonly IInventoryService _inventoryService;
+        private readonly ISecurityDataService _securityDataService;
         private User _defaultUser;
         private UserRole _userRoleAdmin;
         private UserRole _userRoleEmployee;
@@ -41,11 +42,13 @@ namespace Generator
 
         public QADataLoader(IRepository repository,
             IPurchaseOrderLineItemService purchaseOrderLineItemService,
-            IInventoryService inventoryService)
+            IInventoryService inventoryService,
+            ISecurityDataService securityDataService)
         {
             _repository = repository;
             _purchaseOrderLineItemService = purchaseOrderLineItemService;
             _inventoryService = inventoryService;
+            _securityDataService = securityDataService;
         }
 
         public void Load()
@@ -57,25 +60,6 @@ namespace Generator
             createEquipmentAndVendor();
             CreateEmailTemplate();
             _repository.Commit();
-        }
-
-        private void CreateEmailTemplate()
-        {
-            var template = new EmailTemplate
-            {
-                Name = "EmployeeDailyTask",
-                Template =
-                    "<p>Hi {%=name%},</p><p>Here are your tasks for {%=data%}:</p><p>{%=tasks%}</p><p>Thank you,</p><p>Management</p>"
-            };
-            _repository.Save(template);
-
-            var template2 = new EmailTemplate
-            {
-                Name = "EquipmentMaintenanceNotification",
-                Template =
-                    "<p>Hi {%=name%},</p><p>Your {%=equipmentName%} has passed the Total Hours limit you identified.</p><p>Please create a Task and update the threshold as needed.</p><p>Thank you,</p><p>Management</p>"
-            };
-            _repository.Save(template2);
         }
 
         private void CreateCompany()
@@ -108,10 +92,13 @@ namespace Generator
             };
             _defaultUser.UserLoginInfo = new UserLoginInfo
             {
-                LoginName = "Admin",
-                Password = "123",
-                Status = "Active"
+                LoginName = "Admin"
             };
+
+            _defaultUser.UserLoginInfo.Salt = _securityDataService.CreateSalt();
+            _defaultUser.UserLoginInfo.Password = _securityDataService.CreatePasswordHash("123",
+                                                        _defaultUser.UserLoginInfo.Salt);
+
             _userRoleAdmin = new UserRole {Name = UserType.Administrator.ToString(), Status = Status.Active.ToString()};
             _userRoleEmployee = new UserRole {Name = UserType.Employee.ToString(), Status = Status.Active.ToString()};
             _userRoleFac = new UserRole {Name = UserType.Facilities.ToString(), Status = Status.Active.ToString()};
@@ -337,6 +324,25 @@ namespace Generator
             _repository.Save(_photoCategory2);
             _repository.Save(_part1);
             _repository.Save(_part2);
+        }
+
+        private void CreateEmailTemplate()
+        {
+            var template = new EmailTemplate
+            {
+                Name = "EmployeeDailyTask",
+                Template =
+                    "<p>Hi {%=name%},</p><p>Here are your tasks for {%=data%}:</p><p>{%=tasks%}</p><p>Thank you,</p><p>Management</p>"
+            };
+            _repository.Save(template);
+
+            var template2 = new EmailTemplate
+            {
+                Name = "EquipmentMaintenanceNotification",
+                Template =
+                    "<p>Hi {%=name%},</p><p>Your {%=equipmentName%} has passed the Total Hours limit you identified.</p><p>Please create a Task and update the threshold as needed.</p><p>Thank you,</p><p>Management</p>"
+            };
+            _repository.Save(template2);
         }
     }
 

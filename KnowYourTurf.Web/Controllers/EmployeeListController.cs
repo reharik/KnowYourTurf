@@ -36,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult Employees(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserRoles.Any(i=>i.Name==UserType.Employee.ToString()) && x.UserLoginInfo.Status==Status.Active.ToString());
+            var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserRoles.Any(i=>i.Name==UserType.Employee.ToString()));
             var gridItemsViewModel = _employeeListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
         }

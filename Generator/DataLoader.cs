@@ -275,7 +275,6 @@ namespace Generator
                                              {
                                                  LoginName = "Admin",
                                                  Password = "123",
-                                                 Status = "Active",
                                                  CompanyId = companyId
                                              };
             _defaultUser.AddUserRole(_userRoleAdmin);
@@ -306,7 +305,6 @@ namespace Generator
             {
                 LoginName = "facilities",
                 Password = "facilities",
-                Status = "Active",
                 CompanyId = companyId
             };
             facilities.AddUserRole(_userRoleFac);
@@ -341,7 +339,6 @@ namespace Generator
             {
                 LoginName = "reharik@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
 
@@ -366,7 +363,6 @@ namespace Generator
             {
                 LoginName = "amahl@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
 
@@ -391,7 +387,6 @@ namespace Generator
             {
                 LoginName = "mark@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
 
@@ -416,7 +411,6 @@ namespace Generator
             {
                 LoginName = "chris@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
             _employee1.AddUserRole(_userRoleEmployee);

@@ -120,8 +120,6 @@ namespace KnowYourTurf.Web
             For<IEntityListGrid<Fertilizer>>().Use<FertilizerListGrid>();
             For<IRouteTokenConfig>().Add<FieldsRouteTokenList>();
 
-            For<IEmailTemplateHandler>().Use<EmployeeDailyTaskHandler>().Named("Daily TasksHandler");
-
         }
     }
 }
