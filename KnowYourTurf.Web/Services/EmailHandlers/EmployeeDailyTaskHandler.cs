@@ -52,8 +52,8 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
                                var li = new HtmlTag("li");
                                var liDiv = new DivTag("liDiv");
                                var task = new HtmlTag("span");
-                               var taskText = x.ScheduledDate.Value.ToLongDateString()+" "+x.ScheduledStartTime.Value.ToShortTimeString();
-                               taskText += x.ScheduledEndTime.HasValue ? " To " + x.ScheduledEndTime.Value.ToShortTimeString() : "";
+                               var taskText = x.ScheduledDate.Value.ToLongDateString()+" "+x.StartTime.Value.ToShortTimeString();
+                               taskText += x.EndTime.HasValue ? " To " + x.EndTime.Value.ToShortTimeString() : "";
                                taskText += ": " + x.TaskType.Name + " at " + x.Field.Name;
                                task.Text(taskText);
                                var br = new HtmlTag("br");

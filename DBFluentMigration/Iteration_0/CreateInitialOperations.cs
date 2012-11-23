@@ -76,6 +76,17 @@ namespace DBFluentMigration.Iteration_0
             _operations.CreateOperationForControllerType("VendorListController");
             _operations.CreateOperationForControllerType("WeatherController");
             _operations.CreateOperationForControllerType("WeatherListController");
+            _operations.CreateOperationForControllerType("PartController");
+            _operations.CreateOperationForControllerType("EquipmentDashboardController");
+            _operations.CreateOperationForControllerType("EquipmentTaskCalendarController");
+            _operations.CreateOperationForControllerType("EquipmentTaskTypeController");
+            _operations.CreateOperationForControllerType("EquipmentTypeController");
+            _operations.CreateOperationForControllerType("EquipmentTaskController");
+            _operations.CreateOperationForControllerType("EquipmentTaskListController");
+            _operations.CreateOperationForControllerType("EquipmentVendorController");
+            _operations.CreateOperationForControllerType("EquipmentVendorListController");
+            _operations.CreateOperationForControllerType("CompletedPurchaseOrderDisplayController");
+
         }
 
         public void CreateMenuItemOptions()
@@ -106,6 +117,12 @@ namespace DBFluentMigration.Iteration_0
             _operations.CreateOperationForMenuItem("Vendors");
             _operations.CreateOperationForMenuItem("Inventory");
             _operations.CreateOperationForMenuItem("PurchaseOrders");
+            _operations.CreateOperationForMenuItem("EquipmentVendors");
+            _operations.CreateOperationForMenuItem("EquipmentTasks");
+            _operations.CreateOperationForMenuItem("EquipmentTasksLists");
+            _operations.CreateOperationForMenuItem("EquipmentTasks");
+            _operations.CreateOperationForMenuItem("CompletedEquipmentTasks");
+            _operations.CreateOperationForMenuItem("EquipmentTaskCalendar");
         }
 
         public void CreateMiscItems()

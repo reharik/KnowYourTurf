@@ -9,8 +9,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Name);
             Map(x => x.ZipCode);
             Map(x => x.TaxRate);
-            Map(x => x.NumberOfCategories);
-            HasMany(x => x.Categories).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
+            Map(x => x.NumberOfSites);
+            HasMany(x => x.Sites).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
         }
     }
 

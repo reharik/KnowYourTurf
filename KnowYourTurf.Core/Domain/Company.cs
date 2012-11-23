@@ -9,16 +9,16 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Name { get; set; }
         public virtual double TaxRate { get; set; }
         public virtual string ZipCode { get; set; }
-        public virtual int NumberOfCategories { get; set; }
+        public virtual int NumberOfSites { get; set; }
         #region Collections
-        private IList<Site> _categories = new List<Site>();
-        public virtual IEnumerable<Site> Categories { get { return _categories; } }
-        public virtual void ClearCategory() { _categories = new List<Site>(); }
-        public virtual void RemoveCategory(Site site) { _categories.Remove(site); }
-        public virtual void AddCategory(Site site)
+        private IList<Site> _sites = new List<Site>();
+        public virtual IEnumerable<Site> Sites { get { return _sites; } }
+        public virtual void ClearSite() { _sites = new List<Site>(); }
+        public virtual void RemoveSite(Site site) { _sites.Remove(site); }
+        public virtual void AddSite(Site site)
         {
-            if (!site.IsNew() && _categories.Contains(site)) return;
-            _categories.Add(site);
+            if (!site.IsNew() && _sites.Contains(site)) return;
+            _sites.Add(site);
         }
         #endregion
     }

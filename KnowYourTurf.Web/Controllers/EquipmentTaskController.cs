@@ -83,6 +83,7 @@ namespace KnowYourTurf.Web.Controllers
             var equipmentEquipmentTask = _repository.Find<EquipmentTask>(input.EntityId);
             var model = Mapper.Map<EquipmentTask, DisplayEquipmentTaskViewModel>(equipmentEquipmentTask);
             model.Popup = input.Popup;
+            model.ScheduledDate = equipmentEquipmentTask.ScheduledDate.HasValue ? equipmentEquipmentTask.ScheduledDate.Value.ToShortDateString() : "";
             model._EmployeeNames = equipmentEquipmentTask.Employees.Select(x => x.FullName);
             model._PartsNames = equipmentEquipmentTask.Parts.Select(x => x.Name);
             model._AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentTaskController>(x => x.AddUpdate(null));

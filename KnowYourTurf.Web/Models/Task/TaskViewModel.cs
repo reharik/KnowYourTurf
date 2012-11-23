@@ -44,7 +44,7 @@ namespace KnowYourTurf.Web.Models
     public class DisplayTaskViewModel:ViewModel
     {
         public string TaskTypeName { get; set; }
-        public DateTime ScheduledDate { get; set; }
+        public string ScheduledDate { get; set; }
         public string FieldName { get; set; }
         public string InventoryProductProductName { get; set; }
         public string ScheduledStartTimeString { get; set; }

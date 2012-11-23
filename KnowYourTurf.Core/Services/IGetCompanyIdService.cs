@@ -9,7 +9,6 @@ namespace KnowYourTurf.Core.Services
         int Execute();
     }
 
-
     public class GetCompanyIdService : IGetCompanyIdService
     {
         public int Execute()
@@ -20,6 +19,8 @@ namespace KnowYourTurf.Core.Services
         }
     }
 
+    // this of course is stupid and should be on the sessioncontext
+    // so if you're reading this refactor it.
     public class DataLoaderGetCompanyIdService:IGetCompanyIdService
     {
         public int Execute()

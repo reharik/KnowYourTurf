@@ -11,7 +11,7 @@
             @Html.SubmissionFor(x => x.TaskTypeEntityId).LabelDisplay(WebLocalizationKeys.TASK_TYPE).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ScheduledDate).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ScheduledDate).ElType("DateTextbox").ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()

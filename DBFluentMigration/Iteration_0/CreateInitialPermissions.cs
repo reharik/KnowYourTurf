@@ -75,7 +75,16 @@ namespace DBFluentMigration.Iteration_0
             _permissions.CreateControllerPermission("VendorListController", UserType.Employee);
             _permissions.CreateControllerPermission("WeatherController", UserType.Employee);
             _permissions.CreateControllerPermission("WeatherListController", UserType.Employee);
-            
+            _permissions.CreateControllerPermission("EquipmentDashboardController", UserType.Employee);
+            _permissions.CreateControllerPermission("EquipmentTaskCalendarController", UserType.Employee);
+            _permissions.CreateControllerPermission("EquipmentTaskController", UserType.Employee);
+            _permissions.CreateControllerPermission("EquipmentTaskListController", UserType.Employee);
+
+            _permissions.CreateMenuPermission(UserType.Employee, "EquipmentTasks");
+            _permissions.CreateMenuPermission(UserType.Employee, "EquipmentTasksLists");
+            _permissions.CreateMenuPermission(UserType.Employee, "EquipmentTasks");
+            _permissions.CreateMenuPermission(UserType.Employee, "CompletedEquipmentTasks");
+            _permissions.CreateMenuPermission(UserType.Employee, "EquipmentTaskCalendar");
             _permissions.CreateMenuPermission(UserType.Employee, "Home");
             _permissions.CreateMenuPermission(UserType.Employee, "Fields");
             _permissions.CreateMenuPermission(UserType.Employee, "Equipment");

@@ -46,26 +46,10 @@
     <Compile Include="Iteration_0\CreateInitialOperations.cs" />
     <Compile Include="Iteration_0\CreateInitialDB.cs" />
     <Compile Include="Iteration_0\CreateInitialPermissions.cs" />
-    <Compile Include="Iteration_1\1075_Add_Columns_To_Equipment.cs" />
-    <Compile Include="Iteration_1\1030_Update_Rename_Vendor.cs" />
-    <Compile Include="Iteration_1\1090_Add_DocumentToEquipment.cs" />
-    <Compile Include="Iteration_1\1080_Add_EquipmentTask.cs" />
-    <Compile Include="Iteration_1\1110_Add_PartToEquipmentTask.cs" />
-    <Compile Include="Iteration_1\1120_Add_PhotoToEquipment.cs" />
-    <Compile Include="Iteration_1\1130_EquipmentTypeToEquipmentVendor.cs" />
-    <Compile Include="Iteration_1\1070_Add_EquipmentType.cs" />
-    <Compile Include="Iteration_1\1060_Add_EquipmentTaskType.cs" />
-    <Compile Include="Iteration_1\1020_Rename_BaseProductToVendor.cs" />
-    <Compile Include="Iteration_1\1010_Rename_Category_To_Site.cs" />
-    <Compile Include="Iteration_1\1150_Alter_LotsOfTables_FK_Nullable.cs" />
-    <Compile Include="Iteration_1\1040_Remove_Column_From_Photo_And_Doc.cs" />
-    <Compile Include="Iteration_1\SecurityUpdates\1010_UpdateOperations.cs" />
-    <Compile Include="Iteration_1\SecurityUpdates\1020_UpdatePermissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DBFluentMigration.dll.config" />
-    <Compile Include="Iteration_1\1050_Add_Part.cs" />
     <None Include="MigrateApp\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="MigrateApp\Migrate.exe.config" />
     <None Include="MigrateApp\policy.2.0.Npgsql.config" />
@@ -73,7 +57,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Iteration_1\1100_Add_EmployeeToEquipmentTask.cs" />
     <Content Include="MigrateApp\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
     <Content Include="MigrateApp\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
     <Content Include="MigrateApp\amd64\sqlceca40.dll" />

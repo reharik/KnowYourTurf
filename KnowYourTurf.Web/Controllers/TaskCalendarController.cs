@@ -50,8 +50,8 @@ namespace KnowYourTurf.Web.Controllers
         {
             var task = _repository.Find<Task>(input.EntityId);
             task.ScheduledDate = input.ScheduledDate;
-            task.ScheduledEndTime = input.EndTime;
-            task.ScheduledStartTime = input.StartTime;
+            task.EndTime = input.EndTime;
+            task.StartTime = input.StartTime;
             var crudManager = _saveEntityService.ProcessSave(task);
             var notification = crudManager.Finish();
             return Json(notification, JsonRequestBehavior.AllowGet);
@@ -69,8 +69,8 @@ namespace KnowYourTurf.Web.Controllers
                                       {
                                           EntityId = x.EntityId,
                                           title = x.Field.Abbreviation + ": " + x.TaskType.Name,
-                                          start = x.ScheduledStartTime.ToString(),
-                                          end = x.ScheduledEndTime.ToString(),
+                                          start = x.StartTime.ToString(),
+                                          end = x.EndTime.ToString(),
                                           color = x.Field.FieldColor
                                       })
                 );
