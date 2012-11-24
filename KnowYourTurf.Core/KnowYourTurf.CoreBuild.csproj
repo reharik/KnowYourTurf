@@ -8,7 +8,7 @@
     <ProjectGuid>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KnowYourTurf.Core</RootNamespace>
+    <RootNamespace>KnowYourTurf.Core</RootNamespace>  
     <AssemblyName>KnowYourTurf.CoreBuild</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -176,7 +176,6 @@
     <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersRepository.cs" />
     <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersUnitOfWork.cs" />
     <Compile Include="Domain\Tools\NullNHSetupConfig.cs" />
-    <Compile Include="Domain\Tools\NullNHibernateUnitOfWork.cs" />
     <Compile Include="Domain\Tools\CustomAttributes\TextAreaAttribute.cs" />
     <Compile Include="Domain\Tools\NullSession.cs" />
     <Compile Include="Domain\Tools\NullSessionFactory.cs" />

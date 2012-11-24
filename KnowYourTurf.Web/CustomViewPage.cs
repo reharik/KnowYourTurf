@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using CC.Core;
+using CC.Core.Enumerations;
 using CC.Core.Html.Menu;
 using CC.Core.Localization;
 using CC.Core.Utilities;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html.Expressions;
+using AreaName = CC.Core.Enumerations.AreaName;
 
 namespace KnowYourTurf.Web
 {
