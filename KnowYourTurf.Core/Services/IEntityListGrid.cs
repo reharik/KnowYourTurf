@@ -7,7 +7,7 @@ using KnowYourTurf.Core.Domain;
 
 namespace KnowYourTurf.Core.Services
 {
-    public interface IEntityListGrid<ENTITY> where ENTITY : DomainEntity
+    public interface IEntityListGrid<ENTITY> where ENTITY : IGridEnabledClass
     {
         void AddColumnModifications(Action<IGridColumn, ENTITY> modification);
         GridDefinition GetGridDefinition(string url, IUser user);

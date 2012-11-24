@@ -5,7 +5,7 @@ using CC.Core.Services;
 
 namespace KnowYourTurf.Core.Config
 {
-    public class SiteConfiguration : CC.Core.Services.SiteConfigurationBase
+    public class SiteConfiguration : SiteConfigurationBase
     {
         public virtual string NumberOfFieldsPerCategory { get; set; }
         public virtual string CustomerPhotosEmployeePath { get; set; }

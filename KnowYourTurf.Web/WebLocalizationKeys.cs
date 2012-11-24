@@ -188,6 +188,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken DOCUMENT_CATEGORY = new WebLocalizationKeys("DOCUMENT_CATEGORY", "Document Category");
         public static readonly StringToken DOCUMENT_CATEGORIES = new WebLocalizationKeys("DOCUMENT_CATEGORIES", "Document Categories");
         public static readonly StringToken DOCUMENTS = new WebLocalizationKeys("DOCUMENTS", "Documents");
+        public static readonly StringToken DOCUMENT = new WebLocalizationKeys("DOCUMENT", "Document");
         public static readonly StringToken NEW_DOCUMENT = new WebLocalizationKeys("NEW_DOCUMENT", "Add New Document");
         public static readonly StringToken DOCUMENT_INFORMATION = new WebLocalizationKeys("DOCUMENT_INFORMATION", "Document Information");
 
@@ -196,6 +197,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken PHOTO_CATEGORY = new WebLocalizationKeys("PHOTO_CATEGORY", "Photo Category");
         public static readonly StringToken PHOTO_CATEGORIES = new WebLocalizationKeys("PHOTO_CATEGORIES", "Photo Categories");
         public static readonly StringToken PHOTOS = new WebLocalizationKeys("PHOTOS", "Photos");
+        public static readonly StringToken PHOTO = new WebLocalizationKeys("PHOTO", "Photo");
         public static readonly StringToken NEW_PHOTO = new WebLocalizationKeys("NEW_PHOTO", "Add New Photo");
         public static readonly StringToken PHOTO_INFORMATION = new WebLocalizationKeys("PHOTO_INFORMATION", "Photo Information");
         public static readonly StringToken ADD_ITEM_TO_PO = new WebLocalizationKeys("ADD_ITEM_TO_PO", "Add item to the purchase order");

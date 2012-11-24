@@ -48,8 +48,8 @@ namespace KnowYourTurf.Web.Controllers
         {
             var equipmentTask = _repository.Find<EquipmentTask>(input.EntityId);
             equipmentTask.ScheduledDate = input.ScheduledDate;
-//            equipmentTask.EndTime = input.EndTime;
-//            equipmentTask.StartTime = input.StartTime;
+            equipmentTask.EndTime = input.EndTime;
+            equipmentTask.StartTime = input.StartTime;
             var crudManager = _saveEntityService.ProcessSave(equipmentTask);
             var notification = crudManager.Finish();
             return Json(notification, JsonRequestBehavior.AllowGet);
@@ -67,8 +67,8 @@ namespace KnowYourTurf.Web.Controllers
                                                        {
                                                            EntityId = z.EntityId,
                                                            title = z.Equipment.Name + ": " + z.TaskType.Name,
-                                                           start = z.ScheduledDate.ToString(),
-                                                           end = z.ScheduledDate.ToString(),
+                                                           start = z.StartTime.ToString(),
+                                                           end = z.EndTime.ToString(),
                                                        })
                 );
 

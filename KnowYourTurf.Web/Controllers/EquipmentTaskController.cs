@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
@@ -43,6 +44,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var equipmentTask = input.EntityId > 0 ? _repository.Find<EquipmentTask>(input.EntityId) : new EquipmentTask();
             equipmentTask.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : equipmentTask.ScheduledDate;
+            equipmentTask.StartTime = input.StartTime.IsNotEmpty() ? DateTime.Parse(input.StartTime) : equipmentTask.StartTime;
             var equipmentTaskTypes = _selectListItemService.CreateList<EquipmentTaskType>(x => x.Name, x => x.EntityId, true);
             var equipment = _selectListItemService.CreateList<Equipment>(x=>x.Name,x=>x.EntityId,true);
             var availableEmployees = _repository.Query<User>(x =>x.UserRoles.Any(y=>y.Name==UserType.Employee.ToString()))
@@ -57,6 +59,8 @@ namespace KnowYourTurf.Web.Controllers
             model._EquipmentEntityIdList = equipment;
             model._TaskTypeEntityIdList = equipmentTaskTypes;
             model.ScheduledDate = equipmentTask.ScheduledDate.HasValue ? equipmentTask.ScheduledDate.Value.ToShortDateString():"";
+            model.StartTime = equipmentTask.StartTime.HasValue ? equipmentTask.StartTime.Value.ToShortTimeString() : "";
+            model.EndTime = equipmentTask.EndTime.HasValue ? equipmentTask.EndTime.Value.ToShortTimeString() : "";
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             model.Popup = input.Popup;
             model.RootId = input.RootId;
@@ -72,7 +76,6 @@ namespace KnowYourTurf.Web.Controllers
             return Json(model,JsonRequestBehavior.AllowGet);
         }
 
-
         public ActionResult Display_Template(ViewModel input)
         {
             return View("Display", new DisplayEquipmentTaskViewModel{Popup = input.Popup});
@@ -80,12 +83,14 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Display(ViewModel input)
         {
-            var equipmentEquipmentTask = _repository.Find<EquipmentTask>(input.EntityId);
-            var model = Mapper.Map<EquipmentTask, DisplayEquipmentTaskViewModel>(equipmentEquipmentTask);
+            var equipmentTask = _repository.Find<EquipmentTask>(input.EntityId);
+            var model = Mapper.Map<EquipmentTask, DisplayEquipmentTaskViewModel>(equipmentTask);
             model.Popup = input.Popup;
-            model.ScheduledDate = equipmentEquipmentTask.ScheduledDate.HasValue ? equipmentEquipmentTask.ScheduledDate.Value.ToShortDateString() : "";
-            model._EmployeeNames = equipmentEquipmentTask.Employees.Select(x => x.FullName);
-            model._PartsNames = equipmentEquipmentTask.Parts.Select(x => x.Name);
+            model.ScheduledDate = equipmentTask.ScheduledDate.HasValue ? equipmentTask.ScheduledDate.Value.ToShortDateString() : "";
+            model.StartTime = equipmentTask.StartTime.Value.ToShortTimeString();
+            model.EndTime = equipmentTask.EndTime.HasValue ? equipmentTask.EndTime.Value.ToShortTimeString() : "";
+            model._EmployeeNames = equipmentTask.Employees.Select(x => x.FullName);
+            model._PartsNames = equipmentTask.Parts.Select(x => x.Name);
             model._AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentTaskController>(x => x.AddUpdate(null));
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -131,7 +136,13 @@ namespace KnowYourTurf.Web.Controllers
             item.ActualTimeSpent = input.ActualTimeSpent;
             item.Notes = input.Notes;
             item.Complete = input.Complete;
-            
+            item.StartTime = null;
+            item.StartTime = DateTime.Parse(input.ScheduledDate + " " + input.StartTime);
+            item.EndTime = null;
+            if (!string.IsNullOrEmpty(input.EndTime))
+            {
+                item.EndTime = DateTime.Parse(input.ScheduledDate + " " + input.EndTime);
+            }
         }
 
         private void mapChildren(EquipmentTask equipmentTask,EquipmentTaskViewModel model)

@@ -14,10 +14,10 @@
             @Html.SubmissionFor(x => x.ScheduledDate).ElType("DateTextbox").ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ScheduledStartTimeString).ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
+            @Html.SubmissionFor(x => x.StartTime).ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
         </div>
         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ScheduledEndTimeString).ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EndTime).ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
         </div>
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()

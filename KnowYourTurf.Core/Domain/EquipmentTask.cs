@@ -17,6 +17,9 @@ namespace KnowYourTurf.Core.Domain
         public virtual EquipmentTaskType TaskType { get; set; }
         [ValidateNonEmpty]
         public virtual DateTime? ScheduledDate { get; set; }
+        [ValidateNonEmpty]
+        public virtual DateTime? StartTime { get; set; }
+        public virtual DateTime? EndTime { get; set; }
         public virtual string ActualTimeSpent { get; set; }
         [TextArea]
         public virtual string Notes { get; set; }
