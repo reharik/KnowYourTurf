@@ -45,7 +45,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult AddUpdate(AddUpdateTaskViewModel input)
         {
             var task = input.EntityId > 0 ? _repository.Find<Task>(input.EntityId) : new Task();
-            task.ScheduledDate = input.ScheduledDate.IsNotEmpty() ? DateTime.Parse(input.ScheduledDate) : task.ScheduledDate.Value.Date;
+            task.ScheduledDate = input.ScheduledDate.IsNotEmpty() ? DateTime.Parse(input.ScheduledDate) : task.ScheduledDate.HasValue?task.ScheduledDate.Value.Date:DateTime.Now.Date;
             task.StartTime= input.ScheduledStartTime.IsNotEmpty() ? DateTime.Parse(input.ScheduledStartTime) : task.StartTime;
             var taskTypes = _selectListItemService.CreateList<TaskType>(x => x.Name, x => x.EntityId, true);
             var fields = ((KYTSelectListItemService)_selectListItemService).CreateFieldsSelectListItems(input.RootId, input.ParentId);
