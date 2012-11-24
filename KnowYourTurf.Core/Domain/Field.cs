@@ -20,7 +20,6 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Abbreviation { get; set; }
         [ValidateNonEmpty, ValidateIntegerAttribute]
         public virtual int Size { get; set; }
-        public virtual string FileUrl { get; set; }
         [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
         public virtual string FieldColor { get; set; }
@@ -30,7 +29,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual IEnumerable<Task> Tasks { get { return _tasks; } }
         public virtual IEnumerable<Task> GetPendingTasks()
         {
-            return _tasks.Where(x => !x.Complete && x.ScheduledStartTime >= DateTime.Now);
+            return _tasks.Where(x => !x.Complete && x.StartTime >= DateTime.Now);
         }
         public virtual void RemovePendingTask(Task task) { _tasks.Remove(task); }
         public virtual void AddPendingTask(Task task)

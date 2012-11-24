@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AbstractTestProject</RootNamespace>
-    <AssemblyName>AbstractTestProject</AssemblyName>
+    <AssemblyName>AbstractTestProjectBuild</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -59,9 +59,9 @@
     <Compile Include="SpecificationExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
+    <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.CoreBuild.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
-      <Name>KnowYourTurf.Core</Name>
+      <Name>KnowYourTurf.CoreBuild</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

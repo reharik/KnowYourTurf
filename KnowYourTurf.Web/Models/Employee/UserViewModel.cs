@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
 using CC.Core.Enumerations;
 using CC.Core.Localization;
 using Castle.Components.Validator;
@@ -23,7 +24,6 @@ namespace KnowYourTurf.Web.Models
         public string LastName { get; set; }
         public string EmergencyContact { get; set; }
         public string EmergencyContactPhone { get; set; }
-        [ValidateNonEmpty]
         public string UserLoginInfoPassword { get; set; }
         [ValidateNonEmpty]
         [ValueOf(typeof(Status))]

@@ -45,7 +45,7 @@ namespace KnowYourTurf.Web.Controllers
             equipmentTask.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : equipmentTask.ScheduledDate;
             var equipmentTaskTypes = _selectListItemService.CreateList<EquipmentTaskType>(x => x.Name, x => x.EntityId, true);
             var equipment = _selectListItemService.CreateList<Equipment>(x=>x.Name,x=>x.EntityId,true);
-            var availableEmployees = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString() && x.UserRoles.Any(y=>y.Name==UserType.Employee.ToString()))
+            var availableEmployees = _repository.Query<User>(x =>x.UserRoles.Any(y=>y.Name==UserType.Employee.ToString()))
                 .Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).OrderBy(x=>x.name).ToList();
             var selectedEmployees = equipmentTask.Employees.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName }).OrderBy(x => x.name);
             
@@ -83,6 +83,7 @@ namespace KnowYourTurf.Web.Controllers
             var equipmentEquipmentTask = _repository.Find<EquipmentTask>(input.EntityId);
             var model = Mapper.Map<EquipmentTask, DisplayEquipmentTaskViewModel>(equipmentEquipmentTask);
             model.Popup = input.Popup;
+            model.ScheduledDate = equipmentEquipmentTask.ScheduledDate.HasValue ? equipmentEquipmentTask.ScheduledDate.Value.ToShortDateString() : "";
             model._EmployeeNames = equipmentEquipmentTask.Employees.Select(x => x.FullName);
             model._PartsNames = equipmentEquipmentTask.Parts.Select(x => x.Name);
             model._AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentTaskController>(x => x.AddUpdate(null));

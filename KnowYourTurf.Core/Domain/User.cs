@@ -52,12 +52,12 @@ namespace KnowYourTurf.Core.Domain
 
         public virtual bool IsEmployeeAvailableForTask(Task task)
         {
-            var startTime = DateTimeUtilities.StandardToMilitary(task.ScheduledStartTime.ToString());
-            var endTime = DateTimeUtilities.StandardToMilitary(task.ScheduledEndTime.ToString());
+            var startTime = DateTimeUtilities.StandardToMilitary(task.StartTime.ToString());
+            var endTime = DateTimeUtilities.StandardToMilitary(task.EndTime.ToString());
             var conflictingTask = Tasks.FirstOrDefault(x => x != task
                                                                  && (x.ScheduledDate == task.ScheduledDate
-                                                                      && DateTimeUtilities.StandardToMilitary(x.ScheduledStartTime.ToString()) < endTime
-                                                                      && DateTimeUtilities.StandardToMilitary(x.ScheduledEndTime.ToString()) > startTime));
+                                                                      && DateTimeUtilities.StandardToMilitary(x.StartTime.ToString()) < endTime
+                                                                      && DateTimeUtilities.StandardToMilitary(x.EndTime.ToString()) > startTime));
             return conflictingTask == null;
         }
 
@@ -105,9 +105,8 @@ namespace KnowYourTurf.Core.Domain
         public virtual string LoginName { get; set; }
         [ValidateNonEmpty]
         public virtual string Password { get; set; }
-        [ValidateNonEmpty, ValueOf(typeof(Status))]
-        public virtual string Status { get; set; }
-        
+        [ValidateNonEmpty]
+        public virtual string Salt { get; set; }
         public virtual Guid ByPassToken { get; set; }
 
     }

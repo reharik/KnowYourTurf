@@ -222,10 +222,10 @@ namespace Generator
 
         private void CreateCompany()
         {
-            _company = new Company { Name = "KYT", ZipCode = "78702", TaxRate = 8.25,NumberOfCategories = 2};
+            _company = new Company { Name = "KYT", ZipCode = "78702", TaxRate = 8.25,NumberOfSites = 2};
             _category1 = new Site { Name = "Field 1" };
 //            _category2 = new Site { Name = "Field 2" };
-            _company.AddCategory(_category1);
+            _company.AddSite(_category1);
 //            _company.AddCategory(_category2);
 
             _repository.Save(_company);
@@ -275,7 +275,6 @@ namespace Generator
                                              {
                                                  LoginName = "Admin",
                                                  Password = "123",
-                                                 Status = "Active",
                                                  CompanyId = companyId
                                              };
             _defaultUser.AddUserRole(_userRoleAdmin);
@@ -306,7 +305,6 @@ namespace Generator
             {
                 LoginName = "facilities",
                 Password = "facilities",
-                Status = "Active",
                 CompanyId = companyId
             };
             facilities.AddUserRole(_userRoleFac);
@@ -341,7 +339,6 @@ namespace Generator
             {
                 LoginName = "reharik@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
 
@@ -366,7 +363,6 @@ namespace Generator
             {
                 LoginName = "amahl@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
 
@@ -391,7 +387,6 @@ namespace Generator
             {
                 LoginName = "mark@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
 
@@ -416,7 +411,6 @@ namespace Generator
             {
                 LoginName = "chris@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
             _employee1.AddUserRole(_userRoleEmployee);
@@ -518,8 +512,8 @@ namespace Generator
             {
                 TaskType = taskType1,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
-                ScheduledStartTime = DateTime.Parse("3/3/2011 5:30 AM"),
-                ScheduledEndTime = DateTime.Parse("3/3/2011 6:30 AM"),
+                StartTime = DateTime.Parse("3/3/2011 5:30 AM"),
+                EndTime = DateTime.Parse("3/3/2011 6:30 AM"),
                 Notes = "Notes1",
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString(),
@@ -532,8 +526,8 @@ namespace Generator
             {
                 TaskType = taskType2,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
-                ScheduledStartTime = DateTime.Parse("3/3/2011 6:30 AM"),
-                ScheduledEndTime = DateTime.Parse("3/3/2011 7:30 AM"),
+                StartTime = DateTime.Parse("3/3/2011 6:30 AM"),
+                EndTime = DateTime.Parse("3/3/2011 7:30 AM"),
                 Notes = "Notes2",
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString(),
@@ -556,8 +550,8 @@ namespace Generator
             {
                 TaskType = taskType1,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
-                ScheduledStartTime = DateTime.Parse("3/3/2011 5:30 AM"),
-                ScheduledEndTime = DateTime.Parse("3/3/2011 6:30 AM"),
+                StartTime = DateTime.Parse("3/3/2011 5:30 AM"),
+                EndTime = DateTime.Parse("3/3/2011 6:30 AM"),
                 Notes = "Notes1",
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString(),
@@ -570,8 +564,8 @@ namespace Generator
             {
                 TaskType = taskType2,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
-                ScheduledStartTime = DateTime.Parse("3/3/2011 6:30 AM"),
-                ScheduledEndTime = DateTime.Parse("3/3/2011 7:30 AM"),
+                StartTime = DateTime.Parse("3/3/2011 6:30 AM"),
+                EndTime = DateTime.Parse("3/3/2011 7:30 AM"),
                 Notes = "Notes2",
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString(),

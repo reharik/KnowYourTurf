@@ -18,8 +18,8 @@ namespace KnowYourTurf.Core.Domain
         [ValidateNonEmpty]
         public virtual DateTime? ScheduledDate { get; set; }
         [ValidateNonEmpty]
-        public virtual DateTime? ScheduledStartTime { get; set; }
-        public virtual DateTime? ScheduledEndTime { get; set; }
+        public virtual DateTime? StartTime { get; set; }
+        public virtual DateTime? EndTime { get; set; }
         public virtual string ActualTimeSpent { get; set; }
         [ValidateDouble]
         public virtual double? QuantityNeeded { get; set; }
@@ -66,8 +66,8 @@ namespace KnowYourTurf.Core.Domain
                                   TaskType = TaskType,
                                   Notes = Notes,
                                   ScheduledDate = ScheduledDate,
-                                  ScheduledEndTime = ScheduledEndTime,
-                                  ScheduledStartTime = ScheduledStartTime,
+                                  EndTime = EndTime,
+                                  StartTime = StartTime,
                                   InventoryProduct = InventoryProduct,
                                   Field = Field
                               };

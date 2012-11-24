@@ -36,6 +36,7 @@ namespace KnowYourTurf.EmailTask
                 x.AddRegistry(new KYTWebRegistry());
             });
             XmlConfigurator.ConfigureAndWatch(new FileInfo(locateFileAsAbsolutePath("log4net.config")));
+//            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 
         }
 
@@ -69,7 +70,7 @@ namespace KnowYourTurf.EmailTask
                                                                     (x.Frequency == EmailFrequency.Weekly.ToString() &&
                                                                      DateTime.Now.Day == 1)))
                     {
-                        var emailTemplateHandler = ObjectFactory.Container.GetInstance<IEmailTemplateHandler>(x.EmailTemplate.Name + "Handler");
+                        var emailTemplateHandler = ObjectFactory.Container.GetInstance<IEmailTemplateHandler>(x.EmailTemplate.Name+"Handler");
                         emailTemplateHandler.Execute(x);
                         if (x.Frequency == EmailFrequency.Once.ToString())
                         {

@@ -18,7 +18,7 @@ CC.ValidationRunner = (function(){
         var elementIsValid = true;
         var classes = classList(CCElement.$input);
         var val = CCElement.getValue();
-        if((!val || val=="") && !_.any(classes,function(item){return item == "required"})){
+        if((!val || val=="") && !_.any(classes,function(item){return item == "required" || item == "fileRequired"})){
             CCElement.isValid = true;
             return;
         }

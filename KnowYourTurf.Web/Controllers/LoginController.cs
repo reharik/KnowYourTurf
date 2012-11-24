@@ -58,7 +58,6 @@ namespace KnowYourTurf.Web.Controllers
             {
                 if (input.UserName.IsNotEmpty() && input.Password.IsNotEmpty())
                 {
-                    var redirectUrl = string.Empty;
                     var user = _securityDataService.AuthenticateForUserId(input.UserName, input.Password);
                     if (user != null)
                     {

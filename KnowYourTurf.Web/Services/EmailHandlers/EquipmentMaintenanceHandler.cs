@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 using CC.Core;
+using StructureMap;
 
 namespace KnowYourTurf.Web.Services.EmailHandlers
 {
@@ -15,17 +17,20 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
     {
         private readonly IEmailTemplateService _emailTemplateService;
         private readonly IRepository _repository;
+        private readonly ILogger _logger;
 
         public EquipmentMaintenanceHandler(IEmailTemplateService emailTemplateService,
-        IRepository repository)
+       ILogger logger)
         {
             _emailTemplateService = emailTemplateService;
-            _repository = repository;
+            _repository = ObjectFactory.Container.GetInstance<IRepository>("SpecialInterceptorNoFilters");
+
+            _logger = logger;
         }
 
         public void Execute(EmailJob emailJob)
         {
-            var equipment = _repository.Query<Equipment>(x => x.Threshold >= x.TotalHours);
+            var equipment = _repository.Query<Equipment>(x => x.Threshold > 0 && x.Threshold <= x.TotalHours);
             equipment.ForEachItem(eq =>
             {
                 emailJob.Subscribers.ForEachItem(sub =>

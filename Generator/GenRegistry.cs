@@ -6,7 +6,6 @@ using CC.Security.Interfaces;
 using CC.Security.Services;
 using CC.UI.Helpers;
 using KnowYourTurf.Core.Domain.Persistence;
-using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html.Menu;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Core;
@@ -51,7 +50,7 @@ namespace KnowYourTurf.Web
             For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory());
 
             For<ISession>().HybridHttpOrThreadLocalScoped().Add(
-                context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor()));
+                context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithCompanyFilter()));
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();
 

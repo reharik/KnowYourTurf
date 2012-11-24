@@ -37,9 +37,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             {
                 Map(x => x.LoginName);
                 Map(x => x.Password);
-                Map(x => x.Status);
+                Map(x => x.Salt);
                 Map(x => x.ByPassToken);
-                ApplyFilter<StatusConditionFilter>("(status = :condition)");
             }
         }
     }

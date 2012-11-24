@@ -25,6 +25,7 @@ $.extend(CC.Elements.Element.prototype,{
     init:function(view){
         this.notification = view.notification?view.notification:CC.notification;
         this.viewId = view.cid;
+        this.view = view;
         this.cid = _.uniqueId("c");
         this.$input = this.$container.find("input");
         this.type = "Element";
@@ -203,6 +204,13 @@ CC.Elements.FileSubmission = CC.Elements.Element.extend({
         this.type = "file";
         this.$input = this.$container.find("#FileUrl");
         if(view.model.FileUrl()){
+            if(view.model.FileUrl().indexOf('.jpg')>0){
+                this.$container.find("#image").show();
+                this.$container.find("#link").hide();
+            }else{
+                this.$container.find("#image").hide();
+                this.$container.find("#link").show();
+            }
             this.showImage();
         }else{
             this.showInput();
@@ -212,7 +220,6 @@ CC.Elements.FileSubmission = CC.Elements.Element.extend({
             view.model.DeleteImage(true);
         },this));
     },
-
     showImage:function(){
         this.$container.find(".imageContainer").show();
         this.$container.find(".inputContainer").hide();

@@ -40,7 +40,7 @@ namespace KnowYourTurf.Web.Controllers
             var emailJob = input.EntityId > 0 ? _repository.Find<EmailJob>(input.EntityId) : new EmailJob();
             emailJob.Status = input.EntityId > 0 ? emailJob.Status : Status.InActive.ToString();
             
-            var availableSubscribers = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString()).Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).ToList();
+            var availableSubscribers = _repository.FindAll<User>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).ToList();
             var selectedSubscribers = emailJob.Subscribers.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
 
             var model = Mapper.Map<EmailJob, EmailJobViewModel>(emailJob);

@@ -27,13 +27,15 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISessionContext _sessionContext;
         private readonly ISelectListItemService _selectListItemService;
         private readonly IAuthorizationRepository _authorizationRepository;
+        private readonly ISecurityDataService _securityDataService;
 
         public FacilitiesController(IRepository repository,
             ISaveEntityService saveEntityService,
             IFileHandlerService fileHandlerService,
             ISessionContext sessionContext,
             ISelectListItemService selectListItemService,
-            IAuthorizationRepository authorizationRepository)
+            IAuthorizationRepository authorizationRepository,
+            ISecurityDataService securityDataService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
@@ -41,6 +43,7 @@ namespace KnowYourTurf.Web.Controllers
             _sessionContext = sessionContext;
             _selectListItemService = selectListItemService;
             _authorizationRepository = authorizationRepository;
+            _securityDataService = securityDataService;
         }
 
         public ActionResult AddUpdate_Template(ViewModel input)
@@ -92,6 +95,7 @@ namespace KnowYourTurf.Web.Controllers
             }
             facilities = mapToDomain(input, facilities);
             mapRolesToGroups(facilities);
+            handlePassword(input, facilities);
             if (input.DeleteImage)
             {
                 _fileHandlerService.DeleteFile(facilities.FileUrl);
@@ -121,8 +125,7 @@ namespace KnowYourTurf.Web.Controllers
             facilities.UserLoginInfo = new UserLoginInfo()
             {
                 Password = model.UserLoginInfoPassword,
-                LoginName = model.Email,
-                Status = model.UserLoginInfoStatus,
+                LoginName = model.Email
             };
             var role = _repository.Query<UserRole>(x => x.Name == UserType.Facilities.ToString()).FirstOrDefault();
             facilities.AddUserRole(role);
@@ -138,6 +141,16 @@ namespace KnowYourTurf.Web.Controllers
             _authorizationRepository.DetachUserFromGroup(facilities, UserType.MultiTenant.Key);
 
             _authorizationRepository.AssociateUserWith(facilities, UserType.Facilities.Key);
+        }
+
+        private void handlePassword(UserViewModel input, User origional)
+        {
+            if (input.UserLoginInfoPassword.IsNotEmpty())
+            {
+                origional.UserLoginInfo.Salt = _securityDataService.CreateSalt();
+                origional.UserLoginInfo.Password = _securityDataService.CreatePasswordHash(input.UserLoginInfoPassword,
+                                                            origional.UserLoginInfo.Salt);
+            }
         }
     }
 }

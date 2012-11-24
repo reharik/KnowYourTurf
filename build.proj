@@ -63,7 +63,7 @@
   </Target>
 
   <ItemGroup>
-    <UnitTestAssemblies Include="$(SourcePath)\KnowYourTurf.Tests\bin\Debug\KnowYourTurfBuild.Tests.dll;" />
+    <UnitTestAssemblies Include="$(SourcePath)\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.TestsBuild.dll;" />
   </ItemGroup>
   <Target Name="_unitTests">
     <NUnit Assemblies="@(UnitTestAssemblies)" ToolPath="$(NUnit)" />

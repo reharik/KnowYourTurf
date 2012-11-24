@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Models
     public class DisplayEquipmentTaskViewModel : ViewModel
     {
         public string TaskTypeName { get; set; }
-        public DateTime ScheduledDate { get; set; }
+        public string ScheduledDate { get; set; }
         public string EquipmentName { get; set; }
         public string Notes { get; set; }
         public string _AddUpdateUrl { get; set; }
