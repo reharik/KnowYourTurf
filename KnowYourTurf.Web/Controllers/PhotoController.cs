@@ -117,7 +117,7 @@ namespace KnowYourTurf.Web.Controllers
         [TextArea]
         public virtual string Description { get; set; }
         public virtual int PhotoCategoryEntityId { get; set; }
-        [ValidateNonEmpty]
+        [ValidateFileNotEmpty]
         public virtual string FileUrl { get; set; }
 
         public string _saveUrl { get; set; }

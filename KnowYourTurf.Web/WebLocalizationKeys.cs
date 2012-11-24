@@ -221,7 +221,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken DATE_ADDED = new WebLocalizationKeys("DATE_ADDED", "Date Added {0}");
         public static readonly StringToken PO_Number = new WebLocalizationKeys("PO_Number", "PO Number");
         public static readonly StringToken COMMIT_PURCHASE_ORDER = new WebLocalizationKeys("COMMIT_PURCHASE_ORDER", "Commit Purchase Order");
-        public static readonly StringToken RECEIVE_PURCHASE_ORDER_ITEM = new WebLocalizationKeys("RECEIVE_PURCHASE_ORDER_ITEM", "Recieve Purchase Order Item");
+        public static readonly StringToken RECEIVE_PURCHASE_ORDER_ITEM = new WebLocalizationKeys("RECEIVE_PURCHASE_ORDER_ITEM", "Receive Purchase Order Item");
 
         public static readonly StringToken COULD_NOT_DELETE_FOR_TASK = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_TASK", "Could not delete one or more item because it is being used in one or more Task");
         public static readonly StringToken COULD_NOT_DELETE_FOR_VENDOR = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_VENDOR", "Could not delete one or more item because it is being used by one or more Vendor");

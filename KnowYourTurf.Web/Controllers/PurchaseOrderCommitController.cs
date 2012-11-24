@@ -26,7 +26,7 @@ namespace KnowYourTurf.Web.Controllers
             _repository = repository;
             _saveEntityService = saveEntityService;
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _receivePurchaseOrderLineItemGrid = ObjectFactory.Container.GetInstance < IEntityListGrid<PurchaseOrderLineItem>>("Recieve");
+            _receivePurchaseOrderLineItemGrid = ObjectFactory.Container.GetInstance < IEntityListGrid<PurchaseOrderLineItem>>("Receive");
         }
 
         public ActionResult PurchaseOrderCommit_Template(ViewModel input)

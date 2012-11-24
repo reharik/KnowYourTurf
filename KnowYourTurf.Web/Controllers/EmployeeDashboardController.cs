@@ -57,6 +57,7 @@ namespace KnowYourTurf.Web.Controllers
            
 
             var model = Mapper.Map<User, UserViewModel>(employee);
+            model.UserLoginInfoPassword = "";
             model.FileUrl = model.FileUrl.IsNotEmpty() ? model.FileUrl.AddImageSizeToName("thumb") : "";
             model._StateList = _selectListItemService.CreateList<State>();
             model._UserLoginInfoStatusList = _selectListItemService.CreateList<Status>();
