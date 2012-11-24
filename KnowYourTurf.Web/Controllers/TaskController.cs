@@ -45,7 +45,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult AddUpdate(AddUpdateTaskViewModel input)
         {
             var task = input.EntityId > 0 ? _repository.Find<Task>(input.EntityId) : new Task();
-            task.ScheduledDate = input.ScheduledDate.IsNotEmpty() ? DateTime.Parse(input.ScheduledDate) : task.ScheduledDate.Value.Date;
+            task.ScheduledDate = input.ScheduledDate.IsNotEmpty() ? DateTime.Parse(input.ScheduledDate) : task.ScheduledDate.HasValue?task.ScheduledDate.Value.Date:DateTime.Now.Date;
             task.StartTime= input.ScheduledStartTime.IsNotEmpty() ? DateTime.Parse(input.ScheduledStartTime) : task.StartTime;
             var taskTypes = _selectListItemService.CreateList<TaskType>(x => x.Name, x => x.EntityId, true);
             var fields = ((KYTSelectListItemService)_selectListItemService).CreateFieldsSelectListItems(input.RootId, input.ParentId);
@@ -61,8 +61,8 @@ namespace KnowYourTurf.Web.Controllers
             model._FieldEntityIdList = fields;
             model._InventoryProductProductEntityIdList = products;
             model._TaskTypeEntityIdList = taskTypes;
-            model.ScheduledStartTimeString = task.StartTime.HasValue?task.StartTime.Value.ToShortTimeString():"";
-            model.ScheduledEndTimeString = task.EndTime.HasValue ? task.EndTime.Value.ToShortTimeString() : "";
+            model.StartTime = task.StartTime.HasValue?task.StartTime.Value.ToShortTimeString():"";
+            model.EndTime = task.EndTime.HasValue ? task.EndTime.Value.ToShortTimeString() : "";
             model.ScheduledDate = task.ScheduledDate.Value.ToShortDateString();
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             model.Popup = input.Popup;
@@ -124,8 +124,8 @@ namespace KnowYourTurf.Web.Controllers
         {
             var task = _repository.Find<Task>(input.EntityId);
             var model = Mapper.Map<Task, DisplayTaskViewModel>(task);
-            model.ScheduledStartTimeString = task.StartTime.Value.ToShortTimeString();
-            model.ScheduledEndTimeString = task.EndTime.HasValue ? task.EndTime.Value.ToShortTimeString() : "";
+            model.StartTime = task.StartTime.Value.ToShortTimeString();
+            model.EndTime = task.EndTime.HasValue ? task.EndTime.Value.ToShortTimeString() : "";
             model.ScheduledDate = task.ScheduledDate.HasValue ? task.ScheduledDate.Value.ToShortDateString() : "";
             model.Popup = input.Popup;
             model._EmployeeNames = task.Employees.Select(x => x.FullName);
@@ -178,11 +178,11 @@ namespace KnowYourTurf.Web.Controllers
         {
             item.ScheduledDate = DateTime.Parse(input.ScheduledDate);
             item.StartTime = null;
-            item.StartTime = DateTime.Parse(input.ScheduledDate + " " + input.ScheduledStartTimeString);
+            item.StartTime = DateTime.Parse(input.ScheduledDate + " " + input.StartTime);
             item.EndTime = null;
-            if(!string.IsNullOrEmpty(input.ScheduledEndTimeString))
+            if(!string.IsNullOrEmpty(input.EndTime))
             {
-                item.EndTime = DateTime.Parse(input.ScheduledDate + " " + input.ScheduledEndTimeString);
+                item.EndTime = DateTime.Parse(input.ScheduledDate + " " + input.EndTime);
             }
             item.ActualTimeSpent = input.ActualTimeSpent;
             item.QuantityNeeded = input.QuantityNeeded;

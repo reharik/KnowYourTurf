@@ -22,9 +22,9 @@ namespace KnowYourTurf.Web.Models
         public int TaskTypeEntityId { get; set; }
         [ValidateNonEmpty]
         public string ScheduledDate { get; set; }
-//        [ValidateNonEmpty]
-//        public string ScheduledStartTimeString { get; set; }
-//        public string ScheduledEndTimeString { get; set; }
+        [ValidateNonEmpty]
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public string ActualTimeSpent { get; set; }
         [ValidateNonEmpty]
         public int EquipmentEntityId { get; set; }
@@ -38,6 +38,8 @@ namespace KnowYourTurf.Web.Models
     {
         public string TaskTypeName { get; set; }
         public string ScheduledDate { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public string EquipmentName { get; set; }
         public string Notes { get; set; }
         public string _AddUpdateUrl { get; set; }
@@ -50,5 +52,8 @@ namespace KnowYourTurf.Web.Models
         public int Equipment { get; set; }
         public bool Copy { get; set; }
         public DateTime? ScheduledDate { get; set; }
+
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
     }
 }

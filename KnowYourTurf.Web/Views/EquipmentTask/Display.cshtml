@@ -12,7 +12,13 @@
                @Html.ViewFor(x => x.TaskTypeName).ToHtmlTag()
         </div>
         <div class="fieldRow">
-                    @Html.ViewFor(x => x.ScheduledDate).LabelDisplay(WebLocalizationKeys.DATE).ToHtmlTag()
+            @Html.ViewFor(x => x.ScheduledDate).LabelDisplay(WebLocalizationKeys.DATE).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+                    @Html.ViewFor(x => x.StartTime).LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+                    @Html.ViewFor(x => x.EndTime).LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
         </div>
         <div class="fieldRow">
                     @Html.ViewFor(x => x.EquipmentName).ToHtmlTag()

@@ -7,6 +7,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
         public EquipmentTaskMap()
         {
             Map(x => x.ScheduledDate);
+            Map(x => x.StartTime);
+            Map(x => x.EndTime);
             Map(x => x.ActualTimeSpent);
             Map(x => x.Notes);
             Map(x => x.Deleted);

@@ -24,6 +24,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.EmergencyContact);
             Map(x => x.EmergencyContactPhone);
             Map(x => x.EmployeeId);
+            Map(x => x.SystemSupport);
             References(x => x.Company);
             References(x => x.UserLoginInfo).Cascade.All();
             HasManyToMany(x => x.EmailTemplates).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();

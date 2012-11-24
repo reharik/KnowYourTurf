@@ -40,6 +40,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string EmergencyContact { get; set; }
         public virtual string EmergencyContactPhone { get; set; }
         public virtual string EmployeeId { get; set; }
+        public virtual bool SystemSupport { get; set; }
 
         public virtual string FullNameLNF
         {

@@ -68,10 +68,8 @@
     <Reference Include="log4net">
       <HintPath>..\lib\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -125,6 +123,7 @@
     <Compile Include="Domain\BaseProduct.cs" />
     <Compile Include="Domain\Calculator.cs" />
     <Compile Include="Domain\EquipmentVendor.cs" />
+    <Compile Include="Domain\LoginStatistics.cs" />
     <Compile Include="Domain\Site.cs" />
     <Compile Include="Domain\Company.cs" />
     <Compile Include="Domain\Continuation.cs" />
@@ -156,7 +155,6 @@
     <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersRepository.cs" />
     <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersUnitOfWork.cs" />
     <Compile Include="Domain\Tools\NullNHSetupConfig.cs" />
-    <Compile Include="Domain\Tools\NullNHibernateUnitOfWork.cs" />
     <Compile Include="Domain\Tools\CustomAttributes\TextAreaAttribute.cs" />
     <Compile Include="Domain\Tools\NullSession.cs" />
     <Compile Include="Domain\Tools\NullSessionFactory.cs" />

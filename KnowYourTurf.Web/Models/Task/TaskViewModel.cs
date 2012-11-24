@@ -25,8 +25,8 @@ namespace KnowYourTurf.Web.Models
         [ValidateNonEmpty]
         public string ScheduledDate { get; set; }
         [ValidateNonEmpty]
-        public string ScheduledStartTimeString { get; set; }
-        public string ScheduledEndTimeString { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public string ActualTimeSpent { get; set; }
         [ValidateNonEmpty]
         public int FieldEntityId { get; set; }
@@ -47,8 +47,8 @@ namespace KnowYourTurf.Web.Models
         public string ScheduledDate { get; set; }
         public string FieldName { get; set; }
         public string InventoryProductProductName { get; set; }
-        public string ScheduledStartTimeString { get; set; }
-        public string ScheduledEndTimeString { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public string Notes { get; set; }
         public string _AddUpdateUrl { get; set; }
         public IEnumerable<string> _EmployeeNames { get; set; }
