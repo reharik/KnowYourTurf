@@ -34,6 +34,10 @@
     <Reference Include="Alpinely.TownCrier, Version=1.1.0.13346, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\lib\Alpinely.TownCrier.dll</HintPath>
     </Reference>
+    <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -69,10 +73,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CannibalCoder\CC.Core\CC.Core.csproj">
-      <Project>{5E0B0CA2-BD5E-4953-A336-2AADC00CD81B}</Project>
-      <Name>CC.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AbstractTestProject\AbstractTestProject.csproj">
       <Project>{C1B9B3FB-AF1A-43AD-8C11-A8791175B289}</Project>
       <Name>AbstractTestProject</Name>
