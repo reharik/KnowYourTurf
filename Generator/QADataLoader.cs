@@ -47,6 +47,7 @@ namespace Generator
         private PhotoCategory _photoCategory2;
         private Part _part1;
         private Part _part2;
+        private IGetCompanyIdService _getCompanyIdService;
 
         public QADataLoader(IRepository repository,
             IPurchaseOrderLineItemService purchaseOrderLineItemService,
@@ -61,6 +62,10 @@ namespace Generator
 
         public void Load()
         {
+            _getCompanyIdService = ObjectFactory.Container.GetInstance<IGetCompanyIdService>();
+            _getCompanyIdService.CompanyId = 1;
+            ObjectFactory.Container.Inject(_getCompanyIdService);
+
             CreateCompany();
             CreateListTypes();
             createUser();

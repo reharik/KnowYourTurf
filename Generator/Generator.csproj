@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandRegistry.cs" />
+    <Compile Include="Commands\ChrisDataLoadCommand.cs" />
     <Compile Include="Commands\QADataLoadCommand.cs" />
     <Compile Include="Commands\SecurityUpdateCommand.cs" />
     <Compile Include="Commands\DataLoadCommand.cs" />
@@ -157,7 +158,6 @@
     <Compile Include="Commands\RebuildDatabaseCommand.cs" />
     <Compile Include="Commands\SecurityCommand.cs" />
     <Compile Include="QADataLoader.cs" />
-    <Compile Include="QA_Base_Objects_DataLoader.cs" />
     <Compile Include="MinDataLoader.cs" />
     <Compile Include="DataLoader.cs" />
     <Compile Include="GenRegistry.cs" />
