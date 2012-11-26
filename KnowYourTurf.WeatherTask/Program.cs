@@ -64,8 +64,12 @@ namespace KnowYourTurf.WeatherTask
             companies.ForEachItem(x =>
             {
                 _logger.LogInfo(x.Name+", "+DateTime.Now.ToString());
+                _logger.LogInfo(x.Name + ", Get Weather for Yesterday");
                 loadWeatherObject(jss, webClient, x);
+                _logger.LogInfo(x.Name + ", Recieved Weather for Yesterday");
+                _logger.LogInfo(x.Name + ", Get Weather for Last Week");
                 loadLastWeeksWeatherObject(jss, webClient, x);
+                _logger.LogInfo(x.Name + ", Recieved Weather for Last Week");
             });
             _repository.UnitOfWork.Commit();
         }
@@ -95,7 +99,10 @@ namespace KnowYourTurf.WeatherTask
 
         private static void loadWeather(JavaScriptSerializer jss, WebClient webClient, Weather weather, string url)
         {
+            _logger.LogInfo("Company Id: " + weather.CompanyId + ", url: " + url + ", Time: " + DateTime.Now.ToString());
             var result = webClient.DownloadString(url);
+            _logger.LogInfo("Company Id: " + weather.CompanyId + ", Result Has Value: " + result.IsNotEmpty() + ", Time: " + DateTime.Now.ToString());
+
             Thread.Sleep(10000);
             if (result.IsEmpty()) return;
             var companyWeatherInfoDto = jss.Deserialize<CompanyWeatherInfoDto>(result);
@@ -123,6 +130,8 @@ namespace KnowYourTurf.WeatherTask
             weather.Humidity = humidity;
             weather.Pressure = meanPressure;
             _repository.Save(weather);
+            _logger.LogInfo("Company Id: " + weather.CompanyId + ", Weather Saved, Time: " + DateTime.Now.ToString());
+
         }
 
     }
