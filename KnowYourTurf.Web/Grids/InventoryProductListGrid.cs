@@ -21,7 +21,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x => x.SizeOfUnit);
             GridBuilder.DisplayFor(x => x.UnitType);
             GridBuilder.DisplayFor(x => x.DatePurchased);
-            GridBuilder.DisplayFor(x => x.Cost).FormatValue(GridColumnFormatter.Currency);
+//            GridBuilder.DisplayFor(x => x.Cost).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.LastVendor.Company);
             return this;
         }

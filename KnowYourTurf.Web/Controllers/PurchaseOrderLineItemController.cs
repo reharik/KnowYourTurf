@@ -54,6 +54,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = Mapper.Map<PurchaseOrderLineItem, PurchaseOrderLineItemViewModel>(purchaseOrderLineItem);
             model.EntityId = input.EntityId;
             model.ParentId = input.ParentId;
+            model._Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEM.ToString();
             model._UnitTypeList = _selectListItemService.CreateList<UnitType>(true);
             model._saveUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.Save(null));
             return Json(model, JsonRequestBehavior.AllowGet);

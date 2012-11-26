@@ -1,81 +1,78 @@
-﻿//using System.Web.Mvc;
-//using KnowYourTurf.Core;
-//using KnowYourTurf.Core.Domain;
-//using KnowYourTurf.Core.Enums;
-//using KnowYourTurf.Core.Services;
-//using KnowYourTurf.Web.Config;
-//using KnowYourTurf.Web.Models;
-//using Rhino.Security.Interfaces;
-//using StructureMap;
-//
-//namespace KnowYourTurf.Web.Controllers
-//{
-//    public class OrthogonalController : Controller
-//    {
-//        private readonly IMenuConfig _menuConfig;
-//        private readonly ISessionContext _sessionContext;
-//        private readonly IAuthorizationService _authorizationService;
-//
-//        public OrthogonalController(IMenuConfig menuConfig, ISessionContext sessionContext,IAuthorizationService authorizationService)
-//        {
-//            _menuConfig = menuConfig;
-//            _sessionContext = sessionContext;
-//            _authorizationService = authorizationService;
-//        }
-//
-//        public PartialViewResult KnowYourTurfHeader()
-//        {
-//            User user = new User();
-//            if (_sessionContext.IsAuthenticated())
-//            {
-//                user = _sessionContext.GetCurrentUser();
-//            }
-//            var inAdminMode = _sessionContext.RetrieveSessionObject(WebLocalizationKeys.INADMINMODE.ToString());
-//            if (inAdminMode == null)
-//            {
-//                _sessionContext.AddUpdateSessionItem(new SessionItem { SessionKey = WebLocalizationKeys.INADMINMODE.ToString(), SessionObject = false });
-//                inAdminMode = false;
-//            }
-//            HeaderViewModel model = new HeaderViewModel
-//            {
-//                User = user,
-//                LoggedIn = _sessionContext.IsAuthenticated(),
-//                IsAdmin = _authorizationService.IsAllowed(user, "/AdminOrGreater"),
-//                InAdminMode = (bool)inAdminMode
-//            };
-//            return PartialView(model);
-//        }
-//
-//        public PartialViewResult KnowYourTurfMenu()
-//        {
-//            var currentUser = _sessionContext.GetCurrentUser();
-//            var inAdminMode = _sessionContext.RetrieveSessionObject(WebLocalizationKeys.INADMINMODE.ToString());
-//            if (_authorizationService.IsAllowed(currentUser, "/AdminOrGreater") && (bool)inAdminMode)
-//            {
-//                IMenuConfig SetupMenuConfig = ObjectFactory.Container.GetInstance<IMenuConfig>("SetupMenu");
-//                return PartialView(new MenuViewModel
-//                {
-//                    MenuItems = SetupMenuConfig.Build()
-//                });
-//            }         
-//            return PartialView(new MenuViewModel
-//                                   {
-//                                       MenuItems = _menuConfig.Build()
-//                                   });
-//        }
-//
-//        public ActionResult TurnOnOffAdmin()
-//        {
-//            var currentUser = _sessionContext.GetCurrentUser();
-//            var inAdminMode = _sessionContext.RetrieveSessionItem(WebLocalizationKeys.INADMINMODE.ToString());
-//            inAdminMode.SessionObject = !(bool) inAdminMode.SessionObject;
-//            _sessionContext.AddUpdateSessionItem(inAdminMode);
-//            return _authorizationService.IsAllowed(currentUser, "/AdminOrGreater")
-//                && (bool)inAdminMode.SessionObject
-//                    ? RedirectToAction("ItemList", "ListTypeList")
-//                    : RedirectToAction("Home", "Home");
-//        }
-//    }
-//
-//  
-//}
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.DomainTools;
+using CC.Core.Html;
+using CC.Core.Html.Menu;
+using KnowYourTurf.Core;
+using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Core.Services;
+using KnowYourTurf.Web.Config;
+using StructureMap;
+
+namespace KnowYourTurf.Web.Controllers
+{
+    public class OrthogonalController : KYTController
+    {
+        private readonly IMenuConfig _menuConfig;
+        private readonly ISessionContext _sessionContext;
+        private readonly IRepository _repository;
+        private readonly IContainer _container;
+
+        public OrthogonalController(IMenuConfig menuConfig,
+                ISessionContext sessionContext,
+            IRepository repository,
+            IContainer container)
+        {
+            _menuConfig = menuConfig;
+            _sessionContext = sessionContext;
+            _repository = repository;
+            _container = container;
+        }
+
+        public PartialViewResult KnowYourTurfHeader(ViewModel input)
+        {
+            HeaderViewModel model = new HeaderViewModel
+                                        {
+                                            User = (User) input.User,
+                                            LoggedIn = User.Identity.IsAuthenticated,
+                                            NotificationSuccessFunction = "kyt.popupCrud.controller.success",
+                                            HelpUrl = UrlContext.GetUrlForAction<OrthogonalController>(x=>x.Help(null))
+                                        };
+            return PartialView(model);
+        }
+
+        public ActionResult Help(ViewModel input)
+        {
+            return View();
+        }
+
+        //remove true param when permissions are implemented
+        public PartialViewResult MainMenu(ViewModel input)
+        {
+            return PartialView(new MenuViewModel
+            {
+                MenuItems = _menuConfig.Build()
+            });
+        }
+    }
+
+    public class MenuViewModel
+    {
+        public IList<MenuItem> MenuItems { get; set; }
+    }
+
+    public class HeaderViewModel : PartialViewResult
+    {
+        public string SiteName { get { return CoreLocalizationKeys.SITE_NAME.ToString(); } }
+        public User User { get; set; }
+        public bool LoggedIn { get; set; }
+        public bool IsAdmin { get; set; }
+        public bool InAdminMode { get; set; }
+        public string UserProfileUrl { get; set; }
+        public string NotificationSettingsUrl { get; set; }
+        public string NotificationSuccessFunction { get; set; }
+
+        public string HelpUrl { get; set; }
+    }
+}

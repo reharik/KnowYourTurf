@@ -51,17 +51,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core">
+    <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\CC.Core.dll</HintPath>
     </Reference>
     <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Security">
+    <Reference Include="CC.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\CC.Security.dll</HintPath>
     </Reference>
-    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.UI.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="Elmah">
       <HintPath>..\lib\Elmah.dll</HintPath>
     </Reference>
@@ -94,7 +99,8 @@
       <HintPath>..\lib\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0ecfe41405c30fb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -217,6 +223,12 @@
     <Compile Include="Controllers\ChemicalListController.cs" />
     <Compile Include="Controllers\CompletedPurchaseOrderListController.cs" />
     <Compile Include="Controllers\CompletedPurchaseOrderDisplayController.cs" />
+    <Compile Include="Controllers\EquipmentVendorController.cs" />
+    <Compile Include="Controllers\EquipmentVendorListController.cs" />
+    <Compile Include="Controllers\EquipmentTaskCalendarController.cs" />
+    <Compile Include="Controllers\EquipmentTaskController.cs" />
+    <Compile Include="Controllers\EquipmentTaskListController.cs" />
+    <Compile Include="Controllers\EquipmentDashboardController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\KnowYourTurfController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
@@ -250,7 +262,6 @@
     <Compile Include="Controllers\ListTypeListsController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\MaterialListController.cs" />
-    <Compile Include="Controllers\OrthogonalController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\PhotoListController.cs" />
     <Compile Include="Controllers\PurchaseOrderCommitController.cs" />
@@ -277,6 +288,10 @@
     <Compile Include="Grids\CalculatorListGrid.cs" />
     <Compile Include="Grids\ChemicalListGrid.cs" />
     <Compile Include="Grids\CompletedTaskGrid.cs" />
+    <Compile Include="Grids\EquipmentVendorListGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskCompletedGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskPendingGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskListGrid.cs" />
     <Compile Include="Grids\DocumentListGrid.cs" />
     <Compile Include="Grids\EmailJobListGrid.cs" />
     <Compile Include="Grids\EmailTemplateListGrid.cs" />
@@ -304,13 +319,15 @@
     <Compile Include="Config\StructureMapControllerFactory.cs" />
     <Compile Include="Config\StructureMapServiceLocator.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\OrthoganalController.cs" />
+    <Compile Include="Controllers\OrthogonalController.cs" />
     <Compile Include="Controllers\PermissionsController.cs" />
     <Compile Include="CustomViewPage.cs" />
     <Compile Include="Menus\HeaderMenu.cs" />
     <Compile Include="Models\BulkAction\BulkActionViewModel.cs" />
     <Compile Include="Models\Calculator\CalculatorViewModel.cs" />
     <Compile Include="Models\Chemical\ChemicalViewModel.cs" />
+    <Compile Include="Models\EquipmentVendor\EquipmentVendorViewModel.cs" />
+    <Compile Include="Models\EquipmentTask\EquipmentTaskViewModel.cs" />
     <Compile Include="Models\EmailJob\EmailJobViewModel.cs" />
     <Compile Include="Models\Employee\UserViewModel.cs" />
     <Compile Include="Models\Enum\ListTypeListViewModel.cs" />
@@ -333,6 +350,7 @@
     <Compile Include="Services\Calculators\OverseedBagsNeededCalculator.cs" />
     <Compile Include="Services\Calculators\OverseedRateNeededCalculator.cs" />
     <Compile Include="Services\Calculators\SandCalculator.cs" />
+    <Compile Include="Services\EmailHandlers\EquipmentMaintenanceHandler.cs" />
     <Compile Include="Services\EmailHandlers\EmployeeDailyTaskHandler.cs" />
     <Compile Include="Services\EmailHandlers\IEmailTemplateHandler.cs" />
     <Compile Include="Services\IAuthenticationContext.cs" />
@@ -712,6 +730,13 @@
     <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
     <Content Include="Views\InventoryList\InventoryFertilizerView.cshtml" />
     <Content Include="Views\InventoryList\InventoryMaterialView.cshtml" />
+    <Content Include="Views\EquipmentTaskType\AddUpdate.cshtml" />
+    <Content Include="Views\EquipmentType\AddUpdate.cshtml" />
+    <Content Include="Views\Part\AddUpdate.cshtml" />
+    <Content Include="Views\EquipmentDashboard\EquipmentDashboard.cshtml" />
+    <Content Include="Views\EquipmentTask\EquipmentTaskAddUpdate.cshtml" />
+    <Content Include="Views\EquipmentTask\Display.cshtml" />
+    <Content Include="Views\EquipmentVendor\EquipmentVendorAddUpdate.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>

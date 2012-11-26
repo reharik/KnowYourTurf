@@ -1,13 +1,11 @@
 ﻿using CC.Core.Domain;
 using CC.Core.DomainTools;
-using CC.Core.Html.Menu;
 using CC.Core.Localization;
 using CC.Security;
 using CC.Security.Interfaces;
 using CC.Security.Services;
 using CC.UI.Helpers;
 using KnowYourTurf.Core.Domain.Persistence;
-using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Html.Menu;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Core;
@@ -32,6 +30,7 @@ namespace KnowYourTurf.Web
                 x.TheCallingAssembly();
                 x.ConnectImplementationsToTypesClosing(typeof(IEntityListGrid<>));
                 x.AssemblyContainingType(typeof(CoreLocalizationKeys));
+//                x.AssemblyContainingType(typeof(WebLocalizationKeys));
                 x.AssemblyContainingType<Entity>();
                 x.AssemblyContainingType<IUser>();
                 x.AssemblyContainingType<HtmlConventionRegistry>(); 
@@ -51,7 +50,7 @@ namespace KnowYourTurf.Web
             For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory());
 
             For<ISession>().HybridHttpOrThreadLocalScoped().Add(
-                context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor()));
+                context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithCompanyFilter()));
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();
 

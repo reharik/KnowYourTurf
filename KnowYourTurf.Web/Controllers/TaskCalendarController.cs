@@ -38,7 +38,9 @@ namespace KnowYourTurf.Web.Controllers
                                                        DisplayUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Display(null)),
                                                        DisplayRoute = "taskdisplay",
                                                        DeleteUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Delete(null)),
-                                                       EventChangedUrl = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.EventChanged(null))
+                                                       EventChangedUrl = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.EventChanged(null)),
+                                                       PopupTitle = WebLocalizationKeys.TASK_INFORMATION.ToString()
+
                                                    }
                        };
             return Json(model,JsonRequestBehavior.AllowGet);
@@ -48,8 +50,8 @@ namespace KnowYourTurf.Web.Controllers
         {
             var task = _repository.Find<Task>(input.EntityId);
             task.ScheduledDate = input.ScheduledDate;
-            task.ScheduledEndTime = input.EndTime;
-            task.ScheduledStartTime = input.StartTime;
+            task.EndTime = input.EndTime;
+            task.StartTime = input.StartTime;
             var crudManager = _saveEntityService.ProcessSave(task);
             var notification = crudManager.Finish();
             return Json(notification, JsonRequestBehavior.AllowGet);
@@ -60,15 +62,15 @@ namespace KnowYourTurf.Web.Controllers
             var events = new List<CalendarEvent>();
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
-            var category = _repository.Find<Category>(input.RootId);
+            var category = _repository.Find<Site>(input.RootId);
             var tasks = category.GetAllTasks().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
             tasks.ForEachItem(x =>
                        events.Add(new CalendarEvent
                                       {
                                           EntityId = x.EntityId,
                                           title = x.Field.Abbreviation + ": " + x.TaskType.Name,
-                                          start = x.ScheduledStartTime.ToString(),
-                                          end = x.ScheduledEndTime.ToString(),
+                                          start = x.StartTime.ToString(),
+                                          end = x.EndTime.ToString(),
                                           color = x.Field.FieldColor
                                       })
                 );

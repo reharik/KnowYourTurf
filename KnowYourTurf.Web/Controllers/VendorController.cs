@@ -40,7 +40,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate(ViewModel input)
         {
-            var vendor = input.EntityId > 0 ? _repository.Find<Vendor>(input.EntityId) : new Vendor();
+            var vendor = input.EntityId > 0 ? _repository.Find<FieldVendor>(input.EntityId) : new FieldVendor();
             var availableChemicals = _repository.FindAll<Chemical>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             var selectedChemicals = vendor.GetAllProductsOfType("Chemical").Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             var availableFertilizers = _repository.FindAll<Fertilizer>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
@@ -49,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
             var selectedMaterials = vendor.GetAllProductsOfType("Material").Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             var states = _selectListItemService.CreateList<State>(true);
             var status = _selectListItemService.CreateList<Status>(true);
-            var model = Mapper.Map<Vendor,VendorViewModel>(vendor);
+            var model = Mapper.Map<FieldVendor,VendorViewModel>(vendor);
             model.Chemicals = new TokenInputViewModel { _availableItems = availableChemicals, selectedItems = selectedChemicals };
             model.Fertilizers = new TokenInputViewModel { _availableItems = availableFertilizers, selectedItems = selectedFertilizers };
             model.Materials = new TokenInputViewModel { _availableItems = availableMaterials, selectedItems = selectedMaterials };
@@ -62,7 +62,7 @@ namespace KnowYourTurf.Web.Controllers
      
         public ActionResult Delete(ViewModel input)
         {
-            var vendor = _repository.Find<Vendor>(input.EntityId);
+            var vendor = _repository.Find<FieldVendor>(input.EntityId);
             _repository.HardDelete(vendor);
             _repository.UnitOfWork.Commit();
             return null;
@@ -73,7 +73,7 @@ namespace KnowYourTurf.Web.Controllers
             var notification = new Notification { Success = true };
             input.EntityIds.Each(x =>
             {
-                var item = _repository.Find<Vendor>(x);
+                var item = _repository.Find<FieldVendor>(x);
                 if (checkDependencies(item, notification))
                 {
                     _repository.HardDelete(item);
@@ -82,7 +82,7 @@ namespace KnowYourTurf.Web.Controllers
             _repository.Commit();
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
-        private bool checkDependencies(Vendor item, Notification notification)
+        private bool checkDependencies(FieldVendor item, Notification notification)
         {
             var dependantItems = _repository.Query<PurchaseOrder>(x => x.Vendor == item);
             if (dependantItems.Any())
@@ -98,7 +98,7 @@ namespace KnowYourTurf.Web.Controllers
         }
         public ActionResult Save(VendorViewModel input)
         {
-            var vendor = input.EntityId > 0 ? _repository.Find<Vendor>(input.EntityId) : new Vendor();
+            var vendor = input.EntityId > 0 ? _repository.Find<FieldVendor>(input.EntityId) : new FieldVendor();
             var newTask = mapToDomain(input, vendor);
 
             var crudManager = _saveEntityService.ProcessSave(newTask);
@@ -106,25 +106,27 @@ namespace KnowYourTurf.Web.Controllers
             return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
-        private Vendor mapToDomain(VendorViewModel input, Vendor vendor)
+        private FieldVendor mapToDomain(VendorViewModel input, FieldVendor fieldVendor)
         {
-            vendor.Company = input.Company;
-            vendor.Fax = input.Fax;
-            vendor.Phone = input.Phone;
-            vendor.Address1 = input.Address1;
-            vendor.Address2 = input.Address2;
-            vendor.City = input.City;
-            vendor.State = input.State;
-            vendor.ZipCode = input.ZipCode;
-            vendor.Website = input.Website;
-            vendor.Status = input.Status;
-            vendor.Notes = input.Notes;
-            vendor.ClearProducts();
-            _updateCollectionService.Update(vendor.Products, input.Chemicals, vendor.AddProduct, vendor.RemoveProduct, (x, i) => x.InstantiatingType==i.InstantiatingType);
-            _updateCollectionService.Update(vendor.Products, input.Fertilizers, vendor.AddProduct, vendor.RemoveProduct, (x, i) => x.InstantiatingType == i.InstantiatingType);
-            _updateCollectionService.Update(vendor.Products, input.Materials, vendor.AddProduct, vendor.RemoveProduct, (x, i) =>x.InstantiatingType == i.InstantiatingType);
-        
-            return vendor;
+            fieldVendor.Company = input.Company;
+            fieldVendor.Fax = input.Fax;
+            fieldVendor.Phone = input.Phone;
+            fieldVendor.Address1 = input.Address1;
+            fieldVendor.Address2 = input.Address2;
+            fieldVendor.City = input.City;
+            fieldVendor.State = input.State;
+            fieldVendor.ZipCode = input.ZipCode;
+            fieldVendor.Website = input.Website;
+            fieldVendor.Status = input.Status;
+            fieldVendor.Notes = input.Notes;
+            // concatenate all the ids since they are all of the same base class
+            var selected = (input.Chemicals ?? new TokenInputViewModel { selectedItems = new TokenInputDto[] { } })
+                .selectedItems.Concat((input.Fertilizers ?? new TokenInputViewModel { selectedItems = new TokenInputDto[] { } }).selectedItems)
+                .Concat((input.Materials ?? new TokenInputViewModel { selectedItems = new TokenInputDto[] { } }).selectedItems);
+
+            var ids = new TokenInputViewModel { selectedItems = selected };
+            _updateCollectionService.Update(fieldVendor.Products, ids, fieldVendor.AddProduct, fieldVendor.RemoveProduct);
+            return fieldVendor;
         }
     }
 }

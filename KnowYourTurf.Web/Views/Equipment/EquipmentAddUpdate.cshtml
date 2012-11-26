@@ -13,15 +13,17 @@
         <div class="fieldRow">
             @Html.SubmissionFor(x => x.Description).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.VendorEntityId).LabelDisplay(WebLocalizationKeys.VENDOR).ToHtmlTag()
+       <div class="fieldRow">
+           @Html.SubmissionFor(x => x.EquipmentTypeEntityId).LabelDisplay(WebLocalizationKeys.EQUIPMENT_TYPE).ToHtmlTag()
+       </div>
+       <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EquipmentVendorEntityId).LabelDisplay(WebLocalizationKeys.VENDOR).ToHtmlTag()
         </div>
        <div class="fieldRow">
            @Html.SubmissionFor(x => x.TotalHours).ToHtmlTag()
        </div>
-       <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FileUrl).ToHtmlTag()
-        </div>
-
-</div>
+        <div class="fieldRow">
+           @Html.SubmissionFor(x => x.Threshold).ToHtmlTag()
+       </div>
+   </div>
 

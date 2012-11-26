@@ -23,10 +23,10 @@ namespace KnowYourTurf.Web.Models
         [ValidateNonEmpty]
         public int TaskTypeEntityId { get; set; }
         [ValidateNonEmpty]
-        public DateTime? ScheduledDate { get; set; }
+        public string ScheduledDate { get; set; }
         [ValidateNonEmpty]
-        public string ScheduledStartTimeString { get; set; }
-        public string ScheduledEndTimeString { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public string ActualTimeSpent { get; set; }
         [ValidateNonEmpty]
         public int FieldEntityId { get; set; }
@@ -44,11 +44,11 @@ namespace KnowYourTurf.Web.Models
     public class DisplayTaskViewModel:ViewModel
     {
         public string TaskTypeName { get; set; }
-        public DateTime ScheduledDate { get; set; }
+        public string ScheduledDate { get; set; }
         public string FieldName { get; set; }
         public string InventoryProductProductName { get; set; }
-        public string ScheduledStartTimeString { get; set; }
-        public string ScheduledEndTimeString { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public string Notes { get; set; }
         public string _AddUpdateUrl { get; set; }
         public IEnumerable<string> _EmployeeNames { get; set; }
@@ -62,7 +62,7 @@ namespace KnowYourTurf.Web.Models
         public string Product { get; set; }
         public double Quantity { get; set; }
         public bool Copy { get; set; }
-        public DateTime? ScheduledDate { get; set; }
-        public DateTime? ScheduledStartTime { get; set; }
+        public string ScheduledDate { get; set; }
+        public string ScheduledStartTime { get; set; }
     }
 }

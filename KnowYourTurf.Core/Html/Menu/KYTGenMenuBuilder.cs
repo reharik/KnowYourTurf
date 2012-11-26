@@ -13,7 +13,7 @@ namespace KnowYourTurf.Core.Html.Menu
 
         public override IKYTMenuBuilder CategoryGroupForItteration()
         {
-            _categories = new[] { new Category { Name = "default", EntityId = 1 } };
+            _categories = new[] { new Site { Name = "default", EntityId = 1 } };
             count = _categories.Count;
             return this;
         }     

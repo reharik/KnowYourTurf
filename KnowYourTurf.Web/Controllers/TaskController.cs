@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
@@ -13,7 +14,6 @@ using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using KnowYourTurf.Web.Services;
-using FluentNHibernate.Conventions;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -45,12 +45,12 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult AddUpdate(AddUpdateTaskViewModel input)
         {
             var task = input.EntityId > 0 ? _repository.Find<Task>(input.EntityId) : new Task();
-            task.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : task.ScheduledDate;
-            task.ScheduledStartTime= input.ScheduledStartTime.HasValue ? input.ScheduledStartTime.Value: task.ScheduledStartTime;
+            task.ScheduledDate = input.ScheduledDate.IsNotEmpty() ? DateTime.Parse(input.ScheduledDate) : task.ScheduledDate.HasValue?task.ScheduledDate.Value.Date:DateTime.Now.Date;
+            task.StartTime= input.ScheduledStartTime.IsNotEmpty() ? DateTime.Parse(input.ScheduledStartTime) : task.StartTime;
             var taskTypes = _selectListItemService.CreateList<TaskType>(x => x.Name, x => x.EntityId, true);
             var fields = ((KYTSelectListItemService)_selectListItemService).CreateFieldsSelectListItems(input.RootId, input.ParentId);
             var products = createProductSelectListItems();
-            var availableEmployees = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString() && x.UserRoles.Any(y=>y.Name==UserType.Employee.ToString()))
+            var availableEmployees = _repository.Query<User>(x => x.UserRoles.Any(y=>y.Name==UserType.Employee.ToString()))
                 .Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).OrderBy(x=>x.name).ToList();
             var selectedEmployees = task.Employees.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName }).OrderBy(x => x.name);
             var availableEquipment = _repository.FindAll<Equipment>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name }).OrderBy(x => x.name);
@@ -61,8 +61,9 @@ namespace KnowYourTurf.Web.Controllers
             model._FieldEntityIdList = fields;
             model._InventoryProductProductEntityIdList = products;
             model._TaskTypeEntityIdList = taskTypes;
-            model.ScheduledStartTimeString = task.ScheduledStartTime.Value.ToShortTimeString();
-            model.ScheduledEndTimeString = task.ScheduledEndTime.HasValue? task.ScheduledEndTime.Value.ToShortTimeString():"";
+            model.StartTime = task.StartTime.HasValue?task.StartTime.Value.ToShortTimeString():"";
+            model.EndTime = task.EndTime.HasValue ? task.EndTime.Value.ToShortTimeString() : "";
+            model.ScheduledDate = task.ScheduledDate.Value.ToShortDateString();
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             model.Popup = input.Popup;
             model.RootId = input.RootId;
@@ -123,8 +124,9 @@ namespace KnowYourTurf.Web.Controllers
         {
             var task = _repository.Find<Task>(input.EntityId);
             var model = Mapper.Map<Task, DisplayTaskViewModel>(task);
-            model.ScheduledStartTimeString = task.ScheduledStartTime.Value.ToShortTimeString();
-            model.ScheduledEndTimeString = task.ScheduledEndTime.HasValue ? task.ScheduledEndTime.Value.ToShortTimeString() : "";
+            model.StartTime = task.StartTime.Value.ToShortTimeString();
+            model.EndTime = task.EndTime.HasValue ? task.EndTime.Value.ToShortTimeString() : "";
+            model.ScheduledDate = task.ScheduledDate.HasValue ? task.ScheduledDate.Value.ToShortDateString() : "";
             model.Popup = input.Popup;
             model._EmployeeNames = task.Employees.Select(x => x.FullName);
             model._EquipmentNames = task.Equipment.Select(x => x.Name);
@@ -174,13 +176,13 @@ namespace KnowYourTurf.Web.Controllers
 
         private void mapItem(Task item, TaskViewModel input)
         {
-            item.ScheduledDate = input.ScheduledDate;
-            item.ScheduledStartTime = null;
-            item.ScheduledStartTime = DateTime.Parse(input.ScheduledDate.Value.ToShortDateString() + " " + input.ScheduledStartTimeString);
-            item.ScheduledEndTime = null;
-            if(!string.IsNullOrEmpty(input.ScheduledEndTimeString))
+            item.ScheduledDate = DateTime.Parse(input.ScheduledDate);
+            item.StartTime = null;
+            item.StartTime = DateTime.Parse(input.ScheduledDate + " " + input.StartTime);
+            item.EndTime = null;
+            if(!string.IsNullOrEmpty(input.EndTime))
             {
-                item.ScheduledEndTime = DateTime.Parse(input.ScheduledDate.Value.ToShortDateString() + " " + input.ScheduledEndTimeString);
+                item.EndTime = DateTime.Parse(input.ScheduledDate + " " + input.EndTime);
             }
             item.ActualTimeSpent = input.ActualTimeSpent;
             item.QuantityNeeded = input.QuantityNeeded;
@@ -195,9 +197,9 @@ namespace KnowYourTurf.Web.Controllers
             _updateCollectionService.Update(task.Employees, model.Employees, task.AddEmployee, task.RemoveEmployee);
             _updateCollectionService.Update(task.Equipment, model.Equipment, task.AddEquipment, task.RemoveEquipment);
 
-            task.TaskType = _repository.Find<TaskType>(model.TaskTypeEntityId);
-            task.Field = _repository.Find<Field>(model.FieldEntityId);
-            task.InventoryProduct = _repository.Find<InventoryProduct>(model.InventoryProductProductEntityId);
+            task.TaskType = model.TaskTypeEntityId>0? _repository.Find<TaskType>(model.TaskTypeEntityId):null;
+            task.Field = model.FieldEntityId>0?_repository.Find<Field>(model.FieldEntityId):null;
+            task.InventoryProduct = model.InventoryProductProductEntityId>0?_repository.Find<InventoryProduct>(model.InventoryProductProductEntityId):null;
         }
     }
 

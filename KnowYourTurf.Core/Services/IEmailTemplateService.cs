@@ -3,6 +3,7 @@ using System.Net.Mail;
 using Alpinely.TownCrier;
 using CC.Core;
 using StructureMap;
+using System.Linq;
 
 namespace KnowYourTurf.Core.Services
 {
@@ -15,10 +16,12 @@ namespace KnowYourTurf.Core.Services
     public class EmailTemplateService : IEmailTemplateService
     {
         private readonly IContainer _container;
+        private readonly ILogger _logger;
 
-        public EmailTemplateService(IContainer container)
+        public EmailTemplateService(IContainer container, ILogger logger)
         {
             _container = container;
+            _logger = logger;
         }
 
         public void SendSingleEmail(EmailTemplateDTO input)
@@ -35,6 +38,7 @@ namespace KnowYourTurf.Core.Services
             
             var smtpClient = getSmtpClient();
             smtpClient.Send(message);
+            _logger.LogInfo(message.To.FirstOrDefault().Address);
         }
       
         public void SendMultipleEmails(EmailTemplateDTO input, IEnumerable<MailAddress> addresses)

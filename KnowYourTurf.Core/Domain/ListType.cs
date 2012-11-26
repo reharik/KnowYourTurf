@@ -22,12 +22,23 @@ namespace KnowYourTurf.Core.Domain
     public class TaskType : ListType
     {
     }
+    public class EquipmentTaskType : ListType
+    {
+    }
+    public class EquipmentType : ListType
+    {
+    }
     public class EventType : ListType
     {
         public virtual string EventColor { get; set; }
     }
     public class PhotoCategory : ListType
     {
+    }
+    public class Part : ListType
+    {
+        public virtual string Vendor { get; set; }
+        public virtual string FileUrl { get; set; }
     }
 
 

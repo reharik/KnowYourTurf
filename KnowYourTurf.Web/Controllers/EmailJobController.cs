@@ -4,6 +4,7 @@ using AutoMapper;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
+using CC.Core;
 using CC.Core.Services;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
@@ -39,7 +40,7 @@ namespace KnowYourTurf.Web.Controllers
             var emailJob = input.EntityId > 0 ? _repository.Find<EmailJob>(input.EntityId) : new EmailJob();
             emailJob.Status = input.EntityId > 0 ? emailJob.Status : Status.InActive.ToString();
             
-            var availableSubscribers = _repository.Query<User>(x => x.UserLoginInfo.Status == Status.Active.ToString()).Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).ToList();
+            var availableSubscribers = _repository.FindAll<User>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).ToList();
             var selectedSubscribers = emailJob.Subscribers.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName });
 
             var model = Mapper.Map<EmailJob, EmailJobViewModel>(emailJob);
@@ -48,8 +49,7 @@ namespace KnowYourTurf.Web.Controllers
                                       _availableItems = availableSubscribers,
                                       selectedItems = selectedSubscribers
                                   };
-            model._EmailTemplateEntityIdList = _selectListItemService.CreateList<EmailJobType>(x => x.Name, x => x.EntityId, true);
-            model._EmailJobTypeEntityIdList = _selectListItemService.CreateList<EmailTemplate>(x => x.Name, x => x.EntityId, true);
+            model._EmailTemplateEntityIdList = _selectListItemService.CreateList<EmailTemplate>(x => x.FriendlyName, x => x.EntityId, true);
             model._StatusList = _selectListItemService.CreateList<Status>(true);
             model._FrequencyList = _selectListItemService.CreateList<EmailFrequency>(true);
             model._Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString();
@@ -95,7 +95,6 @@ namespace KnowYourTurf.Web.Controllers
             job.Subject = input.Subject;
             var emailTemplate = _repository.Find<EmailTemplate>(input.EmailTemplateEntityId);
             job.EmailTemplate = emailTemplate;
-            job.EmailJobType = _repository.Find<EmailJobType>(input.EmailJobTypeEntityId);
             
             _updateCollectionService.Update(job.Subscribers, input.Subscribers, job.AddSubscriber, job.RemoveSubscriber);
             

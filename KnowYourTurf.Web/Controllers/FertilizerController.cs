@@ -74,7 +74,7 @@ namespace KnowYourTurf.Web.Controllers
         }
         private bool checkDependencies(Fertilizer item, Notification notification)
         {
-            var dependantItems = _repository.Query<Vendor>(x => x.Products.Any(i => i == item));
+            var dependantItems = _repository.Query<FieldVendor>(x => x.Products.Any(i => i == item));
             if (dependantItems.Any())
             {
                 if (notification.Message.IsEmpty())

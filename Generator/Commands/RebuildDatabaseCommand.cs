@@ -27,11 +27,12 @@ namespace Generator.Commands
             var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
 
 //            var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
+            var repo = ObjectFactory.GetInstance<IRepository>();
 
-            new DataLoader().Load();
+//            new DataLoader().Load(repo);
 
-            var securitySetup = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
-            securitySetup.Execute(null);
+//            var securitySetup = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
+//            securitySetup.Execute(null);
 
 
             //_loader.ClearStrings();

@@ -111,7 +111,7 @@ namespace KnowYourTurf.Web.Controllers
 //                                       {
 //                                           x.Subscribers.Each(s =>
 //                                                                  {
-//                                                                      var model = emailTemplateHandler.CreateModel(x, s);
+//                                                                      var model = emailTemplateHandler.Execute(x, s);
 //                                                                      _emailService.SendSingleEmail(model);
 //                                                                  });
 //                                            if(x.Frequency == EmailFrequency.Once.ToString())

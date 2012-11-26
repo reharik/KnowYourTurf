@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
@@ -50,38 +51,43 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.PHOTO_INFORMATION.ToString();
             model.Popup = input.Popup;
             model._saveUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.Save(null));
+            model.Var = input.Var;
             return Json(model, JsonRequestBehavior.AllowGet);
-        }
-
-
-        public ActionResult Delete(ViewModel input)
-        {
-            var photo = _repository.Find<Photo>(input.EntityId);
-            _repository.HardDelete(photo);
-            _repository.UnitOfWork.Commit();
-            return null;
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
+            var methodInfo = typeof(Repository).GetMethod("Find");
+            var type = typeof(Photo).Assembly.GetType("KnowYourTurf.Core.Domain." + input.Var);
+            var genericMethod = methodInfo.MakeGenericMethod(new[] { type });
+            dynamic entity = genericMethod.Invoke(_repository, new[] { (object)input.ParentId });
+            var photoUrls = new List<string>();
             input.EntityIds.ForEachItem(x =>
             {
-                var item = _repository.Find<Photo>(x);
-                _fileHandlerService.DeleteFile(item.FileUrl);
-                _repository.HardDelete(item);
+                var photo = ((IEnumerable<Photo>)entity.Photos).FirstOrDefault(y => y.EntityId == x);
+                photoUrls.Add(photo.FileUrl);
+                entity.RemovePhoto(photo);
             });
-            _repository.Commit();
-            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+            var notification = _saveEntityService.ProcessSave(entity).Finish();
+            if(notification.Success)
+            {
+                photoUrls.ForEachItem(_fileHandlerService.DeleteFile);
+            }
+            return Json(notification, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Save(PhotoViewModel input)
         {
-            var field = _repository.Find<Field>(input.ParentId);
-            var photo = field.Photos.FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Photo();
+            var methodInfo = typeof (Repository).GetMethod("Find");
+            var type = typeof (Photo).Assembly.GetType("KnowYourTurf.Core.Domain." + input.Var);
+            var genericMethod = methodInfo.MakeGenericMethod(new[] {type});
+            dynamic entity = genericMethod.Invoke(_repository, new[] {(object) input.ParentId});
+
+            var photo = ((IEnumerable<Photo>)entity.Photos).FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Photo();
             photo = mapToDomain(input, photo);
-            photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos");
-            field.AddPhoto(photo);
-            var crudManager = _saveEntityService.ProcessSave(field);
+            photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos", entity.CompanyId);
+            entity.AddPhoto(photo);
+            var crudManager = _saveEntityService.ProcessSave(entity);
             var notification = crudManager.Finish();
             notification.Variable = photo.FileUrl;
             return Json(notification, JsonRequestBehavior.AllowGet);
@@ -91,7 +97,10 @@ namespace KnowYourTurf.Web.Controllers
         {
             photo.Name = input.Name;
             photo.Description = input.Description;
-            if (photo.PhotoCategory == null || photo.PhotoCategory.EntityId != input.PhotoCategoryEntityId)
+            if (input.PhotoCategoryEntityId==0)
+            {
+                photo.PhotoCategory = null;
+            }else if (photo.PhotoCategory == null || photo.PhotoCategory.EntityId != input.PhotoCategoryEntityId)
             {
                 photo.PhotoCategory = _repository.Find<PhotoCategory>(input.PhotoCategoryEntityId);
             }
@@ -108,7 +117,7 @@ namespace KnowYourTurf.Web.Controllers
         [TextArea]
         public virtual string Description { get; set; }
         public virtual int PhotoCategoryEntityId { get; set; }
-        [ValidateNonEmpty]
+        [ValidateFileNotEmpty]
         public virtual string FileUrl { get; set; }
 
         public string _saveUrl { get; set; }

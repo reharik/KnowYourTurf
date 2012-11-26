@@ -12,10 +12,10 @@ namespace KnowYourTurf.Web.Controllers
     public class VendorListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
-       private readonly IEntityListGrid<Vendor> _vendorListGrid;
+       private readonly IEntityListGrid<FieldVendor> _vendorListGrid;
 
         public VendorListController(IDynamicExpressionQuery dynamicExpressionQuery,
-            IEntityListGrid<Vendor> vendorListGrid)
+            IEntityListGrid<FieldVendor> vendorListGrid)
         {
             _dynamicExpressionQuery = dynamicExpressionQuery;
             _vendorListGrid = vendorListGrid;
@@ -37,12 +37,12 @@ namespace KnowYourTurf.Web.Controllers
         
         public JsonResult Vendors(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<Vendor>(input.filters);
-            Action<IGridColumn, Vendor> mod = (c, v) =>
+            var items = _dynamicExpressionQuery.PerformQuery<FieldVendor>(input.filters);
+            Action<IGridColumn, FieldVendor> mod = (c, v) =>
                                           {
-                                              if (c.GetType() == typeof(ImageButtonColumn<Vendor>) && c.ColumnIndex == 10)
+                                              if (c.GetType() == typeof(ImageButtonColumn<FieldVendor>) && c.ColumnIndex == 10)
                                               {
-                                                  var col = (ImageButtonColumn<Vendor>)c;
+                                                  var col = (ImageButtonColumn<FieldVendor>)c;
                                                   col.AddDataToEvent("{ 'ParentId' : " + v.EntityId + "}");
                                               }
                                           };

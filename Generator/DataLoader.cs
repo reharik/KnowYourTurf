@@ -15,8 +15,8 @@ namespace Generator
         private Field _field2;
         private Task _task1;
         private Task _task2;
-        private Vendor _vendor2;
-        private Vendor _vendor1;
+        private FieldVendor _vendor2;
+        private FieldVendor _vendor1;
         private Material _materials1;
         private Material _materials2;
         private Fertilizer _fertilizer2;
@@ -45,22 +45,25 @@ namespace Generator
         private UserRole _userRoleAdmin;
         private UserRole _userRoleEmployee;
         private UserRole _userRoleFac;
-        private Category _category1;
-        private Category _category2;
+        private Site _category1;
+        private Site _category2;
         private Field _field3;
         private Field _field4;
         private Task _task3;
         private Task _task4;
+        private EquipmentType _equipmentType1;
 
-        public void Load()
+        public void Load(IRepository repository)
         {
+            _repository = repository;
             //genregistry has no companyfilter and special getcompanyidservice
-            _repository = ObjectFactory.Container.GetInstance<IRepository>();
-            _repository.UnitOfWork.Initialize();
+//            _repository = ObjectFactory.Container.GetInstance<IRepository>();
+//            _repository.UnitOfWork.Initialize();
             _purchaseOrderLineItemService = new PurchaseOrderLineItemService(null);
 
             CreateCompany();
             LoadForCompany(_company.EntityId);
+//            LoadForCompany(_company.EntityId);
             
             _repository.UnitOfWork.Commit();
 
@@ -73,6 +76,7 @@ namespace Generator
 
             CreateEmployee(companyId);
             CreateField(companyId);
+            CreateEquipmentType(companyId);
             CreateEquipment(companyId);
             CreateChemical(companyId);
             CreateMaterials(companyId);
@@ -80,14 +84,13 @@ namespace Generator
             CreateInventory(companyId);
             CreateTask(companyId);
             CreateEventType(companyId);
-
+//
             CreateVendor(companyId);
             CreateVendorContact(companyId);
             CreateCalculator(companyId);
             CreateDocumentCategory(companyId);
             CreatePhotoCategory(companyId);
             CreateEmailTemplate(companyId);
-            CreateEmailJobType(companyId);
         }
 
         private void CreateUserRoles(int companyId)
@@ -122,6 +125,15 @@ namespace Generator
                                         CompanyId = companyId
                                     };
             _repository.Save(template);
+
+            var template2 = new EmailTemplate
+            {
+                Name = "EquipmentMaintenanceNotification",
+                Template =
+                    "<p>Hi {%=name%},</p><p>Your {%=equipmentName%} has passed the Total Hours limit you identified.</p><p>Please create a Task and update the threshold as needed.</p><p>Thank you,</p><p>Management</p>",
+                CompanyId = companyId
+            };
+            _repository.Save(template2);
         }
 
 
@@ -210,25 +222,39 @@ namespace Generator
 
         private void CreateCompany()
         {
-            _company = new Company { Name = "KYT", ZipCode = "78702", TaxRate = 8.25,NumberOfCategories = 2};
-            _category1 = new Category { Name = "Field 1" };
-//            _category2 = new Category { Name = "Field 2" };
-            _company.AddCategory(_category1);
+            _company = new Company { Name = "KYT", ZipCode = "78702", TaxRate = 8.25,NumberOfSites = 2};
+            _category1 = new Site { Name = "Field 1" };
+//            _category2 = new Site { Name = "Field 2" };
+            _company.AddSite(_category1);
 //            _company.AddCategory(_category2);
 
             _repository.Save(_company);
         }
+
+        private void CreateEquipmentType(int companyId)
+        {
+            _equipmentType1 = new EquipmentType
+                                  {
+                                      Name = "type 1",
+                                      CompanyId = companyId,
+                                      Status = "Active"
+                                  };
+            _repository.Save(_equipmentType1);
+        }
+
 
         private void CreateEquipment(int companyId)
         {
             _equip1 = new Equipment
                              {
                                  Name = "Truck",
+                                 EquipmentType = _equipmentType1,
                                  CompanyId = companyId
                              };
             _equip2 = new Equipment
                              {
                                  Name = "Plane",
+                                 EquipmentType = _equipmentType1,
                                  CompanyId = companyId
                              };
             _repository.Save(_equip1);
@@ -249,7 +275,6 @@ namespace Generator
                                              {
                                                  LoginName = "Admin",
                                                  Password = "123",
-                                                 Status = "Active",
                                                  CompanyId = companyId
                                              };
             _defaultUser.AddUserRole(_userRoleAdmin);
@@ -280,7 +305,6 @@ namespace Generator
             {
                 LoginName = "facilities",
                 Password = "facilities",
-                Status = "Active",
                 CompanyId = companyId
             };
             facilities.AddUserRole(_userRoleFac);
@@ -315,7 +339,6 @@ namespace Generator
             {
                 LoginName = "reharik@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
 
@@ -340,7 +363,6 @@ namespace Generator
             {
                 LoginName = "amahl@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
 
@@ -365,7 +387,6 @@ namespace Generator
             {
                 LoginName = "mark@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
 
@@ -390,7 +411,6 @@ namespace Generator
             {
                 LoginName = "chris@gmail.com",
                 Password = "123",
-                Status = "Active",
                 CompanyId = companyId
             };
             _employee1.AddUserRole(_userRoleEmployee);
@@ -470,16 +490,7 @@ namespace Generator
             _repository.Save(eventType2);
         }
 
-        private void CreateEmailJobType(int companyId)
-        {
-            var ejt = new EmailJobType()
-            {
-                Name = "Daily Tasks",
-                Status = Status.Active.ToString(),
-                CompanyId = companyId
-            };
-            _repository.Save(ejt);
-        }
+       
 
         private void CreateTask(int companyId)
         {
@@ -501,8 +512,8 @@ namespace Generator
             {
                 TaskType = taskType1,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
-                ScheduledStartTime = DateTime.Parse("3/3/2011 5:30 AM"),
-                ScheduledEndTime = DateTime.Parse("3/3/2011 6:30 AM"),
+                StartTime = DateTime.Parse("3/3/2011 5:30 AM"),
+                EndTime = DateTime.Parse("3/3/2011 6:30 AM"),
                 Notes = "Notes1",
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString(),
@@ -515,8 +526,8 @@ namespace Generator
             {
                 TaskType = taskType2,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
-                ScheduledStartTime = DateTime.Parse("3/3/2011 6:30 AM"),
-                ScheduledEndTime = DateTime.Parse("3/3/2011 7:30 AM"),
+                StartTime = DateTime.Parse("3/3/2011 6:30 AM"),
+                EndTime = DateTime.Parse("3/3/2011 7:30 AM"),
                 Notes = "Notes2",
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString(),
@@ -539,8 +550,8 @@ namespace Generator
             {
                 TaskType = taskType1,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
-                ScheduledStartTime = DateTime.Parse("3/3/2011 5:30 AM"),
-                ScheduledEndTime = DateTime.Parse("3/3/2011 6:30 AM"),
+                StartTime = DateTime.Parse("3/3/2011 5:30 AM"),
+                EndTime = DateTime.Parse("3/3/2011 6:30 AM"),
                 Notes = "Notes1",
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString(),
@@ -553,8 +564,8 @@ namespace Generator
             {
                 TaskType = taskType2,
                 ScheduledDate = DateTime.Parse("3/3/2011"),
-                ScheduledStartTime = DateTime.Parse("3/3/2011 6:30 AM"),
-                ScheduledEndTime = DateTime.Parse("3/3/2011 7:30 AM"),
+                StartTime = DateTime.Parse("3/3/2011 6:30 AM"),
+                EndTime = DateTime.Parse("3/3/2011 7:30 AM"),
                 Notes = "Notes2",
                 QuantityNeeded = 4,
                 UnitType = UnitType.Tons.ToString(),
@@ -581,7 +592,7 @@ namespace Generator
 
         private void CreateVendor(int companyId)
         {
-            _vendor1 = new Vendor
+            _vendor1 = new FieldVendor
             {
                 Company = "Some Company1",
                 Phone = "555.123.4567",
@@ -592,7 +603,7 @@ namespace Generator
                 CompanyId = companyId
             };
 
-            _vendor2 = new Vendor
+            _vendor2 = new FieldVendor
             {
                 Company = "Some Company2",
                 Phone = "555.123.4567",
@@ -602,7 +613,7 @@ namespace Generator
                 Notes = "notes2",
                 CompanyId = companyId
             };
-
+//
             _vendor1.AddProduct(_fertilizer1);
             _vendor1.AddProduct(_fertilizer2);
             _vendor2.AddProduct(_fertilizer1);

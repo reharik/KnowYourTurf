@@ -46,13 +46,13 @@ namespace KnowYourTurf.Core.Html.Menu
 
         protected IList<MenuItem> _categoryItems = new List<MenuItem>();
         protected int count = 0;
-        protected IList<Category> _categories;
+        protected IList<Site> _categories;
 
         public virtual IKYTMenuBuilder CategoryGroupForItteration()
         {
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);
-            _categories = user.Company.Categories.ToList();
+            _categories = user.Company.Sites.ToList();
             count = _categories.Count;
             return this;
         }

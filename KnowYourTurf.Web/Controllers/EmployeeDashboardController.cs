@@ -35,8 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             _repository = repository;
             _selectListItemService = selectListItemService;
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            //completed used for pending so that you can't edit on employee page
-            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
+            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("PendingTasks");
             _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
             _sessionContext = sessionContext;
         }
@@ -58,6 +57,7 @@ namespace KnowYourTurf.Web.Controllers
            
 
             var model = Mapper.Map<User, UserViewModel>(employee);
+            model.UserLoginInfoPassword = "";
             model.FileUrl = model.FileUrl.IsNotEmpty() ? model.FileUrl.AddImageSizeToName("thumb") : "";
             model._StateList = _selectListItemService.CreateList<State>();
             model._UserLoginInfoStatusList = _selectListItemService.CreateList<Status>();

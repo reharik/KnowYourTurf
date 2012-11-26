@@ -62,13 +62,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core">
+    <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\CC.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Security">
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\CC.Security.dll</HintPath>
     </Reference>
-    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.UI.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
@@ -84,7 +93,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL" />
+    <Reference Include="log4net">
+      <HintPath>..\lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\NHibernate.dll</HintPath>
@@ -133,10 +148,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandRegistry.cs" />
+    <Compile Include="Commands\ChrisDataLoadCommand.cs" />
+    <Compile Include="Commands\QADataLoadCommand.cs" />
+    <Compile Include="Commands\SecurityUpdateCommand.cs" />
+    <Compile Include="Commands\DataLoadCommand.cs" />
     <Compile Include="Commands\DefaultSecuritySetupCommand.cs" />
     <Compile Include="Commands\DropReaddDatabaseCommand.cs" />
     <Compile Include="Commands\KillAllFKsCommand.cs" />
     <Compile Include="Commands\RebuildDatabaseCommand.cs" />
+    <Compile Include="Commands\SecurityCommand.cs" />
+    <Compile Include="QADataLoader.cs" />
+    <Compile Include="MinDataLoader.cs" />
     <Compile Include="DataLoader.cs" />
     <Compile Include="GenRegistry.cs" />
     <Compile Include="IGeneratorCommand.cs" />
@@ -145,6 +167,7 @@
     <Compile Include="SqlServerHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DataImport\Company.txt" />
     <Content Include="DataImport\LocalizedProperty.xml" />
     <Content Include="DataImport\LocalizedText.xml" />
     <Content Include="DataImport\LocalizedValueObject.xml" />
@@ -178,6 +201,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DBFluentMigration\DBFluentMigration.csproj">
+      <Project>{BD319DCA-9D65-4D7B-AAAD-B6A0C2838593}</Project>
+      <Name>DBFluentMigration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>

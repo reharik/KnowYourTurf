@@ -328,4 +328,174 @@ namespace KnowYourTurf.Web.Controllers
             return true;
         }
     }
+
+    public class EquipmentTaskTypeController : ListTypeBaseController<EquipmentTaskType>
+    {
+        private readonly IRepository _repository;
+        private readonly ISelectListItemService _selectListItemService;
+
+        public EquipmentTaskTypeController(IDynamicExpressionQuery dynamicExpressionQuery,
+                                   IRepository repository,
+                                   ISaveEntityService saveEntityService,
+                                   ISelectListItemService selectListItemService,
+                                   IEntityListGrid<EquipmentTaskType> listTypeListGrid)
+            : base(dynamicExpressionQuery, repository, saveEntityService, listTypeListGrid)
+        {
+            _repository = repository;
+            _selectListItemService = selectListItemService;
+        }
+
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("AddUpdate", new ListTypeViewModel());
+        }
+
+        public ActionResult AddUpdate(ViewModel input)
+        {
+            var listType = getListType(input);
+            var model = Mapper.Map<EquipmentTaskType, ListTypeViewModel>(listType);
+            model._Title = WebLocalizationKeys.EQUIPMENT_TASK_TYPE_INFORMATION.ToString();
+            model._saveUrl = UrlContext.GetUrlForAction<EquipmentTaskTypeController>(x => x.SaveListType(null));
+            model._StatusList = _selectListItemService.CreateList<Status>();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            var notification = deleteMultiple(input, checkDependencies);
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+
+        protected virtual bool checkDependencies(EquipmentTaskType item, Notification notification)
+        {
+            var dependantItems = _repository.Query<Equipment>(x => x.Tasks.Any(y => y.TaskType == item));
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_EQUIPMENTTASKTYPE.ToString();
+                }
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public class EquipmentTypeController : ListTypeBaseController<EquipmentType>
+    {
+        private readonly IRepository _repository;
+        private readonly ISelectListItemService _selectListItemService;
+
+        public EquipmentTypeController(IDynamicExpressionQuery dynamicExpressionQuery,
+                                   IRepository repository,
+                                   ISaveEntityService saveEntityService,
+                                   ISelectListItemService selectListItemService,
+                                   IEntityListGrid<EquipmentType> listTypeListGrid)
+            : base(dynamicExpressionQuery, repository, saveEntityService, listTypeListGrid)
+        {
+            _repository = repository;
+            _selectListItemService = selectListItemService;
+        }
+
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("AddUpdate", new ListTypeViewModel());
+        }
+
+        public ActionResult AddUpdate(ViewModel input)
+        {
+            var listType = getListType(input);
+            var model = Mapper.Map<EquipmentType, ListTypeViewModel>(listType);
+            model._Title = WebLocalizationKeys.EQUIPMENT_TYPE_INFORMATION.ToString();
+            model._saveUrl = UrlContext.GetUrlForAction<EquipmentTypeController>(x => x.SaveListType(null));
+            model._StatusList = _selectListItemService.CreateList<Status>();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            var notification = deleteMultiple(input, checkDependencies);
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+
+        protected virtual bool checkDependencies(EquipmentType item, Notification notification)
+        {
+            var dependantItems = _repository.Query<Equipment>(x => x.Tasks.Any(y => y.TaskType == item));
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_EQUIPMENTTYPE.ToString();
+                }
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public class PartController : ListTypeBaseController<Part>
+    {
+        private readonly IRepository _repository;
+        private readonly ISelectListItemService _selectListItemService;
+
+        public PartController(IDynamicExpressionQuery dynamicExpressionQuery,
+                                   IRepository repository,
+                                   ISaveEntityService saveEntityService,
+                                   ISelectListItemService selectListItemService,
+                                   IEntityListGrid<Part> listTypeListGrid)
+            : base(dynamicExpressionQuery, repository, saveEntityService, listTypeListGrid)
+        {
+            _repository = repository;
+            _selectListItemService = selectListItemService;
+        }
+
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("AddUpdate", new PartViewModel());
+        }
+
+        public ActionResult AddUpdate(ViewModel input)
+        {
+            var listType = getListType(input);
+            var model = Mapper.Map<Part, PartViewModel>(listType);
+            model._Title = WebLocalizationKeys.PART_INFORMATION.ToString();
+            model._saveUrl = UrlContext.GetUrlForAction<PartController>(x => x.SavePart(null));
+            model._StatusList = _selectListItemService.CreateList<Status>();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            var notification = deleteMultiple(input, checkDependencies);
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+
+        protected virtual bool checkDependencies(Part item, Notification notification)
+        {
+            var dependantItems = _repository.Query<EquipmentTask>(x => x.Parts.Any(y => y == item));
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_PART.ToString();
+                }
+                return false;
+            }
+            return true;
+        }
+
+
+        public ActionResult SavePart(PartViewModel input)
+        {
+            var listType = mapListType(input);
+            listType.Vendor = input.Vendor;
+            listType.FileUrl = input.FileUrl;
+            var notification = saveListType(listType);
+            return Json(notification, JsonRequestBehavior.AllowGet);
+        }
+
+    }
 }
