@@ -50,6 +50,9 @@ namespace KnowYourTurf.Web.Controllers
             model._EventTypeEntityIdList = _eventTypes;
             model._Title = WebLocalizationKeys.EVENT_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<EventController>(x => x.Save(null));
+            model.StartTime = _event.StartTime.HasValue ? _event.StartTime.Value.ToShortTimeString() : "";
+            model.EndTime = _event.EndTime.HasValue ? _event.EndTime.Value.ToShortTimeString() : "";
+            model.ScheduledDate = _event.ScheduledDate.Value.ToShortDateString();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
