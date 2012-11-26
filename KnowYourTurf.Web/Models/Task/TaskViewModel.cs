@@ -10,7 +10,7 @@ namespace KnowYourTurf.Web.Models
     public class TaskViewModel:ViewModel
     {
         public GroupedSelectViewModel _FieldEntityIdList { get; set; }
-        public GroupedSelectViewModel _InventoryProductProductEntityIdList { get; set; }
+        public GroupedSelectViewModel _InventoryProductEntityIdList { get; set; }
         public IEnumerable<SelectListItem> _TaskTypeEntityIdList { get; set; }
 
         public TokenInputViewModel Employees { get; set; }
@@ -30,7 +30,7 @@ namespace KnowYourTurf.Web.Models
         public string ActualTimeSpent { get; set; }
         [ValidateNonEmpty]
         public int FieldEntityId { get; set; }
-        public int InventoryProductProductEntityId { get; set; }
+        public int InventoryProductEntityId { get; set; }
         [ValidateDouble]
         public double? QuantityNeeded { get; set; }
         [ValidateDouble]
