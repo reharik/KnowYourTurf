@@ -8,8 +8,8 @@
     <ProjectGuid>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KnowYourTurf.Core</RootNamespace>  
-    <AssemblyName>KnowYourTurf.CoreBuild</AssemblyName>
+    <RootNamespace>KnowYourTurf.Core</RootNamespace>
+    <AssemblyName>KnowYourTurf.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -88,10 +88,8 @@
     <Reference Include="log4net">
       <HintPath>..\lib\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -145,6 +143,7 @@
     <Compile Include="Domain\BaseProduct.cs" />
     <Compile Include="Domain\Calculator.cs" />
     <Compile Include="Domain\EquipmentVendor.cs" />
+    <Compile Include="Domain\LoginStatistics.cs" />
     <Compile Include="Domain\Site.cs" />
     <Compile Include="Domain\Company.cs" />
     <Compile Include="Domain\Continuation.cs" />
@@ -288,6 +287,12 @@
   <ItemGroup>
     <Folder Include="Attributes\" />
   </ItemGroup>
+<<<<<<< HEAD
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+=======
+>>>>>>> development
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

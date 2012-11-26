@@ -40,7 +40,7 @@ namespace DBFluentMigration.Iteration_0
             _permissions.CreateControllerPermission("KnowYourTurfController", UserType.Facilities);
             _permissions.CreateControllerPermission("OrthogonalController", UserType.Facilities);
             
-            _permissions.CreateMenuPermission(UserType.Employee, "Events");
+            _permissions.CreateMenuPermission(UserType.Facilities, "Events");
         }
 
         public void GrantEmployeePermissions()

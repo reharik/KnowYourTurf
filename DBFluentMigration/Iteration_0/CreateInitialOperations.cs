@@ -87,6 +87,11 @@ namespace DBFluentMigration.Iteration_0
             _operations.CreateOperationForControllerType("EquipmentVendorListController");
             _operations.CreateOperationForControllerType("CompletedPurchaseOrderDisplayController");
 
+            _operations.CreateOperationForControllerType("TaskTypeController");
+            _operations.CreateOperationForControllerType("EventTypeController");
+            _operations.CreateOperationForControllerType("PhotoCategoryController");
+            _operations.CreateOperationForControllerType("DocumentCategoryController");
+
         }
 
         public void CreateMenuItemOptions()
