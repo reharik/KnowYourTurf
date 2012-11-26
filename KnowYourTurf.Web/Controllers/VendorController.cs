@@ -119,11 +119,13 @@ namespace KnowYourTurf.Web.Controllers
             fieldVendor.Website = input.Website;
             fieldVendor.Status = input.Status;
             fieldVendor.Notes = input.Notes;
-            fieldVendor.ClearProducts();
-            _updateCollectionService.Update(fieldVendor.Products, input.Chemicals, fieldVendor.AddProduct, fieldVendor.RemoveProduct, (x, i) => x.InstantiatingType==i.InstantiatingType);
-            _updateCollectionService.Update(fieldVendor.Products, input.Fertilizers, fieldVendor.AddProduct, fieldVendor.RemoveProduct, (x, i) => x.InstantiatingType == i.InstantiatingType);
-            _updateCollectionService.Update(fieldVendor.Products, input.Materials, fieldVendor.AddProduct, fieldVendor.RemoveProduct, (x, i) =>x.InstantiatingType == i.InstantiatingType);
-        
+            // concatenate all the ids since they are all of the same base class
+            var selected = (input.Chemicals ?? new TokenInputViewModel { selectedItems = new TokenInputDto[] { } })
+                .selectedItems.Concat((input.Fertilizers ?? new TokenInputViewModel { selectedItems = new TokenInputDto[] { } }).selectedItems)
+                .Concat((input.Materials ?? new TokenInputViewModel { selectedItems = new TokenInputDto[] { } }).selectedItems);
+
+            var ids = new TokenInputViewModel { selectedItems = selected };
+            _updateCollectionService.Update(fieldVendor.Products, ids, fieldVendor.AddProduct, fieldVendor.RemoveProduct);
             return fieldVendor;
         }
     }

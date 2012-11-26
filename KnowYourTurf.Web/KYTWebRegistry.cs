@@ -91,7 +91,6 @@ namespace KnowYourTurf.Web
             For<IAuthorizationRepository>().HybridHttpOrThreadLocalScoped().Use<CustomAuthorizationRepository>();
             For<IPermissionsBuilderService>().HybridHttpOrThreadLocalScoped().Use<PermissionsBuilderService>();
             For<IPermissionsService>().HybridHttpOrThreadLocalScoped().Use<PermissionsService>();
-            For<ISecuritySetupService>().Use<DefaultSecuritySetupService>();
             For<ILogger>().Use(() => new Log4NetLogger(typeof(string)));
             For<ICCSessionContext>().Use<SessionContext>();
 
