@@ -157,6 +157,7 @@
     <Compile Include="Commands\KillAllFKsCommand.cs" />
     <Compile Include="Commands\RebuildDatabaseCommand.cs" />
     <Compile Include="Commands\SecurityCommand.cs" />
+    <Compile Include="FCDataLoader.cs" />
     <Compile Include="QADataLoader.cs" />
     <Compile Include="MinDataLoader.cs" />
     <Compile Include="DataLoader.cs" />

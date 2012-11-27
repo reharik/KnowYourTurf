@@ -68,4 +68,11 @@ namespace KnowYourTurf.Core.Domain.Persistence
         }
     }
 
+    public class UserRoleMap : ListTypeMap<UserRole>
+    {
+        public UserRoleMap()
+        {
+        }
+    }
+
 }
