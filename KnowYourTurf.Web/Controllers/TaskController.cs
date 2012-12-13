@@ -59,7 +59,7 @@ namespace KnowYourTurf.Web.Controllers
             model.Employees = new TokenInputViewModel { _availableItems = availableEmployees, selectedItems = selectedEmployees };
             model.Equipment = new TokenInputViewModel { _availableItems = availableEquipment, selectedItems = selectedEquipment};
             model._FieldEntityIdList = fields;
-            model._InventoryProductProductEntityIdList = products;
+            model._InventoryProductEntityIdList = products;
             model._TaskTypeEntityIdList = taskTypes;
             model.StartTime = task.StartTime.HasValue?task.StartTime.Value.ToShortTimeString():"";
             model.EndTime = task.EndTime.HasValue ? task.EndTime.Value.ToShortTimeString() : "";
@@ -199,7 +199,7 @@ namespace KnowYourTurf.Web.Controllers
 
             task.TaskType = model.TaskTypeEntityId>0? _repository.Find<TaskType>(model.TaskTypeEntityId):null;
             task.Field = model.FieldEntityId>0?_repository.Find<Field>(model.FieldEntityId):null;
-            task.InventoryProduct = model.InventoryProductProductEntityId>0?_repository.Find<InventoryProduct>(model.InventoryProductProductEntityId):null;
+            task.InventoryProduct = model.InventoryProductEntityId>0?_repository.Find<InventoryProduct>(model.InventoryProductEntityId):null;
         }
     }
 

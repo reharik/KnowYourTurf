@@ -34,7 +34,7 @@ namespace KnowYourTurf.Core.Services
                 inventoryProduct = new InventoryProduct
                                        {
                                            UnitType = purchaseOrderLineItem.UnitType,
-                                           SizeOfUnit = purchaseOrderLineItem.SizeOfUnit.Value
+                                           SizeOfUnit = purchaseOrderLineItem.SizeOfUnit.HasValue ?purchaseOrderLineItem.SizeOfUnit.Value:0
                                        };
                 inventoryProduct.Product =purchaseOrderLineItem.Product;
             }
