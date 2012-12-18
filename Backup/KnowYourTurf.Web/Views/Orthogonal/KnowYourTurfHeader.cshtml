@@ -1,0 +1,23 @@
+﻿@using KnowYourTurf.Web
+@model KnowYourTurf.Web.Controllers.HeaderViewModel
+            
+<div id="main-header">
+   <div id="main-header-image"></div>
+    @*<ul id="right-tabs">
+              <li id="chart-tab"><a href="">&nbsp;</a></li>
+              <li id="group-tab"><a href="">&nbsp;</a></li>
+         </ul>
+         *@
+    <span id="login-links">
+        @if (Model.LoggedIn)
+        {
+            <a href="" class="first" id="userSettings">@Model.User.FullName (@Model.User.Company.Name) </a>
+            <a href="" onclick="window.open('/Orthogonal/Help'); return false;">Help</a>
+            @Html.ActionLink(WebLocalizationKeys.LOG_OUT.ToString(), "Logout", "Login")
+        }
+        else
+        {
+            @Html.ActionLink(WebLocalizationKeys.SIGN_IN.ToString(), "Login", "Login")
+        }
+    </span>
+</div>

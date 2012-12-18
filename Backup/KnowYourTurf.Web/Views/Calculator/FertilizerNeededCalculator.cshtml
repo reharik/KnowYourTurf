@@ -1,0 +1,45 @@
+﻿@model KnowYourTurf.Web.Models.FertilzierNeededCalcViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.ViewFor(x => x._calculatorDisplayName).LabelDisplay(WebLocalizationKeys.CALCULATOR_NAME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.FieldEntityId).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.ProductEntityId).LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.N).InputId("N").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.P).InputId("P").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.K).InputId("K").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.BagSize).InputId("BagSize").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.BagsNeeded).InputId("BagsNeeded").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.FieldArea).InputId("FieldArea").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.FertilizerRate).ToHtmlTag()
+        </div>
+    </div>
+
+@section FormButtons{
+     @StandardButtonFor("save", WebLocalizationKeys.CALCULATE).AddClass("save").ToHtmlTag()
+     @StandardButtonFor("createTask", WebLocalizationKeys.CREATE_TASK).AddClass("cancel").AddClass("ui-state-disabled").Attr("disabled","disabled").ToHtmlTag()
+     @StandardButtonFor("cancel", WebLocalizationKeys.RETURN).AddClass("cancel").ToHtmlTag()
+}

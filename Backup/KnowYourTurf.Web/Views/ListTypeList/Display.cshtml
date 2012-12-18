@@ -1,0 +1,38 @@
+﻿@using KnowYourTurf.Web
+@model KnowYourTurf.Web.Models.ListTypeListViewModel
+
+@{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
+ <div class="col left clear">
+    <div class="fieldRow dashboardGrid">
+        <div class="gridHeader">@WebLocalizationKeys.TASK_TYPES</div>
+        <div id="taskTypeGridContainer"></div>
+    </div>
+     <div class="fieldRow dashboardGrid">
+         <div class="gridHeader">@WebLocalizationKeys.EVENT_TYPES</div>
+         <div id="eventTypeGridContainer"></div>
+     </div>
+     <div class="fieldRow dashboardGrid">
+         <div class="gridHeader">@WebLocalizationKeys.EQUIPMENT_TASK_TYPES</div>
+         <div id="equipmentTaskTypeGridContainer"></div>
+     </div>
+      <div class="fieldRow dashboardGrid">
+        <div class="gridHeader">@WebLocalizationKeys.PARTS</div>
+        <div id="partsGridContainer"></div>
+    </div>
+</div>
+   
+<div class="col right">
+    <div class="fieldRow dashboardGrid">
+        <div class="gridHeader">@WebLocalizationKeys.PHOTO_CATEGORIES</div>
+        <div id="photoCategoryGridContainer"></div>
+    </div>
+    <div class="fieldRow dashboardGrid">
+        <div class="gridHeader">@WebLocalizationKeys.DOCUMENT_CATEGORIES</div>
+        <div id="documentCategoryGridContainer"></div>
+    </div>
+     <div class="fieldRow dashboardGrid">
+        <div class="gridHeader">@WebLocalizationKeys.EQUIPMENT_TYPES</div>
+        <div id="equipmentTypeGridContainer"></div>
+    </div>
+</div>
+

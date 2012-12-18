@@ -1,0 +1,25 @@
+﻿@using KnowYourTurf.Web;
+@using HtmlTags
+
+<script>
+    @RenderSection("ExtraCss", false)
+
+    @RenderSection("HeaderScripts", false)
+
+    var contentArea;
+    var extraFormOptions = { };
+        @RenderSection("HeaderJavascript", false)
+</script>
+
+   <div class="content-header">
+        @RenderSection("ExtraContentHeaderButtons", false)
+       <button class="close cancel" title="@WebLocalizationKeys.CLOSE"></button>
+        <span class="title-name" data-bind="text:_title"></span>
+        <span class="title-added" data-bind="text:_createdText" ></span>
+    </div>
+    <div id="contentArea" class="content-inner">
+        @RenderBody()
+         <div class="footer">
+            @StandardButtonFor("cancel", WebLocalizationKeys.RETURN).AddClass("cancel").ToHtmlTag()
+         </div>
+    </div>

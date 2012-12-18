@@ -1,0 +1,773 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{67429FBB-EAAC-4E70-A9B5-9591E8E3BCD2}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KnowYourTurf.Web</RootNamespace>
+    <AssemblyName>KnowYourTurf.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Alpinely.TownCrier">
+      <HintPath>..\lib\Alpinely.TownCrier.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fluentnhibernate\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\lib\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Components.Validator">
+      <HintPath>..\lib\Castle.Components.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CC.UI.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=1.2.0.694, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender">
+      <HintPath>..\lib\HibernatingRhinos.Profiler.Appender.dll</HintPath>
+    </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender.NHibernateLog4Net">
+      <HintPath>..\lib\HibernatingRhinos.Profiler.Appender.NHibernateLog4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlTags, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\HtmlTags.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fluentnhibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>..\lib\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Mvc">
+      <HintPath>..\lib\ImageResizer.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0ecfe41405c30fb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fluentnhibernate\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fluentnhibernate\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.41.2, Culture=neutral, PublicKeyToken=cab60358ab4081ea, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fluentnhibernate\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="RouteDebug">
+      <HintPath>..\lib\RouteDebug.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\lib\StructureMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web.Helpers">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xVal">
+      <HintPath>..\lib\xVal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\Reports\ReportsAreaRegistration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Reports\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Reports\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Config\AutoMapperBootstrapper.cs" />
+    <Compile Include="Config\Bootstrapper.cs" />
+    <Compile Include="Config\CustomAuthorizationAttribute.cs" />
+    <Content Include="Areas\Reports\Views\Web.config" />
+    <Content Include="Areas\Reports\WebForm1.aspx" />
+    <Content Include="Content\images\ajax-loader.gif" />
+    <Compile Include="Config\KnowYourTurfMenu.cs" />
+    <Compile Include="Config\ModelBinders.cs" />
+    <Compile Include="Config\ModelBindingBootstaper.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminDashboardController.cs" />
+    <Compile Include="Controllers\AdminListController.cs" />
+    <Compile Include="Controllers\CalculatorController.cs" />
+    <Compile Include="Controllers\CalculatorListController.cs" />
+    <Compile Include="Controllers\ChemicalController.cs" />
+    <Compile Include="Controllers\ChemicalListController.cs" />
+    <Compile Include="Controllers\CompletedPurchaseOrderListController.cs" />
+    <Compile Include="Controllers\CompletedPurchaseOrderDisplayController.cs" />
+    <Compile Include="Controllers\EquipmentVendorController.cs" />
+    <Compile Include="Controllers\EquipmentVendorListController.cs" />
+    <Compile Include="Controllers\EquipmentTaskCalendarController.cs" />
+    <Compile Include="Controllers\EquipmentTaskController.cs" />
+    <Compile Include="Controllers\EquipmentTaskListController.cs" />
+    <Compile Include="Controllers\EquipmentDashboardController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\KnowYourTurfController.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
+    <Compile Include="Controllers\DocumentListController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\EmailJobController.cs" />
+    <Compile Include="Controllers\EmailJobListController.cs" />
+    <Compile Include="Controllers\EmailTemplateController.cs" />
+    <Compile Include="Controllers\EmailTemplateListController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\EmployeeListController.cs" />
+    <Compile Include="Controllers\EquipmentController.cs" />
+    <Compile Include="Controllers\EquipmentListController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\EmployeeDashboardController.cs" />
+    <Compile Include="Controllers\EventCalendarController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\FacilitiesController.cs" />
+    <Compile Include="Controllers\FacilitiesDashboardController.cs" />
+    <Compile Include="Controllers\FacilitiesListController.cs" />
+    <Compile Include="Controllers\FertilizerController.cs" />
+    <Compile Include="Controllers\FertilizerListController.cs" />
+    <Compile Include="Controllers\FieldController.cs" />
+    <Compile Include="Controllers\FieldDashboardController.cs" />
+    <Compile Include="Controllers\FieldListController.cs" />
+    <Compile Include="Controllers\ForumController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryListController.cs" />
+    <Compile Include="Controllers\KYTController.cs" />
+    <Compile Include="Controllers\ListTypeBaseController.cs" />
+    <Compile Include="Controllers\ListTypeListsController.cs" />
+    <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\MaterialListController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\PhotoListController.cs" />
+    <Compile Include="Controllers\PurchaseOrderCommitController.cs" />
+    <Compile Include="Controllers\PurchaseOrderController.cs" />
+    <Compile Include="Controllers\PurchaseOrderLineItemController.cs" />
+    <Compile Include="Controllers\PurchaseOrderLineItemListController.cs" />
+    <Compile Include="Controllers\PurchaseOrderListController.cs" />
+    <Compile Include="Controllers\TaskCalendarController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\TaskListController.cs" />
+    <Compile Include="Controllers\TaskRunnerController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\VendorContactController.cs" />
+    <Compile Include="Controllers\VendorContactListController.cs" />
+    <Compile Include="Controllers\VendorController.cs" />
+    <Compile Include="Controllers\VendorListController.cs" />
+    <Compile Include="Controllers\WeatherController.cs" />
+    <Compile Include="Controllers\WeatherListController.cs" />
+    <Compile Include="Filters\AddUserToViewModelFilter.cs" />
+    <Compile Include="Filters\AdminFilterAttribute.cs" />
+    <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Filters\PermissionValidationAttribute.cs" />
+    <Compile Include="Grids\AdminListGrid.cs" />
+    <Compile Include="Grids\CalculatorListGrid.cs" />
+    <Compile Include="Grids\ChemicalListGrid.cs" />
+    <Compile Include="Grids\CompletedTaskGrid.cs" />
+    <Compile Include="Grids\EquipmentVendorListGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskCompletedGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskPendingGrid.cs" />
+    <Compile Include="Grids\EquipmentTaskListGrid.cs" />
+    <Compile Include="Grids\DocumentListGrid.cs" />
+    <Compile Include="Grids\EmailJobListGrid.cs" />
+    <Compile Include="Grids\EmailTemplateListGrid.cs" />
+    <Compile Include="Grids\EmployeeListGrid.cs" />
+    <Compile Include="Grids\EquipmentListGrid.cs" />
+    <Compile Include="Grids\FacilitiesListGrid.cs" />
+    <Compile Include="Grids\FertilizerListGrid.cs" />
+    <Compile Include="Grids\FieldListGrid.cs" />
+    <Compile Include="Grids\IListTypeListGrid.cs" />
+    <Compile Include="Grids\InventoryProductListGrid.cs" />
+    <Compile Include="Grids\MaterialListGrid.cs" />
+    <Compile Include="Grids\PendingTaskGrid.cs" />
+    <Compile Include="Grids\PhotoListGrid.cs" />
+    <Compile Include="Grids\PurchaseOrderLineItemGrid.cs" />
+    <Compile Include="Grids\PurchaseOrderListGrid.cs" />
+    <Compile Include="Grids\PurchaseOrderSelectorGrid.cs" />
+    <Compile Include="Grids\TaskListGrid.cs" />
+    <Compile Include="Grids\VendorContactListGrid.cs" />
+    <Compile Include="Grids\VendorListGrid.cs" />
+    <Compile Include="Grids\WeatherListGrid.cs" />
+    <Compile Include="KYTTestRegistry.cs" />
+    <Compile Include="Menus\MainMenu.cs" />
+    <Compile Include="Menus\IMenuConfig.cs" />
+    <Compile Include="Config\StructureMapBootstrapper.cs" />
+    <Compile Include="Config\StructureMapControllerFactory.cs" />
+    <Compile Include="Config\StructureMapServiceLocator.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OrthogonalController.cs" />
+    <Compile Include="Controllers\PermissionsController.cs" />
+    <Compile Include="CustomViewPage.cs" />
+    <Compile Include="Menus\HeaderMenu.cs" />
+    <Compile Include="Models\BulkAction\BulkActionViewModel.cs" />
+    <Compile Include="Models\Calculator\CalculatorViewModel.cs" />
+    <Compile Include="Models\Chemical\ChemicalViewModel.cs" />
+    <Compile Include="Models\EquipmentVendor\EquipmentVendorViewModel.cs" />
+    <Compile Include="Models\EquipmentTask\EquipmentTaskViewModel.cs" />
+    <Compile Include="Models\EmailJob\EmailJobViewModel.cs" />
+    <Compile Include="Models\Employee\UserViewModel.cs" />
+    <Compile Include="Models\Enum\ListTypeListViewModel.cs" />
+    <Compile Include="Models\Enum\TaskTypeViewModel.cs" />
+    <Compile Include="Models\Event\EventViewModel.cs" />
+    <Compile Include="Models\Fertilizer\FertilizerViewModel.cs" />
+    <Compile Include="Models\Field\FieldViewModel.cs" />
+    <Compile Include="Models\Material\MaterialViewModel.cs" />
+    <Compile Include="Models\Orthogonal\HeaderViewModel.cs" />
+    <Compile Include="Models\Orthogonal\MenuViewModel.cs" />
+    <Compile Include="Models\PurchaseOrderCommit\POCommitViewModel.cs" />
+    <Compile Include="Models\PurchaseOrderLineItem\PurchaseOrderLineItemViewModel.cs" />
+    <Compile Include="Models\PurchaseOrder\PurchaseOrderViewModel.cs" />
+    <Compile Include="Models\Task\TaskViewModel.cs" />
+    <Compile Include="Models\TokenViewModel.cs" />
+    <Compile Include="Models\VendorContact\VendorContactViewModel.cs" />
+    <Compile Include="Models\Vendor\VendorViewModel.cs" />
+    <Compile Include="Services\Calculators\ICalculatorHandler.cs" />
+    <Compile Include="Services\Calculators\MaterialsCalculator.cs" />
+    <Compile Include="Services\Calculators\OverseedBagsNeededCalculator.cs" />
+    <Compile Include="Services\Calculators\OverseedRateNeededCalculator.cs" />
+    <Compile Include="Services\Calculators\SandCalculator.cs" />
+    <Compile Include="Services\EmailHandlers\EquipmentMaintenanceHandler.cs" />
+    <Compile Include="Services\EmailHandlers\EmployeeDailyTaskHandler.cs" />
+    <Compile Include="Services\EmailHandlers\IEmailTemplateHandler.cs" />
+    <Compile Include="Services\IAuthenticationContext.cs" />
+    <Compile Include="Services\ISecuritySetupService.cs" />
+    <Compile Include="Services\KYTSelectListItemService.cs" />
+    <Compile Include="Services\ModelService.cs" />
+    <Compile Include="Services\RouteTokens\IRouteTokenBuilder.cs" />
+    <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
+    <Compile Include="Services\RouteTokens\RouteToken.cs" />
+    <Compile Include="WebLocalizationKeys.cs" />
+    <Compile Include="KYTWebRegistry.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\dci.css" />
+    <Content Include="Content\css\fg.menu.css" />
+    <Content Include="Content\css\fileinput.css" />
+    <Content Include="Content\css\ie.css" />
+    <Content Include="Content\css\Jcrop.gif" />
+    <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
+    <Content Include="Content\css\jquery.cluetip.css" />
+    <Content Include="Content\css\jquery.Jcrop.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\css\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\css\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\css\redmond\jquery-ui-1.8.12.custom.css" />
+    <Content Include="Content\css\token-input.css" />
+    <Content Include="Content\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\css\ui-lightness\jquery-ui-1.8.7.custom.css" />
+    <Content Include="Content\css\ui.jqgrid.css" />
+    <Content Include="Content\css\ui.multiselect.css" />
+    <Content Include="Content\scripts\externalHelpers\backbone.js" />
+    <Content Include="Content\scripts\externalHelpers\dark-blue.js" />
+    <Content Include="Content\scripts\externalHelpers\highcharts.js" />
+    <Content Include="Content\scripts\externalHelpers\json2.js" />
+    <Content Include="Content\scripts\externalHelpers\knockout-1.2.1.debug.js" />
+    <Content Include="Content\scripts\externalHelpers\knockout-1.2.1.js" />
+    <Content Include="Content\scripts\externalHelpers\knockout.mapping.js" />
+    <Content Include="Content\scripts\externalHelpers\modernizr-2.0.min.js" />
+    <Content Include="Content\scripts\externalHelpers\respond.js" />
+    <Content Include="Content\scripts\externalHelpers\respond.min.js" />
+    <Content Include="Content\scripts\externalHelpers\superfish.js" />
+    <Content Include="Content\scripts\externalHelpers\underscore.js" />
+    <Content Include="Content\scripts\internalHelpers\cc.ccMenu.js" />
+    <Content Include="Content\scripts\internalHelpers\cc.crudForm.js" />
+    <Content Include="Content\scripts\internalHelpers\cc.grid.columnService.js" />
+    <Content Include="Content\scripts\internalHelpers\cc.gridHelpers.js" />
+    <Content Include="Content\scripts\internalHelpers\cc.utilities.js" />
+    <Content Include="Content\scripts\internalHelpers\jquery.cc.grid.js" />
+    <Content Include="Content\scripts\internalHelpers\jquery.kyt.calendar.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.gridSearch.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.mediaHandler.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.multiItemRepeater.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.popupCrud.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.repeatableInputSection.js" />
+    <Content Include="Content\scripts\internalHelpers\kyt.repository.js" />
+    <Content Include="Content\scripts\internalHelpers\multiRowRepeater.js" />
+    <Content Include="Content\scripts\jqueryPlugins\grid.locale-en.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery-1.6.2.min.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery-tmpl.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.address-1.4.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.address-1.4.min.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.CenterInClient.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.cleditor.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.cleditor.min.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.cluetip.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.dotdotdot-1.2.0.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.form.2.63.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.form.2.83.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.form.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.hoverIntent.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.ie-select-style.pack.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.Jcrop.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.Jcrop.min.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.jqGrid.min.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.jqGrid.src.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.jqPrint.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.maskedinput.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.metadata.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.min.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.pubsub.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.template.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.toDictionary.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.tokeninput.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.transform-0.9.3.min.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.validate.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.validate.min-vsdoc.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.validate.min.js" />
+    <Content Include="Content\scripts\jqueryPlugins\jquery.validate.pack.js" />
+    <Content Include="Content\scripts\kyt.ajaxPopupDisplayModule.js" />
+    <Content Include="Content\scripts\kyt.ajaxPopupFormModule.js" />
+    <Content Include="Content\scripts\kyt.AppointmentCalendarController.js" />
+    <Content Include="Content\scripts\kyt.assetController.js" />
+    <Content Include="Content\scripts\kyt.assetFormModule.js" />
+    <Content Include="Content\scripts\kyt.AssetWithToPresentLogicController.js" />
+    <Content Include="Content\scripts\kyt.baseClass.js" />
+    <Content Include="Content\scripts\kyt.CalendarView.js" />
+    <Content Include="Content\scripts\kyt.complianceNotificationController.js" />
+    <Content Include="Content\scripts\kyt.complianceNotificationModule.js" />
+    <Content Include="Content\scripts\kyt.CreditCardController.js" />
+    <Content Include="Content\scripts\kyt.creditcardView.js" />
+    <Content Include="Content\scripts\kyt.crudController.js" />
+    <Content Include="Content\scripts\kyt.DisplayView.js" />
+    <Content Include="Content\scripts\kyt.forgottenPasswordController.js" />
+    <Content Include="Content\scripts\kyt.formModule.js" />
+    <Content Include="Content\scripts\kyt.FormView.js" />
+    <Content Include="Content\scripts\kyt.GridView.js" />
+    <Content Include="Content\scripts\kyt.home.js" />
+    <Content Include="Content\scripts\kyt.PopupView.js" />
+    <Content Include="Content\scripts\kyt.portfolioBuilderController.js" />
+    <Content Include="Content\scripts\kyt.portfolioDashboardController.js" />
+    <Content Include="Content\scripts\kyt.tokenizerModule.js" />
+    <Content Include="Content\scripts\kyt.TokenView.js" />
+    <Content Include="Content\scripts\kyt.TrainerController.js" />
+    <Content Include="Content\scripts\kyt.userProfileController.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.AjaxFileUpload.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.CustomBindings.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.Elements.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.ModelService.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.NotificationService.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.ValidationRules.js" />
+    <Content Include="Content\scripts\KYT\CC.ModelBinding\CC.ValidationRunner.js" />
+    <Content Include="Content\scripts\KYT\Fields\KYT.FieldsApp.js" />
+    <Content Include="Content\scripts\KYT\Fields\KYT.FieldsApp.Menu.js" />
+    <Content Include="Content\scripts\KYT\Fields\KYT.FieldsApp.Routing.js" />
+    <Content Include="Content\scripts\KYT\Fields\KYT.FieldsApp.Views.js" />
+    <Content Include="Content\scripts\KYT\Fields\KYT.Services.js" />
+    <Content Include="Content\scripts\KYT\KYT.App.js" />
+    <Content Include="Content\scripts\KYT\KYT.Controller.js" />
+    <Content Include="Content\scripts\KYT\KYT.Header.js" />
+    <Content Include="Content\scripts\KYT\KYT.mixins.js" />
+    <Content Include="Content\scripts\KYT\KYT.OneOffViews.js" />
+    <Content Include="Content\scripts\KYT\KYT.Routing.js" />
+    <Content Include="Content\scripts\KYT\KYT.State.js" />
+    <Content Include="Content\scripts\KYT\KYT.Views.js" />
+    <Content Include="Content\scripts\KYT\KYT.WorkFlowManager.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="SiteDown.htm" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Reports\Controllers\" />
+    <Folder Include="Areas\Reports\Models\" />
+    <Folder Include="Areas\Reports\Views\Shared\" />
+    <Folder Include="Models\Email\" />
+    <Folder Include="Models\TokenInputDto\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_popupLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Permissions\ShowPermissions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Login\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orthogonal\MainMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserProfile\UserProfile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserProfile\EmailUnconfirmed.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserProfile\EmailConfirmed.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\AddressTemplate.cshtml" />
+    <Content Include="Views\Shared\EmailTemplate.cshtml" />
+    <Content Include="Views\Shared\PhoneTemplate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
+      <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
+      <Name>KnowYourTurf.Core</Name>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ContentAreaLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_FormLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_AssetDetailLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_DetailLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="connectionStrings.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_EmptyLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ListLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orthogonal\KnowYourTurfHeader.cshtml" />
+    <Content Include="Views\Orthogonal\KnowYourTurfMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\KnowYourTurf\Home.cshtml" />
+    <Content Include="Views\ListTypeList\ItemList.cshtml" />
+    <Content Include="Views\TaskList\ItemList.cshtml" />
+    <Content Include="Views\VendorContactList\ItemList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Calculator\CalculatorAddUpdate.cshtml" />
+    <Content Include="Views\Calculator\FertilizerNeededCalculator.cshtml" />
+    <Content Include="Views\Calculator\MaterialsCalculator.cshtml" />
+    <Content Include="Views\Calculator\OverseedBagsNeededCalculator.cshtml" />
+    <Content Include="Views\Calculator\OverseedRateNeededCalculator.cshtml" />
+    <Content Include="Views\Calculator\SandCalculator.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Chemical\ChemicalAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Document\AddUpdate.cshtml" />
+    <Content Include="Views\Document\Display.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EmailJob\EmailJobAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EmailTemplate\EmailTemplateAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EmployeeDashboard\EmployeeDashboard.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Employee\EmployeeAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Equipment\EquipmentAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Event\EventAddUpdate.cshtml" />
+    <Content Include="Views\Event\EventDisplay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_DisplayLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EventType\AddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Fertilizer\FertilizerAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forum\Forum.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Material\MaterialAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Photo\AddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PhotoCategory\AddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PurchaseOrderCommit\PurchaseOrderCommit.cshtml" />
+    <Content Include="Views\PurchaseOrderLineItem\PurchaseOrderLineItemAddUpdate.cshtml" />
+    <Content Include="Views\PurchaseOrderLineItem\PurchaseOrderLineItemView.cshtml" />
+    <Content Include="Views\PurchaseOrderLineItem\ReceivePurchaseOrderLineItem.cshtml" />
+    <Content Include="Views\PurchaseOrder\AddItem.cshtml" />
+    <Content Include="Views\PurchaseOrder\PurchaseOrderBuilder.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Task\TaskAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TaskRunner\GetWeather.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TaskType\AddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\VendorAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\VendorContact\VendorContactAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Weather\WeatherAddUpdate.cshtml" />
+    <Content Include="Views\Weather\WeatherView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FieldDashboard\FieldDashboard.cshtml" />
+    <Content Include="Views\Field\FieldAddUpdate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Task\Display.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DocumentCategory\AddUpdate.cshtml" />
+    <Content Include="Views\DocumentCategory\Display.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Reports\Report1.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />
+    <Content Include="Views\ListTypeList\Display.cshtml" />
+    <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
+    <Content Include="Views\InventoryList\InventoryFertilizerView.cshtml" />
+    <Content Include="Views\InventoryList\InventoryMaterialView.cshtml" />
+    <Content Include="Views\EquipmentTaskType\AddUpdate.cshtml" />
+    <Content Include="Views\EquipmentType\AddUpdate.cshtml" />
+    <Content Include="Views\Part\AddUpdate.cshtml" />
+    <Content Include="Views\EquipmentDashboard\EquipmentDashboard.cshtml" />
+    <Content Include="Views\EquipmentTask\EquipmentTaskAddUpdate.cshtml" />
+    <Content Include="Views\EquipmentTask\Display.cshtml" />
+    <Content Include="Views\EquipmentVendor\EquipmentVendorAddUpdate.cshtml" />
+    <None Include="Views\Shared\help.cshtml" />
+    <Content Include="Views\Test\test.cshtml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>555</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

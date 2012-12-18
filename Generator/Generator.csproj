@@ -149,6 +149,7 @@
   <ItemGroup>
     <Compile Include="CommandRegistry.cs" />
     <Compile Include="Commands\ChrisDataLoadCommand.cs" />
+    <Compile Include="Commands\CODataLoadCommand.cs" />
     <Compile Include="Commands\QADataLoadCommand.cs" />
     <Compile Include="Commands\SecurityUpdateCommand.cs" />
     <Compile Include="Commands\DataLoadCommand.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="Commands\KillAllFKsCommand.cs" />
     <Compile Include="Commands\RebuildDatabaseCommand.cs" />
     <Compile Include="Commands\SecurityCommand.cs" />
+    <Compile Include="CODataLoader.cs" />
     <Compile Include="QADataLoader.cs" />
     <Compile Include="MinDataLoader.cs" />
     <Compile Include="DataLoader.cs" />
