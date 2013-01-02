@@ -1,0 +1,42 @@
+﻿@model KnowYourTurf.Web.Models.MaterialsCalcViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.ViewFor(x => x._calculatorDisplayName).LabelDisplay(WebLocalizationKeys.CALCULATOR_NAME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.FieldEntityId).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.FieldArea).InputId("FieldArea").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Depth).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Drainageline).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.DitchDepth).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.DitchlineWidth).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.PipeRadius).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.TotalMaterials).InputId("TotalMaterials").ToHtmlTag()
+        </div>
+    </div>
+    @section FormButtons{
+     @StandardButtonFor("save", WebLocalizationKeys.CALCULATE).AddClass("save").ToHtmlTag()
+     @StandardButtonFor("createTask", WebLocalizationKeys.CREATE_TASK).AddClass("cancel").AddClass("ui-state-disabled").Attr("disabled","disabled").ToHtmlTag()
+     @StandardButtonFor("cancel", WebLocalizationKeys.RETURN).AddClass("cancel").ToHtmlTag()
+}

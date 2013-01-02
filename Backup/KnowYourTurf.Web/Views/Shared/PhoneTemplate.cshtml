@@ -1,0 +1,8 @@
+﻿@model Phone
+
+        @Html.HiddenFor(x => x.EntityId)
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.PhoneType).AddClassToRoot("one-third").ToHtmlTag()
+            @Html.SubmissionFor(x => x.IsDefault).AddClassToRoot("one-third").ToHtmlTag()
+            @Html.SubmissionFor(x => x.PhoneNumber).AddClassToRoot("one-third").ToHtmlTag()
+        </div>

@@ -30,8 +30,7 @@ namespace KnowYourTurf.Web.Controllers
                 //AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x => x.DeleteMultiple(null)),
                 gridDef = _pendingTaskGrid.GetGridDefinition(url, input.User),
-                _Title = WebLocalizationKeys.TASKS.ToString(),
-                searchField = "TaskType.Name"
+                _Title = WebLocalizationKeys.TASKS.ToString()
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");

@@ -1,0 +1,105 @@
+﻿
+@model KnowYourTurf.Web.Models.ListTypeListViewModel
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
+@section HeaderScripts{
+}
+<script>
+    var gridControllerOptions = { };
+    gridControllerOptions.gridInfo = {
+        addUpdateUrl:  "@Model.AddUpdateUrlET",
+        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.gridDef)) ,
+        title: "@Model.__Title",
+        deleteMultiple:"@Model.DeleteMultipleET"
+    };
+    gridControllerOptions.ttGridInfo = {
+        addUpdateUrl: "@Model.AddUpdateUrlTT",
+        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionTT)) ,
+        title: "@Model.Popup_TitleTT",
+        deleteMultiple:"@Model.DeleteMultipleTT"
+    };
+    gridControllerOptions.dcGridInfo = {
+        addUpdateUrl: "@Model.AddUpdateUrlDC",
+        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionDC)) ,
+        title: "@Model.Popup_TitleDC",
+        deleteMultiple:"@Model.DeleteMultipleDC"
+    };
+    gridControllerOptions.pcGridInfo = {
+        addUpdateUrl: "@Model.AddUpdateUrlPC",
+        gridDef: @MvcHtmlString.Create(JsonUtil.ToJson(Model.ListDefinitionPC)) ,
+        title: "@Model.Popup_TitlePC",
+        deleteMultiple:"@Model.DeleteMultiplePC"
+    }; 
+    
+    $(document).ready(function(){
+        new kyt.ListTypeController(gridControllerOptions);
+    });
+</script>
+    <div id="validation-container-wrapper">
+        <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
+    </div>
+
+    <div class="col left clear">
+        <div class="fieldRow">
+        <div class="gridHeader">@WebLocalizationKeys.TASK_TYPES</div>
+            <div id="ttGrid" class="grid_5b">
+                <div class="content-header">
+                    <input class="search" /> 
+                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+                </div>
+                <div id="contentArea" class="content-inner">
+                  
+                    <table id="TaskTypeGrid" class="scroll"></table>
+@*                    <div id="taskTypePager" class="scroll" style="text-align:center;"></div>*@
+                </div>
+            </div>
+        </div>
+        <div class="fieldRow">
+        <div class="gridHeader">@WebLocalizationKeys.EVENT_TYPES</div>
+            <div id="etGrid" class="grid_5b">
+                <div class="content-header">
+                    <input class="search" /> 
+                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+                </div>
+                <div id="contentArea" class="content-inner">
+                    <table id="EventTypeGrid" class="scroll"></table>
+@*                    <div id="eventTypePager" class="scroll" style="text-align:center;"></div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col right">
+        <div class="fieldRow">
+        <div class="gridHeader">@WebLocalizationKeys.DOCUMENT_CATEGORIES</div>
+            <div id="dcGrid" class="grid_4 KYT_AddNew_space">
+                <div class="content-header">
+                    <input class="search" /> 
+                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+                </div>
+                <div id="contentArea" class="content-inner">
+                    <table id="DocumentCategoryGrid" class="scroll"></table>
+@*                    <div id="docCatPager" class="scroll" style="text-align:center;"></div>*@
+                </div>
+            </div>
+        </div>
+        <div class="fieldRow">
+        <div class="gridHeader">@WebLocalizationKeys.PHOTO_CATEGORIES</div>
+            <div id="pcGrid" class="grid_5b">
+                <div class="content-header">
+                    <input class="search" /> 
+                    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+                    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+                </div>
+                <div id="contentArea" class="content-inner">
+                        <table id="PhotoCategoryGrid" class="scroll"></table>
+@*                        <div id="photoCatPager" class="scroll" style="text-align:center;"></div>*@
+                    </div>
+                </div>
+            </div>
+        </div>

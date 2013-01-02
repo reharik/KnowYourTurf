@@ -1,0 +1,34 @@
+﻿@model InventoryChemicalViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web.Controllers
+
+@{
+    Layout = "~/Views/Shared/_DisplayLayout.cshtml";
+}
+        
+   <div class="col left">
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Manufacturer).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.ActiveIngredient).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.ActiveIngredientPercent).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.EPAEstNumber).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.EPARegNumber).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Notes).ToHtmlTag()
+        </div>
+    </div>

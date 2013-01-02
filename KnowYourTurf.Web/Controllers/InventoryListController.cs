@@ -47,8 +47,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 //TODO put modifiler here "ProductType=" + productType
                 gridDef = _inventoryProductListGrid.GetGridDefinition(url, input.User),
-                _Title = crudTitle.ToString(),
-                searchField = "Product.Name"
+                _Title = crudTitle.ToString()
             };
             return Json(model, JsonRequestBehavior.AllowGet);
         }

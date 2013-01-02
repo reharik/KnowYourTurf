@@ -1,0 +1,16 @@
+﻿@model Address
+
+        @Html.HiddenFor(x => x.EntityId)
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.AddressType).AddClassToRoot("three-quarters").ToHtmlTag()
+            @Html.SubmissionFor(x => x.IsDefault).AddClassToRoot("checkbox one-quarter").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+        @Html.SubmissionFor(x => x.Address1).AddClassToRoot("half").ToHtmlTag()
+        @Html.SubmissionFor(x => x.Address2).AddClassToRoot("half").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+        @Html.SubmissionFor(x => x.City).AddClassToRoot("half").ToHtmlTag()
+        @Html.SubmissionFor(x => x.State).AddClassToRoot("one-quarter").ToHtmlTag()
+        @Html.SubmissionFor(x => x.ZipCode).AddClassToRoot("one-quarter").ToHtmlTag()
+        </div>
