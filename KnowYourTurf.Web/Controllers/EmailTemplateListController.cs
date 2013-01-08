@@ -7,6 +7,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EmailTemplateListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -33,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var items = _dynamicExpressionQuery.PerformQuery<EmailTemplate>();
             var gridItemsViewModel = _emailTemplateListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

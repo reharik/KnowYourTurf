@@ -8,6 +8,8 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class CalculatorController : KYTController
     {
         private readonly IRepository _repository;
@@ -30,7 +32,7 @@ namespace KnowYourTurf.Web.Controllers
             var calculatorHandler = ObjectFactory.Container.GetInstance<ICalculatorHandler>(calculator.Name + "Calculator");
             CalculatorViewModel model = calculatorHandler.GetViewModel();
             model.EntityId = input.EntityId;
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Calculate(SuperInputCalcViewModel input)
@@ -40,9 +42,9 @@ namespace KnowYourTurf.Web.Controllers
             var continuation = calculatorHandler.Calculate(input);
             if(!continuation.Success)
             {
-                return Json(continuation.ReturnNotification(), JsonRequestBehavior.AllowGet);
+                return new CustomJsonResult(continuation.ReturnNotification());
             }
-            return Json(continuation.Target,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(continuation.Target);
         }
     }
 }

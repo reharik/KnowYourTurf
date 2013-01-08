@@ -21,6 +21,10 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -112,6 +116,9 @@
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\NHibernate.dll</HintPath>
@@ -201,8 +208,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Reports\Controllers\TasksByField.cs" />
     <Compile Include="Areas\Reports\ReportsAreaRegistration.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Reports\ReportViewer\TasksByField.aspx.cs">
+      <DependentUpon>TasksByField.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Reports\ReportViewer\TasksByField.aspx.designer.cs">
+      <DependentUpon>TasksByField.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Reports\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -214,9 +229,11 @@
     <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
     <Compile Include="Config\CustomAuthorizationAttribute.cs" />
+    <Content Include="Areas\Reports\ReportViewer\TasksByField.aspx" />
     <Content Include="Areas\Reports\Views\Web.config" />
     <Content Include="Areas\Reports\WebForm1.aspx" />
     <Content Include="Content\images\ajax-loader.gif" />
+    <Compile Include="Config\CustomJsonResult.cs" />
     <Compile Include="Config\KnowYourTurfMenu.cs" />
     <Compile Include="Config\ModelBinders.cs" />
     <Compile Include="Config\ModelBindingBootstaper.cs" />
@@ -555,9 +572,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Reports\Controllers\" />
     <Folder Include="Areas\Reports\Models\" />
+    <Folder Include="Areas\Reports\RDLC\" />
     <Folder Include="Areas\Reports\Views\Shared\" />
+    <Folder Include="Areas\Reports\XSD\" />
     <Folder Include="Models\Email\" />
     <Folder Include="Models\TokenInputDto\" />
     <Folder Include="Properties\" />
@@ -728,9 +746,6 @@
     <Content Include="Views\DocumentCategory\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Reports\Report1.rdlc" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />
     <Content Include="Views\ListTypeList\Display.cshtml" />
     <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
@@ -743,6 +758,7 @@
     <Content Include="Views\EquipmentTask\EquipmentTaskAddUpdate.cshtml" />
     <Content Include="Views\EquipmentTask\Display.cshtml" />
     <Content Include="Views\EquipmentVendor\EquipmentVendorAddUpdate.cshtml" />
+    <Content Include="Areas\Reports\Views\TasksByField\Display.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>

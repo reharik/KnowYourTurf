@@ -8,6 +8,8 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class CompletedPurchaseOrderListController : AdminControllerBase
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -27,14 +29,14 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _purchaseOrderListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.COMPLETED_PURCHASE_ORDERS.ToString()
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult PurchaseOrdersCompleted(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<PurchaseOrder>(input.filters, x => x.Completed);
             var gridItemsViewModel = _purchaseOrderListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

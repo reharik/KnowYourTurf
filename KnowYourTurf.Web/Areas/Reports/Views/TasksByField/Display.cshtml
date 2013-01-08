@@ -1,0 +1,25 @@
+﻿@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+@using MethodFitness.Web
+@model MethodFitness.Web.Areas.Reports.Controllers.TasksByFieldViewModel
+
+@{
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+}
+<div class="col full">
+    <div class="fieldRow">
+        @Html.SubmissionFor(x=>x.TrainerEntityId).AddClassToRoot("one-third").ToHtmlTag()
+        @Html.SubmissionFor(x=>x.StartDate).AddClassToRoot("one-third").ToHtmlTag()
+        @Html.SubmissionFor(x => x.EndDate).AddClassToRoot("one-third").ToHtmlTag()
+    </div>
+    <div class="fieldRow">
+        @StandardButtonFor("viewReport", WebLocalizationKeys.VIEW_REPORT).AddClass("save").ToHtmlTag()
+    </div>
+</div>
+
+<div class="col full">
+    <div class="fieldRow">
+        <iframe width="900px" height="1200px" id="reportBody"></iframe>
+    </div>
+</div>
+
