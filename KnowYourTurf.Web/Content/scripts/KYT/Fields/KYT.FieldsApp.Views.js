@@ -604,11 +604,30 @@ KYT.Views.PurchaseOrderCommitFormView = KYT.Views.View.extend({
     },
     closePOCallback:function(_result){
         var result = typeof _result =="string" ? JSON.parse(_result) : _result;
-        if(!CC.notification.handleResult(result,this.cid)){
-            return;
+        if(!result.Success){
+            if(result.Message && !$.noty.getByViewIdAndElementId(this.cid)){
+                $(this.errorSelector).noty({type: "error", text: result.Message, viewId:this.cid});
+            }
+            if(result.Errors && !$.noty.getByViewIdAndElementId(this.cid)){
+                _.each(result.Errors,function(item){
+                    $(this.errorSelector).noty({type: "error", text:item.ErrorMessage, viewId:this.cid});
+                })
+            }
+        }else{
+            if(result.Message){
+                var note = $(this.successSelector).noty({type: "success", text:result.Message, viewId:this.cid});
+                note.setAnimationSpeed(1000);
+                note.setTimeout(3000);
+                $.noty.closeAllErrorsByViewId(this.cid);
+            }
+            KYT.vent.trigger("PO:"+this.id+":closed");
+            KYT.vent.trigger("route","purchaseorderlist",true);
         }
-        KYT.vent.trigger("PO:"+this.id+":closed");
-        KYT.vent.trigger("route","purchaseorderlist",true);
+
+
+
+
+
     },
     // used by children to update parent grid
     callbackAction: function () {
