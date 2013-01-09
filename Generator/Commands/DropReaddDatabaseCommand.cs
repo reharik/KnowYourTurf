@@ -1,27 +1,30 @@
-﻿using CC.Core.DomainTools;
-using KnowYourTurf.Core.Domain;
-using NHibernate;
+﻿using NHibernate;
 using StructureMap;
+using KnowYourTurf.Core.Domain;
 
 
 namespace Generator.Commands
 {
+
     public class DropReaddDatabaseCommand : IGeneratorCommand
     {
-        private readonly IRepository _repository;
+        private readonly ISessionFactory _sessionFactory;
 
-        public DropReaddDatabaseCommand(IRepository repository)
+        public DropReaddDatabaseCommand(ISessionFactory sessionFactory)
         {
-            _repository = repository;
+            _sessionFactory = sessionFactory;
         }
 
         public string Description { get { return "Rebuilds the db and data"; } }
 
         public void Execute(string[] args)
         {
-            ObjectFactory.Configure(x => x.For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory()));
-            var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
-            SqlServerHelper.DeleteReaddDb(sessionFactory);
+            SqlServerHelper.DeleteReaddDb(_sessionFactory);
+            var sessionFactoryConfiguration =
+                    ObjectFactory.Container.With("connectionStr")
+                                 .EqualTo(args[0])
+                                 .GetInstance<ISessionFactoryConfiguration>();
+            ObjectFactory.Container.Inject(sessionFactoryConfiguration);
         }
     }
 }

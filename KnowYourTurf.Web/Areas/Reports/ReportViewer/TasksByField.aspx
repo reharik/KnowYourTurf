@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DailyPayments.aspx.cs" Inherits="KnowYourTurf.Web.Areas.Reports.ReportViewer.TasksByField" %>
-<%@ Register TagPrefix="rsweb" Namespace="Microsoft.Reporting.WebForms" Assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" %>
+
+<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 
 <!DOCTYPE html>
 
@@ -11,7 +12,7 @@
         <form id="form2" runat="server">
     <div>
     
-        <rsweb:ReportViewer ID="ReportViewer1" 
+<rsweb:ReportViewer ID="ReportViewer1" 
             runat="server" 
             Font-Names="Verdana" 
             Font-Size="8pt" 
@@ -25,11 +26,12 @@
                 </DataSources>
             </LocalReport>
         </rsweb:ReportViewer>
+
       <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-        ConnectionString='<%$ appSettings:MethodFitness.sql_server_connection_string %>'
+        ConnectionString='<%$ appSettings:KnowYourTurf.sql_server_connection_string %>'
         SelectCommand="TasksByField" SelectCommandType="StoredProcedure"> 
         <SelectParameters>
-            <asp:QueryStringParameter Name="Date" DefaultValue="dbnull" QueryStringField="Date" Type="DateTime" />
+            <asp:QueryStringParameter Name="FieldId" QueryStringField="FieldId" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
     

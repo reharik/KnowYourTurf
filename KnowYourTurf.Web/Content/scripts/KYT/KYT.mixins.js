@@ -67,7 +67,7 @@ KYT.mixins.modelAndElementsMixin = {
     }
 };
 
-MF.mixins.reportMixin = {
+KYT.mixins.reportMixin = {
     events:{
         'click #viewReport' : 'viewReport'
     },
