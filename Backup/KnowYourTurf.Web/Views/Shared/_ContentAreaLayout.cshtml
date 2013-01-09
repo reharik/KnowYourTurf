@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section ExtraCss{
+    @CSS("jquery.cluetip.css").ToHtmlTag()
+    @CSS("ui.multiselect.css").ToHtmlTag()
+    @CSS("jquery.miniColors.css").ToHtmlTag()    
+    @CSS("token-input.css").ToHtmlTag()
+    @CSS("fullcalendar.css").ToHtmlTag()
+    @CSS("svwp_style.css").ToHtmlTag()
+    @RenderSection("ExtraCss", false)
+}
+
+@section HeaderScripts{
+    @Script("jqueryPlugins/grid.locale-en.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.jqGrid.min.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.jqPrint.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery-tmpl.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.miniColors.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.ui.timepicker.js").ToHtmlTag()
+    @Script("jqueryPlugins/galleria-1.2.5.js").ToHtmlTag()
+
+    @Script("externalHelpers/knockout-1.2.1.debug.js").ToHtmlTag()
+    @Script("externalHelpers/knockout.mapping.js").ToHtmlTag()
+    @Script("externalHelpers/fullcalendar.js").ToHtmlTag()
+    
+    @Script("internalHelpers/jquery.cc.grid.js").ToHtmlTag()
+    @Script("internalHelpers/cc.grid.columnService.js").ToHtmlTag()
+    @Script("internalHelpers/cc.gridHelpers.js").ToHtmlTag()
+
+
+    @Script("internalHelpers/kyt.repository.js").ToHtmlTag()
+
+    @Script("kyt.TokenView.js").ToHtmlTag()
+    @Script("kyt.PopupView.js").ToHtmlTag()
+    @Script("kyt.GridView.js").ToHtmlTag()
+    @Script("kyt.FormView.js").ToHtmlTag()
+    @Script("kyt.DisplayView.js").ToHtmlTag()
+    @Script("kyt.ajaxPopupDisplayModule.js").ToHtmlTag()
+    @Script("kyt.ajaxPopupFormModule.js").ToHtmlTag()
+    @Script("kyt.tokenizerModule.js").ToHtmlTag()
+    @Script("kyt.FormModule.js").ToHtmlTag()
+    @Script("kyt.CrudController.js").ToHtmlTag()
+    
+    @Script("internalHelpers/kyt.gridSearch.js").ToHtmlTag()
+    @Script("kyt.userProfileController.js").ToHtmlTag()
+    @Script("kyt.TrainerController.js").ToHtmlTag()
+    
+    @Script("internalHelpers/kyt.mediaHandler.js").ToHtmlTag()
+    @Script("internalHelpers/multiRowRepeater.js").ToHtmlTag()
+    @Script("internalHelpers/kyt.multiItemRepeater.js").ToHtmlTag()
+    @Script("internalHelpers/jquery.kyt.calendar.js").ToHtmlTag()
+    @Script("externalHelpers/xdate.js").ToHtmlTag()
+    
+    @Script("kyt.CalendarView.js").ToHtmlTag()
+    @Script("kyt.EmployeeController.js").ToHtmlTag()
+    @Script("kyt.EmployeeDashboardController.js").ToHtmlTag()
+    @Script("kyt.WeatherController.js").ToHtmlTag()
+    @Script("kyt.CalculatorController.js").ToHtmlTag()
+    @Script("kyt.calculator.js").ToHtmlTag()
+    @Script("internalHelpers/jquery.kyt.calendar.js").ToHtmlTag()
+    @Script("externalHelpers/fullcalendar.js").ToHtmlTag()
+    @Script("kyt.CalendarView.js").ToHtmlTag()
+    @Script("kyt.EventCalendarController.js").ToHtmlTag()
+    @Script("kyt.ItemListController.js").ToHtmlTag()
+    @Script("kyt.PurchaseOrderController.js").ToHtmlTag()
+    @Script("kyt.PurchaseOrderBuilderController.js").ToHtmlTag()
+    @Script("kyt.TaskCalendarController.js").ToHtmlTag()
+    @Script("kyt.VendorController.js").ToHtmlTag()
+    @Script("kyt.FieldDashboardController.js").ToHtmlTag()
+    @Script("kyt.ItemListController.js").ToHtmlTag()
+    @Script("kyt.AddUpdateListController.js").ToHtmlTag()
+    @Script("kyt.ItemListController.js").ToHtmlTag()
+    @Script("kyt.InventoryController.js").ToHtmlTag()
+    @Script("kyt.PurchaseOrderCommitController.js").ToHtmlTag()
+
+    @RenderSection("HeaderScripts", false)
+}
+@section HeaderJavascript{
+    @RenderSection("HeaderJavascript", false)
+}
+<div id="left-navigation" class="kyt_menuContainer">
+    @Html.Action("MainMenu", "Orthogonal")
+</div>
+<div id="main-content">
+    <div class="content-outer" >
+        <div id="contentInner">
+            @RenderBody()
+        </div>
+        <div class="content-footer"><span>&nbsp;</span></div>
+    </div>
+
+</div>
+
+

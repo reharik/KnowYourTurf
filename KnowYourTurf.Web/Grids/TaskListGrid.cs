@@ -21,6 +21,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x=>x.ScheduledDate);
             GridBuilder.DisplayFor(x=>x.StartTime);
             GridBuilder.DisplayFor(x => x.Complete);
+            GridBuilder.SetSearchField(x => x.TaskType.Name);
             return this;
         }
     }

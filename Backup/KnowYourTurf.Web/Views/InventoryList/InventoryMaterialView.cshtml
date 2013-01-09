@@ -1,0 +1,28 @@
+﻿@model KnowYourTurf.Web.Controllers.InventoryMaterialViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+
+@{
+    Layout = "~/Views/Shared/_DisplayLayout.cshtml";
+}
+  <div class="col left">
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Name).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Description).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Quantity).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.SizeOfUnit).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.UnitType).ToHtmlTag()
+         </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.LastVendorCompany).LabelDisplay(WebLocalizationKeys.PREVIOUS_VENDOR).ToHtmlTag()
+         </div>
+    </div>
+

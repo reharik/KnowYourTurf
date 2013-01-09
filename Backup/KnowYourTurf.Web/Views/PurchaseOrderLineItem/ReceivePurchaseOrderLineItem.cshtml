@@ -1,0 +1,37 @@
+﻿@model KnowYourTurf.Web.Models.ReceivePurchaseOrderLineItemViewModel
+@using CC.Core.Html.CCUI
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.ProductName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.ProductDescription).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.QuantityOrdered).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.SizeOfUnit).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.UnitType).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Price).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.SubTotal).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.Tax).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.TotalReceived).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Completed).ToHtmlTag()
+        </div>
+    </div>

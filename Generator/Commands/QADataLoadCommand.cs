@@ -2,9 +2,9 @@ namespace Generator.Commands
 {
     public class QADataLoadCommand : IGeneratorCommand
     {
-        private readonly IFCDataLoader _qaDataLoader;
+        private readonly IQADataLoader _qaDataLoader;
 
-        public QADataLoadCommand(IFCDataLoader qaDataLoader)
+        public QADataLoadCommand(IQADataLoader qaDataLoader)
         {
             _qaDataLoader = qaDataLoader;
         }

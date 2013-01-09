@@ -12,6 +12,8 @@ using CC.Core;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class PurchaseOrderCommitController:KYTController
     {
         private readonly IRepository _repository;
@@ -45,7 +47,7 @@ namespace KnowYourTurf.Web.Controllers
                 _ClosePOUrl = UrlContext.GetUrlForAction<PurchaseOrderCommitController>(x => x.ClosePurchaseOrder(null)) + "/" + input.EntityId,
                 _Title = WebLocalizationKeys.COMMIT_PURCHASE_ORDER.ToString()
             };
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult ClosePurchaseOrder(ViewModel input)
@@ -56,7 +58,7 @@ namespace KnowYourTurf.Web.Controllers
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
             var notification = crudManager.Finish();
             notification.RedirectUrl = UrlContext.GetUrlForAction<PurchaseOrderListController>(x => x.ItemList(null));
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public ActionResult PurchaseOrderLineItemList(ViewModel input)
@@ -68,7 +70,7 @@ namespace KnowYourTurf.Web.Controllers
                 _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + input.EntityId,
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult PurchaseOrderLineItems(GridItemsRequestModel input)
@@ -76,7 +78,7 @@ namespace KnowYourTurf.Web.Controllers
             var purchaseOrder = _repository.Find<PurchaseOrder>(input.EntityId);
             var items = _dynamicExpressionQuery.PerformQuery(purchaseOrder.LineItems,input.filters, x=> !x.Completed);
             var model = _receivePurchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
     }
 }

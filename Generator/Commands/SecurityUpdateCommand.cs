@@ -1,4 +1,5 @@
 ﻿using CC.Core.DomainTools;
+using DBFluentMigration.Iteration_1;
 using KnowYourTurf.Web.Security;
 
 namespace Generator.Commands
@@ -22,9 +23,9 @@ namespace Generator.Commands
 
         public void Execute(string[] args)
         {
-//            new UpdateOperations(_operations).Update();
-//            new UpdatePermissions(_permissions).update();
-//            _repository.Commit();
+            new UpdateOperations(_operations).Update();
+            new UpdatePermissions(_permissions).Update();
+            _repository.Commit();
             
         }
     }

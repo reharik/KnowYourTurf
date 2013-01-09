@@ -15,6 +15,8 @@ using KnowYourTurf.Web.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class DocumentController:KYTController
     {
         private readonly IRepository _repository;
@@ -51,7 +53,7 @@ namespace KnowYourTurf.Web.Controllers
             model.Popup = input.Popup;
             model._saveUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.Save(null));
             model.Var = input.Var;
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
@@ -72,7 +74,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 documentUrls.ForEachItem(_fileHandlerService.DeleteFile);
             }
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
 
@@ -91,7 +93,7 @@ namespace KnowYourTurf.Web.Controllers
             var crudManager = _saveEntityService.ProcessSave(entity);
 
             var notification = crudManager.Finish();
-            return Json(notification, "text/plain");
+            return new CustomJsonResult(notification, "text/plain");
         }
 
         private Document mapToDomain(DocumentViewModel input, Document document)
@@ -112,7 +114,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var docs = _repository.FindAll<Document>();
             var model = docs.Select(x => new DocumentDto {file = x});
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
     }
 

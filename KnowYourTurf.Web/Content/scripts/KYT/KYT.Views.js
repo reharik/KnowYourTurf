@@ -148,7 +148,7 @@ KYT.Views.AjaxPopupFormModule  = KYT.Views.View.extend({
         this.options.noBubbleUp=true;
         this.options.isPopup=true;
         this.popupForm = this.options.view && KYT.Views[this.options.view] ? new KYT.Views[this.options.view](this.options) : new KYT.Views.AjaxFormView(this.options);
-        this.popupForm.notification = new CC.NotificationService();
+        this.popupForm.errorSelector = "#popupMessageContainer";
 
         this.popupForm.render();
         this.storeChild(this.popupForm);
@@ -166,11 +166,8 @@ KYT.Views.AjaxPopupFormModule  = KYT.Views.View.extend({
          KYT.vent.unbind("popup:"+this.id+":cancel");
         KYT.vent.unbind("popup:"+this.id+":save");
         KYT.vent.unbind("form:"+this.id+":success");
-        this.notification = null;
     },
     loadPopupView:function(formOptions){
-        this.$el.find("#popupMessageContainer").append("<ul data-bind=\"foreach:{data:messages, beforeRemove: fadeOut}\"><li data-bind=\"text:message, css: { error: status()=='error', warning: status()=='warning', success: status()=='success' }\"></li></ul>");
-        this.popupForm.notification.render(this.$el.find("#popupMessageContainer").get(0));
         var buttons = formOptions.buttons?formOptions.buttons:KYT.Views.popupButtonBuilder.builder(formOptions.id).standardEditButons();
         var popupOptions = {
             id:this.id,
@@ -427,31 +424,6 @@ KYT.Views.EditableTokenView = KYT.Views.TokenView.extend({
         data.splice(idx,1);
     },
     tokenEditor:function(e){}
-});
-
-KYT.Views.NotificationView = KYT.Views.View.extend({
-    events:_.extend({
-        "click #trapezoid":"toggle"
-    }, KYT.Views.View.prototype.events),
-    render: function(){
-        var $trap = $("<div>").attr("id","trapezoid");
-        $trap.text("vaslasdflasdf");
-      //  $trap.hide();
-        this.$el.html($trap);
-        $("#main-content").prepend(this.$el);
-        this.viewLoaded();
-        KYT.vent.trigger("form:"+this.id+":pageLoaded",this.options);
-        return this;
-    },
-    toggle:function(){
-        $("#trapezoid").hide("blind",{},2000).delay(800).show("blind",{},2000);
-    },
-    show:function(){
-        $("#trapezoid").show("blind",{},2000);
-    },
-    hide:function(){
-        $("#trapezoid").hide("blind",{},2000);
-    }
 });
 
 KYT.tokenDefaults = {

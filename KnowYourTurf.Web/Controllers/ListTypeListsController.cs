@@ -13,6 +13,8 @@ using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class ListTypeListController : AdminControllerBase
     {
         private readonly IEntityListGrid<EventType> _eventTypeListGrid;
@@ -67,7 +69,7 @@ namespace KnowYourTurf.Web.Controllers
                                                   _deleteMultipleEquipTypeUrl = UrlContext.GetUrlForAction<EquipmentTypeController>(x => x.DeleteMultiple(null)),
                                                   _deleteMultiplePartsUrl = UrlContext.GetUrlForAction<PartController>(x => x.DeleteMultiple(null)),
                                               };
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult EquipmentTaskTypeGrid(ViewModel input)
@@ -80,7 +82,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("delete");
             model.headerButtons.Add("new");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult EquipmentTypeGrid(ViewModel input)
@@ -93,7 +95,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("delete");
             model.headerButtons.Add("new");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult PartGrid(ViewModel input)
@@ -106,7 +108,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("delete");
             model.headerButtons.Add("new");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult EventTypeGrid(ViewModel input)
@@ -119,7 +121,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("delete");
             model.headerButtons.Add("new");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         public ActionResult TaskTypeGrid(ViewModel input)
         {
@@ -131,7 +133,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("delete");
             model.headerButtons.Add("new");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         public ActionResult DocumentCategoryGrid(ViewModel input)
         {
@@ -143,7 +145,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("delete");
             model.headerButtons.Add("new");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         public ActionResult PhotoCategoryGrid(ViewModel input)
         {
@@ -155,7 +157,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("delete");
             model.headerButtons.Add("new");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
     }
 }

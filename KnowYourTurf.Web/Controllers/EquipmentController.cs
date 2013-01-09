@@ -18,6 +18,8 @@ using KnowYourTurf.Web.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EquipmentController : KYTController
     {
         private readonly IRepository _repository;
@@ -54,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
             model._EquipmentTypeEntityIdList= equipmentTypes;
             model._Title = WebLocalizationKeys.EQUIPMENT_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<EquipmentController>(x => x.Save(null));
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
 //        public ActionResult Display(ViewModel input)
@@ -89,7 +91,7 @@ namespace KnowYourTurf.Web.Controllers
                 }
             });
             _repository.Commit();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         private bool checkDependencies(Equipment item, Notification notification)
@@ -120,7 +122,7 @@ namespace KnowYourTurf.Web.Controllers
             
             var crudManager = _saveEntityService.ProcessSave(equipment);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
     }
 

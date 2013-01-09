@@ -1,0 +1,24 @@
+﻿@model DocumentViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+@using KnowYourTurf.Web.Controllers
+@{
+    Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
+}
+
+
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.DocumentCategoryEntityId).LabelDisplay(WebLocalizationKeys.DOCUMENT_CATEGORY).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.FileUrl).LabelDisplay(WebLocalizationKeys.DOCUMENT).ToHtmlTag() 
+        </div>
+    </div>
+

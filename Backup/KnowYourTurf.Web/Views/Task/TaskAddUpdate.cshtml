@@ -1,0 +1,59 @@
+﻿@model KnowYourTurf.Web.Models.TaskViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+@{
+    Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
+}
+
+
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.TaskTypeEntityId).LabelDisplay(WebLocalizationKeys.TASK_TYPE).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.ScheduledDate).ElType("DateTextbox").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.StartTime).ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EndTime).ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.FieldEntityId).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.InventoryProductEntityId).LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.QuantityNeeded).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.QuantityUsed).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Notes).AddClassToInput("KYT_editor_label_left").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Complete).ToHtmlTag()
+        </div>
+    </div>
+    <div class="col left clear">
+        <div class="fieldRow">
+            <div id="employeeTokenizer">
+                @Html.SubmissionFor(x => x.Employees).ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
+            </div>
+        </div>
+        <div class="fieldRow">
+            <div id="equipmentTokenizer">
+                @Html.SubmissionFor(x => x.Equipment).ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
+            </div>
+        </div>
+    </div>
+            
+@EndForm()
+
+

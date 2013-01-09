@@ -1,0 +1,36 @@
+﻿@using KnowYourTurf.Web;
+@using HtmlTags
+<script>
+    @RenderSection("ExtraCss", false)
+
+    @RenderSection("HeaderScripts", false)
+    </script>
+<script>
+    var gridDef=  @MvcHtmlString.Create(JsonUtil.ToJson(Model.GridDefinition));
+    var addUpdateUrl = "@MvcHtmlString.Create(Model.AddUpdateUrl)";
+    var deleteMultipleUrl = "@MvcHtmlString.Create(Model.deleteMultipleUrl)";
+    var contentArea;
+    var gridControllerOptions = { gridDef: gridDef,
+        addUpdateUrl: addUpdateUrl,
+        deleteMultipleUrl: deleteMultipleUrl,
+        el:"#masterArea"
+    };
+        @RenderSection("HeaderJavascript", false)
+</script>
+
+<div class="content-header">
+    <input class="search" /> 
+    @RenderSection("ExtraContentHeaderButtons", false)
+    @*        <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>*@
+    @*        <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>*@
+    <span class="title-name">@Model.Title</span>
+</div>
+<div id="validation-container-wrapper">
+        <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
+    </div>
+    <div id="contentArea" class="content-inner">
+    <div id="validation-container-wrapper">
+        <div id="errorMessagesGrid" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
+    </div>
+        @RenderBody()
+    </div>

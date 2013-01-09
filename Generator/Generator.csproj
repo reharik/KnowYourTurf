@@ -78,6 +78,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\CC.UI.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="FluentMigrator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\FluentMigrator.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMigrator.Runner">
+      <HintPath>..\lib\FluentMigrator.Runner.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
@@ -149,6 +156,7 @@
   <ItemGroup>
     <Compile Include="CommandRegistry.cs" />
     <Compile Include="Commands\ChrisDataLoadCommand.cs" />
+    <Compile Include="Commands\MigratorCommand.cs" />
     <Compile Include="Commands\QADataLoadCommand.cs" />
     <Compile Include="Commands\SecurityUpdateCommand.cs" />
     <Compile Include="Commands\DataLoadCommand.cs" />
@@ -157,7 +165,8 @@
     <Compile Include="Commands\KillAllFKsCommand.cs" />
     <Compile Include="Commands\RebuildDatabaseCommand.cs" />
     <Compile Include="Commands\SecurityCommand.cs" />
-    <Compile Include="FCDataLoader.cs" />
+    <Compile Include="MigratorConsole.cs" />
+    <Compile Include="MigratorOptions.cs" />
     <Compile Include="QADataLoader.cs" />
     <Compile Include="MinDataLoader.cs" />
     <Compile Include="DataLoader.cs" />

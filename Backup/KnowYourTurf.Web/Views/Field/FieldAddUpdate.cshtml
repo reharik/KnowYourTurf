@@ -1,0 +1,40 @@
+﻿@model KnowYourTurf.Web.Models.FieldViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+@using KnowYourTurf.Web.Controllers
+@using KnowYourTurf.Core.Html.Expressions
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+<script type="text/javascript" charset="utf-8">
+    extraFormOptions.runAfterRenderFunction = function () {
+        $('#FieldColor').miniColors();
+    };
+ </script>
+
+            @MvcHtmlString.Create(FormFor<FieldController>(x => x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
+            <input type="hidden" id="ParentId" name="ParentId" value="@Model.ParentId"/>
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.ParentId).ToString())
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Abbreviation).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Item.Size).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
+            @Html.SubmissionFor(x => x.Item.FieldColor).InputId("FieldColor").ToHtmlTag()
+            <div id="colorPicker"></div>
+        </div>
+    </div>
+            @EndForm()
+            

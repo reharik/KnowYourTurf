@@ -10,6 +10,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EquipmentVendorListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -33,7 +35,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         
         public JsonResult Vendors(GridItemsRequestModel input)
@@ -50,7 +52,7 @@ namespace KnowYourTurf.Web.Controllers
 
             _vendorListGrid.AddColumnModifications(mod);
             var gridItemsViewModel = _vendorListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }
