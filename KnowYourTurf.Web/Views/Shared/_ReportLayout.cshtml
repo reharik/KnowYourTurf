@@ -1,0 +1,20 @@
+﻿<script>
+    @RenderSection("ExtraCss", false)
+
+    @RenderSection("HeaderScripts", false)
+
+    var contentArea;
+    var extraFormOptions = {};
+    @RenderSection("HeaderJavascript", false)
+</script>
+
+   <div class="content-header">
+        @RenderSection("ExtraContentHeaderButtons", false)
+        <span class="title-name" data-bind="text:_Title"></span>
+    </div>
+    <div id="contentArea" class="content-inner">
+        @RenderBody()
+        <div class="footer">
+            @RenderSection("FooterButtons", false)
+        </div>
+    </div>
