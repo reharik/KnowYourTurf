@@ -1,0 +1,37 @@
+﻿@model KnowYourTurf.Web.Models.DisplayEquipmentTaskViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+
+@{
+    Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_DisplayLayout.cshtml";
+}
+
+<div id="equipmentTaskDisplay"> 
+    <div class="col left">
+        <div class="fieldRow">
+               @Html.ViewFor(x => x.TaskTypeName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.ViewFor(x => x.ScheduledDate).LabelDisplay(WebLocalizationKeys.DATE).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+                    @Html.ViewFor(x => x.StartTime).LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+                    @Html.ViewFor(x => x.EndTime).LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+                    @Html.ViewFor(x => x.EquipmentName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+                    @Html.ViewFor(x => x._PartsNames).LabelDisplay(WebLocalizationKeys.PARTS).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+                    @Html.ViewFor(x => x._EmployeeNames).LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+                    @Html.ViewFor(x => x.Notes).ToHtmlTag()
+        </div>
+    </div>
+</div>
+
