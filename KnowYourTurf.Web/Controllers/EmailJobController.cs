@@ -12,6 +12,8 @@ using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EmailJobController : KYTController
     {
         private readonly IRepository _repository;
@@ -54,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
             model._FrequencyList = _selectListItemService.CreateList<EmailFrequency>(true);
             model._Title = WebLocalizationKeys.EMAIL_JOB_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<EmailJobController>(x => x.Save(null));
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
 //        public ActionResult Display(ViewModel input)
@@ -83,7 +85,7 @@ namespace KnowYourTurf.Web.Controllers
             mapItem(job,input);
             var crudManager = _saveEntityService.ProcessSave(job);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         private void mapItem(EmailJob job, EmailJobViewModel input)

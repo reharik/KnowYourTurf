@@ -13,6 +13,8 @@ using CC.Core;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class TaskCalendarController:KYTController
     {
         private readonly IRepository _repository;
@@ -43,7 +45,7 @@ namespace KnowYourTurf.Web.Controllers
 
                                                    }
                        };
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult EventChanged(TaskChangedViewModel input)
@@ -54,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
             task.StartTime = input.StartTime;
             var crudManager = _saveEntityService.ProcessSave(task);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public JsonResult Events(GetEventsViewModel input)

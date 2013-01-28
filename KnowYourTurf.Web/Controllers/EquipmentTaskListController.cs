@@ -12,6 +12,8 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EquipmentTaskListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -33,12 +35,11 @@ namespace KnowYourTurf.Web.Controllers
                 //AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentTaskController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<EquipmentTaskController>(x => x.DeleteMultiple(null)),
                 gridDef = _pendingEquipmentTaskGrid.GetGridDefinition(url, input.User),
-                _Title = WebLocalizationKeys.TASKS.ToString(),
-                searchField = "EquipmentTaskType.Name"
+                _Title = WebLocalizationKeys.TASKS.ToString()
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult EquipmentTasks(GridItemsRequestModel input)
@@ -50,7 +51,7 @@ namespace KnowYourTurf.Web.Controllers
 
             var items = _dynamicExpressionQuery.PerformQuery(equipTasks, input.filters);
             var gridItemsViewModel = _pendingEquipmentTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
 
         public ActionResult CompletedEquipmentTasksGrid(ViewModel input)
@@ -64,7 +65,7 @@ namespace KnowYourTurf.Web.Controllers
                 _Title = WebLocalizationKeys.COMPLETED_TASKS.ToString(),
 
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         public JsonResult CompletedEquipmentTasks(GridItemsRequestModel input)
         {
@@ -75,7 +76,7 @@ namespace KnowYourTurf.Web.Controllers
             
             var items = _dynamicExpressionQuery.PerformQuery(equipTasks, input.filters);
             var gridItemsViewModel = _completedEquipmentTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

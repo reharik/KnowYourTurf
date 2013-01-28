@@ -21,6 +21,8 @@ using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EmployeeController : KYTController
     {
         private readonly IRepository _repository;
@@ -72,7 +74,7 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.Save(null));
             model.UserRoles = new TokenInputViewModel { _availableItems = availableUserRoles, selectedItems = selectedUserRoles };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
       
         public ActionResult Display(ViewModel input)
@@ -96,7 +98,7 @@ namespace KnowYourTurf.Web.Controllers
             if(!rulesResult.Success)
             {
                 var notification = new RulesNotification(rulesResult);
-                return Json(notification);
+                return new CustomJsonResult(notification);
             }
             _repository.Delete(employee);
             _repository.UnitOfWork.Commit();
@@ -134,7 +136,7 @@ namespace KnowYourTurf.Web.Controllers
             var crudManager = _saveEntityService.ProcessSave(employee);
 
             var notification = crudManager.Finish();
-            return Json(notification,"text/plain");
+            return new CustomJsonResult(notification, "text/plain");
         }
 
         private void mapRolesToGroups(User employee)

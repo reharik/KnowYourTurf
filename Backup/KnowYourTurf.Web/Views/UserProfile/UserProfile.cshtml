@@ -1,0 +1,159 @@
+﻿@model KnowYourTurf.Web.Models.UserViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_FormLayout.cshtml"; }
+
+@section HeaderJavascript{
+    var repeaters = {
+        addressItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.Item.Addresses)),
+        emailItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.Item.Emails)),
+        phoneItems: @MvcHtmlString.Create(JsonUtil.ToJson(Model.Item.Phones))
+    }
+    extraFormOptions.repeaters = repeaters;
+}
+<div id="validation-container-wrapper">
+    <div id="errorMessagesForm" class="kyt_ErrorMessages errorMessages"><ul></ul></div>
+</div>
+<div id="userProfile">
+    @MvcHtmlString.Create(FormFor<UserProfileController>(x => x.Save(null)).AddClass("kyt_CRUD").ElementId("CRUDForm").ToString())
+        <input type="hidden" id="EntityId" name="EntityId" value="@Model.Item.EntityId">
+        <div class="col left">
+            <div class="fieldRow">
+                <h4>@WebLocalizationKeys.PERSONAL_INFORMATION</h4>
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item.FirstName).AddClassToRoot("two-five first").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.MiddleInitial).LabelDisplay(WebLocalizationKeys.INITIAL).AddClassToRoot("one-five mid").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.LastName).AddClassToRoot("two-five last").ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Item._Title).ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @Html.ViewFor(x => x.Item.UserLoginInfo.LoginName).AddClassToRoot("half").ToHtmlTag()
+                @Html.SubmissionFor(x => x.Item.BirthDate).AddClassToRoot("half").ToHtmlTag()
+            </div>
+        </div>
+        <div class="col right">
+            <div class="fieldRow">
+                <h4>@WebLocalizationKeys.PASSWORD</h4>
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.Password).InputId("Password").ToHtmlTag()
+            </div>
+            <div class="fieldRow">
+                @Html.SubmissionFor(x => x.PasswordConfirmation).ToHtmlTag()
+            </div>
+        </div>
+     
+    @EndForm()
+        <div class="col left">
+            <div class="fieldRow">
+                <h4>@WebLocalizationKeys.ADDRESSES</h4>
+            </div>
+            <div class="fieldRow">
+                <div id="addressContainer">
+                    <form> @* necessary to make jquery.validate work*@
+                        @Html.Partial("AddressTemplate", @Model.Address)
+                    </form>
+                    <span class="add_another bottom_add "><button class="plus-rounded" type="submit" data-bind="click: addAddress">@WebLocalizationKeys.ADD_THIS_ITEM</button></span>
+                </div>
+            </div>
+            <div class="fieldRow">
+                <div id="addressDisplayContainer" class="repeaterItems">
+                    <div data-bind="template: {name:'addressDisplayTemplate', foreach: addressItems}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col right">
+             <div class="fieldRow">
+                <h4>@WebLocalizationKeys.EMAIL_ADDRESSES</h4>
+            </div>
+            <div class="fieldRow">
+                <div id="emailContainer">
+                    <form> @* necessary to make jquery.validate work*@
+                        @Html.Partial("EmailTemplate", @Model.Email)
+                    </form>
+                    <span class="add_another bottom_add "><button class="plus-rounded" data-bind="click: addEmail">@WebLocalizationKeys.ADD_THIS_ITEM</button></span>
+                </div>
+            </div>
+            <div class="fieldRow">
+                <div id="emailDisplayContainer" class="repeaterItems">
+                    <div class="items" data-bind="template: {name:'emailDisplayTemplate', foreach: emailItems}"></div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="fieldRow">
+                <h4>@WebLocalizationKeys.PHONE_NUMBERS</h4>
+            </div>
+            <div class="fieldRow">
+                <div id="phoneContainer">
+                    <form> @* necessary to make jquery.validate work*@
+                        @Html.Partial("PhoneTemplate", @Model.Phone)
+                    </form>
+                    <span class="add_another bottom_add "><button class="plus-rounded" data-bind="click: addPhone">@WebLocalizationKeys.ADD_THIS_ITEM</button></span>
+                </div>
+            </div>
+            <div class="fieldRow">
+                <div id="phoneDisplayContainer" class="repeaterItems">
+                    <div class="items" data-bind="template: {name:'phoneDisplayTemplate', foreach: phoneItems}"></div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script type="text/x-jquery-tmpl" id="addressDisplayTemplate">
+        <div class="fieldRow unit">
+            <span>
+            {{if $data.AddressType.EntityId}}
+                ${$data.AddressType.Name}: 
+            {{/if}}
+            ${Address1}</span>
+            <br/>
+            {{if Address2 }}
+            <span>${Address2}</span>
+            <br/>
+            {{/if}}
+            <span>
+                ${City}{{if City && (State || ZipCode)}} ,{{/if}}
+                {{if State }}
+                    <span>${State}</span>
+                {{/if}}
+                {{if ZipCode }}
+                    <span>${ZipCode}</span>
+                {{/if}}
+            </span>
+            <a class="close kyt_remove" id="removeAddress" data-bind="click: removeItem">
+                <input type="hidden" id="EntityId" value="${EntityId}"/>
+            </a>
+        </div>
+
+</script>
+
+
+
+<script type="text/x-jquery-tmpl" id="phoneDisplayTemplate">
+        <div class="fieldRow unit">
+             <span>
+            {{if $data.PhoneType.EntityId}}
+                ${$data.PhoneType.Name}: 
+            {{/if}}
+                ${PhoneNumber}</span>
+            <a class="close kyt_remove" id="removePhone" data-bind="click: removeItem">
+                <input type="hidden" id="EntityId" value="${EntityId}"/>
+            </a>
+        </div>
+</script>
+
+<script type="text/x-jquery-tmpl" id="emailDisplayTemplate">
+    <div class="fieldRow unit">
+        ${EmailAddress}
+        <a class="close kyt_remove" id="removeEmail" data-bind="click: removeItem">
+           <input type="hidden" id="EntityId" value="${EntityId}"/>
+        </a>
+    </div>
+            
+</script>

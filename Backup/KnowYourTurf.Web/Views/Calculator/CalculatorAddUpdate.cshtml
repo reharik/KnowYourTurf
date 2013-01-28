@@ -1,0 +1,16 @@
+﻿@model KnowYourTurf.Web.Models.CalculatorViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+
+@{
+    Layout = "~/Views/Shared/_popupLayout.cshtml";
+}
+    <div id="errorMessagesPU" class="mf_ErrorMessages errorMessages"><ul></ul></div>
+
+        <div class="KYT_section_header" >
+            @MvcHtmlString.Create(WebLocalizationKeys.CALCULATOR.ToString())
+        </div>
+        
+            @MvcHtmlString.Create(Html.HiddenFor(x => x.EntityId).ToString())
+            @Html.SubmissionFor(x => x._calculatorName).ToHtmlTag()
+

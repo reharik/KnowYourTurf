@@ -1,0 +1,21 @@
+﻿@model ListViewModel
+@using KnowYourTurf.Core
+@using KnowYourTurf.Web
+@using HtmlTags
+
+@{ Layout = "~/Views/Shared/_listLayout.cshtml"; }
+@section HeaderScripts{
+}
+@section HeaderJavascript{
+    $(document).ready(function () {
+    gridControllerOptions.searchField="TaskType.Name";
+        new kyt.ItemListController(gridControllerOptions);
+    });
+}
+@section ExtraContentHeaderButtons{
+    <button class="delete" title="@WebLocalizationKeys.REMOVE"></button>
+    <button id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+}
+<input type="hidden" id="RootId" name="RootId" value="@Model.ParentId"/>
+<table id="gridContainer" class="scroll"></table>
+<div id="pager" class="scroll" style="text-align:center;"></div>

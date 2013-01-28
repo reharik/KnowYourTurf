@@ -15,6 +15,8 @@ using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EquipmentTaskController : KYTController
     {
         private readonly IRepository _repository;
@@ -73,7 +75,7 @@ namespace KnowYourTurf.Web.Controllers
                 model.Complete = false;
             }
                 
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Display_Template(ViewModel input)
@@ -93,7 +95,7 @@ namespace KnowYourTurf.Web.Controllers
             model._PartsNames = equipmentTask.Parts.Select(x => x.Name);
             model._AddUpdateUrl = UrlContext.GetUrlForAction<EquipmentTaskController>(x => x.AddUpdate(null));
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -115,7 +117,7 @@ namespace KnowYourTurf.Web.Controllers
                 if(!item.Complete) _repository.HardDelete(item);
             });
             _repository.Commit();
-            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(new Notification { Success = true });
         }
 
         public ActionResult Save(EquipmentTaskViewModel input)
@@ -127,7 +129,7 @@ namespace KnowYourTurf.Web.Controllers
             
             var validationManager = _saveEntityService.ProcessSave(equipmentEquipmentTask);
             var notification = validationManager.Finish();
-            return Json(notification);
+            return new CustomJsonResult(notification);
         }
 
         private void mapItem(EquipmentTask item, EquipmentTaskViewModel input)

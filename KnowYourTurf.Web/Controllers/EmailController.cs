@@ -38,7 +38,7 @@
 //                notification.Success = false;
 //                notification.Message = ex.Message;
 //            }
-//            return Json(notification, JsonRequestBehavior.AllowGet);
+//            return new CustomJsonResult(notification);
 //        }
 //    }
 //}

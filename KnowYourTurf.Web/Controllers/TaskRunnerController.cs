@@ -129,7 +129,7 @@ namespace KnowYourTurf.Web.Controllers
 //                                   }
 //                               });
 //
-//            return Json(notification, JsonRequestBehavior.AllowGet);
+//            return new CustomJsonResult(notification);
 //        }
     }
 

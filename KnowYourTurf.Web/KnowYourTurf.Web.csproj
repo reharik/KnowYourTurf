@@ -18,8 +18,9 @@
     <UseIISExpress>false</UseIISExpress>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
-    <UpgradeBackupLocation />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -52,15 +53,6 @@
     </Reference>
     <Reference Include="AutoMapper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\lib\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Cassette">
-      <HintPath>..\lib\Cassette.dll</HintPath>
-    </Reference>
-    <Reference Include="Cassette.Aspnet">
-      <HintPath>..\lib\Cassette.Aspnet.dll</HintPath>
-    </Reference>
-    <Reference Include="Cassette.Views">
-      <HintPath>..\lib\Cassette.Views.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Components.Validator">
       <HintPath>..\lib\Castle.Components.Validator.dll</HintPath>
@@ -121,8 +113,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -213,23 +206,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Reports\Controllers\TasksByFieldController.cs" />
     <Compile Include="Areas\Reports\ReportsAreaRegistration.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Areas\Reports\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Areas\Reports\ReportViewer\TasksByField.aspx.cs">
+      <DependentUpon>TasksByField.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Areas\Reports\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Areas\Reports\ReportViewer\TasksByField.aspx.designer.cs">
+      <DependentUpon>TasksByField.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
     <Compile Include="Config\CustomAuthorizationAttribute.cs" />
+    <Content Include="Areas\Reports\ReportViewer\TasksByField.aspx" />
     <Content Include="Areas\Reports\Views\Web.config" />
-    <Content Include="Areas\Reports\WebForm1.aspx" />
     <Content Include="Content\images\ajax-loader.gif" />
+    <Compile Include="Config\CustomJsonResult.cs" />
     <Compile Include="Config\KnowYourTurfMenu.cs" />
     <Compile Include="Config\ModelBinders.cs" />
     <Compile Include="Config\ModelBindingBootstaper.cs" />
@@ -379,6 +373,11 @@
     <Compile Include="Services\RouteTokens\IRouteTokenBuilder.cs" />
     <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
     <Compile Include="Services\RouteTokens\RouteToken.cs" />
+    <Compile Include="TasksByField.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TasksByField.xsd</DependentUpon>
+    </Compile>
     <Compile Include="WebLocalizationKeys.cs" />
     <Compile Include="KYTWebRegistry.cs" />
     <Compile Include="Global.asax.cs">
@@ -568,9 +567,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Reports\Controllers\" />
     <Folder Include="Areas\Reports\Models\" />
     <Folder Include="Areas\Reports\Views\Shared\" />
+    <Folder Include="Areas\Reports\XSD\" />
     <Folder Include="Models\Email\" />
     <Folder Include="Models\TokenInputDto\" />
     <Folder Include="Properties\" />
@@ -600,6 +599,11 @@
     <Content Include="Views\UserProfile\EmailConfirmed.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Shared\AddressTemplate.cshtml" />
+    <Content Include="Views\Shared\EmailTemplate.cshtml" />
+    <Content Include="Views\Shared\PhoneTemplate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
@@ -616,12 +620,16 @@
     <Content Include="Views\Shared\_FormLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="connectionStrings.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Views\Shared\_AssetDetailLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_DetailLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_EmptyLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ListLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Orthogonal\KnowYourTurfHeader.cshtml" />
@@ -727,9 +735,6 @@
     <Content Include="Views\DocumentCategory\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Reports\Report1.rdlc" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />
     <Content Include="Views\ListTypeList\Display.cshtml" />
     <Content Include="Views\InventoryList\InventoryChemicalView.cshtml" />
@@ -742,9 +747,24 @@
     <Content Include="Views\EquipmentTask\EquipmentTaskAddUpdate.cshtml" />
     <Content Include="Views\EquipmentTask\Display.cshtml" />
     <Content Include="Views\EquipmentVendor\EquipmentVendorAddUpdate.cshtml" />
+    <Content Include="Areas\Reports\Views\TasksByField\Display.cshtml" />
+    <Content Include="TasksByField.xsc">
+      <DependentUpon>TasksByField.xsd</DependentUpon>
+    </Content>
+    <None Include="TasksByField.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TasksByField.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="TasksByField.xss">
+      <DependentUpon>TasksByField.xsd</DependentUpon>
+    </Content>
     <Content Include="Views\Shared\_ReportLayout.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Reports\RDLC\TasksByField.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

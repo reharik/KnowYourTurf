@@ -13,6 +13,8 @@ using CC.Core;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EquipmentTaskCalendarController:KYTController
     {
         private readonly IRepository _repository;
@@ -41,7 +43,7 @@ namespace KnowYourTurf.Web.Controllers
                                                        EventChangedUrl = UrlContext.GetUrlForAction<EquipmentTaskCalendarController>(x => x.EventChanged(null))
                                                    }
                        };
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult EventChanged(EquipmentTaskChangedViewModel input)
@@ -52,7 +54,7 @@ namespace KnowYourTurf.Web.Controllers
             equipmentTask.StartTime = input.StartTime;
             var crudManager = _saveEntityService.ProcessSave(equipmentTask);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public JsonResult Events(GetEventsViewModel input)
@@ -72,7 +74,7 @@ namespace KnowYourTurf.Web.Controllers
                                                        })
                 );
 
-            return Json(events, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(events);
         }
     }
 

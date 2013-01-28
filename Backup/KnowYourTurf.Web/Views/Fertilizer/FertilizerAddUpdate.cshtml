@@ -1,0 +1,23 @@
+﻿@model KnowYourTurf.Web.Models.Fertilizer.FertilizerViewModel
+@using CC.Core.Html.CCUI
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+      <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Description).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.N).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.P).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.K).ToHtmlTag()
+        </div>                             
+    </div>
+

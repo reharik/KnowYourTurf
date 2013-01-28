@@ -9,6 +9,8 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class TaskListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -30,12 +32,11 @@ namespace KnowYourTurf.Web.Controllers
                 //AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null)),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<TaskController>(x => x.DeleteMultiple(null)),
                 gridDef = _pendingTaskGrid.GetGridDefinition(url, input.User),
-                _Title = WebLocalizationKeys.TASKS.ToString(),
-                searchField = "TaskType.Name"
+                _Title = WebLocalizationKeys.TASKS.ToString()
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult Tasks(GridItemsRequestModel input)
@@ -44,7 +45,7 @@ namespace KnowYourTurf.Web.Controllers
             var tasks = _repository.Query<Task>(x => x.Field.Site.EntityId == input.RootId && !x.Complete);
             var items = _dynamicExpressionQuery.PerformQuery(tasks, input.filters);
             var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
 
         public ActionResult CompletedTasksGrid(ViewModel input)
@@ -58,14 +59,14 @@ namespace KnowYourTurf.Web.Controllers
                 _Title = WebLocalizationKeys.COMPLETED_TASKS.ToString(),
 
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         public JsonResult CompletedTasks(GridItemsRequestModel input)
         {
             var _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters,x => x.Field.Site.EntityId == input.RootId && x.Complete);
             var gridItemsViewModel = _completedTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }
