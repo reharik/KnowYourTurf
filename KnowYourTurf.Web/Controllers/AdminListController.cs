@@ -10,6 +10,8 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class AdminListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -42,7 +44,7 @@ namespace KnowYourTurf.Web.Controllers
             var user = _sessionContext.GetCurrentUser();
             var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserRoles.Any(r=>r.Name==UserType.Administrator.ToString()));
             var gridItemsViewModel = _grid.GetGridItemsViewModel(input.PageSortFilter, items, user);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

@@ -7,6 +7,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class CalculatorListController:KYTController
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -28,14 +30,14 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _calculatorListGrid.GetGridDefinition(url,input.User),
                 _Title = WebLocalizationKeys.CALCULATORS.ToString()
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult Calculators(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Calculator>(input.filters);
             var gridItemsViewModel = _calculatorListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 

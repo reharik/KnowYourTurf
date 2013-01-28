@@ -6,6 +6,8 @@ using KnowYourTurf.Core.Domain;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EmailTemplateController:KYTController
     {
         private readonly IRepository _repository;
@@ -55,7 +57,7 @@ namespace KnowYourTurf.Web.Controllers
 
             var crudManager = _saveEntityService.ProcessSave(newTask);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         private EmailTemplate mapToDomain(EmailTemplateViewModel input, EmailTemplate emailTemplate)

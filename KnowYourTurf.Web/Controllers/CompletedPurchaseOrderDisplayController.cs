@@ -11,6 +11,8 @@ using NHibernate.Linq;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class CompletedPurchaseOrderDisplayController : AdminControllerBase
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -32,7 +34,7 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _purchaseOrderListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.COMPLETED_PURCHASE_ORDERS.ToString()
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult Items(GridItemsRequestModel input)
@@ -40,7 +42,7 @@ namespace KnowYourTurf.Web.Controllers
             var po = _repository.Query<PurchaseOrder>(x => x.EntityId == input.EntityId).Fetch(x => x.LineItems).FirstOrDefault();
             var items = _dynamicExpressionQuery.PerformQuery(po.LineItems, input.filters);
             var gridItemsViewModel = _purchaseOrderListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

@@ -17,6 +17,8 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public abstract class ListTypeBaseController<LISTTYPE> : AdminControllerBase where LISTTYPE : ListType
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -40,7 +42,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var items = _dynamicExpressionQuery.PerformQuery<LISTTYPE>(input.filters);
             var gridItemsViewModel = _listTypeListGrid.GetGridItemsViewModel(input.PageSortFilter, items,input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
 
         protected LISTTYPE getListType(ViewModel input)
@@ -55,7 +57,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var listType = mapListType(input);
             var notification = saveListType(listType);
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public LISTTYPE mapListType(ListTypeViewModel input)
@@ -122,13 +124,13 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.EVENT_TYPE_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<EventTypeController>(x => x.SaveEventType(null));
             model._StatusList = _selectListItemService.CreateList<Status>();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
             var notification = deleteMultiple(input, checkDependencies); 
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         protected virtual bool checkDependencies(EventType item, Notification notification)
@@ -152,7 +154,7 @@ namespace KnowYourTurf.Web.Controllers
             var listType = mapListType(input);
             listType.EventColor = input.EventColor;
             var notification = saveListType(listType);
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
     }
@@ -186,13 +188,13 @@ namespace KnowYourTurf.Web.Controllers
             model._saveUrl = UrlContext.GetUrlForAction<TaskTypeController>(x => x.SaveTaskType(null));
             model._Title = WebLocalizationKeys.TASK_TYPE_INFORMATION.ToString();
             model._StatusList = _selectListItemService.CreateList<Status>();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
             var notification = deleteMultiple(input, checkDependencies);
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         protected virtual bool checkDependencies(TaskType item, Notification notification)
@@ -214,7 +216,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var listType = mapListType(input);
             var notification = saveListType(listType);
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
     }
 
@@ -248,13 +250,13 @@ namespace KnowYourTurf.Web.Controllers
             model._saveUrl = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.SaveListType(null));
             model._Title = WebLocalizationKeys.DOCUMENT_CATEGORY_INFORMATION.ToString();
             model._StatusList = _selectListItemService.CreateList<Status>();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
             var notification = deleteMultiple(input, checkDependencies);
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         protected virtual bool checkDependencies(DocumentCategory item, Notification notification)
@@ -304,13 +306,13 @@ namespace KnowYourTurf.Web.Controllers
             model._saveUrl = UrlContext.GetUrlForAction<PhotoCategoryController>(x => x.SaveListType(null));
             model._Title = WebLocalizationKeys.PHOTO_CATEGORY_INFORMATION.ToString();
             model._StatusList = _selectListItemService.CreateList<Status>();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
             var notification = deleteMultiple(input, checkDependencies);
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         protected virtual  bool checkDependencies(PhotoCategory item, Notification notification)
@@ -357,13 +359,13 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.EQUIPMENT_TASK_TYPE_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<EquipmentTaskTypeController>(x => x.SaveListType(null));
             model._StatusList = _selectListItemService.CreateList<Status>();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
             var notification = deleteMultiple(input, checkDependencies);
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         protected virtual bool checkDependencies(EquipmentTaskType item, Notification notification)
@@ -410,13 +412,13 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.EQUIPMENT_TYPE_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<EquipmentTypeController>(x => x.SaveListType(null));
             model._StatusList = _selectListItemService.CreateList<Status>();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
             var notification = deleteMultiple(input, checkDependencies);
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         protected virtual bool checkDependencies(EquipmentType item, Notification notification)
@@ -463,13 +465,13 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.PART_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<PartController>(x => x.SavePart(null));
             model._StatusList = _selectListItemService.CreateList<Status>();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
             var notification = deleteMultiple(input, checkDependencies);
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         protected virtual bool checkDependencies(Part item, Notification notification)
@@ -494,7 +496,7 @@ namespace KnowYourTurf.Web.Controllers
             listType.Vendor = input.Vendor;
             listType.FileUrl = input.FileUrl;
             var notification = saveListType(listType);
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
     }

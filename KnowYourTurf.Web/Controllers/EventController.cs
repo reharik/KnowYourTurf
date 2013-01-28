@@ -14,6 +14,8 @@ using NHibernate.Linq;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EventController : KYTController
     {
         private readonly IRepository _repository;
@@ -53,7 +55,7 @@ namespace KnowYourTurf.Web.Controllers
             model.StartTime = _event.StartTime.HasValue ? _event.StartTime.Value.ToShortTimeString() : "";
             model.EndTime = _event.EndTime.HasValue ? _event.EndTime.Value.ToShortTimeString() : "";
             model.ScheduledDate = _event.ScheduledDate.Value.ToShortDateString();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Display_Template(ViewModel input)
@@ -69,7 +71,7 @@ namespace KnowYourTurf.Web.Controllers
             model.EndTime = _event.EndTime.HasValue ? _event.EndTime.Value.ToShortTimeString() : "";
             model.ScheduledDate = _event.ScheduledDate.HasValue ? _event.ScheduledDate.Value.ToShortDateString() : "";
             model._Title = WebLocalizationKeys.EVENT_INFORMATION.ToString();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -82,7 +84,7 @@ namespace KnowYourTurf.Web.Controllers
             field.RemoveEvent(_event);
             var crudManager = _saveEntityService.ProcessSave(field);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public ActionResult Save(EventViewModel input)
@@ -92,7 +94,7 @@ namespace KnowYourTurf.Web.Controllers
             var field = mapToDomain(input, _event);
             var crudManager = _saveEntityService.ProcessSave(field);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         // getting the repo version of _event in action so I can tell if the _event was completed in past

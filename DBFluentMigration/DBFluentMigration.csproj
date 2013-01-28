@@ -54,6 +54,9 @@
     <Compile Include="Iteration_0\CreateInitialOperations.cs" />
     <Compile Include="Iteration_0\CreateInitialDB.cs" />
     <Compile Include="Iteration_0\CreateInitialPermissions.cs" />
+    <Compile Include="Iteration_1\10010_Create_TasksByFields_Sproc.cs" />
+    <Compile Include="Iteration_1\UpdateOperations.cs" />
+    <Compile Include="Iteration_1\UpdatePermissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

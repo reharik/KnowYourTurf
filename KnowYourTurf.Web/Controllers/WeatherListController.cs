@@ -7,6 +7,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class WeatherListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -27,14 +29,14 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _weatherListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.WEATHER.ToString()
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult Weathers(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Weather>();
             var gridItemsViewModel = _weatherListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

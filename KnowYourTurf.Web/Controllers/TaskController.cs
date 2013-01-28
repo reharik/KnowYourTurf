@@ -17,6 +17,8 @@ using KnowYourTurf.Web.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class TaskController : KYTController
     {
         private readonly IRepository _repository;
@@ -76,7 +78,7 @@ namespace KnowYourTurf.Web.Controllers
                 model.Complete = false;
             }
                 
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
 
@@ -132,7 +134,7 @@ namespace KnowYourTurf.Web.Controllers
             model._EquipmentNames = task.Equipment.Select(x => x.Name);
             model._AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null));
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -171,7 +173,7 @@ namespace KnowYourTurf.Web.Controllers
             }
             validationManager = _saveEntityService.ProcessSave(task, validationManager??new ValidationManager(_repository));
             var notification = validationManager.Finish();
-            return Json(notification);
+            return new CustomJsonResult(notification);
         }
 
         private void mapItem(Task item, TaskViewModel input)

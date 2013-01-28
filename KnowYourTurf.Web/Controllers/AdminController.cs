@@ -14,6 +14,8 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class AdminController:KYTController
     {
         private readonly IRepository _repository;
@@ -69,7 +71,7 @@ namespace KnowYourTurf.Web.Controllers
             if(!rulesResult.Success)
             {
                 var notification = new RulesNotification(rulesResult);
-                return Json(notification);
+                return new CustomJsonResult(notification);
             }
             _repository.Delete(admin);
             _repository.UnitOfWork.Commit();
@@ -103,7 +105,7 @@ namespace KnowYourTurf.Web.Controllers
                 var user = _repository.Find<User>(administrator.EntityId);
                 _saveEntityService.ProcessSave(user,crudManager);
             var notification = crudManager.Finish();
-            return Json(notification,"text/plain");
+            return new CustomJsonResult(notification, "text/plain");
         }
 
         private User mapToDomain(UserViewModel model, User administrator)

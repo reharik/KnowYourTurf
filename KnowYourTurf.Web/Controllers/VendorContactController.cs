@@ -15,6 +15,8 @@ using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class VendorContactController:KYTController
     {
         private readonly IRepository _repository;
@@ -51,7 +53,7 @@ namespace KnowYourTurf.Web.Controllers
             model._saveUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.Save(null));
             model._StatusList = status;
             model._StateList = states;
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
       
         public ActionResult Delete(ViewModel input)
@@ -61,7 +63,7 @@ namespace KnowYourTurf.Web.Controllers
             vendor.RemoveContact(vendorContact);
             var crudManager = _saveEntityService.ProcessSave(vendor);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
@@ -72,7 +74,7 @@ namespace KnowYourTurf.Web.Controllers
             deleteContacts.ForEachItem(vendor.RemoveContact);
             var crudManager = _saveEntityService.ProcessSave(vendor);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public ActionResult Save(VendorContactViewModel input)
@@ -91,7 +93,7 @@ namespace KnowYourTurf.Web.Controllers
             mapItem(vendorContact, input);
             var crudManager = _saveEntityService.ProcessSave(vendor);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         private void mapItem(VendorContact vendorContact, VendorContactViewModel input)
