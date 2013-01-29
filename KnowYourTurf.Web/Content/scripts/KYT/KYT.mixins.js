@@ -91,7 +91,7 @@ KYT.mixins.formMixin = {
     successSelector:"#messageContainer",
     errorSelector:"#messageContainer",
     saveItem:function(){
-        var isValid = CC.ValidationRunner.runViewModel(this.elementsViewmodel);
+        var isValid = CC.ValidationRunner.runViewModel(this.cid, this.elementsViewmodel, this.errorSelector);
         if(!isValid){return;}
         var data;
         var fileInputs = $('input:file', this.$el);

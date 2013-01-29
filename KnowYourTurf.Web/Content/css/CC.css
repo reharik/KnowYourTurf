@@ -65,6 +65,7 @@ select {
 
 #colorPickerInput{
     width: 100px;
+    margin-top:10px;
 }
 
 .blank{

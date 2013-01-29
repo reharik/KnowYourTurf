@@ -85,7 +85,7 @@ namespace KnowYourTurf.Core.Html.Menu
                 Text = text,
                 Url = "#",
                 CssClass = cssClass,
-
+                Operation = operation
             });
             return this;
         }
