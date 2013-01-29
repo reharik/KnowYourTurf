@@ -229,7 +229,6 @@
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
-    <Compile Include="Config\CustomAuthorizationAttribute.cs" />
     <Content Include="Areas\Reports\ReportViewer\TasksByField.aspx" />
     <Content Include="Areas\Reports\Views\Web.config" />
     <Content Include="Content\images\ajax-loader.gif" />

@@ -15,19 +15,10 @@ namespace KnowYourTurf.Web.Controllers
     public class OrthogonalController : KYTController
     {
         private readonly IMenuConfig _menuConfig;
-        private readonly ISessionContext _sessionContext;
-        private readonly IRepository _repository;
-        private readonly IContainer _container;
 
-        public OrthogonalController(IMenuConfig menuConfig,
-                ISessionContext sessionContext,
-            IRepository repository,
-            IContainer container)
+        public OrthogonalController(IMenuConfig menuConfig)
         {
             _menuConfig = menuConfig;
-            _sessionContext = sessionContext;
-            _repository = repository;
-            _container = container;
         }
 
         public PartialViewResult KnowYourTurfHeader(ViewModel input)
@@ -36,7 +27,6 @@ namespace KnowYourTurf.Web.Controllers
                                         {
                                             User = (User) input.User,
                                             LoggedIn = User.Identity.IsAuthenticated,
-                                            NotificationSuccessFunction = "kyt.popupCrud.controller.success",
                                             HelpUrl = UrlContext.GetUrlForAction<OrthogonalController>(x=>x.Help(null))
                                         };
             return PartialView(model);
@@ -67,11 +57,7 @@ namespace KnowYourTurf.Web.Controllers
         public string SiteName { get { return CoreLocalizationKeys.SITE_NAME.ToString(); } }
         public User User { get; set; }
         public bool LoggedIn { get; set; }
-        public bool IsAdmin { get; set; }
-        public bool InAdminMode { get; set; }
         public string UserProfileUrl { get; set; }
-        public string NotificationSettingsUrl { get; set; }
-        public string NotificationSuccessFunction { get; set; }
 
         public string HelpUrl { get; set; }
     }
