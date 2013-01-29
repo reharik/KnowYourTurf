@@ -41,6 +41,7 @@ namespace KnowYourTurf.Web
             fileNames.Add("token-input.css");
             fileNames.Add("smoothness/jquery-ui-1.10.0.custom.css");
             fileNames.Add("fileinput.css");
+            fileNames.Add("fileinputenhanced.css");
             fileNames.Add("ui.jqgrid.css");
             fileNames.Add("fg.menu.css");
             fileNames.Add("select2.css");
@@ -93,12 +94,7 @@ namespace KnowYourTurf.Web
             fileNames.Add("KYT/Fields/KYT.FieldsApp.Routing.js");
             fileNames.Add("KYT/Fields/KYT.FieldsApp.Views.js");
             fileNames.Add("KYT/Fields/KYT.Services.js");
-            fileNames.Add("KYT/Billing/MF.BillingApp.Routing.js");
-            fileNames.Add("KYT/Billing/MF.BillingApp.Views.js");
-                           
-            fileNames.Add("KYT/Reporting/MF.ReportingApp.Routing.js");
-            fileNames.Add("KYT/Reporting/MF.ReportingApp.Views.js");
-                           
+           
             fileNames.Add("KYT/CC.ModelBinding/CC.CustomBindings.js");
             fileNames.Add("KYT/CC.ModelBinding/CC.Elements.js");
             fileNames.Add("KYT/CC.ModelBinding/CC.NotificationService.js");
@@ -107,15 +103,16 @@ namespace KnowYourTurf.Web
             fileNames.Add("KYT/CC.ModelBinding/CC.ValidationRunner.js");
             fileNames.Add("KYT/CC.ModelBinding/CC.AjaxFileUpload.js");
 
+            fileNames.Add("externalHelpers/select2.js");
             fileNames.Add("externalHelpers/superfish.js");
             fileNames.Add("externalHelpers/ba-debug.js");
             fileNames.Add("internalHelpers/cc.ccMenu.js");
             fileNames.Add("internalHelpers/jquery.cc.grid.js");
             fileNames.Add("internalHelpers/cc.grid.columnService.js");
             fileNames.Add("internalHelpers/cc.gridHelpers.js");
-            fileNames.Add("internalHelpers/mf.gridSearch.js");
-            fileNames.Add("internalHelpers/MF.repository.js");
-            fileNames.Add("internalHelpers/jquery.mf.calendar.js");
+            fileNames.Add("internalHelpers/kyt.gridSearch.js");
+            fileNames.Add("internalHelpers/kyt.repository.js");
+            fileNames.Add("internalHelpers/jquery.kyt.calendar.js");
 
             fileNames.Add("externalHelpers/json2.js");
             fileNames.Add("externalHelpers/xdate.js");

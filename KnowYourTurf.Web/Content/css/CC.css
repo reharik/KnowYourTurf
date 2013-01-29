@@ -4,7 +4,7 @@ input, textarea, .uneditable-input {
 }
 
 label, input, button, select, textarea {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
     line-height: 20px;
     color: #666666;
@@ -24,7 +24,7 @@ label {
 }
 
 
-select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+.select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
     border-radius: 4px 4px 4px 4px;
     color: #838383;
     display: inline-block;

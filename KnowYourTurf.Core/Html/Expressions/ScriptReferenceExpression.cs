@@ -18,7 +18,7 @@ namespace KnowYourTurf.Core.Html.Expressions
 
         public ScriptReferenceExpression(string fileName)
         {
-            _baseUrl = SiteConfig.Settings().ScriptsPath;
+            _baseUrl = SiteConfig.Config.ScriptsPath;
             _indentation = "";
             _fileName = fileName;
         }

@@ -77,7 +77,7 @@ namespace KnowYourTurf.Core.Html.Expressions
 
         public LinkExpression AsStyleSheet()
         {
-            BasedAt(SiteConfig.Settings().CssPath);
+            BasedAt(SiteConfig.Config.CssPath);
             Rel("stylesheet");
             Type("text/css");
             return this;

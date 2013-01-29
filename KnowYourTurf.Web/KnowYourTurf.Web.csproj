@@ -54,6 +54,15 @@
     <Reference Include="AutoMapper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\lib\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Cassette">
+      <HintPath>..\lib\Cassette.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette.Aspnet">
+      <HintPath>..\lib\Cassette.Aspnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette.Views">
+      <HintPath>..\lib\Cassette.Views.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Components.Validator">
       <HintPath>..\lib\Castle.Components.Validator.dll</HintPath>
     </Reference>
@@ -217,6 +226,7 @@
     <Compile Include="Areas\Reports\ReportViewer\TasksByField.aspx.designer.cs">
       <DependentUpon>TasksByField.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
     <Compile Include="Config\CustomAuthorizationAttribute.cs" />
@@ -654,7 +664,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Document\AddUpdate.cshtml" />
-    <Content Include="Views\Document\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\EmailJob\EmailJobAddUpdate.cshtml" />
@@ -732,7 +741,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\DocumentCategory\AddUpdate.cshtml" />
-    <Content Include="Views\DocumentCategory\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />

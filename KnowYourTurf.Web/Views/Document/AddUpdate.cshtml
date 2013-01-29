@@ -6,19 +6,16 @@
     Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
 }
 
-
-    <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Name).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Description).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.DocumentCategoryEntityId).LabelDisplay(WebLocalizationKeys.DOCUMENT_CATEGORY).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FileUrl).LabelDisplay(WebLocalizationKeys.DOCUMENT).ToHtmlTag() 
-        </div>
-    </div>
+<div class="row">
+    @Html.SubmissionFor(x => x.Name).Size("5").ToHtmlTag()
+</div>
+<div class="row">
+    @Html.SubmissionFor(x => x.Description).Size("10").ToHtmlTag()
+</div>
+<div class="row">
+    @Html.SubmissionFor(x => x.DocumentCategoryEntityId).Size("5").LabelDisplay(WebLocalizationKeys.DOCUMENT_CATEGORY).ToHtmlTag()
+</div>
+<div class="row">
+    @Html.SubmissionFor(x => x.FileUrl).Size("10").LabelDisplay(WebLocalizationKeys.DOCUMENT).ToHtmlTag() 
+</div>
 

@@ -12,7 +12,7 @@ namespace KnowYourTurf.Core.Html.Expressions
         public ImageExpression(string imageSrcUrl)
         {
             _imageSrcUrl = imageSrcUrl;
-            _baseUrl = SiteConfig.Settings().ImagesPath;
+            _baseUrl = SiteConfig.Config.ImagesPath;
         }
 
         public override string ToString()

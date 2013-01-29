@@ -24,7 +24,7 @@ namespace Migrations
     {
         public override void Up()
         {
-            string sql = System.IO.File.ReadAllText(@"src\dbfluentmigration\initialdb.sql");
+            string sql = System.IO.File.ReadAllText(@"dbfluentmigration\initialdb.sql");
             Execute.Sql(sql);
         }
 

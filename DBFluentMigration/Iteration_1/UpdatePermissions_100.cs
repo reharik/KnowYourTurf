@@ -4,11 +4,11 @@ namespace DBFluentMigration.Iteration_1
 {
     using KnowYourTurf.Core.Enums;
 
-    public class UpdatePermissions
+    public class UpdatePermissions_100 : IUpdatePermissions
     {
         private readonly IPermissions _permissions;
 
-        public UpdatePermissions(IPermissions permissions)
+        public UpdatePermissions_100(IPermissions permissions)
         {
             _permissions = permissions;
         }
@@ -20,7 +20,7 @@ namespace DBFluentMigration.Iteration_1
 
         private void GrantAdminPermissions()
         {
-            _permissions.CreateControllerPermission("TasksByFieldController", UserType.Administrator);
+            _permissions.CreateControllerPermission(UserType.Administrator,"TasksByFieldController");
         }
 
     }

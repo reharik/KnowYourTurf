@@ -11,10 +11,10 @@ namespace KnowYourTurf.Core.Html.Menu
         {
         }
 
-        public override IKYTMenuBuilder CategoryGroupForItteration()
+        public override IKYTMenuBuilder SiteGroupForIteration()
         {
-            _categories = new[] { new Site { Name = "default", EntityId = 1 } };
-            count = _categories.Count;
+            _sites = new[] { new Site { Name = "default", EntityId = 1 } };
+            count = _sites.Count;
             return this;
         }     
     }

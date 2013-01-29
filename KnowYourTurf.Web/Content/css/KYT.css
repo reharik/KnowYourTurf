@@ -112,3 +112,28 @@ button.cancel:active {
     margin-bottom: 10px;
 }
 
+.select2-container .select2-choice {
+    height:21px;
+    line-height:22px;
+    font-size: 13px;
+    color: #666666;
+}
+.select2-container {
+    padding-bottom: 10px;
+}
+
+.imageInputContainer{
+    padding-bottom: 10px;
+}
+
+.customfile {
+    height:20px;
+}
+
+.customfile-button {
+    font-size: 11px;
+}
+.customfile-feedback-populated,.customfile-feedback  {
+    font-size: 13px;
+    color: #666666;
+}

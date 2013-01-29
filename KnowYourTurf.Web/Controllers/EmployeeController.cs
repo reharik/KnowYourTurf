@@ -130,7 +130,7 @@ namespace KnowYourTurf.Web.Controllers
             if(_fileHandlerService.RequsetHasFile())
             {
                 employee.FileUrl =
-                    _fileHandlerService.SaveAndReturnUrlForFile(SiteConfig.Settings().CustomerPhotosEmployeePath);
+                    _fileHandlerService.SaveAndReturnUrlForFile(SiteConfig.Config.CustomerPhotosEmployeePath);
             }
 
             var crudManager = _saveEntityService.ProcessSave(employee);
