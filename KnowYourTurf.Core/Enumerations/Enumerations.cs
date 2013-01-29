@@ -114,4 +114,12 @@ namespace KnowYourTurf.Core.Enums
 
     }
 
+    [Serializable]
+    public class SuiteOnlineStatusType : Enumeration
+    {
+        public static readonly SuiteOnlineStatusType Online = new SuiteOnlineStatusType { IsActive = true, Key = "Online" };
+        public static readonly SuiteOnlineStatusType Offline = new SuiteOnlineStatusType { IsActive = true, Key = "Offline" };
+        public static readonly SuiteOnlineStatusType Testing = new SuiteOnlineStatusType { IsActive = true, Key = "Testing" };
+    }
+
 }

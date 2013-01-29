@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Web.Controllers;
-using KnowYourTurf.Web.Services.RouteTokens;
 
 namespace KnowYourTurf.Web.Services.ViewOptions
 {
+    using KnowYourTurf.Core.RouteTokens;
     using KnowYourTurf.Web.Areas.Reports.Controllers;
 
     public interface IRouteTokenConfig

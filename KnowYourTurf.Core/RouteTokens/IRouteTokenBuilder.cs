@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Web.Mvc;
-using CC.Core;
-using CC.Core.DomainTools;
-using CC.Core.Html;
-using CC.Security.Interfaces;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Services;
-using KnowYourTurf.Web.Services.RouteTokens;
-
-namespace KnowYourTurf.Web.Services.ViewOptions
+﻿namespace KnowYourTurf.Core.RouteTokens
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Web.Mvc;
+
+    using CC.Core;
+    using CC.Core.DomainTools;
+    using CC.Core.Html;
+    using CC.Security.Interfaces;
+
+    using KnowYourTurf.Core.Domain;
+    using KnowYourTurf.Core.Enums;
+    using KnowYourTurf.Core.Services;
+
     public interface IRouteTokenBuilder
     {
         IList<RouteToken> Items { get; set; }
@@ -48,10 +48,10 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             ISessionContext sessionContext,
             IRepository repository)
         {
-            _authorizationService = authorizationService;
-            _sessionContext = sessionContext;
-            _repository = repository;
-            Items = new List<RouteToken>();
+            this._authorizationService = authorizationService;
+            this._sessionContext = sessionContext;
+            this._repository = repository;
+            this.Items = new List<RouteToken>();
         }
 
         private RouteToken _currentItem;
@@ -59,160 +59,160 @@ namespace KnowYourTurf.Web.Services.ViewOptions
 
         private RouteToken currentItem
         {
-            get { return _currentItem ?? (_currentItem = new RouteToken()); }
-            set { _currentItem = value; }
+            get { return this._currentItem ?? (this._currentItem = new RouteToken()); }
+            set { this._currentItem = value; }
         }
 
         public IList<RouteToken> Items { get; set; }
 
         public IRouteTokenBuilder TokenForList<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, AreaName areaName = null) where CONTROLLER : Controller
         {
-            currentItem.url = UrlContext.GetUrlForAction(action,areaName);
+            this.currentItem.url = UrlContext.GetUrlForAction(action,areaName);
             var controllerName = typeof(CONTROLLER).Name.Replace("Controller", "");
-            currentItem.itemName = controllerName + "View";
+            this.currentItem.itemName = controllerName + "View";
             var itemName = controllerName.ToLowerInvariant();
-            currentItem.id = itemName;
-            currentItem.viewName = "GridView";
-            currentItem.route = itemName;
-            currentItem.addUpdate = itemName.Replace("list", "");
-            currentItem.display = itemName.Replace("list", "display");
+            this.currentItem.id = itemName;
+            this.currentItem.viewName = "GridView";
+            this.currentItem.route = itemName;
+            this.currentItem.addUpdate = itemName.Replace("list", "");
+            this.currentItem.display = itemName.Replace("list", "display");
             return this;
         }
 
         public IRouteTokenBuilder TokenForForm<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, AreaName areaName = null) where CONTROLLER : Controller
         {
-            currentItem.url = UrlContext.GetUrlForAction(action, areaName);
+            this.currentItem.url = UrlContext.GetUrlForAction(action, areaName);
             var controllerName = typeof (CONTROLLER).Name.Replace("Controller", "");
-            currentItem.itemName = controllerName+"FormView";
+            this.currentItem.itemName = controllerName+"FormView";
             var itemName = controllerName.ToLowerInvariant();
-            currentItem.id = itemName;
-            currentItem.viewName = "AjaxFormView";
-            currentItem.route = itemName;
-            currentItem.isChild = true;
+            this.currentItem.id = itemName;
+            this.currentItem.viewName = "AjaxFormView";
+            this.currentItem.route = itemName;
+            this.currentItem.isChild = true;
             return this;
         }
 
         public IRouteTokenBuilder UrlForDisplay<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, AreaName areaName = null) where CONTROLLER : Controller
         {
-            currentItem.url = UrlContext.GetUrlForAction(action, areaName);
+            this.currentItem.url = UrlContext.GetUrlForAction(action, areaName);
             var itemName = typeof(CONTROLLER).Name.Replace("Controller", "").ToLowerInvariant()+"display";
-            currentItem.id = itemName;
-            currentItem.viewName = "AjaxDisplayView";
-            currentItem.route = itemName;
-            currentItem.isChild = true;
+            this.currentItem.id = itemName;
+            this.currentItem.viewName = "AjaxDisplayView";
+            this.currentItem.route = itemName;
+            this.currentItem.isChild = true;
             return this;
         }
 
         public IRouteTokenBuilder Url<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, AreaName areaName = null) where CONTROLLER : Controller
         {
-            currentItem.url = UrlContext.GetUrlForAction(action, areaName);
+            this.currentItem.url = UrlContext.GetUrlForAction(action, areaName);
             var controllerName = typeof(CONTROLLER).Name.Replace("Controller", "");
             var itemName = controllerName.ToLowerInvariant();
-            currentItem.id = itemName;
-            currentItem.viewName = "AjaxFormView";
-            currentItem.route = itemName;
+            this.currentItem.id = itemName;
+            this.currentItem.viewName = "AjaxFormView";
+            this.currentItem.route = itemName;
             return this;
         }
 
         public IRouteTokenBuilder RouteToken(string route)
         {
-            currentItem.route = route;
+            this.currentItem.route = route;
             return this;
         }
 
         public IRouteTokenBuilder ViewName(string viewName)
         {
-            currentItem.viewName = viewName;
+            this.currentItem.viewName = viewName;
             return this;
         }
 
         public IRouteTokenBuilder SubViewName(string subViewName)
         {
-            currentItem.subViewName = subViewName;
+            this.currentItem.subViewName = subViewName;
             return this;
         }
 
         public IRouteTokenBuilder ViewId(string ViewId)
         {
-            currentItem.id = ViewId;
+            this.currentItem.id = ViewId;
             return this;
         }
 
         public IRouteTokenBuilder AddUpdateToken(string addUpdate)
         {
-            currentItem.addUpdate = addUpdate;
+            this.currentItem.addUpdate = addUpdate;
             return this;
         }
 
         public IRouteTokenBuilder IsChild(bool isChild = true)
         {
-            currentItem.isChild = isChild;
+            this.currentItem.isChild = isChild;
             return this;
         }
 
         public IRouteTokenBuilder NoBubbleUp()
         {
-            currentItem.noBubbleUp = true;
+            this.currentItem.noBubbleUp = true;
             return this;
         }
 
         public IRouteTokenBuilder Operation(string operation)
         {
-            currentItem.Operation = operation;
+            this.currentItem.Operation = operation;
             return this;
         }
 
         public IRouteTokenBuilder NoModel()
         {
-            currentItem.noModel = true;
+            this.currentItem.noModel = true;
             return this;
         }
 
         public IRouteTokenBuilder NoTemplate()
         {
-            currentItem.noTemplate = true;
+            this.currentItem.noTemplate = true;
             return this;
         }
 
         public IRouteTokenBuilder JustRoute(string route)
         {
-            currentItem.route = route.ToLowerInvariant();
-            currentItem.viewName= route + "View";
+            this.currentItem.route = route.ToLowerInvariant();
+            this.currentItem.viewName= route + "View";
             return this;
         }
 
         public IRouteTokenBuilder SubRouteToken(string route)
         {
-            currentItem.subViewRoute = route.ToLowerInvariant();
+            this.currentItem.subViewRoute = route.ToLowerInvariant();
             return this;
         }
 
         public IRouteTokenBuilder GridId(string gridId)
         {
-            currentItem.gridId = gridId;
+            this.currentItem.gridId = gridId;
             return this;
         }
 
         public IRouteTokenBuilder End()
         {
-            if (_withOutPermissions || currentItem.Operation.IsEmpty())
+            if (this._withOutPermissions || this.currentItem.Operation.IsEmpty())
             {
-                Items.Add(currentItem);
+                this.Items.Add(this.currentItem);
             }
             else
             {
-                if (_authorizationService.IsAllowed(_repository.Find<User>(_sessionContext.GetUserId()),"/Schedule/MenuItem" + currentItem.Operation)) 
+                if (this._authorizationService.IsAllowed(this._repository.Find<User>(this._sessionContext.GetUserId()),"/Schedule/MenuItem" + this.currentItem.Operation)) 
                 {
-                    Items.Add(currentItem);
+                    this.Items.Add(this.currentItem);
                 }
             }
-            currentItem = new RouteToken();
+            this.currentItem = new RouteToken();
             return this;
         }
 
         public void WithoutPermissions(bool withOutPermissions)
         {
-            _withOutPermissions = withOutPermissions;
+            this._withOutPermissions = withOutPermissions;
         }
     }
 }

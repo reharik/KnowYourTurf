@@ -30,9 +30,6 @@ namespace Migrations
 
         public override void Down()
         {
-
         }
     }
 }
-
-
