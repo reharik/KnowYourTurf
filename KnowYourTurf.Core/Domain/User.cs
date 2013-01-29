@@ -12,6 +12,8 @@ using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Core.Domain
 {
+    using CC.Core.Html.Grid;
+
     public class User : DomainEntity,IUser, IPersistableObject
     {
         [ValidateNonEmpty]
@@ -103,6 +105,7 @@ namespace KnowYourTurf.Core.Domain
 
     public class UserLoginInfo : DomainEntity
     {
+        public virtual User User { get; set; }
         public virtual string LoginName { get; set; }
         [ValidateNonEmpty]
         public virtual string Password { get; set; }

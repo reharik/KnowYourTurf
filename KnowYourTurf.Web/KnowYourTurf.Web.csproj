@@ -370,9 +370,7 @@
     <Compile Include="Services\ISecuritySetupService.cs" />
     <Compile Include="Services\KYTSelectListItemService.cs" />
     <Compile Include="Services\ModelService.cs" />
-    <Compile Include="Services\RouteTokens\IRouteTokenBuilder.cs" />
     <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
-    <Compile Include="Services\RouteTokens\RouteToken.cs" />
     <Compile Include="TasksByField.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

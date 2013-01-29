@@ -1,13 +1,14 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Web.Script.Serialization;
-using CC.Core.Html;
-using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Web.Controllers;
-
-namespace KnowYourTurf.Web.Services.RouteTokens
+﻿namespace KnowYourTurf.Core.RouteTokens
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Web.Mvc;
+    using System.Web.Script.Serialization;
+
+    using CC.Core.Html;
+
+    using KnowYourTurf.Core.Enums;
+
     public class RouteToken
     {
         public string url { get; set; }
@@ -28,9 +29,9 @@ namespace KnowYourTurf.Web.Services.RouteTokens
         public string subViewRoute { get; set; }
         public string gridId { get; set; }
 
-        public void CreateUrl<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, AreaName areaName = null) where CONTROLLER : KYTController
+        public void CreateUrl<CONTROLLER>(Expression<Func<CONTROLLER, object>> expression, AreaName areaName = null) where CONTROLLER : Controller
         {
-            url = UrlContext.GetUrlForAction(expression, areaName);
+            this.url = UrlContext.GetUrlForAction(expression, areaName);
         }
 
     }
