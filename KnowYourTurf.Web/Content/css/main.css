@@ -7,7 +7,9 @@ body {
     font-family: helvetica,sans-serif;
     font-size: 14px;
 }
-
+li {
+    list-style:none;
+}
 hr {
     margin: 10px 0;
     border-top: 1px solid #CCCCCC;
@@ -28,7 +30,12 @@ hr {
     display: block;
     position: relative;
 }
-
+.deleteImage
+{
+    vertical-align: bottom;
+    padding: 0 10px;
+    margin-left: 10px;
+}
 /*******   HEADER TABS ********/
 
 #login-links {
@@ -400,8 +407,13 @@ body#signin {
     height: 73px;
 }
 
-#signin .col {
-    width: 300px;
+#signin input {
+    width: 280px;
+    height: 25px;
+}
+
+#signin .form{
+    padding: 10px 0 3px 30px !important;
 }
 
 #signin .big {
@@ -409,11 +421,11 @@ body#signin {
     font-family: sans-serif;
     font-size: 18px;
     font-weight: bold;
-    margin: 20px 10px;
+    margin: 20px 0px;
 }
 
 #signin div.fieldRow label.checkbox {
-    width: 80%;
+    /*width: 80%;*/
 }
 
 #signin .footer a {

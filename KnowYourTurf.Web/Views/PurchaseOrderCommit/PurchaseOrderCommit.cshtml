@@ -4,20 +4,17 @@
 
 @{ Layout = "~/Views/Shared/_emptyLayout.cshtml"; }
 
-    <div class="col left">
-        <div class="fieldRow">
+        <div class="row">
             @Html.ViewFor(x => x.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToHtmlTag()
         </div>
-        <div class="fieldRow">
+        <div class="row">
             @Html.ViewFor(x => x.VendorCompany).RootId("viewVendor").ToHtmlTag()
         </div>
-    </div>
-     <div class="col full clear">
-        <div class="fieldRow">
-            <div id="commitPoliGridArea">
-            </div>
+<div class="row blank"/>
+        <div class="row">
+            <div id="commitPoliGridArea" class="span10"></div>
         </div>
-    </div>
+
     <div class="footer">
         @StandardButtonFor("closePO", WebLocalizationKeys.CLOSE_THIS_PURCHASE_ORDER).AddClass("saveNotFixed").ToHtmlTag()
     </div>

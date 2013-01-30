@@ -4,20 +4,17 @@
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-   <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Name).ToHtmlTag()
+   <div class="row">
+            @Html.SubmissionFor(x => x.Name).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Status).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Description).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Description).Size("10").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Status).ToHtmlTag()
+        <div class="row">
+                <h5 class="stdTxtColor ml2 span10">@WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()</h5>
         </div>
-        <div class="fieldRow">
-            @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
-            @Html.SubmissionFor(x => x.EventColor).HideLabel().InputId("EventColor").ToHtmlTag()
-            <div id="colorPicker"></div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.EventColor).HideLabel().Size("10").InputId("colorPickerInput").ToHtmlTag()
         </div>
-    </div>
 

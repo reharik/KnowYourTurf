@@ -5,18 +5,10 @@
 @{
     Layout = "~/Views/Shared/_ReportLayout.cshtml";
 }
-<div class="col full">
-    <div class="fieldRow">
-        @Html.SubmissionFor(x=>x.FieldEntityId).AddClassToRoot("one-third").ToHtmlTag()
-    </div>
-    <div class="fieldRow">
-        @StandardButtonFor("viewReport", WebLocalizationKeys.VIEW_REPORT).AddClass("save").ToHtmlTag()
-    </div>
+<div class="row">
+    @Html.SubmissionFor(x=>x.FieldEntityId).Size("8").ToHtmlTag()
 </div>
-
-<div class="col full">
-    <div class="fieldRow">
-        <iframe width="900px" height="1200px" id="reportBody"></iframe>
-    </div>
-</div>
-
+@section FooterButtons
+{
+    @StandardButtonFor("viewReport", WebLocalizationKeys.VIEW_REPORT).AddClass("save").ToHtmlTag()
+}

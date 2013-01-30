@@ -6,30 +6,20 @@
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
        
-        @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId, new { @class = "copyEntityId" }).ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.AddUpdateUrl).ToString())
-    <div class="col left">
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.Item.Date).ToHtmlTag()
+        <div class="row">
+            @Html.ViewFor(x => x.Item.Date).Size("5").ToHtmlTag()
+            @Html.ViewFor(x => x.Item.DewPoint).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.Item.DewPoint).ToHtmlTag()
+        <div class="row">
+            @Html.ViewFor(x => x.Item.HighTemperature).Size("5").ToHtmlTag()
+            @Html.ViewFor(x => x.Item.LowTemperature).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.Item.HighTemperature).ToHtmlTag()
+        <div class="row">
+            @Html.ViewFor(x => x.Item.RainPrecipitation).Size("5").ToHtmlTag()
+            @Html.ViewFor(x => x.Item.WindSpeed).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.Item.LowTemperature).ToHtmlTag()
+         <div class="row">
+            @Html.ViewFor(x => x.Item.Humidity).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.Item.RainPrecipitation).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.Item.WindSpeed).ToHtmlTag()
-        </div>
-         <div class="fieldRow">
-            @Html.ViewFor(x => x.Item.Humidity).ToHtmlTag()
-        </div>
-    </div>
 
 

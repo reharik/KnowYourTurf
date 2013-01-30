@@ -644,8 +644,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\KnowYourTurf\Home.cshtml" />
-    <Content Include="Views\ListTypeList\ItemList.cshtml" />
-    <Content Include="Views\TaskList\ItemList.cshtml" />
     <Content Include="Views\VendorContactList\ItemList.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -666,13 +664,7 @@
     <Content Include="Views\EmailJob\EmailJobAddUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\EmailTemplate\EmailTemplateAddUpdate.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\EmployeeDashboard\EmployeeDashboard.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Employee\EmployeeAddUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Equipment\EquipmentAddUpdate.cshtml" />
@@ -705,7 +697,6 @@
   <ItemGroup>
     <Content Include="Views\PurchaseOrderCommit\PurchaseOrderCommit.cshtml" />
     <Content Include="Views\PurchaseOrderLineItem\PurchaseOrderLineItemAddUpdate.cshtml" />
-    <Content Include="Views\PurchaseOrderLineItem\PurchaseOrderLineItemView.cshtml" />
     <Content Include="Views\PurchaseOrderLineItem\ReceivePurchaseOrderLineItem.cshtml" />
     <Content Include="Views\PurchaseOrder\AddItem.cshtml" />
     <Content Include="Views\PurchaseOrder\PurchaseOrderBuilder.cshtml" />
@@ -731,7 +722,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\FieldDashboard\FieldDashboard.cshtml" />
-    <Content Include="Views\Field\FieldAddUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Task\Display.cshtml" />

@@ -5,49 +5,40 @@
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
 
-
-    <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FirstName).ToHtmlTag()
+<div class="row">
+@*-----------Left Column-------------*@
+    <div class="span10">
+        <div class="row">
+            @Html.SubmissionFor(x => x.FirstName).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.LastName).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.LastName).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.UserLoginInfoPassword).Size("5").LabelDisplay(WebLocalizationKeys.PASSWORD).ToHtmlTag()
+            @Html.SubmissionFor(x => x.PasswordConfirmation).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.UserLoginInfoPassword).LabelDisplay(WebLocalizationKeys.PASSWORD).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Email).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.PhoneMobile).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Email).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.UserLoginInfoStatus).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.FileUrl).Size("5").LabelDisplay(WebLocalizationKeys.FACILITIES_PHOTO).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.PhoneMobile).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.UserLoginInfoStatus).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FileUrl).LabelDisplay(WebLocalizationKeys.FACILITIES_PHOTO).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Notes).Size("10").ToHtmlTag()
         </div>
     </div>
-    <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Address1).ToHtmlTag()
+    <div class="span1"></div>
+    @*-----------Right Column-------------*@
+    <div class="span10">
+        <div class="row">
+            @Html.SubmissionFor(x => x.Address1).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address2).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Address2).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.City).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.State).Size("2").ToHtmlTag()
+            @Html.SubmissionFor(x => x.ZipCode).Size("3").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.City).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.State).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ZipCode).ToHtmlTag()
-        </div>
-        
     </div>
-@EndForm()                             
+</div>
