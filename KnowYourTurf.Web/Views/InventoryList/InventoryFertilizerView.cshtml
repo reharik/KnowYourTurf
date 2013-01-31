@@ -7,33 +7,23 @@
     Layout = "~/Views/Shared/_DisplayLayout.cshtml";
 }
         
-  <div class="col left">
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.Name).ToHtmlTag()
+        <div class="row">
+            @Html.ViewFor(x => x.Name).Size("5").ToHtmlTag()
+            @Html.ViewFor(x => x.LastVendorCompany).Size("5").LabelDisplay(WebLocalizationKeys.PREVIOUS_VENDOR).ToHtmlTag()
          </div>
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.Description).ToHtmlTag()
+        <div class="row">
+            @Html.ViewFor(x => x.Description).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.N).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.P).ToHtmlTag()
-        </div>
-      <div class="fieldRow">
-          @Html.ViewFor(x => x.K).ToHtmlTag()
+        <div class="row">
+            @Html.ViewFor(x => x.N).Size("3").ToHtmlTag()
+            @Html.ViewFor(x => x.P).Size("3").ToHtmlTag()
+          @Html.ViewFor(x => x.K).Size("3").ToHtmlTag()
       </div>
-       <div class="fieldRow">
-            @Html.ViewFor(x => x.Quantity).ToHtmlTag()
-         </div>
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.SizeOfUnit).ToHtmlTag()
-         </div>
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.UnitType).ToHtmlTag()
-         </div>
-        <div class="fieldRow">
-            @Html.ViewFor(x => x.LastVendorCompany).LabelDisplay(WebLocalizationKeys.PREVIOUS_VENDOR).ToHtmlTag()
+       <div class="row">
+           @Html.ViewFor(x => x.Quantity).Size("5").ToHtmlTag()         
+            @Html.ViewFor(x => x.SizeOfUnit).Size("5").ToHtmlTag()
+       </div>
+        <div class="row">
+            @Html.ViewFor(x => x.UnitType).Size("5").ToHtmlTag()
          </div>
 
-    </div>

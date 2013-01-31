@@ -10,16 +10,34 @@ namespace KnowYourTurf.Core.Config
         public virtual string NumberOfFieldsPerCategory { get; set; }
         public virtual string CustomerPhotosEmployeePath { get; set; }
         public virtual string CustomerPhotosFacilitiesPath { get; set; }
+        public override void Initialize()
+        {
+            base.Initialize();
+            NumberOfFieldsPerCategory = ConfigurationSettings.AppSettings["NumberOfFieldsPerCategory"];
+            CustomerPhotosEmployeePath = ConfigurationSettings.AppSettings["CustomerPhotosEmployeePath"];
+            CustomerPhotosFacilitiesPath = ConfigurationSettings.AppSettings["CustomerPhotosFacilitiesPath"];
+        }
     }
 
     public static class SiteConfig
     {
-        public static SiteConfiguration Settings()
+            private static SiteConfiguration _config;
+        public static SiteConfiguration Config
         {
-            var appSetting = ConfigurationSettings.AppSettings["KnowYourTurf.SiteConfiguration"];
-            var jss = new JavaScriptSerializer();
-            var siteConfiguration = jss.Deserialize<SiteConfiguration>(appSetting);
-            return siteConfiguration;
+            get
+            {
+                if (_config.CreatedDate.AddHours(2) <= DateTime.Now)
+                {
+                    _config.Initialize();
+                }
+                return _config;
+            }
+        }
+
+        static SiteConfig()
+        {
+            _config = new SiteConfiguration();
+            _config.Initialize();
         }
     }
 
@@ -27,8 +45,7 @@ namespace KnowYourTurf.Core.Config
     {
         public SiteConfigurationBase Settings()
         {
-            return SiteConfig.Settings();
+            return SiteConfig.Config;
         }
     }
-
 }

@@ -1,0 +1,139 @@
+﻿@using Cassette.Views
+@using HtmlTags
+@using KnowYourTurf.Web
+
+@{
+    Bundles.Reference("content/css");
+    Bundles.Reference("content/scripts");
+}
+
+<!--[if IE]>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- [Else]>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- [endif]-->
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @Bundles.RenderStylesheets()
+    @RenderSection("ExtraCss", false)
+<<<<<<< HEAD
+    
+    @Bundles.RenderScripts()
+=======
+
+    @Script("jqueryPlugins/jquery-1.7.1.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.transform-0.9.3.min.js").ToHtmlTag() 
+    @Script("jqueryPlugins/jquery-ui-1.8.22.custom.min.js").ToHtmlTag()
+    @Script("jqueryPlugins/cc.tokeninput2.js").ToHtmlTag()
+    @Script("jqueryPlugins/grid.locale-en.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.jqGrid.min.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery-tmpl.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.miniColors.js").ToHtmlTag()
+    @Script("externalHelpers/select2.js").ToHtmlTag()
+    
+    @Script("jqueryPlugins/jquery.easing.1.3.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.galleryview-3.0-dev.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.timers-1.2.js").ToHtmlTag()
+    @Script("jqueryPlugins/jquery.fileinput.js").ToHtmlTag()
+@*    @Script("jqueryPlugins/mobiscroll.core-2.0.1.js").ToHtmlTag()*@
+@*    @Script("jqueryPlugins/mobiscroll.datetime-2.0.1.js").ToHtmlTag()*@
+    @Script("jqueryPlugins/jquery.ui.timepicker.js").ToHtmlTag()
+  
+     @Script("jqueryPlugins/noty/jquery.noty.js").ToHtmlTag()    
+    @Script("jqueryPlugins/noty/inline.js").ToHtmlTag()    
+    @Script("jqueryPlugins/noty/default.js").ToHtmlTag()    
+   
+
+    @Script("externalHelpers/fullcalendar.js").ToHtmlTag()
+    @Script("externalHelpers/underscore.js").ToHtmlTag()
+    @Script("externalHelpers/backbone.js").ToHtmlTag()
+    @Script("externalHelpers/backbone.marionette.js").ToHtmlTag()
+    @Script("externalHelpers/knockout-2.1.0.debug.js").ToHtmlTag()    
+    @Script("externalHelpers/knockout.mapping-lastest.debug.js").ToHtmlTag()    
+    @Script("KYT/KYT.App.js").ToHtmlTag()
+    @Script("KYT/KYT.Controller.js").ToHtmlTag()
+    @Script("KYT/KYT.Mixins.js").ToHtmlTag()
+    @Script("KYT/KYT.Header.js").ToHtmlTag()
+    @Script("KYT/KYT.Views.js").ToHtmlTag()
+    @Script("KYT/KYT.Routing.js").ToHtmlTag()
+    @Script("KYT/KYT.State.js").ToHtmlTag()
+    @Script("KYT/KYT.WorkflowManager.js").ToHtmlTag()
+    @Script("KYT/Fields/KYT.FieldsApp.js").ToHtmlTag()
+    @Script("KYT/Fields/KYT.FieldsApp.Menu.js").ToHtmlTag()
+    @Script("KYT/Fields/KYT.FieldsApp.Routing.js").ToHtmlTag()
+    @Script("KYT/Fields/KYT.FieldsApp.Views.js").ToHtmlTag()
+    @Script("KYT/Fields/KYT.Services.js").ToHtmlTag()
+    
+    @Script("KYT/CC.ModelBinding/CC.CustomBindings.js").ToHtmlTag()
+    @Script("KYT/CC.ModelBinding/CC.Elements.js").ToHtmlTag()
+    @Script("KYT/CC.ModelBinding/CC.NotificationService.js").ToHtmlTag()
+    @Script("KYT/CC.ModelBinding/CC.ModelService.js").ToHtmlTag()
+    @Script("KYT/CC.ModelBinding/CC.ValidationRules.js").ToHtmlTag()
+    @Script("KYT/CC.ModelBinding/CC.ValidationRunner.js").ToHtmlTag()
+    @Script("KYT/CC.ModelBinding/CC.AjaxFileUpload.js").ToHtmlTag()
+    
+    @Script("KYT/Reporting/KYT.ReportingApp.Routing.js").ToHtmlTag()
+    @Script("KYT/Reporting/KYT.ReportingApp.Views.js").ToHtmlTag()
+
+    @Script("externalHelpers/ba-debug.js").ToHtmlTag()
+    @Script("externalHelpers/superfish.js").ToHtmlTag()
+    @Script("internalHelpers/cc.ccMenu.js").ToHtmlTag()
+    @Script("internalHelpers/jquery.cc.grid.js").ToHtmlTag()
+    @Script("internalHelpers/cc.grid.columnService.js").ToHtmlTag()
+    @Script("internalHelpers/cc.gridHelpers.js").ToHtmlTag()
+    @Script("internalHelpers/KYT.gridSearch.js").ToHtmlTag()
+    @Script("internalHelpers/KYT.repository.js").ToHtmlTag()
+    @Script("internalHelpers/jquery.kyt.calendar.js").ToHtmlTag()
+
+    @Script("internalHelpers/cc.utilities.js").ToHtmlTag()
+    @Script("externalHelpers/json2.js").ToHtmlTag()
+    @Script("externalHelpers/xdate.js").ToHtmlTag()
+
+>>>>>>> development
+    @RenderSection("HeaderScripts", false)
+
+    <script type="text/javascript">
+        KYT.routeTokens = @MvcHtmlString.Create(JsonUtil.ToJson(@Model.SerializedRoutes));
+        @RenderSection("HeaderJavascript", false)
+
+    </script>
+</head>
+
+    <body id="knowYourTurf" class="kyt_dyn">
+        <div id="ajaxLoading" style="z-index: 1000">&nbsp;</div>
+        @Html.Action("KnowYourTurfHeader", "Orthogonal")
+        <div id="top-separator"></div>
+        <div id="main-body">
+            <div id="left-navigation" class="menuContainer">
+            </div>
+            <div id="main-content">
+                <div class="content-outer" >
+                    <div id="messageContainer">
+                    </div>
+                    <div id="contentInner">
+                        @RenderBody()
+                    </div>
+                    <div class="content-footer"><span>&nbsp;</span></div>
+                </div>
+
+            </div>
+        </div>
+    </body>
+
+    <script id="gridTemplate" type="text/x-jQuery-tmpl">
+        <div class="content-header">
+            <input class="search" /> 
+            <button style="display:none" id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+            <button style="display:none" class="delete" title="@WebLocalizationKeys.DELETE_ITEMS"></button>
+            <span class="title-name">${_Title}</span>
+        </div>
+        <div class="form-scroll-inner">
+            <div id="contentArea" class="content-inner">
+                <table id="gridContainer" class="scroll"></table>
+            </div>
+        </div>
+    </script>
+
+
+</html>

@@ -50,7 +50,7 @@ namespace KnowYourTurf.Core.Services
 
         public void GrantDefaultEmployeePermissions()
         {
-            _permissionsBuilderService.Allow("/KnowYourTurfController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/SystemSupportController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/OrthogonalController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/CalculatorController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/CalculatorListController").For(UserType.Employee.Key).OnEverything().Level(1).Save();
@@ -106,7 +106,7 @@ namespace KnowYourTurf.Core.Services
                 .Level(1)
                 .Save();
             _permissionsBuilderService.Allow("/MenuItem/Events").For(UserType.Facilities.Key).OnEverything().Level(1).Save();
-            _permissionsBuilderService.Allow("/KnowYourTurfController").For(UserType.Facilities.Key).OnEverything().Level(1).Save();
+            _permissionsBuilderService.Allow("/SystemSupportController").For(UserType.Facilities.Key).OnEverything().Level(1).Save();
             _permissionsBuilderService.Allow("/OrthogonalController").For(UserType.Facilities.Key).OnEverything().Level(1).Save();
 
         }

@@ -13,13 +13,16 @@
 
    <div class="content-header">
         @RenderSection("ExtraContentHeaderButtons", false)
-       <button class="close cancel" title="@WebLocalizationKeys.CLOSE"></button>
-        <span class="title-name" data-bind="text:_title"></span>
-        <span class="title-added" data-bind="text:_createdText" ></span>
+       <span class="title-name" data-bind="text:_Title"></span>
+        <button class="close cancel" title="@WebLocalizationKeys.CLOSE"></button>
+        @if (Model.EntityId > 0)
+        {
+            <span class="title-added">@WebLocalizationKeys.DATE_ADDED.ToFormat(Model.Item.CreateDate.ToLongDateString())</span>
+        }
     </div>
     <div id="contentArea" class="content-inner">
         @RenderBody()
-         <div class="footer">
+        <div class="footer">
             @StandardButtonFor("cancel", WebLocalizationKeys.RETURN).AddClass("cancel").ToHtmlTag()
-         </div>
+        </div>
     </div>

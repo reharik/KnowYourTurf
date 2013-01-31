@@ -186,6 +186,8 @@
     <Compile Include="Html\Menu\IKYTMenuBuilder.cs" />
     <Compile Include="Html\Menu\KYTGenMenuBuilder.cs" />
     <Compile Include="ILogger.cs" />
+    <Compile Include="RouteTokens\IRouteTokenBuilder.cs" />
+    <Compile Include="RouteTokens\RouteToken.cs" />
     <Compile Include="Rules\FieldHasNoOutstandingEvents.cs" />
     <Compile Include="Rules\FieldHasNoOutstandingTasks.cs" />
     <Compile Include="Rules\DeleteFieldRules.cs" />

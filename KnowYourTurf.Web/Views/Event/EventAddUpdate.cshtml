@@ -5,23 +5,18 @@
     Layout = "~/Views/Shared/_popupLayout.cshtml";
 }
 
-    <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EventTypeEntityId).LabelDisplay(WebLocalizationKeys.EVENT_TYPE).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.EventTypeEntityId).Size("5").LabelDisplay(WebLocalizationKeys.EVENT_TYPE).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ScheduledDate).Size("5").ElType("DateTextbox").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ScheduledDate).ElType("DateTextbox").ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.StartTime).Size("5").ElType("TimeTextbox").ToHtmlTag()
+            @Html.SubmissionFor(x => x.EndTime).Size("5").ElType("TimeTextbox").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.StartTime).ElType("TimeTextbox").ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.FieldEntityId).Size("10").LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EndTime).ElType("TimeTextbox").ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FieldEntityId).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Notes).Size("10").ToHtmlTag()
         </div>
     </div>

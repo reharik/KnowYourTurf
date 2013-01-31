@@ -233,12 +233,8 @@ KYT.Views.AjaxPopupDisplayModule  = KYT.Views.View.extend({
 
 KYT.Views.PopupView = KYT.Views.View.extend({
     render:function(){
+        var that = this;
         $(".ui-dialog").remove();
-//        var errorMessages = $("div[id*='errorMessages']", this.el);
-//        if(errorMessages){
-//            var id = errorMessages.attr("id");
-//            errorMessages.attr("id","errorMessagesPU").removeClass(id).addClass("errorMessagesPU");
-//        }
 
         $(this.el).dialog({
             modal: true,
@@ -246,14 +242,12 @@ KYT.Views.PopupView = KYT.Views.View.extend({
             buttons:this.options.buttons,
             title: this.options.title,
             close:function(){
-                KYT.vent.trigger("popup:"+id+":cancel");
+                KYT.vent.trigger("popup:"+that.options.id+":cancel");
             }
         });
         return this;
-    },
-    close:function(){
-        $(this.el).dialog("close");
     }
+
 });
 
 KYT.Views.TemplatedPopupView = KYT.Views.View.extend({
@@ -285,10 +279,9 @@ KYT.Views.popupButtonBuilder = (function(){
         };
         var editFunc = function(event) {KYT.vent.trigger("popup:"+id+":edit");};
         var cancelFunc = function(){
-                            KYT.vent.trigger("popup:"+id+":cancel");
-                            $(this).dialog("close");
-                            $(".ui-dialog").remove();
-                        };
+            $(this).dialog("close");
+            KYT.vent.trigger("popup:"+id+":cancel");
+        };
         return{
             getButtons:function(){return buttons;},
             getSaveFunc:function(){return saveFunc;},

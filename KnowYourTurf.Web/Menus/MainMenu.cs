@@ -37,7 +37,7 @@ namespace KnowYourTurf.Web.Menus
         {
             return _builder
                 .CreateTagNode<EmployeeDashboardController>(WebLocalizationKeys.HOME)
-                .CategoryGroupForItteration()
+                .SiteGroupForIteration()
                 .CreateTagNode<FieldListController>(WebLocalizationKeys.FIELDS)
 //                .CreateTagNode<CalculatorListController>(WebLocalizationKeys.CALCULATORS)
 

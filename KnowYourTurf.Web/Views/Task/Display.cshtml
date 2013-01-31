@@ -7,34 +7,24 @@
 }
 
 <div id="taskDisplay"> 
-    <div class="col left">
-        <div class="fieldRow">
-               @Html.ViewFor(x => x.TaskTypeName).ToHtmlTag()
+        <div class="row">
+               @Html.ViewFor(x => x.TaskTypeName).Size("7").ToHtmlTag()
+                @Html.ViewFor(x => x.ScheduledDate).Size("7").LabelDisplay(WebLocalizationKeys.DATE).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-                    @Html.ViewFor(x => x.ScheduledDate).LabelDisplay(WebLocalizationKeys.DATE).ToHtmlTag()
+        <div class="row">
+                    @Html.ViewFor(x => x.StartTime).Size("7").LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
+                    @Html.ViewFor(x => x.EndTime).Size("7").LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-                    @Html.ViewFor(x => x.StartTime).LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
+        <div class="row">
+                      @Html.ViewFor(x => x.FieldName).Size("7").ToHtmlTag()
+                    @Html.ViewFor(x => x.InventoryProductProductName).Size("7").LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-                    @Html.ViewFor(x => x.EndTime).LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
+        <div class="row">
+                    @Html.ViewFor(x => x._EquipmentNames).Size("7").LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
+                    @Html.ViewFor(x => x._EmployeeNames).Size("7").LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-                    @Html.ViewFor(x => x.FieldName).ToHtmlTag()
+        <div class="row">
+                    @Html.ViewFor(x => x.Notes).Size("10").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-                    @Html.ViewFor(x => x.InventoryProductProductName).LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-                    @Html.ViewFor(x => x._EquipmentNames).LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-                    @Html.ViewFor(x => x._EmployeeNames).LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-                    @Html.ViewFor(x => x.Notes).ToHtmlTag()
-        </div>
-    </div>
 </div>
 
