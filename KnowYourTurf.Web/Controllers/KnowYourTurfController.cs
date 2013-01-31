@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using CC.Core.CoreViewModelAndDTOs;
-using KnowYourTurf.Core;
-using KnowYourTurf.Core.Html;
-using KnowYourTurf.Web.Services.RouteTokens;
+
 using KnowYourTurf.Web.Services.ViewOptions;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Core.RouteTokens;
+
     public class KnowYourTurfController:KYTController
     {
         private IRouteTokenConfig _routeTokenConfig;

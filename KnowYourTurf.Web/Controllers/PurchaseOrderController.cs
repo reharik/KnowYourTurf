@@ -68,7 +68,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ListViewModel()
             {
                 gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url, input.User),
-                _Title = WebLocalizationKeys.PRODUCTS.ToString(),
+//                _Title = WebLocalizationKeys.PRODUCTS.ToString(),
             };
             return new CustomJsonResult(model);
         }

@@ -54,28 +54,21 @@
     <Reference Include="AutoMapper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\lib\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Cassette">
+      <HintPath>..\lib\Cassette.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette.Aspnet">
+      <HintPath>..\lib\Cassette.Aspnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette.Views">
+      <HintPath>..\lib\Cassette.Views.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Components.Validator">
       <HintPath>..\lib\Castle.Components.Validator.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.UI.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="Elmah">
       <HintPath>..\lib\Elmah.dll</HintPath>
@@ -217,14 +210,13 @@
     <Compile Include="Areas\Reports\ReportViewer\TasksByField.aspx.designer.cs">
       <DependentUpon>TasksByField.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
-    <Compile Include="Config\CustomAuthorizationAttribute.cs" />
     <Content Include="Areas\Reports\ReportViewer\TasksByField.aspx" />
     <Content Include="Areas\Reports\Views\Web.config" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Compile Include="Config\CustomJsonResult.cs" />
-    <Compile Include="Config\KnowYourTurfMenu.cs" />
     <Compile Include="Config\ModelBinders.cs" />
     <Compile Include="Config\ModelBindingBootstaper.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -370,9 +362,7 @@
     <Compile Include="Services\ISecuritySetupService.cs" />
     <Compile Include="Services\KYTSelectListItemService.cs" />
     <Compile Include="Services\ModelService.cs" />
-    <Compile Include="Services\RouteTokens\IRouteTokenBuilder.cs" />
     <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
-    <Compile Include="Services\RouteTokens\RouteToken.cs" />
     <Compile Include="TasksByField.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -604,6 +594,22 @@
     <Content Include="Views\Shared\PhoneTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Core.Utils\CC.Core.Utilities.csproj">
+      <Project>{54970d60-6123-4227-9c72-04ca09baf7b9}</Project>
+      <Name>CC.Core.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Core\CC.Core.csproj">
+      <Project>{5e0b0ca2-bd5e-4953-a336-2aadc00cd81b}</Project>
+      <Name>CC.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Security\CC.Security.csproj">
+      <Project>{dba372fe-3d52-45b3-af82-b37696328764}</Project>
+      <Name>CC.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.UI.Helpers\CC.UI.Helpers.csproj">
+      <Project>{0dbfb19c-e106-4807-aa4b-fc8d128a3438}</Project>
+      <Name>CC.UI.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
@@ -637,8 +643,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\KnowYourTurf\Home.cshtml" />
-    <Content Include="Views\ListTypeList\ItemList.cshtml" />
-    <Content Include="Views\TaskList\ItemList.cshtml" />
     <Content Include="Views\VendorContactList\ItemList.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -654,19 +658,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Document\AddUpdate.cshtml" />
-    <Content Include="Views\Document\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\EmailJob\EmailJobAddUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\EmailTemplate\EmailTemplateAddUpdate.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\EmployeeDashboard\EmployeeDashboard.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Employee\EmployeeAddUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Equipment\EquipmentAddUpdate.cshtml" />
@@ -699,7 +696,6 @@
   <ItemGroup>
     <Content Include="Views\PurchaseOrderCommit\PurchaseOrderCommit.cshtml" />
     <Content Include="Views\PurchaseOrderLineItem\PurchaseOrderLineItemAddUpdate.cshtml" />
-    <Content Include="Views\PurchaseOrderLineItem\PurchaseOrderLineItemView.cshtml" />
     <Content Include="Views\PurchaseOrderLineItem\ReceivePurchaseOrderLineItem.cshtml" />
     <Content Include="Views\PurchaseOrder\AddItem.cshtml" />
     <Content Include="Views\PurchaseOrder\PurchaseOrderBuilder.cshtml" />
@@ -725,14 +721,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\FieldDashboard\FieldDashboard.cshtml" />
-    <Content Include="Views\Field\FieldAddUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Task\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\DocumentCategory\AddUpdate.cshtml" />
-    <Content Include="Views\DocumentCategory\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Facilities\FacilitiesAddUpdate.cshtml" />

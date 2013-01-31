@@ -40,6 +40,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
                 Map(x => x.Password);
                 Map(x => x.Salt);
                 Map(x => x.ByPassToken);
+                References(x => x.User);
             }
         }
     }

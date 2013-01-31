@@ -222,7 +222,7 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
     viewLoaded:function(){
         this.addIdsToModel();
         var rel = KYT.State.get("Relationships");
-        $('#FieldColor',this.el).miniColors();
+        $('#colorPickerInput',this.el).miniColors();
         this.pendingGridView = new KYT.Views.DahsboardGridView({
             el:"#pendingTaskGridContainer",
             url:this.model._pendingGridUrl(),
@@ -953,7 +953,7 @@ KYT.Views.EventTypeFormView = KYT.Views.View.extend({
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
-        $('#EventColor',this.el).miniColors();
+        $('#colorPickerInput',this.el).miniColors();
     }
 });
 
@@ -964,7 +964,7 @@ KYT.Views.TaskTypeFormView = KYT.Views.View.extend({
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
-        $('#TaskColor',this.el).miniColors();
+        $('#colorPickerInput',this.el).miniColors();
     }
 });
 
@@ -976,7 +976,7 @@ KYT.Views.InventoryDisplayView = KYT.Views.View.extend({
         this.options.templateUrl += this.options.url.substr(this.options.url.indexOf("Display/")+7);
     },
     viewLoaded:function(){
-        $('#TaskColor',this.el).miniColors();
+        $('#colorPickerInput',this.el).miniColors();
     }
 });
 

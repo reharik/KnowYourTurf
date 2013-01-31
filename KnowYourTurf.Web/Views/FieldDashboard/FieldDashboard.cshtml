@@ -5,56 +5,80 @@
 
 @{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
 
-
-       <div class="col left">
-            <div class="fieldRow">
-                @Html.SubmissionFor(x => x.Name).ToHtmlTag()
-            </div>
-            <div class="fieldRow">
-                @Html.SubmissionFor(x => x.Abbreviation).ToHtmlTag()
-            </div>
-            <div class="fieldRow">
-                @Html.SubmissionFor(x => x.Description).ToHtmlTag()
-            </div>
-            <div class="fieldRow">
-                @Html.SubmissionFor(x => x.Size).ToHtmlTag()
-            </div>
-            <div class="fieldRow">
-                @WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()
-                @Html.SubmissionFor(x => x.FieldColor).HideLabel().InputId("FieldColor").ToHtmlTag()
-                <div id="colorPicker"></div>
-            </div>
+<div class="row">
+@*-----------Left Column-------------*@
+    <div class="span10">
+        <div class="row">
+            @Html.SubmissionFor(x => x.Name).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Abbreviation).LabelDisplay(WebLocalizationKeys.ABBR).Size("2").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Size).Size("3").ToHtmlTag()
         </div>
-            
-    <div class="col full clear">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x._Photos).InputId("photoGallery").HideLabel().ToHtmlTag()
-        </div> 
+        <div class="row">
+        </div>
+            <div class="row">
+                <h5 class="stdTxtColor ml2 span10">@WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()</h5>
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.FieldColor).HideLabel().Size("10").InputId("colorPickerInput").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.Description).Size("10").ToHtmlTag()
+        </div>
     </div>
-    <div class="col left">
+</div>
+            
+<div class="row blank">
+    <div class="row">
+        @Html.SubmissionFor(x => x._Photos).Size("20").InputId("photoGallery").HideLabel().ToHtmlTag()
+    </div> 
+</div>
+<div class="row blank"></div>
+<div class="row">
         @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
         @StandardButtonFor("cancel", WebLocalizationKeys.CANCEL).AddClass("cancel").ToHtmlTag()
     </div>
-    <div class="col full clear"><hr/></div>
+    <div class="row blank"><hr/></div>
 
-    <div class="col left clear ">
-        <div class="fieldRow dashboardGrid">
-            <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
-            <div id="pendingTaskGridContainer" class="dashboardGrid"></div>
+<div class="row">
+    @*-----------Left Column-------------*@
+    <div class="span10">
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
         </div>
-        <div class="fieldRow  dashboardGrid">
-            <div class="gridHeader">@WebLocalizationKeys.PHOTOS</div>
-            <div id="photoGridContainer" class="dashboardGrid"></div>
+        <div class="row">
+            <div id="pendingTaskGridContainer" class="dashboardGrid span10"></div>
         </div>
     </div>
-   
-<div class="col right ">
-    <div class="fieldRow  dashboardGrid">
-        <div class="gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
-        <div id="completedTaskGridContainer" class="dashboardGrid"></div>
+    <div class="span1"></div>
+    @*-----------Right Column-------------*@
+    <div class="span10">
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
+        </div>
+        <div class="row">
+              <div id="completedTaskGridContainer" class="dashboardGrid  span10"></div>
+        </div>
     </div>
-    <div class="fieldRow  dashboardGrid">
-        <div class="gridHeader">@WebLocalizationKeys.DOCUMENTS</div>
-        <div id="documentGridContainer" class="dashboardGrid"></div>
+</div>
+<div class="row blank"></div>
+<div class="row">
+@*-----------Left Column-------------*@
+    <div class="span10">
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.PHOTOS</div>
+        </div>
+        <div class="row">
+            <div id="photoGridContainer" class="dashboardGrid span10"></div>
+        </div>
+    </div>
+    <div class="span1"></div>
+    @*-----------Right Column-------------*@
+    <div class="span10">
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.DOCUMENTS</div>
+        </div>
+        <div class="row">
+            <div id="documentGridContainer" class="dashboardGrid span10"></div>
+        </div>
     </div>
 </div>

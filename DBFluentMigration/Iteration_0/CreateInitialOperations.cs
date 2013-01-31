@@ -43,6 +43,7 @@ namespace DBFluentMigration.Iteration_0
             _operations.CreateOperationForControllerType("EquipmentListController");
             _operations.CreateOperationForControllerType("EventCalendarController");
             _operations.CreateOperationForControllerType("EventController");
+            _operations.CreateOperationForControllerType("FacilitiesDashboardController");
             _operations.CreateOperationForControllerType("FacilitiesController");
             _operations.CreateOperationForControllerType("FacilitiesListController");
             _operations.CreateOperationForControllerType("FertilizerController");
@@ -128,6 +129,9 @@ namespace DBFluentMigration.Iteration_0
             _operations.CreateOperationForMenuItem("EquipmentTasks");
             _operations.CreateOperationForMenuItem("CompletedEquipmentTasks");
             _operations.CreateOperationForMenuItem("EquipmentTaskCalendar");
+            _operations.CreateOperationForMenuItem("Current");
+            _operations.CreateOperationForMenuItem("Completed");
+            _operations.CreateOperationForMenuItem("Reports");
         }
 
         public void CreateMiscItems()

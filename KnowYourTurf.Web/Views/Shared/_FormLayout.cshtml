@@ -2,22 +2,24 @@
 
 <script>
     @RenderSection("ExtraCss", false)
-
     @RenderSection("HeaderScripts", false)
-
-    var contentArea;
-    var extraFormOptions ={}
-        @RenderSection("HeaderJavascript", false)
+    @RenderSection("HeaderJavascript", false)
 </script>
 
-   <div class="content-header">
+    <div class="content-header">
         @RenderSection("ExtraContentHeaderButtons", false)
+        <span class="title-name" data-bind="text:_Title"></span>
         <button class="close cancel" title="@WebLocalizationKeys.CLOSE"></button>
-        <span class="title-name" data-bind="text:_title"></span>
-        <span class="title-added" data-bind="text:_createdText" ></span>
+        @if (Model.EntityId > 0)
+        {
+            <span class="title-added">@WebLocalizationKeys.DATE_ADDED.ToFormat(Model.Item.CreateDate.ToLongDateString())</span>
+        }
     </div>
     <div id="contentArea" class="content-inner">
-        @RenderBody()
+        <div class="form-scroll-inner form">
+            <div class="required_style"><span>* @WebLocalizationKeys.REQUIRED</span></div>
+            @RenderBody()
+        </div>
         <div class="footer">
             @if (@RenderSection("FormButtons", false) != null)
             {

@@ -19,7 +19,7 @@ namespace KnowYourTurf.Web.Filters
                 var values = new RouteValueDictionary(new
                 {
                     action = "Home",
-                    controller = "Home"
+                    controller = "KnowYourTurf"
                 });
                 filterContext.Result = new RedirectToRouteResult(values);
             }

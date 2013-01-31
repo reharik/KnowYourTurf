@@ -19,6 +19,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
         public SiteMap()
         {
             Map(x => x.Name);
+            Map(x => x.SiteOperation);
             Map(x => x.Description);
             HasMany(x => x.Fields).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
         }

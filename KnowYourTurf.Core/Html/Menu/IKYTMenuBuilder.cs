@@ -19,7 +19,7 @@ namespace KnowYourTurf.Core.Html.Menu
     {
         IKYTMenuBuilder CreateNode(StringToken text, string url, string cssClass = null);
         IKYTMenuBuilder addUrlParameter(string name, string value);
-        IKYTMenuBuilder CategoryGroupForItteration();
+        IKYTMenuBuilder SiteGroupForIteration();
         IKYTMenuBuilder EndCategoryGroup();
         IKYTMenuBuilder HasChildren();
         IKYTMenuBuilder EndChildren();
@@ -44,40 +44,40 @@ namespace KnowYourTurf.Core.Html.Menu
             _sessionContext = sessionContext;
         }
 
-        protected IList<MenuItem> _categoryItems = new List<MenuItem>();
+        protected IList<MenuItem> _siteItems = new List<MenuItem>();
         protected int count = 0;
-        protected IList<Site> _categories;
+        protected IList<Site> _sites;
 
-        public virtual IKYTMenuBuilder CategoryGroupForItteration()
+        public virtual IKYTMenuBuilder SiteGroupForIteration()
         {
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);
-            _categories = user.Company.Sites.ToList();
-            count = _categories.Count;
+            _sites = user.Company.Sites.ToList();
+            count = _sites.Count;
             return this;
         }
 
         public IKYTMenuBuilder EndCategoryGroup()
         {
-            //this is so createnode can get the _list rather than the _categoryItems
-            var categories = _categories;
-            _categories = null;
-            categories.ForEachItem(x =>
+            //this is so createnode can get the _list rather than the _siteItems
+            var sites = _sites;
+            _sites = null;
+            sites.ForEachItem(x =>
                                  {
                                      IList<MenuItem> parent = _items;
                                      if (count > 1)
                                      {
-                                         CreateNode(x.Name);
+                                         CreateNode(x.Name,x.SiteOperation);
                                          _items.LastOrDefault().Children = new List<MenuItem>();
                                          parent = _items.LastOrDefault().Children;
 
                                      }
-                                     itterateOverCategoryItems(x.EntityId, _categoryItems, parent);
+                                     itterateOverSiteItems(x.EntityId, _siteItems, parent);
                                  });
 
             return this;
         }
-        public IMenuBuilder CreateNode(string text, string cssClass = null)
+        public IMenuBuilder CreateNode(string text, string operation = null, string cssClass = null)
         {
             var _itemList = getList();
             _itemList.Add(new MenuItem
@@ -85,11 +85,11 @@ namespace KnowYourTurf.Core.Html.Menu
                 Text = text,
                 Url = "#",
                 CssClass = cssClass,
-
+                Operation = operation
             });
             return this;
         }
-        private void itterateOverCategoryItems(int entityId, IList<MenuItem> items, IList<MenuItem> parent = null)
+        private void itterateOverSiteItems(int entityId, IList<MenuItem> items, IList<MenuItem> parent = null)
         {
             items.ForEachItem(c =>
                            {
@@ -101,7 +101,7 @@ namespace KnowYourTurf.Core.Html.Menu
                                    // however, we need to remove and readd the child since it's not a reference
                                    var children = instanceC.Children;
                                    instanceC.Children=new List<MenuItem>();
-                                   itterateOverCategoryItems(entityId,children, instanceC.Children);
+                                   itterateOverSiteItems(entityId,children, instanceC.Children);
                                }
                                else
                                {
@@ -113,10 +113,10 @@ namespace KnowYourTurf.Core.Html.Menu
 
         protected override  IList<MenuItem> getList()
         {
-            if (_categories != null && count > 0)
+            if (_sites != null && count > 0)
             {
                 var lastCatParentItem = _parentItems.LastOrDefault();
-                return lastCatParentItem != null ? lastCatParentItem.Children : _categoryItems;
+                return lastCatParentItem != null ? lastCatParentItem.Children : _siteItems;
             }
             var lastParentItem = _parentItems.LastOrDefault();
             return lastParentItem != null ? lastParentItem.Children : _items;
@@ -128,6 +128,7 @@ namespace KnowYourTurf.Core.Html.Menu
             return new MenuItem
                        {
                            Url = menuItem.Url,
+                           Operation = menuItem.Operation,
                            Children = menuItem.Children,
                            CssClass = menuItem.CssClass,
                            Text = menuItem.Text

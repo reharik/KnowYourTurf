@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
@@ -19,13 +20,16 @@ namespace Generator
             try
             {
                 args = new[] {GetConnectionString()};
-
+//                args = new[] {ConfigurationManager.AppSettings["KnowYourTurf.sql_server_connection_string"]};
+                
                 Initialize();
                 var sessionFactoryConfiguration =
                     ObjectFactory.Container.With("connectionStr")
                                  .EqualTo(args[0])
                                  .GetInstance<ISessionFactoryConfiguration>();
                 ObjectFactory.Container.Inject(sessionFactoryConfiguration);
+
+//                ObjectFactory.Container.GetInstance<IGeneratorCommand>("securityupdate").Execute(new[] {""});
 
                 var commands = GetDesiredCommands();
                 commands.ForEachItem(x => x.Execute(args));

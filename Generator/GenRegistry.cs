@@ -5,6 +5,8 @@ using CC.Security;
 using CC.Security.Interfaces;
 using CC.Security.Services;
 using CC.UI.Helpers;
+using DBFluentMigration.Iteration_1;
+using DBFluentMigration.Iteration_2;
 using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Html.Menu;
 using KnowYourTurf.Core.Services;
@@ -33,7 +35,7 @@ namespace KnowYourTurf.Web
 //                x.AssemblyContainingType(typeof(WebLocalizationKeys));
                 x.AssemblyContainingType<Entity>();
                 x.AssemblyContainingType<IUser>();
-                x.AssemblyContainingType<HtmlConventionRegistry>(); 
+                x.AssemblyContainingType<HtmlConventionRegistry>();
                 x.AddAllTypesOf<ICalculatorHandler>().NameBy(t => t.Name);
                 x.AddAllTypesOf<RulesEngineBase>().NameBy(t => t.Name);
                 x.AddAllTypesOf<IEmailTemplateHandler>().NameBy(t => t.Name);

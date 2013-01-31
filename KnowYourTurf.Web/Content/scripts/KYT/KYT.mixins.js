@@ -91,7 +91,7 @@ KYT.mixins.formMixin = {
     successSelector:"#messageContainer",
     errorSelector:"#messageContainer",
     saveItem:function(){
-        var isValid = CC.ValidationRunner.runViewModel(this.elementsViewmodel);
+        var isValid = CC.ValidationRunner.runViewModel(this.cid, this.elementsViewmodel, this.errorSelector);
         if(!isValid){return;}
         var data;
         var fileInputs = $('input:file', this.$el);
@@ -158,6 +158,7 @@ KYT.mixins.ajaxDisplayMixin = {
     },
     renderCallback:function(){
         this.bindModelAndElements();
+        $("div.form-scroll-inner").height( window.innerHeight - 220);
         this.viewLoaded();
         KYT.vent.trigger("display:"+this.id+":pageLoaded",this.options);
     }
@@ -170,6 +171,7 @@ KYT.mixins.ajaxFormMixin = {
     },
     renderCallback:function(){
         this.bindModelAndElements();
+        $("div.form-scroll-inner").height( window.innerHeight - 220);
         this.viewLoaded();
         KYT.vent.trigger("form:"+this.id+":pageLoaded",this.options);
     }
@@ -186,7 +188,6 @@ KYT.mixins.ajaxGridMixin = {
         this.setupGrid();
         this.viewLoaded();
         KYT.vent.trigger("grid:"+this.id+":pageLoaded",this.options);
-
     }
 };
 
