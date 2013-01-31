@@ -2,8 +2,8 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <ToolsPath>$(MSBuildProjectDirectory)\src\lib</ToolsPath>
-    <SourcePath>$(MSBuildProjectDirectory)\src</SourcePath>
+    <ToolsPath>$(MSBuildProjectDirectory)\lib</ToolsPath>
+    <SourcePath>$(MSBuildProjectDirectory)</SourcePath>
     <MSBuildCommunityTasksPath>$(ToolsPath)</MSBuildCommunityTasksPath>
     <NUnit>$(ToolsPath)</NUnit>
     <Trunk>$(MSBuildProjectDirectory)..\..</Trunk>
@@ -25,18 +25,18 @@
    </PropertyGroup>
    
    <ItemGroup>
-     <WebFiles Include="src\KnowYourTurf.Web\**\*.*;"
-               Exclude="src\KnowYourTurf.Web\obj\**;
-						 src\KnowYourTurf.Web\**\*.cs;
-						 src\KnowYourTurf.Web\**\.idea\**;
-						 src\KnowYourTurf.Web\**\.svn\**;
-						 src\KnowYourTurf.Web\**\*.pdb;
-						 src\KnowYourTurf.Web\*.csproj.*;
-						 src\KnowYourTurf.Web\*.sln;
-						 src\KnowYourTurf.Web\App_Data\**;
-						 src\KnowYourTurf.Web\web.config;
-						 src\KnowYourTurf.Web\connectionstrings.config;
-						 src\KnowYourTurf.Web\Logs\**; 		 "
+     <WebFiles Include="KnowYourTurf.Web\**\*.*;"
+               Exclude="KnowYourTurf.Web\obj\**;
+						 KnowYourTurf.Web\**\*.cs;
+						 KnowYourTurf.Web\**\.idea\**;
+						 KnowYourTurf.Web\**\.svn\**;
+						 KnowYourTurf.Web\**\*.pdb;
+						 KnowYourTurf.Web\*.csproj.*;
+						 KnowYourTurf.Web\*.sln;
+						 KnowYourTurf.Web\App_Data\**;
+						 KnowYourTurf.Web\web.config;
+						 KnowYourTurf.Web\connectionstrings.config;
+						 KnowYourTurf.Web\Logs\**; 		 "
                 />
    </ItemGroup>
    <Time>
@@ -61,7 +61,7 @@
   </Target>
 
   <ItemGroup>
-    <UnitTestAssemblies Include="$(SourcePath)\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll;" />
+    <UnitTestAssemblies Include="$(SourcePath)\KnowYourTurf.Tests\bin\Release\KnowYourTurf.Tests.dll;" />
   </ItemGroup>
   <Target Name="_unitTests">
     <NUnit Assemblies="@(UnitTestAssemblies)" ToolPath="$(NUnit)" />
