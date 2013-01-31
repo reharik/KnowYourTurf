@@ -6,6 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		appSettings.config = appSettings.config
 		build.bat = build.bat
 		build.proj = build.proj
+		BuildForRelease.proj = BuildForRelease.proj
 		connectionStrings.config = connectionStrings.config
 		Filestream-Notes.txt = Filestream-Notes.txt
 		Gen.bat = Gen.bat
