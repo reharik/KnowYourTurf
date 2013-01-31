@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
+<<<<<<< HEAD
+<test-results name="c:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll" total="0" failures="0" not-run="0" date="2012-08-22" time="19:24:46">
+=======
 <test-results name="c:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll" total="1" failures="0" not-run="0" date="2012-08-31" time="21:17:45">
+>>>>>>> qa
   <environment nunit-version="2.4.7.0" clr-version="4.0.30319.269" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="c:\Development\KnowYourTurf" machine-name="RHARIK" user="Owner" user-domain="RHARIK" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
   <test-suite name="c:\Development\KnowYourTurf\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll" success="True" time="0.145" asserts="0">
