@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxMin">
+      <HintPath>..\lib\AjaxMin.dll</HintPath>
+    </Reference>
     <Reference Include="Alpinely.TownCrier">
       <HintPath>..\lib\Alpinely.TownCrier.dll</HintPath>
     </Reference>
