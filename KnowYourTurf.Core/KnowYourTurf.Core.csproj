@@ -166,7 +166,6 @@
     <Compile Include="Domain\Persistence\PhotoMap.cs" />
     <Compile Include="Domain\Persistence\DocumentMap.cs" />
     <Compile Include="Domain\Persistence\EmailTemplateMap.cs" />
-    <Compile Include="Domain\Persistence\UserRoleMap.cs" />
     <Compile Include="Domain\Persistence\UsersGroupMap.cs" />
     <Compile Include="Domain\Persistence\WeatherMap.cs" />
     <Compile Include="Domain\Photo.cs" />
