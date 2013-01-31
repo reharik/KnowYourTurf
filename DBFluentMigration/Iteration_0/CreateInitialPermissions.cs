@@ -23,7 +23,8 @@ namespace DBFluentMigration.Iteration_0
 
         public void GrantAdminPermissions()
         {
-            _permissions.CreateControllerPermission(UserType.Administrator,"AdminController" );
+            _permissions.CreateControllerPermission(UserType.Administrator, "AdminOrGreater");
+            _permissions.CreateControllerPermission(UserType.Administrator, "AdminController");
             _permissions.CreateControllerPermission(UserType.Administrator,"AdminDashboardController");
             _permissions.CreateControllerPermission(UserType.Administrator,"AdminListController");
             _permissions.CreateControllerPermission(UserType.Administrator,"CalculatorController");
@@ -67,7 +68,14 @@ namespace DBFluentMigration.Iteration_0
             _permissions.CreateControllerPermission(UserType.Administrator,"InventoryListController");
             _permissions.CreateControllerPermission(UserType.Administrator,"KnowYourTurfController");
             _permissions.CreateControllerPermission(UserType.Administrator,"KYTController");
-            _permissions.CreateControllerPermission(UserType.Administrator,"ListTypeListController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "ListTypeListController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "TaskTypeController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "PartController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "DocumentCategoryController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "EventTypeController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "EquipmentTypeController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "PhotoCategoryController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "EquipmentTaskTypeController");
             _permissions.CreateControllerPermission(UserType.Administrator,"MaterialController");
             _permissions.CreateControllerPermission(UserType.Administrator,"MaterialListController");
             _permissions.CreateControllerPermission(UserType.Administrator,"OrthogonalController");
@@ -104,6 +112,7 @@ namespace DBFluentMigration.Iteration_0
             _permissions.CreateMenuPermission(UserType.Administrator, "Forum");
 
 
+            _permissions.CreateMenuPermission(UserType.Administrator, "AdminTools");
             _permissions.CreateMenuPermission(UserType.Administrator, "EmailJobs");
             _permissions.CreateMenuPermission(UserType.Administrator, "Employees");
             _permissions.CreateMenuPermission(UserType.Administrator, "Facilities");

@@ -10,9 +10,13 @@
         <div class="row">
             @Html.ViewFor(x => x.VendorCompany).RootId("viewVendor").ToHtmlTag()
         </div>
-<div class="row blank"/>
+        <div class="row blank"/>
         <div class="row">
-            <div id="commitPoliGridArea" class="span10"></div>
+            <div class="span10 gridHeader">@WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS</div>
+        </div>
+
+        <div class="row">
+            <div id="commitPoliGridArea" class="span20"></div>
         </div>
 
     <div class="footer">

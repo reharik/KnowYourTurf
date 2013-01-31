@@ -67,7 +67,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ListViewModel()
             {
                 gridDef = _receivePurchaseOrderLineItemGrid.GetGridDefinition(url, input.User),
-                _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
+//                _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "?EntityId=" + input.EntityId,
             };
             return new CustomJsonResult(model);

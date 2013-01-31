@@ -9,7 +9,7 @@
 
 <div class="row">
     @Html.SubmissionFor(x => x.Name).Size("5").ToHtmlTag()
-    @Html.SubmissionFor(x => x.PhotoCategoryEntityId).LabelDisplay(WebLocalizationKeys.PHOTO_CATEGORY).ToHtmlTag()
+    @Html.SubmissionFor(x => x.PhotoCategoryEntityId).Size("5").LabelDisplay(WebLocalizationKeys.PHOTO_CATEGORY).ToHtmlTag()
 </div>
 <div class="row">
     @Html.SubmissionFor(x => x.FileUrl).Size("10").LabelDisplay(WebLocalizationKeys.PHOTO).ToHtmlTag() 
