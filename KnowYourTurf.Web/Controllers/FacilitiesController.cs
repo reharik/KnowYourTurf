@@ -19,6 +19,8 @@ using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class FacilitiesController : AdminControllerBase
     {
         private readonly IRepository _repository;
@@ -27,13 +29,15 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISessionContext _sessionContext;
         private readonly ISelectListItemService _selectListItemService;
         private readonly IAuthorizationRepository _authorizationRepository;
+        private readonly ISecurityDataService _securityDataService;
 
         public FacilitiesController(IRepository repository,
             ISaveEntityService saveEntityService,
             IFileHandlerService fileHandlerService,
             ISessionContext sessionContext,
             ISelectListItemService selectListItemService,
-            IAuthorizationRepository authorizationRepository)
+            IAuthorizationRepository authorizationRepository,
+            ISecurityDataService securityDataService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
@@ -41,6 +45,7 @@ namespace KnowYourTurf.Web.Controllers
             _sessionContext = sessionContext;
             _selectListItemService = selectListItemService;
             _authorizationRepository = authorizationRepository;
+            _securityDataService = securityDataService;
         }
 
         public ActionResult AddUpdate_Template(ViewModel input)
@@ -58,7 +63,7 @@ namespace KnowYourTurf.Web.Controllers
             model._saveUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Save(null));
             model._UserLoginInfoStatusList = _selectListItemService.CreateList<Status>(true);
             
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -69,7 +74,7 @@ namespace KnowYourTurf.Web.Controllers
             if(!rulesResult.Success)
             {
                 var notification = new RulesNotification(rulesResult);
-                return Json(notification);
+                return new CustomJsonResult(notification);
             }
             _repository.Delete(facilities);
             _repository.UnitOfWork.Commit();
@@ -92,6 +97,7 @@ namespace KnowYourTurf.Web.Controllers
             }
             facilities = mapToDomain(input, facilities);
             mapRolesToGroups(facilities);
+            handlePassword(input, facilities);
             if (input.DeleteImage)
             {
                 _fileHandlerService.DeleteFile(facilities.FileUrl);
@@ -103,7 +109,7 @@ namespace KnowYourTurf.Web.Controllers
             var crudManager = _saveEntityService.ProcessSave(facilities);
 
             var notification = crudManager.Finish();
-            return Json(notification,"text/plain");
+            return new CustomJsonResult(notification,"text/plain");
         }
 
         private User mapToDomain(UserViewModel model, User facilities)
@@ -121,8 +127,7 @@ namespace KnowYourTurf.Web.Controllers
             facilities.UserLoginInfo = new UserLoginInfo()
             {
                 Password = model.UserLoginInfoPassword,
-                LoginName = model.Email,
-                Status = model.UserLoginInfoStatus,
+                LoginName = model.Email
             };
             var role = _repository.Query<UserRole>(x => x.Name == UserType.Facilities.ToString()).FirstOrDefault();
             facilities.AddUserRole(role);
@@ -138,6 +143,16 @@ namespace KnowYourTurf.Web.Controllers
             _authorizationRepository.DetachUserFromGroup(facilities, UserType.MultiTenant.Key);
 
             _authorizationRepository.AssociateUserWith(facilities, UserType.Facilities.Key);
+        }
+
+        private void handlePassword(UserViewModel input, User origional)
+        {
+            if (input.UserLoginInfoPassword.IsNotEmpty())
+            {
+                origional.UserLoginInfo.Salt = _securityDataService.CreateSalt();
+                origional.UserLoginInfo.Password = _securityDataService.CreatePasswordHash(input.UserLoginInfoPassword,
+                                                            origional.UserLoginInfo.Salt);
+            }
         }
     }
 }

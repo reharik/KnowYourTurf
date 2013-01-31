@@ -1,37 +1,62 @@
 using CC.Core.DomainTools;
-using KnowYourTurf.Core.Domain;
 using NHibernate;
 using StructureMap;
 
 
 namespace Generator.Commands
 {
+    using KnowYourTurf.Core.Domain;
+
     public class RebuildDatabaseCommand : IGeneratorCommand
     {
-        private readonly IRepository _repository;
+        private  IRepository _repository;
 
-        public RebuildDatabaseCommand(IRepository repository)
+        public RebuildDatabaseCommand()
         {
-            _repository = repository;
         }
 
         public string Description { get { return "Rebuilds the db and data"; } }
 
         public void Execute(string[] args)
         {
-//            var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
+//            ObjectFactory.Configure(x => x.For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory()));
+          //  var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
 //            SqlServerHelper.DeleteReaddDb(sessionFactory);
-
 
             ObjectFactory.Configure(x => x.For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactoryAndGenerateSchema()));
             var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
+            var repository = ObjectFactory.Container.GetInstance<IRepository>();
+            new DataLoader().Load(repository);
+//            SqlServerHelper.AddRhinoSecurity(sessionFactory);
 
-//            var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
+//            ObjectFactory.ResetDefaults();
+//            ObjectFactory.Initialize(x =>
+//            {
+//                x.AddRegistry(new GenRegistry());
+//                x.AddRegistry(new CommandRegistry());
+//            });
+//            var securitySetup = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
+//            securitySetup.Execute(null);
 
-            new DataLoader().Load();
 
-            var securitySetup = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
-            securitySetup.Execute(null);
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//            new DataLoader().Load();
+//            SqlServerHelper.AddRhinoSecurity(sessionFactory);
+//
+//            var securitySetup = ObjectFactory.Container.GetInstance<IGeneratorCommand>("defaultsecuritysetup");
+//            securitySetup.Execute(null);
 
 
             //_loader.ClearStrings();

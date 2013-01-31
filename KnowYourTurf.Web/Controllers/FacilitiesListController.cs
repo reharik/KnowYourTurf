@@ -10,6 +10,8 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class FacilitiesListController : AdminControllerBase
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -31,14 +33,14 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult Facilitiess(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserRoles.Any(r=>r.Name==UserType.Facilities.ToString()));
             var gridItemsViewModel = _gridHandlerService.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

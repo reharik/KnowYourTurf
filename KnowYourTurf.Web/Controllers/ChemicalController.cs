@@ -13,6 +13,8 @@ using KnowYourTurf.Web.Models;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class ChemicalController : KYTController
     {
         private readonly IRepository _repository;
@@ -34,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = Mapper.Map<Chemical, ChemicalViewModel>(chemical);
             model._Title = WebLocalizationKeys.CHEMICAL_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<ChemicalController>(x => x.Save(null));
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Display_Template(ViewModel input)
@@ -47,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
             var chemical = _repository.Find<Chemical>(input.EntityId);
             var model = Mapper.Map<Chemical, ChemicalViewModel>(chemical);
             model._Title = WebLocalizationKeys.CHEMICAL_INFORMATION.ToString();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -69,11 +71,11 @@ namespace KnowYourTurf.Web.Controllers
                 }
             });
             _repository.Commit();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
         private bool checkDependencies(Chemical item, Notification notification)
         {
-            var dependantItems = _repository.Query<Vendor>(x => x.Products.Any(i=>i == item));
+            var dependantItems = _repository.Query<FieldVendor>(x => x.Products.Any(i=>i == item));
             if (dependantItems.Any())
             {
                 if (notification.Message.IsEmpty())
@@ -92,7 +94,7 @@ namespace KnowYourTurf.Web.Controllers
             mapItem(chemical, input);
             var crudManager = _saveEntityService.ProcessSave(chemical);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         private void mapItem(Chemical chemical, ChemicalViewModel input)

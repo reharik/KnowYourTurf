@@ -2,10 +2,13 @@
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.Html;
 using CC.Core.Services;
+using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class PhotoListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -27,16 +30,15 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _photoListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.PHOTOS.ToString()
             };
-            model.headerButtons.Add("new");
             model.headerButtons.Add("delete");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         
         public JsonResult Photos(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Photo>(input.filters);
             var gridItemsViewModel = _photoListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

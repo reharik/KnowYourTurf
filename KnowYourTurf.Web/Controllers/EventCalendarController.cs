@@ -13,12 +13,15 @@ using CC.Core;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    public class EventCalendarController:KYTController
+    using KnowYourTurf.Web.Config;
+
+    public class EventCalendarController : KYTController
     {
         private readonly IRepository _repository;
+
         private readonly ISaveEntityService _saveEntityService;
 
-        public EventCalendarController(IRepository repository,ISaveEntityService saveEntityService)
+        public EventCalendarController(IRepository repository, ISaveEntityService saveEntityService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
@@ -27,22 +30,46 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult EventCalendar(ViewModel input)
         {
             var model = new CalendarViewModel
-                       {
-                           CalendarDefinition = new CalendarDefinition
-                                                   {
-                                                       Url = UrlContext.GetUrlForAction<EventCalendarController>(x => x.Events(null)) + "?RootId=" + input.RootId,
-                                                       AddUpdateTemplateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate_Template(null)),
-                                                       AddUpdateUrl = UrlContext.GetUrlForAction<EventController>(x => x.AddUpdate(null)),
-                                                       AddUpdateRoute = "appointment",
-                                                       DisplayTemplateUrl = UrlContext.GetUrlForAction<EventController>(x => x.Display_Template(null)),
-                                                       DisplayUrl = UrlContext.GetUrlForAction<EventController>(x => x.Display(null)),
-                                                       DisplayRoute = "appointmentdisplay",
-                                                       DeleteUrl = UrlContext.GetUrlForAction<EventController>(x => x.Delete(null)),
-                                                       EventChangedUrl = UrlContext.GetUrlForAction<EventCalendarController>(x => x.EventChanged(null))
-                                               
-                                                   }
-                       };
-            return Json(model,JsonRequestBehavior.AllowGet);
+                            {
+                                CalendarDefinition =
+                                    new CalendarDefinition
+                                        {
+                                            Url =
+                                                UrlContext
+                                                    .GetUrlForAction
+                                                    <EventCalendarController>(
+                                                        x => x.Events(null))
+                                                + "?RootId=" + input.RootId,
+                                            AddUpdateTemplateUrl =
+                                                UrlContext
+                                                .GetUrlForAction<EventController>(
+                                                    x => x.AddUpdate_Template(null)),
+                                            AddUpdateUrl =
+                                                UrlContext
+                                                .GetUrlForAction<EventController>(
+                                                    x => x.AddUpdate(null)),
+                                            AddUpdateRoute = "appointment",
+                                            DisplayTemplateUrl =
+                                                UrlContext
+                                                .GetUrlForAction<EventController>(
+                                                    x => x.Display_Template(null)),
+                                            DisplayUrl =
+                                                UrlContext
+                                                .GetUrlForAction<EventController>(
+                                                    x => x.Display(null)),
+                                            DisplayRoute = "appointmentdisplay",
+                                            DeleteUrl =
+                                                UrlContext
+                                                .GetUrlForAction<EventController>(
+                                                    x => x.Delete(null)),
+                                            EventChangedUrl =
+                                                UrlContext
+                                                .GetUrlForAction
+                                                <EventCalendarController>(
+                                                    x => x.EventChanged(null))
+                                        }
+                            };
+            return new CustomJsonResult(model);
         }
 
         public JsonResult EventChanged(EventChangedViewModel input)
@@ -54,7 +81,7 @@ namespace KnowYourTurf.Web.Controllers
             _event.EndTime = input.EndTime;
             var crudManager = _saveEntityService.ProcessSave(field);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public JsonResult Events(GetEventsViewModel input)
@@ -62,19 +89,21 @@ namespace KnowYourTurf.Web.Controllers
             var eventsItems = new List<CalendarEvent>();
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
-            var category = _repository.Find<Category>(input.RootId);
-            var events = category.GetAllEvents().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
-            events.ForEachItem(x =>
-                       eventsItems.Add(new CalendarEvent
-                                      {
-                                          EntityId = x.EntityId,
-                                          title = x.Field.Abbreviation+": "+ x.EventType.Name,
-                                          start = x.StartTime.ToString(),
-                                          end = x.EndTime.ToString(),
-                                          color = x.EventType.EventColor
-                                      })
-                );
-            return Json(eventsItems, JsonRequestBehavior.AllowGet);
+            var category = _repository.Find<Site>(input.RootId);
+            var events =
+                category.GetAllEvents().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
+            events.ForEachItem(
+                x =>
+                eventsItems.Add(
+                    new CalendarEvent
+                        {
+                            EntityId = x.EntityId,
+                            title = x.Field.Abbreviation + ": " + x.EventType.Name,
+                            start = x.StartTime.ToString(),
+                            end = x.EndTime.ToString(),
+                            color = x.EventType.EventColor
+                        }));
+            return new CustomJsonResult(eventsItems);
         }
     }
 

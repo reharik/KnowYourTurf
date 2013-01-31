@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using KnowYourTurf.Core.Enums;
-using KnowYourTurf.Web.Areas.Portfolio.Controllers;
 using KnowYourTurf.Web.Controllers;
-using KnowYourTurf.Web.Services.RouteTokens;
 
 namespace KnowYourTurf.Web.Services.ViewOptions
 {
+    using KnowYourTurf.Core.RouteTokens;
+    using KnowYourTurf.Web.Areas.Reports.Controllers;
+
     public interface IRouteTokenConfig
     {
         IList<RouteToken> Build(bool withoutPermissions = false);
@@ -38,7 +39,15 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForList<EventCalendarController>(x => x.EventCalendar(null)).ViewName("CalendarView").End();
             _builder.TokenForList<EquipmentListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<EquipmentController>(x => x.AddUpdate(null)).End();
-
+            _builder.TokenForForm<EquipmentDashboardController>(x => x.ViewEquipment(null)).ViewName("EquipmentDashboardView").End();
+            _builder.TokenForList<EquipmentTaskCalendarController>(x => x.EquipmentTaskCalendar(null)).ViewName("CalendarView").End();
+            _builder.TokenForList<EquipmentTaskListController>(x => x.ItemList(null)).ViewName("PendingEquipmentTaskListView").End();
+            _builder.TokenForList<EquipmentTaskListController>(x => x.CompletedEquipmentTasksGrid(null)).ViewName("CompletedEquipmentTaskListView").RouteToken("completedequipmenttasks").End();
+            _builder.TokenForForm<EquipmentTaskController>(x => x.AddUpdate(null)).End();
+            _builder.UrlForDisplay<EquipmentTaskController>(x => x.Display(null)).End();
+            _builder.TokenForList<EquipmentVendorListController>(x => x.ItemList(null)).End();
+            _builder.TokenForForm<EquipmentVendorController>(x => x.AddUpdate(null)).End();
+           
             _builder.TokenForList<CalculatorListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<CalculatorController>(x => x.Calculator(null)).End();
 
@@ -86,6 +95,9 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForForm<EventTypeController>(x => x.AddUpdate(null)).End();
             _builder.TokenForForm<DocumentCategoryController>(x => x.AddUpdate(null)).End();
             _builder.TokenForForm<PhotoCategoryController>(x => x.AddUpdate(null)).End();
+            _builder.TokenForForm<EquipmentTaskTypeController>(x => x.AddUpdate(null)).End();
+            _builder.TokenForForm<EquipmentTypeController>(x => x.AddUpdate(null)).End();
+            _builder.TokenForForm<PartController>(x => x.AddUpdate(null)).End();
 
             _builder.TokenForList<VendorListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<VendorController>(x => x.AddUpdate(null)).End();
@@ -102,6 +114,8 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForList<CompletedPurchaseOrderDisplayController>(x => x.ItemList(null)).ViewName("NoMultiSelectGrid").End();
 
             _builder.TokenForForm<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)).AddUpdateToken("purchaseorderlineitem").End();
+
+            _builder.TokenForForm<TasksByFieldController>(x => x.Display(null),AreaName.Reports).ViewName("TasksByFieldView").End();
 
 
             return _builder.Items;

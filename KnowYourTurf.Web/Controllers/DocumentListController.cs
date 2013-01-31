@@ -7,6 +7,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class DocumentListController:KYTController
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -29,16 +31,15 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _documentListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.DOCUMENTS.ToString()
             };
-            model.headerButtons.Add("new");
             model.headerButtons.Add("delete");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         
         public JsonResult Documents(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Document>(input.filters);
             var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

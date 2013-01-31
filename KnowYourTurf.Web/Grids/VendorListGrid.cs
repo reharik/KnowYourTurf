@@ -6,15 +6,15 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Grids
 {
-    public class VendorListGrid : Grid<Vendor>, IEntityListGrid<Vendor>
+    public class VendorListGrid : Grid<FieldVendor>, IEntityListGrid<FieldVendor>
     {
 
-        public VendorListGrid(IGridBuilder<Vendor> gridBuilder)
+        public VendorListGrid(IGridBuilder<FieldVendor> gridBuilder)
             : base(gridBuilder)
         {
         }
 
-        protected override Grid<Vendor> BuildGrid()
+        protected override Grid<FieldVendor> BuildGrid()
         {
 
             GridBuilder.LinkColumnFor(x => x.Company)

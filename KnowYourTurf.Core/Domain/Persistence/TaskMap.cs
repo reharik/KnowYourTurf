@@ -8,8 +8,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
         {
             References(x => x.TaskType);
             Map(x => x.ScheduledDate);
-            Map(x => x.ScheduledStartTime);
-            Map(x => x.ScheduledEndTime);
+            Map(x => x.StartTime);
+            Map(x => x.EndTime);
             Map(x => x.ActualTimeSpent);
             Map(x => x.Notes);
             Map(x => x.Deleted);

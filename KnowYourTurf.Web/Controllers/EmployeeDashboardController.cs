@@ -18,6 +18,8 @@ using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EmployeeDashboardController:KYTController
     {
         private readonly IRepository _repository;
@@ -35,8 +37,7 @@ namespace KnowYourTurf.Web.Controllers
             _repository = repository;
             _selectListItemService = selectListItemService;
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            //completed used for pending so that you can't edit on employee page
-            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
+            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("PendingTasks");
             _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<Task>>("CompletedTasks");
             _sessionContext = sessionContext;
         }
@@ -58,6 +59,7 @@ namespace KnowYourTurf.Web.Controllers
            
 
             var model = Mapper.Map<User, UserViewModel>(employee);
+            model.UserLoginInfoPassword = "";
             model.FileUrl = model.FileUrl.IsNotEmpty() ? model.FileUrl.AddImageSizeToName("thumb") : "";
             model._StateList = _selectListItemService.CreateList<State>();
             model._UserLoginInfoStatusList = _selectListItemService.CreateList<Status>();
@@ -67,7 +69,7 @@ namespace KnowYourTurf.Web.Controllers
             model._completedGridUrl = UrlContext.GetUrlForAction<EmployeeDashboardController>(x => x.CompletedTasksGrid(null)) + "?ParentId=" + entityId;
             model._saveUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.Save(null));
             model.UserRoles = new TokenInputViewModel { _availableItems = availableUserRoles, selectedItems = selectedUserRoles };
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult PendingTasksGrid(ViewModel input)
@@ -79,7 +81,7 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _pendingTaskGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         public ActionResult CompletedTasksGrid(ViewModel input)
         {
@@ -89,14 +91,14 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _completedTaskGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         public JsonResult CompletedTasks(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters, x => x.Complete);
             var employeeItems = items.ToList().Where(x => x.Employees.Any(y => y.EntityId == input.ParentId)).AsQueryable();
             var gridItemsViewModel = _completedTaskGrid.GetGridItemsViewModel(input.PageSortFilter, employeeItems, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
 
         public JsonResult PendingTasks(GridItemsRequestModel input)
@@ -104,7 +106,7 @@ namespace KnowYourTurf.Web.Controllers
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters, x => !x.Complete);
             var employeeItems = items.ToList().Where(x => x.Employees.Any(y => y.EntityId == input.ParentId)).AsQueryable();
             var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, employeeItems, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 

@@ -15,6 +15,8 @@ using KnowYourTurf.Web.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class DocumentController:KYTController
     {
         private readonly IRepository _repository;
@@ -51,49 +53,57 @@ namespace KnowYourTurf.Web.Controllers
             model.Popup = input.Popup;
             model._saveUrl = UrlContext.GetUrlForAction<DocumentController>(x => x.Save(null));
             model.Var = input.Var;
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
-        public ActionResult Delete(ViewModel input)
-        {
-            var document = _repository.Find<Document>(input.EntityId);
-            _repository.HardDelete(document);
-            _repository.UnitOfWork.Commit();
-            return null;
-        }
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
+            var methodInfo = typeof(Repository).GetMethod("Find");
+            var type = typeof(Document).Assembly.GetType("KnowYourTurf.Core.Domain." + input.Var);
+            var genericMethod = methodInfo.MakeGenericMethod(new[] { type });
+            dynamic entity = genericMethod.Invoke(_repository, new[] { (object)input.ParentId });
+            var documentUrls = new List<string>();
             input.EntityIds.ForEachItem(x =>
             {
-                var item = _repository.Find<Document>(x);
-                _fileHandlerService.DeleteFile(item.FileUrl);
-                _repository.HardDelete(item);
+                var document = ((IEnumerable<Document>)entity.Documents).FirstOrDefault(y => y.EntityId == x);
+                documentUrls.Add(document.FileUrl);
+                entity.RemoveDocument(document);
             });
-            _repository.Commit();
-            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+            var notification = _saveEntityService.ProcessSave(entity).Finish();
+            if (notification.Success)
+            {
+                documentUrls.ForEachItem(_fileHandlerService.DeleteFile);
+            }
+            return new CustomJsonResult(notification);
         }
 
 
         public ActionResult Save(DocumentViewModel input)
         {
-            // change to switch when we add docs to other things.
-            var field = _repository.Find<Field>(input.ParentId);
-            var document = field.Documents.FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Document();
-            document = mapToDomain(input, document);
-            document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments");
+            var methodInfo = typeof(Repository).GetMethod("Find");
+            var type = typeof(Document).Assembly.GetType("KnowYourTurf.Core.Domain." + input.Var);
+            var genericMethod = methodInfo.MakeGenericMethod(new[] { type });
+            dynamic entity = genericMethod.Invoke(_repository, new[] { (object)input.ParentId });
 
-            field.AddDocument(document);
-            var crudManager = _saveEntityService.ProcessSave(field);
+            var document = ((IEnumerable<Document>)entity.Documents).FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Document();
+            document = mapToDomain(input, document);
+            document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments",entity.CompanyId);
+
+            entity.AddDocument(document);
+            var crudManager = _saveEntityService.ProcessSave(entity);
 
             var notification = crudManager.Finish();
-            return Json(notification, "text/plain");
+            return new CustomJsonResult(notification, "text/plain");
         }
 
         private Document mapToDomain(DocumentViewModel input, Document document)
         {
             document.Name = input.Name;
             document.Description = input.Description;
-            if (document.DocumentCategory == null || document.DocumentCategory.EntityId != input.DocumentCategoryEntityId)
+            if (input.DocumentCategoryEntityId==0)
+            {
+                document.DocumentCategory = null;
+            }else if (document.DocumentCategory == null || document.DocumentCategory.EntityId != input.DocumentCategoryEntityId)
             {
                 document.DocumentCategory = _repository.Find<DocumentCategory>(input.DocumentCategoryEntityId);
             }
@@ -104,7 +114,7 @@ namespace KnowYourTurf.Web.Controllers
         {
             var docs = _repository.FindAll<Document>();
             var model = docs.Select(x => new DocumentDto {file = x});
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
     }
 
@@ -117,7 +127,7 @@ namespace KnowYourTurf.Web.Controllers
         [TextArea]
         public virtual string Description { get; set; }
         public virtual int DocumentCategoryEntityId { get; set; }
-        [ValidateNonEmpty]
+        [ValidateFileNotEmpty]
         public virtual string FileUrl { get; set; }
 
         public string _saveUrl { get; set; }

@@ -91,7 +91,6 @@ namespace KnowYourTurf.Web
             For<IAuthorizationRepository>().HybridHttpOrThreadLocalScoped().Use<CustomAuthorizationRepository>();
             For<IPermissionsBuilderService>().HybridHttpOrThreadLocalScoped().Use<PermissionsBuilderService>();
             For<IPermissionsService>().HybridHttpOrThreadLocalScoped().Use<PermissionsService>();
-            For<ISecuritySetupService>().Use<DefaultSecuritySetupService>();
             For<ILogger>().Use(() => new Log4NetLogger(typeof(string)));
             For<ICCSessionContext>().Use<SessionContext>();
 
@@ -100,6 +99,9 @@ namespace KnowYourTurf.Web
             For<IEntityListGrid<Task>>().Use<TaskListGrid>();
             For<IEntityListGrid<Task>>().Add<CompletedTaskGrid>().Named("CompletedTasks");
             For<IEntityListGrid<Task>>().Add<PendingTaskGrid>().Named("PendingTasks");
+            For<IEntityListGrid<EquipmentTask>>().Use<EquipmentTaskListGrid>();
+            For<IEntityListGrid<EquipmentTask>>().Add<EquipmentTaskCompletedGrid>().Named("CompletedTasks");
+            For<IEntityListGrid<EquipmentTask>>().Add<EquipmentTaskPendingGrid>().Named("PendingTasks");
 
             For<IEntityListGrid<User>>().Use<EmployeeListGrid>();
             For<IEntityListGrid<User>>().Add<AdminListGrid>().Named("Admins");
@@ -110,14 +112,12 @@ namespace KnowYourTurf.Web
 
 
             For<IEntityListGrid<PurchaseOrderLineItem>>().Use<PurchaseOrderLineItemGrid>();
-            For<IEntityListGrid<PurchaseOrderLineItem>>().Add<ReceivePurchaseOrderLineItemGrid>().Named("Recieve");
+            For<IEntityListGrid<PurchaseOrderLineItem>>().Add<ReceivePurchaseOrderLineItemGrid>().Named("Receive");
             For<IEntityListGrid<PurchaseOrderLineItem>>().Add<CompetedPurchaseOrderLineItemGrid>().Named("Completed");
             For<IEntityListGrid<Material>>().Use<MaterialListGrid>();
             For<IEntityListGrid<Chemical>>().Use<ChemicalListGrid>();
             For<IEntityListGrid<Fertilizer>>().Use<FertilizerListGrid>();
             For<IRouteTokenConfig>().Add<FieldsRouteTokenList>();
-
-            For<IEmailTemplateHandler>().Use<EmployeeDailyTaskHandler>().Named("Daily TasksHandler");
 
         }
     }

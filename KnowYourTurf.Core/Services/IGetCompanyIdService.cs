@@ -7,11 +7,12 @@ namespace KnowYourTurf.Core.Services
     public interface IGetCompanyIdService
     {
         int Execute();
+        int CompanyId { get; set; }
     }
-
 
     public class GetCompanyIdService : IGetCompanyIdService
     {
+        public int CompanyId { get; set; }
         public int Execute()
         {
             var httpContext = HttpContext.Current;
@@ -20,11 +21,14 @@ namespace KnowYourTurf.Core.Services
         }
     }
 
+    // this of course is stupid and should be on the sessioncontext
+    // so if you're reading this refactor it.
     public class DataLoaderGetCompanyIdService:IGetCompanyIdService
     {
+        public int CompanyId { get; set; }
         public int Execute()
         {
-            return 1;
+            return CompanyId;
         }
     }
 }

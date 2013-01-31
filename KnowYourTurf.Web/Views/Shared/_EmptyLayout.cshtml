@@ -1,5 +1,4 @@
 ﻿@using KnowYourTurf.Web;
-@using HtmlTags
 
 <script>
     @RenderSection("ExtraCss", false)
@@ -7,14 +6,18 @@
     @RenderSection("HeaderJavascript", false)
 </script>
 
-   <div class="content-header">
+
+    <div class="content-header">
         @RenderSection("ExtraContentHeaderButtons", false)
-        <span class="title-name" data-bind="text:_title"></span>
+        <span class="title-name" data-bind="text:_Title"></span>
         <span class="title-added" data-bind="text:_createdText" ></span>
     </div>
     <div id="contentArea" class="content-inner">
-    <div id="errorMessagesForm" class="mf_ErrorMessages errorMessages"><ul></ul></div>
-        @RenderBody()
-         <div class="footer">
-         </div>
+        <div class="form-scroll-inner form">
+             <div class="required_style"><span>* @WebLocalizationKeys.REQUIRED</span></div>
+             @RenderBody()
+             <div class="footer">
+             </div>
+        </div>
     </div>
+

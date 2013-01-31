@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Net;
 using System.Threading;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using CC.Core;
-using CC.Core.CoreViewModelAndDTOs;
-using CC.Core.DomainTools;
 using FluentNHibernate.Utils;
 using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
+<<<<<<< HEAD
+using KnowYourTurf.Core.Html;
+=======
+>>>>>>> qa
 using System.Linq;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Services.EmailHandlers;
@@ -25,11 +27,27 @@ namespace KnowYourTurf.Web.Controllers
 
         public TaskRunnerController(IEmailTemplateService emailService)
         {
-<<<<<<< HEAD
             _emailService = emailService;
-            _repository = ObjectFactory.Container.GetInstance<IRepository>("SpecialInterceptorNoFilters");
+            _repository = ObjectFactory.Container.GetInstance<IRepository>("NoFiltersSpecialInterceptor");
         }
-=======
+
+        public ActionResult GetWeather(ViewModel input)
+        {
+            var companies = _repository.FindAll<Company>();
+            var webClient = new WebClient();
+            var jss = new JavaScriptSerializer();
+
+            companies.Each(x =>
+                               {
+                                   loadWeatherObject(jss, webClient, x);
+                                   loadLastWeeksWeatherObject(jss, webClient, x);
+                               });
+            _repository.UnitOfWork.Commit();
+            return null;
+        }
+
+        private void loadWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company company)
+        {
             var url = "http://api.wunderground.com/api/8c25a57f987344bd/yesterday/q/" + company.ZipCode + ".json";
             var date = DateTime.Now.Date.AddDays(-1);
             var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId == company.EntityId).FirstOrDefault() ??
@@ -136,8 +154,13 @@ namespace KnowYourTurf.Web.Controllers
         public string maxhumidity { get; set; }
         public string maxdewpti { get; set; }
         public string maxwspdi { get; set; }
->>>>>>> f6b83210b98693108d91180726e915482d086755
 
+        public string meanpressurei { get; set; }
+    }
+
+<<<<<<< HEAD
+}
+=======
 //        public ActionResult GetWeather(ViewModel input)
 //        {
 //            var companies = _repository.FindAll<Company>();
@@ -220,7 +243,7 @@ namespace KnowYourTurf.Web.Controllers
 //                                       {
 //                                           x.Subscribers.Each(s =>
 //                                                                  {
-//                                                                      var model = emailTemplateHandler.CreateModel(x, s);
+//                                                                      var model = emailTemplateHandler.Execute(x, s);
 //                                                                      _emailService.SendSingleEmail(model);
 //                                                                  });
 //                                            if(x.Frequency == EmailFrequency.Once.ToString())
@@ -238,9 +261,10 @@ namespace KnowYourTurf.Web.Controllers
 //                                   }
 //                               });
 //
-//            return Json(notification, JsonRequestBehavior.AllowGet);
+//            return new CustomJsonResult(notification);
 //        }
     }
 
    
 }
+>>>>>>> qa

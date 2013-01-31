@@ -10,6 +10,8 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class FieldController : KYTController
     {
         private readonly IRepository _repository;
@@ -44,7 +46,7 @@ namespace KnowYourTurf.Web.Controllers
             if (!rulesResult.Success)
             {
                 var notification = new RulesNotification(rulesResult);
-                return Json(notification);
+                return new CustomJsonResult(notification);
             } 
             _repository.Delete(field);
             _repository.UnitOfWork.Commit();
@@ -53,7 +55,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult Save(FieldViewModel input)
         {
-            var category = _repository.Find<Category>(input.RootId);
+            var category = _repository.Find<Site>(input.RootId);
             Field field;
             if (input.EntityId > 0) { field = category.Fields.FirstOrDefault(x => x.EntityId == input.EntityId); }
             else
@@ -69,7 +71,7 @@ namespace KnowYourTurf.Web.Controllers
             
             var crudManager = _saveEntityService.ProcessSave(category);
             var notification = crudManager.Finish();
-            return Json(notification,"text/plain");
+            return new CustomJsonResult(notification,"text/plain");
         }
 
     }

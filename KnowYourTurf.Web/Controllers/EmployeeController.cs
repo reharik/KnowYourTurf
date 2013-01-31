@@ -21,6 +21,8 @@ using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EmployeeController : KYTController
     {
         private readonly IRepository _repository;
@@ -30,6 +32,7 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IAuthorizationRepository _authorizationRepository;
         private readonly IUpdateCollectionService _updateCollectionService;
         private readonly ISelectListItemService _selectListItemService;
+        private readonly ISecurityDataService _securityDataService;
 
         public EmployeeController(IRepository repository,
             ISaveEntityService saveEntityService,
@@ -37,7 +40,8 @@ namespace KnowYourTurf.Web.Controllers
             IFileHandlerService fileHandlerService,
             IAuthorizationRepository authorizationRepository,
             IUpdateCollectionService updateCollectionService,
-            ISelectListItemService selectListItemService)
+            ISelectListItemService selectListItemService,
+            ISecurityDataService securityDataService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
@@ -46,6 +50,7 @@ namespace KnowYourTurf.Web.Controllers
             _authorizationRepository = authorizationRepository;
             _updateCollectionService = updateCollectionService;
             _selectListItemService = selectListItemService;
+            _securityDataService = securityDataService;
         }
 
         public ActionResult AddUpdate_Template(ViewModel input)
@@ -69,7 +74,7 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.EMPLOYEE_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<EmployeeController>(x => x.Save(null));
             model.UserRoles = new TokenInputViewModel { _availableItems = availableUserRoles, selectedItems = selectedUserRoles };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
       
         public ActionResult Display(ViewModel input)
@@ -93,7 +98,7 @@ namespace KnowYourTurf.Web.Controllers
             if(!rulesResult.Success)
             {
                 var notification = new RulesNotification(rulesResult);
-                return Json(notification);
+                return new CustomJsonResult(notification);
             }
             _repository.Delete(employee);
             _repository.UnitOfWork.Commit();
@@ -116,6 +121,7 @@ namespace KnowYourTurf.Web.Controllers
             }
             employee = mapToDomain(input, employee);
             mapRolesToGroups(employee);
+            handlePassword(input, employee);
             if (input.DeleteImage)
             {
                 _fileHandlerService.DeleteFile(employee.FileUrl);
@@ -124,13 +130,13 @@ namespace KnowYourTurf.Web.Controllers
             if(_fileHandlerService.RequsetHasFile())
             {
                 employee.FileUrl =
-                    _fileHandlerService.SaveAndReturnUrlForFile(SiteConfig.Settings().CustomerPhotosEmployeePath);
+                    _fileHandlerService.SaveAndReturnUrlForFile(SiteConfig.Config.CustomerPhotosEmployeePath);
             }
 
             var crudManager = _saveEntityService.ProcessSave(employee);
 
             var notification = crudManager.Finish();
-            return Json(notification,"text/plain");
+            return new CustomJsonResult(notification, "text/plain");
         }
 
         private void mapRolesToGroups(User employee)
@@ -198,9 +204,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 employee.UserLoginInfo = new UserLoginInfo();
             }
-            employee.UserLoginInfo.Password = model.UserLoginInfoPassword;
             employee.UserLoginInfo.LoginName = model.Email;
-            employee.UserLoginInfo.Status = model.UserLoginInfoStatus;
             _updateCollectionService.Update(employee.UserRoles, model.UserRoles, employee.AddUserRole, employee.RemoveUserRole);
             if (!employee.UserRoles.Any())
             {
@@ -208,6 +212,16 @@ namespace KnowYourTurf.Web.Controllers
                 employee.AddUserRole(emp);
             }
             return employee;
+        }
+
+        private void handlePassword(UserViewModel input, User origional)
+        {
+            if (input.UserLoginInfoPassword.IsNotEmpty())
+            {
+                origional.UserLoginInfo.Salt = _securityDataService.CreateSalt();
+                origional.UserLoginInfo.Password = _securityDataService.CreatePasswordHash(input.UserLoginInfoPassword,
+                                                            origional.UserLoginInfo.Salt);
+            }
         }
 
     }

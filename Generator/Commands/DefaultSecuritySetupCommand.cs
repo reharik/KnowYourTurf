@@ -1,7 +1,4 @@
-﻿using KnowYourTurf.Core.Domain;
-using KnowYourTurf.Web.Services;
-using NHibernate;
-using StructureMap;
+﻿using KnowYourTurf.Web.Services;
 
 namespace Generator.Commands
 {
@@ -9,7 +6,7 @@ namespace Generator.Commands
     {
         private readonly ISecuritySetupService _securitySetupService;
 
-        public DefaultSecuritySetupCommand( ISecuritySetupService securitySetupService)
+        public DefaultSecuritySetupCommand(ISecuritySetupService securitySetupService)
         {
             _securitySetupService = securitySetupService;
         }
@@ -18,6 +15,10 @@ namespace Generator.Commands
 
         public void Execute(string[] args)
         {
+//            ObjectFactory.Configure(x => x.For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory()));
+//            var sessionFactory = ObjectFactory.GetInstance<ISessionFactory>();
+//            SqlServerHelper.AddRhinoSecurity(sessionFactory);
+
             _securitySetupService.ExecuteAll();
         }
     }

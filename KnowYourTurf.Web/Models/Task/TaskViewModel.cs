@@ -10,7 +10,7 @@ namespace KnowYourTurf.Web.Models
     public class TaskViewModel:ViewModel
     {
         public GroupedSelectViewModel _FieldEntityIdList { get; set; }
-        public GroupedSelectViewModel _InventoryProductProductEntityIdList { get; set; }
+        public GroupedSelectViewModel _InventoryProductEntityIdList { get; set; }
         public IEnumerable<SelectListItem> _TaskTypeEntityIdList { get; set; }
 
         public TokenInputViewModel Employees { get; set; }
@@ -23,14 +23,14 @@ namespace KnowYourTurf.Web.Models
         [ValidateNonEmpty]
         public int TaskTypeEntityId { get; set; }
         [ValidateNonEmpty]
-        public DateTime? ScheduledDate { get; set; }
+        public string ScheduledDate { get; set; }
         [ValidateNonEmpty]
-        public string ScheduledStartTimeString { get; set; }
-        public string ScheduledEndTimeString { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public string ActualTimeSpent { get; set; }
         [ValidateNonEmpty]
         public int FieldEntityId { get; set; }
-        public int InventoryProductProductEntityId { get; set; }
+        public int InventoryProductEntityId { get; set; }
         [ValidateDouble]
         public double? QuantityNeeded { get; set; }
         [ValidateDouble]
@@ -44,11 +44,11 @@ namespace KnowYourTurf.Web.Models
     public class DisplayTaskViewModel:ViewModel
     {
         public string TaskTypeName { get; set; }
-        public DateTime ScheduledDate { get; set; }
+        public string ScheduledDate { get; set; }
         public string FieldName { get; set; }
         public string InventoryProductProductName { get; set; }
-        public string ScheduledStartTimeString { get; set; }
-        public string ScheduledEndTimeString { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public string Notes { get; set; }
         public string _AddUpdateUrl { get; set; }
         public IEnumerable<string> _EmployeeNames { get; set; }
@@ -62,7 +62,7 @@ namespace KnowYourTurf.Web.Models
         public string Product { get; set; }
         public double Quantity { get; set; }
         public bool Copy { get; set; }
-        public DateTime? ScheduledDate { get; set; }
-        public DateTime? ScheduledStartTime { get; set; }
+        public string ScheduledDate { get; set; }
+        public string ScheduledStartTime { get; set; }
     }
 }

@@ -1,0 +1,12 @@
+﻿@model KnowYourTurf.Web.Models.ListTypeViewModel
+@using CC.Core.Html.CCUI
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+        <div class="row">
+            @Html.SubmissionFor(x => x.Name).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Status).Size("5").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.Description).Size("10").ToHtmlTag()
+        </div>

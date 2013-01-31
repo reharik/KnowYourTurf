@@ -9,6 +9,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EmployeeListController : AdminControllerBase
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -31,14 +33,14 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult Employees(GridItemsRequestModel input)
         {
-            var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserRoles.Any(i=>i.Name==UserType.Employee.ToString()) && x.UserLoginInfo.Status==Status.Active.ToString());
+            var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserRoles.Any(i=>i.Name==UserType.Employee.ToString()));
             var gridItemsViewModel = _employeeListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

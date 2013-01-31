@@ -13,6 +13,8 @@ using KnowYourTurf.Web.Models.Material;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class MaterialController : KYTController
     {
         private readonly IRepository _repository;
@@ -34,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = Mapper.Map<Material, MaterialViewModel>(material);
             model._Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<MaterialController>(x => x.Save(null));
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Display_Template(ViewModel input)
@@ -47,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
             var material =  _repository.Find<Material>(input.EntityId);
             var model = Mapper.Map<Material, MaterialViewModel>(material);
             model._Title = WebLocalizationKeys.MATERIAL_INFORMATION.ToString();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
       
         public ActionResult Delete(ViewModel input)
@@ -70,11 +72,11 @@ namespace KnowYourTurf.Web.Controllers
                 }
             });
             _repository.Commit();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
         private bool checkDependencies(Material item, Notification notification)
         {
-            var dependantItems = _repository.Query<Vendor>(x => x.Products.Any(i => i == item));
+            var dependantItems = _repository.Query<FieldVendor>(x => x.Products.Any(i => i == item));
             if (dependantItems.Any())
             {
                 if (notification.Message.IsEmpty())
@@ -93,7 +95,7 @@ namespace KnowYourTurf.Web.Controllers
             mapItem(material, input);
             var crudManager = _saveEntityService.ProcessSave(material);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         private void mapItem(Material material, MaterialViewModel input)

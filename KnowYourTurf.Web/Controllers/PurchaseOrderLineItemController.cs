@@ -15,6 +15,8 @@ using xVal.ServerSide;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class PurchaseOrderLineItemController : AdminControllerBase
     {
         private readonly IRepository _repository;
@@ -54,9 +56,10 @@ namespace KnowYourTurf.Web.Controllers
             var model = Mapper.Map<PurchaseOrderLineItem, PurchaseOrderLineItemViewModel>(purchaseOrderLineItem);
             model.EntityId = input.EntityId;
             model.ParentId = input.ParentId;
+            model._Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEM.ToString();
             model._UnitTypeList = _selectListItemService.CreateList<UnitType>(true);
             model._saveUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.Save(null));
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Display_Template(ViewModel input)
@@ -71,7 +74,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = Mapper.Map<PurchaseOrderLineItem, PurchaseOrderLineItemViewModel>(purchaseOrderLineItem);
             model.EntityId = input.EntityId;
             model.ParentId = input.ParentId;
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -81,7 +84,7 @@ namespace KnowYourTurf.Web.Controllers
             purchaseOrder.RemoveLineItem(purchaseOrderLineItem);
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public ActionResult Save(PurchaseOrderLineItemViewModel input)
@@ -98,7 +101,7 @@ namespace KnowYourTurf.Web.Controllers
             _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder,purchaseOrderLineItem);
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public ActionResult ReceivePurchaseOrderLineItem_Template(ViewModel input)
@@ -116,7 +119,7 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.RECEIVE_PURCHASE_ORDER_ITEM.ToString();
             model._UnitTypeList = _selectListItemService.CreateList<UnitType>(true);
             model._saveUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.SaveReceived(null));
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult SaveReceived(PurchaseOrderLineItemViewModel input)
@@ -140,7 +143,7 @@ namespace KnowYourTurf.Web.Controllers
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
             crudManager = _inventoryService.ReceivePurchaseOrderLineItem(origionalPurchaseOrderLineItem);
             var notification = crudManager.Finish();
-            return Json(notification);
+            return new CustomJsonResult(notification);
         }
     }
 }

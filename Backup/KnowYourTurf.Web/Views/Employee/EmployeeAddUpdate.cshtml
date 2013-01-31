@@ -1,0 +1,68 @@
+﻿@model KnowYourTurf.Web.Models.UserViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+        
+
+@MvcHtmlString.Create(Html.HiddenFor(x => x.DeleteImage).ToString())
+
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmployeeId).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.FirstName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.LastName).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmergencyContact).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EmergencyContactPhone).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.UserLoginInfoPassword).LabelDisplay(WebLocalizationKeys.PASSWORD).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Email).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.PhoneMobile).ToHtmlTag()
+        </div>
+    </div>
+    <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Address1).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Address2).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.City).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.State).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.ZipCode).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.UserLoginInfoStatus).LabelDisplay(WebLocalizationKeys.STATUS).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.UserRoles).ElType("MultiSelect").OperationName("/UserRoles").ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+           @Html.SubmissionFor(x => x.FileUrl).LabelDisplay(WebLocalizationKeys.EMPLOYEE_PHOTO).ToHtmlTag() 
+        </div>
+    </div>
+@EndForm()
+

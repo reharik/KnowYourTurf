@@ -9,16 +9,17 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Name);
             Map(x => x.ZipCode);
             Map(x => x.TaxRate);
-            Map(x => x.NumberOfCategories);
-            HasMany(x => x.Categories).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
+            Map(x => x.NumberOfSites);
+            HasMany(x => x.Sites).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
         }
     }
 
-    public class CategoryMap : DomainEntityMap<Category>
+    public class SiteMap : DomainEntityMap<Site>
     {
-        public CategoryMap()
+        public SiteMap()
         {
             Map(x => x.Name);
+            Map(x => x.SiteOperation);
             Map(x => x.Description);
             HasMany(x => x.Fields).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
         }

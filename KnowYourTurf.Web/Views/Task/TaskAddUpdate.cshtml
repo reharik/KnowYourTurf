@@ -6,54 +6,40 @@
 }
 
 
-    <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.TaskTypeEntityId).LabelDisplay(WebLocalizationKeys.TASK_TYPE).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.TaskTypeEntityId).Size("5").LabelDisplay(WebLocalizationKeys.TASK_TYPE).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ScheduledDate).Size("5").ElType("DateTextbox").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ScheduledDate).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.StartTime).Size("5").ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EndTime).Size("5").ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ScheduledStartTimeString).ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.ActualTimeSpent).Size("5").InputId("timeSpent").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Complete).Size("4").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ScheduledEndTimeString).ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.FieldEntityId).Size("10").LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ActualTimeSpent).InputId("timeSpent").ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.InventoryProductEntityId).Size("10").LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FieldEntityId).LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.QuantityNeeded).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.QuantityUsed).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.InventoryProductProductEntityId).LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Notes).Size("10").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.QuantityNeeded).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.QuantityUsed).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Notes).AddClassToInput("KYT_editor_label_left").ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Complete).ToHtmlTag()
-        </div>
-    </div>
-    <div class="col left clear">
-        <div class="fieldRow">
-            <div id="employeeTokenizer">
+        <div class="row blank"/>
+        <div class="row">
+            <div id="employeeTokenizer" class="span10">
                 @Html.SubmissionFor(x => x.Employees).ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
             </div>
         </div>
-        <div class="fieldRow">
-            <div id="equipmentTokenizer">
+        <div class="row">
+            <div id="equipmentTokenizer" class="span10">
                 @Html.SubmissionFor(x => x.Equipment).ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
             </div>
         </div>
-    </div>
-            
-@EndForm()
-
 

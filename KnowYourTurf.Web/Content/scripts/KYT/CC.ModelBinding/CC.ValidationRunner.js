@@ -14,23 +14,24 @@ CC.ValidationRunner = (function(){
         return elem.attr('class').split(/\s+/);
     }
 
-    runner.runElement = function(CCElement,notification){
+    runner.runElement = function(CCElement, errorSelector){
         var elementIsValid = true;
         var classes = classList(CCElement.$input);
         var val = CCElement.getValue();
-        if((!val || val=="") && !_.any(classes,function(item){return item == "required"})){
+        if((!val || val=="") && !_.any(classes,function(item){return item == "required" || item == "fileRequired"})){
             CCElement.isValid = true;
             return;
         }
         $.each(classes, function(idx,rule){
             if(rule && validator[rule]){
                 var isValid = validator[rule](CCElement);
-                var possibleErrorMsg = new CC.NotificationMessage(CCElement.cid, CCElement.viewId, CCElement.friendlyName+" "+CC.errorMessages[rule],"error");
                 if(!isValid){
                     elementIsValid = false;
-                    notification.add(possibleErrorMsg);
+                    if(!$.noty.getByViewIdAndElementId(CCElement.viewId,CCElement.cid)){
+                        $(errorSelector).noty({type: "error", text: CCElement.friendlyName+" "+CC.errorMessages[rule], elementId: CCElement.cid, viewId:CCElement.viewId});
+                    }
                 }else{
-                    notification.remove(possibleErrorMsg);
+                    $.noty.closeByElementId(CCElement.cid);
                 }
             }
         });
@@ -40,11 +41,13 @@ CC.ValidationRunner = (function(){
             CCElement.isValid = elementIsValid;
         }
     };
-    runner.runViewModel = function(viewModel){
+    runner.runViewModel = function(cid, viewModel, errorSelector){
         var isValid = true;
         var collection = viewModel.collection;
+//        $.noty.closeByViewId(cid);
         for (var el in collection){
             if(collection.hasOwnProperty(el)){
+                collection[el].errorSelector = errorSelector?errorSelector:"#messageContainer";
                 collection[el].validate();
                 if(!collection[el].isValid) {
                     isValid = false;

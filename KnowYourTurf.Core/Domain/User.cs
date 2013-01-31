@@ -12,6 +12,8 @@ using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Core.Domain
 {
+    using CC.Core.Html.Grid;
+
     public class User : DomainEntity,IUser, IPersistableObject
     {
         [ValidateNonEmpty]
@@ -40,6 +42,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string EmergencyContact { get; set; }
         public virtual string EmergencyContactPhone { get; set; }
         public virtual string EmployeeId { get; set; }
+        public virtual bool SystemSupport { get; set; }
 
         public virtual string FullNameLNF
         {
@@ -52,12 +55,12 @@ namespace KnowYourTurf.Core.Domain
 
         public virtual bool IsEmployeeAvailableForTask(Task task)
         {
-            var startTime = DateTimeUtilities.StandardToMilitary(task.ScheduledStartTime.ToString());
-            var endTime = DateTimeUtilities.StandardToMilitary(task.ScheduledEndTime.ToString());
+            var startTime = DateTimeUtilities.StandardToMilitary(task.StartTime.ToString());
+            var endTime = DateTimeUtilities.StandardToMilitary(task.EndTime.ToString());
             var conflictingTask = Tasks.FirstOrDefault(x => x != task
                                                                  && (x.ScheduledDate == task.ScheduledDate
-                                                                      && DateTimeUtilities.StandardToMilitary(x.ScheduledStartTime.ToString()) < endTime
-                                                                      && DateTimeUtilities.StandardToMilitary(x.ScheduledEndTime.ToString()) > startTime));
+                                                                      && DateTimeUtilities.StandardToMilitary(x.StartTime.ToString()) < endTime
+                                                                      && DateTimeUtilities.StandardToMilitary(x.EndTime.ToString()) > startTime));
             return conflictingTask == null;
         }
 
@@ -102,12 +105,12 @@ namespace KnowYourTurf.Core.Domain
 
     public class UserLoginInfo : DomainEntity
     {
+        public virtual User User { get; set; }
         public virtual string LoginName { get; set; }
         [ValidateNonEmpty]
         public virtual string Password { get; set; }
-        [ValidateNonEmpty, ValueOf(typeof(Status))]
-        public virtual string Status { get; set; }
-        
+        [ValidateNonEmpty]
+        public virtual string Salt { get; set; }
         public virtual Guid ByPassToken { get; set; }
 
     }

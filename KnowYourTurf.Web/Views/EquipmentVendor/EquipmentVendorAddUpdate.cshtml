@@ -1,0 +1,33 @@
+﻿@model KnowYourTurf.Web.Models.EquipmentVendor.EquipmentVendorViewModel
+@using CC.Core.Html.CCUI
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+
+        <div class="row">
+            @Html.SubmissionFor(x => x.Company).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Phone).Size("5").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.Fax).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Website).Size("5").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.Address1).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address2).Size("5").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.City).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.State).Size("2").ToHtmlTag()
+            @Html.SubmissionFor(x => x.ZipCode).Size("3").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.Status).Size("5").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.Notes).Size("10").ToHtmlTag()
+        </div>
+      
+            
+            
+

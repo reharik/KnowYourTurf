@@ -8,6 +8,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class FieldListController : KYTController
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -31,15 +33,15 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _fieldListGrid.GetGridDefinition(url, input.User),
                 _Title = WebLocalizationKeys.FIELDS.ToString()
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult Fields(GridItemsRequestModel input)
         {
-            var category = _repository.Find<Category>(input.RootId);
+            var category = _repository.Find<Site>(input.RootId);
             var items = _dynamicExpressionQuery.PerformQuery(category.Fields, input.filters);
             var gridItemsViewModel = _fieldListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

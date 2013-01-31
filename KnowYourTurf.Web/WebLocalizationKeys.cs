@@ -32,6 +32,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken ADMINS = new WebLocalizationKeys("ADMINS", "Admins");
         public static readonly StringToken FACILITIES = new WebLocalizationKeys("FACILITIES", "Facilities");
         public static readonly StringToken VENDORS = new WebLocalizationKeys("VENDORS", "Vendors");
+        public static readonly StringToken EQUIPMENT_VENDORS = new WebLocalizationKeys("EQUIPMENT_VENDORS", "Equipment Vendors");
         public static readonly StringToken VENDOR = new WebLocalizationKeys("VENDOR", "Vendor");
         public static readonly StringToken PRODUCTS = new WebLocalizationKeys("PRODUCTS", "Products");
         public static readonly StringToken PRODUCT = new WebLocalizationKeys("PRODUCT", "Product");
@@ -41,6 +42,10 @@ namespace KnowYourTurf.Web
         public static readonly StringToken CHEMICALS = new WebLocalizationKeys("CHEMICALS", "Chemicals");
         public static readonly StringToken FIELDS = new WebLocalizationKeys("FIELDS", "Fields");
         public static readonly StringToken EQUIPMENT = new WebLocalizationKeys("EQUIPMENT", "Equipment");
+        public static readonly StringToken EQUIPMENT_TASK_LISTS = new WebLocalizationKeys("EQUIPMENT_TASK_LISTS", "Equipment Tasks Lists");
+        public static readonly StringToken EQUIPMENT_TASKS = new WebLocalizationKeys("EQUIPMENT_TASKS", "Equipment Tasks");
+        public static readonly StringToken COMPLETED_EQUIPMENT_TASKS = new WebLocalizationKeys("COMPLETED_EQUIPMENT_TASKS", "Completed Equipment Tasks");
+        public static readonly StringToken EQUIPMENT_TASK_CALENDAR = new WebLocalizationKeys("EQUIPMENT_TASK_CALENDAR", "Equipment Task Calendar");
         public static readonly StringToken TASKS = new WebLocalizationKeys("TASKS", "Tasks");
         public static readonly StringToken TASK_LIST = new WebLocalizationKeys("TASK_LIST", "Task List");
         public static readonly StringToken TASK_CALENDAR = new WebLocalizationKeys("TASK_CALENDAR", "Task Calendar");
@@ -82,6 +87,22 @@ namespace KnowYourTurf.Web
 
         public static readonly StringToken EQUIPMENT_INFORMATION = new WebLocalizationKeys("EQUIPMENT_INFORMATION", "Equipment Information");
         public static readonly StringToken NEW_EQUIPMENT = new WebLocalizationKeys("NEW_EQUIPMENT", "Add New Equipment");
+
+        public static readonly StringToken EQUIPMENT_TASK_TYPE_INFORMATION = new WebLocalizationKeys("EQUIPMENT_TASK_TYPE_INFORMATION", "Equipment Task Type Information");
+        public static readonly StringToken NEW_EQUIPMENT_TASK_TYPE = new WebLocalizationKeys("NEW_EQUIPMENT_TASK_TYPE", "Add New Equipment Task Type");
+        public static readonly StringToken EQUIPMENT_TASK_TYPES = new WebLocalizationKeys("EQUIPMENT_TASK_TYPES", "Equipment Task Types");
+        public static readonly StringToken EQUIPMENT_TASK_TYPE = new WebLocalizationKeys("EVENT_TYPE", "Equipment Task Type");
+
+        public static readonly StringToken EQUIPMENT_TYPE_INFORMATION = new WebLocalizationKeys("EQUIPMENT_TYPE_INFORMATION", "Equipment Type Information");
+        public static readonly StringToken NEW_EQUIPMENT_TYPE = new WebLocalizationKeys("NEW_EQUIPMENT_TYPE", "Add New Equipment Type");
+        public static readonly StringToken EQUIPMENT_TYPES = new WebLocalizationKeys("EQUIPMENT_TYPES", "Equipment Types");
+        public static readonly StringToken EQUIPMENT_TYPE = new WebLocalizationKeys("EQUIPMENT_TYPE", "Equipment Type");
+
+        public static readonly StringToken PART_INFORMATION = new WebLocalizationKeys("PART_INFORMATION", "Part Information");
+        public static readonly StringToken NEW_PART = new WebLocalizationKeys("NEW_PART", "Add New Part");
+        public static readonly StringToken PARTS = new WebLocalizationKeys("PARTS", "Parts");
+        public static readonly StringToken PART = new WebLocalizationKeys("PART", "Part");
+
 
         public static readonly StringToken TASK_INFORMATION = new WebLocalizationKeys("TASK_INFORMATION", "Task Information");
         public static readonly StringToken NEW_TASK = new WebLocalizationKeys("NEW_TASK", "Add New Task");
@@ -136,6 +157,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken PO_NUMBER = new WebLocalizationKeys("PO_NUMBER", "PO Number");
         public static readonly StringToken VENDOR_PRODUCTS = new WebLocalizationKeys("VENDOR_PRODUCTS", "Vendor Products");
         public static readonly StringToken PURCHASE_ORDER_LINE_ITEMS = new WebLocalizationKeys("PURCHASE_ORDER_LINE_ITEMS", "Purchase Order Line Items");
+        public static readonly StringToken PURCHASE_ORDER_LINE_ITEM = new WebLocalizationKeys("PURCHASE_ORDER_LINE_ITEM", "Purchase Order Line Item");
         public static readonly StringToken LINE_ITEMS = new WebLocalizationKeys("LINE_ITEMS", "Line Items");
         public static readonly StringToken COPY_TASK = new WebLocalizationKeys("COPY_TASK", "Duplicate Task");
         public static readonly StringToken EDIT_TASK = new WebLocalizationKeys("EDIT_TASK", "Edit Task");
@@ -166,6 +188,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken DOCUMENT_CATEGORY = new WebLocalizationKeys("DOCUMENT_CATEGORY", "Document Category");
         public static readonly StringToken DOCUMENT_CATEGORIES = new WebLocalizationKeys("DOCUMENT_CATEGORIES", "Document Categories");
         public static readonly StringToken DOCUMENTS = new WebLocalizationKeys("DOCUMENTS", "Documents");
+        public static readonly StringToken DOCUMENT = new WebLocalizationKeys("DOCUMENT", "Document");
         public static readonly StringToken NEW_DOCUMENT = new WebLocalizationKeys("NEW_DOCUMENT", "Add New Document");
         public static readonly StringToken DOCUMENT_INFORMATION = new WebLocalizationKeys("DOCUMENT_INFORMATION", "Document Information");
 
@@ -174,6 +197,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken PHOTO_CATEGORY = new WebLocalizationKeys("PHOTO_CATEGORY", "Photo Category");
         public static readonly StringToken PHOTO_CATEGORIES = new WebLocalizationKeys("PHOTO_CATEGORIES", "Photo Categories");
         public static readonly StringToken PHOTOS = new WebLocalizationKeys("PHOTOS", "Photos");
+        public static readonly StringToken PHOTO = new WebLocalizationKeys("PHOTO", "Photo");
         public static readonly StringToken NEW_PHOTO = new WebLocalizationKeys("NEW_PHOTO", "Add New Photo");
         public static readonly StringToken PHOTO_INFORMATION = new WebLocalizationKeys("PHOTO_INFORMATION", "Photo Information");
         public static readonly StringToken ADD_ITEM_TO_PO = new WebLocalizationKeys("ADD_ITEM_TO_PO", "Add item to the purchase order");
@@ -199,14 +223,18 @@ namespace KnowYourTurf.Web
         public static readonly StringToken DATE_ADDED = new WebLocalizationKeys("DATE_ADDED", "Date Added {0}");
         public static readonly StringToken PO_Number = new WebLocalizationKeys("PO_Number", "PO Number");
         public static readonly StringToken COMMIT_PURCHASE_ORDER = new WebLocalizationKeys("COMMIT_PURCHASE_ORDER", "Commit Purchase Order");
-        public static readonly StringToken RECEIVE_PURCHASE_ORDER_ITEM = new WebLocalizationKeys("RECEIVE_PURCHASE_ORDER_ITEM", "Recieve Purchase Order Item");
+        public static readonly StringToken RECEIVE_PURCHASE_ORDER_ITEM = new WebLocalizationKeys("RECEIVE_PURCHASE_ORDER_ITEM", "Receive Purchase Order Item");
 
         public static readonly StringToken COULD_NOT_DELETE_FOR_TASK = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_TASK", "Could not delete one or more item because it is being used in one or more Task");
         public static readonly StringToken COULD_NOT_DELETE_FOR_VENDOR = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_VENDOR", "Could not delete one or more item because it is being used by one or more Vendor");
         public static readonly StringToken COULD_NOT_DELETE_FOR_PURCHASEORDER = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_PURCHASEORDER", "Could not delete one or more item because it is being used in one or more Purchase Order");
+        public static readonly StringToken COULD_NOT_DELETE_FOR_EQUIPMENT = new WebLocalizationKeys("COULD_NOT_DELETE_FOR_EQUIPMENT", "Could not delete one or more item because it is being used by one or more piece of Equipment");
         public static readonly StringToken COULD_NOT_DELETE_EVENTTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EVENTTYPE", "Could not delete one or more item because it is being used in one or more Event");
         public static readonly StringToken COULD_NOT_DELETE_PHOTOCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_PHOTOCATEGORY", "Could not delete one or more item because it is being used in one or more Photo");
         public static readonly StringToken COULD_NOT_DELETE_DOCUMENTCATEGORY = new WebLocalizationKeys("COULD_NOT_DELETE_DOCUMENTCATEGORY", "Could not delete one or more item because it is being used in one or more Document");
+        public static readonly StringToken COULD_NOT_DELETE_EQUIPMENTTASKTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EQUIPMENTTASKTYPE", "Could not delete one or more item because it is being used in one or more Equipment Task");
+        public static readonly StringToken COULD_NOT_DELETE_EQUIPMENTTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EQUIPMENTTYPE", "Could not delete one or more item because it is being used in one or more piece of Equipment");
+        public static readonly StringToken COULD_NOT_DELETE_PART = new WebLocalizationKeys("COULD_NOT_DELETE_PART", "Could not delete one or more item because it is being used in one or more Equipment Task");
 
         public static readonly StringToken CURRENT = new WebLocalizationKeys("CURRENT", "Current");
         public static readonly StringToken COMPLETED = new WebLocalizationKeys("COMPLETED", "Completed");
@@ -226,6 +254,12 @@ namespace KnowYourTurf.Web
         public static readonly StringToken SCHEDULED_END_TIME = new WebLocalizationKeys("SCHEDULED_END_TIME", "Scheduled End Time");
 
         public static readonly StringToken TOTAL_RECEIVED = new WebLocalizationKeys("TOTAL_RECEIVED", "Total Received");
+
+        public static readonly StringToken REPORTS = new WebLocalizationKeys("REPORTS", "Reports");
+        public static readonly StringToken VIEW_REPORT = new WebLocalizationKeys("VIEW_REPORT", "View Report");
+        public static readonly StringToken TASKS_BY_FIELD = new WebLocalizationKeys("TASKS_BY_FIELD", "Tasks By Field");
+        public static readonly StringToken REQUIRED = new WebLocalizationKeys("REQUIRED", "Required");
+        public static readonly StringToken ABBR = new WebLocalizationKeys("ABBR", "Abbr.");
 
 
     }

@@ -1,0 +1,41 @@
+﻿@model KnowYourTurf.Web.Models.EquipmentTaskViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+@{
+    Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
+}
+
+
+        <div class="row">
+            @Html.SubmissionFor(x => x.TaskTypeEntityId).Size("5").LabelDisplay(WebLocalizationKeys.TASK_TYPE).ToHtmlTag()
+            @Html.SubmissionFor(x => x.ScheduledDate).Size("5").ElType("DateTextbox").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.StartTime).Size("5").ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
+            @Html.SubmissionFor(x => x.EndTime).Size("5").ElType("TimeTextbox").LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.ActualTimeSpent).Size("5").InputId("timeSpent").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Complete).Size("5").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.EquipmentEntityId).Size("10").LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.Notes).Size("10").AddClassToInput("KYT_editor_label_left").ToHtmlTag()
+        </div>
+        <div class="row blank" />
+        <div class="row">
+            <div id="employeeTokenizer" class="span10">
+                @Html.SubmissionFor(x => x.Employees).ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()
+            </div>
+        </div>
+        <div class="row">
+            <div id="equipmentTokenizer" class="span10">
+                @Html.SubmissionFor(x => x.Parts).ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.PARTS).ToHtmlTag()
+            </div>
+        </div>
+    
+            
+
+

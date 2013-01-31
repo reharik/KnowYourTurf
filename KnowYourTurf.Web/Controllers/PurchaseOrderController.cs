@@ -12,6 +12,8 @@ using System.Linq;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class PurchaseOrderController : AdminControllerBase
     {
         private readonly IRepository _repository;
@@ -45,7 +47,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult AddUpdate(ViewModel input)
         {
             var purchaseOrder = input.EntityId > 0 ? _repository.Find<PurchaseOrder>(input.EntityId) : new PurchaseOrder();
-            var vendors = _selectListItemService.CreateList<Vendor>(x=>x.Company,x=>x.EntityId,true);
+            var vendors = _selectListItemService.CreateList<FieldVendor>(x=>x.Company,x=>x.EntityId,true);
 
             POListViewModel model = Mapper.Map<PurchaseOrder, POListViewModel>(purchaseOrder);
             model._VendorEntityIdList = vendors;
@@ -55,8 +57,9 @@ namespace KnowYourTurf.Web.Controllers
             model._addToOrderUrl = UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddItemToPO(null));
             model._removePOLItemUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.Delete(null));
             model._editPOLItemUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemController>(x => x.AddUpdate(null));
+            model._editPOLItemTitle = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEM.ToString();
             model._Title = WebLocalizationKeys.PURCHASE_ORDER_INFORMATION.ToString();
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult VendorProductList(ViewModel input)
@@ -65,18 +68,18 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ListViewModel()
             {
                 gridDef = _purchaseOrderSelectorGrid.GetGridDefinition(url, input.User),
-                _Title = WebLocalizationKeys.PRODUCTS.ToString(),
+//                _Title = WebLocalizationKeys.PRODUCTS.ToString(),
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         
         public JsonResult Products(PoSelectorGridItemsRequestModel input)
         {
-            var vendor = _repository.Find<Vendor>(input.EntityId);
+            var vendor = _repository.Find<FieldVendor>(input.EntityId);
             var items = _dynamicExpressionQuery.PerformQuery(vendor.Products, input.filters);
 
             var model = _purchaseOrderSelectorGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -89,18 +92,19 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
-            input.EntityIds.Each(x =>
-            {
-                var item = _repository.Find<PurchaseOrder>(x);
-                _repository.HardDelete(item);
-            });
+            input.EntityIds.Each(
+                x =>
+                    {
+                        var item = _repository.Find<PurchaseOrder>(x);
+                        _repository.HardDelete(item);
+                    });
             _repository.Commit();
-            return Json(new Notification { Success = true }, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(new Notification { Success = true });
         }
 
         public JsonResult AddItemToPO(PurchaseOrderLineItemViewModel input)
         {
-            var vendor = _repository.Find<Vendor>(input.RootId);
+            var vendor = _repository.Find<FieldVendor>(input.RootId);
             PurchaseOrder purchaseOrder;
             if (input.ParentId > 0)
             {
@@ -119,17 +123,17 @@ namespace KnowYourTurf.Web.Controllers
             var crudManager = _saveEntityService.ProcessSave(vendor);
             var notification = crudManager.Finish();
             notification.EntityId = purchaseOrder.EntityId;
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         /// ?????? ///
 
 //        public ActionResult AddItem(ViewModel input)
 //        {
-//            var vendor = _repository.Find<Vendor>(input.RootId);
+//            var FieldVendor = _repository.Find<FieldVendor>(input.RootId);
 //            
 //            PurchaseOrder purchaseOrder;
-//            purchaseOrder = input.ParentId > 0 ? vendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId) : new PurchaseOrder { Vendor = vendor };
+//            purchaseOrder = input.ParentId > 0 ? FieldVendor.GetPurchaseOrderInProcess().FirstOrDefault(x => x.EntityId == input.ParentId) : new PurchaseOrder { FieldVendor = FieldVendor };
 //            var baseProduct = _repository.Find<BaseProduct>(input.EntityId);
 //            var purchaseOrderLineItem = new PurchaseOrderLineItem
 //                                            {
@@ -156,18 +160,18 @@ namespace KnowYourTurf.Web.Controllers
 //            purchaseOrderLineItem.Product = baseProduct;
 //            mapItem(purchaseOrderLineItem, input.Item);
 //            _purchaseOrderLineItemService.AddNewItem(ref purchaseOrder, purchaseOrderLineItem);
-//            vendor.AddPurchaseOrder(purchaseOrder);
+//            FieldVendor.AddPurchaseOrder(purchaseOrder);
 //            
-//            var crudManager = _saveEntityService.ProcessSave(vendor);
+//            var crudManager = _saveEntityService.ProcessSave(FieldVendor);
 //            var notification = crudManager.Finish();
 //            notification.Data = new {poId = purchaseOrder.EntityId};
 //            if(newPo)
 //            {
 //                notification.Redirect = true;
 //                notification.RedirectUrl=UrlContext.GetUrlForAction<PurchaseOrderController>(x => x.AddUpdate(null)) + "/" +
-//                        vendor.EntityId+"?ParentId="+ purchaseOrder.EntityId;
+//                        FieldVendor.EntityId+"?ParentId="+ purchaseOrder.EntityId;
 //            }
-//            return Json(notification, JsonRequestBehavior.AllowGet);
+//            return new CustomJsonResult(notification);
 //        }
 
         private void mapItem(PurchaseOrderLineItem item, PurchaseOrderLineItemViewModel input)

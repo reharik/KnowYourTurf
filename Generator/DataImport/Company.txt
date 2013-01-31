@@ -1,0 +1,7 @@
+﻿{
+	Name:"KYT",
+	TaxRate:"8.25"
+	ZipCode:"78702"
+	NumberOfSites:1
+
+}

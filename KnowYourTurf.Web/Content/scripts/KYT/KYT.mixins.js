@@ -67,14 +67,31 @@ KYT.mixins.modelAndElementsMixin = {
     }
 };
 
+KYT.mixins.reportMixin = {
+    events:{
+        'click #viewReport' : 'viewReport'
+    },
+    successSelector:"#messageContainer",
+    errorSelector:"#messageContainer",
+    viewReport:function(){
+        var isValid = CC.ValidationRunner.runViewModel(this.cid, this.elementsViewmodel,this.errorSelector);
+        if(!isValid){return;}
+        var url = this.createUrl();
+        $("#reportBody").attr("src",url);
+    },
+    createUrl:function(data){
+    }
+}
+
 KYT.mixins.formMixin = {
     events:{
         'click #save' : 'saveItem',
         'click #cancel' : 'cancel'
     },
-
+    successSelector:"#messageContainer",
+    errorSelector:"#messageContainer",
     saveItem:function(){
-        var isValid = CC.ValidationRunner.runViewModel(this.elementsViewmodel);
+        var isValid = CC.ValidationRunner.runViewModel(this.cid, this.elementsViewmodel, this.errorSelector);
         if(!isValid){return;}
         var data;
         var fileInputs = $('input:file', this.$el);
@@ -100,12 +117,27 @@ KYT.mixins.formMixin = {
     },
     successHandler:function(_result){
         var result = typeof _result =="string" ? JSON.parse(_result) : _result;
-        if(!CC.notification.handleResult(result,this.cid)){
-            return;
+        if(!result.Success){
+            if(result.Message && !$.noty.getByViewIdAndElementId(this.cid)){
+                $(this.errorSelector).noty({type: "error", text: result.Message, viewId:this.cid});
+            }
+            if(result.Errors && !$.noty.getByViewIdAndElementId(this.cid)){
+                _.each(result.Errors,function(item){
+                    $(this.errorSelector).noty({type: "error", text:item.ErrorMessage, viewId:this.cid});
+                })
+            }
+        }else{
+            if(result.Message){
+                var note = $(this.successSelector).noty({type: "success", text:result.Message, viewId:this.cid});
+                note.setAnimationSpeed(1000);
+                note.setTimeout(3000);
+                $.noty.closeAllErrorsByViewId(this.cid);
+            }
+            KYT.vent.trigger("form:"+this.id+":success",result);
+            if(!this.options.noBubbleUp){KYT.WorkflowManager.returnParentView(result,true);}
         }
-        KYT.vent.trigger("form:"+this.id+":success",result);
-        if(!this.options.noBubbleUp){KYT.WorkflowManager.returnParentView(result,true);}
     }
+
 };
 
 KYT.mixins.displayMixin = {
@@ -126,6 +158,7 @@ KYT.mixins.ajaxDisplayMixin = {
     },
     renderCallback:function(){
         this.bindModelAndElements();
+        $("div.form-scroll-inner").height( window.innerHeight - 220);
         this.viewLoaded();
         KYT.vent.trigger("display:"+this.id+":pageLoaded",this.options);
     }
@@ -138,6 +171,7 @@ KYT.mixins.ajaxFormMixin = {
     },
     renderCallback:function(){
         this.bindModelAndElements();
+        $("div.form-scroll-inner").height( window.innerHeight - 220);
         this.viewLoaded();
         KYT.vent.trigger("form:"+this.id+":pageLoaded",this.options);
     }
@@ -154,7 +188,6 @@ KYT.mixins.ajaxGridMixin = {
         this.setupGrid();
         this.viewLoaded();
         KYT.vent.trigger("grid:"+this.id+":pageLoaded",this.options);
-
     }
 };
 

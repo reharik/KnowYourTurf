@@ -29,7 +29,7 @@ namespace KnowYourTurf.Core.Domain
         [TextArea]
         public virtual string Notes { get; set; }
         [ValidateNonEmpty]
-        public virtual Vendor Vendor { get; set; }
+        public virtual VendorBase Vendor { get; set; }
     }
 }
 

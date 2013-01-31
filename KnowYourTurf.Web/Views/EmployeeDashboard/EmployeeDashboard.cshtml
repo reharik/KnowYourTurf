@@ -9,81 +9,79 @@
 @section HeaderJavascript{
 }
 
-    <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmployeeId).ToHtmlTag()
+
+<div class="row">
+@*-----------Left Column-------------*@
+    <div class="span10">
+        <div class="row">
+            @Html.SubmissionFor(x => x.EmployeeId).Size("8").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FirstName).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.FirstName).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.LastName).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.LastName).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.EmergencyContact).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.EmergencyContactPhone).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmergencyContact).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.UserLoginInfoPassword).Size("5").LabelDisplay(WebLocalizationKeys.PASSWORD).ToHtmlTag()
+            @Html.SubmissionFor(x => x.PasswordConfirmation).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmergencyContactPhone).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Email).Size("8").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.UserLoginInfoPassword).LabelDisplay(WebLocalizationKeys.PASSWORD).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Email).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.PhoneMobile).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.PhoneMobile).Size("5").ToHtmlTag()
         </div>
     </div>
-    <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.FileUrl).LabelDisplay(WebLocalizationKeys.EMPLOYEE_PHOTO).ToHtmlTag() 
+
+    <div class="span1"></div>
+@*-----------Right Column-------------*@
+    <div class="span10">
+        <div class="row">
+            @Html.SubmissionFor(x => x.FileUrl).Size("8").LabelDisplay(WebLocalizationKeys.EMPLOYEE_PHOTO).ToHtmlTag() 
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Address1).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Address1).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address2).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Address2).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.City).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.State).Size("3").ToHtmlTag()
+            @Html.SubmissionFor(x => x.ZipCode).Size("2").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.City).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.UserLoginInfoStatus).Size("5").LabelDisplay(WebLocalizationKeys.STATUS).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UserRoles).Size("5").ElType("MultiSelect").OperationName("/UserRoles").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.State).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Notes).Size("8").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.ZipCode).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.UserLoginInfoStatus).LabelDisplay(WebLocalizationKeys.STATUS).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Notes).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.UserRoles).ElType("MultiSelect").OperationName("/UserRoles").ToHtmlTag()
-        </div>
-        
     </div>
-
-
-<div class="col full clear"></div>
-<div class="col left">
+</div>
+<div class="row blank"></div>
+<div class="row">
     @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
     @StandardButtonFor("cancel", WebLocalizationKeys.CANCEL).AddClass("cancel").ToHtmlTag()
 </div>
-<div class="col full clear"><hr/></div>
-
-    <div class="col left clear">
-        <div class="fieldRow dashboardGrid">
-            <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
+<div class="row">
+    <div class="span21"><hr/></div>
+</div>
+<div class="row">
+@*-----------Left Column-------------*@
+    <div class="span10">
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
             <div id="pendingTaskGridContainer" ></div>
         </div>
     </div>
-
-    <div class="col right">
-        <div class="fieldRow dashboardGrid">
-            <div class="gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
+    <div class="span1"></div>
+@*-----------Right Column-------------*@
+    <div class="span10">
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
             <div id="completedTaskGridContainer" class="grid_4 KYT_AddNew_space"></div>
         </div>
     </div>
+</div>

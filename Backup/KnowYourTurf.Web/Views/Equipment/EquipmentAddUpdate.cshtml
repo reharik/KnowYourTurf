@@ -1,0 +1,29 @@
+﻿@model EquipmentViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+@using KnowYourTurf.Web.Controllers
+@{
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+
+   <div class="col left">
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Name).ToHtmlTag()
+        </div>
+        <div class="fieldRow">
+            @Html.SubmissionFor(x => x.Description).ToHtmlTag()
+        </div>
+       <div class="fieldRow">
+           @Html.SubmissionFor(x => x.EquipmentTypeEntityId).LabelDisplay(WebLocalizationKeys.EQUIPMENT_TYPE).ToHtmlTag()
+       </div>
+       <div class="fieldRow">
+            @Html.SubmissionFor(x => x.EquipmentVendorEntityId).LabelDisplay(WebLocalizationKeys.VENDOR).ToHtmlTag()
+        </div>
+       <div class="fieldRow">
+           @Html.SubmissionFor(x => x.TotalHours).ToHtmlTag()
+       </div>
+        <div class="fieldRow">
+           @Html.SubmissionFor(x => x.Threshold).ToHtmlTag()
+       </div>
+   </div>
+

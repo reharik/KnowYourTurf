@@ -18,7 +18,8 @@ CC.errorMessages = {
     "number":"field should be a number",
     "digits":"field should be didgets",
     "creditcard":"field should be a valid creditcard",
-    "equalTo":"field should be equal to"
+    "equalTo":"field should be equal to",
+    "fileRequired":"You must select a file"
 };
 
 CC.validationRules = (function(){
@@ -114,6 +115,10 @@ CC.validationRules = (function(){
         // http://docs.jquery.com/Plugins/Validation/Methods/equalTo
         equalTo: function(CCElement, CCElementTarget) {
             return CCElement.getValue() == CCElementTarget.getValue();
+        },
+
+        fileRequired: function(CCElement) {
+            return CCElement.$input.val().length>0;
         }
 
     };

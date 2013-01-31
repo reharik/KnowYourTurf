@@ -14,7 +14,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Comment).Length(1000);
             Map(x => x.Name).Length(255).Unique().Not.Nullable().Not.Update();
             References(x => x.Parent).Column("ParentId");
-            HasMany(x => x.Children).AsSet().KeyColumn("Parent").LazyLoad().Inverse().Cache.ReadWrite().Region("cc-security");
+            HasMany(x => x.Children).AsSet().KeyColumn("ParentId").LazyLoad().Inverse().Cache.ReadWrite().Region("cc-security");
         }
 
     }

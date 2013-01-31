@@ -9,6 +9,8 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Menus
 {
+    using KnowYourTurf.Web.Areas.Reports.Controllers;
+
     public class MainMenu : IMenuConfig
     {
         private readonly IKYTMenuBuilder _builder;
@@ -35,8 +37,10 @@ namespace KnowYourTurf.Web.Menus
         {
             return _builder
                 .CreateTagNode<EmployeeDashboardController>(WebLocalizationKeys.HOME)
-                .CategoryGroupForItteration()
+                .SiteGroupForIteration()
                 .CreateTagNode<FieldListController>(WebLocalizationKeys.FIELDS)
+//                .CreateTagNode<CalculatorListController>(WebLocalizationKeys.CALCULATORS)
+
                 .CreateNode(WebLocalizationKeys.TASKS)
                     .HasChildren()
                         .CreateNode(WebLocalizationKeys.TASK_LIST)
@@ -49,7 +53,16 @@ namespace KnowYourTurf.Web.Menus
                 .CreateTagNode<EventCalendarController>(WebLocalizationKeys.EVENTS)
                 .EndCategoryGroup()
                 .CreateTagNode<EquipmentListController>(WebLocalizationKeys.EQUIPMENT)
-                .CreateTagNode<CalculatorListController>(WebLocalizationKeys.CALCULATORS)
+                .CreateNode(WebLocalizationKeys.EQUIPMENT_TASKS)
+                    .HasChildren()
+                        .CreateNode(WebLocalizationKeys.EQUIPMENT_TASK_LISTS)
+                            .HasChildren()
+                                .CreateTagNode<EquipmentTaskListController>(WebLocalizationKeys.EQUIPMENT_TASKS)
+                                .CreateTagNode<EquipmentTaskListController>(WebLocalizationKeys.COMPLETED_EQUIPMENT_TASKS).Route("completedequipmenttasks")
+                            .EndChildren()
+                    .CreateTagNode<EquipmentTaskCalendarController>(WebLocalizationKeys.EQUIPMENT_TASK_CALENDAR)
+                    .EndChildren()
+
                 .CreateTagNode<WeatherListController>(WebLocalizationKeys.WEATHER)
                 .CreateTagNode<ForumController>(WebLocalizationKeys.FORUM)
                  .CreateNode(WebLocalizationKeys.ADMIN_TOOLS, "tools")
@@ -69,6 +82,7 @@ namespace KnowYourTurf.Web.Menus
                         .CreateTagNode<PhotoListController>(WebLocalizationKeys.PHOTOS)
                 //.CreateNode<EmailJobListController>(c => c.ItemList(), WebLocalizationKeys.EMAIL_JOBS)
                 //.CreateNode<EmailTemplateListController>(c => c.EmailTemplateList(null), WebLocalizationKeys.EMAIL_TEMPLATES)
+                        .CreateTagNode<EquipmentVendorListController>(WebLocalizationKeys.EQUIPMENT_VENDORS)
                         .CreateTagNode<VendorListController>(WebLocalizationKeys.VENDORS)
                         .CreateNode(WebLocalizationKeys.INVENTORY)
                         .HasChildren()
@@ -81,6 +95,11 @@ namespace KnowYourTurf.Web.Menus
                             .CreateTagNode<PurchaseOrderListController>(WebLocalizationKeys.CURRENT)
                             .CreateTagNode<CompletedPurchaseOrderListController>(WebLocalizationKeys.COMPLETED)
                         .EndChildren()
+                        .CreateNode(WebLocalizationKeys.REPORTS)
+                        .HasChildren()
+                            .CreateTagNode<TasksByFieldController>(WebLocalizationKeys.TASKS_BY_FIELD)
+                        .EndChildren()
+
                     .EndChildren()
                 .MenuTree(user);
         }

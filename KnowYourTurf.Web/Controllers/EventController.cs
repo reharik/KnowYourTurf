@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
@@ -13,6 +14,8 @@ using NHibernate.Linq;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EventController : KYTController
     {
         private readonly IRepository _repository;
@@ -35,11 +38,11 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate(EventViewModel input)
         {
-            // need category to get fields for dropdown;
-            var category = _repository.Find<Category>(input.RootId);
+            // need Site to get fields for dropdown;
+            var category = _repository.Find<Site>(input.RootId);
             var _event = input.EntityId > 0 ? category.GetAllEvents().FirstOrDefault(x=>x.EntityId == input.EntityId) : new Event();
-            _event.ScheduledDate = input.ScheduledDate.HasValue ? input.ScheduledDate.Value : _event.ScheduledDate;
-            _event.StartTime = input.StartTime.HasValue ? input.StartTime.Value : _event.StartTime;
+            _event.ScheduledDate = input.ScheduledDate.IsNotEmpty() ? DateTime.Parse(input.ScheduledDate) : _event.ScheduledDate.Value.Date;
+            _event.StartTime = input.StartTime.IsNotEmpty() ? DateTime.Parse(input.StartTime) : _event.StartTime;
             var fields = _selectListItemService.CreateList(category.Fields,x => x.Name, x => x.EntityId, true);
             var _eventTypes = _selectListItemService.CreateList<EventType>(x => x.Name, x => x.EntityId, true);
             var model = Mapper.Map<Event,EventViewModel>(_event);
@@ -49,7 +52,10 @@ namespace KnowYourTurf.Web.Controllers
             model._EventTypeEntityIdList = _eventTypes;
             model._Title = WebLocalizationKeys.EVENT_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<EventController>(x => x.Save(null));
-            return Json(model, JsonRequestBehavior.AllowGet);
+            model.StartTime = _event.StartTime.HasValue ? _event.StartTime.Value.ToShortTimeString() : "";
+            model.EndTime = _event.EndTime.HasValue ? _event.EndTime.Value.ToShortTimeString() : "";
+            model.ScheduledDate = _event.ScheduledDate.Value.ToShortDateString();
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Display_Template(ViewModel input)
@@ -61,13 +67,16 @@ namespace KnowYourTurf.Web.Controllers
             var field = _repository.Query<Field>(x=>x.Events.Any(e=>e.EntityId == input.EntityId)).FirstOrDefault();
             var _event = field.Events.FirstOrDefault(x => x.EntityId == input.EntityId);
             var model = Mapper.Map<Event, EventViewModel>(_event);
+            model.StartTime = _event.StartTime.Value.ToShortTimeString();
+            model.EndTime = _event.EndTime.HasValue ? _event.EndTime.Value.ToShortTimeString() : "";
+            model.ScheduledDate = _event.ScheduledDate.HasValue ? _event.ScheduledDate.Value.ToShortDateString() : "";
             model._Title = WebLocalizationKeys.EVENT_INFORMATION.ToString();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Delete(ViewModel input)
         {
-            var category = _repository.Query<Category>(x => x.EntityId == input.RootId)
+            var category = _repository.Query<Site>(x => x.EntityId == input.RootId)
                 .Fetch(x => x.Fields.FirstOrDefault(y => y.Events.Any(z => z.EntityId == input.EntityId))).FirstOrDefault();
 
             var field = category.Fields.FirstOrDefault(y => y.Events.Any(z => z.EntityId == input.EntityId));
@@ -75,37 +84,39 @@ namespace KnowYourTurf.Web.Controllers
             field.RemoveEvent(_event);
             var crudManager = _saveEntityService.ProcessSave(field);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public ActionResult Save(EventViewModel input)
         {
-            var category = _repository.Find<Category>(input.RootId);
+            var category = _repository.Find<Site>(input.RootId);
             var _event = input.EntityId > 0 ? category.GetAllEvents().FirstOrDefault(x => x.EntityId == input.EntityId) : new Event();
             var field = mapToDomain(input, _event);
             var crudManager = _saveEntityService.ProcessSave(field);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         // getting the repo version of _event in action so I can tell if the _event was completed in past
         // maybe not so cool.  don't know
-        private Field mapToDomain(EventViewModel model, Event _event)
+        private Field mapToDomain(EventViewModel input, Event _event)
         {
-            var eventType = _repository.Find<EventType>(model.EventTypeEntityId);
-            _event.ScheduledDate = model.ScheduledDate;
-            _event.StartTime = DateTime.Parse(model.ScheduledDate.Value.ToShortDateString() + " " + model.StartTime.Value.ToShortTimeString());
-            if (model.EndTime.HasValue)
+            var eventType = _repository.Find<EventType>(input.EventTypeEntityId);
+            _event.ScheduledDate = DateTime.Parse(input.ScheduledDate);
+            _event.StartTime = null;
+            _event.StartTime = DateTime.Parse(input.ScheduledDate + " " + input.StartTime);
+            _event.EndTime = null;
+            if (!string.IsNullOrEmpty(input.EndTime))
             {
-                _event.EndTime = DateTime.Parse(model.ScheduledDate.Value.ToShortDateString() + " " + model.EndTime.Value.ToShortTimeString());
+                _event.EndTime = DateTime.Parse(input.ScheduledDate + " " + input.EndTime);
             }
-            if (_event.Field ==null || _event.Field.EntityId != model.FieldEntityId)
+            if (_event.Field ==null || _event.Field.EntityId != input.FieldEntityId)
             {
-                var field = _repository.Find<Field>(model.FieldEntityId);
+                var field = _repository.Find<Field>(input.FieldEntityId);
                 field.AddEvent(_event);
             }
             _event.EventType = eventType;
-            _event.Notes = model.Notes;
+            _event.Notes = input.Notes;
             return _event.Field;
         }
     }

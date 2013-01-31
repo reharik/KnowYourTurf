@@ -2,24 +2,63 @@
 @model KnowYourTurf.Web.Models.ListTypeListViewModel
 
 @{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
- <div class="col left clear">
-    <div class="fieldRow dashboardGrid">
-        <div class="gridHeader">@WebLocalizationKeys.TASK_TYPES</div>
-        <div id="taskTypeGridContainer"></div>
+
+
+
+<div class="row">
+    @*-----------Left Column-------------*@
+    <div class="span10">
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.TASK_TYPES</div>
+        </div>
+        <div class="row">
+            <div id="taskTypeGridContainer" class="dashboardGrid span10"></div>
+        </div>
+        <div class="row blank" ></div>
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.EVENT_TYPES</div>
+        </div>
+        <div class="row">
+            <div id="eventTypeGridContainer" class="dashboardGrid span10"></div>
+        </div>
+        <div class="row blank" ></div>
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.EQUIPMENT_TASK_TYPES</div>
+        </div>
+        <div class="row">
+            <div id="equipmentTaskTypeGridContainer" class="dashboardGrid span10"></div>
+        </div>
+        <div class="row blank" ></div>
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.PARTS</div>
+        </div>
+        <div class="row">
+            <div id="partsGridContainer" class="dashboardGrid span10"></div>
+        </div>
     </div>
-    <div class="fieldRow dashboardGrid">
-        <div class="gridHeader">@WebLocalizationKeys.EVENT_TYPES</div>
-        <div id="eventTypeGridContainer"></div>
+    <div class="span1"></div>
+    @*-----------Right Column-------------*@
+    <div class="span10">
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.PHOTO_CATEGORIES</div>
+        </div>
+        <div class="row">
+            <div id="photoCategoryGridContainer" class="dashboardGrid span10"></div>
+        </div>
+        <div class="row blank" ></div>
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.DOCUMENT_CATEGORIES</div>
+        </div>
+        <div class="row">
+            <div id="documentCategoryGridContainer" class="dashboardGrid span10"></div>
+        </div>
+        <div class="row blank" ></div>
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.EQUIPMENT_TYPES</div>
+        </div>
+        <div class="row">
+            <div id="equipmentTypeGridContainer" class="dashboardGrid span10"></div>
+        </div>
     </div>
 </div>
-   
-<div class="col right">
-    <div class="fieldRow dashboardGrid">
-        <div class="gridHeader">@WebLocalizationKeys.PHOTO_CATEGORIES</div>
-        <div id="photoCategoryGridContainer"></div>
-    </div>
-    <div class="fieldRow dashboardGrid">
-        <div class="gridHeader">@WebLocalizationKeys.DOCUMENT_CATEGORIES</div>
-        <div id="documentCategoryGridContainer"></div>
-    </div>
-</div>
+        

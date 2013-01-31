@@ -1,35 +1,16 @@
-﻿.raif{ width:300px; height:300px;}
-
-div.fieldRow textarea
-	{ height: 45px;
-	overflow: auto; }
- div.fieldRow textarea.medium
-	{ height: 90px	;
-	  overflow: auto; }
- div.fieldRow textarea.large
-		{ height: 180px	;
-	  overflow: auto; }
-
+﻿.row textarea {
+    /*height: 45px;*/
+    overflow: auto;
+}
+.row textarea.medium {
+    height: 90px;
+    overflow: auto;
+}
+.row textarea.large {
+    height: 180px;
+    overflow: auto;
+}
 /******  FORMS  *******/
- div.-scroll-wrapper {
-    padding-top: 12px;
-}
-
- div.-scroll-inner {
-    height: 480px;
-    overflow-y: auto;
-}
-
- div.col {
-    width: 335px;
-    padding: 10px 20px;
-    display: block;
-}
-
- div.top {
-    padding-top: 0;
-    display: block;
-}
 
  div.footer {
     display: block;
@@ -45,125 +26,7 @@ div.fieldRow textarea
     float: left;
 }
 
- div.full {
-    width: 710px;
-    padding: 10px 0 10px 20px;
-}
-
- div.fieldRow {
-    font-size: 13px;
-    color: #666666;
-    display: block;
-    margin: 8px 10px;
-    /*overflow: hidden;*/
-}
-
- div.fieldRow label {
-    width: 100%;
-    margin-bottom: 4px;
-    display: block;
-}
-
- div.fieldRow label.small {
-    font-size: 0.7em;
-}
-
- div.fieldRow a {
-    color: #666666;
-    text-decoration: underline;
-}
-
- div.fieldRow .checkbox .editor_label label {
-    float: left;
-    line-height: 25px;
-    margin: 16px 7px 0 7px;
-    width: auto;
-}
-
- div.fieldRow div.one-quarter {
-    margin-left: 2%;
-    width: 23%;
-    float: left;
-}
-
- div.fieldRow div.one-third {
-    margin-left: 2%;
-    width: 31%;
-    float: left;
-}
-
- div.fieldRow div.half {
-    margin-left: 2%;
-    width: 48%;
-    float: left;
-}
-
- div.fieldRow div.two-thirds {
-    margin-left: 2%;
-    width: 64%;
-    float: left;
-}
-
- div.fieldRow div.three-quarters {
-    margin-left: 2%;
-    width: 73%;
-    float: left;
-}
-
- div.fieldRow div.first {
-    margin-left: 0;
-    margin-right: 2%;
-}
-
- div.fieldRow input, div.fieldRow select {
-    width: 100%;
-    height: 25px;
-    color: #838383;
-    padding: 2px;
-}
-
- div.fieldRow  textarea {
-    width: 100%;
-    color: #838383;
-    font-size: 100%;
-    padding: 2px;
-}
-
- div.fieldRow .checkbox .editor_input input {
-    float: left;
-    width: 12px;
-    margin-top: 16px;
-}
-
- div.fieldRow input.num, div.fieldRow input.money {
-    width: 40%;
-}
-
- div.fieldRow input.password {
-    font-size: 11px;
-}
-
- label.section {
-    color: #457596;
-    background: url('../images/button-v.png') no-repeat;
-    padding-left: 25px;
-    height: 21px;
-    font-weight: bold;
-    font-size: 13px;
-}
-
- .section-divider {
-    width: 710px;
-    display: block;
-    clear: both;
-    padding: 0 0 0 20px;
-}
-
- .section-divider label.section {
-    margin-left: 10px;
-}
-
- .footer button {
+button {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -171,103 +34,34 @@ div.fieldRow textarea
     font-weight: bold;
     padding-bottom: 5px;
 }
-
- button.save {
+button.save {
     background: url("../images/button-save-bg.png") repeat-x scroll 0 0 #CCCCCC;
     border: 1px solid #B7D6DE;
     height: 27px;
     width: 80px;
     color: #437182;
 }
-button.saveNotFixed {
-    background: url("../images/button-save-bg.png") repeat-x scroll 0 0 #CCCCCC;
-    border: 1px solid #B7D6DE;
-    height: 27px;
-    color: #437182;
-}
-
- button.cancel {
+button.cancel {
     background: url("../images/button-cancel-bg.png") repeat-x scroll 0 0 #CCCCCC;
     border: 1px solid #dfdfdf;
     height: 27px;
     width: 80px;
     color: #8F8F8F;
 }
-
- button.save:hover {
+button.save:hover {
     background: url("../images/button-save-bg-hover.png") repeat-x scroll 0 0 #CCCCCC;
 }
-button.saveNotFixed:hover {
-    background: url("../images/button-save-bg-hover.png") repeat-x scroll 0 0 #CCCCCC;
-}
-
- button.cancel:hover {
+button.cancel:hover {
     background: url("../images/button-cancel-bg-hover.png") repeat-x scroll 0 0 #CCCCCC;
 }
-
 button.save:active {
-   background: url("../images/button-save-bg-active.png") repeat-x scroll 0 0 #CCCCCC;
-   -webkit-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
-   -moz-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
-   box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
-   }
-button.saveNotFixed:active {
-   background: url("../images/button-save-bg-active.png") repeat-x scroll 0 0 #CCCCCC;
-   -webkit-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
-   -moz-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
-   box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
-   }
-
- button.cancel:active {
+    background: url("../images/button-save-bg-active.png") repeat-x scroll 0 0 #CCCCCC;
+    -webkit-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+    -moz-box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+    box-shadow: inset 2px 2px 12px 2px rgba(66, 66, 66, 0.3);
+}
+button.cancel:active {
     background: url("../images/button-cancel-bg-active.png") repeat-x scroll 0 0 #CCCCCC;
-}
-
-  .artifact-field .editor_root,   .artifact-field .editor_label,   .artifact-field .editor_input {
-    width:100%;
-}
-
-
- div.fieldRow div.one-five {
-    width: 20%;
-    float: left;
-    margin-left: 2%;
-}
-
- div.fieldRow div.two-five {
-    width: 38%;
-    float: left;
-}
-
-div.fieldRow div.three-five {
-    width: 54%;
-    float: left;
-}
-
- div.fieldRow div.mid {
-    margin: 0;
-}
-
- div.fieldRow div.last {
-    margin: 0 0 0 2%;
-}
-
-div.footer div.col {
-    padding: 10px 20px 10px 0;
-}
-
-#portfolios #main-header ul#main-tabs li.selected {
-    background: white;
-    border-top: medium none;
-    height: 33px;
-}
-
-#portfolios #main-header ul#main-tabs li.selected a {
-    color: #333333;
-    text-shadow: -1px -1px 1px #DDDDDD;
-}
-
-.headShotImage img{
-    width: 80px;
 }
 
 #ajaxLoading {
@@ -307,8 +101,21 @@ div.footer div.col {
 /************************/
 .view_label{
     float: left;
+    font-size: 12px;
+    color: #666666;
+}
+
+.view_label label{
     font-weight: bold;
-    padding-right: 8px;
+    text-align: left;
+}
+
+.view_display{
+    float: left;
+    font-size: 12px;
+    color: #666666;
+    line-height: 20px;
+    padding-left: 10px;
 }
 
 .gridHeader{
@@ -318,48 +125,28 @@ div.footer div.col {
     margin-bottom: 10px;
 }
 
-
-#messageContainer ul {
-    list-style: none;
+.select2-container .select2-choice {
+    height:21px;
+    line-height:22px;
+    font-size: 13px;
+    color: #666666;
+}
+.select2-container {
+    padding-bottom: 10px;
 }
 
-.error {
-	background: url(../images/validation_error.png) 10px 3px no-repeat;
-	background-color: #FF9999;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    margin: 5px;
-    padding: 3px 3px 3px 40px;
-    line-height: 25px;
+.imageInputContainer{
+    padding-bottom: 10px;
 }
 
-.success {
-    background-color: #00cc00;
-    font-size:13px;
-    font-weight:bold;
-    width:auto;
-    height:auto;
-    line-height: 25px;
-    margin:0 30px 10px 30px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    border-radius: 3px 3px 3px 3px;
-    margin-top: 15px;
+.customfile {
+    height:20px;
 }
 
-.invalid{
-    border: 1px solid red;
+.customfile-button {
+    font-size: 11px;
 }
-.valid{
-    border: 1px solid green;
-}
-
-.deleteImage {
-    background: url("../images/delete.png") no-repeat;
-    width: 95px !important;
-    height: 25px !important;
-    vertical-align: bottom;
-}
-
-.dashboardGrid{
-    height: 500px;
+.customfile-feedback-populated,.customfile-feedback  {
+    font-size: 13px;
+    color: #666666;
 }

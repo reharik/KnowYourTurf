@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using CC.Core;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Services;
@@ -13,22 +14,27 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class AdminController:KYTController
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
         private readonly IFileHandlerService _fileHandlerService;
         private readonly ISessionContext _sessionContext;
+        private readonly ISecurityDataService _securityDataService;
 
         public AdminController(IRepository repository,
             ISaveEntityService saveEntityService,
             IFileHandlerService fileHandlerService,
-            ISessionContext sessionContext)
+            ISessionContext sessionContext,
+            ISecurityDataService securityDataService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
             _fileHandlerService = fileHandlerService;
             _sessionContext = sessionContext;
+            _securityDataService = securityDataService;
         }
 
         public ActionResult Admin(ViewModel input)
@@ -65,7 +71,7 @@ namespace KnowYourTurf.Web.Controllers
             if(!rulesResult.Success)
             {
                 var notification = new RulesNotification(rulesResult);
-                return Json(notification);
+                return new CustomJsonResult(notification);
             }
             _repository.Delete(admin);
             _repository.UnitOfWork.Commit();
@@ -86,7 +92,7 @@ namespace KnowYourTurf.Web.Controllers
                 administrator.Company = company;
             }
             administrator = mapToDomain(input, administrator);
-
+            handlePassword(input,administrator);
             if (input.DeleteImage)
             {
                 _fileHandlerService.DeleteFile(administrator.FileUrl);
@@ -99,7 +105,7 @@ namespace KnowYourTurf.Web.Controllers
                 var user = _repository.Find<User>(administrator.EntityId);
                 _saveEntityService.ProcessSave(user,crudManager);
             var notification = crudManager.Finish();
-            return Json(notification,"text/plain");
+            return new CustomJsonResult(notification, "text/plain");
         }
 
         private User mapToDomain(UserViewModel model, User administrator)
@@ -117,12 +123,21 @@ namespace KnowYourTurf.Web.Controllers
             administrator.UserLoginInfo = new UserLoginInfo()
                                               {
                                                   Password = model.UserLoginInfoPassword,
-                                                  LoginName = model.Email,
-                                                  Status = model.UserLoginInfoStatus,
+                                                  LoginName = model.Email
                                               };
             administrator.AddUserRole(new UserRole { Name = UserType.Administrator.ToString() });
             administrator.AddUserRole(new UserRole { Name = UserType.Employee.ToString() });
             return administrator;
+        }
+
+        private void handlePassword(UserViewModel input, User origional)
+        {
+            if (input.UserLoginInfoPassword.IsNotEmpty())
+            {
+                origional.UserLoginInfo.Salt = _securityDataService.CreateSalt();
+                origional.UserLoginInfo.Password = _securityDataService.CreatePasswordHash(input.UserLoginInfoPassword,
+                                                            origional.UserLoginInfo.Salt);
+            }
         }
     }
 }

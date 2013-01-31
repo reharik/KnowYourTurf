@@ -15,6 +15,8 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class FieldDashboardController : KYTController
     {
         private readonly IRepository _repository;
@@ -58,7 +60,7 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.FIELD_INFORMATION.ToString();
             model._Photos = field.Photos.Select(x => new PhotoDto {FileUrl = x.FileUrl});
 
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult CompletedTasksGrid(ViewModel input)
@@ -69,13 +71,13 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _completedTaskGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         public JsonResult CompletedTasks(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Task>(input.filters, x => x.Field.EntityId == input.ParentId && x.Complete);
             var gridItemsViewModel = _completedTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
 
         public ActionResult PendingTasksGrid(ViewModel input)
@@ -86,7 +88,7 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _pendingTaskGrid.GetGridDefinition(url, input.User),
                 ParentId = input.ParentId
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         public JsonResult PendingTasks(GridItemsRequestModel input)
         {
@@ -94,7 +96,7 @@ namespace KnowYourTurf.Web.Controllers
                                                                    x =>
                                                                    x.Field.EntityId == input.ParentId && !x.Complete);
             var gridItemsViewModel = _pendingTaskGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
 
         public ActionResult PhotoGrid(ViewModel input)
@@ -108,7 +110,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         public JsonResult Photos(GridItemsRequestModel input)
         {
@@ -125,7 +127,7 @@ namespace KnowYourTurf.Web.Controllers
                items = field.Photos.Where(photoWhereClause.Compile());
            }
             var gridItemsViewModel = _photoListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable(), input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
 
         public ActionResult DocumentGrid(ViewModel input)
@@ -139,7 +141,7 @@ namespace KnowYourTurf.Web.Controllers
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
         public JsonResult Documents(GridItemsRequestModel input)
         {
@@ -154,7 +156,7 @@ namespace KnowYourTurf.Web.Controllers
                 items = field.Documents.Where(documentWhereClause.Compile());
             }
             var gridItemsViewModel = _documentListGrid.GetGridItemsViewModel(input.PageSortFilter, items.AsQueryable(), input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 

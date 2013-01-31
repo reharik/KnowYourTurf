@@ -19,10 +19,10 @@ namespace KnowYourTurf.Web.Models
         [ValidateNonEmpty]
         public int EventTypeEntityId { get; set; }
         [ValidateNonEmpty]
-        public DateTime? ScheduledDate { get; set; }
+        public string ScheduledDate { get; set; }
         [ValidateNonEmpty]
-        public DateTime? StartTime { get; set; }
-        public DateTime? EndTime { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         [TextArea]
         public string Notes { get; set; }
 

@@ -7,6 +7,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class ChemicalListController:KYTController
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -29,14 +31,14 @@ namespace KnowYourTurf.Web.Controllers
                 _Title = WebLocalizationKeys.CHEMICALS.ToString()
             };
             model.headerButtons.Add("new");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult Chemicals(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<Chemical>(input.filters);
             var gridItemsViewModel = _chemicalListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }
