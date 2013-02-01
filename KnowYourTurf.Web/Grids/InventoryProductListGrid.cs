@@ -24,6 +24,7 @@ namespace KnowYourTurf.Web.Grids
 //            GridBuilder.DisplayFor(x => x.Cost).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.LastVendor.Company);
             GridBuilder.SetSearchField(x => x.Product.Name);
+            GridBuilder.SetDefaultSortColumn(x => x.Product.Name);
             return this;
         }
     }

@@ -202,7 +202,12 @@ KYT.mixins.setupGridMixin = {
         } else {
             this.options.gridId = "gridContainer";
         }
-
+        if(this.options.NoMultiSelectGridView){
+            this.options.gridOptions = this.options.gridOptions
+                ?this.options.gridOptions.multiselect = false
+                :this.options.gridOptions={multiselect:false};
+        }
+        this.options.searchField = this.options.gridDef.SearchField ||this.options.searchField;
         $("#" + this.options.gridId, this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
         ///////
         $(this.el).gridSearch({onClear:$.proxy(this.removeSearch, this),onSubmit:$.proxy(this.search, this)});

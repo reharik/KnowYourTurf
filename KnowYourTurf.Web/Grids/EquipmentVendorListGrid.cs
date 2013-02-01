@@ -32,6 +32,8 @@ namespace KnowYourTurf.Web.Grids
                 .ForAction<VendorContactListController>(x => x.ItemList(null))
                 .ToPerformAction(ColumnAction.Redirect)
                 .ImageName("AddContact.png");
+            GridBuilder.SetSearchField(x => x.Company);
+            GridBuilder.SetDefaultSortColumn(x => x.Company);
             return this;
         }
     }
