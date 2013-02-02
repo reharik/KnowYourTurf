@@ -8,7 +8,7 @@ using StructureMap;
 
 namespace KnowYourTurf.Core.Config
 {
-    public class SaveUpdateInterceptorWithCompanyFilter : EmptyInterceptor
+    public class SaveUpdateInterceptorWithClientFilter : EmptyInterceptor
     {
         public override bool OnFlushDirty(object entity,
                                           object id,
@@ -37,7 +37,7 @@ namespace KnowYourTurf.Core.Config
                 var sessionContext = ObjectFactory.Container.GetInstance<ISessionContext>();
                 var currentUser = sessionContext.GetCurrentUser();
                 var systemClock = ObjectFactory.Container.GetInstance<ISystemClock>();
-                var getCompanyIdService = ObjectFactory.GetInstance<IGetCompanyIdService>();
+                var getClientIdService = ObjectFactory.GetInstance<IGetClientIdService>();
                 for (int i = 0; i < propertyNames.Length; i++)
                 {
                     if ("ChangedDate".Equals(propertyNames[i]))
@@ -48,9 +48,9 @@ namespace KnowYourTurf.Core.Config
                     {
                         state[i] = systemClock.Now;
                     }
-                    if ("CompanyId".Equals(propertyNames[i]))
+                    if ("ClientId".Equals(propertyNames[i]))
                     {
-                        state[i] = getCompanyIdService.Execute();
+                        state[i] = getClientIdService.Execute();
                     }
                     if (domainEntity.CreatedBy ==null && "CreatedBy".Equals(propertyNames[i]))
                     {

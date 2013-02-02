@@ -57,7 +57,7 @@ namespace KnowYourTurf.WeatherTask
 
         public static void GetWeather()
         {
-            var companies = _repository.FindAll<Company>();
+            var companies = _repository.FindAll<Client>();
             var webClient = new WebClient();
             var jss = new JavaScriptSerializer();
 
@@ -74,39 +74,39 @@ namespace KnowYourTurf.WeatherTask
             _repository.UnitOfWork.Commit();
         }
 
-        private static void loadWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company company)
+        private static void loadWeatherObject(JavaScriptSerializer jss, WebClient webClient, Client client)
         {
-            var url = "http://api.wunderground.com/api/8c25a57f987344bd/yesterday/q/" + company.ZipCode + ".json";
+            var url = "http://api.wunderground.com/api/8c25a57f987344bd/yesterday/q/" + client.ZipCode + ".json";
             var date = DateTime.Now.Date.AddDays(-1);
-            var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId == company.EntityId).FirstOrDefault() ??
-                          new Weather { CompanyId = company.EntityId, Date = date };
+            var weather = _repository.Query<Weather>(x => x.Date == date && x.ClientId == client.EntityId).FirstOrDefault() ??
+                          new Weather { ClientId = client.EntityId, Date = date };
             loadWeather(jss, webClient, weather, url);
         }
-        private static void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company company)
+        private static void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Client client)
         {
             var date = DateTime.Now.Date;
             for (int i = 1; i <= 7; i++)
             {
                 date = date.AddDays(-1);
                 var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" +
-                          company.ZipCode + ".json";
+                          client.ZipCode + ".json";
                 var weather =
-                    _repository.Query<Weather>(x => x.Date == date && x.CompanyId == company.EntityId).FirstOrDefault() ??
-                    new Weather {CompanyId = company.EntityId, Date = date};
+                    _repository.Query<Weather>(x => x.Date == date && x.ClientId == client.EntityId).FirstOrDefault() ??
+                    new Weather {ClientId = client.EntityId, Date = date};
                 loadWeather(jss, webClient, weather, url);
             }
         }
 
         private static void loadWeather(JavaScriptSerializer jss, WebClient webClient, Weather weather, string url)
         {
-            _logger.LogInfo("Company Id: " + weather.CompanyId + ", url: " + url + ", Time: " + DateTime.Now.ToString());
+            _logger.LogInfo("Client Id: " + weather.ClientId + ", url: " + url + ", Time: " + DateTime.Now.ToString());
             var result = webClient.DownloadString(url);
-            _logger.LogInfo("Company Id: " + weather.CompanyId + ", Result Has Value: " + result.IsNotEmpty() + ", Time: " + DateTime.Now.ToString());
+            _logger.LogInfo("Client Id: " + weather.ClientId + ", Result Has Value: " + result.IsNotEmpty() + ", Time: " + DateTime.Now.ToString());
 
             Thread.Sleep(10000);
             if (result.IsEmpty()) return;
-            var companyWeatherInfoDto = jss.Deserialize<CompanyWeatherInfoDto>(result);
-            if (companyWeatherInfoDto == null || companyWeatherInfoDto.History == null || companyWeatherInfoDto.History.DailySummary == null) return;
+            var clientWeatherInfoDto = jss.Deserialize<ClientWeatherInfoDto>(result);
+            if (clientWeatherInfoDto == null || clientWeatherInfoDto.History == null || clientWeatherInfoDto.History.DailySummary == null) return;
             var dewPoint = 0d;
             var maxTemp = 0d;
             var minTemp = 0d;
@@ -114,7 +114,7 @@ namespace KnowYourTurf.WeatherTask
             var maxWindGust = 0d;
             var humidity = 0d;
             var meanPressure = 0d;
-            var dailySummary = companyWeatherInfoDto.History.DailySummary.FirstOrDefault();
+            var dailySummary = clientWeatherInfoDto.History.DailySummary.FirstOrDefault();
             Double.TryParse(dailySummary.maxdewpti, out dewPoint);
             Double.TryParse(dailySummary.maxtempi, out maxTemp);
             Double.TryParse(dailySummary.mintempi, out minTemp);
@@ -130,13 +130,13 @@ namespace KnowYourTurf.WeatherTask
             weather.Humidity = humidity;
             weather.Pressure = meanPressure;
             _repository.Save(weather);
-            _logger.LogInfo("Company Id: " + weather.CompanyId + ", Weather Saved, Time: " + DateTime.Now.ToString());
+            _logger.LogInfo("Client Id: " + weather.ClientId + ", Weather Saved, Time: " + DateTime.Now.ToString());
 
         }
 
     }
 
-    public class CompanyWeatherInfoDto
+    public class ClientWeatherInfoDto
     {
         public WeatherHistoryDto History { get; set; }
     }

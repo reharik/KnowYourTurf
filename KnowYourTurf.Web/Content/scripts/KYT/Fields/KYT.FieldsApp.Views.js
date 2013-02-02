@@ -503,7 +503,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     selectVendor:function(){
         if(this.model.VendorEntityId()>0){
             this.showPOInfo(false);
-            this.model.VendorCompany(this.$el.find("#editFieldVendor :selected").text());
+            this.model.VendorClient(this.$el.find("#editFieldVendor :selected").text());
         }
     },
     addToOrder:function(id){

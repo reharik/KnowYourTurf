@@ -56,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
             var photoUrl = UrlContext.GetUrlForAction<EquipmentDashboardController>(x => x.PhotoGrid(null)) + "?ParentId=" + input.EntityId;
             var docuemntUrl = UrlContext.GetUrlForAction<EquipmentDashboardController>(x => x.DocumentGrid(null)) + "?ParentId=" + input.EntityId;
             var equipmentTypes = _selectListItemService.CreateList<EquipmentType>(x => x.Name, x => x.EntityId, true);
-            var vendors = _selectListItemService.CreateList<EquipmentVendor>(x => x.Company, x => x.EntityId, true);
+            var vendors = _selectListItemService.CreateList<EquipmentVendor>(x => x.Client, x => x.EntityId, true);
             
             var model = Mapper.Map<Equipment, EquipmentViewModel>(equipment);
             model._EquipmentTypeEntityIdList = equipmentTypes;

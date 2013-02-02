@@ -45,7 +45,7 @@ namespace KnowYourTurf.Web.Services
             _permissionsBuilderService = permissionsBuilderService;
             _permissionsService = permissionsService;
             _repository = repository;
-            _repository.DisableFilter("CompanyConditionFilter");
+            _repository.DisableFilter("ClientConditionFilter");
         }
 
         public void ExecuteAll()

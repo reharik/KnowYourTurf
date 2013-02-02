@@ -115,9 +115,9 @@ namespace KnowYourTurf.Web.Controllers
             else
             {
                 employee = new User();
-                var companyId = _sessionContext.GetCompanyId();
-                var company = _repository.Find<Company>(companyId);
-                employee.Company = company;
+                var clientId = _sessionContext.GetClientId();
+                var client = _repository.Find<Client>(clientId);
+                employee.Client = client;
             }
             employee = mapToDomain(input, employee);
             mapRolesToGroups(employee);

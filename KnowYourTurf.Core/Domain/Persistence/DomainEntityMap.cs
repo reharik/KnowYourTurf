@@ -22,8 +22,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
     {   
         public DomainEntityMap()
         {
-            Map(x => x.CompanyId);
-            ApplyFilter<CompanyConditionFilter>("(CompanyId= :CompanyId)");
+            Map(x => x.ClientId);
+            ApplyFilter<ClientConditionFilter>("(ClientId= :ClientId)");
         }
 
     }

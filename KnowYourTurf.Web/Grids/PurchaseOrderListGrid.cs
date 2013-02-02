@@ -19,7 +19,7 @@ namespace KnowYourTurf.Core.Domain
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.EntityId).DisplayHeader(WebLocalizationKeys.PO_Number);
-            GridBuilder.DisplayFor(x => x.Vendor.Company);
+            GridBuilder.DisplayFor(x => x.Vendor.Client);
             GridBuilder.DisplayFor(x => x.SubTotal).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.Tax).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.Fees).FormatValue(GridColumnFormatter.Currency);
@@ -47,7 +47,7 @@ namespace KnowYourTurf.Core.Domain
                 .ToPerformAction(ColumnAction.DisplayItem)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.EntityId).DisplayHeader(WebLocalizationKeys.PO_Number);
-            GridBuilder.DisplayFor(x => x.Vendor.Company);
+            GridBuilder.DisplayFor(x => x.Vendor.Client);
             GridBuilder.DisplayFor(x => x.SubTotal).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.Tax).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.Fees).FormatValue(GridColumnFormatter.Currency);

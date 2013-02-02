@@ -16,7 +16,7 @@ namespace KnowYourTurf.Web.Services
         public string ThisUserHasBeenAuthenticated(User user,  bool rememberMe)
         {
             string userData = String.Empty;
-            userData = userData + "UserId=" + user.EntityId + "|CompanyId=" + user.CompanyId;
+            userData = userData + "UserId=" + user.EntityId + "|ClientId=" + user.ClientId;
             var ticket = new FormsAuthenticationTicket(1, user.FullNameLNF, DateTime.Now, DateTime.Now.AddMinutes(30),
                                                        rememberMe, userData);
             string encTicket = FormsAuthentication.Encrypt(ticket);
