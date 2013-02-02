@@ -17,7 +17,7 @@ namespace Generator
     public class QADataLoader : IQADataLoader
     {
         private IRepository _repository;
-        private Company _company;
+        private Client _client;
         private IPurchaseOrderLineItemService _purchaseOrderLineItemService;
         private readonly IInventoryService _inventoryService;
         private readonly ISecurityDataService _securityDataService;
@@ -47,7 +47,7 @@ namespace Generator
         private PhotoCategory _photoCategory2;
         private Part _part1;
         private Part _part2;
-        private IGetCompanyIdService _getCompanyIdService;
+        private IGetClientIdService _getClientIdService;
 
         public QADataLoader(IRepository repository,
             IPurchaseOrderLineItemService purchaseOrderLineItemService,
@@ -62,11 +62,11 @@ namespace Generator
 
         public void Load()
         {
-            _getCompanyIdService = ObjectFactory.Container.GetInstance<IGetCompanyIdService>();
-            _getCompanyIdService.CompanyId = 1;
-            ObjectFactory.Container.Inject(_getCompanyIdService);
+            _getClientIdService = ObjectFactory.Container.GetInstance<IGetClientIdService>();
+            _getClientIdService.ClientId = 1;
+            ObjectFactory.Container.Inject(_getClientIdService);
 
-            CreateCompany();
+            CreateClient();
             CreateListTypes();
             createUser();
             createFieldVendor();
@@ -75,9 +75,9 @@ namespace Generator
             _repository.Commit();
         }
 
-        private void CreateCompany()
+        private void CreateClient()
         {
-            _company = new Company { Name = "KYT - Demo", ZipCode = "78701", TaxRate = 8.25, NumberOfSites = 2 };
+            _client = new Client { Name = "KYT - Demo", ZipCode = "78701", TaxRate = 8.25, NumberOfSites = 2 };
             var site1 = new Site { Name = "Sports Fields", Description = "Site 1" };
             var field1 = new Field { Name = "Baseball", Description = "Baseball", Size = 120000, Status = "Active", Abbreviation = "BB" };
             var field2 = new Field { Name = "Football", Description = "Football", Size = 120000, Status = "Active", Abbreviation = "FB" };
@@ -93,7 +93,7 @@ namespace Generator
             site1.AddField(field5);
             site1.AddField(field6);
             site1.AddField(field7);
-            _company.AddSite(site1);
+            _client.AddSite(site1);
             var site2 = new Site { Name = "KYT Golf Course", Description = "Site 2" };
             var field8 = new Field { Name = "Hole 1", Description = "Hole 1", Size = 120000, Status = "Active", Abbreviation = "H-1" };
             var field9 = new Field { Name = "Hole 2", Description = "Hole 2", Size = 120000, Status = "Active", Abbreviation = "H-2" };
@@ -131,8 +131,8 @@ namespace Generator
             site2.AddField(field23);
             site2.AddField(field24);
             site2.AddField(field25);
-            _company.AddSite(site2);
-            _repository.Save(_company);
+            _client.AddSite(site2);
+            _repository.Save(_client);
         }
 
         private void createUser()
@@ -150,7 +150,7 @@ namespace Generator
                 FirstName = "John",
                 LastName = "Smith",
                 Email = "john.smith@KYTSoftware.com",
-                Company = _company,
+                Client = _client,
                 EmployeeId = "123",
                 Address1 = "123 street",
                 Address2 = "apt a",
@@ -179,7 +179,7 @@ namespace Generator
                 FirstName = "Tom",
                 LastName = "Davis",
                 Email = "tom.davis@KYTSoftware.com",
-                Company = _company,
+                Client = _client,
                 EmployeeId = "100234",
                 Address1 = "1256 Park Ave.",
                 Address2 = "Bldg. B",
@@ -208,7 +208,7 @@ namespace Generator
                 FirstName = "KYT",
                 LastName = "Demo",
                 Email = "kyt.demo@KYTSoftware.com",
-                Company = _company,
+                Client = _client,
                 EmployeeId = "14727",
                 Address1 = "1568 Straight Dr.",
                 Address2 = "Apt. #4",
@@ -240,7 +240,7 @@ namespace Generator
         {
             var vendor = new FieldVendor
             {
-                Company = "KYT Supplier1",
+                Client = "KYT Supplier1",
                 Phone = "555.546.3565",
                 Fax = "555.214.3658",
                 Website = "http://www.supplies.com/",
@@ -298,7 +298,7 @@ namespace Generator
         {
             var vendor = new EquipmentVendor
             {
-                Company = "John Deere",
+                Client = "John Deere",
                 Phone = "555.123.4567",
                 Fax = "123.456.7891",
                 Website = "www.deere.com",

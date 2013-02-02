@@ -11,7 +11,7 @@ namespace KnowYourTurf.Web.Models
         public IEnumerable<SelectListItem> _VendorEntityIdList { get; set; }
         [ValidateNonEmpty]
         public int VendorEntityId { get; set; }
-        public string VendorCompany { get; set; }
+        public string VendorClient { get; set; }
         public string _commitPOUrl { get; set; }
         public string _vendorProductsUrl { get; set; }
         public string _POLIUrl { get; set; }

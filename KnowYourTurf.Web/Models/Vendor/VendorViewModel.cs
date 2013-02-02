@@ -17,7 +17,7 @@ namespace KnowYourTurf.Web.Models.Vendor
         public TokenInputViewModel Materials { get; set; }
 
         [ValidateNonEmpty]
-        public string Company { get; set; }
+        public string Client { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }

@@ -66,7 +66,7 @@ namespace KnowYourTurf.Web
                 .EqualToAppSetting("KnowYourTurf.sql_server_connection_string");
             For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory());
 
-            For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithCompanyFilter()));
+            For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithClientFilter()));
             For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor())).Named("SpecialInterceptorNoFilters");
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<KYTUnitOfWork>();

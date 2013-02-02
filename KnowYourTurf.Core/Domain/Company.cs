@@ -4,7 +4,7 @@ using CC.Core.Domain;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class Company : DomainEntity, IPersistableObject
+    public class Client : DomainEntity, IPersistableObject
     {
         public virtual string Name { get; set; }
         public virtual double TaxRate { get; set; }

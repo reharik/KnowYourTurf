@@ -124,7 +124,7 @@ namespace KnowYourTurf.Web.Controllers
         public double? Quantity { get; set; }
         public int SizeOfUnit { get; set; }
         public string UnitType { get; set; }
-        public string LastVendorCompany { get; set; }
+        public string LastVendorClient { get; set; }
 }
 
     public class InventoryFertilizerViewModel : InventoryProductViewModel
