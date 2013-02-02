@@ -56,7 +56,8 @@
     <Compile Include="Iteration_0\CreateInitialPermissions.cs" />
     <Compile Include="Iteration_1\10010_Create_TasksByFields_Sproc.cs" />
     <Compile Include="Iteration_2\20020_Add_UserID_And_ForiegnKey_To_ULI.cs" />
-    <Compile Include="Iteration_2\Copy of 20030_Rename_Company_to_Client.cs" />
+    <Compile Include="Iteration_2\20030_Rename_Company_to_Client.cs" />
+    <Compile Include="Iteration_2\20040_Create_LoginStatistics_Table.cs" />
     <Compile Include="IUpdatePermissions.cs" />
     <Compile Include="Iteration_1\UpdateOperations_100.cs" />
     <Compile Include="Iteration_1\UpdatePermissions_100.cs" />

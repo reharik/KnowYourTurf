@@ -2,7 +2,7 @@
 {
     using FluentMigrator;
 
-    [Migration(20020)]
+    [Migration(20030)]
     public class Rename_Company_To_Client : Migration
     {
         public override void Up()
@@ -19,6 +19,8 @@
             Rename.Column("CompanyId").OnTable("EquipmentTaskType").To("ClientId");
             Rename.Column("CompanyId").OnTable("EquipmentType").To("ClientId");
             Rename.Column("CompanyId").OnTable("Event").To("ClientId");
+            Rename.Column("CompanyId").OnTable("EventType").To("ClientId");
+            Rename.Column("CompanyId").OnTable("Field").To("ClientId");
             Rename.Column("CompanyId").OnTable("InventoryProduct").To("ClientId");
             Rename.Column("CompanyId").OnTable("LocalizedEnumeration").To("ClientId");
             Rename.Column("CompanyId").OnTable("LocalizedProperty").To("ClientId");
@@ -37,6 +39,9 @@
             Rename.Column("CompanyId").OnTable("VendorBase").To("ClientId");
             Rename.Column("CompanyId").OnTable("VendorContact").To("ClientId");
             Rename.Column("CompanyId").OnTable("Weather").To("ClientId");
+            Rename.Column("CompanyId").OnTable("Client").To("ClientId");
+            Rename.Column("Company_Id").OnTable("User").To("Client_Id");
+            Rename.Column("Company_Id").OnTable("Site").To("Client_Id");
         }
 
         public override void Down()
@@ -53,6 +58,8 @@
             Rename.Column("ClientId").OnTable("EquipmentTaskType").To("CompanyId");
             Rename.Column("ClientId").OnTable("EquipmentType").To("CompanyId");
             Rename.Column("ClientId").OnTable("Event").To("CompanyId");
+            Rename.Column("ClientId").OnTable("EventType").To("CompanyId");
+            Rename.Column("ClientId").OnTable("Field").To("CompanyId");
             Rename.Column("ClientId").OnTable("InventoryProduct").To("CompanyId");
             Rename.Column("ClientId").OnTable("LocalizedEnumeration").To("ClientId");
             Rename.Column("ClientId").OnTable("LocalizedProperty").To("CompanyId");
@@ -71,6 +78,9 @@
             Rename.Column("ClientId").OnTable("VendorBase").To("CompanyId");
             Rename.Column("ClientId").OnTable("VendorContact").To("CompanyId");
             Rename.Column("ClientId").OnTable("Weather").To("CompanyId");
+            Rename.Column("ClientId").OnTable("Client").To("CompanyId");
+            Rename.Column("Client_Id").OnTable("User").To("Company_Id");
+            Rename.Column("Client_Id").OnTable("Site").To("Company_Id");
         }
     }
 }

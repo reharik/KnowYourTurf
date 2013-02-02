@@ -14,6 +14,18 @@ namespace DBFluentMigration.Iteration_2
         public void Update()
         {
             CreateMenuItemOptions();
+            CreateControllerOptions();
+        }
+
+        private void CreateControllerOptions()
+        {
+            _operations.CreateOperationForControllerType("ClientController");
+            _operations.CreateOperationForControllerType("ClientListController");
+            _operations.CreateOperationForControllerType("LoginStatisticsListController");
+            _operations.CreateOperationForControllerType("SiteConfigurationController");
+            _operations.CreateOperationForControllerType("SystemSupportController");
+            _operations.CreateOperationForControllerType("UserController");
+            _operations.CreateOperationForControllerType("UserListController");
         }
 
         public void CreateMenuItemOptions()
@@ -31,14 +43,9 @@ namespace DBFluentMigration.Iteration_2
 
             _operations.CreateOperationForMenuItem("Users");
             _operations.CreateOperationForMenuItem("Clients");
-            _operations.CreateOperationForMenuItem("Site10");
-            _operations.CreateOperationForMenuItem("Site10");
-            _operations.CreateOperationForMenuItem("Site10");
-            _operations.CreateOperationForMenuItem("Site10");
-            _operations.CreateOperationForMenuItem("Site10");
-            _operations.CreateOperationForMenuItem("Site10");
-            _operations.CreateOperationForMenuItem("Site10");
-            _operations.CreateOperationForMenuItem("Site10");
+            _operations.CreateOperationForMenuItem("LoginInformation");
+            _operations.CreateOperationForMenuItem("PermissionUserGroups");
+            _operations.CreateOperationForMenuItem("SystemOffLine");
         }
     }
 }

@@ -90,6 +90,9 @@ namespace KnowYourTurf.Core.Config
         {
             var domainEntity = entity as DomainEntity;
             if (domainEntity == null) return false;
+            var sessionContext = ObjectFactory.Container.GetInstance<ISessionContext>();
+            var currentUser = sessionContext.GetCurrentUser();
+
             if (entity is DomainEntity)
             {
                 var systemClock = ObjectFactory.Container.GetInstance<ISystemClock>();
@@ -102,6 +105,14 @@ namespace KnowYourTurf.Core.Config
                     if (!domainEntity.CreatedDate.HasValue && "CreatedDate".Equals(propertyNames[i]))
                     {
                         state[i] = systemClock.Now;
+                    }
+                    if (domainEntity.CreatedBy == null && "CreatedBy".Equals(propertyNames[i]))
+                    {
+                        state[i] = currentUser;
+                    }
+                    if ("ChangedBy".Equals(propertyNames[i]))
+                    {
+                        state[i] = currentUser;
                     }
                 }
                 return true;

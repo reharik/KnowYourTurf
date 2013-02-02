@@ -31,6 +31,21 @@ namespace DBFluentMigration.Iteration_1
             _permissions.CreateMenuPermission(UserType.Administrator,"Site8");
             _permissions.CreateMenuPermission(UserType.Administrator,"Site9");
             _permissions.CreateMenuPermission(UserType.Administrator,"Site10");
+
+            _permissions.CreateMenuPermission(UserType.Administrator, "Users");
+            _permissions.CreateMenuPermission(UserType.Administrator, "Clients");
+            _permissions.CreateMenuPermission(UserType.Administrator, "LoginInformation");
+            _permissions.CreateMenuPermission(UserType.Administrator, "PermissionUserGroups");
+            _permissions.CreateMenuPermission(UserType.Administrator, "SystemOffLine");
+
+            _permissions.CreateControllerPermission(UserType.Administrator, "ClientController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "ClientListController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "LoginStatisticsListController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "SiteConfigurationController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "SystemSupportController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "UserController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "UserListController");
+
         }
 
         private void GrantEmployeePermissions()
@@ -45,6 +60,7 @@ namespace DBFluentMigration.Iteration_1
             _permissions.CreateMenuPermission(UserType.Employee, "Site8");
             _permissions.CreateMenuPermission(UserType.Employee, "Site9");
             _permissions.CreateMenuPermission(UserType.Employee, "Site10");
+
         }
 
     }
