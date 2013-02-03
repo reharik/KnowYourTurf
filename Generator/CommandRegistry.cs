@@ -1,3 +1,5 @@
+using DBFluentMigration.Iteration_1;
+using DBFluentMigration.Iteration_2;
 using FluentNHibernate.Conventions;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
@@ -13,6 +15,9 @@ namespace Generator
                      {
                          x.TheCallingAssembly();
                          x.AddAllTypesOf<IGeneratorCommand>().NameBy(t => t.toCannonicalCommandName());
+                         x.AssemblyContainingType(typeof(IUpdateOperations));
+                         x.AddAllTypesOf<IUpdateOperations>();
+                         x.AddAllTypesOf<IUpdatePermissions>();
                      });
            
             For<IConventionFinder>().Use<DefaultConventionFinder>();

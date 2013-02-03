@@ -26,7 +26,7 @@ namespace KnowYourTurf.Core.Services
 
         public User AuthenticateForUserId(string username, string password)
         {
-            _repository.CurrentSession().DisableFilter("CompanyConditionFilter");
+            _repository.CurrentSession().DisableFilter("ClientConditionFilter");
             var users = _repository.Query<User>(u => u.UserLoginInfo.LoginName.ToLowerInvariant() == username.ToLowerInvariant());// && u.UserLoginInfo.Password == password).FirstOrDefault();
             User ValidUser = null;
             users.ForEachItem(x =>

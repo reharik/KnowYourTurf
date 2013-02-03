@@ -17,6 +17,8 @@ namespace KnowYourTurf.Web.Grids
                 .ToPerformAction(ColumnAction.AddUpdateItem).WithId("pendingTaskList")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.ScheduledDate);
+            GridBuilder.SetSearchField(x => x.TaskType.Name);
+            GridBuilder.SetDefaultSortColumn(x => x.TaskType.Name); 
             return this;
         }
     }

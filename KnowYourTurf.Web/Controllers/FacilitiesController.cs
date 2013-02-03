@@ -19,6 +19,8 @@ using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class FacilitiesController : AdminControllerBase
     {
         private readonly IRepository _repository;
@@ -61,7 +63,7 @@ namespace KnowYourTurf.Web.Controllers
             model._saveUrl = UrlContext.GetUrlForAction<FacilitiesController>(x => x.Save(null));
             model._UserLoginInfoStatusList = _selectListItemService.CreateList<Status>(true);
             
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -72,7 +74,7 @@ namespace KnowYourTurf.Web.Controllers
             if(!rulesResult.Success)
             {
                 var notification = new RulesNotification(rulesResult);
-                return Json(notification);
+                return new CustomJsonResult(notification);
             }
             _repository.Delete(facilities);
             _repository.UnitOfWork.Commit();
@@ -89,9 +91,9 @@ namespace KnowYourTurf.Web.Controllers
             else
             {
                 facilities = new User();
-                var companyId = _sessionContext.GetCompanyId();
-                var company = _repository.Find<Company>(companyId);
-                facilities.Company = company;
+                var clientId = _sessionContext.GetClientId();
+                var client = _repository.Find<Client>(clientId);
+                facilities.Client = client;
             }
             facilities = mapToDomain(input, facilities);
             mapRolesToGroups(facilities);
@@ -107,7 +109,7 @@ namespace KnowYourTurf.Web.Controllers
             var crudManager = _saveEntityService.ProcessSave(facilities);
 
             var notification = crudManager.Finish();
-            return Json(notification,"text/plain");
+            return new CustomJsonResult(notification,"text/plain");
         }
 
         private User mapToDomain(UserViewModel model, User facilities)

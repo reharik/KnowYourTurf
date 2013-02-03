@@ -1,20 +1,23 @@
-﻿using CC.Core.DomainTools;
+﻿using System.Collections.Generic;
+using CC.Core.DomainTools;
+using DBFluentMigration.Iteration_1;
+using DBFluentMigration.Iteration_2;
 using KnowYourTurf.Web.Security;
+using CC.Core;
+using StructureMap;
 
 namespace Generator.Commands
 {
     public class SecurityUpdateCommand: IGeneratorCommand
     {
-        private readonly IPermissions _permissions;
-        private readonly IOperations _operations;
+        private readonly IEnumerable<IUpdatePermissions> _permissions;
+        private readonly IEnumerable<IUpdateOperations> _operations;
         private readonly IRepository _repository;
 
-        public SecurityUpdateCommand(IPermissions permissions,
-            IOperations operations,
-            IRepository repository)
+        public SecurityUpdateCommand(IRepository repository)
         {
-            _permissions = permissions;
-            _operations = operations;
+            _permissions = ObjectFactory.Container.GetAllInstances<IUpdatePermissions>();
+            _operations = ObjectFactory.Container.GetAllInstances<IUpdateOperations>();
             _repository = repository;
         }
 
@@ -22,9 +25,9 @@ namespace Generator.Commands
 
         public void Execute(string[] args)
         {
-//            new UpdateOperations(_operations).Update();
-//            new UpdatePermissions(_permissions).update();
-//            _repository.Commit();
+            _operations.ForEachItem(x => x.Update());
+            _permissions.ForEachItem(x => x.Update());
+            _repository.Commit();
             
         }
     }

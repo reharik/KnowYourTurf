@@ -16,6 +16,8 @@ using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class LoginController:Controller
     {
         private readonly ISecurityDataService _securityDataService;
@@ -66,7 +68,7 @@ namespace KnowYourTurf.Web.Controllers
                         notification.Message = string.Empty;
                         notification.Redirect = true;
                         notification.RedirectUrl = user.UserRoles.Any(x=>x.Name=="Facilities")
-                            ?"/KnowYourTurf/Home#/eventcalendar/0/0/"+user.Company.EntityId
+                            ?"/KnowYourTurf/Home#/eventcalendar/0/0/"+user.Client.EntityId
                             : "/KnowYourTurf/Home#/employeedashboard/"+user.EntityId;
                     }
                 }
@@ -77,7 +79,7 @@ namespace KnowYourTurf.Web.Controllers
                 ex.Source = "CATCH RAISED";
                 Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
-            return Json(notification);
+            return new CustomJsonResult(notification);
         }
             
 //            
@@ -90,7 +92,7 @@ namespace KnowYourTurf.Web.Controllers
 //                    return Redirect(redirectUrl);
 //                }
 //            }
-//            return Json(notification);
+//            return new CustomJsonResult(notification);
   //      }
 
         public ActionResult Log_in(LoginViewModel input)

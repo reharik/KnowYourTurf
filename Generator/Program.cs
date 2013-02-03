@@ -1,34 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using CC.Core;
-using KnowYourTurf.Web;
 using StructureMap;
-using log4net.Config;
+using KnowYourTurf.Core.Domain;
+using KnowYourTurf.Web;
 
 namespace Generator
 {
+
     static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+
             try
             {
+                args = new[] {GetConnectionString()};
+//                args = new[] {ConfigurationManager.AppSettings["KnowYourTurf.sql_server_connection_string"]};
+                
                 Initialize();
-                IGeneratorCommand command = null;
+                var sessionFactoryConfiguration =
+                    ObjectFactory.Container.With("connectionStr")
+                                 .EqualTo(args[0])
+                                 .GetInstance<ISessionFactoryConfiguration>();
+                ObjectFactory.Container.Inject(sessionFactoryConfiguration);
 
-                var commands = ObjectFactory.GetAllInstances<IGeneratorCommand>();
-                if (args.Length == 0) displayHelpAndExit(args, commands);
-                command = commands.FirstOrDefault(c => c.toCanonicalCommandName() == args[0].toCanonicalCommandName());
-                if (command == null) //displayHelpAndExit(args, commands);
-                {
-                    displayHelpAndExit(args,commands);
-//                    command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("dataload");
-                 //   command = ObjectFactory.Container.GetInstance<IGeneratorCommand>("rebuilddatabase");
-                }
-                command.Execute(args);
+//                ObjectFactory.Container.GetInstance<IGeneratorCommand>("securityupdate").Execute(new[] {""});
+
+                var commands = GetDesiredCommands();
+                commands.ForEachItem(x => x.Execute(args));
+
             }
             catch (Exception ex)
             {
@@ -43,31 +48,77 @@ namespace Generator
             }
         }
 
-        private static void displayHelpAndExit(string[] args, IEnumerable<IGeneratorCommand> commands)
+        private static string GetConnectionString()
         {
-            if (args.Length > 0) Console.WriteLine("Unrecognized Command:" + args[0]);
-            Console.WriteLine("Valid Commands are: ");
+            var xdoc = XDocument.Load(@"connectionstrings.config");
+//                var xdoc = XDocument.Load(@"..\..\..\..\connectionstrings.config");
+            var connStrings = xdoc.Descendants("add").Where(x => x.Attribute("key").Value.StartsWith("constring_"));
+            Console.WriteLine("Please select the database you would like to work with:");
+            connStrings.ForEachItem(x => { Console.WriteLine(x.Attribute("key").Value.Replace("constring_", "")); });
+            string connectionString = string.Empty;
+            while (connectionString.IsEmpty())
+            {
+                var database = Console.ReadLine();
+                var connStringNode = connStrings.FirstOrDefault(x => x.Attribute("key").Value == "constring_"+database);
+                if (connStringNode != null)
+                {
+                    connectionString = connStringNode.Attribute("value").Value;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a valid database and remember it's case senstitive");
+                }
+            }
+            return connectionString;
+        }
 
-            var maxLength = commands.Max(c=>c.toCanonicalCommandName().Length);
+        private static List<IGeneratorCommand> GetDesiredCommands()
+        {
+            IGeneratorCommand command;
+            var commands = ObjectFactory.GetAllInstances<IGeneratorCommand>();
 
-            commands.ForEachItem(
-                c =>
-                Console.WriteLine("    {0, " + (maxLength + 1) + "} -> {1}", c.toCanonicalCommandName(), c.Description));
+            Console.WriteLine("Please select the commands to execute.  Use a comma deliniated string:");
 
-            Environment.Exit(-1);
+            commands.ForEachItem(x => Console.WriteLine(x.toCanonicalCommandName()));
+
+            bool validEntry = false;
+            var selectedCommands = new List<IGeneratorCommand>();
+
+            while (!validEntry)
+            {
+                var commandNames = Console.ReadLine();
+                var selectedCommandNames = commandNames.Split(',');
+                validEntry = getCommandsFromList(commands, selectedCommandNames, selectedCommands);
+            }
+            return selectedCommands;
+        }
+
+        private static bool getCommandsFromList(IList<IGeneratorCommand> commandNames, string[] selectedCommandNames, List<IGeneratorCommand> selectedCommands)
+        {
+            foreach (var x in selectedCommandNames)
+            {
+                var command = commandNames.FirstOrDefault(c => c.toCanonicalCommandName() == x.Trim());
+                if (command == null)
+                {
+                    Console.WriteLine(x + " is not a valid command name");
+                    selectedCommands.Clear();
+                    return false;
+                }
+                selectedCommands.Add(command);
+            }
+            return true;
         }
 
         private static void Initialize()
         {
            // Bootstrapper.Restart();
-//            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 
             ObjectFactory.Initialize(x =>
                                          {
                                              x.AddRegistry(new GenRegistry());
                                              x.AddRegistry(new CommandRegistry());
                                          });
-            XmlConfigurator.ConfigureAndWatch(new FileInfo(locateFileAsAbsolutePath("log4net.config")));
             //ObjectFactory.AssertConfigurationIsValid();
 
 
@@ -91,20 +142,6 @@ namespace Generator
             return commandType.Name.toCanonicalCommandName().Replace("command", "");
         }
 
-        private static string locateFileAsAbsolutePath(string filename)
-        {
-            if (Path.IsPathRooted(filename))
-                return filename;
-            string applicationBase = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            string path = Path.Combine(applicationBase, filename);
-            if (!File.Exists(path))
-            {
-                path = Path.Combine(Path.Combine(applicationBase, "bin"), filename);
-                if (!File.Exists(path))
-                    path = Path.Combine(Path.Combine(applicationBase, ".."), filename);
-            }
-            return path;
-        }
 
     }
 }

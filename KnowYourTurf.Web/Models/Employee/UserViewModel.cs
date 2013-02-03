@@ -25,6 +25,7 @@ namespace KnowYourTurf.Web.Models
         public string EmergencyContact { get; set; }
         public string EmergencyContactPhone { get; set; }
         public string UserLoginInfoPassword { get; set; }
+        public string PasswordConfirmation { get; set; }
         [ValidateNonEmpty]
         [ValueOf(typeof(Status))]
         public string UserLoginInfoStatus { get; set; }
@@ -40,6 +41,7 @@ namespace KnowYourTurf.Web.Models
         [ValueOf(typeof(State))]
         public string State { get; set; }
         public string ZipCode { get; set; }
+        [TextArea]
         public string Notes { get; set; }
         public IEnumerable<SelectListItem> _StateList { get; set; }
         public string _saveUrl { get; set; }

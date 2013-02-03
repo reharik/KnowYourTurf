@@ -1,45 +1,25 @@
-﻿using System;
-using Castle.Components.Validator;
-using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
-using KnowYourTurf.Core.Enumerations;
-using KnowYourTurf.Core.Localization;
+using System.Collections.Generic;
+using System.Linq;
+using CC.Core.Domain;
 
 namespace KnowYourTurf.Core.Domain
 {
-    public class Client:DomainEntity
+    public class Client : DomainEntity, IPersistableObject
     {
-        public virtual string FirstName { get; set; }
-        public virtual string MiddleInitial { get; set; }
-        [ValidateNonEmpty]
-        public virtual string LastName { get; set; }
-        [ValidateNonEmpty]
-        public virtual string Email { get; set; }
-        [ValidateNonEmpty]
-        public virtual string MobilePhone { get; set; }
-        public virtual string SecondaryPhone { get; set; }
-        public virtual string Address1 { get; set; }
-        public virtual string Address2 { get; set; }
-        public virtual string City { get; set; }
-        [ValueOf(typeof(State))]
-        public virtual string State { get; set; }
+        public virtual string Name { get; set; }
+        public virtual double TaxRate { get; set; }
         public virtual string ZipCode { get; set; }
-        [TextArea]
-        public virtual string Notes { get; set; }
-        public virtual DateTime? BirthDate { get; set; }
-        public virtual string ImageUrl { get; set; }
-        [ValueOf(typeof(Status))]
-        public virtual string Status { get; set; }
-        [ValueOf(typeof(Source))]
-        public virtual string Source { get; set; }
-        public virtual DateTime StartDate { get; set; }
-
-        public virtual string FullNameLNF
+        public virtual int NumberOfSites { get; set; }
+        #region Collections
+        private IList<Site> _sites = new List<Site>();
+        public virtual IEnumerable<Site> Sites { get { return _sites; } }
+        public virtual void ClearSite() { _sites = new List<Site>(); }
+        public virtual void RemoveSite(Site site) { _sites.Remove(site); }
+        public virtual void AddSite(Site site)
         {
-            get { return LastName + ", " + FirstName; }
+            if (!site.IsNew() && _sites.Contains(site)) return;
+            _sites.Add(site);
         }
-        public virtual string FullNameFNF
-        {
-            get { return FirstName + " " + LastName; }
-        }
+        #endregion
     }
 }

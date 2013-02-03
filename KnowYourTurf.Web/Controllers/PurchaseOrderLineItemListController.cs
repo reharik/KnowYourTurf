@@ -12,6 +12,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class PurchaseOrderLineItemListController : AdminControllerBase
     {
         private readonly IRepository _repository;
@@ -36,10 +38,10 @@ namespace KnowYourTurf.Web.Controllers
             var model = new ListViewModel()
             {
                 gridDef = _purchaseOrderLineItemGrid.GetGridDefinition(url, input.User),
-                _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
+//                _Title = WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS.ToString(),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<PurchaseOrderLineItemListController>(x => x.DeleteMultiple(null)) + "/" + input.EntityId
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult Items (GridItemsRequestModel input)
@@ -50,7 +52,7 @@ namespace KnowYourTurf.Web.Controllers
 
             if (input.PageSortFilter.SortColumn.IsEmpty()) items = items.OrderBy(x => x.Product.Name);
             var model = _purchaseOrderLineItemGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
@@ -63,7 +65,7 @@ namespace KnowYourTurf.Web.Controllers
                                      });
             var crudManager = _saveEntityService.ProcessSave(purchaseOrder);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
     }   

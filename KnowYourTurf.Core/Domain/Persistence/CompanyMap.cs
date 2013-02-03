@@ -2,9 +2,9 @@ using FluentNHibernate.Mapping;
 
 namespace KnowYourTurf.Core.Domain.Persistence
 {
-    public class CompanyMap : DomainEntityMap<Company>
+    public class ClientMap : DomainEntityMap<Client>
     {
-        public CompanyMap()
+        public ClientMap()
         {
             Map(x => x.Name);
             Map(x => x.ZipCode);
@@ -19,6 +19,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
         public SiteMap()
         {
             Map(x => x.Name);
+            Map(x => x.SiteOperation);
             Map(x => x.Description);
             HasMany(x => x.Fields).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
         }

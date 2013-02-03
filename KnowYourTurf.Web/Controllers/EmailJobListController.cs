@@ -7,6 +7,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class EmailJobListController : KYTController
     {
         private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -27,14 +29,14 @@ namespace KnowYourTurf.Web.Controllers
                 gridDef = _emailJobListGrid.GetGridDefinition(url, input.User)
             };
             model.headerButtons.Add("new");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult EmailJobs(GridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<EmailJob>(input.filters);
             var gridItemsViewModel = _emailJobListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 }

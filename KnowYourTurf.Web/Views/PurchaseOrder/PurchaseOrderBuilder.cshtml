@@ -5,33 +5,34 @@
 
 @{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
 
-    <div class="col left">
-        <div class="fieldRow">
+        <div class="row">
         @Html.ViewFor(x => x.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-        @Html.ViewFor(x => x.VendorCompany).RootId("viewFieldVendor").ToHtmlTag()
+        <div class="row">
+        @Html.ViewFor(x => x.VendorClient).RootId("viewFieldVendor").ToHtmlTag()
         </div>
-        <div class="fieldRow">
+        <div class="row">
         @Html.SubmissionFor(x => x.VendorEntityId).InputId("FieldVendor").RootId("editFieldVendor").ToHtmlTag()
         </div>
-    </div>
 
-    <div class="col full clear">
-        <div class="fieldRow">
-            <div id="productGridArea">
-            </div>
+<div class="row blank"/>
+        <div class="row">
+            <div class="span10 gridHeader">@WebLocalizationKeys.PRODUCTS</div>
         </div>
-    </div>
+        <div class="row">
+            <div id="productGridArea" class="span20"></div>
+        </div>
 
-    <div class="col full clear">
-        <div class="fieldRow">
-            <div id="poliGridArea">
-            </div>
+<div class="row blank"/>
+        <div class="row">
+            <div class="span10 gridHeader">@WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS</div>
         </div>
-    </div>
+        <div class="row">
+            <div id="poliGridArea" class="span20"></div>
+        </div>
+        
+
     <div class="footer">
-
         @StandardButtonFor("commit", WebLocalizationKeys.COMMIT).AddClass("save").ToHtmlTag()
         @StandardButtonFor("return", WebLocalizationKeys.RETURN).AddClass("cancel").ToHtmlTag()
     </div>

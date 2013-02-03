@@ -5,29 +5,21 @@
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-    <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Name).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Name).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Description).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Description).Size("10").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Subject).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Subject).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Frequency).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Frequency).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Status).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.EmailTemplateEntityId).Size("5").LabelDisplay(WebLocalizationKeys.EMAIL_TEMPLATES).ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Status).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Subscribers).ElType("MultiSelect").Size("10").LabelDisplay(WebLocalizationKeys.SUBSCRIBERS).ToHtmlTag()
         </div>
-         <div class="fieldRow">
-            @Html.SubmissionFor(x => x.EmailTemplateEntityId).LabelDisplay(WebLocalizationKeys.EMAIL_TEMPLATES).ToHtmlTag()
-        </div>
-    </div>
-     <div class="col left clear">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Subscribers).ElType("MultiSelect").LabelDisplay(WebLocalizationKeys.SUBSCRIBERS).ToHtmlTag()
-        </div>
-    </div>
 

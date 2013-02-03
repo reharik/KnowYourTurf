@@ -5,32 +5,20 @@
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-       
 
-            @MvcHtmlString.Create(FormFor<WeatherController>(x=>x.Save(null)).Class("CRUD").ElementId("CRUDForm").ToString())
-            @MvcHtmlString.Create(Html.HiddenFor(x => x.Item.EntityId).ToString())
-    <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.DewPoint).ToHtmlTag()        
+        <div class="row">
+            @Html.SubmissionFor(x => x.Item.DewPoint).Size("5").ToHtmlTag()        
+            @Html.SubmissionFor(x => x.Item.EvaporationRate).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.EvaporationRate).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Item.HighTemperature).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.LowTemperature).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.HighTemperature).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Item.Humidity).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Item.RainPrecipitation).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.LowTemperature).ToHtmlTag()
+        <div class="row">
+            @Html.SubmissionFor(x => x.Item.WindSpeed).Size("5").ToHtmlTag()
         </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.Humidity).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.RainPrecipitation).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Item.WindSpeed).ToHtmlTag()
-        </div>
-    </div>
-            @EndForm()
 

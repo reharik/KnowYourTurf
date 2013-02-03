@@ -9,6 +9,8 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Menus
 {
+    using KnowYourTurf.Web.Areas.Reports.Controllers;
+
     public class MainMenu : IMenuConfig
     {
         private readonly IKYTMenuBuilder _builder;
@@ -35,7 +37,7 @@ namespace KnowYourTurf.Web.Menus
         {
             return _builder
                 .CreateTagNode<EmployeeDashboardController>(WebLocalizationKeys.HOME)
-                .CategoryGroupForItteration()
+                .SiteGroupForIteration()
                 .CreateTagNode<FieldListController>(WebLocalizationKeys.FIELDS)
 //                .CreateTagNode<CalculatorListController>(WebLocalizationKeys.CALCULATORS)
 
@@ -93,6 +95,11 @@ namespace KnowYourTurf.Web.Menus
                             .CreateTagNode<PurchaseOrderListController>(WebLocalizationKeys.CURRENT)
                             .CreateTagNode<CompletedPurchaseOrderListController>(WebLocalizationKeys.COMPLETED)
                         .EndChildren()
+                        .CreateNode(WebLocalizationKeys.REPORTS)
+                        .HasChildren()
+                            .CreateTagNode<TasksByFieldController>(WebLocalizationKeys.TASKS_BY_FIELD)
+                        .EndChildren()
+
                     .EndChildren()
                 .MenuTree(user);
         }

@@ -2,11 +2,11 @@
 <configuration>
   <appSettings>
 <<<<<<< HEAD
+<!--    <add key="KnowYourTurf.sql_server_connection_string" value="Data Source=(local);Initial Catalog=KnowYourTurf_DEV;Trusted_Connection=Yes;" />-->
+    <add key="KnowYourTurf.sql_server_connection_string" value="Data Source=CannibalCoder.cloudapp.net;Initial Catalog=KnowYourTurf_PROD;User ID=KnowYourTurf;Password=KYTadmin6;"/>
+=======
     <add key="KnowYourTurf.sql_server_connection_string" value="Data Source=(local);Initial Catalog=KnowYourTurf_DEV;Trusted_Connection=Yes;" />
 <!--    <add key="KnowYourTurf.sql_server_connection_string" value="Data Source=CannibalCoder.cloudapp.net;Initial Catalog=KnowYourTurf_QA;User ID=KnowYourTurf;Password=KYTadmin6;"/>-->
-=======
-<!--    <add key="KnowYourTurf.sql_server_connection_string" value="Data Source=(local);Initial Catalog=KnowYourTurf_DEV2;Trusted_Connection=Yes;" />-->
-    <add key="KnowYourTurf.sql_server_connection_string" value="Data Source=CannibalCoder.cloudapp.net;Initial Catalog=KnowYourTurf_QA;User ID=KnowYourTurf;Password=KYTadmin6;"/>
 >>>>>>> development
 
 

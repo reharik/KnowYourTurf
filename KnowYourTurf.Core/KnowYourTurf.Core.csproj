@@ -144,8 +144,9 @@
     <Compile Include="Domain\Calculator.cs" />
     <Compile Include="Domain\EquipmentVendor.cs" />
     <Compile Include="Domain\LoginStatistics.cs" />
+    <Compile Include="Domain\Persistence\LoginStatisticsMap.cs" />
     <Compile Include="Domain\Site.cs" />
-    <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\Client.cs" />
     <Compile Include="Domain\Continuation.cs" />
     <Compile Include="Domain\Chemical.cs" />
     <Compile Include="Domain\EquipmentTask.cs" />
@@ -166,7 +167,6 @@
     <Compile Include="Domain\Persistence\PhotoMap.cs" />
     <Compile Include="Domain\Persistence\DocumentMap.cs" />
     <Compile Include="Domain\Persistence\EmailTemplateMap.cs" />
-    <Compile Include="Domain\Persistence\UserRoleMap.cs" />
     <Compile Include="Domain\Persistence\UsersGroupMap.cs" />
     <Compile Include="Domain\Persistence\WeatherMap.cs" />
     <Compile Include="Domain\Photo.cs" />
@@ -187,6 +187,8 @@
     <Compile Include="Html\Menu\IKYTMenuBuilder.cs" />
     <Compile Include="Html\Menu\KYTGenMenuBuilder.cs" />
     <Compile Include="ILogger.cs" />
+    <Compile Include="RouteTokens\IRouteTokenBuilder.cs" />
+    <Compile Include="RouteTokens\RouteToken.cs" />
     <Compile Include="Rules\FieldHasNoOutstandingEvents.cs" />
     <Compile Include="Rules\FieldHasNoOutstandingTasks.cs" />
     <Compile Include="Rules\DeleteFieldRules.cs" />

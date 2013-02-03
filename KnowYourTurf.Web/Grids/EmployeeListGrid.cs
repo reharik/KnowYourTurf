@@ -21,6 +21,8 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x => x.EmployeeId);
             GridBuilder.DisplayFor(x => x.PhoneMobile);
             GridBuilder.DisplayFor(x => x.Email).FormatValue(GridColumnFormatter.EMail);
+            GridBuilder.SetSearchField(x => x.LastName);
+            GridBuilder.SetDefaultSortColumn(x => x.LastName);
             return this;
         }
     }

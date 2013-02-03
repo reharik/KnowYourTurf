@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Web.Controllers;
-using KnowYourTurf.Web.Services.RouteTokens;
 
 namespace KnowYourTurf.Web.Services.ViewOptions
 {
+    using KnowYourTurf.Core.RouteTokens;
+    using KnowYourTurf.Web.Areas.Reports.Controllers;
+
     public interface IRouteTokenConfig
     {
         IList<RouteToken> Build(bool withoutPermissions = false);
@@ -112,6 +114,8 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForList<CompletedPurchaseOrderDisplayController>(x => x.ItemList(null)).ViewName("NoMultiSelectGrid").End();
 
             _builder.TokenForForm<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)).AddUpdateToken("purchaseorderlineitem").End();
+
+            _builder.TokenForForm<TasksByFieldController>(x => x.Display(null),AreaName.Reports).ViewName("TasksByFieldView").End();
 
 
             return _builder.Items;

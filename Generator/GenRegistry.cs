@@ -5,6 +5,8 @@ using CC.Security;
 using CC.Security.Interfaces;
 using CC.Security.Services;
 using CC.UI.Helpers;
+using DBFluentMigration.Iteration_1;
+using DBFluentMigration.Iteration_2;
 using KnowYourTurf.Core.Domain.Persistence;
 using KnowYourTurf.Core.Html.Menu;
 using KnowYourTurf.Core.Services;
@@ -33,7 +35,7 @@ namespace KnowYourTurf.Web
 //                x.AssemblyContainingType(typeof(WebLocalizationKeys));
                 x.AssemblyContainingType<Entity>();
                 x.AssemblyContainingType<IUser>();
-                x.AssemblyContainingType<HtmlConventionRegistry>(); 
+                x.AssemblyContainingType<HtmlConventionRegistry>();
                 x.AddAllTypesOf<ICalculatorHandler>().NameBy(t => t.Name);
                 x.AddAllTypesOf<RulesEngineBase>().NameBy(t => t.Name);
                 x.AddAllTypesOf<IEmailTemplateHandler>().NameBy(t => t.Name);
@@ -50,13 +52,13 @@ namespace KnowYourTurf.Web
             For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory());
 
             For<ISession>().HybridHttpOrThreadLocalScoped().Add(
-                context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithCompanyFilter()));
+                context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithClientFilter()));
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();
 
             For<IRepository>().Use<Repository>();
 
-            For<IGetCompanyIdService>().Use<DataLoaderGetCompanyIdService>();
+            For<IGetClientIdService>().Use<DataLoaderGetClientIdService>();
 
             For<ILocalizationDataProvider>().Use<LocalizationDataProvider>();
             For<IAuthenticationContext>().Use<WebAuthenticationContext>();
@@ -70,7 +72,7 @@ namespace KnowYourTurf.Web
             For<ISecuritySetupService>().Use<DefaultSecuritySetupService>();
             For<ILogger>().Use(() => new Log4NetLogger(typeof(string)));
 
-            For<IGetCompanyIdService>().Use<DataLoaderGetCompanyIdService>();
+            For<IGetClientIdService>().Use<DataLoaderGetClientIdService>();
         }
     }
 }

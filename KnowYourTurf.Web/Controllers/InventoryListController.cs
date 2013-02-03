@@ -12,6 +12,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class InventoryListController : AdminControllerBase
     {
         private readonly IRepository _repository;
@@ -47,17 +49,16 @@ namespace KnowYourTurf.Web.Controllers
             {
                 //TODO put modifiler here "ProductType=" + productType
                 gridDef = _inventoryProductListGrid.GetGridDefinition(url, input.User),
-                _Title = crudTitle.ToString(),
-                searchField = "Product.Name"
+                _Title = crudTitle.ToString()
             };
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult Products(InventoryProductGridItemsRequestModel input)
         {
             var items = _dynamicExpressionQuery.PerformQuery<InventoryProduct>(input.filters, x => x.Product.InstantiatingType == input.ProductType);
             var gridItemsViewModel = _inventoryProductListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
 
 
@@ -98,7 +99,7 @@ namespace KnowYourTurf.Web.Controllers
                 model = Mapper.Map<InventoryProduct, InventoryMaterialViewModel>(inventoryProduct);
                 model._Title = WebLocalizationKeys.INVENTORY_MATERIAL_INFORMATION.ToString();
             }
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
     }
@@ -123,7 +124,7 @@ namespace KnowYourTurf.Web.Controllers
         public double? Quantity { get; set; }
         public int SizeOfUnit { get; set; }
         public string UnitType { get; set; }
-        public string LastVendorCompany { get; set; }
+        public string LastVendorClient { get; set; }
 }
 
     public class InventoryFertilizerViewModel : InventoryProductViewModel

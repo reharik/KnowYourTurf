@@ -222,7 +222,7 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
     viewLoaded:function(){
         this.addIdsToModel();
         var rel = KYT.State.get("Relationships");
-        $('#FieldColor',this.el).miniColors();
+        $('#colorPickerInput',this.el).miniColors();
         this.pendingGridView = new KYT.Views.DahsboardGridView({
             el:"#pendingTaskGridContainer",
             url:this.model._pendingGridUrl(),
@@ -503,7 +503,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     selectVendor:function(){
         if(this.model.VendorEntityId()>0){
             this.showPOInfo(false);
-            this.model.VendorCompany(this.$el.find("#editFieldVendor :selected").text());
+            this.model.VendorClient(this.$el.find("#editFieldVendor :selected").text());
         }
     },
     addToOrder:function(id){
@@ -604,11 +604,30 @@ KYT.Views.PurchaseOrderCommitFormView = KYT.Views.View.extend({
     },
     closePOCallback:function(_result){
         var result = typeof _result =="string" ? JSON.parse(_result) : _result;
-        if(!CC.notification.handleResult(result,this.cid)){
-            return;
+        if(!result.Success){
+            if(result.Message && !$.noty.getByViewIdAndElementId(this.cid)){
+                $(this.errorSelector).noty({type: "error", text: result.Message, viewId:this.cid});
+            }
+            if(result.Errors && !$.noty.getByViewIdAndElementId(this.cid)){
+                _.each(result.Errors,function(item){
+                    $(this.errorSelector).noty({type: "error", text:item.ErrorMessage, viewId:this.cid});
+                })
+            }
+        }else{
+            if(result.Message){
+                var note = $(this.successSelector).noty({type: "success", text:result.Message, viewId:this.cid});
+                note.setAnimationSpeed(1000);
+                note.setTimeout(3000);
+                $.noty.closeAllErrorsByViewId(this.cid);
+            }
+            KYT.vent.trigger("PO:"+this.id+":closed");
+            KYT.vent.trigger("route","purchaseorderlist",true);
         }
-        KYT.vent.trigger("PO:"+this.id+":closed");
-        KYT.vent.trigger("route","purchaseorderlist",true);
+
+
+
+
+
     },
     // used by children to update parent grid
     callbackAction: function () {
@@ -934,7 +953,7 @@ KYT.Views.EventTypeFormView = KYT.Views.View.extend({
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
-        $('#EventColor',this.el).miniColors();
+        $('#colorPickerInput',this.el).miniColors();
     }
 });
 
@@ -945,7 +964,7 @@ KYT.Views.TaskTypeFormView = KYT.Views.View.extend({
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
-        $('#TaskColor',this.el).miniColors();
+        $('#colorPickerInput',this.el).miniColors();
     }
 });
 
@@ -957,7 +976,7 @@ KYT.Views.InventoryDisplayView = KYT.Views.View.extend({
         this.options.templateUrl += this.options.url.substr(this.options.url.indexOf("Display/")+7);
     },
     viewLoaded:function(){
-        $('#TaskColor',this.el).miniColors();
+        $('#colorPickerInput',this.el).miniColors();
     }
 });
 

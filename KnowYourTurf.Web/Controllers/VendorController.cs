@@ -15,6 +15,8 @@ using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class VendorController:KYTController
     {
         private readonly IRepository _repository;
@@ -57,7 +59,7 @@ namespace KnowYourTurf.Web.Controllers
             model._saveUrl = UrlContext.GetUrlForAction<VendorController>(x => x.Save(null));
             model._StateList = states;
             model._StatusList = status;
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
      
         public ActionResult Delete(ViewModel input)
@@ -80,7 +82,7 @@ namespace KnowYourTurf.Web.Controllers
                 }
             });
             _repository.Commit();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
         private bool checkDependencies(FieldVendor item, Notification notification)
         {
@@ -103,12 +105,12 @@ namespace KnowYourTurf.Web.Controllers
 
             var crudManager = _saveEntityService.ProcessSave(newTask);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         private FieldVendor mapToDomain(VendorViewModel input, FieldVendor fieldVendor)
         {
-            fieldVendor.Company = input.Company;
+            fieldVendor.Client = input.Client;
             fieldVendor.Fax = input.Fax;
             fieldVendor.Phone = input.Phone;
             fieldVendor.Address1 = input.Address1;

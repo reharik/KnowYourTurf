@@ -9,7 +9,7 @@ namespace KnowYourTurf.Web.Security
 {
     public interface IPermissions
     {
-        void CreateControllerPermission(string controllerName, UserType ut, int level = 1);
+        void CreateControllerPermission(UserType ut, string controllerName, int level = 1);
         void CreateMenuPermission(UserType ut, string token, int level = 1);
         void CreatePermission(UserType ut, string operation, int level = 1);
         void RemovePermissionForController(UserType ut, string operation);
@@ -85,7 +85,7 @@ namespace KnowYourTurf.Web.Security
             return false;
         }
 
-        public void CreateControllerPermission(string controllerName, UserType ut, int level = 1)
+        public void CreateControllerPermission(UserType ut, string controllerName, int level = 1)
         {
             if (!CheckIfExists(ut, "/" + controllerName))
                 _permissionsBuilderService.Allow("/" + controllerName).For(ut.Key).OnEverything().Level(level).Save();

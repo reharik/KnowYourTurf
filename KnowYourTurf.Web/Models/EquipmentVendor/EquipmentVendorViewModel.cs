@@ -14,7 +14,7 @@ namespace KnowYourTurf.Web.Models.EquipmentVendor
         public IEnumerable<string> VendorContactNames{ get; set; }
 
         [ValidateNonEmpty]
-        public string Company { get; set; }
+        public string Client { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }

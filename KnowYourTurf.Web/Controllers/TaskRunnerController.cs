@@ -31,7 +31,7 @@ namespace KnowYourTurf.Web.Controllers
 
 //        public ActionResult GetWeather(ViewModel input)
 //        {
-//            var companies = _repository.FindAll<Company>();
+//            var companies = _repository.FindAll<Client>();
 //            var webClient = new WebClient();
 //            var jss = new JavaScriptSerializer();
 //
@@ -44,20 +44,20 @@ namespace KnowYourTurf.Web.Controllers
 //            return null;
 //        }
 //
-//        private void loadWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company company)
+//        private void loadWeatherObject(JavaScriptSerializer jss, WebClient webClient, Client Client)
 //        {
-//            var url = "http://api.wunderground.com/api/8c25a57f987344bd/yesterday/q/" + company.ZipCode + ".json";
+//            var url = "http://api.wunderground.com/api/8c25a57f987344bd/yesterday/q/" + Client.ZipCode + ".json";
 //            var date = DateTime.Now.Date.AddDays(-1);
-//            var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId == company.EntityId).FirstOrDefault() ??
-//                          new Weather { CompanyId = company.EntityId, Date = date };
+//            var weather = _repository.Query<Weather>(x => x.Date == date && x.ClientId == Client.EntityId).FirstOrDefault() ??
+//                          new Weather { ClientId = Client.EntityId, Date = date };
 //            loadWeather(jss,webClient,weather,url);
 //        }
-//        private void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Company company)
+//        private void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Client Client)
 //        {
 //            var date = DateTime.Now.Date;
-//            var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" + company.ZipCode + ".json";
-//            var weather = _repository.Query<Weather>(x => x.Date == date && x.CompanyId== company.EntityId).FirstOrDefault() ??
-//                          new Weather { CompanyId = company.EntityId, Date = date };
+//            var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" + Client.ZipCode + ".json";
+//            var weather = _repository.Query<Weather>(x => x.Date == date && x.ClientId== Client.EntityId).FirstOrDefault() ??
+//                          new Weather { ClientId = Client.EntityId, Date = date };
 //            loadWeather(jss, webClient, weather, url);
 //        }
 //
@@ -66,8 +66,8 @@ namespace KnowYourTurf.Web.Controllers
 //            var result = webClient.DownloadString(url);
 //            Thread.Sleep(10000);
 //            if (result.IsEmpty()) return;
-//            var companyWeatherInfoDto = jss.Deserialize<CompanyWeatherInfoDto>(result);
-//            if (companyWeatherInfoDto == null || companyWeatherInfoDto.History == null || companyWeatherInfoDto.History.DailySummary == null) return;
+//            var clientWeatherInfoDto = jss.Deserialize<ClientWeatherInfoDto>(result);
+//            if (clientWeatherInfoDto == null || clientWeatherInfoDto.History == null || clientWeatherInfoDto.History.DailySummary == null) return;
 //            var dewPoint = 0d;
 //            var maxTemp = 0d;
 //            var minTemp = 0d;
@@ -75,7 +75,7 @@ namespace KnowYourTurf.Web.Controllers
 //            var maxWindGust = 0d;
 //            var humidity = 0d;
 //            var meanPressure = 0d;
-//            var dailySummary = companyWeatherInfoDto.History.DailySummary.FirstOrDefault();
+//            var dailySummary = clientWeatherInfoDto.History.DailySummary.FirstOrDefault();
 //            Double.TryParse(dailySummary.maxdewpti, out dewPoint);
 //            Double.TryParse(dailySummary.maxtempi, out maxTemp);
 //            Double.TryParse(dailySummary.mintempi, out minTemp);
@@ -129,7 +129,7 @@ namespace KnowYourTurf.Web.Controllers
 //                                   }
 //                               });
 //
-//            return Json(notification, JsonRequestBehavior.AllowGet);
+//            return new CustomJsonResult(notification);
 //        }
     }
 

@@ -19,9 +19,9 @@ namespace KnowYourTurf.Core.Services
         void RemoveSessionItem(string sessionKey);
         HttpPostedFile RetrieveUploadedFile();
         SessionItem RetrieveSessionItem(string sessionKey);
-        int GetCompanyId();
+        int GetClientId();
         int GetUserId();
-        Company GetCurrentCompany();
+        Client GetCurrentClient();
         bool IsAuthenticated();
         bool IsInRole(string role);
         void ClearSession();
@@ -51,9 +51,9 @@ namespace KnowYourTurf.Core.Services
             return GetUserId();
         }
 
-        public Company GetCurrentCompany()
+        public Client GetCurrentClient()
         {
-            return _repository.Find<Company>(GetCompanyId());
+            return _repository.Find<Client>(GetClientId());
         }
 
         public bool IsAuthenticated()
@@ -113,11 +113,11 @@ namespace KnowYourTurf.Core.Services
             return HttpContext.Current.Request.Files.AllKeys.Length > 0 ? HttpContext.Current.Request.Files[0] : null;
         }
 
-        public int GetCompanyId()
+        public int GetClientId()
         {
             var httpContext = HttpContext.Current;
             var customPrincipal = httpContext != null ? httpContext.User as CustomPrincipal : null;
-            return customPrincipal != null ? customPrincipal.CompanyId : 0;
+            return customPrincipal != null ? customPrincipal.ClientId : 0;
         }
 
         public int GetUserId()
@@ -193,7 +193,7 @@ namespace KnowYourTurf.Core.Services
 //            throw new NotImplementedException();
 //        }
 //
-//        public long GetCompanyId()
+//        public long GetClientId()
 //        {
 //            throw new NotImplementedException();
 //        }
@@ -203,9 +203,9 @@ namespace KnowYourTurf.Core.Services
 //            throw new NotImplementedException();
 //        }
 //
-//        public Company GetCurrentCompany()
+//        public Client GetCurrentClient()
 //        {
-//            return _currentUser.Company;
+//            return _currentUser.Client;
 //        }
 //
 //        public bool IsAuthenticated()

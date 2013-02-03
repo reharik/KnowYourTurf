@@ -13,6 +13,8 @@ using KnowYourTurf.Web.Models.Fertilizer;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class FertilizerController : KYTController
     {
         private readonly IRepository _repository;
@@ -34,7 +36,7 @@ namespace KnowYourTurf.Web.Controllers
             var model = Mapper.Map<Fertilizer, FertilizerViewModel>(fertilizer);
             model._Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString();
             model._saveUrl = UrlContext.GetUrlForAction<FertilizerController>(x => x.Save(null));
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Display_Template(ViewModel input)
@@ -47,7 +49,7 @@ namespace KnowYourTurf.Web.Controllers
             var fertilizer = _repository.Find<Fertilizer>(input.EntityId);
             var model = Mapper.Map<Fertilizer, FertilizerViewModel>(fertilizer);
             model._Title = WebLocalizationKeys.FERTILIZER_INFORMATION.ToString();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult Delete(ViewModel input)
@@ -70,7 +72,7 @@ namespace KnowYourTurf.Web.Controllers
                 }
             });
             _repository.Commit();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
         private bool checkDependencies(Fertilizer item, Notification notification)
         {
@@ -93,7 +95,7 @@ namespace KnowYourTurf.Web.Controllers
             mapItem(fertilizer, input);
             var crudManager = _saveEntityService.ProcessSave(fertilizer);
             var notification = crudManager.Finish();
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         private void mapItem(Fertilizer fertilizer, FertilizerViewModel input)

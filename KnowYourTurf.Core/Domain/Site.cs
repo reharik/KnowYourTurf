@@ -7,6 +7,7 @@ namespace KnowYourTurf.Core.Domain
     public class Site:DomainEntity, IPersistableObject
     {
         public virtual string Name { get; set; }
+        public virtual string SiteOperation { get; set; }
         public virtual string Description { get; set; }
         public virtual IEnumerable<Event> GetAllEvents()
         {

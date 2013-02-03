@@ -41,5 +41,16 @@ namespace KnowYourTurf.Core.Domain
         public virtual string FileUrl { get; set; }
     }
 
+    public class UserRole : ListType
+    {
+        public override void UpdateSelf(Entity entity)
+        {
+            var item = (UserRole)entity;
+            Name = item.Name;
+            Description = item.Description;
+
+        }
+    }
+
 
 }

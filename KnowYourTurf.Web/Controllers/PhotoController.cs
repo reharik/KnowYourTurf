@@ -16,6 +16,8 @@ using KnowYourTurf.Web.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class PhotoController:KYTController
     {
         private readonly IRepository _repository;
@@ -52,7 +54,7 @@ namespace KnowYourTurf.Web.Controllers
             model.Popup = input.Popup;
             model._saveUrl = UrlContext.GetUrlForAction<PhotoController>(x => x.Save(null));
             model.Var = input.Var;
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
@@ -73,7 +75,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 photoUrls.ForEachItem(_fileHandlerService.DeleteFile);
             }
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         public ActionResult Save(PhotoViewModel input)
@@ -85,12 +87,12 @@ namespace KnowYourTurf.Web.Controllers
 
             var photo = ((IEnumerable<Photo>)entity.Photos).FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Photo();
             photo = mapToDomain(input, photo);
-            photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos", entity.CompanyId);
+            photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos", entity.ClientId);
             entity.AddPhoto(photo);
             var crudManager = _saveEntityService.ProcessSave(entity);
             var notification = crudManager.Finish();
             notification.Variable = photo.FileUrl;
-            return Json(notification, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(notification);
         }
 
         private Photo mapToDomain(PhotoViewModel input, Photo photo)

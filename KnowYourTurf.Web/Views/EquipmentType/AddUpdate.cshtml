@@ -3,14 +3,12 @@
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-   <div class="col left">
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Name).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Description).ToHtmlTag()
-        </div>
-        <div class="fieldRow">
-            @Html.SubmissionFor(x => x.Status).ToHtmlTag()
-        </div>
-    </div>
+
+<div class="row">
+    @Html.SubmissionFor(x => x.Name).Size("5").ToHtmlTag()
+    @Html.SubmissionFor(x => x.Status).Size("5").ToHtmlTag()
+</div>
+<div class="row">
+    @Html.SubmissionFor(x => x.Description).Size("10").ToHtmlTag()
+</div>
+

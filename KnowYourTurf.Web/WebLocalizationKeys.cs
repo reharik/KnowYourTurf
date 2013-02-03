@@ -255,6 +255,12 @@ namespace KnowYourTurf.Web
 
         public static readonly StringToken TOTAL_RECEIVED = new WebLocalizationKeys("TOTAL_RECEIVED", "Total Received");
 
+        public static readonly StringToken REPORTS = new WebLocalizationKeys("REPORTS", "Reports");
+        public static readonly StringToken VIEW_REPORT = new WebLocalizationKeys("VIEW_REPORT", "View Report");
+        public static readonly StringToken TASKS_BY_FIELD = new WebLocalizationKeys("TASKS_BY_FIELD", "Tasks By Field");
+        public static readonly StringToken REQUIRED = new WebLocalizationKeys("REQUIRED", "Required");
+        public static readonly StringToken ABBR = new WebLocalizationKeys("ABBR", "Abbr.");
+
 
     }
 }

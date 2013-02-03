@@ -9,6 +9,8 @@ using KnowYourTurf.Core.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using KnowYourTurf.Web.Config;
+
     public class PurchaseOrderListController : AdminControllerBase
     {
        private readonly IDynamicExpressionQuery _dynamicExpressionQuery;
@@ -32,7 +34,7 @@ namespace KnowYourTurf.Web.Controllers
                 _Title = WebLocalizationKeys.PURCHASE_ORDERS.ToString()
             };
             model.headerButtons.Add("new");
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(model);
         }
 
         public JsonResult PurchaseOrders(GridItemsRequestModel input)
@@ -50,7 +52,7 @@ namespace KnowYourTurf.Web.Controllers
             _purchaseOrderListGrid.AddColumnModifications(mod);
 
             var gridItemsViewModel = _purchaseOrderListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
-            return Json(gridItemsViewModel, JsonRequestBehavior.AllowGet);
+            return new CustomJsonResult(gridItemsViewModel);
         }
     }
 
