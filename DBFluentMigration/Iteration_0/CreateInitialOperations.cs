@@ -92,7 +92,7 @@ namespace DBFluentMigration.Iteration_0
             _operations.CreateOperationForControllerType("EventTypeController");
             _operations.CreateOperationForControllerType("PhotoCategoryController");
             _operations.CreateOperationForControllerType("DocumentCategoryController");
-
+            _operations.CreateOperationForControllerType("TasksByFieldController");
         }
 
         public void CreateMenuItemOptions()

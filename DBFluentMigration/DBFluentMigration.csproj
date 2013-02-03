@@ -54,17 +54,12 @@
     <Compile Include="Iteration_0\CreateInitialOperations.cs" />
     <Compile Include="Iteration_0\CreateInitialDB.cs" />
     <Compile Include="Iteration_0\CreateInitialPermissions.cs" />
-    <Compile Include="Iteration_1\10010_Create_TasksByFields_Sproc.cs" />
-    <Compile Include="Iteration_2\20020_Add_UserID_And_ForiegnKey_To_ULI.cs" />
-    <Compile Include="Iteration_2\20030_Rename_Company_to_Client.cs" />
-    <Compile Include="Iteration_2\20040_Create_LoginStatistics_Table.cs" />
+    <Compile Include="Iteration_1\10010_Rename_Company_to_Client.cs" />
+    <Compile Include="Iteration_1\10020_Create_LoginStatistics_Table.cs" />
     <Compile Include="IUpdatePermissions.cs" />
-    <Compile Include="Iteration_1\UpdateOperations_100.cs" />
-    <Compile Include="Iteration_1\UpdatePermissions_100.cs" />
-    <Compile Include="Iteration_2\20010_Add_SiteOperation_To_Site_Table.cs" />
     <Compile Include="IUpdateOperations.cs" />
-    <Compile Include="Iteration_2\UpdateOperations_200.cs" />
-    <Compile Include="Iteration_2\UpdatePermissions_200.cs" />
+    <Compile Include="Iteration_1\UpdateOperations_200.cs" />
+    <Compile Include="Iteration_1\UpdatePermissions_200.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
