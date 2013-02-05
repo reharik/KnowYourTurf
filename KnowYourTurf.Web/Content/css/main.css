@@ -142,6 +142,11 @@ span#login-links a.active {
     padding: 0 0 3px 0px !important;
 }
 
+.content-inner .report
+{
+    padding: 10px 0 3px 20px !important;
+}
+
 .content-outer .content-footer {
     height: 17px;
     width: 100%;

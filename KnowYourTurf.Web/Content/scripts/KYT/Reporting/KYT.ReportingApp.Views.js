@@ -6,6 +6,8 @@ KYT.Views.TasksByFieldView = KYT.Views.View.extend({
         KYT.mixin(this, "reportMixin");
     },
     createUrl:function(){
-        return this.model.ReportUrl()+ "?FieldId="+this.model.FieldEntityId();
+        return this.model.ReportUrl()+ "?FieldId="+this.model.FieldEntityId()+"&" +
+            "StartDate="+this.model.StartDate()+"&"+
+            "EndDate="+this.model.EndDate();
     }
 });

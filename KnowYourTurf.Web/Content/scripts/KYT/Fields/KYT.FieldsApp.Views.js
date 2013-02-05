@@ -968,6 +968,18 @@ KYT.Views.TaskTypeFormView = KYT.Views.View.extend({
     }
 });
 
+KYT.Views.EquipmentTypeFormView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        $('#colorPickerInput',this.el).miniColors();
+    }
+});
+
+
 KYT.Views.InventoryDisplayView = KYT.Views.View.extend({
     initialize:function(){
         KYT.mixin(this, "displayMixin");

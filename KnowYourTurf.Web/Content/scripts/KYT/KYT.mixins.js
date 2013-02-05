@@ -77,11 +77,11 @@ KYT.mixins.reportMixin = {
         var isValid = CC.ValidationRunner.runViewModel(this.cid, this.elementsViewmodel,this.errorSelector);
         if(!isValid){return;}
         var url = this.createUrl();
-        $("#reportBody").attr("src",url);
+        window.open(url);
     },
     createUrl:function(data){
     }
-}
+};
 
 KYT.mixins.formMixin = {
     events:{

@@ -94,7 +94,10 @@ namespace KnowYourTurf.Web
             fileNames.Add("KYT/Fields/KYT.FieldsApp.Routing.js");
             fileNames.Add("KYT/Fields/KYT.FieldsApp.Views.js");
             fileNames.Add("KYT/Fields/KYT.Services.js");
-           
+
+            fileNames.Add("KYT/Reporting/KYT.ReportingApp.Routing.js");
+            fileNames.Add("KYT/Reporting/KYT.ReportingApp.Views.js");
+            
             fileNames.Add("KYT/CC.ModelBinding/CC.CustomBindings.js");
             fileNames.Add("KYT/CC.ModelBinding/CC.Elements.js");
             fileNames.Add("KYT/CC.ModelBinding/CC.NotificationService.js");

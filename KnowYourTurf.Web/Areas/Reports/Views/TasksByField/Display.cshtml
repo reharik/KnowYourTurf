@@ -6,8 +6,9 @@
     Layout = "~/Views/Shared/_ReportLayout.cshtml";
 }
 <div class="row">
-    @Html.SubmissionFor(x=>x.FieldEntityId).Size("8").ToHtmlTag()
-</div>
+    @Html.SubmissionFor(x=>x.FieldEntityId).Size("8").LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
+        @Html.SubmissionFor(x=>x.StartDate).Size("3").ToHtmlTag()
+        @Html.SubmissionFor(x => x.EndDate).Size("3").ToHtmlTag()</div>
 @section FooterButtons
 {
     @StandardButtonFor("viewReport", WebLocalizationKeys.VIEW_REPORT).AddClass("save").ToHtmlTag()
