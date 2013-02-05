@@ -24,6 +24,7 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<Equipment, EquipmentViewModel>();
             Mapper.CreateMap<EmailJob, EmailJobViewModel>().ForMember(d => d.Subscribers, o => o.Ignore());
             Mapper.CreateMap<EventType, EventTypeViewModel>();
+            Mapper.CreateMap<EquipmentType, EquipmentTypeViewModel>();
             Mapper.CreateMap<TaskType, ListTypeViewModel>();
             Mapper.CreateMap<PhotoCategory, ListTypeViewModel>();
             Mapper.CreateMap<DocumentCategory, ListTypeViewModel>();

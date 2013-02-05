@@ -24,6 +24,7 @@ namespace KnowYourTurf.Core.Domain
         [ValidateDecimal]
         public virtual double TotalHours { get; set; }
         public virtual double Threshold { get; set; }
+        public virtual string WebSite { get; set; }
         [ValidateNonEmpty]
         public virtual EquipmentType EquipmentType { get; set; }
         

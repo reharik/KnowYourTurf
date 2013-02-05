@@ -14,7 +14,6 @@ namespace KnowYourTurf.Web.Grids
 
         protected override Grid<Task> BuildGrid()
         {
-
             GridBuilder.LinkColumnFor(x => x.TaskType.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
@@ -22,6 +21,7 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x=>x.StartTime);
             GridBuilder.DisplayFor(x => x.Complete);
             GridBuilder.SetSearchField(x => x.TaskType.Name);
+            GridBuilder.SetDefaultSortColumn(x => x.TaskType.Name);
             return this;
         }
     }

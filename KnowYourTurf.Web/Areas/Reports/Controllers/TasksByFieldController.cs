@@ -1,4 +1,7 @@
-﻿namespace KnowYourTurf.Web.Areas.Reports.Controllers
+﻿
+using System;
+
+namespace KnowYourTurf.Web.Areas.Reports.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
@@ -33,10 +36,10 @@
             
             var model = new TasksByFieldViewModel
             {
-//                StartDate = DateTime.Now,
-//                EndDate = DateTime.Now,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
                 _FieldEntityIdList = this._selectListItemService.CreateList<Field>( x => x.Name, x => x.EntityId, true),
-//                _Title = WebLocalizationKeys.TRAINER_METRIC.ToString(),
+                _Title = WebLocalizationKeys.TASKS_BY_FIELD.ToString(),
                 ReportUrl = "/Areas/Reports/ReportViewer/TasksByField.aspx"
             };
             return new CustomJsonResult(model);
@@ -48,6 +51,10 @@
         public IEnumerable<SelectListItem> _FieldEntityIdList { get; set; }
         [ValidateNonEmpty]
         public int FieldEntityId { get; set; }
+        [ValidateNonEmpty]
+        public DateTime StartDate { get; set; }
+        [ValidateNonEmpty]
+        public DateTime EndDate { get; set; }
         public string ReportUrl { get; set; }
     }
 }

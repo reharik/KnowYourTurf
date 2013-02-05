@@ -91,6 +91,7 @@ namespace KnowYourTurf.Core.Enums
     {
         public static readonly AreaName Empty = new AreaName { IsActive = false, Key = "" };
         public static readonly AreaName Reports = new AreaName { IsActive = false, Key = "Reports" };
+        public static readonly AreaName Permissions = new AreaName { IsActive = false, Key = "Permissions" };
     }
 
     [Serializable]

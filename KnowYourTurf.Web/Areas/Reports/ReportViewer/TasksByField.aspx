@@ -32,6 +32,8 @@
         SelectCommand="TasksByField" SelectCommandType="StoredProcedure"> 
         <SelectParameters>
             <asp:QueryStringParameter Name="FieldId" QueryStringField="FieldId" Type="Int32" />
+            <asp:QueryStringParameter Name="StartDate" QueryStringField="StartDate" Type="DateTime" />
+            <asp:QueryStringParameter Name="EndDate" QueryStringField="EndDate" Type="DateTime" />
         </SelectParameters>
     </asp:SqlDataSource>
     

@@ -36,8 +36,8 @@ namespace KnowYourTurf.Web.Controllers
         {
             _repository = repository;
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("PendingTasks");
-            _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("CompletedTasks");
+            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("PendingEquipmentTasks");
+            _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("CompletedEquipmentTasks");
             _photoListGrid = photoListGrid;
             _documentListGrid = documentListGrid;
             _selectListItemService = selectListItemService;
@@ -56,7 +56,7 @@ namespace KnowYourTurf.Web.Controllers
             var photoUrl = UrlContext.GetUrlForAction<EquipmentDashboardController>(x => x.PhotoGrid(null)) + "?ParentId=" + input.EntityId;
             var docuemntUrl = UrlContext.GetUrlForAction<EquipmentDashboardController>(x => x.DocumentGrid(null)) + "?ParentId=" + input.EntityId;
             var equipmentTypes = _selectListItemService.CreateList<EquipmentType>(x => x.Name, x => x.EntityId, true);
-            var vendors = _selectListItemService.CreateList<EquipmentVendor>(x => x.Company, x => x.EntityId, true);
+            var vendors = _selectListItemService.CreateList<EquipmentVendor>(x => x.Client, x => x.EntityId, true);
             
             var model = Mapper.Map<Equipment, EquipmentViewModel>(equipment);
             model._EquipmentTypeEntityIdList = equipmentTypes;

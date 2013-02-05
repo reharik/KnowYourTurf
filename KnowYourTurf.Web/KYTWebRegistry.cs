@@ -66,7 +66,7 @@ namespace KnowYourTurf.Web
                 .EqualToAppSetting("KnowYourTurf.sql_server_connection_string");
             For<ISessionFactory>().Singleton().Use(ctx => ctx.GetInstance<ISessionFactoryConfiguration>().CreateSessionFactory());
 
-            For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithCompanyFilter()));
+            For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithClientFilter()));
             For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor())).Named("SpecialInterceptorNoFilters");
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<KYTUnitOfWork>();
@@ -100,8 +100,9 @@ namespace KnowYourTurf.Web
             For<IEntityListGrid<Task>>().Add<CompletedTaskGrid>().Named("CompletedTasks");
             For<IEntityListGrid<Task>>().Add<PendingTaskGrid>().Named("PendingTasks");
             For<IEntityListGrid<EquipmentTask>>().Use<EquipmentTaskListGrid>();
-            For<IEntityListGrid<EquipmentTask>>().Add<EquipmentTaskCompletedGrid>().Named("CompletedTasks");
-            For<IEntityListGrid<EquipmentTask>>().Add<EquipmentTaskPendingGrid>().Named("PendingTasks");
+            For<IEntityListGrid<EquipmentTask>>().Add<EquipmentTaskCompletedGrid>().Named("CompletedEquipmentTasks");
+            For<IEntityListGrid<EquipmentTask>>().Add<EquipmentTaskPendingGrid>().Named("PendingEquipmentTasks");
+
 
             For<IEntityListGrid<User>>().Use<EmployeeListGrid>();
             For<IEntityListGrid<User>>().Add<AdminListGrid>().Named("Admins");

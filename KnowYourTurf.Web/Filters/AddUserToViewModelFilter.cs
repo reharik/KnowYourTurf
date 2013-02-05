@@ -14,10 +14,11 @@ namespace KnowYourTurf.Web.Filters
         {
             var repository = ObjectFactory.Container.GetInstance<IRepository>();
             var customPrincipal = (CustomPrincipal)filterContext.HttpContext.User;
-            if (filterContext.ActionParameters.Any(x => x.Value is ViewModel || x.Value.GetType().IsSubclassOf(typeof (ViewModel))))
+            var actionParam = filterContext.ActionParameters.FirstOrDefault(x => x.Value is ViewModel || x.Value.GetType().IsSubclassOf(typeof(ViewModel)));
+            if (actionParam.Value != null)
             {
                 var user = repository.Find<User>(customPrincipal.UserId);
-                ((ViewModel)filterContext.ActionParameters["input"]).User = user;
+                ((ViewModel)actionParam.Value).User = user;
             }
         }
     }

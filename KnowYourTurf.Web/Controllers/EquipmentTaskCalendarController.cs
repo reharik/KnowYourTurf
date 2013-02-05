@@ -71,6 +71,7 @@ namespace KnowYourTurf.Web.Controllers
                                                            title = z.Equipment.Name + ": " + z.TaskType.Name,
                                                            start = z.StartTime.ToString(),
                                                            end = z.EndTime.ToString(),
+                                                           color = z.Equipment.EquipmentType.TaskColor
                                                        })
                 );
 

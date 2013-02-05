@@ -38,6 +38,8 @@ namespace KnowYourTurf.Web.Controllers
 
         public JsonResult Employees(GridItemsRequestModel input)
         {
+            // don't really like it but I guess it'll do.
+            input.sidx = input.sidx != "FullName" ? input.sidx : "LastName";
             var items = _dynamicExpressionQuery.PerformQuery<User>(input.filters, x=>x.UserRoles.Any(i=>i.Name==UserType.Employee.ToString()));
             var gridItemsViewModel = _employeeListGrid.GetGridItemsViewModel(input.PageSortFilter, items, input.User);
             return new CustomJsonResult(gridItemsViewModel);

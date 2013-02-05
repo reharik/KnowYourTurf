@@ -88,8 +88,8 @@ namespace KnowYourTurf.Web.Controllers
             else
             {
                 administrator = new User();
-                var company = _sessionContext.GetCurrentCompany();
-                administrator.Company = company;
+                var client = _sessionContext.GetCurrentClient();
+                administrator.Client = client;
             }
             administrator = mapToDomain(input, administrator);
             handlePassword(input,administrator);

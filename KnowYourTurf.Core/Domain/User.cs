@@ -36,7 +36,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual DateTime? BirthDate { get; set; }
         public virtual string FileUrl { get; set; }
         public virtual string ImageFriendlyName { get; set; }
-        public virtual Company Company { get; set; }
+        public virtual Client Client { get; set; }
         public virtual CultureInfo LanguageDefault { get; set; }
         public virtual UserLoginInfo UserLoginInfo { get; set; }
         public virtual string EmergencyContact { get; set; }

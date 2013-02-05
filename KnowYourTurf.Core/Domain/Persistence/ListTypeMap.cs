@@ -48,6 +48,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
     {
         public EquipmentTypeMap()
         {
+            Map(x => x.TaskColor);
         }
     }
 

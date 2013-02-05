@@ -77,11 +77,11 @@ KYT.mixins.reportMixin = {
         var isValid = CC.ValidationRunner.runViewModel(this.cid, this.elementsViewmodel,this.errorSelector);
         if(!isValid){return;}
         var url = this.createUrl();
-        $("#reportBody").attr("src",url);
+        window.open(url);
     },
     createUrl:function(data){
     }
-}
+};
 
 KYT.mixins.formMixin = {
     events:{
@@ -202,7 +202,12 @@ KYT.mixins.setupGridMixin = {
         } else {
             this.options.gridId = "gridContainer";
         }
-
+        if(this.options.NoMultiSelectGridView){
+            this.options.gridOptions = this.options.gridOptions
+                ?this.options.gridOptions.multiselect = false
+                :this.options.gridOptions={multiselect:false};
+        }
+        this.options.searchField = this.options.gridDef.SearchField ||this.options.searchField;
         $("#" + this.options.gridId, this.el).AsGrid(this.options.gridDef, this.options.gridOptions);
         ///////
         $(this.el).gridSearch({onClear:$.proxy(this.removeSearch, this),onSubmit:$.proxy(this.search, this)});

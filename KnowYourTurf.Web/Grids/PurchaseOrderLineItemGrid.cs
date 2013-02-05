@@ -27,6 +27,8 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x => x.SubTotal).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.Tax).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.TotalReceived);
+            GridBuilder.SetSearchField(x => x.Product.Name);
+            GridBuilder.SetDefaultSortColumn(x => x.Product.Name);
             return this;
         }
     }
@@ -50,6 +52,8 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x => x.SubTotal).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.Tax).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.TotalReceived);
+            GridBuilder.SetSearchField(x => x.Product.Name);
+            GridBuilder.SetDefaultSortColumn(x => x.Product.Name);
             return this;
         }
     }
@@ -69,6 +73,8 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x => x.SubTotal).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.Tax).FormatValue(GridColumnFormatter.Currency);
             GridBuilder.DisplayFor(x => x.TotalReceived);
+            GridBuilder.SetSearchField(x => x.Product.Name);
+            GridBuilder.SetDefaultSortColumn(x => x.Product.Name);
             return this;
         }
     }

@@ -96,6 +96,9 @@ namespace DBFluentMigration.Iteration_0
             _permissions.CreateControllerPermission(UserType.Administrator,"VendorListController");
             _permissions.CreateControllerPermission(UserType.Administrator,"WeatherController");
             _permissions.CreateControllerPermission(UserType.Administrator,"WeatherListController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "TasksByFieldController");
+
+            
 
             _permissions.CreateMenuPermission(UserType.Administrator, "EquipmentTasks");
             _permissions.CreateMenuPermission(UserType.Administrator, "EquipmentTasksLists");
@@ -130,7 +133,9 @@ namespace DBFluentMigration.Iteration_0
             _permissions.CreateMenuPermission(UserType.Administrator, "Current");
             _permissions.CreateMenuPermission(UserType.Administrator, "Completed");
             _permissions.CreateMenuPermission(UserType.Administrator, "Reports");
-        
+
+           
+
         }
 
         public void GrantFacilitiesPermissions()

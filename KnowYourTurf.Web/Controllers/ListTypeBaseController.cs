@@ -402,15 +402,15 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult AddUpdate_Template(ViewModel input)
         {
-            return View("AddUpdate", new ListTypeViewModel());
+            return View("AddUpdate", new EquipmentTypeViewModel());
         }
 
         public ActionResult AddUpdate(ViewModel input)
         {
             var listType = getListType(input);
-            var model = Mapper.Map<EquipmentType, ListTypeViewModel>(listType);
+            var model = Mapper.Map<EquipmentType, EquipmentTypeViewModel>(listType);
             model._Title = WebLocalizationKeys.EQUIPMENT_TYPE_INFORMATION.ToString();
-            model._saveUrl = UrlContext.GetUrlForAction<EquipmentTypeController>(x => x.SaveListType(null));
+            model._saveUrl = UrlContext.GetUrlForAction<EquipmentTypeController>(x => x.SaveEquipmentType(null));
             model._StatusList = _selectListItemService.CreateList<Status>();
             return new CustomJsonResult(model);
         }
@@ -434,6 +434,14 @@ namespace KnowYourTurf.Web.Controllers
                 return false;
             }
             return true;
+        }
+
+        public ActionResult SaveEquipmentType(EquipmentTypeViewModel input)
+        {
+            var listType = mapListType(input);
+            listType.TaskColor = input.TaskColor;
+            var notification = saveListType(listType);
+            return new CustomJsonResult(notification);
         }
     }
 

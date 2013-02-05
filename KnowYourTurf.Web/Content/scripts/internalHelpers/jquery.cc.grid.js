@@ -39,7 +39,10 @@ if (typeof cc.grid == 'undefined') {
             },
             sortorder: "asc",
             sortname:cc.grid.columnService.defaultSortColumnName(gridDefinition),
-            onSortCol:function(index,iCol,sortorder) {cc.gridHelper.adjustSortStyles(index,iCol,sortorder);},
+            onSortCol:function(index,iCol,sortorder) {
+                cc.gridHelper.adjustSortStyles(index,iCol,sortorder);
+                
+            },
             jsonReader: {
 
 
