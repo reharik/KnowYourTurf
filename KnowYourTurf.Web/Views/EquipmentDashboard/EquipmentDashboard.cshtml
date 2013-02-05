@@ -20,6 +20,9 @@
     @Html.SubmissionFor(x => x.TotalHours).Size("5").ToHtmlTag()
     @Html.SubmissionFor(x => x.Threshold).Size("5").ToHtmlTag()
 </div>
+<div class="row">
+    @Html.SubmissionFor(x => x.WebSite).Size("10").ToHtmlTag()
+</div>
             
 <div class="row">
     @Html.SubmissionFor(x => x._Photos).Size("20").InputId("photoGallery").HideLabel().ToHtmlTag()
@@ -37,8 +40,8 @@
     <div class="span10">
         <div class="row dashboardGrid">
             <div class="span10">
-                <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
-                <div id="pendingTaskGridContainer" class="dashboardGrid"></div>
+                <div class="gridHeader">@WebLocalizationKeys.PENDING_EQUIPMENT_TASKS</div>
+                <div id="pendingEquipmentTaskGridContainer" class="dashboardGrid"></div>
             </div>
         </div>
         <div class="row  dashboardGrid">
@@ -52,8 +55,8 @@
     <div class="span10">
         <div class="row  dashboardGrid">
             <div class="span10">
-                <div class="gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
-                <div id="completedTaskGridContainer" class="dashboardGrid"></div>
+                <div class="gridHeader">@WebLocalizationKeys.COMPLETED_EQUIPMENT_TASKS</div>
+                <div id="completedEquipmentTaskGridContainer" class="dashboardGrid"></div>
             </div>
         </div>
         <div class="row  dashboardGrid">

@@ -36,8 +36,8 @@ namespace KnowYourTurf.Web.Controllers
         {
             _repository = repository;
             _dynamicExpressionQuery = dynamicExpressionQuery;
-            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("PendingTasks");
-            _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("CompletedTasks");
+            _pendingTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("PendingEquipmentTasks");
+            _completedTaskGrid = ObjectFactory.Container.GetInstance<IEntityListGrid<EquipmentTask>>("CompletedEquipmentTasks");
             _photoListGrid = photoListGrid;
             _documentListGrid = documentListGrid;
             _selectListItemService = selectListItemService;

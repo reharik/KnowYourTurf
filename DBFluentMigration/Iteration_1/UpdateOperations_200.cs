@@ -26,6 +26,7 @@ namespace DBFluentMigration.Iteration_2
             _operations.CreateOperationForControllerType("SystemSupportController");
             _operations.CreateOperationForControllerType("UserController");
             _operations.CreateOperationForControllerType("UserListController");
+            _operations.CreateOperationForControllerType("EmployeeDailyTasksController");
         }
 
         public void CreateMenuItemOptions()
@@ -46,6 +47,7 @@ namespace DBFluentMigration.Iteration_2
             _operations.CreateOperationForMenuItem("LoginInformation");
             _operations.CreateOperationForMenuItem("PermissionUserGroups");
             _operations.CreateOperationForMenuItem("SystemOffLine");
+            _operations.CreateOperationForMenuItem("EmployeeDailyTasks");
         }
     }
 }

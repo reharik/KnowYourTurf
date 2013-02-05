@@ -118,7 +118,7 @@ namespace KnowYourTurf.Web.Controllers
             equipment.Description = input.Description;
             equipment.EquipmentType = input.EquipmentTypeEntityId > 0 ? _repository.Find<EquipmentType>(input.EquipmentTypeEntityId) : null;
             equipment.EquipmentVendor = input.EquipmentVendorEntityId > 0 ? _repository.Find<EquipmentVendor>(input.EquipmentVendorEntityId) : null;
-
+            equipment.WebSite = input.WebSite;
             
             var crudManager = _saveEntityService.ProcessSave(equipment);
             var notification = crudManager.Finish();
@@ -145,6 +145,7 @@ namespace KnowYourTurf.Web.Controllers
         public double TotalHours { get; set; }
         public double Threshold { get; set; }
         public bool DeleteImage { get; set; }
+        public string WebSite { get; set; }
     
         public string _completedGridUrl { get; set; }
         public string _documentGridUrl { get; set; }

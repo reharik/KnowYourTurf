@@ -261,6 +261,10 @@ namespace KnowYourTurf.Web
         public static readonly StringToken REQUIRED = new WebLocalizationKeys("REQUIRED", "Required");
         public static readonly StringToken ABBR = new WebLocalizationKeys("ABBR", "Abbr.");
 
+        public static readonly StringToken EMPLOYEE_DAILY_TASKS = new WebLocalizationKeys("EMPLOYEE_DAILY_TASKS", "Employee Daily Tasks");
+
+        public static readonly StringToken PENDING_EQUIPMENT_TASKS = new WebLocalizationKeys("PENDING_EQUIPMENT_TASKS", "Pending Equipment Tasks");
+
 
     }
 }

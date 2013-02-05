@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace KnowYourTurf.Web {
+namespace KnowYourTurf.Web.Areas.Reports.XSD {
     
     
     /// <summary>
@@ -853,7 +853,7 @@ namespace KnowYourTurf.Web {
         }
     }
 }
-namespace KnowYourTurf.Web.TasksByFieldTableAdapters {
+namespace KnowYourTurf.Web.Areas.Reports.XSD.TasksByFieldTableAdapters {
     
     
     /// <summary>

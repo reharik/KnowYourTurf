@@ -199,10 +199,30 @@ KYT.Views.EmployeeDashboardView = KYT.Views.View.extend({
                 multiselect:false
             }
         });
+        this.pendingEMGridView = new KYT.Views.DahsboardGridView({el:"#pendingEquipmentTaskGridContainer",
+            url:this.model._pendingEMGridUrl(),
+            route:"equipmenttask",
+            gridId:"pendingEquipmentTaskList",
+            gridOptions:{
+                multiselect:false
+            }
+        });
+        this.completedEMGridView = new KYT.Views.DahsboardGridView({el:"#completedEquipmentTaskGridContainer",
+            url:this.model._completedEMGridUrl(),
+            gridId:"completedEquipmentTaskList",
+            route:"equipmenttaskdisplay",
+            gridOptions:{
+                multiselect:false
+            }
+        });
         this.pendingGridView.render();
         this.completedGridView.render();
+        this.pendingEMGridView.render();
+        this.completedEMGridView.render();
         this.storeChild(this.pendingGridView);
         this.storeChild(this.completedGridView);
+        this.storeChild(this.pendingEMGridView);
+        this.storeChild(this.completedEMGridView);
     },
     callbackAction: function(){
         this.pendingGridView.callbackAction();
@@ -288,17 +308,17 @@ KYT.Views.EquipmentDashboardView = KYT.Views.View.extend({
         this.addIdsToModel();
         var rel = KYT.State.get("Relationships");
         this.pendingGridView = new KYT.Views.DahsboardGridView({
-            el:"#pendingTaskGridContainer",
+            el:"#pendingEquipmentTaskGridContainer",
             url:this.model._pendingGridUrl(),
-            gridId:"pendingTaskList",
+            gridId:"pendingEquipmentTaskList",
             parentId:rel.entityId,
             rootId: rel.parentId,
             route:"equipmenttask"
         });
         this.completedGridView = new KYT.Views.DahsboardGridView({
-            el:"#completedTaskGridContainer",
+            el:"#completedEquipmentTaskGridContainer",
             url:this.model._completedGridUrl(),
-            gridId:"completedTaskList",
+            gridId:"completedEquipmentTaskList",
             parentId:rel.entityId,
             rootId: rel.parentId,
             gridOptions:{
@@ -1038,7 +1058,7 @@ KYT.Views.CompletedTaskListView = KYT.Views.View.extend({
 
 KYT.Views.PendingEquipmentTaskListView = KYT.Views.View.extend({
     initialize: function(){
-       this.options.gridId="pendingTaskList";
+       this.options.gridId="pendingEquipmentTaskList";
         KYT.mixin(this, "ajaxGridMixin");
         KYT.mixin(this, "setupGridMixin");
         KYT.mixin(this, "defaultGridEventsMixin");
@@ -1055,7 +1075,7 @@ KYT.Views.PendingEquipmentTaskListView = KYT.Views.View.extend({
 
 KYT.Views.CompletedEquipmentTaskListView = KYT.Views.View.extend({
     initialize: function(){
-        this.options.gridId="completedTaskList";
+        this.options.gridId="completedEquipmentTaskList";
         KYT.mixin(this, "ajaxGridMixin");
         KYT.mixin(this, "setupGridMixin");
         KYT.mixin(this, "defaultGridEventsMixin");

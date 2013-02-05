@@ -72,16 +72,34 @@
 @*-----------Left Column-------------*@
     <div class="span10">
         <div class="row dashboardGrid">
-            <div class="span10 gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
-            <div id="pendingTaskGridContainer" ></div>
+            <div class="span10">
+                <div class="gridHeader">@WebLocalizationKeys.PENDING_TASKS</div>
+                <div id="pendingTaskGridContainer" ></div>
+            </div>
+        </div>
+        <div class="row dashboardGrid">
+            <div class="span10">
+                <div class="gridHeader">@WebLocalizationKeys.PENDING_EQUIPMENT_TASKS</div>
+                <div id="pendingEquipmentTaskGridContainer" class="dashboardGrid"></div>
+            </div>
         </div>
     </div>
+    
+
     <div class="span1"></div>
 @*-----------Right Column-------------*@
     <div class="span10">
         <div class="row dashboardGrid">
-            <div class="span10 gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
-            <div id="completedTaskGridContainer" class="grid_4 KYT_AddNew_space"></div>
+            <div class="span10">
+                <div class="gridHeader">@WebLocalizationKeys.COMPLETED_TASKS</div>
+                <div id="completedTaskGridContainer" ></div>
+            </div>
+        </div>
+         <div class="row  dashboardGrid">
+            <div class="span10">
+                <div class="gridHeader">@WebLocalizationKeys.COMPLETED_EQUIPMENT_TASKS</div>
+                <div id="completedEquipmentTaskGridContainer" class="dashboardGrid"></div>
+            </div>
         </div>
     </div>
 </div>

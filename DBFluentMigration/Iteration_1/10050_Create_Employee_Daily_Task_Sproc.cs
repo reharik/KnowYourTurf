@@ -2,12 +2,12 @@
 
 namespace DBFluentMigration.Iteration_1
 {
-    [Migration(10040)]
-    public class Add_Start_and_End_Date_to_TasksByField : Migration
+    [Migration(10050)]
+    public class Create_Employee_Daily_Task_Sproc : Migration
     {
         public override void Up()
         {
-            string sql = System.IO.File.ReadAllText(@"dbfluentmigration\AlterTasksByField.sql");
+            string sql = System.IO.File.ReadAllText(@"dbfluentmigration\Create_EmployeeDailyTasks_Sproc.sql");
             Execute.Sql(sql);
         }
 

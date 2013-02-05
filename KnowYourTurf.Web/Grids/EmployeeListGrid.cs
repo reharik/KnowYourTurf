@@ -16,7 +16,6 @@ namespace KnowYourTurf.Web.Grids
         {
             GridBuilder.LinkColumnFor(x => x.FullName)
                 .ToPerformAction(ColumnAction.Redirect)
-                .IsSortable(false)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.EmployeeId);
             GridBuilder.DisplayFor(x => x.PhoneMobile);

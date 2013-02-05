@@ -42,7 +42,6 @@
             Rename.Column("CompanyId").OnTable("Client").To("ClientId");
             Rename.Column("Company_Id").OnTable("User").To("Client_Id");
             Rename.Column("Company_Id").OnTable("Site").To("Client_Id");
-            Rename.Column("Company").OnTable("VendorBase").To("Client");
         }
 
         public override void Down()
@@ -82,7 +81,6 @@
             Rename.Column("ClientId").OnTable("Client").To("CompanyId");
             Rename.Column("Client_Id").OnTable("User").To("Company_Id");
             Rename.Column("Client_Id").OnTable("Site").To("Company_Id");
-            Rename.Column("Client").OnTable("VendorBase").To("Company");
         }
     }
 }
