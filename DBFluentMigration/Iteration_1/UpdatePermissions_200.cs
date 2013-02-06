@@ -46,7 +46,7 @@ namespace DBFluentMigration.Iteration_1
             _permissions.CreateControllerPermission(UserType.Administrator, "SystemSupportController");
             _permissions.CreateControllerPermission(UserType.Administrator, "UserController");
             _permissions.CreateControllerPermission(UserType.Administrator, "UserListController");
-            _permissions.CreateControllerPermission(UserType.Administrator, "EmployeeDailyTasksControler");
+            _permissions.CreateControllerPermission(UserType.Administrator, "EmployeeDailyTasksController");
 
         }
 
