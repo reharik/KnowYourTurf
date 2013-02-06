@@ -49,8 +49,8 @@ namespace KnowYourTurf.WeatherTask
         private static string GetConnectionStringStatic(string key)
         {
             // should work for production. please test
-//            var xdoc = XDocument.Load(@"..\..\appSettings.config");
-            var xdoc = XDocument.Load(@"..\..\..\appSettings.config");
+            var xdoc = XDocument.Load(@"..\..\appSettings.config");
+//            var xdoc = XDocument.Load(@"..\..\..\appSettings.config");
             var connStrings = xdoc.Descendants("add").Where(x => x.Attribute("key").Value.Equals(key));
             return connStrings.FirstOrDefault().Attribute("value").Value;
         }
