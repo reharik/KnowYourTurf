@@ -124,7 +124,7 @@ span#login-links a.active {
 }
 
 .content-outer .content-inner {
-    min-height: 400px;
+    /*min-height: 400px;*/
     background: white;
     padding-bottom: 3px;
     position: relative;

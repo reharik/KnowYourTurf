@@ -365,7 +365,11 @@ KYT.Views.EquipmentDashboardView = KYT.Views.View.extend({
 KYT.Views.DahsboardGridView = KYT.Views.View.extend({
      initialize: function(){
         this.options.gridOptions=this.options.gridOptions||{};
-        this.options.gridOptions.height="400px";
+        // this is to override the grid resize from cc.jquery.jqgrid
+        this.options.gridOptions.gridComplete=function(){
+             $(this).find(".cbox").parent().addClass("jqg_cb");
+         };
+         this.options.gridOptions.height="300px";
         KYT.mixin(this, "ajaxGridMixin");
         KYT.mixin(this, "setupGridMixin");
         KYT.mixin(this, "defaultGridEventsMixin");
