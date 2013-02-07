@@ -3,17 +3,26 @@ using CC.Core.CoreViewModelAndDTOs;
 
 namespace KnowYourTurf.Core
 {
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+
+    using KnowYourTurf.Core.Domain;
+
     public class CalendarViewModel : ViewModel
     {
         public CalendarDefinition CalendarDefinition { get; set; }
         public string DeleteUrl { get; set; }
 
+        public IEnumerable<SelectListItem> _TaskTypeList { get; set; }
+        public TaskType TaskType { get; set; }
     }
 
     public class GetEventsViewModel:ViewModel
     {
         public double start { get; set; }
         public double end { get; set; }
+
+        public int taskType { get; set; }
     }
 
     public class CalendarDefinition

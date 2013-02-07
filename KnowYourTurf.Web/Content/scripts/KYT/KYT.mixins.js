@@ -31,7 +31,7 @@ KYT.mixins.modelAndElementsMixin = {
                  that.mappingOptions.ignore.push(item);});
         }
         this.model = ko.mapping.fromJS(this.rawModel,this.mappingOptions);
-        this.extendModel();
+        this.extendModel(this.model);
         ko.applyBindings(this.model,this.el);
         this.elementsViewmodel = CC.elementService.getElementsViewmodel(this);
         var ignore = _.filter(_.keys(this.model),function(item){
@@ -39,22 +39,43 @@ KYT.mixins.modelAndElementsMixin = {
         });
         _.each(ignore,function(item){
             that.mappingOptions.ignore.push(item);});
+        this.renderElements();
         this.mappingOptions.ignore.push("_availableItems");
         this.mappingOptions.ignore.push("_resultsItems");
         KYT.vent.trigger("model:"+this.id+"modelLoaded");
     },
-    extendModel:function(){
-        this.model._createdText = ko.computed(function() {
-            if(this.model.EntityId()>0 && this.model.DateCreated()){
-                return "Added " + new XDate(this.model.DateCreated()).toString("MMM d, yyyy");
+    bindSpecificModelAndElements:function(viewModel){
+        var that = this;
+        this.mappingOptions ={ ignore:[] };
+        this.viewModel = ko.mapping.fromJS(viewModel);
+        this.extendModel(this.viewModel);
+        ko.applyBindings(this.viewModel,this.el);
+        this.elementsViewmodel = CC.elementService.getElementsViewmodel(this);
+        var ignore = _.filter(_.keys(this.viewModel),function(item){
+            return (item.indexOf('_') == 0 && item != "__ko_mapping__");
+        });
+        _.each(ignore,function(item){
+            that.mappingOptions.ignore.push(item);});
+        this.renderElements();
+    },
+    renderElements:function(){
+        var collection = this.elementsViewmodel.collection;
+        for(var item in collection){
+            collection[item].render();
+        }
+    },
+    extendModel:function(model){
+        model._createdText = ko.computed(function() {
+            if(model.EntityId()>0 && model.DateCreated()){
+                return "Added " + new XDate(model.DateCreated()).toString("MMM d, yyyy");
             }
             return "";
         }, this);
-        this.model._title = ko.computed(function(){
-            if(this.model.EntityId()<=0 && this.model._Title()){
-                return "Add New "+this.model._Title();
+        model._title = ko.computed(function(){
+            if(model.EntityId()<=0 && model._Title()){
+                return "Add New "+model._Title();
             }
-            return this.model._Title() ? this.model._Title() : "";
+            return model._Title() ? model._Title() : "";
         },this);
     },
     addIdsToModel:function(){

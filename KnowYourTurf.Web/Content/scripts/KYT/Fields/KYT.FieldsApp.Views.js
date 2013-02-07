@@ -7,18 +7,31 @@
  */
 
 KYT.Views.CalendarView = KYT.Views.View.extend({
+    initialize: function(){
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    events:{
+        'change [name=TaskType]' : 'resetCalendar'
+    },
     render:function(){
-       KYT.repository.ajaxGet(this.options.url, this.options.data)
-           .done($.proxy(this.renderCallback,this));
+        $.when(KYT.loadTemplateAndModel(this))
+            .done($.proxy(this.renderCallback,this));
+//       KYT.repository.ajaxGet(this.options.url, this.options.data)
+//           .done($.proxy(this.renderCallback,this));
     },
     renderCallback:function(result){
-        $(this.el).html($('<div>').attr('id','calendar'));
-        this.model = result.CalendarDefinition;
-        this.model.id=this.id;
-        $("#calendar",this.el).asCalendar(this.model);
+        this.model = this.rawModel;
+        this.model.id= this.model.CalendarDefinition.id = this.id;
+        $("div.form-scroll-inner").height(window.innerHeight-160);
+        $("#calendar",this.el).asCalendar(this.model.CalendarDefinition);
+        this.bindSpecificModelAndElements({TaskType:this.model.TaskType,
+            _TaskTypeList:this.model._TaskTypeList,
+            _Title:this.model._Title,
+            EntityId:0
+        });
         //callback for render
         this.viewLoaded();
-        //general notification of pageloaded
+        $("#calendar",this.el).fullCalendar('option', 'height', $("div.form-scroll-inner").height());
         KYT.vent.trigger("calendar:"+this.id+":pageLoaded",this.options);
         this.calendarBindings();
     },
@@ -154,11 +167,19 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             rootId:rootId
         };
     },
+    resetCalendar:function(){
+        var taskTypeId = this.viewModel.TaskType();
+        this.replaceSource({url : this.model.CalendarDefinition.Url, data:{taskType:taskTypeId} });
+        this.reload();
+    },
 
     reload:function(){
         $('#calendar',this.el).fullCalendar( 'refetchEvents' )
     },
 
+    replaceSource:function(source){
+        $("#calendar",this.el).fullCalendar( 'replaceEventSource', source )
+    },
     formSuccess:function(){
         this.formCancel();
         this.reload();

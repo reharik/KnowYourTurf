@@ -621,11 +621,6 @@
     <Content Include="Views\UserProfile\EmailConfirmed.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\AddressTemplate.cshtml" />
-    <Content Include="Views\Shared\EmailTemplate.cshtml" />
-    <Content Include="Views\Shared\PhoneTemplate.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
@@ -636,22 +631,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_ContentAreaLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\_FormLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_AssetDetailLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\_DetailLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\_EmptyLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\_ListLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Orthogonal\KnowYourTurfHeader.cshtml" />
@@ -784,6 +767,7 @@
     </Content>
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
+    <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Reporting\RDLC\EmployeeDailyTasks.rdlc" />
