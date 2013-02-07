@@ -218,6 +218,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Reports\Controllers\TestController.cs" />
     <Compile Include="Areas\Reports\Controllers\EmployeeDailyTasksController.cs" />
     <Compile Include="Areas\Reports\Controllers\TasksByFieldController.cs" />
     <Compile Include="Areas\Reports\ReportsAreaRegistration.cs">
@@ -237,6 +238,9 @@
     <Compile Include="Areas\Reports\ReportViewer\TasksByField.aspx.designer.cs">
       <DependentUpon>TasksByField.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Test\Controllers\TasksByFieldController.cs" />
+    <Compile Include="Areas\Test\Controllers\TestController.cs" />
+    <Compile Include="Areas\Test\TestAreaRegistration.cs" />
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
@@ -592,6 +596,8 @@
   <ItemGroup>
     <Folder Include="Areas\Reports\Models\" />
     <Folder Include="Areas\Reports\Views\Shared\" />
+    <Folder Include="Areas\Test\Models\" />
+    <Folder Include="Areas\Test\Views\Shared\" />
     <Folder Include="Models\Email\" />
     <Folder Include="Models\TokenInputDto\" />
     <Folder Include="Properties\" />
@@ -762,6 +768,7 @@
       <DependentUpon>TasksByField.xsd</DependentUpon>
     </Content>
     <Content Include="Areas\Reports\Views\EmployeeDailyTasks\Display.cshtml" />
+    <Content Include="Areas\Reports\Views\Test\Display.cshtml" />
     <None Include="Areas\Reports\XSD\TasksByField.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TasksByField.Designer.cs</LastGenOutput>
@@ -782,6 +789,9 @@
     <Content Include="Areas\Reports\XSD\EmployeeDailyTasks.xss">
       <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
     </Content>
+    <Content Include="Areas\Test\Views\Web.config" />
+    <Content Include="Areas\Test\Views\TasksByField\Display.cshtml" />
+    <Content Include="Areas\Test\Views\Test\Display.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>
