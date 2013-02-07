@@ -16,7 +16,7 @@ namespace KnowYourTurf.Web.Areas.Reports.Controllers
     using KnowYourTurf.Web.Controllers;
     using KnowYourTurf.Web.Config;
 
-    public class TasksByFieldController : AdminControllerBase
+    public class TasksByFieldController : KYTController
     {
         private readonly IRepository _repository;
         private readonly ISelectListItemService _selectListItemService;
