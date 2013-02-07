@@ -9,13 +9,12 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Menus
 {
-    using KnowYourTurf.Web.Areas.Reports.Controllers;
+    using KnowYourTurf.Web.Areas.Reporting.Controllers;
 
     public class MainMenu : IMenuConfig
     {
         private readonly IKYTMenuBuilder _builder;
         private readonly ISessionContext _sessionContext;
-        private readonly IRepository _repository;
 
         public MainMenu(IKYTMenuBuilder builder, ISessionContext sessionContext)
         {

@@ -594,7 +594,7 @@ namespace Generator
         {
             _vendor1 = new FieldVendor
             {
-                Client = "Some Client1",
+                Company = "Some Client1",
                 Phone = "555.123.4567",
                 Fax = "123.456.7891",
                 Website = "www.somewebsite1.com",
@@ -605,7 +605,7 @@ namespace Generator
 
             _vendor2 = new FieldVendor
             {
-                Client = "Some Client2",
+                Company = "Some Client2",
                 Phone = "555.123.4567",
                 Fax = "123.456.7891",
                 Website = "www.somewebsite2.com",

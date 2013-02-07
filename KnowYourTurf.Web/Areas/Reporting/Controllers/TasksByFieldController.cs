@@ -1,13 +1,11 @@
 ﻿
-using System;
-
-namespace KnowYourTurf.Web.Areas.Reports.Controllers
+namespace KnowYourTurf.Web.Areas.Reporting.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
 
     using CC.Core.CoreViewModelAndDTOs;
-    using CC.Core.DomainTools;
     using CC.Core.Services;
 
     using Castle.Components.Validator;
@@ -16,14 +14,12 @@ namespace KnowYourTurf.Web.Areas.Reports.Controllers
     using KnowYourTurf.Web.Controllers;
     using KnowYourTurf.Web.Config;
 
-    public class TasksByFieldController : AdminControllerBase
+    public class TasksByFieldController : KYTController
     {
-        private readonly IRepository _repository;
         private readonly ISelectListItemService _selectListItemService;
 
-        public TasksByFieldController(IRepository repository, ISelectListItemService selectListItemService)
+        public TasksByFieldController(ISelectListItemService selectListItemService)
         {
-            this._repository = repository;
             this._selectListItemService = selectListItemService;
         }
         public ActionResult Display_Template(ViewModel input)
@@ -40,7 +36,7 @@ namespace KnowYourTurf.Web.Areas.Reports.Controllers
                 EndDate = DateTime.Now,
                 _FieldEntityIdList = this._selectListItemService.CreateList<Field>( x => x.Name, x => x.EntityId, true),
                 _Title = WebLocalizationKeys.TASKS_BY_FIELD.ToString(),
-                ReportUrl = "/Areas/Reports/ReportViewer/TasksByField.aspx"
+                ReportUrl = "/Areas/Reporting/ReportViewer/TasksByField.aspx"
             };
             return new CustomJsonResult(model);
         }

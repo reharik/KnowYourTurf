@@ -33,7 +33,7 @@ namespace KnowYourTurf.Web.Controllers
             {
                 gridDef = _vendorContactListGrid.GetGridDefinition(url, input.User),
                 deleteMultipleUrl = UrlContext.GetUrlForAction<VendorContactController>(x => x.DeleteMultiple(null)) + "?ParentId=" + input.ParentId,
-                _Title = "("+vendor.Client+") "+ WebLocalizationKeys.VENDOR_CONTACTS
+                _Title = "("+vendor.Company+") "+ WebLocalizationKeys.VENDOR_CONTACTS
             };
             model.headerButtons.Add("new");
             model.headerButtons.Add("delete");

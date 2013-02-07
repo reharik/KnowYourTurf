@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EmployeeDailyTasks.aspx.cs" Inherits="KnowYourTurf.Web.Areas.Reports.ReportViewer.EmployeeDailyTasks" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EmployeeDailyTasks.aspx.cs" Inherits="KnowYourTurf.Web.Areas.Reporting.ReportViewer.EmployeeDailyTasks" %>
 
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 
@@ -20,7 +20,7 @@
             WaitMessageFont-Size="14pt"
             Width="875"
             Height="875">
-            <LocalReport ReportPath="Areas\Reports\RDLC\EmployeeDailyTasks.rdlc">
+            <LocalReport ReportPath="Areas\Reporting\RDLC\EmployeeDailyTasks.rdlc">
                 <DataSources>
                     <rsweb:ReportDataSource DataSourceId="SqlDataSource1" Name="EmployeeDailyTasks" />
                 </DataSources>

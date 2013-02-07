@@ -1,8 +1,7 @@
 ﻿
-using System;
-
-namespace KnowYourTurf.Web.Areas.Reports.Controllers
+namespace KnowYourTurf.Web.Areas.Reporting.Controllers
 {
+    using System;
     using System.Web.Mvc;
 
     using CC.Core.CoreViewModelAndDTOs;
@@ -19,7 +18,7 @@ namespace KnowYourTurf.Web.Areas.Reports.Controllers
 
         public EmployeeDailyTasksController(ISessionContext sessionContext)
         {
-            _sessionContext = sessionContext;
+            this._sessionContext = sessionContext;
         }
 
         public ActionResult Display_Template(ViewModel input)
@@ -33,9 +32,9 @@ namespace KnowYourTurf.Web.Areas.Reports.Controllers
             var model = new EmployeeDailyTasksViewModel
             {
                 Date = DateTime.Now,
-                ClientId = _sessionContext.GetClientId(),
+                ClientId = this._sessionContext.GetClientId(),
                 _Title = WebLocalizationKeys.EMPLOYEE_DAILY_TASKS.ToString(),
-                ReportUrl = "/Areas/Reports/ReportViewer/EmployeeDailyTasks.aspx"
+                ReportUrl = "/Areas/Reporting/ReportViewer/EmployeeDailyTasks.aspx"
             };
             return new CustomJsonResult(model);
         }
