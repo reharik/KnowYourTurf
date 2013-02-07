@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KnowYourTurf.Web.Areas.Reports.ReportViewer {
+namespace KnowYourTurf.Web.Areas.Reporting.ReportViewer {
     
     
-    public partial class EmployeeDailyTasks {
+    public partial class TasksByField {
         
         /// <summary>
         /// Head1 control.

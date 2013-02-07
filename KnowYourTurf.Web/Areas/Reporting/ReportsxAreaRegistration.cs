@@ -1,22 +1,22 @@
-﻿using System.Web.Mvc;
-
-namespace KnowYourTurf.Web.Areas.Test
+﻿namespace KnowYourTurf.Web.Areas.Reporting
 {
-    public class TestAreaRegistration : AreaRegistration
+    using System.Web.Mvc;
+
+    public class ReportingAreaRegistration : AreaRegistration
     {
         public override string AreaName
         {
             get
             {
-                return "Test";
+                return "Reporting";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Test_default",
-                "Test/{controller}/{action}/{EntityId}",
+                "Reporting_default",
+                "Reporting/{controller}/{action}/{EntityId}",
                 new { action = "Index", EntityId = UrlParameter.Optional }
             );
         }

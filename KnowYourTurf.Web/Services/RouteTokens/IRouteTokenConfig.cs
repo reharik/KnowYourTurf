@@ -5,7 +5,7 @@ using KnowYourTurf.Web.Controllers;
 namespace KnowYourTurf.Web.Services.ViewOptions
 {
     using KnowYourTurf.Core.RouteTokens;
-    using KnowYourTurf.Web.Areas.Reports.Controllers;
+    using KnowYourTurf.Web.Areas.Reporting.Controllers;
 
     public interface IRouteTokenConfig
     {
@@ -115,8 +115,8 @@ namespace KnowYourTurf.Web.Services.ViewOptions
 
             _builder.TokenForForm<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)).AddUpdateToken("purchaseorderlineitem").End();
 
-            _builder.TokenForForm<TasksByFieldController>(x => x.Display(null), AreaName.Reportsx).ViewName("TasksByFieldView").End();
-            _builder.TokenForForm<EmployeeDailyTasksController>(x => x.Display(null), AreaName.Reportsx).ViewName("EmployeeDailyTaskView").End();
+            _builder.TokenForForm<TasksByFieldController>(x => x.Display(null), AreaName.Reporting).ViewName("TasksByFieldView").End();
+            _builder.TokenForForm<EmployeeDailyTasksController>(x => x.Display(null), AreaName.Reporting).ViewName("EmployeeDailyTaskView").End();
 
 
             return _builder.Items;

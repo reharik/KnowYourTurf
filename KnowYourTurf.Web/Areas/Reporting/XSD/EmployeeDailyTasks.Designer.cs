@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace KnowYourTurf.Web.Areas.Reportsx.XSD {
+namespace KnowYourTurf.Web.Areas.Reporting.XSD {
     
     
     /// <summary>
@@ -1075,7 +1075,7 @@ namespace KnowYourTurf.Web.Areas.Reportsx.XSD {
         }
     }
 }
-namespace KnowYourTurf.Web.Areas.Reportsx.XSD.EmployeeDailyTasksTableAdapters {
+namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
     
     
     /// <summary>
