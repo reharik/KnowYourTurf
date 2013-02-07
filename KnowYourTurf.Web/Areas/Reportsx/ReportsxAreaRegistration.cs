@@ -2,21 +2,21 @@
 
 namespace KnowYourTurf.Web.Areas.Reports
 {
-    public class ReportsAreaRegistration : AreaRegistration
+    public class ReportsxAreaRegistration : AreaRegistration
     {
         public override string AreaName
         {
             get
             {
-                return "Reports";
+                return "Reportsx";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Reports_default",
-                "Reports/{controller}/{action}/{EntityId}",
+                "Reportsx_default",
+                "Reportsx/{controller}/{action}/{EntityId}",
                 new { action = "Index", EntityId = UrlParameter.Optional }
             );
         }

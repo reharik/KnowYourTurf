@@ -218,24 +218,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\Reports\Controllers\TestController.cs" />
-    <Compile Include="Areas\Reports\Controllers\EmployeeDailyTasksController.cs" />
-    <Compile Include="Areas\Reports\Controllers\TasksByFieldController.cs" />
-    <Compile Include="Areas\Reports\ReportsAreaRegistration.cs">
+    <Compile Include="Areas\Reportsx\Controllers\TestController.cs" />
+    <Compile Include="Areas\Reportsx\Controllers\EmployeeDailyTasksController.cs" />
+    <Compile Include="Areas\Reportsx\Controllers\TasksByFieldController.cs" />
+    <Compile Include="Areas\Reportsx\ReportsxAreaRegistration.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Areas\Reports\ReportViewer\EmployeeDailyTasks.aspx.cs">
+    <Compile Include="Areas\Reportsx\ReportViewer\EmployeeDailyTasks.aspx.cs">
       <DependentUpon>EmployeeDailyTasks.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Areas\Reports\ReportViewer\EmployeeDailyTasks.aspx.designer.cs">
+    <Compile Include="Areas\Reportsx\ReportViewer\EmployeeDailyTasks.aspx.designer.cs">
       <DependentUpon>EmployeeDailyTasks.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Reports\ReportViewer\TasksByField.aspx.cs">
+    <Compile Include="Areas\Reportsx\ReportViewer\TasksByField.aspx.cs">
       <DependentUpon>TasksByField.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Areas\Reports\ReportViewer\TasksByField.aspx.designer.cs">
+    <Compile Include="Areas\Reportsx\ReportViewer\TasksByField.aspx.designer.cs">
       <DependentUpon>TasksByField.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Test\Controllers\TasksByFieldController.cs" />
@@ -244,9 +244,9 @@
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
-    <Content Include="Areas\Reports\ReportViewer\EmployeeDailyTasks.aspx" />
-    <Content Include="Areas\Reports\ReportViewer\TasksByField.aspx" />
-    <Content Include="Areas\Reports\Views\Web.config" />
+    <Content Include="Areas\Reportsx\ReportViewer\EmployeeDailyTasks.aspx" />
+    <Content Include="Areas\Reportsx\ReportViewer\TasksByField.aspx" />
+    <Content Include="Areas\Reportsx\Views\Web.config" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Compile Include="Config\CustomJsonResult.cs" />
     <Compile Include="Config\ModelBinders.cs" />
@@ -317,7 +317,7 @@
     <Compile Include="Controllers\VendorListController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="Controllers\WeatherListController.cs" />
-    <Compile Include="Areas\Reports\XSD\EmployeeDailyTasks.Designer.cs">
+    <Compile Include="Areas\Reportsx\XSD\EmployeeDailyTasks.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
@@ -400,7 +400,7 @@
     <Compile Include="Services\KYTSelectListItemService.cs" />
     <Compile Include="Services\ModelService.cs" />
     <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
-    <Compile Include="Areas\Reports\XSD\TasksByField.Designer.cs">
+    <Compile Include="Areas\Reportsx\XSD\TasksByField.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TasksByField.xsd</DependentUpon>
@@ -594,8 +594,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Reports\Models\" />
-    <Folder Include="Areas\Reports\Views\Shared\" />
+    <Folder Include="Areas\Reportsx\Models\" />
+    <Folder Include="Areas\Reportsx\Views\Shared\" />
     <Folder Include="Areas\Test\Models\" />
     <Folder Include="Areas\Test\Views\Shared\" />
     <Folder Include="Models\Email\" />
@@ -763,30 +763,30 @@
     <Content Include="Views\EquipmentTask\EquipmentTaskAddUpdate.cshtml" />
     <Content Include="Views\EquipmentTask\Display.cshtml" />
     <Content Include="Views\EquipmentVendor\EquipmentVendorAddUpdate.cshtml" />
-    <Content Include="Areas\Reports\Views\TasksByField\Display.cshtml" />
-    <Content Include="Areas\Reports\XSD\TasksByField.xsc">
+    <Content Include="Areas\Reportsx\Views\TasksByField\Display.cshtml" />
+    <Content Include="Areas\Reportsx\XSD\TasksByField.xsc">
       <DependentUpon>TasksByField.xsd</DependentUpon>
     </Content>
-    <Content Include="Areas\Reports\Views\EmployeeDailyTasks\Display.cshtml" />
-    <Content Include="Areas\Reports\Views\Test\Display.cshtml" />
-    <None Include="Areas\Reports\XSD\TasksByField.xsd">
+    <Content Include="Areas\Reportsx\Views\EmployeeDailyTasks\Display.cshtml" />
+    <Content Include="Areas\Reportsx\Views\Test\Display.cshtml" />
+    <None Include="Areas\Reportsx\XSD\TasksByField.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TasksByField.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Areas\Reports\XSD\TasksByField.xss">
+    <Content Include="Areas\Reportsx\XSD\TasksByField.xss">
       <DependentUpon>TasksByField.xsd</DependentUpon>
     </Content>
     <Content Include="Views\Shared\_ReportLayout.cshtml" />
-    <Content Include="Areas\Reports\XSD\EmployeeDailyTasks.xsc">
+    <Content Include="Areas\Reportsx\XSD\EmployeeDailyTasks.xsc">
       <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
     </Content>
-    <None Include="Areas\Reports\XSD\EmployeeDailyTasks.xsd">
+    <None Include="Areas\Reportsx\XSD\EmployeeDailyTasks.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>EmployeeDailyTasks.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Areas\Reports\XSD\EmployeeDailyTasks.xss">
+    <Content Include="Areas\Reportsx\XSD\EmployeeDailyTasks.xss">
       <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
     </Content>
     <Content Include="Areas\Test\Views\Web.config" />
@@ -796,8 +796,8 @@
     <Content Include="Views\Test\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Reports\RDLC\EmployeeDailyTasks.rdlc" />
-    <EmbeddedResource Include="Areas\Reports\RDLC\TasksByField.rdlc" />
+    <EmbeddedResource Include="Areas\Reportsx\RDLC\EmployeeDailyTasks.rdlc" />
+    <EmbeddedResource Include="Areas\Reportsx\RDLC\TasksByField.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
