@@ -240,7 +240,7 @@ namespace Generator
         {
             var vendor = new FieldVendor
             {
-                Client = "KYT Supplier1",
+                Company = "KYT Supplier1",
                 Phone = "555.546.3565",
                 Fax = "555.214.3658",
                 Website = "http://www.supplies.com/",
@@ -298,7 +298,7 @@ namespace Generator
         {
             var vendor = new EquipmentVendor
             {
-                Client = "John Deere",
+                Company = "John Deere",
                 Phone = "555.123.4567",
                 Fax = "123.456.7891",
                 Website = "www.deere.com",

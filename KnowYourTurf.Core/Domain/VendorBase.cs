@@ -13,7 +13,7 @@ namespace KnowYourTurf.Core.Domain
         private readonly IList<VendorContact> _contacts = new List<VendorContact>();
 
         [ValidateNonEmpty]
-        public virtual string Client { get; set; }
+        public virtual string Company { get; set; }
 
         public virtual string Address1 { get; set; }
         public virtual string Address2 { get; set; }

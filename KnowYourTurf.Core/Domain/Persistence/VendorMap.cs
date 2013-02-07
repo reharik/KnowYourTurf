@@ -6,7 +6,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
     {
         public VendorBaseMap()
         {
-            Map(x => x.Client);
+            Map(x => x.Company);
             Map(x => x.Address1);
             Map(x => x.Address2);
             Map(x => x.City);

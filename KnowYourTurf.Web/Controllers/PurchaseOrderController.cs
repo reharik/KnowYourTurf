@@ -47,7 +47,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult AddUpdate(ViewModel input)
         {
             var purchaseOrder = input.EntityId > 0 ? _repository.Find<PurchaseOrder>(input.EntityId) : new PurchaseOrder();
-            var vendors = _selectListItemService.CreateList<FieldVendor>(x=>x.Client,x=>x.EntityId,true);
+            var vendors = _selectListItemService.CreateList<FieldVendor>(x=>x.Company,x=>x.EntityId,true);
 
             POListViewModel model = Mapper.Map<PurchaseOrder, POListViewModel>(purchaseOrder);
             model._VendorEntityIdList = vendors;
