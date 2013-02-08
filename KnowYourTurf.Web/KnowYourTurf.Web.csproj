@@ -396,7 +396,7 @@
     <Compile Include="Services\KYTSelectListItemService.cs" />
     <Compile Include="Services\ModelService.cs" />
     <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
-    <Compile Include="TaskReport.Designer.cs">
+    <Compile Include="Areas\Reporting\XSD\TaskReport.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TaskReport.xsd</DependentUpon>
@@ -754,15 +754,15 @@
     <Content Include="Areas\Reporting\XSD\EmployeeDailyTasks.xss">
       <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
     </Content>
-    <Content Include="TaskReport.xsc">
+    <Content Include="Areas\Reporting\XSD\TaskReport.xsc">
       <DependentUpon>TaskReport.xsd</DependentUpon>
     </Content>
-    <None Include="TaskReport.xsd">
+    <None Include="Areas\Reporting\XSD\TaskReport.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TaskReport.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <Content Include="TaskReport.xss">
+    <Content Include="Areas\Reporting\XSD\TaskReport.xss">
       <DependentUpon>TaskReport.xsd</DependentUpon>
     </Content>
     <None Include="Views\Shared\help.cshtml" />
