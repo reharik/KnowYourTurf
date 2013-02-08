@@ -20,16 +20,26 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
 
-        public TaskCalendarController(IRepository repository,ISaveEntityService saveEntityService)
+        private readonly ISelectListItemService _selectListItemService;
+
+        public TaskCalendarController(IRepository repository,
+            ISaveEntityService saveEntityService,
+            ISelectListItemService selectListItemService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
+            _selectListItemService = selectListItemService;
         }
-
+        public ActionResult TaskCalendar_Template(CalendarViewModel input)
+        {
+            return View("TaskCalendar", new CalendarViewModel());
+        }
         public ActionResult TaskCalendar(ViewModel input)
         {
+            var taskTypes = _selectListItemService.CreateList<TaskType>(x => x.Name, x => x.EntityId,true);
             var model = new CalendarViewModel
                        {
+                           _TaskTypeList = taskTypes,
                            CalendarDefinition = new CalendarDefinition
                                                    {
                                                        Url = UrlContext.GetUrlForAction<TaskCalendarController>(x => x.Events(null))+"?RootId="+input.RootId,
@@ -65,7 +75,8 @@ namespace KnowYourTurf.Web.Controllers
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
             var category = _repository.Find<Site>(input.RootId);
-            var tasks = category.GetAllTasks().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);
+            var tasks = (input.taskType > 0) ? category.GetAllTasks().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime && x.TaskType.EntityId == input.taskType)
+                                            : category.GetAllTasks().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);        
             tasks.ForEachItem(x =>
                        events.Add(new CalendarEvent
                                       {

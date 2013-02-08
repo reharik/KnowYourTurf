@@ -56,9 +56,8 @@ $.extend(CC.Elements.Element.prototype,{
 });
 
 CC.Elements.Textbox = CC.Elements.Element.extend({
-    init:function(){
+    render:function(){
         var that = this;
-        this._super("init",arguments);
         this.type = "textbox";
         this.$input.on("change",function(){that.validate();});
     },
@@ -113,9 +112,8 @@ CC.Elements.Textbox = CC.Elements.Element.extend({
 //});
 
 CC.Elements.DateTextbox = CC.Elements.Element.extend({
-    init:function(){
+    render:function(){
         var that = this;
-        this._super("init",arguments);
         this.type = "datetextbox";
         this.$label = this.$container.find("label");
         this.$input.on("change",function(){that.validate();});
@@ -128,11 +126,9 @@ CC.Elements.DateTextbox = CC.Elements.Element.extend({
 });
 
 CC.Elements.TimeTextbox = CC.Elements.Element.extend({
-    init:function(){
+    render:function(){
         var that = this;
-        this._super("init",arguments);
         this.type = "timetextbox";
-        this.$input = this.$container.find("input");
         this.$input.on("change",function(){that.validate();});
         this.$input.timepicker({showPeriod: true,showLeadingZero: false,
             onClose: function(text, inst){
@@ -147,9 +143,8 @@ CC.Elements.TimeTextbox = CC.Elements.Element.extend({
     }
 });
 CC.Elements.NumberTextbox = CC.Elements.Element.extend({
-    init:function(){
+    render:function(){
         var that = this;
-        this._super("init",arguments);
         this.type = "numbertextbox";
         this.$input.on("change",function(){that.validate();});
     },
@@ -160,9 +155,8 @@ CC.Elements.NumberTextbox = CC.Elements.Element.extend({
 });
 
 CC.Elements.Textarea = CC.Elements.Element.extend({
-    init:function(){
+    render:function(){
         var that = this;
-        this._super("init",arguments);
         this.type = "textarea";
         this.$input.on("change",function(){that.validate();});
     },
@@ -173,9 +167,8 @@ CC.Elements.Textarea = CC.Elements.Element.extend({
 });
 
 CC.Elements.Checkbox = CC.Elements.Element.extend({
-    init:function(){
+    render:function(){
         var that = this;
-        this._super("init",arguments);
         this.type = "checkbox";
         this.$input.on("change",function(){that.validate();});
     },
@@ -186,9 +179,8 @@ CC.Elements.Checkbox = CC.Elements.Element.extend({
 });
 
 CC.Elements.Password= CC.Elements.Element.extend({
-    init:function(){
+    render:function(){
         var that = this;
-        this._super("init",arguments);
         this.type = "textbox";
         this.$input.on("change",function(){that.validate();});
     },
@@ -199,10 +191,14 @@ CC.Elements.Password= CC.Elements.Element.extend({
 });
 
 CC.Elements.FileSubmission = CC.Elements.Element.extend({
-    init:function(view){
+    init:function(){
+        var that = this;
         this._super("init",arguments);
-        this.type = "file";
         this.$input = this.$container.find("#FileUrl");
+        this.name = this.$input.attr('name');
+    },
+    render:function(view){
+        this.type = "file";
         if(view.model.FileUrl()){
             if(view.model.FileUrl().indexOf('.jpg')>0){
                 this.$container.find("#image").show();
@@ -233,9 +229,13 @@ CC.Elements.FileSubmission = CC.Elements.Element.extend({
 
 CC.Elements.PictureGallery= CC.Elements.Element.extend({
     init:function(){
+        var that = this;
         this._super("init",arguments);
-        this.type = "ul";
         this.$input = this.$container.find("ul");
+        this.name = this.$input.attr('name');
+    },
+    render:function(){
+        this.type = "ul";
         if(this.$input.find("li").size()>0){
             this.$input.galleryView({panel_width:500,panel_height:250});
         }
@@ -246,9 +246,12 @@ CC.Elements.Select = CC.Elements.Element.extend({
     init:function(){
         var that = this;
         this._super("init",arguments);
-        this.type = "select";
         this.$input = this.$container.find("select");
         this.name = this.$input.attr('name');
+    },
+    render:function(){
+        var that = this;
+        this.type = "select";
         this.$input.on("change",function(){that.validate();});
         this.$input.select2();
     },
@@ -262,8 +265,12 @@ CC.Elements.MultiSelect = CC.Elements.Element.extend({
     init:function(){
         var that = this;
         this._super("init",arguments);
-        this.type = "select";
         this.$input = this.$container.find("input.multiSelect");
+        this.name = this.$input.attr('name');
+    },
+    render:function(){
+        var that = this;
+        this.type = "select";
         this.$container.on(this.$input.attr("id")+":tokenizer:blur",$.proxy(that.multiSelectBlur,that));
 
     },

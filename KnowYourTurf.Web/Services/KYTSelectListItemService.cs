@@ -8,6 +8,8 @@ using NHibernate.Linq;
 
 namespace KnowYourTurf.Web.Services
 {
+    using System.Collections.Generic;
+
     public class KYTSelectListItemService:SelectListItemService
     {
         private readonly IRepository _repository;
@@ -43,5 +45,41 @@ namespace KnowYourTurf.Web.Services
             }
             return groups;
         }
+
+        public GroupedSelectViewModel CreateProductSelectListItems()
+        {
+            IEnumerable<InventoryProduct> inventory = _repository.FindAll<InventoryProduct>();
+            var chemicals =
+                CreateListWithConcatinatedText(
+                    inventory.Where(i => i.Product.InstantiatingType == "Chemical"),
+                    x => x.Product.Name,
+                    x => x.UnitType,
+                    "-->",
+                    y => y.EntityId,
+                    false);
+            var fertilizer =
+                CreateListWithConcatinatedText(
+                    inventory.Where(i => i.Product.InstantiatingType == "Fertilizer"),
+                    x => x.Product.Name,
+                    x => x.UnitType,
+                    "-->",
+                    x => x.EntityId,
+                    false);
+            var materials =
+                CreateListWithConcatinatedText(
+                    inventory.Where(i => i.Product.InstantiatingType == "Material"),
+                    x => x.Product.Name,
+                    x => x.UnitType,
+                    "-->",
+                    x => x.EntityId,
+                    false);
+            var groups = new GroupedSelectViewModel();
+            groups.groups.Add(new SelectGroup { label = "Chemicals", children = chemicals });
+            groups.groups.Add(new SelectGroup { label = "Ferilizers", children = fertilizer });
+            groups.groups.Add(new SelectGroup { label = "Materials", children = materials });
+
+            return groups;
+        }
+
     }
 }

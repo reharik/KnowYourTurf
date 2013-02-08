@@ -218,8 +218,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Reporting\Controllers\TaskReportController.cs" />
     <Compile Include="Areas\Reporting\Controllers\EmployeeDailyTasksController.cs" />
-    <Compile Include="Areas\Reporting\Controllers\TasksByFieldController.cs" />
     <Compile Include="Areas\Reporting\ReportsxAreaRegistration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -230,18 +230,18 @@
     <Compile Include="Areas\Reporting\ReportViewer\EmployeeDailyTasks.aspx.designer.cs">
       <DependentUpon>EmployeeDailyTasks.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Reporting\ReportViewer\TasksByField.aspx.cs">
-      <DependentUpon>TasksByField.aspx</DependentUpon>
+    <Compile Include="Areas\Reporting\ReportViewer\TaskReport.aspx.cs">
+      <DependentUpon>TaskReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Areas\Reporting\ReportViewer\TasksByField.aspx.designer.cs">
-      <DependentUpon>TasksByField.aspx</DependentUpon>
+    <Compile Include="Areas\Reporting\ReportViewer\TaskReport.aspx.designer.cs">
+      <DependentUpon>TaskReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
     <Content Include="Areas\Reporting\ReportViewer\EmployeeDailyTasks.aspx" />
-    <Content Include="Areas\Reporting\ReportViewer\TasksByField.aspx" />
+    <Content Include="Areas\Reporting\ReportViewer\TaskReport.aspx" />
     <Content Include="Areas\Reporting\Views\Web.config" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Compile Include="Config\CustomJsonResult.cs" />
@@ -396,10 +396,10 @@
     <Compile Include="Services\KYTSelectListItemService.cs" />
     <Compile Include="Services\ModelService.cs" />
     <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
-    <Compile Include="Areas\Reporting\XSD\TasksByField.Designer.cs">
+    <Compile Include="Areas\Reporting\XSD\TaskReport.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TasksByField.xsd</DependentUpon>
+      <DependentUpon>TaskReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="WebLocalizationKeys.cs" />
     <Compile Include="KYTWebRegistry.cs" />
@@ -621,11 +621,6 @@
     <Content Include="Views\UserProfile\EmailConfirmed.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\AddressTemplate.cshtml" />
-    <Content Include="Views\Shared\EmailTemplate.cshtml" />
-    <Content Include="Views\Shared\PhoneTemplate.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
@@ -636,22 +631,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_ContentAreaLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\_FormLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_AssetDetailLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\_DetailLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\_EmptyLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\_ListLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Orthogonal\KnowYourTurfHeader.cshtml" />
@@ -757,19 +740,8 @@
     <Content Include="Views\EquipmentTask\EquipmentTaskAddUpdate.cshtml" />
     <Content Include="Views\EquipmentTask\Display.cshtml" />
     <Content Include="Views\EquipmentVendor\EquipmentVendorAddUpdate.cshtml" />
-    <Content Include="Areas\Reporting\Views\TasksByField\Display.cshtml" />
-    <Content Include="Areas\Reporting\XSD\TasksByField.xsc">
-      <DependentUpon>TasksByField.xsd</DependentUpon>
-    </Content>
     <Content Include="Areas\Reporting\Views\EmployeeDailyTasks\Display.cshtml" />
-    <None Include="Areas\Reporting\XSD\TasksByField.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TasksByField.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Areas\Reporting\XSD\TasksByField.xss">
-      <DependentUpon>TasksByField.xsd</DependentUpon>
-    </Content>
+    <Content Include="Areas\Reporting\Views\TaskReport\Display.cshtml" />
     <Content Include="Views\Shared\_ReportLayout.cshtml" />
     <Content Include="Areas\Reporting\XSD\EmployeeDailyTasks.xsc">
       <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
@@ -782,12 +754,24 @@
     <Content Include="Areas\Reporting\XSD\EmployeeDailyTasks.xss">
       <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
     </Content>
+    <Content Include="Areas\Reporting\XSD\TaskReport.xsc">
+      <DependentUpon>TaskReport.xsd</DependentUpon>
+    </Content>
+    <None Include="Areas\Reporting\XSD\TaskReport.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TaskReport.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Areas\Reporting\XSD\TaskReport.xss">
+      <DependentUpon>TaskReport.xsd</DependentUpon>
+    </Content>
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
+    <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Reporting\RDLC\EmployeeDailyTasks.rdlc" />
-    <EmbeddedResource Include="Areas\Reporting\RDLC\TasksByField.rdlc" />
+    <EmbeddedResource Include="Areas\Reporting\RDLC\TaskReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
