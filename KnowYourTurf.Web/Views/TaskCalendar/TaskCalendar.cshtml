@@ -8,7 +8,7 @@
 }
 
 <div class="content-header">
-    @Html.SubmissionFor(x => x.TaskType).HideLabel().AddClassToRoot("narrow").ToHtmlTag()
+    @Html.SubmissionFor(x => x.TaskType).HideLabel().AddClassToInput("headerDropdown").ToHtmlTag()
     <span class="title-name">@Model._Title</span>
 </div>
 <div id="contentArea" class="content-inner">

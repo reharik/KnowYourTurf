@@ -60,7 +60,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             "ScheduledDate":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "StartTime":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "EndTime":$.fullCalendar.formatDate( event.end,"M/d/yyyy hh:mm TT")};
-        KYT.repository.ajaxGet(this.model.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
+        KYT.repository.ajaxGet(this.model.CalendarDefinition.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
     },
     eventResize:function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){
         var data = {"EntityId":event.EntityId,
@@ -68,13 +68,13 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             "StartTime":$.fullCalendar.formatDate( event.start,"M/d/yyyy hh:mm TT"),
             "EndTime":$.fullCalendar.formatDate( event.end,"M/d/yyyy hh:mm TT")
         };
-        KYT.repository.ajaxGet(this.model.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
+        KYT.repository.ajaxGet(this.model.CalendarDefinition.EventChangedUrl,data).done($.proxy(function(result){this.changeEventCallback(result,revertFunc)},this));
     },
     dayClick:function(date, allDay, jsEvent, view) {
         var data = this.getIds(0);
         data.ScheduledDate= $.fullCalendar.formatDate( date,"M/d/yyyy");
         data.ScheduledStartTime= $.fullCalendar.formatDate( date,"hh:mm TT");
-        this.editEvent(this.model.AddUpdateUrl,data);
+        this.editEvent(this.model.CalendarDefinition.AddUpdateUrl,data);
     },
     eventClick:function(calEvent, jsEvent, view) {
         var data = {"EntityId": calEvent.EntityId, popup:true};
@@ -86,12 +86,12 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
 
         var formOptions = {
             id: "displayModule",
-            url: this.model.DisplayUrl,
-            route: this.model.DisplayRoute,
-            title: this.model.PopupTitle,
-            templateUrl: this.model.DisplayUrl+"_Template?Popup=true",
+            url: this.model.CalendarDefinition.DisplayUrl,
+            route: this.model.CalendarDefinition.DisplayRoute,
+            title: this.model.CalendarDefinition.PopupTitle,
+            templateUrl: this.model.CalendarDefinition.DisplayUrl+"_Template?Popup=true",
             view: this.options.subViewName?"Display" + this.options.subViewName:"",
-            AddUpdateUrl: this.model.AddUpdateUrl,
+            AddUpdateUrl: this.model.CalendarDefinition.AddUpdateUrl,
             data:data,
             buttons: builder.getButtons()
         };
@@ -105,9 +105,9 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         data.Popup = true;
         var formOptions = {
             id: "editModule",
-            route: this.model.AddUpdateRoute,
+            route: this.model.CalendarDefinition.AddUpdateRoute,
             url: url,
-            title: this.model.PopupTitle,
+            title: this.model.CalendarDefinition.PopupTitle,
             templateUrl: url+"_Template?Popup=true",
             data:data,
             view:this.options.subViewName,
@@ -130,7 +130,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         var data = this.getIds(this.ajaxPopupDisplay.popupDisplay.model.EntityId());
         data.Copy = true;
         this.displayCancel();
-        this.editEvent(this.model.AddUpdateUrl,data);
+        this.editEvent(this.model.CalendarDefinition.AddUpdateUrl,data);
         //this feels retarded for some reason
         KYT.vent.bind("form:editModule:pageLoaded", function(){
             this.ajaxPopupFormModule.popupForm.model.EntityId(0);
@@ -142,7 +142,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         var that = this;
         if (confirm("Are you sure you would like to delete this Item?")) {
 
-            KYT.repository.ajaxGet(this.model.DeleteUrl,this.getIds(this.ajaxPopupDisplay.popupDisplay.model.EntityId())).done(function(result){
+            KYT.repository.ajaxGet(this.model.CalendarDefinition.DeleteUrl,this.getIds(this.ajaxPopupDisplay.popupDisplay.model.EntityId())).done(function(result){
                 that.displayCancel();
 //                if(!result.Success){
 //                    alert(result.Message);
@@ -154,7 +154,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
     },
     displayEdit:function(event){
         this.displayCancel();
-        this.editEvent(this.model.AddUpdateUrl,this.getIds(this.ajaxPopupDisplay.popupDisplay.model.EntityId()));
+        this.editEvent(this.model.CalendarDefinition.AddUpdateUrl,this.getIds(this.ajaxPopupDisplay.popupDisplay.model.EntityId()));
     },
 
     getIds:function(entityId){

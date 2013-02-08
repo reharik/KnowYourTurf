@@ -858,7 +858,11 @@ function EventManager(options, _sources) {
 	t.isFetchNeeded = isFetchNeeded;
 	t.fetchEvents = fetchEvents;
 	t.addEventSource = addEventSource;
-	t.removeEventSource = removeEventSource;
+    //*** raif ***
+    t.removeEventSource = removeEventSource;
+    //*** raif ***
+    t.replaceEventSource = replaceEventSource;
+    t.removeEventSource = removeEventSource;
 	t.updateEvent = updateEvent;
 	t.renderEvent = renderEvent;
 	t.removeEvents = removeEvents;
@@ -1029,9 +1033,13 @@ function EventManager(options, _sources) {
 			return source;
 		}
 	}
-	
 
-	function removeEventSource(source) {
+    //*** raif ***//
+    function replaceEventSource(source){
+        sources =[ source];
+    }
+
+    function removeEventSource(source) {
 		sources = $.grep(sources, function(src) {
 			return !isSourcesEqual(src, source);
 		});

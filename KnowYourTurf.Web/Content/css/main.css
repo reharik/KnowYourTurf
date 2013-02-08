@@ -206,10 +206,10 @@ span#login-links a.active {
     cursor: pointer;
 }
 
-.content-outer .content-header select {
+.content-outer .content-header .headerDropdown  {
     float: left;
     height: 23px;
-    width: 140px;
+    width: 200px;
     margin: 8px 10px 0 6px;
     padding: 2px;
 }
