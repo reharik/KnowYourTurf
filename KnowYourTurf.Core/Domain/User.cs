@@ -96,6 +96,11 @@ namespace KnowYourTurf.Core.Domain
         }
         #endregion
 
+        public virtual bool IsEmployee()
+        {
+            return _userRoles.Any(x => x.Name == "Employee");
+        }
+
         public virtual SecurityInfo SecurityInfo
         {
             get { return new SecurityInfo(FullName, EntityId); }

@@ -38,6 +38,7 @@ namespace DBFluentMigration.Iteration_1
             _permissions.CreateMenuPermission(UserType.Administrator, "PermissionUserGroups");
             _permissions.CreateMenuPermission(UserType.Administrator, "SystemOffLine");
             _permissions.CreateMenuPermission(UserType.Administrator, "EmployeeDailyTasks");
+            _permissions.CreateMenuPermission(UserType.Administrator, "TaskReport");
 
             _permissions.CreateControllerPermission(UserType.Administrator, "ClientController");
             _permissions.CreateControllerPermission(UserType.Administrator, "ClientListController");
@@ -47,6 +48,7 @@ namespace DBFluentMigration.Iteration_1
             _permissions.CreateControllerPermission(UserType.Administrator, "UserController");
             _permissions.CreateControllerPermission(UserType.Administrator, "UserListController");
             _permissions.CreateControllerPermission(UserType.Administrator, "EmployeeDailyTasksController");
+            _permissions.CreateControllerPermission(UserType.Administrator, "TaskReportController");
 
         }
 

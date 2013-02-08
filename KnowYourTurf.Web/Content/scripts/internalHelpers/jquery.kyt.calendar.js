@@ -14,6 +14,8 @@
             allDaySlot:false,
             allDayDefault:false,
             slotMinutes:15,
+            minTime:4,
+            maxTime:22,
             events: calendarDefinition.Url,
             dayClick: function(date, allDay, jsEvent, view){KYT.vent.trigger("calendar:"+calendarDefinition.id+":dayClick", date, allDay, jsEvent, view);},
             eventClick: function(calEvent, jsEvent, view){ KYT.vent.trigger("calendar:"+calendarDefinition.id+":eventClick", calEvent, jsEvent, view);},

@@ -57,9 +57,9 @@
     <Compile Include="Iteration_1\10010_Rename_Company_to_Client.cs" />
     <Compile Include="Iteration_1\10020_Create_LoginStatistics_Table.cs" />
     <Compile Include="Iteration_1\10030_Add_Color_To_EquipmentType.cs" />
-    <Compile Include="Iteration_1\10040_Add_Start_and_End_Date_to_TasksByField.cs" />
     <Compile Include="Iteration_1\10050_Create_Employee_Daily_Task_Sproc.cs" />
     <Compile Include="Iteration_1\10060_Add_WebSite_to_Equipment.cs" />
+    <Compile Include="Iteration_1\10070_Create_TaskReport_Sproc.cs" />
     <Compile Include="IUpdatePermissions.cs" />
     <Compile Include="IUpdateOperations.cs" />
     <Compile Include="Iteration_1\UpdateOperations_200.cs" />
