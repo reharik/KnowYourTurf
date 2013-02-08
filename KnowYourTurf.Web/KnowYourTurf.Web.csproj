@@ -218,10 +218,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Reporting\Controllers\EquipmentTaskReportController.cs" />
     <Compile Include="Areas\Reporting\Controllers\TaskReportController.cs" />
     <Compile Include="Areas\Reporting\Controllers\EmployeeDailyTasksController.cs" />
     <Compile Include="Areas\Reporting\ReportsxAreaRegistration.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Reporting\ReportViewer\EquipmentTaskReport.aspx.cs">
+      <DependentUpon>EquipmentTaskReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Reporting\ReportViewer\EquipmentTaskReport.aspx.designer.cs">
+      <DependentUpon>EquipmentTaskReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Reporting\ReportViewer\EmployeeDailyTasks.aspx.cs">
       <DependentUpon>EmployeeDailyTasks.aspx</DependentUpon>
@@ -240,6 +248,7 @@
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
+    <Content Include="Areas\Reporting\ReportViewer\EquipmentTaskReport.aspx" />
     <Content Include="Areas\Reporting\ReportViewer\EmployeeDailyTasks.aspx" />
     <Content Include="Areas\Reporting\ReportViewer\TaskReport.aspx" />
     <Content Include="Areas\Reporting\Views\Web.config" />
@@ -317,6 +326,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EquipmentTaskReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EquipmentTaskReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="Filters\AddUserToViewModelFilter.cs" />
     <Compile Include="Filters\AdminFilterAttribute.cs" />
@@ -746,6 +760,7 @@
     <Content Include="Areas\Reporting\XSD\EmployeeDailyTasks.xsc">
       <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
     </Content>
+    <Content Include="Areas\Reporting\Views\EquipmentTaskReport\Display.cshtml" />
     <None Include="Areas\Reporting\XSD\EmployeeDailyTasks.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>EmployeeDailyTasks.Designer.cs</LastGenOutput>
@@ -765,12 +780,24 @@
     <Content Include="Areas\Reporting\XSD\TaskReport.xss">
       <DependentUpon>TaskReport.xsd</DependentUpon>
     </Content>
+    <Content Include="EquipmentTaskReport.xsc">
+      <DependentUpon>EquipmentTaskReport.xsd</DependentUpon>
+    </Content>
+    <None Include="EquipmentTaskReport.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EquipmentTaskReport.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="EquipmentTaskReport.xss">
+      <DependentUpon>EquipmentTaskReport.xsd</DependentUpon>
+    </Content>
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
     <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Reporting\RDLC\EmployeeDailyTasks.rdlc" />
+    <EmbeddedResource Include="Areas\Reporting\RDLC\EquipmentTaskReport.rdlc" />
+    <EmbeddedResource Include="Areas\Reporting\Views\EmployeeDailyTasks\EmployeeDailyTasks.rdlc" />
     <EmbeddedResource Include="Areas\Reporting\RDLC\TaskReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
