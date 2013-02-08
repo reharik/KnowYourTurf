@@ -12,13 +12,13 @@
               <Width>1in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.17708in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.16667in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.20833in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1in</Width>
@@ -282,7 +282,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ScheduledDate.Value</Value>
+                              <Value>=FormatDateTime(Fields!ScheduledDate.Value,DateFormat.ShortDate)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -419,7 +419,7 @@
         </TablixRowHierarchy>
         <DataSetName>TaskReport</DataSetName>
         <Height>0.5in</Height>
-        <Width>6in</Width>
+        <Width>6.55208in</Width>
         <Style>
           <Border>
             <Style>None</Style>
