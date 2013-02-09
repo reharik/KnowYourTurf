@@ -10,11 +10,13 @@
         <span class="title-name" data-bind="text:_Title"></span>
     </div>
     <div id="contentArea" class="content-inner">
-        <div class="report">
-            @RenderBody()
+        <div class="form-scroll-inner form">
+            <div class="report">
+                @RenderBody()
+            </div>
         </div>
-    <div class="footer">
-        @RenderSection("FooterButtons", false)
+        <div class="footer">
+            @RenderSection("FooterButtons", false)
+        </div>
     </div>
-</div>
   

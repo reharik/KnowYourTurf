@@ -27,6 +27,11 @@ namespace KnowYourTurf.Web.Controllers
             _saveEntityService = saveEntityService;
         }
 
+        public ActionResult EventCalendar_Template(CalendarViewModel input)
+        {
+            return View("EventCalendar", new CalendarViewModel());
+        }
+
         public ActionResult EventCalendar(ViewModel input)
         {
             var model = new CalendarViewModel

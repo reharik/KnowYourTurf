@@ -19,18 +19,26 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
+        private readonly ISelectListItemService _selectListItemService;
 
-        public EquipmentTaskCalendarController(IRepository repository,ISaveEntityService saveEntityService)
+        public EquipmentTaskCalendarController(IRepository repository,ISaveEntityService saveEntityService,ISelectListItemService selectListItemService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService;
+            _selectListItemService = selectListItemService;
         }
 
+        public ActionResult EquipmentTaskCalendar_Template(CalendarViewModel input)
+        {
+            return View("EquipmentTaskCalendar", new CalendarViewModel());
+        }
         public ActionResult EquipmentTaskCalendar(ViewModel input)
         {
+            var taskTypes = _selectListItemService.CreateList<EquipmentTaskType>(x => x.Name, x => x.EntityId, true);
             var model = new CalendarViewModel
-                       {
-                           CalendarDefinition = new CalendarDefinition
+            {
+                _TaskTypeList = taskTypes,
+                CalendarDefinition = new CalendarDefinition
                                                    {
                                                        Url = UrlContext.GetUrlForAction<EquipmentTaskCalendarController>(x => x.Events(null))+"?RootId="+input.RootId,
                                                        AddUpdateTemplateUrl = UrlContext.GetUrlForAction<EquipmentTaskController>(x => x.AddUpdate_Template(null)),
@@ -62,7 +70,8 @@ namespace KnowYourTurf.Web.Controllers
             var events = new List<CalendarEvent>();
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
-            var equipment = _repository.Query<Equipment>( x => x.Tasks.Any(y => y.ScheduledDate >= startDateTime && y.ScheduledDate <= endDateTime));
+            var equipment = input.taskType>0? _repository.Query<Equipment>( x => x.Tasks.Any(y => y.ScheduledDate >= startDateTime && y.ScheduledDate <= endDateTime && y.TaskType.EntityId == input.taskType))
+                : _repository.Query<Equipment>(x => x.Tasks.Any(y => y.ScheduledDate >= startDateTime && y.ScheduledDate <= endDateTime));
             var equipTasks = new List<EquipmentTask>();
             equipment.ForEachItem(x=> equipTasks.AddRange(x.GetAllEquipmentTasks(y => y.ScheduledDate >= startDateTime && y.ScheduledDate <= endDateTime)));
             equipTasks.ForEachItem(z => events.Add(new CalendarEvent

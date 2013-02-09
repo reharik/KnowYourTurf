@@ -10,7 +10,7 @@
 namespace KnowYourTurf.Web.Areas.Reporting.ReportViewer {
     
     
-    public partial class TasksByField {
+    public partial class EquipmentTaskReport {
         
         /// <summary>
         /// Head1 control.

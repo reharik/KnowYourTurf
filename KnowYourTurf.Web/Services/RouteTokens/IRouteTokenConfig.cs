@@ -115,7 +115,8 @@ namespace KnowYourTurf.Web.Services.ViewOptions
 
             _builder.TokenForForm<PurchaseOrderCommitController>(x => x.PurchaseOrderCommit(null)).AddUpdateToken("purchaseorderlineitem").End();
 
-            _builder.TokenForForm<TasksByFieldController>(x => x.Display(null), AreaName.Reporting).ViewName("TasksByFieldView").End();
+            _builder.TokenForForm<TaskReportController>(x => x.Display(null), AreaName.Reporting).ViewName("TaskReportView").End();
+            _builder.TokenForForm<EquipmentTaskReportController>(x => x.Display(null), AreaName.Reporting).ViewName("EquipmentTaskReportView").End();
             _builder.TokenForForm<EmployeeDailyTasksController>(x => x.Display(null), AreaName.Reporting).ViewName("EmployeeDailyTaskView").End();
 
 
