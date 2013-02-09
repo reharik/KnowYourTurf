@@ -791,6 +791,8 @@
     <Content Include="EquipmentTaskReport.xss">
       <DependentUpon>EquipmentTaskReport.xsd</DependentUpon>
     </Content>
+    <Content Include="Views\EquipmentTaskCalendar\EquipmentTaskCalendar.cshtml" />
+    <Content Include="Views\EventCalendar\EventCalendar.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
     <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
