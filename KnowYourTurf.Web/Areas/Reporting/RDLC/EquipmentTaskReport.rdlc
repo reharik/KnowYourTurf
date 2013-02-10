@@ -6,7 +6,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.28125in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1in</Width>
@@ -854,7 +854,7 @@
         </TablixRowHierarchy>
         <DataSetName>EquipmentTaskReport</DataSetName>
         <Height>1.13542in</Height>
-        <Width>4.73958in</Width>
+        <Width>5.02083in</Width>
         <Style>
           <Border>
             <Style>None</Style>

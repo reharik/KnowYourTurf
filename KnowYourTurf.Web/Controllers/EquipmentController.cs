@@ -136,6 +136,7 @@ namespace KnowYourTurf.Web.Controllers
         
         [ValidateNonEmpty]
         public string Name { get; set; }
+        public string ID { get; set; }
         [TextArea]
         public string Description { get; set; }
         public int EquipmentTypeEntityId { get; set; }

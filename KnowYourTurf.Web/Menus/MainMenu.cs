@@ -63,7 +63,7 @@ namespace KnowYourTurf.Web.Menus
                     .EndChildren()
 
                 .CreateTagNode<WeatherListController>(WebLocalizationKeys.WEATHER)
-                .CreateTagNode<ForumController>(WebLocalizationKeys.FORUM)
+//                .CreateTagNode<ForumController>(WebLocalizationKeys.FORUM)
                  .CreateNode(WebLocalizationKeys.ADMIN_TOOLS, "tools")
                     .HasChildren()
                         .CreateTagNode<EmailJobListController>(WebLocalizationKeys.EMAIL_JOBS)
@@ -98,7 +98,7 @@ namespace KnowYourTurf.Web.Menus
                         .HasChildren()
                             .CreateTagNode<TaskReportController>(WebLocalizationKeys.TASK_REPORT)
                             .CreateTagNode<EquipmentTaskReportController>(WebLocalizationKeys.EQUIPMENT_TASK_REPORT)
-                            .CreateTagNode<EmployeeDailyTasksController>(WebLocalizationKeys.EMPLOYEE_DAILY_TASKS)
+//                            .CreateTagNode<EmployeeDailyTasksController>(WebLocalizationKeys.EMPLOYEE_DAILY_TASKS)
                         .EndChildren()
 
                     .EndChildren()

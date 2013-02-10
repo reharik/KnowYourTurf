@@ -15,6 +15,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.SerialNumber);
             Map(x => x.WarrentyInfo);
             Map(x => x.WebSite);
+            Map(x => x.ID);
             References(x => x.EquipmentVendor).Column("Vendor_id");
             References(x => x.EquipmentType);
             HasMany(x => x.Tasks).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();
