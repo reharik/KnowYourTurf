@@ -291,6 +291,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             private global::System.Data.DataColumn columnQuantityUsed;
             
+            private global::System.Data.DataColumn columnEntityId;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public TaskReportDataTable() {
@@ -374,6 +376,14 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EntityIdColumn {
+                get {
+                    return this.columnEntityId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -417,10 +427,18 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                         ScheduledDate,
                         ActualTimeSpent,
                         ProductName,
-                        QuantityUsed};
+                        QuantityUsed,
+                        null};
                 rowTaskReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTaskReportRow);
                 return rowTaskReportRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TaskReportRow FindByEntityId(int EntityId) {
+                return ((TaskReportRow)(this.Rows.Find(new object[] {
+                            EntityId})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -446,6 +464,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 this.columnActualTimeSpent = base.Columns["ActualTimeSpent"];
                 this.columnProductName = base.Columns["ProductName"];
                 this.columnQuantityUsed = base.Columns["QuantityUsed"];
+                this.columnEntityId = base.Columns["EntityId"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -463,10 +482,20 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 base.Columns.Add(this.columnProductName);
                 this.columnQuantityUsed = new global::System.Data.DataColumn("QuantityUsed", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQuantityUsed);
+                this.columnEntityId = new global::System.Data.DataColumn("EntityId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEntityId);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnEntityId}, true));
                 this.columnName.MaxLength = 255;
                 this.columnTaskType.MaxLength = 255;
                 this.columnActualTimeSpent.MaxLength = 255;
                 this.columnProductName.MaxLength = 255;
+                this.columnEntityId.AutoIncrement = true;
+                this.columnEntityId.AutoIncrementSeed = -1;
+                this.columnEntityId.AutoIncrementStep = -1;
+                this.columnEntityId.AllowDBNull = false;
+                this.columnEntityId.ReadOnly = true;
+                this.columnEntityId.Unique = true;
                 this.ExtendedProperties.Add("Generator_TablePropName", "_TaskReport");
                 this.ExtendedProperties.Add("Generator_UserTableName", "TaskReport");
             }
@@ -702,6 +731,17 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 }
                 set {
                     this[this.tableTaskReport.QuantityUsedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int EntityId {
+                get {
+                    return ((int)(this[this.tableTaskReport.EntityIdColumn]));
+                }
+                set {
+                    this[this.tableTaskReport.EntityIdColumn] = value;
                 }
             }
             
@@ -943,6 +983,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TaskReportTableAdapters {
             tableMapping.ColumnMappings.Add("ActualTimeSpent", "ActualTimeSpent");
             tableMapping.ColumnMappings.Add("ProductName", "ProductName");
             tableMapping.ColumnMappings.Add("QuantityUsed", "QuantityUsed");
+            tableMapping.ColumnMappings.Add("EntityId", "EntityId");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

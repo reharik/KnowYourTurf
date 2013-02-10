@@ -34,6 +34,7 @@
               <Mapping SourceColumn="ActualTimeSpent" DataSetColumn="ActualTimeSpent" />
               <Mapping SourceColumn="ProductName" DataSetColumn="ProductName" />
               <Mapping SourceColumn="QuantityUsed" DataSetColumn="QuantityUsed" />
+              <Mapping SourceColumn="EntityId" DataSetColumn="EntityId" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -45,7 +46,7 @@
   <xs:element name="TaskReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="TaskReport" msprop:Generator_UserDSName="TaskReport">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TaskReport" msprop:Generator_TableClassName="TaskReportDataTable" msprop:Generator_TableVarName="tableTaskReport" msprop:Generator_RowChangedName="TaskReportRowChanged" msprop:Generator_TablePropName="_TaskReport" msprop:Generator_RowDeletingName="TaskReportRowDeleting" msprop:Generator_RowChangingName="TaskReportRowChanging" msprop:Generator_RowEvHandlerName="TaskReportRowChangeEventHandler" msprop:Generator_RowDeletedName="TaskReportRowDeleted" msprop:Generator_RowClassName="TaskReportRow" msprop:Generator_UserTableName="TaskReport" msprop:Generator_RowEvArgName="TaskReportRowChangeEvent">
+        <xs:element name="TaskReport" msprop:Generator_TableClassName="TaskReportDataTable" msprop:Generator_TableVarName="tableTaskReport" msprop:Generator_TablePropName="_TaskReport" msprop:Generator_RowDeletingName="TaskReportRowDeleting" msprop:Generator_RowChangingName="TaskReportRowChanging" msprop:Generator_RowEvHandlerName="TaskReportRowChangeEventHandler" msprop:Generator_RowDeletedName="TaskReportRowDeleted" msprop:Generator_UserTableName="TaskReport" msprop:Generator_RowChangedName="TaskReportRowChanged" msprop:Generator_RowEvArgName="TaskReportRowChangeEvent" msprop:Generator_RowClassName="TaskReportRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" minOccurs="0">
@@ -78,10 +79,15 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="QuantityUsed" msprop:Generator_ColumnVarNameInTable="columnQuantityUsed" msprop:Generator_ColumnPropNameInRow="QuantityUsed" msprop:Generator_ColumnPropNameInTable="QuantityUsedColumn" msprop:Generator_UserColumnName="QuantityUsed" type="xs:double" minOccurs="0" />
+              <xs:element name="EntityId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnEntityId" msprop:Generator_ColumnPropNameInRow="EntityId" msprop:Generator_ColumnPropNameInTable="EntityIdColumn" msprop:Generator_UserColumnName="EntityId" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:choice>
     </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TaskReport" />
+      <xs:field xpath="mstns:EntityId" />
+    </xs:unique>
   </xs:element>
 </xs:schema>
