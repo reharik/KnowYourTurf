@@ -2,12 +2,12 @@
 @using CC.Core.Html.CCUI
 @using KnowYourTurf.Web
 
-
 @{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
 
     
 <div class="row">
     @Html.SubmissionFor(x => x.Name).Size("5").ToHtmlTag()
+    @Html.SubmissionFor(x => x.ID).Size("5").ToHtmlTag()
 </div>
 <div class="row">
     @Html.SubmissionFor(x => x.Description).Size("10").ToHtmlTag()

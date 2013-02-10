@@ -61,6 +61,7 @@
     <Compile Include="Iteration_1\10060_Add_WebSite_to_Equipment.cs" />
     <Compile Include="Iteration_1\10070_Create_TaskReport_Sproc.cs" />
     <Compile Include="Iteration_1\10080_Create_EquipmentTaskReport_Sproc.cs" />
+    <Compile Include="Iteration_1\10090_Add_ID_To_Equipment.cs" />
     <Compile Include="IUpdatePermissions.cs" />
     <Compile Include="IUpdateOperations.cs" />
     <Compile Include="Iteration_1\UpdateOperations_200.cs" />
