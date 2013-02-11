@@ -31,7 +31,7 @@ namespace KnowYourTurf.Core.Domain
         [ValueOf(typeof(State))]
         public virtual string State { get; set; }
         public virtual string ZipCode { get; set; }
-        [Tools.CustomAttributes.TextArea]
+        [TextArea]
         public virtual string Notes { get; set; }
         public virtual DateTime? BirthDate { get; set; }
         public virtual string FileUrl { get; set; }

@@ -1,7 +1,7 @@
+using CC.Core.CustomAttributes;
 using CC.Core.Enumerations;
 using CC.Core.Localization;
 using Castle.Components.Validator;
-using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Core.Domain

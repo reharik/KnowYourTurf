@@ -1,6 +1,6 @@
 using System;
+using CC.Core.CustomAttributes;
 using Castle.Components.Validator;
-using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Core.Domain

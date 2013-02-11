@@ -175,7 +175,6 @@
     <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersRepository.cs" />
     <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersUnitOfWork.cs" />
     <Compile Include="Domain\Tools\NullNHSetupConfig.cs" />
-    <Compile Include="Domain\Tools\CustomAttributes\TextAreaAttribute.cs" />
     <Compile Include="Domain\Tools\NullSession.cs" />
     <Compile Include="Domain\Tools\NullSessionFactory.cs" />
     <Compile Include="Domain\UserRole.cs" />
@@ -288,6 +287,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attributes\" />
+    <Folder Include="Domain\Tools\CustomAttributes\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
 using CC.Core.Enumerations;
 using CC.Core.Localization;
 using Castle.Components.Validator;
-using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 using Status = KnowYourTurf.Core.Enums.Status;
 
 namespace KnowYourTurf.Web.Models.Vendor
@@ -17,7 +17,7 @@ namespace KnowYourTurf.Web.Models.Vendor
         public TokenInputViewModel Materials { get; set; }
 
         [ValidateNonEmpty]
-        public string Client { get; set; }
+        public string Company { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }

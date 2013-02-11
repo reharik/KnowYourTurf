@@ -7,7 +7,17 @@
     
 <div class="row">
     @Html.SubmissionFor(x => x.Name).Size("5").ToHtmlTag()
+</div>
+<div class="row">
     @Html.SubmissionFor(x => x.ID).Size("5").ToHtmlTag()
+    @Html.SubmissionFor(x => x.Make).Size("5").ToHtmlTag()
+</div>
+<div class="row">
+    @Html.SubmissionFor(x => x.Model).Size("5").ToHtmlTag()
+    @Html.SubmissionFor(x => x.SerialNumber).Size("5").ToHtmlTag()
+</div>
+<div class="row">
+    @Html.SubmissionFor(x => x.WarrentyInfo).Size("10").ToHtmlTag()
 </div>
 <div class="row">
     @Html.SubmissionFor(x => x.Description).Size("10").ToHtmlTag()

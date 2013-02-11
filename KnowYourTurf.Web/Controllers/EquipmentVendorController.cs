@@ -102,7 +102,7 @@ namespace KnowYourTurf.Web.Controllers
 
         private EquipmentVendor mapToDomain(EquipmentVendorViewModel input, EquipmentVendor equipmentVendor)
         {
-            equipmentVendor.Company = input.Client;
+            equipmentVendor.Company = input.Company;
             equipmentVendor.Fax = input.Fax;
             equipmentVendor.Phone = input.Phone;
             equipmentVendor.Address1 = input.Address1;
