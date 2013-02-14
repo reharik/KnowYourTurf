@@ -35,6 +35,8 @@
               <Mapping SourceColumn="Employees" DataSetColumn="Employees" />
               <Mapping SourceColumn="Parts" DataSetColumn="Parts" />
               <Mapping SourceColumn="Notes" DataSetColumn="Notes" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -46,7 +48,7 @@
   <xs:element name="EquipmentTaskReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="EquipmentTaskReport" msprop:Generator_UserDSName="EquipmentTaskReport">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="EquipmentTaskReport" msprop:Generator_TableClassName="EquipmentTaskReportDataTable" msprop:Generator_TableVarName="tableEquipmentTaskReport" msprop:Generator_TablePropName="_EquipmentTaskReport" msprop:Generator_RowDeletingName="EquipmentTaskReportRowDeleting" msprop:Generator_RowChangingName="EquipmentTaskReportRowChanging" msprop:Generator_RowEvHandlerName="EquipmentTaskReportRowChangeEventHandler" msprop:Generator_RowDeletedName="EquipmentTaskReportRowDeleted" msprop:Generator_UserTableName="EquipmentTaskReport" msprop:Generator_RowChangedName="EquipmentTaskReportRowChanged" msprop:Generator_RowEvArgName="EquipmentTaskReportRowChangeEvent" msprop:Generator_RowClassName="EquipmentTaskReportRow">
+        <xs:element name="EquipmentTaskReport" msprop:Generator_TableClassName="EquipmentTaskReportDataTable" msprop:Generator_TableVarName="tableEquipmentTaskReport" msprop:Generator_RowChangedName="EquipmentTaskReportRowChanged" msprop:Generator_TablePropName="_EquipmentTaskReport" msprop:Generator_RowDeletingName="EquipmentTaskReportRowDeleting" msprop:Generator_RowChangingName="EquipmentTaskReportRowChanging" msprop:Generator_RowEvHandlerName="EquipmentTaskReportRowChangeEventHandler" msprop:Generator_RowDeletedName="EquipmentTaskReportRowDeleted" msprop:Generator_RowClassName="EquipmentTaskReportRow" msprop:Generator_UserTableName="EquipmentTaskReport" msprop:Generator_RowEvArgName="EquipmentTaskReportRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="EquipmentName" msprop:Generator_ColumnVarNameInTable="columnEquipmentName" msprop:Generator_ColumnPropNameInRow="EquipmentName" msprop:Generator_ColumnPropNameInTable="EquipmentNameColumn" msprop:Generator_UserColumnName="EquipmentName" minOccurs="0">
@@ -92,6 +94,8 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="StartDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -293,6 +293,10 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             private global::System.Data.DataColumn columnNotes;
             
+            private global::System.Data.DataColumn columnStartDate;
+            
+            private global::System.Data.DataColumn columnEndDate;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public EquipmentTaskReportDataTable() {
@@ -384,6 +388,22 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn StartDateColumn {
+                get {
+                    return this.columnStartDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EndDateColumn {
+                get {
+                    return this.columnEndDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -419,7 +439,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public EquipmentTaskReportRow AddEquipmentTaskReportRow(string EquipmentName, string TaskType, System.DateTime ScheduledDate, string ActualTimeSpent, string Employees, string Parts, string Notes) {
+            public EquipmentTaskReportRow AddEquipmentTaskReportRow(string EquipmentName, string TaskType, System.DateTime ScheduledDate, string ActualTimeSpent, string Employees, string Parts, string Notes, System.DateTime StartDate, System.DateTime EndDate) {
                 EquipmentTaskReportRow rowEquipmentTaskReportRow = ((EquipmentTaskReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         EquipmentName,
@@ -428,7 +448,9 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                         ActualTimeSpent,
                         Employees,
                         Parts,
-                        Notes};
+                        Notes,
+                        StartDate,
+                        EndDate};
                 rowEquipmentTaskReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowEquipmentTaskReportRow);
                 return rowEquipmentTaskReportRow;
@@ -458,6 +480,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 this.columnEmployees = base.Columns["Employees"];
                 this.columnParts = base.Columns["Parts"];
                 this.columnNotes = base.Columns["Notes"];
+                this.columnStartDate = base.Columns["StartDate"];
+                this.columnEndDate = base.Columns["EndDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -477,6 +501,10 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 base.Columns.Add(this.columnParts);
                 this.columnNotes = new global::System.Data.DataColumn("Notes", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNotes);
+                this.columnStartDate = new global::System.Data.DataColumn("StartDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStartDate);
+                this.columnEndDate = new global::System.Data.DataColumn("EndDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEndDate);
                 this.columnEquipmentName.MaxLength = 255;
                 this.columnTaskType.MaxLength = 255;
                 this.columnActualTimeSpent.MaxLength = 255;
@@ -485,6 +513,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 this.columnParts.ReadOnly = true;
                 this.columnParts.MaxLength = 2147483647;
                 this.columnNotes.MaxLength = 255;
+                this.columnStartDate.ReadOnly = true;
+                this.columnEndDate.ReadOnly = true;
                 this.ExtendedProperties.Add("Generator_TablePropName", "_EquipmentTaskReport");
                 this.ExtendedProperties.Add("Generator_UserTableName", "EquipmentTaskReport");
             }
@@ -741,6 +771,38 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime StartDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableEquipmentTaskReport.StartDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'StartDate\' in table \'EquipmentTaskReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquipmentTaskReport.StartDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime EndDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableEquipmentTaskReport.EndDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EndDate\' in table \'EquipmentTaskReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquipmentTaskReport.EndDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEquipmentNameNull() {
                 return this.IsNull(this.tableEquipmentTaskReport.EquipmentNameColumn);
             }
@@ -821,6 +883,30 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNotesNull() {
                 this[this.tableEquipmentTaskReport.NotesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsStartDateNull() {
+                return this.IsNull(this.tableEquipmentTaskReport.StartDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetStartDateNull() {
+                this[this.tableEquipmentTaskReport.StartDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEndDateNull() {
+                return this.IsNull(this.tableEquipmentTaskReport.EndDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEndDateNull() {
+                this[this.tableEquipmentTaskReport.EndDateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -990,6 +1076,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EquipmentTaskReportTableAdapters 
             tableMapping.ColumnMappings.Add("Employees", "Employees");
             tableMapping.ColumnMappings.Add("Parts", "Parts");
             tableMapping.ColumnMappings.Add("Notes", "Notes");
+            tableMapping.ColumnMappings.Add("StartDate", "StartDate");
+            tableMapping.ColumnMappings.Add("EndDate", "EndDate");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
