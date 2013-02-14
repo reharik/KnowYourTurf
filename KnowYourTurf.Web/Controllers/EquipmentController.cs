@@ -116,6 +116,11 @@ namespace KnowYourTurf.Web.Controllers
             equipment.TotalHours = input.TotalHours;
             equipment.Threshold = input.Threshold;
             equipment.Description = input.Description;
+            equipment.ID = input.ID;
+            equipment.Make = input.Make;
+            equipment.Model = input.Model;
+            equipment.SerialNumber = input.SerialNumber;
+            equipment.WarrentyInfo = input.WarrentyInfo;
             equipment.EquipmentType = input.EquipmentTypeEntityId > 0 ? _repository.Find<EquipmentType>(input.EquipmentTypeEntityId) : null;
             equipment.EquipmentVendor = input.EquipmentVendorEntityId > 0 ? _repository.Find<EquipmentVendor>(input.EquipmentVendorEntityId) : null;
             equipment.WebSite = input.WebSite;
@@ -137,6 +142,11 @@ namespace KnowYourTurf.Web.Controllers
         [ValidateNonEmpty]
         public string Name { get; set; }
         public string ID { get; set; }
+        public virtual string Make { get; set; }
+        public virtual string Model { get; set; }
+        public virtual string SerialNumber { get; set; }
+        [TextArea]
+        public virtual string WarrentyInfo { get; set; }
         [TextArea]
         public string Description { get; set; }
         public int EquipmentTypeEntityId { get; set; }

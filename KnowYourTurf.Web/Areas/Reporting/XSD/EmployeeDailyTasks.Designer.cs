@@ -303,6 +303,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             private global::System.Data.DataColumn columnemployeeId;
             
+            private global::System.Data.DataColumn columnEquipment;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public EmployeeDailyTasksDataTable() {
@@ -434,6 +436,14 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EquipmentColumn {
+                get {
+                    return this.columnEquipment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -469,7 +479,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public EmployeeDailyTasksRow AddEmployeeDailyTasksRow(string TaskType, string SiteName, string FieldName, System.DateTime ScheduledDate, System.DateTime StartTime, System.DateTime EndTime, string ProductName, double QuantityNeeded, string UnitType, string firstname, string lastname) {
+            public EmployeeDailyTasksRow AddEmployeeDailyTasksRow(string TaskType, string SiteName, string FieldName, System.DateTime ScheduledDate, System.DateTime StartTime, System.DateTime EndTime, string ProductName, double QuantityNeeded, string UnitType, string firstname, string lastname, string Equipment) {
                 EmployeeDailyTasksRow rowEmployeeDailyTasksRow = ((EmployeeDailyTasksRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         TaskType,
@@ -483,7 +493,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                         UnitType,
                         firstname,
                         lastname,
-                        null};
+                        null,
+                        Equipment};
                 rowEmployeeDailyTasksRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowEmployeeDailyTasksRow);
                 return rowEmployeeDailyTasksRow;
@@ -518,6 +529,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 this.columnfirstname = base.Columns["firstname"];
                 this.columnlastname = base.Columns["lastname"];
                 this.columnemployeeId = base.Columns["employeeId"];
+                this.columnEquipment = base.Columns["Equipment"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -547,6 +559,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 base.Columns.Add(this.columnlastname);
                 this.columnemployeeId = new global::System.Data.DataColumn("employeeId", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnemployeeId);
+                this.columnEquipment = new global::System.Data.DataColumn("Equipment", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEquipment);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnemployeeId}, false));
                 this.columnTaskType.MaxLength = 255;
@@ -557,10 +571,10 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 this.columnfirstname.MaxLength = 255;
                 this.columnlastname.MaxLength = 255;
                 this.columnemployeeId.AutoIncrement = true;
-                this.columnemployeeId.AutoIncrementSeed = -1;
-                this.columnemployeeId.AutoIncrementStep = -1;
                 this.columnemployeeId.ReadOnly = true;
                 this.columnemployeeId.Unique = true;
+                this.columnEquipment.ReadOnly = true;
+                this.columnEquipment.MaxLength = 2147483647;
                 this.ExtendedProperties.Add("Generator_TablePropName", "_EmployeeDailyTasks");
                 this.ExtendedProperties.Add("Generator_UserTableName", "EmployeeDailyTasks");
             }
@@ -897,6 +911,22 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Equipment {
+                get {
+                    try {
+                        return ((string)(this[this.tableEmployeeDailyTasks.EquipmentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Equipment\' in table \'EmployeeDailyTasks\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEmployeeDailyTasks.EquipmentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsTaskTypeNull() {
                 return this.IsNull(this.tableEmployeeDailyTasks.TaskTypeColumn);
             }
@@ -1037,6 +1067,18 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetemployeeIdNull() {
                 this[this.tableEmployeeDailyTasks.employeeIdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEquipmentNull() {
+                return this.IsNull(this.tableEmployeeDailyTasks.EquipmentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEquipmentNull() {
+                this[this.tableEmployeeDailyTasks.EquipmentColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1211,6 +1253,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
             tableMapping.ColumnMappings.Add("firstname", "firstname");
             tableMapping.ColumnMappings.Add("lastname", "lastname");
             tableMapping.ColumnMappings.Add("employeeId", "employeeId");
+            tableMapping.ColumnMappings.Add("Equipment", "Equipment");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1218,8 +1261,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = "Data Source=RHARIK-PC\\MSSQLSERVER2012;Initial Catalog=KnowYourTurf_DEV;Integrated" +
-                " Security=True";
+            this._connection.ConnectionString = "Data Source=rharik-pc;Initial Catalog=KnowYourTurf_DEV;Integrated Security=True";
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

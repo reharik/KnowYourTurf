@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CC.Core;
+using CC.Core.CustomAttributes;
 using CC.Core.Domain;
 using CC.Core.Localization;
 using Castle.Components.Validator;
-using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 using KnowYourTurf.Core.Enums;
 
 namespace KnowYourTurf.Core.Domain

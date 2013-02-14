@@ -35,6 +35,10 @@
               <Mapping SourceColumn="ProductName" DataSetColumn="ProductName" />
               <Mapping SourceColumn="QuantityUsed" DataSetColumn="QuantityUsed" />
               <Mapping SourceColumn="EntityId" DataSetColumn="EntityId" />
+              <Mapping SourceColumn="Employees" DataSetColumn="Employees" />
+              <Mapping SourceColumn="Notes" DataSetColumn="Notes" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -46,7 +50,7 @@
   <xs:element name="TaskReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="TaskReport" msprop:Generator_UserDSName="TaskReport">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TaskReport" msprop:Generator_TableClassName="TaskReportDataTable" msprop:Generator_TableVarName="tableTaskReport" msprop:Generator_TablePropName="_TaskReport" msprop:Generator_RowDeletingName="TaskReportRowDeleting" msprop:Generator_RowChangingName="TaskReportRowChanging" msprop:Generator_RowEvHandlerName="TaskReportRowChangeEventHandler" msprop:Generator_RowDeletedName="TaskReportRowDeleted" msprop:Generator_UserTableName="TaskReport" msprop:Generator_RowChangedName="TaskReportRowChanged" msprop:Generator_RowEvArgName="TaskReportRowChangeEvent" msprop:Generator_RowClassName="TaskReportRow">
+        <xs:element name="TaskReport" msprop:Generator_TableClassName="TaskReportDataTable" msprop:Generator_TableVarName="tableTaskReport" msprop:Generator_RowChangedName="TaskReportRowChanged" msprop:Generator_TablePropName="_TaskReport" msprop:Generator_RowDeletingName="TaskReportRowDeleting" msprop:Generator_RowChangingName="TaskReportRowChanging" msprop:Generator_RowEvHandlerName="TaskReportRowChangeEventHandler" msprop:Generator_RowDeletedName="TaskReportRowDeleted" msprop:Generator_RowClassName="TaskReportRow" msprop:Generator_UserTableName="TaskReport" msprop:Generator_RowEvArgName="TaskReportRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" minOccurs="0">
@@ -80,6 +84,22 @@
               </xs:element>
               <xs:element name="QuantityUsed" msprop:Generator_ColumnVarNameInTable="columnQuantityUsed" msprop:Generator_ColumnPropNameInRow="QuantityUsed" msprop:Generator_ColumnPropNameInTable="QuantityUsedColumn" msprop:Generator_UserColumnName="QuantityUsed" type="xs:double" minOccurs="0" />
               <xs:element name="EntityId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnEntityId" msprop:Generator_ColumnPropNameInRow="EntityId" msprop:Generator_ColumnPropNameInTable="EntityIdColumn" msprop:Generator_UserColumnName="EntityId" type="xs:int" />
+              <xs:element name="Employees" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnEmployees" msprop:Generator_ColumnPropNameInRow="Employees" msprop:Generator_ColumnPropNameInTable="EmployeesColumn" msprop:Generator_UserColumnName="Employees" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Notes" msprop:Generator_ColumnVarNameInTable="columnNotes" msprop:Generator_ColumnPropNameInRow="Notes" msprop:Generator_ColumnPropNameInTable="NotesColumn" msprop:Generator_UserColumnName="Notes" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

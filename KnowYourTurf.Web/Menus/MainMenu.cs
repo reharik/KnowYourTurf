@@ -98,7 +98,7 @@ namespace KnowYourTurf.Web.Menus
                         .HasChildren()
                             .CreateTagNode<TaskReportController>(WebLocalizationKeys.TASK_REPORT)
                             .CreateTagNode<EquipmentTaskReportController>(WebLocalizationKeys.EQUIPMENT_TASK_REPORT)
-//                            .CreateTagNode<EmployeeDailyTasksController>(WebLocalizationKeys.EMPLOYEE_DAILY_TASKS)
+                            .CreateTagNode<EmployeeDailyTasksController>(WebLocalizationKeys.EMPLOYEE_DAILY_TASKS)
                         .EndChildren()
 
                     .EndChildren()
