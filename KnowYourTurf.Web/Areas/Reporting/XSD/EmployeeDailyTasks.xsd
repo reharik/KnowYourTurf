@@ -4,12 +4,12 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection ConnectionStringObject="Data Source=RHARIK-PC\MSSQLSERVER2012;Initial Catalog=KnowYourTurf_DEV;Integrated Security=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="rharik-pc\mssqlserver2012.KnowYourTurf_DEV.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+          <Connection ConnectionStringObject="Data Source=rharik-pc;Initial Catalog=KnowYourTurf_DEV;Integrated Security=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="rharik-pc.KnowYourTurf_DEV.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeeDailyTasksTableAdapter" GeneratorDataComponentClassName="EmployeeDailyTasksTableAdapter" Name="EmployeeDailyTasks" UserDataComponentName="EmployeeDailyTasksTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="rharik-pc\mssqlserver2012.KnowYourTurf_DEV.dbo" DbObjectName="KnowYourTurf_DEV.dbo.EmployeeDailyTasks" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="rharik-pc.KnowYourTurf_DEV.dbo" DbObjectName="KnowYourTurf_DEV.dbo.EmployeeDailyTasks" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.EmployeeDailyTasks</CommandText>
@@ -35,6 +35,7 @@
               <Mapping SourceColumn="firstname" DataSetColumn="firstname" />
               <Mapping SourceColumn="lastname" DataSetColumn="lastname" />
               <Mapping SourceColumn="employeeId" DataSetColumn="employeeId" />
+              <Mapping SourceColumn="Equipment" DataSetColumn="Equipment" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -46,7 +47,7 @@
   <xs:element name="EmployeeDailyTasks" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="EmployeeDailyTasks" msprop:Generator_UserDSName="EmployeeDailyTasks">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="EmployeeDailyTasks" msprop:Generator_TableClassName="EmployeeDailyTasksDataTable" msprop:Generator_TableVarName="tableEmployeeDailyTasks" msprop:Generator_RowChangedName="EmployeeDailyTasksRowChanged" msprop:Generator_TablePropName="_EmployeeDailyTasks" msprop:Generator_RowDeletingName="EmployeeDailyTasksRowDeleting" msprop:Generator_RowChangingName="EmployeeDailyTasksRowChanging" msprop:Generator_RowEvHandlerName="EmployeeDailyTasksRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeDailyTasksRowDeleted" msprop:Generator_RowClassName="EmployeeDailyTasksRow" msprop:Generator_UserTableName="EmployeeDailyTasks" msprop:Generator_RowEvArgName="EmployeeDailyTasksRowChangeEvent">
+        <xs:element name="EmployeeDailyTasks" msprop:Generator_TableClassName="EmployeeDailyTasksDataTable" msprop:Generator_TableVarName="tableEmployeeDailyTasks" msprop:Generator_TablePropName="_EmployeeDailyTasks" msprop:Generator_RowDeletingName="EmployeeDailyTasksRowDeleting" msprop:Generator_RowChangingName="EmployeeDailyTasksRowChanging" msprop:Generator_RowEvHandlerName="EmployeeDailyTasksRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeDailyTasksRowDeleted" msprop:Generator_UserTableName="EmployeeDailyTasks" msprop:Generator_RowChangedName="EmployeeDailyTasksRowChanged" msprop:Generator_RowEvArgName="EmployeeDailyTasksRowChangeEvent" msprop:Generator_RowClassName="EmployeeDailyTasksRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TaskType" msprop:Generator_ColumnVarNameInTable="columnTaskType" msprop:Generator_ColumnPropNameInRow="TaskType" msprop:Generator_ColumnPropNameInTable="TaskTypeColumn" msprop:Generator_UserColumnName="TaskType" minOccurs="0">
@@ -102,7 +103,14 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="employeeId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnemployeeId" msprop:Generator_ColumnPropNameInRow="employeeId" msprop:Generator_ColumnPropNameInTable="employeeIdColumn" msprop:Generator_UserColumnName="employeeId" type="xs:int" minOccurs="0" />
+              <xs:element name="employeeId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_ColumnVarNameInTable="columnemployeeId" msprop:Generator_ColumnPropNameInRow="employeeId" msprop:Generator_ColumnPropNameInTable="employeeIdColumn" msprop:Generator_UserColumnName="employeeId" type="xs:int" minOccurs="0" />
+              <xs:element name="Equipment" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnEquipment" msprop:Generator_ColumnPropNameInRow="Equipment" msprop:Generator_ColumnPropNameInTable="EquipmentColumn" msprop:Generator_UserColumnName="Equipment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

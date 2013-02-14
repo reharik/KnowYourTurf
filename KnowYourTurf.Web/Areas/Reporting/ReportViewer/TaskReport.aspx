@@ -18,7 +18,7 @@
             Font-Size="8pt" 
             WaitMessageFont-Names="Verdana" 
             WaitMessageFont-Size="14pt"
-            Width="875"
+            Width="960"
             Height="875">
             <LocalReport ReportPath="Areas\Reporting\RDLC\TaskReport.rdlc">
                 <DataSources>

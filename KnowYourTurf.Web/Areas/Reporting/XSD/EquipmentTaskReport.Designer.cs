@@ -20,17 +20,17 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("EmployeeDailyTasks")]
+    [global::System.Xml.Serialization.XmlRootAttribute("EquipmentTaskReport")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class EmployeeDailyTasks : global::System.Data.DataSet {
+    public partial class EquipmentTaskReport : global::System.Data.DataSet {
         
-        private EmployeeDailyTasksDataTable tableEmployeeDailyTasks;
+        private EquipmentTaskReportDataTable tableEquipmentTaskReport;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public EmployeeDailyTasks() {
+        public EquipmentTaskReport() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected EmployeeDailyTasks(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected EquipmentTaskReport(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["EmployeeDailyTasks"] != null)) {
-                    base.Tables.Add(new EmployeeDailyTasksDataTable(ds.Tables["EmployeeDailyTasks"]));
+                if ((ds.Tables["EquipmentTaskReport"] != null)) {
+                    base.Tables.Add(new EquipmentTaskReportDataTable(ds.Tables["EquipmentTaskReport"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public EmployeeDailyTasksDataTable _EmployeeDailyTasks {
+        public EquipmentTaskReportDataTable _EquipmentTaskReport {
             get {
-                return this.tableEmployeeDailyTasks;
+                return this.tableEquipmentTaskReport;
             }
         }
         
@@ -127,7 +127,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            EmployeeDailyTasks cln = ((EmployeeDailyTasks)(base.Clone()));
+            EquipmentTaskReport cln = ((EquipmentTaskReport)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["EmployeeDailyTasks"] != null)) {
-                    base.Tables.Add(new EmployeeDailyTasksDataTable(ds.Tables["EmployeeDailyTasks"]));
+                if ((ds.Tables["EquipmentTaskReport"] != null)) {
+                    base.Tables.Add(new EquipmentTaskReportDataTable(ds.Tables["EquipmentTaskReport"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableEmployeeDailyTasks = ((EmployeeDailyTasksDataTable)(base.Tables["EmployeeDailyTasks"]));
+            this.tableEquipmentTaskReport = ((EquipmentTaskReportDataTable)(base.Tables["EquipmentTaskReport"]));
             if ((initTable == true)) {
-                if ((this.tableEmployeeDailyTasks != null)) {
-                    this.tableEmployeeDailyTasks.InitVars();
+                if ((this.tableEquipmentTaskReport != null)) {
+                    this.tableEquipmentTaskReport.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "EmployeeDailyTasks";
+            this.DataSetName = "EquipmentTaskReport";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/EmployeeDailyTasks.xsd";
+            this.Namespace = "http://tempuri.org/EquipmentTaskReport.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableEmployeeDailyTasks = new EmployeeDailyTasksDataTable();
-            base.Tables.Add(this.tableEmployeeDailyTasks);
+            this.tableEquipmentTaskReport = new EquipmentTaskReportDataTable();
+            base.Tables.Add(this.tableEquipmentTaskReport);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerialize_EmployeeDailyTasks() {
+        private bool ShouldSerialize_EquipmentTaskReport() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            EmployeeDailyTasks ds = new EmployeeDailyTasks();
+            EquipmentTaskReport ds = new EquipmentTaskReport();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,45 +270,33 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void EmployeeDailyTasksRowChangeEventHandler(object sender, EmployeeDailyTasksRowChangeEvent e);
+        public delegate void EquipmentTaskReportRowChangeEventHandler(object sender, EquipmentTaskReportRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class EmployeeDailyTasksDataTable : global::System.Data.TypedTableBase<EmployeeDailyTasksRow> {
+        public partial class EquipmentTaskReportDataTable : global::System.Data.TypedTableBase<EquipmentTaskReportRow> {
+            
+            private global::System.Data.DataColumn columnEquipmentName;
             
             private global::System.Data.DataColumn columnTaskType;
             
-            private global::System.Data.DataColumn columnSiteName;
-            
-            private global::System.Data.DataColumn columnFieldName;
-            
             private global::System.Data.DataColumn columnScheduledDate;
             
-            private global::System.Data.DataColumn columnStartTime;
+            private global::System.Data.DataColumn columnActualTimeSpent;
             
-            private global::System.Data.DataColumn columnEndTime;
+            private global::System.Data.DataColumn columnEmployees;
             
-            private global::System.Data.DataColumn columnProductName;
+            private global::System.Data.DataColumn columnParts;
             
-            private global::System.Data.DataColumn columnQuantityNeeded;
-            
-            private global::System.Data.DataColumn columnUnitType;
-            
-            private global::System.Data.DataColumn columnfirstname;
-            
-            private global::System.Data.DataColumn columnlastname;
-            
-            private global::System.Data.DataColumn columnemployeeId;
-            
-            private global::System.Data.DataColumn columnEquipment;
+            private global::System.Data.DataColumn columnNotes;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public EmployeeDailyTasksDataTable() {
-                this.TableName = "EmployeeDailyTasks";
+            public EquipmentTaskReportDataTable() {
+                this.TableName = "EquipmentTaskReport";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -316,7 +304,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal EmployeeDailyTasksDataTable(global::System.Data.DataTable table) {
+            internal EquipmentTaskReportDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -333,9 +321,17 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected EmployeeDailyTasksDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected EquipmentTaskReportDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EquipmentNameColumn {
+                get {
+                    return this.columnEquipmentName;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -343,22 +339,6 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             public global::System.Data.DataColumn TaskTypeColumn {
                 get {
                     return this.columnTaskType;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SiteNameColumn {
-                get {
-                    return this.columnSiteName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FieldNameColumn {
-                get {
-                    return this.columnFieldName;
                 }
             }
             
@@ -372,73 +352,33 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn StartTimeColumn {
+            public global::System.Data.DataColumn ActualTimeSpentColumn {
                 get {
-                    return this.columnStartTime;
+                    return this.columnActualTimeSpent;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EndTimeColumn {
+            public global::System.Data.DataColumn EmployeesColumn {
                 get {
-                    return this.columnEndTime;
+                    return this.columnEmployees;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ProductNameColumn {
+            public global::System.Data.DataColumn PartsColumn {
                 get {
-                    return this.columnProductName;
+                    return this.columnParts;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn QuantityNeededColumn {
+            public global::System.Data.DataColumn NotesColumn {
                 get {
-                    return this.columnQuantityNeeded;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn UnitTypeColumn {
-                get {
-                    return this.columnUnitType;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn firstnameColumn {
-                get {
-                    return this.columnfirstname;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn lastnameColumn {
-                get {
-                    return this.columnlastname;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn employeeIdColumn {
-                get {
-                    return this.columnemployeeId;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EquipmentColumn {
-                get {
-                    return this.columnEquipment;
+                    return this.columnNotes;
                 }
             }
             
@@ -453,57 +393,51 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public EmployeeDailyTasksRow this[int index] {
+            public EquipmentTaskReportRow this[int index] {
                 get {
-                    return ((EmployeeDailyTasksRow)(this.Rows[index]));
+                    return ((EquipmentTaskReportRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event EmployeeDailyTasksRowChangeEventHandler EmployeeDailyTasksRowChanging;
+            public event EquipmentTaskReportRowChangeEventHandler EquipmentTaskReportRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event EmployeeDailyTasksRowChangeEventHandler EmployeeDailyTasksRowChanged;
+            public event EquipmentTaskReportRowChangeEventHandler EquipmentTaskReportRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event EmployeeDailyTasksRowChangeEventHandler EmployeeDailyTasksRowDeleting;
+            public event EquipmentTaskReportRowChangeEventHandler EquipmentTaskReportRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event EmployeeDailyTasksRowChangeEventHandler EmployeeDailyTasksRowDeleted;
+            public event EquipmentTaskReportRowChangeEventHandler EquipmentTaskReportRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddEmployeeDailyTasksRow(EmployeeDailyTasksRow row) {
+            public void AddEquipmentTaskReportRow(EquipmentTaskReportRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public EmployeeDailyTasksRow AddEmployeeDailyTasksRow(string TaskType, string SiteName, string FieldName, System.DateTime ScheduledDate, System.DateTime StartTime, System.DateTime EndTime, string ProductName, double QuantityNeeded, string UnitType, string firstname, string lastname, string Equipment) {
-                EmployeeDailyTasksRow rowEmployeeDailyTasksRow = ((EmployeeDailyTasksRow)(this.NewRow()));
+            public EquipmentTaskReportRow AddEquipmentTaskReportRow(string EquipmentName, string TaskType, System.DateTime ScheduledDate, string ActualTimeSpent, string Employees, string Parts, string Notes) {
+                EquipmentTaskReportRow rowEquipmentTaskReportRow = ((EquipmentTaskReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
+                        EquipmentName,
                         TaskType,
-                        SiteName,
-                        FieldName,
                         ScheduledDate,
-                        StartTime,
-                        EndTime,
-                        ProductName,
-                        QuantityNeeded,
-                        UnitType,
-                        firstname,
-                        lastname,
-                        null,
-                        Equipment};
-                rowEmployeeDailyTasksRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowEmployeeDailyTasksRow);
-                return rowEmployeeDailyTasksRow;
+                        ActualTimeSpent,
+                        Employees,
+                        Parts,
+                        Notes};
+                rowEquipmentTaskReportRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowEquipmentTaskReportRow);
+                return rowEquipmentTaskReportRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                EmployeeDailyTasksDataTable cln = ((EmployeeDailyTasksDataTable)(base.Clone()));
+                EquipmentTaskReportDataTable cln = ((EquipmentTaskReportDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -511,98 +445,74 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new EmployeeDailyTasksDataTable();
+                return new EquipmentTaskReportDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
+                this.columnEquipmentName = base.Columns["EquipmentName"];
                 this.columnTaskType = base.Columns["TaskType"];
-                this.columnSiteName = base.Columns["SiteName"];
-                this.columnFieldName = base.Columns["FieldName"];
                 this.columnScheduledDate = base.Columns["ScheduledDate"];
-                this.columnStartTime = base.Columns["StartTime"];
-                this.columnEndTime = base.Columns["EndTime"];
-                this.columnProductName = base.Columns["ProductName"];
-                this.columnQuantityNeeded = base.Columns["QuantityNeeded"];
-                this.columnUnitType = base.Columns["UnitType"];
-                this.columnfirstname = base.Columns["firstname"];
-                this.columnlastname = base.Columns["lastname"];
-                this.columnemployeeId = base.Columns["employeeId"];
-                this.columnEquipment = base.Columns["Equipment"];
+                this.columnActualTimeSpent = base.Columns["ActualTimeSpent"];
+                this.columnEmployees = base.Columns["Employees"];
+                this.columnParts = base.Columns["Parts"];
+                this.columnNotes = base.Columns["Notes"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
+                this.columnEquipmentName = new global::System.Data.DataColumn("EquipmentName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEquipmentName);
                 this.columnTaskType = new global::System.Data.DataColumn("TaskType", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTaskType);
-                this.columnSiteName = new global::System.Data.DataColumn("SiteName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSiteName);
-                this.columnFieldName = new global::System.Data.DataColumn("FieldName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFieldName);
                 this.columnScheduledDate = new global::System.Data.DataColumn("ScheduledDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnScheduledDate);
-                this.columnStartTime = new global::System.Data.DataColumn("StartTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnStartTime);
-                this.columnEndTime = new global::System.Data.DataColumn("EndTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEndTime);
-                this.columnProductName = new global::System.Data.DataColumn("ProductName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnProductName);
-                this.columnQuantityNeeded = new global::System.Data.DataColumn("QuantityNeeded", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnQuantityNeeded);
-                this.columnUnitType = new global::System.Data.DataColumn("UnitType", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUnitType);
-                this.columnfirstname = new global::System.Data.DataColumn("firstname", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfirstname);
-                this.columnlastname = new global::System.Data.DataColumn("lastname", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnlastname);
-                this.columnemployeeId = new global::System.Data.DataColumn("employeeId", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnemployeeId);
-                this.columnEquipment = new global::System.Data.DataColumn("Equipment", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEquipment);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnemployeeId}, false));
+                this.columnActualTimeSpent = new global::System.Data.DataColumn("ActualTimeSpent", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnActualTimeSpent);
+                this.columnEmployees = new global::System.Data.DataColumn("Employees", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmployees);
+                this.columnParts = new global::System.Data.DataColumn("Parts", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnParts);
+                this.columnNotes = new global::System.Data.DataColumn("Notes", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNotes);
+                this.columnEquipmentName.MaxLength = 255;
                 this.columnTaskType.MaxLength = 255;
-                this.columnSiteName.MaxLength = 255;
-                this.columnFieldName.MaxLength = 255;
-                this.columnProductName.MaxLength = 255;
-                this.columnUnitType.MaxLength = 255;
-                this.columnfirstname.MaxLength = 255;
-                this.columnlastname.MaxLength = 255;
-                this.columnemployeeId.AutoIncrement = true;
-                this.columnemployeeId.ReadOnly = true;
-                this.columnemployeeId.Unique = true;
-                this.columnEquipment.ReadOnly = true;
-                this.columnEquipment.MaxLength = 2147483647;
-                this.ExtendedProperties.Add("Generator_TablePropName", "_EmployeeDailyTasks");
-                this.ExtendedProperties.Add("Generator_UserTableName", "EmployeeDailyTasks");
+                this.columnActualTimeSpent.MaxLength = 255;
+                this.columnEmployees.ReadOnly = true;
+                this.columnEmployees.MaxLength = 2147483647;
+                this.columnParts.ReadOnly = true;
+                this.columnParts.MaxLength = 2147483647;
+                this.columnNotes.MaxLength = 255;
+                this.ExtendedProperties.Add("Generator_TablePropName", "_EquipmentTaskReport");
+                this.ExtendedProperties.Add("Generator_UserTableName", "EquipmentTaskReport");
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public EmployeeDailyTasksRow NewEmployeeDailyTasksRow() {
-                return ((EmployeeDailyTasksRow)(this.NewRow()));
+            public EquipmentTaskReportRow NewEquipmentTaskReportRow() {
+                return ((EquipmentTaskReportRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new EmployeeDailyTasksRow(builder);
+                return new EquipmentTaskReportRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(EmployeeDailyTasksRow);
+                return typeof(EquipmentTaskReportRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.EmployeeDailyTasksRowChanged != null)) {
-                    this.EmployeeDailyTasksRowChanged(this, new EmployeeDailyTasksRowChangeEvent(((EmployeeDailyTasksRow)(e.Row)), e.Action));
+                if ((this.EquipmentTaskReportRowChanged != null)) {
+                    this.EquipmentTaskReportRowChanged(this, new EquipmentTaskReportRowChangeEvent(((EquipmentTaskReportRow)(e.Row)), e.Action));
                 }
             }
             
@@ -610,8 +520,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.EmployeeDailyTasksRowChanging != null)) {
-                    this.EmployeeDailyTasksRowChanging(this, new EmployeeDailyTasksRowChangeEvent(((EmployeeDailyTasksRow)(e.Row)), e.Action));
+                if ((this.EquipmentTaskReportRowChanging != null)) {
+                    this.EquipmentTaskReportRowChanging(this, new EquipmentTaskReportRowChangeEvent(((EquipmentTaskReportRow)(e.Row)), e.Action));
                 }
             }
             
@@ -619,8 +529,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.EmployeeDailyTasksRowDeleted != null)) {
-                    this.EmployeeDailyTasksRowDeleted(this, new EmployeeDailyTasksRowChangeEvent(((EmployeeDailyTasksRow)(e.Row)), e.Action));
+                if ((this.EquipmentTaskReportRowDeleted != null)) {
+                    this.EquipmentTaskReportRowDeleted(this, new EquipmentTaskReportRowChangeEvent(((EquipmentTaskReportRow)(e.Row)), e.Action));
                 }
             }
             
@@ -628,14 +538,14 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.EmployeeDailyTasksRowDeleting != null)) {
-                    this.EmployeeDailyTasksRowDeleting(this, new EmployeeDailyTasksRowChangeEvent(((EmployeeDailyTasksRow)(e.Row)), e.Action));
+                if ((this.EquipmentTaskReportRowDeleting != null)) {
+                    this.EquipmentTaskReportRowDeleting(this, new EquipmentTaskReportRowChangeEvent(((EquipmentTaskReportRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveEmployeeDailyTasksRow(EmployeeDailyTasksRow row) {
+            public void RemoveEquipmentTaskReportRow(EquipmentTaskReportRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -644,7 +554,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                EmployeeDailyTasks ds = new EmployeeDailyTasks();
+                EquipmentTaskReport ds = new EquipmentTaskReport();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -662,7 +572,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "EmployeeDailyTasksDataTable";
+                attribute2.FixedValue = "EquipmentTaskReportDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -706,15 +616,31 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class EmployeeDailyTasksRow : global::System.Data.DataRow {
+        public partial class EquipmentTaskReportRow : global::System.Data.DataRow {
             
-            private EmployeeDailyTasksDataTable tableEmployeeDailyTasks;
+            private EquipmentTaskReportDataTable tableEquipmentTaskReport;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal EmployeeDailyTasksRow(global::System.Data.DataRowBuilder rb) : 
+            internal EquipmentTaskReportRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableEmployeeDailyTasks = ((EmployeeDailyTasksDataTable)(this.Table));
+                this.tableEquipmentTaskReport = ((EquipmentTaskReportDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string EquipmentName {
+                get {
+                    try {
+                        return ((string)(this[this.tableEquipmentTaskReport.EquipmentNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EquipmentName\' in table \'EquipmentTaskReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquipmentTaskReport.EquipmentNameColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -722,46 +648,14 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             public string TaskType {
                 get {
                     try {
-                        return ((string)(this[this.tableEmployeeDailyTasks.TaskTypeColumn]));
+                        return ((string)(this[this.tableEquipmentTaskReport.TaskTypeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TaskType\' in table \'EmployeeDailyTasks\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'TaskType\' in table \'EquipmentTaskReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableEmployeeDailyTasks.TaskTypeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SiteName {
-                get {
-                    try {
-                        return ((string)(this[this.tableEmployeeDailyTasks.SiteNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SiteName\' in table \'EmployeeDailyTasks\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableEmployeeDailyTasks.SiteNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string FieldName {
-                get {
-                    try {
-                        return ((string)(this[this.tableEmployeeDailyTasks.FieldNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FieldName\' in table \'EmployeeDailyTasks\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableEmployeeDailyTasks.FieldNameColumn] = value;
+                    this[this.tableEquipmentTaskReport.TaskTypeColumn] = value;
                 }
             }
             
@@ -770,315 +664,163 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             public System.DateTime ScheduledDate {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableEmployeeDailyTasks.ScheduledDateColumn]));
+                        return ((global::System.DateTime)(this[this.tableEquipmentTaskReport.ScheduledDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ScheduledDate\' in table \'EmployeeDailyTasks\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ScheduledDate\' in table \'EquipmentTaskReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableEmployeeDailyTasks.ScheduledDateColumn] = value;
+                    this[this.tableEquipmentTaskReport.ScheduledDateColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime StartTime {
+            public string ActualTimeSpent {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableEmployeeDailyTasks.StartTimeColumn]));
+                        return ((string)(this[this.tableEquipmentTaskReport.ActualTimeSpentColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'StartTime\' in table \'EmployeeDailyTasks\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ActualTimeSpent\' in table \'EquipmentTaskReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableEmployeeDailyTasks.StartTimeColumn] = value;
+                    this[this.tableEquipmentTaskReport.ActualTimeSpentColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime EndTime {
+            public string Employees {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableEmployeeDailyTasks.EndTimeColumn]));
+                        return ((string)(this[this.tableEquipmentTaskReport.EmployeesColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EndTime\' in table \'EmployeeDailyTasks\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Employees\' in table \'EquipmentTaskReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableEmployeeDailyTasks.EndTimeColumn] = value;
+                    this[this.tableEquipmentTaskReport.EmployeesColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ProductName {
+            public string Parts {
                 get {
                     try {
-                        return ((string)(this[this.tableEmployeeDailyTasks.ProductNameColumn]));
+                        return ((string)(this[this.tableEquipmentTaskReport.PartsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ProductName\' in table \'EmployeeDailyTasks\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Parts\' in table \'EquipmentTaskReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableEmployeeDailyTasks.ProductNameColumn] = value;
+                    this[this.tableEquipmentTaskReport.PartsColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double QuantityNeeded {
+            public string Notes {
                 get {
                     try {
-                        return ((double)(this[this.tableEmployeeDailyTasks.QuantityNeededColumn]));
+                        return ((string)(this[this.tableEquipmentTaskReport.NotesColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'QuantityNeeded\' in table \'EmployeeDailyTasks\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Notes\' in table \'EquipmentTaskReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableEmployeeDailyTasks.QuantityNeededColumn] = value;
+                    this[this.tableEquipmentTaskReport.NotesColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string UnitType {
-                get {
-                    try {
-                        return ((string)(this[this.tableEmployeeDailyTasks.UnitTypeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'UnitType\' in table \'EmployeeDailyTasks\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableEmployeeDailyTasks.UnitTypeColumn] = value;
-                }
+            public bool IsEquipmentNameNull() {
+                return this.IsNull(this.tableEquipmentTaskReport.EquipmentNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string firstname {
-                get {
-                    try {
-                        return ((string)(this[this.tableEmployeeDailyTasks.firstnameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'firstname\' in table \'EmployeeDailyTasks\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableEmployeeDailyTasks.firstnameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string lastname {
-                get {
-                    try {
-                        return ((string)(this[this.tableEmployeeDailyTasks.lastnameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'lastname\' in table \'EmployeeDailyTasks\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableEmployeeDailyTasks.lastnameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int employeeId {
-                get {
-                    try {
-                        return ((int)(this[this.tableEmployeeDailyTasks.employeeIdColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'employeeId\' in table \'EmployeeDailyTasks\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableEmployeeDailyTasks.employeeIdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Equipment {
-                get {
-                    try {
-                        return ((string)(this[this.tableEmployeeDailyTasks.EquipmentColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Equipment\' in table \'EmployeeDailyTasks\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableEmployeeDailyTasks.EquipmentColumn] = value;
-                }
+            public void SetEquipmentNameNull() {
+                this[this.tableEquipmentTaskReport.EquipmentNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsTaskTypeNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.TaskTypeColumn);
+                return this.IsNull(this.tableEquipmentTaskReport.TaskTypeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTaskTypeNull() {
-                this[this.tableEmployeeDailyTasks.TaskTypeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSiteNameNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.SiteNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSiteNameNull() {
-                this[this.tableEmployeeDailyTasks.SiteNameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsFieldNameNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.FieldNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetFieldNameNull() {
-                this[this.tableEmployeeDailyTasks.FieldNameColumn] = global::System.Convert.DBNull;
+                this[this.tableEquipmentTaskReport.TaskTypeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsScheduledDateNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.ScheduledDateColumn);
+                return this.IsNull(this.tableEquipmentTaskReport.ScheduledDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetScheduledDateNull() {
-                this[this.tableEmployeeDailyTasks.ScheduledDateColumn] = global::System.Convert.DBNull;
+                this[this.tableEquipmentTaskReport.ScheduledDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsStartTimeNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.StartTimeColumn);
+            public bool IsActualTimeSpentNull() {
+                return this.IsNull(this.tableEquipmentTaskReport.ActualTimeSpentColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetStartTimeNull() {
-                this[this.tableEmployeeDailyTasks.StartTimeColumn] = global::System.Convert.DBNull;
+            public void SetActualTimeSpentNull() {
+                this[this.tableEquipmentTaskReport.ActualTimeSpentColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsEndTimeNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.EndTimeColumn);
+            public bool IsEmployeesNull() {
+                return this.IsNull(this.tableEquipmentTaskReport.EmployeesColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetEndTimeNull() {
-                this[this.tableEmployeeDailyTasks.EndTimeColumn] = global::System.Convert.DBNull;
+            public void SetEmployeesNull() {
+                this[this.tableEquipmentTaskReport.EmployeesColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsProductNameNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.ProductNameColumn);
+            public bool IsPartsNull() {
+                return this.IsNull(this.tableEquipmentTaskReport.PartsColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetProductNameNull() {
-                this[this.tableEmployeeDailyTasks.ProductNameColumn] = global::System.Convert.DBNull;
+            public void SetPartsNull() {
+                this[this.tableEquipmentTaskReport.PartsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsQuantityNeededNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.QuantityNeededColumn);
+            public bool IsNotesNull() {
+                return this.IsNull(this.tableEquipmentTaskReport.NotesColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetQuantityNeededNull() {
-                this[this.tableEmployeeDailyTasks.QuantityNeededColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsUnitTypeNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.UnitTypeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetUnitTypeNull() {
-                this[this.tableEmployeeDailyTasks.UnitTypeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsfirstnameNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.firstnameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetfirstnameNull() {
-                this[this.tableEmployeeDailyTasks.firstnameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IslastnameNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.lastnameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetlastnameNull() {
-                this[this.tableEmployeeDailyTasks.lastnameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsemployeeIdNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.employeeIdColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetemployeeIdNull() {
-                this[this.tableEmployeeDailyTasks.employeeIdColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsEquipmentNull() {
-                return this.IsNull(this.tableEmployeeDailyTasks.EquipmentColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetEquipmentNull() {
-                this[this.tableEmployeeDailyTasks.EquipmentColumn] = global::System.Convert.DBNull;
+            public void SetNotesNull() {
+                this[this.tableEquipmentTaskReport.NotesColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1086,22 +828,22 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class EmployeeDailyTasksRowChangeEvent : global::System.EventArgs {
+        public class EquipmentTaskReportRowChangeEvent : global::System.EventArgs {
             
-            private EmployeeDailyTasksRow eventRow;
+            private EquipmentTaskReportRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public EmployeeDailyTasksRowChangeEvent(EmployeeDailyTasksRow row, global::System.Data.DataRowAction action) {
+            public EquipmentTaskReportRowChangeEvent(EquipmentTaskReportRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public EmployeeDailyTasksRow Row {
+            public EquipmentTaskReportRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -1117,7 +859,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
         }
     }
 }
-namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
+namespace KnowYourTurf.Web.Areas.Reporting.XSD.EquipmentTaskReportTableAdapters {
     
     
     /// <summary>
@@ -1129,7 +871,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class EmployeeDailyTasksTableAdapter : global::System.ComponentModel.Component {
+    public partial class EquipmentTaskReportTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -1143,7 +885,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public EmployeeDailyTasksTableAdapter() {
+        public EquipmentTaskReportTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -1240,20 +982,14 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "EmployeeDailyTasks";
+            tableMapping.DataSetTable = "EquipmentTaskReport";
+            tableMapping.ColumnMappings.Add("EquipmentName", "EquipmentName");
             tableMapping.ColumnMappings.Add("TaskType", "TaskType");
-            tableMapping.ColumnMappings.Add("SiteName", "SiteName");
-            tableMapping.ColumnMappings.Add("FieldName", "FieldName");
             tableMapping.ColumnMappings.Add("ScheduledDate", "ScheduledDate");
-            tableMapping.ColumnMappings.Add("StartTime", "StartTime");
-            tableMapping.ColumnMappings.Add("EndTime", "EndTime");
-            tableMapping.ColumnMappings.Add("ProductName", "ProductName");
-            tableMapping.ColumnMappings.Add("QuantityNeeded", "QuantityNeeded");
-            tableMapping.ColumnMappings.Add("UnitType", "UnitType");
-            tableMapping.ColumnMappings.Add("firstname", "firstname");
-            tableMapping.ColumnMappings.Add("lastname", "lastname");
-            tableMapping.ColumnMappings.Add("employeeId", "employeeId");
-            tableMapping.ColumnMappings.Add("Equipment", "Equipment");
+            tableMapping.ColumnMappings.Add("ActualTimeSpent", "ActualTimeSpent");
+            tableMapping.ColumnMappings.Add("Employees", "Employees");
+            tableMapping.ColumnMappings.Add("Parts", "Parts");
+            tableMapping.ColumnMappings.Add("Notes", "Notes");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1261,7 +997,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = "Data Source=rharik-pc;Initial Catalog=KnowYourTurf_DEV;Integrated Security=True";
+            this._connection.ConnectionString = "Data Source=RHARIK-PC;Initial Catalog=KnowYourTurf_DEV;Integrated Security=True";
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1270,10 +1006,15 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "dbo.EmployeeDailyTasks";
+            this._commandCollection[0].CommandText = "dbo.EquipmentTaskReport";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EquipmentId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StartDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EndDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Complete", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 1, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EmployeeId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TaskTypeId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ClientId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -1281,19 +1022,49 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(EmployeeDailyTasks.EmployeeDailyTasksDataTable dataTable, global::System.Nullable<global::System.DateTime> Date, global::System.Nullable<int> ClientId) {
+        public virtual int Fill(EquipmentTaskReport.EquipmentTaskReportDataTable dataTable, global::System.Nullable<int> EquipmentId, global::System.Nullable<global::System.DateTime> StartDate, global::System.Nullable<global::System.DateTime> EndDate, global::System.Nullable<bool> Complete, global::System.Nullable<int> EmployeeId, global::System.Nullable<int> TaskTypeId, global::System.Nullable<int> ClientId) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((Date.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(Date.Value));
+            if ((EquipmentId.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(EquipmentId.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            if ((ClientId.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = ((int)(ClientId.Value));
+            if ((StartDate.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(StartDate.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((EndDate.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(EndDate.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((Complete.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[4].Value = ((bool)(Complete.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((EmployeeId.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[5].Value = ((int)(EmployeeId.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((TaskTypeId.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[6].Value = ((int)(TaskTypeId.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((ClientId.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[7].Value = ((int)(ClientId.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1306,21 +1077,51 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual EmployeeDailyTasks.EmployeeDailyTasksDataTable GetData(global::System.Nullable<global::System.DateTime> Date, global::System.Nullable<int> ClientId) {
+        public virtual EquipmentTaskReport.EquipmentTaskReportDataTable GetData(global::System.Nullable<int> EquipmentId, global::System.Nullable<global::System.DateTime> StartDate, global::System.Nullable<global::System.DateTime> EndDate, global::System.Nullable<bool> Complete, global::System.Nullable<int> EmployeeId, global::System.Nullable<int> TaskTypeId, global::System.Nullable<int> ClientId) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((Date.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(Date.Value));
+            if ((EquipmentId.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(EquipmentId.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            if ((ClientId.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = ((int)(ClientId.Value));
+            if ((StartDate.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(StartDate.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            EmployeeDailyTasks.EmployeeDailyTasksDataTable dataTable = new EmployeeDailyTasks.EmployeeDailyTasksDataTable();
+            if ((EndDate.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(EndDate.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((Complete.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[4].Value = ((bool)(Complete.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((EmployeeId.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[5].Value = ((int)(EmployeeId.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((TaskTypeId.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[6].Value = ((int)(TaskTypeId.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((ClientId.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[7].Value = ((int)(ClientId.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            EquipmentTaskReport.EquipmentTaskReportDataTable dataTable = new EquipmentTaskReport.EquipmentTaskReportDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1394,7 +1195,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(EmployeeDailyTasks dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(EquipmentTaskReport dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1404,7 +1205,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(EmployeeDailyTasks dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(EquipmentTaskReport dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1414,7 +1215,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(EmployeeDailyTasks dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(EquipmentTaskReport dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             return result;
         }
@@ -1448,7 +1249,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.EmployeeDailyTasksTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(EmployeeDailyTasks dataSet) {
+        public virtual int UpdateAll(EquipmentTaskReport dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

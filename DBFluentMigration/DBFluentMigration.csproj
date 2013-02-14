@@ -62,6 +62,10 @@
     <Compile Include="Iteration_1\10070_Create_TaskReport_Sproc.cs" />
     <Compile Include="Iteration_1\10080_Create_EquipmentTaskReport_Sproc.cs" />
     <Compile Include="Iteration_1\10090_Add_ID_To_Equipment.cs" />
+    <Compile Include="Iteration_1\10100_Fix_TrainerMetric_Sproc.cs" />
+    <Compile Include="Iteration_1\10110_Alter_Employee_Daily_Task_Sproc.cs" />
+    <Compile Include="Iteration_1\10120_Alter_TaskReport_Sproc.cs" />
+    <Compile Include="Iteration_1\10130_Alter_EquipmentTaskReport_Sproc.cs" />
     <Compile Include="IUpdatePermissions.cs" />
     <Compile Include="IUpdateOperations.cs" />
     <Compile Include="Iteration_1\UpdateOperations_200.cs" />
