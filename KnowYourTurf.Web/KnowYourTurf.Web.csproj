@@ -73,22 +73,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.UI.Helpers.dll</HintPath>
-    </Reference>
     <Reference Include="Elmah">
       <HintPath>..\lib\Elmah.dll</HintPath>
     </Reference>
@@ -635,6 +619,22 @@
     <Content Include="Views\UserProfile\EmailConfirmed.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Core.Utils\CC.Core.Utilities.csproj">
+      <Project>{54970d60-6123-4227-9c72-04ca09baf7b9}</Project>
+      <Name>CC.Core.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Core\CC.Core.csproj">
+      <Project>{5e0b0ca2-bd5e-4953-a336-2aadc00cd81b}</Project>
+      <Name>CC.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.Security\CC.Security.csproj">
+      <Project>{dba372fe-3d52-45b3-af82-b37696328764}</Project>
+      <Name>CC.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CannibalCoder\CC.UI.Helpers\CC.UI.Helpers.csproj">
+      <Project>{0dbfb19c-e106-4807-aa4b-fc8d128a3438}</Project>
+      <Name>CC.UI.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>

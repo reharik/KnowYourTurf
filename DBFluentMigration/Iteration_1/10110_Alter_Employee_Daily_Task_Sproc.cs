@@ -2,7 +2,7 @@
 
 namespace DBFluentMigration.Iteration_1
 {
-    [Migration(100110)]
+    [Migration(10110)]
     public class Alter_Employee_Daily_Task_Sproc : Migration
     {
         public override void Up()
