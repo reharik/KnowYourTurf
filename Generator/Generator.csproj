@@ -160,10 +160,6 @@
     <Compile Include="Commands\QADataLoadCommand.cs" />
     <Compile Include="Commands\SecurityUpdateCommand.cs" />
     <Compile Include="Commands\DataLoadCommand.cs" />
-    <Compile Include="Commands\DefaultSecuritySetupCommand.cs" />
-    <Compile Include="Commands\DropReaddDatabaseCommand.cs" />
-    <Compile Include="Commands\KillAllFKsCommand.cs" />
-    <Compile Include="Commands\RebuildDatabaseCommand.cs" />
     <Compile Include="Commands\SecurityCommand.cs" />
     <Compile Include="MigratorConsole.cs" />
     <Compile Include="MigratorOptions.cs" />

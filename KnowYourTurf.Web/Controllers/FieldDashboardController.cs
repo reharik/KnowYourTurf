@@ -12,6 +12,7 @@ using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Models;
 using StructureMap;
+using CC.Core;
 
 namespace KnowYourTurf.Web.Controllers
 {
@@ -58,7 +59,7 @@ namespace KnowYourTurf.Web.Controllers
             model._photoGridUrl = photoUrl;
             model._saveUrl = UrlContext.GetUrlForAction<FieldController>(x => x.Save(null));
             model._Title = WebLocalizationKeys.FIELD_INFORMATION.ToString();
-            model._Photos = field.Photos.Select(x => new PhotoDto {FileUrl = x.FileUrl});
+            model._Photos = field.Photos.Select(x => new PhotoDto {FileUrl = x.FileUrl.AddImageSizeToName("Large")});
 
             return new CustomJsonResult(model);
         }

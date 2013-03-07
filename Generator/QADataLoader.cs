@@ -78,7 +78,7 @@ namespace Generator
         private void CreateClient()
         {
             _client = new Client { Name = "KYT - Demo", ZipCode = "78701", TaxRate = 8.25, NumberOfSites = 2 };
-            var site1 = new Site { Name = "Sports Fields", Description = "Site 1" };
+            var site1 = new Site { Name = "Sports Fields", Description = "Site 1", SiteOperation = "Site1"};
             var field1 = new Field { Name = "Baseball", Description = "Baseball", Size = 120000, Status = "Active", Abbreviation = "BB" };
             var field2 = new Field { Name = "Football", Description = "Football", Size = 120000, Status = "Active", Abbreviation = "FB" };
             var field3 = new Field { Name = "Football Practice", Description = "Football Practice", Size = 120000, Status = "Active", Abbreviation = "FBPR" };
@@ -94,7 +94,7 @@ namespace Generator
             site1.AddField(field6);
             site1.AddField(field7);
             _client.AddSite(site1);
-            var site2 = new Site { Name = "KYT Golf Course", Description = "Site 2" };
+            var site2 = new Site { Name = "KYT Golf Course", Description = "Site 2", SiteOperation = "Site2" };
             var field8 = new Field { Name = "Hole 1", Description = "Hole 1", Size = 120000, Status = "Active", Abbreviation = "H-1" };
             var field9 = new Field { Name = "Hole 2", Description = "Hole 2", Size = 120000, Status = "Active", Abbreviation = "H-2" };
             var field10 = new Field { Name = "Hole 3", Description = "Hole 3", Size = 120000, Status = "Active", Abbreviation = "H-3" };
