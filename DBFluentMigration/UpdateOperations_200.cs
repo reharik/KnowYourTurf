@@ -2,11 +2,11 @@ namespace DBFluentMigration.Iteration_2
 {
     using KnowYourTurf.Web.Security;
 
-    public class UpdateOperations_200 : IUpdateOperations
+    public class UpdateOperations_2001 : IUpdateOperations
     {
         private readonly IOperations _operations;
 
-        public UpdateOperations_200(IOperations operations)
+        public UpdateOperations_2001(IOperations operations)
         {
             this._operations = operations;
         }

@@ -45,9 +45,6 @@ namespace KnowYourTurf.Web.Config
             For<ISessionFactoryConfiguration>().Singleton().Use<NullSqlServerSessionSourceConfiguration>();
             For<ISessionFactory>().Use<NullSessionFactory>();
 
-            For<ISession>().Use<NullSession>();
-            For<ISession>().Use<NullSession>().Named("NoInterceptorNoFilters");
-
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<UnitOfWork>().Named("NoInterceptorNoFilters");
@@ -59,7 +56,6 @@ namespace KnowYourTurf.Web.Config
             For<ILocalizationDataProvider>().Use<LocalizationDataProvider>();
             For<IAuthenticationContext>().Use<WebAuthenticationContext>();
             For<IMenuConfig>().Use<MainMenu>();
-            For<IMergedEmailFactory>().LifecycleIs(new UniquePerRequestLifecycle()).Use<MergedEmailFactory>();
 
             For<IAuthorizationService>().HybridHttpOrThreadLocalScoped().Use<AuthorizationService>();
             For<IAuthorizationRepository>().HybridHttpOrThreadLocalScoped().Use<AuthorizationRepository>();

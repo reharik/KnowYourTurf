@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>TownCrier</id>
+    <version>1.1</version>
+    <title>Town Crier E-mail Template Engine</title>
+    <authors>James Freiwirth</authors>
+    <owners>James Freiwirth</owners>
+    <projectUrl>http://thecodedecanter.wordpress.com/2010/07/19/town-crier-an-open-source-e-mail-templating-engine-for-net/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Town Crier is a small, open-source e-mail templating engine for .NET.
+
+Now with Markdown support!
+
+See website for more details.: http://thecodedecanter.wordpress.com/2010/07/19/town-crier-an-open-source-e-mail-templating-engine-for-net/</description>
+    <summary>Town Crier is a small, open-source e-mail templating engine for .NET.</summary>
+    <releaseNotes />
+    <copyright>Copyright James Freiwirth 2010</copyright>
+    <language />
+    <tags>e-mail email template templating mail merge markdown fluent</tags>
+    <dependencies>
+      <dependency id="MarkdownSharp" version="1.13.0.0" />
+    </dependencies>
+    <references>
+      <reference file="Alpinely.TownCrier.dll" />
+    </references>
+  </metadata>
+</package>

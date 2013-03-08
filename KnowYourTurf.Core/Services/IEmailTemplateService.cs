@@ -26,7 +26,7 @@ namespace KnowYourTurf.Core.Services
 
         public void SendSingleEmail(EmailTemplateDTO input)
         {
-            var mergedEmailFactory = _container.GetInstance<IMergedEmailFactory>();
+            var mergedEmailFactory = new MergedEmailFactory(new TemplateParser());
             MailMessage message = mergedEmailFactory
                 .WithTokenValues(input.TokenValues)
                 .WithSubject(input.Subject)
@@ -43,7 +43,7 @@ namespace KnowYourTurf.Core.Services
       
         public void SendMultipleEmails(EmailTemplateDTO input, IEnumerable<MailAddress> addresses)
         {
-            var mergedEmailFactory = _container.GetInstance<IMergedEmailFactory>();
+            var mergedEmailFactory = new MergedEmailFactory(new TemplateParser());
             MailMessage message = mergedEmailFactory
                 .WithTokenValues(input.TokenValues)
                 .WithSubject(input.Subject)

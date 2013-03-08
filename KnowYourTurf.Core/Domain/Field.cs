@@ -11,7 +11,7 @@ namespace KnowYourTurf.Core.Domain
 {
     public class Field : DomainEntity, IPersistableObject
     {
-        public virtual Site Site { get; private set; }
+        public virtual Site Site { get; protected internal set; }
 
         [ValidateNonEmpty]
         public virtual string Name { get; set; }

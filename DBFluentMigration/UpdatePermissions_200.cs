@@ -3,11 +3,11 @@ namespace DBFluentMigration.Iteration_1
     using KnowYourTurf.Core.Enums;
     using KnowYourTurf.Web.Security;
 
-    public class UpdatePermissions_200:IUpdatePermissions
+    public class UpdatePermissions_2001:IUpdatePermissions
     {
         private readonly IPermissions _permissions;
 
-        public UpdatePermissions_200(IPermissions permissions)
+        public UpdatePermissions_2001(IPermissions permissions)
         {
             this._permissions = permissions;
         }
