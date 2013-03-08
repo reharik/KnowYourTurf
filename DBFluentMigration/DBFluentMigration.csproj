@@ -70,6 +70,8 @@
     <Compile Include="Iteration_1\UpdateOperations_200.cs" />
     <Compile Include="Iteration_1\UpdatePermissions_200.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateOperations_200.cs" />
+    <Compile Include="UpdatePermissions_200.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DBFluentMigration.dll.config" />

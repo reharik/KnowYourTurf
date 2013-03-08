@@ -247,6 +247,7 @@
     <Content Include="Areas\Reporting\ReportViewer\EquipmentTaskReport.aspx" />
     <Content Include="Areas\Reporting\ReportViewer\EmployeeDailyTasks.aspx" />
     <Content Include="Areas\Reporting\ReportViewer\TaskReport.aspx" />
+    <Content Include="Areas\Reporting\ReportViewer\TDA.aspx" />
     <Content Include="Areas\Reporting\Views\Web.config" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Compile Include="Config\CustomJsonResult.cs" />
@@ -411,6 +412,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TaskReport.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Reporting\Templates\Report.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Report.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reporting\Controllers\TDAController.cs" />
     <Compile Include="WebLocalizationKeys.cs" />
     <Compile Include="KYTWebRegistry.cs" />
     <Compile Include="Global.asax.cs">
@@ -761,6 +768,7 @@
     <Content Include="Areas\Reporting\XSD\TaskReport.xsc">
       <DependentUpon>TaskReport.xsd</DependentUpon>
     </Content>
+    <Content Include="Areas\Reporting\Views\TDA\Display.cshtml" />
     <None Include="Areas\Reporting\XSD\TaskReport.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TaskReport.Designer.cs</LastGenOutput>
@@ -793,6 +801,12 @@
     </Content>
     <Content Include="Views\EquipmentTaskCalendar\EquipmentTaskCalendar.cshtml" />
     <Content Include="Views\EventCalendar\EventCalendar.cshtml" />
+    <Content Include="Areas\Reporting\Templates\Report.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Report.cs</LastGenOutput>
+      <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
+&lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
+    </Content>
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
     <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
@@ -802,6 +816,9 @@
     <EmbeddedResource Include="Areas\Reporting\RDLC\EquipmentTaskReport.rdlc" />
     <EmbeddedResource Include="Areas\Reporting\Views\EmployeeDailyTasks\EmployeeDailyTasks.rdlc" />
     <EmbeddedResource Include="Areas\Reporting\RDLC\TaskReport.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
