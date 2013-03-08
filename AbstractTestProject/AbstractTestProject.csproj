@@ -39,11 +39,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\lib\Rhino.Mocks.dll</HintPath>
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,6 +65,9 @@
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

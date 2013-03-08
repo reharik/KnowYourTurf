@@ -31,19 +31,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Alpinely.TownCrier, Version=1.1.0.13346, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\lib\Alpinely.TownCrier.dll</HintPath>
+    <Reference Include="Alpinely.TownCrier, Version=1.1.0.20141, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\TownCrier.1.1\lib\Alpinely.TownCrier.dll</HintPath>
     </Reference>
     <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\CC.Core.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>
@@ -91,6 +96,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
