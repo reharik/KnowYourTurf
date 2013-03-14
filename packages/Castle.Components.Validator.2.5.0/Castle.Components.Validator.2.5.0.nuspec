@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Castle.Components.Validator</id>
+    <version>2.5.0</version>
+    <title>Castle.Components.Validator</title>
+    <authors>G. Richard Bellamy</authors>
+    <owners>G. Richard Bellamy</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Validator component is used to validate your objects. It uses an attribute driven syntax making it easy to start adding validation to your classes.</description>
+    <summary>The Validator component is used to validate your objects. It uses an attribute driven syntax making it easy to start adding validation to your classes.</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <references>
+      <reference file="Castle.Components.Validator.dll" />
+    </references>
+  </metadata>
+</package>

@@ -82,7 +82,7 @@ namespace KnowYourTurf.Web.Controllers
         protected Notification deleteMultiple(BulkActionViewModel input, Func<LISTTYPE, Notification, bool> checkDependencies)
         {
             var notification = new Notification {Success = true};
-            input.EntityIds.Each(x =>
+            input.EntityIds.ForEachItem(x =>
                                      {
                                          var item = _repository.Find<LISTTYPE>(x);
                                          if (checkDependencies(item, notification))

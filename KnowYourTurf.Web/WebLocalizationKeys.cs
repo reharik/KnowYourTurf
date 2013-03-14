@@ -267,6 +267,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken TASK_REPORT = new WebLocalizationKeys("TASK_REPORT", "Task Report");
         public static readonly StringToken EMPLOYEE = new WebLocalizationKeys("EMPLOYEE", "Employee");
         public static readonly StringToken EQUIPMENT_TASK_REPORT = new WebLocalizationKeys("EQUIPMENT_TASK_REPORT", "Equipment Task Report");
+        public static readonly StringToken TDA = new WebLocalizationKeys("TDA", "TDA Report");
 
 
     }

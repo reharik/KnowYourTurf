@@ -260,6 +260,14 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
         KYT.mixin(this, "ajaxFormMixin");
         KYT.mixin(this, "modelAndElementsMixin");
     },
+    _setupBindings:function(){
+        KYT.vent.bind(this.options.gridId+":Redirect",this.commitPO,this);
+        KYT.vent.bind(this.options.gridId + ":AddUpdateItem", this.editItem, this);
+    },
+    _unbindBindings:function(){
+        KYT.vent.unbind(this.options.gridId+":Redirect",this.commitPO,this);
+        KYT.vent.unbind(this.options.gridId+ ":AddUpdateItem", this.editItem, this);
+    },
     viewLoaded:function(){
         this.addIdsToModel();
         var rel = KYT.State.get("Relationships");
@@ -310,7 +318,15 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
         this.storeChild(this.completedGridView);
         this.storeChild(this.photoGridView);
         this.storeChild(this.documentGridView);
+
+        KYT.vent.bind("form:photo:success", this.reloadPictureGallery, this);
+
     },
+    reloadPictureGallery:function(){
+        // reload the fucking gallery
+        var x="";
+    },
+
     callbackAction: function(){
         this.pendingGridView.callbackAction();
         this.completedGridView.callbackAction();

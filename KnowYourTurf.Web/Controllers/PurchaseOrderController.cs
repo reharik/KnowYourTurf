@@ -12,6 +12,8 @@ using System.Linq;
 
 namespace KnowYourTurf.Web.Controllers
 {
+    using CC.Core;
+
     using KnowYourTurf.Web.Config;
 
     public class PurchaseOrderController : AdminControllerBase
@@ -92,7 +94,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
-            input.EntityIds.Each(
+            input.EntityIds.ForEachItem(
                 x =>
                     {
                         var item = _repository.Find<PurchaseOrder>(x);
