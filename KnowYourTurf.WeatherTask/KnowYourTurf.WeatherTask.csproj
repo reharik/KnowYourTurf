@@ -41,29 +41,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Components.Validator.2.5.0\lib\NET40\Castle.Components.Validator.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core, Version=1.32.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.1.32\lib\net40\CC.Core.dll</HintPath>
+      <HintPath>..\packages\CC.Core.Utilities.1.0.0.1\lib\net40\CC.Core.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core.Utilities, Version=1.32.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Security, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.Utilities.1.32\lib\net40\CC.Core.Utilities.dll</HintPath>
+      <HintPath>..\packages\CC.Security.1.0.0.1\lib\net40\CC.Security.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Security, Version=1.32.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Security.1.32\lib\net40\CC.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.UI.Helpers, Version=1.32.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.UI.Helpers.1.32\lib\net40\CC.UI.Helpers.dll</HintPath>
+      <HintPath>..\packages\CC.UI.Helpers.1.0.0.1\lib\net40\CC.UI.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate, Version=1.3.0.733, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlTags, Version=1.32.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="HtmlTags, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\HtmlTags.1.32\lib\net40\HtmlTags.dll</HintPath>
+      <HintPath>..\packages\HtmlTags.1.0.0.1\lib\net40\HtmlTags.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
