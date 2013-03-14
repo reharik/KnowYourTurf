@@ -60,6 +60,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Components.Validator.2.5.0\lib\NET40\Castle.Components.Validator.dll</HintPath>
     </Reference>
+    <Reference Include="CC.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CC.Core.1.0.0.1\lib\net40\CC.Core.dll</HintPath>
+    </Reference>
     <Reference Include="CC.Core.Utilities, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CC.Core.Utilities.1.0.0.1\lib\net40\CC.Core.Utilities.dll</HintPath>

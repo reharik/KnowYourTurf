@@ -35,21 +35,6 @@
     <Reference Include="Bottles">
       <HintPath>..\packages\Bottles.1.0.0.441\lib\Bottles.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Components.Validator">
-      <HintPath>..\packages\Castle.Components.Validator.2.5.0\lib\NET40\Castle.Components.Validator.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Core">
-      <HintPath>..\packages\CC.Core.1.32\lib\net40\CC.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Core.Utilities">
-      <HintPath>..\packages\CC.Core.Utilities.1.32\lib\net40\CC.Core.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.Security">
-      <HintPath>..\packages\CC.Security.1.32\lib\net40\CC.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="CC.UI.Helpers">
-      <HintPath>..\packages\CC.UI.Helpers.1.32\lib\net40\CC.UI.Helpers.dll</HintPath>
-    </Reference>
     <Reference Include="FubuCore">
       <HintPath>..\packages\FubuCore.1.0.0.225\lib\FubuCore.dll</HintPath>
     </Reference>
@@ -57,23 +42,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\HtmlTags.1.32\lib\net40\HtmlTags.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections">
-      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="ImageResizer">
-      <HintPath>..\packages\ImageResizer.3.3.3\lib\ImageResizer.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>..\packages\NHibernate.3.3.2.4000\lib\Net35\NHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="StoryTeller">
       <HintPath>..\packages\Storyteller2.2.0.0.12\lib\net40\StoryTeller.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap">
-      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
