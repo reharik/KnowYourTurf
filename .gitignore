@@ -16,3 +16,5 @@ CustomerDocuments
 [Ll]og/
 TestResult.xml
 appSettings.config
+packages/*
+!packages/repositories.config
