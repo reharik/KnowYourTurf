@@ -68,7 +68,7 @@
   </Target>
 
   <Target Name="_build">
-    <MSBuild Projects="$(SourcePath)\KnowYourTurfBuild.sln" Properties="Configuration=Debug" ContinueOnError="false" />
+    <MSBuild Projects="$(SourcePath)\KnowYourTurf.sln" Properties="Configuration=Debug" ContinueOnError="false" />
   </Target>
 
   <ItemGroup>
