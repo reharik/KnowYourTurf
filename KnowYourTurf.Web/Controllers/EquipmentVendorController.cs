@@ -65,7 +65,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
             var notification = new Notification { Success = true };
-            input.EntityIds.Each(x =>
+            input.EntityIds.ForEachItem(x =>
             {
                 var item = _repository.Find<EquipmentVendor>(x);
                 if (checkDependencies(item, notification))

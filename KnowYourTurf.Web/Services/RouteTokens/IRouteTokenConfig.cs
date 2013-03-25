@@ -118,6 +118,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForForm<TaskReportController>(x => x.Display(null), AreaName.Reporting).ViewName("TaskReportView").End();
             _builder.TokenForForm<EquipmentTaskReportController>(x => x.Display(null), AreaName.Reporting).ViewName("EquipmentTaskReportView").End();
             _builder.TokenForForm<EmployeeDailyTasksController>(x => x.Display(null), AreaName.Reporting).ViewName("EmployeeDailyTaskView").End();
+            _builder.TokenForForm<TDAController>(x => x.Display(null), AreaName.Reporting).ViewName("TDAView").End();
 
 
             return _builder.Items;

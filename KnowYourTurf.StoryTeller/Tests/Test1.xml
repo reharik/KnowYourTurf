@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<Test name="Test1" lifecycle="Acceptance">
+  <LoginPageFixture>
+    <Comment><![CDATA[2 + 2 is always 4]]></Comment>
+    <EnterNumber isStep="True" number="2" />
+  </LoginPageFixture>
+</Test>
