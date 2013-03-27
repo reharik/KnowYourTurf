@@ -5,7 +5,7 @@
     <ToolsPath>$(MSBuildProjectDirectory)\lib</ToolsPath>
     <SourcePath>$(MSBuildProjectDirectory)</SourcePath>
     <MSBuildCommunityTasksPath>$(ToolsPath)</MSBuildCommunityTasksPath>
-    <NUnit>$(ToolsPath)</NUnit>
+    <NUnit>$(MSBuildProjectDirectory)\packages\NUnit.Runners.2.6.2</NUnit>
     <Trunk>$(MSBuildProjectDirectory)..\..</Trunk>
   </PropertyGroup>
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
