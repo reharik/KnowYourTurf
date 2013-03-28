@@ -14,8 +14,8 @@
 
 <!-- ____________PUBLIC TASKS_______________  -->
 
-  <Target Name="Test" DependsOnTargets="_unitTests" />
-  <Target Name="Push" DependsOnTargets="_unitTests;_pushToQA;" />
+  <Target Name="Test" DependsOnTargets="_build;_unitTests" />
+  <Target Name="Push" DependsOnTargets="_pushToQA;" />
 
  <Target Name="_pushToQA" >
     <ItemGroup>
