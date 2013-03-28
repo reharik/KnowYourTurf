@@ -8,7 +8,7 @@
     <NUnit>$(MSBuildProjectDirectory)\packages\NUnit.Runners.2.6.2\tools</NUnit>
     <Trunk>$(MSBuildProjectDirectory)..\..</Trunk>
   </PropertyGroup>
-  <Import Project="$(MSBuildCommunityTasksPath)\MSBuildTasks.1.4.0.56\tools\MSBuild.Community.Tasks.Targets" />
+  <Import Project="$(MSBuildCommunityTasksPath)\packages\MSBuildTasks.1.4.0.56\tools\MSBuild.Community.Tasks.Targets" />
 
 
 
