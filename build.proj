@@ -14,8 +14,8 @@
 
 <!-- ____________PUBLIC TASKS_______________  -->
 
-  <Target Name="Build" DependsOnTargets="_build;_unitTests" />
-  <Target Name="Push" DependsOnTargets="_build;_unitTests;_pushToQA;" />
+  <Target Name="Test" DependsOnTargets="_unitTests" />
+  <Target Name="Push" DependsOnTargets="_unitTests;_pushToQA;" />
 
  <Target Name="_pushToQA" >
     <ItemGroup>
@@ -65,10 +65,6 @@
 
   <Target Name="myTemp" >
     <Message Text="Current Date and Time: $(Month).$(Day).$(Year)-$(Hour).$(Minute)" />
-  </Target>
-
-  <Target Name="_build">
-    <MSBuild Projects="$(SourcePath)\KnowYourTurf.sln" Properties="Configuration=Debug" ContinueOnError="false" />
   </Target>
 
   <ItemGroup>
