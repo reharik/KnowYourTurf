@@ -2,13 +2,13 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <ToolsPath>$(MSBuildProjectDirectory)\lib</ToolsPath>
+    <ToolsPath>$(MSBuildProjectDirectory)\packages</ToolsPath>
     <SourcePath>$(MSBuildProjectDirectory)</SourcePath>
     <MSBuildCommunityTasksPath>$(ToolsPath)</MSBuildCommunityTasksPath>
     <NUnit>$(MSBuildProjectDirectory)\packages\NUnit.Runners.2.6.2\tools</NUnit>
     <Trunk>$(MSBuildProjectDirectory)..\..</Trunk>
   </PropertyGroup>
-  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuildTasks.1.4.0.56\tools\MSBuild.Community.Tasks.Targets" />
 
 
 
