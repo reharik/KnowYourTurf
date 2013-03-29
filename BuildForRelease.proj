@@ -14,10 +14,7 @@
 
 <!-- ____________PUBLIC TASKS_______________  -->
 
-  <Target Name="Build" DependsOnTargets="_build;_unitTests" />
-  <!--  <Target Name="Stage" DependsOnTargets="_build;_minifyJSandCss;_outputWebFiles;" />-->
-<!--  <Target Name="Stage" DependsOnTargets="_build;_unitTests;_outputWebFiles;" />-->
-  <Target Name="Push" DependsOnTargets="_build;_unitTests;_pushToProd;" />
+  <Target Name="Push" DependsOnTargets="_pushToProd;" />
   
  <Target Name="_pushToProd" >
    <PropertyGroup>
@@ -55,16 +52,5 @@
      ZipFileName="f:\WebSites\BackUp\KnowYourTurf_PROD\MFWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
      ZipLevel="9" />
  </Target>
-
-  <Target Name="_build">
-    <MSBuild Projects="$(SourcePath)\KnowYourTurf_build.sln" Properties="Configuration=Release" ContinueOnError="false" />
-  </Target>
-
-  <ItemGroup>
-    <UnitTestAssemblies Include="$(SourcePath)\KnowYourTurf.Tests\bin\Release\KnowYourTurf.Tests.dll;" />
-  </ItemGroup>
-  <Target Name="_unitTests">
-    <NUnit Assemblies="@(UnitTestAssemblies)" ToolPath="$(NUnit)" />
-  </Target>
 
 </Project>
