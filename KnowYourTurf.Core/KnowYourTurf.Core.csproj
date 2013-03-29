@@ -12,6 +12,8 @@
     <AssemblyName>KnowYourTurf.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,79 +34,72 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Alpinely.TownCrier">
-      <HintPath>..\lib\Alpinely.TownCrier.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\TownCrier.1.1\lib\Alpinely.TownCrier.dll</HintPath>
     </Reference>
-    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+    <Reference Include="AutoMapper, Version=2.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\fluentnhibernate\Antlr3.Runtime.dll</HintPath>
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper">
-      <HintPath>..\lib\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Components.Validator, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="Castle.Components.Validator, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Castle.Components.Validator.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\Castle.Components.Validator.2.5.0\lib\NET40\Castle.Components.Validator.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="CC.Core, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Core.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.Core.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Security, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.Security.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Security.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.UI.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="FluentNHibernate, Version=1.3.0.733, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.UI.Helpers.dll</HintPath>
+      <HintPath>..\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+    <Reference Include="HtmlTags, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\HtmlTags.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlTags, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\HtmlTags.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\fluentnhibernate\Iesi.Collections.dll</HintPath>
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="ImageResizer">
-      <HintPath>..\lib\ImageResizer.dll</HintPath>
+    <Reference Include="ImageResizer, Version=3.3.3.123, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ImageResizer.3.3.3\lib\ImageResizer.dll</HintPath>
     </Reference>
-    <Reference Include="ImageResizer.Mvc">
-      <HintPath>..\lib\ImageResizer.Mvc.dll</HintPath>
+    <Reference Include="ImageResizer.Mvc, Version=3.3.3.123, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ImageResizer.Mvc.3.3.3\lib\ImageResizer.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\lib\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\fluentnhibernate\NHibernate.dll</HintPath>
+      <HintPath>..\packages\NHibernate.3.3.2.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate.ByteCode.Castle, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+    <Reference Include="StructureMap, Version=2.6.4.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\fluentnhibernate\NHibernate.ByteCode.Castle.dll</HintPath>
-    </Reference>
-    <Reference Include="Remotion.Data.Linq, Version=1.13.41.2, Culture=neutral, PublicKeyToken=cab60358ab4081ea, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\fluentnhibernate\Remotion.Data.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap">
-      <HintPath>..\lib\StructureMap.dll</HintPath>
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -144,8 +139,9 @@
     <Compile Include="Domain\Calculator.cs" />
     <Compile Include="Domain\EquipmentVendor.cs" />
     <Compile Include="Domain\LoginStatistics.cs" />
+    <Compile Include="Domain\Persistence\LoginStatisticsMap.cs" />
     <Compile Include="Domain\Site.cs" />
-    <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\Client.cs" />
     <Compile Include="Domain\Continuation.cs" />
     <Compile Include="Domain\Chemical.cs" />
     <Compile Include="Domain\EquipmentTask.cs" />
@@ -174,8 +170,6 @@
     <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersRepository.cs" />
     <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersUnitOfWork.cs" />
     <Compile Include="Domain\Tools\NullNHSetupConfig.cs" />
-    <Compile Include="Domain\Tools\CustomAttributes\TextAreaAttribute.cs" />
-    <Compile Include="Domain\Tools\NullSession.cs" />
     <Compile Include="Domain\Tools\NullSessionFactory.cs" />
     <Compile Include="Domain\UserRole.cs" />
     <Compile Include="Domain\VendorBase.cs" />
@@ -287,11 +281,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attributes\" />
+    <Folder Include="Domain\Tools\CustomAttributes\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

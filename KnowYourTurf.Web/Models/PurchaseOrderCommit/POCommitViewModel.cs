@@ -8,6 +8,6 @@ namespace KnowYourTurf.Web.Models
     {
         public string _ClosePOUrl { get; set; }
         public string _POLIUrl { get; set; }
-        public string VendorCompany { get; set; }
+        public string VendorClient { get; set; }
     }
 }

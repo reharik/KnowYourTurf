@@ -20,6 +20,8 @@ namespace KnowYourTurf.Web.Grids
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.PhoneMobile);
             GridBuilder.DisplayFor(x => x.Email);
+            GridBuilder.SetSearchField(x => x.LastName);
+            GridBuilder.SetDefaultSortColumn(x => x.LastName);
             return this;
         }
     }

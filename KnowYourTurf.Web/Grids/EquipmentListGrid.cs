@@ -20,6 +20,8 @@ namespace KnowYourTurf.Web.Grids
                  .ForAction<EquipmentDashboardController>(x => x.ViewEquipment(null))
                 .ToPerformAction(ColumnAction.Redirect)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
+            GridBuilder.DisplayFor(x => x.EquipmentVendor.Company);
+            GridBuilder.DisplayFor(x => x.WebSite);
             GridBuilder.DisplayFor(x => x.TotalHours);
             return this;
         }

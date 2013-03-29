@@ -51,7 +51,7 @@ namespace KnowYourTurf.Web.Controllers
             task.StartTime= input.ScheduledStartTime.IsNotEmpty() ? DateTime.Parse(input.ScheduledStartTime) : task.StartTime;
             var taskTypes = _selectListItemService.CreateList<TaskType>(x => x.Name, x => x.EntityId, true);
             var fields = ((KYTSelectListItemService)_selectListItemService).CreateFieldsSelectListItems(input.RootId, input.ParentId);
-            var products = createProductSelectListItems();
+            var products = ((KYTSelectListItemService)_selectListItemService).CreateProductSelectListItems();
             var availableEmployees = _repository.Query<User>(x => x.UserRoles.Any(y=>y.Name==UserType.Employee.ToString()))
                 .Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FirstName + " " + x.LastName }).OrderBy(x=>x.name).ToList();
             var selectedEmployees = task.Employees.Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.FullName }).OrderBy(x => x.name);
@@ -83,40 +83,6 @@ namespace KnowYourTurf.Web.Controllers
 
 
 
-        private GroupedSelectViewModel createProductSelectListItems()
-        {
-            IEnumerable<InventoryProduct> inventory = _repository.FindAll<InventoryProduct>();
-            var chemicals =
-                _selectListItemService.CreateListWithConcatinatedText(
-                    inventory.Where(i => i.Product.InstantiatingType == "Chemical"),
-                    x => x.Product.Name,
-                    x => x.UnitType,
-                    "-->",
-                    y => y.EntityId,
-                    false);
-            var fertilizer =
-                _selectListItemService.CreateListWithConcatinatedText(
-                    inventory.Where(i => i.Product.InstantiatingType == "Fertilizer"),
-                    x => x.Product.Name,
-                    x => x.UnitType,
-                    "-->",
-                    x => x.EntityId,
-                    false);
-            var materials =
-                _selectListItemService.CreateListWithConcatinatedText(
-                    inventory.Where(i => i.Product.InstantiatingType == "Material"),
-                    x => x.Product.Name,
-                    x => x.UnitType,
-                    "-->",
-                    x => x.EntityId,
-                    false);
-            var groups = new GroupedSelectViewModel();
-            groups.groups.Add(new SelectGroup {label = "Chemicals", children = chemicals});
-            groups.groups.Add(new SelectGroup {label = "Ferilizers", children = fertilizer});
-            groups.groups.Add(new SelectGroup {label = "Materials", children = materials});
-
-            return groups;
-        }
         public ActionResult Display_Template(ViewModel input)
         {
             return View("Display", new DisplayTaskViewModel{Popup = input.Popup});
@@ -150,7 +116,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
-            input.EntityIds.Each(x =>
+            input.EntityIds.ForEachItem(x =>
             {
                 var item = _repository.Find<Task>(x);
                 if(!item.Complete) _repository.HardDelete(item);

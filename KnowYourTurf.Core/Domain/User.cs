@@ -31,12 +31,12 @@ namespace KnowYourTurf.Core.Domain
         [ValueOf(typeof(State))]
         public virtual string State { get; set; }
         public virtual string ZipCode { get; set; }
-        [Tools.CustomAttributes.TextArea]
+        [TextArea]
         public virtual string Notes { get; set; }
         public virtual DateTime? BirthDate { get; set; }
         public virtual string FileUrl { get; set; }
         public virtual string ImageFriendlyName { get; set; }
-        public virtual Company Company { get; set; }
+        public virtual Client Client { get; set; }
         public virtual CultureInfo LanguageDefault { get; set; }
         public virtual UserLoginInfo UserLoginInfo { get; set; }
         public virtual string EmergencyContact { get; set; }
@@ -95,6 +95,11 @@ namespace KnowYourTurf.Core.Domain
             _userRoles.Add(userRole);
         }
         #endregion
+
+        public virtual bool IsEmployee()
+        {
+            return _userRoles.Any(x => x.Name == "Employee");
+        }
 
         public virtual SecurityInfo SecurityInfo
         {

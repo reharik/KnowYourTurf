@@ -10,18 +10,25 @@
     @Html.SubmissionFor(x => x.Name).Size("5").ToHtmlTag()
 </div>
 <div class="row">
+    @Html.SubmissionFor(x => x.ID).Size("5").ToHtmlTag()
+    @Html.SubmissionFor(x => x.Make).Size("5").ToHtmlTag()
+</div>
+<div class="row">
+    @Html.SubmissionFor(x => x.Model).Size("5").ToHtmlTag()
+    @Html.SubmissionFor(x => x.SerialNumber).Size("5").ToHtmlTag()
+</div>
+<div class="row">
+    @Html.SubmissionFor(x => x.WarrentyInfo).Size("10").ToHtmlTag()
+</div>
+<div class="row">
     @Html.SubmissionFor(x => x.Description).Size("10").ToHtmlTag()
 </div>
 <div class="row">
     @Html.SubmissionFor(x => x.EquipmentTypeEntityId).Size("5").LabelDisplay(WebLocalizationKeys.EQUIPMENT_TYPE).ToHtmlTag()
-</div>
-<div class="row">
     @Html.SubmissionFor(x => x.EquipmentVendorEntityId).Size("5").LabelDisplay(WebLocalizationKeys.VENDOR).ToHtmlTag()
 </div>
 <div class="row">
     @Html.SubmissionFor(x => x.TotalHours).Size("5").ToHtmlTag()
-</div>
-<div class="row">
     @Html.SubmissionFor(x => x.Threshold).Size("5").ToHtmlTag()
 </div>
 

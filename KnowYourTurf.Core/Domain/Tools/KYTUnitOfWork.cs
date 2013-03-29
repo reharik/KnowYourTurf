@@ -7,18 +7,18 @@ namespace KnowYourTurf.Core.Domain.Tools
     public class KYTUnitOfWork : UnitOfWork
     {
         private ISession _session;
-        private IGetCompanyIdService _getCompanyIdService;
+        private IGetClientIdService _getClientIdService;
 
-        public KYTUnitOfWork(ISession session, IGetCompanyIdService getCompanyIdService)
+        public KYTUnitOfWork(ISession session, IGetClientIdService getClientIdService)
             : base(session)
         {
             _session = session;
-            _getCompanyIdService = getCompanyIdService;
-            var enableCoFilter = _session.EnableFilter("CompanyConditionFilter");
+            _getClientIdService = getClientIdService;
+            var enableCoFilter = _session.EnableFilter("ClientConditionFilter");
             var enableDeletdFilter = _session.EnableFilter("IsDeletedConditionFilter");
             var enableStatusFilter = _session.EnableFilter("StatusConditionFilter");
             if (enableCoFilter != null)
-                enableCoFilter.SetParameter("CompanyId", _getCompanyIdService.Execute());
+                enableCoFilter.SetParameter("ClientId", _getClientIdService.Execute());
             if (enableDeletdFilter != null)
                 enableDeletdFilter.SetParameter("IsDeleted", false);
             if (enableStatusFilter != null)

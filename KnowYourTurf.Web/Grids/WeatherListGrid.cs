@@ -23,6 +23,8 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x => x.RainPrecipitation);
             GridBuilder.DisplayFor(x => x.WindSpeed);
             GridBuilder.DisplayFor(x => x.Humidity);
+            GridBuilder.SetSearchField(x => x.Date);
+            GridBuilder.SetDefaultSortColumn(x => x.Date);
             return this;
         }
     }

@@ -87,7 +87,7 @@ namespace KnowYourTurf.Web.Controllers
 
             var photo = ((IEnumerable<Photo>)entity.Photos).FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Photo();
             photo = mapToDomain(input, photo);
-            photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos", entity.CompanyId);
+            photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos", entity.ClientId);
             entity.AddPhoto(photo);
             var crudManager = _saveEntityService.ProcessSave(entity);
             var notification = crudManager.Finish();

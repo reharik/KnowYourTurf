@@ -1,0 +1,201 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+	var ReportName = "TDA";
+	var ReportKey = "TDA";
+	var ReportValue = "TDA Report";
+ #>
+namespace KnowYourTurf.Web.Areas.Reporting.Controllers
+{
+    using System;
+    using System.Web.Mvc;
+    using CC.Core.CoreViewModelAndDTOs;
+    using Castle.Components.Validator;
+    using KnowYourTurf.Core.Services;
+    using KnowYourTurf.Web.Controllers;
+    using KnowYourTurf.Web.Config;
+    
+	public class <#= ReportName#>Controller : AdminControllerBase
+    {
+        private readonly ISessionContext _sessionContext;
+
+        public <#= ReportName#>Controller(ISessionContext sessionContext)
+        {
+            this._sessionContext = sessionContext;
+        }
+
+        public ActionResult Display_Template(ViewModel input)
+        {
+            return this.View("Display", new <#= ReportName#>ViewModel());
+        }
+
+        public CustomJsonResult Display(ViewModel input)
+        {
+            
+            var model = new <#= ReportName#>ViewModel
+            {
+                Date = DateTime.Now,
+                ClientId = this._sessionContext.GetClientId(),
+                _Title = WebLocalizationKeys.<#= ReportKey#>.ToString(),
+                ReportUrl = "/Areas/Reporting/ReportViewer/<#= ReportName#>.aspx"
+            };
+            return new CustomJsonResult(model);
+        }
+    }
+
+    public class <#= ReportName#>ViewModel : ViewModel
+    {
+        [ValidateNonEmpty]
+        public DateTime Date { get; set; }
+        public string ReportUrl { get; set; }
+        public int ClientId { get; set; }
+    }
+}
+
+
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+@model KnowYourTurf.Web.Areas.Reporting.Controllers.<#= ReportName#>ViewModel
+
+@{
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+}
+<div class="row">
+    @Html.SubmissionFor(x=>x.Date).Size("3").ToHtmlTag()
+</div>
+@section FooterButtons
+{
+    @StandardButtonFor("viewReport", WebLocalizationKeys.VIEW_REPORT).AddClass("save").ToHtmlTag()
+}
+
+
+using KnowYourTurf.Web.Security;
+
+namespace DBFluentMigration.Iteration_2
+{
+    public class UpdateOperations_200 : IUpdateOperations
+    {
+        private readonly IOperations _operations;
+
+        public UpdateOperations_200(IOperations operations)
+        {
+            _operations = operations;
+        }
+
+        public void Update()
+        {
+            CreateMenuItemOptions();
+            CreateControllerOptions();
+        }
+
+        private void CreateControllerOptions()
+        {
+            _operations.CreateOperationForControllerType("<#= ReportName#>Controller");
+        }
+
+        public void CreateMenuItemOptions()
+        {
+            _operations.CreateOperationForMenuItem("<#= ReportName#>");
+        }
+    }
+}
+
+
+using KnowYourTurf.Web.Security;
+
+namespace DBFluentMigration.Iteration_1
+{
+    using KnowYourTurf.Core.Enums;
+
+    public class UpdatePermissions_200:IUpdatePermissions
+    {
+        private readonly IPermissions _permissions;
+
+        public UpdatePermissions_200(IPermissions permissions)
+        {
+            _permissions = permissions;
+        }
+
+        public void Update()
+        {
+            GrantAdminPermissions();
+        }
+
+        private void GrantAdminPermissions()
+        {
+			_permissions.CreateControllerPermission(UserType.Administrator, "<#= ReportName#>Controller");
+            _permissions.CreateMenuPermission(UserType.Administrator, "<#= ReportName#>");
+
+        }
+    }
+}
+
+////////////////// Web Localization Key //////////////////////////////
+        public static readonly StringToken <#= ReportKey#> = new WebLocalizationKeys("<#= ReportKey#>", "<#= ReportValue#>");
+////////////////// Menu Node //////////////////////////////
+                            .CreateTagNode<<#= ReportName#>Controller>(WebLocalizationKeys.<#= ReportKey#>)
+////////////////// Token Node  //////////////////////////////
+            _builder.TokenForForm<<#= ReportName#>Controller>(x => x.Display(null), AreaName.Reporting).ViewName("<#= ReportName#>View").End();
+
+
+////////////////// Javascript View  //////////////////////////////
+KYT.Views.<#= ReportName#>View = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+        KYT.mixin(this, "reportMixin");
+    },
+    createUrl:function(){
+        return this.model.ReportUrl()+ "?Date="+this.model.Date()+"&" +
+            "ClientId="+this.model.ClientId();
+    }
+});
+
+
+
+<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+</head>
+<body>
+        <form id="form2" runat="server">
+    <div>
+    
+<rsweb:ReportViewer ID="ReportViewer1" 
+            runat="server" 
+            Font-Names="Verdana" 
+            Font-Size="8pt" 
+            WaitMessageFont-Names="Verdana" 
+            WaitMessageFont-Size="14pt"
+            Width="875"
+            Height="875">
+            <LocalReport ReportPath="Areas\Reporting\RDLC\\<#=ReportName#>.rdlc">
+                <DataSources>
+                    <rsweb:ReportDataSource DataSourceId="SqlDataSource1" Name="<#= ReportName#>" />
+                </DataSources>
+            </LocalReport>
+        </rsweb:ReportViewer>
+
+      <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+        ConnectionString='<%$ appSettings:KnowYourTurf.sql_server_connection_string %>'
+        SelectCommand="<#= ReportName#>" SelectCommandType="StoredProcedure"> 
+        <SelectParameters>
+            <asp:QueryStringParameter Name="Date" QueryStringField="Date" Type="DateTime" />
+            <asp:QueryStringParameter Name="ClientId" QueryStringField="ClientId" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    
+    </div>
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+    </form>
+</body>
+</html>

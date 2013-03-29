@@ -27,6 +27,8 @@ namespace KnowYourTurf.Web.Grids
             GridBuilder.DisplayFor(x => x.City);
             GridBuilder.DisplayFor(x => x.State);
             GridBuilder.DisplayFor(x => x.Fax);
+            GridBuilder.SetSearchField(x => x.LastName);
+            GridBuilder.SetDefaultSortColumn(x => x.LastName);
             return this;
         }
     }

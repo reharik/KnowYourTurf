@@ -1,7 +1,7 @@
 ﻿using CC.Core.CoreViewModelAndDTOs;
+using CC.Core.CustomAttributes;
 using Castle.Components.Validator;
 using KnowYourTurf.Core;
-using KnowYourTurf.Core.Domain.Tools.CustomAttributes;
 
 namespace KnowYourTurf.Web.Models.Material
 {

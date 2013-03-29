@@ -36,7 +36,7 @@ namespace KnowYourTurf.Core.Domain
         {
             return Fluently.Configure()
                 .Database(_config.DBConfiguration(_connectionStr))
-               // .Mappings(m => m.FluentMappings.Add(typeof(CompanyConditionFilter)))
+               // .Mappings(m => m.FluentMappings.Add(typeof(ClientConditionFilter)))
                 .Mappings(_config.MappingConfiguration())
                 .ExposeConfiguration(x=>
                 {

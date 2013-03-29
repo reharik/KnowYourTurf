@@ -14,6 +14,8 @@ namespace KnowYourTurf.Web.Models
         public TokenInputViewModel UserRoles { get; set; }
         public string _pendingGridUrl { get; set; }
         public string _completedGridUrl { get; set; }
+        public string _pendingEMGridUrl { get; set; }
+        public string _completedEMGridUrl { get; set; }
         public bool _returnToList { get; set; }
 
         public bool DeleteImage { get; set; }

@@ -1,0 +1,21 @@
+﻿@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+@model KnowYourTurf.Web.Areas.Reporting.Controllers.TaskReportViewModel
+
+@{
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+}
+<div class="row">
+    @Html.SubmissionFor(x=>x.FieldEntityId).Size("8").LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
+    @Html.SubmissionFor(x=>x.StartDate).Size("3").ToHtmlTag()
+    @Html.SubmissionFor(x => x.EndDate).Size("3").ToHtmlTag()
+</div>
+<div class="row">
+    @Html.SubmissionFor(x=>x.TaskTypeEntityId).Size("5").LabelDisplay(WebLocalizationKeys.TASK_TYPE).ToHtmlTag()
+    @Html.SubmissionFor(x=>x.ProductEntityId).Size("5").LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
+    @Html.SubmissionFor(x=>x.EmployeeEntityId).Size("5").LabelDisplay(WebLocalizationKeys.EMPLOYEE).ToHtmlTag()
+</div>
+@section FooterButtons
+{
+    @StandardButtonFor("viewReport", WebLocalizationKeys.VIEW_REPORT).AddClass("save").ToHtmlTag()
+}

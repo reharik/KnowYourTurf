@@ -8,7 +8,7 @@ using StructureMap;
 
 namespace KnowYourTurf.Core.Config
 {
-    public class SaveUpdateInterceptorWithCompanyFilter : EmptyInterceptor
+    public class SaveUpdateInterceptorWithClientFilter : EmptyInterceptor
     {
         public override bool OnFlushDirty(object entity,
                                           object id,
@@ -37,7 +37,7 @@ namespace KnowYourTurf.Core.Config
                 var sessionContext = ObjectFactory.Container.GetInstance<ISessionContext>();
                 var currentUser = sessionContext.GetCurrentUser();
                 var systemClock = ObjectFactory.Container.GetInstance<ISystemClock>();
-                var getCompanyIdService = ObjectFactory.GetInstance<IGetCompanyIdService>();
+                var getClientIdService = ObjectFactory.GetInstance<IGetClientIdService>();
                 for (int i = 0; i < propertyNames.Length; i++)
                 {
                     if ("ChangedDate".Equals(propertyNames[i]))
@@ -48,9 +48,9 @@ namespace KnowYourTurf.Core.Config
                     {
                         state[i] = systemClock.Now;
                     }
-                    if ("CompanyId".Equals(propertyNames[i]))
+                    if ("ClientId".Equals(propertyNames[i]))
                     {
-                        state[i] = getCompanyIdService.Execute();
+                        state[i] = getClientIdService.Execute();
                     }
                     if (domainEntity.CreatedBy ==null && "CreatedBy".Equals(propertyNames[i]))
                     {
@@ -90,6 +90,9 @@ namespace KnowYourTurf.Core.Config
         {
             var domainEntity = entity as DomainEntity;
             if (domainEntity == null) return false;
+            var sessionContext = ObjectFactory.Container.GetInstance<ISessionContext>();
+            var currentUser = sessionContext.GetCurrentUser();
+
             if (entity is DomainEntity)
             {
                 var systemClock = ObjectFactory.Container.GetInstance<ISystemClock>();
@@ -102,6 +105,14 @@ namespace KnowYourTurf.Core.Config
                     if (!domainEntity.CreatedDate.HasValue && "CreatedDate".Equals(propertyNames[i]))
                     {
                         state[i] = systemClock.Now;
+                    }
+                    if (domainEntity.CreatedBy == null && "CreatedBy".Equals(propertyNames[i]))
+                    {
+                        state[i] = currentUser;
+                    }
+                    if ("ChangedBy".Equals(propertyNames[i]))
+                    {
+                        state[i] = currentUser;
                     }
                 }
                 return true;

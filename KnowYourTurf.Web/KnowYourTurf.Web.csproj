@@ -25,6 +25,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,56 +47,60 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxMin">
-      <HintPath>..\lib\AjaxMin.dll</HintPath>
+      <HintPath>..\packages\AjaxMin.4.60.4609.17023\lib\net20\AjaxMin.dll</HintPath>
     </Reference>
-    <Reference Include="Alpinely.TownCrier">
-      <HintPath>..\lib\Alpinely.TownCrier.dll</HintPath>
+    <Reference Include="Alpinely.TownCrier, Version=1.1.0.20141, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\TownCrier.1.1\lib\Alpinely.TownCrier.dll</HintPath>
     </Reference>
     <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\lib\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=2.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Cassette">
-      <HintPath>..\lib\Cassette.dll</HintPath>
+      <HintPath>..\packages\Cassette.2.0.0\lib\net40-client\Cassette.dll</HintPath>
     </Reference>
     <Reference Include="Cassette.Aspnet">
-      <HintPath>..\lib\Cassette.Aspnet.dll</HintPath>
+      <HintPath>..\packages\Cassette.Aspnet.2.0.0\lib\net40\Cassette.Aspnet.dll</HintPath>
     </Reference>
     <Reference Include="Cassette.Views">
-      <HintPath>..\lib\Cassette.Views.dll</HintPath>
+      <HintPath>..\packages\Cassette.Views.2.0.0\lib\net40\Cassette.Views.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Components.Validator">
-      <HintPath>..\lib\Castle.Components.Validator.dll</HintPath>
+    <Reference Include="Castle.Components.Validator, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Components.Validator.2.5.0\lib\NET40\Castle.Components.Validator.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Core, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Core.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Core.Utilities.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.Core.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Security, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Security.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.Security.dll</HintPath>
     </Reference>
-    <Reference Include="CC.UI.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.UI.Helpers.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.UI.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="Elmah">
-      <HintPath>..\lib\Elmah.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentNHibernate, Version=1.2.0.694, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\fluentnhibernate\FluentNHibernate.dll</HintPath>
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=1.3.0.733, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="HibernatingRhinos.Profiler.Appender">
       <HintPath>..\lib\HibernatingRhinos.Profiler.Appender.dll</HintPath>
@@ -102,36 +108,40 @@
     <Reference Include="HibernatingRhinos.Profiler.Appender.NHibernateLog4Net">
       <HintPath>..\lib\HibernatingRhinos.Profiler.Appender.NHibernateLog4Net.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlTags, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="HtmlTags, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\HtmlTags.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\HtmlTags.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\fluentnhibernate\Iesi.Collections.dll</HintPath>
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="ImageResizer">
-      <HintPath>..\lib\ImageResizer.dll</HintPath>
-    </Reference>
-    <Reference Include="ImageResizer.Mvc">
-      <HintPath>..\lib\ImageResizer.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+    <Reference Include="ImageResizer, Version=3.3.3.123, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\log4net.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\ImageResizer.3.3.3\lib\ImageResizer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0ecfe41405c30fb3, processorArchitecture=MSIL">
+    <Reference Include="ImageResizer.Mvc, Version=3.3.3.123, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ImageResizer.Mvc.3.3.3\lib\ImageResizer.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\fluentnhibernate\NHibernate.dll</HintPath>
+      <HintPath>..\packages\NHibernate.3.3.2.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate.ByteCode.Castle, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -145,9 +155,9 @@
       <HintPath>..\lib\RouteDebug.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="StructureMap">
-      <HintPath>..\lib\StructureMap.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="StructureMap, Version=2.6.4.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Helpers">
@@ -218,22 +228,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\Reports\Controllers\TasksByFieldController.cs" />
-    <Compile Include="Areas\Reports\ReportsAreaRegistration.cs">
+    <Compile Include="Areas\Reporting\Controllers\EquipmentTaskReportController.cs" />
+    <Compile Include="Areas\Reporting\Controllers\TaskReportController.cs" />
+    <Compile Include="Areas\Reporting\Controllers\EmployeeDailyTasksController.cs" />
+    <Compile Include="Areas\Reporting\ReportsxAreaRegistration.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Areas\Reports\ReportViewer\TasksByField.aspx.cs">
-      <DependentUpon>TasksByField.aspx</DependentUpon>
+    <Compile Include="Areas\Reporting\ReportViewer\EquipmentTaskReport.aspx.cs">
+      <DependentUpon>EquipmentTaskReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Areas\Reports\ReportViewer\TasksByField.aspx.designer.cs">
-      <DependentUpon>TasksByField.aspx</DependentUpon>
+    <Compile Include="Areas\Reporting\ReportViewer\EquipmentTaskReport.aspx.designer.cs">
+      <DependentUpon>EquipmentTaskReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reporting\ReportViewer\EmployeeDailyTasks.aspx.cs">
+      <DependentUpon>EmployeeDailyTasks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Reporting\ReportViewer\EmployeeDailyTasks.aspx.designer.cs">
+      <DependentUpon>EmployeeDailyTasks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reporting\ReportViewer\TaskReport.aspx.cs">
+      <DependentUpon>TaskReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Reporting\ReportViewer\TaskReport.aspx.designer.cs">
+      <DependentUpon>TaskReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
-    <Content Include="Areas\Reports\ReportViewer\TasksByField.aspx" />
-    <Content Include="Areas\Reports\Views\Web.config" />
+    <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Areas\Reporting\ReportViewer\EquipmentTaskReport.aspx" />
+    <Content Include="Areas\Reporting\ReportViewer\EmployeeDailyTasks.aspx" />
+    <Content Include="Areas\Reporting\ReportViewer\TaskReport.aspx" />
+    <Content Include="Areas\Reporting\ReportViewer\TDA.aspx" />
+    <Content Include="Areas\Reporting\Views\Web.config" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Compile Include="Config\CustomJsonResult.cs" />
     <Compile Include="Config\ModelBinders.cs" />
@@ -304,6 +334,16 @@
     <Compile Include="Controllers\VendorListController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="Controllers\WeatherListController.cs" />
+    <Compile Include="Areas\Reporting\XSD\EmployeeDailyTasks.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reporting\XSD\EquipmentTaskReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EquipmentTaskReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Filters\AddUserToViewModelFilter.cs" />
     <Compile Include="Filters\AdminFilterAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
@@ -382,11 +422,12 @@
     <Compile Include="Services\KYTSelectListItemService.cs" />
     <Compile Include="Services\ModelService.cs" />
     <Compile Include="Services\RouteTokens\IRouteTokenConfig.cs" />
-    <Compile Include="TasksByField.Designer.cs">
+    <Compile Include="Areas\Reporting\XSD\TaskReport.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TasksByField.xsd</DependentUpon>
+      <DependentUpon>TaskReport.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Reporting\Controllers\TDAController.cs" />
     <Compile Include="WebLocalizationKeys.cs" />
     <Compile Include="KYTWebRegistry.cs" />
     <Compile Include="Global.asax.cs">
@@ -576,9 +617,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Reports\Models\" />
-    <Folder Include="Areas\Reports\Views\Shared\" />
-    <Folder Include="Areas\Reports\XSD\" />
+    <Folder Include="Areas\Reporting\Models\" />
+    <Folder Include="Areas\Reporting\Views\Shared\" />
     <Folder Include="Models\Email\" />
     <Folder Include="Models\TokenInputDto\" />
     <Folder Include="Properties\" />
@@ -608,11 +648,6 @@
     <Content Include="Views\UserProfile\EmailConfirmed.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\AddressTemplate.cshtml" />
-    <Content Include="Views\Shared\EmailTemplate.cshtml" />
-    <Content Include="Views\Shared\PhoneTemplate.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\KnowYourTurf.Core\KnowYourTurf.Core.csproj">
       <Project>{3CBC320B-ECD3-4A3C-A6A3-704A23E6D1D7}</Project>
       <Name>KnowYourTurf.Core</Name>
@@ -623,22 +658,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_ContentAreaLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\_FormLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_AssetDetailLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\_DetailLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\_EmptyLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\_ListLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Orthogonal\KnowYourTurfHeader.cshtml" />
@@ -744,24 +767,63 @@
     <Content Include="Views\EquipmentTask\EquipmentTaskAddUpdate.cshtml" />
     <Content Include="Views\EquipmentTask\Display.cshtml" />
     <Content Include="Views\EquipmentVendor\EquipmentVendorAddUpdate.cshtml" />
-    <Content Include="Areas\Reports\Views\TasksByField\Display.cshtml" />
-    <Content Include="TasksByField.xsc">
-      <DependentUpon>TasksByField.xsd</DependentUpon>
+    <Content Include="Areas\Reporting\Views\EmployeeDailyTasks\Display.cshtml" />
+    <Content Include="Areas\Reporting\Views\TaskReport\Display.cshtml" />
+    <Content Include="Views\Shared\_ReportLayout.cshtml" />
+    <Content Include="Areas\Reporting\Views\EquipmentTaskReport\Display.cshtml" />
+    <Content Include="Areas\Reporting\XSD\TaskReport.xsc">
+      <DependentUpon>TaskReport.xsd</DependentUpon>
     </Content>
-    <None Include="TasksByField.xsd">
+    <Content Include="Areas\Reporting\Views\TDA\Display.cshtml" />
+    <None Include="Areas\Reporting\XSD\TaskReport.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TasksByField.Designer.cs</LastGenOutput>
+      <LastGenOutput>TaskReport.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <Content Include="TasksByField.xss">
-      <DependentUpon>TasksByField.xsd</DependentUpon>
+    <Content Include="Areas\Reporting\XSD\TaskReport.xss">
+      <DependentUpon>TaskReport.xsd</DependentUpon>
     </Content>
-    <Content Include="Views\Shared\_ReportLayout.cshtml" />
+    <Content Include="Areas\Reporting\XSD\EquipmentTaskReport.xsc">
+      <DependentUpon>EquipmentTaskReport.xsd</DependentUpon>
+    </Content>
+    <Content Include="Areas\Reporting\XSD\EmployeeDailyTasks.xsc">
+      <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
+    </Content>
+    <None Include="Areas\Reporting\XSD\EmployeeDailyTasks.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EmployeeDailyTasks.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Areas\Reporting\XSD\EmployeeDailyTasks.xss">
+      <DependentUpon>EmployeeDailyTasks.xsd</DependentUpon>
+    </Content>
+    <None Include="Areas\Reporting\XSD\EquipmentTaskReport.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EquipmentTaskReport.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Areas\Reporting\XSD\EquipmentTaskReport.xss">
+      <DependentUpon>EquipmentTaskReport.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\EquipmentTaskCalendar\EquipmentTaskCalendar.cshtml" />
+    <Content Include="Views\EventCalendar\EventCalendar.cshtml" />
+    <Content Include="Areas\Reporting\Templates\Report.tt">
+      <LastGenOutput>Report.cs</LastGenOutput>
+      <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
+&lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
+    </Content>
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
+    <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Reports\RDLC\TasksByField.rdlc" />
+    <EmbeddedResource Include="Areas\Reporting\RDLC\EmployeeDailyTasks.rdlc" />
+    <EmbeddedResource Include="Areas\Reporting\RDLC\EquipmentTaskReport.rdlc" />
+    <EmbeddedResource Include="Areas\Reporting\Views\EmployeeDailyTasks\EmployeeDailyTasks.rdlc" />
+    <EmbeddedResource Include="Areas\Reporting\RDLC\TaskReport.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -798,4 +860,5 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>

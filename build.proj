@@ -1,21 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Test" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <ToolsPath>$(MSBuildProjectDirectory)\lib</ToolsPath>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.56\tools</MSBuildCommunityTasksPath>
     <SourcePath>$(MSBuildProjectDirectory)</SourcePath>
-    <MSBuildCommunityTasksPath>$(ToolsPath)</MSBuildCommunityTasksPath>
-    <NUnit>$(ToolsPath)</NUnit>
-    <Trunk>$(MSBuildProjectDirectory)..\..</Trunk>
-  </PropertyGroup>
+</PropertyGroup>
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
 
 
 
 <!-- ____________PUBLIC TASKS_______________  -->
 
-  <Target Name="Build" DependsOnTargets="_build;_unitTests" />
-  <Target Name="Push" DependsOnTargets="_build;_unitTests;_pushToQA;" />
+  <Target Name="Test" DependsOnTargets="_build;_unitTests" />
+  <Target Name="Push" DependsOnTargets="_pushToQA;" />
 
  <Target Name="_pushToQA" >
     <ItemGroup>
@@ -33,6 +30,9 @@
 						 KnowYourTurf.Web\Logs\**;
              KnowYourTurf.Web\connectionStrings.config;
              KnowYourTurf.Web\web.config;" />
+      <WeatherTaskFiles Include="KnowYourTurf.WeatherTask\bin\debug\*.*;" />
+      <EmailTaskFiles Include="KnowYourTurf.EmailTask\bin\debug\*.*;" />
+      
     </ItemGroup>
     <Time>
       <Output TaskParameter="Month" PropertyName="Month" />
@@ -46,9 +46,15 @@
       <OutputDirectory>f:\WebSites\KnowYourTurf_QA</OutputDirectory>
     </PropertyGroup>
 
-    <MakeDir Directories="$(OutputDirectory)"  />
-    <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputDirectory)\%(RecursiveDir)" />
-    <Zip Files="@(WebFiles)"
+   <MakeDir Directories="$(OutputDirectory)"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks\WeatherTask"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks\Email"  />
+   <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputDirectory)\%(RecursiveDir)" />
+   <Copy SourceFiles="@(WeatherTaskFiles)" DestinationFolder="$(OutputDirectory)\Tasks\WeatherTask\%(RecursiveDir)" />
+   <Copy SourceFiles="@(EmailTaskFiles)" DestinationFolder="$(OutputDirectory)\Tasks\EmailTask\%(RecursiveDir)" />
+     
+   <Zip Files="@(WebFiles)"
       WorkingDirectory="f:\WebSites\BackUp\KnowYourTurf_QA"
       ZipFileName="f:\WebSites\BackUp\KnowYourTurf_QA\KYTWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
       ZipLevel="9" />
@@ -57,16 +63,19 @@
   <Target Name="myTemp" >
     <Message Text="Current Date and Time: $(Month).$(Day).$(Year)-$(Hour).$(Minute)" />
   </Target>
-
+  
   <Target Name="_build">
-    <MSBuild Projects="$(SourcePath)\KnowYourTurfBuild.sln" Properties="Configuration=Debug" ContinueOnError="false" />
+    <MSBuild Projects="$(SourcePath)\KnowYourTurf.sln" Properties="Configuration=Debug" ContinueOnError="false" />
+<Message Text="$(MSBuildExtensionsPath)"></Message>
+<Message Text="$(MSBuildProjectDirectory)"></Message>
+<Message Text="$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.56\tools"></Message>
   </Target>
-
+  
   <ItemGroup>
     <UnitTestAssemblies Include="$(SourcePath)\KnowYourTurf.Tests\bin\Debug\KnowYourTurf.Tests.dll;" />
   </ItemGroup>
   <Target Name="_unitTests">
-    <NUnit Assemblies="@(UnitTestAssemblies)" ToolPath="$(NUnit)" />
+    <NUnit Assemblies="@(UnitTestAssemblies)" ToolPath="$(MSBuildProjectDirectory)\packages\NUnit.Runners.2.6.2\tools" />
   </Target>
 
 

@@ -26,8 +26,8 @@ namespace KnowYourTurf.Web.Controllers
             }
             if(purchaseOrderLineItem.Taxable && purchaseOrderLineItem.SubTotal.HasValue)
             {
-                var currentCompany = _sessionContext.GetCurrentCompany();
-                purchaseOrderLineItem.Tax = purchaseOrderLineItem.SubTotal.Value*currentCompany.TaxRate*.01;
+                var currentClient = _sessionContext.GetCurrentClient();
+                purchaseOrderLineItem.Tax = purchaseOrderLineItem.SubTotal.Value*currentClient.TaxRate*.01;
             }
             purchaseOrder.AddLineItem(purchaseOrderLineItem);
             var sub = 0d;

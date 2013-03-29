@@ -47,7 +47,7 @@ ko.bindingHandlers.dateString = {
 
         // handle .net crappy json
         var valueUnwrapped = ko.utils.unwrapObservable(valueAccessor());
-        var formattedDate = valueUnwrapped? new XDate(new Date(parseInt(valueUnwrapped.substr(6)))).toString("MM/dd/yyyy"):"";
+        var formattedDate = valueUnwrapped? new XDate(new XDate(valueUnwrapped)).toString("MM/dd/yyyy"):"";
         if(element.nodeName  == "SPAN"){
            $(element).text(formattedDate).change();
         }
@@ -90,7 +90,7 @@ ko.bindingHandlers.timeString = {
 
         // handle .net crappy json
         var valueUnwrapped = ko.utils.unwrapObservable(valueAccessor());
-        var formattedTime = valueUnwrapped? new XDate(new Date(parseInt(valueUnwrapped.substr(6)))).toString("hh:mm TT"):"";
+        var formattedTime = valueUnwrapped? new XDate(new Date(valueUnwrapped)).toString("hh:mm TT"):"";
         if(element.nodeName  == "SPAN"){
            $(element).text(formattedTime).change();
         }

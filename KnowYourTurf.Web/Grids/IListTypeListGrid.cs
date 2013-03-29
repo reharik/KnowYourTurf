@@ -105,7 +105,7 @@ namespace KnowYourTurf.Web.Grids
         {
             GridBuilder.LinkColumnFor(x => x.Name)
                 .ToPerformAction(ColumnAction.AddUpdateItem)
-                .WithId("equipmentTypelist")
+                .WithId("equipmenttypelist")
                 .ToolTip(WebLocalizationKeys.EDIT_ITEM);
             GridBuilder.DisplayFor(x => x.Status);
             return this;

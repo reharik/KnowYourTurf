@@ -13,6 +13,8 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,16 +34,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CC.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Core, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Core.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Security, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\CC.Security.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.Security, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\CC.UI.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="FluentMigrator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentMigrator.1.0.5.0\lib\35\FluentMigrator.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlTags, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CC.Core.1.0.0.22\lib\HtmlTags.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,16 +71,25 @@
     <Compile Include="Iteration_0\CreateInitialOperations.cs" />
     <Compile Include="Iteration_0\CreateInitialDB.cs" />
     <Compile Include="Iteration_0\CreateInitialPermissions.cs" />
-    <Compile Include="Iteration_1\10010_Create_TasksByFields_Sproc.cs" />
-    <Compile Include="Iteration_2\20020_Add_UserID_And_ForiegnKey_To_ULI.cs" />
+    <Compile Include="Iteration_1\10010_Rename_Company_to_Client.cs" />
+    <Compile Include="Iteration_1\10020_Create_LoginStatistics_Table.cs" />
+    <Compile Include="Iteration_1\10030_Add_Color_To_EquipmentType.cs" />
+    <Compile Include="Iteration_1\10050_Create_Employee_Daily_Task_Sproc.cs" />
+    <Compile Include="Iteration_1\10060_Add_WebSite_to_Equipment.cs" />
+    <Compile Include="Iteration_1\10070_Create_TaskReport_Sproc.cs" />
+    <Compile Include="Iteration_1\10080_Create_EquipmentTaskReport_Sproc.cs" />
+    <Compile Include="Iteration_1\10090_Add_ID_To_Equipment.cs" />
+    <Compile Include="Iteration_1\10110_Alter_Employee_Daily_Task_Sproc.cs" />
+    <Compile Include="Iteration_1\10120_Alter_TaskReport_Sproc.cs" />
+    <Compile Include="Iteration_1\10130_Alter_EquipmentTaskReport_Sproc.cs" />
+    <Compile Include="Iteration_1\10140_Alter_Reports_for_timeless_dates_Sproc.cs" />
     <Compile Include="IUpdatePermissions.cs" />
-    <Compile Include="Iteration_1\UpdateOperations_100.cs" />
-    <Compile Include="Iteration_1\UpdatePermissions_100.cs" />
-    <Compile Include="Iteration_2\20010_Add_SiteOperation_To_Site_Table.cs" />
     <Compile Include="IUpdateOperations.cs" />
-    <Compile Include="Iteration_2\UpdateOperations_200.cs" />
-    <Compile Include="Iteration_2\UpdatePermissions_200.cs" />
+    <Compile Include="Iteration_1\UpdateOperations_200.cs" />
+    <Compile Include="Iteration_1\UpdatePermissions_200.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateOperations_200.cs" />
+    <Compile Include="UpdatePermissions_200.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DBFluentMigration.dll.config" />
@@ -124,6 +150,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

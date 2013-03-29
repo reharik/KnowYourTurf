@@ -9,7 +9,7 @@ namespace Generator
     {
         private IRepository _repository;
         private Field _field1;
-        private Company _company;
+        private Client _client;
         private User _defaultUser;
         private UserRole _userRoleAdmin;
         private UserRole _userRoleEmployee;
@@ -19,51 +19,51 @@ namespace Generator
         public void Load(IRepository repository)
         {
             _repository = repository;
-            CreateCompany();
-            LoadForCompany(_company.EntityId);
+            CreateClient();
+            LoadForClient(_client.EntityId);
             _repository.UnitOfWork.Commit();
 
         }
 
-        private void LoadForCompany(int companyId)
+        private void LoadForClient(int clientId)
         {
-            CreateUserRoles(companyId);
-            CreateUser(companyId);
+            CreateUserRoles(clientId);
+            CreateUser(clientId);
 
-            CreateField(companyId);
-            CreateEmailTemplate(companyId);
+            CreateField(clientId);
+            CreateEmailTemplate(clientId);
         }
 
-        private void CreateUserRoles(int companyId)
+        private void CreateUserRoles(int clientId)
         {
             _userRoleAdmin = new UserRole
             {
                 Name = UserType.Administrator.ToString(),
-                CompanyId = companyId
+                ClientId = clientId
             };
             _userRoleEmployee = new UserRole
             {
                 Name = UserType.Employee.ToString(),
-                CompanyId = companyId
+                ClientId = clientId
             };
             _userRoleFac = new UserRole
             {
                 Name = UserType.Facilities.ToString(),
-                CompanyId = companyId
+                ClientId = clientId
             };
             _repository.Save(_userRoleAdmin);
             _repository.Save(_userRoleEmployee);
             _repository.Save(_userRoleFac);
         }
 
-        private void CreateEmailTemplate(int companyId)
+        private void CreateEmailTemplate(int clientId)
         {
             var template = new EmailTemplate
                                     {
                                         Name = "EmployeeDailyTask",
                                         Template =
                                             "<p>Hi {%=name%},</p><p>Here are your tasks for {%=data%}:</p><p>{%=tasks%}</p><p>Thank you,</p><p>Management</p>",
-                                        CompanyId = companyId
+                                        ClientId = clientId
                                     };
             _repository.Save(template);
 
@@ -72,28 +72,28 @@ namespace Generator
                 Name = "EquipmentMaintenanceNotification",
                 Template =
                     "<p>Hi {%=name%},</p><p>Your {%=equipmentName%} has passed the Total Hours limit you identified.</p><p>Please create a Task and update the threshold as needed.</p><p>Thank you,</p><p>Management</p>",
-                CompanyId = companyId
+                ClientId = clientId
             };
             _repository.Save(template2);
         }
 
-        private void CreateCompany()
+        private void CreateClient()
         {
-            _company = new Company { Name = "KYT", ZipCode = "78702", TaxRate = 8.25,NumberOfSites = 1};
+            _client = new Client { Name = "KYT", ZipCode = "78702", TaxRate = 8.25,NumberOfSites = 1};
             _category1 = new Site { Name = "Site 1" };
-            _company.AddSite(_category1);
-            _repository.Save(_company);
+            _client.AddSite(_category1);
+            _repository.Save(_client);
         }
 
-        private void CreateUser(int companyId)
+        private void CreateUser(int clientId)
         {
             _defaultUser = new User()
             {
                 FirstName = "KYT",
                 LastName = "User",
                 Email = "support@KYTSoftware.com",
-                Company = _company,
-                CompanyId = companyId,
+                Client = _client,
+                ClientId = clientId,
                 EmployeeId = "123",
                 Address1 = "123 street",
                 Address2 = "apt a",
@@ -108,7 +108,7 @@ namespace Generator
                                              {
                                                  LoginName = "Admin",
                                                  Password = "123",
-                                                 CompanyId = companyId
+                                                 ClientId = clientId
                                              };
             _defaultUser.AddUserRole(_userRoleAdmin);
             _defaultUser.AddUserRole(_userRoleEmployee);
@@ -116,7 +116,7 @@ namespace Generator
 
         }
 
-        private void CreateField(int companyId)
+        private void CreateField(int clientId)
         {
             _field1 = new Field
             {
@@ -124,7 +124,7 @@ namespace Generator
                 Description = "field1",
                 Size = 22000,
                 Abbreviation = "f1",
-                CompanyId = companyId
+                ClientId = clientId
             };
 
             _category1.AddField(_field1);

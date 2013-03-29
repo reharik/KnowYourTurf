@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<TestResult xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ExecutionTime="0" ExceptionText="System.NotImplementedException: The method or operation is not implemented.&#xD;&#xA;   at Agitation.AgitationSystem.CreateContext() in c:\Development\CannibalCoder\Agitation\Agitation\AgitationSystem.cs:line 97&#xD;&#xA;   at StoryTeller.Engine.TestRun.Execute()" WasCancelled="false" Locator="Test1">
+  <Html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;head&gt;&lt;title&gt;Catastrophic Failure!&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;pre&gt;System.NotImplementedException: The method or operation is not implemented.
+   at Agitation.AgitationSystem.CreateContext() in c:\Development\CannibalCoder\Agitation\Agitation\AgitationSystem.cs:line 97
+   at StoryTeller.Engine.TestRun.Execute()&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;</Html>
+  <Counts Rights="0" Wrongs="0" Exceptions="1" SyntaxErrors="0" />
+  <FullExceptionText>System.NotImplementedException: The method or operation is not implemented.
+   at Agitation.AgitationSystem.CreateContext() in c:\Development\CannibalCoder\Agitation\Agitation\AgitationSystem.cs:line 97
+   at StoryTeller.Engine.TestRun.Execute()</FullExceptionText>
+</TestResult>

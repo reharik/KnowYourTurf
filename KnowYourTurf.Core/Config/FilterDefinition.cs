@@ -3,12 +3,12 @@ using FluentNHibernate.Mapping;
 namespace KnowYourTurf.Core.Config
 {
 
-    public class CompanyConditionFilter : FilterDefinition
+    public class ClientConditionFilter : FilterDefinition
     {
-        public CompanyConditionFilter()
+        public ClientConditionFilter()
         {
-            WithName("CompanyConditionFilter")
-                .AddParameter("CompanyId",NHibernate.NHibernateUtil.Int32);
+            WithName("ClientConditionFilter")
+                .AddParameter("ClientId",NHibernate.NHibernateUtil.Int32);
         }
     }
 

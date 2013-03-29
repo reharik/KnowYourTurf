@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Xml.Linq;
 using CC.Core;
 using CC.Core.DomainTools;
 using KnowYourTurf.Core;
@@ -22,7 +24,13 @@ namespace KnowYourTurf.EmailTask
         static void Main(string[] args)
         {
             Initialize();
-
+            var arg = GetConnectionStringStatic("KnowYourTurf.sql_server_connection_string");
+            var sessionFactoryConfiguration =
+                   ObjectFactory.Container.With("connectionStr")
+                                .EqualTo(arg)
+                                .GetInstance<ISessionFactoryConfiguration>();
+            ObjectFactory.Container.Inject(sessionFactoryConfiguration);
+ 
             _repository = ObjectFactory.Container.GetInstance<IRepository>("SpecialInterceptorNoFilters");
             _emailService = ObjectFactory.Container.GetInstance<IEmailTemplateService>();
             _logger = ObjectFactory.Container.GetInstance<ILogger>();
@@ -37,7 +45,15 @@ namespace KnowYourTurf.EmailTask
             });
             XmlConfigurator.ConfigureAndWatch(new FileInfo(locateFileAsAbsolutePath("log4net.config")));
 //            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+        }
 
+        private static string GetConnectionStringStatic(string key)
+        {
+            // should work for production. please test
+            var xdoc = XDocument.Load(@"..\..\appSettings.config");
+//            var xdoc = XDocument.Load(@"..\..\..\appSettings.config");
+            var connStrings = xdoc.Descendants("add").Where(x => x.Attribute("key").Value.Equals(key));
+            return connStrings.FirstOrDefault().Attribute("value").Value;
         }
 
         private static string locateFileAsAbsolutePath(string filename)

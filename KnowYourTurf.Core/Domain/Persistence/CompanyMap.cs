@@ -2,9 +2,9 @@ using FluentNHibernate.Mapping;
 
 namespace KnowYourTurf.Core.Domain.Persistence
 {
-    public class CompanyMap : DomainEntityMap<Company>
+    public class ClientMap : DomainEntityMap<Client>
     {
-        public CompanyMap()
+        public ClientMap()
         {
             Map(x => x.Name);
             Map(x => x.ZipCode);

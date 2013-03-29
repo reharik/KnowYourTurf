@@ -111,7 +111,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
-            input.EntityIds.Each(x =>
+            input.EntityIds.ForEachItem(x =>
             {
                 var item = _repository.Find<EquipmentTask>(x);
                 if(!item.Complete) _repository.HardDelete(item);

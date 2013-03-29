@@ -87,7 +87,7 @@ namespace KnowYourTurf.Web.Controllers
 
             var document = ((IEnumerable<Document>)entity.Documents).FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Document();
             document = mapToDomain(input, document);
-            document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments",entity.CompanyId);
+            document.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerDocuments",entity.ClientId);
 
             entity.AddDocument(document);
             var crudManager = _saveEntityService.ProcessSave(entity);

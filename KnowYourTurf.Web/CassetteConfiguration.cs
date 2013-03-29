@@ -65,6 +65,7 @@ namespace KnowYourTurf.Web
             fileNames.Add("jqueryPlugins/jquery.miniColors.js");
             fileNames.Add("jqueryPlugins/jquery.fileinput.js");
             fileNames.Add("jqueryPlugins/jquery.easing.1.3.js");
+            fileNames.Add("jqueryPlugins/jquery.timers-1.2.js");
             fileNames.Add("jqueryPlugins/jquery.galleryview-3.0-dev.js");
             fileNames.Add("jqueryPlugins/jquery.ui.timepicker.js");
 
@@ -94,7 +95,10 @@ namespace KnowYourTurf.Web
             fileNames.Add("KYT/Fields/KYT.FieldsApp.Routing.js");
             fileNames.Add("KYT/Fields/KYT.FieldsApp.Views.js");
             fileNames.Add("KYT/Fields/KYT.Services.js");
-           
+
+            fileNames.Add("KYT/Reporting/KYT.ReportingApp.Routing.js");
+            fileNames.Add("KYT/Reporting/KYT.ReportingApp.Views.js");
+            
             fileNames.Add("KYT/CC.ModelBinding/CC.CustomBindings.js");
             fileNames.Add("KYT/CC.ModelBinding/CC.Elements.js");
             fileNames.Add("KYT/CC.ModelBinding/CC.NotificationService.js");

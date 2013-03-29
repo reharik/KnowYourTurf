@@ -82,7 +82,7 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult DeleteMultiple(BulkActionViewModel input)
         {
             var notification = new Notification { Success = true };
-            input.EntityIds.Each(x =>
+            input.EntityIds.ForEachItem(x =>
             {
                 var item = _repository.Find<Equipment>(x);
                 if (checkDependencies(item, notification))
@@ -116,9 +116,14 @@ namespace KnowYourTurf.Web.Controllers
             equipment.TotalHours = input.TotalHours;
             equipment.Threshold = input.Threshold;
             equipment.Description = input.Description;
+            equipment.ID = input.ID;
+            equipment.Make = input.Make;
+            equipment.Model = input.Model;
+            equipment.SerialNumber = input.SerialNumber;
+            equipment.WarrentyInfo = input.WarrentyInfo;
             equipment.EquipmentType = input.EquipmentTypeEntityId > 0 ? _repository.Find<EquipmentType>(input.EquipmentTypeEntityId) : null;
             equipment.EquipmentVendor = input.EquipmentVendorEntityId > 0 ? _repository.Find<EquipmentVendor>(input.EquipmentVendorEntityId) : null;
-
+            equipment.WebSite = input.WebSite;
             
             var crudManager = _saveEntityService.ProcessSave(equipment);
             var notification = crudManager.Finish();
@@ -136,6 +141,12 @@ namespace KnowYourTurf.Web.Controllers
         
         [ValidateNonEmpty]
         public string Name { get; set; }
+        public string ID { get; set; }
+        public virtual string Make { get; set; }
+        public virtual string Model { get; set; }
+        public virtual string SerialNumber { get; set; }
+        [TextArea]
+        public virtual string WarrentyInfo { get; set; }
         [TextArea]
         public string Description { get; set; }
         public int EquipmentTypeEntityId { get; set; }
@@ -145,6 +156,7 @@ namespace KnowYourTurf.Web.Controllers
         public double TotalHours { get; set; }
         public double Threshold { get; set; }
         public bool DeleteImage { get; set; }
+        public string WebSite { get; set; }
     
         public string _completedGridUrl { get; set; }
         public string _documentGridUrl { get; set; }

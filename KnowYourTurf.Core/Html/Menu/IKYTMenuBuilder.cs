@@ -52,7 +52,7 @@ namespace KnowYourTurf.Core.Html.Menu
         {
             var userId = _sessionContext.GetUserId();
             var user = _repository.Find<User>(userId);
-            _sites = user.Company.Sites.ToList();
+            _sites = user.Client.Sites.ToList();
             count = _sites.Count;
             return this;
         }

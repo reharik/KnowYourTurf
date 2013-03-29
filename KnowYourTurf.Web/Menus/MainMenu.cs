@@ -9,13 +9,12 @@ using KnowYourTurf.Web.Controllers;
 
 namespace KnowYourTurf.Web.Menus
 {
-    using KnowYourTurf.Web.Areas.Reports.Controllers;
+    using KnowYourTurf.Web.Areas.Reporting.Controllers;
 
     public class MainMenu : IMenuConfig
     {
         private readonly IKYTMenuBuilder _builder;
         private readonly ISessionContext _sessionContext;
-        private readonly IRepository _repository;
 
         public MainMenu(IKYTMenuBuilder builder, ISessionContext sessionContext)
         {
@@ -64,7 +63,7 @@ namespace KnowYourTurf.Web.Menus
                     .EndChildren()
 
                 .CreateTagNode<WeatherListController>(WebLocalizationKeys.WEATHER)
-                .CreateTagNode<ForumController>(WebLocalizationKeys.FORUM)
+//                .CreateTagNode<ForumController>(WebLocalizationKeys.FORUM)
                  .CreateNode(WebLocalizationKeys.ADMIN_TOOLS, "tools")
                     .HasChildren()
                         .CreateTagNode<EmailJobListController>(WebLocalizationKeys.EMAIL_JOBS)
@@ -97,7 +96,10 @@ namespace KnowYourTurf.Web.Menus
                         .EndChildren()
                         .CreateNode(WebLocalizationKeys.REPORTS)
                         .HasChildren()
-                            .CreateTagNode<TasksByFieldController>(WebLocalizationKeys.TASKS_BY_FIELD)
+                            .CreateTagNode<TaskReportController>(WebLocalizationKeys.TASK_REPORT)
+                            .CreateTagNode<EquipmentTaskReportController>(WebLocalizationKeys.EQUIPMENT_TASK_REPORT)
+                            .CreateTagNode<EmployeeDailyTasksController>(WebLocalizationKeys.EMPLOYEE_DAILY_TASKS)
+                            .CreateTagNode<TDAController>(WebLocalizationKeys.TDA)
                         .EndChildren()
 
                     .EndChildren()

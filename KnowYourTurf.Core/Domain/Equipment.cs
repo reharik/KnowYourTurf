@@ -15,6 +15,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string Name { get; set; }
         [TextArea]
         public virtual string Description { get; set; }
+        public virtual string ID { get; set; }
         public virtual string Make { get; set; }
         public virtual string Model { get; set; }
         public virtual string SerialNumber { get; set; }
@@ -24,6 +25,7 @@ namespace KnowYourTurf.Core.Domain
         [ValidateDecimal]
         public virtual double TotalHours { get; set; }
         public virtual double Threshold { get; set; }
+        public virtual string WebSite { get; set; }
         [ValidateNonEmpty]
         public virtual EquipmentType EquipmentType { get; set; }
         

@@ -1,5 +1,6 @@
-﻿@model KnowYourTurf.Web.Models.ListTypeViewModel
+﻿@model KnowYourTurf.Web.Models.EquipmentTypeViewModel
 @using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
 @{
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
@@ -10,5 +11,11 @@
 </div>
 <div class="row">
     @Html.SubmissionFor(x => x.Description).Size("10").ToHtmlTag()
+</div>
+<div class="row">
+        <h5 class="stdTxtColor ml2 span10">@WebLocalizationKeys.SELECT_COLOR_TO_ASSOCIATE_WITH_THIS_ITEM.ToString()</h5>
+</div>
+<div class="row">
+    @Html.SubmissionFor(x => x.TaskColor).HideLabel().Size("10").InputId("colorPickerInput").ToHtmlTag()
 </div>
 

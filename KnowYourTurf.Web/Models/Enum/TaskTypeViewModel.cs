@@ -23,7 +23,10 @@ namespace KnowYourTurf.Web.Models
     public class EventTypeViewModel : ListTypeViewModel
     {
         public string EventColor { get; set; }
-
+    }
+    public class EquipmentTypeViewModel : ListTypeViewModel
+    {
+        public string TaskColor { get; set; }
     }
 
     public class PartViewModel : ListTypeViewModel
