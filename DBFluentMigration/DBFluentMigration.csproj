@@ -83,6 +83,7 @@
     <Compile Include="Iteration_1\10120_Alter_TaskReport_Sproc.cs" />
     <Compile Include="Iteration_1\10130_Alter_EquipmentTaskReport_Sproc.cs" />
     <Compile Include="Iteration_1\10140_Alter_Reports_for_timeless_dates_Sproc.cs" />
+    <Compile Include="Iteration_2\20030_Alter_TaskReport_Sproc.cs" />
     <Compile Include="Iteration_2\20010_Add_LicenseNunber_to_User.cs" />
     <Compile Include="Iteration_2\20020_Add_fields_to_Task.cs" />
     <Compile Include="IUpdatePermissions.cs" />
