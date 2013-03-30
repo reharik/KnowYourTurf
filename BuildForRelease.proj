@@ -2,24 +2,24 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.56\tool</MSBuildCommunityTasksPath>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.56\tools</MSBuildCommunityTasksPath>
     <SourcePath>$(MSBuildProjectDirectory)</SourcePath>
-  </PropertyGroup>
-  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
+</PropertyGroup>
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />  
 
 
-  <!-- ____________PUBLIC TASKS_______________  -->
+<!-- ____________PUBLIC TASKS_______________  -->
 
   <Target Name="Push" DependsOnTargets="_pushToProd;" />
-
-  <Target Name="_pushToProd" >
-    <PropertyGroup>
-      <OutputDirectory>f:\WebSites\KnowYourTurf_PreRelease</OutputDirectory>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <WebFiles Include="KnowYourTurf.Web\**\*.*;"
-                Exclude="KnowYourTurf.Web\obj\**;
+  
+ <Target Name="_pushToProd" >
+   <PropertyGroup>
+     <OutputDirectory>f:\WebSites\KnowYourTurf_PreRelease</OutputDirectory>
+   </PropertyGroup>
+   
+   <ItemGroup>
+     <WebFiles Include="KnowYourTurf.Web\**\*.*;"
+               Exclude="KnowYourTurf.Web\obj\**;
 						 KnowYourTurf.Web\**\*.cs;
 						 KnowYourTurf.Web\**\.idea\**;
 						 KnowYourTurf.Web\**\.svn\**;
@@ -31,12 +31,12 @@
 						 KnowYourTurf.Web\connectionstrings.config;
 						 KnowYourTurf.Web\Logs\**; 		 "
                 />
-      <WeatherTaskFiles Include="KnowYourTurf.WeatherTask\bin\release\*.*;" />
-      <EmailTaskFiles Include="KnowYourTurf.EmailTask\bin\release\*.*;" />
+     <WeatherTaskFiles Include="KnowYourTurf.WeatherTask\bin\release\*.*;" />
+     <EmailTaskFiles Include="KnowYourTurf.EmailTask\bin\release\*.*;" />
 
 
-    </ItemGroup>
-    <Time>
+   </ItemGroup>
+   <Time>
       <Output TaskParameter="Month" PropertyName="Month" />
       <Output TaskParameter="Day" PropertyName="Day" />
       <Output TaskParameter="Year" PropertyName="Year" />
@@ -44,19 +44,81 @@
       <Output TaskParameter="Minute" PropertyName="Minute" />
     </Time>
 
+   
+   <MakeDir Directories="$(OutputDirectory)"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks\WeatherTask"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks\Email"  />
+   <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputDirectory)\%(RecursiveDir)" />
+   <Copy SourceFiles="@(WeatherTaskFiles)" DestinationFolder="$(OutputDirectory)\Tasks\WeatherTask\%(RecursiveDir)" />
+   <Copy SourceFiles="@(EmailTaskFiles)" DestinationFolder="$(OutputDirectory)\Tasks\EmailTask\%(RecursiveDir)" />
 
-    <MakeDir Directories="$(OutputDirectory)"  />
-    <MakeDir Directories="$(OutputDirectory)\Tasks"  />
-    <MakeDir Directories="$(OutputDirectory)\Tasks\WeatherTask"  />
-    <MakeDir Directories="$(OutputDirectory)\Tasks\Email"  />
-    <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputDirectory)\%(RecursiveDir)" />
-    <Copy SourceFiles="@(WeatherTaskFiles)" DestinationFolder="$(OutputDirectory)\Tasks\WeatherTask\%(RecursiveDir)" />
-    <Copy SourceFiles="@(EmailTaskFiles)" DestinationFolder="$(OutputDirectory)\Tasks\EmailTask\%(RecursiveDir)" />
+   <Zip Files="@(WebFiles)"
+     WorkingDirectory="f:\WebSites\BackUp\KnowYourTurf_PROD"
+     ZipFileName="f:\WebSites\BackUp\KnowYourTurf_PROD\MFWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
+     ZipLevel="9" />
+ </Target>
 
-    <Zip Files="@(WebFiles)"
-      WorkingDirectory="f:\WebSites\BackUp\KnowYourTurf_PROD"
-      ZipFileName="f:\WebSites\BackUp\KnowYourTurf_PROD\MFWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
-      ZipLevel="9" />
-  </Target>
+</Project>
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.56\tool</MSBuildCommunityTasksPath>
+    <SourcePath>$(MSBuildProjectDirectory)</SourcePath>
+</PropertyGroup>
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />  
+
+
+<!-- ____________PUBLIC TASKS_______________  -->
+
+  <Target Name="Push" DependsOnTargets="_pushToProd;" />
+  
+ <Target Name="_pushToProd" >
+   <PropertyGroup>
+     <OutputDirectory>f:\WebSites\KnowYourTurf_PreRelease</OutputDirectory>
+   </PropertyGroup>
+   
+   <ItemGroup>
+     <WebFiles Include="KnowYourTurf.Web\**\*.*;"
+               Exclude="KnowYourTurf.Web\obj\**;
+						 KnowYourTurf.Web\**\*.cs;
+						 KnowYourTurf.Web\**\.idea\**;
+						 KnowYourTurf.Web\**\.svn\**;
+						 KnowYourTurf.Web\**\*.pdb;
+						 KnowYourTurf.Web\*.csproj.*;
+						 KnowYourTurf.Web\*.sln;
+						 KnowYourTurf.Web\App_Data\**;
+						 KnowYourTurf.Web\web.config;
+						 KnowYourTurf.Web\connectionstrings.config;
+						 KnowYourTurf.Web\Logs\**; 		 "
+                />
+     <WeatherTaskFiles Include="KnowYourTurf.WeatherTask\bin\release\*.*;" />
+     <EmailTaskFiles Include="KnowYourTurf.EmailTask\bin\release\*.*;" />
+
+
+   </ItemGroup>
+   <Time>
+      <Output TaskParameter="Month" PropertyName="Month" />
+      <Output TaskParameter="Day" PropertyName="Day" />
+      <Output TaskParameter="Year" PropertyName="Year" />
+      <Output TaskParameter="Hour" PropertyName="Hour" />
+      <Output TaskParameter="Minute" PropertyName="Minute" />
+    </Time>
+
+   
+   <MakeDir Directories="$(OutputDirectory)"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks\WeatherTask"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks\Email"  />
+   <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputDirectory)\%(RecursiveDir)" />
+   <Copy SourceFiles="@(WeatherTaskFiles)" DestinationFolder="$(OutputDirectory)\Tasks\WeatherTask\%(RecursiveDir)" />
+   <Copy SourceFiles="@(EmailTaskFiles)" DestinationFolder="$(OutputDirectory)\Tasks\EmailTask\%(RecursiveDir)" />
+
+   <Zip Files="@(WebFiles)"
+     WorkingDirectory="f:\WebSites\BackUp\KnowYourTurf_PROD"
+     ZipFileName="f:\WebSites\BackUp\KnowYourTurf_PROD\MFWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
+     ZipLevel="9" />
+ </Target>
 
 </Project>
