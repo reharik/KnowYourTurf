@@ -31,6 +31,10 @@
 						 KnowYourTurf.Web\connectionstrings.config;
 						 KnowYourTurf.Web\Logs\**; 		 "
                 />
+     <WeatherTaskFiles Include="KnowYourTurf.WeatherTask\bin\release\*.*;" />
+     <EmailTaskFiles Include="KnowYourTurf.EmailTask\bin\release\*.*;" />
+
+
    </ItemGroup>
    <Time>
       <Output TaskParameter="Month" PropertyName="Month" />
@@ -42,7 +46,13 @@
 
    
    <MakeDir Directories="$(OutputDirectory)"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks\WeatherTask"  />
+   <MakeDir Directories="$(OutputDirectory)\Tasks\Email"  />
    <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputDirectory)\%(RecursiveDir)" />
+   <Copy SourceFiles="@(WeatherTaskFiles)" DestinationFolder="$(OutputDirectory)\Tasks\WeatherTask\%(RecursiveDir)" />
+   <Copy SourceFiles="@(EmailTaskFiles)" DestinationFolder="$(OutputDirectory)\Tasks\EmailTask\%(RecursiveDir)" />
+
    <Zip Files="@(WebFiles)"
      WorkingDirectory="f:\WebSites\BackUp\KnowYourTurf_PROD"
      ZipFileName="f:\WebSites\BackUp\KnowYourTurf_PROD\MFWeb$(Month).$(Day).$(Year)-$(Hour).$(Minute).zip"
