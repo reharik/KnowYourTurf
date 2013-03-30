@@ -18,6 +18,9 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.QuantityUsed);
             Map(x => x.UnitType);
             Map(x => x.InventoryDecremented);
+            Map(x => x.TargetPest);
+            Map(x => x.RatePerUnit);
+            Map(x => x.SprayPermitNumber);
             References(x => x.Field);
             References(x => x.InventoryProduct);
             HasManyToMany(x => x.Equipment).Table("EquipmentToTask").Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.SaveUpdate();

@@ -3,9 +3,9 @@ using KnowYourTurf.Core.Config;
 
 namespace KnowYourTurf.Core.Domain.Persistence
 {
-    public sealed class UserPersistenceMap : DomainEntityMap<User>
+    public sealed class UserMap : DomainEntityMap<User>
     {
-        public UserPersistenceMap()
+        public UserMap()
         {
             Map(u => u.FirstName);
             Map(u => u.LastName);
@@ -24,6 +24,7 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.EmergencyContact);
             Map(x => x.EmergencyContactPhone);
             Map(x => x.EmployeeId);
+            Map(x => x.LicenseNumber);
             Map(x => x.SystemSupport);
             References(x => x.Client);
             References(x => x.UserLoginInfo).Cascade.All();

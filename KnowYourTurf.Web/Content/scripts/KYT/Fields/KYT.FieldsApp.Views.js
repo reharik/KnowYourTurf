@@ -446,6 +446,25 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
         KYT.mixin(this, "ajaxFormMixin");
         KYT.mixin(this, "modelAndElementsMixin");
     },
+    events:{
+        'change #InventoryProductEntityId' : 'chemicalSubSection'
+    },
+    chemicalSubSection:function(){
+        var id = this.model.InventoryProductEntityId();
+        var isChem;
+        _.find(this.model._InventoryProductEntityIdList.groups(),function(item){
+            if(item.label()=="Chemicals"){
+                isChem = _.find(item.children(),function(chemId){
+                    return chemId.Value() == id;
+                });
+            }
+        });
+        if(isChem){
+            $("#chemicalReport",this.$el).show("slow");
+        }else{
+            $("#chemicalReport",this.$el).hide("slow");
+        }
+    },
     viewLoaded:function(){
         KYT.calculator.applyTaskTransferData(this.model,this.$el);
     }
