@@ -322,9 +322,13 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
         KYT.vent.bind("form:photo:success", this.reloadPictureGallery, this);
 
     },
-    reloadPictureGallery:function(){
-        // reload the fucking gallery
-        var x="";
+    reloadPictureGallery:function(result){
+        if(result.Variable){
+            this.model._Photos().push({FileUrl:result.Variable});
+        }
+//        $("[eltype='PictureGallery'] div").
+        // reload the fucking galler
+//        var x="";
     },
 
     callbackAction: function(){

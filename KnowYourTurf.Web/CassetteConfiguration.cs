@@ -45,7 +45,8 @@ namespace KnowYourTurf.Web
             fileNames.Add("ui.jqgrid.css");
             fileNames.Add("fg.menu.css");
             fileNames.Add("select2.css");
-            fileNames.Add("jquery.galleryview-3.0-dev.css");
+            fileNames.Add("galleria.classic.css");
+//            fileNames.Add("jquery.galleryview-3.0-dev.css");
             fileNames.Add("main.css");
             fileNames.Add("KYT.css");
             fileNames.Add("CC.css");
@@ -66,13 +67,14 @@ namespace KnowYourTurf.Web
             fileNames.Add("jqueryPlugins/jquery.fileinput.js");
             fileNames.Add("jqueryPlugins/jquery.easing.1.3.js");
             fileNames.Add("jqueryPlugins/jquery.timers-1.2.js");
-            fileNames.Add("jqueryPlugins/jquery.galleryview-3.0-dev.js");
+//            fileNames.Add("jqueryPlugins/jquery.galleryview-3.0-dev.js");
             fileNames.Add("jqueryPlugins/jquery.ui.timepicker.js");
 
             fileNames.Add("jqueryPlugins/noty/jquery.noty.js");
             fileNames.Add("jqueryPlugins/noty/inline.js");
             fileNames.Add("jqueryPlugins/noty/default.js");
 
+            fileNames.Add("externalHelpers/galleria-1.2.9.js");
             fileNames.Add("externalHelpers/fullcalendar.js");
             fileNames.Add("externalHelpers/underscore.js");
             fileNames.Add("externalHelpers/backbone.js");

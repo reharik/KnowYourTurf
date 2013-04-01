@@ -231,13 +231,19 @@ CC.Elements.PictureGallery= CC.Elements.Element.extend({
     init:function(){
         var that = this;
         this._super("init",arguments);
-        this.$input = this.$container.find("ul");
+        this.$input = this.$container.find("div.gallery");
         this.name = this.$input.attr('name');
     },
     render:function(){
-        this.type = "ul";
-        if(this.$input.find("li").size()>0){
-            this.$input.galleryView({panel_width:500,panel_height:250});
+        this.type = "div";
+        if(this.$input.find("a").size()>0){
+            Galleria.loadTheme('/content/themes/galleria/galleria.classic.min.js');
+            Galleria.run(this.$input);
+            Galleria.configure({
+                width: 700,
+                height: 467
+            });
+//            this.$input.galleryView({panel_width:500,panel_height:250});
         }
     }
 });

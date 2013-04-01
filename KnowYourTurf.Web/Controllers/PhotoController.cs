@@ -91,7 +91,7 @@ namespace KnowYourTurf.Web.Controllers
             entity.AddPhoto(photo);
             var crudManager = _saveEntityService.ProcessSave(entity);
             var notification = crudManager.Finish();
-            notification.Variable = photo.FileUrl;
+            notification.Variable = photo.FileUrl.AddImageSizeToName("Large");
             return new CustomJsonResult(notification);
         }
 
