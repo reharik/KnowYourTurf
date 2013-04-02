@@ -4139,6 +4139,83 @@ $(document).mousemove(function(e) {
     },
 
     /**
+     Adds an image to the Galleria.
+     @param {item} structured same way as json in initialize method
+     @example addNewItem({
+                image: url,
+                thumb: url
+                ... etc
+            });
+     @returns Instance
+     */
+    addNewItem: function(item){
+        this._data.push(item);
+        this.load(this._data);
+        return this;
+    },
+
+    /**
+     removes an image to the Galleria using the url of the image as a key.
+     @param {id} id is the id of the image as added to the json
+     @example removeItem(2);
+     @returns Instance
+     */
+    removeItem: function(id){
+        var targetItem;
+        $.each(this._data, function(i,item){
+            if(item.imageId === id){targetItem=item;}
+        });
+        if(targetItem){
+            Utils.removeFromArray(this._data, targetItem);
+            if(this._data.length<=0){
+                this.reloadGallery();
+            }
+            var targetThumb;
+            $.each(this._thumbnails, function(i,item){
+                if(item.data.src === targetItem.thumb){targetThumb=item;}
+            });
+            Utils.removeFromArray(this._thumbnails,targetThumb);
+            var targetImage;
+            this.$("thumbnails").find("img").each(function(i,item){
+                if($(item).attr("src")=== targetThumb.data.src){targetImage=item;}
+            });
+            if(targetImage){
+                $(targetImage).parent().remove();
+            }
+            this.updateCarousel();
+            this.show(0);
+        }
+        return this;
+    },
+
+    /**
+     reloads the gallery using the origin data
+     @example reloadGallery();
+     @returns Instance
+     */
+    reloadGallery: function(){
+        var hasData = this._data.length>0;
+        if(!hasData){
+            this.$( 'target' ).data( 'galleria', null );
+            this.$( 'container' ).unbind( 'galleria' );
+            this.get( 'target' ).innerHTML = "";
+            this.clearTimer();
+            Utils.removeFromArray( _instances, this );
+            Utils.removeFromArray( _galleries, this );
+//            Galleria.loadTheme('/content/themes/galleria/galleria.classic.min.js');
+            Galleria.run(this._target, {dataSource: this._data});
+//            Galleria.configure({
+//                width: 700,
+//                height: 467
+//            });
+        }
+        this.updateCarousel();
+        this.show(0);
+//      return this;
+    },
+
+
+    /**
         Adds an element to the Galleria DOM array.
         When you add an element here, you can access it using element ID in many API calls
 

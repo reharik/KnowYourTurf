@@ -319,16 +319,31 @@ KYT.Views.FieldDashboardView = KYT.Views.View.extend({
         this.storeChild(this.photoGridView);
         this.storeChild(this.documentGridView);
 
+        KYT.vent.bind("photolist:delete",this.removePicturesFromGallery, this);
         KYT.vent.bind("form:photo:success", this.reloadPictureGallery, this);
 
     },
     reloadPictureGallery:function(result){
-        if(result.Variable){
-            this.model._Photos().push({FileUrl:result.Variable});
+        if(result.Payload){
+            var gallery = $("#photoGallery").data("galleria");
+            gallery.removeItem(result.Payload.ImageId);
+            var newImage ={
+                image: result.Payload.FileUrl_Large,
+                thumb: result.Payload.FileUrl_Thumb,
+                imageId:result.Payload.ImageId.toString()
+            };
+            gallery.addNewItem(newImage);
         }
-//        $("[eltype='PictureGallery'] div").
-        // reload the fucking galler
-//        var x="";
+    },
+
+    removePicturesFromGallery: function(result){
+        if(result.length>0){
+            var gallery = $("#photoGallery").data("galleria");
+            $.each(result,function(i,item){
+                gallery.removeItem(item);
+            });
+//            gallery.reloadGallery();
+        }
     },
 
     callbackAction: function(){
@@ -411,7 +426,7 @@ KYT.Views.DahsboardGridView = KYT.Views.View.extend({
              $(this).find(".cbox").parent().addClass("jqg_cb");
          };
          this.options.gridOptions.height="300px";
-        KYT.mixin(this, "ajaxGridMixin");
+        KYT.mixin(this, "dashboardGridMixin");
         KYT.mixin(this, "setupGridMixin");
         KYT.mixin(this, "defaultGridEventsMixin");
         KYT.mixin(this, "setupGridSearchMixin");
@@ -436,7 +451,9 @@ KYT.Views.DahsboardGridView = KYT.Views.View.extend({
                     "ParentId":this.options.parentId,
                     "RootId":this.options.rootId,
                     "Var":this.options.parent}, true))
-                .done($.proxy(function () { this.reloadGrid() }, this));
+                .done($.proxy(function () {
+                KYT.vent.trigger(this.options.gridId +":delete",ids);
+                this.reloadGrid() }, this));
         }
     },
     onClose:function(){

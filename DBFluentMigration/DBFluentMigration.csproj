@@ -34,28 +34,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CC.Core, Version=1.0.0.30, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Core, Version=1.0.0.36, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.1.0.0.30\lib\CC.Core.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.36\lib\CC.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core.Utilities, Version=1.0.0.30, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.36, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.1.0.0.30\lib\CC.Core.Utilities.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.36\lib\CC.Core.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Security, Version=1.0.0.30, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Security, Version=1.0.0.36, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.1.0.0.30\lib\CC.Security.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.36\lib\CC.Security.dll</HintPath>
     </Reference>
-    <Reference Include="CC.UI.Helpers, Version=1.0.0.30, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.36, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.1.0.0.30\lib\CC.UI.Helpers.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.36\lib\CC.UI.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="FluentMigrator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentMigrator.1.0.5.0\lib\35\FluentMigrator.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlTags, Version=1.0.0.30, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="HtmlTags, Version=1.0.0.36, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.1.0.0.30\lib\HtmlTags.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.36\lib\HtmlTags.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>

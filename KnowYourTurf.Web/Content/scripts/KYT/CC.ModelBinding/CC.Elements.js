@@ -236,15 +236,29 @@ CC.Elements.PictureGallery= CC.Elements.Element.extend({
     },
     render:function(){
         this.type = "div";
-        if(this.$input.find("a").size()>0){
+//        if(this.$input.find("a").size()>0){
             Galleria.loadTheme('/content/themes/galleria/galleria.classic.min.js');
             Galleria.run(this.$input);
             Galleria.configure({
-                width: 700,
-                height: 467
+                width: 500,
+                height: 500,
+                showCounter:false,
+                lightbox: true,
+                dataConfig: function(img) {
+                    return {
+                        title:       $(img).attr('title') || '',
+                        imageId:     $(img).attr('imageId') || '',
+                        thumb:       $(img).parent().attr('src'),
+                        image:       $(img).attr('src'),
+                        big:         $(img).attr('src'),
+                        description: $(img).attr('alt') || '',
+                        link:        $(img).attr('longdesc'),
+                        original:    $(img).get(0) // saved as a reference
+                    };
+                    }
             });
 //            this.$input.galleryView({panel_width:500,panel_height:250});
-        }
+//        }
     }
 });
 

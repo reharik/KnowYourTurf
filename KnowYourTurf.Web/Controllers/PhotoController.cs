@@ -87,11 +87,11 @@ namespace KnowYourTurf.Web.Controllers
 
             var photo = ((IEnumerable<Photo>)entity.Photos).FirstOrDefault(x => x.EntityId == input.EntityId) ?? new Photo();
             photo = mapToDomain(input, photo);
-            photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos", entity.ClientId);
+            photo.FileUrl = _fileHandlerService.SaveAndReturnUrlForFile("CustomerPhotos", entity.ClientId)??photo.FileUrl;
             entity.AddPhoto(photo);
             var crudManager = _saveEntityService.ProcessSave(entity);
             var notification = crudManager.Finish();
-            notification.Variable = photo.FileUrl.AddImageSizeToName("Large");
+            notification.Payload = new PhotoDto {FileUrl = photo.FileUrl, ImageId = photo.EntityId};
             return new CustomJsonResult(notification);
         }
 
