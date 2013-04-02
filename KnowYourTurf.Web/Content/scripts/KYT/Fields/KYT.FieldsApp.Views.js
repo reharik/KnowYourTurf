@@ -468,6 +468,8 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
         KYT.mixin(this, "modelAndElementsMixin");
     },
     events:{
+        'click #save' : 'saveItem',
+        'click #cancel' : 'cancel',
         'change #InventoryProductEntityId' : 'chemicalSubSection'
     },
     chemicalSubSection:function(){
