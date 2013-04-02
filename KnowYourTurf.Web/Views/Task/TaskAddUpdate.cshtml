@@ -5,7 +5,6 @@
     Layout = Model.Popup ? "~/Views/Shared/_popupLayout.cshtml" : "~/Views/Shared/_FormLayout.cshtml";
 }
 
-
         <div class="row">
             @Html.SubmissionFor(x => x.TaskTypeEntityId).Size("5").LabelDisplay(WebLocalizationKeys.TASK_TYPE).ToHtmlTag()
             @Html.SubmissionFor(x => x.ScheduledDate).Size("5").ElType("DateTextbox").ToHtmlTag()
@@ -22,7 +21,22 @@
             @Html.SubmissionFor(x => x.FieldEntityId).Size("10").LabelDisplay(WebLocalizationKeys.FIELD_NAME).ToHtmlTag()
         </div>
         <div class="row">
-            @Html.SubmissionFor(x => x.InventoryProductEntityId).Size("10").LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
+            @Html.SubmissionFor(x => x.InventoryProductEntityId).Size("10").InputId("InventoryProductEntityId").LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
+        </div>
+        <div class="row">
+            <div class="span11">
+                <div id="chemicalReport" class="chemicalReport">
+                    <h3>@WebLocalizationKeys.CHEMICAL_REPORT</h3>
+                    <div class="row">
+                        @Html.SubmissionFor(x => x.TargetPest).Size("5").ToHtmlTag()
+                        @Html.SubmissionFor(x => x.TargetPest).Size("5").ToHtmlTag()
+                    </div>
+                    <div class="row">
+                        @Html.SubmissionFor(x => x.RatePerUnit).Size("5").ToHtmlTag()
+                        @Html.SubmissionFor(x => x.SprayPermitNumber).Size("5").ToHtmlTag()
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             @Html.SubmissionFor(x => x.QuantityNeeded).Size("5").ToHtmlTag()

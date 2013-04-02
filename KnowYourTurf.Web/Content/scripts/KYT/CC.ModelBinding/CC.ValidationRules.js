@@ -118,7 +118,7 @@ CC.validationRules = (function(){
         },
 
         fileRequired: function(CCElement) {
-            return CCElement.$input.val().length>0;
+            return !CCElement.$input.is(":visible") || CCElement.$input.val().length>0;
         }
 
     };

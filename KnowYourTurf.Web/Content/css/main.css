@@ -163,7 +163,7 @@ span#login-links a.active {
 }
 
 /******  MAIN CONTENT HEADER  *******/
-.content-outer .content-header {
+.content-outer .content-header, .content-outer .dashboard-content-header{
     width: 100%;
     height: 41px;
     background: url(../images/content-header-silver.png) repeat-x scroll 0 0
@@ -171,7 +171,7 @@ span#login-links a.active {
     position: relative;
 }
 
-.content-outer .content-header .search {
+.content-outer .content-header .search, .content-outer .dashboard-content-header .search{
     background: url(../images/search-bg.png) no-repeat scroll 0 0
         transparent;
     width: 178px;
@@ -184,7 +184,7 @@ span#login-links a.active {
     font-size: 12px;
 }
 
-.content-outer .content-header .clear-search {
+.content-outer .content-header .clear-search, .content-outer .dashboard-content-header .clear-search  {
     cursor: pointer;
     height: 16px;
     position: absolute;
@@ -195,7 +195,7 @@ span#login-links a.active {
     display:none;
 }
 
-.content-outer .content-header .close {
+.content-outer .content-header .close, .content-outer .dashboard-content-header .close {
     background: url(../images/close-x.png) no-repeat scroll 0 0 transparent;
     width: 14px;
     height: 16px;
@@ -214,7 +214,7 @@ span#login-links a.active {
     padding: 2px;
 }
 
-.content-outer .content-header button {
+.content-outer .content-header button, .content-outer .dashboard-content-header button {
     filter: progid :       DXImageTransform.Microsoft.gradient (  
         startColorstr =  
         '#f9f9f9', endColorstr =       '#e9e9e9', GradientType =       0 );
@@ -233,98 +233,98 @@ span#login-links a.active {
     margin: 8px 0 0 6px;
 }
 
-.content-outer .content-header button.delete {
+.content-outer .content-header button.delete, .content-outer .dashboard-content-header button.delete {
     background: url(../images/icon-header-delete.png) no-repeat scroll 0 0
         transparent;
 }
 
-.content-outer .content-header button.new {
+.content-outer .content-header button.new, .content-outer .dashboard-content-header button.new {
     background: url(../images/icon-header-plus.png) no-repeat scroll 0 0
         transparent;
 }
 
-.content-outer .content-header button.print {
+.content-outer .content-header button.print, .content-outer .dashboard-content-header button.print {
     background: url(../images/icon-header-print.png) no-repeat scroll 0 0
         transparent;
 }
-.content-outer .content-header button.arrow {
+.content-outer .content-header button.arrow, .content-outer .dashboard-content-header button.arrow {
     background: url(../images/icon-header-arrow.png) no-repeat scroll 0 0
         transparent;
 }
 
-.content-outer .content-header button.mail {
+.content-outer .content-header button.mail, .content-outer .dashboard-content-header button.mail {
     background: url(../images/icon-header-mail.png) no-repeat scroll 0 0
         transparent;
 }
-.content-outer .content-header button.download {
+.content-outer .content-header button.download, .content-outer .dashboard-content-header button.download {
     background: url(../images/icon-header-down.png) no-repeat scroll 0 0
         transparent;
 }
 
-.content-outer .content-header button.img {
+.content-outer .content-header button.img, .content-outer .dashboard-content-header button.img {
     background: url(../images/icon-header-img.png) no-repeat scroll
         0 0 transparent;
 }
 /******  HOVER STATE  ******/
 
-.content-outer .content-header button.delete:hover {
+.content-outer .content-header button.delete:hover, .content-outer .dashboard-content-header button.delete:hover {
     background: url(../images/icon-header-delete.png) no-repeat scroll 0 -23px
         transparent;
 }
 
-.content-outer .content-header button.new:hover {
+.content-outer .content-header button.new:hover, .content-outer .dashboard-content-header button.new:hover {
     background: url(../images/icon-header-plus.png) no-repeat scroll 0 -23px
         transparent;
 }
 
-.content-outer .content-header button.print:hover {
+.content-outer .content-header button.print:hover, .content-outer .dashboard-content-header button.print:hover {
     background: url(../images/icon-header-print.png) no-repeat scroll 0 -23px
         transparent;
 }
 
-.content-outer .content-header button.arrow:hover {
+.content-outer .content-header button.arrow:hover, .content-outer .dashboard-content-header button.arrow:hover {
     background: url(../images/icon-header-arrow.png) no-repeat scroll 0 -23px transparent;
 }
 
-.content-outer .content-header button.mail:hover {
+.content-outer .content-header button.mail:hover, .content-outer .dashboard-content-header button.mail:hover {
     background: url(../images/icon-header-mail.png) no-repeat scroll 0 -23px transparent;
 }
 
-.content-outer .content-header button.download:hover {
+.content-outer .content-header button.download:hover, .content-outer .dashboard-content-header button.download:hover {
     background: url(../images/icon-header-down.png) no-repeat scroll 0 -23px transparent;
 }
 
-.content-outer .content-header button.img:hover {
+.content-outer .content-header button.img:hover, .content-outer .dashboard-content-header button.img:hover {
     background: url(../images/icon-header-img.png) no-repeat scroll 0 -23px transparent;
 }
 
-.content-outer .content-header button.delete:active {
+.content-outer .content-header button.delete:active, .content-outer .dashboard-content-header button.delete:active {
     background: url(../images/icon-header-delete.png) no-repeat scroll 0 -46px
         transparent;
 }
 
-.content-outer .content-header button.new:active {
+.content-outer .content-header button.new:active, .content-outer .dashboard-content-header button.new:active {
     background: url(../images/icon-header-plus.png) no-repeat scroll 0 -46px
         transparent;
 }
 
-.content-outer .content-header button.print:active {
+.content-outer .content-header button.print:active, .content-outer .dashboard-content-header button.print:active {
     background: url(../images/icon-header-print.png) no-repeat scroll 0 -46px
         transparent;
 }
-.content-outer .content-header button.arrow:active {
+.content-outer .content-header button.arrow:active, .content-outer .dashboard-content-header button.arrow:active {
     background: url(../images/icon-header-arrow.png) no-repeat scroll 0 -46px transparent;
 }
 
-.content-outer .content-header button.mail:active {
+.content-outer .content-header button.mail:active, .content-outer .dashboard-content-header button.mail:active {
     background: url(../images/icon-header-mail.png) no-repeat scroll 0 -46px transparent;
 }
 
-.content-outer .content-header button.download:active {
+.content-outer .content-header button.download:active, .content-outer .dashboard-content-header button.download:active {
     background: url(../images/icon-header-down.png) no-repeat scroll 0 -46px transparent;
 }
 
-.content-outer .content-header button.img:active {
+.content-outer .content-header button.img:active, .content-outer .dashboard-content-header button.img:active {
     background: url(../images/icon-header-img.png) no-repeat scroll	0 -46px transparent;
 }
 

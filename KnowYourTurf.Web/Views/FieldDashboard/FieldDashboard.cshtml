@@ -27,11 +27,11 @@
     </div>
 </div>
             
-<div class="row blank">
+@*<div class="row blank">*@
     <div class="row">
         @Html.SubmissionFor(x => x._Photos).Size("20").InputId("photoGallery").HideLabel().ToHtmlTag()
     </div> 
-</div>
+@*</div>*@
 <div class="row blank"></div>
 <div class="row">
         @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
