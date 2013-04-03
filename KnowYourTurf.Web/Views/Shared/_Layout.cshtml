@@ -62,6 +62,20 @@
             </div>
         </div>
     </script>
+    
+     <script id="dashboardGridTemplate" type="text/x-jQuery-tmpl">
+        <div class="dashboard-content-header">
+            <input class="search" /> 
+            <button style="display:none" id="new" class="new" title="@WebLocalizationKeys.NEW"></button>
+            <button style="display:none" class="delete" title="@WebLocalizationKeys.DELETE_ITEMS"></button>
+            <span class="title-name">${_Title}</span>
+        </div>
+        <div class="dashboard-form-scroll-inner">
+            <div id="dashboard-contentArea" class="dashboard-content-inner">
+                <table id="gridContainer" class="scroll"></table>
+            </div>
+        </div>
+    </script>
 
 
 </html>

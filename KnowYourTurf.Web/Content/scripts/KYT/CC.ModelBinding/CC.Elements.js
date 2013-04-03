@@ -231,14 +231,34 @@ CC.Elements.PictureGallery= CC.Elements.Element.extend({
     init:function(){
         var that = this;
         this._super("init",arguments);
-        this.$input = this.$container.find("ul");
+        this.$input = this.$container.find("div.gallery");
         this.name = this.$input.attr('name');
     },
     render:function(){
-        this.type = "ul";
-        if(this.$input.find("li").size()>0){
-            this.$input.galleryView({panel_width:500,panel_height:250});
-        }
+        this.type = "div";
+//        if(this.$input.find("a").size()>0){
+            Galleria.loadTheme('/content/themes/galleria/galleria.classic.min.js');
+            Galleria.run(this.$input);
+            Galleria.configure({
+                width: 500,
+                height: 500,
+                showCounter:false,
+                lightbox: true,
+                dataConfig: function(img) {
+                    return {
+                        title:       $(img).attr('title') || '',
+                        imageId:     $(img).attr('imageId') || '',
+                        thumb:       $(img).parent().attr('src'),
+                        image:       $(img).attr('src'),
+                        big:         $(img).attr('src'),
+                        description: $(img).attr('alt') || '',
+                        link:        $(img).attr('longdesc'),
+                        original:    $(img).get(0) // saved as a reference
+                    };
+                    }
+            });
+//            this.$input.galleryView({panel_width:500,panel_height:250});
+//        }
     }
 });
 

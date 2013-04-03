@@ -149,4 +149,12 @@ button.cancel:active {
 .customfile-feedback-populated,.customfile-feedback  {
     font-size: 13px;
     color: #666666;
+
+
+}
+.chemicalReport{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px #add8e6 solid;
+
 }

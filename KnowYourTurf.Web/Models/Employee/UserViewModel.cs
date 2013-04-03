@@ -36,6 +36,7 @@ namespace KnowYourTurf.Web.Models
         public string Email { get; set; }
         [ValidateNonEmpty]
         public string PhoneMobile { get; set; }
+        public string LicenseNumber { get; set; }
         public string FileUrl { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }

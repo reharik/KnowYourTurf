@@ -198,6 +198,20 @@ KYT.mixins.ajaxFormMixin = {
     }
 };
 
+KYT.mixins.dashboardGridMixin = {
+    render:function(){
+        KYT.repository.ajaxGet(this.options.url, this.options.data)
+            .done($.proxy(this.renderCallback,this));
+    },
+    renderCallback:function(result){
+        $(this.el).html($("#dashboardGridTemplate").tmpl(result));
+        $.extend(this.options,result,KYT.gridDefaults);
+        this.setupGrid();
+        this.viewLoaded();
+        KYT.vent.trigger("grid:"+this.id+":pageLoaded",this.options);
+    }
+};
+
 KYT.mixins.ajaxGridMixin = {
     render:function(){
         KYT.repository.ajaxGet(this.options.url, this.options.data)

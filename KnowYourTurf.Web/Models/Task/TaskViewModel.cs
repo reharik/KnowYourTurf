@@ -15,7 +15,6 @@ namespace KnowYourTurf.Web.Models
 
         public TokenInputViewModel Employees { get; set; }
         public TokenInputViewModel Equipment { get; set; }
-
         
         public string _saveUrl { get; set; }
         public bool Copy { get; set; }
@@ -39,6 +38,10 @@ namespace KnowYourTurf.Web.Models
         public string Notes { get; set; }
         public bool Complete { get; set; }
 
+        public string TargetPest { get; set; }
+        public string RatePerUnit { get; set; }
+        public string SprayPermitNumber { get; set; }
+    
     }
 
     public class DisplayTaskViewModel:ViewModel
