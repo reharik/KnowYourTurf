@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Mail;
 using Alpinely.TownCrier;
 using CC.Core;
+using KnowYourTurf.Core.Config;
 using StructureMap;
 using System.Linq;
 
@@ -59,14 +61,11 @@ namespace KnowYourTurf.Core.Services
     
         private SmtpClient getSmtpClient()
         {
-//            var smtpClient = new SmtpClient("smtp.gmail.com",587);
-//            smtpClient.Credentials = new System.Net.NetworkCredential("reharik@gmail.com", "mishm124");
+            // local needs port and ssl ( gmail )
+//            var smtpClient = new SmtpClient(SiteConfig.Config.SMTPServer,SiteConfig.Config.SMTPPort);
 //            smtpClient.EnableSsl = true;
-
-            //TODO get this from site settins
-
-            var smtpClient = new SmtpClient("knowyourturf-qa.com");
-            smtpClient.Credentials = new System.Net.NetworkCredential("mail@knowyourturf.com", "KYTadmin6");
+            var smtpClient = new SmtpClient(SiteConfig.Config.SMTPServer);
+            smtpClient.Credentials = new System.Net.NetworkCredential(SiteConfig.Config.SMTPUserName, SiteConfig.Config.SMTPPassword);
             return smtpClient;
         }
     }
