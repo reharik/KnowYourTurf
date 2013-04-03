@@ -137,6 +137,7 @@ namespace KnowYourTurf.WeatherTask
             Double.TryParse(dailySummary.maxwspdi, out maxWindGust);
             Double.TryParse(dailySummary.maxhumidity, out humidity);
             Double.TryParse(dailySummary.meanpressurei, out meanPressure);
+            weather.WindDirection = dailySummary.wdire;
             weather.DewPoint = dewPoint;
             weather.HighTemperature = maxTemp;
             weather.LowTemperature = minTemp;
@@ -170,6 +171,7 @@ namespace KnowYourTurf.WeatherTask
         public string maxdewpti { get; set; }
         public string maxwspdi { get; set; }
         public string meanpressurei { get; set; }
+        public string wdire { get; set; }
     }
 
 }

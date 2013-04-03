@@ -69,6 +69,7 @@ namespace KnowYourTurf.Web.Controllers
             weather.LowTemperature = weatherModel.LowTemperature; 
             weather.RainPrecipitation = weatherModel.RainPrecipitation;
             weather.WindSpeed = weatherModel.WindSpeed;
+            weather.WindDirection = weatherModel.WindDirection;
             return weather;
         }
     }
