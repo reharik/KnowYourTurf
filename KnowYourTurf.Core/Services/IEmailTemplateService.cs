@@ -61,12 +61,6 @@ namespace KnowYourTurf.Core.Services
     
         private SmtpClient getSmtpClient()
         {
-            // local needs port and ssl ( gmail )
-//            var smtpClient = new SmtpClient(SiteConfig.Config.SMTPServer,SiteConfig.Config.SMTPPort);
-//            smtpClient.EnableSsl = true;
-            _logger.LogDebug(SiteConfig.Config.SMTPServer);
-            _logger.LogDebug(SiteConfig.Config.SMTPUserName);
-            _logger.LogDebug(SiteConfig.Config.SMTPPassword);
             var smtpClient = new SmtpClient(SiteConfig.Config.SMTPServer);
             smtpClient.Credentials = new System.Net.NetworkCredential(SiteConfig.Config.SMTPUserName, SiteConfig.Config.SMTPPassword);
             return smtpClient;
