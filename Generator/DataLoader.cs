@@ -52,10 +52,12 @@ namespace Generator
         private Task _task3;
         private Task _task4;
         private EquipmentType _equipmentType1;
+        private ISecurityDataService _securityDataService;
 
-        public void Load(IRepository repository)
+        public void Load(IRepository repository, ISecurityDataService securityDataService)
         {
             _repository = repository;
+            _securityDataService = securityDataService;
             //genregistry has no clientfilter and special getclientidservice
 //            _repository = ObjectFactory.Container.GetInstance<IRepository>();
 //            _repository.UnitOfWork.Initialize();
@@ -274,9 +276,11 @@ namespace Generator
             _defaultUser.UserLoginInfo = new UserLoginInfo
                                              {
                                                  LoginName = "Admin",
-                                                 Password = "123",
                                                  ClientId = clientId
                                              };
+            var salt1 = _securityDataService.CreateSalt();
+            _defaultUser.UserLoginInfo.Salt = salt1;
+            _defaultUser.UserLoginInfo.Password = _securityDataService.CreatePasswordHash("123", salt1);
             _defaultUser.AddUserRole(_userRoleAdmin);
             _defaultUser.AddUserRole(_userRoleEmployee);
             var altUser = new User()
@@ -289,9 +293,11 @@ namespace Generator
             altUser.UserLoginInfo = new UserLoginInfo
             {
                 LoginName = "alt",
-                Password = "alt",
                 ClientId = clientId
             };
+            var salt2 = _securityDataService.CreateSalt();
+            altUser.UserLoginInfo.Salt = salt2;
+            altUser.UserLoginInfo.Password = _securityDataService.CreatePasswordHash("alt", salt2);
             altUser.AddUserRole(_userRoleAdmin);
             altUser.AddUserRole(_userRoleEmployee);
 
@@ -304,9 +310,11 @@ namespace Generator
             facilities.UserLoginInfo = new UserLoginInfo
             {
                 LoginName = "facilities",
-                Password = "facilities",
                 ClientId = clientId
             };
+            var salt3 = _securityDataService.CreateSalt();
+            facilities.UserLoginInfo.Salt = salt3;
+            facilities.UserLoginInfo.Password = _securityDataService.CreatePasswordHash("facilities", salt3);
             facilities.AddUserRole(_userRoleFac);
 
 
@@ -338,9 +346,11 @@ namespace Generator
             _employee1.UserLoginInfo = new UserLoginInfo
             {
                 LoginName = "reharik@gmail.com",
-                Password = "123",
                 ClientId = clientId
             };
+            var salt1 = _securityDataService.CreateSalt();
+            _employee1.UserLoginInfo.Salt = salt1;
+            _employee1.UserLoginInfo.Password = _securityDataService.CreatePasswordHash("123", salt1);
 
             _employee2 = new User()
             {
@@ -365,6 +375,9 @@ namespace Generator
                 Password = "123",
                 ClientId = clientId
             };
+            var salt2 = _securityDataService.CreateSalt();
+            _employee2.UserLoginInfo.Salt = salt2;
+            _employee2.UserLoginInfo.Password = _securityDataService.CreatePasswordHash("123", salt2);
 
             _employeeAdmin1 = new User()
             {
@@ -389,6 +402,9 @@ namespace Generator
                 Password = "123",
                 ClientId = clientId
             };
+            var salt3 = _securityDataService.CreateSalt();
+            _employeeAdmin1.UserLoginInfo.Salt = salt3;
+            _employeeAdmin1.UserLoginInfo.Password = _securityDataService.CreatePasswordHash("123", salt3);
 
             _employeeAdmin2 = new User()
             {
@@ -413,6 +429,12 @@ namespace Generator
                 Password = "123",
                 ClientId = clientId
             };
+            var salt4 = _securityDataService.CreateSalt();
+            _employeeAdmin2.UserLoginInfo.Salt = salt4;
+            _employeeAdmin2.UserLoginInfo.Password = _securityDataService.CreatePasswordHash("123", salt4);
+
+            
+            
             _employee1.AddUserRole(_userRoleEmployee);
             _employee2.AddUserRole(_userRoleEmployee);
             _employeeAdmin1.AddUserRole(_userRoleEmployee);
