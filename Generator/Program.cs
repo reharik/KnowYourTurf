@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 using CC.Core;
+using KnowYourTurf.Core;
+using KnowYourTurf.Core.Config;
 using StructureMap;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Web;
@@ -23,6 +25,10 @@ namespace Generator
 //                args = new[] { GetConnectionStringStatic("KnowYourTurf.sql_server_connection_string") };
                 
                 Initialize();
+                var _logger = ObjectFactory.GetInstance<ILogger>();
+                _logger.LogDebug(SiteConfig.Config.SMTPPassword);
+
+
                 var sessionFactoryConfiguration =
                     ObjectFactory.Container.With("connectionStr")
                                  .EqualTo(args[0])
