@@ -6,7 +6,8 @@
     Layout = "~/Views/Shared/_ReportLayout.cshtml";
 }
 <div class="row">
-    @Html.SubmissionFor(x=>x.Date).Size("3").ToHtmlTag()
+    @Html.SubmissionFor(x=>x.StartDate).Size("3").ToHtmlTag()
+    @Html.SubmissionFor(x => x.EndDate).Size("3").ToHtmlTag()
 </div>
 @section FooterButtons
 {
