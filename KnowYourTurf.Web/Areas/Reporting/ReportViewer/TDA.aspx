@@ -18,20 +18,21 @@
             Font-Size="8pt" 
             WaitMessageFont-Names="Verdana" 
             WaitMessageFont-Size="14pt"
-            Width="875"
-            Height="875">
-            <LocalReport ReportPath="Areas\Reporting\RDLC\TDA.rdlc">
+            Width="875px"
+            Height="875px">
+            <LocalReport ReportPath="Areas\Reporting\RDLC\TDA.rdlc" ReportEmbeddedResource="KnowYourTurf.Web.Areas.Reporting.RDLC.TDA.rdlc">
                 <DataSources>
-                    <rsweb:ReportDataSource DataSourceId="SqlDataSource1" Name="TDA" />
+                    <rsweb:ReportDataSource DataSourceId="SqlDataSource1" Name="TDAReport" />
                 </DataSources>
             </LocalReport>
         </rsweb:ReportViewer>
 
-      <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+      <asp:SqlDataSource ID="SqlDataSource1" runat="server"
         ConnectionString='<%$ appSettings:KnowYourTurf.sql_server_connection_string %>'
-        SelectCommand="TDA" SelectCommandType="StoredProcedure"> 
+        SelectCommand="TDAReport" SelectCommandType="StoredProcedure"> 
         <SelectParameters>
-            <asp:QueryStringParameter Name="Date" QueryStringField="Date" Type="DateTime" />
+            <asp:QueryStringParameter Name="StartDate" QueryStringField="StartDate" Type="DateTime" />
+            <asp:QueryStringParameter Name="EndDate" QueryStringField="EndDate" Type="DateTime" />
             <asp:QueryStringParameter Name="ClientId" QueryStringField="ClientId" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
