@@ -365,6 +365,7 @@
                                   <Value>=Fields!Date.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <Format>MM/dd/yyyy</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
