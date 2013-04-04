@@ -86,6 +86,9 @@
     <Compile Include="Iteration_2\20030_Alter_TaskReport_Sproc.cs" />
     <Compile Include="Iteration_2\20010_Add_LicenseNunber_to_User.cs" />
     <Compile Include="Iteration_2\20020_Add_fields_to_Task.cs" />
+    <Compile Include="Iteration_2\20040_Add_winddirection_to_Weather.cs" />
+    <Compile Include="Iteration_2\20050_Add_Address_to_Client.cs" />
+    <Compile Include="Iteration_2\20060_Create_TDAReport_Sproc.cs" />
     <Compile Include="IUpdatePermissions.cs" />
     <Compile Include="IUpdateOperations.cs" />
     <Compile Include="Iteration_1\UpdateOperations_200.cs" />
