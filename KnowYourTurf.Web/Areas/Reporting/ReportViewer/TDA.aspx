@@ -18,8 +18,8 @@
             Font-Size="8pt" 
             WaitMessageFont-Names="Verdana" 
             WaitMessageFont-Size="14pt"
-            Width="875px"
-            Height="1300px">
+            Width="1100"
+            Height="875px">
             <LocalReport ReportPath="Areas\Reporting\RDLC\TDA.rdlc" ReportEmbeddedResource="KnowYourTurf.Web.Areas.Reporting.RDLC.TDA.rdlc">
                 <DataSources>
                     <rsweb:ReportDataSource DataSourceId="SqlDataSource1" Name="TDAReport" />
