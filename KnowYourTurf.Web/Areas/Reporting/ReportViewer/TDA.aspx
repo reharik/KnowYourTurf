@@ -20,7 +20,7 @@
             WaitMessageFont-Size="14pt"
             Width="1100"
             Height="875px">
-            <LocalReport ReportPath="Areas\Reporting\RDLC\TDA.rdlc" ReportEmbeddedResource="KnowYourTurf.Web.Areas.Reporting.RDLC.TDA.rdlc">
+            <LocalReport ReportPath="Areas\Reporting\RDLC\TDA2.rdlc" ReportEmbeddedResource="KnowYourTurf.Web.Areas.Reporting.RDLC.TDA2.rdlc">
                 <DataSources>
                     <rsweb:ReportDataSource DataSourceId="SqlDataSource1" Name="TDAReport" />
                 </DataSources>

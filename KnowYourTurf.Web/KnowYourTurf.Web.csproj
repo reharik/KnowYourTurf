@@ -840,6 +840,7 @@
     <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\Reporting\RDLC\TDA2.rdlc" />
     <EmbeddedResource Include="Areas\Reporting\RDLC\EmployeeDailyTasks.rdlc" />
     <EmbeddedResource Include="Areas\Reporting\RDLC\EquipmentTaskReport.rdlc" />
     <EmbeddedResource Include="Areas\Reporting\RDLC\TDA.rdlc" />
