@@ -33,8 +33,13 @@ chem.EPARegNumber,
 STUFF((SELECT ', ' + em.FirstName +' '+ em.LastName + '( ' + em.LicenseNumber + ' )'
 	FROM [User] as em
 		left join EmployeeToTask as emtt on em.entityid = emtt.User_id 
-		where emtt.Task_id = t.entityid 
+		where emtt.Task_id = t.entityid and em.LicenseNumber IS NOT NULL
 		FOR XML PATH('')), 1, 1, '') as LicensedEmployees,
+STUFF((SELECT ', ' + em.FirstName +' '+ em.LastName 
+	FROM [User] as em
+		left join EmployeeToTask as emtt on em.entityid = emtt.User_id 
+		where emtt.Task_id = t.entityid and em.LicenseNumber IS NULL
+		FOR XML PATH('')), 1, 1, '') as UnLicensedEmployees,
 STUFF((SELECT ', ' + eq.name + ' ( ' + eq.ID + ' )'
 	FROM [Equipment] as eq
 		left join EquipmentToTask as eqtt on eq.entityid = eqtt.Equipment_id 
