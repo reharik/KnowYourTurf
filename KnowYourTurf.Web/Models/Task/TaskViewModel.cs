@@ -41,7 +41,7 @@ namespace KnowYourTurf.Web.Models
         public string TargetPest { get; set; }
         public string RatePerUnit { get; set; }
         public string SprayPermitNumber { get; set; }
-    
+        public string ApplicationRequestedBy { get; set; }
     }
 
     public class DisplayTaskViewModel:ViewModel
