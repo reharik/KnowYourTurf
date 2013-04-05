@@ -39,6 +39,7 @@ namespace KnowYourTurf.Core.Domain
         public virtual string TargetPest { get; set; }
         public virtual string RatePerUnit { get; set; }
         public virtual string SprayPermitNumber { get; set; }
+        public virtual string ApplicationRequestedBy { get; set; }
 
 
         #region Collections

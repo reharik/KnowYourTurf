@@ -200,6 +200,7 @@ namespace KnowYourTurf.Web.Controllers
             employee.State = model.State;
             employee.ZipCode = model.ZipCode;
             employee.Notes = model.Notes;
+            employee.LicenseNumber = model.LicenseNumber;
             if(employee.UserLoginInfo == null)
             {
                 employee.UserLoginInfo = new UserLoginInfo();

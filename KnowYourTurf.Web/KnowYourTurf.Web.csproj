@@ -255,6 +255,13 @@
     <Compile Include="Areas\Reporting\ReportViewer\TaskReport.aspx.designer.cs">
       <DependentUpon>TaskReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Reporting\ReportViewer\TDA.aspx.cs">
+      <DependentUpon>TDA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Reporting\ReportViewer\TDA.aspx.designer.cs">
+      <DependentUpon>TDA.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Config\AutoMapperBootstrapper.cs" />
     <Compile Include="Config\Bootstrapper.cs" />
@@ -428,6 +435,11 @@
       <DependentUpon>TaskReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="Areas\Reporting\Controllers\TDAController.cs" />
+    <Compile Include="Areas\Reporting\XSD\TDAReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TDAReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="WebLocalizationKeys.cs" />
     <Compile Include="KYTWebRegistry.cs" />
     <Compile Include="Global.asax.cs">
@@ -812,11 +824,23 @@
       <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
 &lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
     </Content>
+    <Content Include="Areas\Reporting\XSD\TDAReport.xsc">
+      <DependentUpon>TDAReport.xsd</DependentUpon>
+    </Content>
+    <None Include="Areas\Reporting\XSD\TDAReport.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TDAReport.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Areas\Reporting\XSD\TDAReport.xss">
+      <DependentUpon>TDAReport.xsd</DependentUpon>
+    </Content>
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
     <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\Reporting\RDLC\TDA.rdlc" />
     <EmbeddedResource Include="Areas\Reporting\RDLC\EmployeeDailyTasks.rdlc" />
     <EmbeddedResource Include="Areas\Reporting\RDLC\EquipmentTaskReport.rdlc" />
     <EmbeddedResource Include="Areas\Reporting\Views\EmployeeDailyTasks\EmployeeDailyTasks.rdlc" />
