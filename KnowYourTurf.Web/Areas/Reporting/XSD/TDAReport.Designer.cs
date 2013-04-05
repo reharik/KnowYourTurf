@@ -323,6 +323,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             private global::System.Data.DataColumn columnEquipment;
             
+            private global::System.Data.DataColumn columnApplicationRequestedBy;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public TDAReportDataTable() {
@@ -534,6 +536,14 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ApplicationRequestedByColumn {
+                get {
+                    return this.columnApplicationRequestedBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -591,7 +601,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                         string EPARegNumber, 
                         string LicensedEmployees, 
                         string UnLicensedEmployees, 
-                        string Equipment) {
+                        string Equipment, 
+                        string ApplicationRequestedBy) {
                 TDAReportRow rowTDAReportRow = ((TDAReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         BusinessName,
@@ -615,7 +626,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                         EPARegNumber,
                         LicensedEmployees,
                         UnLicensedEmployees,
-                        Equipment};
+                        Equipment,
+                        ApplicationRequestedBy};
                 rowTDAReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTDAReportRow);
                 return rowTDAReportRow;
@@ -660,6 +672,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 this.columnLicensedEmployees = base.Columns["LicensedEmployees"];
                 this.columnUnLicensedEmployees = base.Columns["UnLicensedEmployees"];
                 this.columnEquipment = base.Columns["Equipment"];
+                this.columnApplicationRequestedBy = base.Columns["ApplicationRequestedBy"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -709,6 +722,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 base.Columns.Add(this.columnUnLicensedEmployees);
                 this.columnEquipment = new global::System.Data.DataColumn("Equipment", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEquipment);
+                this.columnApplicationRequestedBy = new global::System.Data.DataColumn("ApplicationRequestedBy", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnApplicationRequestedBy);
                 this.columnBusinessName.MaxLength = 255;
                 this.columnAddress.MaxLength = 255;
                 this.columnAddress2.MaxLength = 255;
@@ -728,6 +743,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
                 this.columnUnLicensedEmployees.MaxLength = 2147483647;
                 this.columnEquipment.ReadOnly = true;
                 this.columnEquipment.MaxLength = 2147483647;
+                this.columnApplicationRequestedBy.MaxLength = 255;
                 this.ExtendedProperties.Add("Generator_TablePropName", "_TDAReport");
                 this.ExtendedProperties.Add("Generator_UserTableName", "TDAReport");
             }
@@ -1224,6 +1240,22 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ApplicationRequestedBy {
+                get {
+                    try {
+                        return ((string)(this[this.tableTDAReport.ApplicationRequestedByColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ApplicationRequestedBy\' in table \'TDAReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTDAReport.ApplicationRequestedByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsBusinessNameNull() {
                 return this.IsNull(this.tableTDAReport.BusinessNameColumn);
             }
@@ -1485,6 +1517,18 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD {
             public void SetEquipmentNull() {
                 this[this.tableTDAReport.EquipmentColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsApplicationRequestedByNull() {
+                return this.IsNull(this.tableTDAReport.ApplicationRequestedByColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetApplicationRequestedByNull() {
+                this[this.tableTDAReport.ApplicationRequestedByColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -1668,7 +1712,14 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
             tableMapping.ColumnMappings.Add("LicensedEmployees", "LicensedEmployees");
             tableMapping.ColumnMappings.Add("UnLicensedEmployees", "UnLicensedEmployees");
             tableMapping.ColumnMappings.Add("Equipment", "Equipment");
+            tableMapping.ColumnMappings.Add("ApplicationRequestedBy", "ApplicationRequestedBy");
             this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "dbo.TasksByField";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1721,6 +1772,35 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(TDAReport.TDAReportDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(TDAReport dataSet) {
+            return this.Adapter.Update(dataSet, "TDAReport");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
     }
     
     /// <summary>
@@ -1735,6 +1815,8 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
         
         private UpdateOrderOption _updateOrder;
         
+        private TDAReportTableAdapter _tDAReportTableAdapter;
+        
         private bool _backupDataSetBeforeUpdate;
         
         private global::System.Data.IDbConnection _connection;
@@ -1747,6 +1829,20 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
             }
             set {
                 this._updateOrder = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public TDAReportTableAdapter TDAReportTableAdapter {
+            get {
+                return this._tDAReportTableAdapter;
+            }
+            set {
+                this._tDAReportTableAdapter = value;
             }
         }
         
@@ -1769,6 +1865,10 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
                 if ((this._connection != null)) {
                     return this._connection;
                 }
+                if (((this._tDAReportTableAdapter != null) 
+                            && (this._tDAReportTableAdapter.Connection != null))) {
+                    return this._tDAReportTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -1782,6 +1882,9 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
+                if ((this._tDAReportTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -1793,6 +1896,15 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateUpdatedRows(TDAReport dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._tDAReportTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet._TDAReport.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tDAReportTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             return result;
         }
         
@@ -1803,6 +1915,14 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateInsertedRows(TDAReport dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._tDAReportTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet._TDAReport.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tDAReportTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -1813,6 +1933,14 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateDeletedRows(TDAReport dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._tDAReportTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet._TDAReport.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tDAReportTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             return result;
         }
         
@@ -1852,6 +1980,11 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
+            if (((this._tDAReportTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._tDAReportTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana" +
@@ -1884,6 +2017,15 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
             try {
                 // ---- Prepare for update -----------
                 //
+                if ((this._tDAReportTableAdapter != null)) {
+                    revertConnections.Add(this._tDAReportTableAdapter, this._tDAReportTableAdapter.Connection);
+                    this._tDAReportTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._tDAReportTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._tDAReportTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._tDAReportTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._tDAReportTableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -1941,6 +2083,10 @@ namespace KnowYourTurf.Web.Areas.Reporting.XSD.TDAReportTableAdapters {
             finally {
                 if (workConnOpened) {
                     workConnection.Close();
+                }
+                if ((this._tDAReportTableAdapter != null)) {
+                    this._tDAReportTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tDAReportTableAdapter]));
+                    this._tDAReportTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
