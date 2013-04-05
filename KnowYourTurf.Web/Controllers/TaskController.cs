@@ -158,6 +158,7 @@ namespace KnowYourTurf.Web.Controllers
             item.TargetPest = input.TargetPest;
             item.RatePerUnit = input.RatePerUnit;
             item.SprayPermitNumber = input.SprayPermitNumber;
+            item.ApplicationRequestedBy = input.ApplicationRequestedBy;
             
         }
 
