@@ -490,6 +490,10 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
     },
     viewLoaded:function(){
         KYT.calculator.applyTaskTransferData(this.model,this.$el);
+        KYT.vent.bind("popup:editModule:loaded",this.chemicalSubSection,this);
+    },
+    onClose:function(){
+        KYT.vent.unbind("popup:editModule:loaded",this.chemicalSubSection,this);
     }
 });
 
