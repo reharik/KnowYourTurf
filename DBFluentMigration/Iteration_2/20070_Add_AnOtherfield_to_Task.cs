@@ -2,7 +2,7 @@
 {
     using FluentMigrator;
 
-    [Migration(20070)]
+    [Migration(20060)]
     public class Add_AnOtherfield_to_Task : Migration
     {
         public override void Up()

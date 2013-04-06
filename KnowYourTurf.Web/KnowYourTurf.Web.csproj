@@ -835,6 +835,7 @@
     <Content Include="Areas\Reporting\XSD\TDAReport.xss">
       <DependentUpon>TDAReport.xsd</DependentUpon>
     </Content>
+    <Content Include="Views\Employee\EmployeeAddUpdate.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
     <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />
