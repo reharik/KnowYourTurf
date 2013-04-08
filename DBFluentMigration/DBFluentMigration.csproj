@@ -93,6 +93,7 @@
     <Compile Include="Iteration_2\20080_Alter_EquipmentTaskReport_Sproc.cs" />
     <Compile Include="Iteration_2\20090_Alter_TDAReport_Sproc.cs" />
     <Compile Include="Iteration_2\20100_Alter_TaskReport_Sproc.cs" />
+    <Compile Include="Iteration_2\20110_Alter_EquipmentTaskReport_Sproc.cs" />
     <Compile Include="IUpdatePermissions.cs" />
     <Compile Include="IUpdateOperations.cs" />
     <Compile Include="Iteration_1\UpdateOperations_200.cs" />

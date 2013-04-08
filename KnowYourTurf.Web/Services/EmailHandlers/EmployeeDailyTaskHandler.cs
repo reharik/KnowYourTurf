@@ -33,7 +33,7 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
                             };
                 var emailTemplateDTO = new EmailTemplateDTO
                 {
-                    Subject = CoreLocalizationKeys.DAILY_TASK_SUMMARY.ToString(),
+                    Subject = emailJob.Subject,
                     Body = emailJob.EmailTemplate.Template,
                     From = new MailAddress("DailyTasks@KnowYourTurf.Com", CoreLocalizationKeys.KNOWYOURTURF_DAILY_TASKS.ToString()),
                     To = new MailAddress(sub.Email, sub.FullName),

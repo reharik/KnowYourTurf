@@ -34,6 +34,7 @@ namespace KnowYourTurf.WeatherTask
             ObjectFactory.Container.Inject(sessionFactoryConfiguration);
             _repository = ObjectFactory.Container.GetInstance<IRepository>("SpecialInterceptorNoFilters");
             _logger = ObjectFactory.Container.GetInstance<ILogger>();
+//            GetWeatherTest();
             GetWeather();
         }
 
@@ -89,10 +90,21 @@ namespace KnowYourTurf.WeatherTask
             _repository.UnitOfWork.Commit();
         }
 
+        public static void GetWeatherTest()
+        {
+            var webClient = new WebClient();
+            var jss = new JavaScriptSerializer();
+            var x = _repository.Find<Client>(1);
+            loadWeatherObject(jss, webClient, x);
+//            loadLastWeeksWeatherObject(jss, webClient, x);
+            _repository.UnitOfWork.Commit();
+        }
+
+
         private static void loadWeatherObject(JavaScriptSerializer jss, WebClient webClient, Client client)
         {
-            var url = "http://api.wunderground.com/api/8c25a57f987344bd/yesterday/q/" + client.ZipCode + ".json";
             var date = DateTime.Now.Date.AddDays(-1);
+            var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" + client.ZipCode + ".json";
             var weather = _repository.Query<Weather>(x => x.Date == date && x.ClientId == client.EntityId).FirstOrDefault() ??
                           new Weather { ClientId = client.EntityId, Date = date };
             loadWeather(jss, webClient, weather, url);
