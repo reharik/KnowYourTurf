@@ -129,11 +129,14 @@ namespace KnowYourTurf.WeatherTask
             _logger.LogInfo("Client Id: " + weather.ClientId + ", url: " + url + ", Time: " + DateTime.Now.ToString());
             var result = webClient.DownloadString(url);
             _logger.LogInfo("Client Id: " + weather.ClientId + ", Result Has Value: " + result.IsNotEmpty() + ", Time: " + DateTime.Now.ToString());
-
+            _logger.LogInfo("Result: " + result);
+            _logger.LogInfo("jss is null: " + (jss==null));
             Thread.Sleep(10000);
             if (result.IsEmpty()) return;
             var clientWeatherInfoDto = jss.Deserialize<ClientWeatherInfoDto>(result);
             if (clientWeatherInfoDto == null || clientWeatherInfoDto.History == null || clientWeatherInfoDto.History.DailySummary == null) return;
+            _logger.LogInfo("Daily Summary: " + clientWeatherInfoDto.History.DailySummary.FirstOrDefault());
+
             var dewPoint = 0d;
             var maxTemp = 0d;
             var minTemp = 0d;
