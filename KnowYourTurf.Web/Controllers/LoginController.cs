@@ -102,11 +102,13 @@ namespace KnowYourTurf.Web.Controllers
 //            {
 //                return RedirectToAction("Login");
 //            }
-            var redirectUrl = _authenticationContext.ThisUserHasBeenAuthenticated(user,false);
+            _authenticationContext.ThisUserHasBeenAuthenticated(user,false);
             user.UserLoginInfo.ByPassToken = Guid.Empty;
             var crudManager = _saveEntityService.ProcessSave(user);
             crudManager.Finish();
-
+            var redirectUrl = user.UserRoles.Any(x => x.Name == "Facilities")
+                            ? "/KnowYourTurf/Home#/eventcalendar/0/0/" + user.Client.EntityId
+                            : "/KnowYourTurf/Home#/employeedashboard/" + user.EntityId;
             return Redirect(redirectUrl);
         }
 
