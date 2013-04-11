@@ -126,7 +126,6 @@
     <Compile Include="Config\CustomIdentitiy.cs" />
     <Compile Include="Config\CustomPrincipal.cs" />
     <Compile Include="Config\MsSqlAzureDialect.cs" />
-    <Compile Include="Config\NullSqlServerSessionSourceConfiguration.cs" />
     <Compile Include="Config\SaveUpdateInterceptorWithCompanyFilter.cs" />
     <Compile Include="Config\SiteConfiguration.cs" />
     <Compile Include="CoreViewModels\CalendarViewModel.cs" />
@@ -169,8 +168,6 @@
     <Compile Include="Domain\Tools\NoFilterRepository.cs" />
     <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersRepository.cs" />
     <Compile Include="Domain\Tools\SpecialInterceptorNoFiltersUnitOfWork.cs" />
-    <Compile Include="Domain\Tools\NullNHSetupConfig.cs" />
-    <Compile Include="Domain\Tools\NullSessionFactory.cs" />
     <Compile Include="Domain\UserRole.cs" />
     <Compile Include="Domain\VendorBase.cs" />
     <Compile Include="Domain\Weather.cs" />
