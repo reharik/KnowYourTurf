@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>KnowYourTurf.Core</id>
+    <version>$version$</version>
+    <title>KnowYourTurf.Core</title>
+    <authors>CannibalCoder</authors>
+    <owners>CannibalCoder</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Core functionality</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags></tags>
+  </metadata>
+  <files>
+     <file src="KnowYourTurf.Core\bin\Debug\KnowYourTurf.Core.dll" target="lib" />
+     <file src="KnowYourTurf.Core\bin\Debug\KnowYourTurf.Core.pdb" target="lib" />
+     <file src="KnowYourTurf.Core\**\*.cs" target="src\CC.Core" />
+   </files> 
+  </package>
