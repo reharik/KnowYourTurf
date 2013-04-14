@@ -73,7 +73,8 @@ KYT.Views.TDAView = KYT.Views.View.extend({
         KYT.mixin(this, "reportMixin");
     },
     createUrl:function(){
-        return this.model.ReportUrl()+ "?Date="+this.model.Date()+"&" +
+        return this.model.ReportUrl()+  "?StartDate=" + this.model.StartDate()+ "&" +
+            "EndDate=" + this.model.EndDate()+ "&" +
             "ClientId="+this.model.ClientId();
     }
 });

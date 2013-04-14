@@ -42,7 +42,7 @@ namespace KnowYourTurf.Web.Services.EmailHandlers
                     };
                     var emailTemplateDTO = new EmailTemplateDTO
                     {
-                        Subject = CoreLocalizationKeys.EQUIPMENT_MAINTENANCE_NOTIFICATION.ToString(),
+                        Subject = emailJob.Subject,
                         Body = emailJob.EmailTemplate.Template,
                         From = new MailAddress("EquipmentNotification@KnowYourTurf.Com", CoreLocalizationKeys.EQUIPMENT_MAINTENANCE_NOTIFICATION.ToString()),
                         To = new MailAddress(sub.Email, sub.FullName),

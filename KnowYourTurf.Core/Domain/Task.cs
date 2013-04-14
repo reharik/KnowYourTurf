@@ -35,6 +35,12 @@ namespace KnowYourTurf.Core.Domain
 
         public virtual InventoryProduct InventoryProduct { get; set; }
         public virtual bool InventoryDecremented { get; set; }
+        // chemical sub fields
+        public virtual string TargetPest { get; set; }
+        public virtual string RatePerUnit { get; set; }
+        public virtual string SprayPermitNumber { get; set; }
+        public virtual string ApplicationRequestedBy { get; set; }
+
 
         #region Collections
         public virtual void ClearEquipment() { _equipment = new List<Equipment>(); }

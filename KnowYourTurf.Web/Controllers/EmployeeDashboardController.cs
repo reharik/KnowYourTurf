@@ -53,7 +53,7 @@ namespace KnowYourTurf.Web.Controllers
 
         public ActionResult ViewEmployee(ViewModel input)
         {
-            var entityId = input.EntityId > 0 ? input.EntityId : _sessionContext.GetUserId();
+            var entityId = _sessionContext.GetUserId();// input.EntityId > 0 ? input.EntityId : _sessionContext.GetUserId();
             var employee = _repository.Query<User>(x=>x.EntityId == entityId).Fetch(x=>x.UserLoginInfo).FirstOrDefault();
             var availableUserRoles = _repository.FindAll<UserRole>().Select(x => new TokenInputDto { id = x.EntityId.ToString(), name = x.Name });
             var selectedUserRoles = employee.UserRoles != null

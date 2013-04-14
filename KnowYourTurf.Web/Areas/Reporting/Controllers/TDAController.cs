@@ -30,7 +30,8 @@
             
             var model = new TDAViewModel
                             {
-                                Date = DateTime.Now,
+                                StartDate = DateTime.Now,
+                                EndDate = DateTime.Now,
                                 ClientId = this._sessionContext.GetClientId(),
                                 _Title = WebLocalizationKeys.TDA.ToString(),
                                 ReportUrl = "/Areas/Reporting/ReportViewer/TDA.aspx"
@@ -42,7 +43,9 @@
     public class TDAViewModel : ViewModel
     {
         [ValidateNonEmpty]
-        public DateTime Date { get; set; }
+        public DateTime StartDate { get; set; }
+        [ValidateNonEmpty]
+        public DateTime EndDate { get; set; }
         public string ReportUrl { get; set; }
         public int ClientId { get; set; }
     }

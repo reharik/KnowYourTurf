@@ -40,10 +40,7 @@ namespace KnowYourTurf.Web.Config
             For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
             For(typeof (ITagGenerator<>)).Use(typeof (TagGenerator<>));
             For<TagProfileLibrary>().Singleton();
-            For<INHSetupConfig>().Use<NullNHSetupConfig>();
 
-            For<ISessionFactoryConfiguration>().Singleton().Use<NullSqlServerSessionSourceConfiguration>();
-            For<ISessionFactory>().Use<NullSessionFactory>();
 
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();

@@ -4,7 +4,7 @@
 
 
 /*custom upload elements*/
-.customfile-input {top:5px;  position: absolute;  cursor: pointer; background: transparent; border: 0; opacity: 0; -moz-opacity: 0; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); z-index: 999;  }
+.customfile-input {top:0px;  position: absolute;  cursor: pointer; background: transparent; border: 0; opacity: 0; -moz-opacity: 0; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); z-index: 999;  }
 
 
 .customfile { background-color: #fff;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
@@ -8,7 +7,6 @@ using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
 using CC.Core.Services;
-using FluentNHibernate.Utils;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
@@ -17,7 +15,7 @@ using KnowYourTurf.Web.Services;
 
 namespace KnowYourTurf.Web.Controllers
 {
-    using KnowYourTurf.Web.Config;
+    using Config;
 
     public class TaskController : KYTController
     {
@@ -157,6 +155,10 @@ namespace KnowYourTurf.Web.Controllers
             item.QuantityUsed = input.QuantityUsed;
             item.Notes = input.Notes;
             item.Complete = input.Complete;
+            item.TargetPest = input.TargetPest;
+            item.RatePerUnit = input.RatePerUnit;
+            item.SprayPermitNumber = input.SprayPermitNumber;
+            item.ApplicationRequestedBy = input.ApplicationRequestedBy;
             
         }
 

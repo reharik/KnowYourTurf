@@ -247,6 +247,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken FACILITIES_PHOTO = new WebLocalizationKeys("FACILITIES_PHOTO", "Facilities Photo");
 
         public static readonly StringToken PASSWORD = new WebLocalizationKeys("PASSWORD", "Password");
+        public static readonly StringToken PASSWORD_CONFIRMATION_MUST_MATCH = new WebLocalizationKeys("PASSWORD_CONFIRMATION_MUST_MATCH", "Password confirmation must match password");
         public static readonly StringToken STATUS = new WebLocalizationKeys("STATUS", "Status");
         public static readonly StringToken CALCULATOR_NAME = new WebLocalizationKeys("CALCULATOR_NAME", "Calculator Name");
 
@@ -268,6 +269,8 @@ namespace KnowYourTurf.Web
         public static readonly StringToken EMPLOYEE = new WebLocalizationKeys("EMPLOYEE", "Employee");
         public static readonly StringToken EQUIPMENT_TASK_REPORT = new WebLocalizationKeys("EQUIPMENT_TASK_REPORT", "Equipment Task Report");
         public static readonly StringToken TDA = new WebLocalizationKeys("TDA", "TDA Report");
+        public static readonly StringToken CHEMICAL_REPORT = new WebLocalizationKeys("CHEMICAL_REPORT", "Chemical Report Variables");
+        public static readonly StringToken SELECT_AT_LEAST_ONE_USER_ROLE = new WebLocalizationKeys("SELECT_AT_LEAST_ONE_USER_ROLE", "You must select at least one User Role.");
 
 
     }

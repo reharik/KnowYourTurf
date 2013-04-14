@@ -59,7 +59,7 @@ namespace KnowYourTurf.Web.Controllers
             model._photoGridUrl = photoUrl;
             model._saveUrl = UrlContext.GetUrlForAction<FieldController>(x => x.Save(null));
             model._Title = WebLocalizationKeys.FIELD_INFORMATION.ToString();
-            model._Photos = field.Photos.Select(x => new PhotoDto {FileUrl = x.FileUrl.AddImageSizeToName("Large")});
+            model._Photos = field.Photos.Select(x => new PhotoDto { FileUrl = x.FileUrl, ImageId = x.EntityId });
 
             return new CustomJsonResult(model);
         }
