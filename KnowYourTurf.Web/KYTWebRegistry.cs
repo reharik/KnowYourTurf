@@ -68,13 +68,16 @@ namespace KnowYourTurf.Web
 
             For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptorWithClientFilter()));
             For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession(new SaveUpdateInterceptor())).Named("SpecialInterceptorNoFilters");
+            For<ISession>().HybridHttpOrThreadLocalScoped().Add(context => context.GetInstance<ISessionFactory>().OpenSession()).Named("NoInterceptorNoFilters");
 
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<KYTUnitOfWork>();
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<UnitOfWork>().Named("NoFilters");
             For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<SpecialInterceptorNoFiltersUnitOfWork>().Named("SpecialInterceptorNoFilters");
+            For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Add<NoInterceptorNoFiltersUnitOfWork>().Named("NoInterceptorNoFilters");
 
             For<IRepository>().Use<Repository>();
             For<IRepository>().Add<NoFilterRepository>().Named("NoFilters");
+            For<IRepository>().Add<NoInterceptorNoFiltersRepository>().Named("NoInterceptorNoFilters");
             For<IRepository>().Add<SpecialInterceptorNoFiltersRepository>().Named("SpecialInterceptorNoFilters");
 
             For<ISelectListItemService>().Use<KYTSelectListItemService>();

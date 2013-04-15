@@ -37,21 +37,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CC.Core, Version=1.0.0.39, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Core, Version=1.0.0.41, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.1.0.0.39\lib\CC.Core.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.41\lib\CC.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Core.Utilities, Version=1.0.0.39, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Core.Utilities, Version=1.0.0.41, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.1.0.0.39\lib\CC.Core.Utilities.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.41\lib\CC.Core.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="CC.Security, Version=1.0.0.39, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.Security, Version=1.0.0.41, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.1.0.0.39\lib\CC.Security.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.41\lib\CC.Security.dll</HintPath>
     </Reference>
-    <Reference Include="CC.UI.Helpers, Version=1.0.0.39, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CC.UI.Helpers, Version=1.0.0.41, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.1.0.0.39\lib\CC.UI.Helpers.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.41\lib\CC.UI.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate, Version=1.3.0.733, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -60,9 +60,9 @@
     <Reference Include="HibernatingRhinos.Profiler.Appender">
       <HintPath>..\lib\HibernatingRhinos.Profiler.Appender.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlTags, Version=1.0.0.39, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="HtmlTags, Version=1.0.0.41, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CC.Core.1.0.0.39\lib\HtmlTags.dll</HintPath>
+      <HintPath>..\packages\CC.Core.1.0.0.41\lib\HtmlTags.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

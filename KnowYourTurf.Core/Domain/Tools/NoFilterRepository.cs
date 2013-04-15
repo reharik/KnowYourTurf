@@ -11,4 +11,12 @@ namespace KnowYourTurf.Core.Domain.Tools
             _unitOfWork.Initialize();
         }
     }
+    public class NoInterceptorNoFiltersRepository : Repository
+    {
+        public NoInterceptorNoFiltersRepository()
+        {
+            _unitOfWork = ObjectFactory.Container.GetInstance<IUnitOfWork>("NoFilters");
+            _unitOfWork.Initialize();
+        }
+    }
 }

@@ -3,19 +3,20 @@ using System.Web;
 using System.Web.Security;
 using CC.Core.DomainTools;
 using KnowYourTurf.Core.Domain;
+using NHibernate;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Services
 {
     public interface IAuthenticationContext
     {
-        string ThisUserHasBeenAuthenticated(User username, bool rememberMe);
+        string ThisUserHasBeenAuthenticated(User username, bool rememberMe, User impersonator = null);
         void SignOut();
     }
 
     public class WebAuthenticationContext : IAuthenticationContext
     {
-        public string ThisUserHasBeenAuthenticated(User user,  bool rememberMe)
+        public string ThisUserHasBeenAuthenticated(User user, bool rememberMe, User impersonator = null)
         {
             string userData = String.Empty;
             userData = userData + "UserId=" + user.EntityId + "|ClientId=" + user.ClientId;
@@ -24,13 +25,16 @@ namespace KnowYourTurf.Web.Services
             string encTicket = FormsAuthentication.Encrypt(ticket);
             var faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
             HttpContext.Current.Response.Cookies.Add(faCookie);
-            logUserStats(user);
+            logUserStats(user, impersonator);
             return FormsAuthentication.GetRedirectUrl(user.FullNameLNF, false);
         }
 
-        private void logUserStats(User user)
+        private void logUserStats(User user, User impersonator = null)
         {
-            var repository = ObjectFactory.Container.GetInstance<IRepository>();
+            var sf = ObjectFactory.GetInstance<ISessionFactory>();
+            var session = sf.OpenSession();
+            var unitOfWork = new UnitOfWork(session);
+            var repository = new Repository(unitOfWork, null);
             var request = HttpContext.Current.Request;
             var loginStatistics = new LoginStatistics
             {
@@ -39,7 +43,12 @@ namespace KnowYourTurf.Web.Services
                 BrowserVersion = request.Browser.Version,
                 UserAgent = request.UserAgent,
                 UserHostAddress = request.UserHostAddress,
-                UserHostName = request.UserHostName
+                UserHostName = request.UserHostName,
+                CreatedDate = DateTime.Now,
+                ChangedDate = DateTime.Now,
+                CreatedBy = impersonator ?? user,
+                ChangedBy = impersonator ?? user,
+                ClientId = user.ClientId
             };
             repository.Save(loginStatistics);
             repository.Commit();
