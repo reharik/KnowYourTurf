@@ -122,7 +122,7 @@ namespace KnowYourTurf.Web.Controllers
             }
             employee = mapToDomain(input, employee);
             ActionResult json;
-            if(validateUserRolesAndPasswords(employee, input, out json))
+            if(!validateUserRolesAndPasswords(employee, input, out json))
             {
                 return json;
             }

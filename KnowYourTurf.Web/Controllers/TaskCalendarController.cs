@@ -74,6 +74,8 @@ namespace KnowYourTurf.Web.Controllers
             var events = new List<CalendarEvent>();
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
+
+            //TODO this needs to be refactored to use criteria or it will slow the fuck down in prod.
             var category = _repository.Find<Site>(input.RootId);
             var tasks = (input.taskType > 0) ? category.GetAllTasks().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime && x.TaskType.EntityId == input.taskType)
                                             : category.GetAllTasks().Where(x => x.ScheduledDate >= startDateTime && x.ScheduledDate <= endDateTime);        

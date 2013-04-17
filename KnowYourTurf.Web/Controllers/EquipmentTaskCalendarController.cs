@@ -70,10 +70,12 @@ namespace KnowYourTurf.Web.Controllers
             var events = new List<CalendarEvent>();
             var startDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.start);
             var endDateTime = DateTimeUtilities.ConvertFromUnixTimestamp(input.end);
+            
+            //TODO this needs to be refactored to use criteria or it will slow the fuck down in prod.
             var equipment = input.taskType>0? _repository.Query<Equipment>( x => x.Tasks.Any(y => y.ScheduledDate >= startDateTime && y.ScheduledDate <= endDateTime && y.TaskType.EntityId == input.taskType))
                 : _repository.Query<Equipment>(x => x.Tasks.Any(y => y.ScheduledDate >= startDateTime && y.ScheduledDate <= endDateTime));
             var equipTasks = new List<EquipmentTask>();
-            equipment.ForEachItem(x=> equipTasks.AddRange(x.GetAllEquipmentTasks(y => y.ScheduledDate >= startDateTime && y.ScheduledDate <= endDateTime)));
+            equipment.ForEachItem(x=> equipTasks.AddRange(x.GetAllEquipmentTasks(y => !(y.ScheduledDate >= startDateTime) || !(y.ScheduledDate <= endDateTime) || input.taskType <= 0 || y.TaskType.EntityId == input.taskType)));
             equipTasks.ForEachItem(z => events.Add(new CalendarEvent
                                                        {
                                                            EntityId = z.EntityId,
