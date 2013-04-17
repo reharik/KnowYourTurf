@@ -81,7 +81,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         var builder =  KYT.Views.popupButtonBuilder.builder("displayModule");
         builder.addButton("Delete", $.proxy(this.deleteItem,this));
         builder.addEditButton();
-        builder.addButton("Copy Event",$.proxy(this.copyItem,this));
+        builder.addButton("Copy Task",$.proxy(this.copyItem,this));
         builder.addCancelButton();
 
         var formOptions = {
@@ -497,6 +497,22 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
     }
 });
 
+KYT.Views.TaskDisplayView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "displayMixin");
+        KYT.mixin(this, "ajaxDisplayMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        if(this.model._IsChemical()){
+            $("#chemicalReport",this.$el).show("slow");
+        }else{
+            $("#chemicalReport",this.$el).hide("slow");
+        }
+    }
+});
+
+
 KYT.Views.PurchaseOrderListView = KYT.Views.View.extend({
     _setupBindings:function(){
         KYT.vent.bind(this.options.gridId+":Redirect",this.commitPO,this);
@@ -833,26 +849,6 @@ KYT.Views.EquipmentListView = KYT.Views.View.extend({
     }
 });
 
-KYT.Views.EmployeeListView = KYT.Views.View.extend({
-    initialize:function(){
-        KYT.mixin(this, "ajaxGridMixin");
-        KYT.mixin(this, "setupGridMixin");
-        KYT.mixin(this, "defaultGridEventsMixin");
-        KYT.mixin(this, "setupGridSearchMixin");
-    },
-    viewLoaded:function(){
-        KYT.vent.bind(this.options.gridId+":Redirect",this.showDashboard,this);
-        this.setupBindings();
-    },
-    onClose:function(){
-        KYT.vent.unbind(this.options.gridId+":Redirect",this.showDashboard,this);
-        this.unbindBindings();
-    },
-    showDashboard:function(id){
-        KYT.vent.trigger("route",KYT.generateRoute("employeedashboard",id),true);
-    }
-});
-
 KYT.Views.VendorListView = KYT.Views.View.extend({
     initialize:function(){
         KYT.mixin(this, "ajaxGridMixin");
@@ -1086,7 +1082,6 @@ KYT.Views.EquipmentTypeFormView = KYT.Views.View.extend({
     }
 });
 
-
 KYT.Views.InventoryDisplayView = KYT.Views.View.extend({
     initialize:function(){
         KYT.mixin(this, "displayMixin");
@@ -1172,6 +1167,4 @@ KYT.Views.CompletedEquipmentTaskListView = KYT.Views.View.extend({
         this.setupBindings();},
     onClose:function(){this.unbindBindings();}
 });
-
-
 

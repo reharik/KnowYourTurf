@@ -272,6 +272,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken CHEMICAL_REPORT = new WebLocalizationKeys("CHEMICAL_REPORT", "Chemical Report Variables");
         public static readonly StringToken SELECT_AT_LEAST_ONE_USER_ROLE = new WebLocalizationKeys("SELECT_AT_LEAST_ONE_USER_ROLE", "You must select at least one User Role.");
 
+        public static readonly StringToken TASK_TYPE_FILTER = new WebLocalizationKeys("TASK_TYPE_FILTER", "Task Type Filter");
 
     }
 }
