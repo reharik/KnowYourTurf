@@ -5,6 +5,8 @@ using System.Web.Security;
 using CC.Core;
 using CC.Core.DomainTools;
 using KnowYourTurf.Core.Domain;
+using NHibernate;
+using StructureMap;
 
 namespace KnowYourTurf.Core.Services
 {
@@ -19,15 +21,17 @@ namespace KnowYourTurf.Core.Services
     {
         private readonly IRepository _repository;
 
-        public SecurityDataService(IRepository repository)
+        public SecurityDataService()
         {
-            _repository = repository;
+            var sf = ObjectFactory.GetInstance<ISessionFactory>();
+            var session = sf.OpenSession();
+            var unitOfWork = new UnitOfWork(session);
+            _repository = new Repository(unitOfWork, null);
         }
 
         public User AuthenticateForUserId(string username, string password)
         {
-            _repository.CurrentSession().DisableFilter("ClientConditionFilter");
-            var users = _repository.Query<User>(u => u.UserLoginInfo.LoginName.ToLowerInvariant() == username.ToLowerInvariant());// && u.UserLoginInfo.Password == password).FirstOrDefault();
+            var users = _repository.Query<User>(u => u.UserLoginInfo.LoginName == username);// && u.UserLoginInfo.Password == password).FirstOrDefault();
             User ValidUser = null;
             users.ForEachItem(x =>
             {

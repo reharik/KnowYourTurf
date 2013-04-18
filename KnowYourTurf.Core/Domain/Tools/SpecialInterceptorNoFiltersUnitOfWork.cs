@@ -11,4 +11,12 @@ namespace KnowYourTurf.Core.Domain.Tools
             _session = ObjectFactory.Container.GetInstance<ISession>("SpecialInterceptorNoFilters");
         }
     }
+
+    public class NoInterceptorNoFiltersUnitOfWork : UnitOfWork
+    {
+        public NoInterceptorNoFiltersUnitOfWork()
+        {
+            _session = ObjectFactory.Container.GetInstance<ISession>("NoInterceptorNoFilters");
+        }
+    }
 }

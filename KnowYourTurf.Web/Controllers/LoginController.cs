@@ -12,6 +12,7 @@ using KnowYourTurf.Core;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
 using KnowYourTurf.Web.Services;
+using NHibernate;
 using StructureMap;
 
 namespace KnowYourTurf.Web.Controllers
@@ -22,22 +23,16 @@ namespace KnowYourTurf.Web.Controllers
     {
         private readonly ISecurityDataService _securityDataService;
         private readonly IAuthenticationContext _authenticationContext;
-        private readonly IEmailTemplateService _emailTemplateService;
-        private readonly IContainer _container;
         private readonly IRepository _repository;
         private readonly ISaveEntityService _saveEntityService;
 
         public LoginController(ISecurityDataService securityDataService,
             IAuthenticationContext authenticationContext,
-            IEmailTemplateService emailTemplateService,
-            IContainer container,
-            IRepository repository,
-            ISaveEntityService saveEntityService)
+            ISaveEntityService saveEntityService,
+            IRepository repository)
         {
             _securityDataService = securityDataService;
             _authenticationContext = authenticationContext;
-            _emailTemplateService = emailTemplateService;
-            _container = container;
             _repository = repository;
             _saveEntityService = saveEntityService;
         }
@@ -55,7 +50,6 @@ namespace KnowYourTurf.Web.Controllers
         public ActionResult Login(LoginViewModel input)
         {
             var notification = new Notification {Message = WebLocalizationKeys.INVALID_USERNAME_OR_PASSWORD.ToString()};
-
             try
             {
                 if (input.UserName.IsNotEmpty() && input.Password.IsNotEmpty())
@@ -81,31 +75,26 @@ namespace KnowYourTurf.Web.Controllers
             }
             return new CustomJsonResult(notification);
         }
-            
-//            
-//            if (input.HasCredentials())
-//            {
-//                var user = _securityDataService.AuthenticateForUserId(input.UserName, input.Password);
-//                if(user!=null)
-//                {
-//                    var redirectUrl = _authenticationContext.ThisUserHasBeenAuthenticated(user, false);
-//                    return Redirect(redirectUrl);
-//                }
-//            }
-//            return new CustomJsonResult(notification);
-  //      }
 
         public ActionResult Log_in(LoginViewModel input)
         {
-            var user = _repository.Find<User>(input.EntityId);
-//            if(user.UserLoginInfo.ByPassToken!=input.Guid)
-//            {
-//                return RedirectToAction("Login");
-//            }
-            _authenticationContext.ThisUserHasBeenAuthenticated(user,false);
+            var sf = ObjectFactory.GetInstance<ISessionFactory>();
+            var session = sf.OpenSession();
+            var unitOfWork = new UnitOfWork(session);
+            var repository = new Repository(unitOfWork, null);
+            var user = repository.Find<User>(input.EntityId);
+            if(user.UserLoginInfo.ByPassToken!=input.Guid)
+            {
+                return RedirectToAction("Login");
+            }
+            var impersonator = repository.Find<User>(input.ImpersonatorId);
+            _authenticationContext.ThisUserHasBeenAuthenticated(user, false, impersonator);
             user.UserLoginInfo.ByPassToken = Guid.Empty;
-            var crudManager = _saveEntityService.ProcessSave(user);
-            crudManager.Finish();
+            user.ChangedDate = DateTime.Now;
+            user.ChangedBy = impersonator;
+            
+            repository.Save(user);
+            repository.Commit();
             var redirectUrl = user.UserRoles.Any(x => x.Name == "Facilities")
                             ? "/KnowYourTurf/Home#/eventcalendar/0/0/" + user.Client.EntityId
                             : "/KnowYourTurf/Home#/employeedashboard/" + user.EntityId;
@@ -117,10 +106,7 @@ namespace KnowYourTurf.Web.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }
-        
     }
-
-    
 
     public class LoginViewModel : ViewModel
     {
@@ -131,16 +117,8 @@ namespace KnowYourTurf.Web.Controllers
         public bool RememberMe { get; set; }
         public string ForgotPasswordUrl { get; set; }
         public string _saveUrl { get; set; }
-
+        public Guid Guid { get; set; }
+        public int ImpersonatorId { get; set; }
     }
 
-    public class RegisterViewModel : ViewModel
-    {
-        [ValidateNonEmpty]
-        public string FirstName { get; set; }
-        [ValidateNonEmpty]
-        public string LastName { get; set; }
-        [ValidateNonEmpty, ValidateEmail]
-        public string Email { get; set; }
-    }
 }
