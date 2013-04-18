@@ -50,8 +50,7 @@ namespace KnowYourTurf.Core.Html.Menu
 
         public virtual IKYTMenuBuilder SiteGroupForIteration()
         {
-            var userId = _sessionContext.GetUserId();
-            var user = _repository.Find<User>(userId);
+            var user = (User)_sessionContext.GetCurrentUser();
             _sites = user.Client.Sites.ToList();
             count = _sites.Count;
             return this;
