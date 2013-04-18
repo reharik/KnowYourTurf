@@ -90,7 +90,16 @@ KYT.Views.View = Backbone.View.extend({
         });
       }
     },
-
+    functionIsPaused:function(funcName){
+        return this[funcName];
+    },
+    pauseFunction:function(funcName){
+        var pauseFunction=this;
+        pauseFunction[funcName] = true;
+        setTimeout(function(){
+            pauseFunction[funcName]=false;
+        },1000);
+    },
     viewLoaded:function(){
     }
   });

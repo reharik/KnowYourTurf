@@ -77,6 +77,12 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         this.editEvent(this.model.CalendarDefinition.AddUpdateUrl,data);
     },
     eventClick:function(calEvent, jsEvent, view) {
+        if(this.functionIsPaused("eventClickDCPrevention")){
+            console.log("paused");
+            return;
+        }
+        this.pauseFunction("eventClickDCPrevention");
+        console.log("not paused");
         var data = {"EntityId": calEvent.EntityId, popup:true};
         var builder =  KYT.Views.popupButtonBuilder.builder("displayModule");
         builder.addButton("Delete", $.proxy(this.deleteItem,this));
