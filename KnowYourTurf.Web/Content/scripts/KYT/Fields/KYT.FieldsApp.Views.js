@@ -518,7 +518,6 @@ KYT.Views.TaskDisplayView = KYT.Views.View.extend({
     }
 });
 
-
 KYT.Views.PurchaseOrderListView = KYT.Views.View.extend({
     _setupBindings:function(){
         KYT.vent.bind(this.options.gridId+":Redirect",this.commitPO,this);
@@ -585,8 +584,8 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         this._unbindBindings();
     },
     showVendorProducts:function(){
-        $("#productGridArea").show();
-        this.productsGridView = new KYT.Views.GridView({
+        $("#products").show();
+        this.productsGridView = new KYT.Views.DahsboardGridView({
             el:"#productGridArea",
             url:this.model._vendorProductsUrl() + "/" + this.model.VendorEntityId(),
             grouping:true,
@@ -603,7 +602,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         this.storeChild(this.productsGridView);
     },
     showPOLI:function(){
-        $("#poliGridArea").show();
+        $("#selectedItems").show();
         this.POLIGridView = new KYT.Views.POLIGridView({
             el:"#poliGridArea",
             gridOptions:{
@@ -619,12 +618,14 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
             $("#viewPOID",this.$el).hide();
             $("#viewFieldVendor",this.$el).hide();
             $("#editFieldVendor",this.$el).show();
-            $("#poliGridArea").hide();
-            $("#productGridArea").hide();
+            $("#products").hide();
+            $("#selectedItems").hide();
+            $(".footer", this.$el).hide();
         }else{
             $("#viewPOID",this.$el).show();
             $("#viewFieldVendor",this.$el).show();
             $("#editFieldVendor",this.$el).hide();
+            $(".footer", this.$el).show();
             this.showVendorProducts();
             this.showPOLI();
         }
@@ -687,12 +688,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     }
 });
 
-KYT.Views.POLIGridView = KYT.Views.View.extend({
-     initialize: function(){
-        KYT.mixin(this, "ajaxGridMixin");
-        KYT.mixin(this, "setupGridMixin");
-        KYT.mixin(this, "setupGridSearchMixin");
-    },
+KYT.Views.POLIGridView = KYT.Views.DahsboardGridView.extend({
     reloadGrid: function () {
         $("#" + this.options.gridId).trigger("reloadGrid");
     },
