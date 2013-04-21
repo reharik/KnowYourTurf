@@ -49,9 +49,10 @@ namespace KnowYourTurf.WeatherTask
 
         private static string GetConnectionStringStatic(string key)
         {
-            // should work for production. please test
-            var xdoc = XDocument.Load(@"..\..\appSettings.config");
-//            var xdoc = XDocument.Load(@"..\..\..\appSettings.config");
+            // for production.
+//            var xdoc = XDocument.Load(@"..\..\appSettings.config");
+            // for dev.
+            var xdoc = XDocument.Load(@"..\..\..\appSettings.config");
             var connStrings = xdoc.Descendants("add").Where(x => x.Attribute("key").Value.Equals(key));
             return connStrings.FirstOrDefault().Attribute("value").Value;
         }
@@ -112,7 +113,7 @@ namespace KnowYourTurf.WeatherTask
         private static void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Client client)
         {
             var date = DateTime.Now.Date;
-            for (int i = 1; i <= 7; i++)
+            for (int i = 1; i <= 60; i++)
             {
                 date = date.AddDays(-1);
                 var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" +

@@ -97,8 +97,9 @@ namespace KnowYourTurf.Web.Controllers
             model._EmployeeNames = task.Employees.Select(x => x.FullName);
             model._EquipmentNames = task.Equipment.Select(x => x.Name);
             model._AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null));
-            model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
-            model._IsChemical = task.InventoryProduct != null && task.InventoryProduct.Product is Chemical;
+            model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();    
+            // why doesn't this work?
+            model._IsChemical = task.InventoryProduct != null && task.InventoryProduct.Product.InstantiatingType == "Chemical";
             return new CustomJsonResult(model);
         }
 
