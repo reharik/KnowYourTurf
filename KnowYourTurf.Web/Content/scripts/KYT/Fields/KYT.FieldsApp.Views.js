@@ -96,7 +96,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             route: this.model.CalendarDefinition.DisplayRoute,
             title: this.model.CalendarDefinition.PopupTitle,
             templateUrl: this.model.CalendarDefinition.DisplayUrl+"_Template?Popup=true",
-            view: this.options.subViewName?"Display" + this.options.subViewName:"",
+            view: this.options.subViewName?this.options.subViewName + "DisplayView" :"",
             AddUpdateUrl: this.model.CalendarDefinition.AddUpdateUrl,
             data:data,
             buttons: builder.getButtons()
@@ -104,8 +104,6 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         this.ajaxPopupDisplay = new KYT.Views.AjaxPopupDisplayModule(formOptions);
         this.ajaxPopupDisplay.render();
         this.storeChild(this.ajaxPopupDisplay);
-        $(this.el).append(this.ajaxPopupDisplay.el);
-
     },
     editEvent:function(url, data){
         data.Popup = true;
@@ -116,7 +114,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             title: this.model.CalendarDefinition.PopupTitle,
             templateUrl: url+"_Template?Popup=true",
             data:data,
-            view:this.options.subViewName,
+            view:this.options.subViewName+"FormView",
             buttons: KYT.Views.popupButtonBuilder.builder("editModule").standardEditButons()
         };
         this.ajaxPopupFormModule = new KYT.Views.AjaxPopupFormModule(formOptions);
@@ -510,14 +508,23 @@ KYT.Views.TaskDisplayView = KYT.Views.View.extend({
         KYT.mixin(this, "modelAndElementsMixin");
     },
     viewLoaded:function(){
+        if(this.model.Popup()){
+            KYT.vent.bind("popup:"+this.options.id+":loaded",this.toggleChemicals,this);
+        }else{
+            this.toggleChemicals();
+        }
+    },
+    toggleChemicals:function(){
         if(this.model._IsChemical()){
             $("#chemicalReport",this.$el).show("slow");
         }else{
             $("#chemicalReport",this.$el).hide("slow");
         }
+    },
+    onClose:function(){
+        KYT.vent.unbind("popup:"+this.options.id+":loaded",this.toggleChemicals,this);
     }
 });
-
 
 KYT.Views.PurchaseOrderListView = KYT.Views.View.extend({
     _setupBindings:function(){
@@ -585,8 +592,8 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         this._unbindBindings();
     },
     showVendorProducts:function(){
-        $("#productGridArea").show();
-        this.productsGridView = new KYT.Views.GridView({
+        $("#products").show();
+        this.productsGridView = new KYT.Views.DahsboardGridView({
             el:"#productGridArea",
             url:this.model._vendorProductsUrl() + "/" + this.model.VendorEntityId(),
             grouping:true,
@@ -603,7 +610,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         this.storeChild(this.productsGridView);
     },
     showPOLI:function(){
-        $("#poliGridArea").show();
+        $("#selectedItems").show();
         this.POLIGridView = new KYT.Views.POLIGridView({
             el:"#poliGridArea",
             gridOptions:{
@@ -619,12 +626,14 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
             $("#viewPOID",this.$el).hide();
             $("#viewFieldVendor",this.$el).hide();
             $("#editFieldVendor",this.$el).show();
-            $("#poliGridArea").hide();
-            $("#productGridArea").hide();
+            $("#products").hide();
+            $("#selectedItems").hide();
+            $(".footer", this.$el).hide();
         }else{
             $("#viewPOID",this.$el).show();
             $("#viewFieldVendor",this.$el).show();
             $("#editFieldVendor",this.$el).hide();
+            $(".footer", this.$el).show();
             this.showVendorProducts();
             this.showPOLI();
         }
@@ -687,12 +696,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     }
 });
 
-KYT.Views.POLIGridView = KYT.Views.View.extend({
-     initialize: function(){
-        KYT.mixin(this, "ajaxGridMixin");
-        KYT.mixin(this, "setupGridMixin");
-        KYT.mixin(this, "setupGridSearchMixin");
-    },
+KYT.Views.POLIGridView = KYT.Views.DahsboardGridView.extend({
     reloadGrid: function () {
         $("#" + this.options.gridId).trigger("reloadGrid");
     },

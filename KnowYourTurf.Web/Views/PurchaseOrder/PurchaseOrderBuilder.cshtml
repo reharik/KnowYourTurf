@@ -6,31 +6,34 @@
 @{ Layout = "~/Views/Shared/_EmptyLayout.cshtml"; }
 
         <div class="row">
-        @Html.ViewFor(x => x.EntityId).LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToHtmlTag()
+        @Html.ViewFor(x => x.EntityId).Size("5").LabelDisplay(WebLocalizationKeys.PO_NUMBER).RootId("viewPOID").ToHtmlTag()
         </div>
         <div class="row">
-        @Html.ViewFor(x => x.VendorClient).RootId("viewFieldVendor").ToHtmlTag()
+        @Html.ViewFor(x => x.VendorClient).Size("5").RootId("viewFieldVendor").ToHtmlTag()
         </div>
         <div class="row">
-        @Html.SubmissionFor(x => x.VendorEntityId).InputId("FieldVendor").RootId("editFieldVendor").ToHtmlTag()
+        @Html.SubmissionFor(x => x.VendorEntityId).Size("5").InputId("FieldVendor").RootId("editFieldVendor").ToHtmlTag()
         </div>
 
 <div class="row blank"/>
+    <div id="products">
         <div class="row">
             <div class="span10 gridHeader">@WebLocalizationKeys.PRODUCTS</div>
         </div>
         <div class="row">
             <div id="productGridArea" class="span20"></div>
         </div>
+    </div>
 
 <div class="row blank"/>
+    <div id="selectedItems">
         <div class="row">
             <div class="span10 gridHeader">@WebLocalizationKeys.PURCHASE_ORDER_LINE_ITEMS</div>
         </div>
         <div class="row">
             <div id="poliGridArea" class="span20"></div>
         </div>
-        
+    </div>
 
     <div class="footer">
         @StandardButtonFor("commit", WebLocalizationKeys.COMMIT).AddClass("save").ToHtmlTag()
