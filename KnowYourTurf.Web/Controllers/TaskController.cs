@@ -100,7 +100,7 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();    
             model._IsChemical = task.InventoryProduct != null && task.InventoryProduct.Product.InstantiatingType == "Chemical";
             return new CustomJsonResult(model);
-        }
+        } 
 
         public ActionResult Delete(ViewModel input)
         {
