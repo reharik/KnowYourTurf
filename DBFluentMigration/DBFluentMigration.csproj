@@ -83,6 +83,7 @@
     <Compile Include="Iteration_1\10120_Alter_TaskReport_Sproc.cs" />
     <Compile Include="Iteration_1\10130_Alter_EquipmentTaskReport_Sproc.cs" />
     <Compile Include="Iteration_1\10140_Alter_Reports_for_timeless_dates_Sproc.cs" />
+    <Compile Include="Iteration_2\20130_Create_ProductToDocument_Table.cs" />
     <Compile Include="Iteration_2\20030_Alter_TaskReport_Sproc.cs" />
     <Compile Include="Iteration_2\20010_Add_LicenseNunber_to_User.cs" />
     <Compile Include="Iteration_2\20020_Add_fields_to_Task.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Iteration_2\20100_Alter_TaskReport_Sproc.cs" />
     <Compile Include="Iteration_2\20110_Alter_EquipmentTaskReport_Sproc.cs" />
     <Compile Include="Iteration_2\20120_Alter_TDAReport_Sproc.cs" />
+    <Compile Include="Iteration_2\20140_Create_ProductToPhoto_Table.cs" />
     <Compile Include="IUpdatePermissions.cs" />
     <Compile Include="IUpdateOperations.cs" />
     <Compile Include="Iteration_1\UpdateOperations_200.cs" />

@@ -1,7 +1,8 @@
+using KnowYourTurf.Core.Enums;
+using KnowYourTurf.Web.Security;
+
 namespace DBFluentMigration.Iteration_1
 {
-    using KnowYourTurf.Core.Enums;
-    using KnowYourTurf.Web.Security;
 
     public class UpdatePermissions_2001:IUpdatePermissions
     {
@@ -21,7 +22,7 @@ namespace DBFluentMigration.Iteration_1
         {
             this._permissions.CreateControllerPermission(UserType.Administrator, "TDAController");
             this._permissions.CreateMenuPermission(UserType.Administrator, "TDA");
-
+            _permissions.CreatePermission(UserType.Administrator, "/EditPastTask");
         }
     }
 }

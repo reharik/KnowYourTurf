@@ -273,6 +273,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken SELECT_AT_LEAST_ONE_USER_ROLE = new WebLocalizationKeys("SELECT_AT_LEAST_ONE_USER_ROLE", "You must select at least one User Role.");
 
         public static readonly StringToken TASK_TYPE_FILTER = new WebLocalizationKeys("TASK_TYPE_FILTER", "Task Type Filter");
+        public static readonly StringToken EQUIPMENT_WEBSITE = new WebLocalizationKeys("EQUIPMENT_WEBSITE", "Equipment Website");
 
     }
 }

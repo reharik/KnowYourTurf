@@ -7,6 +7,7 @@ using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.DomainTools;
 using CC.Core.Html;
 using CC.Core.Services;
+using CC.Security.Interfaces;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Enums;
 using KnowYourTurf.Core.Services;
@@ -24,18 +25,21 @@ namespace KnowYourTurf.Web.Controllers
         private readonly ISelectListItemService _selectListItemService;
         private readonly IInventoryService _inventoryService;
         private readonly IUpdateCollectionService _updateCollectionService;
+        private readonly IAuthorizationService _authorizationService;
 
         public TaskController(IRepository repository,
             ISaveEntityService saveEntityService,
             ISelectListItemService selectListItemService,
             IInventoryService inventoryService,
-            IUpdateCollectionService updateCollectionService)
+            IUpdateCollectionService updateCollectionService,
+            IAuthorizationService authorizationService)
         {
             _repository = repository;
             _saveEntityService = saveEntityService; 
             _selectListItemService = selectListItemService;
             _inventoryService = inventoryService;
             _updateCollectionService = updateCollectionService;
+            _authorizationService = authorizationService;
         }
         public ActionResult AddUpdate_Template(AddUpdateTaskViewModel input)
         {
@@ -67,7 +71,6 @@ namespace KnowYourTurf.Web.Controllers
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();
             model.Popup = input.Popup;
             model.RootId = input.RootId;
-
             model._saveUrl = UrlContext.GetUrlForAction<TaskController>(x => x.Save(null));
 
             if (input.Copy)
@@ -99,6 +102,8 @@ namespace KnowYourTurf.Web.Controllers
             model._AddUpdateUrl = UrlContext.GetUrlForAction<TaskController>(x => x.AddUpdate(null));
             model._Title = WebLocalizationKeys.TASK_INFORMATION.ToString();    
             model._IsChemical = task.InventoryProduct != null && task.InventoryProduct.Product.InstantiatingType == "Chemical";
+            model.AllowEdit = task.ScheduledDate.Value.SetTime(task.StartTime.Value.ToShortTimeString()) > DateTime.Now
+                              || _authorizationService.IsAllowed(input.User, "/EditPastTask");
             return new CustomJsonResult(model);
         }
 
