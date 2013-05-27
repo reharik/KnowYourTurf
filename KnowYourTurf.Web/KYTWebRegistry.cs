@@ -46,18 +46,16 @@ namespace KnowYourTurf.Web
                 x.AssemblyContainingType(typeof(MergedEmailFactory));
                 x.AssemblyContainingType<Entity>();
                 x.AssemblyContainingType<IUser>();
-                x.AssemblyContainingType<HtmlConventionRegistry>();  
+                x.AssemblyContainingType<TagProfileExpression>();  
                 x.AddAllTypesOf<ICalculatorHandler>().NameBy(t => t.Name);
                 x.AddAllTypesOf<RulesEngineBase>().NameBy(t => t.Name);
                 x.AddAllTypesOf<IEmailTemplateHandler>().NameBy(t => t.Name);
                 x.WithDefaultConventions();
             });
-
-            For<HtmlConventionRegistry>().Add<KYTKOHtmlConventionRegistry>();
+            For<TagProfileExpression>().Singleton().Use<KYTKOHtmlConventionRegistry>();
             For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
             For<IElementNamingConvention>().Use<CCElementNamingConvention>();
             For(typeof(ITagGenerator<>)).Use(typeof(TagGenerator<>));
-            For<TagProfileLibrary>().Singleton();
             For<INHSetupConfig>().Use<KYTNHSetupConfig>();
 
             For<ISessionFactoryConfiguration>().Singleton()

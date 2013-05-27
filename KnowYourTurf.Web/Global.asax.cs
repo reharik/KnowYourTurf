@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using CC.Core.DomainTools;
+using CC.UI.Helpers.Tags;
 using KnowYourTurf.Core.Config;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Html;
@@ -76,6 +77,9 @@ namespace KnowYourTurf.Web
             RegisterRoutes(RouteTable.Routes);
             //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
             Bootstrapper.Bootstrap();
+            var profileContainer = ObjectFactory.Container.GetInstance<ITagProfileContainer>();
+            var profileExpression = ObjectFactory.Container.GetInstance<TagProfileExpression>();
+            profileContainer.Profile = profileExpression.Profile;
         }
 
         protected void Application_EndRequest()
