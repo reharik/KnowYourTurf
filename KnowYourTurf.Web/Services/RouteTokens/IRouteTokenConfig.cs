@@ -71,11 +71,11 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForList<ListTypeListController>(x => x.Display(null)).ViewName("ListTypeListView").End();
 
             _builder.TokenForList<MaterialListController>(x => x.ItemList(null)).End();
-            _builder.TokenForForm<MaterialController>(x => x.AddUpdate(null)).End();
+            _builder.TokenForForm<MaterialController>(x => x.AddUpdate(null)).ViewName("ProductDashboardView").End();
             _builder.TokenForList<FertilizerListController>(x => x.ItemList(null)).End();
-            _builder.TokenForForm<FertilizerController>(x => x.AddUpdate(null)).End();
+            _builder.TokenForForm<FertilizerController>(x => x.AddUpdate(null)).ViewName("ProductDashboardView").End();
             _builder.TokenForList<ChemicalListController>(x => x.ItemList(null)).End();
-            _builder.TokenForForm<ChemicalController>(x => x.AddUpdate(null)).End();
+            _builder.TokenForForm<ChemicalController>(x => x.AddUpdate(null)).ViewName("ProductDashboardView").End();
 
             _builder.TokenForList<DocumentListController>(x => x.ItemList(null)).GridId("documentlistGrid").End();
             _builder.TokenForForm<DocumentController>(x => x.AddUpdate(null)).End();

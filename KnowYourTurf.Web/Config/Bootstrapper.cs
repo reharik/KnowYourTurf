@@ -57,9 +57,9 @@ namespace KnowYourTurf.Web.Config
 
             XmlConfigurator.ConfigureAndWatch(new FileInfo(locateFileAsAbsolutePath("log4net.config")));
 
-            var library = ObjectFactory.Container.GetInstance<TagProfileLibrary>();
-            var conventions = ObjectFactory.Container.GetAllInstances<HtmlConventionRegistry>();
-            conventions.ForEachItem(library.ImportRegistry);
+//            var library = ObjectFactory.Container.GetInstance<TagProfileLibrary>();
+//            var conventions = ObjectFactory.Container.GetAllInstances<HtmlConventionRegistry>();
+//            conventions.ForEachItem(library.ImportRegistry);
 
             //SecurityBootstrapper.Bootstrap();
         }

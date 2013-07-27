@@ -5,7 +5,7 @@ using HtmlTags;
 
 namespace KnowYourTurf.Core.Html.HtmlConventionRegistries
 {
-    public class KYTKOHtmlConventionRegistry : CCHtmlConventions2
+    public class KYTKOHtmlConventionRegistry : CCHtmlConventionsKO
     {
         public KYTKOHtmlConventionRegistry()
         {

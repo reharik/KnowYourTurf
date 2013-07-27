@@ -18,3 +18,5 @@ TestResult.xml
 appSettings.config
 packages/*
 !packages/repositories.config
+_UpgradeReport_Files*
+UpgradeReport*
