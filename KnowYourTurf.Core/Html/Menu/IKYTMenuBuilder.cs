@@ -12,6 +12,7 @@ using CC.Security;
 using CC.Security.Interfaces;
 using KnowYourTurf.Core.Domain;
 using KnowYourTurf.Core.Services;
+using NHibernate.Linq;
 
 namespace KnowYourTurf.Core.Html.Menu
 {
@@ -50,9 +51,14 @@ namespace KnowYourTurf.Core.Html.Menu
 
         public virtual IKYTMenuBuilder SiteGroupForIteration()
         {
-            var user = (User)_sessionContext.GetCurrentUser();
-            _sites = user.Client.Sites.ToList();
-            count = _sites.Count;
+            var clientId = _sessionContext.GetClientId();
+            var client = _repository.Query<Client>(x => x.EntityId == clientId).Fetch(x => x.Sites).FirstOrDefault();
+            _sites = new List<Site>();
+            if (client != null)
+            {
+                _sites = client.Sites.ToList();
+                count = _sites.Count;
+            }
             return this;
         }
 

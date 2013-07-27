@@ -20,7 +20,9 @@ namespace DBFluentMigration.Iteration_1
 
         private void GrantAdminPermissions()
         {
-            this._permissions.CreateControllerPermission(UserType.Administrator, "TDAController");
+            this._permissions.CreateControllerPermission(UserType.Administrator, "SiteController");
+            this._permissions.CreateControllerPermission(UserType.Administrator, "SiteListController");
+            this._permissions.CreateMenuPermission(UserType.Administrator, "Sites");
             this._permissions.CreateMenuPermission(UserType.Administrator, "TDA");
             _permissions.CreatePermission(UserType.Administrator, "/EditPastTask");
         }

@@ -21,6 +21,8 @@ namespace DBFluentMigration.Iteration_2
         private void CreateControllerOptions()
         {
             this._operations.CreateOperationForControllerType("TDAController");
+            this._operations.CreateOperationForControllerType("SiteController");
+            this._operations.CreateOperationForControllerType("SiteListController");
         }
         public void CreateOperations()
         {
@@ -29,6 +31,7 @@ namespace DBFluentMigration.Iteration_2
         public void CreateMenuItemOptions()
         {
             this._operations.CreateOperationForMenuItem("TDA");
+            this._operations.CreateOperationForMenuItem("Sites");
         }
     }
 }

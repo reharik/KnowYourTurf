@@ -200,7 +200,7 @@
     <Compile Include="Domain\LocalizedText.cs" />
     <Compile Include="Domain\Material.cs" />
     <Compile Include="Domain\Persistence\BaseProductMap.cs" />
-    <Compile Include="Domain\Persistence\CompanyMap.cs" />
+    <Compile Include="Domain\Persistence\ClientMap.cs" />
     <Compile Include="Domain\Persistence\CalculatorMap.cs" />
     <Compile Include="Domain\Persistence\EmailJobMap.cs" />
     <Compile Include="Domain\Persistence\EventMap.cs" />

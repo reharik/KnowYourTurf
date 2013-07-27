@@ -97,6 +97,8 @@
     <Compile Include="Iteration_2\20110_Alter_EquipmentTaskReport_Sproc.cs" />
     <Compile Include="Iteration_2\20120_Alter_TDAReport_Sproc.cs" />
     <Compile Include="Iteration_2\20140_Create_ProductToPhoto_Table.cs" />
+    <Compile Include="Iteration_2\20150_Add_Notes_to_Client.cs" />
+    <Compile Include="Iteration_2\20160_Add_UserRoles_to_Client.cs" />
     <Compile Include="IUpdatePermissions.cs" />
     <Compile Include="IUpdateOperations.cs" />
     <Compile Include="Iteration_1\UpdateOperations_200.cs" />
