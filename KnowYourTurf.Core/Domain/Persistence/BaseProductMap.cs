@@ -10,6 +10,8 @@ namespace KnowYourTurf.Core.Domain.Persistence
             Map(x => x.Description);
             Map(x => x.InstantiatingType);
             Map(x => x.Notes);
+            HasManyToMany(x => x.Documents).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
+            HasManyToMany(x => x.Photos).Access.CamelCaseField(Prefix.Underscore).LazyLoad().Cascade.AllDeleteOrphan();
         }
 
         public class FertilizerMap : SubclassMap<Fertilizer>

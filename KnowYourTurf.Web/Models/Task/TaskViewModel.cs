@@ -42,6 +42,7 @@ namespace KnowYourTurf.Web.Models
         public string RatePerUnit { get; set; }
         public string SprayPermitNumber { get; set; }
         public string ApplicationRequestedBy { get; set; }
+        public bool AllowEdit { get; set; }
     }
 
     public class DisplayTaskViewModel:ViewModel
@@ -54,8 +55,18 @@ namespace KnowYourTurf.Web.Models
         public string EndTime { get; set; }
         public string Notes { get; set; }
         public string _AddUpdateUrl { get; set; }
+        public string TargetPest { get; set; }
+        public string RatePerUnit { get; set; }
+        public string SprayPermitNumber { get; set; }
+        public string ApplicationRequestedBy { get; set; }
+        public double? QuantityNeeded { get; set; }
+        public double? QuantityUsed { get; set; }
+        public bool Complete { get; set; }
+        public string ActualTimeSpent { get; set; }
+        public bool _IsChemical { get; set; }
         public IEnumerable<string> _EmployeeNames { get; set; }
         public IEnumerable<string> _EquipmentNames { get; set; }
+        public bool AllowEdit { get; set; }
     }
 
     public class AddUpdateTaskViewModel:ViewModel

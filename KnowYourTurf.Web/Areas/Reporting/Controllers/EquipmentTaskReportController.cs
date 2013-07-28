@@ -36,7 +36,7 @@ namespace KnowYourTurf.Web.Areas.Reporting.Controllers
         public CustomJsonResult Display(ViewModel input)
         {
             var equipmentEntityIdList = _selectListItemService.CreateList<Equipment>(x => x.Name, x => x.EntityId, true);
-            var taskTypeEntityIdList = _selectListItemService.CreateList<TaskType>(x => x.Name, x => x.EntityId, true);
+            var taskTypeEntityIdList = _selectListItemService.CreateList<EquipmentTaskType>(x => x.Name, x => x.EntityId, true);
             var employees = _repository.Query<User>(x => x.UserRoles.Any(y => y.Name == "Employee"));
             var employeeList = _selectListItemService.CreateList(employees, x => x.FullNameLNF, x => x.EntityId, true);
             var model = new EquipmentTaskReportViewModel

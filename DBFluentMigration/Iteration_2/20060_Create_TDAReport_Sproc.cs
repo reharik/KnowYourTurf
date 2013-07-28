@@ -2,7 +2,7 @@
 
 namespace DBFluentMigration.Iteration_1
 {
-    [Migration(20060)]
+    [Migration(20070)]
     public class Create_TDAReport_Sproc : Migration
     {
         public override void Up()

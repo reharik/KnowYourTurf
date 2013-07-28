@@ -15,10 +15,34 @@
                     @Html.ViewFor(x => x.StartTime).Size("7").LabelDisplay(WebLocalizationKeys.SCHEDULED_START_TIME).ToHtmlTag()
                     @Html.ViewFor(x => x.EndTime).Size("7").LabelDisplay(WebLocalizationKeys.SCHEDULED_END_TIME).ToHtmlTag()
         </div>
+    <div class="row">
+        @Html.ViewFor(x => x.ActualTimeSpent).Size("7").ToHtmlTag()
+        @Html.ViewFor(x => x.Complete).Size("7").ToHtmlTag()
+    </div>
         <div class="row">
-                      @Html.ViewFor(x => x.FieldName).Size("7").ToHtmlTag()
-                    @Html.ViewFor(x => x.InventoryProductProductName).Size("7").LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
+            <div class="span11">
+                <div id="chemicalReport" class="chemicalReport">
+                    <h3>@WebLocalizationKeys.CHEMICAL_REPORT</h3>
+                    <div class="row">
+                        @Html.ViewFor(x => x.ApplicationRequestedBy).Size("7").ToHtmlTag()
+                        @Html.ViewFor(x => x.TargetPest).Size("7").ToHtmlTag()
+                    </div>
+                    <div class="row">
+                        @Html.ViewFor(x => x.RatePerUnit).Size("7").ToHtmlTag()
+                        @Html.ViewFor(x => x.SprayPermitNumber).Size("7").ToHtmlTag()
+                    </div>
+                </div>
+            </div>
         </div>
+
+    <div class="row">
+        @Html.ViewFor(x => x.QuantityNeeded).Size("7").ToHtmlTag()
+        @Html.ViewFor(x => x.QuantityUsed).Size("7").ToHtmlTag()
+    </div>
+    <div class="row">
+        @Html.ViewFor(x => x.FieldName).Size("7").ToHtmlTag()
+        @Html.ViewFor(x => x.InventoryProductProductName).Size("7").LabelDisplay(WebLocalizationKeys.PRODUCT).ToHtmlTag()
+    </div>
         <div class="row">
                     @Html.ViewFor(x => x._EquipmentNames).Size("7").LabelDisplay(WebLocalizationKeys.EQUIPMENT).ToHtmlTag()
                     @Html.ViewFor(x => x._EmployeeNames).Size("7").LabelDisplay(WebLocalizationKeys.EMPLOYEES).ToHtmlTag()

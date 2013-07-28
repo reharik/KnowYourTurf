@@ -66,8 +66,11 @@ namespace KnowYourTurf.Web.Controllers
             input.EntityIds.ForEachItem(x =>
             {
                 var document = ((IEnumerable<Document>)entity.Documents).FirstOrDefault(y => y.EntityId == x);
-                documentUrls.Add(document.FileUrl);
-                entity.RemoveDocument(document);
+                if (document!=null)
+                {
+                    documentUrls.Add(document.FileUrl);
+                    entity.RemoveDocument(document);
+                }
             });
             var notification = _saveEntityService.ProcessSave(entity).Finish();
             if (notification.Success)

@@ -45,6 +45,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken EQUIPMENT_TASK_LISTS = new WebLocalizationKeys("EQUIPMENT_TASK_LISTS", "Equipment Tasks Lists");
         public static readonly StringToken EQUIPMENT_TASKS = new WebLocalizationKeys("EQUIPMENT_TASKS", "Equipment Tasks");
         public static readonly StringToken COMPLETED_EQUIPMENT_TASKS = new WebLocalizationKeys("COMPLETED_EQUIPMENT_TASKS", "Completed Equipment Tasks");
+        public static readonly StringToken CURRENT_EQUIPMENT_TASKS = new WebLocalizationKeys("CURRENT_EQUIPMENT_TASKS", "Current Equipment Tasks");
         public static readonly StringToken EQUIPMENT_TASK_CALENDAR = new WebLocalizationKeys("EQUIPMENT_TASK_CALENDAR", "Equipment Task Calendar");
         public static readonly StringToken TASKS = new WebLocalizationKeys("TASKS", "Tasks");
         public static readonly StringToken TASK_LIST = new WebLocalizationKeys("TASK_LIST", "Task List");
@@ -247,6 +248,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken FACILITIES_PHOTO = new WebLocalizationKeys("FACILITIES_PHOTO", "Facilities Photo");
 
         public static readonly StringToken PASSWORD = new WebLocalizationKeys("PASSWORD", "Password");
+        public static readonly StringToken PASSWORD_CONFIRMATION_MUST_MATCH = new WebLocalizationKeys("PASSWORD_CONFIRMATION_MUST_MATCH", "Password confirmation must match password");
         public static readonly StringToken STATUS = new WebLocalizationKeys("STATUS", "Status");
         public static readonly StringToken CALCULATOR_NAME = new WebLocalizationKeys("CALCULATOR_NAME", "Calculator Name");
 
@@ -269,7 +271,10 @@ namespace KnowYourTurf.Web
         public static readonly StringToken EQUIPMENT_TASK_REPORT = new WebLocalizationKeys("EQUIPMENT_TASK_REPORT", "Equipment Task Report");
         public static readonly StringToken TDA = new WebLocalizationKeys("TDA", "TDA Report");
         public static readonly StringToken CHEMICAL_REPORT = new WebLocalizationKeys("CHEMICAL_REPORT", "Chemical Report Variables");
+        public static readonly StringToken SELECT_AT_LEAST_ONE_USER_ROLE = new WebLocalizationKeys("SELECT_AT_LEAST_ONE_USER_ROLE", "You must select at least one User Role.");
 
+        public static readonly StringToken TASK_TYPE_FILTER = new WebLocalizationKeys("TASK_TYPE_FILTER", "Task Type Filter");
+        public static readonly StringToken EQUIPMENT_WEBSITE = new WebLocalizationKeys("EQUIPMENT_WEBSITE", "Equipment Website");
 
     }
 }

@@ -15,7 +15,7 @@ namespace KnowYourTurf.Web.Grids
         protected override Grid<User> BuildGrid()
         {
             GridBuilder.LinkColumnFor(x => x.FullName)
-                .ToPerformAction(ColumnAction.Redirect)
+                .ToPerformAction(ColumnAction.AddUpdateItem)
                 .ToolTip(WebLocalizationKeys.DISPLAY_ITEM);
             GridBuilder.DisplayFor(x => x.EmployeeId);
             GridBuilder.DisplayFor(x => x.PhoneMobile);
