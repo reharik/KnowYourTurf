@@ -7,7 +7,7 @@
     {
         public override void Up()
         {
-            Create.Column("Client_id").OnTable("UserRole").AsInt32().NotNullable().ForeignKey("FK_ClientToUserRole", "UserRole", "EntityId");
+            Create.Column("Client_id").OnTable("UserRole").AsInt32().NotNullable().ForeignKey("FK_ClientToUserRole", "UserRole", "EntityId").WithDefaultValue(1);
         }
 
         public override void Down()
