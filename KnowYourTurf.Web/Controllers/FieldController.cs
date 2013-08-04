@@ -68,7 +68,7 @@ namespace KnowYourTurf.Web.Controllers
             field.Abbreviation= input.Abbreviation;
             field.Size = input.Size;
             field.FieldColor= input.FieldColor;
-            
+            field.GrassType = input.GrassTypeEntityId > 0 ? _repository.Find<GrassType>(input.GrassTypeEntityId) : null;
             var crudManager = _saveEntityService.ProcessSave(category);
             var notification = crudManager.Finish();
             return new CustomJsonResult(notification,"text/plain");

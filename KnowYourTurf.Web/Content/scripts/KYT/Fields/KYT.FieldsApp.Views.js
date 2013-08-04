@@ -833,11 +833,6 @@ KYT.Views.PurchaseOrderCommitFormView = KYT.Views.View.extend({
             KYT.vent.trigger("PO:"+this.id+":closed");
             KYT.vent.trigger("route","purchaseorderlist",true);
         }
-
-
-
-
-
     },
     // used by children to update parent grid
     callbackAction: function () {
@@ -1064,7 +1059,10 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
              options.deleteMultipleUrl = this.model._deleteMultipleEquipTypeUrl();
         },this);
         KYT.vent.bind("grid:partlist:pageLoaded",function(options){
-             options.deleteMultipleUrl = this.model._deleteMultiplePartsUrl();
+            options.deleteMultipleUrl = this.model._deleteMultiplePartsUrl();
+        },this);
+        KYT.vent.bind("grid:grasstypelist:pageLoaded",function(options){
+            options.deleteMultipleUrl = this.model._deleteMultipleGrassTypeUrl();
         },this);
         this.taskTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#taskTypeGridContainer",
@@ -1108,6 +1106,12 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
             gridId:"partlist",
             route:"part"
         });
+        this.grassTypesGridView = new KYT.Views.DahsboardGridView({
+            el:"#grassTypesGridContainer",
+            url:this.model._grassTypesGridUrl(),
+            gridId:"grasstypelist",
+            route:"grasstype"
+        });
 
 
         this.taskTypeGridView.render();
@@ -1117,6 +1121,7 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         this.equipmentTaskTypeGridView.render();
         this.equipmentTypeGridView.render();
         this.partGridView.render();
+        this.grassTypesGridView.render();
         this.storeChild(this.taskTypeGridView);
         this.storeChild(this.eventTypeGridView);
         this.storeChild(this.photoCategoryGridView);
@@ -1124,6 +1129,7 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         this.storeChild(this.equipmentTaskTypeGridView);
         this.storeChild(this.equipmentTypeGridView);
         this.storeChild(this.partGridView);
+        this.storeChild(this.grassTypesGridView);
     },
     callbackAction: function(){
         this.taskTypeGridView.callbackAction();
@@ -1133,6 +1139,7 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         this.equipmentTaskTypeGridView.callbackAction();
         this.equipmentTypeGridView.callbackAction();
         this.partGridView.callbackAction();
+        this.grassTypesGridView.callbackAction();
     }
 });
 

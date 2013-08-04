@@ -23,6 +23,7 @@ namespace KnowYourTurf.Web.Controllers
         private readonly IEntityListGrid<DocumentCategory> _documentCategoryListGrid;
         private readonly IEntityListGrid<EquipmentTaskType> _equipmentTaskTypeListGrid;
         private readonly IEntityListGrid<EquipmentType> _equipmentTypeListGrid;
+        private readonly IEntityListGrid<GrassType> _grassTypeListGrid;
         private readonly IEntityListGrid<Part> _partListGrid;
 
         public ListTypeListController(
@@ -32,6 +33,7 @@ namespace KnowYourTurf.Web.Controllers
             IEntityListGrid<DocumentCategory> documentCategoryListGrid,
             IEntityListGrid<EquipmentTaskType> equipmentTaskTypeListGrid,
             IEntityListGrid<EquipmentType> equipmentTypeListGrid,
+            IEntityListGrid<GrassType> grassTypeListGrid,
             IEntityListGrid<Part> partListGrid
             )
         {
@@ -41,6 +43,7 @@ namespace KnowYourTurf.Web.Controllers
             _documentCategoryListGrid = documentCategoryListGrid;
             _equipmentTaskTypeListGrid = equipmentTaskTypeListGrid;
             _equipmentTypeListGrid = equipmentTypeListGrid;
+            _grassTypeListGrid = grassTypeListGrid;
             _partListGrid = partListGrid;
         }
 
@@ -60,6 +63,7 @@ namespace KnowYourTurf.Web.Controllers
                                                   _equipmentTaskTypeGridUrl = UrlContext.GetUrlForAction<ListTypeListController>(x => x.EquipmentTaskTypeGrid(null)),
                                                   _equipmentTypeGridUrl = UrlContext.GetUrlForAction<ListTypeListController>(x => x.EquipmentTypeGrid(null)),
                                                   _partsGridUrl = UrlContext.GetUrlForAction<ListTypeListController>(x => x.PartGrid(null)),
+                                                  _grassTypesGridUrl = UrlContext.GetUrlForAction<ListTypeListController>(x => x.GrassTypeGrid(null)),
 
                                                   _deleteMultipleTaskTypesUrl = UrlContext.GetUrlForAction<TaskTypeController>(x => x.DeleteMultiple(null)),
                                                   _deleteMultipleEventTypesUrl = UrlContext.GetUrlForAction<EventTypeController>(x => x.DeleteMultiple(null)),
@@ -67,7 +71,8 @@ namespace KnowYourTurf.Web.Controllers
                                                   _deleteMultipleDocCatUrl = UrlContext.GetUrlForAction<DocumentCategoryController>(x => x.DeleteMultiple(null)),
                                                   _deleteMultipleEquipTaskTypeUrl = UrlContext.GetUrlForAction<EquipmentTaskTypeController>(x => x.DeleteMultiple(null)),
                                                   _deleteMultipleEquipTypeUrl = UrlContext.GetUrlForAction<EquipmentTypeController>(x => x.DeleteMultiple(null)),
-                                                  _deleteMultiplePartsUrl = UrlContext.GetUrlForAction<PartController>(x => x.DeleteMultiple(null)),
+                                                  _deleteMultiplePartsUrl = UrlContext.GetUrlForAction<GrassTypeController>(x => x.DeleteMultiple(null)),
+                                                  _deleteMultipleGrassTypesUrl = UrlContext.GetUrlForAction<PartController>(x => x.DeleteMultiple(null)),
                                               };
             return new CustomJsonResult(model);
         }
@@ -159,5 +164,19 @@ namespace KnowYourTurf.Web.Controllers
             model.headerButtons.Add("new");
             return new CustomJsonResult(model);
         }
+
+        public ActionResult GrassTypeGrid(ViewModel input)
+        {
+            var url = UrlContext.GetUrlForAction<GrassTypeController>(x => x.ListTypes(null));
+            ListViewModel model = new ListViewModel()
+            {
+                gridDef = _grassTypeListGrid.GetGridDefinition(url, input.User),
+                ParentId = input.ParentId
+            };
+            model.headerButtons.Add("delete");
+            model.headerButtons.Add("new");
+            return new CustomJsonResult(model);
+        }
+
     }
 }

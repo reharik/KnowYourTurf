@@ -104,6 +104,11 @@ namespace KnowYourTurf.Web
         public static readonly StringToken PARTS = new WebLocalizationKeys("PARTS", "Parts");
         public static readonly StringToken PART = new WebLocalizationKeys("PART", "Part");
 
+        public static readonly StringToken GRASSTYPE_INFORMATION = new WebLocalizationKeys("GRASSTYPE_INFORMATION", "Grass Type Information");
+        public static readonly StringToken NEW_GRASSTYPE = new WebLocalizationKeys("NEW_GRASSTYPE", "Add New Grass Type");
+        public static readonly StringToken GRASSTYPES = new WebLocalizationKeys("GRASSTYPES", "Grass Types");
+        public static readonly StringToken GRASSTYPE = new WebLocalizationKeys("GRASSTYPE", "Grass Type");
+
 
         public static readonly StringToken TASK_INFORMATION = new WebLocalizationKeys("TASK_INFORMATION", "Task Information");
         public static readonly StringToken NEW_TASK = new WebLocalizationKeys("NEW_TASK", "Add New Task");
@@ -236,6 +241,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken COULD_NOT_DELETE_EQUIPMENTTASKTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EQUIPMENTTASKTYPE", "Could not delete one or more item because it is being used in one or more Equipment Task");
         public static readonly StringToken COULD_NOT_DELETE_EQUIPMENTTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EQUIPMENTTYPE", "Could not delete one or more item because it is being used in one or more piece of Equipment");
         public static readonly StringToken COULD_NOT_DELETE_PART = new WebLocalizationKeys("COULD_NOT_DELETE_PART", "Could not delete one or more item because it is being used in one or more Equipment Task");
+        public static readonly StringToken COULD_NOT_DELETE_GRASSTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_GRASSTYPE", "Could not delete one or more item because it is being used on one or more Fields");
 
         public static readonly StringToken CURRENT = new WebLocalizationKeys("CURRENT", "Current");
         public static readonly StringToken COMPLETED = new WebLocalizationKeys("COMPLETED", "Completed");

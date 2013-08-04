@@ -508,4 +508,59 @@ namespace KnowYourTurf.Web.Controllers
         }
 
     }
+
+    public class GrassTypeController : ListTypeBaseController<GrassType>
+    {
+        private readonly IRepository _repository;
+        private readonly ISelectListItemService _selectListItemService;
+
+        public GrassTypeController(IDynamicExpressionQuery dynamicExpressionQuery,
+                                       IRepository repository,
+                                       ISelectListItemService selectListItemService,
+                                       ISaveEntityService saveEntityService,
+                                       IEntityListGrid<GrassType> listTypeListGrid)
+            : base(dynamicExpressionQuery, repository, saveEntityService,
+                listTypeListGrid)
+        {
+            _repository = repository;
+            _selectListItemService = selectListItemService;
+        }
+
+        public ActionResult AddUpdate_Template(ViewModel input)
+        {
+            return View("AddUpdate", new ListTypeViewModel());
+        }
+
+        public ActionResult AddUpdate(ViewModel input)
+        {
+            var listType = getListType(input);
+            var model = Mapper.Map<GrassType, ListTypeViewModel>(listType);
+            model._saveUrl = UrlContext.GetUrlForAction<GrassTypeController>(x => x.SaveListType(null));
+            model._Title = WebLocalizationKeys.GRASSTYPE_INFORMATION.ToString();
+            model._StatusList = _selectListItemService.CreateList<Status>();
+            return new CustomJsonResult(model);
+        }
+
+        public ActionResult DeleteMultiple(BulkActionViewModel input)
+        {
+            var notification = deleteMultiple(input, checkDependencies);
+            return new CustomJsonResult(notification);
+        }
+
+        protected virtual bool checkDependencies(GrassType item, Notification notification)
+        {
+            var dependantItems = _repository.Query<Field>(x => x.GrassType == item);
+            if (dependantItems.Any())
+            {
+                if (notification.Message.IsEmpty())
+                {
+                    notification.Success = false;
+                    notification.Message = WebLocalizationKeys.COULD_NOT_DELETE_GRASSTYPE.ToString();
+                }
+                return false;
+            }
+            return true;
+        }
+    }
+
 }
