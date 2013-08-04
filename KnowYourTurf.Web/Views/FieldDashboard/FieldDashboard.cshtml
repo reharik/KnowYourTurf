@@ -22,7 +22,7 @@
             @Html.SubmissionFor(x => x.FieldColor).HideLabel().Size("10").InputId("colorPickerInput").ToHtmlTag()
         </div>
         <div class="row">
-            @Html.SubmissionFor(x => x.GrassTypeEntityId).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.GrassTypeEntityId).LabelDisplay(WebLocalizationKeys.GRASSTYPE).Size("5").ToHtmlTag()
         </div>
         <div class="row">
             @Html.SubmissionFor(x => x.Description).Size("10").ToHtmlTag()

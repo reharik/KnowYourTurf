@@ -24,6 +24,7 @@ namespace KnowYourTurf.Web.Models
         public string FieldColor { get; set; }
         public string FileUrl { get; set; }
         public bool DeleteImage { get; set; }
+        [ValidateNonEmpty]
         public int GrassTypeEntityId { get; set; }
 
         public string _completedGridUrl { get; set; }
