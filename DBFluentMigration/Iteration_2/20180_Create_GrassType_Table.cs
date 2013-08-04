@@ -9,7 +9,7 @@
         {
             Create.Table("GrassType")
                   .WithColumn("EntityId").AsInt32().NotNullable().PrimaryKey().Identity()
-                  .WithColumn("ChangedDate").AsDateTime()
+                  .WithColumn("CreatedDate").AsDateTime()
                   .WithColumn("ChangedDate").AsDateTime()
                   .WithColumn("IsDeleted").AsBoolean()
                   .WithColumn("ClientId").AsInt32().ForeignKey("FK_GrassTypeToClient", "Client", "EntityId")
