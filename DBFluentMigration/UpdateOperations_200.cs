@@ -23,6 +23,7 @@ namespace DBFluentMigration.Iteration_2
             this._operations.CreateOperationForControllerType("TDAController");
             this._operations.CreateOperationForControllerType("SiteController");
             this._operations.CreateOperationForControllerType("SiteListController");
+            this._operations.CreateOperationForControllerType("GrassTypeController");
         }
         public void CreateOperations()
         {

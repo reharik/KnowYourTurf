@@ -98,6 +98,7 @@ namespace KnowYourTurf.Web.Services.ViewOptions
             _builder.TokenForForm<EquipmentTaskTypeController>(x => x.AddUpdate(null)).End();
             _builder.TokenForForm<EquipmentTypeController>(x => x.AddUpdate(null)).End();
             _builder.TokenForForm<PartController>(x => x.AddUpdate(null)).End();
+            _builder.TokenForForm<GrassTypeController>(x => x.AddUpdate(null)).End();
 
             _builder.TokenForList<VendorListController>(x => x.ItemList(null)).End();
             _builder.TokenForForm<VendorController>(x => x.AddUpdate(null)).End();

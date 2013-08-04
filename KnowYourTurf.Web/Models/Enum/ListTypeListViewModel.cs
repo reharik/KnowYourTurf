@@ -11,6 +11,7 @@ namespace KnowYourTurf.Web.Models
         public string _equipmentTaskTypeGridUrl { get; set; }
         public string _equipmentTypeGridUrl { get; set; }
         public string _partsGridUrl { get; set; }
+        public string _grassTypesGridUrl { get; set; }
         
         public string _deleteMultipleTaskTypesUrl { get; set; }
         public string _deleteMultipleEventTypesUrl { get; set; }
@@ -19,5 +20,6 @@ namespace KnowYourTurf.Web.Models
         public string _deleteMultipleEquipTaskTypeUrl { get; set; }
         public string _deleteMultipleEquipTypeUrl { get; set; }
         public string _deleteMultiplePartsUrl { get; set; }
+        public string _deleteMultipleGrassTypesUrl { get; set; }
     }
 }

@@ -828,6 +828,7 @@
       <DependentUpon>TDAReport.xsd</DependentUpon>
     </Content>
     <Content Include="Views\Employee\EmployeeAddUpdate.cshtml" />
+    <Content Include="Views\GrassType\AddUpdate.cshtml" />
     <None Include="Views\Shared\help.cshtml" />
     <Content Include="Views\Test\test.cshtml" />
     <Content Include="Views\TaskCalendar\TaskCalendar.cshtml" />

@@ -130,4 +130,22 @@ namespace KnowYourTurf.Web.Grids
         }
     }
 
+    public class GrassTypeListGrid : Grid<GrassType>, IEntityListGrid<GrassType>
+    {
+        public GrassTypeListGrid(IGridBuilder<GrassType> gridBuilder)
+            : base(gridBuilder)
+        {
+        }
+
+        protected override Grid<GrassType> BuildGrid()
+        {
+            GridBuilder.LinkColumnFor(x => x.Name)
+                .ToPerformAction(ColumnAction.AddUpdateItem)
+                .WithId("grasstypelist")
+                .ToolTip(WebLocalizationKeys.EDIT_ITEM);
+            GridBuilder.DisplayFor(x => x.Status);
+            return this;
+        }
+    }
+
 }
