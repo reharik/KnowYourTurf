@@ -23,6 +23,7 @@ namespace KnowYourTurf.Core.Domain
         [ValueOf(typeof(Status))]
         public virtual string Status { get; set; }
         public virtual string FieldColor { get; set; }
+        [ValidateNonEmpty]
         public virtual GrassType GrassType { get; set; }
 
         #region Collections
