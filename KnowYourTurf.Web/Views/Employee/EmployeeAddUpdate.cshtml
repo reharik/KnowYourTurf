@@ -1,0 +1,58 @@
+﻿@model KnowYourTurf.Web.Models.UserViewModel
+@using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
+
+
+@{ Layout = "~/Views/Shared/_FormLayout.cshtml"; }
+
+<div class="row">
+@*-----------Left Column-------------*@
+    <div class="span10">
+        <div class="row">
+            @Html.SubmissionFor(x => x.EmployeeId).Size("8").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.FirstName).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.LastName).Size("5").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.EmergencyContact).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.EmergencyContactPhone).Size("5").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.UserLoginInfoPassword).Size("5").LabelDisplay(WebLocalizationKeys.PASSWORD).ToHtmlTag()
+            @Html.SubmissionFor(x => x.PasswordConfirmation).Size("5").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.Email).Size("8").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.PhoneMobile).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.LicenseNumber).Size("5").ToHtmlTag()
+        </div>
+    </div>
+
+    <div class="span1"></div>
+@*-----------Right Column-------------*@
+    <div class="span10">
+        <div class="row">
+            @Html.SubmissionFor(x => x.FileUrl).Size("8").LabelDisplay(WebLocalizationKeys.EMPLOYEE_PHOTO).ToHtmlTag() 
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.Address1).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.Address2).Size("5").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.City).Size("5").ToHtmlTag()
+            @Html.SubmissionFor(x => x.State).Size("3").ToHtmlTag()
+            @Html.SubmissionFor(x => x.ZipCode).Size("2").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.UserLoginInfoStatus).Size("5").LabelDisplay(WebLocalizationKeys.STATUS).ToHtmlTag()
+            @Html.SubmissionFor(x => x.UserRoles).Size("5").ElType("MultiSelect").OperationName("/UserRoles").ToHtmlTag()
+        </div>
+        <div class="row">
+            @Html.SubmissionFor(x => x.Notes).Size("8").ToHtmlTag()
+        </div>
+    </div>
+</div>

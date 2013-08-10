@@ -3,12 +3,8 @@
 
 <script>
     @RenderSection("ExtraCss", false)
-
     @RenderSection("HeaderScripts", false)
-
-    var contentArea;
-    var extraFormOptions = { };
-        @RenderSection("HeaderJavascript", false)
+    @RenderSection("HeaderJavascript", false)
 </script>
 
    <div class="content-header">
@@ -21,7 +17,9 @@
         }
     </div>
     <div id="contentArea" class="content-inner">
-        @RenderBody()
+        <div class="form-scroll-inner form">
+            @RenderBody()
+        </div>
         <div class="footer">
             @StandardButtonFor("cancel", WebLocalizationKeys.RETURN).AddClass("cancel").ToHtmlTag()
         </div>

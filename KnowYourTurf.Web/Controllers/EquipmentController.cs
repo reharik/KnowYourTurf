@@ -149,6 +149,7 @@ namespace KnowYourTurf.Web.Controllers
         public virtual string WarrentyInfo { get; set; }
         [TextArea]
         public string Description { get; set; }
+        [ValidateNonEmpty]
         public int EquipmentTypeEntityId { get; set; }
         public int EquipmentVendorEntityId { get; set; }
         [ValidateNonEmpty]

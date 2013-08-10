@@ -34,6 +34,7 @@ namespace KnowYourTurf.WeatherTask
             ObjectFactory.Container.Inject(sessionFactoryConfiguration);
             _repository = ObjectFactory.Container.GetInstance<IRepository>("SpecialInterceptorNoFilters");
             _logger = ObjectFactory.Container.GetInstance<ILogger>();
+//            GetWeatherTest();
             GetWeather();
         }
 
@@ -48,9 +49,10 @@ namespace KnowYourTurf.WeatherTask
 
         private static string GetConnectionStringStatic(string key)
         {
-            // should work for production. please test
-            var xdoc = XDocument.Load(@"..\..\appSettings.config");
-//            var xdoc = XDocument.Load(@"..\..\..\appSettings.config");
+            // for production.
+//            var xdoc = XDocument.Load(@"..\..\appSettings.config");
+            // for dev.
+            var xdoc = XDocument.Load(@"..\..\..\appSettings.config");
             var connStrings = xdoc.Descendants("add").Where(x => x.Attribute("key").Value.Equals(key));
             return connStrings.FirstOrDefault().Attribute("value").Value;
         }
@@ -89,10 +91,21 @@ namespace KnowYourTurf.WeatherTask
             _repository.UnitOfWork.Commit();
         }
 
+        public static void GetWeatherTest()
+        {
+            var webClient = new WebClient();
+            var jss = new JavaScriptSerializer();
+            var x = _repository.Find<Client>(1);
+            loadWeatherObject(jss, webClient, x);
+//            loadLastWeeksWeatherObject(jss, webClient, x);
+            _repository.UnitOfWork.Commit();
+        }
+
+
         private static void loadWeatherObject(JavaScriptSerializer jss, WebClient webClient, Client client)
         {
-            var url = "http://api.wunderground.com/api/8c25a57f987344bd/yesterday/q/" + client.ZipCode + ".json";
             var date = DateTime.Now.Date.AddDays(-1);
+            var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" + client.ZipCode + ".json";
             var weather = _repository.Query<Weather>(x => x.Date == date && x.ClientId == client.EntityId).FirstOrDefault() ??
                           new Weather { ClientId = client.EntityId, Date = date };
             loadWeather(jss, webClient, weather, url);
@@ -100,7 +113,7 @@ namespace KnowYourTurf.WeatherTask
         private static void loadLastWeeksWeatherObject(JavaScriptSerializer jss, WebClient webClient, Client client)
         {
             var date = DateTime.Now.Date;
-            for (int i = 1; i <= 7; i++)
+            for (int i = 1; i <= 60; i++)
             {
                 date = date.AddDays(-1);
                 var url = "http://api.wunderground.com/api/8c25a57f987344bd/history_" + date.ToString("yyyyMMd") + "/q/" +
@@ -117,11 +130,14 @@ namespace KnowYourTurf.WeatherTask
             _logger.LogInfo("Client Id: " + weather.ClientId + ", url: " + url + ", Time: " + DateTime.Now.ToString());
             var result = webClient.DownloadString(url);
             _logger.LogInfo("Client Id: " + weather.ClientId + ", Result Has Value: " + result.IsNotEmpty() + ", Time: " + DateTime.Now.ToString());
-
+            _logger.LogInfo("Result: " + result);
+            _logger.LogInfo("jss is null: " + (jss==null));
             Thread.Sleep(10000);
             if (result.IsEmpty()) return;
             var clientWeatherInfoDto = jss.Deserialize<ClientWeatherInfoDto>(result);
             if (clientWeatherInfoDto == null || clientWeatherInfoDto.History == null || clientWeatherInfoDto.History.DailySummary == null) return;
+            _logger.LogInfo("Daily Summary: " + clientWeatherInfoDto.History.DailySummary.FirstOrDefault());
+
             var dewPoint = 0d;
             var maxTemp = 0d;
             var minTemp = 0d;

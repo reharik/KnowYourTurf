@@ -53,5 +53,8 @@ namespace KnowYourTurf.Core.Domain
         }
     }
 
+    public class GrassType : ListType
+    {
+    }
 
 }

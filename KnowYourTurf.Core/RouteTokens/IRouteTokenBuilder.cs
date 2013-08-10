@@ -95,7 +95,10 @@
         public IRouteTokenBuilder UrlForDisplay<CONTROLLER>(Expression<Func<CONTROLLER, object>> action, AreaName areaName = null) where CONTROLLER : Controller
         {
             this.currentItem.url = UrlContext.GetUrlForAction(action, areaName);
-            var itemName = typeof(CONTROLLER).Name.Replace("Controller", "").ToLowerInvariant()+"display";
+            var controllerName = typeof(CONTROLLER).Name.Replace("Controller", "");
+            this.currentItem.itemName = controllerName + "DisplayView";
+            
+            var itemName = controllerName.ToLowerInvariant()+"display";
             this.currentItem.id = itemName;
             this.currentItem.viewName = "AjaxDisplayView";
             this.currentItem.route = itemName;

@@ -77,11 +77,17 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         this.editEvent(this.model.CalendarDefinition.AddUpdateUrl,data);
     },
     eventClick:function(calEvent, jsEvent, view) {
+        if(this.functionIsPaused("eventClickDCPrevention")){
+            console.log("paused");
+            return;
+        }
+        this.pauseFunction("eventClickDCPrevention");
+        console.log("not paused");
         var data = {"EntityId": calEvent.EntityId, popup:true};
         var builder =  KYT.Views.popupButtonBuilder.builder("displayModule");
         builder.addButton("Delete", $.proxy(this.deleteItem,this));
         builder.addEditButton();
-        builder.addButton("Copy Event",$.proxy(this.copyItem,this));
+        builder.addButton("Copy Task",$.proxy(this.copyItem,this));
         builder.addCancelButton();
 
         var formOptions = {
@@ -90,7 +96,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             route: this.model.CalendarDefinition.DisplayRoute,
             title: this.model.CalendarDefinition.PopupTitle,
             templateUrl: this.model.CalendarDefinition.DisplayUrl+"_Template?Popup=true",
-            view: this.options.subViewName?"Display" + this.options.subViewName:"",
+            view: this.options.subViewName?this.options.subViewName + "DisplayView" :"",
             AddUpdateUrl: this.model.CalendarDefinition.AddUpdateUrl,
             data:data,
             buttons: builder.getButtons()
@@ -98,8 +104,6 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
         this.ajaxPopupDisplay = new KYT.Views.AjaxPopupDisplayModule(formOptions);
         this.ajaxPopupDisplay.render();
         this.storeChild(this.ajaxPopupDisplay);
-        $(this.el).append(this.ajaxPopupDisplay.el);
-
     },
     editEvent:function(url, data){
         data.Popup = true;
@@ -110,7 +114,7 @@ KYT.Views.CalendarView = KYT.Views.View.extend({
             title: this.model.CalendarDefinition.PopupTitle,
             templateUrl: url+"_Template?Popup=true",
             data:data,
-            view:this.options.subViewName,
+            view:this.options.subViewName+"FormView",
             buttons: KYT.Views.popupButtonBuilder.builder("editModule").standardEditButons()
         };
         this.ajaxPopupFormModule = new KYT.Views.AjaxPopupFormModule(formOptions);
@@ -253,6 +257,74 @@ KYT.Views.EmployeeDashboardView = KYT.Views.View.extend({
         this.render();
     }
 });
+
+KYT.Views.ProductDashboardView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "formMixin");
+        KYT.mixin(this, "ajaxFormMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        this.addIdsToModel();
+        var rel = KYT.State.get("Relationships");
+        $('#colorPickerInput',this.el).miniColors();
+        this.photoGridView = new KYT.Views.DahsboardGridView({
+            el:"#photoGridContainer",
+            url:this.model._photoGridUrl(),
+            gridId:"photolist",
+            route:"photo",
+            parentId:rel.entityId,
+            rootId: rel.parentId,
+            parent:this.model.Product()
+        });
+        this.documentGridView = new KYT.Views.DahsboardGridView({
+            el:"#documentGridContainer",
+            url:this.model._documentGridUrl(),
+            gridId:"documentlist",
+            route:"document",
+            parentId:rel.entityId,
+            rootId: rel.parentId,
+            parent:this.model.Product()
+        });
+
+        this.photoGridView.render();
+        this.documentGridView.render();
+        this.storeChild(this.photoGridView);
+        this.storeChild(this.documentGridView);
+
+        KYT.vent.bind("photolist:delete",this.removePicturesFromGallery, this);
+        KYT.vent.bind("form:photo:success", this.reloadPictureGallery, this);
+
+    },
+    reloadPictureGallery:function(result){
+        if(result.Payload){
+            var gallery = $("#photoGallery").data("galleria");
+            gallery.removeItem(result.Payload.ImageId);
+            var newImage ={
+                image: result.Payload.FileUrl_Large,
+                thumb: result.Payload.FileUrl_Thumb,
+                imageId:result.Payload.ImageId.toString()
+            };
+            gallery.addNewItem(newImage);
+        }
+    },
+
+    removePicturesFromGallery: function(result){
+        if(result.length>0){
+            var gallery = $("#photoGallery").data("galleria");
+            $.each(result,function(i,item){
+                gallery.removeItem(item);
+            });
+//            gallery.reloadGallery();
+        }
+    },
+
+    callbackAction: function(){
+        this.photoGridView.callbackAction();
+        this.documentGridView.callbackAction();
+    }
+});
+
 
 KYT.Views.FieldDashboardView = KYT.Views.View.extend({
     initialize:function(){
@@ -497,6 +569,40 @@ KYT.Views.TaskFormView = KYT.Views.View.extend({
     }
 });
 
+KYT.Views.TaskDisplayView = KYT.Views.View.extend({
+    initialize:function(){
+        KYT.mixin(this, "displayMixin");
+        KYT.mixin(this, "ajaxDisplayMixin");
+        KYT.mixin(this, "modelAndElementsMixin");
+    },
+    viewLoaded:function(){
+        if(this.model.Popup()){
+            KYT.vent.bind("popup:"+this.options.id+":loaded",this.toggleChemicals,this);
+            KYT.vent.bind("popup:"+this.options.id+":loaded",this.checkPermOnEdit,this);
+        }else{
+            this.toggleChemicals();
+        }
+    },
+    checkPermOnEdit:function(popup){
+        if(!this.model.AllowEdit()){
+            var buttons = $(popup.el).dialog("option", "buttons");
+            delete buttons.Edit;
+            $(popup.el).dialog("option", "buttons", buttons);
+        }
+    },
+    toggleChemicals:function(){
+        if(this.model._IsChemical()){
+            $("#chemicalReport",this.$el).show("slow");
+        }else{
+            $("#chemicalReport",this.$el).hide("slow");
+        }
+    },
+    onClose:function(){
+        KYT.vent.unbind("popup:"+this.options.id+":loaded",this.toggleChemicals,this);
+        KYT.vent.unbind("popup:"+this.options.id+":loaded",this.checkPermOnEdit,this);
+    }
+});
+
 KYT.Views.PurchaseOrderListView = KYT.Views.View.extend({
     _setupBindings:function(){
         KYT.vent.bind(this.options.gridId+":Redirect",this.commitPO,this);
@@ -563,8 +669,8 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         this._unbindBindings();
     },
     showVendorProducts:function(){
-        $("#productGridArea").show();
-        this.productsGridView = new KYT.Views.GridView({
+        $("#products").show();
+        this.productsGridView = new KYT.Views.DahsboardGridView({
             el:"#productGridArea",
             url:this.model._vendorProductsUrl() + "/" + this.model.VendorEntityId(),
             grouping:true,
@@ -581,7 +687,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
         this.storeChild(this.productsGridView);
     },
     showPOLI:function(){
-        $("#poliGridArea").show();
+        $("#selectedItems").show();
         this.POLIGridView = new KYT.Views.POLIGridView({
             el:"#poliGridArea",
             gridOptions:{
@@ -597,12 +703,14 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
             $("#viewPOID",this.$el).hide();
             $("#viewFieldVendor",this.$el).hide();
             $("#editFieldVendor",this.$el).show();
-            $("#poliGridArea").hide();
-            $("#productGridArea").hide();
+            $("#products").hide();
+            $("#selectedItems").hide();
+            $(".footer", this.$el).hide();
         }else{
             $("#viewPOID",this.$el).show();
             $("#viewFieldVendor",this.$el).show();
             $("#editFieldVendor",this.$el).hide();
+            $(".footer", this.$el).show();
             this.showVendorProducts();
             this.showPOLI();
         }
@@ -665,12 +773,7 @@ KYT.Views.PurchaseOrderFormView = KYT.Views.View.extend({
     }
 });
 
-KYT.Views.POLIGridView = KYT.Views.View.extend({
-     initialize: function(){
-        KYT.mixin(this, "ajaxGridMixin");
-        KYT.mixin(this, "setupGridMixin");
-        KYT.mixin(this, "setupGridSearchMixin");
-    },
+KYT.Views.POLIGridView = KYT.Views.DahsboardGridView.extend({
     reloadGrid: function () {
         $("#" + this.options.gridId).trigger("reloadGrid");
     },
@@ -730,11 +833,6 @@ KYT.Views.PurchaseOrderCommitFormView = KYT.Views.View.extend({
             KYT.vent.trigger("PO:"+this.id+":closed");
             KYT.vent.trigger("route","purchaseorderlist",true);
         }
-
-
-
-
-
     },
     // used by children to update parent grid
     callbackAction: function () {
@@ -830,26 +928,6 @@ KYT.Views.EquipmentListView = KYT.Views.View.extend({
     },
     showDashboard:function(id){
         KYT.vent.trigger("route",KYT.generateRoute("equipmentdashboard",id,this.options.ParentId),true);
-    }
-});
-
-KYT.Views.EmployeeListView = KYT.Views.View.extend({
-    initialize:function(){
-        KYT.mixin(this, "ajaxGridMixin");
-        KYT.mixin(this, "setupGridMixin");
-        KYT.mixin(this, "defaultGridEventsMixin");
-        KYT.mixin(this, "setupGridSearchMixin");
-    },
-    viewLoaded:function(){
-        KYT.vent.bind(this.options.gridId+":Redirect",this.showDashboard,this);
-        this.setupBindings();
-    },
-    onClose:function(){
-        KYT.vent.unbind(this.options.gridId+":Redirect",this.showDashboard,this);
-        this.unbindBindings();
-    },
-    showDashboard:function(id){
-        KYT.vent.trigger("route",KYT.generateRoute("employeedashboard",id),true);
     }
 });
 
@@ -981,7 +1059,10 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
              options.deleteMultipleUrl = this.model._deleteMultipleEquipTypeUrl();
         },this);
         KYT.vent.bind("grid:partlist:pageLoaded",function(options){
-             options.deleteMultipleUrl = this.model._deleteMultiplePartsUrl();
+            options.deleteMultipleUrl = this.model._deleteMultiplePartsUrl();
+        },this);
+        KYT.vent.bind("grid:grasstypelist:pageLoaded",function(options){
+            options.deleteMultipleUrl = this.model._deleteMultipleGrassTypeUrl();
         },this);
         this.taskTypeGridView = new KYT.Views.DahsboardGridView({
             el:"#taskTypeGridContainer",
@@ -1025,6 +1106,12 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
             gridId:"partlist",
             route:"part"
         });
+        this.grassTypesGridView = new KYT.Views.DahsboardGridView({
+            el:"#grassTypesGridContainer",
+            url:this.model._grassTypesGridUrl(),
+            gridId:"grasstypelist",
+            route:"grasstype"
+        });
 
 
         this.taskTypeGridView.render();
@@ -1034,6 +1121,7 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         this.equipmentTaskTypeGridView.render();
         this.equipmentTypeGridView.render();
         this.partGridView.render();
+        this.grassTypesGridView.render();
         this.storeChild(this.taskTypeGridView);
         this.storeChild(this.eventTypeGridView);
         this.storeChild(this.photoCategoryGridView);
@@ -1041,6 +1129,7 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         this.storeChild(this.equipmentTaskTypeGridView);
         this.storeChild(this.equipmentTypeGridView);
         this.storeChild(this.partGridView);
+        this.storeChild(this.grassTypesGridView);
     },
     callbackAction: function(){
         this.taskTypeGridView.callbackAction();
@@ -1050,6 +1139,7 @@ KYT.Views.ListTypeListView = KYT.Views.View.extend({
         this.equipmentTaskTypeGridView.callbackAction();
         this.equipmentTypeGridView.callbackAction();
         this.partGridView.callbackAction();
+        this.grassTypesGridView.callbackAction();
     }
 });
 
@@ -1085,7 +1175,6 @@ KYT.Views.EquipmentTypeFormView = KYT.Views.View.extend({
         $('#colorPickerInput',this.el).miniColors();
     }
 });
-
 
 KYT.Views.InventoryDisplayView = KYT.Views.View.extend({
     initialize:function(){
@@ -1172,6 +1261,4 @@ KYT.Views.CompletedEquipmentTaskListView = KYT.Views.View.extend({
         this.setupBindings();},
     onClose:function(){this.unbindBindings();}
 });
-
-
 

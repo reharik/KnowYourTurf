@@ -76,4 +76,10 @@ namespace KnowYourTurf.Core.Domain.Persistence
         }
     }
 
+    public class GrassTypeMap : ListTypeMap<GrassType>
+    {
+        public GrassTypeMap()
+        {
+        }
+    }
 }

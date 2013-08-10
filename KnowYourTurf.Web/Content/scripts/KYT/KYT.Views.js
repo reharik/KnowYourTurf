@@ -90,7 +90,16 @@ KYT.Views.View = Backbone.View.extend({
         });
       }
     },
-
+    functionIsPaused:function(funcName){
+        return this[funcName];
+    },
+    pauseFunction:function(funcName){
+        var pauseFunction=this;
+        pauseFunction[funcName] = true;
+        setTimeout(function(){
+            pauseFunction[funcName]=false;
+        },1000);
+    },
     viewLoaded:function(){
     }
   });
@@ -245,7 +254,7 @@ KYT.Views.PopupView = KYT.Views.View.extend({
                 KYT.vent.trigger("popup:"+that.options.id+":cancel");
             }
         });
-        KYT.vent.trigger("popup:"+that.options.id+":loaded");
+        KYT.vent.trigger("popup:"+that.options.id+":loaded",this);
         return this;
     }
 

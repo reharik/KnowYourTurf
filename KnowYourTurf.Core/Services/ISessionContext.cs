@@ -113,7 +113,7 @@ namespace KnowYourTurf.Core.Services
             return HttpContext.Current.Request.Files.AllKeys.Length > 0 ? HttpContext.Current.Request.Files[0] : null;
         }
 
-        public int GetClientId()
+        public virtual int GetClientId()
         {
             var httpContext = HttpContext.Current;
             var customPrincipal = httpContext != null ? httpContext.User as CustomPrincipal : null;
@@ -130,6 +130,11 @@ namespace KnowYourTurf.Core.Services
 
     public class SessionItem
     {
+        public SessionItem()
+        {
+            TimeStamp = DateTime.Now;
+        }
+
         public DateTime TimeStamp { get; set; }
         public string SessionKey { get; set; }
         public object SessionObject { get; set; }

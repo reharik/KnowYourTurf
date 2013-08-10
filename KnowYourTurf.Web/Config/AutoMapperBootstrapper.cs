@@ -31,6 +31,7 @@ namespace KnowYourTurf.Web.Config
             Mapper.CreateMap<EquipmentTaskType, ListTypeViewModel>();
             Mapper.CreateMap<EquipmentType, ListTypeViewModel>();
             Mapper.CreateMap<Part, PartViewModel>();
+            Mapper.CreateMap<GrassType, ListTypeViewModel>();
             Mapper.CreateMap<Material, MaterialViewModel>();
             Mapper.CreateMap<Fertilizer, FertilizerViewModel>();
             Mapper.CreateMap<Chemical, ChemicalViewModel>();

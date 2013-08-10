@@ -45,6 +45,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken EQUIPMENT_TASK_LISTS = new WebLocalizationKeys("EQUIPMENT_TASK_LISTS", "Equipment Tasks Lists");
         public static readonly StringToken EQUIPMENT_TASKS = new WebLocalizationKeys("EQUIPMENT_TASKS", "Equipment Tasks");
         public static readonly StringToken COMPLETED_EQUIPMENT_TASKS = new WebLocalizationKeys("COMPLETED_EQUIPMENT_TASKS", "Completed Equipment Tasks");
+        public static readonly StringToken CURRENT_EQUIPMENT_TASKS = new WebLocalizationKeys("CURRENT_EQUIPMENT_TASKS", "Current Equipment Tasks");
         public static readonly StringToken EQUIPMENT_TASK_CALENDAR = new WebLocalizationKeys("EQUIPMENT_TASK_CALENDAR", "Equipment Task Calendar");
         public static readonly StringToken TASKS = new WebLocalizationKeys("TASKS", "Tasks");
         public static readonly StringToken TASK_LIST = new WebLocalizationKeys("TASK_LIST", "Task List");
@@ -102,6 +103,11 @@ namespace KnowYourTurf.Web
         public static readonly StringToken NEW_PART = new WebLocalizationKeys("NEW_PART", "Add New Part");
         public static readonly StringToken PARTS = new WebLocalizationKeys("PARTS", "Parts");
         public static readonly StringToken PART = new WebLocalizationKeys("PART", "Part");
+
+        public static readonly StringToken GRASSTYPE_INFORMATION = new WebLocalizationKeys("GRASSTYPE_INFORMATION", "Grass Type Information");
+        public static readonly StringToken NEW_GRASSTYPE = new WebLocalizationKeys("NEW_GRASSTYPE", "Add New Grass Type");
+        public static readonly StringToken GRASSTYPES = new WebLocalizationKeys("GRASSTYPES", "Grass Types");
+        public static readonly StringToken GRASSTYPE = new WebLocalizationKeys("GRASSTYPE", "Grass Type");
 
 
         public static readonly StringToken TASK_INFORMATION = new WebLocalizationKeys("TASK_INFORMATION", "Task Information");
@@ -235,6 +241,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken COULD_NOT_DELETE_EQUIPMENTTASKTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EQUIPMENTTASKTYPE", "Could not delete one or more item because it is being used in one or more Equipment Task");
         public static readonly StringToken COULD_NOT_DELETE_EQUIPMENTTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_EQUIPMENTTYPE", "Could not delete one or more item because it is being used in one or more piece of Equipment");
         public static readonly StringToken COULD_NOT_DELETE_PART = new WebLocalizationKeys("COULD_NOT_DELETE_PART", "Could not delete one or more item because it is being used in one or more Equipment Task");
+        public static readonly StringToken COULD_NOT_DELETE_GRASSTYPE = new WebLocalizationKeys("COULD_NOT_DELETE_GRASSTYPE", "Could not delete one or more item because it is being used on one or more Fields");
 
         public static readonly StringToken CURRENT = new WebLocalizationKeys("CURRENT", "Current");
         public static readonly StringToken COMPLETED = new WebLocalizationKeys("COMPLETED", "Completed");
@@ -247,6 +254,7 @@ namespace KnowYourTurf.Web
         public static readonly StringToken FACILITIES_PHOTO = new WebLocalizationKeys("FACILITIES_PHOTO", "Facilities Photo");
 
         public static readonly StringToken PASSWORD = new WebLocalizationKeys("PASSWORD", "Password");
+        public static readonly StringToken PASSWORD_CONFIRMATION_MUST_MATCH = new WebLocalizationKeys("PASSWORD_CONFIRMATION_MUST_MATCH", "Password confirmation must match password");
         public static readonly StringToken STATUS = new WebLocalizationKeys("STATUS", "Status");
         public static readonly StringToken CALCULATOR_NAME = new WebLocalizationKeys("CALCULATOR_NAME", "Calculator Name");
 
@@ -269,7 +277,10 @@ namespace KnowYourTurf.Web
         public static readonly StringToken EQUIPMENT_TASK_REPORT = new WebLocalizationKeys("EQUIPMENT_TASK_REPORT", "Equipment Task Report");
         public static readonly StringToken TDA = new WebLocalizationKeys("TDA", "TDA Report");
         public static readonly StringToken CHEMICAL_REPORT = new WebLocalizationKeys("CHEMICAL_REPORT", "Chemical Report Variables");
+        public static readonly StringToken SELECT_AT_LEAST_ONE_USER_ROLE = new WebLocalizationKeys("SELECT_AT_LEAST_ONE_USER_ROLE", "You must select at least one User Role.");
 
+        public static readonly StringToken TASK_TYPE_FILTER = new WebLocalizationKeys("TASK_TYPE_FILTER", "Task Type Filter");
+        public static readonly StringToken EQUIPMENT_WEBSITE = new WebLocalizationKeys("EQUIPMENT_WEBSITE", "Equipment Website");
 
     }
 }

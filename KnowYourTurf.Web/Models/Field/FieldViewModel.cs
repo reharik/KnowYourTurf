@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using CC.Core.CoreViewModelAndDTOs;
 using CC.Core.CustomAttributes;
 using Castle.Components.Validator;
@@ -23,6 +24,8 @@ namespace KnowYourTurf.Web.Models
         public string FieldColor { get; set; }
         public string FileUrl { get; set; }
         public bool DeleteImage { get; set; }
+        [ValidateNonEmpty]
+        public int GrassTypeEntityId { get; set; }
 
         public string _completedGridUrl { get; set; }
         public string _documentGridUrl { get; set; }
@@ -35,6 +38,7 @@ namespace KnowYourTurf.Web.Models
         public List<string> _PhotoHeaderButtons { get; set; }
         public List<string> _DocumentHeaderButtons { get; set; }
         public IEnumerable<PhotoDto> _Photos { get; set; }
+        public IEnumerable<SelectListItem> _GrassTypeEntityIdList { get; set; }
 
         public string _saveUrl { get; set; }
 
