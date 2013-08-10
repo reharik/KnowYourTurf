@@ -1,8 +1,9 @@
 ﻿@model KnowYourTurf.Web.Models.ChemicalViewModel
 @using CC.Core.Html.CCUI
+@using KnowYourTurf.Web
 
 @{
-    Layout = "~/Views/Shared/_FormLayout.cshtml";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
 }
 
 <div class="row">
@@ -22,5 +23,38 @@
 </div>
 <div class="row">
     @Html.SubmissionFor(x => x.Notes).Size("10").ToHtmlTag()
+</div>
+            
+@*<div class="row blank">*@
+    <div class="row">
+        @Html.SubmissionFor(x => x._Photos).Size("20").InputId("photoGallery").HideLabel().ToHtmlTag()
+    </div> 
+@*</div>*@
+<div class="row blank"></div>
+<div class="row">
+    @StandardButtonFor("save", WebLocalizationKeys.SAVE).AddClass("save").ToHtmlTag()
+    @StandardButtonFor("cancel", WebLocalizationKeys.CANCEL).AddClass("cancel").ToHtmlTag()
+</div>
+<div class="row blank"><hr/></div>
+<div class="row">
+@*-----------Left Column-------------*@
+    <div class="span10">
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.PHOTOS</div>
+        </div>
+        <div class="row">
+            <div id="photoGridContainer" class="dashboardGrid span10"></div>
+        </div>
+    </div>
+    <div class="span1"></div>
+    @*-----------Right Column-------------*@
+    <div class="span10">
+        <div class="row dashboardGrid">
+            <div class="span10 gridHeader">@WebLocalizationKeys.DOCUMENTS</div>
+        </div>
+        <div class="row">
+            <div id="documentGridContainer" class="dashboardGrid span10"></div>
+        </div>
+    </div>
 </div>
 

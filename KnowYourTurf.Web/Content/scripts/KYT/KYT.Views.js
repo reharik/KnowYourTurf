@@ -254,7 +254,7 @@ KYT.Views.PopupView = KYT.Views.View.extend({
                 KYT.vent.trigger("popup:"+that.options.id+":cancel");
             }
         });
-        KYT.vent.trigger("popup:"+that.options.id+":loaded");
+        KYT.vent.trigger("popup:"+that.options.id+":loaded",this);
         return this;
     }
 

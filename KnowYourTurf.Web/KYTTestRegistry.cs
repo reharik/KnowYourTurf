@@ -34,12 +34,11 @@ namespace KnowYourTurf.Web.Config
                          x.AssemblyContainingType(typeof (MergedEmailFactory));
                          x.WithDefaultConventions();
                      });
-            For<HtmlConventionRegistry>().Add<CCHtmlConventions2>();
+            For<TagProfileExpression>().Add<CCHtmlConventionsKO>();
             For<IElementNamingConvention>().Use<CCElementNamingConvention>();
 
             For<IServiceLocator>().Singleton().Use(new StructureMapServiceLocator());
             For(typeof (ITagGenerator<>)).Use(typeof (TagGenerator<>));
-            For<TagProfileLibrary>().Singleton();
 
 
 
