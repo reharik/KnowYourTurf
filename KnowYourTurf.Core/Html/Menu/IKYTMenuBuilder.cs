@@ -52,7 +52,7 @@ namespace KnowYourTurf.Core.Html.Menu
         public virtual IKYTMenuBuilder SiteGroupForIteration()
         {
             var clientId = _sessionContext.GetClientId();
-            var client = _repository.Query<Client>(x => x.EntityId == clientId).Fetch(x => x.Sites).FirstOrDefault();
+            var client = _repository.Query<Client>(x => x.EntityId == clientId).Fetch(x => x.Sites).ToList().FirstOrDefault();
             _sites = new List<Site>();
             if (client != null)
             {
